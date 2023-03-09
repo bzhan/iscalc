@@ -1,0 +1,148 @@
+{
+    "content": [
+        {
+            "finished": true,
+            "goal": "converges(SUM(n, 0, oo, INT x:[0,1]. x ^ n / (n + 1)))",
+            "latex_goal": "\\sum_{n=0}^{\\infty}{\\int_{0}^{1} \\frac{x ^ {n}}{n + 1} \\,dx}\\quad\\mathrm{converges}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\sum_{n=0}^{\\infty}{\\int_{0}^{1} \\frac{x ^ {n}}{n + 1} \\,dx}",
+                        "start": "SUM(n, 0, oo, INT x:[0,1]. x ^ n / (n + 1))",
+                        "steps": [
+                            {
+                                "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{n + 1} (\\int_{0}^{1} x ^ {n} \\,dx)}",
+                                "res": "SUM(n, 0, oo, 1 / (n + 1) * (INT x:[0,1]. x ^ n))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{n + 1} (\\left. \\frac{x ^ {n + 1}}{n + 1} \\right\\vert_{x=0}^{1})}",
+                                "res": "SUM(n, 0, oo, 1 / (n + 1) * ([x ^ (n + 1) / (n + 1)]_x=0,1))",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{(n + 1) ^ {2}}}",
+                                "res": "SUM(n, 0, oo, 1 / (n + 1) ^ 2)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "converges(SUM(n, 0, oo, INT x:[0,1]. x ^ n / (n + 1)))",
+                "latex_goal": "\\sum_{n=0}^{\\infty}{\\int_{0}^{1} \\frac{x ^ {n}}{n + 1} \\,dx}\\quad\\mathrm{converges}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "finished": true,
+            "goal": "(INT x:[0,1]. log(1 + x) / x) = pi ^ 2 / 12",
+            "latex_goal": "\\int_{0}^{1} \\frac{\\log{(1 + x)}}{x} \\,dx = \\frac{\\pi ^ {2}}{12}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{0}^{1} \\frac{\\log{(1 + x)}}{x} \\,dx",
+                        "start": "INT x:[0,1]. log(1 + x) / x",
+                        "steps": [
+                            {
+                                "latex_res": "\\int_{0}^{1} \\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {n + 1}}{n + 1}}}{x} \\,dx",
+                                "res": "INT x:[0,1]. SUM(n, 0, oo, (-1) ^ n * x ^ (n + 1) / (n + 1)) / x",
+                                "rule": {
+                                    "index_var": "n",
+                                    "name": "SeriesExpansionIdentity",
+                                    "old_expr": "log(1 + x)",
+                                    "str": "apply series expansion"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{1} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {n + 1}}{n + 1} (\\frac{1}{x})} \\,dx",
+                                "res": "INT x:[0,1]. SUM(n, 0, oo, (-1) ^ n * x ^ (n + 1) / (n + 1) * (1 / x))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {n + 1}}{n + 1}}}{x}\\) to \\(\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {n + 1}}{n + 1} (\\frac{1}{x})}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "SUM(n, 0, oo, (-1) ^ n * x ^ (n + 1) / (n + 1) * (1 / x))",
+                                    "old_expr": "SUM(n, 0, oo, (-1) ^ n * x ^ (n + 1) / (n + 1)) / x",
+                                    "str": "rewriting SUM(n, 0, oo, (-1) ^ n * x ^ (n + 1) / (n + 1)) / x to SUM(n, 0, oo, (-1) ^ n * x ^ (n + 1) / (n + 1) * (1 / x))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=0}^{\\infty}{\\int_{0}^{1} \\frac{(-1) ^ {n} x ^ {n + 1}}{n + 1} (\\frac{1}{x}) \\,dx}",
+                                "res": "SUM(n, 0, oo, INT x:[0,1]. (-1) ^ n * x ^ (n + 1) / (n + 1) * (1 / x))",
+                                "rule": {
+                                    "name": "IntSumExchange",
+                                    "str": "exchange integral and sum"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n}}{n + 1} (\\int_{0}^{1} x ^ {n} \\,dx)}",
+                                "res": "SUM(n, 0, oo, (-1) ^ n / (n + 1) * (INT x:[0,1]. x ^ n))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n}}{n + 1} (\\left. \\frac{x ^ {n + 1}}{n + 1} \\right\\vert_{x=0}^{1})}",
+                                "res": "SUM(n, 0, oo, (-1) ^ n / (n + 1) * ([x ^ (n + 1) / (n + 1)]_x=0,1))",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n}}{(n + 1) ^ {2}}}",
+                                "res": "SUM(n, 0, oo, (-1) ^ n / (n + 1) ^ 2)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\pi ^ {2}}{12}",
+                                "res": "pi ^ 2 / 12",
+                                "rule": {
+                                    "name": "SeriesEvaluationIdentity",
+                                    "str": "apply series evaluation"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{\\pi ^ {2}}{12}",
+                        "start": "pi ^ 2 / 12",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(INT x:[0,1]. log(1 + x) / x) = pi ^ 2 / 12",
+                "latex_goal": "\\int_{0}^{1} \\frac{\\log{(1 + x)}}{x} \\,dx = \\frac{\\pi ^ {2}}{12}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "LogFunction01"
+}

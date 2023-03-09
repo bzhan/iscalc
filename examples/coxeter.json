@@ -1,0 +1,191 @@
+{
+    "content": [
+        {
+            "conds": [
+                {
+                    "cond": "x >= 0",
+                    "latex_cond": "x \\ge 0"
+                },
+                {
+                    "cond": "x <= pi / 2",
+                    "latex_cond": "x \\le \\frac{\\pi}{2}"
+                }
+            ],
+            "finished": true,
+            "goal": "cos(2 * x) = 2 * cos(x) ^ 2 - 1",
+            "latex_goal": "\\cos{(2 x)} = 2 \\cos^{2}(x) - 1",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\cos{(2 x)}",
+                        "start": "cos(2 * x)",
+                        "steps": [
+                            {
+                                "latex_res": "2 \\cos^{2}(x) - 1",
+                                "res": "2 * cos(x) ^ 2 - 1",
+                                "rule": {
+                                    "latex_str": "rewrite \\(\\cos{(2 x)}\\) to \\(2 \\cos^{2}(x) - 1\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "cos(2 * x)",
+                                    "str": "rewrite cos(2 * x) to 2 * cos(x) ^ 2 - 1 using identity",
+                                    "target": "2 * cos(x) ^ 2 - 1"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "2 \\cos^{2}(x) - 1",
+                        "start": "2 * cos(x) ^ 2 - 1",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "cos(2 * x) = 2 * cos(x) ^ 2 - 1",
+                "latex_goal": "\\cos{(2 x)} = 2 \\cos^{2}(x) - 1",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "abs(a) <= 1",
+                    "latex_cond": "\\left| a \\right| \\le 1"
+                }
+            ],
+            "finished": false,
+            "goal": "acos(a) = 2 * acos(sqrt((1 + a) / 2))",
+            "latex_goal": "\\cos^{-1}{a} = 2 \\cos^{-1}{(\\sqrt{\\frac{1 + a}{2}})}",
+            "obligations": [
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "sqrt((1 + a) / 2) >= -1"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "abs(a) <= 1",
+                            "latex_cond": "\\left| a \\right| \\le 1"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "sqrt((1 + a) / 2) <= 1"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "abs(a) <= 1",
+                            "latex_cond": "\\left| a \\right| \\le 1"
+                        }
+                    ]
+                }
+            ],
+            "proof": {
+                "finished": false,
+                "goal": "acos(a) = 2 * acos(sqrt((1 + a) / 2))",
+                "latex_goal": "\\cos^{-1}{a} = 2 \\cos^{-1}{(\\sqrt{\\frac{1 + a}{2}})}",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "x >= 0",
+                            "latex_cond": "x \\ge 0"
+                        },
+                        {
+                            "cond": "x <= pi / 2",
+                            "latex_cond": "x \\le \\frac{\\pi}{2}"
+                        }
+                    ],
+                    "latex_start": "\\cos{(2 x)} = 2 \\cos^{2}(x) - 1",
+                    "start": "cos(2 * x) = 2 * cos(x) ^ 2 - 1",
+                    "steps": [
+                        {
+                            "latex_res": "\\cos{(2 \\cos^{-1}{u})} = 2 \\cos^{2}(\\cos^{-1}{u}) - 1",
+                            "res": "cos(2 * acos(u)) = 2 * cos(acos(u)) ^ 2 - 1",
+                            "rule": {
+                                "latex_str": "substitute \\(x\\) for \\(\\cos^{-1}{u}\\) in equation",
+                                "name": "VarSubsOfEquation",
+                                "str": "substitute x for acos(u) in equation",
+                                "subst": [
+                                    {
+                                        "expr": "acos(u)",
+                                        "var": "x"
+                                    }
+                                ]
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "\\cos{(2 \\cos^{-1}{u})} = 2 u ^ {2} - 1",
+                            "res": "cos(2 * acos(u)) = 2 * u ^ 2 - 1",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "\\cos{(2 \\cos^{-1}{u})} = 2 u ^ {2} - 1",
+                            "res": "cos(2 * acos(u)) = 2 * u ^ 2 - 1",
+                            "rule": {
+                                "func_name": "acos",
+                                "name": "FunEquation",
+                                "str": "function on both sides"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "\\cos{(2 \\cos^{-1}{u})} = 2 u ^ {2} - 1",
+                            "res": "cos(2 * acos(u)) = 2 * u ^ 2 - 1",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "\\cos{(2 \\cos^{-1}{(\\sqrt{\\frac{1 + a}{2}})})} = 2 \\sqrt{\\frac{1 + a}{2}} ^ {2} - 1",
+                            "res": "cos(2 * acos(sqrt((1 + a) / 2))) = 2 * sqrt((1 + a) / 2) ^ 2 - 1",
+                            "rule": {
+                                "latex_str": "substitute \\(u\\) for \\(\\sqrt{\\frac{1 + a}{2}}\\) in equation",
+                                "name": "VarSubsOfEquation",
+                                "str": "substitute u for sqrt((1 + a) / 2) in equation",
+                                "subst": [
+                                    {
+                                        "expr": "sqrt((1 + a) / 2)",
+                                        "var": "u"
+                                    }
+                                ]
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "\\cos{(2 \\cos^{-1}{(\\frac{\\sqrt{2} \\sqrt{a + 1}}{2})})} = a",
+                            "res": "cos(2 * acos(sqrt(2) * sqrt(a + 1) / 2)) = a",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal",
+            "wellformed": false
+        }
+    ],
+    "name": "coxeter"
+}

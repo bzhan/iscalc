@@ -1,0 +1,230 @@
+{
+    "content": [
+        {
+            "conds": [
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                }
+            ],
+            "finished": true,
+            "goal": "(INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2)) = pi / (2 * a)",
+            "latex_goal": "\\int_{0}^{\\infty} \\frac{1}{x ^ {2} + a ^ {2}} \\,dx = \\frac{\\pi}{2 a}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{0}^{\\infty} \\frac{1}{x ^ {2} + a ^ {2}} \\,dx",
+                        "start": "INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2)",
+                        "steps": [
+                            {
+                                "latex_res": "\\lim\\limits_{t\\to \\infty} \\int_{0}^{t} \\frac{1}{x ^ {2} + a ^ {2}} \\,dx",
+                                "res": "LIM {t -> oo}. INT x:[0,t]. 1 / (x ^ 2 + a ^ 2)",
+                                "rule": {
+                                    "a": "0",
+                                    "name": "ElimInfInterval",
+                                    "str": "eliminate improper integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\lim\\limits_{t\\to \\infty} \\int_{0}^{t/a} \\frac{1}{(a u) ^ {2} + a ^ {2}} a \\,du",
+                                "res": "LIM {t -> oo}. INT u:[0,t / a]. 1 / ((a * u) ^ 2 + a ^ 2) * a",
+                                "rule": {
+                                    "latex_str": "inverse substitution for \\(a u\\)",
+                                    "name": "SubstitutionInverse",
+                                    "str": "inverse substitution for a * u",
+                                    "var_name": "u",
+                                    "var_subst": "a * u"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "a (\\int_{0}^{\\infty} \\frac{1}{a ^ {2} u ^ {2} + a ^ {2}} \\,du)",
+                                "res": "a * (INT u:[0,oo]. 1 / (a ^ 2 * u ^ 2 + a ^ 2))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "a (\\int_{0}^{\\infty} \\frac{1}{a ^ {2} (u ^ {2} + 1)} \\,du)",
+                                "res": "a * (INT u:[0,oo]. 1 / (a ^ 2 * (u ^ 2 + 1)))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{1}{a ^ {2} u ^ {2} + a ^ {2}}\\) to \\(\\frac{1}{a ^ {2} (u ^ {2} + 1)}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "1 / (a ^ 2 * (u ^ 2 + 1))",
+                                    "old_expr": "1 / (a ^ 2 * u ^ 2 + a ^ 2)",
+                                    "str": "rewriting 1 / (a ^ 2 * u ^ 2 + a ^ 2) to 1 / (a ^ 2 * (u ^ 2 + 1))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (\\int_{0}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
+                                "res": "1 / a * (INT u:[0,oo]. 1 / (u ^ 2 + 1))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (\\left. \\tan^{-1}{u} \\right\\vert_{u=0}^{\\infty})",
+                                "res": "1 / a * ([atan(u)]_u=0,oo)",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\pi}{2 a}",
+                                "res": "pi / (2 * a)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{\\pi}{2 a}",
+                        "start": "pi / (2 * a)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2)) = pi / (2 * a)",
+                "latex_goal": "\\int_{0}^{\\infty} \\frac{1}{x ^ {2} + a ^ {2}} \\,dx = \\frac{\\pi}{2 a}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                }
+            ],
+            "finished": true,
+            "goal": "(INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2) ^ 2) = pi / (4 * a ^ 3)",
+            "latex_goal": "\\int_{0}^{\\infty} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {2}} \\,dx = \\frac{\\pi}{4 a ^ {3}}",
+            "proof": {
+                "finished": true,
+                "goal": "(INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2) ^ 2) = pi / (4 * a ^ 3)",
+                "latex_goal": "\\int_{0}^{\\infty} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {2}} \\,dx = \\frac{\\pi}{4 a ^ {3}}",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "a > 0",
+                            "latex_cond": "a > 0"
+                        }
+                    ],
+                    "latex_start": "\\int_{0}^{\\infty} \\frac{1}{x ^ {2} + a ^ {2}} \\,dx = \\frac{\\pi}{2 a}",
+                    "start": "(INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2)) = pi / (2 * a)",
+                    "steps": [
+                        {
+                            "latex_res": "\\frac{d}{da} \\int_{0}^{\\infty} \\frac{1}{x ^ {2} + a ^ {2}} \\,dx = \\frac{d}{da} \\frac{\\pi}{2 a}",
+                            "res": "(D a. INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2)) = (D a. pi / (2 * a))",
+                            "rule": {
+                                "name": "DerivEquation",
+                                "str": "derivate both sides",
+                                "var": "a"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "-2 a (\\int_{0}^{\\infty} \\frac{1}{(a ^ {2} + x ^ {2}) ^ {2}} \\,dx) = -\\frac{\\pi}{2 a ^ {2}}",
+                            "res": "-(2 * a * (INT x:[0,oo]. 1 / (a ^ 2 + x ^ 2) ^ 2)) = -(pi / (2 * a ^ 2))",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(a ^ {2} + x ^ {2}) ^ {2}} \\,dx = \\frac{\\pi}{4 a ^ {3}}",
+                            "res": "(INT x:[0,oo]. 1 / (a ^ 2 + x ^ 2) ^ 2) = pi / (4 * a ^ 3)",
+                            "rule": {
+                                "latex_str": "solve equation for \\(\\int_{0}^{\\infty} \\frac{1}{(a ^ {2} + x ^ {2}) ^ {2}} \\,dx\\)",
+                                "name": "SolveEquation",
+                                "solve_for": "INT x:[0,oo]. 1 / (a ^ 2 + x ^ 2) ^ 2",
+                                "str": "solve equation for INT x:[0,oo]. 1 / (a ^ 2 + x ^ 2) ^ 2"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                }
+            ],
+            "finished": true,
+            "goal": "(INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2) ^ 3) = 3 * pi / (16 * a ^ 5)",
+            "latex_goal": "\\int_{0}^{\\infty} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {3}} \\,dx = \\frac{3 \\pi}{16 a ^ {5}}",
+            "proof": {
+                "finished": true,
+                "goal": "(INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2) ^ 3) = 3 * pi / (16 * a ^ 5)",
+                "latex_goal": "\\int_{0}^{\\infty} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {3}} \\,dx = \\frac{3 \\pi}{16 a ^ {5}}",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "a > 0",
+                            "latex_cond": "a > 0"
+                        }
+                    ],
+                    "latex_start": "\\int_{0}^{\\infty} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {2}} \\,dx = \\frac{\\pi}{4 a ^ {3}}",
+                    "start": "(INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2) ^ 2) = pi / (4 * a ^ 3)",
+                    "steps": [
+                        {
+                            "latex_res": "\\frac{d}{da} \\int_{0}^{\\infty} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {2}} \\,dx = \\frac{d}{da} \\frac{\\pi}{4 a ^ {3}}",
+                            "res": "(D a. INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2) ^ 2) = (D a. pi / (4 * a ^ 3))",
+                            "rule": {
+                                "name": "DerivEquation",
+                                "str": "derivate both sides",
+                                "var": "a"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "-4 a (\\int_{0}^{\\infty} \\frac{1}{(a ^ {2} + x ^ {2}) ^ {3}} \\,dx) = -\\frac{3 \\pi}{4 a ^ {4}}",
+                            "res": "-(4 * a * (INT x:[0,oo]. 1 / (a ^ 2 + x ^ 2) ^ 3)) = -(3 * pi / (4 * a ^ 4))",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(a ^ {2} + x ^ {2}) ^ {3}} \\,dx = \\frac{3 \\pi}{16 a ^ {5}}",
+                            "res": "(INT x:[0,oo]. 1 / (a ^ 2 + x ^ 2) ^ 3) = 3 * pi / (16 * a ^ 5)",
+                            "rule": {
+                                "latex_str": "solve equation for \\(\\int_{0}^{\\infty} \\frac{1}{(a ^ {2} + x ^ {2}) ^ {3}} \\,dx\\)",
+                                "name": "SolveEquation",
+                                "solve_for": "INT x:[0,oo]. 1 / (a ^ 2 + x ^ 2) ^ 3",
+                                "str": "solve equation for INT x:[0,oo]. 1 / (a ^ 2 + x ^ 2) ^ 3"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "Leibniz01"
+}

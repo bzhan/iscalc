@@ -1,0 +1,101 @@
+{
+    "content": [
+        {
+            "conds": [
+                {
+                    "cond": "a > -1",
+                    "latex_cond": "a > -1"
+                }
+            ],
+            "finished": true,
+            "goal": "(INT x:[1,oo]. 1 / ((x + a) * sqrt(x - 1))) = pi / sqrt(a + 1)",
+            "latex_goal": "\\int_{1}^{\\infty} \\frac{1}{(x + a) \\sqrt{x - 1}} \\,dx = \\frac{\\pi}{\\sqrt{a + 1}}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{1}^{\\infty} \\frac{1}{(x + a) \\sqrt{x - 1}} \\,dx",
+                        "start": "INT x:[1,oo]. 1 / ((x + a) * sqrt(x - 1))",
+                        "steps": [
+                            {
+                                "latex_res": "\\int_{0}^{\\infty} \\frac{2}{t ^ {2} + a + 1} \\,dt",
+                                "res": "INT t:[0,oo]. 2 / (t ^ 2 + a + 1)",
+                                "rule": {
+                                    "latex_str": "substitute \\(t\\) for \\(\\sqrt{x - 1}\\)",
+                                    "name": "Substitution",
+                                    "str": "substitute t for sqrt(x - 1)",
+                                    "var_name": "t",
+                                    "var_subst": "sqrt(x - 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 (\\int_{0}^{\\infty} \\frac{1}{t ^ {2} + a + 1} \\,dt)",
+                                "res": "2 * (INT t:[0,oo]. 1 / (t ^ 2 + a + 1))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 (\\int_{0}^{\\infty} \\frac{\\sqrt{a + 1}}{y ^ {2} (a + 1) + a + 1} \\,dy)",
+                                "res": "2 * (INT y:[0,oo]. sqrt(a + 1) / (y ^ 2 * (a + 1) + a + 1))",
+                                "rule": {
+                                    "latex_str": "substitute \\(y\\) for \\(\\frac{t}{\\sqrt{a + 1}}\\)",
+                                    "name": "Substitution",
+                                    "str": "substitute y for t / sqrt(a + 1)",
+                                    "var_name": "y",
+                                    "var_subst": "t / sqrt(a + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 (\\int_{0}^{\\infty} \\frac{\\sqrt{a + 1}}{(a + 1) (y ^ {2} + 1)} \\,dy)",
+                                "res": "2 * (INT y:[0,oo]. sqrt(a + 1) / ((a + 1) * (y ^ 2 + 1)))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(y ^ {2} (a + 1) + a + 1\\) to \\((a + 1) (y ^ {2} + 1)\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(a + 1) * (y ^ 2 + 1)",
+                                    "old_expr": "y ^ 2 * (a + 1) + a + 1",
+                                    "str": "rewriting y ^ 2 * (a + 1) + a + 1 to (a + 1) * (y ^ 2 + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 (\\frac{\\sqrt{a + 1}}{a + 1} (\\left. \\tan^{-1}{y} \\right\\vert_{y=0}^{\\infty}))",
+                                "res": "2 * (sqrt(a + 1) / (a + 1) * ([atan(y)]_y=0,oo))",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\pi}{\\sqrt{a + 1}}",
+                                "res": "pi / sqrt(a + 1)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{\\pi}{\\sqrt{a + 1}}",
+                        "start": "pi / sqrt(a + 1)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(INT x:[1,oo]. 1 / ((x + a) * sqrt(x - 1))) = pi / sqrt(a + 1)",
+                "latex_goal": "\\int_{1}^{\\infty} \\frac{1}{(x + a) \\sqrt{x - 1}} \\,dx = \\frac{\\pi}{\\sqrt{a + 1}}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "easy01"
+}

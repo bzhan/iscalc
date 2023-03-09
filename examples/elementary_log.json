@@ -1,0 +1,486 @@
+{
+    "content": [
+        {
+            "eq": "I(m,n) = (INT x:[0,1]. x ^ m * log(x) ^ n)",
+            "latex_eq": "I(m,n) = \\int_{0}^{1} x ^ {m} \\log^{n}(x) \\,dx",
+            "latex_lhs": "I(m,n)",
+            "type": "FuncDef"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "m >= 0",
+                    "latex_cond": "m \\ge 0"
+                },
+                {
+                    "cond": "n >= 0",
+                    "latex_cond": "n \\ge 0"
+                },
+                {
+                    "cond": "isInt(n)",
+                    "latex_cond": "n \\in\\mathbb{Z}"
+                },
+                {
+                    "cond": "isInt(m)",
+                    "latex_cond": "m \\in\\mathbb{Z}"
+                }
+            ],
+            "finished": true,
+            "goal": "I(m,n) = -(n / (m + 1)) * I(m,n - 1)",
+            "latex_goal": "I(m,n) = (-\\frac{n}{m + 1}) I(m,n - 1)",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "I(m,n)",
+                        "start": "I(m,n)",
+                        "steps": [
+                            {
+                                "latex_res": "\\int_{0}^{1} x ^ {m} \\log^{n}(x) \\,dx",
+                                "res": "INT x:[0,1]. x ^ m * log(x) ^ n",
+                                "rule": {
+                                    "func_name": "I",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "(\\left. \\frac{x ^ {m + 1} \\log^{n}(x)}{m + 1} \\right\\vert_{x=0}^{1}) - (\\int_{0}^{1} \\frac{n x ^ {m} \\log^{n - 1}(x)}{m + 1} \\,dx)",
+                                "res": "([x ^ (m + 1) * log(x) ^ n / (m + 1)]_x=0,1) - (INT x:[0,1]. n * x ^ m * log(x) ^ (n - 1) / (m + 1))",
+                                "rule": {
+                                    "latex_str": "integrate by parts \\(u \\to \\log^{n}(x), v \\to \\frac{x ^ {m + 1}}{m + 1}\\)",
+                                    "name": "IntegrationByParts",
+                                    "str": "integrate by parts u -> log(x) ^ n, v -> x ^ (m + 1) / (m + 1)",
+                                    "u": "log(x) ^ n",
+                                    "v": "x ^ (m + 1) / (m + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{n}{m + 1} (\\int_{0}^{1} x ^ {m} \\log^{n - 1}(x) \\,dx)",
+                                "res": "-(n / (m + 1) * (INT x:[0,1]. x ^ m * log(x) ^ (n - 1)))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{n}{m + 1} I(m,n - 1)",
+                                "res": "-(n / (m + 1) * I(m,n - 1))",
+                                "rule": {
+                                    "func_name": "I",
+                                    "loc": "0.1",
+                                    "name": "FoldDefinition",
+                                    "str": "fold definition at 0.1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "(-\\frac{n}{m + 1}) I(m,n - 1)",
+                                "res": "-(n / (m + 1)) * I(m,n - 1)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(-\\frac{n}{m + 1} I(m,n - 1)\\) to \\((-\\frac{n}{m + 1}) I(m,n - 1)\\)",
+                                    "name": "Equation",
+                                    "new_expr": "-(n / (m + 1)) * I(m,n - 1)",
+                                    "old_expr": "-(n / (m + 1) * I(m,n - 1))",
+                                    "str": "rewriting -(n / (m + 1) * I(m,n - 1)) to -(n / (m + 1)) * I(m,n - 1)"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "(-\\frac{n}{m + 1}) I(m,n - 1)",
+                        "start": "-(n / (m + 1)) * I(m,n - 1)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "I(m,n) = -(n / (m + 1)) * I(m,n - 1)",
+                "latex_goal": "I(m,n) = (-\\frac{n}{m + 1}) I(m,n - 1)",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "m >= 0",
+                    "latex_cond": "m \\ge 0"
+                },
+                {
+                    "cond": "n >= 0",
+                    "latex_cond": "n \\ge 0"
+                },
+                {
+                    "cond": "isInt(n)",
+                    "latex_cond": "n \\in\\mathbb{Z}"
+                },
+                {
+                    "cond": "isInt(m)",
+                    "latex_cond": "m \\in\\mathbb{Z}"
+                }
+            ],
+            "finished": true,
+            "goal": "I(m,n) = (-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1))",
+            "latex_goal": "I(m,n) = (-1) ^ {n} (\\frac{n!}{(m + 1) ^ {n + 1}})",
+            "proof": {
+                "base_case": {
+                    "finished": true,
+                    "goal": "I(m,0) = 1 / (m + 1)",
+                    "latex_goal": "I(m,0) = \\frac{1}{m + 1}",
+                    "proof": {
+                        "calcs": [
+                            {
+                                "latex_start": "I(m,0)",
+                                "start": "I(m,0)",
+                                "steps": [
+                                    {
+                                        "latex_res": "\\int_{0}^{1} x ^ {m} \\,dx",
+                                        "res": "INT x:[0,1]. x ^ m",
+                                        "rule": {
+                                            "func_name": "I",
+                                            "name": "ExpandDefinition",
+                                            "str": "expand definition"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\left. \\frac{x ^ {m + 1}}{m + 1} \\right\\vert_{x=0}^{1}",
+                                        "res": "[x ^ (m + 1) / (m + 1)]_x=0,1",
+                                        "rule": {
+                                            "name": "DefiniteIntegralIdentity",
+                                            "str": "apply definite integral"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{1}{m + 1}",
+                                        "res": "1 / (m + 1)",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            },
+                            {
+                                "latex_start": "\\frac{1}{m + 1}",
+                                "start": "1 / (m + 1)",
+                                "steps": [],
+                                "type": "Calculation"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "I(m,0) = 1 / (m + 1)",
+                        "latex_goal": "I(m,0) = \\frac{1}{m + 1}",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal"
+                },
+                "finished": true,
+                "goal": "I(m,n) = (-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1))",
+                "induct_case": {
+                    "finished": true,
+                    "goal": "I(m,n + 1) = -((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
+                    "latex_goal": "I(m,n + 1) = -(-1) ^ {n} (m + 1) ^ {-n - 2} (n + 1)!",
+                    "proof": {
+                        "calcs": [
+                            {
+                                "latex_start": "I(m,n + 1)",
+                                "start": "I(m,n + 1)",
+                                "steps": [
+                                    {
+                                        "latex_res": "(-\\frac{n + 1}{m + 1}) I(m,n + 1 - 1)",
+                                        "res": "-((n + 1) / (m + 1)) * I(m,n + 1 - 1)",
+                                        "rule": {
+                                            "eq": "I(m,n) = -(n / (m + 1)) * I(m,n - 1)",
+                                            "latex_str": "apply equation \\(I(m,n) = (-\\frac{n}{m + 1}) I(m,n - 1)\\)",
+                                            "name": "ApplyEquation",
+                                            "str": "apply equation: I(m,n) = -(n / (m + 1)) * I(m,n - 1)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "-\\frac{(n + 1) I(m,n)}{m + 1}",
+                                        "res": "-((n + 1) * I(m,n) / (m + 1))",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "-\\frac{(n + 1) ((-1) ^ {n} (\\frac{n!}{(m + 1) ^ {n + 1}}))}{m + 1}",
+                                        "res": "-((n + 1) * ((-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1))) / (m + 1))",
+                                        "rule": {
+                                            "loc": "0.0.1",
+                                            "name": "ApplyInductHyp",
+                                            "str": "apply induction hypothesis at 0.0.1"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "-(-1) ^ {n} n! (m + 1) ^ {-n - 2} (n + 1)",
+                                        "res": "-((-1) ^ n * factorial(n) * (m + 1) ^ (-n - 2) * (n + 1))",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{(-1) ^ {n + 1} ((n + 1) n!)}{(m + 1) ^ {n + 2}}",
+                                        "res": "(-1) ^ (n + 1) * ((n + 1) * factorial(n)) / (m + 1) ^ (n + 2)",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(-(-1) ^ {n} n! (m + 1) ^ {-n - 2} (n + 1)\\) to \\(\\frac{(-1) ^ {n + 1} ((n + 1) n!)}{(m + 1) ^ {n + 2}}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "(-1) ^ (n + 1) * ((n + 1) * factorial(n)) / (m + 1) ^ (n + 2)",
+                                            "old_expr": "-((-1) ^ n * factorial(n) * (m + 1) ^ (-n - 2) * (n + 1))",
+                                            "str": "rewriting -((-1) ^ n * factorial(n) * (m + 1) ^ (-n - 2) * (n + 1)) to (-1) ^ (n + 1) * ((n + 1) * factorial(n)) / (m + 1) ^ (n + 2)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{(-1) ^ {n + 1} (n + 1)!}{(m + 1) ^ {n + 2}}",
+                                        "res": "(-1) ^ (n + 1) * factorial(n + 1) / (m + 1) ^ (n + 2)",
+                                        "rule": {
+                                            "latex_str": "rewrite \\((n + 1) n!\\) to \\((n + 1)!\\) using identity at 0.1",
+                                            "loc": "0.1",
+                                            "name": "ApplyIdentity",
+                                            "source": "(n + 1) * factorial(n)",
+                                            "str": "rewrite (n + 1) * factorial(n) to factorial(n + 1) using identity at 0.1",
+                                            "target": "factorial(n + 1)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "-(-1) ^ {n} (m + 1) ^ {-n - 2} (n + 1)!",
+                                        "res": "-((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            },
+                            {
+                                "latex_start": "-(-1) ^ {n} (m + 1) ^ {-n - 2} (n + 1)!",
+                                "start": "-((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
+                                "steps": [],
+                                "type": "Calculation"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "I(m,n + 1) = -((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
+                        "latex_goal": "I(m,n + 1) = -(-1) ^ {n} (m + 1) ^ {-n - 2} (n + 1)!",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal"
+                },
+                "induct_var": "n",
+                "latex_goal": "I(m,n) = (-1) ^ {n} (\\frac{n!}{(m + 1) ^ {n + 1}})",
+                "type": "InductionProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "m >= 0",
+                    "latex_cond": "m \\ge 0"
+                },
+                {
+                    "cond": "n >= 0",
+                    "latex_cond": "n \\ge 0"
+                },
+                {
+                    "cond": "isInt(n)",
+                    "latex_cond": "n \\in\\mathbb{Z}"
+                },
+                {
+                    "cond": "isInt(m)",
+                    "latex_cond": "m \\in\\mathbb{Z}"
+                },
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                }
+            ],
+            "finished": true,
+            "goal": "(INT x:[0,a]. x ^ m * log(x) ^ n) = a ^ (m + 1) * SUM(k, 0, n, (-1) ^ k * binom(n,k) * factorial(k) * log(a) ^ (n - k) / (m + 1) ^ (k + 1))",
+            "latex_goal": "\\int_{0}^{a} x ^ {m} \\log^{n}(x) \\,dx = a ^ {m + 1} \\sum_{k=0}^{n}{\\frac{(-1) ^ {k} \\binom{n}{k} k! \\log^{n - k}(a)}{(m + 1) ^ {k + 1}}}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{0}^{a} x ^ {m} \\log^{n}(x) \\,dx",
+                        "start": "INT x:[0,a]. x ^ m * log(x) ^ n",
+                        "steps": [
+                            {
+                                "latex_res": "\\int_{0}^{1} (a y) ^ {m} \\log^{n}(a y) a \\,dy",
+                                "res": "INT y:[0,1]. (a * y) ^ m * log(a * y) ^ n * a",
+                                "rule": {
+                                    "latex_str": "inverse substitution for \\(a y\\)",
+                                    "name": "SubstitutionInverse",
+                                    "str": "inverse substitution for a * y",
+                                    "var_name": "y",
+                                    "var_subst": "a * y"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{1} a ^ {m} y ^ {m} \\log^{n}(a y) a \\,dy",
+                                "res": "INT y:[0,1]. a ^ m * y ^ m * log(a * y) ^ n * a",
+                                "rule": {
+                                    "latex_str": "rewrite \\((a y) ^ {m}\\) to \\(a ^ {m} y ^ {m}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "(a * y) ^ m",
+                                    "str": "rewrite (a * y) ^ m to a ^ m * y ^ m using identity",
+                                    "target": "a ^ m * y ^ m"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "a ^ {m + 1} (\\int_{0}^{1} y ^ {m} \\log^{n}(a y) \\,dy)",
+                                "res": "a ^ (m + 1) * (INT y:[0,1]. y ^ m * log(a * y) ^ n)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "a ^ {m + 1} (\\int_{0}^{1} y ^ {m} \\log^{n}(y a) \\,dy)",
+                                "res": "a ^ (m + 1) * (INT y:[0,1]. y ^ m * log(y * a) ^ n)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(a y\\) to \\(y a\\)",
+                                    "name": "Equation",
+                                    "new_expr": "y * a",
+                                    "old_expr": "a * y",
+                                    "str": "rewriting a * y to y * a"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "a ^ {m + 1} (\\int_{0}^{1} y ^ {m} (\\log{y} + \\log{a}) ^ {n} \\,dy)",
+                                "res": "a ^ (m + 1) * (INT y:[0,1]. y ^ m * (log(y) + log(a)) ^ n)",
+                                "rule": {
+                                    "latex_str": "rewrite \\(\\log{(y a)}\\) to \\(\\log{y} + \\log{a}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "log(y * a)",
+                                    "str": "rewrite log(y * a) to log(y) + log(a) using identity",
+                                    "target": "log(y) + log(a)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "a ^ {m + 1} (\\int_{0}^{1} y ^ {m} \\sum_{k=0}^{n}{\\binom{n}{k} \\log^{k}(y) \\log^{n - k}(a)} \\,dy)",
+                                "res": "a ^ (m + 1) * (INT y:[0,1]. y ^ m * SUM(k, 0, n, binom(n,k) * log(y) ^ k * log(a) ^ (n - k)))",
+                                "rule": {
+                                    "index_var": "k",
+                                    "loc": "1.0.1",
+                                    "name": "SeriesExpansionIdentity",
+                                    "str": "apply series expansion at 1.0.1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "a ^ {m + 1} (\\int_{0}^{1} \\sum_{k=0}^{n}{y ^ {m} \\binom{n}{k} \\log^{k}(y) \\log^{n - k}(a)} \\,dy)",
+                                "res": "a ^ (m + 1) * (INT y:[0,1]. SUM(k, 0, n, y ^ m * binom(n,k) * log(y) ^ k * log(a) ^ (n - k)))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(y ^ {m} \\sum_{k=0}^{n}{\\binom{n}{k} \\log^{k}(y) \\log^{n - k}(a)}\\) to \\(\\sum_{k=0}^{n}{y ^ {m} \\binom{n}{k} \\log^{k}(y) \\log^{n - k}(a)}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "SUM(k, 0, n, y ^ m * binom(n,k) * log(y) ^ k * log(a) ^ (n - k))",
+                                    "old_expr": "y ^ m * SUM(k, 0, n, binom(n,k) * log(y) ^ k * log(a) ^ (n - k))",
+                                    "str": "rewriting y ^ m * SUM(k, 0, n, binom(n,k) * log(y) ^ k * log(a) ^ (n - k)) to SUM(k, 0, n, y ^ m * binom(n,k) * log(y) ^ k * log(a) ^ (n - k))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{\\int_{0}^{1} y ^ {m} \\binom{n}{k} \\log^{k}(y) \\log^{n - k}(a) \\,dy}",
+                                "res": "a ^ (m + 1) * SUM(k, 0, n, INT y:[0,1]. y ^ m * binom(n,k) * log(y) ^ k * log(a) ^ (n - k))",
+                                "rule": {
+                                    "loc": "1",
+                                    "name": "IntSumExchange",
+                                    "str": "exchange integral and sum at 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{\\log^{-k + n}(a) (\\binom{n}{k} (\\int_{0}^{1} y ^ {m} \\log^{k}(y) \\,dy))}",
+                                "res": "a ^ (m + 1) * SUM(k, 0, n, log(a) ^ (-k + n) * (binom(n,k) * (INT y:[0,1]. y ^ m * log(y) ^ k)))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{\\log^{-k + n}(a) (\\binom{n}{k} I(m,k))}",
+                                "res": "a ^ (m + 1) * SUM(k, 0, n, log(a) ^ (-k + n) * (binom(n,k) * I(m,k)))",
+                                "rule": {
+                                    "func_name": "I",
+                                    "loc": "1.0.1.1",
+                                    "name": "FoldDefinition",
+                                    "str": "fold definition at 1.0.1.1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{\\log^{-k + n}(a) (\\binom{n}{k} ((-1) ^ {k} (\\frac{k!}{(m + 1) ^ {k + 1}})))}",
+                                "res": "a ^ (m + 1) * SUM(k, 0, n, log(a) ^ (-k + n) * (binom(n,k) * ((-1) ^ k * (factorial(k) / (m + 1) ^ (k + 1)))))",
+                                "rule": {
+                                    "eq": "I(m,n) = (-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1))",
+                                    "latex_str": "apply equation \\(I(m,n) = (-1) ^ {n} (\\frac{n!}{(m + 1) ^ {n + 1}})\\) at 1.0.1.1",
+                                    "loc": "1.0.1.1",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: I(m,n) = (-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1)) at 1.0.1.1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{(-1) ^ {k} k! \\log^{-k + n}(a) (m + 1) ^ {-k - 1} \\binom{n}{k}}",
+                                "res": "a ^ (m + 1) * SUM(k, 0, n, (-1) ^ k * factorial(k) * log(a) ^ (-k + n) * (m + 1) ^ (-k - 1) * binom(n,k))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "a ^ {m + 1} \\sum_{k=0}^{n}{\\frac{(-1) ^ {k} \\binom{n}{k} k! \\log^{n - k}(a)}{(m + 1) ^ {k + 1}}}",
+                        "start": "a ^ (m + 1) * SUM(k, 0, n, (-1) ^ k * binom(n,k) * factorial(k) * log(a) ^ (n - k) / (m + 1) ^ (k + 1))",
+                        "steps": [
+                            {
+                                "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{(-1) ^ {k} k! \\log^{-k + n}(a) (m + 1) ^ {-k - 1} \\binom{n}{k}}",
+                                "res": "a ^ (m + 1) * SUM(k, 0, n, (-1) ^ k * factorial(k) * log(a) ^ (-k + n) * (m + 1) ^ (-k - 1) * binom(n,k))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(INT x:[0,a]. x ^ m * log(x) ^ n) = a ^ (m + 1) * SUM(k, 0, n, (-1) ^ k * binom(n,k) * factorial(k) * log(a) ^ (n - k) / (m + 1) ^ (k + 1))",
+                "latex_goal": "\\int_{0}^{a} x ^ {m} \\log^{n}(x) \\,dx = a ^ {m + 1} \\sum_{k=0}^{n}{\\frac{(-1) ^ {k} \\binom{n}{k} k! \\log^{n - k}(a)}{(m + 1) ^ {k + 1}}}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "elementary_log"
+}

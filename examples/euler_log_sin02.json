@@ -1,0 +1,135 @@
+{
+    "content": [
+        {
+            "finished": true,
+            "goal": "(INT x:[0,pi / 2]. log(sin(x) / x)) = pi / 2 * (1 - log(pi))",
+            "latex_goal": "\\int_{0}^{\\pi/2} \\log{(\\frac{\\sin{x}}{x})} \\,dx = \\frac{\\pi}{2}\\cdot (1 - \\log{(\\pi)})",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{0}^{\\pi/2} \\log{(\\frac{\\sin{x}}{x})} \\,dx",
+                        "start": "INT x:[0,pi / 2]. log(sin(x) / x)",
+                        "steps": [
+                            {
+                                "latex_res": "\\int_{0}^{\\pi/2} \\log{(\\sin{x})} - \\log{x} \\,dx",
+                                "res": "INT x:[0,pi / 2]. log(sin(x)) - log(x)",
+                                "rule": {
+                                    "latex_str": "rewrite \\(\\log{(\\frac{\\sin{x}}{x})}\\) to \\(\\log{(\\sin{x})} - \\log{x}\\) using identity at 0",
+                                    "loc": "0",
+                                    "name": "ApplyIdentity",
+                                    "source": "log(sin(x) / x)",
+                                    "str": "rewrite log(sin(x) / x) to log(sin(x)) - log(x) using identity at 0",
+                                    "target": "log(sin(x)) - log(x)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "(\\int_{0}^{\\pi/2} \\log{(\\sin{x})} \\,dx) - (\\int_{0}^{\\pi/2} \\log{x} \\,dx)",
+                                "res": "(INT x:[0,pi / 2]. log(sin(x))) - (INT x:[0,pi / 2]. log(x))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "(\\int_{0}^{\\pi/2} \\log{(1 \\sin{x})} \\,dx) - (\\int_{0}^{\\pi/2} \\log{x} \\,dx)",
+                                "res": "(INT x:[0,pi / 2]. log(1 * sin(x))) - (INT x:[0,pi / 2]. log(x))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\log{(\\sin{x})}\\) to \\(\\log{(1 \\sin{x})}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "log(1 * sin(x))",
+                                    "old_expr": "log(sin(x))",
+                                    "str": "rewriting log(sin(x)) to log(1 * sin(x))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{\\pi \\log{(2)}}{2} - (\\int_{0}^{\\pi/2} \\log{x} \\,dx)",
+                                "res": "-(pi * log(2) / 2) - (INT x:[0,pi / 2]. log(x))",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{\\pi \\log{(2)}}{2} - ((\\left. x \\log{x} \\right\\vert_{x=0}^{\\pi/2}) - (\\int_{0}^{\\pi/2} 1 \\,dx))",
+                                "res": "-(pi * log(2) / 2) - (([x * log(x)]_x=0,pi / 2) - (INT x:[0,pi / 2]. 1))",
+                                "rule": {
+                                    "latex_str": "integrate by parts \\(u \\to \\log{x}, v \\to x\\) at 1",
+                                    "loc": "1",
+                                    "name": "IntegrationByParts",
+                                    "str": "integrate by parts u -> log(x), v -> x at 1",
+                                    "u": "log(x)",
+                                    "v": "x"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{\\pi \\log{(2)}}{2} - ((\\left. x \\log{x} \\right\\vert_{x=0}^{\\pi/2}) - (\\left. x \\right\\vert_{x=0}^{\\pi/2}))",
+                                "res": "-(pi * log(2) / 2) - (([x * log(x)]_x=0,pi / 2) - ([x]_x=0,pi / 2))",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{\\pi\\cdot (-\\log{(2)} + \\log{(\\pi)})}{2} - \\frac{\\pi \\log{(2)}}{2} + \\frac{\\pi}{2}",
+                                "res": "-(pi * (-log(2) + log(pi)) / 2) - pi * log(2) / 2 + pi / 2",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-(-\\frac{\\pi \\log{(2)}}{2} + \\frac{\\pi \\log{(\\pi)}}{2}) - \\frac{\\pi \\log{(2)}}{2} + \\frac{\\pi}{2}",
+                                "res": "-(-(pi * log(2) / 2) + pi * log(pi) / 2) - pi * log(2) / 2 + pi / 2",
+                                "rule": {
+                                    "loc": "0.0.0",
+                                    "name": "ExpandPolynomial",
+                                    "str": "expand polynomial at 0.0.0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{\\pi \\log{(\\pi)}}{2} + \\frac{\\pi}{2}",
+                                "res": "-(pi * log(pi) / 2) + pi / 2",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{\\pi}{2}\\cdot (1 - \\log{(\\pi)})",
+                        "start": "pi / 2 * (1 - log(pi))",
+                        "steps": [
+                            {
+                                "latex_res": "-\\frac{\\pi \\log{(\\pi)}}{2} + \\frac{\\pi}{2}",
+                                "res": "-(pi * log(pi) / 2) + pi / 2",
+                                "rule": {
+                                    "name": "ExpandPolynomial",
+                                    "str": "expand polynomial"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(INT x:[0,pi / 2]. log(sin(x) / x)) = pi / 2 * (1 - log(pi))",
+                "latex_goal": "\\int_{0}^{\\pi/2} \\log{(\\frac{\\sin{x}}{x})} \\,dx = \\frac{\\pi}{2}\\cdot (1 - \\log{(\\pi)})",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "euler_log_sin02"
+}

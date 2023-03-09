@@ -1,0 +1,81 @@
+{
+    "content": [
+        {
+            "_problem_latex": "\\int_{0}^{\\pi/100} \\frac{\\sin{(20 x)} + \\sin{(19 x)}}{\\cos{(20 x)} + \\cos{(19 x)}} \\,\\mathrm{dx}",
+            "calc": [
+                {
+                    "latex": "\\int_{0}^{\\pi/100} \\frac{\\sin{(20 x)} + \\sin{(19 x)}}{\\cos{(20 x)} + \\cos{(19 x)}} \\,\\mathrm{dx}",
+                    "reason": "Initial",
+                    "text": "INT x:[0,pi / 100]. (sin(20 * x) + sin(19 * x)) / (cos(20 * x) + cos(19 * x))"
+                },
+                {
+                    "_latex_reason": "Rewrite trigonometric \\(\\frac{\\sin{(20 x)} + \\sin{(19 x)}}{\\cos{(20 x)} + \\cos{(19 x)}}\\) to \\(\\frac{\\sin{(\\frac{1}{2} \\times 39 x)}}{\\cos{(\\frac{1}{2} \\times 39 x)}}\\)",
+                    "latex": "\\int_{0}^{\\pi/100} \\frac{\\sin{(\\frac{1}{2} \\times 39 x)}}{\\cos{(\\frac{1}{2} \\times 39 x)}} \\,\\mathrm{dx}",
+                    "location": "0",
+                    "params": {
+                        "rule": "TR9"
+                    },
+                    "reason": "Rewrite trigonometric",
+                    "text": "INT x:[0,pi / 100]. sin((39 * x) / 2) / cos((39 * x) / 2)"
+                },
+                {
+                    "_latex_reason": "Substitute \\(u\\) for \\(\\frac{1}{2} \\times 39 x\\)",
+                    "latex": "\\int_{0}^{39/200 \\pi} \\frac{\\frac{2}{39}}{\\cos{(u)}} \\sin{(u)} \\,\\mathrm{du}",
+                    "params": {
+                        "f": "(2 * sin(u)) / (39 * cos(u))",
+                        "g": "(39 * x) / 2",
+                        "var_name": "u"
+                    },
+                    "reason": "Substitution",
+                    "text": "INT u:[0,39/200 * pi]. 2/39 * cos(u) ^ -1 * sin(u)"
+                },
+                {
+                    "_latex_reason": "Substitute \\(v\\) for \\(\\cos{(u)}\\)",
+                    "latex": "\\int_{\\cos{(39/200 \\pi)}}^{1} \\frac{\\frac{2}{39}}{v} \\,\\mathrm{dv}",
+                    "params": {
+                        "f": "-2 / (39 * v)",
+                        "g": "cos(u)",
+                        "var_name": "v"
+                    },
+                    "reason": "Substitution",
+                    "text": "INT v:[cos(39/200 * pi),1]. 2/39 * v ^ -1"
+                },
+                {
+                    "latex": "-\\frac{2}{39} \\log{(\\cos{(\\frac{39}{200} \\pi)})}",
+                    "reason": "Simplification",
+                    "text": "-2/39 * log(cos(39/200 * pi))"
+                }
+            ],
+            "name": "Exercise 1",
+            "problem": "INT x:[0, pi/100].(sin(20*x) + sin(19*x))/(cos(20*x) + cos(19*x))"
+        },
+        {
+            "_problem_latex": "\\int_{0}^{1} \\frac{e^{x} + \\cos{(x)}}{e^{x} + \\sin{(x)}} \\,\\mathrm{dx}",
+            "calc": [
+                {
+                    "latex": "\\int_{0}^{1} \\frac{e^{x} + \\cos{(x)}}{e^{x} + \\sin{(x)}} \\,\\mathrm{dx}",
+                    "reason": "Initial",
+                    "text": "INT x:[0,1]. (exp(x) + cos(x)) / (exp(x) + sin(x))"
+                },
+                {
+                    "_latex_reason": "Substitute \\(u\\) for \\(e^{x} + \\sin{(x)}\\)",
+                    "latex": "\\int_{1}^{e + \\sin{(1)}} \\frac{1}{u} \\,\\mathrm{du}",
+                    "params": {
+                        "f": "1 / u",
+                        "g": "exp(x) + sin(x)",
+                        "var_name": "u"
+                    },
+                    "reason": "Substitution",
+                    "text": "INT u:[1,exp(1) + sin(1)]. u ^ -1"
+                },
+                {
+                    "latex": "\\log{(e + \\sin{(1)})}",
+                    "reason": "Simplification",
+                    "text": "log(exp(1) + sin(1))"
+                }
+            ],
+            "name": "Exercise 2",
+            "problem": "INT x:[0, 1]. (exp(x) + cos(x))/(exp(x) + sin(x))"
+        }
+    ]
+}

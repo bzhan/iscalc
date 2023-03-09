@@ -1,0 +1,39 @@
+{
+    "content": [
+        {
+            "type": "header",
+            "name": "Integrals",
+            "level": 1
+        },
+        {
+            "type": "problem",
+            "expr": "INT x:[0, 1]. 1/ ((1 + y*x)*sqrt(1-x^2))",
+            "path": "powerful_elementry_integral"
+        },
+        {
+            "type": "problem",
+            "expr": "INT x:[0,1]. x^m * log(x)^n",
+            "path": "elementary_log"
+        },
+        {
+            "type": "problem",
+            "expr": "(INT x:[0,a]. x^m *log(x)^n)",
+            "path": "elementary_log"
+        },
+        {
+            "type": "problem",
+            "expr": "INT x:[0,1]. x^(n-1) * log(1-x)",
+            "path": "harmonic_series"
+        },
+        {
+            "type": "problem",
+            "expr": "INT t:[0,x]. log(1-t)^2 / t",
+            "path": "useful_log"
+        }
+    ],
+    "imports": [
+        "base",
+        "interesting"
+    ],
+    "name": "Almost Impossible Integrals, Sums, and Series"
+}

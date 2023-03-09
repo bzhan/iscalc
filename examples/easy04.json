@@ -1,0 +1,110 @@
+{
+    "content": [
+        {
+            "conds": [
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                }
+            ],
+            "finished": true,
+            "goal": "(INT x:[0,oo]. 1 / (1 + exp(a * x))) = log(2) / a",
+            "latex_goal": "\\int_{0}^{\\infty} \\frac{1}{1 + e^{a x}} \\,dx = \\frac{\\log{(2)}}{a}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{0}^{\\infty} \\frac{1}{1 + e^{a x}} \\,dx",
+                        "start": "INT x:[0,oo]. 1 / (1 + exp(a * x))",
+                        "steps": [
+                            {
+                                "latex_res": "\\int_{1}^{\\infty} \\frac{1}{a u (u + 1)} \\,du",
+                                "res": "INT u:[1,oo]. 1 / (a * u * (u + 1))",
+                                "rule": {
+                                    "latex_str": "substitute \\(u\\) for \\(e^{a x}\\)",
+                                    "name": "Substitution",
+                                    "str": "substitute u for exp(a * x)",
+                                    "var_name": "u",
+                                    "var_subst": "exp(a * x)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (\\int_{1}^{\\infty} \\frac{1}{u (u + 1)} \\,du)",
+                                "res": "1 / a * (INT u:[1,oo]. 1 / (u * (u + 1)))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (\\int_{1}^{\\infty} \\frac{1}{u} - \\frac{1}{u + 1} \\,du)",
+                                "res": "1 / a * (INT u:[1,oo]. 1 / u - 1 / (u + 1))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{1}{u (u + 1)}\\) to \\(\\frac{1}{u} - \\frac{1}{u + 1}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "1 / u - 1 / (u + 1)",
+                                    "old_expr": "1 / (u * (u + 1))",
+                                    "str": "rewriting 1 / (u * (u + 1)) to 1 / u - 1 / (u + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (-(\\int_{1}^{\\infty} \\frac{1}{u + 1} \\,du) + (\\int_{1}^{\\infty} \\frac{1}{u} \\,du))",
+                                "res": "1 / a * (-(INT u:[1,oo]. 1 / (u + 1)) + (INT u:[1,oo]. 1 / u))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (-(\\int_{2}^{\\infty} \\frac{1}{y} \\,dy) + (\\int_{1}^{\\infty} \\frac{1}{u} \\,du))",
+                                "res": "1 / a * (-(INT y:[2,oo]. 1 / y) + (INT u:[1,oo]. 1 / u))",
+                                "rule": {
+                                    "latex_str": "substitute \\(y\\) for \\(u + 1\\)",
+                                    "name": "Substitution",
+                                    "str": "substitute y for u + 1",
+                                    "var_name": "y",
+                                    "var_subst": "u + 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (-(\\left. \\log{y} \\right\\vert_{y=2}^{\\infty}) + (\\left. \\log{u} \\right\\vert_{u=1}^{\\infty}))",
+                                "res": "1 / a * (-([log(y)]_y=2,oo) + ([log(u)]_u=1,oo))",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\log{(2)}}{a}",
+                                "res": "log(2) / a",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{\\log{(2)}}{a}",
+                        "start": "log(2) / a",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(INT x:[0,oo]. 1 / (1 + exp(a * x))) = log(2) / a",
+                "latex_goal": "\\int_{0}^{\\infty} \\frac{1}{1 + e^{a x}} \\,dx = \\frac{\\log{(2)}}{a}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "easy04"
+}

@@ -1,0 +1,55 @@
+{
+    "content": [
+        {
+            "latex_start": "\\int_{0}^{\\pi/2} \\frac{\\sqrt{\\sin{x}}}{\\sqrt{\\sin{x}} + \\sqrt{\\cos{x}}} \\,dx",
+            "start": "INT x:[0,pi / 2]. sqrt(sin(x)) / (sqrt(sin(x)) + sqrt(cos(x)))",
+            "steps": [
+                {
+                    "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\sqrt{\\cos{y}}}{\\sqrt{\\cos{y}} + \\sqrt{\\sin{y}}} \\,dy",
+                    "res": "INT y:[0,pi / 2]. sqrt(cos(y)) / (sqrt(cos(y)) + sqrt(sin(y)))",
+                    "rule": {
+                        "latex_str": "substitute \\(y\\) for \\(\\frac{\\pi}{2} - x\\)",
+                        "name": "Substitution",
+                        "str": "substitute y for pi / 2 - x",
+                        "var_name": "y",
+                        "var_subst": "pi / 2 - x"
+                    },
+                    "type": "CalculationStep"
+                },
+                {
+                    "latex_res": "\\int_{0}^{\\pi/2} 1 - \\frac{\\sqrt{\\sin{y}}}{\\sqrt{\\cos{y}} + \\sqrt{\\sin{y}}} \\,dy",
+                    "res": "INT y:[0,pi / 2]. 1 - sqrt(sin(y)) / (sqrt(cos(y)) + sqrt(sin(y)))",
+                    "rule": {
+                        "latex_str": "rewriting \\(\\frac{\\sqrt{\\cos{y}}}{\\sqrt{\\cos{y}} + \\sqrt{\\sin{y}}}\\) to \\(1 - \\frac{\\sqrt{\\sin{y}}}{\\sqrt{\\cos{y}} + \\sqrt{\\sin{y}}}\\)",
+                        "name": "Equation",
+                        "new_expr": "1 - sqrt(sin(y)) / (sqrt(cos(y)) + sqrt(sin(y)))",
+                        "old_expr": "sqrt(cos(y)) / (sqrt(cos(y)) + sqrt(sin(y)))",
+                        "str": "rewriting sqrt(cos(y)) / (sqrt(cos(y)) + sqrt(sin(y))) to 1 - sqrt(sin(y)) / (sqrt(cos(y)) + sqrt(sin(y)))"
+                    },
+                    "type": "CalculationStep"
+                },
+                {
+                    "latex_res": "(\\left. y \\right\\vert_{y=0}^{\\pi/2}) - (\\int_{0}^{\\pi/2} \\frac{\\sqrt{\\sin{y}}}{\\sqrt{\\cos{y}} + \\sqrt{\\sin{y}}} \\,dy)",
+                    "res": "([y]_y=0,pi / 2) - (INT y:[0,pi / 2]. sqrt(sin(y)) / (sqrt(cos(y)) + sqrt(sin(y))))",
+                    "rule": {
+                        "name": "DefiniteIntegralIdentity",
+                        "str": "apply definite integral"
+                    },
+                    "type": "CalculationStep"
+                },
+                {
+                    "latex_res": "\\frac{\\pi}{4}",
+                    "res": "pi / 4",
+                    "rule": {
+                        "lhs": "INT x:[0,pi / 2]. sqrt(sin(x)) / (sqrt(sin(x)) + sqrt(cos(x)))",
+                        "name": "IntegrateByEquation",
+                        "str": "integrate by equation"
+                    },
+                    "type": "CalculationStep"
+                }
+            ],
+            "type": "Calculation"
+        }
+    ],
+    "name": "Trick2a"
+}

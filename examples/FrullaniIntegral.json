@@ -1,0 +1,343 @@
+{
+    "content": [
+        {
+            "conds": [
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                },
+                {
+                    "cond": "b > 0",
+                    "latex_cond": "b > 0"
+                }
+            ],
+            "eq": "I(a,b) = (INT x:[0,oo]. (atan(a * x) - atan(b * x)) / x)",
+            "latex_eq": "I(a,b) = \\int_{0}^{\\infty} \\frac{\\tan^{-1}{(a x)} - \\tan^{-1}{(b x)}}{x} \\,dx",
+            "latex_lhs": "I(a,b)",
+            "type": "FuncDef"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                },
+                {
+                    "cond": "b > 0",
+                    "latex_cond": "b > 0"
+                }
+            ],
+            "finished": true,
+            "goal": "(D a. I(a,b)) = pi / (2 * a)",
+            "latex_goal": "\\frac{d}{da} I(a,b) = \\frac{\\pi}{2 a}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\frac{d}{da} I(a,b)",
+                        "start": "D a. I(a,b)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{d}{da} \\int_{0}^{\\infty} \\frac{\\tan^{-1}{(a x)} - \\tan^{-1}{(b x)}}{x} \\,dx",
+                                "res": "D a. INT x:[0,oo]. (atan(a * x) - atan(b * x)) / x",
+                                "rule": {
+                                    "func_name": "I",
+                                    "loc": "subterms",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\infty} \\frac{d}{da} \\frac{\\tan^{-1}{(a x)} - \\tan^{-1}{(b x)}}{x} \\,dx",
+                                "res": "INT x:[0,oo]. D a. (atan(a * x) - atan(b * x)) / x",
+                                "rule": {
+                                    "name": "DerivIntExchange",
+                                    "str": "exchange derivative and integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\infty} \\frac{1}{a ^ {2} x ^ {2} + 1} \\,dx",
+                                "res": "INT x:[0,oo]. 1 / (a ^ 2 * x ^ 2 + 1)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\infty} \\frac{1}{a (u ^ {2} + 1)} \\,du",
+                                "res": "INT u:[0,oo]. 1 / (a * (u ^ 2 + 1))",
+                                "rule": {
+                                    "latex_str": "substitute \\(u\\) for \\(a x\\)",
+                                    "name": "Substitution",
+                                    "str": "substitute u for a * x",
+                                    "var_name": "u",
+                                    "var_subst": "a * x"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (\\left. \\tan^{-1}{u} \\right\\vert_{u=0}^{\\infty})",
+                                "res": "1 / a * ([atan(u)]_u=0,oo)",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\pi}{2 a}",
+                                "res": "pi / (2 * a)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{\\pi}{2 a}",
+                        "start": "pi / (2 * a)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(D a. I(a,b)) = pi / (2 * a)",
+                "latex_goal": "\\frac{d}{da} I(a,b) = \\frac{\\pi}{2 a}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                },
+                {
+                    "cond": "b > 0",
+                    "latex_cond": "b > 0"
+                }
+            ],
+            "finished": true,
+            "goal": "I(a,b) = pi * log(a) / 2 + SKOLEM_FUNC(C(b))",
+            "latex_goal": "I(a,b) = \\frac{\\pi \\log{a}}{2} + C(b)",
+            "proof": {
+                "finished": true,
+                "goal": "I(a,b) = pi * log(a) / 2 + SKOLEM_FUNC(C(b))",
+                "latex_goal": "I(a,b) = \\frac{\\pi \\log{a}}{2} + C(b)",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "a > 0",
+                            "latex_cond": "a > 0"
+                        },
+                        {
+                            "cond": "b > 0",
+                            "latex_cond": "b > 0"
+                        }
+                    ],
+                    "latex_start": "\\frac{d}{da} I(a,b) = \\frac{\\pi}{2 a}",
+                    "start": "(D a. I(a,b)) = pi / (2 * a)",
+                    "steps": [
+                        {
+                            "latex_res": "I(a,b) = \\int \\frac{\\pi}{2 a} \\,da",
+                            "res": "I(a,b) = (INT a [b]. pi / (2 * a))",
+                            "rule": {
+                                "name": "IntegrateBothSide",
+                                "str": "integrate both side"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "I(a,b) = \\frac{\\pi}{2} (\\int \\frac{1}{a} \\,da)",
+                            "res": "I(a,b) = pi / 2 * (INT a [b]. 1 / a)",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "I(a,b) = \\frac{\\pi}{2} \\log{(\\left| a \\right|)} + C(b)",
+                            "res": "I(a,b) = pi / 2 * log(abs(a)) + SKOLEM_FUNC(C(b))",
+                            "rule": {
+                                "name": "IndefiniteIntegralIdentity",
+                                "str": "apply indefinite integral"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "I(a,b) = \\frac{\\pi \\log{a}}{2} + C(b)",
+                            "res": "I(a,b) = pi * log(a) / 2 + SKOLEM_FUNC(C(b))",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                }
+            ],
+            "finished": true,
+            "goal": "SKOLEM_FUNC(C(a)) = -(pi * log(a) / 2)",
+            "latex_goal": "C(a) = -\\frac{\\pi \\log{a}}{2}",
+            "proof": {
+                "finished": true,
+                "goal": "SKOLEM_FUNC(C(a)) = -(pi * log(a) / 2)",
+                "latex_goal": "C(a) = -\\frac{\\pi \\log{a}}{2}",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "a > 0",
+                            "latex_cond": "a > 0"
+                        },
+                        {
+                            "cond": "b > 0",
+                            "latex_cond": "b > 0"
+                        }
+                    ],
+                    "latex_start": "I(a,b) = \\frac{\\pi \\log{a}}{2} + C(b)",
+                    "start": "I(a,b) = pi * log(a) / 2 + SKOLEM_FUNC(C(b))",
+                    "steps": [
+                        {
+                            "latex_res": "I(a,a) = \\frac{\\pi \\log{a}}{2} + C(a)",
+                            "res": "I(a,a) = pi * log(a) / 2 + SKOLEM_FUNC(C(a))",
+                            "rule": {
+                                "latex_str": "substitute \\(b\\) for \\(a\\) in equation",
+                                "name": "VarSubsOfEquation",
+                                "str": "substitute b for a in equation",
+                                "subst": [
+                                    {
+                                        "expr": "a",
+                                        "var": "b"
+                                    }
+                                ]
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "C(a) = -\\frac{\\pi \\log{a}}{2} + I(a,a)",
+                            "res": "SKOLEM_FUNC(C(a)) = -(pi * log(a) / 2) + I(a,a)",
+                            "rule": {
+                                "latex_str": "solve equation for \\(C(a)\\)",
+                                "name": "SolveEquation",
+                                "solve_for": "SKOLEM_FUNC(C(a))",
+                                "str": "solve equation for SKOLEM_FUNC(C(a))"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "C(a) = -\\frac{\\pi \\log{a}}{2} + (\\int_{0}^{\\infty} 0 \\,dx)",
+                            "res": "SKOLEM_FUNC(C(a)) = -(pi * log(a) / 2) + (INT x:[0,oo]. 0)",
+                            "rule": {
+                                "func_name": "I",
+                                "loc": "subterms",
+                                "name": "ExpandDefinition",
+                                "str": "expand definition on subterms"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "C(a) = -\\frac{\\pi \\log{a}}{2}",
+                            "res": "SKOLEM_FUNC(C(a)) = -(pi * log(a) / 2)",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                },
+                {
+                    "cond": "b > 0",
+                    "latex_cond": "b > 0"
+                }
+            ],
+            "finished": true,
+            "goal": "I(a,b) = pi * log(a) / 2 - pi * log(b) / 2",
+            "latex_goal": "I(a,b) = \\frac{\\pi \\log{a}}{2} - \\frac{\\pi \\log{b}}{2}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "I(a,b)",
+                        "start": "I(a,b)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{\\pi \\log{a}}{2} + C(b)",
+                                "res": "pi * log(a) / 2 + SKOLEM_FUNC(C(b))",
+                                "rule": {
+                                    "eq": "I(a,b) = pi * log(a) / 2 + SKOLEM_FUNC(C(b))",
+                                    "latex_str": "apply equation \\(I(a,b) = \\frac{\\pi \\log{a}}{2} + C(b)\\)",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: I(a,b) = pi * log(a) / 2 + SKOLEM_FUNC(C(b))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\pi \\log{a}}{2} + -\\frac{\\pi \\log{b}}{2}",
+                                "res": "pi * log(a) / 2 + -(pi * log(b) / 2)",
+                                "rule": {
+                                    "eq": "SKOLEM_FUNC(C(a)) = -(pi * log(a) / 2)",
+                                    "latex_str": "apply equation \\(C(a) = -\\frac{\\pi \\log{a}}{2}\\) at 1",
+                                    "loc": "1",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: SKOLEM_FUNC(C(a)) = -(pi * log(a) / 2) at 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\pi \\log{a}}{2} - \\frac{\\pi \\log{b}}{2}",
+                                "res": "pi * log(a) / 2 - pi * log(b) / 2",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{\\pi \\log{a}}{2} - \\frac{\\pi \\log{b}}{2}",
+                        "start": "pi * log(a) / 2 - pi * log(b) / 2",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "I(a,b) = pi * log(a) / 2 - pi * log(b) / 2",
+                "latex_goal": "I(a,b) = \\frac{\\pi \\log{a}}{2} - \\frac{\\pi \\log{b}}{2}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "FrullaniIntegral"
+}

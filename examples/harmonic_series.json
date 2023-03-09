@@ -1,0 +1,165 @@
+{
+    "content": [
+        {
+            "eq": "H(n) = SUM(k, 1, n, 1 / k)",
+            "latex_eq": "H{(n)} = \\sum_{k=1}^{n}{\\frac{1}{k}}",
+            "latex_lhs": "H{(n)}",
+            "type": "FuncDef"
+        },
+        {
+            "eq": "I(n) = (INT x:[0,1]. x ^ (n - 1) * log(1 - x))",
+            "latex_eq": "I{(n)} = \\int_{0}^{1} x ^ {n - 1} \\log{(1 - x)} \\,dx",
+            "latex_lhs": "I{(n)}",
+            "type": "FuncDef"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "n > 0",
+                    "latex_cond": "n > 0"
+                },
+                {
+                    "cond": "isInt(n)",
+                    "latex_cond": "n \\in\\mathbb{Z}"
+                }
+            ],
+            "finished": true,
+            "goal": "I(n) = -(H(n) / n)",
+            "latex_goal": "I{(n)} = -\\frac{H{(n)}}{n}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "I{(n)}",
+                        "start": "I(n)",
+                        "steps": [
+                            {
+                                "latex_res": "\\int_{0}^{1} x ^ {n - 1} \\log{(-x + 1)} \\,dx",
+                                "res": "INT x:[0,1]. x ^ (n - 1) * log(-x + 1)",
+                                "rule": {
+                                    "func_name": "I",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "(\\left. \\frac{(x ^ {n} - 1) \\log{(-x + 1)}}{n} \\right\\vert_{x=0}^{1}) - (\\int_{0}^{1} -\\frac{x ^ {n} - 1}{n (-x + 1)} \\,dx)",
+                                "res": "([(x ^ n - 1) * log(-x + 1) / n]_x=0,1) - (INT x:[0,1]. -((x ^ n - 1) / (n * (-x + 1))))",
+                                "rule": {
+                                    "latex_str": "integrate by parts \\(u \\to \\log{(1 - x)}, v \\to \\frac{x ^ {n} - 1}{n}\\)",
+                                    "name": "IntegrationByParts",
+                                    "str": "integrate by parts u -> log(1 - x), v -> (x ^ n - 1) / n",
+                                    "u": "log(1 - x)",
+                                    "v": "(x ^ n - 1) / n"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{n} (\\int_{0}^{1} \\frac{x ^ {n} - 1}{-x + 1} \\,dx)",
+                                "res": "1 / n * (INT x:[0,1]. (x ^ n - 1) / (-x + 1))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{n} (\\int_{0}^{1} -\\frac{1 - x ^ {n}}{1 - x} \\,dx)",
+                                "res": "1 / n * (INT x:[0,1]. -((1 - x ^ n) / (1 - x)))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{x ^ {n} - 1}{-x + 1}\\) to \\(-\\frac{1 - x ^ {n}}{1 - x}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "-((1 - x ^ n) / (1 - x))",
+                                    "old_expr": "(x ^ n - 1) / (-x + 1)",
+                                    "str": "rewriting (x ^ n - 1) / (-x + 1) to -((1 - x ^ n) / (1 - x))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{n} (\\int_{0}^{1} -\\sum_{k=1}^{n}{x ^ {k - 1}} \\,dx)",
+                                "res": "1 / n * (INT x:[0,1]. -SUM(k, 1, n, x ^ (k - 1)))",
+                                "rule": {
+                                    "index_var": "k",
+                                    "loc": "1.0.0",
+                                    "name": "SeriesExpansionIdentity",
+                                    "str": "apply series expansion at 1.0.0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{1}{n} (\\int_{0}^{1} \\sum_{k=1}^{n}{x ^ {k - 1}} \\,dx)",
+                                "res": "-(1 / n * (INT x:[0,1]. SUM(k, 1, n, x ^ (k - 1))))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{1}{n} \\sum_{k=1}^{n}{\\int_{0}^{1} x ^ {k - 1} \\,dx}",
+                                "res": "-(1 / n * SUM(k, 1, n, INT x:[0,1]. x ^ (k - 1)))",
+                                "rule": {
+                                    "loc": "0.1",
+                                    "name": "IntSumExchange",
+                                    "str": "exchange integral and sum at 0.1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{1}{n} \\sum_{k=1}^{n}{\\left. \\frac{x ^ {k}}{k} \\right\\vert_{x=0}^{1}}",
+                                "res": "-(1 / n * SUM(k, 1, n, [x ^ k / k]_x=0,1))",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{1}{n} \\sum_{k=1}^{n}{\\frac{1}{k}}",
+                                "res": "-(1 / n * SUM(k, 1, n, 1 / k))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{1}{n} H{(n)}",
+                                "res": "-(1 / n * H(n))",
+                                "rule": {
+                                    "func_name": "H",
+                                    "loc": "0.1",
+                                    "name": "FoldDefinition",
+                                    "str": "fold definition at 0.1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{H{(n)}}{n}",
+                                "res": "-(H(n) / n)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "-\\frac{H{(n)}}{n}",
+                        "start": "-(H(n) / n)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "I(n) = -(H(n) / n)",
+                "latex_goal": "I{(n)} = -\\frac{H{(n)}}{n}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "harmonic_series"
+}

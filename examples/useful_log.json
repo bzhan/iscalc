@@ -1,0 +1,1449 @@
+{
+    "content": [
+        {
+            "eq": "Li(s,x) = SUM(k, 1, oo, x ^ k / k ^ s)",
+            "latex_eq": "\\operatorname{Li}(s,x) = \\sum_{k=1}^{\\infty}{\\frac{x ^ {k}}{k ^ {s}}}",
+            "latex_lhs": "\\operatorname{Li}(s,x)",
+            "type": "FuncDef"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "abs(x) < 1",
+                    "latex_cond": "\\left| x \\right| < 1"
+                }
+            ],
+            "finished": true,
+            "goal": "x / (1 - x) = SUM(k, 1, oo, x ^ k)",
+            "latex_goal": "\\frac{x}{1 - x} = \\sum_{k=1}^{\\infty}{x ^ {k}}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\frac{x}{1 - x}",
+                        "start": "x / (1 - x)",
+                        "steps": [
+                            {
+                                "latex_res": "x (1 - x) ^ {-1}",
+                                "res": "x * (1 - x) ^ (-1)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{x}{1 - x}\\) to \\(x (1 - x) ^ {-1}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "x * (1 - x) ^ (-1)",
+                                    "old_expr": "x / (1 - x)",
+                                    "str": "rewriting x / (1 - x) to x * (1 - x) ^ (-1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "x \\sum_{n=0}^{\\infty}{x ^ {n}}",
+                                "res": "x * SUM(n, 0, oo, x ^ n)",
+                                "rule": {
+                                    "index_var": "n",
+                                    "loc": "1",
+                                    "name": "SeriesExpansionIdentity",
+                                    "str": "apply series expansion at 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=0}^{\\infty}{x x ^ {n}}",
+                                "res": "SUM(n, 0, oo, x * x ^ n)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(x \\sum_{n=0}^{\\infty}{x ^ {n}}\\) to \\(\\sum_{n=0}^{\\infty}{x x ^ {n}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "SUM(n, 0, oo, x * x ^ n)",
+                                    "old_expr": "x * SUM(n, 0, oo, x ^ n)",
+                                    "str": "rewriting x * SUM(n, 0, oo, x ^ n) to SUM(n, 0, oo, x * x ^ n)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=0}^{\\infty}{x ^ {1} x ^ {n}}",
+                                "res": "SUM(n, 0, oo, x ^ 1 * x ^ n)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(x x ^ {n}\\) to \\(x ^ {1} x ^ {n}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "x ^ 1 * x ^ n",
+                                    "old_expr": "x * x ^ n",
+                                    "str": "rewriting x * x ^ n to x ^ 1 * x ^ n"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=0}^{\\infty}{x ^ {n + 1}}",
+                                "res": "SUM(n, 0, oo, x ^ (n + 1))",
+                                "rule": {
+                                    "latex_str": "rewrite \\(x ^ {1} x ^ {n}\\) to \\(x ^ {n + 1}\\) using identity at 0",
+                                    "loc": "0",
+                                    "name": "ApplyIdentity",
+                                    "source": "x ^ 1 * x ^ n",
+                                    "str": "rewrite x ^ 1 * x ^ n to x ^ (n + 1) using identity at 0",
+                                    "target": "x ^ (n + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=1}^{\\infty}{x ^ {n - 1 + 1}}",
+                                "res": "SUM(n, 1, oo, x ^ (n - 1 + 1))",
+                                "rule": {
+                                    "name": "ChangeSummationIndex",
+                                    "new_lower": "1",
+                                    "str": "change summation index"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=1}^{\\infty}{x ^ {n}}",
+                                "res": "SUM(n, 1, oo, x ^ n)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\sum_{k=1}^{\\infty}{x ^ {k}}",
+                        "start": "SUM(k, 1, oo, x ^ k)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "x / (1 - x) = SUM(k, 1, oo, x ^ k)",
+                "latex_goal": "\\frac{x}{1 - x} = \\sum_{k=1}^{\\infty}{x ^ {k}}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "abs(x) < 1",
+                    "latex_cond": "\\left| x \\right| < 1"
+                }
+            ],
+            "finished": true,
+            "goal": "Li(0,x) = x / (1 - x)",
+            "latex_goal": "\\operatorname{Li}(0,x) = \\frac{x}{1 - x}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\operatorname{Li}(0,x)",
+                        "start": "Li(0,x)",
+                        "steps": [
+                            {
+                                "latex_res": "\\sum_{k=1}^{\\infty}{x ^ {k}}",
+                                "res": "SUM(k, 1, oo, x ^ k)",
+                                "rule": {
+                                    "func_name": "Li",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{x}{1 - x}",
+                                "res": "x / (1 - x)",
+                                "rule": {
+                                    "eq": "x / (1 - x) = SUM(k, 1, oo, x ^ k)",
+                                    "latex_str": "apply equation \\(\\frac{x}{1 - x} = \\sum_{k=1}^{\\infty}{x ^ {k}}\\)",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: x / (1 - x) = SUM(k, 1, oo, x ^ k)"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{x}{1 - x}",
+                        "start": "x / (1 - x)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "Li(0,x) = x / (1 - x)",
+                "latex_goal": "\\operatorname{Li}(0,x) = \\frac{x}{1 - x}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "abs(x) < 1",
+                    "latex_cond": "\\left| x \\right| < 1"
+                },
+                {
+                    "cond": "s >= 0",
+                    "latex_cond": "s \\ge 0"
+                },
+                {
+                    "cond": "isInt(s)",
+                    "latex_cond": "s \\in\\mathbb{Z}"
+                }
+            ],
+            "finished": true,
+            "goal": "Li(s + 1,x) = (INT t:[0,x]. Li(s,t) / t)",
+            "latex_goal": "\\operatorname{Li}(s + 1,x) = \\int_{0}^{x} \\frac{\\operatorname{Li}(s,t)}{t} \\,dt",
+            "proof": {
+                "base_case": {
+                    "finished": true,
+                    "goal": "Li(1,x) = (INT t:[0,x]. Li(0,t) / t)",
+                    "latex_goal": "\\operatorname{Li}(1,x) = \\int_{0}^{x} \\frac{\\operatorname{Li}(0,t)}{t} \\,dt",
+                    "proof": {
+                        "calcs": [
+                            {
+                                "latex_start": "\\operatorname{Li}(1,x)",
+                                "start": "Li(1,x)",
+                                "steps": [
+                                    {
+                                        "latex_res": "\\sum_{k=1}^{\\infty}{\\frac{x ^ {k}}{k}}",
+                                        "res": "SUM(k, 1, oo, x ^ k / k)",
+                                        "rule": {
+                                            "func_name": "Li",
+                                            "name": "ExpandDefinition",
+                                            "str": "expand definition"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            },
+                            {
+                                "latex_start": "\\int_{0}^{x} \\frac{\\operatorname{Li}(0,t)}{t} \\,dt",
+                                "start": "INT t:[0,x]. Li(0,t) / t",
+                                "steps": [
+                                    {
+                                        "latex_res": "\\int_{0}^{x} \\frac{\\frac{t}{1 - t}}{t} \\,dt",
+                                        "res": "INT t:[0,x]. t / (1 - t) / t",
+                                        "rule": {
+                                            "eq": "Li(0,x) = x / (1 - x)",
+                                            "latex_str": "apply equation \\(\\operatorname{Li}(0,x) = \\frac{x}{1 - x}\\) at 0.0",
+                                            "loc": "0.0",
+                                            "name": "ApplyEquation",
+                                            "str": "apply equation: Li(0,x) = x / (1 - x) at 0.0"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\int_{0}^{x} \\frac{\\sum_{k=1}^{\\infty}{t ^ {k}}}{t} \\,dt",
+                                        "res": "INT t:[0,x]. SUM(k, 1, oo, t ^ k) / t",
+                                        "rule": {
+                                            "eq": "x / (1 - x) = SUM(k, 1, oo, x ^ k)",
+                                            "latex_str": "apply equation \\(\\frac{x}{1 - x} = \\sum_{k=1}^{\\infty}{x ^ {k}}\\) at 0.0",
+                                            "loc": "0.0",
+                                            "name": "ApplyEquation",
+                                            "str": "apply equation: x / (1 - x) = SUM(k, 1, oo, x ^ k) at 0.0"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\int_{0}^{x} \\frac{1}{t} \\sum_{k=1}^{\\infty}{t ^ {k}} \\,dt",
+                                        "res": "INT t:[0,x]. 1 / t * SUM(k, 1, oo, t ^ k)",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(\\frac{\\sum_{k=1}^{\\infty}{t ^ {k}}}{t}\\) to \\(\\frac{1}{t} \\sum_{k=1}^{\\infty}{t ^ {k}}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "1 / t * SUM(k, 1, oo, t ^ k)",
+                                            "old_expr": "SUM(k, 1, oo, t ^ k) / t",
+                                            "str": "rewriting SUM(k, 1, oo, t ^ k) / t to 1 / t * SUM(k, 1, oo, t ^ k)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\int_{0}^{x} \\sum_{k=1}^{\\infty}{\\frac{1}{t} t ^ {k}} \\,dt",
+                                        "res": "INT t:[0,x]. SUM(k, 1, oo, 1 / t * t ^ k)",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(\\frac{1}{t} \\sum_{k=1}^{\\infty}{t ^ {k}}\\) to \\(\\sum_{k=1}^{\\infty}{\\frac{1}{t} t ^ {k}}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "SUM(k, 1, oo, 1 / t * t ^ k)",
+                                            "old_expr": "1 / t * SUM(k, 1, oo, t ^ k)",
+                                            "str": "rewriting 1 / t * SUM(k, 1, oo, t ^ k) to SUM(k, 1, oo, 1 / t * t ^ k)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\int_{0}^{x} \\sum_{k=1}^{\\infty}{t ^ {-1} t ^ {k}} \\,dt",
+                                        "res": "INT t:[0,x]. SUM(k, 1, oo, t ^ (-1) * t ^ k)",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(\\frac{1}{t} t ^ {k}\\) to \\(t ^ {-1} t ^ {k}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "t ^ (-1) * t ^ k",
+                                            "old_expr": "1 / t * t ^ k",
+                                            "str": "rewriting 1 / t * t ^ k to t ^ (-1) * t ^ k"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\int_{0}^{x} \\sum_{k=1}^{\\infty}{t ^ {-1 + k}} \\,dt",
+                                        "res": "INT t:[0,x]. SUM(k, 1, oo, t ^ (-1 + k))",
+                                        "rule": {
+                                            "latex_str": "rewrite \\(t ^ {-1} t ^ {k}\\) to \\(t ^ {-1 + k}\\) using identity at 0.0",
+                                            "loc": "0.0",
+                                            "name": "ApplyIdentity",
+                                            "source": "t ^ (-1) * t ^ k",
+                                            "str": "rewrite t ^ (-1) * t ^ k to t ^ (-1 + k) using identity at 0.0",
+                                            "target": "t ^ (-1 + k)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{k=1}^{\\infty}{\\int_{0}^{x} t ^ {-1 + k} \\,dt}",
+                                        "res": "SUM(k, 1, oo, INT t:[0,x]. t ^ (-1 + k))",
+                                        "rule": {
+                                            "name": "IntSumExchange",
+                                            "str": "exchange integral and sum"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{k=1}^{\\infty}{\\left. \\frac{t ^ {k}}{k} \\right\\vert_{t=0}^{x}}",
+                                        "res": "SUM(k, 1, oo, [t ^ k / k]_t=0,x)",
+                                        "rule": {
+                                            "name": "DefiniteIntegralIdentity",
+                                            "str": "apply definite integral"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{k=1}^{\\infty}{\\frac{x ^ {k}}{k}}",
+                                        "res": "SUM(k, 1, oo, x ^ k / k)",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "Li(1,x) = (INT t:[0,x]. Li(0,t) / t)",
+                        "latex_goal": "\\operatorname{Li}(1,x) = \\int_{0}^{x} \\frac{\\operatorname{Li}(0,t)}{t} \\,dt",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal"
+                },
+                "finished": true,
+                "goal": "Li(s + 1,x) = (INT t:[0,x]. Li(s,t) / t)",
+                "induct_case": {
+                    "finished": true,
+                    "goal": "Li(s + 2,x) = (INT t:[0,x]. Li(s + 1,t) / t)",
+                    "latex_goal": "\\operatorname{Li}(s + 2,x) = \\int_{0}^{x} \\frac{\\operatorname{Li}(s + 1,t)}{t} \\,dt",
+                    "proof": {
+                        "calcs": [
+                            {
+                                "latex_start": "\\operatorname{Li}(s + 2,x)",
+                                "start": "Li(s + 2,x)",
+                                "steps": [
+                                    {
+                                        "latex_res": "\\sum_{k=1}^{\\infty}{k ^ {-s - 2} x ^ {k}}",
+                                        "res": "SUM(k, 1, oo, k ^ (-s - 2) * x ^ k)",
+                                        "rule": {
+                                            "func_name": "Li",
+                                            "name": "ExpandDefinition",
+                                            "str": "expand definition"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            },
+                            {
+                                "latex_start": "\\int_{0}^{x} \\frac{\\operatorname{Li}(s + 1,t)}{t} \\,dt",
+                                "start": "INT t:[0,x]. Li(s + 1,t) / t",
+                                "steps": [
+                                    {
+                                        "latex_res": "\\int_{0}^{x} \\frac{\\sum_{k=1}^{\\infty}{k ^ {-s - 1} t ^ {k}}}{t} \\,dt",
+                                        "res": "INT t:[0,x]. SUM(k, 1, oo, k ^ (-s - 1) * t ^ k) / t",
+                                        "rule": {
+                                            "func_name": "Li",
+                                            "loc": "0.0",
+                                            "name": "ExpandDefinition",
+                                            "str": "expand definition at 0.0"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\int_{0}^{x} t ^ {-1} \\sum_{k=1}^{\\infty}{k ^ {-s - 1} t ^ {k}} \\,dt",
+                                        "res": "INT t:[0,x]. t ^ (-1) * SUM(k, 1, oo, k ^ (-s - 1) * t ^ k)",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(\\frac{\\sum_{k=1}^{\\infty}{k ^ {-s - 1} t ^ {k}}}{t}\\) to \\(t ^ {-1} \\sum_{k=1}^{\\infty}{k ^ {-s - 1} t ^ {k}}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "t ^ (-1) * SUM(k, 1, oo, k ^ (-s - 1) * t ^ k)",
+                                            "old_expr": "SUM(k, 1, oo, k ^ (-s - 1) * t ^ k) / t",
+                                            "str": "rewriting SUM(k, 1, oo, k ^ (-s - 1) * t ^ k) / t to t ^ (-1) * SUM(k, 1, oo, k ^ (-s - 1) * t ^ k)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\int_{0}^{x} \\sum_{k=1}^{\\infty}{t ^ {-1} (k ^ {-s - 1} t ^ {k})} \\,dt",
+                                        "res": "INT t:[0,x]. SUM(k, 1, oo, t ^ (-1) * (k ^ (-s - 1) * t ^ k))",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(t ^ {-1} \\sum_{k=1}^{\\infty}{k ^ {-s - 1} t ^ {k}}\\) to \\(\\sum_{k=1}^{\\infty}{t ^ {-1} (k ^ {-s - 1} t ^ {k})}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "SUM(k, 1, oo, t ^ (-1) * (k ^ (-s - 1) * t ^ k))",
+                                            "old_expr": "t ^ (-1) * SUM(k, 1, oo, k ^ (-s - 1) * t ^ k)",
+                                            "str": "rewriting t ^ (-1) * SUM(k, 1, oo, k ^ (-s - 1) * t ^ k) to SUM(k, 1, oo, t ^ (-1) * (k ^ (-s - 1) * t ^ k))"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\int_{0}^{x} \\sum_{k=1}^{\\infty}{t ^ {-1} t ^ {k} k ^ {-s - 1}} \\,dt",
+                                        "res": "INT t:[0,x]. SUM(k, 1, oo, t ^ (-1) * t ^ k * k ^ (-s - 1))",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(t ^ {-1} (k ^ {-s - 1} t ^ {k})\\) to \\(t ^ {-1} t ^ {k} k ^ {-s - 1}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "t ^ (-1) * t ^ k * k ^ (-s - 1)",
+                                            "old_expr": "t ^ (-1) * (k ^ (-s - 1) * t ^ k)",
+                                            "str": "rewriting t ^ (-1) * (k ^ (-s - 1) * t ^ k) to t ^ (-1) * t ^ k * k ^ (-s - 1)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\int_{0}^{x} \\sum_{k=1}^{\\infty}{t ^ {-1 + k} k ^ {-s - 1}} \\,dt",
+                                        "res": "INT t:[0,x]. SUM(k, 1, oo, t ^ (-1 + k) * k ^ (-s - 1))",
+                                        "rule": {
+                                            "latex_str": "rewrite \\(t ^ {-1} t ^ {k}\\) to \\(t ^ {-1 + k}\\) using identity at 0.0.0",
+                                            "loc": "0.0.0",
+                                            "name": "ApplyIdentity",
+                                            "source": "t ^ (-1) * t ^ k",
+                                            "str": "rewrite t ^ (-1) * t ^ k to t ^ (-1 + k) using identity at 0.0.0",
+                                            "target": "t ^ (-1 + k)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{k=1}^{\\infty}{\\int_{0}^{x} t ^ {-1 + k} k ^ {-s - 1} \\,dt}",
+                                        "res": "SUM(k, 1, oo, INT t:[0,x]. t ^ (-1 + k) * k ^ (-s - 1))",
+                                        "rule": {
+                                            "name": "IntSumExchange",
+                                            "str": "exchange integral and sum"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{k=1}^{\\infty}{k ^ {-s - 1} (\\left. \\frac{t ^ {k}}{k} \\right\\vert_{t=0}^{x})}",
+                                        "res": "SUM(k, 1, oo, k ^ (-s - 1) * ([t ^ k / k]_t=0,x))",
+                                        "rule": {
+                                            "name": "DefiniteIntegralIdentity",
+                                            "str": "apply definite integral"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{k=1}^{\\infty}{k ^ {-s - 2} x ^ {k}}",
+                                        "res": "SUM(k, 1, oo, k ^ (-s - 2) * x ^ k)",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "Li(s + 2,x) = (INT t:[0,x]. Li(s + 1,t) / t)",
+                        "latex_goal": "\\operatorname{Li}(s + 2,x) = \\int_{0}^{x} \\frac{\\operatorname{Li}(s + 1,t)}{t} \\,dt",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal"
+                },
+                "induct_var": "s",
+                "latex_goal": "\\operatorname{Li}(s + 1,x) = \\int_{0}^{x} \\frac{\\operatorname{Li}(s,t)}{t} \\,dt",
+                "type": "InductionProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "x < 1",
+                    "latex_cond": "x < 1"
+                },
+                {
+                    "cond": "x > 0",
+                    "latex_cond": "x > 0"
+                }
+            ],
+            "finished": true,
+            "goal": "(D x. Li(2,1 - x)) = log(x) / (1 - x)",
+            "latex_goal": "\\frac{d}{dx} \\operatorname{Li}(2,1 - x) = \\frac{\\log{x}}{1 - x}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\frac{d}{dx} \\operatorname{Li}(2,1 - x)",
+                        "start": "D x. Li(2,1 - x)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{d}{dx} \\sum_{k=1}^{\\infty}{\\frac{(-x + 1) ^ {k}}{k ^ {2}}}",
+                                "res": "D x. SUM(k, 1, oo, (-x + 1) ^ k / k ^ 2)",
+                                "rule": {
+                                    "func_name": "Li",
+                                    "loc": "0",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition at 0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\sum_{k=1}^{\\infty}{\\frac{(-x + 1) ^ {k - 1}}{k}}",
+                                "res": "-SUM(k, 1, oo, (-x + 1) ^ (k - 1) / k)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{\\log{x}}{1 - x}",
+                        "start": "log(x) / (1 - x)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{\\log{(1 - (1 - x))}}{1 - x}",
+                                "res": "log(1 - (1 - x)) / (1 - x)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\log{x}\\) to \\(\\log{(1 - (1 - x))}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "log(1 - (1 - x))",
+                                    "old_expr": "log(x)",
+                                    "str": "rewriting log(x) to log(1 - (1 - x))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (-(1 - x)) ^ {n + 1}}{n + 1}}}{1 - x}",
+                                "res": "SUM(n, 0, oo, (-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1)) / (1 - x)",
+                                "rule": {
+                                    "index_var": "n",
+                                    "loc": "0",
+                                    "name": "SeriesExpansionIdentity",
+                                    "str": "apply series expansion at 0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "(-(-(1 - x)) ^ {-1}) \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (-(1 - x)) ^ {n + 1}}{n + 1}}",
+                                "res": "-((-(1 - x)) ^ (-1)) * SUM(n, 0, oo, (-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (-(1 - x)) ^ {n + 1}}{n + 1}}}{1 - x}\\) to \\((-(-(1 - x)) ^ {-1}) \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (-(1 - x)) ^ {n + 1}}{n + 1}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "-((-(1 - x)) ^ (-1)) * SUM(n, 0, oo, (-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1))",
+                                    "old_expr": "SUM(n, 0, oo, (-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1)) / (1 - x)",
+                                    "str": "rewriting SUM(n, 0, oo, (-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1)) / (1 - x) to -((-(1 - x)) ^ (-1)) * SUM(n, 0, oo, (-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=0}^{\\infty}{(-(-(1 - x)) ^ {-1}) (\\frac{(-1) ^ {n} (-(1 - x)) ^ {n + 1}}{n + 1})}",
+                                "res": "SUM(n, 0, oo, -((-(1 - x)) ^ (-1)) * ((-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1)))",
+                                "rule": {
+                                    "latex_str": "rewriting \\((-(-(1 - x)) ^ {-1}) \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (-(1 - x)) ^ {n + 1}}{n + 1}}\\) to \\(\\sum_{n=0}^{\\infty}{(-(-(1 - x)) ^ {-1}) (\\frac{(-1) ^ {n} (-(1 - x)) ^ {n + 1}}{n + 1})}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "SUM(n, 0, oo, -((-(1 - x)) ^ (-1)) * ((-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1)))",
+                                    "old_expr": "-((-(1 - x)) ^ (-1)) * SUM(n, 0, oo, (-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1))",
+                                    "str": "rewriting -((-(1 - x)) ^ (-1)) * SUM(n, 0, oo, (-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1)) to SUM(n, 0, oo, -((-(1 - x)) ^ (-1)) * ((-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1)))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{-1 ((-(1 - x)) ^ {-1} (-(1 - x)) ^ {n + 1}) (-1) ^ {n}}{n + 1}}",
+                                "res": "SUM(n, 0, oo, -1 * ((-(1 - x)) ^ (-1) * (-(1 - x)) ^ (n + 1)) * (-1) ^ n / (n + 1))",
+                                "rule": {
+                                    "latex_str": "rewriting \\((-(-(1 - x)) ^ {-1}) (\\frac{(-1) ^ {n} (-(1 - x)) ^ {n + 1}}{n + 1})\\) to \\(\\frac{-1 ((-(1 - x)) ^ {-1} (-(1 - x)) ^ {n + 1}) (-1) ^ {n}}{n + 1}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "-1 * ((-(1 - x)) ^ (-1) * (-(1 - x)) ^ (n + 1)) * (-1) ^ n / (n + 1)",
+                                    "old_expr": "-((-(1 - x)) ^ (-1)) * ((-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1))",
+                                    "str": "rewriting -((-(1 - x)) ^ (-1)) * ((-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1)) to -1 * ((-(1 - x)) ^ (-1) * (-(1 - x)) ^ (n + 1)) * (-1) ^ n / (n + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{-1 (-(1 - x)) ^ {-1 + (n + 1)} (-1) ^ {n}}{n + 1}}",
+                                "res": "SUM(n, 0, oo, -1 * (-(1 - x)) ^ (-1 + (n + 1)) * (-1) ^ n / (n + 1))",
+                                "rule": {
+                                    "latex_str": "rewrite \\((-(1 - x)) ^ {-1} (-(1 - x)) ^ {n + 1}\\) to \\((-(1 - x)) ^ {-1 + (n + 1)}\\) using identity at 0.0.0.1",
+                                    "loc": "0.0.0.1",
+                                    "name": "ApplyIdentity",
+                                    "source": "(-(1 - x)) ^ (-1) * (-(1 - x)) ^ (n + 1)",
+                                    "str": "rewrite (-(1 - x)) ^ (-1) * (-(1 - x)) ^ (n + 1) to (-(1 - x)) ^ (-1 + (n + 1)) using identity at 0.0.0.1",
+                                    "target": "(-(1 - x)) ^ (-1 + (n + 1))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=1}^{\\infty}{\\frac{-1 (-(1 - x)) ^ {-1 + (n - 1 + 1)} (-1) ^ {n - 1}}{n - 1 + 1}}",
+                                "res": "SUM(n, 1, oo, -1 * (-(1 - x)) ^ (-1 + (n - 1 + 1)) * (-1) ^ (n - 1) / (n - 1 + 1))",
+                                "rule": {
+                                    "name": "ChangeSummationIndex",
+                                    "new_lower": "1",
+                                    "str": "change summation index"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=1}^{\\infty}{\\frac{(-1) ^ {n} (x - 1) ^ {n - 1}}{n}}",
+                                "res": "SUM(n, 1, oo, (-1) ^ n * (x - 1) ^ (n - 1) / n)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=1}^{\\infty}{\\frac{(-1) ^ {n} (-1 (-x + 1)) ^ {n - 1}}{n}}",
+                                "res": "SUM(n, 1, oo, (-1) ^ n * (-1 * (-x + 1)) ^ (n - 1) / n)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(x - 1\\) to \\(-1 (-x + 1)\\)",
+                                    "name": "Equation",
+                                    "new_expr": "-1 * (-x + 1)",
+                                    "old_expr": "x - 1",
+                                    "str": "rewriting x - 1 to -1 * (-x + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=1}^{\\infty}{\\frac{(-1) ^ {n} ((-1) ^ {n - 1} (-x + 1) ^ {n - 1})}{n}}",
+                                "res": "SUM(n, 1, oo, (-1) ^ n * ((-1) ^ (n - 1) * (-x + 1) ^ (n - 1)) / n)",
+                                "rule": {
+                                    "latex_str": "rewrite \\((-1 (-x + 1)) ^ {n - 1}\\) to \\((-1) ^ {n - 1} (-x + 1) ^ {n - 1}\\) using identity at 0.0.1",
+                                    "loc": "0.0.1",
+                                    "name": "ApplyIdentity",
+                                    "source": "(-1 * (-x + 1)) ^ (n - 1)",
+                                    "str": "rewrite (-1 * (-x + 1)) ^ (n - 1) to (-1) ^ (n - 1) * (-x + 1) ^ (n - 1) using identity at 0.0.1",
+                                    "target": "(-1) ^ (n - 1) * (-x + 1) ^ (n - 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\sum_{n=1}^{\\infty}{\\frac{(-x + 1) ^ {n - 1}}{n}}",
+                                "res": "-SUM(n, 1, oo, (-x + 1) ^ (n - 1) / n)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(D x. Li(2,1 - x)) = log(x) / (1 - x)",
+                "latex_goal": "\\frac{d}{dx} \\operatorname{Li}(2,1 - x) = \\frac{\\log{x}}{1 - x}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "x > 0",
+                    "latex_cond": "x > 0"
+                },
+                {
+                    "cond": "x < 1",
+                    "latex_cond": "x < 1"
+                }
+            ],
+            "finished": true,
+            "goal": "(D x. -Li(3,1 - x)) = Li(2,-x + 1) / (-x + 1)",
+            "latex_goal": "\\frac{d}{dx} (-\\operatorname{Li}(3,1 - x)) = \\frac{\\operatorname{Li}(2,-x + 1)}{-x + 1}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\frac{d}{dx} (-\\operatorname{Li}(3,1 - x))",
+                        "start": "D x. -Li(3,1 - x)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{d}{dx} (-\\operatorname{Li}(2 + 1,1 - x))",
+                                "res": "D x. -Li(2 + 1,1 - x)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(3\\) to \\(2 + 1\\)",
+                                    "name": "Equation",
+                                    "new_expr": "2 + 1",
+                                    "old_expr": "3",
+                                    "str": "rewriting 3 to 2 + 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{d}{dx} (-(\\int_{0}^{1 - x} \\frac{\\operatorname{Li}(2,t)}{t} \\,dt))",
+                                "res": "D x. -(INT t:[0,1 - x]. Li(2,t) / t)",
+                                "rule": {
+                                    "eq": "Li(s + 1,x) = (INT t:[0,x]. Li(s,t) / t)",
+                                    "latex_str": "apply equation \\(\\operatorname{Li}(s + 1,x) = \\int_{0}^{x} \\frac{\\operatorname{Li}(s,t)}{t} \\,dt\\) at 0.0",
+                                    "loc": "0.0",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: Li(s + 1,x) = (INT t:[0,x]. Li(s,t) / t) at 0.0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\operatorname{Li}(2,-x + 1)}{-x + 1}",
+                                "res": "Li(2,-x + 1) / (-x + 1)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{\\operatorname{Li}(2,-x + 1)}{-x + 1}",
+                        "start": "Li(2,-x + 1) / (-x + 1)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(D x. -Li(3,1 - x)) = Li(2,-x + 1) / (-x + 1)",
+                "latex_goal": "\\frac{d}{dx} (-\\operatorname{Li}(3,1 - x)) = \\frac{\\operatorname{Li}(2,-x + 1)}{-x + 1}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "isInt(s)",
+                    "latex_cond": "s \\in\\mathbb{Z}"
+                },
+                {
+                    "cond": "s > 1",
+                    "latex_cond": "s > 1"
+                }
+            ],
+            "finished": true,
+            "goal": "Li(s,1) = zeta(s)",
+            "latex_goal": "\\operatorname{Li}(s,1) = \\zeta{(s)}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\operatorname{Li}(s,1)",
+                        "start": "Li(s,1)",
+                        "steps": [
+                            {
+                                "latex_res": "\\sum_{k=1}^{\\infty}{k ^ {-s}}",
+                                "res": "SUM(k, 1, oo, k ^ -s)",
+                                "rule": {
+                                    "func_name": "Li",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\zeta{(s)}",
+                        "start": "zeta(s)",
+                        "steps": [
+                            {
+                                "latex_res": "\\sum_{k=0}^{\\infty}{(k + 1) ^ {-s}}",
+                                "res": "SUM(k, 0, oo, (k + 1) ^ -s)",
+                                "rule": {
+                                    "func_name": "zeta",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{k=1}^{\\infty}{(k - 1 + 1) ^ {-s}}",
+                                "res": "SUM(k, 1, oo, (k - 1 + 1) ^ -s)",
+                                "rule": {
+                                    "name": "ChangeSummationIndex",
+                                    "new_lower": "1",
+                                    "str": "change summation index"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{k=1}^{\\infty}{k ^ {-s}}",
+                                "res": "SUM(k, 1, oo, k ^ -s)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "Li(s,1) = zeta(s)",
+                "latex_goal": "\\operatorname{Li}(s,1) = \\zeta{(s)}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "x > 0",
+                    "latex_cond": "x > 0"
+                },
+                {
+                    "cond": "x < 1",
+                    "latex_cond": "x < 1"
+                }
+            ],
+            "finished": true,
+            "goal": "(INT t:[0,x]. log(-t + 1) ^ 2 / t) = log(x) * log(1 - x) ^ 2 + 2 * log(1 - x) * Li(2,1 - x) - 2 * Li(3,1 - x) + 2 * zeta(3)",
+            "latex_goal": "\\int_{0}^{x} \\frac{\\log^{2}(-t + 1)}{t} \\,dt = \\log{x} \\log^{2}(1 - x) + 2 \\log{(1 - x)} \\operatorname{Li}(2,1 - x) - 2 \\operatorname{Li}(3,1 - x) + 2 \\zeta{(3)}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{0}^{x} \\frac{\\log^{2}(-t + 1)}{t} \\,dt",
+                        "start": "INT t:[0,x]. log(-t + 1) ^ 2 / t",
+                        "steps": [
+                            {
+                                "latex_res": "(\\left. \\log{t} \\log^{2}(-t + 1) \\right\\vert_{t=0}^{x}) - (\\int_{0}^{x} -\\frac{2 \\log{t} \\log{(-t + 1)}}{-t + 1} \\,dt)",
+                                "res": "([log(t) * log(-t + 1) ^ 2]_t=0,x) - (INT t:[0,x]. -(2 * log(t) * log(-t + 1) / (-t + 1)))",
+                                "rule": {
+                                    "latex_str": "integrate by parts \\(u \\to \\log^{2}(1 - t), v \\to \\log{t}\\)",
+                                    "name": "IntegrationByParts",
+                                    "str": "integrate by parts u -> log(1 - t) ^ 2, v -> log(t)",
+                                    "u": "log(1 - t) ^ 2",
+                                    "v": "log(t)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 (\\int_{0}^{x} \\frac{\\log{t} \\log{(-t + 1)}}{-t + 1} \\,dt) + \\log{x} \\log^{2}(-x + 1)",
+                                "res": "2 * (INT t:[0,x]. log(t) * log(-t + 1) / (-t + 1)) + log(x) * log(-x + 1) ^ 2",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 (\\int_{0}^{x} \\frac{\\log{t}}{1 - t} \\log{(-t + 1)} \\,dt) + \\log{x} \\log^{2}(-x + 1)",
+                                "res": "2 * (INT t:[0,x]. log(t) / (1 - t) * log(-t + 1)) + log(x) * log(-x + 1) ^ 2",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{\\log{t} \\log{(-t + 1)}}{-t + 1}\\) to \\(\\frac{\\log{t}}{1 - t} \\log{(-t + 1)}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "log(t) / (1 - t) * log(-t + 1)",
+                                    "old_expr": "log(t) * log(-t + 1) / (-t + 1)",
+                                    "str": "rewriting log(t) * log(-t + 1) / (-t + 1) to log(t) / (1 - t) * log(-t + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 (\\int_{0}^{x} \\log{(-t + 1)} (\\frac{d}{dt} \\operatorname{Li}(2,1 - t)) \\,dt) + \\log{x} \\log^{2}(-x + 1)",
+                                "res": "2 * (INT t:[0,x]. log(-t + 1) * (D t. Li(2,1 - t))) + log(x) * log(-x + 1) ^ 2",
+                                "rule": {
+                                    "eq": "(D x. Li(2,1 - x)) = log(x) / (1 - x)",
+                                    "latex_str": "apply equation \\(\\frac{d}{dx} \\operatorname{Li}(2,1 - x) = \\frac{\\log{x}}{1 - x}\\) at 0.1.0.0",
+                                    "loc": "0.1.0.0",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: (D x. Li(2,1 - x)) = log(x) / (1 - x) at 0.1.0.0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 ((\\left. \\log{(-t + 1)} \\operatorname{Li}(2,-t + 1) \\right\\vert_{t=0}^{x}) - (\\int_{0}^{x} -\\frac{\\operatorname{Li}(2,-t + 1)}{-t + 1} \\,dt)) + \\log{x} \\log^{2}(-x + 1)",
+                                "res": "2 * (([log(-t + 1) * Li(2,-t + 1)]_t=0,x) - (INT t:[0,x]. -(Li(2,-t + 1) / (-t + 1)))) + log(x) * log(-x + 1) ^ 2",
+                                "rule": {
+                                    "latex_str": "integrate by parts \\(u \\to \\log{(-t + 1)}, v \\to \\operatorname{Li}(2,1 - t)\\) at 0.1",
+                                    "loc": "0.1",
+                                    "name": "IntegrationByParts",
+                                    "str": "integrate by parts u -> log(-t + 1), v -> Li(2,1 - t) at 0.1",
+                                    "u": "log(-t + 1)",
+                                    "v": "Li(2,1 - t)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 (\\int_{0}^{x} \\frac{\\operatorname{Li}(2,-t + 1)}{-t + 1} \\,dt) + 2 \\log{(-x + 1)} \\operatorname{Li}(2,-x + 1) + \\log{x} \\log^{2}(-x + 1)",
+                                "res": "2 * (INT t:[0,x]. Li(2,-t + 1) / (-t + 1)) + 2 * log(-x + 1) * Li(2,-x + 1) + log(x) * log(-x + 1) ^ 2",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 (\\int_{0}^{x} \\frac{d}{dt} (-\\operatorname{Li}(3,1 - t)) \\,dt) + 2 \\log{(-x + 1)} \\operatorname{Li}(2,-x + 1) + \\log{x} \\log^{2}(-x + 1)",
+                                "res": "2 * (INT t:[0,x]. D t. -Li(3,1 - t)) + 2 * log(-x + 1) * Li(2,-x + 1) + log(x) * log(-x + 1) ^ 2",
+                                "rule": {
+                                    "eq": "(D x. -Li(3,1 - x)) = Li(2,-x + 1) / (-x + 1)",
+                                    "latex_str": "apply equation \\(\\frac{d}{dx} (-\\operatorname{Li}(3,1 - x)) = \\frac{\\operatorname{Li}(2,-x + 1)}{-x + 1}\\) at 0.0.1.0",
+                                    "loc": "0.0.1.0",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: (D x. -Li(3,1 - x)) = Li(2,-x + 1) / (-x + 1) at 0.0.1.0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 \\log{(-x + 1)} \\operatorname{Li}(2,-x + 1) + \\log{x} \\log^{2}(-x + 1) - 2 \\operatorname{Li}(3,-x + 1) + 2 \\operatorname{Li}(3,1)",
+                                "res": "2 * log(-x + 1) * Li(2,-x + 1) + log(x) * log(-x + 1) ^ 2 - 2 * Li(3,-x + 1) + 2 * Li(3,1)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 \\log{(-x + 1)} \\operatorname{Li}(2,-x + 1) + \\log{x} \\log^{2}(-x + 1) - 2 \\operatorname{Li}(3,-x + 1) + 2 \\zeta{(3)}",
+                                "res": "2 * log(-x + 1) * Li(2,-x + 1) + log(x) * log(-x + 1) ^ 2 - 2 * Li(3,-x + 1) + 2 * zeta(3)",
+                                "rule": {
+                                    "eq": "Li(s,1) = zeta(s)",
+                                    "latex_str": "apply equation \\(\\operatorname{Li}(s,1) = \\zeta{(s)}\\) at 1.1",
+                                    "loc": "1.1",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: Li(s,1) = zeta(s) at 1.1"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\log{x} \\log^{2}(1 - x) + 2 \\log{(1 - x)} \\operatorname{Li}(2,1 - x) - 2 \\operatorname{Li}(3,1 - x) + 2 \\zeta{(3)}",
+                        "start": "log(x) * log(1 - x) ^ 2 + 2 * log(1 - x) * Li(2,1 - x) - 2 * Li(3,1 - x) + 2 * zeta(3)",
+                        "steps": [
+                            {
+                                "latex_res": "2 \\log{(-x + 1)} \\operatorname{Li}(2,-x + 1) + \\log{x} \\log^{2}(-x + 1) - 2 \\operatorname{Li}(3,-x + 1) + 2 \\zeta{(3)}",
+                                "res": "2 * log(-x + 1) * Li(2,-x + 1) + log(x) * log(-x + 1) ^ 2 - 2 * Li(3,-x + 1) + 2 * zeta(3)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(INT t:[0,x]. log(-t + 1) ^ 2 / t) = log(x) * log(1 - x) ^ 2 + 2 * log(1 - x) * Li(2,1 - x) - 2 * Li(3,1 - x) + 2 * zeta(3)",
+                "latex_goal": "\\int_{0}^{x} \\frac{\\log^{2}(-t + 1)}{t} \\,dt = \\log{x} \\log^{2}(1 - x) + 2 \\log{(1 - x)} \\operatorname{Li}(2,1 - x) - 2 \\operatorname{Li}(3,1 - x) + 2 \\zeta{(3)}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "x > 0",
+                    "latex_cond": "x > 0"
+                },
+                {
+                    "cond": "x < 1",
+                    "latex_cond": "x < 1"
+                }
+            ],
+            "finished": true,
+            "goal": "(D x. Li(2,1 / (1 + x))) = log(x / (1 + x)) / (1 + x)",
+            "latex_goal": "\\frac{d}{dx} \\operatorname{Li}(2,\\frac{1}{1 + x}) = \\frac{\\log{(\\frac{x}{1 + x})}}{1 + x}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\frac{d}{dx} \\operatorname{Li}(2,\\frac{1}{1 + x})",
+                        "start": "D x. Li(2,1 / (1 + x))",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{d}{dx} \\sum_{k=1}^{\\infty}{\\frac{1}{k ^ {2}} (\\frac{1}{x + 1}) ^ {k}}",
+                                "res": "D x. SUM(k, 1, oo, 1 / k ^ 2 * (1 / (x + 1)) ^ k)",
+                                "rule": {
+                                    "func_name": "Li",
+                                    "loc": "0",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition at 0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{1}{(x + 1) ^ {2}} \\sum_{k=1}^{\\infty}{\\frac{1}{k} (\\frac{1}{x + 1}) ^ {k - 1}}",
+                                "res": "-(1 / (x + 1) ^ 2 * SUM(k, 1, oo, 1 / k * (1 / (x + 1)) ^ (k - 1)))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{\\log{(\\frac{x}{1 + x})}}{1 + x}",
+                        "start": "log(x / (1 + x)) / (1 + x)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{\\log{(1 - \\frac{1}{1 + x})}}{1 + x}",
+                                "res": "log(1 - 1 / (1 + x)) / (1 + x)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{x}{1 + x}\\) to \\(1 - \\frac{1}{1 + x}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "1 - 1 / (1 + x)",
+                                    "old_expr": "x / (1 + x)",
+                                    "str": "rewriting x / (1 + x) to 1 - 1 / (1 + x)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (-\\frac{1}{1 + x}) ^ {n + 1}}{n + 1}}}{1 + x}",
+                                "res": "SUM(n, 0, oo, (-1) ^ n * (-(1 / (1 + x))) ^ (n + 1) / (n + 1)) / (1 + x)",
+                                "rule": {
+                                    "index_var": "n",
+                                    "loc": "0",
+                                    "name": "SeriesExpansionIdentity",
+                                    "str": "apply series expansion at 0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (-1 (\\frac{1}{1 + x})) ^ {n + 1}}{n + 1}}}{1 + x}",
+                                "res": "SUM(n, 0, oo, (-1) ^ n * (-1 * (1 / (1 + x))) ^ (n + 1) / (n + 1)) / (1 + x)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(-\\frac{1}{1 + x}\\) to \\(-1 (\\frac{1}{1 + x})\\)",
+                                    "name": "Equation",
+                                    "new_expr": "-1 * (1 / (1 + x))",
+                                    "old_expr": "-(1 / (1 + x))",
+                                    "str": "rewriting -(1 / (1 + x)) to -1 * (1 / (1 + x))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} ((-1) ^ {n + 1} (\\frac{1}{1 + x}) ^ {n + 1})}{n + 1}}}{1 + x}",
+                                "res": "SUM(n, 0, oo, (-1) ^ n * ((-1) ^ (n + 1) * (1 / (1 + x)) ^ (n + 1)) / (n + 1)) / (1 + x)",
+                                "rule": {
+                                    "latex_str": "rewrite \\((-1 (\\frac{1}{1 + x})) ^ {n + 1}\\) to \\((-1) ^ {n + 1} (\\frac{1}{1 + x}) ^ {n + 1}\\) using identity at 0.0.0.1",
+                                    "loc": "0.0.0.1",
+                                    "name": "ApplyIdentity",
+                                    "source": "(-1 * (1 / (1 + x))) ^ (n + 1)",
+                                    "str": "rewrite (-1 * (1 / (1 + x))) ^ (n + 1) to (-1) ^ (n + 1) * (1 / (1 + x)) ^ (n + 1) using identity at 0.0.0.1",
+                                    "target": "(-1) ^ (n + 1) * (1 / (1 + x)) ^ (n + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{1}{x + 1} \\sum_{n=0}^{\\infty}{\\frac{1}{n + 1} (\\frac{1}{x + 1}) ^ {n + 1}}",
+                                "res": "-(1 / (x + 1) * SUM(n, 0, oo, 1 / (n + 1) * (1 / (x + 1)) ^ (n + 1)))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{1}{x + 1} \\sum_{n=1}^{\\infty}{\\frac{1}{n - 1 + 1} (\\frac{1}{x + 1}) ^ {n - 1 + 1}}",
+                                "res": "-(1 / (x + 1) * SUM(n, 1, oo, 1 / (n - 1 + 1) * (1 / (x + 1)) ^ (n - 1 + 1)))",
+                                "rule": {
+                                    "loc": "0.1",
+                                    "name": "ChangeSummationIndex",
+                                    "new_lower": "1",
+                                    "str": "change summation index at 0.1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{1}{x + 1} \\sum_{n=1}^{\\infty}{\\frac{1}{n} (\\frac{1}{x + 1}) ^ {n}}",
+                                "res": "-(1 / (x + 1) * SUM(n, 1, oo, 1 / n * (1 / (x + 1)) ^ n))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{1}{x + 1} \\sum_{n=1}^{\\infty}{\\frac{1}{n} (\\frac{1}{x + 1}) ^ {n - 1 + 1}}",
+                                "res": "-(1 / (x + 1) * SUM(n, 1, oo, 1 / n * (1 / (x + 1)) ^ (n - 1 + 1)))",
+                                "rule": {
+                                    "latex_str": "rewriting \\((\\frac{1}{x + 1}) ^ {n}\\) to \\((\\frac{1}{x + 1}) ^ {n - 1 + 1}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(1 / (x + 1)) ^ (n - 1 + 1)",
+                                    "old_expr": "(1 / (x + 1)) ^ n",
+                                    "str": "rewriting (1 / (x + 1)) ^ n to (1 / (x + 1)) ^ (n - 1 + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{1}{x + 1} \\sum_{n=1}^{\\infty}{\\frac{1}{n} ((\\frac{1}{x + 1}) ^ {n - 1} (\\frac{1}{x + 1}) ^ {1})}",
+                                "res": "-(1 / (x + 1) * SUM(n, 1, oo, 1 / n * ((1 / (x + 1)) ^ (n - 1) * (1 / (x + 1)) ^ 1)))",
+                                "rule": {
+                                    "latex_str": "rewrite \\((\\frac{1}{x + 1}) ^ {n - 1 + 1}\\) to \\((\\frac{1}{x + 1}) ^ {n - 1} (\\frac{1}{x + 1}) ^ {1}\\) using identity at 0.1.0.1",
+                                    "loc": "0.1.0.1",
+                                    "name": "ApplyIdentity",
+                                    "source": "(1 / (x + 1)) ^ (n - 1 + 1)",
+                                    "str": "rewrite (1 / (x + 1)) ^ (n - 1 + 1) to (1 / (x + 1)) ^ (n - 1) * (1 / (x + 1)) ^ 1 using identity at 0.1.0.1",
+                                    "target": "(1 / (x + 1)) ^ (n - 1) * (1 / (x + 1)) ^ 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{1}{(x + 1) ^ {2}} \\sum_{n=1}^{\\infty}{\\frac{1}{n} (\\frac{1}{x + 1}) ^ {n - 1}}",
+                                "res": "-(1 / (x + 1) ^ 2 * SUM(n, 1, oo, 1 / n * (1 / (x + 1)) ^ (n - 1)))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(D x. Li(2,1 / (1 + x))) = log(x / (1 + x)) / (1 + x)",
+                "latex_goal": "\\frac{d}{dx} \\operatorname{Li}(2,\\frac{1}{1 + x}) = \\frac{\\log{(\\frac{x}{1 + x})}}{1 + x}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "x > 0",
+                    "latex_cond": "x > 0"
+                },
+                {
+                    "cond": "x < 1",
+                    "latex_cond": "x < 1"
+                }
+            ],
+            "finished": true,
+            "goal": "1 / (x + 1) * Li(2,1 / (x + 1)) = (D x. -Li(3,1 / (x + 1)))",
+            "latex_goal": "\\frac{1}{x + 1} \\operatorname{Li}(2,\\frac{1}{x + 1}) = \\frac{d}{dx} (-\\operatorname{Li}(3,\\frac{1}{x + 1}))",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\frac{1}{x + 1} \\operatorname{Li}(2,\\frac{1}{x + 1})",
+                        "start": "1 / (x + 1) * Li(2,1 / (x + 1))",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{1}{x + 1} \\sum_{k=1}^{\\infty}{\\frac{1}{k ^ {2}} (\\frac{1}{x + 1}) ^ {k}}",
+                                "res": "1 / (x + 1) * SUM(k, 1, oo, 1 / k ^ 2 * (1 / (x + 1)) ^ k)",
+                                "rule": {
+                                    "func_name": "Li",
+                                    "loc": "1",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition at 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{x + 1} \\sum_{k=1}^{\\infty}{\\frac{1}{k ^ {2}} (\\frac{1}{x + 1}) ^ {k - 1 + 1}}",
+                                "res": "1 / (x + 1) * SUM(k, 1, oo, 1 / k ^ 2 * (1 / (x + 1)) ^ (k - 1 + 1))",
+                                "rule": {
+                                    "latex_str": "rewriting \\((\\frac{1}{x + 1}) ^ {k}\\) to \\((\\frac{1}{x + 1}) ^ {k - 1 + 1}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(1 / (x + 1)) ^ (k - 1 + 1)",
+                                    "old_expr": "(1 / (x + 1)) ^ k",
+                                    "str": "rewriting (1 / (x + 1)) ^ k to (1 / (x + 1)) ^ (k - 1 + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{x + 1} \\sum_{k=1}^{\\infty}{\\frac{1}{k ^ {2}} ((\\frac{1}{x + 1}) ^ {k - 1} (\\frac{1}{x + 1}) ^ {1})}",
+                                "res": "1 / (x + 1) * SUM(k, 1, oo, 1 / k ^ 2 * ((1 / (x + 1)) ^ (k - 1) * (1 / (x + 1)) ^ 1))",
+                                "rule": {
+                                    "latex_str": "rewrite \\((\\frac{1}{x + 1}) ^ {k - 1 + 1}\\) to \\((\\frac{1}{x + 1}) ^ {k - 1} (\\frac{1}{x + 1}) ^ {1}\\) using identity at 1.0.1",
+                                    "loc": "1.0.1",
+                                    "name": "ApplyIdentity",
+                                    "source": "(1 / (x + 1)) ^ (k - 1 + 1)",
+                                    "str": "rewrite (1 / (x + 1)) ^ (k - 1 + 1) to (1 / (x + 1)) ^ (k - 1) * (1 / (x + 1)) ^ 1 using identity at 1.0.1",
+                                    "target": "(1 / (x + 1)) ^ (k - 1) * (1 / (x + 1)) ^ 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{(x + 1) ^ {2}} \\sum_{k=1}^{\\infty}{\\frac{1}{k ^ {2}} (\\frac{1}{x + 1}) ^ {k - 1}}",
+                                "res": "1 / (x + 1) ^ 2 * SUM(k, 1, oo, 1 / k ^ 2 * (1 / (x + 1)) ^ (k - 1))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{d}{dx} (-\\operatorname{Li}(3,\\frac{1}{x + 1}))",
+                        "start": "D x. -Li(3,1 / (x + 1))",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{d}{dx} (-\\sum_{k=1}^{\\infty}{\\frac{1}{k ^ {3}} (\\frac{1}{x + 1}) ^ {k}})",
+                                "res": "D x. -SUM(k, 1, oo, 1 / k ^ 3 * (1 / (x + 1)) ^ k)",
+                                "rule": {
+                                    "func_name": "Li",
+                                    "loc": "0.0",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition at 0.0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{(x + 1) ^ {2}} \\sum_{k=1}^{\\infty}{\\frac{1}{k ^ {2}} (\\frac{1}{x + 1}) ^ {k - 1}}",
+                                "res": "1 / (x + 1) ^ 2 * SUM(k, 1, oo, 1 / k ^ 2 * (1 / (x + 1)) ^ (k - 1))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "1 / (x + 1) * Li(2,1 / (x + 1)) = (D x. -Li(3,1 / (x + 1)))",
+                "latex_goal": "\\frac{1}{x + 1} \\operatorname{Li}(2,\\frac{1}{x + 1}) = \\frac{d}{dx} (-\\operatorname{Li}(3,\\frac{1}{x + 1}))",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "x > 0",
+                    "latex_cond": "x > 0"
+                },
+                {
+                    "cond": "x < 1",
+                    "latex_cond": "x < 1"
+                }
+            ],
+            "finished": true,
+            "goal": "(INT t:[0,x]. log(t + 1) ^ 2 / t) = log(x) * log(1 + x) ^ 2 - 2/3 * log(1 + x) ^ 3 - 2 * log(1 + x) * Li(2,1 / (1 + x)) - 2 * Li(3,1 / (1 + x)) + 2 * zeta(3)",
+            "latex_goal": "\\int_{0}^{x} \\frac{\\log^{2}(t + 1)}{t} \\,dt = \\log{x} \\log^{2}(1 + x) - \\frac{2}{3} \\log^{3}(1 + x) - 2 \\log{(1 + x)} \\operatorname{Li}(2,\\frac{1}{1 + x}) - 2 \\operatorname{Li}(3,\\frac{1}{1 + x}) + 2 \\zeta{(3)}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{0}^{x} \\frac{\\log^{2}(t + 1)}{t} \\,dt",
+                        "start": "INT t:[0,x]. log(t + 1) ^ 2 / t",
+                        "steps": [
+                            {
+                                "latex_res": "(\\left. \\log{t} \\log^{2}(t + 1) \\right\\vert_{t=0}^{x}) - (\\int_{0}^{x} \\frac{2 \\log{t} \\log{(t + 1)}}{t + 1} \\,dt)",
+                                "res": "([log(t) * log(t + 1) ^ 2]_t=0,x) - (INT t:[0,x]. 2 * log(t) * log(t + 1) / (t + 1))",
+                                "rule": {
+                                    "latex_str": "integrate by parts \\(u \\to \\log^{2}(1 + t), v \\to \\log{t}\\)",
+                                    "name": "IntegrationByParts",
+                                    "str": "integrate by parts u -> log(1 + t) ^ 2, v -> log(t)",
+                                    "u": "log(1 + t) ^ 2",
+                                    "v": "log(t)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{t} \\log{(t + 1)}}{t + 1} \\,dt) + \\log{x} \\log^{2}(x + 1)",
+                                "res": "-(2 * (INT t:[0,x]. log(t) * log(t + 1) / (t + 1))) + log(x) * log(x + 1) ^ 2",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{((1 + t) (\\frac{t}{1 + t}))} \\log{(t + 1)}}{t + 1} \\,dt) + \\log{x} \\log^{2}(x + 1)",
+                                "res": "-(2 * (INT t:[0,x]. log((1 + t) * (t / (1 + t))) * log(t + 1) / (t + 1))) + log(x) * log(x + 1) ^ 2",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\log{t}\\) to \\(\\log{((1 + t) (\\frac{t}{1 + t}))}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "log((1 + t) * (t / (1 + t)))",
+                                    "old_expr": "log(t)",
+                                    "str": "rewriting log(t) to log((1 + t) * (t / (1 + t)))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-2 (\\int_{0}^{x} \\frac{(\\log{(1 + t)} + \\log{(\\frac{t}{1 + t})}) \\log{(t + 1)}}{t + 1} \\,dt) + \\log{x} \\log^{2}(x + 1)",
+                                "res": "-(2 * (INT t:[0,x]. (log(1 + t) + log(t / (1 + t))) * log(t + 1) / (t + 1))) + log(x) * log(x + 1) ^ 2",
+                                "rule": {
+                                    "latex_str": "rewrite \\(\\log{((1 + t) (\\frac{t}{1 + t}))}\\) to \\(\\log{(1 + t)} + \\log{(\\frac{t}{1 + t})}\\) using identity at 0.0.1.0.0.0",
+                                    "loc": "0.0.1.0.0.0",
+                                    "name": "ApplyIdentity",
+                                    "source": "log((1 + t) * (t / (1 + t)))",
+                                    "str": "rewrite log((1 + t) * (t / (1 + t))) to log(1 + t) + log(t / (1 + t)) using identity at 0.0.1.0.0.0",
+                                    "target": "log(1 + t) + log(t / (1 + t))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{(t + 1)} \\log{(\\frac{t}{t + 1})} + \\log^{2}(t + 1)}{t + 1} \\,dt) + \\log{x} \\log^{2}(x + 1)",
+                                "res": "-(2 * (INT t:[0,x]. (log(t + 1) * log(t / (t + 1)) + log(t + 1) ^ 2) / (t + 1))) + log(x) * log(x + 1) ^ 2",
+                                "rule": {
+                                    "loc": "0.0.1.0.0",
+                                    "name": "ExpandPolynomial",
+                                    "str": "expand polynomial at 0.0.1.0.0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{(t + 1)}}{t + 1} \\log{(\\frac{t}{t + 1})} + \\frac{\\log^{2}(t + 1)}{t + 1} \\,dt) + \\log{x} \\log^{2}(x + 1)",
+                                "res": "-(2 * (INT t:[0,x]. log(t + 1) / (t + 1) * log(t / (t + 1)) + log(t + 1) ^ 2 / (t + 1))) + log(x) * log(x + 1) ^ 2",
+                                "rule": {
+                                    "loc": "0.0.1.0",
+                                    "name": "ExpandPolynomial",
+                                    "str": "expand polynomial at 0.0.1.0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{(t + 1)}}{t + 1} \\log{(\\frac{t}{t + 1})} \\,dt) - 2 (\\int_{0}^{x} \\frac{\\log^{2}(t + 1)}{t + 1} \\,dt) + \\log{x} \\log^{2}(x + 1)",
+                                "res": "-(2 * (INT t:[0,x]. log(t + 1) / (t + 1) * log(t / (t + 1)))) - 2 * (INT t:[0,x]. log(t + 1) ^ 2 / (t + 1)) + log(x) * log(x + 1) ^ 2",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{(t + 1)}}{t + 1} \\log{(\\frac{t}{t + 1})} \\,dt) - 2 (\\int_{0}^{\\log{(x + 1)}} u ^ {2} \\,du) + \\log{x} \\log^{2}(x + 1)",
+                                "res": "-(2 * (INT t:[0,x]. log(t + 1) / (t + 1) * log(t / (t + 1)))) - 2 * (INT u:[0,log(x + 1)]. u ^ 2) + log(x) * log(x + 1) ^ 2",
+                                "rule": {
+                                    "latex_str": "substitute \\(u\\) for \\(\\log{(t + 1)}\\) at 0.1.1",
+                                    "loc": "0.1.1",
+                                    "name": "Substitution",
+                                    "str": "substitute u for log(t + 1) at 0.1.1",
+                                    "var_name": "u",
+                                    "var_subst": "log(t + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{(t + 1)}}{t + 1} \\log{(\\frac{t}{t + 1})} \\,dt) - 2 (\\left. \\frac{u ^ {3}}{3} \\right\\vert_{u=0}^{\\log{(x + 1)}}) + \\log{x} \\log^{2}(x + 1)",
+                                "res": "-(2 * (INT t:[0,x]. log(t + 1) / (t + 1) * log(t / (t + 1)))) - 2 * ([u ^ 3 / 3]_u=0,log(x + 1)) + log(x) * log(x + 1) ^ 2",
+                                "rule": {
+                                    "loc": "0.1.1",
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral at 0.1.1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{(t + 1)}}{t + 1} \\log{(\\frac{t}{t + 1})} \\,dt) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1)",
+                                "res": "-(2 * (INT t:[0,x]. log(t + 1) / (t + 1) * log(t / (t + 1)))) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{(\\frac{t}{1 + t})}}{1 + t} \\log{(t + 1)} \\,dt) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1)",
+                                "res": "-(2 * (INT t:[0,x]. log(t / (1 + t)) / (1 + t) * log(t + 1))) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{\\log{(t + 1)}}{t + 1} \\log{(\\frac{t}{t + 1})}\\) to \\(\\frac{\\log{(\\frac{t}{1 + t})}}{1 + t} \\log{(t + 1)}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "log(t / (1 + t)) / (1 + t) * log(t + 1)",
+                                    "old_expr": "log(t + 1) / (t + 1) * log(t / (t + 1))",
+                                    "str": "rewriting log(t + 1) / (t + 1) * log(t / (t + 1)) to log(t / (1 + t)) / (1 + t) * log(t + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-2 (\\int_{0}^{x} \\log{(t + 1)} (\\frac{d}{dt} \\operatorname{Li}(2,\\frac{1}{1 + t})) \\,dt) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1)",
+                                "res": "-(2 * (INT t:[0,x]. log(t + 1) * (D t. Li(2,1 / (1 + t))))) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2",
+                                "rule": {
+                                    "eq": "(D x. Li(2,1 / (1 + x))) = log(x / (1 + x)) / (1 + x)",
+                                    "latex_str": "apply equation \\(\\frac{d}{dx} \\operatorname{Li}(2,\\frac{1}{1 + x}) = \\frac{\\log{(\\frac{x}{1 + x})}}{1 + x}\\) at 0.0.0.1.0.0",
+                                    "loc": "0.0.0.1.0.0",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: (D x. Li(2,1 / (1 + x))) = log(x / (1 + x)) / (1 + x) at 0.0.0.1.0.0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-2 ((\\left. \\log{(t + 1)} \\operatorname{Li}(2,\\frac{1}{t + 1}) \\right\\vert_{t=0}^{x}) - (\\int_{0}^{x} \\frac{1}{t + 1} \\operatorname{Li}(2,\\frac{1}{t + 1}) \\,dt)) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1)",
+                                "res": "-(2 * (([log(t + 1) * Li(2,1 / (t + 1))]_t=0,x) - (INT t:[0,x]. 1 / (t + 1) * Li(2,1 / (t + 1))))) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2",
+                                "rule": {
+                                    "latex_str": "integrate by parts \\(u \\to \\log{(t + 1)}, v \\to \\operatorname{Li}(2,\\frac{1}{1 + t})\\) at 0.0.0.1",
+                                    "loc": "0.0.0.1",
+                                    "name": "IntegrationByParts",
+                                    "str": "integrate by parts u -> log(t + 1), v -> Li(2,1 / (1 + t)) at 0.0.0.1",
+                                    "u": "log(t + 1)",
+                                    "v": "Li(2,1 / (1 + t))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 (\\int_{0}^{x} \\frac{1}{t + 1} \\operatorname{Li}(2,\\frac{1}{t + 1}) \\,dt) - 2 \\log{(x + 1)} \\operatorname{Li}(2,\\frac{1}{x + 1}) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1)",
+                                "res": "2 * (INT t:[0,x]. 1 / (t + 1) * Li(2,1 / (t + 1))) - 2 * log(x + 1) * Li(2,1 / (x + 1)) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 (\\int_{0}^{x} \\frac{d}{dt} (-\\operatorname{Li}(3,\\frac{1}{t + 1})) \\,dt) - 2 \\log{(x + 1)} \\operatorname{Li}(2,\\frac{1}{x + 1}) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1)",
+                                "res": "2 * (INT t:[0,x]. D t. -Li(3,1 / (t + 1))) - 2 * log(x + 1) * Li(2,1 / (x + 1)) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2",
+                                "rule": {
+                                    "eq": "1 / (x + 1) * Li(2,1 / (x + 1)) = (D x. -Li(3,1 / (x + 1)))",
+                                    "latex_str": "apply equation \\(\\frac{1}{x + 1} \\operatorname{Li}(2,\\frac{1}{x + 1}) = \\frac{d}{dx} (-\\operatorname{Li}(3,\\frac{1}{x + 1}))\\) at 0.0.0.1.0",
+                                    "loc": "0.0.0.1.0",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: 1 / (x + 1) * Li(2,1 / (x + 1)) = (D x. -Li(3,1 / (x + 1))) at 0.0.0.1.0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-2 \\log{(x + 1)} \\operatorname{Li}(2,\\frac{1}{x + 1}) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1) - 2 \\operatorname{Li}(3,\\frac{1}{x + 1}) + 2 \\operatorname{Li}(3,1)",
+                                "res": "-(2 * log(x + 1) * Li(2,1 / (x + 1))) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2 - 2 * Li(3,1 / (x + 1)) + 2 * Li(3,1)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-2 \\log{(x + 1)} \\operatorname{Li}(2,\\frac{1}{x + 1}) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1) - 2 \\operatorname{Li}(3,\\frac{1}{x + 1}) + 2 \\zeta{(3)}",
+                                "res": "-(2 * log(x + 1) * Li(2,1 / (x + 1))) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2 - 2 * Li(3,1 / (x + 1)) + 2 * zeta(3)",
+                                "rule": {
+                                    "eq": "Li(s,1) = zeta(s)",
+                                    "latex_str": "apply equation \\(\\operatorname{Li}(s,1) = \\zeta{(s)}\\) at 1.1",
+                                    "loc": "1.1",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: Li(s,1) = zeta(s) at 1.1"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\log{x} \\log^{2}(1 + x) - \\frac{2}{3} \\log^{3}(1 + x) - 2 \\log{(1 + x)} \\operatorname{Li}(2,\\frac{1}{1 + x}) - 2 \\operatorname{Li}(3,\\frac{1}{1 + x}) + 2 \\zeta{(3)}",
+                        "start": "log(x) * log(1 + x) ^ 2 - 2/3 * log(1 + x) ^ 3 - 2 * log(1 + x) * Li(2,1 / (1 + x)) - 2 * Li(3,1 / (1 + x)) + 2 * zeta(3)",
+                        "steps": [
+                            {
+                                "latex_res": "-2 \\log{(x + 1)} \\operatorname{Li}(2,\\frac{1}{x + 1}) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1) - 2 \\operatorname{Li}(3,\\frac{1}{x + 1}) + 2 \\zeta{(3)}",
+                                "res": "-(2 * log(x + 1) * Li(2,1 / (x + 1))) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2 - 2 * Li(3,1 / (x + 1)) + 2 * zeta(3)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(INT t:[0,x]. log(t + 1) ^ 2 / t) = log(x) * log(1 + x) ^ 2 - 2/3 * log(1 + x) ^ 3 - 2 * log(1 + x) * Li(2,1 / (1 + x)) - 2 * Li(3,1 / (1 + x)) + 2 * zeta(3)",
+                "latex_goal": "\\int_{0}^{x} \\frac{\\log^{2}(t + 1)}{t} \\,dt = \\log{x} \\log^{2}(1 + x) - \\frac{2}{3} \\log^{3}(1 + x) - 2 \\log{(1 + x)} \\operatorname{Li}(2,\\frac{1}{1 + x}) - 2 \\operatorname{Li}(3,\\frac{1}{1 + x}) + 2 \\zeta{(3)}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "useful_log"
+}

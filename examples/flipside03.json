@@ -1,0 +1,292 @@
+{
+    "content": [
+        {
+            "conds": [
+                {
+                    "cond": "a >= 0",
+                    "latex_cond": "a \\ge 0"
+                }
+            ],
+            "eq": "I(a) = (INT x:[0,1]. (x ^ a - 1) / log(x))",
+            "latex_eq": "I{(a)} = \\int_{0}^{1} \\frac{x ^ {a} - 1}{\\log{x}} \\,dx",
+            "latex_lhs": "I{(a)}",
+            "type": "FuncDef"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a >= 0",
+                    "latex_cond": "a \\ge 0"
+                }
+            ],
+            "finished": true,
+            "goal": "(D a. I(a)) = 1 / (a + 1)",
+            "latex_goal": "\\frac{d}{da} I{(a)} = \\frac{1}{a + 1}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\frac{d}{da} I{(a)}",
+                        "start": "D a. I(a)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{d}{da} \\int_{0}^{1} \\frac{x ^ {a} - 1}{\\log{x}} \\,dx",
+                                "res": "D a. INT x:[0,1]. (x ^ a - 1) / log(x)",
+                                "rule": {
+                                    "func_name": "I",
+                                    "loc": "subterms",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{1} \\frac{d}{da} \\frac{x ^ {a} - 1}{\\log{x}} \\,dx",
+                                "res": "INT x:[0,1]. D a. (x ^ a - 1) / log(x)",
+                                "rule": {
+                                    "name": "DerivIntExchange",
+                                    "str": "exchange derivative and integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{1} x ^ {a} \\,dx",
+                                "res": "INT x:[0,1]. x ^ a",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\left. \\frac{x ^ {a + 1}}{a + 1} \\right\\vert_{x=0}^{1}",
+                                "res": "[x ^ (a + 1) / (a + 1)]_x=0,1",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a + 1}",
+                                "res": "1 / (a + 1)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{1}{a + 1}",
+                        "start": "1 / (a + 1)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(D a. I(a)) = 1 / (a + 1)",
+                "latex_goal": "\\frac{d}{da} I{(a)} = \\frac{1}{a + 1}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a >= 0",
+                    "latex_cond": "a \\ge 0"
+                }
+            ],
+            "finished": true,
+            "goal": "I(a) = log(a + 1) + SKOLEM_CONST(C)",
+            "latex_goal": "I{(a)} = \\log{(a + 1)} + C",
+            "proof": {
+                "finished": true,
+                "goal": "I(a) = log(a + 1) + SKOLEM_CONST(C)",
+                "latex_goal": "I{(a)} = \\log{(a + 1)} + C",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "a >= 0",
+                            "latex_cond": "a \\ge 0"
+                        }
+                    ],
+                    "latex_start": "\\frac{d}{da} I{(a)} = \\frac{1}{a + 1}",
+                    "start": "(D a. I(a)) = 1 / (a + 1)",
+                    "steps": [
+                        {
+                            "latex_res": "I{(a)} = \\int \\frac{1}{a + 1} \\,da",
+                            "res": "I(a) = (INT a. 1 / (a + 1))",
+                            "rule": {
+                                "name": "IntegrateBothSide",
+                                "str": "integrate both side"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "I{(a)} = \\log{(\\left| a + 1 \\right|)} + C",
+                            "res": "I(a) = log(abs(a + 1)) + SKOLEM_CONST(C)",
+                            "rule": {
+                                "name": "IndefiniteIntegralIdentity",
+                                "str": "apply indefinite integral"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "I{(a)} = \\log{(a + 1)} + C",
+                            "res": "I(a) = log(a + 1) + SKOLEM_CONST(C)",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "finished": true,
+            "goal": "SKOLEM_CONST(C) = 0",
+            "latex_goal": "C = 0",
+            "proof": {
+                "finished": true,
+                "goal": "SKOLEM_CONST(C) = 0",
+                "latex_goal": "C = 0",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "a >= 0",
+                            "latex_cond": "a \\ge 0"
+                        }
+                    ],
+                    "latex_start": "I{(a)} = \\log{(a + 1)} + C",
+                    "start": "I(a) = log(a + 1) + SKOLEM_CONST(C)",
+                    "steps": [
+                        {
+                            "latex_res": "I{(0)} = \\log{(0 + 1)} + C",
+                            "res": "I(0) = log(0 + 1) + SKOLEM_CONST(C)",
+                            "rule": {
+                                "latex_str": "substitute \\(a\\) for \\(0\\) in equation",
+                                "name": "VarSubsOfEquation",
+                                "str": "substitute a for 0 in equation",
+                                "subst": [
+                                    {
+                                        "expr": "0",
+                                        "var": "a"
+                                    }
+                                ]
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "\\int_{0}^{1} 0 \\,dx = \\log{(0 + 1)} + C",
+                            "res": "(INT x:[0,1]. 0) = log(0 + 1) + SKOLEM_CONST(C)",
+                            "rule": {
+                                "func_name": "I",
+                                "loc": "subterms",
+                                "name": "ExpandDefinition",
+                                "str": "expand definition on subterms"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "0 = C",
+                            "res": "0 = SKOLEM_CONST(C)",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "C = 0",
+                            "res": "SKOLEM_CONST(C) = 0",
+                            "rule": {
+                                "latex_str": "solve equation for \\(C\\)",
+                                "name": "SolveEquation",
+                                "solve_for": "SKOLEM_CONST(C)",
+                                "str": "solve equation for SKOLEM_CONST(C)"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a >= 0",
+                    "latex_cond": "a \\ge 0"
+                }
+            ],
+            "finished": true,
+            "goal": "I(a) = log(a + 1)",
+            "latex_goal": "I{(a)} = \\log{(a + 1)}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "I{(a)}",
+                        "start": "I(a)",
+                        "steps": [
+                            {
+                                "latex_res": "\\log{(a + 1)} + C",
+                                "res": "log(a + 1) + SKOLEM_CONST(C)",
+                                "rule": {
+                                    "eq": "I(a) = log(a + 1) + SKOLEM_CONST(C)",
+                                    "latex_str": "apply equation \\(I{(a)} = \\log{(a + 1)} + C\\)",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: I(a) = log(a + 1) + SKOLEM_CONST(C)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\log{(a + 1)} + 0",
+                                "res": "log(a + 1) + 0",
+                                "rule": {
+                                    "eq": "SKOLEM_CONST(C) = 0",
+                                    "latex_str": "apply equation \\(C = 0\\) at 1",
+                                    "loc": "1",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: SKOLEM_CONST(C) = 0 at 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\log{(a + 1)}",
+                                "res": "log(a + 1)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\log{(a + 1)}",
+                        "start": "log(a + 1)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "I(a) = log(a + 1)",
+                "latex_goal": "I{(a)} = \\log{(a + 1)}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "flipside03"
+}

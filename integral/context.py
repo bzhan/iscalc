@@ -346,7 +346,7 @@ class Context:
     def load_book(self, book_name: str, *, upto: Optional[str] = None):
         assert isinstance(book_name, str)
 
-        filename = os.path.join(dirname, "../integral/examples/" + book_name + '.json')
+        filename = os.path.join(dirname, "../examples/" + book_name + '.json')
         with open(filename, 'r', encoding='utf-8') as f:
             info = json.load(f)
 

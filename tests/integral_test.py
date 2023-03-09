@@ -17,7 +17,7 @@ class IntegralTest(unittest.TestCase):
             self.assertEqual(compstate.parse_item(file.content[i].parent, item).export(), file.content[i].export())
 
         # Output to file
-        with open('integral/examples/' + file.name + '.json', 'w', encoding='utf-8') as f:
+        with open('examples/' + file.name + '.json', 'w', encoding='utf-8') as f:
             json.dump(file.export(), f, indent=4, ensure_ascii=False, sort_keys=True)
 
         # Test goals are finished

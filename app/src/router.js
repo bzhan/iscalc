@@ -3,12 +3,10 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-import Index from './components/Index.vue'
 import Integral from './components/integral/Integral.vue'
 
 const routes = [
-  {path: '/', name: 'main', component: Index},
-  {path: '/integral', name: 'integral', component: Integral},
+  {path: '/', name: 'main', component: Integral},
 ]
 
 const router = new VueRouter({

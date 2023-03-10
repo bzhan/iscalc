@@ -3642,7 +3642,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.ExpandPolynomial(), "0.0.1.0"))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.Substitution('u', 'log(t+1)'), '0.1.1'))
-        calc.perform_rule(rules.OnLocation(rules.DefiniteIntegralIdentity(), "0.1.1"))
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
         s1 = "log(t + 1) / (t + 1) * log(t / (t + 1))"
         s2 = "log(t/(1+t)) / (1+t) * log(t+1)"

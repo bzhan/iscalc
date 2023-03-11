@@ -7,8 +7,10 @@
         <b-nav-item-dropdown text="File" left>
           <b-dropdown-item href="#" v-on:click="addBook">Add new book</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="deleteBook">Delete books</b-dropdown-item>
-          <b-dropdown-item href="#" v-on:click="addProblem">Add problem</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="saveFile">Save file</b-dropdown-item>
+          <b-dropdown-item href="#" v-on:click="addHeader">Add header</b-dropdown-item>
+          <b-dropdown-item href="#" v-on:click="addFuncDef">Add definition</b-dropdown-item>
+          <b-dropdown-item href="#" v-on:click="addProblem">Add problem</b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item-dropdown text="Proof" left>
           <b-dropdown-item href="#" v-on:click="clearItem">Clear</b-dropdown-item>
@@ -125,6 +127,7 @@
           v-bind:selected_facts="selected_facts"/>
       </div>
     </div>
+    <!-- Main panel for showing book content-->
     <div v-if="content.length == 0" id="problem">
       <div class="book-title">
         {{book_content.name}}
@@ -400,6 +403,8 @@
           </label><br/>
         </div>
       </div>
+      <div v-if="r_query_mode === 'add header'">
+      </div>
     </div>
   </div>
 </template>
@@ -541,6 +546,7 @@ export default {
 
     openBook: async function (book_name) {
       this.book_name = book_name
+      this.r_query_mode = undefined
       this.loadBookContent()
     },
 
@@ -723,6 +729,8 @@ export default {
         this.book_list = response.data.book_list
         this.r_query_mode = undefined
         this.content_state = false
+        this.content = []
+        this.new_book_name = undefined
       }
     },
 

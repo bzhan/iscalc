@@ -32,7 +32,6 @@
         }
     ],
     "imports": [
-        "base",
         "interesting"
     ],
     "name": "Almost Impossible Integrals, Sums, and Series"

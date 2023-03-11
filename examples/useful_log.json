@@ -1320,12 +1320,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{(t + 1)}}{t + 1} \\log{(\\frac{t}{t + 1})} \\,dt) - 2 (\\left. \\frac{u ^ {3}}{3} \\right\\vert_{u=0}^{\\log{(x + 1)}}) + \\log{x} \\log^{2}(x + 1)",
-                                "res": "-(2 * (INT t:[0,x]. log(t + 1) / (t + 1) * log(t / (t + 1)))) - 2 * ([u ^ 3 / 3]_u=0,log(x + 1)) + log(x) * log(x + 1) ^ 2",
+                                "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{(t + 1)} \\log{(\\frac{t}{t + 1})}}{t + 1} \\,dt) - 2 (\\left. \\frac{u ^ {3}}{3} \\right\\vert_{u=0}^{\\log{(x + 1)}}) + \\log{x} \\log^{2}(x + 1)",
+                                "res": "-(2 * (INT t:[0,x]. log(t + 1) * log(t / (t + 1)) / (t + 1))) - 2 * ([u ^ 3 / 3]_u=0,log(x + 1)) + log(x) * log(x + 1) ^ 2",
                                 "rule": {
-                                    "loc": "0.1.1",
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral at 0.1.1"
+                                    "str": "apply definite integral"
                                 },
                                 "type": "CalculationStep"
                             },

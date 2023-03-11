@@ -4,6 +4,12 @@
     <b-navbar type="light" variant="info">
       <b-navbar-brand href="#" v-on:click='loadBookList'>Integral</b-navbar-brand>
       <b-navbar-nav>
+        <b-nav-item-dropdown text="File" left>
+          <b-dropdown-item href="#" v-on:click="addBook">Add new book</b-dropdown-item>
+          <b-dropdown-item href="#" v-on:click="deleteBook">Delete books</b-dropdown-item>
+          <b-dropdown-item href="#" v-on:click="addProblem">Add problem</b-dropdown-item>
+          <b-dropdown-item href="#" v-on:click="saveFile">Save file</b-dropdown-item>
+        </b-nav-item-dropdown>
         <b-nav-item-dropdown text="Proof" left>
           <b-dropdown-item href="#" v-on:click="clearItem">Clear</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="applyRule('FullSimplify')">Simplify</b-dropdown-item>
@@ -190,7 +196,10 @@
         <div v-for="(cond, index) in cond_query" :key="index">
           <ExprQuery v-bind:value="cond" @input="setCondQuery(index, $event)"/><br/>
         </div>
-        <button v-on:click="doAddFuncDef">OK</button>&nbsp;
+        <button v-show="this.filename !== undefined" v-on:click="doAddFuncDef('file')">OK</button>&nbsp;
+        <div v-show="this.filename === undefined && this.book_name !== undefined">
+          <button v-on:click="doAddFuncDef('book')">OK</button>&nbsp;
+        </div>
         <button v-on:click="cond_query.push('')">Add condition</button>
       </div>
       <div v-if="r_query_mode === 'add goal'">
@@ -201,6 +210,20 @@
         </div>
         <button v-on:click="doAddGoal">OK</button>&nbsp;
         <button v-on:click="cond_query.push('')">Add condition</button>
+      </div>
+      <div v-if="r_query_mode === 'add book'">
+        <span class="math-text">book name:</span>
+        <input type="text" v-model="new_book_name" style="width: 190.4px;height: 32px;"/>
+        <button v-on:click="doAddBook()">OK</button>
+      </div>
+      <div v-if="r_query_mode === 'delete book'">
+        <button v-on:click="showDeleteDialog()" v-show="!show_delete_book_msg">Delete</button>
+        <div class="mask" v-show="show_delete_book_msg">
+            <span>are you sure to delete these books ?</span><br/>
+            <button class="app-download"  @click="doDeleteBook">YES</button>
+            <button class="app-download"  @click="cancelDelete">NO</button>
+        </div>
+
       </div>
       <div v-if="r_query_mode === 'apply induction'">
         <span class="math-text">Please specify induction variable</span><br/>
@@ -364,6 +387,19 @@
       </div>
     </div>
     <div id="select">
+      <div v-if="r_query_mode === 'add book'">
+        <span class="math-text">select books to import:</span><br/>
+      </div>
+      <div v-if="r_query_mode === 'delete book'">
+        <span class="math-text">select books to delete:</span><br/>
+      </div>
+      <div v-if="r_query_mode === 'add book' || r_query_mode === 'delete book'">
+        <div v-for=" (name,i) in book_list" v-bind:key=name style="margin:5px 10px">
+          <label :for="'book_'+name" @change="selectBook(name)">
+              <input type="checkbox" :id="'book_'+name" v-model="checkVal[i]">{{name}}
+          </label><br/>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -466,6 +502,11 @@ export default {
 			
       // the index of sep-integrals
       int_id: 0,
+
+      // Selected book
+      selected_book: [],
+      checkVal: false,
+      show_delete_book_msg: false,
     }
   },
 
@@ -487,6 +528,7 @@ export default {
       this.content_state = false
       this.content = []
       this.cur_id = undefined
+      this.filename = undefined
     },
 
     loadBookContent: async function () {
@@ -510,7 +552,7 @@ export default {
         cur_id: this.cur_id,
         selected_item: this.selected_item
       }
-      const response = await axios.post("http://127.0.0.1:5000/api/query-last-expr", JSON.stringify(data))
+      const response = await axios.post("httpfilename://127.0.0.1:5000/api/query-last-expr", JSON.stringify(data))
       if (response.data.status === 'ok'){
         this.last_expr = response.data.last_expr
       } else {
@@ -584,22 +626,103 @@ export default {
     },
 
     // Perform add function definition
-    doAddFuncDef: async function() {
-      const data = {
-        book: this.book_name,
-        file: this.filename,
-        content: this.content,
-        eq: this.expr_query1,
-        conds: this.cond_query
+    doAddFuncDef: async function(forSomething) {
+      if(forSomething=='file'){
+        const data = {
+          book: this.book_name,
+          file: this.filename,
+          content: this.content,
+          eq: this.expr_query1,
+          conds: this.cond_query,
+          for: "file"
+        }
+        const response = await axios.post("http://127.0.0.1:5000/api/add-function-definition", JSON.stringify(data))
+        if (response.data.status == 'ok') {
+          this.content = response.data.state
+          this.cur_id = this.content.length - 1
+          this.selected_item = response.data.selected_item
+          this.r_query_mode = undefined
+          this.expr_query1 = ''
+          this.cond_query = []
+        }
       }
-      const response = await axios.post("http://127.0.0.1:5000/api/add-function-definition", JSON.stringify(data))
+      else if(forSomething=='book'){
+        const data = {
+          book: this.book_name,
+          eq: this.expr_query1,
+          conds: this.cond_query,
+          for: "book"
+        }
+        const response = await axios.post("http://127.0.0.1:5000/api/add-function-definition", JSON.stringify(data))
+        if (response.data.status == 'ok') {
+          this.content = response.data.state
+          this.r_query_mode = undefined
+          this.expr_query1 = ''
+          this.cond_query = []
+        }
+      }
+    },
+    
+    //Delete Books
+    deleteBook: function(){
+      this.r_query_mode = 'delete book'
+      this.selected_book = []
+      this.checkVal = []
+      this.show_delete_book_msg = false
+      for(let i=0;i <= this.book_list.lenth; i++){
+        this.checkVal.add(false)
+      }
+    },
+    cancelDelete: function(){
+      this.show_delete_book_msg = false
+      this.r_query_mode = undefined
+      this.content_state = false
+    },
+    doDeleteBook: async function(){
+      const data = {
+        books: this.selected_book
+      }
+      const response = await axios.post("http://127.0.0.1:5000/api/delete-books", JSON.stringify(data))
       if (response.data.status == 'ok') {
-        this.content = response.data.state
-        this.cur_id = this.content.length - 1
-        this.selected_item = response.data.selected_item
+        this.book_list = response.data.book_list
         this.r_query_mode = undefined
-        this.expr_query1 = ''
-        this.cond_query = []
+        this.content_state = false
+        this.show_delete_book_msg = false
+        console.log(this.book_list)
+      }
+    },
+    showDeleteDialog: function(){
+      this.show_delete_book_msg = true
+    },
+
+    selectBook: function(book_name){
+      if(this.checkVal&&!this.selected_book.includes(book_name)){
+        this.selected_book.push(book_name)
+      }else if(!this.checkVal&&this.selected_book.includes(book_name)){
+        this.selected_book.splice(this.selected_book.findIndex(i => i==book_name))
+      }
+    },
+
+    // Add book
+    addBook: function() {
+      this.r_query_mode = 'add book'
+      this.selected_book = []
+      this.checkVal = []
+      for(let i=0;i <= this.book_list.lenth; i++){
+        this.checkVal.add(false)
+      }
+    },
+
+    doAddBook: async function(){
+      const data = {
+        new_book_name: this.new_book_name,
+        imports: this.selected_book
+      }
+      const response = await axios.post("http://127.0.0.1:5000/api/add-new-book", JSON.stringify(data))
+      if (response.data.status == 'ok') {
+        this.book_list = response.data.book_list
+        this.r_query_mode = undefined
+        this.content_state = false
       }
     },
 

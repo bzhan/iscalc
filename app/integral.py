@@ -24,6 +24,55 @@ def integral_load_book_list():
 
     return jsonify(f_data)
 
+@app.route("/api/add-new-book", methods=['POST'])
+def add_new_book():
+    # add new book
+    data = json.loads(request.get_data().decode('utf-8'))
+    new_book_name = data['new_book_name']
+    imports = data['imports']
+    # # load all books
+    file_name = os.path.join(dirname, "../examples/index.json")
+    with open(file_name, 'r', encoding='utf-8') as f:
+        f_data = json.load(f)
+    # add book to book list
+    tmp = {
+        "content":[],
+        "name": new_book_name,
+        "imports": imports
+    }
+    with open('../examples/'+new_book_name+'.json', 'w', encoding='utf-8') as f:
+        json.dump(tmp, f, indent=4, ensure_ascii=False, sort_keys=True)
+    f_data['book_list'].append(new_book_name)
+    with open('../examples/index.json', 'w', encoding='utf-8') as f:
+        json.dump({'book_list':f_data['book_list']}, f, indent=4, ensure_ascii=False, sort_keys=True)
+    res = {
+        'status': "ok",
+        'book_list': f_data['book_list']
+    }
+    return jsonify(res)
+
+@app.route("/api/delete-books", methods=['POST'])
+def delete_books():
+    # add new book
+    data = json.loads(request.get_data().decode('utf-8'))
+    books = data['books']
+    # # load all books
+    file_name = os.path.join(dirname, "../examples/index.json")
+    with open(file_name, 'r', encoding='utf-8') as f:
+        f_data = json.load(f)
+    for b in books:
+        # delete book
+        f_data['book_list'].remove(b)
+        os.remove("../examples/"+b+'.json')
+    with open('../examples/index.json', 'w', encoding='utf-8') as f:
+        json.dump({'book_list':f_data['book_list']}, f, indent=4, ensure_ascii=False, sort_keys=True)
+    
+    res = {
+        'status': 'ok',
+        'book_list': f_data['book_list']
+    }
+    return jsonify(res)
+
 @app.route("/api/integral-load-book-content", methods=['POST'])
 def integral_load_book_content():
     data = json.loads(request.get_data().decode('utf-8'))
@@ -209,19 +258,27 @@ def query_identities():
 @app.route("/api/add-function-definition", methods=['POST'])
 def add_function_definition():
     data = json.loads(request.get_data().decode('UTF-8'))
-    book_name = data['book']
-    filename = data['file']
-    file = compstate.CompFile(book_name, filename)
-    for item in data['content']:
-        file.add_item(compstate.parse_item(file, item))
-    eq = integral.parser.parse_expr(data['eq'])
-    conds = list(integral.parser.parse_expr(cond) for cond in data['conds'])
-    file.add_definition(eq, conds=conds)
-    return jsonify({
-        "status": "ok",
-        "state": file.export()['content'],
-        "selected_item": str(compstate.Label(""))
-    })
+    forSomething = data['for']
+    if forSomething == 'file':
+        book_name = data['book']
+        filename = data['file']
+        file = compstate.CompFile(book_name, filename)
+        for item in data['content']:
+            file.add_item(compstate.parse_item(file, item))
+        eq = integral.parser.parse_expr(data['eq'])
+        conds = list(integral.parser.parse_expr(cond) for cond in data['conds'])
+        file.add_definition(eq, conds=conds)
+        return jsonify({
+            "status": "ok",
+            "state": file.export()['content'],
+            "selected_item": str(compstate.Label(""))
+        })
+    elif forSomething == 'book':
+        book_name = data['book']
+        eq = integral.parser.parse_expr(data['eq'])
+        conds = list(integral.parser.parse_expr(cond) for cond in data['conds'])
+        
+
 
 @app.route("/api/add-goal", methods=["POST"])
 def add_goal():

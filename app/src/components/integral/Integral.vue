@@ -130,67 +130,9 @@
     <!-- Main panel for showing book content-->
     <div v-if="content.length == 0" id="problem">
       <div class="book-title">
-        {{book_content.name}}
+      {{book_content.name}}
       </div>
-      <div v-for="(item, index) in book_content.content" :key="index">
-        <div v-if="item.type == 'header'">
-          <div v-if="item.level == 1" class="book-header1">
-            {{item.name}}
-          </div>
-          <div v-if="item.level == 2" class="book-header2">
-            {{item.name}}
-          </div>
-        </div>
-        <div v-if="item.type == 'definition'">
-          <MathEquation v-bind:data="'\\(' + item.latex_str + '\\)'" class="indented-text"
-            v-on:click.native="openFile(item.path)"
-            style="cursor:pointer"/>
-        </div>
-        <div v-if="item.type == 'problem'">
-          <MathEquation v-bind:data="'\\(' + item.latex_str + '\\)'" class="indented-text"
-            v-on:click.native="openFile(item.path)"
-            style="cursor:pointer"/>
-          <span v-if="'latex_conds' in item && item.latex_conds.length > 0">
-            <span class="math-text indented-text">for &nbsp;</span>
-            <span v-for="(cond, index) in item.latex_conds" :key="index">
-              <span v-if="index > 0">, &nbsp;</span>
-              <MathEquation v-bind:data="'\\(' + cond + '\\)'"/>
-            </span>
-          </span>
-        </div>
-        <div v-if="item.type == 'axiom'">
-          <MathEquation v-bind:data="'\\(' + item.latex_str + '\\)'" class="indented-text"/>
-          <span v-if="'latex_conds' in item && item.latex_conds.length > 0">
-            <span class="math-text indented-text">for &nbsp;</span>
-            <span v-for="(cond, index) in item.latex_conds" :key="index">
-              <span v-if="index > 0">, &nbsp;</span>
-              <MathEquation v-bind:data="'\\(' + cond + '\\)'"/>
-            </span>
-          </span>
-        </div>
-        <div v-if="item.type == 'table'" style="margin: 5px">
-          <table style="border-collapse: collapse">
-            <tr>
-              <td style="border-style: solid; padding: 3px">
-                <MathEquation v-bind:data="'\\(' + '{x}' + '\\)'"/>
-              </td>
-              <td v-for="(entry, index) in item.latex_table" :key="index"
-                  style="border-style: solid; padding: 3px">
-                <MathEquation v-bind:data="'\\(' + entry.x + '\\)'"/>
-              </td>
-            </tr>
-            <tr>
-              <td style="border-style: solid; padding: 3px">
-                <MathEquation v-bind:data="'\\(' + item.funcexpr + '\\)'"/>
-              </td>
-              <td v-for="(entry, index) in item.latex_table" :key="index"
-                  style="border-style: solid; padding: 3px">
-                <MathEquation v-bind:data="'\\(' + entry.y + '\\)'"/>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
+      <BookContent v-bind:content="book_content.content"></BookContent>
     </div>
     <div id="dialog">
       <div v-if="r_query_mode === 'add definition'">
@@ -417,6 +359,7 @@ import ExprQuery from './ExprQuery.vue'
 import Goal from "./Goal.vue"
 import Lemma from "./Lemma.vue"
 import Calculation from "./Calculation.vue"
+import BookContent from "./BookContent.vue"
 
 export default {
   name: 'Integral',
@@ -427,6 +370,7 @@ export default {
     Calculation,
     ExprQuery,
     Lemma,
+    BookContent,
   },
 
   props: [
@@ -565,7 +509,7 @@ export default {
         this.last_expr = ""
       }
     },
-		
+
     openFile: async function (filename) {
       const data = {
         filename: filename

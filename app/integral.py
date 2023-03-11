@@ -77,39 +77,44 @@ def delete_books():
 def integral_load_book_content():
     data = json.loads(request.get_data().decode('utf-8'))
     file_name = os.path.join(dirname, "../examples/" + data['bookname'] + '.json')
-
     # Load raw data
     with open(file_name, 'r', encoding='utf-8') as f:
         f_data = json.load(f)
 
-    # For each expression, load its latex form
-    for item in f_data['content']:
-        # Expressions in item
-        if 'expr' in item:
-            e = integral.parser.parse_expr(item['expr'])
-            latex_str = integral.latex.convert_expr(e)
-            item['latex_str'] = latex_str
-        # Conditions in item
-        if 'conds' in item:
-            latex_conds = []
-            for cond_str in item['conds']:
-                cond = integral.parser.parse_expr(cond_str)
-                latex_conds.append(integral.latex.convert_expr(cond))
-            item['latex_conds'] = latex_conds
-        # Table elements
-        if item['type'] == 'table':
-            new_table = list()
-            funcexpr = integral.expr.Fun(item['name'], integral.expr.Var('x'))
-            item['funcexpr'] = integral.latex.convert_expr(funcexpr)
-            for x, y in item['table'].items():
-                x = integral.parser.parse_expr(x)
-                y = integral.parser.parse_expr(y)
-                new_table.append({
-                    'x': integral.latex.convert_expr(x),
-                    'y': integral.latex.convert_expr(y)
-                })
-            item['latex_table'] = new_table
+    def rec(item):
+        res = item
+        if 'content' in item:
+            for i in range(len(item['content'])):
+                res['content'][i] = rec(item['content'][i])
+        else:
+            # Expressions in item
+            if 'expr' in item:
+                e = integral.parser.parse_expr(item['expr'])
+                latex_str = integral.latex.convert_expr(e)
+                item['latex_str'] = latex_str
+            # Conditions in item
+            if 'conds' in item:
+                latex_conds = []
+                for cond_str in item['conds']:
+                    cond = integral.parser.parse_expr(cond_str)
+                    latex_conds.append(integral.latex.convert_expr(cond))
+                item['latex_conds'] = latex_conds
+            # Table elements
+            if item['type'] == 'table':
+                new_table = list()
+                funcexpr = integral.expr.Fun(item['name'], integral.expr.Var('x'))
+                item['funcexpr'] = integral.latex.convert_expr(funcexpr)
+                for x, y in item['table'].items():
+                    x = integral.parser.parse_expr(x)
+                    y = integral.parser.parse_expr(y)
+                    new_table.append({
+                        'x': integral.latex.convert_expr(x),
+                        'y': integral.latex.convert_expr(y)
+                    })
+                item['latex_table'] = new_table
+        return res
 
+    f_data = rec(f_data)
     return jsonify(f_data)
 
 @app.route("/api/integral-open-file", methods=['POST'])

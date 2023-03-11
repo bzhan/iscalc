@@ -3,7 +3,7 @@
     <div v-for="(item, index) in content" :key="index">
     <div v-if="item.type == 'header'">
         <span>{{ item.name }}</span>
-        <BookContent v-bind:content="item.content"></BookContent>
+        <BookContent v-bind:content="item.content" @open_file="openFile"></BookContent>
       </div>
       
       <div v-else>
@@ -71,7 +71,12 @@
     },
     props: [
       'content'
-    ]
+    ],
+    methods: {
+      openFile: function(name){
+        this.$emit('open_file', name)
+      }
+    }
   }
   
   </script>

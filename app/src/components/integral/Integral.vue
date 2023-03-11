@@ -132,7 +132,7 @@
       <div class="book-title">
       {{book_content.name}}
       </div>
-      <BookContent v-bind:content="book_content.content"></BookContent>
+      <BookContent v-bind:content="book_content.content" @open_file = 'openFile'></BookContent>
     </div>
     <div id="dialog">
       <div v-if="r_query_mode === 'add definition'">

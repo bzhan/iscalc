@@ -552,7 +552,7 @@ export default {
         cur_id: this.cur_id,
         selected_item: this.selected_item
       }
-      const response = await axios.post("httpfilename://127.0.0.1:5000/api/query-last-expr", JSON.stringify(data))
+      const response = await axios.post("http://127.0.0.1:5000/api/query-last-expr", JSON.stringify(data))
       if (response.data.status === 'ok'){
         this.last_expr = response.data.last_expr
       } else {

@@ -1,0 +1,59 @@
+{
+    "content": [
+        {
+            "content": [
+                {
+                    "content": [
+                        {
+                            "expr": "(INT x:[0,1]. x) = 1/2",
+                            "path": "testfile",
+                            "type": "problem"
+                        }
+                    ],
+                    "name": "Header1.1",
+                    "type": "header"
+                },
+                {
+                    "content": [
+                        {
+                            "content": [
+                                {
+                                    "expr": "a = 3",
+                                    "path": "testfile",
+                                    "type": "problem"
+                                }
+                            ],
+                            "name": "1.2.1",
+                            "type": "header"
+                        }
+                    ],
+                    "name": "1.2 ",
+                    "type": "header"
+                },
+                {
+                    "expr": "y = 6",
+                    "path": "testfile",
+                    "type": "problem"
+                }
+            ],
+            "name": "Header1",
+            "type": "header"
+        },
+        {
+            "content": [
+                {
+                    "content": [],
+                    "name": "header2.1",
+                    "type": "header"
+                }
+            ],
+            "name": "Header2",
+            "type": "header"
+        }
+    ],
+    "imports": [
+        "base"
+    ],
+    "name": "asdfasdf",
+    "type": "header"
+}

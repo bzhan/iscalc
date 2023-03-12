@@ -1,0 +1,23 @@
+{
+    "content": [
+        {
+            "finished": false,
+            "goal": "(INT x:[0,1]. x) = 1/2",
+            "latex_goal": "\\int_{0}^{1} x \\,dx = \\frac{1}{2}",
+            "type": "Goal"
+        },
+        {
+            "finished": false,
+            "goal": "a = 3",
+            "latex_goal": "a = 3",
+            "type": "Goal"
+        },
+        {
+            "finished": false,
+            "goal": "y = 6",
+            "latex_goal": "y = 6",
+            "type": "Goal"
+        }
+    ],
+    "name": "D:\\workspace\\iscalc\\app\\../examples/testfile.json"
+}

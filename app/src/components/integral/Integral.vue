@@ -9,8 +9,8 @@
           <b-dropdown-item href="#" v-on:click="deleteBook">Delete books</b-dropdown-item>
           <!-- <b-dropdown-item href="#" v-on:click="saveFile">Save file</b-dropdown-item> -->
           <b-dropdown-item href="#" v-on:click="addHeader">Add header</b-dropdown-item>
-          <!-- <b-dropdown-item href="#" v-on:click="addFuncDef">Add definition</b-dropdown-item>
-          <b-dropdown-item href="#" v-on:click="addProblem">Add problem</b-dropdown-item> -->
+          <!-- <b-dropdown-item href="#" v-on:click="addFuncDef">Add definition</b-dropdown-item> -->
+          <b-dropdown-item href="#" v-on:click="addProblem">Add problem</b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item-dropdown text="Proof" left>
           <b-dropdown-item href="#" v-on:click="clearItem">Clear</b-dropdown-item>
@@ -152,13 +152,19 @@
         </div>
         <button v-on:click="cond_query.push('')">Add condition</button>
       </div>
-      <div v-if="r_query_mode === 'add goal'">
-        <span class="math-text">Add goal:</span><br/>
+      <div v-if="r_query_mode === 'add goal' || r_query_mode === 'add problem'">
+        <span v-if="r_query_mode === 'add goal'" class="math-text">Add goal:</span>
+        <span v-if="r_query_mode === 'add problem'" class="math-text">Add problem:</span><br/>
         <ExprQuery v-model="expr_query1"/><br/>
         <div v-for="(cond, index) in cond_query" :key="index">
           <ExprQuery v-bind:value="cond" @input="setCondQuery(index, $event)"/><br/>
         </div>
-        <button v-on:click="doAddGoal">OK</button>&nbsp;
+        <div v-if="r_query_mode === 'add problem'">
+          <span class="math-text">file name:</span>
+          <input v-model="filename"/>
+        </div>
+        <button v-if="r_query_mode === 'add goal'" v-on:click="doAddGoal">OK</button>
+        <button v-if="r_query_mode === 'add problem'" v-on:click="doAddProblem">OK</button>&nbsp;
         <button v-on:click="cond_query.push('')">Add condition</button>
       </div>
       <div v-if="r_query_mode === 'add book'">
@@ -494,6 +500,7 @@ export default {
       }
       const response = await axios.post('http://127.0.0.1:5000/api/integral-load-book-content', JSON.stringify(data))
       this.book_content = response.data
+      console.log(this.book_content)
     },
 
     openBook: async function (book_name) {
@@ -534,6 +541,29 @@ export default {
       this.cur_id = index
       this.selected_item = undefined
       this.selected_facts = {}
+    },
+
+    // add problem
+    addProblem: function() {
+      this.r_query_mode = "add problem"
+    },
+    
+    doAddProblem: async function() {
+      const data = {
+        book: this.book_name,
+        file: this.filename,
+        goal: this.expr_query1,
+        conds: this.cond_query,
+        label: this.selected_item
+      }
+      const response = await axios.post("http://127.0.0.1:5000/api/book-add-problem", JSON.stringify(data))
+      if (response.data.status == 'ok') {
+        this.r_query_mode = undefined
+        this.expr_query1 = ''
+        this.cond_query = []
+        this.filename = ""
+        this.loadBookContent()
+      }
     },
 
     // Select an item
@@ -623,7 +653,7 @@ export default {
 
     // select header 
     selectHeader: function(header_id) {
-      console.log(header_id)
+      console.log("selected header:"+header_id)
       this.selected_item = header_id
       this.r_query_mode = undefined
     },

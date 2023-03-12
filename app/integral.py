@@ -117,6 +117,65 @@ def integral_load_book_content():
     f_data = rec(f_data)
     return jsonify(f_data)
 
+@app.route("/api/book-add-problem", methods=['POST'])
+def book_add_problem():
+    data = json.loads(request.get_data().decode('utf-8'))
+    book_name = data['book']
+    file_name = data['file']
+    label = data['label']
+    goal = integral.parser.parse_expr(data['goal'])
+    conds = list(integral.parser.parse_expr(cond) for cond in data['conds'])
+    # find this file, if this file doesn't exist, then create it.
+    file = compstate.CompFile(book_name, file_name)
+    file_name = os.path.join(dirname, "../examples/" + file_name + '.json')
+    if os.path.exists(file_name):
+        with open(file_name, 'r', encoding='utf-8') as f:
+            problem_content = json.load(f)
+        file = compstate.CompFile(book_name, file_name)
+        for item in problem_content['content']:
+            file.add_item(compstate.parse_item(file, item))
+    file.add_goal(goal, conds=conds)
+    with open(file_name, 'w', encoding='utf-8') as f:
+        json.dump(file.export(), f, indent=4, ensure_ascii=False, sort_keys=True)
+    pos = label.split(".")[:-1]
+
+    # open book, add this item
+    file_name = os.path.join(dirname, "../examples/" + book_name + '.json')
+    # Load raw data
+    with open(file_name, 'r', encoding='utf-8') as f:
+        book_content = json.load(f)
+    if len(pos) == 0:
+        tmp = {}
+        tmp['expr'] = data['goal']
+        tmp['type'] = 'problem'
+        tmp['path'] = file_name
+        book_content['content'].append(tmp)
+    else:
+        pos = [int(i) - 1 for i in pos]
+        pos.reverse()
+
+        # add sub header at locs
+        def rec(content, locs, e, path):
+            res = content
+            if len(locs) == 0:
+                tmp = {}
+                tmp['expr'] = e
+                tmp['type'] = 'problem'
+                tmp['path'] = path
+                res.append(tmp)
+            else:
+                p = locs.pop()
+                res[p]['content'] = rec(content[p]['content'], locs, e, path)
+            return res
+
+        book_content['content'] = rec(book_content['content'], pos, data['goal'], data['file'])
+    with open(file_name, 'w', encoding='utf-8') as f:
+        json.dump(book_content, f, indent=4, ensure_ascii=False, sort_keys=True)
+    res = {
+        "status": "ok",
+    }
+    return res
+
 @app.route("/api/integral-add-header", methods=['POST'])
 def integral_add_header():
     data = json.loads(request.get_data().decode('utf-8'))

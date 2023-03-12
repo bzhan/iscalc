@@ -8,8 +8,8 @@
           <b-dropdown-item href="#" v-on:click="addBook">Add new book</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="deleteBook">Delete books</b-dropdown-item>
           <!-- <b-dropdown-item href="#" v-on:click="saveFile">Save file</b-dropdown-item> -->
-          <!-- <b-dropdown-item href="#" v-on:click="addHeader">Add header</b-dropdown-item>
-          <b-dropdown-item href="#" v-on:click="addFuncDef">Add definition</b-dropdown-item>
+          <b-dropdown-item href="#" v-on:click="addHeader">Add header</b-dropdown-item>
+          <!-- <b-dropdown-item href="#" v-on:click="addFuncDef">Add definition</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="addProblem">Add problem</b-dropdown-item> -->
         </b-nav-item-dropdown>
         <b-nav-item-dropdown text="Proof" left>
@@ -135,6 +135,11 @@
                    v-bind:header_level="1"></BookContent>
     </div>
     <div id="dialog">
+      <div v-if = "r_query_mode === 'add header'">
+        <span class="math-text">Add header:</span><br/>
+        <input v-model="header"/>
+        <button v-on:click="doAddHeader">OK</button>
+      </div>
       <div v-if="r_query_mode === 'add definition'">
         <span class="math-text">Add function definition:</span><br/>
         <ExprQuery v-model="expr_query1"/><br/>
@@ -456,6 +461,9 @@ export default {
       selected_book: [],
       checkVal: false,
       show_delete_book_msg: false,
+
+      // selected header
+      header: "",
     }
   },
 
@@ -618,6 +626,24 @@ export default {
       console.log(header_id)
       this.selected_item = header_id
       this.r_query_mode = undefined
+    },
+
+    // add header
+    addHeader: function(){
+      this.r_query_mode = "add header"
+    },
+    doAddHeader: async function(){
+      
+      const data = {
+          header_name: this.header,
+          book_name: this.book_name,
+          label: this.selected_item
+        }
+        const response = await axios.post("http://127.0.0.1:5000//api/integral-add-header", JSON.stringify(data))
+        if (response.data.status == 'ok') {
+          this.r_query_mode = undefined
+          this.loadBookContent()
+        }
     },
     
     //Delete Books

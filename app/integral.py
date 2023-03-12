@@ -117,6 +117,53 @@ def integral_load_book_content():
     f_data = rec(f_data)
     return jsonify(f_data)
 
+@app.route("/api/integral-add-header", methods=['POST'])
+def integral_add_header():
+    data = json.loads(request.get_data().decode('utf-8'))
+    book_name = data['book_name']
+    label = data['label']
+    name = data['header_name']
+    pos = label.split(".")[:-1]
+    file_name = os.path.join(dirname, "../examples/" + book_name + '.json')
+    # Load raw data
+    with open(file_name, 'r', encoding='utf-8') as f:
+        book_content = json.load(f)
+    if len(pos) == 0:
+        tmp = {}
+        tmp['name'] = name
+        tmp['type'] = 'header'
+        tmp['content'] = []
+        book_content['content'].append(tmp)
+    else:
+        pos = [int(i)-1 for i in pos]
+        pos.reverse()
+        # add sub header at locs
+        def rec(content, locs, n):
+            res = content
+            if len(locs) == 0:
+                tmp = {}
+                tmp['name'] = n
+                tmp['type'] = 'header'
+                tmp['content'] = []
+                res.append(tmp)
+            else:
+                p = locs.pop()
+                try:
+                    res[p]['content']= rec(content[p]['content'], locs, n)
+                    print(res, p, locs, flush=True)
+                except:
+                    print(res, p, locs, flush=True)
+            return res
+        book_content['content'] = rec(book_content['content'], pos, name)
+    with open(file_name, 'w', encoding='utf-8') as f:
+        json.dump(book_content, f, indent=4, ensure_ascii=False, sort_keys=True)
+    res = {
+        "status": "ok",
+    }
+    return res
+
+
+
 @app.route("/api/integral-open-file", methods=['POST'])
 def integral_open_file():
     data = json.loads(request.get_data().decode('utf-8'))

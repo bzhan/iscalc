@@ -7,10 +7,10 @@
         <b-nav-item-dropdown text="File" left>
           <b-dropdown-item href="#" v-on:click="addBook">Add new book</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="deleteBook">Delete books</b-dropdown-item>
-          <b-dropdown-item href="#" v-on:click="saveFile">Save file</b-dropdown-item>
-          <b-dropdown-item href="#" v-on:click="addHeader">Add header</b-dropdown-item>
+          <!-- <b-dropdown-item href="#" v-on:click="saveFile">Save file</b-dropdown-item> -->
+          <!-- <b-dropdown-item href="#" v-on:click="addHeader">Add header</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="addFuncDef">Add definition</b-dropdown-item>
-          <b-dropdown-item href="#" v-on:click="addProblem">Add problem</b-dropdown-item>
+          <b-dropdown-item href="#" v-on:click="addProblem">Add problem</b-dropdown-item> -->
         </b-nav-item-dropdown>
         <b-nav-item-dropdown text="Proof" left>
           <b-dropdown-item href="#" v-on:click="clearItem">Clear</b-dropdown-item>
@@ -129,10 +129,10 @@
     </div>
     <!-- Main panel for showing book content-->
     <div v-if="content.length == 0" id="problem">
-      <div class="book-title">
-      {{book_content.name}}
-      </div>
-      <BookContent v-bind:content="book_content.content" @open_file = 'openFile'></BookContent>
+      <BookContent v-bind:content="book_content" @open_file = 'openFile' 
+                   @select_header = "selectHeader" v-bind:label="''"
+                   v-bind:selected_item="selected_item"
+                   v-bind:header_level="1"></BookContent>
     </div>
     <div id="dialog">
       <div v-if="r_query_mode === 'add definition'">
@@ -611,6 +611,13 @@ export default {
           this.cond_query = []
         }
       }
+    },
+
+    // select header 
+    selectHeader: function(header_id) {
+      console.log(header_id)
+      this.selected_item = header_id
+      this.r_query_mode = undefined
     },
     
     //Delete Books
@@ -1347,20 +1354,6 @@ export default {
 </script>
 
 <style scoped>
-
-.book-title {
-  text-align: center
-}
-
-.book-header1 {
-  font-size: x-large;
-  font-weight: 500;
-}
-
-.book-header2 {
-  font-size: large;
-  font-weight: 500;
-}
 
 #content {
   display: inline-block;

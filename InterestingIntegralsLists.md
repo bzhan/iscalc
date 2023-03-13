@@ -14,6 +14,10 @@ This is the list of integrals which appeared in the textbook *Inside Interesting
 
 #### 1.6 Singularities
 
+- 1.6.1
+
+- [ ]  $\int_0^1 \frac 1 {\left[ax + b(1-x)\right]^2}dx = \frac 1{ab}$ for $ab>0$
+
 - 1.6.2
 
 * [ ]  $\int_0^\infty \frac{1}{x ^ 3 - 1} dx = 0$
@@ -28,7 +32,7 @@ This is the list of integrals which appeared in the textbook *Inside Interesting
 
 - 1.8.1
 
-- [ ]  $\int_0^\infty \frac{\{x\}-\frac{1}{2}}{x} dx = -1 + \ln{\sqrt{2 \pi}}$
+- [ ]  $\int_0^\infty \frac{\left\{x\right\}-\frac{1}{2}}{x} dx = -1 + \ln{\sqrt{2 \pi}}$
 
 #### 1.10 Challenge Problems
 
@@ -55,7 +59,7 @@ This is the list of integrals which appeared in the textbook *Inside Interesting
 
 - 2.1.3
 
-- [X]  $\int_0^\infty \frac{ln{x}}{x^2 + b^2} dx = \frac{\pi}{2b}\ln{b}$ for $b > 0$
+- [X]  $\int_0^\infty \frac{\ln{x}}{x^2 + b^2} dx = \frac{\pi}{2b}\ln{b}$ for $b > 0$
 
 - 2.1.4
 
@@ -89,7 +93,7 @@ This is the list of integrals which appeared in the textbook *Inside Interesting
 
 - 2.2.5
 
-- [X]  $\int_0^a \frac{\ln{(x+a)}}{x^2 + a^2}dx = \frac{\pi}{8a}\ln{(2a^2)}$
+- [X]  $\int_0^a \frac{\ln{(x+a)}}{x^2 + a^2}dx = \frac{\pi}{8a}\ln{(2a^2)}$ for $a > 0$
 
 #### 2.3 Two Old New Tricks
 
@@ -103,7 +107,7 @@ This is the list of integrals which appeared in the textbook *Inside Interesting
 
 - 2.3.3
 
-- [ ]  $\int_0^\infty \frac{1}{x^4 + 2x^2\cos{(2\alpha)}+1}dx = \frac{\pi}{2|\cos{\alpha}|}$ for $\cos{\alpha} \neq 0$
+- [ ]  $\int_0^\infty \frac{1}{x^4 + 2x^2\cos{(2\alpha)}+1}dx = \frac{\pi}{2\left\vert\cos{\alpha}\right\vert}$ for $\cos{\alpha} \neq 0$
 
 - 2.3.4
 
@@ -172,3 +176,196 @@ This is the list of integrals which appeared in the textbook *Inside Interesting
 - C2.5
 
 - [X]  $\int_0^\infty \frac{\ln (1+x)}{x\sqrt x}dx = 2\pi$
+
+### Chapter 3: Feynman’s Favorite Trick
+
+#### 3.1 Leibniz’s Formula
+
+- 3.1.2
+
+- [X]  $\int_0^\infty \frac1{(x^2+a^2)^2}dx = \frac\pi{4a^3}$ for $a>0$
+
+- 3.1.3
+
+- [X]  $\int_0^\infty \frac1{(x^2+a^2)^3}dx = \frac{3\pi}{16a^5}$ for $a > 0$
+
+- 3.1.4
+
+- [ ]  $\int_{-\infty}^\infty e^{-\frac{x^2}2}dx = \sqrt{2\pi}$
+
+- 3.1.5
+
+- [X]  $\int_0^\infty \cos(tx)e^{-\frac{x^2} 2} dx = \sqrt{\frac{\pi} 2}e^{-\frac{t^2}2}$
+
+- 3.1.6
+
+- [ ]  $\int_{-\infty}^{\infty} e^{-\frac{x^2}2}\cos(s+tx)dx = \sqrt{2\pi}e^{-\frac{t^2}2}\cos s$
+
+- 3.1.7
+
+- [X]  $\int_0^\infty \frac{\cos (ax)}{x^2 + b^2}dx = \frac\pi{2b}e^{-ab}$ for $a > 0, b > 0$
+
+- 3.1.8
+
+- [X]  $\int_0^1 \frac{1}{\sqrt{-\ln x}}dx = \sqrt\pi$
+
+#### 3.2 An Amazing Integral
+
+- 3.2.1
+
+- [ ]  $\int_0^\infty \frac{\sin(ax)}x dx = \frac{\pi}2~\mathrm{sgn}(a) $
+
+#### 3.3 Frullani’s Integral
+
+- 3.3.1
+
+- [ ]  $\int_0^\infty \frac{\tan^{-1}(ax)-\tan^{-1}(bx)}x dx = \frac{\pi}2 \ln \frac a b$ for $\frac a b > 0$
+
+- 3.3.3
+
+- [ ]  $\int_0^\infty \frac{e^{-ax} - e^{-bx}}x dx= \ln \frac b a$ for $a > 0, b > 0$
+
+#### 3.4 The Flip-Side of Feynman’s Trick
+
+- 3.4.1
+
+- [ ]  $\int_0^\infty \frac{\cos(ax) - \cos (bx)}{x^2} dx = \frac{\pi}{2} (\left\vert b \right\vert - \left\vert a \right\vert)$
+
+- 3.4.2
+
+- [ ]  $\int_0^\infty \frac{e^{-pt^2}-e^{-qt^2}}{t^2}dt = \sqrt \pi (\sqrt q - \sqrt p)$ for $p >0, q > 0$
+
+- 3.4.3
+
+- [ ]  $\int_0^1 \frac{x^a-1}{\ln x} dx = \ln(a+1)$ for $a > -1$
+
+- 3.4.4
+
+- [ ]  $\int_0^1 \frac{x^a-x^b}{\ln x} dx = \frac{\ln(a+1)}{\ln(b+1)}$ for $a > -1, b > -1$
+
+- 3.4.5
+
+- [ ]  $I(t) = \int_0^\infty e^{-tx}\frac{\cos(ax) - \cos (bx)}{x} dx = \ln\sqrt{\frac{t^2+b^2}{t^2+a^2}}$ for $t> 0$
+
+- 3.4.6
+
+- [ ]  $\int_0^\infty \frac{\cos(ax) - \cos (bx)}{x} dx = \ln\left\vert\frac b a\right\vert$ for $a \neq 0, b \neq0$
+
+- 3.4.7
+
+- [ ]  $\int_0^1 x^a (\ln x)^2 dx = \frac 2{(a+1)^3}$ for $a > -1$
+
+- 3.4.8
+
+- [ ]  $\int_0^\pi \frac1{a+b\cos x} dx = \frac\pi {\sqrt{a^2-b^2}}$ for $a>b\geq 0$
+
+- 3.4.9
+
+- [ ]  $\int_0^\pi \ln{(a+b\cos x)} dx = \pi\ln\frac{a + \sqrt{a^2-b^2}} {2}$ for $a > b \geq 0$
+
+- 3.4.10
+
+- [ ]  $\int_0^\pi \frac{\ln(1+b\cos x)}{\cos{x}}dx = \pi \sin^{-1} b$ for $-1\leq b \leq 1$
+
+#### 3.5 Combining Two Tricks
+
+- Definition 1
+  $I_n = \int_0^{\frac\pi2} \frac1{(a\cos^2 x + b \sin^2 x)^n} dx$ for $n \in \mathbb{N}_+, a>0, b >0$
+
+- [ ]  $I_n = -\frac 1 {n-1}(\frac{\partial I_{n-1}}{\partial a} + \frac{\partial I_{n-1}}{\partial b})$ for $n \in \mathbb{N}_+, n \geq 2$
+
+- 3.5.1
+
+- [ ]  $I_1 = \int_0^{\frac\pi2} \frac1{a\cos^2 x + b \sin^2 x} dx = \frac{\pi}{2\sqrt{ab}}$
+
+- 3.5.2
+
+- [ ]  $I_2 = \int_0^{\frac\pi2} \frac1{(a\cos^2 x + b \sin^2 x)^2} dx = \frac{\pi}{4\sqrt{ab}}(\frac 1 a + \frac 1 b)$
+
+- 3.5.3
+
+- [ ]  $I_3 = \int_0^{\frac\pi2} \frac1{(a\cos^2 x + b \sin^2 x)^3} dx = \frac{\pi}{16\sqrt{ab}}(\frac 3 {a^2} + \frac 3 {b^2} + \frac 2 {ab})$
+
+- Definition 2
+  $I_n(y) = \int_0^y \frac 1 {(x^2+a^2)^n}dx$ for $a > 0, y \geq 0, n\in \mathbb{N}_+$
+- 3.5.4
+
+- [ ]  $I_{n+1}(y) = \frac y {2na^2(y^2+a^2)^n} + \frac{2n-1}{2na^2}I_n(y)$
+
+#### 3.6 Uhler’s Integral and Symbolic Integration
+
+- 3.6.1
+
+- [ ]  $\int_1 ^ \infty \frac{\ln x}{(1+x)^2} dx = \ln 2$
+
+#### 3.7 The Probability Integral Revisited
+
+- 3.7.1
+
+- [ ]  $\int_0^\infty e^{-ax^2-\frac b {x^2}}dx = \frac 1 2 \sqrt{\frac{\pi}{a}}e^{-2\sqrt{ab}}$ for $a > 0, b \geq 0$
+
+#### 3.8 Dini's Integral
+
+- 3.8.1
+
+- [ ]
+
+- $$
+  \int_0^\pi \ln(1-2\alpha\cos x +\alpha^2)dx= 
+  \begin{cases}
+  0\quad \mathrm{for}~\alpha^2<1\\\\
+  \pi\ln\alpha^2\quad\mathrm{for}~\alpha^2>1
+  \end{cases}
+  $$
+
+#### 3.10 Challenge Problems
+
+- C3.1
+
+- [ ]  $\int_0^\infty \frac{\ln(1+a^2x^2)}{b^2+x^2}dx = \pi \frac{\ln(1+ab)}b$ for $a > 0, b>0$
+
+- C3.2
+
+- [ ]  $P.V.\int_{-\infty}^{\infty} \frac{\cos (ax)}{b^2-x^2}dx = \pi \frac{\sin(ab)}b$ for $a > 0, b > 0$
+
+- C3.3
+
+- [ ]  $P.V.\int_{-\infty}^{\infty} \frac{\cos (ax)}{b^4-x^4}dx = \frac{\pi(e^{-ab} + \sin(ab))}{2b^3}$ for $a >0, b >0$
+
+- C3.4
+
+- [ ]  $P.V.\int_{0}^{\infty} \frac{x\sin (ax)}{x^2-b^2}dx = \frac\pi 2 \cos(ab)$ for $a > 0$
+
+- C3.5
+
+- [ ] 
+
+  $$
+  \int_0^\infty \cos(ax)\frac{\sin(bx)}xdx =
+  \begin{cases}
+  \frac\pi2\quad \mathrm{for}~\left\vert a\right\vert < b, b > 0 \\\\
+  0\quad \mathrm{for}~\left\vert a\right\vert > b, b > 0 \\\\
+  \frac\pi4\quad \mathrm{for}~\left\vert a\right\vert = b, b > 0 
+  \end{cases}
+  $$
+
+- C3.6
+
+- [ ]  $\int_{-1}^1 \sqrt\frac{1+x}{1-x}dx=\pi$
+
+- C3.8
+
+- [ ]  $\int_{-\infty}^{\infty} xe^{-x^2-x}dx = -\frac12\sqrt{\pi\sqrt e}$
+- [ ]  $\int_{-\infty}^{\infty} x^2e^{-x^2-x}dx = \frac34\sqrt{\pi\sqrt e}$
+
+- C3.9
+
+- [ ]  $\int_0^\infty \frac{\sin(mx)}{x(x^2+a^2)^2}dx = \frac{\pi}{2a^4}(1-\frac{2+ma}2e^{-am})$ for $a > 0, m>0$
+
+- C3.10
+
+- [ ]  $\int_0^1 \frac x {\left[ax+b(1-x)\right]^3} = \frac 1 {2a^2b}$ for $ab > 0$
+
+### Chapter 4: Gamma and Beta Function Integrals
+
+s

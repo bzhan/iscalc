@@ -183,7 +183,7 @@ def integral_save_file():
     data = json.loads(request.get_data().decode('utf-8'))
     file_name = os.path.join(dirname, "../examples/" + data['filename'] + '.json')
     with open(file_name, 'w', encoding='utf-8') as f:
-        json.dump({"content": data['content']}, f, indent=4, ensure_ascii=False, sort_keys=True)
+        json.dump({"content": data['content'], "name":data['filename']}, f, indent=4, ensure_ascii=False, sort_keys=True)
     return jsonify({
         'status': 'ok'
     })

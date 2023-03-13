@@ -30,15 +30,22 @@ def add_new_book():
     data = json.loads(request.get_data().decode('utf-8'))
     new_book_name = data['new_book_name']
     imports = data['imports']
-    # # load all books
+    # load all books
     file_name = os.path.join(dirname, "../examples/index.json")
     with open(file_name, 'r', encoding='utf-8') as f:
         f_data = json.load(f)
+    if new_book_name in f_data['book_list']:
+        res = {
+            'status': "ok",
+            'book_list': f_data['book_list']
+        }
+        return res
     # add book to book list
     tmp = {
         "content":[],
         "name": new_book_name,
-        "imports": imports
+        "imports": imports,
+        'type':'header'
     }
     with open('../examples/'+new_book_name+'.json', 'w', encoding='utf-8') as f:
         json.dump(tmp, f, indent=4, ensure_ascii=False, sort_keys=True)
@@ -148,7 +155,7 @@ def book_add_problem():
         tmp = {}
         tmp['expr'] = data['goal']
         tmp['type'] = 'problem'
-        tmp['path'] = file_name
+        tmp['path'] = data['file']
         book_content['content'].append(tmp)
     else:
         pos = [int(i) - 1 for i in pos]

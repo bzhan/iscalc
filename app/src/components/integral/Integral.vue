@@ -466,6 +466,9 @@ export default {
       checkVal: false,
       show_delete_book_msg: false,
 
+      // add book
+      new_book_name: "",
+
       // selected header
       header: "",
       selected_header: undefined,
@@ -546,7 +549,11 @@ export default {
 
     // add problem
     addProblem: function() {
-      this.r_query_mode = "add problem"
+      if(this.selected_header !== undefined)
+        this.r_query_mode = "add problem"
+        this.expr_query1 = ''
+        this.cond_query = []
+        this.filename = ""
     },
     
     doAddProblem: async function() {
@@ -555,7 +562,7 @@ export default {
         file: this.filename,
         goal: this.expr_query1,
         conds: this.cond_query,
-        label: this.selected_item
+        label: this.selected_header
       }
       const response = await axios.post("http://127.0.0.1:5000/api/book-add-problem", JSON.stringify(data))
       if (response.data.status == 'ok') {
@@ -674,6 +681,7 @@ export default {
         const response = await axios.post("http://127.0.0.1:5000//api/integral-add-header", JSON.stringify(data))
         if (response.data.status == 'ok') {
           this.r_query_mode = undefined
+          this.header = ""
           this.loadBookContent()
         }
     },
@@ -691,7 +699,6 @@ export default {
     cancelDelete: function(){
       this.show_delete_book_msg = false
       this.r_query_mode = undefined
-      this.content_state = false
     },
     doDeleteBook: async function(){
       const data = {
@@ -701,9 +708,7 @@ export default {
       if (response.data.status == 'ok') {
         this.book_list = response.data.book_list
         this.r_query_mode = undefined
-        this.content_state = false
         this.show_delete_book_msg = false
-        console.log(this.book_list)
       }
     },
     showDeleteDialog: function(){

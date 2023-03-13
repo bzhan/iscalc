@@ -977,3 +977,26 @@ def get_next_step_label(step: Union[Calculation, CalculationStep], label: Label)
         return Label(label.data + [0])
     else:
         raise NotImplementedError
+
+def edit_book(label:str, file_name:str, data:dict):
+    import os,json
+    pos = label.split(".")[:-1]
+    with open(file_name, 'r', encoding='utf-8') as f:
+        book_content = json.load(f)
+    if len(pos) == 0:
+        book_content['content'].append(data)
+    else:
+        pos = [int(i) - 1 for i in pos]
+        pos.reverse()
+        # add sub header at locs
+        def rec(content, locs, d):
+            res = content
+            if len(locs) == 0:
+                res.append(d)
+            else:
+                p = locs.pop()
+                res[p]['content'] = rec(content[p]['content'], locs, d)
+            return res
+        book_content['content'] = rec(book_content['content'], pos, data)
+    with open(file_name, 'w', encoding='utf-8') as f:
+        json.dump(book_content, f, indent=4, ensure_ascii=False, sort_keys=True)

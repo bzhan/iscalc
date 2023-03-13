@@ -2,17 +2,18 @@
   <div>
     <div v-if="content.type === 'header'">
       <div @click="selectHeader(label)" 
-        :class="{selected: selected_item == label, 
+        :class="{selected: selected_header == label, 
                  'header-1': header_level == 1,
                  'header-2': header_level == 2,
                  'header-3': header_level == 3,
                  'header-4': header_level == 4,
-                 'header-5': header_level == 5}" 
-        v-bind:selected_item="selected_item">{{ content.name }}</div>
+                 'header-5': header_level == 5}">{{ content.name }}</div>
       <div v-for="(item, index) in content.content" :key="index">
-        <BookContent  v-bind:content="item" @open_file="openFile" @select_header = "selectHeader" 
+        <BookContent  v-bind:content="item" 
+                      @open_file="openFile" 
+                      @select_header = "selectHeader" 
                       v-bind:label="label+(index+1)+'.'"
-                      v-bind:selected_item="selected_item"
+                      v-bind:selected_header="selected_header"
                       v-bind:header_level="header_level+1"></BookContent>
       </div>
     </div>
@@ -70,9 +71,8 @@
   </div>
 </template>
   
-  <script>
-  import MathEquation from '../util/MathEquation.vue'
-  
+<script>
+import MathEquation from '../util/MathEquation.vue'
 export default {
   name: "BookContent",
   components: {
@@ -81,7 +81,7 @@ export default {
   props: [
     'content',
     'label',
-    'selected_item',
+    'selected_header',
     'header_level',
   ],
   methods: {

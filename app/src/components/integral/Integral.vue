@@ -131,7 +131,7 @@
     <div v-if="content.length == 0" id="problem">
       <BookContent v-bind:content="book_content" @open_file = 'openFile' 
                    @select_header = "selectHeader" v-bind:label="''"
-                   v-bind:selected_item="selected_item"
+                   v-bind:selected_header="selected_header"
                    v-bind:header_level="1"></BookContent>
     </div>
     <div id="dialog">
@@ -356,8 +356,6 @@
           </label><br/>
         </div>
       </div>
-      <div v-if="r_query_mode === 'add header'">
-      </div>
     </div>
   </div>
 </template>
@@ -470,6 +468,7 @@ export default {
 
       // selected header
       header: "",
+      selected_header: undefined,
     }
   },
 
@@ -534,6 +533,8 @@ export default {
       this.content = response.data.content
       this.cur_id = undefined
       this.content_state = true
+      this.selected_header = undefined
+      this.r_query_mode = undefined
     },
 
     initialize: async function (index) {
@@ -654,20 +655,21 @@ export default {
     // select header 
     selectHeader: function(header_id) {
       console.log("selected header:"+header_id)
-      this.selected_item = header_id
+      this.selected_header = header_id
       this.r_query_mode = undefined
     },
 
     // add header
     addHeader: function(){
-      this.r_query_mode = "add header"
+      if(this.selected_header !== undefined)
+        this.r_query_mode = "add header"
     },
+
     doAddHeader: async function(){
-      
       const data = {
           header_name: this.header,
           book_name: this.book_name,
-          label: this.selected_item
+          label: this.selected_header
         }
         const response = await axios.post("http://127.0.0.1:5000//api/integral-add-header", JSON.stringify(data))
         if (response.data.status == 'ok') {

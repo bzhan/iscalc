@@ -130,7 +130,7 @@ def book_add_problem():
     label = data['label']
     goal = integral.parser.parse_expr(data['goal'])
     conds = list(integral.parser.parse_expr(cond) for cond in data['conds'])
-    # find this file, if this file doesn't exist, then create it.
+
     file = compstate.CompFile(book_name, data['file'])
     file_name = os.path.join(dirname, "../examples/" + data['file'] + '.json')
     if os.path.exists(file_name):

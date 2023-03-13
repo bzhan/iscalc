@@ -7,7 +7,7 @@
         <b-nav-item-dropdown text="File" left>
           <b-dropdown-item href="#" v-on:click="addBook">Add new book</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="deleteBook">Delete books</b-dropdown-item>
-          <!-- <b-dropdown-item href="#" v-on:click="saveFile">Save file</b-dropdown-item> -->
+          <b-dropdown-item href="#" v-on:click="saveFile">Save file</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="addHeader">Add header</b-dropdown-item>
           <!-- <b-dropdown-item href="#" v-on:click="addFuncDef">Add definition</b-dropdown-item> -->
           <b-dropdown-item href="#" v-on:click="addProblem">Add problem</b-dropdown-item>
@@ -526,7 +526,16 @@ export default {
         this.last_expr = ""
       }
     },
-
+    saveFile: async function(){
+      const data = {
+        filename: this.filename,
+        content: this.content
+      }
+      const response = await axios.post("http://127.0.0.1:5000/api/integral-save-file", JSON.stringify(data))
+      if(response.data.status === 'ok'){
+        console.log("ok")
+      }
+    },
     openFile: async function (filename) {
       const data = {
         filename: filename

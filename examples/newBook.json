@@ -1,0 +1,14 @@
+{
+    "content": [
+        {
+            "expr": "(INT x:[0,2]. 2*x) = 4",
+            "path": "test",
+            "type": "problem"
+        }
+    ],
+    "imports": [
+        "base"
+    ],
+    "name": "newBook",
+    "type": "header"
+}

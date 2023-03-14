@@ -740,7 +740,7 @@ $$
 
 - C5.8
 
-- [ ]  $\int_0^1\int_0^1...\int_0^1\frac1{1-\prod_{k=1}^n x_k}dx_1dx_2...dx_n =\zeta(n)$
+- [ ]  $\int_0^1\int_0^1...\int_0^1\frac1{1-\prod_{k=1}^n x_k}dx_1dx_2...dx_n =\zeta(n)$ for $n\in \mathbb{N}_+$
 
 - C5.9
 
@@ -779,5 +779,61 @@ $$
 - [ ]  $\int_0^1 x^{x^2} dx = \sum_{k=0}^\infty \frac{(-1)^k}{(2k+1)^{k+1}}$
 
 - 6.1.6
+
+- [ ]  $\int_0^1 x^{\sqrt x}dx = \sum_{k=0}^\infty (-1)^k (\frac 2 {k+2})^{k+1}$
+
+#### 6.2 Ahmed’s Integral
+
+- 6.2.2
+
+- [ ]  $I(u) =\int_0^1 \frac{\tan^{-1} (u\sqrt{2+x^2})}{(1+x^2)\sqrt{2+x^2}}dx$ (Definition)
+
+- 6.2.3
+
+- [ ]  $\lim_{u\rightarrow\infty}I(u) = \frac\pi2\int_0^1\frac1{(1+x^2)\sqrt{2+x^2}}$
+
+- 6.2.4
+
+- [ ]  $\frac{dI}{du} = \frac1{1+u^2}\left[\frac\pi4-\frac u{\sqrt{1+2u^2}}\tan^{-1}(\frac u{\sqrt{1+2u^2}})\right]$
+
+- 6.2.5
+
+- [ ]  $\lim_{u\rightarrow\infty}I(u)-I(1) = \frac{\pi^2}{16}-\int_1^\infty \frac u{(1+u^2)\sqrt{1+2u^2}}\tan^{-1}(\frac u {\sqrt{1+2u^2}})du$
+
+- 6.2.6
+
+- [ ]  $\int_0^1 \frac{\tan^{-1} (\sqrt{2+x^2})}{(1+x^2)\sqrt{2+x^2}}dx = \frac {5\pi^2}{96}$
+
+#### 6.3 Coxeter’s Integral
+
+- 6.3.1
+
+- [ ]  $I = \int_0^\frac\pi 2 \cos^{-1}(\frac{\cos x}{1+2\cos x})dx$
+
+- 6.3.2
+
+- [ ]  $\cos(2\theta) = 2\cos^2\theta-1$
+
+- 6.3.3
+
+- [ ]  $\cos^{-1}(2\theta^2-1)=2\cos^{-1}\theta$
+
+- 6.3.4
+
+- [ ]  $\cos^{-1}(\frac{\cos x }{1+2\cos x}) = 2\cos^{-1} (\sqrt{\frac{1+\frac{\cos x}{1+2\cos x}}2})=2\cos^{-1}(\sqrt{\frac{1+3\cos x}{2+4\cos x}})$
+
+- 6.3.5
+
+- [ ]  $I = 2\int_0^\frac{\pi}2 \tan^{-1} (\sqrt{\frac{1+\cos x}{1+3\cos x}})dx$
+
+- 6.3.6
+
+- [ ]  $I =4\int_0^\frac{\pi}4 \tan^{-1} (\frac{\cos y}{\sqrt{2-3\sin^2 y}})dy$
+
+- 6.3.7
+
+- [ ]  $ I=4\int_0^\frac{\pi}{4} \frac{\cos y}{\sqrt{2-3\sin^2 y}}\int_0^1 \frac1{1+(\frac{\cos^2 y}{2-3\sin^2 y })t^2}dtdy$
+
+- 6.3.8
 
 - [ ]

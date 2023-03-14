@@ -711,7 +711,7 @@ $$
 
 - C5.1
 
-- [ ]  $I(m,n) = \int_0^1 \frac{1-x^m}{1-x^n}dx$ for $m\in\mathbb{N}_+, n\in\mathbb{N}_+$
+- [ ]  $I(m,n) = \int_0^1 \frac{1-x^m}{1-x^n}dx$ for $m\in\mathbb{N}_+, n\in\mathbb{N}_+$ (Definition)
 - [ ]  $I(m,n) = m\sum_{k=0}^\infty \frac1{(kn+1)(kn+m+1)}$ for $m\in\mathbb{N}_+, n\in\mathbb{N}_+$
 
 - C5.2
@@ -808,7 +808,7 @@ $$
 
 - 6.3.1
 
-- [ ]  $I = \int_0^\frac\pi 2 \cos^{-1}(\frac{\cos x}{1+2\cos x})dx$
+- [ ]  $I = \int_0^\frac\pi 2 \cos^{-1}(\frac{\cos x}{1+2\cos x})dx$ (Definition)
 
 - 6.3.2
 
@@ -836,4 +836,26 @@ $$
 
 - 6.3.8
 
-- [ ]
+- [ ]  $ I=4\int_0^\frac{\pi}{4}\int_0^1 \frac{4\cos y \sqrt{2-3\sin^2y}}{(t^2+2)-(t^2+3)\sin^2y}dtdy$
+
+- 6.3.9
+
+- [ ]  $I=\int_0^\frac{\pi}{3}\int_0^1\frac{8\sqrt3\cos^2w}{t^2+(2t^2+6)\cos^2w}dtdw$
+
+- 6.3.10
+
+- [ ]  $I=\int_0^{\sqrt 3}\int_0^1\frac{8\sqrt3}{(1+s^2)(t^2s^2+3t^2+6)}dtds$
+
+- 6.3.11
+
+- [ ]  $I = \int_0^1 \frac{4\sqrt 3}{t^2+3}(\int_0^{\sqrt3} \frac{1}{1+s^2}ds-\int_0^{\sqrt3}\frac{1}{s^2+3+\frac6{t^2}}ds)dt$
+
+- 6.3.12
+
+- [ ]  $I = \frac{2\pi^2}9 -4\int_0^1\frac{t}{(t^2+3)\sqrt{t^2+2}}\tan^{-1}(\frac t{\sqrt{t^2+2}})dt$
+
+- 6.3.13
+
+- [ ]  $\int_0^\frac{\pi}2 \cos^{-1}(\frac{\cos x}{1+2\cos x})dx=\frac{5\pi^2}{24}$
+
+#### 6.4 The Hardy-Schuster Optical Integral

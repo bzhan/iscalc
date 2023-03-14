@@ -9,7 +9,7 @@
           <b-dropdown-item href="#" v-on:click="deleteBook">Delete books</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="saveFile">Save file</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="addHeader">Add header</b-dropdown-item>
-          <!-- <b-dropdown-item href="#" v-on:click="addFuncDef">Add definition</b-dropdown-item> -->
+          <b-dropdown-item href="#" v-on:click="addFuncDef">Add definition</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="addProblem">Add problem</b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item-dropdown text="Proof" left>
@@ -146,10 +146,18 @@
         <div v-for="(cond, index) in cond_query" :key="index">
           <ExprQuery v-bind:value="cond" @input="setCondQuery(index, $event)"/><br/>
         </div>
-        <button v-show="this.filename !== undefined" v-on:click="doAddFuncDef('file')">OK</button>&nbsp;
-        <div v-show="this.filename === undefined && this.book_name !== undefined">
-          <button v-on:click="doAddFuncDef('book')">OK</button>&nbsp;
+        <button v-on:click="doAddFuncDef('file')">OK</button>&nbsp;
+        <button v-on:click="cond_query.push('')">Add condition</button>
+      </div>
+      <div v-if="r_query_mode === 'add definition for book'">
+        <span class="math-text">Add function definition:</span><br/>
+        <ExprQuery v-model="expr_query1"/><br/>
+        <div v-for="(cond, index) in cond_query" :key="index">
+          <ExprQuery v-bind:value="cond" @input="setCondQuery(index, $event)"/><br/>
         </div>
+        <span class="math-text">file name:</span>
+        <input v-model="filename_for_input"/><br/>
+        <button v-on:click="doAddFuncDef('book')">OK</button>&nbsp;
         <button v-on:click="cond_query.push('')">Add condition</button>
       </div>
       <div v-if="r_query_mode === 'add goal' || r_query_mode === 'add problem'">
@@ -161,7 +169,7 @@
         </div>
         <div v-if="r_query_mode === 'add problem'">
           <span class="math-text">file name:</span>
-          <input v-model="filename"/>
+          <input v-model="filename_for_input"/>
         </div>
         <button v-if="r_query_mode === 'add goal'" v-on:click="doAddGoal">OK</button>
         <button v-if="r_query_mode === 'add problem'" v-on:click="doAddProblem">OK</button>&nbsp;
@@ -472,6 +480,9 @@ export default {
       // selected header
       header: "",
       selected_header: undefined,
+      
+      //add problem, definition for book
+      filename_for_input: "",
     }
   },
 
@@ -568,7 +579,7 @@ export default {
     doAddProblem: async function() {
       const data = {
         book: this.book_name,
-        file: this.filename,
+        file: this.filename_for_input,
         goal: this.expr_query1,
         conds: this.cond_query,
         label: this.selected_header
@@ -627,7 +638,14 @@ export default {
 
     // Add function definition
     addFuncDef: function() {
-      this.r_query_mode = 'add definition'
+      if(this.filename === undefined && this.book_name !== undefined  && this.selected_header !== undefined)
+        this.r_query_mode = 'add definition for book'
+      else if(this.filename !== undefined)
+        this.r_query_mode = 'add definition'
+      else
+        this.r_query_mode = undefined
+      this.expr_query1 = ''
+      this.cond_query = []
     },
 
     // Perform add function definition
@@ -655,15 +673,18 @@ export default {
         const data = {
           book: this.book_name,
           eq: this.expr_query1,
+          file: this.filename_for_input,
+          label: this.selected_header,
           conds: this.cond_query,
           for: "book"
         }
         const response = await axios.post("http://127.0.0.1:5000/api/add-function-definition", JSON.stringify(data))
         if (response.data.status == 'ok') {
-          this.content = response.data.state
           this.r_query_mode = undefined
           this.expr_query1 = ''
           this.cond_query = []
+          this.loadBookContent()
+          this.book_name = response.data.book_name
         }
       }
     },

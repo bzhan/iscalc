@@ -126,27 +126,12 @@ def integral_load_book_content():
 @app.route("/api/book-add-problem", methods=['POST'])
 def book_add_problem():
     data = json.loads(request.get_data().decode('utf-8'))
-    book_name = data['book']
-    label = data['label']
+    book_name, label, file = data['book'], data['label'], data['file']
     goal = integral.parser.parse_expr(data['goal'])
     conds = list(integral.parser.parse_expr(cond) for cond in data['conds'])
-
-    file = compstate.CompFile(book_name, data['file'])
-    file_name = os.path.join(dirname, "../examples/" + data['file'] + '.json')
-    if os.path.exists(file_name):
-        with open(file_name, 'r', encoding='utf-8') as f:
-            problem = json.load(f)
-        for item in problem['content']:
-            file.add_item(compstate.parse_item(file, item))
-    file.add_goal(goal, conds=conds)
-    with open(file_name, 'w', encoding='utf-8') as f:
-        json.dump(file.export(), f, indent=4, ensure_ascii=False, sort_keys=True)
-    file_name = os.path.join(dirname, "../examples/" + book_name + '.json')
-    compstate.edit_book(label, file_name, {'expr':data['goal'], 'type':'problem', 'path':data['file']})
-    res = {
-        "status": "ok",
-    }
-    return res
+    compstate.edit_problem_file(book_name, file, {'type': 'goal', 'goal': goal, 'conds': conds})
+    compstate.edit_book(label, book_name, {'expr': data['goal'], 'type': 'problem', 'path': file})
+    return jsonify({"status": "ok"})
 
 @app.route("/api/integral-add-header", methods=['POST'])
 def integral_add_header():
@@ -154,9 +139,7 @@ def integral_add_header():
     book_name = data['book_name']
     label = data['label']
     name = data['header_name']
-    pos = label.split(".")[:-1]
-    file_name = os.path.join(dirname, "../examples/" + book_name + '.json')
-    compstate.edit_book(label, file_name, {'name':name, 'type':'header', 'content':[]})
+    compstate.edit_book(label, book_name, {'name':name, 'type':'header', 'content':[]})
     res = {
         "status": "ok",
     }
@@ -309,15 +292,14 @@ def query_identities():
 @app.route("/api/add-function-definition", methods=['POST'])
 def add_function_definition():
     data = json.loads(request.get_data().decode('UTF-8'))
+    book_name = data['book']
     forSomething = data['for']
+    eq = integral.parser.parse_expr(data['eq'])
+    conds = list(integral.parser.parse_expr(cond) for cond in data['conds'])
     if forSomething == 'file':
-        book_name = data['book']
-        filename = data['file']
-        file = compstate.CompFile(book_name, filename)
+        file = compstate.CompFile(book_name, data['file'])
         for item in data['content']:
             file.add_item(compstate.parse_item(file, item))
-        eq = integral.parser.parse_expr(data['eq'])
-        conds = list(integral.parser.parse_expr(cond) for cond in data['conds'])
         file.add_definition(eq, conds=conds)
         return jsonify({
             "status": "ok",
@@ -325,9 +307,24 @@ def add_function_definition():
             "selected_item": str(compstate.Label(""))
         })
     elif forSomething == 'book':
-        book_name = data['book']
-        eq = integral.parser.parse_expr(data['eq'])
-        conds = list(integral.parser.parse_expr(cond) for cond in data['conds'])
+        label = data['label']
+        imported = {
+            'type': 'definition',
+            'eq': eq,
+            'conds': conds
+        }
+        compstate.edit_problem_file(book_name, data['file'], imported)
+        fun_def = {
+            'type': 'definition',
+            'expr': data['eq'],
+            'path': data['file'],
+            'conds': data['conds'] if 'conds' in data else []
+        }
+        compstate.edit_book(label, book_name, fun_def)
+        return jsonify({
+            "status": "ok",
+            "book_name": book_name
+        })
         
 
 

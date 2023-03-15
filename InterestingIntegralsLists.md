@@ -896,7 +896,7 @@ $$
 - [ ]  $f(x) = \frac x {x^n + 1} - \frac 1 {\sum_{k=0}^{n-1} x^k}$ for $n\in \mathbb{N}_+, n \geq 3$ (Definition)
 - [ ]  $\int_0^\infty f(x)dx=0$
 
-#### Chapter 7: Using $\sqrt {-1}$ to Evaluate Integrals
+### Chapter 7: Using $\sqrt {-1}$ to Evaluate Integrals
 
 #### 7.1 Euler's Formula
 

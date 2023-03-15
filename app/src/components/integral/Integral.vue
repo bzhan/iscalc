@@ -11,6 +11,7 @@
           <b-dropdown-item href="#" v-on:click="addHeader">Add header</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="addFuncDef">Add definition</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="addProblem">Add problem</b-dropdown-item>
+          <b-dropdown-item href="#" v-on:click="addLemma">Add lemma</b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item-dropdown text="Proof" left>
           <b-dropdown-item href="#" v-on:click="clearItem">Clear</b-dropdown-item>
@@ -130,11 +131,38 @@
     <!-- Main panel for showing book content-->
     <div v-if="content.length == 0" id="problem">
       <BookContent v-bind:content="book_content" @open_file = 'openFile' 
+                   @select_table = 'selectTable'
                    @select_header = "selectHeader" v-bind:label="''"
                    v-bind:selected_header="selected_header"
+                   v-bind:selected_table="selected_table"
                    v-bind:header_level="1"></BookContent>
     </div>
     <div id="dialog">
+      <div v-if = "r_query_mode === 'add lemma'">
+        <span class="math-text">Add lemma:</span><br/>
+        <span class="math-text">type:</span>&nbsp;
+        <select v-model="lemma_type">
+          <option v-for="(type, index) in lemma_types" :key="index">{{ type }}</option>
+        </select>
+        <div v-if="lemma_type !== 'table'">
+          <span class="math-text">category:</span>&nbsp;
+          <select v-model="lemma_category">
+            <option v-for="(category, index) in lemma_categories" :key="index">{{ category }}</option>
+          </select>
+          <ExprQuery v-model="expr_query1"/><br/>
+          <div v-for="(cond, index) in cond_query" :key="index">
+            <ExprQuery v-bind:value="cond" @input="setCondQuery(index, $event)"/><br/>
+          </div>
+          <span class="math-text">reference:</span>&nbsp;
+          <input v-model="msg"/><br/>
+          <button v-on:click="doAddLemma">OK</button>&nbsp;
+          <button v-on:click="cond_query.push('')">Add condition</button>
+        </div>
+        <div v-if="lemma_type === 'table'">
+          input function name, function argument, function values<br/>
+          <button v-on:click="doAddLemma">OK</button>
+        </div>
+      </div>
       <div v-if = "r_query_mode === 'add header'">
         <span class="math-text">Add header:</span><br/>
         <input v-model="header"/>
@@ -156,7 +184,7 @@
           <ExprQuery v-bind:value="cond" @input="setCondQuery(index, $event)"/><br/>
         </div>
         <span class="math-text">file name:</span>
-        <input v-model="filename_for_input"/><br/>
+        <input v-model="msg"/><br/>
         <button v-on:click="doAddFuncDef('book')">OK</button>&nbsp;
         <button v-on:click="cond_query.push('')">Add condition</button>
       </div>
@@ -169,7 +197,7 @@
         </div>
         <div v-if="r_query_mode === 'add problem'">
           <span class="math-text">file name:</span>
-          <input v-model="filename_for_input"/>
+          <input v-model="msg"/>
         </div>
         <button v-if="r_query_mode === 'add goal'" v-on:click="doAddGoal">OK</button>
         <button v-if="r_query_mode === 'add problem'" v-on:click="doAddProblem">OK</button>&nbsp;
@@ -358,9 +386,17 @@
         <span class="math-text">select books to delete:</span><br/>
       </div>
       <div v-if="r_query_mode === 'add book' || r_query_mode === 'delete book'">
-        <div v-for=" (name,i) in book_list" v-bind:key=name style="margin:5px 10px">
-          <label :for="'book_'+name" @change="selectBook(name)">
+        <div v-for="(name,i) in book_list" :key="i" style="margin:5px 10px">
+          <label :for="'book_'+name" @change="selectBook(i, name)">
               <input type="checkbox" :id="'book_'+name" v-model="checkVal[i]">{{name}}
+          </label><br/>
+        </div>
+      </div>
+      <div v-if="r_query_mode === 'add lemma' && lemma_type !== 'table'">
+        <span class="math-text">lemma's attributes</span>
+        <div v-for="(attr, i) in lemma_attributes" :key="i" style="margin:5px 10px">
+          <label :for="'attribute_'+attr" @change="selectAttribute(i, attr)">
+              <input type="checkbox" :id="'attribute_'+attr" v-model="checkVal[i]">{{attr}}
           </label><br/>
         </div>
       </div>
@@ -471,7 +507,7 @@ export default {
 
       // Selected book
       selected_book: [],
-      checkVal: false,
+      checkVal: [],
       show_delete_book_msg: false,
 
       // add book
@@ -482,7 +518,16 @@ export default {
       selected_header: undefined,
       
       //add problem, definition for book
-      filename_for_input: "",
+      msg: "",
+
+      //add lemma
+      lemma_types: ['inequality', 'axiom', 'table', 'unknown'],
+      lemma_categories: ['trigonometric', 'exp-log', 'power', 'binomial', 'unknown'],
+      lemma_attributes: ['simplify', 'bidirectional'],
+      lemma_type: undefined,
+      lemma_category: undefined,
+      selected_lemma_attributes: [],
+      selected_table: undefined
     }
   },
 
@@ -566,6 +611,60 @@ export default {
       this.selected_item = undefined
       this.selected_facts = {}
     },
+    // add lemma
+    addLemma: function() {
+      if(this.selected_header === undefined)
+        return
+      this.r_query_mode = "add lemma"
+      this.checkVal = []
+      for(let i=0;i < this.lemma_attributes.lenth; i++){
+        this.checkVal.add(false)
+      }
+      this.lemma_type = 'axiom'
+      this.lemma_category = 'unknown'
+      this.msg = ""
+      this.selected_lemma_attributes = []
+      this.cond_query = []
+      this.expr_query1 = "" 
+      this.func_table_name = ""
+      this.func_table = []
+    },
+    doAddLemma: async function(){
+      const data = {
+        lemma_type: this.lemma_type,
+        book_name: this.book_name,
+        lemma_category: this.lemma_category,
+        reference: this.msg,
+        lemma_attributes: this.selected_lemma_attributes,
+        expr: this.expr_query1,
+        conds: this.cond_query,
+        table: this.func_table,
+        table_name: this.func_table_name,
+        label: this.selected_header,
+      }
+      const response = await axios.post("http://127.0.0.1:5000/api/book-add-lemma", JSON.stringify(data))
+      if (response.data.status == 'ok') {
+        this.r_query_mode = undefined
+        this.expr_query1 = ''
+        this.cond_query = []
+        this.msg = ""
+        this.loadBookContent()
+        this.book_name = response.data.book_name
+      }
+    },
+    selectAttribute: function(i, attr) {
+      if(this.checkVal[i]&&!this.selected_lemma_attributes.includes(attr)){
+        this.selected_lemma_attributes.push(attr)
+      }else if(!this.checkVal[i]&&this.selected_lemma_attributes.includes(attr)){
+        this.selected_lemma_attributes.splice(this.selected_lemma_attributes.findIndex(j => j==attr))
+      }
+      console.log(this.selected_lemma_attributes)
+    },
+    selectTable: function(content, label) {
+      this.selected_table = label
+      console.log(content)
+      console.log(label)
+    },
 
     // add problem
     addProblem: function() {
@@ -579,7 +678,7 @@ export default {
     doAddProblem: async function() {
       const data = {
         book: this.book_name,
-        file: this.filename_for_input,
+        file: this.msg,
         goal: this.expr_query1,
         conds: this.cond_query,
         label: this.selected_header
@@ -673,7 +772,7 @@ export default {
         const data = {
           book: this.book_name,
           eq: this.expr_query1,
-          file: this.filename_for_input,
+          file: this.msg,
           label: this.selected_header,
           conds: this.cond_query,
           for: "book"
@@ -745,12 +844,13 @@ export default {
       this.show_delete_book_msg = true
     },
 
-    selectBook: function(book_name){
-      if(this.checkVal&&!this.selected_book.includes(book_name)){
+    selectBook: function(i, book_name){
+      if(this.checkVal[i]&&!this.selected_book.includes(book_name)){
         this.selected_book.push(book_name)
-      }else if(!this.checkVal&&this.selected_book.includes(book_name)){
-        this.selected_book.splice(this.selected_book.findIndex(i => i==book_name))
+      }if(!this.checkVal[i]&&this.selected_book.includes(book_name)){
+        this.selected_book.splice(this.selected_book.findIndex(j => j==book_name))
       }
+      console.log(this.selected_book)
     },
 
     // Add book
@@ -758,7 +858,7 @@ export default {
       this.r_query_mode = 'add book'
       this.selected_book = []
       this.checkVal = []
-      for(let i=0;i <= this.book_list.lenth; i++){
+      for(let i=0;i < this.book_list.lenth; i++){
         this.checkVal.add(false)
       }
     },

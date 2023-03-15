@@ -12,8 +12,10 @@
         <BookContent  v-bind:content="item" 
                       @open_file="openFile" 
                       @select_header = "selectHeader" 
+                      @select_table = "selectTable"
                       v-bind:label="label+(index+1)+'.'"
                       v-bind:selected_header="selected_header"
+                      v-bind:selected_table="selected_table"
                       v-bind:header_level="header_level+1"></BookContent>
       </div>
     </div>
@@ -35,7 +37,7 @@
           </span>
         </span>
       </div>
-      <div v-if="content.type == 'axiom'">
+      <div v-if="content.type == 'axiom' || content.type == 'inequality'">
         <MathEquation v-bind:data="'\\(' + content.latex_str + '\\)'" class="indented-text"/>
         <span v-if="'latex_conds' in content && content.latex_conds.length > 0">
           <span class="math-text indented-text">for &nbsp;</span>
@@ -45,8 +47,9 @@
           </span>
         </span>
       </div>
-      <div v-if="content.type == 'table'" style="margin: 5px">
-        <table style="border-collapse: collapse">
+      <div :class="{selected_table: selected_table == label}" 
+           v-if="content.type == 'table'" style="margin: 5px">
+        <table style="border-collapse: collapse" @click="selectTable(content, label)">
           <tr>
             <td style="border-style: solid; padding: 3px">
               <MathEquation v-bind:data="'\\(' + '{x}' + '\\)'"/>
@@ -83,6 +86,7 @@ export default {
     'label',
     'selected_header',
     'header_level',
+    'selected_table'
   ],
   methods: {
     openFile: function(name){
@@ -90,6 +94,9 @@ export default {
     },
     selectHeader: function(label) {
       this.$emit('select_header', label)
+    },
+    selectTable: function(content, label) {
+      this.$emit('select_table', content, label)
     }
   }
 }
@@ -120,6 +127,10 @@ export default {
 .header-5 {
   font-size: small;
   font-weight: 500;
+}
+
+.selected_table{
+  background-color: aqua;
 }
 </style>
   

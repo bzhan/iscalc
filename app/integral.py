@@ -123,6 +123,27 @@ def integral_load_book_content():
     f_data = rec(f_data)
     return jsonify(f_data)
 
+@app.route("/api/book-add-lemma", methods=['POST'])
+def book_add_lemma():
+    data = json.loads(request.get_data().decode('utf-8'))
+    label, book_name, lemma_type = data['label'], data['book_name'], data['lemma_type']
+    if type != 'table':
+        item = {
+            'type': lemma_type,
+            'attributes': data['lemma_attributes'],
+            'category': data['lemma_category'],
+            'expr': data['expr'],
+            'conds': data['conds'],
+            'reference': data['reference']
+        }
+        compstate.edit_book(label, book_name, item)
+        return jsonify({
+            "status": "ok",
+            "book_name": book_name
+        })
+    else:
+        pass
+
 @app.route("/api/book-add-problem", methods=['POST'])
 def book_add_problem():
     data = json.loads(request.get_data().decode('utf-8'))
@@ -144,8 +165,6 @@ def integral_add_header():
         "status": "ok",
     }
     return res
-
-
 
 @app.route("/api/integral-open-file", methods=['POST'])
 def integral_open_file():
@@ -325,8 +344,6 @@ def add_function_definition():
             "status": "ok",
             "book_name": book_name
         })
-        
-
 
 @app.route("/api/add-goal", methods=["POST"])
 def add_goal():

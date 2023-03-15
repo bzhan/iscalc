@@ -42,7 +42,7 @@ class Label:
     def __str__(self):
         res = ""
         for n in self.data:
-            res += str(n+1) + "."
+            res += str(n + 1) + "."
         return res
 
 
@@ -169,7 +169,7 @@ class Goal(StateItem):
 
     def __eq__(self, other):
         return isinstance(other, Goal) and self.goal == other.goal and self.conds == other.conds and \
-            self.proof == other.proof
+               self.proof == other.proof
 
     def is_finished(self):
         return self.proof is not None and self.proof.is_finished()
@@ -195,7 +195,7 @@ class Goal(StateItem):
 
     def export_book(self):
         p = self.parent
-        while(not isinstance(p, CompFile)):
+        while (not isinstance(p, CompFile)):
             p = p.parent
         res = {
             "type": "problem",
@@ -271,7 +271,7 @@ class CalculationStep(StateItem):
 
     def perform_rule(self, rule: Rule):
         self.parent.perform_rule(rule, self.id)
-    
+
     def perform_rules(self, calc_rules: tuple[Rule]):
         self.parent.perform_rules(calc_rules, self.id)
 
@@ -285,7 +285,7 @@ class Calculation(StateItem):
 
     """
     def __init__(self, parent, ctx: Context, start: Expr, *,
-                 connection_symbol = '=', conds: Optional[Conditions] = None):
+                 connection_symbol='=', conds: Optional[Conditions] = None):
         self.parent = parent
         self.start = start
         self.steps: List[CalculationStep] = []
@@ -335,7 +335,7 @@ class Calculation(StateItem):
         """Perform the given rule on the current expression."""
         if id is not None:
             # Cut off later steps
-            self.steps = self.steps[:id+1]
+            self.steps = self.steps[:id + 1]
         else:
             id = len(self.steps) - 1
 
@@ -346,9 +346,9 @@ class Calculation(StateItem):
                 ctx.add_subst(var, subst_e)
                 ctx.add_condition(expr.Op("=", expr.Var(var), subst_e))
         new_e = rule.eval(e, ctx)
-        self.add_step(CalculationStep(self, rule, new_e, id+1))
+        self.add_step(CalculationStep(self, rule, new_e, id + 1))
 
-    def perform_rules(self, calc_rules : tuple[Rule], id : Optional[int] = None):
+    def perform_rules(self, calc_rules: tuple[Rule], id: Optional[int] = None):
         for rule in calc_rules:
             self.perform_rule(rule)
 
@@ -392,7 +392,7 @@ class CalculationProof(StateItem):
             if calc.steps:
                 res += str(calc)
         return res
-    
+
     @property
     def lhs_calc(self) -> Calculation:
         assert self.goal.is_compare()
@@ -572,7 +572,7 @@ class CaseProof(StateItem):
         else:
             res = "Proof by cases\n"
         for i, case in enumerate(self.cases):
-            res += "case%d: %s for %s\n" % (i+1, case.goal, case.conds)
+            res += "case%d: %s for %s\n" % (i + 1, case.goal, case.conds)
             res += str(case)
         return res
 
@@ -990,7 +990,7 @@ def edit_book(label:str, book_name:str, data:dict):
     else:
         pos = [int(i) - 1 for i in pos]
         pos.reverse()
-        # add sub header at locs
+
         def rec(content, locs, d):
             res = content
             if len(locs) == 0:
@@ -999,11 +999,13 @@ def edit_book(label:str, book_name:str, data:dict):
                 p = locs.pop()
                 res[p]['content'] = rec(content[p]['content'], locs, d)
             return res
+
         book_content['content'] = rec(book_content['content'], pos, data)
     with open(book_path, 'w', encoding='utf-8') as f:
         json.dump(book_content, f, indent=4, ensure_ascii=False, sort_keys=True)
 
-def edit_problem_file(book_name:str, name:str, imported:dict):
+
+def edit_problem_file(book_name: str, name: str, imported: dict):
     file = CompFile(book_name, name)
     file_path = os.path.join(dirname, "../examples/" + name + '.json')
     if os.path.exists(file_path):
@@ -1014,6 +1016,6 @@ def edit_problem_file(book_name:str, name:str, imported:dict):
     if imported['type'] == 'goal':
         file.add_goal(imported['goal'], conds=imported['conds'])
     elif imported['type'] == 'definition':
-        file.add_definition(imported['eq'], conds = imported['conds'])
+        file.add_definition(imported['eq'], conds=imported['conds'])
     with open(file_path, 'w', encoding='utf-8') as f:
         json.dump(file.export(), f, indent=4, ensure_ascii=False, sort_keys=True)

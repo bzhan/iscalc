@@ -859,3 +859,107 @@ $$
 - [ ]  $\int_0^\frac{\pi}2 \cos^{-1}(\frac{\cos x}{1+2\cos x})dx=\frac{5\pi^2}{24}$
 
 #### 6.4 The Hardy-Schuster Optical Integral
+
+- 6.4.1
+
+- [ ]  $J =\int_0^\infty \left[C^2(x)+S^2(x)\right]dx$ (Definition)
+- [ ]  $C(x) = \int_x^\infty \cos(t^2)dt$
+- [ ]  $S(x) = \int_x^\infty \sin(t^2)dt$
+
+- 6.4.3
+
+- [ ]  $J =\int_0^\infty \int_x^\infty \int_x^\infty \cos(t^2-u^2)dtdudx$
+
+- 6.4.4
+
+- [ ]  $f(t, u) = \cos(t^2-u^2)$ (Definition)
+- [ ]  $J =\int_0^\infty \int_x^\infty \int_x^\infty f(t,u)dtdudx$
+
+- 6.4.7
+
+- [ ]  $\int_0^\infty \int_x^\infty \int_x^\infty \cos(t^2-u^2)dtdudx = \frac12\sqrt\frac\pi2$
+
+#### 6.5 The Watson/van Peype Triple Integrals
+
+- 6.5.1
+
+- [ ]  $\frac1{\pi^3}\int_0^\pi\int_0^\pi\int_0^\pi\frac1{1-\cos u \cos v \cos w}dudvdw =\frac{\Gamma^4(\frac14)}{4\pi^3}$
+
+#### 6.7 Challenge Problems
+
+- C6.1
+
+- [ ]  $\int_0^\frac{\pi}2\cos^{-1}(\frac1{1+2\cos x})dx = \frac{\pi^2}6$
+
+- C6.2
+
+- [ ]  $f(x) = \frac x {x^n + 1} - \frac 1 {\sum_{k=0}^{n-1} x^k}$ for $n\in \mathbb{N}_+, n \geq 3$ (Definition)
+- [ ]  $\int_0^\infty f(x)dx=0$
+
+#### Chapter 7: Using $\sqrt {-1}$ to Evaluate Integrals
+
+#### 7.1 Euler's Formula
+
+- 7.1.1
+
+- [ ]  $e^{ibx} = \cos bx + i\sin bx$
+
+- 7.1.2
+
+- [ ]  $\int_0^\infty \sin(bx)e^{-xy}dx=\frac b{y^2+b^2}$ for $y >0$
+
+#### 7.2 The Fresnel Integrals
+
+- 7.2.1
+
+- [ ]  $\int_0^\infty \cos x^2 dx =\frac12\sqrt\frac\pi 2$
+
+- 7,2.2
+
+- [ ]  $\int_0^\infty \sin x^2 dx =\frac12\sqrt\frac\pi 2$
+
+- 7.2.3
+
+- [ ]  $\int_0^\infty e^{ix^2}dx =\frac12\sqrt{\frac\pi2}(1+i)$
+
+#### 7.3 $\zeta(3)$ and More Log-Sine Integrals
+
+- 7.3.1
+
+- [ ]  $\int_0^\frac\pi2x\ln(\sin x)dx =\frac7{16}\zeta(3)-\frac{\pi^2}8\ln2$
+
+- 7.3.2
+
+- [ ]  $\int_0^\frac\pi2\ln^2(a\sin\theta)d\theta=\int_0^\frac\pi2\ln^2(a\cos\theta)d\theta=\frac{\pi^3}{24}+\frac\pi6\left[\ln^2 (\frac2a) -2\ln(\frac2a)\ln (\frac a2)\right]$ for $a>0$
+
+- 7.3.3
+
+- [ ]  $\int_0^\frac\pi2\ln(a\sin\theta)\ln(a\cos\theta)d\theta=\frac\pi6\left[\ln^2 (\frac2a) -2\ln(\frac2a)\ln (\frac a2)\right]-\frac{\pi^3}{48}$ fot $a >0$
+
+#### 7.4 $\zeta(2)$, At Last!
+
+- [ ]  $\zeta(2) = (\frac4\pi)(\frac{\pi^3}{24})=\frac{\pi^2}6$
+
+#### 7.5 The Probability Integral *Again*
+
+- 7.5.1
+
+- [X]  $\int_0^\infty e^{-x^2}dx =\frac12 \sqrt\pi$ (Reference)
+
+- 7.5.2
+
+- [ ]  $\int_0^\infty \frac{\cos x}{\sqrt x}dx = \int_0^\infty \frac{\sin x}{\sqrt x}dx = \sqrt\frac\pi2$
+
+#### 7.6 Beyond Dirichlet’s Integral
+
+- 7.6.1
+
+- [ ]  $\int_0^\infty (\frac{\sin x}x)^2 dx =\frac\pi2$
+
+- 7.6.2
+
+- [ ]  $\int_0^\infty (\frac{\sin x}x)^3 dx =\frac{3\pi}8$
+
+- 7.6.3
+
+- [ ]  $\sin^{2n-1} x =\frac{(-1)^{n-1}}{2^{2n-1}}\sum_{r=0}^{n-1}(-1)^r\binom{2n-1}{r}2\sin\left[(2n-2r-1)x\right]$ for $n \in \mathbb{N}_+$

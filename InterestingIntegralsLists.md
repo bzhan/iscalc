@@ -963,3 +963,35 @@ $$
 - 7.6.3
 
 - [ ]  $\sin^{2n-1} x =\frac{(-1)^{n-1}}{2^{2n-1}}\sum_{r=0}^{n-1}(-1)^r\binom{2n-1}{r}2\sin\left[(2n-2r-1)x\right]$ for $n \in \mathbb{N}_+$
+
+- 7.6.4
+
+- [ ]  $\int_0^\infty \frac{\sin^{2n-1} x}xdx =\frac\pi{2^{2n-1}}\binom{2n-2}{n-1}$ for $n\in\mathbb{N}_+$
+
+- 7.6.5
+
+- [ ]  $\int_0^\infty \frac{\sin^{2n-1} x\cos x}xdx =\frac\pi{2^{2n}n}\binom{2n-2}{n-1}$ for $n\in\mathbb{N}_+$
+
+- 7.6.6
+
+- [ ]  $\int_0^\infty \frac{\sin^{2n} x}{x^2}dx=\int_0^\infty \frac{\sin^{2n-1} x}xdx =\frac\pi{2^{2n-1}}\binom{2n-2}{n-1}$ for $n\in\mathbb{N}_+$
+
+#### 7.7 Dirichlet Meets the Gamma Function
+
+- 7.7.1
+
+- [ ]  $\int_0^\infty \frac{\sin^p x}{x^q}dx = \frac{p!}{(q-1)!}\int_0^\infty \frac{u^{q-2}}{\prod_{k=1}^{\frac p 2}\left[u^2+(2k)^2\right]}du$ for $ p $ is even, $q>0$
+
+- 7.7.2
+
+- [ ]  $\int_0^\infty \frac{\sin^p x}{x^q}dx = \frac{p!}{(q-1)!}\int_0^\infty \frac{u^{q-1}}{\prod_{k=0}^{\frac {p-1} 2}\left[u^2+(2k+1)^2\right]}du$ for $ p $ is odd, $q>0$
+
+- 7.7.3
+
+- [ ]  $\int_0^\infty (\frac{\sin x}x)^4dx =\frac\pi3$
+
+- 7.7.4
+
+- [ ]  $\int_0^\infty \frac{\sin^3 x}{x^2}dx =\frac{3\ln 3}4$
+
+#### 7.8 Fourier Transforms and Energy Integrals

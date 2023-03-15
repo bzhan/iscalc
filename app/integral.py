@@ -127,7 +127,7 @@ def integral_load_book_content():
 def book_add_lemma():
     data = json.loads(request.get_data().decode('utf-8'))
     label, book_name, lemma_type = data['label'], data['book_name'], data['lemma_type']
-    if type != 'table':
+    if lemma_type != 'table':
         item = {
             'type': lemma_type,
             'attributes': data['lemma_attributes'],
@@ -136,13 +136,18 @@ def book_add_lemma():
             'conds': data['conds'],
             'reference': data['reference']
         }
-        compstate.edit_book(label, book_name, item)
-        return jsonify({
-            "status": "ok",
-            "book_name": book_name
-        })
     else:
-        pass
+        table = data['table']
+        item = {
+            'type': lemma_type,
+            'name': data['table_name'],
+            'table': dict(zip(table['args'], table['values']))
+        }
+    compstate.edit_book(label, book_name, item)
+    return jsonify({
+        "status": "ok",
+        "book_name": book_name
+    })
 
 @app.route("/api/book-add-problem", methods=['POST'])
 def book_add_problem():

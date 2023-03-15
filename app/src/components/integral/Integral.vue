@@ -159,8 +159,16 @@
           <button v-on:click="cond_query.push('')">Add condition</button>
         </div>
         <div v-if="lemma_type === 'table'">
-          input function name, function argument, function values<br/>
-          <button v-on:click="doAddLemma">OK</button>
+          <span class="math-text">function name:</span>&nbsp;
+          <input v-model="func_table_name"/>
+          <div v-for="(arg, i) in func_table['args']" :key="i">
+            <span class="math-text">argument:</span>&nbsp;
+            <ExprQuery v-bind:value="arg" @input="setFunArg(i, $event)"></ExprQuery>
+            <span class="math-text">value:</span>&nbsp;
+            <ExprQuery v-bind:value="func_table['values'][i]" @input="setFunVal(i, $event)"></ExprQuery>
+          </div><br/>
+          <button v-on:click="doAddLemma">OK</button>&nbsp;
+          <button v-on:click="func_table['args'].push('');func_table['values'].push('');">add item</button>
         </div>
       </div>
       <div v-if = "r_query_mode === 'add header'">
@@ -527,7 +535,9 @@ export default {
       lemma_type: undefined,
       lemma_category: undefined,
       selected_lemma_attributes: [],
-      selected_table: undefined
+      selected_table: undefined,
+      func_table: {args:[], values:[]},
+      func_table_name: "",
     }
   },
 
@@ -583,6 +593,8 @@ export default {
       }
     },
     saveFile: async function(){
+      if (this.fileanme === undefined)
+        return
       const data = {
         filename: this.filename,
         content: this.content
@@ -627,7 +639,7 @@ export default {
       this.cond_query = []
       this.expr_query1 = "" 
       this.func_table_name = ""
-      this.func_table = []
+      this.func_table = {args:[], values:[]}
     },
     doAddLemma: async function(){
       const data = {
@@ -730,7 +742,12 @@ export default {
         }
       }
     },
-
+    setFunArg: function(index, value) {
+      this.$set(this.func_table['args'], index, value)
+    },
+    setFunVal: function(index, value) {
+      this.$set(this.func_table['values'], index, value)
+    },
     setCondQuery: function(index, value) {
       this.$set(this.cond_query, index, value)
     },

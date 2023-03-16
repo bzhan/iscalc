@@ -4,6 +4,8 @@ This is the list of integrals which appeared in the textbook *Inside Interesting
 
 ## All Integrals
 
+In fact, not all the formulas below are integrals.
+
 ### Chapter 1: Introduction
 
 #### 1.5 Some examples of tricks
@@ -44,6 +46,10 @@ This is the list of integrals which appeared in the textbook *Inside Interesting
 - C1.2
 
 * [ ]  $\int_0^\infty \frac{1}{\sqrt{x^3 - 1}} dx < 4 $
+
+- C1.5
+
+- [ ]  $\int_0^\frac\pi3 \frac1{\cos \theta}d\theta = \ln(2+\sqrt3)$
 
 ### Chapter 2: 'Easy' Integrals
 
@@ -310,7 +316,7 @@ This is the list of integrals which appeared in the textbook *Inside Interesting
 
 - 3.8.1
 
-- [ ] 
+- [ ]
 
   $$
   \int_0^\pi \ln(1-2\alpha\cos x +\alpha^2)dx= 
@@ -520,6 +526,16 @@ $$
 
 - [ ]  $\int_0^\infty \frac{e^{-rx}\cos(px) - e^{-sx}\cos(qx)}xdx=\frac12\ln\frac{q^2+s^2}{p^2+r^2}$ for $(q^2 + s^2)(p^2+r^2)\neq0$
 
+#### 4.4 The Gamma Function Meets Physics
+
+- 4.4.1
+
+- [ ]  $-\frac k {y^{p+1}} = mv\frac{dv}{dy}$
+
+- 4.4.2
+
+- [ ]  $T = a^{\frac p2 +1}\sqrt{\frac {m\pi}{2kp}}\frac{\Gamma(\frac1p+\frac12)}{\Gamma{(\frac1p+1)}}$ for $p>0$
+
 #### 4.5 Challenge Problems
 
 - C4.1
@@ -548,6 +564,10 @@ $$
 - C4.6
 
 - [ ]  $\int_0^\infty \frac{x^a}{(1+x^b)^c}dx = \frac{\Gamma(\frac{1+a}b)\Gamma(c-\frac{1+a}b)}{b\Gamma(c)}$ for $a > -1, b > 0, c > \frac{1+a}{b}$
+
+- C4.7
+
+- [ ]  $T=a\sqrt\frac{m\pi}{2k}$
 
 - C4.9
 
@@ -653,7 +673,7 @@ $$
 
 - Definition 1
 
-- [ ]  $\gamma(n) = \sum_{k=1}^n (\frac1k -\ln n)$ for $n \in \mathbb{N}_+$
+- [ ]  $\gamma(n) = \sum_{k=1}^n (\frac1k -\ln n)$ for $n \in \mathbb{N}_+$ (Definition)
 
 - 5.4.1
 
@@ -863,8 +883,8 @@ $$
 - 6.4.1
 
 - [ ]  $J =\int_0^\infty \left[C^2(x)+S^2(x)\right]dx$ (Definition)
-- [ ]  $C(x) = \int_x^\infty \cos(t^2)dt$
-- [ ]  $S(x) = \int_x^\infty \sin(t^2)dt$
+- [ ]  $C(x) = \int_x^\infty \cos(t^2)dt$ (Definition)
+- [ ]  $S(x) = \int_x^\infty \sin(t^2)dt$ (Definition)
 
 - 6.4.3
 
@@ -884,6 +904,56 @@ $$
 - 6.5.1
 
 - [ ]  $\frac1{\pi^3}\int_0^\pi\int_0^\pi\int_0^\pi\frac1{1-\cos u \cos v \cos w}dudvdw =\frac{\Gamma^4(\frac14)}{4\pi^3}$
+
+#### 6.6 Elliptic Integrals in a Physical Problem
+
+- 6.6.1
+
+- [ ]  $F(k, \phi) = \int_0^\phi \frac{1}{\sqrt{1-k^2\sin^2(\phi^\prime)}}d\phi^\prime$
+
+- 6.6.2
+
+- [ ]  $E(k, \phi) = \sqrt{1-k^2\sin^2(\phi^\prime)}d\phi^\prime$
+
+- 6.6.3
+
+- [ ]  $P.E.=-\frac14\mu g(L^2+2xL-x^2)$
+
+- 6.6.4
+
+- [ ]  $K.E. =\frac14\mu (L-x)(\frac{dx}{dt})^2$
+
+- 6.6.5
+
+- [ ]  $\frac14(L-x)(\frac{dx}{dt})^2=\frac14g(2L-x)x$
+
+- 6.6.6
+
+- [ ]  $\sqrt g dt = \sqrt\frac{L-x}{(2L-x)x}$
+
+- 6.6.7
+
+- [ ]  $\int_0^t \sqrt g dt^\prime = \int_0^x \sqrt\frac{L-x^\prime}{(2L-x^\prime)x^\prime}dx^\prime = t\sqrt g$
+
+- 6.6.8
+
+- [ ]  $\frac T {\sqrt{\frac{2L}g}} = \sqrt 2 \int_0^\frac\pi2 \frac{\cos^2(\phi^\prime)}{\sqrt{1+\cos^2(\phi^\prime)}}d\phi^\prime$
+
+- 6.6.9
+
+- [ ]  $\int_0^\phi \frac{\cos^2(\phi^\prime)}{\sqrt{1+\cos^2(\phi^2)}}d\phi^\prime = \frac 1 {\sqrt2} F(\frac1{\sqrt2},\phi)-\frac1{\sqrt2}\int_0^\phi\frac{\sin^2(\phi^\prime)}{\sqrt{1-\frac12\sin^2(\phi^\prime)}}d\phi^\prime$
+
+- 6.6.10
+
+- [ ]  $\int_0^\phi\frac{\sin^2(\phi^\prime)}{\sqrt{1-\frac12\sin^2(\phi^\prime)}}d\phi^\prime = 2F(\frac1{\sqrt2},\phi) - 2E(\frac1{\sqrt2},\phi)$ for $0\leq \phi^\prime\leq \frac\pi2$
+
+- 6.6.11
+
+- [ ]  $\int_0^\phi \frac{\cos^2(\phi^\prime)}{\sqrt{1+\cos^2(\phi^2)}}d\phi^\prime = \sqrt2E(\frac1{\sqrt2},\phi)-\frac 1 {\sqrt2} F(\frac1{\sqrt2},\phi)$ for $0\leq \phi^\prime\leq \frac\pi2$
+
+- 6.6.12
+
+- [ ]  $\frac T {\sqrt{\frac{2L}g}} = 2E(\frac1{\sqrt2},\frac\pi2) - F(\frac1{\sqrt2},\frac\pi2)$
 
 #### 6.7 Challenge Problems
 
@@ -995,3 +1065,119 @@ $$
 - [ ]  $\int_0^\infty \frac{\sin^3 x}{x^2}dx =\frac{3\ln 3}4$
 
 #### 7.8 Fourier Transforms and Energy Integrals
+
+- 7.8.1
+
+- [ ]
+
+  $$
+  f(t)=
+  \begin{cases}
+  1\quad \mathrm{for}~a<t<b\\\\
+  0 \quad \mathrm{otherwise}
+  \end{cases}
+  $$
+
+  (Definition)
+
+- 7.8.2
+
+- [ ]  $W_f = \int_{-\infty}^{\infty} f^2(t)dt =\int_a^bdt = b-a$
+
+- 7.8.3
+
+- [ ]  $W_f = \int_{-\infty}^{\infty} f^2(t)dt = \int_{-\infty}^{\infty} S_f(\omega)d\omega = b - a$
+
+- 7.8.4
+
+- [ ]  $G(\omega)=\int_{-\omega}^{\omega} g(t)e^{-i\omega t}dt$
+
+- 7.8.5
+
+- [ ]  $g(t) = \frac 1{2\pi}\int_{-\infty}^{\infty} G(\omega)e^{i\omega t}d\omega$
+
+- 7.8.6
+
+- [ ]  $S_f(\omega)=\frac{\left\vert e^{-i\omega a}-e^{-i\omega b}\right\vert ^2}{2\pi\omega^2}$
+
+- 7.8.7
+
+- [ ]  $\frac{1}{2\pi}\int_{-\infty}^{\infty} \frac{\left\vert e^{-i\omega a}-e^{-i\omega b}\right\vert ^2}{\omega^2}d\omega = b-a$
+
+- 7.8.8
+
+- [ ]  $\frac1{2\pi}\int_{-\infty}^{\infty}\frac{\left\vert e^{-ix a}-e^{-ix b}\right\vert ^2}{x^2}dx = b -a$ for $b >a$
+
+- 7.8.9
+
+- [ ]  $\int_{-\infty}^{\infty} \frac{1-\cos(ax)\cos(bx)}{x^2}dx - \int_{-\infty}^{\infty} \frac{\sin(ax)sin(bx)}{x^2}dx = \pi(b-a)$
+
+- 7.8.10
+
+- [ ]  $\int_{-\infty}^{\infty}\frac{1-\cos u}{u^2}du =\pi$
+
+- 7.8.11
+
+- [ ]  $\int_{-\infty}^{\infty} \frac{1-\cos(ax)\cos(bx)}{x^2}dx + \int_{-\infty}^{\infty} \frac{\sin(ax)sin(bx)}{x^2}dx = \pi(b+a)$
+
+- 7.8.12
+
+- [ ]  $\int_{-\infty}^{\infty} \frac{\sin(ax)sin(bx)}{x^2}dx = \pi\min(a,b)$
+
+#### 7.9 ‘Weird’ Integrals from Radio Engineering
+
+- 7.9.1
+
+- [ ]  $\int_0^\infty \frac{\sin(t\omega)}\omega d\omega =\frac{\pi}2~\mathrm{sgn}(t)$
+
+- 7.9.2
+
+- [ ]  $\int_{-\infty}^\infty \frac{\sin(t\omega)}\omega d\omega =\pi~\mathrm{sgn}(t)$
+
+- 7.9.3
+
+- [ ]  $\int_{-\infty}^{\infty} \frac{e^{i\omega t}}\omega d\omega =i\pi~\mathrm{sgn}(t)$
+
+- 7.9.4
+
+- [ ]  $u(t)=\frac{1+\mathrm{sgn}(t)}2$ (Definition)
+
+- 7.9.5
+
+- [ ]  $\int_{-\infty}^\infty e^{i\omega t} d\omega = \pi\frac{d}{dt}~\mathrm{sgn}(t)$
+
+- 7.9.6
+
+- [ ]  $\int_{-\infty}^\infty e^{i\omega t} d\omega = 2\pi\delta(t)$
+
+- 7.9.7
+
+- [ ]  $\mathrm{sgn}(t)\leftrightarrow\frac2{i\omega}$
+
+- 7.9.8
+
+- [ ]  $\delta(t)\leftrightarrow1$
+
+- 7.9.9
+
+- [ ]  $u(t)\leftrightarrow\int_{-\infty}^\infty \frac12e^{-i\omega t} dt +\frac1{i\omega}$
+
+- 7.9.10
+
+- [ ]  $\int_{-\infty}^\infty e^{it\omega } dt = 2\pi\delta(\omega)$
+
+- 7.9.11
+
+- [ ]  $\int_{-\infty}^\infty e^{-i\omega t} dt = 2\pi\delta(\omega)$
+
+- 7.9.12
+
+- [ ]  $u(t)\leftrightarrow\pi\delta(\omega)+\frac1{i\omega}$
+
+- 7.9.13
+
+- [ ]  $\cos(\omega_0t)\leftrightarrow\pi\delta(\omega-\omega_0)+\pi\delta(\omega+\omega_0)$
+
+- 7.9.14
+
+- [ ]

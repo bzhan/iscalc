@@ -321,7 +321,7 @@ In fact, not all the formulas below are integrals.
   $$
   \int_0^\pi \ln(1-2\alpha\cos x +\alpha^2)dx= 
   \begin{cases}
-  0\quad \mathrm{for}~\alpha^2<1\\\\
+  0\quad \quad\quad\ \mathrm{for}~\alpha^2<1\\
   \pi\ln\alpha^2\quad\mathrm{for}~\alpha^2>1
   \end{cases}
   $$
@@ -351,8 +351,8 @@ In fact, not all the formulas below are integrals.
 $$
 \int_0^\infty \cos(ax)\frac{\sin(bx)}xdx =
 \begin{cases}
-\frac\pi2\quad \mathrm{for}~\left\vert a\right\vert < b, b > 0 \\\\
-0\quad \mathrm{for}~\left\vert a\right\vert > b, b > 0 \\\\
+\frac\pi2\quad \mathrm{for}~\left\vert a\right\vert < b, b > 0 \\
+0\quad \mathrm{for}~\left\vert a\right\vert > b, b > 0 \\
 \frac\pi4\quad \mathrm{for}~\left\vert a\right\vert = b, b > 0
 \end{cases}
 $$
@@ -1073,7 +1073,7 @@ $$
   $$
   f(t)=
   \begin{cases}
-  1\quad \mathrm{for}~a<t<b\\\\
+  1\quad \mathrm{for}~a<t<b\\
   0 \quad \mathrm{otherwise}
   \end{cases}
   $$
@@ -1128,11 +1128,25 @@ $$
 
 - 7.9.1
 
-- [ ]  $\int_0^\infty \frac{\sin(t\omega)}\omega d\omega =\frac{\pi}2~\mathrm{sgn}(t)$
+- [ ]
+  $$
+  \int_0^\infty \frac{\sin(t\omega)}\omega d\omega =
+  \begin{cases}
+  \frac{\pi}2\quad\mathrm{for}~t >0\\
+  -\frac{\pi}2\ \mathrm{for}~t <0
+  \end{cases}
+  $$
 
 - 7.9.2
 
-- [ ]  $\int_{-\infty}^\infty \frac{\sin(t\omega)}\omega d\omega =\pi~\mathrm{sgn}(t)$
+- [ ]
+  $$
+  \int_{-\infty}^\infty \frac{\sin(t\omega)}\omega d\omega =
+  \begin{cases}
+  \pi\quad\mathrm{for}~t>0\\
+  -\pi\ \mathrm{for}~t<0
+  \end{cases}
+  $$
 
 - 7.9.3
 
@@ -1180,4 +1194,181 @@ $$
 
 - 7.9.14
 
+- [ ]  $\int_{-\infty}^{\infty} \delta(t-a)\phi(t) dt =\phi(a)$
+
+- 7.9.15
+
+- [ ]  $g(t) \leftrightarrow G(\omega) $ for $ G(t) \leftrightarrow2\pi g(-\omega)$
+
+- 7.9.16
+
+- [ ]  $f(t) \leftrightarrow F(\omega) $ for $ f(at) \leftrightarrow\frac1a F(\frac\omega a)$
+
+- 7.9.17
+
+- [ ]  $m(t)g(t)\leftrightarrow\frac1{2\pi}\int_{-\infty}^{\infty}G(u)M(\omega-u)du$
+
+#### 7.10 Causality and Hilbert Transform Integrals
+
+- 7.10.1
+
+- [ ]  $g(t)=g_e(t)+g_o(t)$
+
+- 7.10.2
+
+- [ ]  $g(-t) = g_e(-t) + g_o(-t) = g_e(t) - g_o(t)$
+
+- 7.10.3
+
+- [ ]  $g_e(t) = \frac12 \left[g(t)+g(-t)\right]$
+
+- 7.10.4
+
+- [ ]  $g_o(t) = \frac12 \left[g(t)-g(-t)\right]$
+
+- 7.10.5
+
+- [ ]  $g_e(t) = g_o(t)~\mathrm{sgn}(t)$
+
+- 7.10.6
+
+- [ ]  $g_o(t) = g_e(t)~\mathrm{sgn}(t)$
+
+- 7.10.7
+
+- [ ]  $G_e(\omega) = R(\omega)$
+
+- 7.10.8
+
+- [ ]  $G_o(\omega) =iX(\omega)$
+
+- 7.10.9
+
+- [ ]  $R(\omega) = \frac1{2\pi}iX(\omega) * \frac2{i\omega} =\frac1\pi X(\omega)*\frac1\omega$
+
+- 7.10.10
+
+- [ ]  $X(\omega) = -\frac1\pi R(\omega)*\frac1\omega$
+
+- 7.10.11
+
+- [ ]  $R(\omega) = \frac1\pi\int_{-\infty}^{\infty}\frac{X(u)}{\omega-u}du$
+- [ ]  $X(\omega) = -\frac1\pi\int_{-\infty}^{\infty}\frac{X(u)}{\omega-u}du$
+
+- 7.10.12
+
+- [ ]  $\overline{x(t)}=\frac1\pi \int_{-\infty}^{\infty}\frac{x(u)}{t-u}du$
+
+- 7.10.13
+
+- [ ]  $\int_{-\infty}^{\infty}\frac{1}{t-u}du=0$
+
+- 7.10.14
+
 - [ ]
+  $$
+  \pi(t)=
+  \begin{cases}
+  1\quad\mathrm{for}~-\frac12<t<\frac12\\
+  0\quad\mathrm{otherwise}
+  \end{cases}
+  $$
+
+- 7.10.15
+
+- [ ]  $\Pi(\omega) = \frac{e^{i\omega \frac12}-e^{-i\omega\frac12}}{i\omega}=\frac{i2\sin\frac\omega2}{i\omega}=\frac{\sin\frac\omega2}{\frac\omega2}$ for $-\infty < \omega < \infty$
+
+- 7.10.16
+
+- [ ]  $\frac{\sin\frac t2}{\frac t2} \leftrightarrow2\pi~\pi(-\omega)=2\pi~\pi(\omega)$
+
+- 7.10.17
+
+- [ ]
+  $$
+  \frac{\sin t}t \leftrightarrow 
+  \begin{cases}
+  \pi\quad\mathrm{for}~-1<\omega<1\\
+  0\quad\mathrm{otherwise}
+  \end{cases}
+  $$
+
+- 7.10.18
+
+- [ ]
+  $$
+  \frac{\sin t}{2t} = \frac12 \frac{\sin(t)}t\leftrightarrow R(\omega) =
+  \begin{cases}
+  \frac\pi2\quad\mathrm{for}~-1<\omega<1\\
+  0\quad\mathrm{otherwise}
+  \end{cases}
+  $$
+
+- 7.10.19
+
+- [ ]  $X(\omega) = \frac12 \ln(\left\vert\frac{1-\omega}{1+\omega}\right\vert)$ for $-\infty < \omega < \infty$
+
+- 7.10.20
+
+- [ ]  $\int_0^\infty \ln^2(\left\vert\frac{1-x}{1+x}\right\vert)=\pi^2$
+
+#### 7.11 Challenge Problems
+
+- C7.1
+
+- [ ]  $\int_0^\infty (\frac{\sin x}x)^5dx =\frac{115}{384}\pi$
+- [ ]  $\int_0^\infty (\frac{\sin x}x)^6dx =\frac{11}{40}\pi$
+- [ ]  $\int_0^\infty (\frac{\sin x}x)^7dx =\frac{5887}{23040}\pi$
+
+- C7.2
+
+- [ ]  $F(x) = \int_x^\infty\int_x^\infty \sin(t^2-u^2)dtdu =0$
+
+- C7.3
+
+- [ ]  $\mathrm{convergence}~\int_{-\infty}^{\infty} \frac{1}{1-ix^3}dx$
+
+- C7.4
+
+- [ ]  $\int_1^\infty \frac{\left\{x\right\}}{x^3} dx =1-\frac{\pi^2}{12}$
+
+- C7.5
+
+- [ ]  $I(a) = \int_0^\infty \frac{\sin^2(ax)}{x^2} dx$ (Definition)
+- [ ]  $I(a)= \frac\pi2\left\vert a\right\vert$
+
+- C7.7
+
+- [ ]
+
+  $$
+  f(t)=
+  \begin{cases}
+  e^{-at}\ \mathrm{for}~0\leq t\leq m \\
+  0\quad\ \mathrm{otherwise}
+  \end{cases}\quad\mathrm{for}~a > 0,m>0
+  $$
+- [ ]  $\int_{-\infty}^\infty \frac{\cos(mx)}{x^2+a^2}dx = \frac\pi a e^{-ma}$ for $a >0, m >0$
+
+- C7.8
+
+- [ ]  $\frac1{t^2+1} \leftrightarrow \pi e^{-\left\vert \omega\right\vert}$
+- [ ]  $\frac t{t^2+1} \leftrightarrow -i\pi e ^{-\left\vert\omega\right\vert}~\mathrm{sgn}(\omega)$
+- [ ]  $\frac12\delta(t)+i\frac1{2\pi t}\leftrightarrow u(\omega)$
+- [ ]  $\int_t^\infty \frac{e^{-u}}udu \leftrightarrow \frac{\ln(1+i\omega)}{i\omega}$
+
+- C7.9
+
+- [ ]  $X(\omega) = -\frac{2\omega}\pi \int_0^\infty \frac{R(u)}{\omega^2-u^2}du$
+
+- C7.10
+
+- [ ]  $\frac1{2\pi}\int_{-\infty}^{\infty} \left\vert X(\omega)\right\vert^2d\omega < \infty$
+- [ ]  $y(t)=x(t)*h(t)=\int_{-\infty}^\infty x(u)h(t-u)du$
+- [ ]  $\int_{-\infty}^\infty \left\vert h(t)\right\vert dt < \infty$
+- [ ]  $\frac1{2\pi}\int_{-\infty}^{\infty} \left\vert Y(\omega)\right\vert^2d\omega < \infty$
+
+- C7.11
+
+- [ ]  $\overline{\sin(\omega_0t)} = -\cos(\omega_0t)$ for $\omega_0>0$
+- [ ]  $\overline{\cos(\omega_0t)} = \sin(\omega_0t)$ for $\omega_0>0$

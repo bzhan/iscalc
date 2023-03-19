@@ -65,7 +65,7 @@
     <div id="content">
       <div v-if="content_state === false" align=left>
         <div v-for="name in book_list" v-bind:key=name style="margin:5px 10px">
-          <a href="#" v-on:click="openBook(name)">{{name}}</a>
+          <a href="#" v-on:click="openBook(name)">{{ name }}</a>
         </div>
       </div>
       <div v-if="content_state === true">
@@ -130,16 +130,36 @@
     </div>
     <!-- Main panel for showing book content-->
     <div v-if="content.length == 0" id="problem">
-      <BookContent v-bind:content="book_content" @open_file = 'openFile' 
-                   @select_table = 'selectTable'
-                   @select_header = "selectHeader" v-bind:label="''"
-                   v-bind:selected_header="selected_header"
-                   v-bind:selected_table="selected_table"
-                   v-bind:header_level="1"></BookContent>
+      <BookContent v-bind:content="book_content" @open_file='openFile' @select_table='selectTable'
+        @select_header="selectHeader" v-bind:label="''" v-bind:selected_header="selected_header"
+        v-bind:selected_table="selected_table" v-bind:header_level="1"></BookContent>
     </div>
     <div id="dialog">
-      <div v-if = "r_query_mode === 'add lemma'">
-        <span class="math-text">Add lemma:</span><br/>
+      <div v-if="r_query_mode === 'edit func table'" style="margin: 5px">
+        <table style="border-collapse: collapse">
+          <tr>
+            <td style="border-style: solid; padding: 3px">
+              <MathEquation v-bind:data="'\\(' + '{x}' + '\\)'" />
+            </td>
+            <td v-for="(e, i) in selected_table_list" :key="i" style="border-style: solid; padding: 3px">
+              <ExprQuery v-bind:value="e.x" @input="updateTable(i, $event, e.y)"></ExprQuery>
+            </td>
+          </tr>
+          <tr>
+            <td style="border-style: solid; padding: 3px">
+              <MathEquation v-bind:data="'\\(' + selected_table_content.funcexpr + '\\)'" />
+            </td>
+            <td v-for="(e, i) in selected_table_list" :key="i" style="border-style: solid; padding: 3px">
+              <ExprQuery v-bind:value="e.y" @input="updateTable(i, e.x, $event)"></ExprQuery>
+            </td>
+          </tr>
+        </table>
+        <button v-on:click="selected_table_list.push({ 'x': '', 'y': '' }); checkVal.push(false)">add</button>&nbsp;
+        <button v-on:click="deleteSelectedTableItem()">delete</button>&nbsp;
+        <button v-on:click="saveFuncTable()">save</button>
+      </div>
+      <div v-if="r_query_mode === 'add lemma'">
+        <span class="math-text">Add lemma:</span><br />
         <span class="math-text">type:</span>&nbsp;
         <select v-model="lemma_type">
           <option v-for="(type, index) in lemma_types" :key="index">{{ type }}</option>
@@ -168,44 +188,44 @@
             <ExprQuery v-bind:value="func_table['values'][i]" @input="setFunVal(i, $event)"></ExprQuery>
           </div><br/>
           <button v-on:click="doAddLemma">OK</button>&nbsp;
-          <button v-on:click="func_table['args'].push('');func_table['values'].push('');">add item</button>
+          <button v-on:click="func_table['args'].push(''); func_table['values'].push('');">add item</button>
         </div>
       </div>
-      <div v-if = "r_query_mode === 'add header'">
-        <span class="math-text">Add header:</span><br/>
-        <input v-model="header"/>
+      <div v-if="r_query_mode === 'add header'">
+        <span class="math-text">Add header:</span><br />
+        <input v-model="header" />
         <button v-on:click="doAddHeader">OK</button>
       </div>
       <div v-if="r_query_mode === 'add definition'">
-        <span class="math-text">Add function definition:</span><br/>
-        <ExprQuery v-model="expr_query1"/><br/>
+        <span class="math-text">Add function definition:</span><br />
+        <ExprQuery v-model="expr_query1" /><br />
         <div v-for="(cond, index) in cond_query" :key="index">
-          <ExprQuery v-bind:value="cond" @input="setCondQuery(index, $event)"/><br/>
+          <ExprQuery v-bind:value="cond" @input="setCondQuery(index, $event)" /><br />
         </div>
         <button v-on:click="doAddFuncDef('file')">OK</button>&nbsp;
         <button v-on:click="cond_query.push('')">Add condition</button>
       </div>
       <div v-if="r_query_mode === 'add definition for book'">
-        <span class="math-text">Add function definition:</span><br/>
-        <ExprQuery v-model="expr_query1"/><br/>
+        <span class="math-text">Add function definition:</span><br />
+        <ExprQuery v-model="expr_query1" /><br />
         <div v-for="(cond, index) in cond_query" :key="index">
-          <ExprQuery v-bind:value="cond" @input="setCondQuery(index, $event)"/><br/>
+          <ExprQuery v-bind:value="cond" @input="setCondQuery(index, $event)" /><br />
         </div>
         <span class="math-text">file name:</span>
-        <input v-model="msg"/><br/>
+        <input v-model="msg" /><br />
         <button v-on:click="doAddFuncDef('book')">OK</button>&nbsp;
         <button v-on:click="cond_query.push('')">Add condition</button>
       </div>
       <div v-if="r_query_mode === 'add goal' || r_query_mode === 'add problem'">
         <span v-if="r_query_mode === 'add goal'" class="math-text">Add goal:</span>
-        <span v-if="r_query_mode === 'add problem'" class="math-text">Add problem:</span><br/>
-        <ExprQuery v-model="expr_query1"/><br/>
+        <span v-if="r_query_mode === 'add problem'" class="math-text">Add problem:</span><br />
+        <ExprQuery v-model="expr_query1" /><br />
         <div v-for="(cond, index) in cond_query" :key="index">
-          <ExprQuery v-bind:value="cond" @input="setCondQuery(index, $event)"/><br/>
+          <ExprQuery v-bind:value="cond" @input="setCondQuery(index, $event)" /><br />
         </div>
         <div v-if="r_query_mode === 'add problem'">
           <span class="math-text">file name:</span>
-          <input v-model="msg"/>
+          <input v-model="msg" />
         </div>
         <button v-if="r_query_mode === 'add goal'" v-on:click="doAddGoal">OK</button>
         <button v-if="r_query_mode === 'add problem'" v-on:click="doAddProblem">OK</button>&nbsp;
@@ -213,71 +233,71 @@
       </div>
       <div v-if="r_query_mode === 'add book'">
         <span class="math-text">book name:</span>
-        <input type="text" v-model="new_book_name" style="width: 190.4px;height: 32px;"/>
+        <input type="text" v-model="new_book_name" style="width: 190.4px;height: 32px;" />
         <button v-on:click="doAddBook()">OK</button>
       </div>
       <div v-if="r_query_mode === 'delete book'">
         <button v-on:click="showDeleteDialog()" v-show="!show_delete_book_msg">Delete</button>
         <div class="mask" v-show="show_delete_book_msg">
-            <span>are you sure to delete these books ?</span><br/>
-            <button class="app-download"  @click="doDeleteBook">YES</button>
-            <button class="app-download"  @click="cancelDelete">NO</button>
+          <span>are you sure to delete these books ?</span><br />
+          <button class="app-download" @click="doDeleteBook">YES</button>
+          <button class="app-download" @click="cancelDelete">NO</button>
         </div>
 
       </div>
       <div v-if="r_query_mode === 'apply induction'">
-        <span class="math-text">Please specify induction variable</span><br/>
-        <input v-model="induct_var"><br/>
-        <span class="math-text">starting from</span><br/>
-        <ExprQuery v-model="expr_query1"/>
+        <span class="math-text">Please specify induction variable</span><br />
+        <input v-model="induct_var"><br />
+        <span class="math-text">starting from</span><br />
+        <ExprQuery v-model="expr_query1" />
         <button v-on:click="doApplyInduction">OK</button>
       </div>
       <div v-if="r_query_mode === 'apply rewrite goal'">
         <div class="math-text">Select lemma to start from:</div>
         <div v-for="(item, index) in theorems" :key="index"
              v-on:click="doApplyRewriteGoal(index)" style="cursor:pointer">
-          <MathEquation v-bind:data="'\\(' + item.latex_eq + '\\)'"/>
+          <MathEquation v-bind:data="'\\(' + item.latex_eq + '\\)'" />
         </div>
       </div>
       <div v-if="r_query_mode === 'integrate by parts'">
         <span class="math-text">Integrate by parts on: </span>
-        <MathEquation v-bind:data="'\\(' + sep_int[0].latex_body + '\\)'"/><br/>
-        <MathEquation data="Choose \(u\) and \(v\) such that \(u\cdot\mathrm{d}v\) is the integrand."/>
+        <MathEquation v-bind:data="'\\(' + sep_int[0].latex_body + '\\)'" /><br />
+        <MathEquation data="Choose \(u\) and \(v\) such that \(u\cdot\mathrm{d}v\) is the integrand." />
         <div>
-          <MathEquation data="\(u=\)"/>
-          <ExprQuery v-model="expr_query1"/>
+          <MathEquation data="\(u=\)" />
+          <ExprQuery v-model="expr_query1" />
         </div>
         <div>
-          <MathEquation data="\(v=\)"/>
-          <ExprQuery v-model="expr_query2"/><br/>
+          <MathEquation data="\(v=\)" />
+          <ExprQuery v-model="expr_query2" /><br />
         </div>
         <button v-on:click="doIntegrateByParts">OK</button>
       </div>
       <div v-if="r_query_mode === 'forward substitution'">
-        <MathEquation v-bind:data="'\\(' + sep_int[int_id].latex_expr + '\\)'"/><br/>
-        <span class="math-text">Location: {{sep_int[int_id].loc}}</span><br/>
+        <MathEquation v-bind:data="'\\(' + sep_int[int_id].latex_expr + '\\)'" /><br />
+        <span class="math-text">Location: {{ sep_int[int_id].loc }}</span><br />
         <button v-bind:disabled='int_id == 0' v-on:click="int_id--">prev</button>
-        <button v-bind:disabled='int_id == sep_int.length-1' v-on:click='int_id++'>next</button><br/>
+        <button v-bind:disabled='int_id == sep_int.length - 1' v-on:click='int_id++'>next</button><br />
         <span class="math-text">Substitution on: </span>
-        <MathEquation v-bind:data="'\\(' + sep_int[int_id].latex_body + '\\)'"/><br/>
+        <MathEquation v-bind:data="'\\(' + sep_int[int_id].latex_body + '\\)'" /><br />
         <span class="math-text">Substitute </span>
-        <input v-model="subst_var"><br/>
-        <span class="math-text"> for</span><br/>
-        <ExprQuery v-model="expr_query1"/><br/>
+        <input v-model="subst_var"><br />
+        <span class="math-text"> for</span><br />
+        <ExprQuery v-model="expr_query1" /><br />
         <button v-on:click="doForwardSubstitution">OK</button>
       </div>
       <div v-if="r_query_mode === 'backward substitution'">
         <span class="math-text">Backward substitution on: </span>
-        <MathEquation v-bind:data="'\\(' + sep_int[int_id].latex_body + '\\)'"/><br/>
-        <span class="math-text">Location: {{sep_int[int_id].loc}}</span><br/>
+        <MathEquation v-bind:data="'\\(' + sep_int[int_id].latex_body + '\\)'" /><br />
+        <span class="math-text">Location: {{ sep_int[int_id].loc }}</span><br />
         <button v-bind:disabled='int_id == 0' v-on:click="int_id--">prev</button>
-        <button v-bind:disabled='int_id == sep_int.length-1' v-on:click='int_id++'>next</button><br/>
+        <button v-bind:disabled='int_id == sep_int.length - 1' v-on:click='int_id++'>next</button><br />
         <span class="math-text">New variable </span>
-        <input v-model="subst_var"><br/>
+        <input v-model="subst_var"><br />
         <span class="math-text">Substitute </span>
-        <span class="math-text-italic">{{sep_int[int_id].var_name}}</span>
-        <span class="math-text"> for</span><br/>
-        <ExprQuery v-model="expr_query1"/><br/>
+        <span class="math-text-italic">{{ sep_int[int_id].var_name }}</span>
+        <span class="math-text"> for</span><br />
+        <ExprQuery v-model="expr_query1" /><br />
         <button v-on:click="doBackwardSubstitution">OK</button>
       </div>
       <div v-if="r_query_mode === 'rewrite equation'">
@@ -286,10 +306,10 @@
              class="item-text" ref="select_expr1"
              v-bind:value="lastExpr"
              style="width:500px" disabled="disabled"
-             @select="selectExpr"><br/>
+          @select="selectExpr"><br />
         &nbsp;<MathEquation v-bind:data="'\\(' + latex_selected_expr + '\\)'" class="indented-text"/><br/>
-        <span class="math-text">Rewrite subexpression to</span><br/>
-        <ExprQuery v-model="expr_query1"/>
+        <span class="math-text">Rewrite subexpression to</span><br />
+        <ExprQuery v-model="expr_query1" />
         <button v-on:click="doRewriteEquation">OK</button>
       </div>
       <div v-if="r_query_mode === 'rewrite using identity'">
@@ -298,18 +318,18 @@
              class="item-text" ref="select_expr1"
              v-bind:value="lastExpr"
              style="width:500px" disabled="disabled"
-             @select="selectExprIdentity"><br/>
+          @select="selectExprIdentity"><br />
         &nbsp;<MathEquation v-bind:data="'\\(' + latex_selected_expr + '\\)'" class="indented-text"/><br/>
         <div v-for="(item, index) in identity_rewrites" :key="index">
           <MathEquation
             v-on:click.native="applyIdentity(index)"
             v-bind:data="'\\(=' + item.latex_res + '\\)'"
-            style="cursor:pointer"/>
+            style="cursor:pointer" />
         </div>
       </div>
       <div v-if="r_query_mode === 'split region'">
         <div class="math-text">Split region at:</div>
-        <ExprQuery v-model="expr_query1"/>
+        <ExprQuery v-model="expr_query1" />
         <button v-on:click="doSplitRegion">OK</button>
       </div>
       <div v-if="r_query_mode === 'select theorem'">
@@ -318,24 +338,24 @@
              class="item-text" ref="select_expr1"
              v-bind:value="lastExpr"
              style="width:500px" disabled="disabled"
-             @select="selectExpr"><br/>
+          @select="selectExpr"><br />
         &nbsp;<MathEquation v-bind:data="'\\(' + latex_selected_expr + '\\)'" class="indented-text"/><br/>
         <div class="math-text">Select theorem to apply:</div>
         <div v-for="(item, index) in theorems" :key="index"
              v-on:click="doApplyTheorem(index)" style="cursor:pointer">
-          <MathEquation v-bind:data="'\\(' + item.latex_eq + '\\)'"/>
+          <MathEquation v-bind:data="'\\(' + item.latex_eq + '\\)'" />
         </div>
       </div>
       <div v-if="r_query_mode === 'query vars'">
         <div class="math-text">Enter instantiation in theorem</div>
         <div v-for="(item, index) in query_vars" :key="index">
-          <MathEquation v-bind:data="'\\(' + item.var + '\\to \\)'"/>
-          <ExprQuery v-model="item.expr"/>
+          <MathEquation v-bind:data="'\\(' + item.var + '\\to \\)'" />
+          <ExprQuery v-model="item.expr" />
         </div>
         <button v-on:click="doVariableSubstitution">OK</button>
       </div>
       <div v-if="r_query_mode === 'derivate both sides'">
-        <span class="math-text">Please specify variable</span><br/>
+        <span class="math-text">Please specify variable</span><br />
         <input v-model="deriv_var">
         <button v-on:click="doApplyDerivBothSides">OK</button>
       </div>
@@ -345,15 +365,15 @@
              class="item-text" ref="select_expr1"
              v-bind:value="lastExpr"
              style="width:500px" disabled="disabled"
-             @select="selectExpr"><br/>
+          @select="selectExpr"><br />
         &nbsp;<MathEquation v-bind:data="'\\(' + latex_selected_expr + '\\)'" class="indented-text"/><br/>
         <button v-on:click="doSolveEquation">Solve</button>
       </div>
       <div v-if="r_query_mode === 'limit both sides'">
-        <span class="math-text">Take limit as variable</span><br/>
+        <span class="math-text">Take limit as variable</span><br />
         <input v-model="limit_var">
-        <span class="math-text">goes to</span><br/>
-        <ExprQuery v-model="expr_query1"/>
+        <span class="math-text">goes to</span><br />
+        <ExprQuery v-model="expr_query1" />
         <button v-on:click="doApplyLimitBothSides">OK</button>
       </div>
       <div v-if="r_query_mode === 'series expansion'">
@@ -362,9 +382,9 @@
              class="item-text" ref="select_expr1"
              v-bind:value="lastExpr"
              style="width:500px" disabled="disabled"
-             @select="selectExpr"><br/>
+          @select="selectExpr"><br />
         &nbsp;<MathEquation v-bind:data="'\\(' + latex_selected_expr + '\\)'" class="indented-text"/><br/>
-        <span class="math-text">Index variable</span><br/>
+        <span class="math-text">Index variable</span><br />
         <input v-model="index_var">
         <button v-on:click="doApplySeriesExpansion">OK</button>
       </div>
@@ -374,7 +394,7 @@
              class="item-text" ref="select_expr1"
              v-bind:value="lastExpr"
              style="width:500px" disabled="disabled"
-             @select="selectExpr"><br/>
+          @select="selectExpr"><br />
         &nbsp;<MathEquation v-bind:data="'\\(' + latex_selected_expr + '\\)'" class="indented-text"/><br/>
         <button v-on:click="doApplyExpandPolynomial">OK</button>
       </div>
@@ -382,30 +402,37 @@
         <div class="math-text">Expand definition on:</div>
         <div v-for="(item, index) in def_choices" :key="index"
              v-on:click="doExpandDefinition(index)" style="cursor:pointer">
-          <MathEquation v-bind:data="'\\(' + item.latex_subexpr + '\\)'"/>
+          <MathEquation v-bind:data="'\\(' + item.latex_subexpr + '\\)'" />
         </div>
       </div>
     </div>
     <div id="select">
+      <div v-if="r_query_mode === 'edit func table'">
+        <div v-for="(entry, i) in selected_table_list" :key="i" style="margin:5px 10px">
+          <label :for="'entry_' + entry.x" @change="selectTableItem(i, entry.x)">
+            <input type="checkbox" :id="'entry_' + entry.x" v-model="checkVal[i]">{{ entry.x }}
+          </label><br/>
+        </div>
+      </div>
       <div v-if="r_query_mode === 'add book'">
-        <span class="math-text">select books to import:</span><br/>
+        <span class="math-text">select books to import:</span><br />
       </div>
       <div v-if="r_query_mode === 'delete book'">
-        <span class="math-text">select books to delete:</span><br/>
+        <span class="math-text">select books to delete:</span><br />
       </div>
       <div v-if="r_query_mode === 'add book' || r_query_mode === 'delete book'">
-        <div v-for="(name,i) in book_list" :key="i" style="margin:5px 10px">
-          <label :for="'book_'+name" @change="selectBook(i, name)">
-              <input type="checkbox" :id="'book_'+name" v-model="checkVal[i]">{{name}}
-          </label><br/>
+        <div v-for="(name, i) in book_list" :key="i" style="margin:5px 10px">
+          <label :for="'book_' + name" @change="selectBook(i, name)">
+            <input type="checkbox" :id="'book_' + name" v-model="checkVal[i]">{{ name }}
+          </label><br />
         </div>
       </div>
       <div v-if="r_query_mode === 'add lemma' && lemma_type !== 'table'">
         <span class="math-text">lemma's attributes</span>
         <div v-for="(attr, i) in lemma_attributes" :key="i" style="margin:5px 10px">
-          <label :for="'attribute_'+attr" @change="selectAttribute(i, attr)">
-              <input type="checkbox" :id="'attribute_'+attr" v-model="checkVal[i]">{{attr}}
-          </label><br/>
+          <label :for="'attribute_' + attr" @change="selectAttribute(i, attr)">
+            <input type="checkbox" :id="'attribute_' + attr" v-model="checkVal[i]">{{ attr }}
+          </label><br />
         </div>
       </div>
     </div>
@@ -440,7 +467,7 @@ export default {
   data: function () {
     return {
       // Display list of books (false) or list of items in a file.
-      content_state: undefined,  
+      content_state: undefined,
 
       // List of integral books
       book_list: [],
@@ -509,7 +536,7 @@ export default {
 
       // Expression in the chosen step
       last_expr: undefined,
-			
+
       // the index of sep-integrals
       int_id: 0,
 
@@ -524,7 +551,7 @@ export default {
       // selected header
       header: "",
       selected_header: undefined,
-      
+
       //add problem, definition for book
       msg: "",
 
@@ -536,13 +563,18 @@ export default {
       lemma_category: undefined,
       selected_lemma_attributes: [],
       selected_table: undefined,
-      func_table: {args:[], values:[]},
+      func_table: { args: [], values: [] },
       func_table_name: "",
+
+      //edit table
+      selected_table_content: undefined,
+      selected_table_item_list: [],
+      selected_table_list: [],
     }
   },
 
   computed: {
-    lastExpr: function() {
+    lastExpr: function () {
       if (this.content.length > 0 && this.cur_id !== undefined) {
         this.query_last_expr()
         return this.last_expr
@@ -553,7 +585,7 @@ export default {
   },
 
   methods: {
-    loadBookList: async function (){
+    loadBookList: async function () {
       const response = await axios.post('http://127.0.0.1:5000/api/integral-load-book-list')
       this.book_list = response.data.book_list
       this.content_state = false
@@ -577,7 +609,7 @@ export default {
       this.loadBookContent()
     },
 
-    query_last_expr: async function(){
+    query_last_expr: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -586,13 +618,13 @@ export default {
         selected_item: this.selected_item
       }
       const response = await axios.post("http://127.0.0.1:5000/api/query-last-expr", JSON.stringify(data))
-      if (response.data.status === 'ok'){
+      if (response.data.status === 'ok') {
         this.last_expr = response.data.last_expr
       } else {
         this.last_expr = ""
       }
     },
-    saveFile: async function(){
+    saveFile: async function () {
       if (this.fileanme === undefined)
         return
       const data = {
@@ -600,7 +632,7 @@ export default {
         content: this.content
       }
       const response = await axios.post("http://127.0.0.1:5000/api/integral-save-file", JSON.stringify(data))
-      if(response.data.status === 'ok'){
+      if (response.data.status === 'ok') {
         console.log("ok")
       }
     },
@@ -624,12 +656,12 @@ export default {
       this.selected_facts = {}
     },
     // add lemma
-    addLemma: function() {
-      if(this.selected_header === undefined)
+    addLemma: function () {
+      if (this.selected_header === undefined)
         return
       this.r_query_mode = "add lemma"
       this.checkVal = []
-      for(let i=0;i < this.lemma_attributes.lenth; i++){
+      for (let i = 0; i < this.lemma_attributes.lenth; i++) {
         this.checkVal.add(false)
       }
       this.lemma_type = 'axiom'
@@ -637,11 +669,11 @@ export default {
       this.msg = ""
       this.selected_lemma_attributes = []
       this.cond_query = []
-      this.expr_query1 = "" 
+      this.expr_query1 = ""
       this.func_table_name = ""
-      this.func_table = {args:[], values:[]}
+      this.func_table = { args: [], values: [] }
     },
-    doAddLemma: async function(){
+    doAddLemma: async function () {
       const data = {
         lemma_type: this.lemma_type,
         book_name: this.book_name,
@@ -664,30 +696,79 @@ export default {
         this.book_name = response.data.book_name
       }
     },
-    selectAttribute: function(i, attr) {
-      if(this.checkVal[i]&&!this.selected_lemma_attributes.includes(attr)){
+    selectAttribute: function (i, attr) {
+      if (this.checkVal[i] && !this.selected_lemma_attributes.includes(attr)) {
         this.selected_lemma_attributes.push(attr)
-      }else if(!this.checkVal[i]&&this.selected_lemma_attributes.includes(attr)){
-        this.selected_lemma_attributes.splice(this.selected_lemma_attributes.findIndex(j => j==attr))
+      } else if (!this.checkVal[i] && this.selected_lemma_attributes.includes(attr)) {
+        this.selected_lemma_attributes.splice(this.selected_lemma_attributes.findIndex(j => j == attr))
       }
       console.log(this.selected_lemma_attributes)
     },
-    selectTable: function(content, label) {
+    selectTable: function (content, label) {
       this.selected_table = label
+      this.selected_table_content = content
+      this.selected_table_list = []
+      this.selected_table_item_list = []
+      this.checkVal = []
+      for (let k in content.table) {
+        this.checkVal.push(false)
+        this.selected_table_list.push({ 'x': k, 'y': content.table[k] })
+      }
+      this.r_query_mode = 'edit func table'
+      console.log("selected_table:")
+      console.log(this.selected_table_list)
       console.log(content)
       console.log(label)
     },
+    selectTableItem: function (i, name) {
+      console.log(this.checkVal[i], this.selected_table_item_list.includes(name),name,i)
+      if (this.checkVal[i] && !this.selected_table_item_list.includes(name)) {
+        this.selected_table_item_list.push(name)
+      } 
+      if (!this.checkVal[i] && this.selected_table_item_list.includes(name)) {
+        this.selected_table_item_list.splice(this.selected_table_item_list.findIndex(j => j == name))
+      }
+      console.log(this.selected_table_item_list)
+    },
+    deleteSelectedTableItem: async function () {
+      const data = {
+        label : this.selected_table,
+        selected_items : this.selected_table_item_list,
+        book : this.book_name
+      }
+      const response = await axios.post("http://127.0.0.1:5000/api/delete-func-table-item", JSON.stringify(data))
+      if (response.data.status == 'ok') {
+        this.r_query_mode = undefined
+        this.loadBookContent()
+      }
+    },
+    updateTable: function (idx, k, v) {
+      this.selected_table_list[idx].x = k
+      this.selected_table_list[idx].y = v
+    },
+    saveFuncTable: async function () {
+      const data = {
+        label : this.selected_table,
+        table : this.selected_table_list,
+        book : this.book_name
+      }
+      const response = await axios.post("http://127.0.0.1:5000/api/save-func-table", JSON.stringify(data))
+      if (response.data.status == 'ok') {
+        this.r_query_mode = undefined
+        this.loadBookContent()
+      }
+    },
 
     // add problem
-    addProblem: function() {
-      if(this.selected_header !== undefined)
+    addProblem: function () {
+      if (this.selected_header !== undefined)
         this.r_query_mode = "add problem"
-        this.expr_query1 = ''
-        this.cond_query = []
-        this.filename = ""
+      this.expr_query1 = ''
+      this.cond_query = []
+      this.filename = ""
     },
-    
-    doAddProblem: async function() {
+
+    doAddProblem: async function () {
       const data = {
         book: this.book_name,
         file: this.msg,
@@ -706,14 +787,14 @@ export default {
     },
 
     // Select an item
-    selectItem: function(item_id) {
+    selectItem: function (item_id) {
       console.log('selectItem', item_id)
       this.selected_item = item_id
       this.r_query_mode = undefined
     },
 
     // Select a fact
-    selectFact: function(item_id) {
+    selectFact: function (item_id) {
       console.log('selectFact', item_id)
       if (item_id in this.selected_facts) {
         this.$delete(this.selected_facts, item_id)
@@ -723,7 +804,7 @@ export default {
     },
 
     // Restart proof, delete all steps
-    clearItem: async function() {
+    clearItem: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -742,21 +823,21 @@ export default {
         }
       }
     },
-    setFunArg: function(index, value) {
+    setFunArg: function (index, value) {
       this.$set(this.func_table['args'], index, value)
     },
-    setFunVal: function(index, value) {
+    setFunVal: function (index, value) {
       this.$set(this.func_table['values'], index, value)
     },
-    setCondQuery: function(index, value) {
+    setCondQuery: function (index, value) {
       this.$set(this.cond_query, index, value)
     },
 
     // Add function definition
-    addFuncDef: function() {
-      if(this.filename === undefined && this.book_name !== undefined  && this.selected_header !== undefined)
+    addFuncDef: function () {
+      if (this.filename === undefined && this.book_name !== undefined && this.selected_header !== undefined)
         this.r_query_mode = 'add definition for book'
-      else if(this.filename !== undefined)
+      else if (this.filename !== undefined)
         this.r_query_mode = 'add definition'
       else
         this.r_query_mode = undefined
@@ -765,8 +846,8 @@ export default {
     },
 
     // Perform add function definition
-    doAddFuncDef: async function(forSomething) {
-      if(forSomething=='file'){
+    doAddFuncDef: async function (forSomething) {
+      if (forSomething == 'file') {
         const data = {
           book: this.book_name,
           file: this.filename,
@@ -785,7 +866,7 @@ export default {
           this.cond_query = []
         }
       }
-      else if(forSomething=='book'){
+      else if (forSomething == 'book') {
         const data = {
           book: this.book_name,
           eq: this.expr_query1,
@@ -806,47 +887,47 @@ export default {
     },
 
     // select header 
-    selectHeader: function(header_id) {
-      console.log("selected header:"+header_id)
+    selectHeader: function (header_id) {
+      console.log("selected header:" + header_id)
       this.selected_header = header_id
       this.r_query_mode = undefined
     },
 
     // add header
-    addHeader: function(){
-      if(this.selected_header !== undefined)
+    addHeader: function () {
+      if (this.selected_header !== undefined)
         this.r_query_mode = "add header"
     },
 
-    doAddHeader: async function(){
+    doAddHeader: async function () {
       const data = {
-          header_name: this.header,
-          book_name: this.book_name,
-          label: this.selected_header
-        }
-        const response = await axios.post("http://127.0.0.1:5000//api/integral-add-header", JSON.stringify(data))
-        if (response.data.status == 'ok') {
-          this.r_query_mode = undefined
-          this.header = ""
-          this.loadBookContent()
-        }
+        header_name: this.header,
+        book_name: this.book_name,
+        label: this.selected_header
+      }
+      const response = await axios.post("http://127.0.0.1:5000//api/integral-add-header", JSON.stringify(data))
+      if (response.data.status == 'ok') {
+        this.r_query_mode = undefined
+        this.header = ""
+        this.loadBookContent()
+      }
     },
-    
+
     //Delete Books
-    deleteBook: function(){
+    deleteBook: function () {
       this.r_query_mode = 'delete book'
       this.selected_book = []
       this.checkVal = []
       this.show_delete_book_msg = false
-      for(let i=0;i <= this.book_list.lenth; i++){
+      for (let i = 0; i <= this.book_list.lenth; i++) {
         this.checkVal.add(false)
       }
     },
-    cancelDelete: function(){
+    cancelDelete: function () {
       this.show_delete_book_msg = false
       this.r_query_mode = undefined
     },
-    doDeleteBook: async function(){
+    doDeleteBook: async function () {
       const data = {
         books: this.selected_book
       }
@@ -857,30 +938,30 @@ export default {
         this.show_delete_book_msg = false
       }
     },
-    showDeleteDialog: function(){
+    showDeleteDialog: function () {
       this.show_delete_book_msg = true
     },
 
-    selectBook: function(i, book_name){
-      if(this.checkVal[i]&&!this.selected_book.includes(book_name)){
+    selectBook: function (i, book_name) {
+      if (this.checkVal[i] && !this.selected_book.includes(book_name)) {
         this.selected_book.push(book_name)
-      }if(!this.checkVal[i]&&this.selected_book.includes(book_name)){
-        this.selected_book.splice(this.selected_book.findIndex(j => j==book_name))
+      } if (!this.checkVal[i] && this.selected_book.includes(book_name)) {
+        this.selected_book.splice(this.selected_book.findIndex(j => j == book_name))
       }
       console.log(this.selected_book)
     },
 
     // Add book
-    addBook: function() {
+    addBook: function () {
       this.r_query_mode = 'add book'
       this.selected_book = []
       this.checkVal = []
-      for(let i=0;i < this.book_list.lenth; i++){
+      for (let i = 0; i < this.book_list.lenth; i++) {
         this.checkVal.add(false)
       }
     },
 
-    doAddBook: async function(){
+    doAddBook: async function () {
       const data = {
         new_book_name: this.new_book_name,
         imports: this.selected_book
@@ -896,12 +977,12 @@ export default {
     },
 
     // Add goal
-    addGoal: function() {
+    addGoal: function () {
       this.r_query_mode = 'add goal'
     },
 
     // Perform add goal
-    doAddGoal: async function() {
+    doAddGoal: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -921,7 +1002,7 @@ export default {
     },
 
     // Perform proof by calculation
-    proofByCalculation: async function() {
+    proofByCalculation: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -937,13 +1018,13 @@ export default {
     },
 
     // First stage of proof by induction: query for induction variable
-    proofByInduction: function() {
+    proofByInduction: function () {
       this.expr_query1 = "0"
       this.r_query_mode = 'apply induction'
     },
 
     // Second stage of proof by induction
-    doApplyInduction: async function() {
+    doApplyInduction: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -961,7 +1042,7 @@ export default {
     },
 
     // Perform proof by rewrite goal
-    proofByRewriteGoal: async function() {
+    proofByRewriteGoal: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -975,7 +1056,7 @@ export default {
       }
     },
 
-    doApplyRewriteGoal: async function(index) {
+    doApplyRewriteGoal: async function (index) {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -992,7 +1073,7 @@ export default {
     },
 
     // Simple form of applying a rule
-    applyRule: async function(rulename) {
+    applyRule: async function (rulename) {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1011,7 +1092,7 @@ export default {
     },
 
     // Expand definition
-    expandDefinition: async function() {
+    expandDefinition: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1030,7 +1111,7 @@ export default {
     },
 
     // Second stage of expand definition
-    doExpandDefinition: async function(index) {
+    doExpandDefinition: async function (index) {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1052,7 +1133,7 @@ export default {
     },
 
     // Fold definition
-    foldDefinition: async function() {
+    foldDefinition: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1068,7 +1149,7 @@ export default {
     },
 
     // First stage of integrate by parts: query for list of integrals
-    integrateByParts: async function() {
+    integrateByParts: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1084,7 +1165,7 @@ export default {
     },
 
     // Second stage of integrate by parts
-    doIntegrateByParts: async function() {
+    doIntegrateByParts: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1106,7 +1187,7 @@ export default {
     },
 
     // First stage of forward substitution: query for list of integrals
-    forwardSubstitution: async function() {
+    forwardSubstitution: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1122,7 +1203,7 @@ export default {
     },
 
     // Second stage of forward substitution
-    doForwardSubstitution: async function() {
+    doForwardSubstitution: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1145,7 +1226,7 @@ export default {
     },
 
     // First stage of backward substitution: query for list of integrals
-    backwardSubstitution: async function() {
+    backwardSubstitution: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1160,9 +1241,9 @@ export default {
         this.r_query_mode = 'backward substitution'
       }
     },
-    
+
     // Second stage of backward substitution
-    doBackwardSubstitution: async function() {
+    doBackwardSubstitution: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1185,7 +1266,7 @@ export default {
     },
 
     // Compute integral by solving equation
-    solveEquation: async function() {
+    solveEquation: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1204,17 +1285,17 @@ export default {
     },
 
     // First stage of rewriting
-    rewriteEquation: function() {
+    rewriteEquation: function () {
       this.selected_expr = undefined
       this.latex_selected_expr = undefined
       this.r_query_mode = 'rewrite equation'
     },
 
     // Select expression during rewriting
-    selectExpr: async function() {
+    selectExpr: async function () {
       const start = this.$refs.select_expr1.selectionStart
       const end = this.$refs.select_expr1.selectionEnd
-      this.selected_expr = this.lastExpr.slice(start, end)   
+      this.selected_expr = this.lastExpr.slice(start, end)
       const data = {
         expr: this.lastExpr,
         selected_expr: this.selected_expr
@@ -1222,12 +1303,12 @@ export default {
       const response = await axios.post("http://127.0.0.1:5000/api/query-latex-expr", JSON.stringify(data))
       if (response.data.status === 'ok') {
         this.latex_selected_expr = response.data.latex_expr,
-        this.selected_loc = response.data.loc
+          this.selected_loc = response.data.loc
       }
     },
 
     // Perform rewriting
-    doRewriteEquation: async function() {
+    doRewriteEquation: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1249,7 +1330,7 @@ export default {
     },
 
     // First stage of rewriting using identity
-    rewriteUsingIdentity: function() {
+    rewriteUsingIdentity: function () {
       this.selected_expr = undefined
       this.latex_selected_expr = undefined
       this.identity_rewrites = []
@@ -1257,10 +1338,10 @@ export default {
     },
 
     // Select expressiong during rewriting using identity
-    selectExprIdentity: async function() {
+    selectExprIdentity: async function () {
       const start = this.$refs.select_expr1.selectionStart
       const end = this.$refs.select_expr1.selectionEnd
-      this.selected_expr = this.lastExpr.slice(start, end)   
+      this.selected_expr = this.lastExpr.slice(start, end)
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1278,7 +1359,7 @@ export default {
     },
 
     // Perform rewriting using identity
-    applyIdentity: async function(index) {
+    applyIdentity: async function (index) {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1300,12 +1381,12 @@ export default {
     },
 
     // First stage of split region: query for splitting point
-    splitRegion: function() {
+    splitRegion: function () {
       this.r_query_mode = 'split region'
     },
 
     // Second stage of split region
-    doSplitRegion: async function() {
+    doSplitRegion: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1326,7 +1407,7 @@ export default {
     },
 
     // First stage of apply theorem: select theorem to apply
-    applyTheorem: async function() {
+    applyTheorem: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1343,7 +1424,7 @@ export default {
     },
 
     // Second stage of apply theorem.
-    doApplyTheorem: async function(index) {
+    doApplyTheorem: async function (index) {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1365,7 +1446,7 @@ export default {
     },
 
     // First stage of variable substitution
-    variableSubstitution: async function() {
+    variableSubstitution: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1381,7 +1462,7 @@ export default {
     },
 
     // Second stage of variable substitution
-    doVariableSubstitution: async function() {
+    doVariableSubstitution: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,
@@ -1402,7 +1483,7 @@ export default {
     },
 
     // First stage of differentiate both sides
-    applyDerivBothSides: function() {
+    applyDerivBothSides: function () {
       this.r_query_mode = 'derivate both sides'
     },
 
@@ -1428,7 +1509,7 @@ export default {
     },
 
     // Slagle algorithm
-    slagleAlgo : async function () {
+    slagleAlgo: async function () {
       const data = {
         book: this.book_name,
         file: this.filename,

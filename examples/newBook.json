@@ -25,6 +25,39 @@
                     "expr": "I(x) = x+3",
                     "path": "test",
                     "type": "definition"
+                },
+                {
+                    "name": "sin",
+                    "table": {},
+                    "type": "table"
+                },
+                {
+                    "name": "atan",
+                    "table": {},
+                    "type": "table"
+                },
+                {
+                    "name": "cos",
+                    "table": {
+                        "0": "1",
+                        "pi": "-1"
+                    },
+                    "type": "table"
+                },
+                {
+                    "attributes": [],
+                    "category": "unknown",
+                    "conds": [
+                        "x>0"
+                    ],
+                    "expr": "exp(x) > x+1",
+                    "reference": "",
+                    "type": "inequality"
+                },
+                {
+                    "content": [],
+                    "name": "Header1.1",
+                    "type": "header"
                 }
             ],
             "name": "Header 1",

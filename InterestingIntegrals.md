@@ -20,7 +20,7 @@ In fact, not all the formulas below are integrals.
 
 - [ ]  $\int_0^1 \frac 1 {\left[ax + b(1-x)\right]^2}dx = \frac 1{ab}$ for $ab>0$
 
-- [1.6.2](# Cauchy_Principle_Value)
+- [1.6.2](#Cauchy_Principle_Value)
 
 * [ ]  $P.V. \int_0^\infty \frac{1}{x ^ 3 - 1} dx = 0$
 

@@ -20,9 +20,9 @@ In fact, not all the formulas below are integrals.
 
 - [ ]  $\int_0^1 \frac 1 {\left[ax + b(1-x)\right]^2}dx = \frac 1{ab}$ for $ab>0$
 
-- 1.6.2
+- [1.6.2](# Cauchy_Principle_Value)
 
-* [ ]  $\int_0^\infty \frac{1}{x ^ 3 - 1} dx = 0$
+* [ ]  $P.V. \int_0^\infty \frac{1}{x ^ 3 - 1} dx = 0$
 
 #### 1.7 Dalzell’s Integral
 
@@ -1486,3 +1486,15 @@ $$
 - C8.8
 
 - [ ]  $\int_{-\infty}^{\infty} \frac{x^2}{(x^2+a^2)^3}dx=\frac\pi{8a^3}$ for $a>0$
+
+## Unsolved Problems
+
+Here shows the problems we need to solve.
+
+### Unsupported Functions
+
+Some functions haven't been supported yet.
+
+<h4 id=Cauchy_Principle_Value>Cauchy Principnle Value</h4>
+
+Some improper integrals may not be convergent. However, we can calculate the Cauchy principle value of the integral. It's somewhat like a mistake that a beginner will make.

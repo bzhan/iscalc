@@ -1,6 +1,6 @@
 # List of Integrals
 
-This is the list of integrals which appeared in the textbook *Inside Interesting Integrals*.
+This is a list of numbered integrals appearing in the textbook *Inside Interesting Integrals*.
 
 ## All Integrals
 
@@ -16,7 +16,7 @@ In fact, not all the formulas below are integrals.
 
 #### 1.6 Singularities
 
-- 1.6.1
+- [1.6.1](#Overly_Stringent_Conditions)
 
 - [ ]  $\int_0^1 \frac 1 {\left[ax + b(1-x)\right]^2}dx = \frac 1{ab}$ for $ab>0$
 
@@ -32,13 +32,13 @@ In fact, not all the formulas below are integrals.
 
 #### 1.8 Where Integrals Come From
 
-- 1.8.1
+- [1.8.1](#Decimal_Part_Function)
 
 - [ ]  $\int_0^\infty \frac{\left\{x\right\}-\frac{1}{2}}{x} dx = -1 + \ln{\sqrt{2 \pi}}$
 
 #### 1.10 Challenge Problems
 
-- C1.1
+- [C1.1](#Cauchy_Principle_Value)
 
 * [ ]  $\int_0^8 \frac{1}{x-2}dx = \ln{3}$
 * [ ]  $\int_0^3 \frac{1}{(x - 1) ^ {2 / 3}}dx = 3(1 + 2 ^ {1/3})$
@@ -103,7 +103,7 @@ In fact, not all the formulas below are integrals.
 
 #### 2.3 Two Old New Tricks
 
-- 2.3.1
+- [2.3.1](#Complex_Conditions)
 
 - [ ]  $\int_0^\infty \frac{1}{\prod_{k=1}^n (x^2 + a_k^2)}dx = \frac{\pi}{2}\sum_{k=1}^n \frac{c_k}{a_k}$ for $c_k = \frac{1}{\prod_{j=1, j\neq k}^n(a_j^2-a_k^2)}$, $a_i\neq a_j$ if $j\neq i$
 
@@ -113,7 +113,7 @@ In fact, not all the formulas below are integrals.
 
 - 2.3.3
 
-- [ ]  $\int_0^\infty \frac{1}{x^4 + 2x^2\cos{(2\alpha)}+1}dx = \frac{\pi}{2\left\vert\cos{\alpha}\right\vert}$ for $\cos{\alpha} \neq 0$
+- [X]  $\int_0^\infty \frac{1}{x^4 + 2x^2\cos{(2\alpha)}+1}dx = \frac{\pi}{4\left\vert\cos{\alpha}\right\vert}$ for $\cos{\alpha} \neq 0$
 
 - 2.3.4
 
@@ -143,7 +143,7 @@ In fact, not all the formulas below are integrals.
 
 - 2.4.1
 
-- [ ]  $\int_0^{\frac\pi2}\ln{(a\sin x)}dx = \int_0^{\frac\pi2}\ln{(a\cos x)}dx = \frac\pi2\ln\frac a2$ for $a > 0$
+- [X]  $\int_0^{\frac\pi2}\ln{(a\sin x)}dx = \int_0^{\frac\pi2}\ln{(a\cos x)}dx = \frac\pi2\ln\frac a2$ for $a > 0$
 
 - 2.4.2
 
@@ -157,7 +157,7 @@ In fact, not all the formulas below are integrals.
 
 - [ ]  $\int_0^\infty \frac{\ln (x + \frac 1 x )}{x ^ 2 + 1}dx = \frac \pi 2 \ln 2$
 
-- 2.4.5
+- [2.4.5](#Overly_Stringent_Conditions)
 
 - [ ]  $\int_0^\infty \frac {\ln x}{1-bx+x^2}dx =0$ for $b < 2$
 
@@ -197,7 +197,7 @@ In fact, not all the formulas below are integrals.
 
 - 3.1.4
 
-- [ ]  $\int_{-\infty}^\infty e^{-\frac{x^2}2}dx = \sqrt{2\pi}$
+- [X]  $\int_{-\infty}^\infty e^{-\frac{x^2}2}dx = \sqrt{2\pi}$
 
 - 3.1.5
 
@@ -213,17 +213,17 @@ In fact, not all the formulas below are integrals.
 
 - 3.1.8
 
-- [X]  $\int_0^1 \frac{1}{\sqrt{-\ln x}}dx = \sqrt\pi$
+- [ ]  $\int_0^1 \frac{1}{\sqrt{-\ln x}}dx = \sqrt\pi$
 
 #### 3.2 An Amazing Integral
 
 - 3.2.1
 
-- [ ]  $\int_0^\infty \frac{\sin(ax)}x dx = \frac{\pi}2~\mathrm{sgn}(a) $
+- [X]  $\int_0^\infty \frac{\sin(ax)}x dx = \frac{\pi}2~\mathrm{sgn}(a) $
 
 #### 3.3 Frullani’s Integral
 
-- 3.3.1
+- [3.3.1](#Overly_Stringent_Conditions)
 
 - [ ]  $\int_0^\infty \frac{\tan^{-1}(ax)-\tan^{-1}(bx)}x dx = \frac{\pi}2 \ln \frac a b$ for $\frac a b > 0$
 
@@ -241,7 +241,7 @@ In fact, not all the formulas below are integrals.
 
 - [ ]  $\int_0^\infty \frac{e^{-pt^2}-e^{-qt^2}}{t^2}dt = \sqrt \pi (\sqrt q - \sqrt p)$ for $p >0, q > 0$
 
-- 3.4.3
+- [3.4.3](#Overly_Stringent_Conditions)
 
 - [ ]  $\int_0^1 \frac{x^a-1}{\ln x} dx = \ln(a+1)$ for $a > -1$
 
@@ -330,17 +330,17 @@ In fact, not all the formulas below are integrals.
 
 - C3.1
 
-- [ ]  $\int_0^\infty \frac{\ln(1+a^2x^2)}{b^2+x^2}dx = \pi \frac{\ln(1+ab)}b$ for $a > 0, b>0$
+- [X]  $\int_0^\infty \frac{\ln(1+a^2x^2)}{b^2+x^2}dx = \pi \frac{\ln(1+ab)}b$ for $a > 0, b>0$
 
-- C3.2
+- [C3.2](#Cauchy_Principle_Values)
 
 - [ ]  $P.V.\int_{-\infty}^{\infty} \frac{\cos (ax)}{b^2-x^2}dx = \pi \frac{\sin(ab)}b$ for $a > 0, b > 0$
 
-- C3.3
+- [C3.3](#Cauchy_Principle_Value)
 
 - [ ]  $P.V.\int_{-\infty}^{\infty} \frac{\cos (ax)}{b^4-x^4}dx = \frac{\pi(e^{-ab} + \sin(ab))}{2b^3}$ for $a >0, b >0$
 
-- C3.4
+- [C3.4](#Cauchy_Principle_Value)
 
 - [ ]  $P.V.\int_{0}^{\infty} \frac{x\sin (ax)}{x^2-b^2}dx = \frac\pi 2 \cos(ab)$ for $a > 0$
 
@@ -359,18 +359,18 @@ $$
 
 - C3.6
 
-- [ ]  $\int_{-1}^1 \sqrt\frac{1+x}{1-x}dx=\pi$
+- [X]  $\int_{-1}^1 \sqrt\frac{1+x}{1-x}dx=\pi$
 
 - C3.8
 
-- [ ]  $\int_{-\infty}^{\infty} xe^{-x^2-x}dx = -\frac12\sqrt{\pi\sqrt e}$
-- [ ]  $\int_{-\infty}^{\infty} x^2e^{-x^2-x}dx = \frac34\sqrt{\pi\sqrt e}$
+- [X]  $\int_{-\infty}^{\infty} xe^{-x^2-x}dx = -\frac12\sqrt{\pi\sqrt e}$
+- [X]  $\int_{-\infty}^{\infty} x^2e^{-x^2-x}dx = \frac34\sqrt{\pi\sqrt e}$
 
 - C3.9
 
-- [ ]  $\int_0^\infty \frac{\sin(mx)}{x(x^2+a^2)^2}dx = \frac{\pi}{2a^4}(1-\frac{2+ma}2e^{-am})$ for $a > 0, m>0$
+- [X]  $\int_0^\infty \frac{\sin(mx)}{x(x^2+a^2)^2}dx = \frac{\pi}{2a^4}(1-\frac{2+ma}2e^{-am})$ for $a > 0, m>0$
 
-- C3.10
+- [C3.10](#Overly_Stringent_Conditions)
 
 - [ ]  $\int_0^1 \frac x {\left[ax+b(1-x)\right]^3} = \frac 1 {2a^2b}$ for $ab > 0$
 
@@ -380,19 +380,19 @@ $$
 
 - 4.1.1
 
-- [ ]  $\Gamma(n) = \int_0^\infty e^{-x}x^{n-1}dx$ for $n > 0$ (Definition)
+- [X]  $\Gamma(n) = \int_0^\infty e^{-x}x^{n-1}dx$ for $n > 0$ (Definition)
 
 - 4.1.2
 
-- [ ]  $\Gamma{(n + 1)} = n\Gamma(n)$ for $n \in \mathbb{N}_+$
+- [X]  $\Gamma{(n + 1)} = n\Gamma(n)$ for $n \in \mathbb{N}_+$
 
 - 4.1.3
 
-- [ ]  $\Gamma(n) = (n-1)!$ for $n \in \mathbb{N}_+$
+- [X]  $\Gamma(n) = (n-1)!$ for $n \in \mathbb{N}_+$
 
 - 4.1.4
 
-- [ ]  $\int_0^\infty e ^{-x^3} dx = \Gamma(\frac 4 3)$
+- [X]  $\int_0^\infty e ^{-x^3} dx = \Gamma(\frac 4 3)$
 
 #### 4.2 Wallis’ Integral and the Beta Function
 
@@ -422,7 +422,7 @@ $$
 
 - 4.2.7
 
-- [ ]  $(\frac 1 2)! = \frac 1 2 \sqrt \pi$
+- [X]  $(\frac 1 2)! = \frac 1 2 \sqrt \pi$
 
 - 4.2.8
 
@@ -1416,7 +1416,7 @@ $$
 
 - 8.7.4
 
-- [X]  $\int_{\infty}^{\infty} \frac{1}{ax^2+bx+c}=\frac{2\pi}{\sqrt{4ac-b^2}}$ for $a\neq0, b^2<4ac$
+- [ ]  $\int_{\infty}^{\infty} \frac{1}{ax^2+bx+c}=\frac{2\pi}{\sqrt{4ac-b^2}}$ for $a\neq0, b^2<4ac$
 
 - 8.7.8
 
@@ -1489,12 +1489,32 @@ $$
 
 ## Unsolved Problems
 
-Here shows the problems we need to solve.
+Here shows the problems to be solved.
 
 ### Unsupported Functions
 
 Some functions haven't been supported yet.
 
-<h4 id=Cauchy_Principle_Value>Cauchy Principnle Value</h4>
+<h4 id=Cauchy_Principle_Value>Cauchy Principle Value</h4>
 
-Some improper integrals may not be convergent. However, we can calculate the Cauchy principle value of the integral. It's somewhat like a mistake that a beginner will make.
+Some improper integrals may not be convergent. However, sometimes we can calculate the Cauchy principle value of the integral. It's somewhat like a mistake that a beginner will make.
+
+<h4 id=Decimal_Part_Function>Decimal Part Function</h4>
+
+Suppose that $x=3.14$, and then $\left\{x\right\}$ gets 0.14. It's easy to see that $0\leq\left\{x\right\}<1$ for $x\in\mathbb{R}$.
+
+### Conditions
+
+Some integral-related equations only hold under specific conditions.
+
+<h4 id=Complex_Conditions>Complex Conditions</h4>
+
+Some conditions are too difficult to express in the program right now.
+
+<h4 id=Incomplete_Conditions>Incomplete Conditions</h4>
+
+We have shown that some integral holds, but did not fully specify its conditions. In other words, the proof is not rigorous.
+
+<h4 id=Overly_Stringent_Conditions>Overly Stringent Conditions</h4>
+
+We have shown that some integral holds,but in fact, the conditions can be weakened.

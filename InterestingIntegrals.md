@@ -629,6 +629,10 @@ $$
 
 #### 5.3 Zeta Function Integrals
 
+- Defintion 1
+
+- [ ]  $\zeta(s) =\sum_{k=1}^\infty \frac{1}{k^s}$
+
 - 5.3.1
 
 - [ ]  $\int_0^1 \int_0^1 \frac{x^ay^a}{1-xy}dxdy = \sum_{n=1}^\infty \frac 1{(n+a)^2}$
@@ -637,7 +641,7 @@ $$
 
 - [ ]  $\int_0^1 \int_0^1 \frac{(xy)^a\left[\ln (xy)\right]^{s-2}}{1-xy}dxdy =(-1)^s(s-1)!\sum_{n=1}^\infty \frac1{(n+a)^s}$
 
-- 5.3.3 (Definition)
+- 5.3.3
 
 - [ ]  $\zeta(s) = \frac{(-1)^s}{(s-1)!}\int_0^1\int_0^1\frac{\left[\ln(xy)\right]^{s-2}}{1-xy}dxdy$
 
@@ -1014,7 +1018,7 @@ $$
 
 - 7.5.1
 
-- [X]  $\int_0^\infty e^{-x^2}dx =\frac12 \sqrt\pi$ (Reference)
+- [ ]  $\int_0^\infty e^{-x^2}dx =\frac12 \sqrt\pi$ (Reference)
 
 - 7.5.2
 
@@ -1372,3 +1376,113 @@ $$
 
 - [ ]  $\overline{\sin(\omega_0t)} = -\cos(\omega_0t)$ for $\omega_0>0$
 - [ ]  $\overline{\cos(\omega_0t)} = \sin(\omega_0t)$ for $\omega_0>0$
+
+### Chapter 8: Contour Integration
+
+#### 8.3 Functions of a Complex Variable
+
+- 8.3.6
+
+- [ ]  $\int_0^{2\pi} e^{\cos\theta}d\theta = 2\pi \sum_{m=0}^\infty \frac{1}{2^{2m}(m!)^2}$
+
+#### 8.6 Cauchy’s First Integral Theorem
+
+- 8.6.4
+
+- [ ]  $\int_0^\infty \frac{\cos x - e^{-x}}x dx =0$
+
+- 8.6.5
+
+- [ ]  $\int_{-\infty}^\infty \frac{1}{ax^2+bx+c}dx = 0$ for $a\neq 0, b^2>4ac$
+
+- 8.6.9
+
+- [ ]  $\int_{-\infty}^\infty \frac{e^{ax}}{1-e^{x}}dx = \frac{\pi}{\tan(a\pi)}$ for $0<a<1$
+
+- Definition 1
+
+- [ ]  $I(a) = \int_0^\infty \frac{\cos x}{x+a} dx = \lim_{T\rightarrow \infty}\int_0^T \frac{\cos x}{x+a}dx$ for $a>0$
+
+- Definition 2
+
+- [ ]  $J(a) = \int_0^\infty \frac{\sin x}{x+a} dx = \lim_{T\rightarrow \infty}\int_0^T \frac{\sin x}{x+a}dx$ for $a>0$
+
+- 8.6.11
+
+- [ ]  $I(a) = \int_0^\infty \frac{xe^{-x}}{x^2+a^2}dx$ for $a>0$
+- [ ]  $J(a) = a\int_0^\infty a\frac{e^{-x}}{x^2+a^2}dx$ for $a > 0$
+
+#### 8.7 Cauchy’s Second Integral Theorem
+
+- 8.7.4
+
+- [X]  $\int_{\infty}^{\infty} \frac{1}{ax^2+bx+c}=\frac{2\pi}{\sqrt{4ac-b^2}}$ for $a\neq0, b^2<4ac$
+
+- 8.7.8
+
+- [ ]  $\int_0^\infty \frac{x^m}{x^n+1}dx = \frac{\frac{\pi}n}{\sin\left[ (m+1)\frac\pi n\right]}$ for $m \in \mathbb{N},n\in\mathbb{N}, n-m\geq 2$
+
+- 8.7.9
+
+- [ ]  $\int_0^\infty \frac{x^{a-1}}{x+1}dx = \frac{\pi}{\sin(a\pi)}$ for $0<a<1$
+
+- 8.7.10
+
+- [ ]  $\int_{-\infty}^\infty \frac{e^{ax}}{1+e^x} dx = \frac{\pi}{\sin(a\pi)}$ for $0<a<1$
+
+- 8.7.11
+
+- [ ]  $\int_{-\infty}^\infty \frac{1}{(1+x)x^a} dx = \frac{\pi}{\sin(a\pi)}$ for $0<a<1$
+
+- 8.7.14
+
+- [ ]  $\int_0^{2\pi} \frac{1}{a+\sin^2 \theta}=\frac{2\pi}{\sqrt{a(a+1)}}$ for $a>0$
+
+#### 8.8 Singularities and the Residue Theorem
+
+- 8.8.11
+
+- [ ]  $\int_0^{2\pi} \cos^k \theta d\theta = \frac{2\pi}{2^k} \frac{k!}{\left[(\frac k2)!\right]^2}$ for $k$ is even
+
+- 8.8.12
+
+- [ ]  $\int_0^{2\pi} \frac{1}{(1+k\cos\theta)^2}d\theta = \frac{2\pi}{(1-k^2)^\frac32}$ for $k <1$
+
+- 8.8.13
+
+- [ ]  $\int_0^\infty \frac{\ln x}{(x+a)^2 +b^2}dx = \frac 1b \tan^{-1} (\frac ba) \ln(\sqrt{a^2+b^2})$ for $a\geq 0, b>0$
+
+#### 8.10 Challenge Problems
+
+- C8.2
+
+- [ ]  $\int_0^\infty \frac{\sin(mx)}{x(x^2+a^2)}dx = \frac\pi2(\frac{1-e^{-am}}{a^2})$ for $a>0, m>0$
+
+- C8.3
+
+- [ ]  $\int_0^{2\pi} \frac{1}{1-2a\cos\theta +a^2} d\theta= \frac{2\pi}{1-a^2}$ for $0<a<1$
+- [ ]  $\int_{-\infty}^{\infty} \frac{\cos x}{(x+a)^2 + b ^2} dx = \frac{\pi}b e^{-b}\cos a$ for $a >0, b>0$
+- [ ]  $\int_{-\infty}^{\infty} \frac{\sin x}{(x+a)^2 + b ^2} dx = -\frac{\pi}b e^{-b}\sin a$ for $a >0, b>0$
+- [ ]  $\int_{-\infty}^\infty \frac{\cos x}{(x^2+a^2)(x^2+b^2)}dx = \frac\pi{a^2-b^2}(\frac{e^{-b}}b-\frac{e^{-a}}a)$ for $a>b>0$
+- [ ]  $\int_{-\infty}^{\infty} \frac{\cos (ax)}{(x^2+b^2)^2} dx = \frac{\pi}{4b^3} (1+ab)e^{-ab}$ for $a >0, b>0$
+
+- C8.4
+
+- [ ]  $\int_0^\infty \frac{x^k}{(x^2+1)^2}dx = \frac{\pi(1-k)}{4\cos \frac{k\pi}2}$ for $-1<k<3$
+
+- C8.5
+
+- [ ]  $\int_{-\infty}^{\infty} \frac{\cos (mx)}{ax^2+bx+c}dx = -2\pi\frac{\cos\frac{mb}{2a}\sin\frac{m\sqrt{b^2-4ac}}{2a}}{\sqrt{b^2-4ac}}$ for $b^2\geq 4ac$
+
+- C8.6
+
+- [ ]  $\int_0^{\infty} \frac{x^p}{(x+1)(x+2)}dx=(2^p-1)\frac{\pi}{\sin(px)}$ for $-1<p<1$
+- [ ]  $\int_0^{\infty} \frac{x^\frac12}{(x+1)(x+2)}dx=(\sqrt2-1)\pi$
+
+- C8.7
+
+- [ ]  $\int_0^\infty \frac{e^{\cos x }\sin(\sin x)}xdx=\frac\pi2(e-1)$
+
+- C8.8
+
+- [ ]  $\int_{-\infty}^{\infty} \frac{x^2}{(x^2+a^2)^3}dx=\frac\pi{8a^3}$ for $a>0$

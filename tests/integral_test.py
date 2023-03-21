@@ -911,6 +911,22 @@ class IntegralTest(unittest.TestCase):
 
         self.checkAndOutput(file)
 
+    def testChapter1Section7(self):
+        # Reference:
+        # Inside interesting integrals, Section 1.7
+        file = compstate.CompFile("interesting", "chapter1section7")
+
+        goal = file.add_goal("(INT x:[0,1]. (x^4*(1-x)^4)/(1+x^2)) = 22/7 - pi")
+        proof = goal.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.Equation("(x^4*(1-x)^4)/(1+x^2)", "(x^6-4*x^5+5*x^4-4*x^2+4)-4/(1+x^2)"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("-pi+22/7", "22/7-pi"))
+
+        self.checkAndOutput(file)
+
     def testEasy01(self):
         # Reference:
         # Inside interesting integrals, Section 2.1.a
@@ -2859,6 +2875,24 @@ class IntegralTest(unittest.TestCase):
     #     calc.perform_rule(rules.FullSimplify())
     #     calc = proof.rhs_calc
     #     calc.perform_rule(rules.ExpandPolynomial())
+    #     self.checkAndOutput(file)
+
+    # def testChapter1Practice03(self):
+    #     # Reference:
+    #     # Inside interesting integrals, C1.5
+    #     file = compstate.CompFile("interesting", "chapter1_practice03")
+    #
+    #     goal = file.add_goal("(INT x:[0,pi/3]. 1/cos(x))=log(2+sqrt(3))")
+    #     proof = goal.proof_by_calculation()
+    #     calc = proof.lhs_calc
+    #     calc.perform_rule(rules.Equation("1/cos(x)", "cos(x)/(cos(x))^2"))
+    #     calc.perform_rule(rules.ApplyIdentity("(cos(x))^2", "1-(sin(x))^2"))
+    #     calc.perform_rule(rules.Substitution(var_name="u", var_subst="sin(x)"))
+    #     calc.perform_rule(rules.Equation("1/(-(u^2)+1)", "1/2 * (1/(1-u)+1/(1+u))"))
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.DefiniteIntegralIdentity())
+    #     calc.perform_rule(rules.FullSimplify())
+    #
     #     self.checkAndOutput(file)
 
     def testChapter2Practice01(self):

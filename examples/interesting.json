@@ -17,6 +17,18 @@
                             "path": "chapter1section5"
                         }
                     ]
+                },
+                {
+                    "type": "header",
+                    "name": "1.7 Dalzell’s Integral",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0,1]. (x^4*(1-x)^4)/(1+x^2)) = 22/7 - pi",
+                            "path": "chapter1section7"
+                        }
+                    ]
                 }
             ]
         },

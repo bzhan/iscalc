@@ -909,6 +909,22 @@ class IntegralTest(unittest.TestCase):
 
         self.checkAndOutput(file)
 
+    def testChapter1Section7(self):
+        # Reference:
+        # Inside interesting integrals, Section 1.7
+        file = compstate.CompFile("interesting", "chapter1section7")
+
+        goal = file.add_goal("(INT x:[0,1]. (x^4*(1-x)^4)/(1+x^2)) = 22/7 - pi")
+        proof = goal.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.Equation("(x^4*(1-x)^4)/(1+x^2)", "(x^6-4*x^5+5*x^4-4*x^2+4)-4/(1+x^2)"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("-pi+22/7", "22/7-pi"))
+
+        self.checkAndOutput(file)
+
     def testEasy01(self):
         # Reference:
         # Inside interesting integrals, Section 2.1.a

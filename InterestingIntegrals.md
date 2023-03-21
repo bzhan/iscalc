@@ -28,7 +28,7 @@ In fact, not all the formulas below are integrals.
 
 - 1.7.1
 
-* [ ]  $\int_0^1 \frac{x^4 (1 - x) ^ 4}{1 + x^2}dx = \frac{22}{7} - \pi$
+* [X]  $\int_0^1 \frac{x^4 (1 - x) ^ 4}{1 + x^2}dx = \frac{22}{7} - \pi$
 
 #### 1.8 Where Integrals Come From
 
@@ -47,7 +47,7 @@ In fact, not all the formulas below are integrals.
 
 * [ ]  $\int_0^\infty \frac{1}{\sqrt{x^3 - 1}} dx < 4 $
 
-- C1.5
+- [C1.5](#Undetermined_Ranges)
 
 - [ ]  $\int_0^\frac\pi3 \frac1{\cos \theta}d\theta = \ln(2+\sqrt3)$
 
@@ -1497,7 +1497,7 @@ Some functions haven't been supported yet.
 
 <h4 id=Cauchy_Principle_Value>Cauchy Principle Value</h4>
 
-Some improper integrals may not be convergent. However, sometimes we can calculate the Cauchy principle value of the integral. It's somewhat like a mistake that a beginner will make.
+Some improper integrals may not be convergent. However, sometimes we can calculate the Cauchy principle value of the integral. It is somewhat like a mistake that a beginner will make.
 
 <h4 id=Decimal_Part_Function>Decimal Part Function</h4>
 
@@ -1513,8 +1513,16 @@ Some conditions are too difficult to express in the program right now.
 
 <h4 id=Incomplete_Conditions>Incomplete Conditions</h4>
 
-We have shown that some integral holds, but did not fully specify its conditions. In other words, the proof is not rigorous.
+We have shown that some propositions hold, but did not fully specify the conditions of them. In other words, the proof is not rigorous.
 
 <h4 id=Overly_Stringent_Conditions>Overly Stringent Conditions</h4>
 
-We have shown that some integral holds,but in fact, the conditions can be weakened.
+We have shown that some propositions hold, but in fact, the conditions of them can be weakened.
+
+### Unsolved Equations
+
+Not all equations can be solved easily.
+
+<h4 id=Undetermined_Ranges>Undetermined Ranges</h4>
+
+It is tough to calculate the ranges of some expressions. Even worse, some operations can not be performed if it is uncertain whether the denominator may be equal to zero.

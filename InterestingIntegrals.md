@@ -18,7 +18,7 @@ In fact, not all the formulas below are integrals.
 
 - [1.6.1](#Overly_Stringent_Conditions)
 
-- [ ]  $\int_0^1 \frac 1 {\left[ax + b(1-x)\right]^2}dx = \frac 1{ab}$ for $ab>0$
+- [ ]  $\int_0^1 \frac 1 {\left[ax + b(1-x)\right]^2}dx = \frac 1{ab}$ for $ab>0$ (Notice that the proof is in 3.10)
 
 - [1.6.2](#Cauchy_Principle_Value)
 

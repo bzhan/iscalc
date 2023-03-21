@@ -43,7 +43,7 @@ In fact, not all the formulas below are integrals.
 * [ ]  $\int_0^8 \frac{1}{x-2}dx = \ln{3}$
 * [ ]  $\int_0^3 \frac{1}{(x - 1) ^ {2 / 3}}dx = 3(1 + 2 ^ {1/3})$
 
-- C1.2
+- [C1.2](#Undetermined_Ranges)
 
 * [ ]  $\int_0^\infty \frac{1}{\sqrt{x^3 - 1}} dx < 4 $
 

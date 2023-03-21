@@ -1,9 +1,9 @@
 {
+    "type": "header",
     "content": [
         {
             "type": "header",
             "name": "Inequality reasoning",
-            "level": 1,
             "content": [
 
             ]
@@ -11,7 +11,6 @@
         {
             "type": "header",
             "name": "Common integrals",
-            "level": 1,
             "content": [
                 {
                     "type": "axiom",
@@ -92,7 +91,6 @@
         {
             "type": "header",
             "name": "Common series expansion",
-            "level": 1,
             "content": [
                 {
                     "type": "axiom",
@@ -148,7 +146,6 @@
         {
             "type": "header",
             "name": "Common series evaluations",
-            "level": 1,
             "content": [
                 {
                     "type": "axiom",
@@ -170,12 +167,10 @@
         {
             "type": "header",
             "name": "Common identities",
-            "level": 1,
             "content": [
                 {
                     "type": "header",
                     "name": "Absolute value",
-                    "level": 2,
                     "content": [
                         {
                             "type": "axiom",
@@ -229,7 +224,6 @@
                 {
                     "type": "header",
                     "name": "Hyperbolic functions",
-                    "level": 2,
                     "content": [
                         {
                             "type": "definition",
@@ -244,7 +238,6 @@
                 {
                     "type": "header",
                     "name": "Power identities",
-                    "level": 2,
                     "content": [
                         {
                             "type": "axiom",
@@ -309,7 +302,6 @@
                 {
                     "type": "header",
                     "name": "Exp-log identities",
-                    "level": 2,
                     "content": [
                         {
                             "type": "axiom",
@@ -423,7 +415,6 @@
                 {
                     "type": "header",
                     "name": "Table of trigonometric values",
-                    "level": 2,
                     "content": [
                         {
                             "type": "table",
@@ -598,7 +589,6 @@
                 {
                     "type": "header",
                     "name": "Trigonometric identities",
-                    "level": 2,
                     "content": [
                         {
                             "type": "axiom",
@@ -904,7 +894,6 @@
                 {
                     "type": "header",
                     "name": "Factorial and binomial coefficient",
-                    "level": 2,
                     "content": [
                         {
                             "type": "axiom",
@@ -936,7 +925,6 @@
         {
             "type": "header",
             "name": "Derived integrals",
-            "level": 1,
             "content": [
                 {
                     "type": "problem",
@@ -1029,7 +1017,6 @@
         {
             "type": "header",
             "name": "Results from contour integration",
-            "level": 1,
             "content": [
                 {
                     "type": "axiom",
@@ -1059,7 +1046,6 @@
         {
             "type": "header",
             "name": "Gamma and Beta function",
-            "level": 1,
             "content": [
                 {
                     "type": "axiom",

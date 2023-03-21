@@ -1,0 +1,113 @@
+{
+    "content": [
+        {
+            "finished": true,
+            "goal": "(INT x:[0,2]. 2 * x) = 4",
+            "latex_goal": "\\int_{0}^{2} 2 x \\,dx = 4",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{0}^{2} 2 x \\,dx",
+                        "start": "INT x:[0,2]. 2 * x",
+                        "steps": [
+                            {
+                                "latex_res": "2 (\\left. \\frac{x ^ {2}}{2} \\right\\vert_{x=0}^{2})",
+                                "res": "2 * ([x ^ 2 / 2]_x=0,2)",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "4",
+                                "res": "4",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "4",
+                        "start": "4",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(INT x:[0,2]. 2 * x) = 4",
+                "latex_goal": "\\int_{0}^{2} 2 x \\,dx = 4",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "eq": "a = 3",
+            "latex_eq": "a = 3",
+            "latex_lhs": "a",
+            "type": "FuncDef"
+        },
+        {
+            "finished": true,
+            "goal": "(INT x:[0,1]. x) = 1/2",
+            "latex_goal": "\\int_{0}^{1} x \\,dx = \\frac{1}{2}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{0}^{1} x \\,dx",
+                        "start": "INT x:[0,1]. x",
+                        "steps": [
+                            {
+                                "latex_res": "\\left. \\frac{x ^ {2}}{2} \\right\\vert_{x=0}^{1}",
+                                "res": "[x ^ 2 / 2]_x=0,1",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{2}",
+                                "res": "1/2",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{1}{2}",
+                        "start": "1/2",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(INT x:[0,1]. x) = 1/2",
+                "latex_goal": "\\int_{0}^{1} x \\,dx = \\frac{1}{2}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "x > 0",
+                    "latex_cond": "x > 0"
+                }
+            ],
+            "eq": "I(x) = x + 3",
+            "latex_eq": "I{(x)} = x + 3",
+            "latex_lhs": "I{(x)}",
+            "type": "FuncDef"
+        }
+    ],
+    "name": "test"
+}

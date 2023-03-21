@@ -30,15 +30,22 @@ def add_new_book():
     data = json.loads(request.get_data().decode('utf-8'))
     new_book_name = data['new_book_name']
     imports = data['imports']
-    # # load all books
+    # load all books
     file_name = os.path.join(dirname, "../examples/index.json")
     with open(file_name, 'r', encoding='utf-8') as f:
         f_data = json.load(f)
+    if new_book_name in f_data['book_list']:
+        res = {
+            'status': "ok",
+            'book_list': f_data['book_list']
+        }
+        return res
     # add book to book list
     tmp = {
         "content":[],
         "name": new_book_name,
-        "imports": imports
+        "imports": imports,
+        'type':'header'
     }
     with open('../examples/'+new_book_name+'.json', 'w', encoding='utf-8') as f:
         json.dump(tmp, f, indent=4, ensure_ascii=False, sort_keys=True)
@@ -56,7 +63,7 @@ def delete_books():
     # add new book
     data = json.loads(request.get_data().decode('utf-8'))
     books = data['books']
-    # # load all books
+    # load all books
     file_name = os.path.join(dirname, "../examples/index.json")
     with open(file_name, 'r', encoding='utf-8') as f:
         f_data = json.load(f)
@@ -66,7 +73,6 @@ def delete_books():
         os.remove("../examples/"+b+'.json')
     with open('../examples/index.json', 'w', encoding='utf-8') as f:
         json.dump({'book_list':f_data['book_list']}, f, indent=4, ensure_ascii=False, sort_keys=True)
-    
     res = {
         'status': 'ok',
         'book_list': f_data['book_list']
@@ -117,6 +123,54 @@ def integral_load_book_content():
     f_data = rec(f_data)
     return jsonify(f_data)
 
+@app.route("/api/book-add-lemma", methods=['POST'])
+def book_add_lemma():
+    data = json.loads(request.get_data().decode('utf-8'))
+    label, book_name, lemma_type = data['label'], data['book_name'], data['lemma_type']
+    if lemma_type != 'table':
+        item = {
+            'type': lemma_type,
+            'attributes': data['lemma_attributes'],
+            'category': data['lemma_category'],
+            'expr': data['expr'],
+            'conds': data['conds'],
+            'reference': data['reference']
+        }
+    else:
+        table = data['table']
+        item = {
+            'type': lemma_type,
+            'name': data['table_name'],
+            'table': dict(zip(table['args'], table['values']))
+        }
+    compstate.edit_book(label, book_name, item)
+    return jsonify({
+        "status": "ok",
+        "book_name": book_name
+    })
+
+@app.route("/api/book-add-problem", methods=['POST'])
+def book_add_problem():
+    data = json.loads(request.get_data().decode('utf-8'))
+    book_name, label, file = data['book'], data['label'], data['file']
+    goal = integral.parser.parse_expr(data['goal'])
+    conds = list(integral.parser.parse_expr(cond) for cond in data['conds'])
+    compstate.edit_problem_file(book_name, file, {'type': 'goal', 'goal': goal, 'conds': conds})
+    compstate.edit_book(label, book_name, {'expr': data['goal'], 'type': 'problem', 'path': file})
+    return jsonify({"status": "ok"})
+
+@app.route("/api/integral-add-header", methods=['POST'])
+def integral_add_header():
+    data = json.loads(request.get_data().decode('utf-8'))
+    book_name = data['book_name']
+    label = data['label']
+    name = data['header_name']
+    compstate.edit_book(label, book_name, {'name':name, 'type':'header', 'content':[]})
+    res = {
+        "status": "ok",
+    }
+    return res
+
 @app.route("/api/integral-open-file", methods=['POST'])
 def integral_open_file():
     data = json.loads(request.get_data().decode('utf-8'))
@@ -134,12 +188,11 @@ def integral_open_file():
 @app.route("/api/integral-save-file", methods=['POST'])
 def integral_save_file():
     data = json.loads(request.get_data().decode('utf-8'))
-    file_name = os.path.join(dirname, "../examples/" + data['filename'])
+    file_name = os.path.join(dirname, "../examples/" + data['filename'] + '.json')
     with open(file_name, 'w', encoding='utf-8') as f:
-        json.dump({"content": data['content']}, f, indent=4, ensure_ascii=False, sort_keys=True)
-
+        json.dump({"content": data['content'], "name":data['filename']}, f, indent=4, ensure_ascii=False, sort_keys=True)
     return jsonify({
-        'status': 'success'
+        'status': 'ok'
     })
 
 @app.route("/api/clear-item", methods=['POST'])
@@ -263,15 +316,14 @@ def query_identities():
 @app.route("/api/add-function-definition", methods=['POST'])
 def add_function_definition():
     data = json.loads(request.get_data().decode('UTF-8'))
+    book_name = data['book']
     forSomething = data['for']
+    eq = integral.parser.parse_expr(data['eq'])
+    conds = list(integral.parser.parse_expr(cond) for cond in data['conds'])
     if forSomething == 'file':
-        book_name = data['book']
-        filename = data['file']
-        file = compstate.CompFile(book_name, filename)
+        file = compstate.CompFile(book_name, data['file'])
         for item in data['content']:
             file.add_item(compstate.parse_item(file, item))
-        eq = integral.parser.parse_expr(data['eq'])
-        conds = list(integral.parser.parse_expr(cond) for cond in data['conds'])
         file.add_definition(eq, conds=conds)
         return jsonify({
             "status": "ok",
@@ -279,11 +331,24 @@ def add_function_definition():
             "selected_item": str(compstate.Label(""))
         })
     elif forSomething == 'book':
-        book_name = data['book']
-        eq = integral.parser.parse_expr(data['eq'])
-        conds = list(integral.parser.parse_expr(cond) for cond in data['conds'])
-        
-
+        label = data['label']
+        imported = {
+            'type': 'definition',
+            'eq': eq,
+            'conds': conds
+        }
+        compstate.edit_problem_file(book_name, data['file'], imported)
+        fun_def = {
+            'type': 'definition',
+            'expr': data['eq'],
+            'path': data['file'],
+            'conds': data['conds'] if 'conds' in data else []
+        }
+        compstate.edit_book(label, book_name, fun_def)
+        return jsonify({
+            "status": "ok",
+            "book_name": book_name
+        })
 
 @app.route("/api/add-goal", methods=["POST"])
 def add_goal():

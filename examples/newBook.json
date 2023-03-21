@@ -1,0 +1,39 @@
+{
+    "content": [
+        {
+            "expr": "(INT x:[0,2]. 2*x) = 4",
+            "path": "test",
+            "type": "problem"
+        },
+        {
+            "conds": [],
+            "expr": "a = 3",
+            "path": "test",
+            "type": "definition"
+        },
+        {
+            "expr": "(INT x:[0,1]. x) = 1/2",
+            "path": "test",
+            "type": "problem"
+        },
+        {
+            "content": [
+                {
+                    "conds": [
+                        "x>0"
+                    ],
+                    "expr": "I(x) = x+3",
+                    "path": "test",
+                    "type": "definition"
+                }
+            ],
+            "name": "Header 1",
+            "type": "header"
+        }
+    ],
+    "imports": [
+        "base"
+    ],
+    "name": "newBook",
+    "type": "header"
+}

@@ -5,210 +5,74 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 ## Chapter 1: Introduction (2/9)
 
 
-| Section |    Type    |                                        Expression                                        |                                         Status                                         |
-| :-----: | :--------: | :--------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------: |
-|   1.5   |  Integral  |                    
-$$
-\int_0^\infty \frac{\ln{x}}{x^2+1} dx = 0
-$$
-
-                    |                                          Done                                          |
-|   1.6   |  Integral  |     
-$$
-\int_0^1 \frac 1 {\left[ax + b(1-x)\right]^2}dx = \frac 1{ab}
-$$
-
- for $ab>0$     | [Overly stringent conditions](#Overly_Stringent_Conditions) Notice the proof is in 3.10 |
-|   1.6   |  Integral  |                  
-$$
-P.V. \int_0^\infty \frac{1}{x ^ 3 - 1} dx = 0
-$$
-
-                  |                    [Cauchy principle value](#Cauchy_Principle_Value)                    |
-|   1.7   |  Integral  |         
-$$
-\int_0^1 \frac{x^4 (1 - x) ^ 4}{1 + x^2}dx = \frac{22}{7} - \pi
-$$
-
-         |                                          Done                                          |
-|   1.8   |  Integral  | 
-$$
-\int_0^\infty \frac{\left\{x\right\}-\frac{1}{2}}{x} dx = -1 + \ln{\sqrt{2 \pi}}
-$$
-
- |                                Unsupported: decimal part                                |
-| 1.10 C1 |  Integral  |                        
-$$
-\int_0^8 \frac{1}{x-2}dx = \ln{3}
-$$
-
-                        |                    [Cauchy principle value](#Cauchy_Principle_Value)                    |
-| 1.10 C1 |  Integral  |            
-$$
-\int_0^3 \frac{1}{(x - 1) ^ {2 / 3}}dx = 3(1 + 2 ^ {1/3})
-$$
-
-            |                    [Cauchy principle value](#Cauchy_Principle_Value)                    |
-| 1.10 C2 | Inequality |                  
-$$
-\int_0^\infty \frac{1}{\sqrt{x^3 - 1}} dx < 4
-$$
-
-                  |                                                                                        |
-| 1.10 C5 |  Integral  |           
-$$
-\int_0^\frac\pi3 \frac1{\cos \theta}d\theta = \ln(2+\sqrt3)
-$$
-
-           |                       [Undetermined ranges](#Undetermined_Ranges)                       |
+| Section |    Type    | Expression | Status |
+| :-----: |  :------:  | :--------: | :----: |
+|   1.5   |  Integral  | $\int_0^\infty \frac{\ln{x}}{x^2+1} dx = 0$ | Done |
+|   1.6   |  Integral  | $\int_0^1 \frac 1 {\left[ax + b(1-x)\right]^2}dx = \frac 1{ab}$ <br> for $ab>0$ | [Overly stringent conditions](#Overly_Stringent_Conditions)<br> Notice the proof is in 3.10 |
+|   1.6   |  Integral  | $P.V. \int_0^\infty \frac{1}{x ^ 3 - 1} dx = -\frac{\pi\sqrt3}9$ |[Cauchy principle value](#Cauchy_Principle_Value)|
+|   1.7   |  Integral  | $\int_0^1 \frac{x^4 (1 - x) ^ 4}{1 + x^2}dx = \frac{22}{7} - \pi$ | Done |
+|   1.8   |  Integral  | $\int_0^\infty \frac{\left\{x\right\}-\frac{1}{2}}{x} dx = -1 + \ln{\sqrt{2 \pi}}$ |Unsupported: [decimal part](#Decimal_Part_Function) |
+| 1.10 C1 |  Integral  | $\int_0^8 \frac{1}{x-2}dx = \ln{3}$ |[Cauchy principle value](#Cauchy_Principle_Value) |
+| 1.10 C1 |  Integral  | $\int_0^3 \frac{1}{(x - 1) ^ {2 / 3}}dx = 3(1 + 2 ^ {1/3})$ | [Cauchy principle value](#Cauchy_Principle_Value) |
+| 1.10 C2 | Inequality | $\int_1^\infty \frac{1}{\sqrt{x^3 - 1}} dx < 4$| |
+| 1.10 C5 |  Integral  | $\int_0^\frac\pi3 \frac1{\cos \theta}d\theta = \ln(2+\sqrt3)$ | [Undetermined ranges](#Undetermined_Ranges) |
 
 ## Chapter 2: 'Easy' Integrals
 
-### 2.1 Six 'Easy' Warm-Ups (5/6)
+### 2.1 Six 'Easy' Warm-Ups (6/6)
 
+|   Type   | Expression | Status |
+| :------: | :--------: | :----: |
+| Integral |$\int_1^\infty \frac{1}{(x+a)\sqrt{x-1}}dx = \frac{\pi}{\sqrt{a+1}}$ <br> for $a > -1$|  Done  |
+| Integral |$\int_0^\infty \ln{\left(1 + \frac{a^2}{x^2}\right)}dx=\pi a$ <br> for $a > 0$        |  Done  |
+| Integral |$\int_0^\infty \frac{\ln{x}}{x^2 + b^2} dx = \frac{\pi}{2b}\ln{b}$ <br> for $b > 0$   |  Done  |
+| Integral |$\int_0^\infty \frac{1}{1 + e^{ax}}dx = \frac{\ln{2}}{a}$ <br> for $a>0$              |  Done  |
+| Integral |$\int_{\sqrt{2}}^\infty \frac{1}{x + x^{\sqrt{2}}}dx = (1+\sqrt{2})\ln{(1 + 2 ^{\frac{1}{2}(1 - \sqrt{2})})}$|Done|
+| Integral |$\int_{-\infty}^{\infty} \frac{1}{\cosh{x}}dx = \pi$                                  |  Done  |
 
-|   Type   |                                                     Expression                                                     | Status |
-| :------: | :-----------------------------------------------------------------------------------------------------------------: | :----: |
-| Integral |               
-$$
-\int_1^\infty \frac{1}{(x+a)\sqrt{x-1}}dx = \frac{\pi}{\sqrt{a+1}}
-$$
+### 2.2 A New Trick (5/5)
 
- for $a > -1$               |  Done  |
-| Integral |                   
-$$
-\int_0^\infty \ln{\left(1 + \frac{a^2}{x^2}\right)}dx=\pi a
-$$
+|   Type   |                                             Expression                                              | Status |
+| :------: |:---------------------------------------------------------------------------------------------------:| :----: |
+| Integral |  $\int_0^\frac{\pi}{2} \frac{\sqrt{\sin{x}}}{\sqrt{\sin{x}} + \sqrt{\cos{x}}} dx = \frac{\pi}{4}$   | Done |
+| Integral |                   $\int_0^\pi \frac{x\sin{x}}{1 + \cos^2{x}}dx = \frac{\pi^2}{4}$                   | Done |
+| Integral | $\int_0^\frac{\pi}{2} \frac{\sin^2{x}}{\sin{x} + \cos{x}}dx = \frac{\sqrt{2}}{4}\ln{(3+2\sqrt{2})}$ | Done |
+| Integral |                  $\int_0^1 \frac{\ln{(x + 1)}}{x ^ 2 + 1}dx = \frac{\pi}{8}\ln{2}$                  | Done | 
+| Integral |         $\int_0^a \frac{\ln{(x+a)}}{x^2 + a^2}dx = \frac{\pi}{8a}\ln{(2a^2)}$ for $a > 0$           | Done |
 
- for $a > 0$                   |  Done  |
-| Integral |                
-$$
-\int_0^\infty \frac{\ln{x}}{x^2 + b^2} dx = \frac{\pi}{2b}\ln{b}
-$$
+### 2.3 Two Old New Tricks (6/9)
 
- for $b > 0$                |  Done  |
-| Integral |                      
-$$
-\int_0^\infty \frac{1}{1 + e^{ax}}dx = \frac{\ln{2}}{a}
-$$
+|   Type   | Expression | Status |
+| :------: | :--------: | :----: |
+| Integral |$\int_0^\infty \frac{1}{\prod_{k=1}^n (x^2 + a_k^2)}dx = \frac{\pi}{2}\sum_{k=1}^n \frac{c_k}{a_k}$ <br> for $c_k = \frac{1}{\prod_{j=1, j\neq k}^n(a_j^2-a_k^2)}$, $a_i\neq a_j$ if $j\neq i$| [Complex conditions](#Complex_Conditions) |
+| Integral | $\int_0^\infty \frac{1}{x^4 + 2x^2\cosh{(2\alpha)}+1}dx = \frac{\pi}{4\cosh{\alpha}}$| Done |
+| Integral | $\int_0^\infty \frac{1}{x^4 + 2x^2\cos{(2\alpha)}+1}dx = \frac{\pi}{4\left\vert\cos{\alpha}\right\vert}$ <br> for $\cos{\alpha} \neq 0$| Done |
+| Integral | $\int_0^\infty \frac{1}{x^4+1}dx = \int_0^\infty \frac{x^2}{x^4 + 1}dx = \frac{\pi \sqrt{2}}{4}$| Done |
+| Integral | $\int_0^\infty \frac1{x^4+x^2+1}dx = \frac\pi{2\sqrt3}$ | Done |
+| Integral | $\int_0^\infty \frac1{x^4-x^2+1}dx=\frac\pi2$ | Done |
+| Integral | $\int_0^\infty \frac1{x^4+2x^2+1}dx=\frac\pi4$ | Done |
+| Integral | $\int_0^\pi \frac{\cos{(nx)}-\cos{(n\alpha)}}{\cos{x}-\cos{\alpha}}dx = \pi\frac{\sin{(n\alpha)}}{\sin{\alpha}}$ <br> for $n \in \mathbb{N}$ | |
+| Integral | $\int_0^\infty x^{2n}e^{-x^2}dx = \frac{(2n)!}{4^n n!}(\frac12)\sqrt\pi$ <br> for $n \in \mathbb{N}$ | |
 
- for $a>0$                      |  Done  |
-| Integral | 
-$$
-\int_{\sqrt{2}}^\infty \frac{1}{x + x^{\sqrt{2}}}dx = (1+\sqrt{2})\ln{(1 + 2 ^{\frac{1}{2}(1 - \sqrt{2})})}
-$$
+### 2.4 Another Old Trick: Euler’s Log-Sine Integral (5/6)
 
- |        |
-| Integral |                             
-$$
-\int_{-\infty}^{\infty} \frac{1}{\cosh{x}}dx = \pi
-$$
+|   Type   |                                                    Expression                                                     |                           Status                            |
+| :------: |:-----------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------:|
+| Integral | $\int_0^{\frac\pi2}\ln{(a\sin x)}dx = \int_0^{\frac\pi2}\ln{(a\cos x)}dx = \frac\pi2\ln\frac a2$ <br> for $a > 0$ |                            Done                             |
+| Integral |                        $\int_0^\frac\pi 2 \ln(\frac{\sin x}x) dx = \frac \pi 2 (1-\ln\pi)$                        |                            Done                             |
+| Integral |                              $\int_0^\infty \frac{\ln (x^2+1)}{x^2+1}dx = \pi \ln 2$                              |                            Done                             |
+| Integral |                      $\int_0^1 \frac{\ln (x + \frac 1 x )}{x ^ 2 + 1}dx = \frac \pi 2 \ln 2$                      |                            Done                             |
+| Integral |                             $\int_0^\infty \frac {\ln x}{1-bx+x^2}dx =0$ for $b < 2$                              | [Overly stringent conditions](#Overly_Stringent_Conditions) |
+| Integral |                        $\int_0^1 \frac{1-x}{1+x+x^2} dx = \frac12(\frac\pi{\sqrt3}-\ln3)$                         |                            Done                             |
 
-                             |  Done  |
+### 2.5 Challenge Problems (3/4)
 
-#### 2.2 A New Trick
-
-- 2.2.1
-
-- [X]  $\int_0^\frac{\pi}{2} \frac{\sqrt{\sin{x}}}{\sqrt{\sin{x}} + \sqrt{\cos{x}}} dx = \frac{\pi}{4}$
-
-- 2.2.2
-
-- [X]  $\int_0^\pi \frac{x\sin{x}}{1 + \cos^2{x}}dx = \frac{\pi^2}{4}$
-
-- 2.2.3
-
-- [X]  $\int_0^\frac{\pi}{2} \frac{\sin^2{x}}{\sin{x} + \cos{x}}dx = \frac{\sqrt{2}}{4}\ln{(3+2\sqrt{2})}$
-
-- 2.2.4
-
-- [X]  $\int_0^1 \frac{\ln{(x + 1)}}{x ^ 2 + 1}dx = \frac{\pi}{8}\ln{2}$
-
-- 2.2.5
-
-- [X]  $\int_0^a \frac{\ln{(x+a)}}{x^2 + a^2}dx = \frac{\pi}{8a}\ln{(2a^2)}$ for $a > 0$
-
-#### 2.3 Two Old New Tricks
-
-- [2.3.1](#Complex_Conditions)
-
-- [ ]  $\int_0^\infty \frac{1}{\prod_{k=1}^n (x^2 + a_k^2)}dx = \frac{\pi}{2}\sum_{k=1}^n \frac{c_k}{a_k}$ for $c_k = \frac{1}{\prod_{j=1, j\neq k}^n(a_j^2-a_k^2)}$, $a_i\neq a_j$ if $j\neq i$
-
-- 2.3.2
-
-- [X]  $\int_0^\infty \frac{1}{x^4 + 2x^2\cosh{(2\alpha)}+1}dx = \frac{\pi}{4\cosh{\alpha}}$
-
-- 2.3.3
-
-- [X]  $\int_0^\infty \frac{1}{x^4 + 2x^2\cos{(2\alpha)}+1}dx = \frac{\pi}{4\left\vert\cos{\alpha}\right\vert}$ for $\cos{\alpha} \neq 0$
-
-- 2.3.4
-
-- [ ]  $\int_0^\infty \frac{1}{x^4+1}dx = \int_0^\infty \frac{x^2}{x^4 + 1}dx = \frac{\pi \sqrt{2}}{4}$
-
-- 2.3.5
-
-- [ ]  $\int_0^\infty \frac1{x^4+x^2+1}dx = \frac\pi{2\sqrt3}$
-
-- 2.3.6
-
-- [ ]  $\int_0^\infty \frac1{x^4-x^2+1}dx=\frac\pi2$
-
-- 2.3.7
-
-- [ ]  $\int_0^\infty \frac1{x^4+2x^2+1}dx=\frac\pi4$
-
-- 2.3.8
-
-- [ ]  $\int_0^\pi \frac{\cos{(nx)}-\cos{(n\alpha)}}{\cos{x}-\cos{\alpha}}dx = \pi\frac{\sin{(n\alpha)}}{\sin{\alpha}}$ for $n \in \mathbb{N}$
-
-- 2.3.9
-
-- [ ]  $\int_0^\infty x^{2n}e^{-x^2}dx = \frac{(2n)!}{4^n n!}(\frac12)\sqrt\pi$ for $n \in \mathbb{N}$
-
-#### 2.4 Another Old Trick: Euler’s Log-Sine Integral
-
-- 2.4.1
-
-- [X]  $\int_0^{\frac\pi2}\ln{(a\sin x)}dx = \int_0^{\frac\pi2}\ln{(a\cos x)}dx = \frac\pi2\ln\frac a2$ for $a > 0$
-
-- 2.4.2
-
-- [X]  $\int_0^\frac\pi 2 \ln(\frac{\sin x}x) dx = \frac \pi 2 (1-\ln\pi)$
-
-- 2.4.3
-
-- [ ]  $\int_0^\infty \frac{\ln (x^2+1)}{x^2+1}dx = \pi \ln 2$
-
-- 2.4.4
-
-- [ ]  $\int_0^\infty \frac{\ln (x + \frac 1 x )}{x ^ 2 + 1}dx = \frac \pi 2 \ln 2$
-
-- [2.4.5](#Overly_Stringent_Conditions)
-
-- [ ]  $\int_0^\infty \frac {\ln x}{1-bx+x^2}dx =0$ for $b < 2$
-
-- 2.4.6
-
-- [X]  $\int_0^1 \frac{1-x}{1+x+x^2} dx = \frac12(\frac\pi{\sqrt3}-\ln3)$
-
-#### 2.5 Challenge Problems
-
-- C2.1
-
-- [X]  $\int_0^4 \frac{\ln x}{\sqrt{4x - x^2}}dx =0$
-
-- C2.2
-
-- [X]  $\int_0^1 \frac1{x^3+1}dx=\frac13(\ln2+\frac{\pi}{\sqrt{3}})$
-
-- C2.3
-
-- [ ]  $\int_0^\infty \frac1{(x^4+1)^{m+1}} dx = \frac{4m-1}{4m}\int_0^\infty \frac1{(x^4+1)^m} dx$ for $m \in \mathbb{N}_+$
-
-- C2.5
-
-- [X]  $\int_0^\infty \frac{\ln (1+x)}{x\sqrt x}dx = 2\pi$
+|   Type   | Expression | Status |
+| :------: | :--------: | :----: |
+| Integral | $\int_0^4 \frac{\ln x}{\sqrt{4x - x^2}}dx =0$ | Done |
+| Integral | $\int_0^1 \frac1{x^3+1}dx=\frac13(\ln2+\frac{\pi}{\sqrt{3}})$ | Done |
+| Integral | $\int_0^\infty \frac1{(x^4+1)^{m+1}} dx = \frac{4m-1}{4m}\int_0^\infty \frac1{(x^4+1)^m} dx$ <br> for $m \in \mathbb{N}_+$ |  |
+| Integral | $\int_0^\infty \frac{\ln (1+x)}{x\sqrt x}dx = 2\pi$ | Done |
 
 ### Chapter 3: Feynman’s Favorite Trick
 
@@ -605,38 +469,43 @@ $$
 ### 5.1 Catalan’s Constant (2/4)
 
 
-|    Type    |                                                           Expression                                                           |          Status          |
-| :--------: | :-----------------------------------------------------------------------------------------------------------------------------: | :-----------------------: |
-| Definition |                                        
+|    Type    | Expression | Status |
+| :--------: | :--------: | :----: |
+| Definition |            |        |
+
 $$
 G = \sum_{k=0}^\infty \frac{1}{(2k+1)^2}
 $$
 
-                                        |           Done           |
-|  Integral  |                                           
+                                    |           Done           |
+|  Integral  |
+
 $$
 \int_0^1 \frac{\tan^{-1} x }x dx =G
 $$
 
-                                           |           Done           |
-|  Integral  |                                         
+                                       |           Done           |
+|  Integral  |
+
 $$
 \int_1^\infty \frac{\ln x}{x^2+1}dx =G
 $$
 
-                                         |           Done           |
-|  Integral  |                               
+                                     |           Done           |
+|  Integral  |
+
 $$
 \int_0^\infty \frac{\ln (x+1)}{x^2+1}dx = \frac\pi 4\ln 2+G
 $$
 
-                               |                          |
-|  Integral  | 
+                           |                          |
+|  Integral  |
+
 $$
 \int_0^\pi \frac{\theta\sin \theta}{a + b\cos^2 \theta}d\theta = \frac\pi{\sqrt ab}\tan^{-1}\sqrt\frac ba
 $$
 
- for $a > b>0$ | Actually$a >0, b>0$ is OK |
+for $a > b>0$ | Actually$a >0, b>0$ is OK |
 
 #### 5.2 Power Series for the Log Function
 
@@ -1542,7 +1411,7 @@ Some improper integrals may not be convergent. However, sometimes we can calcula
 
 <h4 id=Decimal_Part_Function>Decimal Part Function</h4>
 
-Suppose that $x=3.14$, and then $\left\{x\right\}$ gets 0.14. It's easy to see that $0\leq\left\{x\right\}<1$ for $x\in\mathbb{R}$.
+Suppose that $x=3.14$, and then $\left\{x\right\}$ gets $0.14$. It's easy to see that $0\leq\left\{x\right\}<1$ for $x\in\mathbb{R}$. Notice that when $x$ is negative, the result of $\left\{x\right\}$ seems strange. For example, if $x=-3.14$, then $\left\{x\right\}$ gets $0.86$, for $-3.14 = -4 + 0.86$.
 
 ### Conditions
 
@@ -1560,9 +1429,9 @@ We have shown that some propositions hold, but did not fully specify the conditi
 
 We have shown that some propositions hold, but in fact, the conditions of them can be weakened.
 
-### Unsolved Equations
+### Unsolved Expressions
 
-Not all equations can be solved easily.
+Not all expressions can be solved easily.
 
 <h4 id=Undetermined_Ranges>Undetermined Ranges</h4>
 

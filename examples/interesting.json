@@ -136,6 +136,31 @@
                             "type": "problem",
                             "expr": "(INT x:[0,oo]. x^2 / (x^4 + 2*x^2*cos(2*a) + 1)) = pi / (4 * cos(a))",
                             "path": "partialFraction03"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0,oo]. 1/(x^4+1))=(pi*sqrt(2))/4",
+                            "path": "partialFraction03"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0,oo]. 1/(x^4+1)) = (INT x:[0,oo]. x^2/(x^4+1))",
+                            "path": "partialFraction03"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0,oo]. 1/(x^4+x^2+1))=pi/(2*sqrt(3))",
+                            "path": "partialFraction03"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0,oo]. 1/(x^4-x^2+1))=pi/2",
+                            "path": "partialFraction03"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0,oo]. 1/(x^4+2*x^2+1))=pi/4",
+                            "path": "partialFraction03"
                         }
                     ]
                 },
@@ -156,6 +181,16 @@
                             "type": "problem",
                             "expr": "(INT x:[0, pi/2]. log(sin(x) / x)) = pi/2 * (1-log(pi))",
                             "path": "euler_log_sin02"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0, oo]. log(x^2+1)/(x^2+1)) = pi * log(2)",
+                            "path": "euler_log_sin0304"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0, 1]. log(x+1/x)/(x^2+1)) = pi/2 * log(2)",
+                            "path": "euler_log_sin0304"
                         },
                         {
                             "type": "problem",

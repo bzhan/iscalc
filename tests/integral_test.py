@@ -1413,6 +1413,14 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyEquation(goal04.goal))
         calc.perform_rule(rules.FullSimplify())
 
+        goal10 = file.add_goal("(INT x:[0,oo]. 1/(x^4+2*x^2+1))=pi/4")
+        proof = goal10.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.Equation("x^4+2*x^2+1", "x^4 + 2*x^2*cos(2*0)+1"))
+        calc.perform_rule(rules.FoldDefinition("I"))
+        calc.perform_rule(rules.ApplyEquation(goal04.goal))
+        calc.perform_rule(rules.FullSimplify())
+
         self.checkAndOutput(file)
 
     def testLeibniz01(self):
@@ -1710,6 +1718,47 @@ class IntegralTest(unittest.TestCase):
 
         calc = proof.rhs_calc
         calc.perform_rule(rules.ExpandPolynomial())
+
+        self.checkAndOutput(file)
+
+    def testEulerLogSineIntegral0304(self):
+        # Reference:
+        # Inside interesting integrals, Section 2.4 (2.4.3 & 2.4.4)
+
+        file = compstate.CompFile("interesting", "euler_log_sin0304")
+
+        goal01 = file.add_goal("(INT x:[0, oo]. log(x^2+1)/(x^2+1)) = pi * log(2)")
+        proof = goal01.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.SubstitutionInverse(var_name="u", var_subst="tan(u)"))
+        calc.perform_rule(rules.ApplyIdentity("sec(u)^2", "tan(u)^2 + 1"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.ApplyIdentity("tan(u)^2+1", "sec(u)^2"))
+        calc.perform_rule(rules.ApplyIdentity("sec(u)", "cos(u)^(-1)"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Substitution(var_name="x", var_subst="pi/2 - u"))
+        calc.perform_rule(rules.Equation("sin(x)", "1 * sin(x)"))
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+
+        goal02 = file.add_goal("(INT x:[0, 1]. log(x+1/x)/(x^2+1)) = pi/2 * log(2)")
+        proof = goal02.proof_by_rewrite_goal(begin=goal01)
+        calc = proof.begin
+        calc.perform_rule(rules.SplitRegion("1"))
+        calc.perform_rule(rules.OnLocation(rules.Substitution(var_name="x", var_subst="1/x"), "0.1"))
+        calc.perform_rule(rules.Equation("x ^ 2 * (1 / x ^ 2 + 1)", "x^2+1"))
+        calc.perform_rule(rules.Equation("1 / (x ^ 2 + 1) * log(1 / x ^ 2 + 1)",
+                                         "log(1/x^2 + 1)/(x^2+1)"))
+        calc.perform_rule(rules.Equation("(INT x:[0,1]. log(x ^ 2 + 1) / (x ^ 2 + 1)) + (INT x:[0,1]. log(1 / x ^ 2 + 1) / (x ^ 2 + 1))",
+                                         "(INT x:[0,1]. log(x ^ 2 + 1) / (x ^ 2 + 1) + log(1 / x ^ 2 + 1) / (x ^ 2 + 1))"))
+        calc.perform_rule(rules.Equation("log(x ^ 2 + 1) / (x ^ 2 + 1) + log(1 / x ^ 2 + 1) / (x ^ 2 + 1)",
+                                         "(log(x ^ 2 + 1) + log(1 / x ^ 2 + 1)) / (x ^ 2 + 1)"))
+        calc.perform_rule(rules.Equation("log(x ^ 2 + 1) + log(1 / x ^ 2 + 1)", "log((x^2+1)*(1/x^2+1))"))
+        calc.perform_rule(rules.Equation("(x ^ 2 + 1) * (1 / x ^ 2 + 1)", "(x + 1/x)^2"))
+        calc.perform_rule(rules.ApplyIdentity("log((x + 1 / x) ^ 2)", "2*log(x+1/x)"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("1 / (x ^ 2 + 1) * log(1 / x + x)", "log(x+1/x)/(x^2+1)"))
+        calc.perform_rule(rules.SolveEquation("(INT x:[0, 1]. log(x+1/x)/(x^2+1))"))
 
         self.checkAndOutput(file)
 

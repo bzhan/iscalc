@@ -1011,6 +1011,26 @@ class IntegralTest(unittest.TestCase):
 
         self.checkAndOutput(file)
 
+    def testEasy05(self):
+        # Reference:
+        # Inside interesting integrals, Section 2.1.e
+        file = compstate.CompFile("interesting", "easy05")
+
+        goal = file.add_goal("(INT x:[sqrt(2), oo]. 1/(x+x^sqrt(2)))=(1+sqrt(2))*log(1+2^(1/2*(1-sqrt(2))))")
+        proof = goal.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.Equation("1/(x+x^sqrt(2))", "x^(-sqrt(2))/(x^(1-sqrt(2))+1)"))
+        calc.perform_rule(rules.Substitution(var_name="u", var_subst="log(x^(1-sqrt(2))+1)"))
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.OnLocation(rules.Equation("-sqrt(2) + 1", "-1/(1+sqrt(2))"), "0.1"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.OnLocation(rules.Equation("sqrt(2)", "2^(1/2)"), "1.0.0.0"))
+        calc.perform_rule(rules.ApplyIdentity("2 ^ (1/2) ^ (-sqrt(2) + 1)", "2^(1/2*(-sqrt(2)+1))"))
+        calc.perform_rule(rules.Equation("(sqrt(2) + 1) * log(2 ^ (1/2 * (-sqrt(2) + 1)) + 1)",
+                                         "(1+sqrt(2))*log(1+2^(1/2*(1-sqrt(2))))"))
+
+        self.checkAndOutput(file)
     def testEasy06(self):
         # Reference:
         # Inside interesting integrals, Section 2.1.f
@@ -1360,6 +1380,39 @@ class IntegralTest(unittest.TestCase):
         calc = proof.lhs_calc
         calc.perform_rule(rules.ApplyEquation(goal03.goal))
         calc.perform_rule(rules.DefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+
+        # TODO: Check the condition. When applying goal04.goal, in fact it doesn't check whether cos(a)>0.
+        goal06 = file.add_goal("(INT x:[0,oo]. 1/(x^4+1))=(pi*sqrt(2))/4")
+        proof = goal06.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.Equation("x^4+1", "x^4 + 2*x^2*cos(2*(pi/4))+1"))
+        calc.perform_rule(rules.FoldDefinition("I"))
+        calc.perform_rule(rules.ApplyEquation(goal04.goal))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("sqrt(2) * pi / 4", "pi * sqrt(2) / 4"))
+
+        goal07 = file.add_goal("(INT x:[0,oo]. 1/(x^4+1)) = (INT x:[0,oo]. x^2/(x^4+1))")
+        proof = goal07.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.Substitution(var_name='u', var_subst="1/x"))
+        calc.perform_rule(rules.Equation("1 / (u ^ 2 * (1 / u ^ 4 + 1))", "u^2/(u^4+1)"))
+
+        goal08 = file.add_goal("(INT x:[0,oo]. 1/(x^4+x^2+1))=pi/(2*sqrt(3))")
+        proof = goal08.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.Equation("x^4+x^2+1", "x^4 + 2*x^2*cos(2*(pi/6))+1"))
+        calc.perform_rule(rules.FoldDefinition("I"))
+        calc.perform_rule(rules.ApplyEquation(goal04.goal))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("sqrt(3) * pi / 6", "pi/(2*sqrt(3))"))
+
+        goal09 = file.add_goal("(INT x:[0,oo]. 1/(x^4-x^2+1))=pi/2")
+        proof = goal09.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.Equation("x^4-x^2+1", "x^4 + 2*x^2*cos(2*(pi/3))+1"))
+        calc.perform_rule(rules.FoldDefinition("I"))
+        calc.perform_rule(rules.ApplyEquation(goal04.goal))
         calc.perform_rule(rules.FullSimplify())
 
         self.checkAndOutput(file)
@@ -2877,10 +2930,10 @@ class IntegralTest(unittest.TestCase):
     #     calc.perform_rule(rules.ExpandPolynomial())
     #     self.checkAndOutput(file)
 
-    # def testChapter1Practice03(self):
+    # def testChapter1Practice01_04(self):
     #     # Reference:
     #     # Inside interesting integrals, C1.5
-    #     file = compstate.CompFile("interesting", "chapter1_practice03")
+    #     file = compstate.CompFile("interesting", "chapter1_practice01_04")
     #
     #     goal = file.add_goal("(INT x:[0,pi/3]. 1/cos(x))=log(2+sqrt(3))")
     #     proof = goal.proof_by_calculation()

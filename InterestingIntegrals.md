@@ -4,30 +4,107 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 
 ## Chapter 1: Introduction (2/9)
 
-Section | Type | Expression | Status
-:------:|:---:|:----------:|:-----:
-1.5 | Integral | $$\int_0^\infty \frac{\ln{x}}{x^2+1} dx = 0$$ | Done
-1.6 | Integral | $$\int_0^1 \frac 1 {\left[ax + b(1-x)\right]^2}dx = \frac 1{ab}$$ for $ab>0$ | [Overly stringent conditions](#Overly_Stringent_Conditions) Notice the proof is in 3.10
-1.6 | Integral | $$P.V. \int_0^\infty \frac{1}{x ^ 3 - 1} dx = 0$$ | [Cauchy principle value](#Cauchy_Principle_Value)
-1.7 | Integral | $$\int_0^1 \frac{x^4 (1 - x) ^ 4}{1 + x^2}dx = \frac{22}{7} - \pi$$ | Done
-1.8 | Integral | $$\int_0^\infty \frac{\left\{x\right\}-\frac{1}{2}}{x} dx = -1 + \ln{\sqrt{2 \pi}}$$ | Unsupported: decimal part
-1.10 C1 | Integral | $$\int_0^8 \frac{1}{x-2}dx = \ln{3}$$ | [Cauchy principle value](#Cauchy_Principle_Value)
-1.10 C1 | Integral | $$\int_0^3 \frac{1}{(x - 1) ^ {2 / 3}}dx = 3(1 + 2 ^ {1/3})$$ | [Cauchy principle value](#Cauchy_Principle_Value)
-1.10 C2 | Inequality | $$\int_0^\infty \frac{1}{\sqrt{x^3 - 1}} dx < 4 $$
-1.10 C5 | Integral | $$\int_0^\frac\pi3 \frac1{\cos \theta}d\theta = \ln(2+\sqrt3)$$ | [Undetermined ranges](#Undetermined_Ranges)
+
+| Section |    Type    |                                        Expression                                        |                                         Status                                         |
+| :-----: | :--------: | :--------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------: |
+|   1.5   |  Integral  |                    
+$$
+\int_0^\infty \frac{\ln{x}}{x^2+1} dx = 0
+$$
+
+                    |                                          Done                                          |
+|   1.6   |  Integral  |     
+$$
+\int_0^1 \frac 1 {\left[ax + b(1-x)\right]^2}dx = \frac 1{ab}
+$$
+
+ for $ab>0$     | [Overly stringent conditions](#Overly_Stringent_Conditions) Notice the proof is in 3.10 |
+|   1.6   |  Integral  |                  
+$$
+P.V. \int_0^\infty \frac{1}{x ^ 3 - 1} dx = 0
+$$
+
+                  |                    [Cauchy principle value](#Cauchy_Principle_Value)                    |
+|   1.7   |  Integral  |         
+$$
+\int_0^1 \frac{x^4 (1 - x) ^ 4}{1 + x^2}dx = \frac{22}{7} - \pi
+$$
+
+         |                                          Done                                          |
+|   1.8   |  Integral  | 
+$$
+\int_0^\infty \frac{\left\{x\right\}-\frac{1}{2}}{x} dx = -1 + \ln{\sqrt{2 \pi}}
+$$
+
+ |                                Unsupported: decimal part                                |
+| 1.10 C1 |  Integral  |                        
+$$
+\int_0^8 \frac{1}{x-2}dx = \ln{3}
+$$
+
+                        |                    [Cauchy principle value](#Cauchy_Principle_Value)                    |
+| 1.10 C1 |  Integral  |            
+$$
+\int_0^3 \frac{1}{(x - 1) ^ {2 / 3}}dx = 3(1 + 2 ^ {1/3})
+$$
+
+            |                    [Cauchy principle value](#Cauchy_Principle_Value)                    |
+| 1.10 C2 | Inequality |                  
+$$
+\int_0^\infty \frac{1}{\sqrt{x^3 - 1}} dx < 4
+$$
+
+                  |                                                                                        |
+| 1.10 C5 |  Integral  |           
+$$
+\int_0^\frac\pi3 \frac1{\cos \theta}d\theta = \ln(2+\sqrt3)
+$$
+
+           |                       [Undetermined ranges](#Undetermined_Ranges)                       |
 
 ## Chapter 2: 'Easy' Integrals
 
 ### 2.1 Six 'Easy' Warm-Ups (5/6)
 
-Type | Expression | Status
-:---:|:----------:|:-----:
-Integral | $$\int_1^\infty \frac{1}{(x+a)\sqrt{x-1}}dx = \frac{\pi}{\sqrt{a+1}} $$ for $a > -1$ | Done
-Integral | $$\int_0^\infty \ln{\left(1 + \frac{a^2}{x^2}\right)}dx=\pi a$$ for $a > 0$  | Done
-Integral | $$\int_0^\infty \frac{\ln{x}}{x^2 + b^2} dx = \frac{\pi}{2b}\ln{b}$$ for $b > 0$ | Done
-Integral | $$\int_0^\infty \frac{1}{1 + e^{ax}}dx = \frac{\ln{2}}{a}$$ for $a>0$ | Done
-Integral | $$\int_{\sqrt{2}}^\infty \frac{1}{x + x^{\sqrt{2}}}dx = (1+\sqrt{2})\ln{(1 + 2 ^{\frac{1}{2}(1 - \sqrt{2})})}$$ |
-Integral | $$\int_{-\infty}^{\infty} \frac{1}{\cosh{x}}dx = \pi$$ | Done
+
+|   Type   |                                                     Expression                                                     | Status |
+| :------: | :-----------------------------------------------------------------------------------------------------------------: | :----: |
+| Integral |               
+$$
+\int_1^\infty \frac{1}{(x+a)\sqrt{x-1}}dx = \frac{\pi}{\sqrt{a+1}}
+$$
+
+ for $a > -1$               |  Done  |
+| Integral |                   
+$$
+\int_0^\infty \ln{\left(1 + \frac{a^2}{x^2}\right)}dx=\pi a
+$$
+
+ for $a > 0$                   |  Done  |
+| Integral |                
+$$
+\int_0^\infty \frac{\ln{x}}{x^2 + b^2} dx = \frac{\pi}{2b}\ln{b}
+$$
+
+ for $b > 0$                |  Done  |
+| Integral |                      
+$$
+\int_0^\infty \frac{1}{1 + e^{ax}}dx = \frac{\ln{2}}{a}
+$$
+
+ for $a>0$                      |  Done  |
+| Integral | 
+$$
+\int_{\sqrt{2}}^\infty \frac{1}{x + x^{\sqrt{2}}}dx = (1+\sqrt{2})\ln{(1 + 2 ^{\frac{1}{2}(1 - \sqrt{2})})}
+$$
+
+ |        |
+| Integral |                             
+$$
+\int_{-\infty}^{\infty} \frac{1}{\cosh{x}}dx = \pi
+$$
+
+                             |  Done  |
 
 #### 2.2 A New Trick
 
@@ -527,13 +604,39 @@ $$
 
 ### 5.1 Catalan’s Constant (2/4)
 
-Type | Expression | Status
-:---:|:----------:|:-----:
-Definition | $$G = \sum_{k=0}^\infty \frac{1}{(2k+1)^2}$$ | Done
-Integral | $$\int_0^1 \frac{\tan^{-1} x }x dx =G$$ | Done
-Integral | $$\int_1^\infty \frac{\ln x}{x^2+1}dx =G$$ | Done
-Integral | $$\int_0^\infty \frac{\ln (x+1)}{x^2+1}dx = \frac\pi 4\ln 2+G$$ |
-Integral | $$\int_0^\pi \frac{\theta\sin \theta}{a + b\cos^2 \theta}d\theta = \frac\pi{\sqrt ab}\tan^{-1}\sqrt\frac ba$$ for $a > b>0$ | Actually $a >0, b>0$ is OK
+
+|    Type    |                                                           Expression                                                           |          Status          |
+| :--------: | :-----------------------------------------------------------------------------------------------------------------------------: | :-----------------------: |
+| Definition |                                        
+$$
+G = \sum_{k=0}^\infty \frac{1}{(2k+1)^2}
+$$
+
+                                        |           Done           |
+|  Integral  |                                           
+$$
+\int_0^1 \frac{\tan^{-1} x }x dx =G
+$$
+
+                                           |           Done           |
+|  Integral  |                                         
+$$
+\int_1^\infty \frac{\ln x}{x^2+1}dx =G
+$$
+
+                                         |           Done           |
+|  Integral  |                               
+$$
+\int_0^\infty \frac{\ln (x+1)}{x^2+1}dx = \frac\pi 4\ln 2+G
+$$
+
+                               |                          |
+|  Integral  | 
+$$
+\int_0^\pi \frac{\theta\sin \theta}{a + b\cos^2 \theta}d\theta = \frac\pi{\sqrt ab}\tan^{-1}\sqrt\frac ba
+$$
+
+ for $a > b>0$ | Actually$a >0, b>0$ is OK |
 
 #### 5.2 Power Series for the Log Function
 

@@ -287,6 +287,11 @@
                         },
                         {
                             "type": "problem",
+                            "expr": "(INT x:[0,1]. 1/sqrt(-log(x))) = sqrt(pi)",
+                            "path": "leibniz02"
+                        },
+                        {
+                            "type": "problem",
                             "expr": "(INT x:[0, oo]. cos(t*x)*exp(-(x^2)/2)) = sqrt(pi/2)*exp(-(t^2)/2)",
                             "path": "leibniz03"
                         }

@@ -1504,7 +1504,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
 
         Eq4 = file.add_goal("pi/2 = SKOLEM_CONST(C)")
-        proof_of_Eq4 = Eq4.proof_by_rewrite_goal(begin = Eq3)
+        proof_of_Eq4 = Eq4.proof_by_rewrite_goal(begin= Eq3)
         calc = proof_of_Eq4.begin
         calc.perform_rule(rules.LimitEquation('t', expr.Const(0)))
         calc.perform_rule(rules.FullSimplify())
@@ -1552,6 +1552,20 @@ class IntegralTest(unittest.TestCase):
 
         calc = proof_of_Eq8.rhs_calc
         calc.perform_rule(rules.FullSimplify())
+
+        Eq9 = file.add_goal("(INT x:[0,oo]. exp(-x^2)) = sqrt(pi)/2")
+        proof_of_Eq9 = Eq9.proof_by_rewrite_goal(begin=Eq7)
+        calc = proof_of_Eq9.begin
+        calc.perform_rule(rules.Substitution(var_name="x", var_subst="x/sqrt(2)"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.SolveEquation("(INT x:[0,oo]. exp(-x^2))"))
+
+        Eq10 = file.add_goal("(INT x:[0,1]. 1/sqrt(-log(x))) = sqrt(pi)")
+        proof_of_Eq10 = Eq10.proof_by_rewrite_goal(begin=Eq9)
+        calc = proof_of_Eq10.begin
+        calc.perform_rule(rules.Substitution(var_name="t", var_subst="exp(-x^2)"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.SolveEquation("(INT x:[0,1]. 1/sqrt(-log(x)))"))
 
         self.checkAndOutput(file)
 

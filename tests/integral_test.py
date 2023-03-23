@@ -1382,7 +1382,6 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
 
-        # TODO: Check the condition. When applying goal04.goal, in fact it doesn't check whether cos(a)>0.
         goal06 = file.add_goal("(INT x:[0,oo]. 1/(x^4+1))=(pi*sqrt(2))/4")
         proof = goal06.proof_by_calculation()
         calc = proof.lhs_calc

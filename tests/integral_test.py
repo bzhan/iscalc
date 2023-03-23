@@ -1791,7 +1791,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
 
         # Integrate the previous equation on both sides
-        goal3 = file.add_goal("g(y, a) = -atan(y / a) + SKOLEM_FUNC(C(a))", conds=["y > 0", "a != 0"])
+        goal3 = file.add_goal("g(y, a) = -atan(y / a) + SKOLEM_FUNC(C(a))", conds=["y >= 0", "a != 0"])
         proof = goal3.proof_by_rewrite_goal(begin=goal2)
         calc = proof.begin
         calc.perform_rule(rules.IntegralEquation())
@@ -1800,8 +1800,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
 
         # Evaluate the case y = oo
-        # TODO: remove condition x > 0
-        goal4 = file.add_goal("(LIM {y -> oo}. g(y, a)) = 0", conds=["y >= 0", "x > 0"])
+        goal4 = file.add_goal("(LIM {y -> oo}. g(y, a)) = 0", conds=["y>=0"])
         proof = goal4.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("g")))
@@ -1854,7 +1853,6 @@ class IntegralTest(unittest.TestCase):
         proof = goal10.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.FullSimplify())
-
         self.checkAndOutput(file)
 
     def testFlipside03(self):
@@ -1898,7 +1896,6 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyEquation(goal3.goal))
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal4.goal), '1'))
         calc.perform_rule(rules.FullSimplify())
-
         self.checkAndOutput(file)
 
     def testFrullaniIntegral(self):
@@ -3628,6 +3625,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.Equation("3", "2+1"))
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation("Li(s+1, x) = (INT t:[0, x]. Li(s, t) / t)"), "0.0"))
         calc.perform_rule(rules.FullSimplify())
+        self.assertTrue(goal.is_finished())
 
         goal = file.add_goal("Li(s,1) = zeta(s)", conds=["isInt(s)", "s>1"])
         proof = goal.proof_by_calculation()
@@ -3637,6 +3635,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ExpandDefinition("zeta"))
         calc.perform_rule(rules.ChangeSummationIndex("1"))
         calc.perform_rule(rules.FullSimplify())
+        self.assertTrue(goal.is_finished())
 
         s1 = "(INT t:[0,x]. log(1-t)^2 / t)"
         s2 = "log(x) * log(1-x)^2 + 2 * log(1-x) * Li(2, 1-x) - 2*Li(3,1-x) + 2 * zeta(3)"

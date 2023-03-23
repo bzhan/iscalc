@@ -450,7 +450,11 @@ def check_condition(e: Expr, ctx: Context) -> bool:
         ctx2.add_condition(Op(">", Var(e.args[0].var), e.args[0].lower))
         ctx2.add_condition(Op("<", Var(e.args[0].var), e.args[0].upper))
         return check_condition(Op(">=", e.args[0].body, Const(0)), ctx2)
-
+    if e.is_less() and e.args[0].is_fun() and e.args[0].func_name == 'abs':
+        arg = e.args[0].args[0]
+        e1 = Op("<", arg, e.args[1])
+        e2 = Op(">", arg, -e.args[1])
+        return check_condition(e1, ctx) and check_condition(e2,ctx)
     if ctx.get_substs():
         new_e = e
         for var, subst_e in ctx.get_substs().items():

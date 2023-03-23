@@ -76,34 +76,33 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 
 ## Chapter 3: Feynman’s Favorite Trick
 
-### 3.1 Leibniz’s Formula
+### 3.1 Leibniz’s Formula (8/10)
 
 |   Type   |                                         Expression                                          | Status |
 | :------: |:-------------------------------------------------------------------------------------------:|:------:|
-| Integral |                      $\int_0^\infty \frac1{x^2+a^2}dx = \frac\pi{2a}$                       |  Done  |
-| Integral |            $\int_0^\infty \frac1{(x^2+a^2)^2}dx = \frac\pi{4a^3}$ <br> for $a>0$            |  Done  |
+| Integral |              $\int_0^\infty \frac1{x^2+a^2}dx = \frac\pi{2a}$ <br> for $a > 0$              |  Done  |
+| Integral |           $\int_0^\infty \frac1{(x^2+a^2)^2}dx = \frac\pi{4a^3}$ <br> for $a > 0$           |  Done  |
 | Integral |         $\int_0^\infty \frac1{(x^2+a^2)^3}dx = \frac{3\pi}{16a^5}$ <br> for $a > 0$         |  Done  |
 | Integral |                  $\int_{-\infty}^\infty e^{-\frac{x^2}2}dx = \sqrt{2\pi}$                   |  Done  |
+| Integral |                   $\int_0^\infty e^{-\frac{-x^2}2}dx = \sqrt{\frac\pi2}$                    |  Done  |                          
 | Integral |     $\int_0^\infty \cos(tx)e^{-\frac{x^2} 2} dx = \sqrt{\frac{\pi} 2}e^{-\frac{t^2}2}$      |  Done  |
+| Integral |                 $\int_{-\infty}^\infty e^{-ax^2} dx = \sqrt{\frac\pi a}$                    |  Done  |
 | Integral | $\int_{-\infty}^{\infty} e^{-\frac{x^2}2}\cos(s+tx)dx = \sqrt{2\pi}e^{-\frac{t^2}2}\cos s$  |        |
-| Integral | $\int_0^\infty \frac{\cos (ax)}{x^2 + b^2}dx = \frac\pi{2b}e^{-ab}$ <br> for $a > 0, b > 0$ |  Done  |
-| Integral |                      $\int_0^1 \frac{1}{\sqrt{-\ln x}}dx = \sqrt\pi$                        |  Done  |
+| Integral | $\int_0^\infty \frac{\cos (ax)}{x^2 + b^2}dx = \frac\pi{2b}e^{-ab}$ <br> for $a > 0, b > 0$ |        |
+| Integral |                       $\int_0^1 \frac{1}{\sqrt{-\ln x}}dx = \sqrt\pi$                       |  Done  |
 
-### 3.2 An Amazing Integral
+### 3.2 An Amazing Integral (1/1)
 
 |   Type   |                            Expression                             | Status |
 | :------: |:-----------------------------------------------------------------:|:------:|
 | Integral | $\int_0^\infty\frac{\sin(ax)}x dx = \frac{\pi}2~\mathrm{sgn}(a) $ |  Done  |
 
-### 3.3 Frullani’s Integral
+### 3.3 Frullani’s Integral (0/2)
 
-- [3.3.1](#Overly_Stringent_Conditions)
-
-- [ ]  $\int_0^\infty \frac{\tan^{-1}(ax)-\tan^{-1}(bx)}x dx = \frac{\pi}2 \ln \frac a b$ for $\frac a b > 0$
-
-- 3.3.3
-
-- [ ]  $\int_0^\infty \frac{e^{-ax} - e^{-bx}}x dx= \ln \frac b a$ for $a > 0, b > 0$
+|   Type   |                                                 Expression                                                  |                           Status                            |
+| :------: |:-----------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------:|
+| Integral | $\int_0^\infty \frac{\tan^{-1}(ax)-\tan^{-1}(bx)}x dx = \frac{\pi}2 \ln \frac a b$ <br> for $\frac a b > 0$ | [Overly stringent conditions](#Overly_Stringent_Conditions) |
+| Integral |            $\int_0^\infty \frac{e^{-ax} - e^{-bx}}x dx= \ln \frac b a$ <br> for $a > 0, b > 0$              |                                                             |
 
 #### 3.4 The Flip-Side of Feynman’s Trick
 

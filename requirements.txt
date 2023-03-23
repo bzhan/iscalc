@@ -1,0 +1,9 @@
+flask>=2.0.2
+flask_cors>=3.0.10
+traceback2>=1.4.0
+lark-parser>=0.12.0
+sympy>=1.9
+z3-solver>=4.8.13.0
+alive_progress>=2.4.1
+scipy>=1.10.0
+coverage>=6.3.2

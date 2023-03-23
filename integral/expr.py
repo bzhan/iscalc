@@ -870,6 +870,12 @@ def match(exp: Expr, pattern: Expr) -> Optional[Dict]:
             return res1 and res2 and res3
         elif exp.is_inf():
             return exp.t == pattern.t
+        elif exp.is_limit():
+            bd_vars[pattern.var] = exp.var
+            res1 = rec(exp.body, pattern.body, bd_vars)
+            res2 = rec(exp.lim, pattern.lim, bd_vars)
+            del bd_vars[pattern.var]
+            return res1 and res2
         else:
             # Currently not implemented
             return False
@@ -990,7 +996,7 @@ class Op(Expr):
     """Operators."""
 
     def __init__(self, op: str, *args):
-        assert isinstance(op, str) and all(isinstance(arg, Expr) for arg in args)
+        assert isinstance(op, str) and all(isinstance(arg, Expr) for arg in args), str([type(arg) for arg in args])
         if len(args) == 1:
             assert op == "-"
         elif len(args) == 2:

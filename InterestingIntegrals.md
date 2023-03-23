@@ -5,17 +5,17 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 ## Chapter 1: Introduction (2/9)
 
 
-| Section |    Type    |                                     Expression                                     |                                           Status                                            |
-| :-----: |  :------:  |:----------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------:|
-|   1.5   |  Integral  |                    $\int_0^\infty \frac{\ln{x}}{x^2+1} dx = 0$                     |                                            Done                                             |
-|   1.6   |  Integral  |  $\int_0^1 \frac 1 {\left[ax + b(1-x)\right]^2}dx = \frac 1{ab}$ <br> for $ab>0$   | [Overly stringent conditions](#Overly_Stringent_Conditions)<br> Notice the proof is in 3.10 |
-|   1.6   |  Integral  |          $P.V. \int_0^\infty \frac{1}{x ^ 3 - 1} dx = -\frac{\pi\sqrt3}9$          |                      [Cauchy principle value](#Cauchy_Principle_Value)                      |
-|   1.7   |  Integral  |         $\int_0^1 \frac{x^4 (1 - x) ^ 4}{1 + x^2}dx = \frac{22}{7} - \pi$          |                                            Done                                             |
-|   1.8   |  Integral  | $\int_0^\infty \frac{\left\{x\right\}-\frac{1}{2}}{x} dx = -1 + \ln{\sqrt{2 \pi}}$ |                     Unsupported: [decimal part](#Decimal_Part_Function)                     |
-| 1.10 C1 |  Integral  |                        $\int_0^8 \frac{1}{x-2}dx = \ln{3}$                         |                      [Cauchy principle value](#Cauchy_Principle_Value)                      |
-| 1.10 C1 |  Integral  |            $\int_0^3 \frac{1}{(x - 1) ^ {2 / 3}}dx = 3(1 + 2 ^ {1/3})$             |                      [Cauchy principle value](#Cauchy_Principle_Value)                      |
-| 1.10 C2 | Inequality |                  $\int_1^\infty \frac{1}{\sqrt{x^3 - 1}} dx < 4$                   |                                                                                             |
-| 1.10 C5 |  Integral  |           $\int_0^\frac\pi3 \frac1{\cos \theta}d\theta = \ln(2+\sqrt3)$            |                         [Undetermined ranges](#Undetermined_Ranges)                         |
+| Section |    Type    |                                     Expression                                     |                                            Status                                            |
+| :-----: |  :------:  |:----------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------:|
+|   1.5   |  Integral  |                    $\int_0^\infty \frac{\ln{x}}{x^2+1} dx = 0$                     |                                             Done                                             |
+|   1.6   |  Integral  |  $\int_0^1 \frac 1 {\left[ax + b(1-x)\right]^2}dx = \frac 1{ab}$ <br> for $ab>0$   | [Overly stringent conditions](#Overly_Stringent_Conditions) <br> Notice the proof is in 3.10 |
+|   1.6   |  Integral  |          $P.V. \int_0^\infty \frac{1}{x ^ 3 - 1} dx = -\frac{\pi\sqrt3}9$          |                      [Cauchy principle value](#Cauchy_Principle_Value)                       |
+|   1.7   |  Integral  |         $\int_0^1 \frac{x^4 (1 - x) ^ 4}{1 + x^2}dx = \frac{22}{7} - \pi$          |                                             Done                                             |
+|   1.8   |  Integral  | $\int_0^\infty \frac{\left\{x\right\}-\frac{1}{2}}{x} dx = -1 + \ln{\sqrt{2 \pi}}$ |                     Unsupported: [decimal part](#Decimal_Part_Function)                      |
+| 1.10 C1 |  Integral  |                        $\int_0^8 \frac{1}{x-2}dx = \ln{3}$                         |                      [Cauchy principle value](#Cauchy_Principle_Value)                       |
+| 1.10 C1 |  Integral  |            $\int_0^3 \frac{1}{(x - 1) ^ {2 / 3}}dx = 3(1 + 2 ^ {1/3})$             |                      [Cauchy principle value](#Cauchy_Principle_Value)                       |
+| 1.10 C2 | Inequality |                  $\int_1^\infty \frac{1}{\sqrt{x^3 - 1}} dx < 4$                   |                                                                                              |
+| 1.10 C5 |  Integral  |           $\int_0^\frac\pi3 \frac1{\cos \theta}d\theta = \ln(2+\sqrt3)$            |                         [Undetermined ranges](#Undetermined_Ranges)                          |
 
 ## Chapter 2: 'Easy' Integrals
 
@@ -104,152 +104,69 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 | Integral | $\int_0^\infty \frac{\tan^{-1}(ax)-\tan^{-1}(bx)}x dx = \frac{\pi}2 \ln \frac a b$ <br> for $\frac a b > 0$ | [Overly stringent conditions](#Overly_Stringent_Conditions) |
 | Integral |            $\int_0^\infty \frac{e^{-ax} - e^{-bx}}x dx= \ln \frac b a$ <br> for $a > 0, b > 0$              |                                                             |
 
-#### 3.4 The Flip-Side of Feynman’s Trick
-
-- 3.4.1
-
-- [ ]  $\int_0^\infty \frac{\cos(ax) - \cos (bx)}{x^2} dx = \frac{\pi}{2} (\left\vert b \right\vert - \left\vert a \right\vert)$
-
-- 3.4.2
-
-- [ ]  $\int_0^\infty \frac{e^{-pt^2}-e^{-qt^2}}{t^2}dt = \sqrt \pi (\sqrt q - \sqrt p)$ for $p >0, q > 0$
-
-- [3.4.3](#Overly_Stringent_Conditions)
-
-- [ ]  $\int_0^1 \frac{x^a-1}{\ln x} dx = \ln(a+1)$ for $a > -1$
-
-- 3.4.4
-
-- [ ]  $\int_0^1 \frac{x^a-x^b}{\ln x} dx = \frac{\ln(a+1)}{\ln(b+1)}$ for $a > -1, b > -1$
-
-- 3.4.5
-
-- [ ]  $I(t) = \int_0^\infty e^{-tx}\frac{\cos(ax) - \cos (bx)}{x} dx = \ln\sqrt{\frac{t^2+b^2}{t^2+a^2}}$ for $t> 0$
-
-- 3.4.6
-
-- [ ]  $\int_0^\infty \frac{\cos(ax) - \cos (bx)}{x} dx = \ln\left\vert\frac b a\right\vert$ for $a \neq 0, b \neq0$
-
-- 3.4.7
-
-- [ ]  $\int_0^1 x^a (\ln x)^2 dx = \frac 2{(a+1)^3}$ for $a > -1$
-
-- 3.4.8
-
-- [ ]  $\int_0^\pi \frac1{a+b\cos x} dx = \frac\pi {\sqrt{a^2-b^2}}$ for $a>b\geq 0$
-
-- 3.4.9
-
-- [ ]  $\int_0^\pi \ln{(a+b\cos x)} dx = \pi\ln\frac{a + \sqrt{a^2-b^2}} {2}$ for $a > b \geq 0$
-
-- 3.4.10
-
-- [ ]  $\int_0^\pi \frac{\ln(1+b\cos x)}{\cos{x}}dx = \pi \sin^{-1} b$ for $-1\leq b \leq 1$
-
-#### 3.5 Combining Two Tricks
-
-- Definition 1
-
-- [ ]  $I_n = \int_0^{\frac\pi2} \frac1{(a\cos^2 x + b \sin^2 x)^n} dx$ for $n \in \mathbb{N}_+, a>0, b >0$
-- [ ]  $I_n = -\frac 1 {n-1}(\frac{\partial I_{n-1}}{\partial a} + \frac{\partial I_{n-1}}{\partial b})$ for $n \in \mathbb{N}_+, n \geq 2$
-
-- 3.5.1
-
-- [ ]  $I_1 = \int_0^{\frac\pi2} \frac1{a\cos^2 x + b \sin^2 x} dx = \frac{\pi}{2\sqrt{ab}}$ for $a>0, b >0$
-
-- 3.5.2
-
-- [ ]  $I_2 = \int_0^{\frac\pi2} \frac1{(a\cos^2 x + b \sin^2 x)^2} dx = \frac{\pi}{4\sqrt{ab}}(\frac 1 a + \frac 1 b)$ for $a>0, b >0$
-
-- 3.5.3
-
-- [ ]  $I_3 = \int_0^{\frac\pi2} \frac1{(a\cos^2 x + b \sin^2 x)^3} dx = \frac{\pi}{16\sqrt{ab}}(\frac 3 {a^2} + \frac 3 {b^2} + \frac 2 {ab})$ for $a>0, b >0$
-
-- Definition 2
-
-- [ ]  $I_n(y) = \int_0^y \frac 1 {(x^2+a^2)^n}dx$ for $a > 0, y \geq 0, n\in \mathbb{N}_+$
-
-- 3.5.4
-
-- [ ]  $I_{n+1}(y) = \frac y {2na^2(y^2+a^2)^n} + \frac{2n-1}{2na^2}I_n(y)$ for $a > 0, y \geq 0, n\in \mathbb{N}_+$
-
-#### 3.6 Uhler’s Integral and Symbolic Integration
-
-- 3.6.1
-
-- [ ]  $\int_1 ^ \infty \frac{\ln x}{(1+x)^2} dx = \ln 2$
-
-#### 3.7 The Probability Integral Revisited
-
-- 3.7.1
-
-- [ ]  $\int_0^\infty e^{-ax^2-\frac b {x^2}}dx = \frac 1 2 \sqrt{\frac{\pi}{a}}e^{-2\sqrt{ab}}$ for $a > 0, b \geq 0$
-
-#### 3.8 Dini's Integral
-
-- 3.8.1
-
-- [ ]
-
-  $$
-  \int_0^\pi \ln(1-2\alpha\cos x +\alpha^2)dx= 
-  \begin{cases}
-  0\quad \quad\quad\ \mathrm{for}~\alpha^2<1\\
-  \pi\ln\alpha^2\quad\mathrm{for}~\alpha^2>1
-  \end{cases}
-  $$
-
-#### 3.10 Challenge Problems
-
-- C3.1
-
-- [X]  $\int_0^\infty \frac{\ln(1+a^2x^2)}{b^2+x^2}dx = \pi \frac{\ln(1+ab)}b$ for $a > 0, b>0$
-
-- [C3.2](#Cauchy_Principle_Values)
-
-- [ ]  $P.V.\int_{-\infty}^{\infty} \frac{\cos (ax)}{b^2-x^2}dx = \pi \frac{\sin(ab)}b$ for $a > 0, b > 0$
-
-- [C3.3](#Cauchy_Principle_Value)
-
-- [ ]  $P.V.\int_{-\infty}^{\infty} \frac{\cos (ax)}{b^4-x^4}dx = \frac{\pi(e^{-ab} + \sin(ab))}{2b^3}$ for $a >0, b >0$
-
-- [C3.4](#Cauchy_Principle_Value)
-
-- [ ]  $P.V.\int_{0}^{\infty} \frac{x\sin (ax)}{x^2-b^2}dx = \frac\pi 2 \cos(ab)$ for $a > 0$
-
-- C3.5
-
-- [X]
-
-$$
-\int_0^\infty \cos(ax)\frac{\sin(bx)}xdx =
-\begin{cases}
-\frac\pi2\quad \mathrm{for}~\left\vert a\right\vert < b, b > 0 \\
-0\quad \mathrm{for}~\left\vert a\right\vert > b, b > 0 \\
-\frac\pi4\quad \mathrm{for}~\left\vert a\right\vert = b, b > 0
-\end{cases}
-$$
-
-- C3.6
-
-- [X]  $\int_{-1}^1 \sqrt\frac{1+x}{1-x}dx=\pi$
-
-- C3.8
-
-- [X]  $\int_{-\infty}^{\infty} xe^{-x^2-x}dx = -\frac12\sqrt{\pi\sqrt e}$
-- [X]  $\int_{-\infty}^{\infty} x^2e^{-x^2-x}dx = \frac34\sqrt{\pi\sqrt e}$
-
-- C3.9
-
-- [X]  $\int_0^\infty \frac{\sin(mx)}{x(x^2+a^2)^2}dx = \frac{\pi}{2a^4}(1-\frac{2+ma}2e^{-am})$ for $a > 0, m>0$
-
-- [C3.10](#Overly_Stringent_Conditions)
-
-- [ ]  $\int_0^1 \frac x {\left[ax+b(1-x)\right]^3} = \frac 1 {2a^2b}$ for $ab > 0$
-
-### Chapter 4: Gamma and Beta Function Integrals
-
-#### 4.1 Euler's Gamma Function
+### 3.4 The Flip-Side of Feynman’s Trick (0/10)
+
+|   Type   |                                                        Expression                                                         |                           Status                            |
+|:--------:|:-------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------:|
+| Integral | $\int_0^\infty \frac{\cos(ax) - \cos (bx)}{x^2} dx = \frac{\pi}{2} (\left\vert b \right\vert - \left\vert a \right\vert)$ |                                                             |
+| Integral |            $\int_0^\infty \frac{e^{-pt^2}-e^{-qt^2}}{t^2}dt = \sqrt \pi (\sqrt q - \sqrt p)$ for $p >0, q > 0$            |                                                             |
+| Integral |                                 $\int_0^1 \frac{x^a-1}{\ln x} dx = \ln(a+1)$ for $a > -1$                                 | [Overly stringent conditions](#Overly_Stringent_Conditions) |
+| Integral |                 $\int_0^1 \frac{x^a-x^b}{\ln x} dx = \frac{\ln(a+1)}{\ln(b+1)}$ <br> for $a > -1, b > -1$                 |                                                             |
+| Integral |    $I(t) = \int_0^\infty e^{-tx}\frac{\cos(ax) - \cos (bx)}{x} dx = \ln\sqrt{\frac{t^2+b^2}{t^2+a^2}}$ <br> for $t>0$     |                                                             |
+| Integral |    $\int_0^\infty \frac{\cos(ax) - \cos (bx)}{x} dx = \ln\left\vert\frac b a\right\vert$ <br> for $a \neq 0, b \neq0$     |                                                             |
+| Integral |                             $\int_0^1 x^a (\ln x)^2 dx = \frac 2{(a+1)^3}$ <br> for $a > -1$                              |                                                             |
+| Integral |                    $\int_0^\pi \frac1{a+b\cos x} dx = \frac\pi {\sqrt{a^2-b^2}}$ <br> for $a>b\geq 0$                     |                                                             |
+| Integral |              $\int_0^\pi \ln{(a+b\cos x)} dx = \pi\ln\frac{a + \sqrt{a^2-b^2}} {2}$ <br> for $a > b \geq 0$               |                                                             |
+| Integral |                  $\int_0^\pi \frac{\ln(1+b\cos x)}{\cos{x}}dx = \pi \sin^{-1} b$ for $-1\leq b \leq 1$                    |                                                             |
+
+### 3.5 Combining Two Tricks (0/7)
+
+|   Type   |                                                                          Expression                                                                           | Status |
+|:--------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------:|
+| Integral |                           $I_n = \int_0^{\frac\pi2} \frac1{(a\cos^2 x + b \sin^2 x)^n} dx$ <br> for $n \in \mathbb{N}_+, a>0, b >0$                           |        |
+| Integral |           $I_n = -\frac 1 {n-1}(\frac{\partial I_{n-1}}{\partial a} + \frac{\partial I_{n-1}}{\partial b})$ <br> for $n \in \mathbb{N}_+,n \geq 2$            |        |
+| Integral |                          $I_1 = \int_0^{\frac\pi2} \frac1{a\cos^2 x + b \sin^2 x} dx = \frac{\pi}{2\sqrt{ab}}$ <br> for $a>0, b >0$                           |        |
+| Integral |             $I_2 = \int_0^{\frac\pi2} \frac1{(a\cos^2 x + b \sin^2 x)^2} dx = \frac{\pi}{4\sqrt{ab}}(\frac 1 a + \frac 1 b)$ <br> for $a>0, b >0$             |        |
+| Integral | $I_3 = \int_0^{\frac\pi2} \frac1{(a\cos^2 x + b \sin^2 x)^3} dx = \frac{\pi}{16\sqrt{ab}}(\frac 3 {a^2} + \frac 3 {b^2} + \frac 2 {ab})$ <br> for $a>0, b >0$ |        |
+| Integral |                                     $I_n(y) = \int_0^y \frac 1 {(x^2+a^2)^n}dx$ for $a > 0, y \geq 0, n\in \mathbb{N}_+$                                      |        |
+| Integral |                        $I_{n+1}(y) = \frac y {2na^2(y^2+a^2)^n} + \frac{2n-1}{2na^2}I_n(y)$ for $a > 0, y \geq 0, n\in \mathbb{N}_+$                          |        |
+
+### 3.6 Uhler’s Integral and Symbolic Integration
+
+|   Type   |                     Expression                     | Status |
+|:--------:|:--------------------------------------------------:|:------:|
+| Integral | $\int_1 ^ \infty \frac{\ln x}{(1+x)^2} dx = \ln 2$ |        |
+
+### 3.7 The Probability Integral Revisited
+
+|   Type   |                                                      Expression                                                       | Status |
+|:--------:|:---------------------------------------------------------------------------------------------------------------------:|:------:|
+| Integral | $\int_0^\infty e^{-ax^2-\frac b {x^2}}dx = \frac 1 2 \sqrt{\frac{\pi}{a}}e^{-2\sqrt{ab}}$ <br> for $a > 0, b \geq 0$  |        |
+
+### 3.8 Dini's Integral (0/1)
+
+|   Type   |                                                                           Expression                                                                           | Status |
+|:--------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------:|
+| Integral |  $\int_0^\pi \ln(1-2\alpha\cos x +\alpha^2)dx=\begin{cases}0\quad\quad\quad\ \mathrm{for}~\alpha^2<1\\ \pi\ln\alpha^2\quad\mathrm{for}~\alpha^2>1\end{cases}$  |        |
+
+### 3.10 Challenge Problems (6/10)
+
+|   Type   |                                                                                                                            Expression                                                                                                                             |                               Status                                |
+|:--------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------:|
+| Integral |                                                                                   $\int_0^\infty \frac{\ln(1+a^2x^2)}{b^2+x^2}dx = \pi \frac{\ln(1+ab)}b$ <br> for $a > 0, b>0$                                                                                   |                                Done                                 |
+| Integral |                                                                             $P.V.\int_{-\infty}^{\infty} \frac{\cos (ax)}{b^2-x^2}dx = \pi \frac{\sin(ab)}b$ <br> for $a > 0, b > 0$                                                                              |         [Cauchy principle value](#Cauchy_Principle_Values)          |
+| Integral |                                                                             $P.V.\int_{-\infty}^{\infty} \frac{\cos (ax)}{b^4-x^4}dx = \pi \frac{\sin(ab)}b$ <br> for $a > 0, b > 0$                                                                              |         [Cauchy principle value](#Cauchy_Principle_Values)          |
+| Integral |                                                                       $P.V.\int_{0}^{\infty} \frac{x\sin (ax)}{x^2-b^2}dx = \frac{\pi\left[e^{-ab}+\sin(ab)\right]}{2b^3}$ <br> for $a > 0$                                                                       |         [Cauchy principle value](#Cauchy_Principle_Values)          |
+| Integral | $\int_0^\infty \cos(ax)\frac{\sin(bx)}xdx = \begin{cases} \frac\pi2\quad \mathrm{for}~\left\vert a\right\vert < b, b > 0 \\ 0\quad \mathrm{for}~\left\vert a\right\vert > b, b > 0 \\ \frac\pi4\quad \mathrm{for}~\left\vert a\right\vert = b, b > 0 \end{cases}$ |                                Done                                 |
+| Integral |                                                                                                             $\int_{-1}^1 \sqrt\frac{1+x}{1-x}dx=\pi$                                                                                                              |                                Done                                 |
+| Integral |                                                                                                $\int_{-\infty}^{\infty} xe^{-x^2-x}dx = -\frac12\sqrt{\pi\sqrt e}$                                                                                                |                                Done                                 |
+| Integral |                                                                                               $\int_{-\infty}^{\infty} x^2e^{-x^2-x}dx = \frac34\sqrt{\pi\sqrt e}$                                                                                                |                                Done                                 |
+| Integral |                                                                          $\int_0^\infty \frac{\sin(mx)}{x(x^2+a^2)^2}dx = \frac{\pi}{2a^4}(1-\frac{2+ma}2e^{-am})$ <br> for $a > 0, m>0$                                                                          |                                Done                                 |
+| Integral |                                                                                           $\int_0^1 \frac x {\left[ax+b(1-x)\right]^3} = \frac 1 {2a^2b}$ for $ab > 0$                                                                                            |     [Overly stringent conditions](#Overly_Stringent_Conditions)     |
+
+## Chapter 4: Gamma and Beta Function Integrals
+
+### 4.1 Euler's Gamma Function
 
 - 4.1.1
 
@@ -1401,7 +1318,7 @@ Some integral-related equations only hold under specific conditions.
 
 <h4 id=Complex_Conditions>Complex Conditions</h4>
 
-Some conditions are too difficult to express in the program right now.
+Some conditions are too difficult to express right now.
 
 <h4 id=Incomplete_Conditions>Incomplete Conditions</h4>
 

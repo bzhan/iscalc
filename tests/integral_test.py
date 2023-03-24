@@ -2989,6 +2989,7 @@ class IntegralTest(unittest.TestCase):
     #     calc.perform_rule(rules.ExpandPolynomial())
     #     self.checkAndOutput(file)
 
+    # TODO: Show that 1-sqrt(3)/2 > 0.
     # def testChapter1Practice01_04(self):
     #     # Reference:
     #     # Inside interesting integrals, C1.5
@@ -3086,6 +3087,19 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
 
+    # TODO: Enhance the limit function.
+    # def testChapter2Practice03(self):
+    #     # Reference:
+    #     # Inside interesting integrals, C2.3
+    #     file = compstate.CompFile("interesting", "chapter2_practice03")
+    #
+    #     goal = file.add_goal("(INT x:[0, oo]. 1/(x^4+1)^(m+1)) = 4*m*(INT x:[0,oo]. 1/(x^4+1)^(m+1))", conds=["m>0", "isInt(m)"])
+    #     proof = goal.proof_by_calculation()
+    #     calc = proof.lhs_calc
+    #     calc.perform_rule(rules.IntegrationByParts(u="1/(x^4+1)^(m+1)", v="x"))
+    #     calc.perform_rule(rules.FullSimplify())
+
+        self.checkAndOutput(file)
     def testChapter2Practice05(self):
         # Reference:
         # Inside interesting integrals, C2.5

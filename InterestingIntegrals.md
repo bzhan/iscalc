@@ -67,12 +67,12 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 
 ### 2.5 Challenge Problems (3/4)
 
-|   Type   |                                                         Expression                                                         | Status |
-| :------: |:--------------------------------------------------------------------------------------------------------------------------:|:------:|
-| Integral |                                       $\int_0^4 \frac{\ln x}{\sqrt{4x - x^2}}dx =0$                                        |  Done  |
-| Integral |                               $\int_0^1 \frac1{x^3+1}dx=\frac13(\ln2+\frac{\pi}{\sqrt{3}})$                                |  Done  |
-| Integral | $\int_0^\infty \frac1{(x^4+1)^{m+1}} dx = \frac{4m-1}{4m}\int_0^\infty \frac1{(x^4+1)^m} dx$ <br> for $m \in \mathbb{N}_+$ |        |
-| Integral |                                    $\int_0^\infty \frac{\ln (1+x)}{x\sqrt x}dx = 2\pi$                                     |  Done  |
+|   Type   |                                                         Expression                                                         |                   Status                    |
+| :------: |:--------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------:|
+| Integral |                                       $\int_0^4 \frac{\ln x}{\sqrt{4x - x^2}}dx =0$                                        |                    Done                     |
+| Integral |                               $\int_0^1 \frac1{x^3+1}dx=\frac13(\ln2+\frac{\pi}{\sqrt{3}})$                                |                    Done                     |
+| Integral | $\int_0^\infty \frac1{(x^4+1)^{m+1}} dx = \frac{4m-1}{4m}\int_0^\infty \frac1{(x^4+1)^m} dx$ <br> for $m \in \mathbb{N}_+$ | [Undetermined ranges](#Undetermined_Ranges) |
+| Integral |                                    $\int_0^\infty \frac{\ln (1+x)}{x\sqrt x}dx = 2\pi$                                     |                    Done                     |
 
 ## Chapter 3: Feynman’s Favorite Trick
 
@@ -168,13 +168,10 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 
 ### 4.1 Euler's Gamma Function
 
-- 4.1.1
-
-- [X]  $\Gamma(n) = \int_0^\infty e^{-x}x^{n-1}dx$ for $n > 0$ (Definition)
-
-- 4.1.2
-
-- [X]  $\Gamma{(n + 1)} = n\Gamma(n)$ for $n \in \mathbb{N}_+$
+|   Type   |                       Expression                        | Status |
+|:--------:|:-------------------------------------------------------:|:------:|
+| Integral | $\Gamma(n) = \int_0^\infty e^{-x}x^{n-1}dx$ for $n > 0$ |  Done  |
+| Integral | $\Gamma{(n + 1)} = n\Gamma(n)$ for $n \in \mathbb{N}_+$ | Done <br> (The 
 
 - 4.1.3
 

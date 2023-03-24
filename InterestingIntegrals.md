@@ -166,20 +166,14 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 
 ## Chapter 4: Gamma and Beta Function Integrals
 
-### 4.1 Euler's Gamma Function
+### 4.1 Euler's Gamma Function (4/4)
 
 |   Type   |                       Expression                        | Status |
 |:--------:|:-------------------------------------------------------:|:------:|
 | Integral | $\Gamma(n) = \int_0^\infty e^{-x}x^{n-1}dx$ for $n > 0$ |  Done  |
-| Integral | $\Gamma{(n + 1)} = n\Gamma(n)$ for $n \in \mathbb{N}_+$ | Done <br> (The 
-
-- 4.1.3
-
-- [X]  $\Gamma(n) = (n-1)!$ for $n \in \mathbb{N}_+$
-
-- 4.1.4
-
-- [X]  $\int_0^\infty e ^{-x^3} dx = \Gamma(\frac 4 3)$
+| Integral | $\Gamma{(n + 1)} = n\Gamma(n)$ for $n \in \mathbb{N}_+$ |  Done  |
+| Integral |      $\Gamma(n) = (n-1)!$ for $n \in \mathbb{N}_+$      |  Done  |
+| Integral |    $\int_0^\infty e ^{-x^3} dx = \Gamma(\frac 4 3)$     |  Done  |
 
 #### 4.2 Wallis’ Integral and the Beta Function
 

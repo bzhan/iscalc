@@ -323,6 +323,12 @@ class Context:
                 self.add_series_evaluation(e)
             elif e.is_equals() and 'category' in item:
                 self.add_other_identities(e, item['category'], item.get('attributes'))
+            elif e.is_equals() and item['type'] == 'problem':
+                conds = Conditions()
+                if 'conds' in item:
+                    for c in item['conds']:
+                        conds.add_condition(parser.parse_expr(c))
+                self.add_lemma(e, conds)
         if 'attributes' in item and 'simplify' in item['attributes']:
             e = parser.parse_expr(item['expr'])
             conds = Conditions()

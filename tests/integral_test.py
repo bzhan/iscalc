@@ -1625,6 +1625,183 @@ class IntegralTest(unittest.TestCase):
 
         self.checkAndOutput(file)
 
+    def testLeibniz03New(self):
+        # Reference:
+        # Inside interesting integrals, Section 3.1, example #3
+
+        # Overall goal: INT x:[0,oo]. cos(tx)*exp(-(x^2)/2) = sqrt(pi/2)*exp(-(t^2)/2)
+
+        # Initial state
+        file = compstate.CompFile("interesting", 'leibniz03_new')
+
+        # Make definition
+        file.add_definition("I(t) = INT x:[0,oo]. cos(t*x)*exp(-(x^2)/2)")
+        goal = file.add_goal("Gamma(n+1/2) = sqrt(pi) * factorial(2*n) / (4^n * factorial(n))", conds=["n>=0", 'isInt(n)'])
+        proof = goal.proof_by_induction(induct_var='n')
+        base_proof = proof.base_case.proof_by_calculation()
+        induct_proof = proof.induct_case.proof_by_calculation()
+        calc = base_proof.lhs_calc
+        calc.perform_rule(rules.ApplyEquation("Gamma(1/2) = sqrt(pi)"))
+        calc = induct_proof.lhs_calc
+        calc.perform_rule(rules.Equation("n+3/2", "(n+1/2)+1"))
+        s1 = "Gamma(n + 1/2 + 1)"
+        s2 = "(n+1/2) * Gamma(n+1/2)"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        calc.perform_rule(rules.OnLocation(rules.ApplyInductHyp(), '1'))
+        s1 = "n+1/2"
+        s2 = "(2*n+1)*(2*n+2) / (4 * (n+1))"
+        calc.perform_rule(rules.Equation(s1, s2))
+        s1 = "(2 * n + 1) * (2 * n + 2) / (4 * (n + 1)) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n)))"
+        s2 = "sqrt(pi) * ((2*n+1+1) * ((2*n+1) * factorial(2*n)))/ (4^1*4^n*((n+1)*factorial(n)))"
+        calc.perform_rule(rules.Equation(s1, s2))
+        s1 = "4^1 * 4^n"
+        s2 = "4^(1+n)"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        s1 = "(2*n+1)*factorial(2*n)"
+        s2 = "factorial(2*n+1)"
+        calc.perform_rule(rules.ApplyIdentity(s1,s2))
+        s1 = "(2*n+1+1)*factorial(2*n+1)"
+        s2 = "factorial(2*n+2)"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        s1 = "(n+1)*factorial(n)"
+        s2 = "factorial(n+1)"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        calc.perform_rule(rules.FullSimplify())
+        self.assertTrue(goal.is_finished())
+
+        goal = file.add_goal("converges(SUM(n, 0, oo, INT x:[0,oo]. (-(-1)) ^ n * (abs(t) * abs(x)) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2))))")
+        proof = goal.proof_by_case("t>=0")
+        proofa = proof.cases[0].proof_by_calculation()
+        calc = proofa.arg_calc
+        calc.perform_rule(rules.FullSimplify())
+        s1 = "(t*x)^(2*n)"
+        s2 = "t^(2*n) * x^(2*n)"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.OnLocation(rules.Substitution('u', 'x^2/2'), '0.1'))
+        calc.perform_rule(rules.FullSimplify())
+        s1 = "(sqrt(u) * sqrt(2)) ^ (2 * n)"
+        s2 = "((sqrt(u)*sqrt(2))^2)^n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        calc.perform_rule(rules.FullSimplify())
+        s1 = "(2*u)^n"
+        s2 = "2^n * u^n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        calc.perform_rule(rules.FullSimplify())
+        s1 = "u ^ (n - 1/2) * exp(-u)"
+        s2 = "exp(-u) * u^(n+1/2 - 1)"
+        calc.perform_rule(rules.Equation(s1, s2))
+        calc.perform_rule(rules.OnLocation(rules.FoldDefinition("Gamma"), "1.0.1"))
+        calc.perform_rule(
+            rules.OnLocation(rules.ApplyEquation("Gamma(n+1/2) = sqrt(pi) * factorial(2*n) / (4^n * factorial(n))"),
+                             "1.0.1"))
+        calc.perform_rule(rules.FullSimplify())
+        s1 = "t^(2*n)"
+        s2 = "(t^2)^n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        s1 = "(t ^ 2 ) ^ n * 2 ^ n"
+        s2 = "(t^2 * 2) ^ n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        s1 = "4^-n"
+        s2 = "(1/4)^n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        s1 = "(t ^ 2 * 2) ^ n * (1/4) ^ n"
+        s2 = "(t^2/2)^n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        calc.perform_rule(rules.OnLocation(rules.SeriesEvaluationIdentity(), "1"))
+        proofb = proof.cases[1].proof_by_calculation()
+        calc = proofb.arg_calc
+        calc.perform_rule(rules.FullSimplify())
+        s1 = "(t*x)^(2*n)"
+        s2 = "t^(2*n) * x^(2*n)"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.OnLocation(rules.Substitution('u', 'x^2/2'), '0.1'))
+        calc.perform_rule(rules.FullSimplify())
+        s1 = "(sqrt(u) * sqrt(2)) ^ (2 * n)"
+        s2 = "((sqrt(u)*sqrt(2))^2)^n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        calc.perform_rule(rules.FullSimplify())
+        s1 = "(2*u)^n"
+        s2 = "2^n * u^n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        calc.perform_rule(rules.FullSimplify())
+        s1 = "u ^ (n - 1/2) * exp(-u)"
+        s2 = "exp(-u) * u^(n+1/2 - 1)"
+        calc.perform_rule(rules.Equation(s1, s2))
+        calc.perform_rule(rules.OnLocation(rules.FoldDefinition("Gamma"), "1.0.1"))
+        calc.perform_rule(
+            rules.OnLocation(rules.ApplyEquation("Gamma(n+1/2) = sqrt(pi) * factorial(2*n) / (4^n * factorial(n))"),
+                             "1.0.1"))
+        calc.perform_rule(rules.FullSimplify())
+        s1 = "t^(2*n)"
+        s2 = "(t^2)^n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        s1 = "(t ^ 2 ) ^ n * 2 ^ n"
+        s2 = "(t^2 * 2) ^ n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        s1 = "4^-n"
+        s2 = "(1/4)^n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        s1 = "(t ^ 2 * 2) ^ n * (1/4) ^ n"
+        s2 = "(t^2/2)^n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        calc.perform_rule(rules.OnLocation(rules.SeriesEvaluationIdentity(), "1"))
+        self.assertTrue(goal.is_finished())
+
+        goal = file.add_goal("I(t) = sqrt(pi/2) * exp(-t^2/2)")
+        proof = goal.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.ExpandDefinition("I"))
+        calc.perform_rule(rules.OnLocation(rules.SeriesExpansionIdentity(), "0.0"))
+        s1 = "SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n)) * exp(-(x ^ 2 / 2))"
+        s2 = "SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x^2/2)))"
+        calc.perform_rule(rules.Equation(s1,s2))
+        calc.perform_rule(rules.IntSumExchange())
+        s1 = "(t*x)^(2*n)"
+        s2 = "t^(2*n) * x^(2*n)"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.OnLocation(rules.Substitution('u', 'x^2/2'), '0.1'))
+        calc.perform_rule(rules.FullSimplify())
+        s1 = "(sqrt(u) * sqrt(2)) ^ (2 * n)"
+        s2 = "((sqrt(u)*sqrt(2))^2)^n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        calc.perform_rule(rules.FullSimplify())
+        s1 = "(2*u)^n"
+        s2 = "2^n * u^n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        calc.perform_rule(rules.FullSimplify())
+        s1 = "u ^ (n - 1/2) * exp(-u)"
+        s2 = "exp(-u) * u^(n+1/2 - 1)"
+        calc.perform_rule(rules.Equation(s1, s2))
+        calc.perform_rule(rules.OnLocation(rules.FoldDefinition("Gamma"), "1.0.1"))
+        calc.perform_rule(
+            rules.OnLocation(rules.ApplyEquation("Gamma(n+1/2) = sqrt(pi) * factorial(2*n) / (4^n * factorial(n))"),
+                             "1.0.1"))
+        calc.perform_rule(rules.FullSimplify())
+        s1 = "t^(2*n)"
+        s2 = "(t^2)^n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        s1 = "(t^2)^n * (-1)^n"
+        s2 = "(t^2*-1)^n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        s1 = "(t ^ 2 * -1) ^ n * 2 ^ n"
+        s2 = "(t^2 * -2) ^ n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        s1 = "4^-n"
+        s2 = "(1/4)^n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        s1 = "(t ^ 2 * -2) ^ n * (1/4) ^ n"
+        s2 = "(-t^2/2)^n"
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        calc.perform_rule(rules.OnLocation(rules.SeriesEvaluationIdentity(), '1'))
+        calc.perform_rule(rules.FullSimplify())
+        calc = proof.rhs_calc
+        calc.perform_rule(rules.FullSimplify())
+        self.assertTrue(goal.is_finished())
+        self.checkAndOutput(file)
+
     def testEulerLogSineIntegral(self):
         # Reference:
         # Inside interesting integrals, Section 2.4

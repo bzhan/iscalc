@@ -453,12 +453,10 @@
         {
             "type": "header",
             "name": "4. Gamma and Beta Function Integrals",
-            "level": 1,
             "content": [
                 {
                     "type": "header",
                     "name": "4.1 Euler's Gamma Function",
-                    "level": 2,
                     "content": [
                         {
                             "type": "definition",

@@ -301,6 +301,27 @@ def check_converge(e: Expr, ctx: Context) -> bool:
         lim = limits.limit_of_expr(e.body, e.index_var, ctx)
         if lim.e == Const(0) and check_asymp_converge(lim.asymp):
             return True
+    elif e.is_var() or e.is_constant():
+        return True
+    elif e.is_times() or e.is_plus():
+        if check_converge(e.args[0], ctx) and check_converge(e.args[1], ctx):
+            return True
+    elif e.is_power():
+        if check_converge(e.args[0], ctx) and check_converge(e.args[1], ctx) and \
+            ctx.check_condition(Op(">",e.args[1], Const(0))):
+            return True
+    elif e.is_divides():
+        if ctx.check_condition(Op("!=", e.args[1], Const(0))) and check_converge(e.args[0], ctx) and\
+                check_converge(e.args[1], ctx):
+            return True
+    elif e.is_fun():
+        flag = True
+        for arg in e.args:
+            if not check_converge(arg, ctx):
+                flag = False
+                break
+        if(flag):
+            return True
     return False
 
 class Rule:
@@ -2005,8 +2026,7 @@ class IntSumExchange(Rule):
             i = e.body
             if self.test_converge(e.index_var, e.lower, e.upper, i.var, i.lower, i.upper, e.body.body, ctx2):
                 return Integral(i.var, i.lower, i.upper, Summation(e.index_var, e.lower, e.upper, i.body))
-        else:
-            return e
+        return e
 
     def export(self):
         return {

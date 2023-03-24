@@ -79,12 +79,12 @@ def init_all_conds(conds: Conditions) -> Dict[Expr, List[Expr]]:
             all_conds[x.args[0]].append(Op(">=", x.args[0], -cond.args[1]))
 
     # add simple condition transition
-    # a < b ,b < c  => a < c
     for k in all_conds:
         for x in all_conds[k]:
             if x.is_less():
                 if x.args[1] in all_conds:
                     for y in all_conds[x.args[1]]:
+                        # a<b -> b<c -> a<c
                         if y.is_less() or y.is_less_eq() or y.is_equals():
                             all_conds[k].append(Op(x.op, x.args[0], y.args[1]))
     return all_conds

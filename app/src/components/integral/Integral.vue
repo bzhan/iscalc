@@ -625,7 +625,7 @@ export default {
       }
     },
     saveFile: async function () {
-      if (this.fileanme === undefined)
+      if (this.filename === undefined)
         return
       const data = {
         filename: this.filename,
@@ -1038,6 +1038,7 @@ export default {
       if (response.data.status == 'ok') {
         this.$set(this.content, this.cur_id, response.data.item)
         this.selected_item = response.data.selected_item
+        this.r_query_mode = undefined
       }
     },
 

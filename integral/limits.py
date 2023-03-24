@@ -708,6 +708,11 @@ def reduce_inf_limit(e: Expr, var_name: str, ctx: Context) -> Expr:
             return normalize(e.args[1] * reduce_inf_limit(e.args[0], var_name, ctx), ctx)
         else:
             return expr.Limit(var_name, POS_INF, e)
+    elif e.is_integral():
+        ctx2 = Context(ctx)
+        ctx2.add_condition(expr.Op('>', expr.Var(e.var), e.lower))
+        ctx2.add_condition(expr.Op('<', expr.Var(e.var), e.upper))
+        return expr.Integral(e.var, e.lower, e.upper, expr.Limit(var_name, POS_INF, e.body))
     else:
         return expr.Limit(var_name, POS_INF, e)
 

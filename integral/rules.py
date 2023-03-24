@@ -979,37 +979,54 @@ class ApplyEquation(Rule):
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
         found = False
+        conds = None
         for identity in ctx.get_lemmas():
             if self.eq == identity.expr:
                 found = True
+                conds = identity.conds.data
         assert found, "ApplyEquation: lemma %s not found" % self.eq
 
         # First try to match the current term with left or right side.
         pat = expr.expr_to_pattern(self.eq)
+        conds_pattern = [expr.expr_to_pattern(cond) for cond in conds]
         inst_lhs = expr.match(e, pat.lhs)
         inst_rhs = expr.match(e, pat.rhs)
+        tmp = None
+        tmp_conds = []
         if inst_lhs is not None:
             tmp = pat.rhs.inst_pat(inst_lhs)
-            if not tmp.has_symbol():
-                return tmp
-            else:
+            tmp_conds = [cond_pattern.inst_pat(inst_lhs) for cond_pattern in conds_pattern]
+            if tmp.has_symbol() or any([cond.has_symbol() for cond in tmp_conds]):
                 tmp_inst_rhs = expr.match(self.eq.rhs, pat.rhs)
-                return tmp.inst_pat(tmp_inst_rhs)
+                tmp = tmp.inst_pat(tmp_inst_rhs)
+                tmp_conds = [cond_pattern.inst_pat(tmp_inst_rhs) for cond_pattern in conds_pattern]
 
         if inst_rhs is not None:
             tmp = pat.lhs.inst_pat(inst_rhs)
-            if not tmp.has_symbol():
-                return tmp
-            else:
+            tmp_conds = [cond_pattern.inst_pat(inst_rhs) for cond_pattern in conds_pattern]
+            if tmp.has_symbol() or any([cond.has_symbol() for cond in tmp_conds]):
                 tmp_inst_lhs = expr.match(self.eq.lhs, pat.lhs)
-                return tmp.inst_pat(tmp_inst_lhs)
-
+                tmp = tmp.inst_pat(tmp_inst_lhs)
+                tmp_conds = [cond_pattern.inst_pat(tmp_inst_lhs) for cond_pattern in conds_pattern]
+        if tmp != None:
+            if tmp_conds == []:
+                return tmp
+            flag = True
+            # check whether all conditions of the lemma have been satisfied
+            for cond in tmp_conds:
+                flag = flag and ctx.check_condition(cond)
+            if flag:
+                return tmp
+        # print("solve equation %s for %s"%(self.eq, e))
         # Finally, try to solve for e in the equation.
         res = solve_for_term(self.eq, e, ctx)
         if res is not None:
-            return res
-        else:
-            return e
+            flag = True
+            for cond in conds:
+                flag = flag and ctx.check_condition(cond)
+            if flag:
+                return res
+        return e
 
 
 class ApplyInductHyp(Rule):

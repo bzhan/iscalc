@@ -96,8 +96,8 @@
         {
             "conds": [
                 {
-                    "cond": "y > 0",
-                    "latex_cond": "y > 0"
+                    "cond": "y >= 0",
+                    "latex_cond": "y \\ge 0"
                 },
                 {
                     "cond": "a != 0",
@@ -169,10 +169,6 @@
                 {
                     "cond": "y >= 0",
                     "latex_cond": "y \\ge 0"
-                },
-                {
-                    "cond": "x > 0",
-                    "latex_cond": "x > 0"
                 }
             ],
             "finished": true,
@@ -238,8 +234,8 @@
                 "start": {
                     "conds": [
                         {
-                            "cond": "y > 0",
-                            "latex_cond": "y > 0"
+                            "cond": "y >= 0",
+                            "latex_cond": "y \\ge 0"
                         },
                         {
                             "cond": "a != 0",
@@ -317,8 +313,8 @@
                 "start": {
                     "conds": [
                         {
-                            "cond": "y > 0",
-                            "latex_cond": "y > 0"
+                            "cond": "y >= 0",
+                            "latex_cond": "y \\ge 0"
                         },
                         {
                             "cond": "a != 0",

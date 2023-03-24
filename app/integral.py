@@ -123,6 +123,71 @@ def integral_load_book_content():
     f_data = rec(f_data)
     return jsonify(f_data)
 
+@app.route("/api/save-func-table", methods=['POST'])
+def save_func_table():
+    data = json.loads(request.get_data().decode('utf-8'))
+    print(data, flush=True)
+    label, table, book_name = data['label'], data['table'], data['book']
+    book_path = os.path.join(dirname, "../examples/" + book_name + '.json')
+    with open(book_path, 'r', encoding='utf-8') as f:
+        book_content = json.load(f)
+    pos = label.split(".")[:-1]
+    pos = [int(i) - 1 for i in pos]
+    pos.reverse()
+
+    def rec(content, locs, d):
+        res = content
+        if len(locs) == 0:
+            res = {}
+            for e in d:
+                if e['x'] != '':
+                    res[e['x']] = e['y']
+        elif len(locs) == 1:
+            p = locs.pop()
+            res[p]['table'] = rec(content[p]['table'], locs, d)
+        else:
+            p = locs.pop()
+            res[p]['content'] = rec(content[p]['content'], locs, d)
+        return res
+
+    book_content['content'] = rec(book_content['content'], pos, table)
+    with open(book_path, 'w', encoding='utf-8') as f:
+        json.dump(book_content, f, indent=4, ensure_ascii=False, sort_keys=True)
+    return jsonify({
+        'status': 'ok'
+    })
+
+@app.route("/api/delete-func-table-item", methods=['POST'])
+def delete_func_table_item():
+    data = json.loads(request.get_data().decode('utf-8'))
+    label, selected_items, book_name = data['label'], data['selected_items'], data['book']
+    print(label, selected_items, book_name, flush=True)
+    book_path = os.path.join(dirname, "../examples/" + book_name + '.json')
+    with open(book_path, 'r', encoding='utf-8') as f:
+        book_content = json.load(f)
+    pos = label.split(".")[:-1]
+    pos = [int(i)-1 for i in pos]
+    pos.reverse()
+    def rec(content, locs, remove_items):
+        res = content
+        if len(locs) == 0:
+            for n in remove_items:
+                del res[n]
+        elif len(locs) == 1:
+            p = locs.pop()
+            res[p]['table'] = rec(content[p]['table'], locs, remove_items)
+        else:
+            p = locs.pop()
+            res[p]['content'] = rec(content[p]['content'], locs, remove_items)
+        return res
+    book_content['content'] = rec(book_content['content'], pos, selected_items)
+    with open(book_path, 'w', encoding='utf-8') as f:
+        json.dump(book_content, f, indent=4, ensure_ascii=False, sort_keys=True)
+    return jsonify({
+        'status': 'ok'
+    })
+
+
 @app.route("/api/book-add-lemma", methods=['POST'])
 def book_add_lemma():
     data = json.loads(request.get_data().decode('utf-8'))

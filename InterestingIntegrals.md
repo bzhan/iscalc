@@ -337,165 +337,80 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 | 6.7 C2 | Definition |            $f(x) = \frac x {x^n + 1} - \frac 1 {\sum_{k=0}^{n-1} x^k}$ for $n\in \mathbb{N}_+, n \geq 3$            |        |
 | 6.7 C2 |  Integral  |                                              $\int_0^\infty f(x)dx=0$                                              |        |
 
-### Chapter 7: Using $\sqrt {-1}$ to Evaluate Integrals
+## Chapter 7: Using $\sqrt {-1}$ to Evaluate Integrals
 
-#### 7.1 Euler's Formula
+### 7.1 Euler's Formula (0/1)
 
-- 7.1.1
 
-- [ ]  $e^{ibx} = \cos bx + i\sin bx$
+|   Type   |                             Expression                             | Status |
+| :------: | :----------------------------------------------------------------: | :----: |
+| IntegraL | $\int_0^\infty \sin(bx)e^{-xy}dx=\frac b{y^2+b^2}$ <br> for $y >0$ |        |
 
-- 7.1.2
+### 7.2 The Fresnel Integrals (0/3)
 
-- [ ]  $\int_0^\infty \sin(bx)e^{-xy}dx=\frac b{y^2+b^2}$ for $y >0$
 
-#### 7.2 The Fresnel Integrals
+|   Type   |                        Expression                        | Status |
+| :------: | :------------------------------------------------------: | :----: |
+| Integral |   $\int_0^\infty \cos x^2 dx =\frac12\sqrt\frac\pi 2$   |        |
+| Integral |   $\int_0^\infty \sin x^2 dx =\frac12\sqrt\frac\pi 2$   |        |
+| Integral | $\int_0^\infty e^{ix^2}dx =\frac12\sqrt{\frac\pi2}(1+i)$ |        |
 
-- 7.2.1
+### 7.3 $\zeta(3)$ and More Log-Sine Integrals (0/3)
 
-- [ ]  $\int_0^\infty \cos x^2 dx =\frac12\sqrt\frac\pi 2$
 
-- 7,2.2
+|   Type   |                                                                                        Expression                                                                                        | Status |
+| :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----: |
+| Integral |                                                          $\int_0^\frac\pi2x\ln(\sin x)dx =\frac7{16}\zeta(3)-\frac{\pi^2}8\ln2$                                                          |        |
+| Integral | $\int_0^\frac\pi2\ln^2(a\sin\theta)d\theta=\int_0^\frac\pi2\ln^2(a\cos\theta)d\theta=\frac{\pi^3}{24}+\frac\pi6\left[\ln^2 (\frac2a) -2\ln(\frac2a)\ln (\frac a2)\right]$ <br> for $a>0$ |        |
+| Integral |              $\int_0^\frac\pi2\ln(a\sin\theta)\ln(a\cos\theta)d\theta=\frac\pi6\left[\ln^2 (\frac2a) -2\ln(\frac2a)\ln (\frac a2)\right]-\frac{\pi^3}{48}$ <br> for $a >0$              |        |
 
-- [ ]  $\int_0^\infty \sin x^2 dx =\frac12\sqrt\frac\pi 2$
+### 7.4 $\zeta(2)$, At Last! (0/1)
 
-- 7.2.3
 
-- [ ]  $\int_0^\infty e^{ix^2}dx =\frac12\sqrt{\frac\pi2}(1+i)$
+|   Type   |         Expression         | Status |
+| :------: | :------------------------: | :----: |
+| Integral | $\zeta(2) = \frac{\pi^2}6$ |        |
 
-#### 7.3 $\zeta(3)$ and More Log-Sine Integrals
+### 7.5 The Probability Integral *Again* (0/1)
 
-- 7.3.1
 
-- [ ]  $\int_0^\frac\pi2x\ln(\sin x)dx =\frac7{16}\zeta(3)-\frac{\pi^2}8\ln2$
+|   Type   |                                             Expression                                             | Status |
+| :------: | :------------------------------------------------------------------------------------------------: | :----: |
+| Integral | $\int_0^\infty \frac{\cos x}{\sqrt x}dx = \int_0^\infty \frac{\sin x}{\sqrt x}dx = \sqrt\frac\pi2$ |        |
 
-- 7.3.2
+### 7.6 Beyond Dirichlet’s Integral (0/5)
 
-- [ ]  $\int_0^\frac\pi2\ln^2(a\sin\theta)d\theta=\int_0^\frac\pi2\ln^2(a\cos\theta)d\theta=\frac{\pi^3}{24}+\frac\pi6\left[\ln^2 (\frac2a) -2\ln(\frac2a)\ln (\frac a2)\right]$ for $a>0$
 
-- 7.3.3
+|   Type   |                                                                 Expression                                                                 | Status |
+| :------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :----: |
+| Integral |                                              $\int_0^\infty (\frac{\sin x}x)^2 dx =\frac\pi2$                                              |        |
+| Integral |                                             $\int_0^\infty (\frac{\sin x}x)^3 dx =\frac{3\pi}8$                                             |        |
+| Integral |                     $\int_0^\infty \frac{\sin^{2n-1} x}xdx =\frac\pi{2^{2n-1}}\binom{2n-2}{n-1}$ for $n\in\mathbb{N}_+$                     |        |
+| Integral |                  $\int_0^\infty \frac{\sin^{2n-1} x\cos x}xdx =\frac\pi{2^{2n}n}\binom{2n-2}{n-1}$ for $n\in\mathbb{N}_+$                  |        |
+| Integral | $\int_0^\infty \frac{\sin^{2n} x}{x^2}dx=\int_0^\infty \frac{\sin^{2n-1} x}xdx =\frac\pi{2^{2n-1}}\binom{2n-2}{n-1}$ for $n\in\mathbb{N}_+$ |        |
 
-- [ ]  $\int_0^\frac\pi2\ln(a\sin\theta)\ln(a\cos\theta)d\theta=\frac\pi6\left[\ln^2 (\frac2a) -2\ln(\frac2a)\ln (\frac a2)\right]-\frac{\pi^3}{48}$ fot $a >0$
+### 7.7 Dirichlet Meets the Gamma Function (0/4)
 
-#### 7.4 $\zeta(2)$, At Last!
 
-- [ ]  $\zeta(2) = (\frac4\pi)(\frac{\pi^3}{24})=\frac{\pi^2}6$
+|   Type   |                                                                                 Expression                                                                                 | Status |
+| :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----: |
+| Integral |   $\int_0^\infty \frac{\sin^p x}{x^q}dx = \frac{p!}{(q-1)!}\int_0^\infty \frac{u^{q-2}}{\prod_{k=1}^{\frac p 2}\left[u^2+(2k)^2\right]}du$ <br> for $ p $ is even, $q>0$   |        |
+| Integral | $\int_0^\infty \frac{\sin^p x}{x^q}dx = \frac{p!}{(q-1)!}\int_0^\infty \frac{u^{q-1}}{\prod_{k=0}^{\frac {p-1} 2}\left[u^2+(2k+1)^2\right]}du$ <br> for $ p $ is odd, $q>0$ |        |
+| Integral |                                                               $\int_0^\infty (\frac{\sin x}x)^4dx =\frac\pi3$                                                               |        |
+| Integral |                                                           $\int_0^\infty \frac{\sin^3 x}{x^2}dx =\frac{3\ln 3}4$                                                           |        |
 
-#### 7.5 The Probability Integral *Again*
+### 7.8 Fourier Transforms and Energy Integrals (0/5)
 
-- 7.5.1
 
-- [ ]  $\int_0^\infty e^{-x^2}dx =\frac12 \sqrt\pi$ (Reference)
+|   Type   |                                                                    Expression                                                                    | Status |
+| :------: | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :----: |
+| Integral |              $\frac1{2\pi}\int_{-\infty}^{\infty}\frac{\left\vert e^{-ix a}-e^{-ix b}\right\vert ^2}{x^2}dx = b -a$ <br> for $b >a$              |        |
+| Integral | $\int_{-\infty}^{\infty} \frac{1-\cos(ax)\cos(bx)}{x^2}dx - \int_{-\infty}^{\infty} \frac{\sin(ax)sin(bx)}{x^2}dx = \pi\left\vert b-a\right\vert$ |        |
+| Integral |                                               $\int_{-\infty}^{\infty}\frac{1-\cos u}{u^2}du =\pi$                                               |        |
+| Integral |           $\int_{-\infty}^{\infty} \frac{1-\cos(ax)\cos(bx)}{x^2}dx + \int_{-\infty}^{\infty} \frac{\sin(ax)sin(bx)}{x^2}dx = \pi(b+a)$           |        |
+| Integral |        $\int_{-\infty}^{\infty} \frac{\sin(ax)sin(bx)}{x^2}dx = \pi\min(\left\vert a\right\vert,\left\vert b\right\vert)~\mathrm{sgn}(ab)$        |        |
 
-- 7.5.2
-
-- [ ]  $\int_0^\infty \frac{\cos x}{\sqrt x}dx = \int_0^\infty \frac{\sin x}{\sqrt x}dx = \sqrt\frac\pi2$
-
-#### 7.6 Beyond Dirichlet’s Integral
-
-- 7.6.1
-
-- [ ]  $\int_0^\infty (\frac{\sin x}x)^2 dx =\frac\pi2$
-
-- 7.6.2
-
-- [ ]  $\int_0^\infty (\frac{\sin x}x)^3 dx =\frac{3\pi}8$
-
-- 7.6.3
-
-- [ ]  $\sin^{2n-1} x =\frac{(-1)^{n-1}}{2^{2n-1}}\sum_{r=0}^{n-1}(-1)^r\binom{2n-1}{r}2\sin\left[(2n-2r-1)x\right]$ for $n \in \mathbb{N}_+$
-
-- 7.6.4
-
-- [ ]  $\int_0^\infty \frac{\sin^{2n-1} x}xdx =\frac\pi{2^{2n-1}}\binom{2n-2}{n-1}$ for $n\in\mathbb{N}_+$
-
-- 7.6.5
-
-- [ ]  $\int_0^\infty \frac{\sin^{2n-1} x\cos x}xdx =\frac\pi{2^{2n}n}\binom{2n-2}{n-1}$ for $n\in\mathbb{N}_+$
-
-- 7.6.6
-
-- [ ]  $\int_0^\infty \frac{\sin^{2n} x}{x^2}dx=\int_0^\infty \frac{\sin^{2n-1} x}xdx =\frac\pi{2^{2n-1}}\binom{2n-2}{n-1}$ for $n\in\mathbb{N}_+$
-
-#### 7.7 Dirichlet Meets the Gamma Function
-
-- 7.7.1
-
-- [ ]  $\int_0^\infty \frac{\sin^p x}{x^q}dx = \frac{p!}{(q-1)!}\int_0^\infty \frac{u^{q-2}}{\prod_{k=1}^{\frac p 2}\left[u^2+(2k)^2\right]}du$ for $ p $ is even, $q>0$
-
-- 7.7.2
-
-- [ ]  $\int_0^\infty \frac{\sin^p x}{x^q}dx = \frac{p!}{(q-1)!}\int_0^\infty \frac{u^{q-1}}{\prod_{k=0}^{\frac {p-1} 2}\left[u^2+(2k+1)^2\right]}du$ for $ p $ is odd, $q>0$
-
-- 7.7.3
-
-- [ ]  $\int_0^\infty (\frac{\sin x}x)^4dx =\frac\pi3$
-
-- 7.7.4
-
-- [ ]  $\int_0^\infty \frac{\sin^3 x}{x^2}dx =\frac{3\ln 3}4$
-
-#### 7.8 Fourier Transforms and Energy Integrals
-
-- 7.8.1
-
-- [ ]
-
-  $$
-  f(t)=
-  \begin{cases}
-  1\quad \mathrm{for}~a<t<b\\
-  0 \quad \mathrm{otherwise}
-  \end{cases}
-  $$
-
-  (Definition)
-
-- 7.8.2
-
-- [ ]  $W_f = \int_{-\infty}^{\infty} f^2(t)dt =\int_a^bdt = b-a$
-
-- 7.8.3
-
-- [ ]  $W_f = \int_{-\infty}^{\infty} f^2(t)dt = \int_{-\infty}^{\infty} S_f(\omega)d\omega = b - a$
-
-- 7.8.4
-
-- [ ]  $G(\omega)=\int_{-\omega}^{\omega} g(t)e^{-i\omega t}dt$
-
-- 7.8.5
-
-- [ ]  $g(t) = \frac 1{2\pi}\int_{-\infty}^{\infty} G(\omega)e^{i\omega t}d\omega$
-
-- 7.8.6
-
-- [ ]  $S_f(\omega)=\frac{\left\vert e^{-i\omega a}-e^{-i\omega b}\right\vert ^2}{2\pi\omega^2}$
-
-- 7.8.7
-
-- [ ]  $\frac{1}{2\pi}\int_{-\infty}^{\infty} \frac{\left\vert e^{-i\omega a}-e^{-i\omega b}\right\vert ^2}{\omega^2}d\omega = b-a$
-
-- 7.8.8
-
-- [ ]  $\frac1{2\pi}\int_{-\infty}^{\infty}\frac{\left\vert e^{-ix a}-e^{-ix b}\right\vert ^2}{x^2}dx = b -a$ for $b >a$
-
-- 7.8.9
-
-- [ ]  $\int_{-\infty}^{\infty} \frac{1-\cos(ax)\cos(bx)}{x^2}dx - \int_{-\infty}^{\infty} \frac{\sin(ax)sin(bx)}{x^2}dx = \pi(b-a)$
-
-- 7.8.10
-
-- [ ]  $\int_{-\infty}^{\infty}\frac{1-\cos u}{u^2}du =\pi$
-
-- 7.8.11
-
-- [ ]  $\int_{-\infty}^{\infty} \frac{1-\cos(ax)\cos(bx)}{x^2}dx + \int_{-\infty}^{\infty} \frac{\sin(ax)sin(bx)}{x^2}dx = \pi(b+a)$
-
-- 7.8.12
-
-- [ ]  $\int_{-\infty}^{\infty} \frac{\sin(ax)sin(bx)}{x^2}dx = \pi\min(a,b)$
-
-#### 7.9 ‘Weird’ Integrals from Radio Engineering
+### 7.9 ‘Weird’ Integrals from Radio Engineering
 
 - 7.9.1
 
@@ -744,90 +659,49 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 - [ ]  $\overline{\sin(\omega_0t)} = -\cos(\omega_0t)$ for $\omega_0>0$
 - [ ]  $\overline{\cos(\omega_0t)} = \sin(\omega_0t)$ for $\omega_0>0$
 
-### Chapter 8: Contour Integration
+## Chapter 8: Contour Integration
 
-#### 8.3 Functions of a Complex Variable
+### 8.3 Functions of a Complex Variable (0/1)
 
-- 8.3.6
+|   Type   |                                      Expression                                       | Status |
+| :------: |:-------------------------------------------------------------------------------------:|:------:|
+| Integral | $\int_0^{2\pi} e^{\cos\theta}d\theta = 2\pi \sum_{m=0}^\infty \frac{1}{2^{2m}(m!)^2}$ |        |
 
-- [ ]  $\int_0^{2\pi} e^{\cos\theta}d\theta = 2\pi \sum_{m=0}^\infty \frac{1}{2^{2m}(m!)^2}$
+### 8.6 Cauchy’s First Integral Theorem (0/5)
 
-#### 8.6 Cauchy’s First Integral Theorem
+|   Type   |                                           Expression                                            | Status |
+| :------: |:-----------------------------------------------------------------------------------------------:|:------:|
+| Integral |                          $\int_0^\infty \frac{\cos x - e^{-x}}x dx =0$                          |        |
+| Integral |          $P.V.\int_{-\infty}^\infty \frac{1}{ax^2+bx+c}dx = 0$ for $a\neq 0, b^2>4ac$           |        |
+| Integral | $P.V.\int_{-\infty}^\infty \frac{e^{ax}}{1-e^{x}}dx = \frac{\pi}{\tan(a\pi)}$ <br> for $0<a<1$  |        |
+| Integral |  $\int_0^\infty \frac{\cos(x)}{x+a} = \int_0^\infty \frac{xe^{-x}}{x^2+a^2}dx$ <br> for $a>0$   |        |
+| Integral | $\int_0^\infty \frac{\sin(x)}{x+a} = a\int_0^\infty a\frac{e^{-x}}{x^2+a^2}dx$ <br> for $a > 0$ |        |
 
-- 8.6.4
+### 8.7 Cauchy’s Second Integral Theorem (0/6)
 
-- [ ]  $\int_0^\infty \frac{\cos x - e^{-x}}x dx =0$
+|   Type   |                                                                    Expression                                                                     | Status |
+| :------: |:-------------------------------------------------------------------------------------------------------------------------------------------------:|:------:|
+| Integral |                        $\int_{\infty}^{\infty} \frac{1}{ax^2+bx+c}=\frac{2\pi}{\sqrt{4ac-b^2}}$ <br> for $a\neq0, b^2<4ac$                        |        |
+| Integral | $\int_0^\infty \frac{x^m}{x^n+1}dx = \frac{\frac{\pi}n}{\sin\left[ (m+1)\frac\pi n\right]}$ <br> for $m \in \mathbb{N},n\in\mathbb{N}, n-m\geq 2$ |        |
+| Integral |                                  $\int_0^\infty \frac{x^{a-1}}{x+1}dx = \frac{\pi}{\sin(a\pi)}$ <br> for $0<a<1$                                  |        |
+| Integral |                             $\int_{-\infty}^\infty \frac{e^{ax}}{1+e^x} dx = \frac{\pi}{\sin(a\pi)}$ <br> for $0<a<1$                             |        |
+| Integral |                              $\int_{-\infty}^\infty \frac{1}{(1+x)x^a} dx = \frac{\pi}{\sin(a\pi)}$ <br> for $0<a<1$                              |        |
+| Integral |                                $\int_0^{2\pi} \frac{1}{a+\sin^2 \theta}=\frac{2\pi}{\sqrt{a(a+1)}}$ <br> for $a>0$                                |        |
 
-- 8.6.5
+### 8.8 Singularities and the Residue Theorem (0/3)
 
-- [ ]  $\int_{-\infty}^\infty \frac{1}{ax^2+bx+c}dx = 0$ for $a\neq 0, b^2>4ac$
+|   Type   |                                                       Expression                                                       | Status |
+| :------: |:----------------------------------------------------------------------------------------------------------------------:|:------:|
+| Integral |  $\int_0^{2\pi} \cos^k \theta d\theta = \frac{2\pi}{2^k} \frac{k!}{\left[(\frac k2)!\right]^2}$ <br> for $k$ is even   |        |
+| Integral |           $\int_0^{2\pi} \frac{1}{(1+k\cos\theta)^2}d\theta = \frac{2\pi}{(1-k^2)^\frac32}$ <br> for $k <1$            |        |
+| Integral |$\int_0^\infty \frac{\ln x}{(x+a)^2 +b^2}dx = \frac 1b \tan^{-1} (\frac ba) \ln(\sqrt{a^2+b^2})$ <br> for $a\geq 0,b>0$ |        |
 
-- 8.6.9
+### 8.10 Challenge Problems
 
-- [ ]  $\int_{-\infty}^\infty \frac{e^{ax}}{1-e^{x}}dx = \frac{\pi}{\tan(a\pi)}$ for $0<a<1$
-
-- Definition 1
-
-- [ ]  $I(a) = \int_0^\infty \frac{\cos x}{x+a} dx = \lim_{T\rightarrow \infty}\int_0^T \frac{\cos x}{x+a}dx$ for $a>0$
-
-- Definition 2
-
-- [ ]  $J(a) = \int_0^\infty \frac{\sin x}{x+a} dx = \lim_{T\rightarrow \infty}\int_0^T \frac{\sin x}{x+a}dx$ for $a>0$
-
-- 8.6.11
-
-- [ ]  $I(a) = \int_0^\infty \frac{xe^{-x}}{x^2+a^2}dx$ for $a>0$
-- [ ]  $J(a) = a\int_0^\infty a\frac{e^{-x}}{x^2+a^2}dx$ for $a > 0$
-
-#### 8.7 Cauchy’s Second Integral Theorem
-
-- 8.7.4
-
-- [ ]  $\int_{\infty}^{\infty} \frac{1}{ax^2+bx+c}=\frac{2\pi}{\sqrt{4ac-b^2}}$ for $a\neq0, b^2<4ac$
-
-- 8.7.8
-
-- [ ]  $\int_0^\infty \frac{x^m}{x^n+1}dx = \frac{\frac{\pi}n}{\sin\left[ (m+1)\frac\pi n\right]}$ for $m \in \mathbb{N},n\in\mathbb{N}, n-m\geq 2$
-
-- 8.7.9
-
-- [ ]  $\int_0^\infty \frac{x^{a-1}}{x+1}dx = \frac{\pi}{\sin(a\pi)}$ for $0<a<1$
-
-- 8.7.10
-
-- [ ]  $\int_{-\infty}^\infty \frac{e^{ax}}{1+e^x} dx = \frac{\pi}{\sin(a\pi)}$ for $0<a<1$
-
-- 8.7.11
-
-- [ ]  $\int_{-\infty}^\infty \frac{1}{(1+x)x^a} dx = \frac{\pi}{\sin(a\pi)}$ for $0<a<1$
-
-- 8.7.14
-
-- [ ]  $\int_0^{2\pi} \frac{1}{a+\sin^2 \theta}=\frac{2\pi}{\sqrt{a(a+1)}}$ for $a>0$
-
-#### 8.8 Singularities and the Residue Theorem
-
-- 8.8.11
-
-- [ ]  $\int_0^{2\pi} \cos^k \theta d\theta = \frac{2\pi}{2^k} \frac{k!}{\left[(\frac k2)!\right]^2}$ for $k$ is even
-
-- 8.8.12
-
-- [ ]  $\int_0^{2\pi} \frac{1}{(1+k\cos\theta)^2}d\theta = \frac{2\pi}{(1-k^2)^\frac32}$ for $k <1$
-
-- 8.8.13
-
-- [ ]  $\int_0^\infty \frac{\ln x}{(x+a)^2 +b^2}dx = \frac 1b \tan^{-1} (\frac ba) \ln(\sqrt{a^2+b^2})$ for $a\geq 0, b>0$
-
-#### 8.10 Challenge Problems
-
-- C8.2
-
-- [ ]  $\int_0^\infty \frac{\sin(mx)}{x(x^2+a^2)}dx = \frac\pi2(\frac{1-e^{-am}}{a^2})$ for $a>0, m>0$
-
-- C8.3
-
-- [ ]  $\int_0^{2\pi} \frac{1}{1-2a\cos\theta +a^2} d\theta= \frac{2\pi}{1-a^2}$ for $0<a<1$
+|   Type   |                                              Expression                                              | Status |
+| :------: |:----------------------------------------------------------------------------------------------------:|:------:|
+| Integral | $\int_0^\infty \frac{\sin(mx)}{x(x^2+a^2)}dx = \frac\pi2(\frac{1-e^{-am}}{a^2})$ <br> for $a>0, m>0$ |        |
+| Integral |      $\int_0^{2\pi} \frac{1}{1-2a\cos\theta +a^2} d\theta= \frac{2\pi}{1-a^2}$ <br> for $0<a<1$      |        |
 - [ ]  $\int_{-\infty}^{\infty} \frac{\cos x}{(x+a)^2 + b ^2} dx = \frac{\pi}b e^{-b}\cos a$ for $a >0, b>0$
 - [ ]  $\int_{-\infty}^{\infty} \frac{\sin x}{(x+a)^2 + b ^2} dx = -\frac{\pi}b e^{-b}\sin a$ for $a >0, b>0$
 - [ ]  $\int_{-\infty}^\infty \frac{\cos x}{(x^2+a^2)(x^2+b^2)}dx = \frac\pi{a^2-b^2}(\frac{e^{-b}}b-\frac{e^{-a}}a)$ for $a>b>0$

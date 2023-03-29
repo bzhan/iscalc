@@ -337,7 +337,7 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 | 6.7 C2 | Definition |            $f(x) = \frac x {x^n + 1} - \frac 1 {\sum_{k=0}^{n-1} x^k}$ for $n\in \mathbb{N}_+, n \geq 3$            |        |
 | 6.7 C2 |  Integral  |                                              $\int_0^\infty f(x)dx=0$                                              |        |
 
-## Chapter 7: Using $\sqrt {-1}$ to Evaluate Integrals
+## [Chapter 7: Using $\sqrt {-1}$ to Evaluate Integrals](#Complex_Integration)
 
 ### 7.1 Euler's Formula (0/1)
 
@@ -410,277 +410,74 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 | Integral |           $\int_{-\infty}^{\infty} \frac{1-\cos(ax)\cos(bx)}{x^2}dx + \int_{-\infty}^{\infty} \frac{\sin(ax)sin(bx)}{x^2}dx = \pi(b+a)$           |        |
 | Integral |        $\int_{-\infty}^{\infty} \frac{\sin(ax)sin(bx)}{x^2}dx = \pi\min(\left\vert a\right\vert,\left\vert b\right\vert)~\mathrm{sgn}(ab)$        |        |
 
-### 7.9 ‘Weird’ Integrals from Radio Engineering
-
-- 7.9.1
-
-- [ ]
-  $$
-  \int_0^\infty \frac{\sin(t\omega)}\omega d\omega =
-  \begin{cases}
-  \frac{\pi}2\quad\mathrm{for}~t >0\\
-  -\frac{\pi}2\ \mathrm{for}~t <0
-  \end{cases}
-  $$
-
-- 7.9.2
-
-- [ ]
-  $$
-  \int_{-\infty}^\infty \frac{\sin(t\omega)}\omega d\omega =
-  \begin{cases}
-  \pi\quad\mathrm{for}~t>0\\
-  -\pi\ \mathrm{for}~t<0
-  \end{cases}
-  $$
-
-- 7.9.3
-
-- [ ]  $\int_{-\infty}^{\infty} \frac{e^{i\omega t}}\omega d\omega =i\pi~\mathrm{sgn}(t)$
-
-- 7.9.4
-
-- [ ]  $u(t)=\frac{1+\mathrm{sgn}(t)}2$ (Definition)
-
-- 7.9.5
-
-- [ ]  $\int_{-\infty}^\infty e^{i\omega t} d\omega = \pi\frac{d}{dt}~\mathrm{sgn}(t)$
-
-- 7.9.6
-
-- [ ]  $\int_{-\infty}^\infty e^{i\omega t} d\omega = 2\pi\delta(t)$
-
-- 7.9.7
-
-- [ ]  $\mathrm{sgn}(t)\leftrightarrow\frac2{i\omega}$
-
-- 7.9.8
-
-- [ ]  $\delta(t)\leftrightarrow1$
-
-- 7.9.9
-
-- [ ]  $u(t)\leftrightarrow\int_{-\infty}^\infty \frac12e^{-i\omega t} dt +\frac1{i\omega}$
-
-- 7.9.10
-
-- [ ]  $\int_{-\infty}^\infty e^{it\omega } dt = 2\pi\delta(\omega)$
-
-- 7.9.11
-
-- [ ]  $\int_{-\infty}^\infty e^{-i\omega t} dt = 2\pi\delta(\omega)$
-
-- 7.9.12
-
-- [ ]  $u(t)\leftrightarrow\pi\delta(\omega)+\frac1{i\omega}$
-
-- 7.9.13
-
-- [ ]  $\cos(\omega_0t)\leftrightarrow\pi\delta(\omega-\omega_0)+\pi\delta(\omega+\omega_0)$
-
-- 7.9.14
-
-- [ ]  $\int_{-\infty}^{\infty} \delta(t-a)\phi(t) dt =\phi(a)$
-
-- 7.9.15
-
-- [ ]  $g(t) \leftrightarrow G(\omega) $ for $ G(t) \leftrightarrow2\pi g(-\omega)$
-
-- 7.9.16
-
-- [ ]  $f(t) \leftrightarrow F(\omega) $ for $ f(at) \leftrightarrow\frac1a F(\frac\omega a)$
-
-- 7.9.17
-
-- [ ]  $m(t)g(t)\leftrightarrow\frac1{2\pi}\int_{-\infty}^{\infty}G(u)M(\omega-u)du$
-
-#### 7.10 Causality and Hilbert Transform Integrals
-
-- 7.10.1
-
-- [ ]  $g(t)=g_e(t)+g_o(t)$
-
-- 7.10.2
-
-- [ ]  $g(-t) = g_e(-t) + g_o(-t) = g_e(t) - g_o(t)$
-
-- 7.10.3
-
-- [ ]  $g_e(t) = \frac12 \left[g(t)+g(-t)\right]$
-
-- 7.10.4
-
-- [ ]  $g_o(t) = \frac12 \left[g(t)-g(-t)\right]$
-
-- 7.10.5
-
-- [ ]  $g_e(t) = g_o(t)~\mathrm{sgn}(t)$
-
-- 7.10.6
-
-- [ ]  $g_o(t) = g_e(t)~\mathrm{sgn}(t)$
-
-- 7.10.7
-
-- [ ]  $G_e(\omega) = R(\omega)$
-
-- 7.10.8
-
-- [ ]  $G_o(\omega) =iX(\omega)$
-
-- 7.10.9
-
-- [ ]  $R(\omega) = \frac1{2\pi}iX(\omega) * \frac2{i\omega} =\frac1\pi X(\omega)*\frac1\omega$
-
-- 7.10.10
-
-- [ ]  $X(\omega) = -\frac1\pi R(\omega)*\frac1\omega$
-
-- 7.10.11
-
-- [ ]  $R(\omega) = \frac1\pi\int_{-\infty}^{\infty}\frac{X(u)}{\omega-u}du$
-- [ ]  $X(\omega) = -\frac1\pi\int_{-\infty}^{\infty}\frac{X(u)}{\omega-u}du$
-
-- 7.10.12
-
-- [ ]  $\overline{x(t)}=\frac1\pi \int_{-\infty}^{\infty}\frac{x(u)}{t-u}du$
-
-- 7.10.13
-
-- [ ]  $\int_{-\infty}^{\infty}\frac{1}{t-u}du=0$
-
-- 7.10.14
-
-- [ ]
-  $$
-  \pi(t)=
-  \begin{cases}
-  1\quad\mathrm{for}~-\frac12<t<\frac12\\
-  0\quad\mathrm{otherwise}
-  \end{cases}
-  $$
-
-- 7.10.15
-
-- [ ]  $\Pi(\omega) = \frac{e^{i\omega \frac12}-e^{-i\omega\frac12}}{i\omega}=\frac{i2\sin\frac\omega2}{i\omega}=\frac{\sin\frac\omega2}{\frac\omega2}$ for $-\infty < \omega < \infty$
-
-- 7.10.16
-
-- [ ]  $\frac{\sin\frac t2}{\frac t2} \leftrightarrow2\pi~\pi(-\omega)=2\pi~\pi(\omega)$
-
-- 7.10.17
-
-- [ ]
-  $$
-  \frac{\sin t}t \leftrightarrow 
-  \begin{cases}
-  \pi\quad\mathrm{for}~-1<\omega<1\\
-  0\quad\mathrm{otherwise}
-  \end{cases}
-  $$
-
-- 7.10.18
-
-- [ ]
-  $$
-  \frac{\sin t}{2t} = \frac12 \frac{\sin(t)}t\leftrightarrow R(\omega) =
-  \begin{cases}
-  \frac\pi2\quad\mathrm{for}~-1<\omega<1\\
-  0\quad\mathrm{otherwise}
-  \end{cases}
-  $$
-
-- 7.10.19
-
-- [ ]  $X(\omega) = \frac12 \ln(\left\vert\frac{1-\omega}{1+\omega}\right\vert)$ for $-\infty < \omega < \infty$
-
-- 7.10.20
-
-- [ ]  $\int_0^\infty \ln^2(\left\vert\frac{1-x}{1+x}\right\vert)=\pi^2$
-
-#### 7.11 Challenge Problems
-
-- C7.1
-
-- [ ]  $\int_0^\infty (\frac{\sin x}x)^5dx =\frac{115}{384}\pi$
-- [ ]  $\int_0^\infty (\frac{\sin x}x)^6dx =\frac{11}{40}\pi$
-- [ ]  $\int_0^\infty (\frac{\sin x}x)^7dx =\frac{5887}{23040}\pi$
-
-- C7.2
-
-- [ ]  $F(x) = \int_x^\infty\int_x^\infty \sin(t^2-u^2)dtdu =0$
-
-- C7.3
-
-- [ ]  $\mathrm{convergence}~\int_{-\infty}^{\infty} \frac{1}{1-ix^3}dx$
-
-- C7.4
-
-- [ ]  $\int_1^\infty \frac{\left\{x\right\}}{x^3} dx =1-\frac{\pi^2}{12}$
-
-- C7.5
-
-- [ ]  $I(a) = \int_0^\infty \frac{\sin^2(ax)}{x^2} dx$ (Definition)
-- [ ]  $I(a)= \frac\pi2\left\vert a\right\vert$
-
-- C7.7
-
-- [ ]
-
-  $$
-  f(t)=
-  \begin{cases}
-  e^{-at}\ \mathrm{for}~0\leq t\leq m \\
-  0\quad\ \mathrm{otherwise}
-  \end{cases}\quad\mathrm{for}~a > 0,m>0
-  $$
-- [ ]  $\int_{-\infty}^\infty \frac{\cos(mx)}{x^2+a^2}dx = \frac\pi a e^{-ma}$ for $a >0, m >0$
-
-- C7.8
-
-- [ ]  $\frac1{t^2+1} \leftrightarrow \pi e^{-\left\vert \omega\right\vert}$
-- [ ]  $\frac t{t^2+1} \leftrightarrow -i\pi e ^{-\left\vert\omega\right\vert}~\mathrm{sgn}(\omega)$
-- [ ]  $\frac12\delta(t)+i\frac1{2\pi t}\leftrightarrow u(\omega)$
-- [ ]  $\int_t^\infty \frac{e^{-u}}udu \leftrightarrow \frac{\ln(1+i\omega)}{i\omega}$
-
-- C7.9
-
-- [ ]  $X(\omega) = -\frac{2\omega}\pi \int_0^\infty \frac{R(u)}{\omega^2-u^2}du$
-
-- C7.10
-
-- [ ]  $\frac1{2\pi}\int_{-\infty}^{\infty} \left\vert X(\omega)\right\vert^2d\omega < \infty$
-- [ ]  $y(t)=x(t)*h(t)=\int_{-\infty}^\infty x(u)h(t-u)du$
-- [ ]  $\int_{-\infty}^\infty \left\vert h(t)\right\vert dt < \infty$
-- [ ]  $\frac1{2\pi}\int_{-\infty}^{\infty} \left\vert Y(\omega)\right\vert^2d\omega < \infty$
-
-- C7.11
-
-- [ ]  $\overline{\sin(\omega_0t)} = -\cos(\omega_0t)$ for $\omega_0>0$
-- [ ]  $\overline{\cos(\omega_0t)} = \sin(\omega_0t)$ for $\omega_0>0$
-
-## Chapter 8: Contour Integration
+### [7.9 ‘Weird’ Integrals from Radio Engineering (0/4)](#Fourier_Transform)
+
+
+|   Type   |                                     Expression                                     | Status |
+| :------: | :--------------------------------------------------------------------------------: | :----: |
+| Integral | $\int_{-\infty}^{\infty} \frac{e^{i\omega t}}\omega d\omega =i\pi~\mathrm{sgn}(t)$ |        |
+| Integral |           $\int_{-\infty}^\infty e^{i\omega t} d\omega = 2\pi\delta(t)$           |        |
+| Integral |           $\int_{-\infty}^\infty e^{-i\omega t} dt = 2\pi\delta(\omega)$           |        |
+| Integral |              $\int_{-\infty}^{\infty} \delta(t-a)\phi(t) dt =\phi(a)$              |        |
+
+### [7.10 Causality and Hilbert Transform Integrals (0/2)](#Hilbert_Transform)
+
+
+|   Type   |                            Expression                            | Status |
+| :------: | :---------------------------------------------------------------: | :----: |
+| Integral |            $\int_{-\infty}^{\infty}\frac{1}{t-u}du=0$            |        |
+| Integral | $\int_0^\infty \ln^2(\left\vert\frac{1-x}{1+x}\right\vert)=\pi^2$ |        |
+
+### 7.11 Challenge Problems (0/16)
+
+
+|    Type    |                                          Expression                                          | Status |
+| :--------: | :-------------------------------------------------------------------------------------------: | :----: |
+|  Integral  |                   $\int_0^\infty (\frac{\sin x}x)^5dx =\frac{115}{384}\pi$                   |        |
+|  Integral  |                    $\int_0^\infty (\frac{\sin x}x)^6dx =\frac{11}{40}\pi$                    |        |
+|  Integral  |                  $\int_0^\infty (\frac{\sin x}x)^7dx =\frac{5887}{23040}\pi$                  |        |
+|  Integral  |                       $\int_x^\infty\int_x^\infty \sin(t^2-u^2)dtdu =0$                       |        |
+|  Integral  |               $\mathrm{convergence}~\int_{-\infty}^{\infty} \frac{1}{1-ix^3}dx$               |        |
+|  Integral  |              $\int_1^\infty \frac{\left\{x\right\}}{x^3} dx =1-\frac{\pi^2}{12}$              |        |
+|  Integral  |         $\int_0^\infty \frac{\sin^2(ax)}{x^2} dx = \frac\pi2\left\vert a\right\vert$         |        |
+|  Integral  | $\int_{-\infty}^\infty \frac{\cos(mx)}{x^2+a^2}dx = \frac\pi a e^{-ma}$ <br> for $a >0, m >0$ |        |
+|  Integral  |             $\frac1{t^2+1} \leftrightarrow \pi e^{-\left\vert \omega\right\vert}$             |        |
+|  Integral  | $\frac t{t^2+1} \leftrightarrow -i\pi e ^{-\left\vert\omega\right\vert}~\mathrm{sgn}(\omega)$ |        |
+|  Integral  |                  $\frac12\delta(t)+i\frac1{2\pi t}\leftrightarrow u(\omega)$                  |        |
+|  Integral  |        $\int_t^\infty \frac{e^{-u}}udu \leftrightarrow \frac{\ln(1+i\omega)}{i\omega}$        |        |
+|  Integral  |          $X(\omega) = -\frac{2\omega}\pi \int_0^\infty \frac{R(u)}{\omega^2-u^2}du$          |        |
+| Definition |    $\frac1{2\pi}\int_{-\infty}^{\infty} \left\vert X(\omega)\right\vert^2d\omega < \infty$    |        |
+| Definition |                      $y(t)=x(t)*h(t)=\int_{-\infty}^\infty x(u)h(t-u)du$                      |        |
+| Definition |                $\int_{-\infty}^\infty \left\vert h(t)\right\vert dt < \infty$                |        |
+|  Integral  |    $\frac1{2\pi}\int_{-\infty}^{\infty} \left\vert Y(\omega)\right\vert^2d\omega < \infty$    |        |
+|  Integral  |               $\overline{\sin(\omega_0t)} = -\cos(\omega_0t)$ for $\omega_0>0$               |        |
+|  Integral  |                $\overline{\cos(\omega_0t)} = \sin(\omega_0t)$ for $\omega_0>0$                |        |
+
+## [Chapter 8: Contour Integration](#Contour_Integration)
 
 ### 8.3 Functions of a Complex Variable (0/1)
 
-|   Type   |                                      Expression                                       | Status |
-| :------: |:-------------------------------------------------------------------------------------:|:------:|
+
+|   Type   |                                      Expression                                      | Status |
+| :------: | :-----------------------------------------------------------------------------------: | :----: |
 | Integral | $\int_0^{2\pi} e^{\cos\theta}d\theta = 2\pi \sum_{m=0}^\infty \frac{1}{2^{2m}(m!)^2}$ |        |
 
 ### 8.6 Cauchy’s First Integral Theorem (0/5)
 
-|   Type   |                                           Expression                                            | Status |
-| :------: |:-----------------------------------------------------------------------------------------------:|:------:|
+
+|   Type   |                                           Expression                                           | Status |
+| :------: | :---------------------------------------------------------------------------------------------: | :----: |
 | Integral |                          $\int_0^\infty \frac{\cos x - e^{-x}}x dx =0$                          |        |
-| Integral |          $P.V.\int_{-\infty}^\infty \frac{1}{ax^2+bx+c}dx = 0$ for $a\neq 0, b^2>4ac$           |        |
-| Integral | $P.V.\int_{-\infty}^\infty \frac{e^{ax}}{1-e^{x}}dx = \frac{\pi}{\tan(a\pi)}$ <br> for $0<a<1$  |        |
-| Integral |  $\int_0^\infty \frac{\cos(x)}{x+a} = \int_0^\infty \frac{xe^{-x}}{x^2+a^2}dx$ <br> for $a>0$   |        |
+| Integral |          $P.V.\int_{-\infty}^\infty \frac{1}{ax^2+bx+c}dx = 0$ for $a\neq 0, b^2>4ac$          |        |
+| Integral | $P.V.\int_{-\infty}^\infty \frac{e^{ax}}{1-e^{x}}dx = \frac{\pi}{\tan(a\pi)}$ <br> for $0<a<1$ |        |
+| Integral |  $\int_0^\infty \frac{\cos(x)}{x+a} = \int_0^\infty \frac{xe^{-x}}{x^2+a^2}dx$ <br> for $a>0$  |        |
 | Integral | $\int_0^\infty \frac{\sin(x)}{x+a} = a\int_0^\infty a\frac{e^{-x}}{x^2+a^2}dx$ <br> for $a > 0$ |        |
 
 ### 8.7 Cauchy’s Second Integral Theorem (0/6)
 
-|   Type   |                                                                    Expression                                                                     | Status |
-| :------: |:-------------------------------------------------------------------------------------------------------------------------------------------------:|:------:|
+
+|   Type   |                                                                    Expression                                                                    | Status |
+| :------: | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :----: |
 | Integral |                        $\int_{\infty}^{\infty} \frac{1}{ax^2+bx+c}=\frac{2\pi}{\sqrt{4ac-b^2}}$ <br> for $a\neq0, b^2<4ac$                        |        |
 | Integral | $\int_0^\infty \frac{x^m}{x^n+1}dx = \frac{\frac{\pi}n}{\sin\left[ (m+1)\frac\pi n\right]}$ <br> for $m \in \mathbb{N},n\in\mathbb{N}, n-m\geq 2$ |        |
 | Integral |                                  $\int_0^\infty \frac{x^{a-1}}{x+1}dx = \frac{\pi}{\sin(a\pi)}$ <br> for $0<a<1$                                  |        |
@@ -690,43 +487,30 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 
 ### 8.8 Singularities and the Residue Theorem (0/3)
 
+
 |   Type   |                                                       Expression                                                       | Status |
-| :------: |:----------------------------------------------------------------------------------------------------------------------:|:------:|
-| Integral |  $\int_0^{2\pi} \cos^k \theta d\theta = \frac{2\pi}{2^k} \frac{k!}{\left[(\frac k2)!\right]^2}$ <br> for $k$ is even   |        |
-| Integral |           $\int_0^{2\pi} \frac{1}{(1+k\cos\theta)^2}d\theta = \frac{2\pi}{(1-k^2)^\frac32}$ <br> for $k <1$            |        |
-| Integral |$\int_0^\infty \frac{\ln x}{(x+a)^2 +b^2}dx = \frac 1b \tan^{-1} (\frac ba) \ln(\sqrt{a^2+b^2})$ <br> for $a\geq 0,b>0$ |        |
+| :------: | :---------------------------------------------------------------------------------------------------------------------: | :----: |
+| Integral |   $\int_0^{2\pi} \cos^k \theta d\theta = \frac{2\pi}{2^k} \frac{k!}{\left[(\frac k2)!\right]^2}$ <br> for $k$ is even   |        |
+| Integral |            $\int_0^{2\pi} \frac{1}{(1+k\cos\theta)^2}d\theta = \frac{2\pi}{(1-k^2)^\frac32}$ <br> for $k <1$            |        |
+| Integral | $\int_0^\infty \frac{\ln x}{(x+a)^2 +b^2}dx = \frac 1b \tan^{-1} (\frac ba) \ln(\sqrt{a^2+b^2})$ <br> for $a\geq 0,b>0$ |        |
 
-### 8.10 Challenge Problems
+### 8.10 Challenge Problems (0/12)
 
-|   Type   |                                              Expression                                              | Status |
-| :------: |:----------------------------------------------------------------------------------------------------:|:------:|
-| Integral | $\int_0^\infty \frac{\sin(mx)}{x(x^2+a^2)}dx = \frac\pi2(\frac{1-e^{-am}}{a^2})$ <br> for $a>0, m>0$ |        |
-| Integral |      $\int_0^{2\pi} \frac{1}{1-2a\cos\theta +a^2} d\theta= \frac{2\pi}{1-a^2}$ <br> for $0<a<1$      |        |
-- [ ]  $\int_{-\infty}^{\infty} \frac{\cos x}{(x+a)^2 + b ^2} dx = \frac{\pi}b e^{-b}\cos a$ for $a >0, b>0$
-- [ ]  $\int_{-\infty}^{\infty} \frac{\sin x}{(x+a)^2 + b ^2} dx = -\frac{\pi}b e^{-b}\sin a$ for $a >0, b>0$
-- [ ]  $\int_{-\infty}^\infty \frac{\cos x}{(x^2+a^2)(x^2+b^2)}dx = \frac\pi{a^2-b^2}(\frac{e^{-b}}b-\frac{e^{-a}}a)$ for $a>b>0$
-- [ ]  $\int_{-\infty}^{\infty} \frac{\cos (ax)}{(x^2+b^2)^2} dx = \frac{\pi}{4b^3} (1+ab)e^{-ab}$ for $a >0, b>0$
 
-- C8.4
-
-- [ ]  $\int_0^\infty \frac{x^k}{(x^2+1)^2}dx = \frac{\pi(1-k)}{4\cos \frac{k\pi}2}$ for $-1<k<3$
-
-- C8.5
-
-- [ ]  $\int_{-\infty}^{\infty} \frac{\cos (mx)}{ax^2+bx+c}dx = -2\pi\frac{\cos\frac{mb}{2a}\sin\frac{m\sqrt{b^2-4ac}}{2a}}{\sqrt{b^2-4ac}}$ for $b^2\geq 4ac$
-
-- C8.6
-
-- [ ]  $\int_0^{\infty} \frac{x^p}{(x+1)(x+2)}dx=(2^p-1)\frac{\pi}{\sin(px)}$ for $-1<p<1$
-- [ ]  $\int_0^{\infty} \frac{x^\frac12}{(x+1)(x+2)}dx=(\sqrt2-1)\pi$
-
-- C8.7
-
-- [ ]  $\int_0^\infty \frac{e^{\cos x }\sin(\sin x)}xdx=\frac\pi2(e-1)$
-
-- C8.8
-
-- [ ]  $\int_{-\infty}^{\infty} \frac{x^2}{(x^2+a^2)^3}dx=\frac\pi{8a^3}$ for $a>0$
+|   Type   |                                                                          Expression                                                                          | Status |
+| :------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------: | :----: |
+| Integral |                             $\int_0^\infty \frac{\sin(mx)}{x(x^2+a^2)}dx = \frac\pi2(\frac{1-e^{-am}}{a^2})$ <br> for $a>0, m>0$                             |        |
+| Integral |                                  $\int_0^{2\pi} \frac{1}{1-2a\cos\theta +a^2} d\theta= \frac{2\pi}{1-a^2}$ <br> for $0<a<1$                                  |        |
+| Integral |                          $\int_{-\infty}^{\infty} \frac{\cos x}{(x+a)^2 + b ^2} dx = \frac{\pi}b e^{-b}\cos a$ <br> for $a >0, b>0$                          |        |
+| Integral |                         $\int_{-\infty}^{\infty} \frac{\sin x}{(x+a)^2 + b ^2} dx = -\frac{\pi}b e^{-b}\sin a$ <br> for $a >0, b>0$                         |        |
+| Integral |               $\int_{-\infty}^\infty \frac{\cos x}{(x^2+a^2)(x^2+b^2)}dx = \frac\pi{a^2-b^2}(\frac{e^{-b}}b-\frac{e^{-a}}a)$ <br> for $a>b>0$               |        |
+| Integral |                       $\int_{-\infty}^{\infty} \frac{\cos (ax)}{(x^2+b^2)^2} dx = \frac{\pi}{4b^3} (1+ab)e^{-ab}$ <br> for $a >0, b>0$                       |        |
+| Integral |                               $\int_0^\infty \frac{x^k}{(x^2+1)^2}dx = \frac{\pi(1-k)}{4\cos \frac{k\pi}2}$ <br> for $-1<k<3$                               |        |
+| Integral | $\int_{-\infty}^{\infty} \frac{\cos (mx)}{ax^2+bx+c}dx = -2\pi\frac{\cos\frac{mb}{2a}\sin\frac{m\sqrt{b^2-4ac}}{2a}}{\sqrt{b^2-4ac}}$ <br> for $b^2\geq 4ac$ |        |
+| Integral |                                   $\int_0^{\infty} \frac{x^p}{(x+1)(x+2)}dx=(2^p-1)\frac{\pi}{\sin(px)}$ <br> for $-1<p<1$                                   |        |
+| Integral |                                                $\int_0^{\infty} \frac{x^\frac12}{(x+1)(x+2)}dx=(\sqrt2-1)\pi$                                                |        |
+| Integral |                                               $\int_0^\infty \frac{e^{\cos x }\sin(\sin x)}xdx=\frac\pi2(e-1)$                                               |        |
+| Integral |                                      $\int_{-\infty}^{\infty} \frac{x^2}{(x^2+a^2)^3}dx=\frac\pi{8a^3}$ <br> for $a>0$                                      |        |
 
 ## Unsolved Problems
 
@@ -734,7 +518,7 @@ Here shows the problems to be solved.
 
 ### Unsupported Functions
 
-Some functions haven't been supported yet.
+Some functions have not been supported yet.
 
 <h4 id=Cauchy_Principle_Value>Cauchy Principle Value</h4>
 
@@ -743,6 +527,22 @@ Some improper integrals may not be convergent. However, sometimes we can calcula
 <h4 id=Decimal_Part_Function>Decimal Part Function</h4>
 
 Suppose that $x=3.14$, and then $\left\{x\right\}$ gets $0.14$. It's easy to see that $0\leq\left\{x\right\}<1$ for $x\in\mathbb{R}$. Notice that when $x$ is negative, the result of $\left\{x\right\}$ seems strange. For example, if $x=-3.14$, then $\left\{x\right\}$ gets $0.86$, for $-3.14 = -4 + 0.86$.
+
+<h4 id=Complex_Integration>Complex Integration</h4>
+
+Complex integration is a mathematical technique that extends the concept of integration to complex functions, allowing for the calculation of the area enclosed by complex curves and the evaluation of complex-valued integrals.
+
+<h4 id=Fourier_Transform>Fourier Transform</h4>
+
+The Fourier transform is a transform which converts a function of time or space into its frequency domain representation.
+
+<h4 id=Hilbert_Transform>Hilbert Transform</h4>
+
+The Hilbert transform is a mathematical operation that takes a real-valued signal and produces a corresponding complex-valued analytic signal, which provides a measure of the signal's instantaneous frequency and phase.
+
+<h4 id=Contour_Integration>Contour Integration</h4>
+
+Contour Integration is a method of evaluating some integrals along paths in the complex plane.
 
 ### Conditions
 

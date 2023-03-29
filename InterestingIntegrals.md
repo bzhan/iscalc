@@ -542,7 +542,7 @@ The Hilbert transform is a mathematical operation that takes a real-valued signa
 
 <h4 id=Contour_Integration>Contour Integration</h4>
 
-Contour Integration is a method of evaluating some integrals along paths in the complex plane.
+Contour integration is a method of evaluating some integrals along paths in the complex plane.
 
 ### Conditions
 

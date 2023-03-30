@@ -2159,6 +2159,46 @@ class IntegralTest(unittest.TestCase):
 
         self.checkAndOutput(file)
 
+    def testCatalanConstant03(self):
+        # Reference:
+        # Inside interesting integrals, Section 5.1, example #4
+        # Notice: This proof is different from the book's.
+        # If we use the series method mentioned in the textbook, the theorem is only valid when a>b>0;
+        # In fact, the theorem can be proved to hold for a>0 and b>0 using the method below.
+
+        file = compstate.CompFile("interesting", 'CatalanConstant03')
+
+        file.add_definition("I(a, b) = (INT x:[0,pi]. x*sin(x)/(a+b*(cos(x))^2))", conds=["a>0", "b>0"])
+        goal01 = file.add_goal("I(a,b) = (INT x:[0,pi]. (pi-x)*sin(x)/(a+b*(cos(x))^2))", conds=["a>0","b>0"])
+        proof = goal01.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.ExpandDefinition("I"))
+        calc.perform_rule(rules.Substitution(var_name="x", var_subst="pi-x"))
+        calc.perform_rule(rules.Equation("sin(x) * (-x + pi) / (b * cos(x) ^ 2 + a)", "(pi-x)*sin(x)/(a+b*(cos(x))^2)"))
+
+        goal02 = file.add_goal("I(a,b) = pi/sqrt(a*b) *atan(sqrt(b/a))", conds=["a>0", "b>0"])
+        proof = goal02.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.Equation("I(a,b)", "1/2 * (I(a,b) + I(a,b))"))
+        calc.perform_rule(rules.OnLocation(rules.ExpandDefinition("I"), "1.0"))
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal01.goal), "1.1"))
+        calc.perform_rule(rules.Equation("(INT x:[0,pi]. x * sin(x) / (b * cos(x) ^ 2 + a)) + (INT x:[0,pi]. (pi - x) * sin(x) / (a + b * cos(x) ^ 2))",
+                                         "(INT x:[0,pi]. x * sin(x)/(a+b*cos(x)^2) + (pi-x) * sin(x)/(a+b*cos(x)^2))"))
+        calc.perform_rule(rules.Equation("x * sin(x)/(a+b*cos(x)^2) + (pi-x) * sin(x)/(a+b*cos(x)^2)",
+                                         "pi * sin(x)/(a+b *cos(x)^2)"))
+        calc.perform_rule(rules.Substitution(var_name="u", var_subst="cos(x)"))
+        calc.perform_rule(rules.Substitution(var_name="x", var_subst="sqrt(b/a) * u"))
+        calc.perform_rule(rules.Equation("a * x ^ 2 + a", "a*(x^2+1)"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.ApplyIdentity("atan(-(sqrt(b) / sqrt(a)))", "-atan(sqrt(b) / sqrt(a))"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("sqrt(a) * sqrt(b)", "sqrt(a*b)"))
+        calc.perform_rule(rules.Equation("sqrt(b) / sqrt(a)", "sqrt(b/a)"))
+
+        self.checkAndOutput(file)
+
     def testLogFunction01(self):
         # Reference:
         # Inside interesting integrals, Section 5.2, example #1

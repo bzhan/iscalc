@@ -722,6 +722,15 @@
                             "type": "problem",
                             "expr": "(INT x:[0, oo]. log(x + 1) / (x ^ 2 + 1)) = pi / 4 * log(2) + G",
                             "path": "CatalanConstant02"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0,pi]. x*sin(x)/(a+b*(cos(x))^2)) = pi/sqrt(a*b) * atan(sqrt(b/a))",
+                            "conds": [
+                                "a>0",
+                                "b>0"
+                            ],
+                            "path": "CatalanConstant03"
                         }
                     ]
                 },

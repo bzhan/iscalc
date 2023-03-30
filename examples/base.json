@@ -617,6 +617,11 @@
                         },
                         {
                             "type": "axiom",
+                            "expr": "atan(-u) = -atan(u)",
+                            "category": "trigonometric"
+                        },
+                        {
+                            "type": "axiom",
                             "expr": "sin(pi / 2 - u) = cos(u)",
                             "category": "trigonometric",
                             "attributes": [

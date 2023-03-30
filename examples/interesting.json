@@ -351,9 +351,17 @@
                             "type": "problem",
                             "expr": "(INT x:[0, 1]. (x ^ a - 1) / log(x)) = log(a + 1)",
                             "conds": [
-                                "a >= 0"
+                                "a > -1"
                             ],
                             "path": "flipside03"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0,1]. (x^a-x^b)/log(x)) = log((a+1)/(b+1))",
+                            "conds": [
+                                "a > -1", "b > -1"
+                            ],
+                            "path": "flipside04"
                         }
                     ]
                 },

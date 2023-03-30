@@ -1925,10 +1925,10 @@ class IntegralTest(unittest.TestCase):
         file = compstate.CompFile("interesting", "flipside03")
 
         # introduce definition
-        file.add_definition("I(a) = INT x:[0, 1]. (x ^ a - 1) / log(x)", conds=["a >= 0"])
+        file.add_definition("I(a) = INT x:[0, 1]. (x ^ a - 1) / log(x)", conds=["a > -1"])
 
         # verify the following equation: D a. I(a) = 1/(a+1)
-        goal1 = file.add_goal("(D a. I(a)) = 1/(a+1)", conds=["a >= 0"])
+        goal1 = file.add_goal("(D a. I(a)) = 1/(a+1)", conds=["a > -1"])
         proof_of_goal1 = goal1.proof_by_calculation()
         calc = proof_of_goal1.lhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
@@ -1937,7 +1937,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
 
-        goal3 = file.add_goal("I(a) = log(a+1) + SKOLEM_CONST(C)", conds=["a >= 0"])
+        goal3 = file.add_goal("I(a) = log(a+1) + SKOLEM_CONST(C)", conds=["a > -1"])
         proof_of_goal3 = goal3.proof_by_rewrite_goal(begin=goal1)
         calc = proof_of_goal3.begin
         calc.perform_rule(rules.IntegralEquation())
@@ -1952,7 +1952,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.SolveEquation(parser.parse_expr("SKOLEM_CONST(C)")))
 
-        goal5 = file.add_goal("I(a) = log(a+1)", conds=["a >= 0"])
+        goal5 = file.add_goal("I(a) = log(a+1)", conds=["a > -1"])
         proof_of_goal5 = goal5.proof_by_calculation()
         calc = proof_of_goal5.lhs_calc
         calc.perform_rule(rules.ApplyEquation(goal3.goal))
@@ -1960,6 +1960,20 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
 
+    def testFlipside04(self):
+        # Reference:
+        # Inside interesting integrals, Section 3.4, example #4
+        file = compstate.CompFile("interesting", "flipside04")
+
+        goal = file.add_goal("(INT x:[0,1]. (x^a-x^b)/log(x)) = log((a+1)/(b+1))", conds=["a>-1", "b>-1"])
+        proof = goal.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.Equation("x^a-x^b", "(x^a-1)-(x^b-1)"))
+        calc.perform_rule(rules.Equation("(x ^ a - 1 - (x ^ b - 1)) / log(x)", "(x ^ a - 1)/log(x) - (x ^ b - 1) / log(x)"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
+        calc.perform_rule(rules.ApplyIdentity("log(a + 1) - log(b + 1)", "log((a+1)/(b+1))"))
+        self.checkAndOutput(file)
     def testFrullaniIntegral(self):
         # Reference:
         # Inside interesting integrals, Section 3.3

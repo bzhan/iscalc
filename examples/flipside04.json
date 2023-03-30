@@ -1,0 +1,96 @@
+{
+    "content": [
+        {
+            "conds": [
+                {
+                    "cond": "a > -1",
+                    "latex_cond": "a > -1"
+                },
+                {
+                    "cond": "b > -1",
+                    "latex_cond": "b > -1"
+                }
+            ],
+            "finished": true,
+            "goal": "(INT x:[0,1]. (x ^ a - x ^ b) / log(x)) = log((a + 1) / (b + 1))",
+            "latex_goal": "\\int_{0}^{1} \\frac{x ^ {a} - x ^ {b}}{\\log{x}} \\,dx = \\log{(\\frac{a + 1}{b + 1})}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{0}^{1} \\frac{x ^ {a} - x ^ {b}}{\\log{x}} \\,dx",
+                        "start": "INT x:[0,1]. (x ^ a - x ^ b) / log(x)",
+                        "steps": [
+                            {
+                                "latex_res": "\\int_{0}^{1} \\frac{x ^ {a} - 1 - (x ^ {b} - 1)}{\\log{x}} \\,dx",
+                                "res": "INT x:[0,1]. (x ^ a - 1 - (x ^ b - 1)) / log(x)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(x ^ {a} - x ^ {b}\\) to \\(x ^ {a} - 1 - (x ^ {b} - 1)\\)",
+                                    "name": "Equation",
+                                    "new_expr": "x ^ a - 1 - (x ^ b - 1)",
+                                    "old_expr": "x ^ a - x ^ b",
+                                    "str": "rewriting x ^ a - x ^ b to x ^ a - 1 - (x ^ b - 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{1} \\frac{x ^ {a} - 1}{\\log{x}} - \\frac{x ^ {b} - 1}{\\log{x}} \\,dx",
+                                "res": "INT x:[0,1]. (x ^ a - 1) / log(x) - (x ^ b - 1) / log(x)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{x ^ {a} - 1 - (x ^ {b} - 1)}{\\log{x}}\\) to \\(\\frac{x ^ {a} - 1}{\\log{x}} - \\frac{x ^ {b} - 1}{\\log{x}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(x ^ a - 1) / log(x) - (x ^ b - 1) / log(x)",
+                                    "old_expr": "(x ^ a - 1 - (x ^ b - 1)) / log(x)",
+                                    "str": "rewriting (x ^ a - 1 - (x ^ b - 1)) / log(x) to (x ^ a - 1) / log(x) - (x ^ b - 1) / log(x)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "(\\int_{0}^{1} \\frac{x ^ {a} - 1}{\\log{x}} \\,dx) - (\\int_{0}^{1} \\frac{x ^ {b} - 1}{\\log{x}} \\,dx)",
+                                "res": "(INT x:[0,1]. (x ^ a - 1) / log(x)) - (INT x:[0,1]. (x ^ b - 1) / log(x))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\log{(a + 1)} - \\log{(b + 1)}",
+                                "res": "log(a + 1) - log(b + 1)",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\log{(\\frac{a + 1}{b + 1})}",
+                                "res": "log((a + 1) / (b + 1))",
+                                "rule": {
+                                    "latex_str": "rewrite \\(\\log{(a + 1)} - \\log{(b + 1)}\\) to \\(\\log{(\\frac{a + 1}{b + 1})}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "log(a + 1) - log(b + 1)",
+                                    "str": "rewrite log(a + 1) - log(b + 1) to log((a + 1) / (b + 1)) using identity",
+                                    "target": "log((a + 1) / (b + 1))"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\log{(\\frac{a + 1}{b + 1})}",
+                        "start": "log((a + 1) / (b + 1))",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(INT x:[0,1]. (x ^ a - x ^ b) / log(x)) = log((a + 1) / (b + 1))",
+                "latex_goal": "\\int_{0}^{1} \\frac{x ^ {a} - x ^ {b}}{\\log{x}} \\,dx = \\log{(\\frac{a + 1}{b + 1})}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "flipside04"
+}

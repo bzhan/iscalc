@@ -3,8 +3,8 @@
         {
             "conds": [
                 {
-                    "cond": "a >= 0",
-                    "latex_cond": "a \\ge 0"
+                    "cond": "a > -1",
+                    "latex_cond": "a > -1"
                 }
             ],
             "eq": "I(a) = (INT x:[0,1]. (x ^ a - 1) / log(x))",
@@ -15,8 +15,8 @@
         {
             "conds": [
                 {
-                    "cond": "a >= 0",
-                    "latex_cond": "a \\ge 0"
+                    "cond": "a > -1",
+                    "latex_cond": "a > -1"
                 }
             ],
             "finished": true,
@@ -95,8 +95,8 @@
         {
             "conds": [
                 {
-                    "cond": "a >= 0",
-                    "latex_cond": "a \\ge 0"
+                    "cond": "a > -1",
+                    "latex_cond": "a > -1"
                 }
             ],
             "finished": true,
@@ -109,8 +109,8 @@
                 "start": {
                     "conds": [
                         {
-                            "cond": "a >= 0",
-                            "latex_cond": "a \\ge 0"
+                            "cond": "a > -1",
+                            "latex_cond": "a > -1"
                         }
                     ],
                     "latex_start": "\\frac{d}{da} I{(a)} = \\frac{1}{a + 1}",
@@ -161,8 +161,8 @@
                 "start": {
                     "conds": [
                         {
-                            "cond": "a >= 0",
-                            "latex_cond": "a \\ge 0"
+                            "cond": "a > -1",
+                            "latex_cond": "a > -1"
                         }
                     ],
                     "latex_start": "I{(a)} = \\log{(a + 1)} + C",
@@ -225,8 +225,8 @@
         {
             "conds": [
                 {
-                    "cond": "a >= 0",
-                    "latex_cond": "a \\ge 0"
+                    "cond": "a > -1",
+                    "latex_cond": "a > -1"
                 }
             ],
             "finished": true,

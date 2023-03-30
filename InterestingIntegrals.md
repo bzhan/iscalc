@@ -121,9 +121,9 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 | Integral |            $\int_0^\infty \frac{e^{-pt^2}-e^{-qt^2}}{t^2}dt = \sqrt \pi (\sqrt q - \sqrt p)$ for $p >0, q > 0$            |        |
 | Integral |                                 $\int_0^1 \frac{x^a-1}{\ln x} dx = \ln(a+1)$ for $a > -1$                                 |  Done  |
 | Integral |                 $\int_0^1 \frac{x^a-x^b}{\ln x} dx = \frac{\ln(a+1)}{\ln(b+1)}$ <br> for $a > -1, b > -1$                 |  Done  |
-| Integral |    $I(t) = \int_0^\infty e^{-tx}\frac{\cos(ax) - \cos (bx)}{x} dx = \ln\sqrt{\frac{t^2+b^2}{t^2+a^2}}$ <br> for $t>0$    |        |
+| Integral |        $\int_0^\infty e^{-tx}\frac{\cos(ax) - \cos (bx)}{x} dx = \ln\sqrt{\frac{t^2+b^2}{t^2+a^2}}$ <br> for $t>0$        |        |
 | Integral |    $\int_0^\infty \frac{\cos(ax) - \cos (bx)}{x} dx = \ln\left\vert\frac b a\right\vert$ <br> for $a \neq 0, b \neq0$    |        |
-| Integral |                             $\int_0^1 x^a (\ln x)^2 dx = \frac 2{(a+1)^3}$ <br> for $a > -1$                             |        |
+| Integral |                             $\int_0^1 x^a (\ln x)^2 dx = \frac 2{(a+1)^3}$ <br> for $a > -1$                             |  Done  |
 | Integral |                    $\int_0^\pi \frac1{a+b\cos x} dx = \frac\pi {\sqrt{a^2-b^2}}$ <br> for $a>b\geq 0$                    |        |
 | Integral |              $\int_0^\pi \ln{(a+b\cos x)} dx = \pi\ln\frac{a + \sqrt{a^2-b^2}} {2}$ <br> for $a > b \geq 0$              |        |
 | Integral |                   $\int_0^\pi \frac{\ln(1+b\cos x)}{\cos{x}}dx = \pi \sin^{-1} b$ for $-1\leq b \leq 1$                   |        |
@@ -304,19 +304,19 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 ### 5.5 Challenge Problems (0/11)
 
 
-|    Type    |                                                         Expression                                                         |                       Status                       |
-| :--------: | :------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------: |
-|  Integral  | $\int_0^1 \frac{1-x^m}{1-x^n}dx = m\sum_{k=0}^\infty \frac1{(kn+1)(kn+m+1)}$ <br> for $m\in\mathbb{N}_+, n\in\mathbb{N}_+$ |                                                    |
-|  Integral  |                                    $\int_1^\infty \frac{\left\{x\right\}}x dx=1-\gamma$                                    | Unsupported:[decimal part](#Decimal_Part_Function) |
-|  Integral  |                            $\zeta(3) = \frac32 -3\int_1^\infty \frac{\left\{x\right\}}{x^4}dx$                            | Unsupported:[decimal part](#Decimal_Part_Function) |
-|  Integral  |                               $\lim_{a\rightarrow 1} (\frac1{1-a}+\frac1{\ln a}) = \frac12$                               |                                                    |
-|  Integral  |                        $2\sum_{k=1}^\infty \frac{(-1)^{k-1}}{k^2} = \sum_{k=1}^\infty \frac1{k^2}$                        |                                                    |
-|  Integral  |                                         $\int_0^1 \frac{\ln^2 (1-x)}x =2\zeta(3)$                                         |                                                    |
-|  Integral  |                         $\int_0^1\frac{(-\ln x)^p}{1-x}dx =\Gamma(p+1)\zeta(p+1)$ <br> for $p > 0$                         |                                                    |
-|  Integral  |       $\int_0^1\int_0^1...\int_0^1\frac1{1-\prod_{k=1}^n x_k}dx_1dx_2...dx_n =\zeta(n)$ <br> for $n\in \mathbb{N}_+$       |     [Complex conditions](#Complex_Conditions)     |
-|  Integral  |                                   $\int_0^\infty \ln\frac{e^x+1}{e^x-1}dx=\frac{\pi^2}4$                                   |                                                    |
-|  Integral  |                                 $\int_0^\infty e^{-x}\ln^2 x dx = \gamma^2+\frac{\pi^2}6$                                 |                                                    |
-|  Integral  |                                    $\gamma = \int_0^1 \frac{1-e^{-x}-e^{-\frac1x}}xdx$                                    |                                                    |
+|   Type   |                                                         Expression                                                         |                       Status                       |
+| :------: | :------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------: |
+| Integral | $\int_0^1 \frac{1-x^m}{1-x^n}dx = m\sum_{k=0}^\infty \frac1{(kn+1)(kn+m+1)}$ <br> for $m\in\mathbb{N}_+, n\in\mathbb{N}_+$ |                                                    |
+| Integral |                                    $\int_1^\infty \frac{\left\{x\right\}}x dx=1-\gamma$                                    | Unsupported:[decimal part](#Decimal_Part_Function) |
+| Integral |                            $\zeta(3) = \frac32 -3\int_1^\infty \frac{\left\{x\right\}}{x^4}dx$                            | Unsupported:[decimal part](#Decimal_Part_Function) |
+| Integral |                               $\lim_{a\rightarrow 1} (\frac1{1-a}+\frac1{\ln a}) = \frac12$                               |                                                    |
+| Integral |                        $2\sum_{k=1}^\infty \frac{(-1)^{k-1}}{k^2} = \sum_{k=1}^\infty \frac1{k^2}$                        |                                                    |
+| Integral |                                         $\int_0^1 \frac{\ln^2 (1-x)}x =2\zeta(3)$                                         |                                                    |
+| Integral |                         $\int_0^1\frac{(-\ln x)^p}{1-x}dx =\Gamma(p+1)\zeta(p+1)$ <br> for $p > 0$                         |                                                    |
+| Integral |       $\int_0^1\int_0^1...\int_0^1\frac1{1-\prod_{k=1}^n x_k}dx_1dx_2...dx_n =\zeta(n)$ <br> for $n\in \mathbb{N}_+$       |     [Complex conditions](#Complex_Conditions)     |
+| Integral |                                   $\int_0^\infty \ln\frac{e^x+1}{e^x-1}dx=\frac{\pi^2}4$                                   |                                                    |
+| Integral |                                 $\int_0^\infty e^{-x}\ln^2 x dx = \gamma^2+\frac{\pi^2}6$                                 |                                                    |
+| Integral |                                    $\gamma = \int_0^1 \frac{1-e^{-x}-e^{-\frac1x}}xdx$                                    |                                                    |
 
 ## Chapter 6: Seven Not-So-Easy Integrals (7/11)
 

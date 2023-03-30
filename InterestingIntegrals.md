@@ -104,15 +104,15 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 | :------: | :---------------------------------------------------------------: | :----: |
 | Integral | $\int_0^\infty\frac{\sin(ax)}x dx = \frac{\pi}2~\mathrm{sgn}(a) $ |  Done  |
 
-### 3.3 Frullani’s Integral (0/2)
+### 3.3 Frullani’s Integral (1/2)
 
 
-|   Type   |                                                 Expression                                                 |                           Status                           |
-| :------: | :---------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------: |
-| Integral | $\int_0^\infty \frac{\tan^{-1}(ax)-\tan^{-1}(bx)}x dx = \frac{\pi}2 \ln \frac a b$ <br> for $\frac a b > 0$ | [Overly stringent conditions](#Overly_Stringent_Conditions) |
-| Integral |             $\int_0^\infty \frac{e^{-ax} - e^{-bx}}x dx= \ln \frac b a$ <br> for $a > 0, b > 0$             |                                                            |
+|   Type   |                                              Expression                                              | Status |
+| :------: | :---------------------------------------------------------------------------------------------------: | :----: |
+| Integral | $\int_0^\infty \frac{\tan^{-1}(ax)-\tan^{-1}(bx)}x dx = \frac{\pi}2 \ln \frac a b$ <br> for $a>0,b>0$ |  Done  |
+| Integral |          $\int_0^\infty \frac{e^{-ax} - e^{-bx}}x dx= \ln \frac b a$ <br> for $a > 0, b > 0$          |        |
 
-### 3.4 The Flip-Side of Feynman’s Trick (0/10)
+### 3.4 The Flip-Side of Feynman’s Trick (3/10)
 
 
 |   Type   |                                                        Expression                                                        |               Status               |

@@ -250,16 +250,16 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 
 ## Chapter 5: Using Power Series to Evaluate Integrals
 
-### 5.1 Catalan’s Constant (3/4)
+### 5.1 Catalan’s Constant (4/4)
 
 
-|    Type    |                                                             Expression                                                             |                          Status                          |
-| :--------: | :---------------------------------------------------------------------------------------------------------------------------------: |:--------------------------------------------------------:|
-| Definition |                                             $G = \sum_{k=0}^\infty \frac{1}{(2k+1)^2}$                                             |                           Done                           |
-|  Integral  |                                                $\int_0^1 \frac{\tan^{-1} x }x dx =G$                                                |                           Done                           |
-|  Integral  |                                              $\int_1^\infty \frac{\ln x}{x^2+1}dx =G$                                              |                           Done                           |
-|  Integral  |                                    $\int_0^\infty \frac{\ln (x+1)}{x^2+1}dx = \frac\pi 4\ln 2+G$                                    |                           Done                           |
-|  Integral  | $ \int_0^\pi \frac{\theta\sin \theta}{a + b\cos^2 \theta}d\theta = \frac\pi{\sqrt ab}\tan^{-1}\sqrt\frac ba $ <br> for $a >0 , b>0$ | Done <br> Notice the proof is different from the book's. |
+|    Type    |                                                             Expression                                                             |                         Status                         |
+| :--------: | :---------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------: |
+| Definition |                                             $G = \sum_{k=0}^\infty \frac{1}{(2k+1)^2}$                                             |                          Done                          |
+|  Integral  |                                                $\int_0^1 \frac{\tan^{-1} x }x dx =G$                                                |                          Done                          |
+|  Integral  |                                              $\int_1^\infty \frac{\ln x}{x^2+1}dx =G$                                              |                          Done                          |
+|  Integral  |                                    $\int_0^\infty \frac{\ln (x+1)}{x^2+1}dx = \frac\pi 4\ln 2+G$                                    |                          Done                          |
+|  Integral  | $ \int_0^\pi \frac{\theta\sin \theta}{a + b\cos^2 \theta}d\theta = \frac\pi{\sqrt ab}\tan^{-1}\sqrt\frac ba $ <br> for $a >0 , b>0$ | Done<br> Notice the proof is different from the book's. |
 
 ### 5.2 Power Series for the Log Function (2/7)
 

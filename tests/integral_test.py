@@ -1645,6 +1645,25 @@ class IntegralTest(unittest.TestCase):
             "2 ^ (1/2) ^ (-1) * pi ^ (1/2) / exp(1/2 * t ^ 2)"))
         calc.perform_rule(rules.FullSimplify())
 
+        Eq7 = file.add_goal("(INT x:[-oo, oo]. exp(-x^2/2) * cos(s + t*x)) = sqrt(2*pi)*exp(-t^2/2)*cos(s)")
+        Eq7_proof = Eq7.proof_by_calculation()
+        calc = Eq7_proof.lhs_calc
+        calc.perform_rule(rules.ApplyIdentity("cos(s + t*x)", "cos(s)*cos(t*x)-sin(s)*sin(t*x)"))
+        calc.perform_rule(rules.Equation("exp(-(x ^ 2) / 2) * (cos(s) * cos(t * x) - sin(s) * sin(t * x))",
+                                         "exp(-(x ^ 2) / 2) * cos(s) * cos(t * x) - exp(-(x^2)/2)*sin(s) * sin(t * x)"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.OnLocation(rules.SplitRegion("0"), "1.1"))
+        calc.perform_rule(rules.OnLocation(rules.Substitution(var_name="x", var_subst="-x"), "1.1.0"))
+        calc.perform_rule(rules.ApplyIdentity("sin(-(t * x))", "-sin(t*x)"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.SplitRegion("0"))
+        calc.perform_rule(rules.OnLocation(rules.Substitution(var_name="x", var_subst="-x"), "1.0"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("-(x^2/2)", "-x^2/2"))
+        calc.perform_rule(rules.OnSubterm(rules.FoldDefinition("I")))
+        calc.perform_rule(rules.OnSubterm(rules.ApplyEquation(Eq6.goal)))
+        calc.perform_rule(rules.Equation("2 * cos(s) * (sqrt(pi / 2) * exp(-(t ^ 2) / 2))",
+                                         "sqrt(2*pi)*exp(-t^2/2)*cos(s)"))
         self.checkAndOutput(file)
 
     def testEulerLogSineIntegral(self):

@@ -294,6 +294,11 @@
                             "type": "problem",
                             "expr": "(INT x:[0, oo]. cos(t*x)*exp(-(x^2)/2)) = sqrt(pi/2)*exp(-(t^2)/2)",
                             "path": "leibniz03"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[-oo, oo]. exp(-x^2/2) * cos(s + t*x)) = sqrt(2*pi)*exp(-t^2/2)*cos(s)",
+                            "path": "leibniz03"
                         }
                     ]
                 },

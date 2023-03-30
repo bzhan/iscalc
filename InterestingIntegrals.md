@@ -81,7 +81,7 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 
 ## Chapter 3: Feynman’s Favorite Trick
 
-### 3.1 Leibniz’s Formula (8/10)
+### 3.1 Leibniz’s Formula (9/10)
 
 
 |   Type   |                                         Expression                                         | Status |
@@ -93,7 +93,7 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 | Integral |                   $\int_0^\infty e^{-\frac{-x^2}2}dx = \sqrt{\frac\pi2}$                   |  Done  |
 | Integral |     $\int_0^\infty \cos(tx)e^{-\frac{x^2} 2} dx = \sqrt{\frac{\pi} 2}e^{-\frac{t^2}2}$     |  Done  |
 | Integral |                  $\int_{-\infty}^\infty e^{-ax^2} dx = \sqrt{\frac\pi a}$                  |  Done  |
-| Integral | $\int_{-\infty}^{\infty} e^{-\frac{x^2}2}\cos(s+tx)dx = \sqrt{2\pi}e^{-\frac{t^2}2}\cos s$ |        |
+| Integral | $\int_{-\infty}^{\infty} e^{-\frac{x^2}2}\cos(s+tx)dx = \sqrt{2\pi}e^{-\frac{t^2}2}\cos s$ |  Done  |
 | Integral | $\int_0^\infty \frac{\cos (ax)}{x^2 + b^2}dx = \frac\pi{2b}e^{-ab}$ <br> for $a > 0, b > 0$ |        |
 | Integral |                       $\int_0^1 \frac{1}{\sqrt{-\ln x}}dx = \sqrt\pi$                       |  Done  |
 

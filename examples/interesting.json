@@ -136,6 +136,31 @@
                             "type": "problem",
                             "expr": "(INT x:[0,oo]. x^2 / (x^4 + 2*x^2*cos(2*a) + 1)) = pi / (4 * cos(a))",
                             "path": "partialFraction03"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0,oo]. 1/(x^4+1))=(pi*sqrt(2))/4",
+                            "path": "partialFraction03"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0,oo]. 1/(x^4+1)) = (INT x:[0,oo]. x^2/(x^4+1))",
+                            "path": "partialFraction03"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0,oo]. 1/(x^4+x^2+1))=pi/(2*sqrt(3))",
+                            "path": "partialFraction03"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0,oo]. 1/(x^4-x^2+1))=pi/2",
+                            "path": "partialFraction03"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0,oo]. 1/(x^4+2*x^2+1))=pi/4",
+                            "path": "partialFraction03"
                         }
                     ]
                 },
@@ -156,6 +181,16 @@
                             "type": "problem",
                             "expr": "(INT x:[0, pi/2]. log(sin(x) / x)) = pi/2 * (1-log(pi))",
                             "path": "euler_log_sin02"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0, oo]. log(x^2+1)/(x^2+1)) = pi * log(2)",
+                            "path": "euler_log_sin0304"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0, 1]. log(x+1/x)/(x^2+1)) = pi/2 * log(2)",
+                            "path": "euler_log_sin0304"
                         },
                         {
                             "type": "problem",
@@ -252,7 +287,17 @@
                         },
                         {
                             "type": "problem",
+                            "expr": "(INT x:[0,1]. 1/sqrt(-log(x))) = sqrt(pi)",
+                            "path": "leibniz02"
+                        },
+                        {
+                            "type": "problem",
                             "expr": "(INT x:[0, oo]. cos(t*x)*exp(-(x^2)/2)) = sqrt(pi/2)*exp(-(t^2)/2)",
+                            "path": "leibniz03"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[-oo, oo]. exp(-x^2/2) * cos(s + t*x)) = sqrt(2*pi)*exp(-t^2/2)*cos(s)",
                             "path": "leibniz03"
                         }
                     ]
@@ -311,9 +356,25 @@
                             "type": "problem",
                             "expr": "(INT x:[0, 1]. (x ^ a - 1) / log(x)) = log(a + 1)",
                             "conds": [
-                                "a >= 0"
+                                "a > -1"
                             ],
                             "path": "flipside03"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0,1]. (x^a-x^b)/log(x)) = log((a+1)/(b+1))",
+                            "conds": [
+                                "a > -1", "b > -1"
+                            ],
+                            "path": "flipside04"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0,1]. x^a*(log(x))^2) = 2/(a+1)^3",
+                            "conds": [
+                                "a > -1"
+                            ],
+                            "path": "flipside07"
                         }
                     ]
                 },
@@ -664,6 +725,15 @@
                             "type": "problem",
                             "expr": "(INT x:[0, oo]. log(x + 1) / (x ^ 2 + 1)) = pi / 4 * log(2) + G",
                             "path": "CatalanConstant02"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0,pi]. x*sin(x)/(a+b*(cos(x))^2)) = pi/sqrt(a*b) * atan(sqrt(b/a))",
+                            "conds": [
+                                "a>0",
+                                "b>0"
+                            ],
+                            "path": "CatalanConstant03"
                         }
                     ]
                 },

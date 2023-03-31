@@ -683,6 +683,108 @@
                 "type": "CalculationProof"
             },
             "type": "Goal"
+        },
+        {
+            "finished": true,
+            "goal": "(INT x:[0,oo]. exp(-(x ^ 2))) = sqrt(pi) / 2",
+            "latex_goal": "\\int_{0}^{\\infty} e^{-x ^ {2}} \\,dx = \\frac{\\sqrt{\\pi}}{2}",
+            "proof": {
+                "finished": true,
+                "goal": "(INT x:[0,oo]. exp(-(x ^ 2))) = sqrt(pi) / 2",
+                "latex_goal": "\\int_{0}^{\\infty} e^{-x ^ {2}} \\,dx = \\frac{\\sqrt{\\pi}}{2}",
+                "start": {
+                    "latex_start": "\\int_{0}^{\\infty} e^{-x ^ {2}/2} \\,dx = \\frac{\\sqrt{2} \\sqrt{\\pi}}{2}",
+                    "start": "(INT x:[0,oo]. exp(-(x ^ 2) / 2)) = sqrt(2) * sqrt(pi) / 2",
+                    "steps": [
+                        {
+                            "latex_res": "\\int_{0}^{\\infty} \\sqrt{2} e^{-x ^ {2}} \\,dx = \\frac{\\sqrt{2} \\sqrt{\\pi}}{2}",
+                            "res": "(INT x:[0,oo]. sqrt(2) * exp(-(x ^ 2))) = sqrt(2) * sqrt(pi) / 2",
+                            "rule": {
+                                "latex_str": "substitute \\(x\\) for \\(\\frac{x}{\\sqrt{2}}\\)",
+                                "name": "Substitution",
+                                "str": "substitute x for x / sqrt(2)",
+                                "var_name": "x",
+                                "var_subst": "x / sqrt(2)"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "\\sqrt{2} (\\int_{0}^{\\infty} e^{-x ^ {2}} \\,dx) = \\frac{\\sqrt{2} \\sqrt{\\pi}}{2}",
+                            "res": "sqrt(2) * (INT x:[0,oo]. exp(-(x ^ 2))) = sqrt(2) * sqrt(pi) / 2",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "\\int_{0}^{\\infty} e^{-x ^ {2}} \\,dx = \\frac{\\sqrt{\\pi}}{2}",
+                            "res": "(INT x:[0,oo]. exp(-(x ^ 2))) = sqrt(pi) / 2",
+                            "rule": {
+                                "latex_str": "solve equation for \\(\\int_{0}^{\\infty} e^{-x ^ {2}} \\,dx\\)",
+                                "name": "SolveEquation",
+                                "solve_for": "INT x:[0,oo]. exp(-(x ^ 2))",
+                                "str": "solve equation for INT x:[0,oo]. exp(-(x ^ 2))"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "finished": true,
+            "goal": "(INT x:[0,1]. 1 / sqrt(-log(x))) = sqrt(pi)",
+            "latex_goal": "\\int_{0}^{1} \\frac{1}{\\sqrt{-\\log{x}}} \\,dx = \\sqrt{\\pi}",
+            "proof": {
+                "finished": true,
+                "goal": "(INT x:[0,1]. 1 / sqrt(-log(x))) = sqrt(pi)",
+                "latex_goal": "\\int_{0}^{1} \\frac{1}{\\sqrt{-\\log{x}}} \\,dx = \\sqrt{\\pi}",
+                "start": {
+                    "latex_start": "\\int_{0}^{\\infty} e^{-x ^ {2}} \\,dx = \\frac{\\sqrt{\\pi}}{2}",
+                    "start": "(INT x:[0,oo]. exp(-(x ^ 2))) = sqrt(pi) / 2",
+                    "steps": [
+                        {
+                            "latex_res": "\\int_{0}^{1} \\frac{1}{2 \\sqrt{-\\log{t}}} \\,dt = \\frac{\\sqrt{\\pi}}{2}",
+                            "res": "(INT t:[0,1]. 1 / (2 * sqrt(-log(t)))) = sqrt(pi) / 2",
+                            "rule": {
+                                "latex_str": "substitute \\(t\\) for \\(e^{-x ^ {2}}\\)",
+                                "name": "Substitution",
+                                "str": "substitute t for exp(-(x ^ 2))",
+                                "var_name": "t",
+                                "var_subst": "exp(-(x ^ 2))"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "\\frac{1}{2} (\\int_{0}^{1} \\frac{1}{\\sqrt{-\\log{t}}} \\,dt) = \\frac{\\sqrt{\\pi}}{2}",
+                            "res": "1/2 * (INT t:[0,1]. 1 / sqrt(-log(t))) = sqrt(pi) / 2",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "\\int_{0}^{1} \\frac{1}{\\sqrt{-\\log{x}}} \\,dx = \\sqrt{\\pi}",
+                            "res": "(INT x:[0,1]. 1 / sqrt(-log(x))) = sqrt(pi)",
+                            "rule": {
+                                "latex_str": "solve equation for \\(\\int_{0}^{1} \\frac{1}{\\sqrt{-\\log{x}}} \\,dx\\)",
+                                "name": "SolveEquation",
+                                "solve_for": "INT x:[0,1]. 1 / sqrt(-log(x))",
+                                "str": "solve equation for INT x:[0,1]. 1 / sqrt(-log(x))"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal"
         }
     ],
     "name": "leibniz02"

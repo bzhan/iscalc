@@ -464,6 +464,190 @@
                 "type": "RewriteGoalProof"
             },
             "type": "Goal"
+        },
+        {
+            "finished": true,
+            "goal": "(INT x:[-oo,oo]. exp(-(x ^ 2) / 2) * cos(s + t * x)) = sqrt(2 * pi) * exp(-(t ^ 2) / 2) * cos(s)",
+            "latex_goal": "\\int_{-\\infty}^{\\infty} e^{-x ^ {2}/2} \\cos{(s + t x)} \\,dx = \\sqrt{2 \\pi} e^{-t ^ {2}/2} \\cos{s}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{-\\infty}^{\\infty} e^{-x ^ {2}/2} \\cos{(s + t x)} \\,dx",
+                        "start": "INT x:[-oo,oo]. exp(-(x ^ 2) / 2) * cos(s + t * x)",
+                        "steps": [
+                            {
+                                "latex_res": "\\int_{-\\infty}^{\\infty} e^{-x ^ {2}/2} (\\cos{s} \\cos{(t x)} - \\sin{s} \\sin{(t x)}) \\,dx",
+                                "res": "INT x:[-oo,oo]. exp(-(x ^ 2) / 2) * (cos(s) * cos(t * x) - sin(s) * sin(t * x))",
+                                "rule": {
+                                    "latex_str": "rewrite \\(\\cos{(s + t x)}\\) to \\(\\cos{s} \\cos{(t x)} - \\sin{s} \\sin{(t x)}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "cos(s + t * x)",
+                                    "str": "rewrite cos(s + t * x) to cos(s) * cos(t * x) - sin(s) * sin(t * x) using identity",
+                                    "target": "cos(s) * cos(t * x) - sin(s) * sin(t * x)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{-\\infty}^{\\infty} e^{-x ^ {2}/2} \\cos{s} \\cos{(t x)} - e^{-x ^ {2}/2} \\sin{s} \\sin{(t x)} \\,dx",
+                                "res": "INT x:[-oo,oo]. exp(-(x ^ 2) / 2) * cos(s) * cos(t * x) - exp(-(x ^ 2) / 2) * sin(s) * sin(t * x)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(e^{-x ^ {2}/2} (\\cos{s} \\cos{(t x)} - \\sin{s} \\sin{(t x)})\\) to \\(e^{-x ^ {2}/2} \\cos{s} \\cos{(t x)} - e^{-x ^ {2}/2} \\sin{s} \\sin{(t x)}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "exp(-(x ^ 2) / 2) * cos(s) * cos(t * x) - exp(-(x ^ 2) / 2) * sin(s) * sin(t * x)",
+                                    "old_expr": "exp(-(x ^ 2) / 2) * (cos(s) * cos(t * x) - sin(s) * sin(t * x))",
+                                    "str": "rewriting exp(-(x ^ 2) / 2) * (cos(s) * cos(t * x) - sin(s) * sin(t * x)) to exp(-(x ^ 2) / 2) * cos(s) * cos(t * x) - exp(-(x ^ 2) / 2) * sin(s) * sin(t * x)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\cos{s} (\\int_{-\\infty}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx) - \\sin{s} (\\int_{-\\infty}^{\\infty} \\sin{(t x)} e^{-x ^ {2}/2} \\,dx)",
+                                "res": "cos(s) * (INT x:[-oo,oo]. cos(t * x) * exp(-(x ^ 2 / 2))) - sin(s) * (INT x:[-oo,oo]. sin(t * x) * exp(-(x ^ 2 / 2)))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\cos{s} (\\int_{-\\infty}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx) - \\sin{s} ((\\int_{-\\infty}^{0} \\sin{(t x)} e^{-x ^ {2}/2} \\,dx) + (\\int_{0}^{\\infty} \\sin{(t x)} e^{-x ^ {2}/2} \\,dx))",
+                                "res": "cos(s) * (INT x:[-oo,oo]. cos(t * x) * exp(-(x ^ 2 / 2))) - sin(s) * ((INT x:[-oo,0]. sin(t * x) * exp(-(x ^ 2 / 2))) + (INT x:[0,oo]. sin(t * x) * exp(-(x ^ 2 / 2))))",
+                                "rule": {
+                                    "c": "0",
+                                    "loc": "1.1",
+                                    "name": "SplitRegion",
+                                    "str": "split region at 0 at 1.1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\cos{s} (\\int_{-\\infty}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx) - \\sin{s} ((\\int_{0}^{\\infty} \\sin{(-t x)} e^{-x ^ {2}/2} \\,dx) + (\\int_{0}^{\\infty} \\sin{(t x)} e^{-x ^ {2}/2} \\,dx))",
+                                "res": "cos(s) * (INT x:[-oo,oo]. cos(t * x) * exp(-(x ^ 2 / 2))) - sin(s) * ((INT x:[0,oo]. sin(-(t * x)) * exp(-(x ^ 2 / 2))) + (INT x:[0,oo]. sin(t * x) * exp(-(x ^ 2 / 2))))",
+                                "rule": {
+                                    "latex_str": "substitute \\(x\\) for \\(-x\\) at 1.1.0",
+                                    "loc": "1.1.0",
+                                    "name": "Substitution",
+                                    "str": "substitute x for -x at 1.1.0",
+                                    "var_name": "x",
+                                    "var_subst": "-x"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\cos{s} (\\int_{-\\infty}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx) - \\sin{s} ((\\int_{0}^{\\infty} (-\\sin{(t x)}) e^{-x ^ {2}/2} \\,dx) + (\\int_{0}^{\\infty} \\sin{(t x)} e^{-x ^ {2}/2} \\,dx))",
+                                "res": "cos(s) * (INT x:[-oo,oo]. cos(t * x) * exp(-(x ^ 2 / 2))) - sin(s) * ((INT x:[0,oo]. -sin(t * x) * exp(-(x ^ 2 / 2))) + (INT x:[0,oo]. sin(t * x) * exp(-(x ^ 2 / 2))))",
+                                "rule": {
+                                    "latex_str": "rewrite \\(\\sin{(-t x)}\\) to \\(-\\sin{(t x)}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "sin(-(t * x))",
+                                    "str": "rewrite sin(-(t * x)) to -sin(t * x) using identity",
+                                    "target": "-sin(t * x)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\cos{s} (\\int_{-\\infty}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx)",
+                                "res": "cos(s) * (INT x:[-oo,oo]. cos(t * x) * exp(-(x ^ 2 / 2)))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\cos{s} ((\\int_{-\\infty}^{0} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx) + (\\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx))",
+                                "res": "cos(s) * ((INT x:[-oo,0]. cos(t * x) * exp(-(x ^ 2 / 2))) + (INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2 / 2))))",
+                                "rule": {
+                                    "c": "0",
+                                    "name": "SplitRegion",
+                                    "str": "split region at 0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\cos{s} ((\\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx) + (\\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx))",
+                                "res": "cos(s) * ((INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2 / 2))) + (INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2 / 2))))",
+                                "rule": {
+                                    "latex_str": "substitute \\(x\\) for \\(-x\\) at 1.0",
+                                    "loc": "1.0",
+                                    "name": "Substitution",
+                                    "str": "substitute x for -x at 1.0",
+                                    "var_name": "x",
+                                    "var_subst": "-x"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 \\cos{s} (\\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx)",
+                                "res": "2 * cos(s) * (INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2 / 2)))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 \\cos{s} (\\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx)",
+                                "res": "2 * cos(s) * (INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2) / 2))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(-\\frac{x ^ {2}}{2}\\) to \\(\\frac{-x ^ {2}}{2}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "-(x ^ 2) / 2",
+                                    "old_expr": "-(x ^ 2 / 2)",
+                                    "str": "rewriting -(x ^ 2 / 2) to -(x ^ 2) / 2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 \\cos{s} I{(t)}",
+                                "res": "2 * cos(s) * I(t)",
+                                "rule": {
+                                    "func_name": "I",
+                                    "loc": "subterms",
+                                    "name": "FoldDefinition",
+                                    "str": "fold definition on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 \\cos{s} (\\sqrt{\\frac{\\pi}{2}} e^{-t ^ {2}/2})",
+                                "res": "2 * cos(s) * (sqrt(pi / 2) * exp(-(t ^ 2) / 2))",
+                                "rule": {
+                                    "eq": "I(t) = sqrt(pi / 2) * exp(-(t ^ 2) / 2)",
+                                    "latex_str": "apply equation \\(I{(t)} = \\sqrt{\\frac{\\pi}{2}} e^{-t ^ {2}/2}\\) on subterms",
+                                    "loc": "subterms",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: I(t) = sqrt(pi / 2) * exp(-(t ^ 2) / 2) on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sqrt{2 \\pi} e^{-t ^ {2}/2} \\cos{s}",
+                                "res": "sqrt(2 * pi) * exp(-(t ^ 2) / 2) * cos(s)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(2 \\cos{s} (\\sqrt{\\frac{\\pi}{2}} e^{-t ^ {2}/2})\\) to \\(\\sqrt{2 \\pi} e^{-t ^ {2}/2} \\cos{s}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "sqrt(2 * pi) * exp(-(t ^ 2) / 2) * cos(s)",
+                                    "old_expr": "2 * cos(s) * (sqrt(pi / 2) * exp(-(t ^ 2) / 2))",
+                                    "str": "rewriting 2 * cos(s) * (sqrt(pi / 2) * exp(-(t ^ 2) / 2)) to sqrt(2 * pi) * exp(-(t ^ 2) / 2) * cos(s)"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\sqrt{2 \\pi} e^{-t ^ {2}/2} \\cos{s}",
+                        "start": "sqrt(2 * pi) * exp(-(t ^ 2) / 2) * cos(s)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(INT x:[-oo,oo]. exp(-(x ^ 2) / 2) * cos(s + t * x)) = sqrt(2 * pi) * exp(-(t ^ 2) / 2) * cos(s)",
+                "latex_goal": "\\int_{-\\infty}^{\\infty} e^{-x ^ {2}/2} \\cos{(s + t x)} \\,dx = \\sqrt{2 \\pi} e^{-t ^ {2}/2} \\cos{s}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
         }
     ],
     "name": "leibniz03"

@@ -1,1072 +1,1101 @@
 {
-    "type": "header",
     "content": [
         {
-            "type": "header",
+            "content": [],
             "name": "Inequality reasoning",
-            "content": [
-
-            ]
+            "type": "header"
         },
         {
-            "type": "header",
-            "name": "Common integrals",
             "content": [
                 {
-                    "type": "axiom",
-                    "expr": "(INT x. c) = c * x + SKOLEM_CONST(C)"
+                    "expr": "(INT x. c) = c * x + SKOLEM_CONST(C)",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(INT x. x) = x ^ 2 / 2 + SKOLEM_CONST(C)"
+                    "expr": "(INT x. x) = x ^ 2 / 2 + SKOLEM_CONST(C)",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(INT x. -x) = -x ^ 2 / 2 + SKOLEM_CONST(C)"
+                    "expr": "(INT x. -x) = -x ^ 2 / 2 + SKOLEM_CONST(C)",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(INT x. 1 / x) = log(abs(x)) + SKOLEM_CONST(C)"
+                    "expr": "(INT x. 1 / x) = log(abs(x)) + SKOLEM_CONST(C)",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(INT x. x ^ n) = x ^ (n + 1) / (n + 1) + SKOLEM_CONST(C)",
                     "conds": [
                         "n != -1"
-                    ]
+                    ],
+                    "expr": "(INT x. x ^ n) = x ^ (n + 1) / (n + 1) + SKOLEM_CONST(C)",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(INT x. 1 / x ^ n) = 1 / (-((n - 1) * (x ^ (n - 1)))) + SKOLEM_CONST(C)",
                     "conds": [
                         "n = 1"
-                    ]
+                    ],
+                    "expr": "(INT x. 1 / x ^ n) = 1 / (-((n - 1) * (x ^ (n - 1)))) + SKOLEM_CONST(C)",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(INT x. sqrt(x)) = 2/3 * x ^ (3/2) + SKOLEM_CONST(C)"
+                    "expr": "(INT x. sqrt(x)) = 2/3 * x ^ (3/2) + SKOLEM_CONST(C)",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(INT x. 1 / sqrt(x)) = 2 * sqrt(x) + SKOLEM_CONST(C)"
+                    "expr": "(INT x. 1 / sqrt(x)) = 2 * sqrt(x) + SKOLEM_CONST(C)",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(INT x. exp(x)) = exp(x) + SKOLEM_CONST(C)"
+                    "expr": "(INT x. exp(x)) = exp(x) + SKOLEM_CONST(C)",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(INT x. exp(-x)) = -exp(-x) + SKOLEM_CONST(C)"
+                    "expr": "(INT x. exp(-x)) = -exp(-x) + SKOLEM_CONST(C)",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(INT x. sin(x)) = -cos(x) + SKOLEM_CONST(C)"
+                    "expr": "(INT x. sin(x)) = -cos(x) + SKOLEM_CONST(C)",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(INT x. cos(x)) = sin(x) + SKOLEM_CONST(C)"
+                    "expr": "(INT x. cos(x)) = sin(x) + SKOLEM_CONST(C)",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(INT x. 1 / (x^2 + 1)) = atan(x) + SKOLEM_CONST(C)"
+                    "expr": "(INT x. 1 / (x^2 + 1)) = atan(x) + SKOLEM_CONST(C)",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(INT x. sec(x)^2) = tan(x) + SKOLEM_CONST(C)"
+                    "expr": "(INT x. sec(x)^2) = tan(x) + SKOLEM_CONST(C)",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(INT x. csc(x)^2) = -cot(x) + SKOLEM_CONST(C)"
+                    "expr": "(INT x. csc(x)^2) = -cot(x) + SKOLEM_CONST(C)",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(INT x. cot(x) * csc(x)) = -csc(x) + SKOLEM_CONST(C)"
+                    "expr": "(INT x. cot(x) * csc(x)) = -csc(x) + SKOLEM_CONST(C)",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(INT x. sec(x) * tan(x)) = sec(x) + SKOLEM_CONST(C)"
+                    "expr": "(INT x. sec(x) * tan(x)) = sec(x) + SKOLEM_CONST(C)",
+                    "type": "axiom"
                 }
-            ]
+            ],
+            "name": "Common integrals",
+            "type": "header"
         },
         {
-            "type": "header",
-            "name": "Common series expansion",
             "content": [
                 {
-                    "type": "axiom",
-                    "expr": "exp(x) = SUM(n, 0, oo, x ^ n / factorial(n))"
+                    "expr": "exp(x) = SUM(n, 0, oo, x ^ n / factorial(n))",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "sin(x) = SUM(n, 0, oo, (-1)^n * x^(2*n+1) / factorial(2*n+1))"
+                    "expr": "sin(x) = SUM(n, 0, oo, (-1)^n * x^(2*n+1) / factorial(2*n+1))",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "cos(x) = SUM(n, 0, oo, (-1)^n * x^(2*n) / factorial(2*n))"
+                    "expr": "cos(x) = SUM(n, 0, oo, (-1)^n * x^(2*n) / factorial(2*n))",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "atan(x) = SUM(n, 0, oo, (-1)^n * x^(2*n+1) / (2*n+1))",
                     "conds": [
                         "abs(x) <= 1"
-                    ]
+                    ],
+                    "expr": "atan(x) = SUM(n, 0, oo, (-1)^n * x^(2*n+1) / (2*n+1))",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
+                    "conds": [
+                        "abs(x) < 1"
+                    ],
                     "expr": "(1 + x) ^ -1 = SUM(n, 0, oo, (-1)^n * x ^ n)",
-                    "conds": [
-                        "abs(x) < 1"
-                    ]
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
+                    "conds": [
+                        "abs(x) < 1"
+                    ],
                     "expr": "(1 - x) ^ -1 = SUM(n, 0, oo, x ^ n)",
-                    "conds": [
-                        "abs(x) < 1"
-                    ]
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "log(1 + x) = SUM(n, 0, oo, (-1)^n * x ^ (n+1) / (n + 1))",
                     "conds": [
                         "x > -1",
                         "x <= 1"
-                    ]
+                    ],
+                    "expr": "log(1 + x) = SUM(n, 0, oo, (-1)^n * x ^ (n+1) / (n + 1))",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "log(1 - x) = SUM(n, 0, oo, (-1)^n * (-x)^(n+1) / (n + 1))",
                     "conds": [
                         "x >= -1",
                         "x < 1"
-                    ]
+                    ],
+                    "expr": "log(1 - x) = SUM(n, 0, oo, (-1)^n * (-x)^(n+1) / (n + 1))",
+                    "type": "axiom"
                 }
-            ]
+            ],
+            "name": "Common series expansion",
+            "type": "header"
         },
         {
-            "type": "header",
-            "name": "Common series evaluations",
             "content": [
                 {
-                    "type": "axiom",
-                    "expr": "SUM(n, 0, oo, 1 / (n+1)^2) = (pi^2) / 6"
+                    "expr": "SUM(n, 0, oo, 1 / (n+1)^2) = (pi^2) / 6",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(SUM(n, a, oo, (x)^n)) = (x^a)/(1-x)",
                     "conds": [
                         "abs(x) < 1"
-                    ]
+                    ],
+                    "expr": "(SUM(n, a, oo, (x)^n)) = (x^a)/(1-x)",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "SUM(n, 0, oo, (-1)^n / (n+1)^2) = (pi^2) / 12"
+                    "expr": "SUM(n, 0, oo, (-1)^n / (n+1)^2) = (pi^2) / 12",
+                    "type": "axiom"
+                },
+                {
+                    "attributes": [],
+                    "category": "unknown",
+                    "conds": [],
+                    "expr": "SUM(n, 0, oo, x^n/factorial(n)) = exp(x)",
+                    "reference": "",
+                    "type": "axiom"
                 }
-            ]
+            ],
+            "name": "Common series evaluations",
+            "type": "header"
         },
         {
-            "type": "header",
-            "name": "Common identities",
             "content": [
                 {
-                    "type": "header",
-                    "name": "Absolute value",
                     "content": [
                         {
-                            "type": "axiom",
-                            "expr": "abs(x) = x",
+                            "attributes": [
+                                "simplify"
+                            ],
                             "conds": [
                                 "x >= 0"
                             ],
-                            "attributes": [
-                                "simplify"
-                            ]
+                            "expr": "abs(x) = x",
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
-                            "expr": "abs(x) = -x",
+                            "attributes": [
+                                "simplify"
+                            ],
                             "conds": [
                                 "x <= 0"
                             ],
-                            "attributes": [
-                                "simplify"
-                            ]
+                            "expr": "abs(x) = -x",
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "simplify"
+                            ],
                             "expr": "abs(x * y) = abs(x) * abs(y)",
-                            "attributes": [
-                                "simplify"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
-                            "expr": "abs(x / y) = abs(x) / abs(y)",
+                            "attributes": [
+                                "simplify"
+                            ],
                             "conds": [
                                 "y != 0"
                             ],
-                            "attributes": [
-                                "simplify"
-                            ]
+                            "expr": "abs(x / y) = abs(x) / abs(y)",
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
-                            "expr": "abs(c ^ n) = abs(c) ^ n",
+                            "attributes": [
+                                "simplify"
+                            ],
                             "conds": [
                                 "isInt(n)"
                             ],
-                            "attributes": [
-                                "simplify"
-                            ]
+                            "expr": "abs(c ^ n) = abs(c) ^ n",
+                            "type": "axiom"
                         }
-                    ]
+                    ],
+                    "name": "Absolute value",
+                    "type": "header"
                 },
                 {
-                    "type": "header",
-                    "name": "Hyperbolic functions",
                     "content": [
                         {
-                            "type": "definition",
-                            "expr": "cosh(x) = (exp(x) + exp(-x)) / 2"
+                            "expr": "cosh(x) = (exp(x) + exp(-x)) / 2",
+                            "type": "definition"
                         },
                         {
-                            "type": "definition",
-                            "expr": "sinh(x) = (exp(x) - exp(-x)) / 2"
+                            "expr": "sinh(x) = (exp(x) - exp(-x)) / 2",
+                            "type": "definition"
                         }
-                    ]
+                    ],
+                    "name": "Hyperbolic functions",
+                    "type": "header"
                 },
                 {
-                    "type": "header",
-                    "name": "Power identities",
                     "content": [
                         {
-                            "type": "axiom",
-                            "expr": "(a * b) ^ k = a ^ k * b ^ k",
-                            "category": "power",
                             "attributes": [
                                 "bidirectional"
-                            ]
-                        },
-                        {
-                            "type": "axiom",
-                            "expr": "a ^ x ^ y = a ^ (x * y)",
-                            "conds": [
-                                "a > 0"
                             ],
                             "category": "power",
+                            "expr": "(a * b) ^ k = a ^ k * b ^ k",
+                            "type": "axiom"
+                        },
+                        {
                             "attributes": [
                                 "bidirectional",
                                 "simplify"
-                            ]
-                        },
-                        {
-                            "type": "axiom",
-                            "expr": "(1 / a ^ x) ^ y = a ^ (-(x * y))",
+                            ],
+                            "category": "power",
                             "conds": [
                                 "a > 0"
                             ],
-                            "category": "power",
+                            "expr": "a ^ x ^ y = a ^ (x * y)",
+                            "type": "axiom"
+                        },
+                        {
                             "attributes": [
                                 "simplify"
-                            ]
+                            ],
+                            "category": "power",
+                            "conds": [
+                                "a > 0"
+                            ],
+                            "expr": "(1 / a ^ x) ^ y = a ^ (-(x * y))",
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "bidirectional"
+                            ],
+                            "category": "power",
                             "expr": "x^a * x^b = x^(a+b)",
-                            "category": "power",
-                            "attributes": [
-                                "bidirectional"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "bidirectional"
+                            ],
+                            "category": "power",
                             "expr": "(a / b) ^ k = a ^ k / b ^ k",
-                            "category": "power",
-                            "attributes": [
-                                "bidirectional"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
-                            "expr": "(-1) ^ (2 * n) = 1",
+                            "attributes": [
+                                "simplify"
+                            ],
+                            "category": "power",
                             "conds": [
                                 "isInt(n)"
                             ],
+                            "expr": "(-1) ^ (2 * n) = 1",
+                            "type": "axiom"
+                        },
+                        {
+                            "attributes": [],
                             "category": "power",
+                            "conds": [
+                                "a!=0"
+                            ],
+                            "expr": "a^(-x) = (1/a)^x",
+                            "reference": "",
+                            "type": "axiom"
+                        },
+                        {
+                            "attributes": [],
+                            "category": "power",
+                            "conds": [
+                                "isInt(n)"
+                            ],
+                            "expr": "(-x)^(2*n) = x^(2*n)",
+                            "reference": "",
                             "attributes": [
                                 "simplify"
-                            ]
+                            ],
+                            "type": "axiom"
                         }
-                    ]
+                    ],
+                    "name": "Power identities",
+                    "type": "header"
                 },
                 {
-                    "type": "header",
-                    "name": "Exp-log identities",
                     "content": [
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "bidirectional"
+                            ],
+                            "category": "exp-log",
                             "expr": "exp(a) ^ b = exp(a * b)",
-                            "category": "exp-log",
-                            "attributes": [
-                                "bidirectional"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "exp-log",
                             "expr": "exp(a + b) = exp(a) * exp(b)",
-                            "category": "exp-log"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "exp-log",
                             "expr": "exp(a - b) = exp(a) * exp(-b)",
-                            "category": "exp-log"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "simplify"
+                            ],
+                            "category": "exp-log",
                             "expr": "exp(0) = 1",
-                            "category": "exp-log",
-                            "attributes": [
-                                "simplify"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "simplify"
+                            ],
+                            "category": "exp-log",
+                            "conds": [
+                                "b > 0"
+                            ],
                             "expr": "exp(log(b)) = b",
+                            "type": "axiom"
+                        },
+                        {
+                            "attributes": [
+                                "simplify"
+                            ],
+                            "category": "exp-log",
                             "conds": [
                                 "b > 0"
                             ],
-                            "category": "exp-log",
-                            "attributes": [
-                                "simplify"
-                            ]
-                        },
-                        {
-                            "type": "axiom",
                             "expr": "exp(a * log(b)) = b ^ a",
-                            "conds": [
-                                "b > 0"
-                            ],
-                            "category": "exp-log",
-                            "attributes": [
-                                "simplify"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "exp-log",
+                            "conds": [
+                                "a > 0",
+                                "b > 0"
+                            ],
                             "expr": "log(a * b) = log(a) + log(b)",
-                            "conds": [
-                                "a > 0",
-                                "b > 0"
-                            ],
-                            "category": "exp-log"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
-                            "expr": "log(a / b) = log(a) - log(b)",
-                            "conds": [
-                                "a > 0",
-                                "b > 0"
-                            ],
-                            "category": "exp-log",
                             "attributes": [
                                 "bidirectional"
-                            ]
+                            ],
+                            "category": "exp-log",
+                            "conds": [
+                                "a > 0",
+                                "b > 0"
+                            ],
+                            "expr": "log(a / b) = log(a) - log(b)",
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "simplify"
+                            ],
+                            "category": "exp-log",
+                            "conds": [
+                                "x > 0"
+                            ],
                             "expr": "log(x ^ a) = a * log(x)",
-                            "conds": [
-                                "x > 0"
-                            ],
-                            "category": "exp-log",
-                            "attributes": [
-                                "simplify"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "simplify"
+                            ],
+                            "category": "exp-log",
                             "expr": "log(1) = 0",
-                            "category": "exp-log",
-                            "attributes": [
-                                "simplify"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
-                            "expr": "log(1 / x) = -log(x)",
+                            "attributes": [
+                                "simplify"
+                            ],
+                            "category": "exp-log",
                             "conds": [
                                 "x > 0"
                             ],
-                            "category": "exp-log",
-                            "attributes": [
-                                "simplify"
-                            ]
+                            "expr": "log(1 / x) = -log(x)",
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
-                            "expr": "log(exp(b)) = b",
-                            "category": "exp-log",
                             "attributes": [
                                 "simplify"
-                            ]
+                            ],
+                            "category": "exp-log",
+                            "expr": "log(exp(b)) = b",
+                            "type": "axiom"
                         }
-                    ]
+                    ],
+                    "name": "Exp-log identities",
+                    "type": "header"
                 },
                 {
-                    "type": "header",
-                    "name": "Table of trigonometric values",
                     "content": [
                         {
-                            "type": "table",
                             "name": "sin",
                             "table": {
                                 "0": "0",
-                                "pi / 6": "1/2",
-                                "pi / 4": "sqrt(2) / 2",
-                                "pi / 3": "sqrt(3) / 2",
-                                "pi / 2": "1",
                                 "2 * pi / 3": "sqrt(3) / 2",
                                 "3 * pi / 4": "sqrt(2) / 2",
                                 "5 * pi / 6": "1/2",
-                                "pi": "0"
-                            }
+                                "pi": "0",
+                                "pi / 2": "1",
+                                "pi / 3": "sqrt(3) / 2",
+                                "pi / 4": "sqrt(2) / 2",
+                                "pi / 6": "1/2"
+                            },
+                            "type": "table"
                         },
                         {
-                            "type": "table",
                             "name": "cos",
                             "table": {
                                 "0": "1",
-                                "pi / 6": "sqrt(3) / 2",
-                                "pi / 4": "sqrt(2) / 2",
-                                "pi / 3": "1/2",
-                                "pi / 2": "0",
                                 "2 * pi / 3": "-1/2",
                                 "3 * pi / 4": "-(sqrt(2) / 2)",
                                 "5 * pi / 6": "-(sqrt(3) / 2)",
-                                "pi": "-1"
-                            }
+                                "pi": "-1",
+                                "pi / 2": "0",
+                                "pi / 3": "1/2",
+                                "pi / 4": "sqrt(2) / 2",
+                                "pi / 6": "sqrt(3) / 2"
+                            },
+                            "type": "table"
                         },
                         {
-                            "type": "table",
                             "name": "tan",
                             "table": {
                                 "0": "0",
-                                "pi / 6": "sqrt(3) / 3",
-                                "pi / 4": "1",
-                                "pi / 3": "sqrt(3)",
                                 "2 * pi / 3": "-sqrt(3)",
                                 "3 * pi / 4": "-1",
                                 "5 * pi / 6": "-(sqrt(3) / 3)",
-                                "pi": "0"
-                            }
+                                "pi": "0",
+                                "pi / 3": "sqrt(3)",
+                                "pi / 4": "1",
+                                "pi / 6": "sqrt(3) / 3"
+                            },
+                            "type": "table"
                         },
                         {
-                            "type": "table",
                             "name": "cot",
                             "table": {
-                                "pi / 6": "sqrt(3)",
-                                "pi / 4": "1",
-                                "pi / 3": "sqrt(3) / 3",
-                                "pi / 2": "0",
                                 "2 * pi / 3": "-(sqrt(3) / 3)",
                                 "3 * pi / 4": "-1",
-                                "5 * pi / 6": "-sqrt(3)"
-                            }
+                                "5 * pi / 6": "-sqrt(3)",
+                                "pi / 2": "0",
+                                "pi / 3": "sqrt(3) / 3",
+                                "pi / 4": "1",
+                                "pi / 6": "sqrt(3)"
+                            },
+                            "type": "table"
                         },
                         {
-                            "type": "table",
                             "name": "csc",
                             "table": {
-                                "pi / 6": "2",
-                                "pi / 4": "sqrt(2)",
-                                "pi / 3": "2 * sqrt(3) / 3",
-                                "pi / 2": "1",
                                 "2 * pi / 3": "2 * sqrt(3) / 3",
                                 "3 * pi / 4": "sqrt(2)",
-                                "5 * pi / 6": "2"
-                            }
+                                "5 * pi / 6": "2",
+                                "pi / 2": "1",
+                                "pi / 3": "2 * sqrt(3) / 3",
+                                "pi / 4": "sqrt(2)",
+                                "pi / 6": "2"
+                            },
+                            "type": "table"
                         },
                         {
-                            "type": "table",
                             "name": "sec",
                             "table": {
                                 "0": "1",
-                                "pi / 6": "2 * sqrt(3) / 3",
-                                "pi / 4": "sqrt(2)",
-                                "pi / 3": "2",
                                 "2 * pi / 3": "-2",
                                 "3 * pi / 4": "-sqrt(2)",
                                 "5 * pi / 6": "-(2 * sqrt(3) / 3)",
-                                "pi": "-1"
-                            }
+                                "pi": "-1",
+                                "pi / 3": "2",
+                                "pi / 4": "sqrt(2)",
+                                "pi / 6": "2 * sqrt(3) / 3"
+                            },
+                            "type": "table"
                         },
                         {
-                            "type": "table",
                             "name": "asin",
                             "table": {
-                                "-1": "-(pi / 2)",
-                                "-(sqrt(3) / 2)": "-(pi / 3)",
                                 "-(sqrt(2) / 2)": "-(pi / 4)",
+                                "-(sqrt(3) / 2)": "-(pi / 3)",
+                                "-1": "-(pi / 2)",
                                 "-1/2": "-(pi / 6)",
                                 "0": "0",
+                                "1": "pi / 2",
                                 "1/2": "pi / 6",
                                 "sqrt(2) / 2": "pi / 4",
-                                "sqrt(3) / 2": "pi / 3",
-                                "1": "pi / 2"
-                            }
+                                "sqrt(3) / 2": "pi / 3"
+                            },
+                            "type": "table"
                         },
                         {
-                            "type": "table",
                             "name": "acos",
                             "table": {
-                                "1": "0",
-                                "sqrt(3) / 2": "pi / 6",
-                                "sqrt(2) / 2": "pi / 4",
-                                "1/2": "pi / 3",
-                                "0": "pi / 2",
-                                "-1/2": "2 * pi / 3",
                                 "-(sqrt(2) / 2)": "3 * pi / 4",
                                 "-(sqrt(3) / 2)": "5 * pi / 6",
-                                "-1": "pi"
-                            }
+                                "-1": "pi",
+                                "-1/2": "2 * pi / 3",
+                                "0": "pi / 2",
+                                "1": "0",
+                                "1/2": "pi / 3",
+                                "sqrt(2) / 2": "pi / 4",
+                                "sqrt(3) / 2": "pi / 6"
+                            },
+                            "type": "table"
                         },
                         {
-                            "type": "table",
                             "name": "atan",
                             "table": {
-                                "-sqrt(3)": "-(pi / 3)",
-                                "-1": "-(pi / 4)",
                                 "-(sqrt(3) / 3)": "-(pi / 6)",
+                                "-1": "-(pi / 4)",
+                                "-sqrt(3)": "-(pi / 3)",
                                 "0": "0",
-                                "sqrt(3) / 3": "pi / 6",
                                 "1": "pi / 4",
-                                "sqrt(3)": "pi / 3"
-                            }
+                                "sqrt(3)": "pi / 3",
+                                "sqrt(3) / 3": "pi / 6"
+                            },
+                            "type": "table"
                         },
                         {
-                            "type": "table",
                             "name": "acot",
                             "table": {
-                                "sqrt(3)": "pi / 6",
-                                "1": "pi / 4",
-                                "sqrt(3) / 3": "pi / 3",
-                                "0": "pi / 2",
                                 "-(sqrt(3) / 3)": "2 * pi / 3",
                                 "-1": "3 * pi / 4",
-                                "-sqrt(3)": "5 * pi / 6"
-                            }
+                                "-sqrt(3)": "5 * pi / 6",
+                                "0": "pi / 2",
+                                "1": "pi / 4",
+                                "sqrt(3)": "pi / 6",
+                                "sqrt(3) / 3": "pi / 3"
+                            },
+                            "type": "table"
                         },
                         {
-                            "type": "table",
                             "name": "acsc",
                             "table": {
-                                "-2": "-(pi / 6)",
-                                "-sqrt(2)": "-(pi / 4)",
                                 "-(2 * sqrt(3) / 3)": "-(pi / 3)",
                                 "-1": "-(pi / 2)",
+                                "-2": "-(pi / 6)",
+                                "-sqrt(2)": "-(pi / 4)",
                                 "1": "pi / 2",
+                                "2": "pi / 6",
                                 "2 * sqrt(3) / 3": "pi / 3",
-                                "sqrt(2)": "pi / 4",
-                                "2": "pi / 6"
-                            }
+                                "sqrt(2)": "pi / 4"
+                            },
+                            "type": "table"
                         },
                         {
-                            "type": "table",
                             "name": "asec",
                             "table": {
-                                "1": "0",
-                                "2 * sqrt(3) / 3": "pi / 6",
-                                "sqrt(2)": "pi / 4",
-                                "2": "pi / 3",
+                                "-(2 * sqrt(3) / 3)": "5 * pi / 6",
+                                "-1": "pi",
                                 "-2": "2 * pi / 3",
                                 "-sqrt(2)": "3 * pi / 4",
-                                "-(2 * sqrt(3) / 3)": "5 * pi / 6",
-                                "-1": "pi"    
-                            }
+                                "1": "0",
+                                "2": "pi / 3",
+                                "2 * sqrt(3) / 3": "pi / 6",
+                                "sqrt(2)": "pi / 4"
+                            },
+                            "type": "table"
                         }
-                    ]
+                    ],
+                    "name": "Table of trigonometric values",
+                    "type": "header"
                 },
                 {
-                    "type": "header",
-                    "name": "Trigonometric identities",
                     "content": [
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "atan(A) - atan(B) = atan((A-B)/(1+A*B))",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "atan(sqrt((1-x)/(1+x))) = acos(x) / 2",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "sin(-u) = -sin(u)",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "tan(x) = sin(x) / cos(x)",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "cos(-u) = cos(u)",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "simplify"
+                            ],
+                            "category": "trigonometric",
                             "expr": "sin(pi / 2 - u) = cos(u)",
-                            "category": "trigonometric",
-                            "attributes": [
-                                "simplify"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "simplify"
+                            ],
+                            "category": "trigonometric",
                             "expr": "cos(pi / 2 - u) = sin(u)",
-                            "category": "trigonometric",
-                            "attributes": [
-                                "simplify"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "bidirectional"
+                            ],
+                            "category": "trigonometric",
                             "expr": "sec(x)^2 = tan(x)^2 + 1",
-                            "category": "trigonometric",
-                            "attributes": [
-                                "bidirectional"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "bidirectional"
+                            ],
+                            "category": "trigonometric",
+                            "conds": [
+                                "cos(x) != 0"
+                            ],
                             "expr": "cos(x)^-1 = sec(x)",
+                            "type": "axiom"
+                        },
+                        {
+                            "attributes": [
+                                "bidirectional"
+                            ],
                             "category": "trigonometric",
                             "conds": [
                                 "cos(x) != 0"
                             ],
-                            "attributes": [
-                                "bidirectional"
-                            ]
-                        },
-                        {
-                            "type": "axiom",
                             "expr": "1 / cos(x) = sec(x)",
+                            "type": "axiom"
+                        },
+                        {
                             "category": "trigonometric",
                             "conds": [
                                 "cos(x) != 0"
                             ],
-                            "attributes": [
-                                "bidirectional"
-                            ]
-                        },
-                        {
-                            "type": "axiom",
                             "expr": "sin(x) / cos(x) = tan(x)",
-                            "category": "trigonometric",
-                            "conds": [
-                                "cos(x) != 0"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "tan(a - b) = (tan(a) - tan(b)) / (1 + tan(a) * tan(b))",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "simplify"
+                            ],
+                            "category": "trigonometric",
                             "expr": "cos(-u + pi) = -cos(u)",
-                            "category": "trigonometric",
-                            "attributes": [
-                                "simplify"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "simplify"
+                            ],
+                            "category": "trigonometric",
+                            "conds": [
+                                "z>0",
+                                "z<1"
+                            ],
                             "expr": "cos(2 * atan(z)) = (1 - z^2) / (1 + z^2)",
+                            "type": "axiom"
+                        },
+                        {
+                            "attributes": [
+                                "simplify"
+                            ],
                             "category": "trigonometric",
                             "conds": [
                                 "z>0",
                                 "z<1"
                             ],
-                            "attributes": [
-                                "simplify"
-                            ]
-                        },
-                        {
-                            "type": "axiom",
                             "expr": "sin(2 * atan(z)) = (2 * z) / (1 + z^2)",
-                            "conds": [
-                                "z>0",
-                                "z<1"
-                            ],
-                            "category": "trigonometric",
-                            "attributes": [
-                                "simplify"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "simplify"
+                            ],
+                            "category": "trigonometric",
                             "expr": "sin(-u + pi) = sin(u)",
-                            "category": "trigonometric",
-                            "attributes": [
-                                "simplify"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "cot(x) = cos(x) / sin(x)",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "bidirectional"
+                            ],
+                            "category": "trigonometric",
                             "expr": "cot(x)^2 = csc(x)^2 - 1",
-                            "category": "trigonometric",
-                            "attributes": [
-                                "bidirectional"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "bidirectional"
+                            ],
+                            "category": "trigonometric",
                             "expr": "tan(x)^2 = sec(x)^2 - 1",
-                            "category": "trigonometric",
-                            "attributes": [
-                                "bidirectional"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
+                            "conds": [
+                                "n != 0"
+                            ],
                             "expr": "1 / sin(x) ^ n = csc(x) ^ n",
+                            "type": "axiom"
+                        },
+                        {
+                            "category": "trigonometric",
                             "conds": [
                                 "n != 0"
                             ],
-                            "category": "trigonometric"
-                        },
-                        {
-                            "type": "axiom",
                             "expr": "sin(x) ^ n = csc(x) ^ (-n)",
-                            "conds": [
-                                "n != 0"
+                            "type": "axiom"
+                        },
+                        {
+                            "attributes": [
+                                "bidirectional"
                             ],
-                            "category": "trigonometric"
-                        },
-                        {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "sin(x)^2 = 1 - cos(x)^2",
-                            "category": "trigonometric",
-                            "attributes": [
-                                "bidirectional"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "simplify"
+                            ],
+                            "category": "trigonometric",
                             "expr": "sin(x)^2 + cos(x)^2 = 1",
-                            "category": "trigonometric",
-                            "attributes": [
-                                "simplify"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
-                            "expr": "cos(x)^2 = 1 - sin(x)^2",
-                            "category": "trigonometric",
                             "attributes": [
                                 "bidirectional"
-                            ]
+                            ],
+                            "category": "trigonometric",
+                            "expr": "cos(x)^2 = 1 - sin(x)^2",
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "cos(x)^2 = (1 + cos(2*x)) / 2",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "sin(x)^2 = (1 - cos(2*x)) / 2",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "cos(2*x) = 2 * cos(x)^2 - 1",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "cos(2*x) = 1 - 2 * sin(x) ^ 2",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "sin(2*x) = 2 * sin(x) * cos(x)",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "sin(a + b) = sin(a) * cos(b) + cos(a) * sin(b)",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "sin(a - b) = sin(a) * cos(b) - cos(a) * sin(b)",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "cos(a + b) = cos(a) * cos(b) - sin(a) * sin(b)",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "cos(a - b) = cos(a) * cos(b) + sin(a) * sin(b)",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "sin(a) + sin(b) = 2 * sin((a + b) / 2) * cos((a - b) / 2)",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "sin(a) - sin(b) = 2 * cos((a + b) / 2) * sin((a - b) / 2)",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "cos(a) + cos(b) = 2 * cos((a + b) / 2) * cos((a - b) / 2)",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "cos(a) - cos(b) = -2 * sin((a + b) / 2) * sin((a - b) / 2)",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "cos(a) * sin(b) = (1 / 2) * (sin(a + b) - sin(a - b))",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "sin(a) * cos(b) = (1 / 2) * (sin(a + b) + sin(a - b))",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "cos(a) * cos(b) = (1 / 2) * (cos(a - b) + cos(a + b))",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "sin(a) * sin(b) = -(1 / 2) * (cos(a - b) - cos(a + b))",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "trigonometric",
                             "expr": "atan(x ^ -1) = pi/2 - atan(x)",
-                            "category": "trigonometric"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "simplify"
+                            ],
+                            "category": "trigonometric",
                             "expr": "sin(acos(x)) = sqrt(1-x^2)",
-                            "category": "trigonometric",
-                            "attributes": [
-                                "simplify"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "attributes": [
+                                "simplify"
+                            ],
+                            "category": "trigonometric",
                             "expr": "cos(asin(x)) = sqrt(1-x^2)",
-                            "category": "trigonometric",
-                            "attributes": [
-                                "simplify"
-                            ]
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
-                            "expr": "sec(atan(x)) = sqrt(x ^ 2 + 1)",
-                            "category": "trigonometric",
                             "attributes": [
                                 "simplify"
-                            ]
+                            ],
+                            "category": "trigonometric",
+                            "expr": "sec(atan(x)) = sqrt(x ^ 2 + 1)",
+                            "type": "axiom"
                         }
-                    ]
+                    ],
+                    "name": "Trigonometric identities",
+                    "type": "header"
                 },
                 {
-                    "type": "header",
-                    "name": "Factorial and binomial coefficient",
                     "content": [
                         {
-                            "type": "axiom",
+                            "category": "factorial",
                             "expr": "(m + 1) * factorial(m) = factorial(m + 1)",
-                            "category": "factorial"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
-                            "expr": "m * factorial(m - 1) = factorial(m)",
-                            "category": "factorial",
                             "attributes": [
                                 "bidirectional"
-                            ]
+                            ],
+                            "category": "factorial",
+                            "expr": "m * factorial(m - 1) = factorial(m)",
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "binomial",
                             "expr": "binom(2*k+2, k+1) = 2 * binom(2*k, k) * ((2*k+1) / (k+1))",
-                            "category": "binomial"
+                            "type": "axiom"
                         },
                         {
-                            "type": "axiom",
+                            "category": "binomial",
                             "expr": "(x+y)^n = SUM(k, 0, n, binom(n,k)*x^k*y^(n-k))",
-                            "category": "binomial"
+                            "type": "axiom"
                         }
-                    ]
+                    ],
+                    "name": "Factorial and binomial coefficient",
+                    "type": "header"
                 }
-            ]
+            ],
+            "name": "Common identities",
+            "type": "header"
         },
         {
-            "type": "header",
-            "name": "Derived integrals",
             "content": [
                 {
-                    "type": "problem",
                     "expr": "(INT x. 1 / (x + a)) = log(abs(x + a)) + SKOLEM_CONST(C)",
-                    "path": "standard"
+                    "path": "standard",
+                    "type": "problem"
                 },
                 {
-                    "type": "problem",
+                    "conds": [
+                        "a != 0"
+                    ],
                     "expr": "(INT x. exp(a * x)) = exp(a * x) / a + SKOLEM_CONST(C)",
+                    "path": "standard",
+                    "type": "problem"
+                },
+                {
                     "conds": [
                         "a != 0"
                     ],
-                    "path": "standard"
-                },
-                {
-                    "type": "problem",
                     "expr": "(INT x. exp(-(a * x))) = - exp(-(a * x)) / a + SKOLEM_CONST(C)",
+                    "path": "standard",
+                    "type": "problem"
+                },
+                {
                     "conds": [
                         "a != 0"
                     ],
-                    "path": "standard"
-                },
-                {
-                    "type": "problem",
                     "expr": "(INT x. sin(a * x)) = - (cos(a * x) / a) + SKOLEM_CONST(C)",
+                    "path": "standard",
+                    "type": "problem"
+                },
+                {
                     "conds": [
                         "a != 0"
                     ],
-                    "path": "standard"
-                },
-                {
-                    "type": "problem",
                     "expr": "(INT x. cos(a * x)) = sin(a * x) / a + SKOLEM_CONST(C)",
-                    "conds": [
-                        "a != 0"
-                    ],
-                    "path": "standard"
+                    "path": "standard",
+                    "type": "problem"
                 },
                 {
-                    "type": "problem",
                     "expr": "(INT x. tan(x)) = log(abs(sec(x))) + SKOLEM_CONST(C)",
-                    "path": "standard"
+                    "path": "standard",
+                    "type": "problem"
                 },
                 {
-                    "type": "problem",
-                    "expr": "(INT x. 1 / (a ^ 2 + x ^ 2)) = (1 / a) * atan(x / a) + SKOLEM_CONST(C)",
                     "conds": [
                         "a != 0"
                     ],
-                    "path": "standard"
+                    "expr": "(INT x. 1 / (a ^ 2 + x ^ 2)) = (1 / a) * atan(x / a) + SKOLEM_CONST(C)",
+                    "path": "standard",
+                    "type": "problem"
                 },
                 {
-                    "type": "problem",
-                    "expr": "(INT x. x ^ k * log(x)) = x ^ (k + 1) * log(x) / (k + 1) - x ^ (k + 1) / (k + 1) ^ 2 + SKOLEM_CONST(C)",
                     "conds": [
                         "x > 0"
                     ],
-                    "path": "standard"
+                    "expr": "(INT x. x ^ k * log(x)) = x ^ (k + 1) * log(x) / (k + 1) - x ^ (k + 1) / (k + 1) ^ 2 + SKOLEM_CONST(C)",
+                    "path": "standard",
+                    "type": "problem"
                 },
                 {
-                    "type": "problem",
-                    "expr": "(INT x:[0,1]. x ^ m * log(x) ^ n) = (-1)^n * factorial(n) / (m+1) ^ (n+1)",
                     "conds": [
                         "m >= 0",
                         "n >= 0",
                         "isInt(n)"
                     ],
-                    "path": "standard"
+                    "expr": "(INT x:[0,1]. x ^ m * log(x) ^ n) = (-1)^n * factorial(n) / (m+1) ^ (n+1)",
+                    "path": "standard",
+                    "type": "problem"
                 },
                 {
-                    "type": "problem",
-                    "expr": "(INT x:[0,oo]. exp(-(x * y)) * sin(a * x)) = a / (a ^ 2 + y ^ 2)",
                     "conds": [
                         "y > 0"
                     ],
-                    "path": "standard"
+                    "expr": "(INT x:[0,oo]. exp(-(x * y)) * sin(a * x)) = a / (a ^ 2 + y ^ 2)",
+                    "path": "standard",
+                    "type": "problem"
                 },
                 {
-                    "type": "problem",
                     "expr": "(INT x. a ^ x) = a ^ x / log(a) + SKOLEM_CONST(C)",
-                    "path": "standard"
+                    "path": "standard",
+                    "type": "problem"
                 },
                 {
-                    "type": "problem",
                     "expr": "(INT x. cos(x) ^ 2) = 1/4 * sin(2 * x) + 1/2 * x + SKOLEM_CONST(C)",
-                    "path": "standard"
+                    "path": "standard",
+                    "type": "problem"
                 }
-            ]
+            ],
+            "name": "Derived integrals",
+            "type": "header"
         },
         {
-            "type": "header",
-            "name": "Results from contour integration",
             "content": [
                 {
-                    "type": "axiom",
-                    "expr": "(INT x:[0, oo]. sin(m * x) / (x * (a ^ 2 + x ^ 2))) = (pi * (1 - exp(-a * m))) / (2 * a ^ 2)",
                     "conds": [
                         "a > 0",
                         "m > 0"
                     ],
-                    "reference": "Inside interesting Integrals, Section 8.10, C8.2"
+                    "expr": "(INT x:[0, oo]. sin(m * x) / (x * (a ^ 2 + x ^ 2))) = (pi * (1 - exp(-a * m))) / (2 * a ^ 2)",
+                    "reference": "Inside interesting Integrals, Section 8.10, C8.2",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(INT x:[0, oo]. cos(a * x) / (x ^ 2 + b ^ 2)) = (pi / (2 * b)) * exp(-a * b)",
                     "conds": [
                         "a > 0",
                         "b > 0"
                     ],
-                    "reference": "Inside interesting Integrals, Section 3.1.7"
+                    "expr": "(INT x:[0, oo]. cos(a * x) / (x ^ 2 + b ^ 2)) = (pi / (2 * b)) * exp(-a * b)",
+                    "reference": "Inside interesting Integrals, Section 3.1.7",
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
                     "expr": "(INT x:[0, oo]. x ^ (m - 1) / (x + 1)) = pi / sin(m * pi)",
-                    "reference": "Inside interesting Integrals, Section 8.7.9"
+                    "reference": "Inside interesting Integrals, Section 8.7.9",
+                    "type": "axiom"
                 }
-            ]
+            ],
+            "name": "Results from contour integration",
+            "type": "header"
         },
         {
-            "type": "header",
-            "name": "Gamma and Beta function",
             "content": [
                 {
-                    "type": "axiom",
+                    "category": "gamma-beta",
                     "expr": "B(m,n) = Gamma(m) * Gamma(n) / Gamma(m+n)",
-                    "category": "gamma-beta"
+                    "type": "axiom"
                 },
                 {
-                    "type": "axiom",
-                    "expr": "(1-x^n) / (1-x) =  SUM(k, 1, n, x^(k-1))"
+                    "expr": "(1-x^n) / (1-x) =  SUM(k, 1, n, x^(k-1))",
+                    "type": "axiom"
                 },
                 {
-                    "type": "problem",
-                    "expr": "(INT x:[0,oo]. 1/(x^2+b)^(m+1)) = pi / 2^(2*m+1) * binom(2*m, m) * (1/(b^((2*m+1)/2)))",
                     "conds": [
                         "b > 0",
                         "m >= 0"
                     ],
-                    "path": "wallis"
+                    "expr": "(INT x:[0,oo]. 1/(x^2+b)^(m+1)) = pi / 2^(2*m+1) * binom(2*m, m) * (1/(b^((2*m+1)/2)))",
+                    "path": "wallis",
+                    "type": "problem"
                 }
-            ]
+            ],
+            "name": "Gamma and Beta function",
+            "type": "header"
         }
     ],
-    "name": "Base theory"
+    "name": "Base theory",
+    "type": "header"
 }

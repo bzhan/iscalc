@@ -154,8 +154,19 @@ def deriv(var: str, e: Expr, ctx: Context) -> Expr:
     return rec(e)
 
 class ProofObligationBranch:
-    def __init__(self, exprs:List[Expr]):
+    def __init__(self, exprs:List[Expr], flags:List[bool] = None):
         self.exprs = exprs # satisfy all expressions
+        if flags is None or len(flags) != len(exprs):
+            self.need_to_be_satisfied = [True for i in range(len(exprs))]
+        else:
+            self.need_to_be_satisfied = flags
+
+    def __str__(self):
+        res = ", ".join([str(e) for e in self.exprs])
+        res += "\n"
+        res += ", ".join([str(b) for b in self.need_to_be_satisfied])
+        return res
+
     def export(self):
         res = {
             'exprs': [str(e) for e in self.exprs]
@@ -182,7 +193,12 @@ class ProofObligation:
         return all(a < b for a, b in zip(self.branches, other.branches))
 
     def __str__(self):
-        return "%s" % self.branches
+        res = ""
+        for i, b in enumerate(self.branches):
+            res += "branch "+str(i)+":\n"
+            res += str(b) + '\n'
+        #"%s" % self.branches
+        return res
 
     def __repr__(self):
         return str(self)
@@ -262,6 +278,17 @@ def check_wellformed(e: Expr, ctx: Context) -> List[ProofObligation]:
                 else:
                     add_obligation(Op(">=", e.args[0], Const(-1)), ctx)
                     add_obligation(Op("<=", e.args[0], Const(1)), ctx)
+            if e.func_name == 'tan':
+                tmp = normalize(Const(2) * e.args[0] / expr.pi, ctx)
+                f1 = ctx.check_condition(Fun("isInt", tmp))
+                f2 = ctx.check_condition(Fun("isEven", tmp))
+
+                if not f1 or f2:
+                    pass
+                else:
+                    branch1 = ProofObligationBranch([Fun("isInt", tmp)], [False])
+                    branch2 = ProofObligationBranch([Fun("isEven", tmp)])
+                    add_obligation([branch1, branch2], ctx)
             # TODO: add checks for other functions
         elif e.is_integral():
             rec(e.body, body_conds(e, ctx))

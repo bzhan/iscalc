@@ -131,6 +131,7 @@ class CondProverTest(unittest.TestCase):
             ("a ^ 2 + b ^ 2 > 0", ["a != 0"], True),
             ("-k + 1 != 0", ["k > 1"], True),
             ("(p ^ 2 - 5) ^ 2 - 16 != 0", ["p > 3"], True),
+            ("1-sqrt(3)/2 > 0", [], True)
         ]
 
         for s, conds, res in test_data:
@@ -141,6 +142,13 @@ class CondProverTest(unittest.TestCase):
             ctx.extend_condition(conds)
             self.assertEqual(check_condition(e, ctx), res, "%s [%s]" % (e, conds))
 
+    def testCheckWellformed(self):
+        from integral import rules
+        data = [("tan(pi)", 'e'),]
+        ctx = Context()
+        for e, f in data:
+            e = parse_expr(e)
+            print(rules.check_wellformed(e, ctx))
 
 if __name__ == "__main__":
     unittest.main()

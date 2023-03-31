@@ -25,6 +25,8 @@ def subject_of(cond: Expr) -> Expr:
         return cond.args[0]
     if cond.is_fun() and cond.func_name == 'isInt':
         return cond.args[0]
+    if cond.is_fun() and cond.func_name == 'isEven':
+        return cond.args[0]
     raise TypeError
 
 # Tolerance for floating-point rounding errors
@@ -58,6 +60,12 @@ def approx_less_eq(a: Expr, b: Expr) -> bool:
 def approx_integer(a: Expr) -> bool:
     a = eval_expr(a)
     return abs(round(a) - a) < tol
+
+def approx_even(a: Expr) -> bool:
+    if approx_integer(a):
+        return eval_expr(a) % 2 == 0
+    else:
+        return False
 
 def init_all_conds(conds: Conditions) -> Dict[Expr, List[Expr]]:
     """Initialize all_conds from a condition object."""
@@ -137,6 +145,9 @@ def check_cond(cond: Expr, all_conds: Dict[Expr, List[Expr]], inst: Dict[str, Ex
                 return [inst]
         elif cond.is_fun() and cond.func_name == 'isInt':
             if approx_integer(x):
+                return [inst]
+        elif cond.is_fun() and cond.func_name == 'isEven':
+            if approx_even(x):
                 return [inst]
 
     # If subject of cond appears in all_conds

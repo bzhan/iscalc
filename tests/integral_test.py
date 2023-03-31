@@ -3281,7 +3281,6 @@ class IntegralTest(unittest.TestCase):
     #     calc.perform_rule(rules.ExpandPolynomial())
     #     self.checkAndOutput(file)
 
-    # TODO: Show that 1-sqrt(3)/2 > 0.
     # def testChapter1Practice01_04(self):
     #     # Reference:
     #     # Inside interesting integrals, C1.5

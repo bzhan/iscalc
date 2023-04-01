@@ -2305,11 +2305,9 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.Equation("t ^ (-k + 1) * log(t)", "log(t) / t^(k-1)"))
-        calc.perform_rule(rules.LHopital())
-        calc.perform_rule(rules.FullSimplify())
         calc = proof_of_goal1.rhs_calc
         calc.perform_rule(rules.Equation("1 / (k-1)^2", "1 / (-k+1)^2"))
+        self.assertTrue(goal1.is_finished())
 
         goal = file.add_goal("converges(SUM(n, 0, oo, INT x:[1,oo]. x ^ (-(2 * n) - 2) * log(x)))")
         proof = goal.proof_by_calculation()
@@ -2334,6 +2332,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc = proof_of_goal5.rhs_calc
         calc.perform_rule(rules.ExpandDefinition("G"))
+        self.assertTrue(goal5.is_finished())
 
         goal6 = file.add_goal("(INT x:[0, oo]. log(x + 1) / (x ^ 2 + 1)) = pi / 4 * log(2) + G")
         proof_of_goal6 = goal6.proof_by_calculation()
@@ -2351,7 +2350,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.Equation("pi * log(2) / 4", "pi / 4 * log(2)"))
-
+        self.assertTrue(goal6.is_finished())
         self.checkAndOutput(file)
 
     def testCatalanConstant03(self):
@@ -3377,18 +3376,16 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
 
-    # TODO: Enhance the limit function.
-    # def testChapter2Practice03(self):
-    #     # Reference:
-    #     # Inside interesting integrals, C2.3
-    #     file = compstate.CompFile("interesting", "chapter2_practice03")
-    #
-    #     goal = file.add_goal("(INT x:[0, oo]. 1/(x^4+1)^(m+1)) = 4*m*(INT x:[0,oo]. 1/(x^4+1)^(m+1))", conds=["m>0", "isInt(m)"])
-    #     proof = goal.proof_by_calculation()
-    #     calc = proof.lhs_calc
-    #     calc.perform_rule(rules.IntegrationByParts(u="1/(x^4+1)^(m+1)", v="x"))
-    #     calc.perform_rule(rules.FullSimplify())
+    def testChapter2Practice03(self):
+        # Reference:
+        # Inside interesting integrals, C2.3
+        file = compstate.CompFile("interesting", "chapter2_practice03")
 
+        goal = file.add_goal("(INT x:[0, oo]. 1/(x^4+1)^(m+1)) = 4*m*(INT x:[0,oo]. 1/(x^4+1)^(m+1))", conds=["m>0", "isInt(m)"])
+        proof = goal.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.IntegrationByParts(u="1/(x^4+1)^(m+1)", v="x"))
+        calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
     def testChapter2Practice05(self):
         # Reference:

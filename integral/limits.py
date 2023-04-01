@@ -85,12 +85,12 @@ class Exp(Asymptote):
         return isinstance(other, Exp) and self.order == other.order
 
 
-def asymp_compare(a: Asymptote, b: Asymptote) -> int:
+def asymp_compare(a: Asymptote, b: Asymptote, ctx:Context) -> int:
     """Returns the maximum of two asymptotes."""
     if isinstance(a, Unknown) or isinstance(b, Unknown):
         return UNKNOWN
     elif isinstance(a, Exp) and isinstance(b, Exp):
-        return asymp_compare(a.order, b.order)
+        return asymp_compare(a.order, b.order, ctx)
     elif isinstance(a, Exp) and isinstance(b, PolyLog):
         return GREATER
     elif isinstance(a, PolyLog) and isinstance(b, Exp):
@@ -106,8 +106,13 @@ def asymp_compare(a: Asymptote, b: Asymptote) -> int:
                     return LESS
                 elif t1 > t2:
                     return GREATER
-            if ai != bi:
-                return UNKNOWN
+            else:
+                if ctx.check_condition(expr.Op(">", ai, bi)) or ctx.check_condition(expr.Op("<", bi, ai)):
+                    return GREATER
+                if ctx.check_condition(expr.Op("<", ai, bi)) or ctx.check_condition(expr.Op(">", bi, ai)):
+                    return LESS
+                if ai != bi:
+                    return UNKNOWN
         return EQUAL
     else:
         raise NotImplementedError
@@ -117,7 +122,7 @@ def asymp_add(a: Asymptote, b: Asymptote) -> Asymptote:
     if isinstance(a, Unknown) or isinstance(b, Unknown):
         return Unknown()
 
-    cmp = asymp_compare(a, b)
+    cmp = asymp_compare(a, b, ctx)
     if cmp == LESS:
         return b
     elif cmp == GREATER or cmp == EQUAL:
@@ -130,7 +135,7 @@ def asymp_add_inv(a: Asymptote, b: Asymptote) -> Asymptote:
     if isinstance(a, Unknown) or isinstance(b, Unknown):
         return Unknown()
 
-    cmp = asymp_compare(a, b)
+    cmp = asymp_compare(a, b, ctx)
     if cmp == GREATER:
         return b
     elif cmp == LESS or cmp == EQUAL:
@@ -168,7 +173,7 @@ def asymp_div(a: Asymptote, b: Asymptote, ctx: Context) -> Asymptote:
     Assume a > b according to asymp_compare. Otherwise throw Exception.
     
     """
-    if asymp_compare(a, b) != GREATER:
+    if asymp_compare(a, b, ctx) != GREATER:
         raise AssertionError("asymp_div")
 
     if isinstance(a, Exp) and isinstance(b, Exp):
@@ -273,7 +278,7 @@ def limit_add(a: Limit, b: Limit, ctx: Context) -> Limit:
     elif a.e == POS_INF and b.e == POS_INF:
         return Limit(POS_INF, asymp=asymp_add(a.asymp, b.asymp))
     elif a.e == POS_INF and b.e == NEG_INF:
-        cmp = asymp_compare(a.asymp, b.asymp)
+        cmp = asymp_compare(a.asymp, b.asymp, ctx)
         if cmp == UNKNOWN:
             return Limit(None)
         elif cmp == LESS:
@@ -307,7 +312,7 @@ def limit_add(a: Limit, b: Limit, ctx: Context) -> Limit:
         elif a.side == FROM_ABOVE and b.side == FROM_ABOVE:
             return Limit(res_e, asymp=asymp_add_inv(a.asymp, b.asymp), side=FROM_ABOVE)
         elif a.side == FROM_ABOVE and b.side == FROM_BELOW:
-            cmp = asymp_compare(a.asymp, b.asymp)
+            cmp = asymp_compare(a.asymp, b.asymp, ctx)
             if cmp == UNKNOWN:
                 return Limit(res_e, side=TWO_SIDED)
             elif cmp == LESS:
@@ -367,7 +372,7 @@ def limit_mult(a: Limit, b: Limit, ctx: Context) -> Limit:
         elif b.e == Const(0):
             if b.side == AT_CONST:
                 return Limit(Const(0), side=AT_CONST)
-            cmp = asymp_compare(a.asymp, b.asymp)
+            cmp = asymp_compare(a.asymp, b.asymp, ctx)
             if cmp == UNKNOWN:
                 return Limit(None)
             elif cmp == LESS:

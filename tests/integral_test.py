@@ -2182,7 +2182,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnSubterm(rules.DefiniteIntegralIdentity()))
         calc.perform_rule(rules.OnSubterm(rules.FullSimplify()))
 
-        # TODO: Check the condition. The proof is still accessed when condition a>-1 is missing.
+
         goal02 = file.add_goal("(INT x:[0,1]. x^a*(log(x))^2) = 2/(a+1)^3", conds=["a>-1"])
         proof = goal02.proof_by_rewrite_goal(begin=goal01)
         calc = proof.begin

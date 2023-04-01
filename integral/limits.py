@@ -545,11 +545,9 @@ def limit_power(a: Limit, b: Limit, ctx: Context) -> Limit:
 
 def limit_of_expr(e: Expr, var_name: str, ctx: Context) -> Limit:
     """Compute the limit of an expression as variable goes to infinity."""
-    if e.is_const():
+    if e.is_const() or e.is_fun() and len(e.args) == 0:
         return Limit(e, side=AT_CONST)
     elif e.is_inf():
-        return Limit(e)
-    elif e.is_fun() and len(e.args) == 0:
         return Limit(e)
     elif e.is_var():
         if e.name == var_name:
@@ -636,6 +634,13 @@ def limit_of_expr(e: Expr, var_name: str, ctx: Context) -> Limit:
             res = Limit(expr.Fun("cos", l.e), side=AT_CONST)
         res.is_bounded = True
         return res
+    elif e.is_fun() and e.func_name == 'tan':
+        l = limit_of_expr(e.args[0], var_name, ctx)
+        if normalize(l.e, ctx) == expr.Fun('pi')/Const(2) and l.side == FROM_BELOW:
+            return Limit(POS_INF)
+        else:
+            # TODO: miss many cases
+            return Limit(expr.Fun(e.func_name, l.e))
     elif e.is_fun() and e.func_name == 'sqrt':
         l = limit_of_expr(e.args[0], var_name, ctx)
         if l.e == None:

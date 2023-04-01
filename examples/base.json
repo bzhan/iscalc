@@ -309,16 +309,15 @@
                             "type": "axiom"
                         },
                         {
-                            "attributes": [],
+                            "attributes": [
+                                "simplify"
+                            ],
                             "category": "power",
                             "conds": [
                                 "isInt(n)"
                             ],
                             "expr": "(-x)^(2*n) = x^(2*n)",
                             "reference": "",
-                            "attributes": [
-                                "simplify"
-                            ],
                             "type": "axiom"
                         }
                     ],
@@ -911,6 +910,14 @@
                             ],
                             "category": "trigonometric",
                             "expr": "sec(atan(x)) = sqrt(x ^ 2 + 1)",
+                            "type": "axiom"
+                        },
+                        {
+                            "attributes": [],
+                            "category": "trigonometric",
+                            "conds": [],
+                            "expr": "atan(-x) = -atan(x)",
+                            "reference": "",
                             "type": "axiom"
                         }
                     ],

@@ -42,7 +42,7 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 | Integral |                  $\int_0^1 \frac{\ln{(x + 1)}}{x ^ 2 + 1}dx = \frac{\pi}{8}\ln{2}$                  |  Done  |
 | Integral |          $\int_0^a \frac{\ln{(x+a)}}{x^2 + a^2}dx = \frac{\pi}{8a}\ln{(2a^2)}$ for $a > 0$          |  Done  |
 
-### 2.3 Two Old New Tricks (6/9)
+### 2.3 Two Old New Tricks, Plus a New One (6/9)
 
 
 |   Type   |                                                                                           Expression                                                                                           |                  Status                  |
@@ -107,10 +107,10 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 ### 3.3 Frullani’s Integral (1/2)
 
 
-|   Type   |                                              Expression                                              | Status |
-| :------: | :---------------------------------------------------------------------------------------------------: | :----: |
-| Integral | $\int_0^\infty \frac{\tan^{-1}(ax)-\tan^{-1}(bx)}x dx = \frac{\pi}2 \ln \frac a b$ <br> for $a>0,b>0$ |  Done  |
-| Integral |          $\int_0^\infty \frac{e^{-ax} - e^{-bx}}x dx= \ln \frac b a$ <br> for $a > 0, b > 0$          |        |
+|   Type   |                                              Expression                                              |               Status               |
+| :------: | :---------------------------------------------------------------------------------------------------: | :---------------------------------: |
+| Integral | $\int_0^\infty \frac{\tan^{-1}(ax)-\tan^{-1}(bx)}x dx = \frac{\pi}2 \ln \frac a b$ <br> for $a>0,b>0$ |                Done                |
+| Integral |          $\int_0^\infty \frac{e^{-ax} - e^{-bx}}x dx= \ln \frac b a$ <br> for $a > 0, b > 0$          | [Unsolved limits](#Unsolved_Limits) |
 
 ### 3.4 The Flip-Side of Feynman’s Trick (3/10)
 
@@ -522,6 +522,10 @@ Some functions have not been supported yet.
 <h4 id=Cauchy_Principle_Value>Cauchy Principle Value</h4>
 
 Some improper integrals may not be convergent. However, sometimes we can calculate the Cauchy principle value of the integral. It is somewhat like a mistake that a beginner will make.
+
+<h4 id=Higher_Order_Differential_Equation>Higher Order Differential Equation</h4>
+
+The program can only solve first order differential equations so far.
 
 <h4 id=Decimal_Part_Function>Decimal Part Function</h4>
 

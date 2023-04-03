@@ -2211,10 +2211,10 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
 
-    def testFrullaniIntegral(self):
+    def testFrullaniIntegral01(self):
         # Reference:
         # Inside interesting integrals, Section 3.3
-        file = compstate.CompFile("interesting", "FrullaniIntegral")
+        file = compstate.CompFile("interesting", "FrullaniIntegral01")
 
         # Define I(a, b)
         file.add_definition("I(a, b) = INT x:[0,oo]. (atan(a*x) - atan(b*x))/x", conds=["a > 0", "b > 0"])
@@ -2257,6 +2257,23 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
 
         self.checkAndOutput(file)
+
+    # TODO: Calculating the limit lim{x->oo}. exp(-a*x) = 0
+    # def testFrullaniIntegral02(self):
+    #     # Reference:
+    #     # Inside interesting integrals, Section 3.3
+    #     file = compstate.CompFile("interesting", "FrullaniIntegral02")
+    #
+    #     file.add_definition("I(a) = (INT x:[0, oo]. (exp(-a*x)-1)/x)", conds=["a>0"])
+    #
+    #     goal01 = file.add_goal("(D a. I(a)) = -1/a")
+    #     proof_of_goal01 = goal01.proof_by_calculation()
+    #     calc = proof_of_goal01.lhs_calc
+    #     calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.DefiniteIntegralIdentity())
+    #     calc.perform_rule(rules.FullSimplify())
+    #     self.checkAndOutput(file)
 
     def testCatalanConstant01(self):
         # Reference:

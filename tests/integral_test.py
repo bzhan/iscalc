@@ -2190,9 +2190,10 @@ class IntegralTest(unittest.TestCase):
 
         self.checkAndOutput(file)
 
+    # TODO: Solve LIM {z -> oo}. atan(z * sqrt(a - b) / sqrt(a + b))
     def testFilpSide08(self):
         # Reference:
-        # Inside interesting integrals, Section 3.4, example #7 & #8
+        # Inside interesting integrals, Section 3.4, example #7 and #8
         file = compstate.CompFile("interesting", "flipside08")
 
         file.add_definition("I(a, b) = (INT x:[0,pi]. log(a+b*cos(x)))", conds=["a>b", "b>=0"])
@@ -2208,6 +2209,13 @@ class IntegralTest(unittest.TestCase):
         proof = goal02.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.Substitution(var_name="z", var_subst="tan(x/2)"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("1 / ((z ^ 2 + 1) * (b * (-(z ^ 2) + 1) / (z ^ 2 + 1) + a))",
+                                         "1/(a*(1+z^2) + b*(1-z^2))"))
+        calc.perform_rule(rules.Equation("1/(a*(1+z^2) + b*(1-z^2))", "(1/(a-b)) * 1/((a+b)/(a-b)+z^2)"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("(a+b)/(a-b)+z^2", "z^2+(a+b)/(a-b)"))
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
 
@@ -3296,23 +3304,24 @@ class IntegralTest(unittest.TestCase):
     #     calc.perform_rule(rules.ExpandPolynomial())
     #     self.checkAndOutput(file)
 
-    # def testChapter1Practice01_04(self):
-    #     # Reference:
-    #     # Inside interesting integrals, C1.5
-    #     file = compstate.CompFile("interesting", "chapter1_practice01_04")
-    #
-    #     goal = file.add_goal("(INT x:[0,pi/3]. 1/cos(x))=log(2+sqrt(3))")
-    #     proof = goal.proof_by_calculation()
-    #     calc = proof.lhs_calc
-    #     calc.perform_rule(rules.Equation("1/cos(x)", "cos(x)/(cos(x))^2"))
-    #     calc.perform_rule(rules.ApplyIdentity("(cos(x))^2", "1-(sin(x))^2"))
-    #     calc.perform_rule(rules.Substitution(var_name="u", var_subst="sin(x)"))
-    #     calc.perform_rule(rules.Equation("1/(-(u^2)+1)", "1/2 * (1/(1-u)+1/(1+u))"))
-    #     calc.perform_rule(rules.FullSimplify())
-    #     calc.perform_rule(rules.DefiniteIntegralIdentity())
-    #     calc.perform_rule(rules.FullSimplify())
-    #
-    #     self.checkAndOutput(file)
+    # TODO: Solve (INT u:[0,sqrt(3) / 2]. 1 / (-u + 1))
+    def testChapter1Practice0104(self):
+        # Reference:
+        # Inside interesting integrals, C1.5
+        file = compstate.CompFile("interesting", "chapter1_practice0104")
+
+        goal = file.add_goal("(INT x:[0,pi/3]. 1/cos(x))=log(2+sqrt(3))")
+        proof = goal.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.Equation("1/cos(x)", "cos(x)/(cos(x))^2"))
+        calc.perform_rule(rules.ApplyIdentity("(cos(x))^2", "1-(sin(x))^2"))
+        calc.perform_rule(rules.Substitution(var_name="u", var_subst="sin(x)"))
+        calc.perform_rule(rules.Equation("1/(-(u^2)+1)", "1/2 * (1/(1-u)+1/(1+u))"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.OnLocation(rules.DefiniteIntegralIdentity(), "0.1"))
+        self.checkAndOutput(file)
 
     def testChapter2Practice01(self):
         # Reference:
@@ -3393,17 +3402,20 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
 
+    # TODO: Solve LIM {x -> oo}. x * (x ^ 4 + 1) ^ -m
     def testChapter2Practice03(self):
         # Reference:
         # Inside interesting integrals, C2.3
         file = compstate.CompFile("interesting", "chapter2_practice03")
 
-        goal = file.add_goal("(INT x:[0, oo]. 1/(x^4+1)^(m+1)) = 4*m*(INT x:[0,oo]. 1/(x^4+1)^(m+1))", conds=["m>0", "isInt(m)"])
+        goal = file.add_goal("(INT x:[0, oo]. 1/(x^4+1)^m) = 4*m*(INT x:[0,oo]. x^4/(x^4+1)^(m+1))", conds=["m>0", "isInt(m)"])
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
-        calc.perform_rule(rules.IntegrationByParts(u="1/(x^4+1)^(m+1)", v="x"))
+        calc.perform_rule(rules.IntegrationByParts(u="1/(x^4+1)^m", v="x"))
         calc.perform_rule(rules.FullSimplify())
+
         self.checkAndOutput(file)
+
     def testChapter2Practice05(self):
         # Reference:
         # Inside interesting integrals, C2.5

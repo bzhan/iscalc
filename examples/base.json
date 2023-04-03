@@ -62,7 +62,10 @@
                     "type": "axiom"
                 },
                 {
-                    "expr": "(INT x. 1 / (x^2 + 1)) = atan(x) + SKOLEM_CONST(C)",
+                    "conds": [
+                        "a > 0"
+                    ],
+                    "expr": "(INT x. 1 / (x^2 + a)) = atan(x / sqrt(a)) /sqrt(a) + SKOLEM_CONST(C)",
                     "type": "axiom"
                 },
                 {
@@ -710,10 +713,6 @@
                                 "simplify"
                             ],
                             "category": "trigonometric",
-                            "conds": [
-                                "z>0",
-                                "z<1"
-                            ],
                             "expr": "cos(2 * atan(z)) = (1 - z^2) / (1 + z^2)",
                             "type": "axiom"
                         },
@@ -722,10 +721,6 @@
                                 "simplify"
                             ],
                             "category": "trigonometric",
-                            "conds": [
-                                "z>0",
-                                "z<1"
-                            ],
                             "expr": "sin(2 * atan(z)) = (2 * z) / (1 + z^2)",
                             "type": "axiom"
                         },

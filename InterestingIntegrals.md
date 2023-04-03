@@ -128,18 +128,18 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 | Integral |              $\int_0^\pi \ln{(a+b\cos x)} dx = \pi\ln\frac{a + \sqrt{a^2-b^2}} {2}$ <br> for $a > b \geq 0$              |                                    |
 | Integral |                   $\int_0^\pi \frac{\ln(1+b\cos x)}{\cos{x}}dx = \pi \sin^{-1} b$ for $-1\leq b \leq 1$                   |                                    |
 
-### 3.5 Combining Two Tricks (0/6)
+### 3.5 Combining Two Tricks (1/6)
 
 
-|    Type    |                                                                          Expression                                                                          | Status |
-| :--------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------: | :----: |
-| Definition |                           $I_n = \int_0^{\frac\pi2} \frac1{(a\cos^2 x + b \sin^2 x)^n} dx$ <br> for $n \in \mathbb{N}_+, a>0, b >0$                           |        |
-|  Integral  |           $I_n = -\frac 1 {n-1}(\frac{\partial I_{n-1}}{\partial a} + \frac{\partial I_{n-1}}{\partial b})$ <br> for $n \in \mathbb{N}_+,n \geq 2$           |        |
-|  Integral  |                          $I_1 = \int_0^{\frac\pi2} \frac1{a\cos^2 x + b \sin^2 x} dx = \frac{\pi}{2\sqrt{ab}}$ <br> for $a>0, b >0$                          |        |
-|  Integral  |             $I_2 = \int_0^{\frac\pi2} \frac1{(a\cos^2 x + b \sin^2 x)^2} dx = \frac{\pi}{4\sqrt{ab}}(\frac 1 a + \frac 1 b)$ <br> for $a>0, b >0$             |        |
-|  Integral  | $I_3 = \int_0^{\frac\pi2} \frac1{(a\cos^2 x + b \sin^2 x)^3} dx = \frac{\pi}{16\sqrt{ab}}(\frac 3 {a^2} + \frac 3 {b^2} + \frac 2 {ab})$ <br> for $a>0, b >0$ |        |
-|  Integral  |                                     $I_n(y) = \int_0^y \frac 1 {(x^2+a^2)^n}dx$ for $a > 0, y \geq 0, n\in \mathbb{N}_+$                                     |        |
-|  Integral  |                         $I_{n+1}(y) = \frac y {2na^2(y^2+a^2)^n} + \frac{2n-1}{2na^2}I_n(y)$ for $a > 0, y \geq 0, n\in \mathbb{N}_+$                         |        |
+|    Type    |                                                                          Expression                                                                          |               Status               |
+| :--------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------: |
+| Definition |                           $I_n = \int_0^{\frac\pi2} \frac1{(a\cos^2 x + b \sin^2 x)^n} dx$ <br> for $n \in \mathbb{N}_+, a>0, b >0$                           |                Done                |
+|  Integral  |           $I_n = -\frac 1 {n-1}(\frac{\partial I_{n-1}}{\partial a} + \frac{\partial I_{n-1}}{\partial b})$ <br> for $n \in \mathbb{N}_+,n \geq 2$           |                Done                |
+|  Integral  |                          $I_1 = \int_0^{\frac\pi2} \frac1{a\cos^2 x + b \sin^2 x} dx = \frac{\pi}{2\sqrt{ab}}$ <br> for $a>0, b >0$                          | [Unsolved limits](#Unsolved_Limits) |
+|  Integral  |             $I_2 = \int_0^{\frac\pi2} \frac1{(a\cos^2 x + b \sin^2 x)^2} dx = \frac{\pi}{4\sqrt{ab}}(\frac 1 a + \frac 1 b)$ <br> for $a>0, b >0$             |                                    |
+|  Integral  | $I_3 = \int_0^{\frac\pi2} \frac1{(a\cos^2 x + b \sin^2 x)^3} dx = \frac{\pi}{16\sqrt{ab}}(\frac 3 {a^2} + \frac 3 {b^2} + \frac 2 {ab})$ <br> for $a>0, b >0$ |                                    |
+|  Integral  |                                     $I_n(y) = \int_0^y \frac 1 {(x^2+a^2)^n}dx$ for $a > 0, y \geq 0, n\in \mathbb{N}_+$                                     |                                    |
+|  Integral  |                         $I_{n+1}(y) = \frac y {2na^2(y^2+a^2)^n} + \frac{2n-1}{2na^2}I_n(y)$ for $a > 0, y \geq 0, n\in \mathbb{N}_+$                         |                                    |
 
 ### 3.6 Uhler’s Integral and Symbolic Integration (0/1)
 

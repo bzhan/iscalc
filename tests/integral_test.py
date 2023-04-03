@@ -2283,6 +2283,47 @@ class IntegralTest(unittest.TestCase):
     #     calc.perform_rule(rules.FullSimplify())
     #     self.checkAndOutput(file)
 
+    # TODO: Solve LIM {y -> oo}. atan(sqrt(b) * y / sqrt(a))
+    def testCombiningTwoTricks(self):
+        # Reference:
+        # Inside interesting integrals, Section 3.5
+        file = compstate.CompFile("interesting", 'CombiningTwoTricks')
+
+        file.add_definition("I(a,b,n) = (INT x:[0, pi/2]. 1/(a*cos(x)^2+b*sin(x)^2)^n)", conds=["a > 0", "b > 0", "n > 0", "isInt(n)"])
+
+        goal01 = file.add_goal("I(a, b, n) = -1/(n-1)*((D a. I(a,b, n-1))+(D b. I(a,b,n-1)))", conds=["n>=2"])
+        proof_of_goal01 = goal01.proof_by_calculation()
+        calc = proof_of_goal01.rhs_calc
+        calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("(-n + 1) * (INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (-n + 1) * (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)",
+                                         "(-n+1)*((INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n))"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("(-n + 1) / (n - 1)", "-1"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("(INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)",
+                                         "(INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n + sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)"))
+        calc.perform_rule(rules.Equation("cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n + sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n",
+                                         "(sin(x)^2+cos(x)^2)*(a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n"))
+        calc.perform_rule(rules.ApplyIdentity("sin(x)^2+cos(x)^2", "1"))
+        calc.perform_rule(rules.Equation("1 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n",
+                                         "1 / (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ n"))
+        calc.perform_rule(rules.FoldDefinition("I"))
+
+        goal02 = file.add_goal("I(a,b,1) = pi/(2*sqrt(a*b))")
+        proof_of_goal02 = goal02.proof_by_calculation()
+        calc = proof_of_goal02.lhs_calc
+        calc.perform_rule(rules.ExpandDefinition("I"))
+        calc.perform_rule(rules.Equation("1/(a*cos(x)^2+b*sin(x)^2)", "(1/cos(x))^2/(a+b*(sin(x)/cos(x))^2)"))
+        calc.perform_rule(rules.ApplyIdentity("sin(x)/cos(x)", "tan(x)"))
+        calc.perform_rule(rules.ApplyIdentity("1/cos(x)", "sec(x)"))
+        calc.perform_rule(rules.Substitution(var_name="y", var_subst="tan(x)"))
+        calc.perform_rule(rules.Equation("1 / (b * y ^ 2 + a)", "(1/b)/(y^2+a/b)"))
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+
+        self.checkAndOutput(file)
+
     def testCatalanConstant01(self):
         # Reference:
         # Inside interesting integrals, Section 5.1, example #1

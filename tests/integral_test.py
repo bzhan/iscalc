@@ -998,8 +998,8 @@ class IntegralTest(unittest.TestCase):
         # Inside interesting integrals, Section 2.1.d
         file = compstate.CompFile("interesting", "easy04")
 
-        goal = file.add_goal("(INT x:[0, oo]. 1/(1 + exp(a*x))) = (log(2)/a)", conds=["a > 0"])
-        proof = goal.proof_by_calculation()
+        goal01 = file.add_goal("(INT x:[0, oo]. 1/(1 + exp(a*x))) = (log(2)/a)", conds=["a > 0"])
+        proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.Substitution(var_name="u", var_subst=parser.parse_expr("exp(a*x)")))
         calc.perform_rule(rules.FullSimplify())
@@ -1009,6 +1009,21 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
 
+        # TODO: Check the condition. The proof is still accessed if a!=0 is missing
+        goal02 = file.add_goal("(INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2))=log(2)/a^2", conds=["a!=0"])
+        proof = goal02.proof_by_rewrite_goal(begin=goal01)
+        calc = proof.begin
+        calc.perform_rule(rules.DerivEquation("a"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.OnLocation(rules.Substitution(var_name="x", var_subst="exp(a*x)"), "0.0"))
+        calc.perform_rule(rules.SolveEquation("INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2)"))
+
+        goal03 = file.add_goal("(INT x:[1, oo]. log(x)/(x+1)^2) = log(2)")
+        proof = goal03.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.Equation("(x+1)^2", "1^2 * (x+1)^2"))
+        calc.perform_rule(rules.ApplyEquation(goal02.goal))
+        calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
 
     def testEasy05(self):

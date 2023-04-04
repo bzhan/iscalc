@@ -76,6 +76,11 @@
                         },
                         {
                             "type": "problem",
+                            "expr": "(INT x:[1, oo]. log(x)/(x+1)^2) = log(2)",
+                            "path": "easy04"
+                        },
+                        {
+                            "type": "problem",
                             "expr": "(INT x:[sqrt(2), oo]. 1/(x+x^sqrt(2)))=(1+sqrt(2))*log(1+2^(1/2*(1-sqrt(2))))",
                             "path": "easy05"
                         },

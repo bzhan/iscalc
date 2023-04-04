@@ -144,9 +144,9 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 ### 3.6 Uhler’s Integral and Symbolic Integration (0/1)
 
 
-|   Type   |                     Expression                     | Status |
-| :------: | :------------------------------------------------: | :----: |
-| Integral | $\int_1 ^ \infty \frac{\ln x}{(1+x)^2} dx = \ln 2$ |        |
+|   Type   |                     Expression                     |                Status                |
+| :------: | :------------------------------------------------: |:------------------------------------:|
+| Integral | $\int_1 ^ \infty \frac{\ln x}{(1+x)^2} dx = \ln 2$ | Done <br> Notice the proof is in 2.1 |
 
 ### 3.7 The Probability Integral Revisited (0/1)
 

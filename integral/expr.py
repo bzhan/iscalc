@@ -9,7 +9,7 @@ from typing import Dict, List, Optional, Set, TypeGuard, Tuple, Union, Callable
 
 
 VAR, CONST, OP, FUN, DERIV, INTEGRAL, EVAL_AT, SYMBOL, LIMIT, INF, INDEFINITEINTEGRAL, \
-SKOLEMFUNC, SUMMATION = range(13)
+SKOLEMFUNC, SUMMATION, LAZYSERIES = range(14)
 
 op_priority = {
     "+": 65, "-": 65, "*": 70, "/": 70, "^": 75, "=": 50, "<": 50, ">": 50, "<=": 50, ">=": 50, "!=": 50
@@ -306,7 +306,7 @@ class Expr:
         return not self < other
 
     def priority(self):
-        if self.ty in (VAR, SYMBOL, INF, SKOLEMFUNC):
+        if self.ty in (VAR, SYMBOL, INF, SKOLEMFUNC, LAZYSERIES):
             return 100
         elif self.ty == CONST:
             if isinstance(self.val, Fraction) and self.val.denominator != 1:

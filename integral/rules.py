@@ -148,7 +148,7 @@ def deriv(var: str, e: Expr, ctx: Context) -> Expr:
         elif e.is_inf():
             return Const(0)
         else:
-            print(e)
+            print(e, type(e))
             raise NotImplementedError
 
     return rec(e)

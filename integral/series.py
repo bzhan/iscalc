@@ -6,7 +6,7 @@ from integral.poly import normalize
 from integral.context import Context
 from integral.rules import deriv
 from integral.parser import parse_expr
-
+global_map = dict()
 class LazySeries(Expr):
     def __init__(self, head, f, args, var):
         self.head = head
@@ -21,6 +21,13 @@ class LazySeries(Expr):
     @property
     def head_power(self):
         return self.head[1]
+    @property
+    def head_term(self):
+        tmp = self
+        while tmp.head_coff == Const(0):
+            tmp = tmp.tail()
+        return tmp.head
+
     def __str__(self):
         ctx = Context()
         ctx.load_book('base')
@@ -45,7 +52,10 @@ class LazySeries(Expr):
                     res.append(arg)
             return res
         if self.f != None:
-            return self.f(*rec(self.args))
+            # return self.f(*rec(self.args))
+            if self not in global_map:
+                global_map[self] = self.f(*rec(self.args))
+            return global_map[self]
         elif self.args != None:
             return self.args
         else:
@@ -272,12 +282,7 @@ def log_series(s:LazySeries, ctx:Context = None):
     if ctx == None:
         ctx = Context()
         ctx.load_book('base')
-    if ctx.check_condition(Op('!=', -s.head_power, Const(0))):
-        p = log_series(shift_series(-s.head_power, s)) + s.head_power * Fun('log', Var(s.var))
-        return p
-    else:
-        s0 = s.head_coff
-    p = make_series([Fun('log', s0), Const(0)],
+    p = make_series([normalize(Fun('log', s.head_coff) + s.head_power * Fun('log', Var(s.var)), ctx), Const(0)],
                        int_series, [
                             [divide_series,[[diff_series, [s]], s]]
                        ],s.var)
@@ -306,7 +311,10 @@ def divide_series(f:LazySeries, g:LazySeries, ctx:Context = None):
                         ], f.var)
         return p
 
-def expand_series(e: Expr, x: str):
+def expand_series(e: Expr, x: str, ctx:Context = None):
+    if ctx == None:
+        ctx = Context()
+        ctx.load_book('base')
     if e.is_const() or e.is_constant() or e.is_var() and e.name != x or e.is_fun() and len(e.args) == 0 or\
         not e.contains_var(x):
         return LazySeries([e, Const(0)], None, None, x)
@@ -325,6 +333,9 @@ def expand_series(e: Expr, x: str):
     elif e.is_power():
         if e.args[0].is_var() and e.args[0].name == x and not e.args[1].contains_var(x):
             return LazySeries([Const(1), e.args[1]], None, None, x)
+        elif e.args[0].is_divides() and e.args[0].args[0] == Const(1) and \
+            e.args[0].args[1] == Var(x) and not e.args[1].contains_var(x):
+            return LazySeries([Const(1), normalize(e.args[1] * Const(-1),ctx)], None, None, x)
         else:
             raise NotImplementedError
     elif e.is_fun():

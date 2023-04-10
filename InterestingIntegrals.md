@@ -117,7 +117,7 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 
 |   Type   |                                                            Expression                                                            |                    Status                    |
 | :------: | :-------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------: |
-| Integral |     $\int_0^\infty \frac{\cos(ax) - \cos (bx)}{x^2} dx = \frac{\pi}{2} (\left\vert b \right\vert - \left\vert a \right\vert)$     |                                              |
+| Integral |     $\int_0^\infty \frac{\cos(ax) - \cos (bx)}{x^2} dx = \frac{\pi}{2} (\left\vert b \right\vert - \left\vert a \right\vert)$     | [Iterated integration](#Iterated_Integration) |
 | Integral |                $\int_0^\infty \frac{e^{-pt^2}-e^{-qt^2}}{t^2}dt = \sqrt \pi (\sqrt q - \sqrt p)$ for $p >0, q > 0$                | [Iterated integration](#Iterated_Integration) |
 | Integral |                                     $\int_0^1 \frac{x^a-1}{\ln x} dx = \ln(a+1)$ for $a > -1$                                     |                     Done                     |
 | Integral |                     $\int_0^1 \frac{x^a-x^b}{\ln x} dx = \frac{\ln(a+1)}{\ln(b+1)}$ <br> for $a > -1, b > -1$                     |                     Done                     |
@@ -526,6 +526,10 @@ Some improper integrals may not be convergent. However, sometimes we can calcula
 <h4 id=Higher_Order_Differential_Equation>Higher Order Differential Equation</h4>
 
 The program can only solve first order differential equations so far.
+
+<h4 id=Difference_Equation>Difference Equation</h4>
+
+Solving difference equations like $I_n = I_{n-1}+I_{n-2}$ have not been supported.
 
 <h4 id=Iterated_Integration>Iterated Integration</h4>
 

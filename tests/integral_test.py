@@ -2128,6 +2128,31 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
 
+    def testFlipSide02(self):
+        # Reference:
+        # Inside interesting integrals, Section 3.4 example #2
+        file = compstate.CompFile("interesting", "filpside02")
+
+        goal01 = file.add_goal("(INT t:[0,oo]. (exp(-p*t^2)-exp(-q*t^2))/t^2) = (INT t:[0,oo]. (INT a:[p,q]. exp(-a*t^2)))", conds=["p>0","q>0"])
+        proof_of_goal01 = goal01.proof_by_calculation()
+        calc = proof_of_goal01.rhs_calc
+        calc.perform_rule(rules.OnLocation(rules.Substitution(var_name="x", var_subst="-a*t"), "0"))
+        calc.perform_rule(rules.OnLocation(rules.DefiniteIntegralIdentity(), "0"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.ReplaceSubstitution())
+        calc.perform_rule(rules.Equation("1 / t * (-(exp(-(p * t ^ 2)) / t) + exp(-(q * t ^ 2)) / t)",
+                                         "-exp(-p * t ^ 2) / t^2 + exp(-q * t ^ 2) / t^2"))
+        calc.perform_rule(rules.Equation("-(INT t:[0,oo]. -exp(-p * t ^ 2) / t ^ 2 + exp(-q * t ^ 2) / t ^ 2)",
+                                         "(INT t:[0,oo]. exp(-p * t ^ 2) / t ^ 2 - exp(-q * t ^ 2) / t ^ 2)"))
+        calc.perform_rule(rules.Equation("exp(-p * t ^ 2) / t ^ 2 - exp(-q * t ^ 2) / t ^ 2",
+                                         "(exp(-p*t^2)-exp(-q*t^2))/t^2"))
+
+        goal02 = file.add_goal("(INT t:[0,oo]. (INT a:[p,q]. exp(-a*t^2))) = sqrt(pi)*(sqrt(q) - sqrt(p))", conds=["p>0","q>0"])
+        proof_of_goal02 = goal02.proof_by_calculation()
+        calc = proof_of_goal02.lhs_calc
+        calc.perform_rule(rules.Exchange)
+
+        self.checkAndOutput(file)
     def testFlipside03(self):
         # Reference:
         # Inside interesting integrals, Section 3.4, example #3

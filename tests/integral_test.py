@@ -2128,6 +2128,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
 
+    # TODO: Change the order of integration.
     def testFlipSide02(self):
         # Reference:
         # Inside interesting integrals, Section 3.4 example #2
@@ -2150,7 +2151,6 @@ class IntegralTest(unittest.TestCase):
         goal02 = file.add_goal("(INT t:[0,oo]. (INT a:[p,q]. exp(-a*t^2))) = sqrt(pi)*(sqrt(q) - sqrt(p))", conds=["p>0","q>0"])
         proof_of_goal02 = goal02.proof_by_calculation()
         calc = proof_of_goal02.lhs_calc
-        calc.perform_rule(rules.Exchange)
 
         self.checkAndOutput(file)
     def testFlipside03(self):

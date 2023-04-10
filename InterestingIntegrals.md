@@ -125,8 +125,8 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 | Integral |    $\int_0^\infty \frac{\cos(ax) - \cos (bx)}{x} dx = \ln\left\vert\frac b a\right\vert$ <br> for $a \neq 0, b \neq0$    |                                    |
 | Integral |                             $\int_0^1 x^a (\ln x)^2 dx = \frac 2{(a+1)^3}$ <br> for $a > -1$                             |                Done                |
 | Integral |                    $\int_0^\pi \frac1{a+b\cos x} dx = \frac\pi {\sqrt{a^2-b^2}}$ <br> for $a>b\geq 0$                    | [Unsolved limits](#Unsolved_Limits) |
-| Integral |              $\int_0^\pi \ln{(a+b\cos x)} dx = \pi\ln\frac{a + \sqrt{a^2-b^2}} {2}$ <br> for $a > b \geq 0$              |                                    |
-| Integral |                   $\int_0^\pi \frac{\ln(1+b\cos x)}{\cos{x}}dx = \pi \sin^{-1} b$ for $-1\leq b \leq 1$                   |                                    |
+| Integral |              $\int_0^\pi \ln{(a+b\cos x)} dx = \pi\ln\frac{a + \sqrt{a^2-b^2}} {2}$ <br> for $a > b \geq 0$              | [Unsolved limits](#Unsolved_Limits) |
+| Integral |                   $\int_0^\pi \frac{\ln(1+b\cos x)}{\cos{x}}dx = \pi \sin^{-1} b$ for $-1\leq b \leq 1$                   | [Unsolved limits](#Unsolved_Limits) |
 
 ### 3.5 Combining Two Tricks (1/6)
 
@@ -144,9 +144,9 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 ### 3.6 Uhler’s Integral and Symbolic Integration (0/1)
 
 
-|   Type   |                     Expression                     |                Status                |
-| :------: | :------------------------------------------------: |:------------------------------------:|
-| Integral | $\int_1 ^ \infty \frac{\ln x}{(1+x)^2} dx = \ln 2$ | Done <br> Notice the proof is in 2.1 |
+|   Type   |                     Expression                     |               Status               |
+| :------: | :------------------------------------------------: | :---------------------------------: |
+| Integral | $\int_1 ^ \infty \frac{\ln x}{(1+x)^2} dx = \ln 2$ | Done<br> Notice the proof is in 2.1 |
 
 ### 3.7 The Probability Integral Revisited (0/1)
 

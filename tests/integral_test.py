@@ -2741,6 +2741,79 @@ class IntegralTest(unittest.TestCase):
 
         self.checkAndOutput(file)
 
+    # TODO: Show I(1/a) = 0 for a>1.
+    def testDini(self):
+        # Reference:
+        # Inside interesting integrals, Section 3.8
+        file = compstate.CompFile("interesting", "Dini")
+
+        file.add_definition("I(a) = (INT x:[0,pi]. log(1-2*a*cos(x)+a^2))", conds=["a>0", "a!=1"])
+
+        goal01 = file.add_goal("(D a. I(a)) = "
+                               "1 / a * (-(abs(a + 1) * (-(2 * a ^ 2) + 2) / ((a + 1) ^ 2 * abs(-a + 1)) * (LIM {z -> oo}. atan(z * abs(a + 1) / abs(-a + 1)))) + pi)")
+        proof_of_goal01 = goal01.proof_by_calculation()
+        calc = proof_of_goal01.lhs_calc
+        calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("(-(2 * cos(x)) + 2 * a)", "1/a*(2*a^2-2*a*cos(x))"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("(-(2 * a * cos(x)) + 2 * a ^ 2) / (-(2 * a * cos(x)) + a ^ 2 + 1)",
+                                         "1 - (1-a^2) / (-(2 * a * cos(x)) + a ^ 2 + 1)"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Substitution(var_name="z", var_subst="tan(x/2)"))
+        calc.perform_rule(rules.Equation("(z ^ 2 + 1) * (-(2 * a * (-(z ^ 2) + 1) / (z ^ 2 + 1)) + a ^ 2 + 1)",
+                                         "(1+a)^2*z^2+(1-a)^2"))
+        calc.perform_rule(rules.Equation("2/((1+a)^2*z^2+(1-a)^2)", "2/(1+a)^2 * 1/(((1-a)/(1+a))^2+z^2)"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("(-a + 1) ^ 2 / (a + 1) ^ 2 + z ^ 2", "z ^ 2 + ((1-a) / (1+a)) ^ 2"))
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+
+
+        goal02 = file.add_goal("I(a)=SKOLEM_CONST(C)", conds=["a>=0", "a<1"])
+        proof_of_goal02 = goal02.proof_by_rewrite_goal(begin=goal01)
+        calc = proof_of_goal02.begin
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("(-a + 1) * (2 * a + 2)", "-(2 * a ^ 2) + 2"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.IntegralEquation())
+        calc.perform_rule(rules.IndefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+
+        goal03 = file.add_goal("SKOLEM_CONST(C) = 0", conds=["a>=0", "a<1"])
+        proof_of_goal03 = goal03.proof_by_rewrite_goal(begin=goal02)
+        calc = proof_of_goal03.begin
+        calc.perform_rule(rules.VarSubsOfEquation([{'var': 'a', 'expr': "0"}]))
+        calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.SolveEquation(parser.parse_expr("SKOLEM_CONST(C)")))
+
+        goal04 = file.add_goal("I(a) = 0", conds=["a>=0", "a<1"])
+        proof_of_goal04 = goal04.proof_by_rewrite_goal(begin=goal02)
+        calc = proof_of_goal04.begin
+        calc.perform_rule(rules.OnSubterm(rules.ApplyEquation(goal03.goal)))
+
+        goal05 = file.add_goal("I(1/a) = I(a) - 2*pi*log(a)", conds=["a>1"])
+        proof_of_goal05 = goal05.proof_by_calculation()
+        calc = proof_of_goal05.lhs_calc
+        calc.perform_rule(rules.ExpandDefinition("I"))
+        calc.perform_rule(rules.Equation("-(2 * cos(x) / a) + 1 / a ^ 2 + 1", "(a^2-2*a*cos(x)+1)/a^2"))
+        calc.perform_rule(rules.ApplyIdentity("log((a^2-2*a*cos(x)+1)/a^2)", "log(a^2-2*a*cos(x)+1) - log(a^2)"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("-(2 * a * cos(x)) + a ^ 2 + 1", "1-2*a*cos(x)+a^2"))
+        calc.perform_rule(rules.OnSubterm(rules.FoldDefinition("I")))
+
+        goal06 = file.add_goal("I(a) = 2*pi*log(a)", conds=["a>1"])
+        proof_of_goal06 = goal06.proof_by_rewrite_goal(begin=goal05)
+        calc = proof_of_goal06.begin
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal04.goal), "0"))
+
+        self.checkAndOutput(file)
+
     def testChapter3Practice01(self):
         # Reference:
         # Inside interesting integrals, Section 3.10, C3.1

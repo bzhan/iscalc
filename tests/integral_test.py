@@ -2766,6 +2766,45 @@ class IntegralTest(unittest.TestCase):
 
         self.checkAndOutput(file)
 
+    # TODO: Substitute s for t - sqrt(a*b)/t
+    def testProbability(self):
+        # Reference:
+        # Inside interesting integrals, Section 3.7
+        file = compstate.CompFile("interesting", "Probability")
+
+        file.add_definition("I(a, b) = (INT x:[0, oo]. exp(-a*x^2 - b/x^2))", conds=["a>0", "b>=0"])
+        file.add_definition("J(a, b) = (INT t:[0, oo]. exp(-t^2 - a*b/t^2))", conds=["a>0", "b>=0"])
+
+        goal01 = file.add_goal("I(a, b) = 1/sqrt(a) * J(a, b)", conds=["a>0", "b>0"])
+        proof01 = goal01.proof_by_calculation()
+        calc = proof01.lhs_calc
+        calc.perform_rule(rules.ExpandDefinition("I"))
+        calc.perform_rule(rules.Substitution(var_name="t", var_subst="x*sqrt(a)"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("-(a * b / t ^ 2) - t ^ 2", "-t^2 - a*b/t^2"))
+        calc.perform_rule(rules.OnSubterm((rules.FoldDefinition("J"))))
+
+        goal02 = file.add_goal("J(a, b) = sqrt(a*b) * (INT t:[0,oo]. exp(-t^2-a*b/t^2)/t^2)", conds=["a>0","b>0"])
+        proof02 = goal02.proof_by_calculation()
+        calc = proof02.lhs_calc
+        calc.perform_rule(rules.ExpandDefinition("J"))
+        calc.perform_rule(rules.Substitution(var_name="t", var_subst="sqrt(a*b)/t"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("1 / t ^ 2 * exp(-(a * b / t ^ 2) - t ^ 2)",
+                                         "exp(-t^2-a*b/t^2)/t^2"))
+        calc.perform_rule(rules.Equation("sqrt(a)*sqrt(b)", "sqrt(a*b)"))
+
+        goal03 = file.add_goal("2*J(a,b) = exp(-2*sqrt(a*b)) * (INT s:[0,oo]. exp(-s^2))", conds=["a>0","b>0"])
+        proof03 = goal03.proof_by_calculation()
+        calc = proof03.lhs_calc
+        calc.perform_rule(rules.Equation("2*J(a, b)", "J(a,b) + J(a, b)"))
+        calc.perform_rule(rules.OnLocation(rules.ExpandDefinition("J"), "0"))
+        calc.perform_rule(rules.OnSubterm(rules.ApplyEquation(goal02.goal)))
+        calc.perform_rule(rules.Equation("(INT t:[0,oo]. exp(-(a * b / t ^ 2) - t ^ 2)) + sqrt(a * b) * (INT t:[0,oo]. exp(-(t ^ 2) - a * b / t ^ 2) / t ^ 2)",
+                                         "(INT t:[0,oo]. exp(-(a * b / t ^ 2) - t ^ 2) + sqrt(a * b) * exp(-(t ^ 2) - a * b / t ^ 2) / t ^ 2)"))
+        calc.perform_rule(rules.Substitution(var_name="s", var_subst="t-sqrt(a*b)/t"))
+        self.checkAndOutput(file)
+
     # TODO: Show I(1/a) = 0 for a>1.
     def testDini(self):
         # Reference:

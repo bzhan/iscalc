@@ -14,7 +14,7 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 |   1.8   |  Integral  | $\int_0^\infty \frac{\left\{x\right\}-\frac{1}{2}}{x} dx = -1 + \ln{\sqrt{2 \pi}}$ |                      Unsupported:[decimal part](#Decimal_Part_Function)                      |
 | 1.10 C1 |  Integral  |                        $\int_0^8 \frac{1}{x-2}dx = \ln{3}$                        |                      [Cauchy principle value](#Cauchy_Principle_Value)                      |
 | 1.10 C1 |  Integral  |            $\int_0^3 \frac{1}{(x - 1) ^ {2 / 3}}dx = 3(1 + 2 ^ {1/3})$            |                      [Cauchy principle value](#Cauchy_Principle_Value)                      |
-| 1.10 C2 | Inequality |                  $\int_1^\infty \frac{1}{\sqrt{x^3 - 1}} dx < 4$                  |                                                                                              |
+| 1.10 C2 | Inequality |                  $\int_1^\infty \frac{1}{\sqrt{x^3 - 1}} dx < 4$                  |                                [Inequalities](#Inequalities)                                |
 | 1.10 C5 |  Integral  |           $\int_0^\frac\pi3 \frac1{\cos \theta}d\theta = \ln(2+\sqrt3)$           |                         [Undetermined ranges](#Undetermined_Ranges)                         |
 
 ## Chapter 2: 'Easy' Integrals
@@ -90,7 +90,7 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 | Integral |           $\int_0^\infty \frac1{(x^2+a^2)^2}dx = \frac\pi{4a^3}$ <br> for $a > 0$           |                                    Done                                    |
 | Integral |         $\int_0^\infty \frac1{(x^2+a^2)^3}dx = \frac{3\pi}{16a^5}$ <br> for $a > 0$         |                                    Done                                    |
 | Integral |                  $\int_{-\infty}^\infty e^{-\frac{x^2}2}dx = \sqrt{2\pi}$                  |                                    Done                                    |
-| Integral |                   $\int_0^\infty e^{-\frac{-x^2}2}dx = \sqrt{\frac\pi2}$                   |                                    Done                                    |
+| Integral |                    $\int_0^\infty e^{-\frac{x^2}2}dx = \sqrt{\frac\pi2}$                    |                                    Done                                    |
 | Integral |     $\int_0^\infty \cos(tx)e^{-\frac{x^2} 2} dx = \sqrt{\frac{\pi} 2}e^{-\frac{t^2}2}$     |                                    Done                                    |
 | Integral |                  $\int_{-\infty}^\infty e^{-ax^2} dx = \sqrt{\frac\pi a}$                  |                                    Done                                    |
 | Integral | $\int_{-\infty}^{\infty} e^{-\frac{x^2}2}\cos(s+tx)dx = \sqrt{2\pi}e^{-\frac{t^2}2}\cos s$ |                                    Done                                    |
@@ -115,18 +115,18 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 ### 3.4 The Flip-Side of Feynman’s Trick (3/10)
 
 
-|   Type   |                                                        Expression                                                        |                    Status                    |
-| :------: | :-----------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------: |
-| Integral | $\int_0^\infty \frac{\cos(ax) - \cos (bx)}{x^2} dx = \frac{\pi}{2} (\left\vert b \right\vert - \left\vert a \right\vert)$ |                                              |
-| Integral |            $\int_0^\infty \frac{e^{-pt^2}-e^{-qt^2}}{t^2}dt = \sqrt \pi (\sqrt q - \sqrt p)$ for $p >0, q > 0$            | [Iterated integration](#Iterated_Integration) |
-| Integral |                                 $\int_0^1 \frac{x^a-1}{\ln x} dx = \ln(a+1)$ for $a > -1$                                 |                     Done                     |
-| Integral |                 $\int_0^1 \frac{x^a-x^b}{\ln x} dx = \frac{\ln(a+1)}{\ln(b+1)}$ <br> for $a > -1, b > -1$                 |                     Done                     |
-| Integral |        $\int_0^\infty e^{-tx}\frac{\cos(ax) - \cos (bx)}{x} dx = \ln\sqrt{\frac{t^2+b^2}{t^2+a^2}}$ <br> for $t>0$        |                                              |
-| Integral |    $\int_0^\infty \frac{\cos(ax) - \cos (bx)}{x} dx = \ln\left\vert\frac b a\right\vert$ <br> for $a \neq 0, b \neq0$    |                                              |
-| Integral |                             $\int_0^1 x^a (\ln x)^2 dx = \frac 2{(a+1)^3}$ <br> for $a > -1$                             |                     Done                     |
-| Integral |                    $\int_0^\pi \frac1{a+b\cos x} dx = \frac\pi {\sqrt{a^2-b^2}}$ <br> for $a>b\geq 0$                    |      [Unsolved limits](#Unsolved_Limits)      |
-| Integral |              $\int_0^\pi \ln{(a+b\cos x)} dx = \pi\ln\frac{a + \sqrt{a^2-b^2}} {2}$ <br> for $a > b \geq 0$              |      [Unsolved limits](#Unsolved_Limits)      |
-| Integral |                   $\int_0^\pi \frac{\ln(1+b\cos x)}{\cos{x}}dx = \pi \sin^{-1} b$ for $-1\leq b \leq 1$                   |      [Unsolved limits](#Unsolved_Limits)      |
+|   Type   |                                                            Expression                                                            |                    Status                    |
+| :------: | :-------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------: |
+| Integral |     $\int_0^\infty \frac{\cos(ax) - \cos (bx)}{x^2} dx = \frac{\pi}{2} (\left\vert b \right\vert - \left\vert a \right\vert)$     |                                              |
+| Integral |                $\int_0^\infty \frac{e^{-pt^2}-e^{-qt^2}}{t^2}dt = \sqrt \pi (\sqrt q - \sqrt p)$ for $p >0, q > 0$                | [Iterated integration](#Iterated_Integration) |
+| Integral |                                     $\int_0^1 \frac{x^a-1}{\ln x} dx = \ln(a+1)$ for $a > -1$                                     |                     Done                     |
+| Integral |                     $\int_0^1 \frac{x^a-x^b}{\ln x} dx = \frac{\ln(a+1)}{\ln(b+1)}$ <br> for $a > -1, b > -1$                     |                     Done                     |
+| Integral | $\int_0^\infty e^{-tx}\frac{\cos(ax) - \cos (bx)}{x} dx = \ln\sqrt{\frac{t^2+b^2}{t^2+a^2}}$ <br> for $\frac{t^2+b^2}{t^2+a^2}>0$ |                                              |
+| Integral |        $\int_0^\infty \frac{\cos(ax) - \cos (bx)}{x} dx = \ln\left\vert\frac b a\right\vert$ <br> for $a \neq 0, b \neq0$        |                                              |
+| Integral |                                 $\int_0^1 x^a (\ln x)^2 dx = \frac 2{(a+1)^3}$ <br> for $a > -1$                                 |                     Done                     |
+| Integral |                        $\int_0^\pi \frac1{a+b\cos x} dx = \frac\pi {\sqrt{a^2-b^2}}$ <br> for $a>b\geq 0$                        |      [Unsolved limits](#Unsolved_Limits)      |
+| Integral |                  $\int_0^\pi \ln{(a+b\cos x)} dx = \pi\ln\frac{a + \sqrt{a^2-b^2}} {2}$ <br> for $a > b \geq 0$                  |      [Unsolved limits](#Unsolved_Limits)      |
+| Integral |                       $\int_0^\pi \frac{\ln(1+b\cos x)}{\cos{x}}dx = \pi \sin^{-1} b$ for $-1\leq b \leq 1$                       |      [Unsolved limits](#Unsolved_Limits)      |
 
 ### 3.5 Combining Two Tricks (1/6)
 
@@ -151,9 +151,9 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 ### 3.7 The Probability Integral Revisited (0/1)
 
 
-|   Type   |                                                      Expression                                                      | Status |
-| :------: | :------------------------------------------------------------------------------------------------------------------: | :----: |
-| Integral | $\int_0^\infty e^{-ax^2-\frac b {x^2}}dx = \frac 1 2 \sqrt{\frac{\pi}{a}}e^{-2\sqrt{ab}}$ <br> for $a > 0, b \geq 0$ |        |
+|   Type   |                                                      Expression                                                      |                        Status                        |
+| :------: | :------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------: |
+| Integral | $\int_0^\infty e^{-ax^2-\frac b {x^2}}dx = \frac 1 2 \sqrt{\frac{\pi}{a}}e^{-2\sqrt{ab}}$ <br> for $a > 0, b \geq 0$ | [Complicated substitution](#Complicated_Substitution) |
 
 ### 3.8 Dini's Integral (0/1)
 
@@ -578,3 +578,11 @@ It is tough to calculate the ranges of some expressions. Even worse, some operat
 <h4 id=Unsolved_Limits>Unsolved Limits</h4>
 
 In most cases, the task of computing limits is delegated to the program, but not all limits can be computed by the program independently.
+
+<h4 id=Inequalities>Inequalities</h4>
+
+There is currently no corresponding set of rules to prove inequalities.
+
+<h4 id=Complicated_Substitution>Complicated Substitution</h4>
+
+When substituting $u$ for $x$, we try solving $u = f(x)$ and then get $x = f^{-1}(u)$. However, things become harder when there is more than one solution for $x$.

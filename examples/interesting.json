@@ -414,6 +414,95 @@
                 },
                 {
                     "type": "header",
+                    "name": "3.5 Combining Two Tricks",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "definition",
+                            "expr": "I(a,b,n) = (INT x:[0, pi/2]. 1/(a*cos(x)^2+b*sin(x)^2)^n)",
+                            "conds": [
+                                "a > 0",
+                                "b > 0",
+                                "n > 0",
+                                "isInt(n)"
+                            ],
+                            "path": "CombiningTwoTricks"
+                        },
+                        {
+                            "type": "definition",
+                            "expr": "J(a,y,n) = (INT x:[0, y]. 1/(x^2+a^2)^n)",
+                            "conds": [
+                                "a > 0",
+                                "y >= 0",
+                                "n > 0",
+                                "isInt(n)"
+                            ],
+                            "path": "CombiningTwoTricks"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "I(a, b, n) = -1/(n-1)*((D a. I(a,b, n-1))+(D b. I(a,b,n-1)))",
+                            "conds": [
+                                "a>0",
+                                "b>0",
+                                "n>=2",
+                                "isInt(n)"
+                            ],
+                            "path": "CombiningTwoTricks"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "I(a,b,1) = pi/(2*sqrt(a*b))",
+                            "conds": [
+                                "a>0",
+                                "b>0"
+                            ],
+                            "path": "CombiningTwoTricks"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "I(a,b,2) = pi/(4*sqrt(a*b)) * (1/a + 1/b)",
+                            "conds": [
+                                "a>0",
+                                "b>0"
+                            ],
+                            "path": "CombiningTwoTricks"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "I(a,b,3) = pi/(16*sqrt(a*b)) * (3/a^2 + 3/b^2 + 2/(a*b))",
+                            "conds": [
+                                "a>0",
+                                "b>0"
+                            ],
+                            "path": "CombiningTwoTricks"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "J(a,y,n) = y/(y^2+a^2)^n+2*n*J(a,y,n)-(2*n*a^2)*J(a,y,n+1)",
+                            "conds": [
+                                "a > 0",
+                                "y >= 0",
+                                "n > 0",
+                                "isInt(n)"
+                            ],
+                            "path": "CombiningTwoTricks"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "J(a,y,n+1) = y/(2*n*a^2*(y^2+a^2)^n) + (2*n-1)/(2*n*a^2) * J(a,y,n)",
+                            "conds": [
+                                "a > 0",
+                                "y >= 0",
+                                "n > 0",
+                                "isInt(n)"
+                            ],
+                            "path": "CombiningTwoTricks"
+                        }
+                    ]
+                },
+                {
+                    "type": "header",
                     "name": "3.10 Challenge Problems",
                     "level": 2,
                     "content": [

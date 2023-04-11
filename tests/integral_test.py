@@ -2324,7 +2324,6 @@ class IntegralTest(unittest.TestCase):
     #     calc.perform_rule(rules.FullSimplify())
     #     self.checkAndOutput(file)
 
-    # TODO: Fix the output
     def testCombiningTwoTricks(self):
         # Reference:
         # Inside interesting integrals, Section 3.5

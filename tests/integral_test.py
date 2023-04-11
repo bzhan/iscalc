@@ -2324,15 +2324,16 @@ class IntegralTest(unittest.TestCase):
     #     calc.perform_rule(rules.FullSimplify())
     #     self.checkAndOutput(file)
 
-    # TODO: Solve LIM {y -> oo}. atan(sqrt(b) * y / sqrt(a))
+    # TODO: Fix the output
     def testCombiningTwoTricks(self):
         # Reference:
         # Inside interesting integrals, Section 3.5
         file = compstate.CompFile("interesting", 'CombiningTwoTricks')
 
         file.add_definition("I(a,b,n) = (INT x:[0, pi/2]. 1/(a*cos(x)^2+b*sin(x)^2)^n)", conds=["a > 0", "b > 0", "n > 0", "isInt(n)"])
+        file.add_definition("J(a,y,n) = (INT x:[0, y]. 1/(x^2+a^2)^n)", conds=["a>0", "y>=0", "n>0", "isInt(n)"])
 
-        goal01 = file.add_goal("I(a, b, n) = -1/(n-1)*((D a. I(a,b, n-1))+(D b. I(a,b,n-1)))", conds=["n>=2"])
+        goal01 = file.add_goal("I(a, b, n) = -1/(n-1)*((D a. I(a,b, n-1))+(D b. I(a,b,n-1)))", conds=["a>0","b>0","n>=2","isInt(n)"])
         proof_of_goal01 = goal01.proof_by_calculation()
         calc = proof_of_goal01.rhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
@@ -2351,7 +2352,7 @@ class IntegralTest(unittest.TestCase):
                                          "1 / (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ n"))
         calc.perform_rule(rules.FoldDefinition("I"))
 
-        goal02 = file.add_goal("I(a,b,1) = pi/(2*sqrt(a*b))")
+        goal02 = file.add_goal("I(a,b,1) = pi/(2*sqrt(a*b))", conds=["a>0", "b>0"])
         proof_of_goal02 = goal02.proof_by_calculation()
         calc = proof_of_goal02.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("I"))
@@ -2362,6 +2363,54 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.Equation("1 / (b * y ^ 2 + a)", "(1/b)/(y^2+a/b)"))
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("2 * sqrt(a) * sqrt(b)", "2 * sqrt(a * b)"))
+
+        goal03 = file.add_goal("I(a,b,2) = pi/(4*sqrt(a*b)) * (1/a + 1/b)", conds=["a>0", "b>0"])
+        proof_of_goal03 = goal03.proof_by_calculation()
+        calc = proof_of_goal03.lhs_calc
+        calc.perform_rule(rules.ApplyEquation(goal01.goal))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0.0.0.2"))
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "1.0.2"))
+        calc.perform_rule(rules.OnSubterm(rules.ApplyEquation(goal02.goal)))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("pi / (4 * a ^ (3/2) * sqrt(b)) + pi / (4 * sqrt(a) * b ^ (3/2))",
+                                         "pi/(4*sqrt(a*b)) * (1/a + 1/b)"))
+
+        goal04 = file.add_goal("I(a,b,3) = pi/(16*sqrt(a*b)) * (3/a^2 + 3/b^2 + 2/(a*b))", conds=["a>0", "b>0"])
+        proof_of_goal04 = goal04.proof_by_calculation()
+        calc = proof_of_goal04.lhs_calc
+        calc.perform_rule(rules.ApplyEquation(goal01.goal))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0.0.0.0.2"))
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "1.0.0.2"))
+        calc.perform_rule(rules.OnSubterm(rules.ApplyEquation(goal03.goal)))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("pi / (16 * a ^ (3/2) * sqrt(b)) * (1 / a + 1 / b) + pi / (16 * sqrt(a) * b ^ (3/2)) * (1 / a + 1 / b) + pi / (8 * a ^ (5/2) * sqrt(b)) + pi / (8 * sqrt(a) * b ^ (5/2))",
+                                         "pi/(16*sqrt(a*b)) * (3/a^2 + 3/b^2 + 2/(a*b))"))
+
+        goal05 = file.add_goal("J(a,y,n) = y/(y^2+a^2)^n+2*n*J(a,y,n)-(2*n*a^2)*J(a,y,n+1)", conds=["a>0", "y>=0", "n>0", "isInt(n)"])
+        proof_of_goal05 = goal05.proof_by_calculation()
+        calc = proof_of_goal05.lhs_calc
+        calc.perform_rule(rules.ExpandDefinition("J"))
+        calc.perform_rule(rules.IntegrationByParts(u="1/(x^2+a^2)^n", v="x"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("2 * n * (INT x:[0,y]. x ^ 2 * (a ^ 2 + x ^ 2) ^ (-n - 1))",
+                                         "n * (INT x:[0,y]. 2 * x ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1))"))
+        calc.perform_rule(rules.Equation("2 * x ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1)",
+                                         "2 * (x ^ 2 + a ^ 2) / (a ^ 2 + x ^ 2) ^ (n + 1) - 2 * a ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1)"))
+        calc.perform_rule(rules.Equation("(INT x:[0,y]. 2 * (x ^ 2 + a ^ 2) / (a ^ 2 + x ^ 2) ^ (n + 1) - 2 * a ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1))",
+                                         "2 * (INT x:[0,y]. 1 / (x ^ 2 + a ^ 2) ^ n) - 2 * a ^ 2 *(INT x:[0,y]. 1 / (x ^ 2 + a ^ 2) ^ (n + 1))"))
+        calc.perform_rule(rules.OnSubterm(rules.FoldDefinition("J")))
+        calc.perform_rule(rules.Equation("n * (2 * J(a,y,n) - 2 * a ^ 2 * J(a,y,n + 1)) + y * (a ^ 2 + y ^ 2) ^ -n",
+                                         "y/(y^2+a^2)^n+2*n*J(a,y,n)-(2*n*a^2)*J(a,y,n+1)"))
+
+        goal06 = file.add_goal("J(a,y,n+1) = y/(2*n*a^2*(y^2+a^2)^n) + (2*n-1)/(2*n*a^2) * J(a,y,n)", conds=["a>0", "y>=0", "n>0", "isInt(n)"])
+        proof_of_goal06 = goal06.proof_by_rewrite_goal(begin=goal05)
+        calc = proof_of_goal06.begin
+        calc.perform_rule(rules.SolveEquation("J(a,y,n+1)"))
+        calc.perform_rule(rules.Equation("(y * (a ^ 2 + y ^ 2) ^ -n + 2 * n * J(a,y,n) - J(a,y,n)) / (2 * a ^ 2 * n)",
+                                         "y/(2*n*a^2*(y^2+a^2)^n) + (2*n-1)/(2*n*a^2) * J(a,y,n)"))
 
         self.checkAndOutput(file)
 

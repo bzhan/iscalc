@@ -1,0 +1,195 @@
+{
+    "content": [
+        {
+            "finished": true,
+            "goal": "(INT x:[0,pi / 3]. 1 / cos(x)) = log(2 + sqrt(3))",
+            "latex_goal": "\\int_{0}^{\\pi/3} \\frac{1}{\\cos{x}} \\,dx = \\log{(2 + \\sqrt{3})}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{0}^{\\pi/3} \\frac{1}{\\cos{x}} \\,dx",
+                        "start": "INT x:[0,pi / 3]. 1 / cos(x)",
+                        "steps": [
+                            {
+                                "latex_res": "\\int_{0}^{\\pi/3} \\frac{\\cos{x}}{\\cos^{2}(x)} \\,dx",
+                                "res": "INT x:[0,pi / 3]. cos(x) / cos(x) ^ 2",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{1}{\\cos{x}}\\) to \\(\\frac{\\cos{x}}{\\cos^{2}(x)}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "cos(x) / cos(x) ^ 2",
+                                    "old_expr": "1 / cos(x)",
+                                    "str": "rewriting 1 / cos(x) to cos(x) / cos(x) ^ 2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\pi/3} \\frac{\\cos{x}}{1 - \\sin^{2}(x)} \\,dx",
+                                "res": "INT x:[0,pi / 3]. cos(x) / (1 - sin(x) ^ 2)",
+                                "rule": {
+                                    "latex_str": "rewrite \\(\\cos^{2}(x)\\) to \\(1 - \\sin^{2}(x)\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "cos(x) ^ 2",
+                                    "str": "rewrite cos(x) ^ 2 to 1 - sin(x) ^ 2 using identity",
+                                    "target": "1 - sin(x) ^ 2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\sqrt{3}/2} \\frac{1}{-u ^ {2} + 1} \\,du",
+                                "res": "INT u:[0,sqrt(3) / 2]. 1 / (-(u ^ 2) + 1)",
+                                "rule": {
+                                    "latex_str": "substitute \\(u\\) for \\(\\sin{x}\\)",
+                                    "name": "Substitution",
+                                    "str": "substitute u for sin(x)",
+                                    "var_name": "u",
+                                    "var_subst": "sin(x)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\sqrt{3}/2} \\frac{1}{2} (\\frac{1}{1 - u} + \\frac{1}{1 + u}) \\,du",
+                                "res": "INT u:[0,sqrt(3) / 2]. 1/2 * (1 / (1 - u) + 1 / (1 + u))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{1}{-u ^ {2} + 1}\\) to \\(\\frac{1}{2} (\\frac{1}{1 - u} + \\frac{1}{1 + u})\\)",
+                                    "name": "Equation",
+                                    "new_expr": "1/2 * (1 / (1 - u) + 1 / (1 + u))",
+                                    "old_expr": "1 / (-(u ^ 2) + 1)",
+                                    "str": "rewriting 1 / (-(u ^ 2) + 1) to 1/2 * (1 / (1 - u) + 1 / (1 + u))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{2} (\\int_{0}^{\\sqrt{3}/2} \\frac{1}{-u + 1} \\,du) + \\frac{1}{2} (\\int_{0}^{\\sqrt{3}/2} \\frac{1}{u + 1} \\,du)",
+                                "res": "1/2 * (INT u:[0,sqrt(3) / 2]. 1 / (-u + 1)) + 1/2 * (INT u:[0,sqrt(3) / 2]. 1 / (u + 1))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{2} (\\int_{0}^{\\sqrt{3}/2} \\frac{1}{-u + 1} \\,du) + \\frac{1}{2} (\\left. \\log{(\\left| u + 1 \\right|)} \\right\\vert_{u=0}^{\\sqrt{3}/2})",
+                                "res": "1/2 * (INT u:[0,sqrt(3) / 2]. 1 / (-u + 1)) + 1/2 * ([log(abs(u + 1))]_u=0,sqrt(3) / 2)",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{2} (\\int_{0}^{\\sqrt{3}/2} \\frac{1}{-u + 1} \\,du) + \\frac{1}{2} \\log{(\\frac{\\sqrt{3}}{2} + 1)}",
+                                "res": "1/2 * (INT u:[0,sqrt(3) / 2]. 1 / (-u + 1)) + 1/2 * log(sqrt(3) / 2 + 1)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{2} (\\int_{-\\sqrt{3}/2 + 1}^{1} \\frac{1}{t} \\,dt) + \\frac{1}{2} \\log{(\\frac{\\sqrt{3}}{2} + 1)}",
+                                "res": "1/2 * (INT t:[-(sqrt(3) / 2) + 1,1]. 1 / t) + 1/2 * log(sqrt(3) / 2 + 1)",
+                                "rule": {
+                                    "latex_str": "substitute \\(t\\) for \\(-u + 1\\) at 0.1",
+                                    "loc": "0.1",
+                                    "name": "Substitution",
+                                    "str": "substitute t for -u + 1 at 0.1",
+                                    "var_name": "t",
+                                    "var_subst": "-u + 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{2} (\\left. \\log{(\\left| t \\right|)} \\right\\vert_{t=-\\sqrt{3}/2 + 1}^{1}) + \\frac{1}{2} \\log{(\\frac{\\sqrt{3}}{2} + 1)}",
+                                "res": "1/2 * ([log(abs(t))]_t=-(sqrt(3) / 2) + 1,1) + 1/2 * log(sqrt(3) / 2 + 1)",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{1}{2} \\log{(-\\frac{\\sqrt{3}}{2} + 1)} + \\frac{1}{2} \\log{(\\frac{\\sqrt{3}}{2} + 1)}",
+                                "res": "-(1/2 * log(-(sqrt(3) / 2) + 1)) + 1/2 * log(sqrt(3) / 2 + 1)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{2}\\cdot (\\log{(\\frac{\\sqrt{3}}{2} + 1)} - \\log{(-\\frac{\\sqrt{3}}{2} + 1)})",
+                                "res": "1/2 * (log(sqrt(3) / 2 + 1) - log(-(sqrt(3) / 2) + 1))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(-\\frac{1}{2} \\log{(-\\frac{\\sqrt{3}}{2} + 1)} + \\frac{1}{2} \\log{(\\frac{\\sqrt{3}}{2} + 1)}\\) to \\(\\frac{1}{2}\\cdot (\\log{(\\frac{\\sqrt{3}}{2} + 1)} - \\log{(-\\frac{\\sqrt{3}}{2} + 1)})\\)",
+                                    "name": "Equation",
+                                    "new_expr": "1/2 * (log(sqrt(3) / 2 + 1) - log(-(sqrt(3) / 2) + 1))",
+                                    "old_expr": "-(1/2 * log(-(sqrt(3) / 2) + 1)) + 1/2 * log(sqrt(3) / 2 + 1)",
+                                    "str": "rewriting -(1/2 * log(-(sqrt(3) / 2) + 1)) + 1/2 * log(sqrt(3) / 2 + 1) to 1/2 * (log(sqrt(3) / 2 + 1) - log(-(sqrt(3) / 2) + 1))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{2} \\log{(\\frac{\\frac{\\sqrt{3}}{2} + 1}{-\\frac{\\sqrt{3}}{2} + 1})}",
+                                "res": "1/2 * log((sqrt(3) / 2 + 1) / (-(sqrt(3) / 2) + 1))",
+                                "rule": {
+                                    "latex_str": "rewrite \\(\\log{(\\frac{\\sqrt{3}}{2} + 1)} - \\log{(-\\frac{\\sqrt{3}}{2} + 1)}\\) to \\(\\log{(\\frac{\\frac{\\sqrt{3}}{2} + 1}{-\\frac{\\sqrt{3}}{2} + 1})}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "log(sqrt(3) / 2 + 1) - log(-(sqrt(3) / 2) + 1)",
+                                    "str": "rewrite log(sqrt(3) / 2 + 1) - log(-(sqrt(3) / 2) + 1) to log((sqrt(3) / 2 + 1) / (-(sqrt(3) / 2) + 1)) using identity",
+                                    "target": "log((sqrt(3) / 2 + 1) / (-(sqrt(3) / 2) + 1))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{2} \\log{((2 + \\sqrt{3}) ^ {2})}",
+                                "res": "1/2 * log((2 + sqrt(3)) ^ 2)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{\\frac{\\sqrt{3}}{2} + 1}{-\\frac{\\sqrt{3}}{2} + 1}\\) to \\((2 + \\sqrt{3}) ^ {2}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(2 + sqrt(3)) ^ 2",
+                                    "old_expr": "(sqrt(3) / 2 + 1) / (-(sqrt(3) / 2) + 1)",
+                                    "str": "rewriting (sqrt(3) / 2 + 1) / (-(sqrt(3) / 2) + 1) to (2 + sqrt(3)) ^ 2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\log{(\\sqrt{3} + 2)}",
+                                "res": "log(sqrt(3) + 2)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\log{(2 + \\sqrt{3})}",
+                                "res": "log(2 + sqrt(3))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\sqrt{3} + 2\\) to \\(2 + \\sqrt{3}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "2 + sqrt(3)",
+                                    "old_expr": "sqrt(3) + 2",
+                                    "str": "rewriting sqrt(3) + 2 to 2 + sqrt(3)"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\log{(2 + \\sqrt{3})}",
+                        "start": "log(2 + sqrt(3))",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(INT x:[0,pi / 3]. 1 / cos(x)) = log(2 + sqrt(3))",
+                "latex_goal": "\\int_{0}^{\\pi/3} \\frac{1}{\\cos{x}} \\,dx = \\log{(2 + \\sqrt{3})}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "chapter1_practice0104"
+}

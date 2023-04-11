@@ -14,7 +14,7 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 |   1.8   |  Integral  | $\int_0^\infty \frac{\left\{x\right\}-\frac{1}{2}}{x} dx = -1 + \ln{\sqrt{2 \pi}}$ |                      Unsupported:[decimal part](#Decimal_Part_Function)                      |
 | 1.10 C1 |  Integral  |                        $\int_0^8 \frac{1}{x-2}dx = \ln{3}$                        |                      [Cauchy principle value](#Cauchy_Principle_Value)                      |
 | 1.10 C1 |  Integral  |            $\int_0^3 \frac{1}{(x - 1) ^ {2 / 3}}dx = 3(1 + 2 ^ {1/3})$            |                      [Cauchy principle value](#Cauchy_Principle_Value)                      |
-| 1.10 C2 | Inequality |                  $\int_1^\infty \frac{1}{\sqrt{x^3 - 1}} dx < 4$                  |                                [Inequalities](#Inequalities)                                |
+| 1.10 C2 | Inequality |                  $\int_1^\infty \frac{1}{\sqrt{x^3 - 1}} dx < 4$                  |                          Unsupported:[inequalities](#inequalities)                          |
 | 1.10 C5 |  Integral  |           $\int_0^\frac\pi3 \frac1{\cos \theta}d\theta = \ln(2+\sqrt3)$           |                         [Undetermined ranges](#Undetermined_Ranges)                         |
 
 ## Chapter 2: 'Easy' Integrals
@@ -232,15 +232,15 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 | Integral |                  $\int_0^\infty \frac{1-e^{-cx}}x\cos(bx)dx = \frac12 \ln\frac{b^2+c^2}{b^2}$ <br> for $b \neq 0$                  |        |
 | Integral | $\int_0^\infty \frac{e^{-rx}\cos(px) - e^{-sx}\cos(qx)}xdx=\frac12\ln\frac{q^2+s^2}{p^2+r^2}$ <br> for $(q^2 + s^2)(p^2+r^2)\neq0$ |        |
 
-### 4.5 Challenge Problems (0/9)
+### 4.5 Challenge Problems (2/9)
 
 
 |    Type    |                                                                    Expression                                                                    |                     Status                     |
 | :--------: | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------: |
-| Definition |                                                $I(n) = \int_0^1 (1-\sqrt x)^n dx$ <br> for $n>-1$                                                |                                                |
-|  Integral  |                                                   $I(n)= \frac2{(n+1)(n+2)}$ <br> for $n > -1$                                                   | [Incomplete conditions](#Incomplete_Conditions) |
-|  Integral  |                                                                $I(9) = \frac1{55}$                                                                |                                                |
-|  Integral  |                                  $\int_0^1 x^m\ln^x x dx = {(-1)}^n\frac{n!}{(m+1)^{n+1}}$ <br> for $m>-1, n>-1$                                  | [Incomplete conditions](#Incomplete_Conditions) |
+| Definition |                                                $I(n) = \int_0^1 (1-\sqrt x)^n dx$ <br> for $n>-1$                                                |                      Done                      |
+|  Integral  |                                                   $I(n)= \frac2{(n+1)(n+2)}$ <br> for $n > -1$                                                   |                      Done                      |
+|  Integral  |                                                                $I(9) = \frac1{55}$                                                                |                      Done                      |
+|  Integral  |                                  $\int_0^1 x^m\ln^n x dx = {(-1)}^n\frac{n!}{(m+1)^{n+1}}$ <br> for $m>-1, n>-1$                                  | [Incomplete conditions](#Incomplete_Conditions) |
 |  Integral  |                                   $\int_0^1 x^a\int_0^{1-x}y^bdydx=\frac{a!b!}{(a+b+2)!}$ <br> for $a > 0, b>0$                                   |                                                |
 |  Integral  |                       $\int_0^\infty \frac{\sin x}{\sqrt x} dx = \int_0^\infty \frac{\cos x}{\sqrt x} dx = \sqrt\frac\pi 2$                       |                                                |
 |  Integral  |                                $\int_0^\infty \sin x^2 dx =\int_0^\infty \cos x^2 dx = \frac{\sqrt\frac{\pi}{2}}2$                                |                                                |
@@ -527,6 +527,10 @@ Some improper integrals may not be convergent. However, sometimes we can calcula
 
 The program can only solve first order differential equations so far.
 
+<h4 id=Inequalities>Inequalities</h4>
+
+There is currently no corresponding set of rules to prove inequalities.
+
 <h4 id=Difference_Equation>Difference Equation</h4>
 
 Solving difference equations like $I_n = I_{n-1}+I_{n-2}$ have not been supported.
@@ -582,10 +586,6 @@ It is tough to calculate the ranges of some expressions. Even worse, some operat
 <h4 id=Unsolved_Limits>Unsolved Limits</h4>
 
 In most cases, the task of computing limits is delegated to the program, but not all limits can be computed by the program independently.
-
-<h4 id=Inequalities>Inequalities</h4>
-
-There is currently no corresponding set of rules to prove inequalities.
 
 <h4 id=Complicated_Substitution>Complicated Substitution</h4>
 

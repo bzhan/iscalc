@@ -3634,7 +3634,8 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ExpandDefinition("B"))
         calc = proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
-        goal02 = file.add_goal("(INT x:[0,1]. (1-sqrt(x))^n) = 2 / ((n+1)*(n+2))", conds=["n!=-1", "n!=-2"])
+
+        goal02 = file.add_goal("(INT x:[0,1]. (1-sqrt(x))^n) = 2 / ((n+1)*(n+2))", conds=["n>-1"])
         proof = goal02.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.Substitution("u", "sqrt(x)"))
@@ -3650,6 +3651,11 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyIdentity("factorial(n+1)", "(n+1)*factorial(n)"))
         calc.perform_rule(rules.FullSimplify())
 
+        goal03 = file.add_goal("(INT x:[0,1]. (1-sqrt(x))^9) = 1 / 55")
+        proof = goal03.proof_by_rewrite_goal(begin=goal02)
+        calc = proof.begin
+        calc.perform_rule(rules.VarSubsOfEquation([{'var': 'n', 'expr': "9"}]))
+        calc.perform_rule(rules.OnLocation(rules.Simplify(), "1"))
         self.checkAndOutput(file)
 
     def testChapter4Practice02(self):
@@ -3662,7 +3668,7 @@ class IntegralTest(unittest.TestCase):
         calc = proof.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("Gamma"))
 
-        goal02 = file.add_goal("(INT x:[0,1]. x^m * log(x)^n) = (-1)^n * factorial(n) / (m+1)^(n+1)", conds=["m + 1 > 0", "n >= 0", "isInt(n)"])
+        goal02 = file.add_goal("(INT x:[0,1]. x^m * log(x)^n) = (-1)^n * factorial(n) / (m+1)^(n+1)", conds=["m > -1", "n > -1"])
         proof = goal02.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.SubstitutionInverse("u", "exp(-u)"))
@@ -3699,7 +3705,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.DefiniteIntegralIdentity(), "0.1"))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation("B(a+1,b+2) = (INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1))"), "1"))
-        calc.perform_rule(rules.ApplyIdentity("B(a + 1,b + 2)","Gamma(a+1) * Gamma(b+2)/Gamma(a+b+3)"))
+        calc.perform_rule(rules.ApplyIdentity("B(a + 1,b + 2)", "Gamma(a+1) * Gamma(b+2)/Gamma(a+b+3)"))
         calc.perform_rule(rules.ApplyIdentity("Gamma(a+1)", "factorial(a)"))
         calc.perform_rule(rules.ApplyIdentity("Gamma(b+2)", "factorial(b+1)"))
         calc.perform_rule(rules.ApplyIdentity("Gamma(a+b+3)", "factorial(a+b+2)"))

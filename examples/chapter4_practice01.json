@@ -50,12 +50,8 @@
         {
             "conds": [
                 {
-                    "cond": "n != -1",
-                    "latex_cond": "n \\neq -1"
-                },
-                {
-                    "cond": "n != -2",
-                    "latex_cond": "n \\neq -2"
+                    "cond": "n > -1",
+                    "latex_cond": "n > -1"
                 }
             ],
             "finished": true,
@@ -220,6 +216,57 @@
                 "goal": "(INT x:[0,1]. (1 - sqrt(x)) ^ n) = 2 / ((n + 1) * (n + 2))",
                 "latex_goal": "\\int_{0}^{1} (1 - \\sqrt{x}) ^ {n} \\,dx = \\frac{2}{(n + 1) (n + 2)}",
                 "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "finished": true,
+            "goal": "(INT x:[0,1]. (1 - sqrt(x)) ^ 9) = 1/55",
+            "latex_goal": "\\int_{0}^{1} (1 - \\sqrt{x}) ^ {9} \\,dx = \\frac{1}{55}",
+            "proof": {
+                "finished": true,
+                "goal": "(INT x:[0,1]. (1 - sqrt(x)) ^ 9) = 1/55",
+                "latex_goal": "\\int_{0}^{1} (1 - \\sqrt{x}) ^ {9} \\,dx = \\frac{1}{55}",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "n > -1",
+                            "latex_cond": "n > -1"
+                        }
+                    ],
+                    "latex_start": "\\int_{0}^{1} (1 - \\sqrt{x}) ^ {n} \\,dx = \\frac{2}{(n + 1) (n + 2)}",
+                    "start": "(INT x:[0,1]. (1 - sqrt(x)) ^ n) = 2 / ((n + 1) * (n + 2))",
+                    "steps": [
+                        {
+                            "latex_res": "\\int_{0}^{1} (1 - \\sqrt{x}) ^ {9} \\,dx = \\frac{2}{(9 + 1)\\cdot (9 + 2)}",
+                            "res": "(INT x:[0,1]. (1 - sqrt(x)) ^ 9) = 2 / ((9 + 1) * (9 + 2))",
+                            "rule": {
+                                "latex_str": "substitute \\(n\\) for \\(9\\) in equation",
+                                "name": "VarSubsOfEquation",
+                                "str": "substitute n for 9 in equation",
+                                "subst": [
+                                    {
+                                        "expr": "9",
+                                        "var": "n"
+                                    }
+                                ]
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "\\int_{0}^{1} (1 - \\sqrt{x}) ^ {9} \\,dx = \\frac{1}{55}",
+                            "res": "(INT x:[0,1]. (1 - sqrt(x)) ^ 9) = 1/55",
+                            "rule": {
+                                "loc": "1",
+                                "name": "FullSimplify",
+                                "str": "full simplify at 1"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
             },
             "type": "Goal"
         }

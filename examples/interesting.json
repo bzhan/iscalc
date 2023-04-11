@@ -20,12 +20,41 @@
                 },
                 {
                     "type": "header",
+                    "name": "1.6 Singularities",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0, 1]. 1 / (a * x + b * (1 - x)) ^ 2) = 1 / (a * b)",
+                            "conds": [
+                                "a>0",
+                                "b>0",
+                                "a>b"
+                            ],
+                            "path": "Chapter3Practice09"
+                        }
+                    ]
+                },
+                {
+                    "type": "header",
                     "name": "1.7 Dalzell’s Integral",
                     "level": 2,
                     "content": [
                         {
                             "type": "problem",
                             "expr": "(INT x:[0,1]. (x^4*(1-x)^4)/(1+x^2)) = 22/7 - pi",
+                            "path": "chapter1section7"
+                        }
+                    ]
+                },
+                {
+                    "type": "header",
+                    "name": "1.10 Challenge Problems",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0,pi/3]. 1/cos(x))=log(2+sqrt(3))",
                             "path": "chapter1section7"
                         }
                     ]
@@ -676,8 +705,7 @@
                             "type": "problem",
                             "expr": "(INT x:[0,1]. (1-sqrt(x))^n) = 2 / ((n+1)*(n+2))",
                             "conds": [
-                                "n!=-1",
-                                "n!=-2"
+                                "n>-1"
                             ],
                             "path": "chapter4_practice01"
                         },
@@ -685,7 +713,9 @@
                             "type": "problem",
                             "expr": "(INT x:[0,1].x^m * log(x)^n) = (-1)^n * factorial(n) / (m+1)^(n+1)",
                             "conds": [
-                                "m + 1 > 0"
+                                "m > -1",
+                                "n >= 0",
+                                "isInt(n)"
                             ],
                             "path": "chapter4_practice02"
                         },

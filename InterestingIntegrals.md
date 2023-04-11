@@ -2,7 +2,7 @@
 
 This is a list of numbered integrals (and other formulas) appearing in the textbook *Inside Interesting Integrals*.
 
-## Chapter 1: Introduction (2/9)
+## Chapter 1: Introduction (3/9)
 
 
 | Section |    Type    |                                     Expression                                     |                                            Status                                            |
@@ -15,7 +15,7 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 | 1.10 C1 |  Integral  |                        $\int_0^8 \frac{1}{x-2}dx = \ln{3}$                        |                      [Cauchy principle value](#Cauchy_Principle_Value)                      |
 | 1.10 C1 |  Integral  |            $\int_0^3 \frac{1}{(x - 1) ^ {2 / 3}}dx = 3(1 + 2 ^ {1/3})$            |                      [Cauchy principle value](#Cauchy_Principle_Value)                      |
 | 1.10 C2 | Inequality |                  $\int_1^\infty \frac{1}{\sqrt{x^3 - 1}} dx < 4$                  |                          Unsupported:[inequalities](#inequalities)                          |
-| 1.10 C5 |  Integral  |           $\int_0^\frac\pi3 \frac1{\cos \theta}d\theta = \ln(2+\sqrt3)$           |                         [Undetermined ranges](#Undetermined_Ranges)                         |
+| 1.10 C5 |  Integral  |           $\int_0^\frac\pi3 \frac1{\cos \theta}d\theta = \ln(2+\sqrt3)$           |                                             Done                                             |
 
 ## Chapter 2: 'Easy' Integrals
 
@@ -45,17 +45,17 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 ### 2.3 Two Old New Tricks, Plus a New One (6/9)
 
 
-|   Type   |                                                                                           Expression                                                                                           |                  Status                  |
-| :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------: |
-| Integral | $\int_0^\infty \frac{1}{\prod_{k=1}^n (x^2 + a_k^2)}dx = \frac{\pi}{2}\sum_{k=1}^n \frac{c_k}{a_k}$ <br> for $c_k = \frac{1}{\prod_{j=1, j\neq k}^n(a_j^2-a_k^2)}$, $a_i\neq a_j$ if $j\neq i$ | [Complex conditions](#Complex_Conditions) |
-| Integral |                                                     $\int_0^\infty \frac{1}{x^4 + 2x^2\cosh{(2\alpha)}+1}dx = \frac{\pi}{4\cosh{\alpha}}$                                                     |                   Done                   |
-| Integral |                            $\int_0^\infty \frac{1}{x^4 + 2x^2\cos{(2\alpha)}+1}dx = \frac{\pi}{4\left\vert\cos{\alpha}\right\vert}$ <br> for $\cos{\alpha} \neq 0$                            |                   Done                   |
-| Integral |                                                $\int_0^\infty \frac{1}{x^4+1}dx = \int_0^\infty \frac{x^2}{x^4 + 1}dx = \frac{\pi \sqrt{2}}{4}$                                                |                   Done                   |
-| Integral |                                                                    $\int_0^\infty \frac1{x^4+x^2+1}dx = \frac\pi{2\sqrt3}$                                                                    |                   Done                   |
-| Integral |                                                                         $\int_0^\infty \frac1{x^4-x^2+1}dx=\frac\pi2$                                                                         |                   Done                   |
-| Integral |                                                                         $\int_0^\infty \frac1{x^4+2x^2+1}dx=\frac\pi4$                                                                         |                   Done                   |
-| Integral |                          $\int_0^\pi \frac{\cos{(nx)}-\cos{(n\alpha)}}{\cos{x}-\cos{\alpha}}dx = \pi\frac{\sin{(n\alpha)}}{\sin{\alpha}}$ <br> for $n \in \mathbb{N}$                          |                                          |
-| Integral |                                              $\int_0^\infty x^{2n}e^{-x^2}dx = \frac{(2n)!}{4^n n!}(\frac12)\sqrt\pi$ <br> for $n \in \mathbb{N}$                                              |                                          |
+|   Type   |                                                                                           Expression                                                                                           |                         Status                         |
+| :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------: |
+| Integral | $\int_0^\infty \frac{1}{\prod_{k=1}^n (x^2 + a_k^2)}dx = \frac{\pi}{2}\sum_{k=1}^n \frac{c_k}{a_k}$ <br> for $c_k = \frac{1}{\prod_{j=1, j\neq k}^n(a_j^2-a_k^2)}$, $a_i\neq a_j$ if $j\neq i$ |        [Complex conditions](#Complex_Conditions)        |
+| Integral |                                                     $\int_0^\infty \frac{1}{x^4 + 2x^2\cosh{(2\alpha)}+1}dx = \frac{\pi}{4\cosh{\alpha}}$                                                     |                          Done                          |
+| Integral |                            $\int_0^\infty \frac{1}{x^4 + 2x^2\cos{(2\alpha)}+1}dx = \frac{\pi}{4\left\vert\cos{\alpha}\right\vert}$ <br> for $\cos{\alpha} \neq 0$                            |                          Done                          |
+| Integral |                                                $\int_0^\infty \frac{1}{x^4+1}dx = \int_0^\infty \frac{x^2}{x^4 + 1}dx = \frac{\pi \sqrt{2}}{4}$                                                |                          Done                          |
+| Integral |                                                                    $\int_0^\infty \frac1{x^4+x^2+1}dx = \frac\pi{2\sqrt3}$                                                                    |                          Done                          |
+| Integral |                                                                         $\int_0^\infty \frac1{x^4-x^2+1}dx=\frac\pi2$                                                                         |                          Done                          |
+| Integral |                                                                         $\int_0^\infty \frac1{x^4+2x^2+1}dx=\frac\pi4$                                                                         |                          Done                          |
+| Integral |                          $\int_0^\pi \frac{\cos{(nx)}-\cos{(n\alpha)}}{\cos{x}-\cos{\alpha}}dx = \pi\frac{\sin{(n\alpha)}}{\sin{\alpha}}$ <br> for $n \in \mathbb{N}$                          | Unsupported:[difference equation](#Difference_Equation) |
+| Integral |                                              $\int_0^\infty x^{2n}e^{-x^2}dx = \frac{(2n)!}{4^n n!}(\frac12)\sqrt\pi$ <br> for $n \in \mathbb{N}$                                              |                                                        |
 
 ### 2.4 Another Old Trick: Euler’s Log-Sine Integral (5/6)
 

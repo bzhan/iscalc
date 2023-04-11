@@ -70,6 +70,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.IndefiniteIntegralIdentity())
         calc.perform_rule(rules.ReplaceSubstitution())
+        calc.perform_rule(rules.FullSimplify())
 
         goal6 = file.add_goal(
             "(INT x. x ^ k * log(x)) = x ^ (k + 1) * log(x) / (k + 1) - x ^ (k + 1) / (k + 1) ^ 2 + SKOLEM_CONST(C)", conds=["x > 0", "k != -1"])
@@ -3216,7 +3217,7 @@ class IntegralTest(unittest.TestCase):
         # Inside interesting integrals, Section 3.10, C3.10
         file = compstate.CompFile("interesting", "Chapter3Practice09")
 
-        goal01 = file.add_goal("(INT x:[0, 1]. 1 / (a * x + b * (1 - x)) ^ 2) = 1 / (a * b)", conds=["a > 0", "b > 0", "a - b > 0"])
+        goal01 = file.add_goal("(INT x:[0, 1]. 1 / (a * x + b * (1 - x)) ^ 2) = 1 / (a * b)", conds=["a > 0", "b > 0", "a > b"])
         proof_of_goal01 = goal01.proof_by_calculation()
         calc = proof_of_goal01.lhs_calc
         calc.perform_rule(rules.Substitution(var_name="u", var_subst="(a - b) * x + b"))
@@ -3497,7 +3498,6 @@ class IntegralTest(unittest.TestCase):
     #     calc.perform_rule(rules.ExpandPolynomial())
     #     self.checkAndOutput(file)
 
-    # TODO: Solve (INT u:[0,sqrt(3) / 2]. 1 / (-u + 1))
     def testChapter1Practice0104(self):
         # Reference:
         # Inside interesting integrals, C1.5
@@ -3513,7 +3513,17 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.OnLocation(rules.DefiniteIntegralIdentity(), "0.1"))
+        calc.perform_rule(rules.OnLocation(rules.Substitution(var_name="t", var_subst="-u+1"), "0.1"))
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("-(1/2 * log(-(sqrt(3) / 2) + 1)) + 1/2 * log(sqrt(3) / 2 + 1)",
+                                         "1/2 * (log(sqrt(3) / 2 + 1) - log(-(sqrt(3) / 2) + 1))"))
+        calc.perform_rule(rules.ApplyIdentity("log(sqrt(3) / 2 + 1) - log(-(sqrt(3) / 2) + 1)",
+                                              "log((sqrt(3) / 2 + 1)/(-(sqrt(3) / 2) + 1))"))
+        calc.perform_rule(rules.Equation("(sqrt(3) / 2 + 1)/(-(sqrt(3) / 2) + 1)", "(2+sqrt(3))^2"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("sqrt(3)+2", "2+sqrt(3)"))
+
         self.checkAndOutput(file)
 
     def testChapter2Practice01(self):
@@ -3655,9 +3665,10 @@ class IntegralTest(unittest.TestCase):
         proof = goal03.proof_by_rewrite_goal(begin=goal02)
         calc = proof.begin
         calc.perform_rule(rules.VarSubsOfEquation([{'var': 'n', 'expr': "9"}]))
-        calc.perform_rule(rules.OnLocation(rules.Simplify(), "1"))
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "1"))
         self.checkAndOutput(file)
 
+    # The condition of goal02 can not be weakened until complex integration is supported.
     def testChapter4Practice02(self):
         # Reference:
         # Inside interesting integrals, C4.2
@@ -3668,7 +3679,7 @@ class IntegralTest(unittest.TestCase):
         calc = proof.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("Gamma"))
 
-        goal02 = file.add_goal("(INT x:[0,1]. x^m * log(x)^n) = (-1)^n * factorial(n) / (m+1)^(n+1)", conds=["m > -1", "n > -1"])
+        goal02 = file.add_goal("(INT x:[0,1]. x^m * log(x)^n) = (-1)^n * factorial(n) / (m+1)^(n+1)", conds=["m > -1", "n >= 0", "isInt(n)"])
         proof = goal02.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.SubstitutionInverse("u", "exp(-u)"))

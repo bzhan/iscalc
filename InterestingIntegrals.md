@@ -141,7 +141,7 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 | Definition |                                     $I_n(y) = \int_0^y \frac 1 {(x^2+a^2)^n}dx$ for $a > 0, y \geq 0, n\in \mathbb{N}_+$                                     |  Done  |
 |  Integral  |                         $I_{n+1}(y) = \frac y {2na^2(y^2+a^2)^n} + \frac{2n-1}{2na^2}I_n(y)$ for $a > 0, y \geq 0, n\in \mathbb{N}_+$                         |  Done  |
 
-### 3.6 Uhler’s Integral and Symbolic Integration (0/1)
+### 3.6 Uhler’s Integral and Symbolic Integration (1/1)
 
 
 |   Type   |                     Expression                     |               Status               |

@@ -2237,9 +2237,9 @@ class IntegralTest(unittest.TestCase):
         # Inside interesting integrals, Section 3.4, example #7 and #8
         file = compstate.CompFile("interesting", "flipside08")
 
-        file.add_definition("I(a, b) = (INT x:[0,pi]. log(a+b*cos(x)))", conds=["a>b", "b>=0"])
+        file.add_definition("I(a, b) = (INT x:[0,pi]. log(a+b*cos(x)))", conds=["a>0", "b>=0", "a>b"])
 
-        goal01 = file.add_goal("(D a. I(a, b)) = (INT x:[0,pi]. 1/(a+b*cos(x)))", conds=["a>b", "b>=0"])
+        goal01 = file.add_goal("(D a. I(a, b)) = (INT x:[0,pi]. 1/(a+b*cos(x)))", conds=["a>0", "b>=0", "a>b"])
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))

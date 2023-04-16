@@ -75,16 +75,31 @@ class GruntzTest(unittest.TestCase):
         ctx.load_book('base')
         ctx.add_condition(Op('>', Var('x'), Const(0)))
         test_data = [
-            ('exp(x)', 'oo'),
-            ('(3^(1/x) - 2^(1/x))/((1/x)^2-(1/x))', 'log(2) - log(3)'),
-            ('(x^2-x) / (x^2+3*x -4)', '1'),
-            ('(exp(1/x - exp(-x)) - exp(1/x)) / exp(-x)', '-1'),
-            ('(log(log(x) + log(log(x))) - log(log(x))) / log(log(x) + log(log(log(x)))) * log(x)', '1'),
-            # ("exp(exp(-x/(1+exp(-x)))) * exp(-x / (1+exp(-x/(1+exp(-x))))) * \
+            # ('exp(x)', 'oo'),
+            # ('(3^(1/x) - 2^(1/x))/((1/x)^2-(1/x))', 'log(2) - log(3)'),
+            # ('(x^2-x) / (x^2+3*x -4)', '1'),
+            # ('(exp(1/x - exp(-x)) - exp(1/x)) / exp(-x)', '-1'), # 8.1
+            # ('(log(log(x) + log(log(x))) - log(log(x))) / log(log(x) + log(log(log(x)))) * log(x)', '1'), #8.19
+            # ('exp(x)*(exp(1/x-exp(-x))-exp(1/x))', '-1'), # 8.1
+            # ('exp(x) * (exp(1/x + exp(-x)+exp(-x^2))-exp(1/x-exp(-exp(x))))', '1') # 8.2
+            # ("exp(exp(-x/(1+exp(-x)))) * exp(-x / (1+exp(-x/(1+exp(-x))))) * \ #issue
             # exp(exp(-x+exp(-x/(1+exp(-x))))) / (exp(-x/(1+exp(-x))))^2 - exp(x)+x", '2')
             ]
         for e, res in test_data:
             r = limit_inf(parse_expr(e), 'x', ctx)
             print(r)
+
+    def test_limit_inf2(self):
+        ctx = Context()
+        ctx.load_book('base')
+        test_data = [
+            ("(exp(1/x - exp(-x)) - exp(1/x)) / exp(-x)", "-1"),
+            ('(log(log(x) + log(log(x))) - log(log(x))) / log(log(x) + log(log(log(x)))) * log(x)', '1')
+        ]
+        from integral import limits
+        for a, b in test_data:
+            res = limits.limit_of_expr(parse_expr(a), 'x', ctx)
+            print(res)
+
 
 

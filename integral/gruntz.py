@@ -2,7 +2,7 @@ from random import random
 from typing import Set, Dict, Tuple
 
 from integral.context import Context
-from integral.expr import Op, Fun, Expr, Var, POS_INF, NEG_INF, Const, DUMMY
+from integral.expr import Op, Fun, Expr, Var, POS_INF, NEG_INF, Const
 from integral.poly import normalize
 from integral.series import expand_series
 

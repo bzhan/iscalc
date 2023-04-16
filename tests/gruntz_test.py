@@ -1,4 +1,6 @@
 import unittest
+
+import integral.gruntz
 from integral import series, parser
 from integral.context import Context
 from integral.expr import Op, Var, Const
@@ -36,26 +38,27 @@ class GruntzTest(unittest.TestCase):
         ctx.load_book('base')
         ctx.add_condition(Op('>', Var('x'), Const(1000000000000000)))
         test_data = [
-            # ("x", "_d1"),
-            # ('exp(x)', "_d3"),
-            # ('log(x)', "log(_d1)"),
-            # ('exp(x+exp(x^2))', "_d13"),
-            # ("(exp(x ^ 2) + x) / x ^ 2", "(_d3 + x) / x ^ 2"),
-            # ("exp(x^2)+x", "_d3 + x"),
-            # ("exp(x) + exp(-x) + exp(2*x)", "_d3 + _d10 + _d17"),
-            # ("exp(-x+exp(-x))", "_d15"),
-            # ("1/exp(-x+exp(-x))","1 / _d15"),
-            # ("1/exp(-x+exp(-x)) - exp(x)", "1 / _d15 - _d45"),
-            # ("exp(exp(-x/(1+exp(-x)))) * exp(-x / (1+exp(-x/(1+exp(-x))))) * exp(exp(-x+exp(-x/(1+exp(-x))))) / (exp(-x/(1+exp(-x))))^2 - exp(x)+x",\
-            #  "exp(_d58) * _d143 * exp(_d599) / _d58 ^ 2 - _d764 + x"),
-            # ('(3^x - 2^x)/(x^2-x)', '(_d3 - _d10) / (x ^ 2 - x)'),
+            ("x", "_d1"),
+            ('exp(x)', "_d3"),
+            ('log(x)', "log(_d1)"),
+            ('exp(x+exp(x^2))', "_d13"),
+            ("(exp(x ^ 2) + x) / x ^ 2", "(_d3 + x) / x ^ 2"),
+            ("exp(x^2)+x", "_d3 + x"),
+            ("exp(x) + exp(-x) + exp(2*x)", "_d3 + _d10 + _d17"),
+            ("exp(-x+exp(-x))", "_d15"),
+            ("1/exp(-x+exp(-x))","1 / _d15"),
+            ("1/exp(-x+exp(-x)) - exp(x)", "1 / _d15 - _d45"),
+            ("exp(exp(-x/(1+exp(-x)))) * exp(-x / (1+exp(-x/(1+exp(-x))))) * exp(exp(-x+exp(-x/(1+exp(-x))))) / (exp(-x/(1+exp(-x))))^2 - exp(x)+x",\
+             "exp(_d58) * _d143 * exp(_d599) / _d58 ^ 2 - _d764 + x"),
+            ('(3^x - 2^x)/(x^2-x)', '(_d3 - _d10) / (x ^ 2 - x)'),
         ]
         for e, res in test_data:
+            integral.gruntz.count = 0
             e = parse_expr(e)
             f, exps = mrv(e, x, ctx)
-            print(f)
-            print("--------------")
-            print(exps)
+            # print(f)
+            # print("--------------")
+            # print(exps)
             self.assertEqual(str(exps), res)
 
     def testMrvLeadTerm(self):

@@ -9,7 +9,7 @@ from typing import Dict, List, Optional, Set, TypeGuard, Tuple, Union, Callable
 
 
 VAR, CONST, OP, FUN, DERIV, INTEGRAL, EVAL_AT, SYMBOL, LIMIT, INF, INDEFINITEINTEGRAL, \
-SKOLEMFUNC, SUMMATION, LAZYSERIES = range(15)
+SKOLEMFUNC, SUMMATION, LAZYSERIES = range(14)
 
 op_priority = {
     "+": 65, "-": 65, "*": 70, "/": 70, "^": 75, "=": 50, "<": 50, ">": 50, "<=": 50, ">=": 50, "!=": 50

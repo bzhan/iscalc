@@ -3714,7 +3714,7 @@ class IntegralTest(unittest.TestCase):
         # Inside interesting integrals, C2.3
         file = compstate.CompFile("interesting", "chapter2_practice03")
 
-        goal = file.add_goal("(INT x:[0, oo]. 1/(x^4+1)^m) = 4*m*(INT x:[0,oo]. x^4/(x^4+1)^(m+1))", conds=["m>0", "isInt(m)"])
+        goal = file.add_goal("(INT x:[0, oo]. 1/(x^4+1)^m) = 4*m*(INT x:[0,oo]. x^4/(x^4+1)^(m+1))", conds=["m>=1", "isInt(m)"])
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.IntegrationByParts(u="1/(x^4+1)^m", v="x"))

@@ -195,6 +195,15 @@
                             "type": "problem",
                             "expr": "(INT x:[0,oo]. 1/(x^4+2*x^2+1))=pi/4",
                             "path": "partialFraction03"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0, oo]. x^(2*n) * exp(-x^2))=factorial(2*n)/(4^n*factorial(n))*(1/2)*sqrt(pi)",
+                            "conds": [
+                                "n>=0",
+                                "isInt(n)"
+                            ],
+                            "path": "gaussianPowerExp"
                         }
                     ]
                 },
@@ -256,6 +265,15 @@
                             "type": "problem",
                             "expr": "(INT x:[0,1]. 1/(x^3+1)) = 1/3 *log(2) + pi / (3*sqrt(3))",
                             "path": "chapter2_practice02"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0, oo]. 1/(x^4+1)^(m+1)) = (4*m-1)/(4*m) * (INT x:[0, oo]. 1/(x^4+1)^m)",
+                            "conds": [
+                                "m>=1",
+                                "isInt(m)"
+                            ],
+                            "path": "chapter2_practice03"
                         },
                         {
                             "type": "problem",

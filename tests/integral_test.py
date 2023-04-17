@@ -2311,6 +2311,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.Equation("(a+b)/(a-b)+z^2", "z^2+(a+b)/(a-b)"))
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
+
         self.checkAndOutput(file)
 
     def testFrullaniIntegral01(self):
@@ -3706,17 +3707,28 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
 
-    # TODO: Solve LIM {x -> oo}. x * (x ^ 4 + 1) ^ -m
+
     def testChapter2Practice03(self):
         # Reference:
         # Inside interesting integrals, C2.3
         file = compstate.CompFile("interesting", "chapter2_practice03")
 
-        goal = file.add_goal("(INT x:[0, oo]. 1/(x^4+1)^m) = 4*m*(INT x:[0,oo]. x^4/(x^4+1)^(m+1))", conds=["m>=1", "isInt(m)"])
-        proof = goal.proof_by_calculation()
+        goal01 = file.add_goal("(INT x:[0, oo]. 1/(x^4+1)^m) = 4*m*((INT x:[0, oo]. 1 / (x^4+1)^m)-(INT x:[0, oo]. 1 / (x^4+1)^(m+1)))", conds=["m>=1", "isInt(m)"])
+        proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.IntegrationByParts(u="1/(x^4+1)^m", v="x"))
         calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("x ^ 4 * (x ^ 4 + 1) ^ (-m - 1)", "(x^4+1)/(x^4+1)^(m+1)-1/(x^4+1)^(m+1)"))
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "1"))
+        calc.perform_rule(rules.Equation("-(INT x:[0,oo]. (x ^ 4 + 1) ^ (-m - 1)) + (INT x:[0,oo]. (x ^ 4 + 1) ^ -m)",
+                                         "(INT x:[0, oo]. 1 / (x^4+1)^m)-(INT x:[0, oo]. 1 / (x^4+1)^(m+1))"))
+
+        goal02 = file.add_goal("(INT x:[0, oo]. 1/(x^4+1)^(m+1)) = (4*m-1)/(4*m) * (INT x:[0, oo]. 1/(x^4+1)^m)", conds=["m>=1", "isInt(m)"])
+        proof = goal02.proof_by_rewrite_goal(begin=goal01)
+        calc = proof.begin
+        calc.perform_rule(rules.SolveEquation("(INT x:[0, oo]. 1/(x^4+1)^(m+1))"))
+        calc.perform_rule(rules.Equation("-(1 / (4 * m) * (INT x:[0,oo]. (x ^ 4 + 1) ^ -m)) + (INT x:[0,oo]. (x ^ 4 + 1) ^ -m)",
+                                         "(4*m-1)/(4*m) * (INT x:[0, oo]. 1/(x^4+1)^m)"))
 
         self.checkAndOutput(file)
 

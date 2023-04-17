@@ -1871,7 +1871,7 @@ class IntegralTest(unittest.TestCase):
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.FullSimplify())
-
+        self.assertTrue(goal01.is_finished())
         goal02 = file.add_goal("(INT x:[0, oo]. (D x. x^(2*n-1)*exp(-x^2))) = (2*n-1)*I(n-1) - 2 * I(n)", conds=["n>=1", "isInt(n)"])
         proof = goal02.proof_by_calculation()
         calc = proof.lhs_calc
@@ -1880,19 +1880,18 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.Equation("2*n-2", "2*(n-1)"))
         calc.perform_rule(rules.OnSubterm(rules.FoldDefinition("I")))
-
+        self.assertTrue(goal02.is_finished())
         goal03 = file.add_goal("I(n) = (2 * n - 1) / 2 * I(n - 1)", conds=["n>=1", "isInt(n)"])
         proof = goal03.proof_by_rewrite_goal(begin=goal01)
         calc = proof.begin
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal02.goal), "0"))
         calc.perform_rule(rules.SolveEquation("I(n)"))
         calc.perform_rule(rules.Equation("I(n - 1) * (2 * n - 1) / 2", "(2 * n - 1) / 2 * I(n - 1)"))
-
+        self.assertTrue(goal03.is_finished())
         goal04 = file.add_goal("I(n) = factorial(2*n)/(4^n*factorial(n))*(1/2)*sqrt(pi)", conds=["n>=0", "isInt(n)"])
         proof = goal04.proof_by_induction("n", 0)
         proof_base = proof.base_case.proof_by_calculation()
         proof_induct = proof.induct_case.proof_by_calculation()
-
         calc = proof_base.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("I"))
         calc.perform_rule(rules.Substitution(var_name="x", var_subst="sqrt(2)*x"))
@@ -1911,7 +1910,8 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyIdentity("(n+1)*factorial(n)", "factorial(n+1)"))
         calc.perform_rule(rules.Equation("4 ^ -n * sqrt(pi) * (factorial(2 * n + 2) / (8 * factorial(n + 1)))",
                                          "4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))"))
-
+        print(goal04)
+        self.assertTrue(goal04.is_finished())
         self.checkAndOutput(file)
 
     def testEulerLogSineIntegral(self):

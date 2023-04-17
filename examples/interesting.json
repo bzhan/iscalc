@@ -195,15 +195,6 @@
                             "type": "problem",
                             "expr": "(INT x:[0,oo]. 1/(x^4+2*x^2+1))=pi/4",
                             "path": "partialFraction03"
-                        },
-                        {
-                            "type": "problem",
-                            "expr": "(INT x:[0, oo]. x^(2*n) * exp(-x^2))=factorial(2*n)/(4^n*factorial(n))*(1/2)*sqrt(pi)",
-                            "conds": [
-                                "n>=0",
-                                "isInt(n)"
-                            ],
-                            "path": "gaussianPowerExp"
                         }
                     ]
                 },
@@ -341,6 +332,15 @@
                             "type": "problem",
                             "expr": "(INT x:[0,1]. 1/sqrt(-log(x))) = sqrt(pi)",
                             "path": "leibniz02"
+                        },
+                        {
+                            "type": "problem",
+                            "expr": "(INT x:[0, oo]. x^(2*n) * exp(-x^2)) = factorial(2*n)/(4^n*factorial(n))*(1/2)*sqrt(pi)",
+                            "conds": [
+                                "n>=0",
+                                "isInt(n)"
+                            ],
+                            "path": "gaussianPowerExp"
                         },
                         {
                             "type": "problem",

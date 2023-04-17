@@ -42,7 +42,7 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 | Integral |                  $\int_0^1 \frac{\ln{(x + 1)}}{x ^ 2 + 1}dx = \frac{\pi}{8}\ln{2}$                  |  Done  |
 | Integral |          $\int_0^a \frac{\ln{(x+a)}}{x^2 + a^2}dx = \frac{\pi}{8a}\ln{(2a^2)}$ for $a > 0$          |  Done  |
 
-### 2.3 Two Old New Tricks, Plus a New One (6/9)
+### 2.3 Two Old Tricks, Plus a New One (7/9)
 
 
 |   Type   |                                                                                           Expression                                                                                           |                         Status                         |
@@ -55,7 +55,7 @@ This is a list of numbered integrals (and other formulas) appearing in the textb
 | Integral |                                                                         $\int_0^\infty \frac1{x^4-x^2+1}dx=\frac\pi2$                                                                         |                          Done                          |
 | Integral |                                                                         $\int_0^\infty \frac1{x^4+2x^2+1}dx=\frac\pi4$                                                                         |                          Done                          |
 | Integral |                          $\int_0^\pi \frac{\cos{(nx)}-\cos{(n\alpha)}}{\cos{x}-\cos{\alpha}}dx = \pi\frac{\sin{(n\alpha)}}{\sin{\alpha}}$ <br> for $n \in \mathbb{N}$                          | Unsupported:[difference equation](#Difference_Equation) |
-| Integral |                                              $\int_0^\infty x^{2n}e^{-x^2}dx = \frac{(2n)!}{4^n n!}(\frac12)\sqrt\pi$ <br> for $n \in \mathbb{N}$                                              |                                                        |
+| Integral |                                              $\int_0^\infty x^{2n}e^{-x^2}dx = \frac{(2n)!}{4^n n!}(\frac12)\sqrt\pi$ <br> for $n \in \mathbb{N}$                                              |                          Done                          |
 
 ### 2.4 Another Old Trick: Euler’s Log-Sine Integral (5/6)
 

@@ -1680,6 +1680,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnSubterm(rules.ApplyEquation(Eq6.goal)))
         calc.perform_rule(rules.Equation("2 * cos(s) * (sqrt(pi / 2) * exp(-(t ^ 2) / 2))",
                                          "sqrt(2*pi)*exp(-t^2/2)*cos(s)"))
+
         self.checkAndOutput(file)
 
     def testLeibniz03New(self):
@@ -1857,6 +1858,60 @@ class IntegralTest(unittest.TestCase):
         calc = proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
         self.assertTrue(goal.is_finished())
+        self.checkAndOutput(file)
+
+    def testGaussianPowerExp(self):
+        # Reference:
+        # Inside interesting integrals, Section 2.3
+        file = compstate.CompFile("interesting", 'gaussianPowerExp')
+
+        file.add_definition("I(n) = (INT x:[0, oo]. x^(2*n) * exp(-x^2))", conds=["n>=0", "isInt(n)"])
+
+        goal01 = file.add_goal("(INT x:[0, oo]. (D x. x^(2*n-1)*exp(-x^2))) = 0", conds=["n>=1", "isInt(n)"])
+        proof = goal01.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.FullSimplify())
+
+        goal02 = file.add_goal("(INT x:[0, oo]. (D x. x^(2*n-1)*exp(-x^2))) = (2*n-1)*I(n-1) - 2 * I(n)", conds=["n>=1", "isInt(n)"])
+        proof = goal02.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("2*n-2", "2*(n-1)"))
+        calc.perform_rule(rules.OnSubterm(rules.FoldDefinition("I")))
+
+        goal03 = file.add_goal("I(n) = (2 * n - 1) / 2 * I(n - 1)", conds=["n>=1", "isInt(n)"])
+        proof = goal03.proof_by_rewrite_goal(begin=goal01)
+        calc = proof.begin
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal02.goal), "0"))
+        calc.perform_rule(rules.SolveEquation("I(n)"))
+        calc.perform_rule(rules.Equation("I(n - 1) * (2 * n - 1) / 2", "(2 * n - 1) / 2 * I(n - 1)"))
+
+        goal04 = file.add_goal("I(n) = factorial(2*n)/(4^n*factorial(n))*(1/2)*sqrt(pi)", conds=["n>=0", "isInt(n)"])
+        proof = goal04.proof_by_induction("n", 0)
+        proof_base = proof.base_case.proof_by_calculation()
+        proof_induct = proof.induct_case.proof_by_calculation()
+
+        calc = proof_base.lhs_calc
+        calc.perform_rule(rules.ExpandDefinition("I"))
+        calc.perform_rule(rules.Substitution(var_name="x", var_subst="sqrt(2)*x"))
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+
+        calc = proof_induct.lhs_calc
+        calc.perform_rule(rules.ApplyEquation(goal03.goal))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.OnSubterm(rules.ApplyInductHyp()))
+        calc.perform_rule(rules.Equation("factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi) * (2 * n + 1) / 2",
+                                         "4 ^ -n * sqrt(pi) * (((2*n+1)*factorial(2*n))/(4 * factorial(n)))"))
+        calc.perform_rule(rules.ApplyIdentity("(2*n+1)*factorial(2*n)", "factorial(2*n+1)"))
+        calc.perform_rule(rules.Equation("factorial(2 * n + 1) / (4 * factorial(n))", "((2*n+1 + 1)*factorial(2 * n + 1)) / (8 * ((n+1)*factorial(n)))"))
+        calc.perform_rule(rules.ApplyIdentity("(2*n+1 + 1)*factorial(2*n+1)", "factorial(2*n+2)"))
+        calc.perform_rule(rules.ApplyIdentity("(n+1)*factorial(n)", "factorial(n+1)"))
+        calc.perform_rule(rules.Equation("4 ^ -n * sqrt(pi) * (factorial(2 * n + 2) / (8 * factorial(n + 1)))",
+                                         "4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))"))
+
         self.checkAndOutput(file)
 
     def testEulerLogSineIntegral(self):
@@ -2232,7 +2287,7 @@ class IntegralTest(unittest.TestCase):
         self.checkAndOutput(file)
 
     # TODO: Solve LIM {z -> oo}. atan(z * sqrt(a - b) / sqrt(a + b))
-    def testFilpSide08(self):
+    def testFlipSide08(self):
         # Reference:
         # Inside interesting integrals, Section 3.4, example #7 and #8
         file = compstate.CompFile("interesting", "flipside08")
@@ -2858,7 +2913,7 @@ class IntegralTest(unittest.TestCase):
     def testDini(self):
         # Reference:
         # Inside interesting integrals, Section 3.8
-        file = compstate.CompFile("interesting", "Dini")
+        file = compstate.CompFile("interesting", "dini")
 
         file.add_definition("I(a) = (INT x:[0,pi]. log(1-2*a*cos(x)+a^2))", conds=["a>0", "a!=1"])
 

@@ -308,7 +308,7 @@
                         },
                         {
                             "type": "problem",
-                            "expr": "(INT x:[0,oo]. exp(-(x^2)/2)) = sqrt(pi/2)",
+                            "expr": "(INT x:[0,oo]. exp(-(x^2/2))) = sqrt(pi/2)",
                             "path": "leibniz02"
                         },
                         {

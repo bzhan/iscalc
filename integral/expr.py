@@ -329,6 +329,8 @@ class Expr:
             return 10
         elif self.ty == LIMIT:
             return 5
+        else:
+            raise NotImplementedError
 
     def __lt__(self, other):
         return self <= other and self != other
@@ -636,7 +638,7 @@ class Expr:
         elif self.is_limit():
             return Limit(self.var, self.lim.replace(e, repl_e), self.body.replace(e, repl_e), self.drt)
         else:
-            print(self)
+            print(self, e, repl_e)
             raise NotImplementedError
 
     def has_func(self, func_name: str) -> bool:

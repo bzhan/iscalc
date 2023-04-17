@@ -4,8 +4,7 @@ from integral import expr, poly, context, rules
 from integral.expr import Expr, Var, Const, Op, Fun, POS_INF, NEG_INF
 from integral.poly import normalize
 from integral.context import Context
-from integral.rules import deriv
-from integral.parser import parse_expr
+
 global_map = dict()
 class LazySeries(Expr):
     def __init__(self, head, f, args, var):
@@ -26,7 +25,7 @@ class LazySeries(Expr):
         tmp = self
         while tmp.head_coff == Const(0):
             tmp = tmp.tail()
-        return tmp.head
+        return tmp
 
     def __str__(self):
         ctx = Context()
@@ -140,8 +139,15 @@ def int_series(p:LazySeries, ctx:Context=None):
     if ctx == None:
         ctx = Context()
         ctx.load_book('base')
-    def integrate(a, b):
-        return [normalize(a/(b+Const(1)),ctx), normalize(b+Const(1),ctx)]
+    def integrate(a:Expr, b:Expr):
+        nonlocal p,ctx
+        if ctx.check_condition(Op('=', b, Const(-1))):
+            return [normalize(a * Fun('log', Var(p.var)),ctx), Const(0)]
+        else:
+            res = [normalize(a/(b+Const(1)),ctx), normalize(b+Const(1),ctx)]
+            return res
+        print(a,b)
+        raise  NotImplementedError
     return map_series(integrate, p)
 
 def sign(e:Expr, ctx:Context = None):
@@ -298,6 +304,8 @@ def divide_series(f:LazySeries, g:LazySeries, ctx:Context = None):
         return None
     else:
         assert f.var == g.var
+        f = f.head_term
+        g = g.head_term
         p = make_series([normalize(f.head_coff/g.head_coff, ctx), normalize(f.head_power - g.head_power,ctx)], scale_series,
                         [
                             Const(1) / g.head_coff,
@@ -311,14 +319,14 @@ def divide_series(f:LazySeries, g:LazySeries, ctx:Context = None):
                         ], f.var)
         return p
 
-def expand_series(e: Expr, x: str, ctx:Context = None):
+def expand_series(e: Expr, x: str, logx:Expr=None, ctx:Context = None):
     if ctx == None:
         ctx = Context()
         ctx.load_book('base')
     if e.is_const() or e.is_constant() or e.is_var() and e.name != x or e.is_fun() and len(e.args) == 0 or\
         not e.contains_var(x):
         return LazySeries([e, Const(0)], None, None, x)
-    elif e.is_var() and e.name == 'x':
+    elif e.is_var() and e.name == x:
         return LazySeries([Const(1), Const(1)], None, None, x)
     elif e.is_plus():
         return add_series(expand_series(e.args[0],x), expand_series(e.args[1],x))
@@ -329,7 +337,9 @@ def expand_series(e: Expr, x: str, ctx:Context = None):
     elif e.is_times():
         return mult_series(expand_series(e.args[0], x), expand_series(e.args[1], x))
     elif e.is_divides():
-        return divide_series(expand_series(e.args[0], x), expand_series(e.args[1], x))
+        a = expand_series(e.args[0], x)
+        b = expand_series(e.args[1], x)
+        return divide_series(a, b)
     elif e.is_power():
         if e.args[0].is_var() and e.args[0].name == x and not e.args[1].contains_var(x):
             return LazySeries([Const(1), e.args[1]], None, None, x)
@@ -349,4 +359,5 @@ def expand_series(e: Expr, x: str, ctx:Context = None):
             return cos_series(expand_series(e.args[0], x))
         elif e.func_name == 'tan':
             return tan_series(expand_series(e.args[0], x))
+    print(e,x,type(e))
     raise NotImplementedError

@@ -1603,7 +1603,6 @@ class IntegralTest(unittest.TestCase):
         Eq0_proof = Eq0.proof_by_calculation()
         calc = Eq0_proof.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("I"))
-        calc.perform_rule(rules.Equation("-(x ^ 2 / 2)", "-(x ^ 2) / 2"))
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc = Eq0_proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
@@ -1680,7 +1679,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnSubterm(rules.ApplyEquation(Eq6.goal)))
         calc.perform_rule(rules.Equation("2 * cos(s) * (sqrt(pi / 2) * exp(-(t ^ 2) / 2))",
                                          "sqrt(2*pi)*exp(-t^2/2)*cos(s)"))
-
+        # print(file)
         self.checkAndOutput(file)
 
     def testLeibniz03New(self):
@@ -1910,7 +1909,6 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyIdentity("(n+1)*factorial(n)", "factorial(n+1)"))
         calc.perform_rule(rules.Equation("4 ^ -n * sqrt(pi) * (factorial(2 * n + 2) / (8 * factorial(n + 1)))",
                                          "4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))"))
-        print(goal04)
         self.assertTrue(goal04.is_finished())
         self.checkAndOutput(file)
 

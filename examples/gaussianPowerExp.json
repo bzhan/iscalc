@@ -237,12 +237,12 @@
                     "latex_cond": "n \\in\\mathbb{Z}"
                 }
             ],
-            "finished": false,
+            "finished": true,
             "goal": "I(n) = factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi)",
             "latex_goal": "I{(n)} = \\frac{(2 n)!}{4 ^ {n} n!}\\cdot (\\frac{1}{2})\\cdot \\sqrt{\\pi}",
             "proof": {
                 "base_case": {
-                    "finished": false,
+                    "finished": true,
                     "goal": "I(0) = sqrt(pi) / 2",
                     "latex_goal": "I{(0)} = \\frac{\\sqrt{\\pi}}{2}",
                     "proof": {
@@ -274,8 +274,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\frac{\\sqrt{2}}{2} (\\int_{0}^{\\infty} e^{-x ^ {2}/2} \\,dx)",
-                                        "res": "sqrt(2) / 2 * (INT x:[0,oo]. exp(-(x ^ 2 / 2)))",
+                                        "latex_res": "\\frac{\\sqrt{2}}{2}\\cdot (\\frac{\\sqrt{2} \\sqrt{\\pi}}{2})",
+                                        "res": "sqrt(2) / 2 * (sqrt(2) * sqrt(pi) / 2)",
                                         "rule": {
                                             "name": "DefiniteIntegralIdentity",
                                             "str": "apply definite integral"
@@ -283,8 +283,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\frac{\\sqrt{2}}{2} (\\int_{0}^{\\infty} e^{-x ^ {2}/2} \\,dx)",
-                                        "res": "sqrt(2) / 2 * (INT x:[0,oo]. exp(-(x ^ 2 / 2)))",
+                                        "latex_res": "\\frac{\\sqrt{\\pi}}{2}",
+                                        "res": "sqrt(pi) / 2",
                                         "rule": {
                                             "name": "FullSimplify",
                                             "str": "full simplify"
@@ -301,14 +301,14 @@
                                 "type": "Calculation"
                             }
                         ],
-                        "finished": false,
+                        "finished": true,
                         "goal": "I(0) = sqrt(pi) / 2",
                         "latex_goal": "I{(0)} = \\frac{\\sqrt{\\pi}}{2}",
                         "type": "CalculationProof"
                     },
                     "type": "Goal"
                 },
-                "finished": false,
+                "finished": true,
                 "goal": "I(n) = factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi)",
                 "induct_case": {
                     "finished": true,

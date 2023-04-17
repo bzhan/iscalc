@@ -1,0 +1,155 @@
+{
+    "content": [
+        {
+            "conds": [
+                {
+                    "cond": "p > 0",
+                    "latex_cond": "p > 0"
+                },
+                {
+                    "cond": "q > 0",
+                    "latex_cond": "q > 0"
+                }
+            ],
+            "finished": true,
+            "goal": "(INT t:[0,oo]. (exp(-p * t ^ 2) - exp(-q * t ^ 2)) / t ^ 2) = (INT t:[0,oo]. INT a:[p,q]. exp(-a * t ^ 2))",
+            "latex_goal": "\\int_{0}^{\\infty} \\frac{e^{(-p) t ^ {2}} - e^{(-q) t ^ {2}}}{t ^ {2}} \\,dt = \\int_{0}^{\\infty} \\int_{p}^{q} e^{(-a) t ^ {2}} \\,da \\,dt",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{0}^{\\infty} \\frac{e^{(-p) t ^ {2}} - e^{(-q) t ^ {2}}}{t ^ {2}} \\,dt",
+                        "start": "INT t:[0,oo]. (exp(-p * t ^ 2) - exp(-q * t ^ 2)) / t ^ 2",
+                        "steps": [],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\int_{0}^{\\infty} \\int_{p}^{q} e^{(-a) t ^ {2}} \\,da \\,dt",
+                        "start": "INT t:[0,oo]. INT a:[p,q]. exp(-a * t ^ 2)",
+                        "steps": [
+                            {
+                                "latex_res": "\\int_{0}^{\\infty} \\int_{-p t}^{-q t} -\\frac{e^{t x}}{t} \\,dx \\,dt",
+                                "res": "INT t:[0,oo]. INT x:[-(p * t),-(q * t)]. -(exp(t * x) / t)",
+                                "rule": {
+                                    "latex_str": "substitute \\(x\\) for \\((-a) t\\) at 0",
+                                    "loc": "0",
+                                    "name": "Substitution",
+                                    "str": "substitute x for -a * t at 0",
+                                    "var_name": "x",
+                                    "var_subst": "-a * t"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\infty} -\\frac{1}{t} (\\left. \\frac{e^{t x}}{t} \\right\\vert_{x=-p t}^{-q t}) \\,dt",
+                                "res": "INT t:[0,oo]. -(1 / t * ([exp(t * x) / t]_x=-(p * t),-(q * t)))",
+                                "rule": {
+                                    "loc": "0",
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral at 0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-(\\int_{0}^{\\infty} \\frac{1}{t} (-\\frac{e^{-p t ^ {2}}}{t} + \\frac{e^{-q t ^ {2}}}{t}) \\,dt)",
+                                "res": "-(INT t:[0,oo]. 1 / t * (-(exp(-(p * t ^ 2)) / t) + exp(-(q * t ^ 2)) / t))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-(\\int_{0}^{\\infty} \\frac{1}{t} (-\\frac{e^{-p t ^ {2}}}{t} + \\frac{e^{-q t ^ {2}}}{t}) \\,dt)",
+                                "res": "-(INT t:[0,oo]. 1 / t * (-(exp(-(p * t ^ 2)) / t) + exp(-(q * t ^ 2)) / t))",
+                                "rule": {
+                                    "name": "ReplaceSubstitution",
+                                    "str": "replace substitution"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-(\\int_{0}^{\\infty} \\frac{-e^{(-p) t ^ {2}}}{t ^ {2}} + \\frac{e^{(-q) t ^ {2}}}{t ^ {2}} \\,dt)",
+                                "res": "-(INT t:[0,oo]. -exp(-p * t ^ 2) / t ^ 2 + exp(-q * t ^ 2) / t ^ 2)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{1}{t} (-\\frac{e^{-p t ^ {2}}}{t} + \\frac{e^{-q t ^ {2}}}{t})\\) to \\(\\frac{-e^{(-p) t ^ {2}}}{t ^ {2}} + \\frac{e^{(-q) t ^ {2}}}{t ^ {2}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "-exp(-p * t ^ 2) / t ^ 2 + exp(-q * t ^ 2) / t ^ 2",
+                                    "old_expr": "1 / t * (-(exp(-(p * t ^ 2)) / t) + exp(-(q * t ^ 2)) / t)",
+                                    "str": "rewriting 1 / t * (-(exp(-(p * t ^ 2)) / t) + exp(-(q * t ^ 2)) / t) to -exp(-p * t ^ 2) / t ^ 2 + exp(-q * t ^ 2) / t ^ 2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\infty} \\frac{e^{(-p) t ^ {2}}}{t ^ {2}} - \\frac{e^{(-q) t ^ {2}}}{t ^ {2}} \\,dt",
+                                "res": "INT t:[0,oo]. exp(-p * t ^ 2) / t ^ 2 - exp(-q * t ^ 2) / t ^ 2",
+                                "rule": {
+                                    "latex_str": "rewriting \\(-(\\int_{0}^{\\infty} \\frac{-e^{(-p) t ^ {2}}}{t ^ {2}} + \\frac{e^{(-q) t ^ {2}}}{t ^ {2}} \\,dt)\\) to \\(\\int_{0}^{\\infty} \\frac{e^{(-p) t ^ {2}}}{t ^ {2}} - \\frac{e^{(-q) t ^ {2}}}{t ^ {2}} \\,dt\\)",
+                                    "name": "Equation",
+                                    "new_expr": "INT t:[0,oo]. exp(-p * t ^ 2) / t ^ 2 - exp(-q * t ^ 2) / t ^ 2",
+                                    "old_expr": "-(INT t:[0,oo]. -exp(-p * t ^ 2) / t ^ 2 + exp(-q * t ^ 2) / t ^ 2)",
+                                    "str": "rewriting -(INT t:[0,oo]. -exp(-p * t ^ 2) / t ^ 2 + exp(-q * t ^ 2) / t ^ 2) to INT t:[0,oo]. exp(-p * t ^ 2) / t ^ 2 - exp(-q * t ^ 2) / t ^ 2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\infty} \\frac{e^{(-p) t ^ {2}} - e^{(-q) t ^ {2}}}{t ^ {2}} \\,dt",
+                                "res": "INT t:[0,oo]. (exp(-p * t ^ 2) - exp(-q * t ^ 2)) / t ^ 2",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{e^{(-p) t ^ {2}}}{t ^ {2}} - \\frac{e^{(-q) t ^ {2}}}{t ^ {2}}\\) to \\(\\frac{e^{(-p) t ^ {2}} - e^{(-q) t ^ {2}}}{t ^ {2}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(exp(-p * t ^ 2) - exp(-q * t ^ 2)) / t ^ 2",
+                                    "old_expr": "exp(-p * t ^ 2) / t ^ 2 - exp(-q * t ^ 2) / t ^ 2",
+                                    "str": "rewriting exp(-p * t ^ 2) / t ^ 2 - exp(-q * t ^ 2) / t ^ 2 to (exp(-p * t ^ 2) - exp(-q * t ^ 2)) / t ^ 2"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(INT t:[0,oo]. (exp(-p * t ^ 2) - exp(-q * t ^ 2)) / t ^ 2) = (INT t:[0,oo]. INT a:[p,q]. exp(-a * t ^ 2))",
+                "latex_goal": "\\int_{0}^{\\infty} \\frac{e^{(-p) t ^ {2}} - e^{(-q) t ^ {2}}}{t ^ {2}} \\,dt = \\int_{0}^{\\infty} \\int_{p}^{q} e^{(-a) t ^ {2}} \\,da \\,dt",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "p > 0",
+                    "latex_cond": "p > 0"
+                },
+                {
+                    "cond": "q > 0",
+                    "latex_cond": "q > 0"
+                }
+            ],
+            "finished": false,
+            "goal": "(INT t:[0,oo]. INT a:[p,q]. exp(-a * t ^ 2)) = sqrt(pi) * (sqrt(q) - sqrt(p))",
+            "latex_goal": "\\int_{0}^{\\infty} \\int_{p}^{q} e^{(-a) t ^ {2}} \\,da \\,dt = \\sqrt{\\pi} (\\sqrt{q} - \\sqrt{p})",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{0}^{\\infty} \\int_{p}^{q} e^{(-a) t ^ {2}} \\,da \\,dt",
+                        "start": "INT t:[0,oo]. INT a:[p,q]. exp(-a * t ^ 2)",
+                        "steps": [],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\sqrt{\\pi} (\\sqrt{q} - \\sqrt{p})",
+                        "start": "sqrt(pi) * (sqrt(q) - sqrt(p))",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": false,
+                "goal": "(INT t:[0,oo]. INT a:[p,q]. exp(-a * t ^ 2)) = sqrt(pi) * (sqrt(q) - sqrt(p))",
+                "latex_goal": "\\int_{0}^{\\infty} \\int_{p}^{q} e^{(-a) t ^ {2}} \\,da \\,dt = \\sqrt{\\pi} (\\sqrt{q} - \\sqrt{p})",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "filpside02"
+}

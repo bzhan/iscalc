@@ -1,0 +1,208 @@
+{
+    "content": [
+        {
+            "conds": [
+                {
+                    "cond": "a > b",
+                    "latex_cond": "a > b"
+                },
+                {
+                    "cond": "b >= 0",
+                    "latex_cond": "b \\ge 0"
+                }
+            ],
+            "eq": "I(a,b) = (INT x:[0,pi]. log(a + b * cos(x)))",
+            "latex_eq": "I(a,b) = \\int_{0}^{\\pi} \\log{(a + b \\cos{x})} \\,dx",
+            "latex_lhs": "I(a,b)",
+            "type": "FuncDef"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a > b",
+                    "latex_cond": "a > b"
+                },
+                {
+                    "cond": "b >= 0",
+                    "latex_cond": "b \\ge 0"
+                }
+            ],
+            "finished": true,
+            "goal": "(D a. I(a,b)) = (INT x:[0,pi]. 1 / (a + b * cos(x)))",
+            "latex_goal": "\\frac{d}{da} I(a,b) = \\int_{0}^{\\pi} \\frac{1}{a + b \\cos{x}} \\,dx",
+            "obligations": [
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "a + b * cos(x) != 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "a > b",
+                            "latex_cond": "a > b"
+                        },
+                        {
+                            "cond": "b >= 0",
+                            "latex_cond": "b \\ge 0"
+                        },
+                        {
+                            "cond": "x > 0",
+                            "latex_cond": "x > 0"
+                        },
+                        {
+                            "cond": "x < pi",
+                            "latex_cond": "x < \\pi"
+                        }
+                    ]
+                }
+            ],
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\frac{d}{da} I(a,b)",
+                        "start": "D a. I(a,b)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{d}{da} \\int_{0}^{\\pi} \\log{(b \\cos{x} + a)} \\,dx",
+                                "res": "D a. INT x:[0,pi]. log(b * cos(x) + a)",
+                                "rule": {
+                                    "func_name": "I",
+                                    "loc": "subterms",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\pi} \\frac{1}{b \\cos{x} + a} \\,dx",
+                                "res": "INT x:[0,pi]. 1 / (b * cos(x) + a)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\pi} \\frac{1}{a + b \\cos{x}} \\,dx",
+                                "res": "INT x:[0,pi]. 1 / (a + b * cos(x))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(b \\cos{x} + a\\) to \\(a + b \\cos{x}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "a + b * cos(x)",
+                                    "old_expr": "b * cos(x) + a",
+                                    "str": "rewriting b * cos(x) + a to a + b * cos(x)"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\int_{0}^{\\pi} \\frac{1}{a + b \\cos{x}} \\,dx",
+                        "start": "INT x:[0,pi]. 1 / (a + b * cos(x))",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(D a. I(a,b)) = (INT x:[0,pi]. 1 / (a + b * cos(x)))",
+                "latex_goal": "\\frac{d}{da} I(a,b) = \\int_{0}^{\\pi} \\frac{1}{a + b \\cos{x}} \\,dx",
+                "type": "CalculationProof"
+            },
+            "type": "Goal",
+            "wellformed": false
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a > b",
+                    "latex_cond": "a > b"
+                },
+                {
+                    "cond": "b >= 0",
+                    "latex_cond": "b \\ge 0"
+                }
+            ],
+            "finished": false,
+            "goal": "(INT x:[0,pi]. 1 / (a + b * cos(x))) = pi / sqrt(a ^ 2 - b ^ 2)",
+            "latex_goal": "\\int_{0}^{\\pi} \\frac{1}{a + b \\cos{x}} \\,dx = \\frac{\\pi}{\\sqrt{a ^ {2} - b ^ {2}}}",
+            "obligations": [
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "a + b * cos(x) != 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "a > b",
+                            "latex_cond": "a > b"
+                        },
+                        {
+                            "cond": "b >= 0",
+                            "latex_cond": "b \\ge 0"
+                        },
+                        {
+                            "cond": "x > 0",
+                            "latex_cond": "x > 0"
+                        },
+                        {
+                            "cond": "x < pi",
+                            "latex_cond": "x < \\pi"
+                        }
+                    ]
+                }
+            ],
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{0}^{\\pi} \\frac{1}{a + b \\cos{x}} \\,dx",
+                        "start": "INT x:[0,pi]. 1 / (a + b * cos(x))",
+                        "steps": [
+                            {
+                                "latex_res": "\\int_{0}^{\\infty} \\frac{2}{(z ^ {2} + 1) (b \\cos{(2 \\tan^{-1}{z})} + a)} \\,dz",
+                                "res": "INT z:[0,oo]. 2 / ((z ^ 2 + 1) * (b * cos(2 * atan(z)) + a))",
+                                "rule": {
+                                    "latex_str": "substitute \\(z\\) for \\(\\tan{(\\frac{x}{2})}\\)",
+                                    "name": "Substitution",
+                                    "str": "substitute z for tan(x / 2)",
+                                    "var_name": "z",
+                                    "var_subst": "tan(x / 2)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 (\\int_{0}^{\\infty} \\frac{1}{(z ^ {2} + 1) (b \\cos{(2 \\tan^{-1}{z})} + a)} \\,dz)",
+                                "res": "2 * (INT z:[0,oo]. 1 / ((z ^ 2 + 1) * (b * cos(2 * atan(z)) + a)))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{\\pi}{\\sqrt{a ^ {2} - b ^ {2}}}",
+                        "start": "pi / sqrt(a ^ 2 - b ^ 2)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": false,
+                "goal": "(INT x:[0,pi]. 1 / (a + b * cos(x))) = pi / sqrt(a ^ 2 - b ^ 2)",
+                "latex_goal": "\\int_{0}^{\\pi} \\frac{1}{a + b \\cos{x}} \\,dx = \\frac{\\pi}{\\sqrt{a ^ {2} - b ^ {2}}}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal",
+            "wellformed": false
+        }
+    ],
+    "name": "flipside08"
+}

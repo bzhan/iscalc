@@ -1,0 +1,609 @@
+{
+    "content": [
+        {
+            "conds": [
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                },
+                {
+                    "cond": "a != 1",
+                    "latex_cond": "a \\neq 1"
+                }
+            ],
+            "eq": "I(a) = (INT x:[0,pi]. log(1 - 2 * a * cos(x) + a ^ 2))",
+            "latex_eq": "I{(a)} = \\int_{0}^{\\pi} \\log{(1 - 2 a \\cos{x} + a ^ {2})} \\,dx",
+            "latex_lhs": "I{(a)}",
+            "type": "FuncDef"
+        },
+        {
+            "finished": true,
+            "goal": "(D a. I(a)) = 1 / a * (-(abs(a + 1) * (-(2 * a ^ 2) + 2) / ((a + 1) ^ 2 * abs(-a + 1)) * (LIM {z -> oo}. atan(z * abs(a + 1) / abs(-a + 1)))) + pi)",
+            "latex_goal": "\\frac{d}{da} I{(a)} = \\frac{1}{a} (-\\frac{\\left| a + 1 \\right| (-2 a ^ {2} + 2)}{(a + 1) ^ {2} \\left| -a + 1 \\right|} (\\lim\\limits_{z\\to \\infty} \\tan^{-1}{(\\frac{z \\left| a + 1 \\right|}{\\left| -a + 1 \\right|})}) + \\pi)",
+            "obligations": [
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "a != 0"
+                            ]
+                        }
+                    ],
+                    "conds": []
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "(a + 1) ^ 2 * abs(-a + 1) != 0"
+                            ]
+                        }
+                    ],
+                    "conds": []
+                }
+            ],
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\frac{d}{da} I{(a)}",
+                        "start": "D a. I(a)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{d}{da} \\int_{0}^{\\pi} \\log{(-2 a \\cos{x} + a ^ {2} + 1)} \\,dx",
+                                "res": "D a. INT x:[0,pi]. log(-(2 * a * cos(x)) + a ^ 2 + 1)",
+                                "rule": {
+                                    "func_name": "I",
+                                    "loc": "subterms",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\pi} \\frac{-2 \\cos{x} + 2 a}{-2 a \\cos{x} + a ^ {2} + 1} \\,dx",
+                                "res": "INT x:[0,pi]. (-(2 * cos(x)) + 2 * a) / (-(2 * a * cos(x)) + a ^ 2 + 1)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\pi} \\frac{\\frac{1}{a} (2 a ^ {2} - 2 a \\cos{x})}{-2 a \\cos{x} + a ^ {2} + 1} \\,dx",
+                                "res": "INT x:[0,pi]. 1 / a * (2 * a ^ 2 - 2 * a * cos(x)) / (-(2 * a * cos(x)) + a ^ 2 + 1)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(-2 \\cos{x} + 2 a\\) to \\(\\frac{1}{a} (2 a ^ {2} - 2 a \\cos{x})\\)",
+                                    "name": "Equation",
+                                    "new_expr": "1 / a * (2 * a ^ 2 - 2 * a * cos(x))",
+                                    "old_expr": "-(2 * cos(x)) + 2 * a",
+                                    "str": "rewriting -(2 * cos(x)) + 2 * a to 1 / a * (2 * a ^ 2 - 2 * a * cos(x))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (\\int_{0}^{\\pi} \\frac{-2 a \\cos{x} + 2 a ^ {2}}{-2 a \\cos{x} + a ^ {2} + 1} \\,dx)",
+                                "res": "1 / a * (INT x:[0,pi]. (-(2 * a * cos(x)) + 2 * a ^ 2) / (-(2 * a * cos(x)) + a ^ 2 + 1))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (\\int_{0}^{\\pi} 1 - \\frac{1 - a ^ {2}}{-2 a \\cos{x} + a ^ {2} + 1} \\,dx)",
+                                "res": "1 / a * (INT x:[0,pi]. 1 - (1 - a ^ 2) / (-(2 * a * cos(x)) + a ^ 2 + 1))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{-2 a \\cos{x} + 2 a ^ {2}}{-2 a \\cos{x} + a ^ {2} + 1}\\) to \\(1 - \\frac{1 - a ^ {2}}{-2 a \\cos{x} + a ^ {2} + 1}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "1 - (1 - a ^ 2) / (-(2 * a * cos(x)) + a ^ 2 + 1)",
+                                    "old_expr": "(-(2 * a * cos(x)) + 2 * a ^ 2) / (-(2 * a * cos(x)) + a ^ 2 + 1)",
+                                    "str": "rewriting (-(2 * a * cos(x)) + 2 * a ^ 2) / (-(2 * a * cos(x)) + a ^ 2 + 1) to 1 - (1 - a ^ 2) / (-(2 * a * cos(x)) + a ^ 2 + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (-(-a ^ {2} + 1) (\\int_{0}^{\\pi} \\frac{1}{-2 a \\cos{x} + a ^ {2} + 1} \\,dx) + (\\int_{0}^{\\pi} 1 \\,dx))",
+                                "res": "1 / a * (-((-(a ^ 2) + 1) * (INT x:[0,pi]. 1 / (-(2 * a * cos(x)) + a ^ 2 + 1))) + (INT x:[0,pi]. 1))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (-(-a ^ {2} + 1) (\\int_{0}^{\\pi} \\frac{1}{-2 a \\cos{x} + a ^ {2} + 1} \\,dx) + (\\left. x \\right\\vert_{x=0}^{\\pi}))",
+                                "res": "1 / a * (-((-(a ^ 2) + 1) * (INT x:[0,pi]. 1 / (-(2 * a * cos(x)) + a ^ 2 + 1))) + ([x]_x=0,pi))",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (-(-a ^ {2} + 1) (\\int_{0}^{\\pi} \\frac{1}{-2 a \\cos{x} + a ^ {2} + 1} \\,dx) + \\pi)",
+                                "res": "1 / a * (-((-(a ^ 2) + 1) * (INT x:[0,pi]. 1 / (-(2 * a * cos(x)) + a ^ 2 + 1))) + pi)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (-(-a ^ {2} + 1) (\\int_{0}^{\\infty} \\frac{2}{(z ^ {2} + 1) (-\\frac{2 a (-z ^ {2} + 1)}{z ^ {2} + 1} + a ^ {2} + 1)} \\,dz) + \\pi)",
+                                "res": "1 / a * (-((-(a ^ 2) + 1) * (INT z:[0,oo]. 2 / ((z ^ 2 + 1) * (-(2 * a * (-(z ^ 2) + 1) / (z ^ 2 + 1)) + a ^ 2 + 1)))) + pi)",
+                                "rule": {
+                                    "latex_str": "substitute \\(z\\) for \\(\\tan{(\\frac{x}{2})}\\)",
+                                    "name": "Substitution",
+                                    "str": "substitute z for tan(x / 2)",
+                                    "var_name": "z",
+                                    "var_subst": "tan(x / 2)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (-(-a ^ {2} + 1) (\\int_{0}^{\\infty} \\frac{2}{(1 + a) ^ {2} z ^ {2} + (1 - a) ^ {2}} \\,dz) + \\pi)",
+                                "res": "1 / a * (-((-(a ^ 2) + 1) * (INT z:[0,oo]. 2 / ((1 + a) ^ 2 * z ^ 2 + (1 - a) ^ 2))) + pi)",
+                                "rule": {
+                                    "latex_str": "rewriting \\((z ^ {2} + 1) (-\\frac{2 a (-z ^ {2} + 1)}{z ^ {2} + 1} + a ^ {2} + 1)\\) to \\((1 + a) ^ {2} z ^ {2} + (1 - a) ^ {2}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(1 + a) ^ 2 * z ^ 2 + (1 - a) ^ 2",
+                                    "old_expr": "(z ^ 2 + 1) * (-(2 * a * (-(z ^ 2) + 1) / (z ^ 2 + 1)) + a ^ 2 + 1)",
+                                    "str": "rewriting (z ^ 2 + 1) * (-(2 * a * (-(z ^ 2) + 1) / (z ^ 2 + 1)) + a ^ 2 + 1) to (1 + a) ^ 2 * z ^ 2 + (1 - a) ^ 2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (-(-a ^ {2} + 1) (\\int_{0}^{\\infty} \\frac{\\frac{2}{(1 + a) ^ {2}}\\cdot 1}{(\\frac{1 - a}{1 + a}) ^ {2} + z ^ {2}} \\,dz) + \\pi)",
+                                "res": "1 / a * (-((-(a ^ 2) + 1) * (INT z:[0,oo]. 2 / (1 + a) ^ 2 * 1 / (((1 - a) / (1 + a)) ^ 2 + z ^ 2))) + pi)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{2}{(1 + a) ^ {2} z ^ {2} + (1 - a) ^ {2}}\\) to \\(\\frac{\\frac{2}{(1 + a) ^ {2}}\\cdot 1}{(\\frac{1 - a}{1 + a}) ^ {2} + z ^ {2}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "2 / (1 + a) ^ 2 * 1 / (((1 - a) / (1 + a)) ^ 2 + z ^ 2)",
+                                    "old_expr": "2 / ((1 + a) ^ 2 * z ^ 2 + (1 - a) ^ 2)",
+                                    "str": "rewriting 2 / ((1 + a) ^ 2 * z ^ 2 + (1 - a) ^ 2) to 2 / (1 + a) ^ 2 * 1 / (((1 - a) / (1 + a)) ^ 2 + z ^ 2)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (-\\frac{-2 a ^ {2} + 2}{(a + 1) ^ {2}} (\\int_{0}^{\\infty} \\frac{1}{\\frac{(-a + 1) ^ {2}}{(a + 1) ^ {2}} + z ^ {2}} \\,dz) + \\pi)",
+                                "res": "1 / a * (-((-(2 * a ^ 2) + 2) / (a + 1) ^ 2 * (INT z:[0,oo]. 1 / ((-a + 1) ^ 2 / (a + 1) ^ 2 + z ^ 2))) + pi)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (-\\frac{-2 a ^ {2} + 2}{(a + 1) ^ {2}} (\\int_{0}^{\\infty} \\frac{1}{z ^ {2} + (\\frac{1 - a}{1 + a}) ^ {2}} \\,dz) + \\pi)",
+                                "res": "1 / a * (-((-(2 * a ^ 2) + 2) / (a + 1) ^ 2 * (INT z:[0,oo]. 1 / (z ^ 2 + ((1 - a) / (1 + a)) ^ 2))) + pi)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{(-a + 1) ^ {2}}{(a + 1) ^ {2}} + z ^ {2}\\) to \\(z ^ {2} + (\\frac{1 - a}{1 + a}) ^ {2}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "z ^ 2 + ((1 - a) / (1 + a)) ^ 2",
+                                    "old_expr": "(-a + 1) ^ 2 / (a + 1) ^ 2 + z ^ 2",
+                                    "str": "rewriting (-a + 1) ^ 2 / (a + 1) ^ 2 + z ^ 2 to z ^ 2 + ((1 - a) / (1 + a)) ^ 2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (-\\frac{-2 a ^ {2} + 2}{(a + 1) ^ {2}} (\\left. \\frac{\\left| a + 1 \\right|}{\\left| -a + 1 \\right|} \\tan^{-1}{(\\frac{z \\left| a + 1 \\right|}{\\left| -a + 1 \\right|})} \\right\\vert_{z=0}^{\\infty}) + \\pi)",
+                                "res": "1 / a * (-((-(2 * a ^ 2) + 2) / (a + 1) ^ 2 * ([abs(a + 1) / abs(-a + 1) * atan(z * abs(a + 1) / abs(-a + 1))]_z=0,oo)) + pi)",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{a} (-\\frac{\\left| a + 1 \\right| (-2 a ^ {2} + 2)}{(a + 1) ^ {2} \\left| -a + 1 \\right|} (\\lim\\limits_{z\\to \\infty} \\tan^{-1}{(\\frac{z \\left| a + 1 \\right|}{\\left| -a + 1 \\right|})}) + \\pi)",
+                                "res": "1 / a * (-(abs(a + 1) * (-(2 * a ^ 2) + 2) / ((a + 1) ^ 2 * abs(-a + 1)) * (LIM {z -> oo}. atan(z * abs(a + 1) / abs(-a + 1)))) + pi)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{1}{a} (-\\frac{\\left| a + 1 \\right| (-2 a ^ {2} + 2)}{(a + 1) ^ {2} \\left| -a + 1 \\right|} (\\lim\\limits_{z\\to \\infty} \\tan^{-1}{(\\frac{z \\left| a + 1 \\right|}{\\left| -a + 1 \\right|})}) + \\pi)",
+                        "start": "1 / a * (-(abs(a + 1) * (-(2 * a ^ 2) + 2) / ((a + 1) ^ 2 * abs(-a + 1)) * (LIM {z -> oo}. atan(z * abs(a + 1) / abs(-a + 1)))) + pi)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(D a. I(a)) = 1 / a * (-(abs(a + 1) * (-(2 * a ^ 2) + 2) / ((a + 1) ^ 2 * abs(-a + 1)) * (LIM {z -> oo}. atan(z * abs(a + 1) / abs(-a + 1)))) + pi)",
+                "latex_goal": "\\frac{d}{da} I{(a)} = \\frac{1}{a} (-\\frac{\\left| a + 1 \\right| (-2 a ^ {2} + 2)}{(a + 1) ^ {2} \\left| -a + 1 \\right|} (\\lim\\limits_{z\\to \\infty} \\tan^{-1}{(\\frac{z \\left| a + 1 \\right|}{\\left| -a + 1 \\right|})}) + \\pi)",
+                "type": "CalculationProof"
+            },
+            "type": "Goal",
+            "wellformed": false
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a >= 0",
+                    "latex_cond": "a \\ge 0"
+                },
+                {
+                    "cond": "a < 1",
+                    "latex_cond": "a < 1"
+                }
+            ],
+            "finished": true,
+            "goal": "I(a) = SKOLEM_CONST(C)",
+            "latex_goal": "I{(a)} = C",
+            "proof": {
+                "finished": true,
+                "goal": "I(a) = SKOLEM_CONST(C)",
+                "latex_goal": "I{(a)} = C",
+                "start": {
+                    "latex_start": "\\frac{d}{da} I{(a)} = \\frac{1}{a} (-\\frac{\\left| a + 1 \\right| (-2 a ^ {2} + 2)}{(a + 1) ^ {2} \\left| -a + 1 \\right|} (\\lim\\limits_{z\\to \\infty} \\tan^{-1}{(\\frac{z \\left| a + 1 \\right|}{\\left| -a + 1 \\right|})}) + \\pi)",
+                    "start": "(D a. I(a)) = 1 / a * (-(abs(a + 1) * (-(2 * a ^ 2) + 2) / ((a + 1) ^ 2 * abs(-a + 1)) * (LIM {z -> oo}. atan(z * abs(a + 1) / abs(-a + 1)))) + pi)",
+                    "steps": [
+                        {
+                            "latex_res": "\\frac{d}{da} I{(a)} = \\frac{1}{a} (-\\frac{\\pi (-2 a ^ {2} + 2)}{(-a + 1) (2 a + 2)} + \\pi)",
+                            "res": "(D a. I(a)) = 1 / a * (-(pi * (-(2 * a ^ 2) + 2) / ((-a + 1) * (2 * a + 2))) + pi)",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "\\frac{d}{da} I{(a)} = \\frac{1}{a} (-\\frac{\\pi (-2 a ^ {2} + 2)}{-2 a ^ {2} + 2} + \\pi)",
+                            "res": "(D a. I(a)) = 1 / a * (-(pi * (-(2 * a ^ 2) + 2) / (-(2 * a ^ 2) + 2)) + pi)",
+                            "rule": {
+                                "latex_str": "rewriting \\((-a + 1) (2 a + 2)\\) to \\(-2 a ^ {2} + 2\\)",
+                                "name": "Equation",
+                                "new_expr": "-(2 * a ^ 2) + 2",
+                                "old_expr": "(-a + 1) * (2 * a + 2)",
+                                "str": "rewriting (-a + 1) * (2 * a + 2) to -(2 * a ^ 2) + 2"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "\\frac{d}{da} I{(a)} = 0",
+                            "res": "(D a. I(a)) = 0",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "I{(a)} = \\int 0 \\,da",
+                            "res": "I(a) = (INT a. 0)",
+                            "rule": {
+                                "name": "IntegrateBothSide",
+                                "str": "integrate both side"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "I{(a)} = 0 a + C",
+                            "res": "I(a) = 0 * a + SKOLEM_CONST(C)",
+                            "rule": {
+                                "name": "IndefiniteIntegralIdentity",
+                                "str": "apply indefinite integral"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "I{(a)} = C",
+                            "res": "I(a) = SKOLEM_CONST(C)",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a >= 0",
+                    "latex_cond": "a \\ge 0"
+                },
+                {
+                    "cond": "a < 1",
+                    "latex_cond": "a < 1"
+                }
+            ],
+            "finished": true,
+            "goal": "SKOLEM_CONST(C) = 0",
+            "latex_goal": "C = 0",
+            "proof": {
+                "finished": true,
+                "goal": "SKOLEM_CONST(C) = 0",
+                "latex_goal": "C = 0",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "a >= 0",
+                            "latex_cond": "a \\ge 0"
+                        },
+                        {
+                            "cond": "a < 1",
+                            "latex_cond": "a < 1"
+                        }
+                    ],
+                    "latex_start": "I{(a)} = C",
+                    "start": "I(a) = SKOLEM_CONST(C)",
+                    "steps": [
+                        {
+                            "latex_res": "I{(0)} = C",
+                            "res": "I(0) = SKOLEM_CONST(C)",
+                            "rule": {
+                                "latex_str": "substitute \\(a\\) for \\(0\\) in equation",
+                                "name": "VarSubsOfEquation",
+                                "str": "substitute a for 0 in equation",
+                                "subst": [
+                                    {
+                                        "expr": "0",
+                                        "var": "a"
+                                    }
+                                ]
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "\\int_{0}^{\\pi} 0 \\,dx = C",
+                            "res": "(INT x:[0,pi]. 0) = SKOLEM_CONST(C)",
+                            "rule": {
+                                "func_name": "I",
+                                "loc": "subterms",
+                                "name": "ExpandDefinition",
+                                "str": "expand definition on subterms"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "0 = C",
+                            "res": "0 = SKOLEM_CONST(C)",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "C = 0",
+                            "res": "SKOLEM_CONST(C) = 0",
+                            "rule": {
+                                "latex_str": "solve equation for \\(C\\)",
+                                "name": "SolveEquation",
+                                "solve_for": "SKOLEM_CONST(C)",
+                                "str": "solve equation for SKOLEM_CONST(C)"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a >= 0",
+                    "latex_cond": "a \\ge 0"
+                },
+                {
+                    "cond": "a < 1",
+                    "latex_cond": "a < 1"
+                }
+            ],
+            "finished": true,
+            "goal": "I(a) = 0",
+            "latex_goal": "I{(a)} = 0",
+            "proof": {
+                "finished": true,
+                "goal": "I(a) = 0",
+                "latex_goal": "I{(a)} = 0",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "a >= 0",
+                            "latex_cond": "a \\ge 0"
+                        },
+                        {
+                            "cond": "a < 1",
+                            "latex_cond": "a < 1"
+                        }
+                    ],
+                    "latex_start": "I{(a)} = C",
+                    "start": "I(a) = SKOLEM_CONST(C)",
+                    "steps": [
+                        {
+                            "latex_res": "I{(a)} = 0",
+                            "res": "I(a) = 0",
+                            "rule": {
+                                "eq": "SKOLEM_CONST(C) = 0",
+                                "latex_str": "apply equation \\(C = 0\\) on subterms",
+                                "loc": "subterms",
+                                "name": "ApplyEquation",
+                                "str": "apply equation: SKOLEM_CONST(C) = 0 on subterms"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a > 1",
+                    "latex_cond": "a > 1"
+                }
+            ],
+            "finished": true,
+            "goal": "I(1 / a) = I(a) - 2 * pi * log(a)",
+            "latex_goal": "I{(\\frac{1}{a})} = I{(a)} - 2 \\pi \\log{a}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "I{(\\frac{1}{a})}",
+                        "start": "I(1 / a)",
+                        "steps": [
+                            {
+                                "latex_res": "\\int_{0}^{\\pi} \\log{(-\\frac{2 \\cos{x}}{a} + \\frac{1}{a ^ {2}} + 1)} \\,dx",
+                                "res": "INT x:[0,pi]. log(-(2 * cos(x) / a) + 1 / a ^ 2 + 1)",
+                                "rule": {
+                                    "func_name": "I",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\pi} \\log{(\\frac{a ^ {2} - 2 a \\cos{x} + 1}{a ^ {2}})} \\,dx",
+                                "res": "INT x:[0,pi]. log((a ^ 2 - 2 * a * cos(x) + 1) / a ^ 2)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(-\\frac{2 \\cos{x}}{a} + \\frac{1}{a ^ {2}} + 1\\) to \\(\\frac{a ^ {2} - 2 a \\cos{x} + 1}{a ^ {2}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(a ^ 2 - 2 * a * cos(x) + 1) / a ^ 2",
+                                    "old_expr": "-(2 * cos(x) / a) + 1 / a ^ 2 + 1",
+                                    "str": "rewriting -(2 * cos(x) / a) + 1 / a ^ 2 + 1 to (a ^ 2 - 2 * a * cos(x) + 1) / a ^ 2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\pi} \\log{(a ^ {2} - 2 a \\cos{x} + 1)} - \\log{(a ^ {2})} \\,dx",
+                                "res": "INT x:[0,pi]. log(a ^ 2 - 2 * a * cos(x) + 1) - log(a ^ 2)",
+                                "rule": {
+                                    "latex_str": "rewrite \\(\\log{(\\frac{a ^ {2} - 2 a \\cos{x} + 1}{a ^ {2}})}\\) to \\(\\log{(a ^ {2} - 2 a \\cos{x} + 1)} - \\log{(a ^ {2})}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "log((a ^ 2 - 2 * a * cos(x) + 1) / a ^ 2)",
+                                    "str": "rewrite log((a ^ 2 - 2 * a * cos(x) + 1) / a ^ 2) to log(a ^ 2 - 2 * a * cos(x) + 1) - log(a ^ 2) using identity",
+                                    "target": "log(a ^ 2 - 2 * a * cos(x) + 1) - log(a ^ 2)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "(\\int_{0}^{\\pi} \\log{(-2 a \\cos{x} + a ^ {2} + 1)} \\,dx) - 2 \\log{a} (\\int_{0}^{\\pi} 1 \\,dx)",
+                                "res": "(INT x:[0,pi]. log(-(2 * a * cos(x)) + a ^ 2 + 1)) - 2 * log(a) * (INT x:[0,pi]. 1)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "(\\int_{0}^{\\pi} \\log{(-2 a \\cos{x} + a ^ {2} + 1)} \\,dx) - 2 \\log{a} (\\left. x \\right\\vert_{x=0}^{\\pi})",
+                                "res": "(INT x:[0,pi]. log(-(2 * a * cos(x)) + a ^ 2 + 1)) - 2 * log(a) * ([x]_x=0,pi)",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "(\\int_{0}^{\\pi} \\log{(-2 a \\cos{x} + a ^ {2} + 1)} \\,dx) - 2 \\pi \\log{a}",
+                                "res": "(INT x:[0,pi]. log(-(2 * a * cos(x)) + a ^ 2 + 1)) - 2 * pi * log(a)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "(\\int_{0}^{\\pi} \\log{(1 - 2 a \\cos{x} + a ^ {2})} \\,dx) - 2 \\pi \\log{a}",
+                                "res": "(INT x:[0,pi]. log(1 - 2 * a * cos(x) + a ^ 2)) - 2 * pi * log(a)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(-2 a \\cos{x} + a ^ {2} + 1\\) to \\(1 - 2 a \\cos{x} + a ^ {2}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "1 - 2 * a * cos(x) + a ^ 2",
+                                    "old_expr": "-(2 * a * cos(x)) + a ^ 2 + 1",
+                                    "str": "rewriting -(2 * a * cos(x)) + a ^ 2 + 1 to 1 - 2 * a * cos(x) + a ^ 2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "I{(a)} - 2 \\pi \\log{a}",
+                                "res": "I(a) - 2 * pi * log(a)",
+                                "rule": {
+                                    "func_name": "I",
+                                    "loc": "subterms",
+                                    "name": "FoldDefinition",
+                                    "str": "fold definition on subterms"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "I{(a)} - 2 \\pi \\log{a}",
+                        "start": "I(a) - 2 * pi * log(a)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "I(1 / a) = I(a) - 2 * pi * log(a)",
+                "latex_goal": "I{(\\frac{1}{a})} = I{(a)} - 2 \\pi \\log{a}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a > 1",
+                    "latex_cond": "a > 1"
+                }
+            ],
+            "finished": false,
+            "goal": "I(a) = 2 * pi * log(a)",
+            "latex_goal": "I{(a)} = 2 \\pi \\log{a}",
+            "proof": {
+                "finished": false,
+                "goal": "I(a) = 2 * pi * log(a)",
+                "latex_goal": "I{(a)} = 2 \\pi \\log{a}",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "a > 1",
+                            "latex_cond": "a > 1"
+                        }
+                    ],
+                    "latex_start": "I{(\\frac{1}{a})} = I{(a)} - 2 \\pi \\log{a}",
+                    "start": "I(1 / a) = I(a) - 2 * pi * log(a)",
+                    "steps": [
+                        {
+                            "latex_res": "I{(\\frac{1}{a})} = I{(a)} - 2 \\pi \\log{a}",
+                            "res": "I(1 / a) = I(a) - 2 * pi * log(a)",
+                            "rule": {
+                                "eq": "I(a) = 0",
+                                "latex_str": "apply equation \\(I{(a)} = 0\\) at 0",
+                                "loc": "0",
+                                "name": "ApplyEquation",
+                                "str": "apply equation: I(a) = 0 at 0"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "dini"
+}

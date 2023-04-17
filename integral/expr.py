@@ -9,7 +9,7 @@ from typing import Dict, List, Optional, Set, TypeGuard, Tuple, Union, Callable
 
 
 VAR, CONST, OP, FUN, DERIV, INTEGRAL, EVAL_AT, SYMBOL, LIMIT, INF, INDEFINITEINTEGRAL, \
-SKOLEMFUNC, SUMMATION = range(13)
+SKOLEMFUNC, SUMMATION, LAZYSERIES = range(14)
 
 op_priority = {
     "+": 65, "-": 65, "*": 70, "/": 70, "^": 75, "=": 50, "<": 50, ">": 50, "<=": 50, ">=": 50, "!=": 50
@@ -306,7 +306,7 @@ class Expr:
         return not self < other
 
     def priority(self):
-        if self.ty in (VAR, SYMBOL, INF, SKOLEMFUNC):
+        if self.ty in (VAR, SYMBOL, INF, SKOLEMFUNC, LAZYSERIES):
             return 100
         elif self.ty == CONST:
             if isinstance(self.val, Fraction) and self.val.denominator != 1:
@@ -329,6 +329,8 @@ class Expr:
             return 10
         elif self.ty == LIMIT:
             return 5
+        else:
+            raise NotImplementedError
 
     def __lt__(self, other):
         return self <= other and self != other
@@ -636,7 +638,7 @@ class Expr:
         elif self.is_limit():
             return Limit(self.var, self.lim.replace(e, repl_e), self.body.replace(e, repl_e), self.drt)
         else:
-            print(self)
+            print(self, e, repl_e)
             raise NotImplementedError
 
     def has_func(self, func_name: str) -> bool:

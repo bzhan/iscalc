@@ -159,11 +159,7 @@
             "type": "axiom"
         },
         {
-            "attributes": [],
-            "category": "unknown",
-            "conds": [],
             "expr": "SUM(n, 0, oo, x^n/factorial(n)) = exp(x)",
-            "reference": "",
             "type": "axiom"
         },
         {
@@ -300,13 +296,11 @@
             "type": "axiom"
         },
         {
-            "attributes": [],
             "category": "power",
             "conds": [
                 "a!=0"
             ],
             "expr": "a^(-x) = (1/a)^x",
-            "reference": "",
             "type": "axiom"
         },
         {
@@ -318,7 +312,6 @@
                 "isInt(n)"
             ],
             "expr": "(-x)^(2*n) = x^(2*n)",
-            "reference": "",
             "type": "axiom"
         },
         {
@@ -903,11 +896,8 @@
             "type": "axiom"
         },
         {
-            "attributes": [],
             "category": "trigonometric",
-            "conds": [],
             "expr": "atan(-x) = -atan(x)",
-            "reference": "",
             "type": "axiom"
         },
         {
@@ -1089,12 +1079,10 @@
             "attributes": [
                 "simplify"
             ],
-            "category": "unknown",
             "conds": [
                 "a != 0"
             ],
             "expr": "a * b / a = b",
-            "reference": "",
             "type": "axiom"
         }
     ],

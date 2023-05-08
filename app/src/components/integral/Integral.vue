@@ -152,7 +152,7 @@
         <button v-on:click="showDeleteDialog()" v-show="!show_delete_book_msg">Delete</button>
         <div class="mask" v-show="show_delete_book_msg">
           <span>are you sure to delete these books ?</span><br />
-          <button class="app-download" @click="doDeleteBook">YES</button>
+          <button class="app-download" @click="doDeleteBook">YES</button> &nbsp;
           <button class="app-download" @click="cancelDelete">NO</button>
         </div>
       </div>
@@ -318,13 +318,6 @@
       </div>
     </div>
     <div id="select">
-      <div v-if="r_query_mode === 'edit func table'">
-        <div v-for="(entry, i) in selected_table_list" :key="i" style="margin:5px 10px">
-          <label :for="'entry_' + entry.x" @change="selectTableItem(i, entry.x)">
-            <input type="checkbox" :id="'entry_' + entry.x" v-model="checkVal[i]">{{ entry.x }}
-          </label><br/>
-        </div>
-      </div>
       <div v-if="r_query_mode === 'add book'">
         <span class="math-text">select books to import:</span><br />
       </div>
@@ -333,17 +326,8 @@
       </div>
       <div v-if="r_query_mode === 'add book' || r_query_mode === 'delete book'">
         <div v-for="(name, i) in book_list" :key="i" style="margin:5px 10px">
-          <label :for="'book_' + name" @change="selectBook(i, name)">
-            <input type="checkbox" :id="'book_' + name" v-model="checkVal[i]">{{ name }}
-          </label><br />
-        </div>
-      </div>
-      <div v-if="r_query_mode === 'add lemma' && lemma_type !== 'table'">
-        <span class="math-text">lemma's attributes</span>
-        <div v-for="(attr, i) in lemma_attributes" :key="i" style="margin:5px 10px">
-          <label :for="'attribute_' + attr" @change="selectAttribute(i, attr)">
-            <input type="checkbox" :id="'attribute_' + attr" v-model="checkVal[i]">{{ attr }}
-          </label><br />
+          <label :for="'book_' + name">{{ name }}</label>
+          <input type="checkbox" :id="'book_' + name" v-model="selected_book" v-bind:value="name"/>
         </div>
       </div>
     </div>
@@ -453,7 +437,6 @@ export default {
 
       // Selected book
       selected_book: [],
-      checkVal: [],
       show_delete_book_msg: false,
 
       // add book
@@ -714,11 +697,6 @@ export default {
     deleteBook: function () {
       this.r_query_mode = 'delete book'
       this.selected_book = []
-      this.checkVal = []
-      this.show_delete_book_msg = false
-      for (let i = 0; i <= this.book_list.lenth; i++) {
-        this.checkVal.add(false)
-      }
     },
     cancelDelete: function () {
       this.show_delete_book_msg = false
@@ -733,29 +711,17 @@ export default {
         this.book_list = response.data.book_list
         this.r_query_mode = undefined
         this.show_delete_book_msg = false
+        this.loadBookList()
       }
     },
     showDeleteDialog: function () {
       this.show_delete_book_msg = true
     },
 
-    selectBook: function (i, book_name) {
-      if (this.checkVal[i] && !this.selected_book.includes(book_name)) {
-        this.selected_book.push(book_name)
-      } if (!this.checkVal[i] && this.selected_book.includes(book_name)) {
-        this.selected_book.splice(this.selected_book.findIndex(j => j == book_name))
-      }
-      console.log(this.selected_book)
-    },
-
     // Add book
     addBook: function () {
       this.r_query_mode = 'add book'
       this.selected_book = []
-      this.checkVal = []
-      for (let i = 0; i < this.book_list.lenth; i++) {
-        this.checkVal.add(false)
-      }
     },
 
     doAddBook: async function () {

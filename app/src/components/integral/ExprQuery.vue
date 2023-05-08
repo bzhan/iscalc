@@ -1,5 +1,6 @@
 <template>
   <div>
+    <span v-html="label"></span>
     <input v-bind:value="value"
            v-on:input="$emit('input', $event.target.value)"
            style="width:500px"/><br/>
@@ -49,6 +50,7 @@ export default {
 
   props: [
     "value",
+    "label"
   ],
 
   created: function () {

@@ -1,16 +1,14 @@
 {
     "content": [
         {
-            "content": [
-                {
-                    "expr": "INT x:[0,pi/100]. (sin(20*x)+sin(19*x)) / (cos(20*x)+cos(19*x))",
-                    "path": "MIT2019",
-                    "type": "problem"
-                }
-            ],
             "level": 1,
             "name": "2019",
             "type": "header"
+        },
+        {
+            "expr": "INT x:[0,pi/100]. (sin(20*x)+sin(19*x)) / (cos(20*x)+cos(19*x))",
+            "path": "MIT2019",
+            "type": "problem"
         }
     ],
     "imports": [

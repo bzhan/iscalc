@@ -8,10 +8,6 @@
           <b-dropdown-item href="#" v-on:click="addBook">Add new book</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="deleteBook">Delete books</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="saveFile">Save file</b-dropdown-item>
-          <b-dropdown-item href="#" v-on:click="addHeader">Add header</b-dropdown-item>
-          <b-dropdown-item href="#" v-on:click="addFuncDef">Add definition</b-dropdown-item>
-          <b-dropdown-item href="#" v-on:click="addProblem">Add problem</b-dropdown-item>
-          <b-dropdown-item href="#" v-on:click="addLemma">Add lemma</b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item-dropdown text="Proof" left>
           <b-dropdown-item href="#" v-on:click="clearItem">Clear</b-dropdown-item>
@@ -130,95 +126,12 @@
     </div>
     <!-- Main panel for showing book content-->
     <div v-if="content.length == 0" id="problem">
-      <BookContent v-bind:content="book_content" @open_file='openFile' @select_table='selectTable'
-        @select_header="selectHeader" v-bind:label="''" v-bind:selected_header="selected_header"
-        v-bind:selected_table="selected_table" v-bind:header_level="1"></BookContent>
+      <BookContent v-bind:content="book_content" :book_name="book_name" @open_file='openFile' @select_book_item='selectBookItem'>
+      </BookContent>
     </div>
     <div id="dialog">
-      <div v-if="r_query_mode === 'edit func table'" style="margin: 5px">
-        <table style="border-collapse: collapse">
-          <tr>
-            <td style="border-style: solid; padding: 3px">
-              <MathEquation v-bind:data="'\\(' + '{x}' + '\\)'" />
-            </td>
-            <td v-for="(e, i) in selected_table_list" :key="i" style="border-style: solid; padding: 3px">
-              <ExprQuery v-bind:value="e.x" @input="updateTable(i, $event, e.y)"></ExprQuery>
-            </td>
-          </tr>
-          <tr>
-            <td style="border-style: solid; padding: 3px">
-              <MathEquation v-bind:data="'\\(' + selected_table_content.funcexpr + '\\)'" />
-            </td>
-            <td v-for="(e, i) in selected_table_list" :key="i" style="border-style: solid; padding: 3px">
-              <ExprQuery v-bind:value="e.y" @input="updateTable(i, e.x, $event)"></ExprQuery>
-            </td>
-          </tr>
-        </table>
-        <button v-on:click="selected_table_list.push({ 'x': '', 'y': '' }); checkVal.push(false)">add</button>&nbsp;
-        <button v-on:click="deleteSelectedTableItem()">delete</button>&nbsp;
-        <button v-on:click="saveFuncTable()">save</button>
-      </div>
-      <div v-if="r_query_mode === 'add lemma'">
-        <span class="math-text">Add lemma:</span><br />
-        <span class="math-text">type:</span>&nbsp;
-        <select v-model="lemma_type">
-          <option v-for="(type, index) in lemma_types" :key="index">{{ type }}</option>
-        </select>
-        <div v-if="lemma_type !== 'table'">
-          <span class="math-text">category:</span>&nbsp;
-          <select v-model="lemma_category">
-            <option v-for="(category, index) in lemma_categories" :key="index">{{ category }}</option>
-          </select>
-          <ExprQuery v-model="expr_query1"/><br/>
-          <div v-for="(cond, index) in cond_query" :key="index">
-            <ExprQuery v-bind:value="cond" @input="setCondQuery(index, $event)"/><br/>
-          </div>
-          <span class="math-text">reference:</span>&nbsp;
-          <input v-model="msg"/><br/>
-          <button v-on:click="doAddLemma">OK</button>&nbsp;
-          <button v-on:click="cond_query.push('')">Add condition</button>
-        </div>
-        <div v-if="lemma_type === 'table'">
-          <span class="math-text">function name:</span>&nbsp;
-          <input v-model="func_table_name"/>
-          <div v-for="(arg, i) in func_table['args']" :key="i">
-            <span class="math-text">argument:</span>&nbsp;
-            <ExprQuery v-bind:value="arg" @input="setFunArg(i, $event)"></ExprQuery>
-            <span class="math-text">value:</span>&nbsp;
-            <ExprQuery v-bind:value="func_table['values'][i]" @input="setFunVal(i, $event)"></ExprQuery>
-          </div><br/>
-          <button v-on:click="doAddLemma">OK</button>&nbsp;
-          <button v-on:click="func_table['args'].push(''); func_table['values'].push('');">add item</button>
-        </div>
-      </div>
-      <div v-if="r_query_mode === 'add header'">
-        <span class="math-text">Add header:</span><br />
-        <input v-model="header" />
-        <button v-on:click="doAddHeader">OK</button>
-      </div>
-      <div v-if="r_query_mode === 'add definition'">
-        <span class="math-text">Add function definition:</span><br />
-        <ExprQuery v-model="expr_query1" /><br />
-        <div v-for="(cond, index) in cond_query" :key="index">
-          <ExprQuery v-bind:value="cond" @input="setCondQuery(index, $event)" /><br />
-        </div>
-        <button v-on:click="doAddFuncDef('file')">OK</button>&nbsp;
-        <button v-on:click="cond_query.push('')">Add condition</button>
-      </div>
-      <div v-if="r_query_mode === 'add definition for book'">
-        <span class="math-text">Add function definition:</span><br />
-        <ExprQuery v-model="expr_query1" /><br />
-        <div v-for="(cond, index) in cond_query" :key="index">
-          <ExprQuery v-bind:value="cond" @input="setCondQuery(index, $event)" /><br />
-        </div>
-        <span class="math-text">file name:</span>
-        <input v-model="msg" /><br />
-        <button v-on:click="doAddFuncDef('book')">OK</button>&nbsp;
-        <button v-on:click="cond_query.push('')">Add condition</button>
-      </div>
-      <div v-if="r_query_mode === 'add goal' || r_query_mode === 'add problem'">
-        <span v-if="r_query_mode === 'add goal'" class="math-text">Add goal:</span>
-        <span v-if="r_query_mode === 'add problem'" class="math-text">Add problem:</span><br />
+      <div v-if="r_query_mode === 'add goal'">
+        <span class="math-text">Add goal:</span>
         <ExprQuery v-model="expr_query1" /><br />
         <div v-for="(cond, index) in cond_query" :key="index">
           <ExprQuery v-bind:value="cond" @input="setCondQuery(index, $event)" /><br />
@@ -227,8 +140,7 @@
           <span class="math-text">file name:</span>
           <input v-model="msg" />
         </div>
-        <button v-if="r_query_mode === 'add goal'" v-on:click="doAddGoal">OK</button>
-        <button v-if="r_query_mode === 'add problem'" v-on:click="doAddProblem">OK</button>&nbsp;
+        <button v-on:click="doAddGoal">OK</button>
         <button v-on:click="cond_query.push('')">Add condition</button>
       </div>
       <div v-if="r_query_mode === 'add book'">
@@ -243,7 +155,6 @@
           <button class="app-download" @click="doDeleteBook">YES</button>
           <button class="app-download" @click="cancelDelete">NO</button>
         </div>
-
       </div>
       <div v-if="r_query_mode === 'apply induction'">
         <span class="math-text">Please specify induction variable</span><br />
@@ -547,29 +458,6 @@ export default {
 
       // add book
       new_book_name: "",
-
-      // selected header
-      header: "",
-      selected_header: undefined,
-
-      //add problem, definition for book
-      msg: "",
-
-      //add lemma
-      lemma_types: ['inequality', 'axiom', 'table', 'unknown'],
-      lemma_categories: ['trigonometric', 'exp-log', 'power', 'binomial', 'unknown'],
-      lemma_attributes: ['simplify', 'bidirectional'],
-      lemma_type: undefined,
-      lemma_category: undefined,
-      selected_lemma_attributes: [],
-      selected_table: undefined,
-      func_table: { args: [], values: [] },
-      func_table_name: "",
-
-      //edit table
-      selected_table_content: undefined,
-      selected_table_item_list: [],
-      selected_table_list: [],
     }
   },
 
@@ -655,47 +543,6 @@ export default {
       this.selected_item = undefined
       this.selected_facts = {}
     },
-    // add lemma
-    addLemma: function () {
-      if (this.selected_header === undefined)
-        return
-      this.r_query_mode = "add lemma"
-      this.checkVal = []
-      for (let i = 0; i < this.lemma_attributes.lenth; i++) {
-        this.checkVal.add(false)
-      }
-      this.lemma_type = 'axiom'
-      this.lemma_category = 'unknown'
-      this.msg = ""
-      this.selected_lemma_attributes = []
-      this.cond_query = []
-      this.expr_query1 = ""
-      this.func_table_name = ""
-      this.func_table = { args: [], values: [] }
-    },
-    doAddLemma: async function () {
-      const data = {
-        lemma_type: this.lemma_type,
-        book_name: this.book_name,
-        lemma_category: this.lemma_category,
-        reference: this.msg,
-        lemma_attributes: this.selected_lemma_attributes,
-        expr: this.expr_query1,
-        conds: this.cond_query,
-        table: this.func_table,
-        table_name: this.func_table_name,
-        label: this.selected_header,
-      }
-      const response = await axios.post("http://127.0.0.1:5000/api/book-add-lemma", JSON.stringify(data))
-      if (response.data.status == 'ok') {
-        this.r_query_mode = undefined
-        this.expr_query1 = ''
-        this.cond_query = []
-        this.msg = ""
-        this.loadBookContent()
-        this.book_name = response.data.book_name
-      }
-    },
     selectAttribute: function (i, attr) {
       if (this.checkVal[i] && !this.selected_lemma_attributes.includes(attr)) {
         this.selected_lemma_attributes.push(attr)
@@ -759,36 +606,9 @@ export default {
       }
     },
 
-    // add problem
-    addProblem: function () {
-      if (this.selected_header !== undefined)
-        this.r_query_mode = "add problem"
-      this.expr_query1 = ''
-      this.cond_query = []
-      this.filename = ""
-    },
-
-    doAddProblem: async function () {
-      const data = {
-        book: this.book_name,
-        file: this.msg,
-        goal: this.expr_query1,
-        conds: this.cond_query,
-        label: this.selected_header
-      }
-      const response = await axios.post("http://127.0.0.1:5000/api/book-add-problem", JSON.stringify(data))
-      if (response.data.status == 'ok') {
-        this.r_query_mode = undefined
-        this.expr_query1 = ''
-        this.cond_query = []
-        this.filename = ""
-        this.loadBookContent()
-      }
-    },
 
     // Select an item
     selectItem: function (item_id) {
-      console.log('selectItem', item_id)
       this.selected_item = item_id
       this.r_query_mode = undefined
     },
@@ -835,9 +655,7 @@ export default {
 
     // Add function definition
     addFuncDef: function () {
-      if (this.filename === undefined && this.book_name !== undefined && this.selected_header !== undefined)
-        this.r_query_mode = 'add definition for book'
-      else if (this.filename !== undefined)
+      if (this.filename !== undefined)
         this.r_query_mode = 'add definition'
       else
         this.r_query_mode = undefined
@@ -846,43 +664,23 @@ export default {
     },
 
     // Perform add function definition
-    doAddFuncDef: async function (forSomething) {
-      if (forSomething == 'file') {
-        const data = {
-          book: this.book_name,
-          file: this.filename,
-          content: this.content,
-          eq: this.expr_query1,
-          conds: this.cond_query,
-          for: "file"
-        }
-        const response = await axios.post("http://127.0.0.1:5000/api/add-function-definition", JSON.stringify(data))
-        if (response.data.status == 'ok') {
-          this.content = response.data.state
-          this.cur_id = this.content.length - 1
-          this.selected_item = response.data.selected_item
-          this.r_query_mode = undefined
-          this.expr_query1 = ''
-          this.cond_query = []
-        }
+    doAddFuncDef: async function () {
+      const data = {
+        book: this.book_name,
+        file: this.filename,
+        content: this.content,
+        eq: this.expr_query1,
+        conds: this.cond_query,
+        for: "file"
       }
-      else if (forSomething == 'book') {
-        const data = {
-          book: this.book_name,
-          eq: this.expr_query1,
-          file: this.msg,
-          label: this.selected_header,
-          conds: this.cond_query,
-          for: "book"
-        }
-        const response = await axios.post("http://127.0.0.1:5000/api/add-function-definition", JSON.stringify(data))
-        if (response.data.status == 'ok') {
-          this.r_query_mode = undefined
-          this.expr_query1 = ''
-          this.cond_query = []
-          this.loadBookContent()
-          this.book_name = response.data.book_name
-        }
+      const response = await axios.post("http://127.0.0.1:5000/api/add-function-definition", JSON.stringify(data))
+      if (response.data.status == 'ok') {
+        this.content = response.data.state
+        this.cur_id = this.content.length - 1
+        this.selected_item = response.data.selected_item
+        this.r_query_mode = undefined
+        this.expr_query1 = ''
+        this.cond_query = []
       }
     },
 
@@ -895,8 +693,7 @@ export default {
 
     // add header
     addHeader: function () {
-      if (this.selected_header !== undefined)
-        this.r_query_mode = "add header"
+      this.r_query_mode = "add header"
     },
 
     doAddHeader: async function () {

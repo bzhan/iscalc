@@ -1,104 +1,374 @@
 <template>
   <div>
-    <div v-if="content.type === 'header'">
-      <div @click="selectHeader(label)" 
-        :class="{selected: selected_header == label, 
-                 'header-1': header_level == 1,
-                 'header-2': header_level == 2,
-                 'header-3': header_level == 3,
-                 'header-4': header_level == 4,
-                 'header-5': header_level == 5}">{{ content.name }}</div>
-      <div v-for="(item, index) in content.content" :key="index">
-        <BookContent  v-bind:content="item" 
-                      @open_file="openFile" 
-                      @select_header = "selectHeader" 
-                      @select_table = "selectTable"
-                      v-bind:label="label+(index+1)+'.'"
-                      v-bind:selected_header="selected_header"
-                      v-bind:selected_table="selected_table"
-                      v-bind:header_level="header_level+1"></BookContent>
-      </div>
+    <div v-if="content.content[0] === undefined">
+      <a v-if="add_pos === undefined" href="#" v-on:click="add_pos = 0" title="add item" style="margin-left:10px">
+        <v-icon name="plus"/>
+      </a>
+      <div v-if="add_pos === 0">
+          <form>
+            <div>
+              <label>item type:</label>
+              <select v-model="item_type">
+                <option v-for="(type, index) in item_types" :key="index">{{ type }}</option>
+              </select>
+            </div>
+            <div v-if="item_type === 'header'">
+              <lable>name:</lable>
+              <input v-model="header_name"/><br>
+            </div>
+            <div v-if="item_type === 'header'">
+              <lable>level:</lable>
+              <input v-model="header_level"/><br>
+            </div>
+            <div v-if="item_type === 'problem'">
+              <ExprQuery :label="'expr_latex: '" v-model="problem_expr"></ExprQuery>
+            </div>
+            <div v-if="item_type === 'problem'">
+              <div v-for="(cond, index) in problem_conds" :key="index">
+                <ExprQuery :label="'cond_'+index+': '" v-bind:value="cond" 
+                          @input="setProblemConds(index, $event)"/><br/>
+              </div>
+              <button v-on:click="problem_conds.push('')">Add condition</button>
+            </div>
+            <div v-if = "item_type === 'problem'">
+              <label>path:</label>
+              <input v-model="problem_path"/><br/>
+            </div>
+            <div v-if = "item_type === 'definition'">
+              <ExprQuery :label="'expr_latex: '" v-model="definition_expr"></ExprQuery>
+            </div>
+            <div v-if = "item_type === 'axiom'">
+              <ExprQuery :label="'expr_latex: '" v-model="axiom_expr"></ExprQuery>
+            </div>
+            <div v-if = "item_type === 'axiom'">
+              <label>category:</label>
+              <input v-model="axiom_category"/><br/>
+            </div>
+            <div v-if = "item_type === 'axiom'">
+              <!-- attributes -->
+            </div>
+
+          </form>
+          <button v-if="item_type === 'header'" style="margin:5px" v-on:click="add_header(0)">Add</button>
+          <button v-if="item_type === 'problem'" style="margin:5px" v-on:click="add_problem(0)">Add</button>
+          <button v-if="item_type === 'definition'" style="margin:5px" v-on:click="add_definition(0)">Add</button>
+          <button v-if="item_type === 'axiom'" style="margin:5px" v-on:click="add_axiom(0)">Add</button>
+          <button style="margin:5px" v-on:click="add_pos = undefined">Cancel</button>
+        </div>
     </div>
     <div v-else>
-      <div v-if="content.type == 'definition'">
-        <MathEquation v-bind:data="'\\(' + content.latex_str + '\\)'" class="indented-text"
-          v-on:click.native="openFile(content.path)"
-          style="cursor:pointer"/>
-      </div>
-      <div v-if="content.type == 'problem'">
-        <MathEquation v-bind:data="'\\(' + content.latex_str + '\\)'" class="indented-text"
-          v-on:click.native="openFile(content.path)"
-          style="cursor:pointer"/>
-        <span v-if="'latex_conds' in content && content.latex_conds.length > 0">
-          <span class="math-text indented-text">for &nbsp;</span>
-          <span v-for="(cond, index) in content.latex_conds" :key="index">
-            <span v-if="index > 0">, &nbsp;</span>
-            <MathEquation v-bind:data="'\\(' + cond + '\\)'"/>
-          </span>
-        </span>
-      </div>
-      <div v-if="content.type == 'axiom' || content.type == 'inequality'">
-        <MathEquation v-bind:data="'\\(' + content.latex_str + '\\)'" class="indented-text"/>
-        <span v-if="'latex_conds' in content && content.latex_conds.length > 0">
-          <span class="math-text indented-text">for &nbsp;</span>
-          <span v-for="(cond, index) in content.latex_conds" :key="index">
-            <span v-if="index > 0">, &nbsp;</span>
-            <MathEquation v-bind:data="'\\(' + cond + '\\)'"/>
-          </span>
-        </span>
-      </div>
-      <div :class="{selected_table: selected_table == label}" 
-           v-if="content.type == 'table'" style="margin: 5px">
-        <table style="border-collapse: collapse" @click="selectTable(content, label)">
-          <tr>
-            <td style="border-style: solid; padding: 3px">
-              <MathEquation v-bind:data="'\\(' + '{x}' + '\\)'"/>
-            </td>
-            <td v-for="(entry, index) in content.latex_table" :key="index"
-                style="border-style: solid; padding: 3px">
-              <MathEquation v-bind:data="'\\(' + entry.x + '\\)'"/>
-            </td>
-          </tr>
-          <tr>
-            <td style="border-style: solid; padding: 3px">
-              <MathEquation v-bind:data="'\\(' + content.funcexpr + '\\)'"/>
-            </td>
-            <td v-for="(entry, index) in content.latex_table" :key="index"
-                style="border-style: solid; padding: 3px">
-              <MathEquation v-bind:data="'\\(' + entry.y + '\\)'"/>
-            </td>
-          </tr>
-        </table>
+      <div v-for="(item, idx) in content.content" :key="idx">
+        <div v-if="item.type === 'header'"
+            v-bind:class="{'item-selected':is_selected(idx)}"
+            v-on:click="selected_item=idx">
+          <div v-if="edit_pos === undefined || edit_pos !== idx">
+            <span v-html="item.name"
+                  :class="{'header-1': item.level == 1,
+                          'header-2': item.level == 2,
+                          'header-3': item.level == 3}"></span>
+            <a href="#" v-on:click="edit_pos = idx" title="edit" style="margin-left:10px">
+              <v-icon name="edit"/>
+            </a>
+            <a href="#" v-on:click="add_pos = idx" title="add item" style="margin-left:10px">
+              <v-icon name="plus"/>
+            </a>
+          </div>
+          <div v-else>
+            <HeaderEdit :header="content.content[idx]" ref="edit"></HeaderEdit>
+            <button style="margin:5px" v-on:click="save_header(idx)">Save</button>
+            <button style="margin:5px" v-on:click="edit_pos = undefined">Cancel</button>
+          </div>
+        </div>
+        <div v-else>
+          <div v-if="item.type == 'definition'" @click="selectItem(idx)">
+            <MathEquation v-bind:data="'\\(' + item.latex_str + '\\)'" class="indented-text"
+              style="cursor:pointer"/>
+            <a href="#" v-on:click="edit_header = true" title="edit" style="margin-left:10px">
+              <v-icon name="edit"/>
+            </a>
+            <a href="#" v-on:click="add_pos = idx" title="add item" style="margin-left:10px">
+              <v-icon name="plus"/>
+            </a>
+          </div>
+          <div v-if="item.type == 'problem'" @click="selectItem(idx)">
+            <MathEquation v-bind:data="'\\(' + item.latex_str + '\\)'" class="indented-text"
+              v-on:click.native="openFile(item.path)"
+              style="cursor:pointer"/>
+            <span v-if="'latex_conds' in item && item.latex_conds.length > 0">
+              <span class="math-text indented-text">for &nbsp;</span>
+              <span v-for="(cond, index) in item.latex_conds" :key="index">
+                <span v-if="index > 0">, &nbsp;</span>
+                <MathEquation v-bind:data="'\\(' + cond + '\\)'"/>
+              </span>
+            </span>
+            <a href="#" v-on:click="edit_header = true" title="edit" style="margin-left:10px">
+              <v-icon name="edit"/>
+            </a>
+            <a href="#" v-on:click="add_pos = idx" title="add item" style="margin-left:10px">
+              <v-icon name="plus"/>
+            </a>
+          </div>
+          <div v-if="item.type == 'axiom' || item.type == 'inequality'" @click="selectItem(idx)">
+            <MathEquation v-bind:data="'\\(' + item.latex_str + '\\)'" class="indented-text"/>
+            <span v-if="'latex_conds' in item && item.latex_conds.length > 0">
+              <span class="math-text indented-text">for &nbsp;</span>
+              <span v-for="(cond, index) in item.latex_conds" :key="index">
+                <span v-if="index > 0">, &nbsp;</span>
+                <MathEquation v-bind:data="'\\(' + cond + '\\)'"/>
+              </span>
+            </span>
+            <a href="#" v-on:click="edit_header = true" title="edit" style="margin-left:10px">
+              <v-icon name="edit"/>
+            </a>
+            <a href="#" v-on:click="add_pos = idx" title="add item" style="margin-left:10px">
+              <v-icon name="plus"/>
+            </a>
+          </div>
+          <div v-if="item.type == 'table'" style="margin: 5px" @click="selectItem(idx)">
+            <table style="border-collapse: collapse">
+              <tr>
+                <td style="border-style: solid; padding: 3px">
+                  <MathEquation v-bind:data="'\\(' + '{x}' + '\\)'"/>
+                </td>
+                <td v-for="(entry, index) in item.latex_table" :key="index"
+                    style="border-style: solid; padding: 3px">
+                  <MathEquation v-bind:data="'\\(' + entry.x + '\\)'"/>
+                </td>
+              </tr>
+              <tr>
+                <td style="border-style: solid; padding: 3px">
+                  <MathEquation v-bind:data="'\\(' + item.funcexpr + '\\)'"/>
+                </td>
+                <td v-for="(entry, index) in item.latex_table" :key="index"
+                    style="border-style: solid; padding: 3px">
+                  <MathEquation v-bind:data="'\\(' + entry.y + '\\)'"/>
+                </td>
+              </tr>
+            </table>
+            <a href="#" v-on:click="edit_header = true" title="edit" style="margin-left:10px">
+                <v-icon name="edit"/>
+            </a>
+            <a href="#" v-on:click="add_pos = idx" title="add item" style="margin-left:10px">
+                <v-icon name="plus"/>
+            </a>
+          </div>
+        </div>
+        <div v-if="add_pos === idx">
+          <form>
+            <div>
+              <label>item type:</label>
+              <select v-model="item_type">
+                <option v-for="(type, index) in item_types" :key="index">{{ type }}</option>
+              </select>
+            </div>
+            <div>
+              <label>insert position:</label>
+              <select v-model="insert_pos">
+                <option>previous</option>
+                <option>next</option>
+              </select>
+            </div>
+            <div v-if="item_type === 'header'">
+              <lable>name:</lable>
+              <input v-model="header_name"/><br>
+            </div>
+            <div v-if="item_type === 'header'">
+              <lable>level:</lable>
+              <input v-model="header_level"/><br>
+            </div>
+            <div v-if="item_type === 'problem'">
+              <ExprQuery :label="'expr_latex: '" v-model="problem_expr"></ExprQuery>
+            </div>
+            <div v-if="item_type === 'problem'">
+              <div v-for="(cond, index) in problem_conds" :key="index">
+                <ExprQuery :label="'cond_'+index+': '" v-bind:value="cond" 
+                          @input="setProblemConds(index, $event)"/><br/>
+              </div>
+              <button v-on:click="problem_conds.push('')">Add condition</button>
+            </div>
+            <div v-if = "item_type === 'problem'">
+              <label>path:</label>
+              <input v-model="problem_path"/><br/>
+            </div>
+            <div v-if = "item_type === 'definition'">
+              <ExprQuery :label="'expr_latex: '" v-model="definition_expr"></ExprQuery>
+            </div>
+            <div v-if = "item_type === 'axiom'">
+              <ExprQuery :label="'expr_latex: '" v-model="axiom_expr"></ExprQuery>
+            </div>
+            <div v-if = "item_type === 'axiom'">
+              <label>category:</label>
+              <input v-model="axiom_category"/><br/>
+            </div>
+            <div v-if = "item_type === 'axiom'">
+              <!-- attributes -->
+            </div>
+
+          </form>
+          <button v-if="item_type === 'header'" style="margin:5px" v-on:click="add_header(idx)">Add</button>
+          <button v-if="item_type === 'problem'" style="margin:5px" v-on:click="add_problem(idx)">Add</button>
+          <button v-if="item_type === 'definition'" style="margin:5px" v-on:click="add_definition(idx)">Add</button>
+          <button v-if="item_type === 'axiom'" style="margin:5px" v-on:click="add_axiom(idx)">Add</button>
+          <button style="margin:5px" v-on:click="add_pos = undefined">Cancel</button>
+        </div>
       </div>
     </div>
   </div>
 </template>
-  
 <script>
+import axios from 'axios'
 import MathEquation from '../util/MathEquation.vue'
+import HeaderEdit from '../book_items/HeaderEdit'
+import ExprQuery from './ExprQuery'
 export default {
   name: "BookContent",
   components: {
-    MathEquation
+    MathEquation,
+    HeaderEdit,
+    ExprQuery
+  },
+  data: function(){
+    return {
+      edit_pos:undefined,
+      selected_item:undefined,
+      add_pos:undefined,
+      insert_pos:undefined,
+      item_types: ['header', 'axiom', 'table', 'definition', 'problem'],
+      item_type: undefined,
+      header_name: undefined,
+      header_level: undefined,
+      is_next: undefined,
+      problem_expr: undefined,
+      problem_conds: [],
+      problem_path: undefined,
+      definition_expr: undefined,
+    }
   },
   props: [
     'content',
-    'label',
-    'selected_header',
-    'header_level',
-    'selected_table'
+    'book_name'
   ],
   methods: {
     openFile: function(name){
       this.$emit('open_file', name)
     },
-    selectHeader: function(label) {
-      this.$emit('select_header', label)
+    selectItem: function(index) {
+      this.$emit('select_book_item', index)
     },
-    selectTable: function(content, label) {
-      this.$emit('select_table', content, label)
+    save_book: async function() {
+      
+      const data = {
+        filename: this.book_name,
+        content: this.content,
+        type: 'book'
+      }
+      const response = await axios.post("http://127.0.0.1:5000/api/integral-save-file", JSON.stringify(data))
+      if (response.data.status === 'ok') {
+        console.log("ok")
+      }
+      
+    },
+    save_header: async function(idx) {
+      this.$nextTick(async () => {
+        const data = {
+          'item':{
+            'name': this.$refs.edit[0].name,
+            'level': this.$refs.edit[0].level,
+            'type': 'header'
+          },
+          'filename': this.book_name,
+          'index': idx
+        }
+        const response = await axios.post("http://127.0.0.1:5000/api/integral-save-book-item", JSON.stringify(data))
+        if (response.data.status === 'ok') {
+          this.$parent.loadBookContent();
+          console.log("ok")
+        }
+        this.init_var()
+      })
+    },
+    is_selected: function(idx) {
+      return idx === this.selected_item
+    },
+    init_var: function() {
+      this.add_pos = undefined
+      this.problem_conds = []
+      this.problem_expr = undefined
+      this.item_type = undefined
+      this.definition_expr = undefined
+      this.edit_pos = undefined
+    },
+    add_header: async function(idx) {
+      var pos = idx 
+      if(this.insert_pos !== undefined && this.insert_pos == 'next')
+        pos = idx + 1
+      const data = {
+        'item':{
+          'name': this.header_name,
+          'level': Number(this.header_level),
+          'type': this.item_type
+        },
+        'filename': this.book_name,
+        'index': pos
+      }
+      const response = await axios.post("http://127.0.0.1:5000/api/integral-book-add-item", JSON.stringify(data))
+      if (response.data.status === 'ok') {
+        this.$parent.loadBookContent();
+        console.log("ok")
+      }
+      this.init_var()
+    },
+    add_problem: async function(idx) {
+      this.$nextTick(async () => {
+        var pos = idx 
+        if(this.insert_pos !== undefined && this.insert_pos == 'next')
+          pos = idx + 1
+        const data = {
+          'item':{
+            'expr': this.problem_expr,
+            'conds': this.problem_conds,
+            'path': this.problem_path,
+            'type': this.item_type
+          },
+          'filename': this.book_name,
+          'index': pos
+        }
+        const response = await axios.post("http://127.0.0.1:5000/api/integral-book-add-item", JSON.stringify(data))
+        if (response.data.status === 'ok') {
+          this.$parent.loadBookContent();
+          console.log("ok")
+        }
+        this.init_var()
+      })
+    },
+    add_definition: async function(idx) {
+      this.$nextTick(async () => {
+        var pos = idx 
+        if(this.insert_pos !== undefined && this.insert_pos == 'next')
+          pos = idx + 1
+        const data = {
+          'item':{
+            'expr': this.definition_expr,
+            'type': this.item_type
+          },
+          'filename': this.book_name,
+          'index': pos
+        }
+        const response = await axios.post("http://127.0.0.1:5000/api/integral-book-add-item", JSON.stringify(data))
+        if (response.data.status === 'ok') {
+          this.$parent.loadBookContent();
+          console.log("ok")
+        }
+        this.init_var()
+      })
+    },
+    setProblemConds: function(index, value){
+      this.$set(this.problem_conds, index, value)
     }
-  }
+  },
+  mounted() {
+    console.log(this.content.content)
+  },
 }
 
 </script>
@@ -119,18 +389,9 @@ export default {
   font-weight: 500;
 }
 
-.header-4 {
-  font-size: medium;
-  font-weight: 500;
-}
-
-.header-5 {
-  font-size: small;
-  font-weight: 500;
-}
-
-.selected_table{
-  background-color: aqua;
+.item-selected {
+  border-style: solid;
+  border-width: thin;
 }
 </style>
   

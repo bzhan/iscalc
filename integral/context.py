@@ -360,25 +360,13 @@ class Context:
         if 'imports' in info:
             for book_name in info['imports']:
                 self.load_book(book_name)
-        def rec(item, u):
-            if 'content' in item:
-                for i in range(len(item['content'])):
-                    flag = rec(item['content'][i], u)
-                    if not flag:
-                        return False
-            else:
-                if u is not None and 'path' in item and item['path'] == u:
-                    return False
-                else:
-                    self.extend_by_item(item)
-            return True
-        rec(info, upto)
+
         # Load content
-        # if 'content' in info:
-        #     for item in info['content']:
-        #         if upto is not None and "path" in item and item['path'] == upto:
-        #             break
-        #         self.extend_by_item(item)
+        if 'content' in info:
+            for item in info['content']:
+                if upto is not None and "path" in item and item['path'] == upto:
+                    break
+                self.extend_by_item(item)
 
     def check_condition(self, e: Expr) -> bool:
         """Check the given condition under the extra conditions"""

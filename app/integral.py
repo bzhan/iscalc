@@ -10,6 +10,7 @@ import os
 import integral
 from integral import compstate
 from integral import slagle
+from integral import parser
 from app.app import app
 
 dirname = os.path.dirname(__file__)
@@ -45,7 +46,6 @@ def add_new_book():
         "content":[],
         "name": new_book_name,
         "imports": imports,
-        'type':'header'
     }
     with open('../examples/'+new_book_name+'.json', 'w', encoding='utf-8') as f:
         json.dump(tmp, f, indent=4, ensure_ascii=False, sort_keys=True)
@@ -83,44 +83,38 @@ def delete_books():
 def integral_load_book_content():
     data = json.loads(request.get_data().decode('utf-8'))
     file_name = os.path.join(dirname, "../examples/" + data['bookname'] + '.json')
+
     # Load raw data
     with open(file_name, 'r', encoding='utf-8') as f:
         f_data = json.load(f)
 
-    def rec(item):
-        res = item
-        if 'content' in item:
-            for i in range(len(item['content'])):
-                res['content'][i] = rec(item['content'][i])
-        else:
-            # Expressions in item
-            if 'expr' in item:
-                e = integral.parser.parse_expr(item['expr'])
-                latex_str = integral.latex.convert_expr(e)
-                item['latex_str'] = latex_str
-            # Conditions in item
-            if 'conds' in item:
-                latex_conds = []
-                for cond_str in item['conds']:
-                    cond = integral.parser.parse_expr(cond_str)
-                    latex_conds.append(integral.latex.convert_expr(cond))
-                item['latex_conds'] = latex_conds
-            # Table elements
-            if item['type'] == 'table':
-                new_table = list()
-                funcexpr = integral.expr.Fun(item['name'], integral.expr.Var('x'))
-                item['funcexpr'] = integral.latex.convert_expr(funcexpr)
-                for x, y in item['table'].items():
-                    x = integral.parser.parse_expr(x)
-                    y = integral.parser.parse_expr(y)
-                    new_table.append({
-                        'x': integral.latex.convert_expr(x),
-                        'y': integral.latex.convert_expr(y)
-                    })
-                item['latex_table'] = new_table
-        return res
-
-    f_data = rec(f_data)
+    # For each expression, load its latex form
+    for item in f_data['content']:
+        # Expressions in item
+        if 'expr' in item:
+            e = integral.parser.parse_expr(item['expr'])
+            latex_str = integral.latex.convert_expr(e)
+            item['latex_str'] = latex_str
+        # Conditions in item
+        if 'conds' in item:
+            latex_conds = []
+            for cond_str in item['conds']:
+                cond = integral.parser.parse_expr(cond_str)
+                latex_conds.append(integral.latex.convert_expr(cond))
+            item['latex_conds'] = latex_conds
+        # Table elements
+        if item['type'] == 'table':
+            new_table = list()
+            funcexpr = integral.expr.Fun(item['name'], integral.expr.Var('x'))
+            item['funcexpr'] = integral.latex.convert_expr(funcexpr)
+            for x, y in item['table'].items():
+                x = integral.parser.parse_expr(x)
+                y = integral.parser.parse_expr(y)
+                new_table.append({
+                    'x': integral.latex.convert_expr(x),
+                    'y': integral.latex.convert_expr(y)
+                })
+            item['latex_table'] = new_table
     return jsonify(f_data)
 
 @app.route("/api/save-func-table", methods=['POST'])
@@ -187,54 +181,34 @@ def delete_func_table_item():
         'status': 'ok'
     })
 
-
-@app.route("/api/book-add-lemma", methods=['POST'])
-def book_add_lemma():
+@app.route("/api/integral-book-add-item", methods=['POST'])
+def book_add_item():
     data = json.loads(request.get_data().decode('utf-8'))
-    label, book_name, lemma_type = data['label'], data['book_name'], data['lemma_type']
-    if lemma_type != 'table':
-        item = {
-            'type': lemma_type,
-            'attributes': data['lemma_attributes'],
-            'category': data['lemma_category'],
-            'expr': data['expr'],
-            'conds': data['conds'],
-            'reference': data['reference']
-        }
-    else:
-        table = data['table']
-        item = {
-            'type': lemma_type,
-            'name': data['table_name'],
-            'table': dict(zip(table['args'], table['values']))
-        }
-    compstate.edit_book(label, book_name, item)
-    return jsonify({
-        "status": "ok",
-        "book_name": book_name
-    })
+    print(data, flush=True)
+    book_path = os.path.join(dirname, "../examples/" + data['filename'] + '.json')
+    index = data['index']
+    item = data['item']
+    with open(book_path, 'r', encoding='utf-8') as f:
+        book = json.load(f)
+    book['content'].insert(index, item)
+    if item['type'] == 'problem':
+        # check the existance of this problem
+        problem_path = os.path.join(dirname, "../examples/" + item['path'] + '.json')
+        problem_file = compstate.CompFile(data['filename'], item['path'])
+        if os.path.exists(problem_path):
+            with open(problem_path, 'r', encoding='utf-8') as f:
+                problem = json.load(f)
+            for i in problem['content']:
+                problem_file.add_item(compstate.parse_item(problem_file, i))
 
-@app.route("/api/book-add-problem", methods=['POST'])
-def book_add_problem():
-    data = json.loads(request.get_data().decode('utf-8'))
-    book_name, label, file = data['book'], data['label'], data['file']
-    goal = integral.parser.parse_expr(data['goal'])
-    conds = list(integral.parser.parse_expr(cond) for cond in data['conds'])
-    compstate.edit_problem_file(book_name, file, {'type': 'goal', 'goal': goal, 'conds': conds})
-    compstate.edit_book(label, book_name, {'expr': data['goal'], 'type': 'problem', 'path': file})
-    return jsonify({"status": "ok"})
+        problem_file.add_goal(integral.parser.parse_expr(item['expr']), \
+                            conds=[integral.parser.parse_expr(cond) for cond in item['conds']])
+        with open(problem_path, 'w', encoding='utf-8') as f:
+            json.dump(problem_file.export(), f, indent=4, ensure_ascii=False, sort_keys=True)
+    with open(book_path, 'w', encoding='utf-8') as f:
+        json.dump(book, f, indent=4, ensure_ascii=False, sort_keys=True)
+    return jsonify({'status': 'ok'})
 
-@app.route("/api/integral-add-header", methods=['POST'])
-def integral_add_header():
-    data = json.loads(request.get_data().decode('utf-8'))
-    book_name = data['book_name']
-    label = data['label']
-    name = data['header_name']
-    compstate.edit_book(label, book_name, {'name':name, 'type':'header', 'content':[]})
-    res = {
-        "status": "ok",
-    }
-    return res
 
 @app.route("/api/integral-open-file", methods=['POST'])
 def integral_open_file():
@@ -249,6 +223,20 @@ def integral_open_file():
             item['_problem_latex'] = integral.latex.convert_expr(problem)
         
     return jsonify(f_data)
+
+@app.route("/api/integral-save-book-item", methods=['POST'])
+def integral_save_book_item():
+    data = json.loads(request.get_data().decode('utf-8'))
+    print(data, flush=True)
+    book_path = os.path.join(dirname, "../examples/" + data['filename'] + '.json')
+    index = data['index']
+    item = data['item']
+    with open(book_path, 'r', encoding='utf-8') as f:
+        book = json.load(f)
+    book['content'][index] = item
+    with open(book_path, 'w', encoding='utf-8') as f:
+        json.dump(book, f, indent=4, ensure_ascii=False, sort_keys=True)
+    return jsonify({'status':'ok'})
 
 @app.route("/api/integral-save-file", methods=['POST'])
 def integral_save_file():
@@ -385,35 +373,15 @@ def add_function_definition():
     forSomething = data['for']
     eq = integral.parser.parse_expr(data['eq'])
     conds = list(integral.parser.parse_expr(cond) for cond in data['conds'])
-    if forSomething == 'file':
-        file = compstate.CompFile(book_name, data['file'])
-        for item in data['content']:
-            file.add_item(compstate.parse_item(file, item))
-        file.add_definition(eq, conds=conds)
-        return jsonify({
-            "status": "ok",
-            "state": file.export()['content'],
-            "selected_item": str(compstate.Label(""))
-        })
-    elif forSomething == 'book':
-        label = data['label']
-        imported = {
-            'type': 'definition',
-            'eq': eq,
-            'conds': conds
-        }
-        compstate.edit_problem_file(book_name, data['file'], imported)
-        fun_def = {
-            'type': 'definition',
-            'expr': data['eq'],
-            'path': data['file'],
-            'conds': data['conds'] if 'conds' in data else []
-        }
-        compstate.edit_book(label, book_name, fun_def)
-        return jsonify({
-            "status": "ok",
-            "book_name": book_name
-        })
+    file = compstate.CompFile(book_name, data['file'])
+    for item in data['content']:
+        file.add_item(compstate.parse_item(file, item))
+    file.add_definition(eq, conds=conds)
+    return jsonify({
+        "status": "ok",
+        "state": file.export()['content'],
+        "selected_item": str(compstate.Label(""))
+    })
 
 @app.route("/api/add-goal", methods=["POST"])
 def add_goal():

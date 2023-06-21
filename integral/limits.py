@@ -117,7 +117,7 @@ def asymp_compare(a: Asymptote, b: Asymptote, ctx:Context) -> int:
     else:
         raise NotImplementedError
     
-def asymp_add(a: Asymptote, b: Asymptote) -> Asymptote:
+def asymp_add(a: Asymptote, b: Asymptote, ctx:Context) -> Asymptote:
     """Return the sum of two asymptotes."""
     if isinstance(a, Unknown) or isinstance(b, Unknown):
         return Unknown()
@@ -276,7 +276,7 @@ def limit_add(a: Limit, b: Limit, ctx: Context) -> Limit:
                 return Limit(POS_INF,asymp=b.asymp)
         return Limit(None)
     elif a.e == POS_INF and b.e == POS_INF:
-        return Limit(POS_INF, asymp=asymp_add(a.asymp, b.asymp))
+        return Limit(POS_INF, asymp=asymp_add(a.asymp, b.asymp, ctx))
     elif a.e == POS_INF and b.e == NEG_INF:
         cmp = asymp_compare(a.asymp, b.asymp, ctx)
         if cmp == UNKNOWN:

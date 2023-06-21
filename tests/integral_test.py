@@ -70,6 +70,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.IndefiniteIntegralIdentity())
         calc.perform_rule(rules.ReplaceSubstitution())
+        calc.perform_rule(rules.FullSimplify())
 
         goal6 = file.add_goal(
             "(INT x. x ^ k * log(x)) = x ^ (k + 1) * log(x) / (k + 1) - x ^ (k + 1) / (k + 1) ^ 2 + SKOLEM_CONST(C)", conds=["x > 0", "k != -1"])
@@ -998,8 +999,8 @@ class IntegralTest(unittest.TestCase):
         # Inside interesting integrals, Section 2.1.d
         file = compstate.CompFile("interesting", "easy04")
 
-        goal = file.add_goal("(INT x:[0, oo]. 1/(1 + exp(a*x))) = (log(2)/a)", conds=["a > 0"])
-        proof = goal.proof_by_calculation()
+        goal01 = file.add_goal("(INT x:[0, oo]. 1/(1 + exp(a*x))) = (log(2)/a)", conds=["a > 0"])
+        proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.Substitution(var_name="u", var_subst=parser.parse_expr("exp(a*x)")))
         calc.perform_rule(rules.FullSimplify())
@@ -1009,6 +1010,21 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
 
+        # TODO: Check the condition. The proof is still accessed if a!=0 is missing
+        goal02 = file.add_goal("(INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2))=log(2)/a^2", conds=["a!=0"])
+        proof = goal02.proof_by_rewrite_goal(begin=goal01)
+        calc = proof.begin
+        calc.perform_rule(rules.DerivEquation("a"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.OnLocation(rules.Substitution(var_name="x", var_subst="exp(a*x)"), "0.0"))
+        calc.perform_rule(rules.SolveEquation("INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2)"))
+
+        goal03 = file.add_goal("(INT x:[1, oo]. log(x)/(x+1)^2) = log(2)")
+        proof = goal03.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.Equation("(x+1)^2", "1^2 * (x+1)^2"))
+        calc.perform_rule(rules.ApplyEquation(goal02.goal))
+        calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
 
     def testEasy05(self):
@@ -1587,7 +1603,6 @@ class IntegralTest(unittest.TestCase):
         Eq0_proof = Eq0.proof_by_calculation()
         calc = Eq0_proof.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("I"))
-        calc.perform_rule(rules.Equation("-(x ^ 2 / 2)", "-(x ^ 2) / 2"))
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc = Eq0_proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
@@ -1664,6 +1679,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnSubterm(rules.ApplyEquation(Eq6.goal)))
         calc.perform_rule(rules.Equation("2 * cos(s) * (sqrt(pi / 2) * exp(-(t ^ 2) / 2))",
                                          "sqrt(2*pi)*exp(-t^2/2)*cos(s)"))
+        # print(file)
         self.checkAndOutput(file)
 
     def testLeibniz03New(self):
@@ -1841,6 +1857,59 @@ class IntegralTest(unittest.TestCase):
         calc = proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
         self.assertTrue(goal.is_finished())
+        self.checkAndOutput(file)
+
+    def testGaussianPowerExp(self):
+        # Reference:
+        # Inside interesting integrals, Section 2.3
+        file = compstate.CompFile("interesting", 'gaussianPowerExp')
+
+        file.add_definition("I(n) = (INT x:[0, oo]. x^(2*n) * exp(-x^2))", conds=["n>=0", "isInt(n)"])
+
+        goal01 = file.add_goal("(INT x:[0, oo]. (D x. x^(2*n-1)*exp(-x^2))) = 0", conds=["n>=1", "isInt(n)"])
+        proof = goal01.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.FullSimplify())
+        self.assertTrue(goal01.is_finished())
+        goal02 = file.add_goal("(INT x:[0, oo]. (D x. x^(2*n-1)*exp(-x^2))) = (2*n-1)*I(n-1) - 2 * I(n)", conds=["n>=1", "isInt(n)"])
+        proof = goal02.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("2*n-2", "2*(n-1)"))
+        calc.perform_rule(rules.OnSubterm(rules.FoldDefinition("I")))
+        self.assertTrue(goal02.is_finished())
+        goal03 = file.add_goal("I(n) = (2 * n - 1) / 2 * I(n - 1)", conds=["n>=1", "isInt(n)"])
+        proof = goal03.proof_by_rewrite_goal(begin=goal01)
+        calc = proof.begin
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal02.goal), "0"))
+        calc.perform_rule(rules.SolveEquation("I(n)"))
+        calc.perform_rule(rules.Equation("I(n - 1) * (2 * n - 1) / 2", "(2 * n - 1) / 2 * I(n - 1)"))
+        self.assertTrue(goal03.is_finished())
+        goal04 = file.add_goal("I(n) = factorial(2*n)/(4^n*factorial(n))*(1/2)*sqrt(pi)", conds=["n>=0", "isInt(n)"])
+        proof = goal04.proof_by_induction("n", 0)
+        proof_base = proof.base_case.proof_by_calculation()
+        proof_induct = proof.induct_case.proof_by_calculation()
+        calc = proof_base.lhs_calc
+        calc.perform_rule(rules.ExpandDefinition("I"))
+        calc.perform_rule(rules.Substitution(var_name="x", var_subst="sqrt(2)*x"))
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+
+        calc = proof_induct.lhs_calc
+        calc.perform_rule(rules.ApplyEquation(goal03.goal))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.OnSubterm(rules.ApplyInductHyp()))
+        calc.perform_rule(rules.Equation("factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi) * (2 * n + 1) / 2",
+                                         "4 ^ -n * sqrt(pi) * (((2*n+1)*factorial(2*n))/(4 * factorial(n)))"))
+        calc.perform_rule(rules.ApplyIdentity("(2*n+1)*factorial(2*n)", "factorial(2*n+1)"))
+        calc.perform_rule(rules.Equation("factorial(2 * n + 1) / (4 * factorial(n))", "((2*n+1 + 1)*factorial(2 * n + 1)) / (8 * ((n+1)*factorial(n)))"))
+        calc.perform_rule(rules.ApplyIdentity("(2*n+1 + 1)*factorial(2*n+1)", "factorial(2*n+2)"))
+        calc.perform_rule(rules.ApplyIdentity("(n+1)*factorial(n)", "factorial(n+1)"))
+        calc.perform_rule(rules.Equation("4 ^ -n * sqrt(pi) * (factorial(2 * n + 2) / (8 * factorial(n + 1)))",
+                                         "4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))"))
+        self.assertTrue(goal04.is_finished())
         self.checkAndOutput(file)
 
     def testEulerLogSineIntegral(self):
@@ -2113,6 +2182,31 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
 
+    # TODO: Change the order of integration.
+    # def testFlipSide02(self):
+    #     # Reference:
+    #     # Inside interesting integrals, Section 3.4 example #2
+    #     file = compstate.CompFile("interesting", "filpside02")
+    #
+    #     goal01 = file.add_goal("(INT t:[0,oo]. (exp(-p*t^2)-exp(-q*t^2))/t^2) = (INT t:[0,oo]. (INT a:[p,q]. exp(-a*t^2)))", conds=["p>0","q>0"])
+    #     proof_of_goal01 = goal01.proof_by_calculation()
+    #     calc = proof_of_goal01.rhs_calc
+    #     calc.perform_rule(rules.OnLocation(rules.Substitution(var_name="x", var_subst="-a*t"), "0"))
+    #     calc.perform_rule(rules.OnLocation(rules.DefiniteIntegralIdentity(), "0"))
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.ReplaceSubstitution())
+    #     calc.perform_rule(rules.Equation("1 / t * (-(exp(-(p * t ^ 2)) / t) + exp(-(q * t ^ 2)) / t)",
+    #                                      "-exp(-p * t ^ 2) / t^2 + exp(-q * t ^ 2) / t^2"))
+    #     calc.perform_rule(rules.Equation("-(INT t:[0,oo]. -exp(-p * t ^ 2) / t ^ 2 + exp(-q * t ^ 2) / t ^ 2)",
+    #                                      "(INT t:[0,oo]. exp(-p * t ^ 2) / t ^ 2 - exp(-q * t ^ 2) / t ^ 2)"))
+    #     calc.perform_rule(rules.Equation("exp(-p * t ^ 2) / t ^ 2 - exp(-q * t ^ 2) / t ^ 2",
+    #                                      "(exp(-p*t^2)-exp(-q*t^2))/t^2"))
+    #
+    #     goal02 = file.add_goal("(INT t:[0,oo]. (INT a:[p,q]. exp(-a*t^2))) = sqrt(pi)*(sqrt(q) - sqrt(p))", conds=["p>0","q>0"])
+    #     proof_of_goal02 = goal02.proof_by_calculation()
+    #     calc = proof_of_goal02.lhs_calc
+    #
+    #     self.checkAndOutput(file)
     def testFlipside03(self):
         # Reference:
         # Inside interesting integrals, Section 3.4, example #3
@@ -2190,31 +2284,40 @@ class IntegralTest(unittest.TestCase):
 
         self.checkAndOutput(file)
 
-    def testFilpSide08(self):
-        # Reference:
-        # Inside interesting integrals, Section 3.4, example #7 & #8
-        file = compstate.CompFile("interesting", "flipside08")
+    # TODO: Solve LIM {z -> oo}. atan(z * sqrt(a - b) / sqrt(a + b))
+    # def testFlipSide08(self):
+    #     # Reference:
+    #     # Inside interesting integrals, Section 3.4, example #7 and #8
+    #     file = compstate.CompFile("interesting", "flipside08")
+    #
+    #     file.add_definition("I(a, b) = (INT x:[0,pi]. log(a+b*cos(x)))", conds=["a>b", "b>=0"])
+    #
+    #     goal01 = file.add_goal("(D a. I(a, b)) = (INT x:[0,pi]. 1/(a+b*cos(x)))", conds=["a>b", "b>=0"])
+    #     proof = goal01.proof_by_calculation()
+    #     calc = proof.lhs_calc
+    #     calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.Equation("b*cos(x)+a", "a+b*cos(x)"))
+    #
+    #     goal02 = file.add_goal("(INT x:[0,pi]. 1/(a+b*cos(x))) = pi/(sqrt(a^2-b^2))", conds=["a>b", "b>=0"])
+    #     proof = goal02.proof_by_calculation()
+    #     calc = proof.lhs_calc
+    #     calc.perform_rule(rules.Substitution(var_name="z", var_subst="tan(x/2)"))
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.Equation("1 / ((z ^ 2 + 1) * (b * (-(z ^ 2) + 1) / (z ^ 2 + 1) + a))",
+    #                                      "1/(a*(1+z^2) + b*(1-z^2))"))
+    #     calc.perform_rule(rules.Equation("1/(a*(1+z^2) + b*(1-z^2))", "(1/(a-b)) * 1/((a+b)/(a-b)+z^2)"))
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.Equation("(a+b)/(a-b)+z^2", "z^2+(a+b)/(a-b)"))
+    #     calc.perform_rule(rules.DefiniteIntegralIdentity())
+    #     calc.perform_rule(rules.FullSimplify())
+    #
+    #     self.checkAndOutput(file)
 
-        file.add_definition("I(a, b) = (INT x:[0,pi]. log(a+b*cos(x)))", conds=["a>b", "b>=0"])
-
-        goal01 = file.add_goal("(D a. I(a, b)) = (INT x:[0,pi]. 1/(a+b*cos(x)))", conds=["a>b", "b>=0"])
-        proof = goal01.proof_by_calculation()
-        calc = proof.lhs_calc
-        calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
-        calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.Equation("b*cos(x)+a", "a+b*cos(x)"))
-
-        goal02 = file.add_goal("(INT x:[0,pi]. 1/(a+b*cos(x))) = pi/(sqrt(a^2-b^2))", conds=["a>b", "b>=0"])
-        proof = goal02.proof_by_calculation()
-        calc = proof.lhs_calc
-        calc.perform_rule(rules.Substitution(var_name="z", var_subst="tan(x/2)"))
-        calc.perform_rule(rules.FullSimplify())
-        self.checkAndOutput(file)
-
-    def testFrullaniIntegral(self):
+    def testFrullaniIntegral01(self):
         # Reference:
         # Inside interesting integrals, Section 3.3
-        file = compstate.CompFile("interesting", "FrullaniIntegral")
+        file = compstate.CompFile("interesting", "FrullaniIntegral01")
 
         # Define I(a, b)
         file.add_definition("I(a, b) = INT x:[0,oo]. (atan(a*x) - atan(b*x))/x", conds=["a > 0", "b > 0"])
@@ -2255,6 +2358,112 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyEquation(goal3.goal))
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal4.goal), "1"))
         calc.perform_rule(rules.FullSimplify())
+
+        self.checkAndOutput(file)
+
+    # TODO: Calculating the limit lim{x->oo}. exp(-a*x) = 0
+    # def testFrullaniIntegral02(self):
+    #     # Reference:
+    #     # Inside interesting integrals, Section 3.3
+    #     file = compstate.CompFile("interesting", "FrullaniIntegral02")
+    #
+    #     file.add_definition("I(a) = (INT x:[0, oo]. (exp(-a*x)-1)/x)", conds=["a>0"])
+    #
+    #     goal01 = file.add_goal("(D a. I(a)) = -1/a")
+    #     proof_of_goal01 = goal01.proof_by_calculation()
+    #     calc = proof_of_goal01.lhs_calc
+    #     calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.DefiniteIntegralIdentity())
+    #     calc.perform_rule(rules.FullSimplify())
+    #     self.checkAndOutput(file)
+
+    def testCombiningTwoTricks(self):
+        # Reference:
+        # Inside interesting integrals, Section 3.5
+        file = compstate.CompFile("interesting", 'CombiningTwoTricks')
+
+        file.add_definition("I(a,b,n) = (INT x:[0, pi/2]. 1/(a*cos(x)^2+b*sin(x)^2)^n)", conds=["a > 0", "b > 0", "n > 0", "isInt(n)"])
+        file.add_definition("J(a,y,n) = (INT x:[0, y]. 1/(x^2+a^2)^n)", conds=["a>0", "y>=0", "n>0", "isInt(n)"])
+
+        goal01 = file.add_goal("I(a, b, n) = -1/(n-1)*((D a. I(a,b, n-1))+(D b. I(a,b,n-1)))", conds=["a>0","b>0","n>=2","isInt(n)"])
+        proof_of_goal01 = goal01.proof_by_calculation()
+        calc = proof_of_goal01.rhs_calc
+        calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("(-n + 1) * (INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (-n + 1) * (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)",
+                                         "(-n+1)*((INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n))"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("(-n + 1) / (n - 1)", "-1"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("(INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)",
+                                         "(INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n + sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)"))
+        calc.perform_rule(rules.Equation("cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n + sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n",
+                                         "(sin(x)^2+cos(x)^2)*(a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n"))
+        calc.perform_rule(rules.ApplyIdentity("sin(x)^2+cos(x)^2", "1"))
+        calc.perform_rule(rules.Equation("1 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n",
+                                         "1 / (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ n"))
+        calc.perform_rule(rules.FoldDefinition("I"))
+
+        goal02 = file.add_goal("I(a,b,1) = pi/(2*sqrt(a*b))", conds=["a>0", "b>0"])
+        proof_of_goal02 = goal02.proof_by_calculation()
+        calc = proof_of_goal02.lhs_calc
+        calc.perform_rule(rules.ExpandDefinition("I"))
+        calc.perform_rule(rules.Equation("1/(a*cos(x)^2+b*sin(x)^2)", "(1/cos(x))^2/(a+b*(sin(x)/cos(x))^2)"))
+        calc.perform_rule(rules.ApplyIdentity("sin(x)/cos(x)", "tan(x)"))
+        calc.perform_rule(rules.ApplyIdentity("1/cos(x)", "sec(x)"))
+        calc.perform_rule(rules.Substitution(var_name="y", var_subst="tan(x)"))
+        calc.perform_rule(rules.Equation("1 / (b * y ^ 2 + a)", "(1/b)/(y^2+a/b)"))
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("2 * sqrt(a) * sqrt(b)", "2 * sqrt(a * b)"))
+
+        goal03 = file.add_goal("I(a,b,2) = pi/(4*sqrt(a*b)) * (1/a + 1/b)", conds=["a>0", "b>0"])
+        proof_of_goal03 = goal03.proof_by_calculation()
+        calc = proof_of_goal03.lhs_calc
+        calc.perform_rule(rules.ApplyEquation(goal01.goal))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0.0.0.2"))
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "1.0.2"))
+        calc.perform_rule(rules.OnSubterm(rules.ApplyEquation(goal02.goal)))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("pi / (4 * a ^ (3/2) * sqrt(b)) + pi / (4 * sqrt(a) * b ^ (3/2))",
+                                         "pi/(4*sqrt(a*b)) * (1/a + 1/b)"))
+
+        goal04 = file.add_goal("I(a,b,3) = pi/(16*sqrt(a*b)) * (3/a^2 + 3/b^2 + 2/(a*b))", conds=["a>0", "b>0"])
+        proof_of_goal04 = goal04.proof_by_calculation()
+        calc = proof_of_goal04.lhs_calc
+        calc.perform_rule(rules.ApplyEquation(goal01.goal))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0.0.0.0.2"))
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "1.0.0.2"))
+        calc.perform_rule(rules.OnSubterm(rules.ApplyEquation(goal03.goal)))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("pi / (16 * a ^ (3/2) * sqrt(b)) * (1 / a + 1 / b) + pi / (16 * sqrt(a) * b ^ (3/2)) * (1 / a + 1 / b) + pi / (8 * a ^ (5/2) * sqrt(b)) + pi / (8 * sqrt(a) * b ^ (5/2))",
+                                         "pi/(16*sqrt(a*b)) * (3/a^2 + 3/b^2 + 2/(a*b))"))
+
+        goal05 = file.add_goal("J(a,y,n) = y/(y^2+a^2)^n+2*n*J(a,y,n)-(2*n*a^2)*J(a,y,n+1)", conds=["a>0", "y>=0", "n>0", "isInt(n)"])
+        proof_of_goal05 = goal05.proof_by_calculation()
+        calc = proof_of_goal05.lhs_calc
+        calc.perform_rule(rules.ExpandDefinition("J"))
+        calc.perform_rule(rules.IntegrationByParts(u="1/(x^2+a^2)^n", v="x"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("2 * n * (INT x:[0,y]. x ^ 2 * (a ^ 2 + x ^ 2) ^ (-n - 1))",
+                                         "n * (INT x:[0,y]. 2 * x ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1))"))
+        calc.perform_rule(rules.Equation("2 * x ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1)",
+                                         "2 * (x ^ 2 + a ^ 2) / (a ^ 2 + x ^ 2) ^ (n + 1) - 2 * a ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1)"))
+        calc.perform_rule(rules.Equation("(INT x:[0,y]. 2 * (x ^ 2 + a ^ 2) / (a ^ 2 + x ^ 2) ^ (n + 1) - 2 * a ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1))",
+                                         "2 * (INT x:[0,y]. 1 / (x ^ 2 + a ^ 2) ^ n) - 2 * a ^ 2 *(INT x:[0,y]. 1 / (x ^ 2 + a ^ 2) ^ (n + 1))"))
+        calc.perform_rule(rules.OnSubterm(rules.FoldDefinition("J")))
+        calc.perform_rule(rules.Equation("n * (2 * J(a,y,n) - 2 * a ^ 2 * J(a,y,n + 1)) + y * (a ^ 2 + y ^ 2) ^ -n",
+                                         "y/(y^2+a^2)^n+2*n*J(a,y,n)-(2*n*a^2)*J(a,y,n+1)"))
+
+        goal06 = file.add_goal("J(a,y,n+1) = y/(2*n*a^2*(y^2+a^2)^n) + (2*n-1)/(2*n*a^2) * J(a,y,n)", conds=["a>0", "y>=0", "n>0", "isInt(n)"])
+        proof_of_goal06 = goal06.proof_by_rewrite_goal(begin=goal05)
+        calc = proof_of_goal06.begin
+        calc.perform_rule(rules.SolveEquation("J(a,y,n+1)"))
+        calc.perform_rule(rules.Equation("(y * (a ^ 2 + y ^ 2) ^ -n + 2 * n * J(a,y,n) - J(a,y,n)) / (2 * a ^ 2 * n)",
+                                         "y/(2*n*a^2*(y^2+a^2)^n) + (2*n-1)/(2*n*a^2) * J(a,y,n)"))
 
         self.checkAndOutput(file)
 
@@ -2660,6 +2869,118 @@ class IntegralTest(unittest.TestCase):
 
         self.checkAndOutput(file)
 
+    # TODO: Substitute s for t - sqrt(a*b)/t
+    # def testProbability(self):
+    #     # Reference:
+    #     # Inside interesting integrals, Section 3.7
+    #     file = compstate.CompFile("interesting", "Probability")
+    #
+    #     file.add_definition("I(a, b) = (INT x:[0, oo]. exp(-a*x^2 - b/x^2))", conds=["a>0", "b>=0"])
+    #     file.add_definition("J(a, b) = (INT t:[0, oo]. exp(-t^2 - a*b/t^2))", conds=["a>0", "b>=0"])
+    #
+    #     goal01 = file.add_goal("I(a, b) = 1/sqrt(a) * J(a, b)", conds=["a>0", "b>0"])
+    #     proof01 = goal01.proof_by_calculation()
+    #     calc = proof01.lhs_calc
+    #     calc.perform_rule(rules.ExpandDefinition("I"))
+    #     calc.perform_rule(rules.Substitution(var_name="t", var_subst="x*sqrt(a)"))
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.Equation("-(a * b / t ^ 2) - t ^ 2", "-t^2 - a*b/t^2"))
+    #     calc.perform_rule(rules.OnSubterm((rules.FoldDefinition("J"))))
+    #
+    #     goal02 = file.add_goal("J(a, b) = sqrt(a*b) * (INT t:[0,oo]. exp(-t^2-a*b/t^2)/t^2)", conds=["a>0","b>0"])
+    #     proof02 = goal02.proof_by_calculation()
+    #     calc = proof02.lhs_calc
+    #     calc.perform_rule(rules.ExpandDefinition("J"))
+    #     calc.perform_rule(rules.Substitution(var_name="t", var_subst="sqrt(a*b)/t"))
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.Equation("1 / t ^ 2 * exp(-(a * b / t ^ 2) - t ^ 2)",
+    #                                      "exp(-t^2-a*b/t^2)/t^2"))
+    #     calc.perform_rule(rules.Equation("sqrt(a)*sqrt(b)", "sqrt(a*b)"))
+    #
+    #     goal03 = file.add_goal("2*J(a,b) = exp(-2*sqrt(a*b)) * (INT s:[0,oo]. exp(-s^2))", conds=["a>0","b>0"])
+    #     proof03 = goal03.proof_by_calculation()
+    #     calc = proof03.lhs_calc
+    #     calc.perform_rule(rules.Equation("2*J(a, b)", "J(a,b) + J(a, b)"))
+    #     calc.perform_rule(rules.OnLocation(rules.ExpandDefinition("J"), "0"))
+    #     calc.perform_rule(rules.OnSubterm(rules.ApplyEquation(goal02.goal)))
+    #     calc.perform_rule(rules.Equation("(INT t:[0,oo]. exp(-(a * b / t ^ 2) - t ^ 2)) + sqrt(a * b) * (INT t:[0,oo]. exp(-(t ^ 2) - a * b / t ^ 2) / t ^ 2)",
+    #                                      "(INT t:[0,oo]. exp(-(a * b / t ^ 2) - t ^ 2) + sqrt(a * b) * exp(-(t ^ 2) - a * b / t ^ 2) / t ^ 2)"))
+    #     calc.perform_rule(rules.Substitution(var_name="s", var_subst="t-sqrt(a*b)/t"))
+    #     self.checkAndOutput(file)
+
+    # TODO: Show I(1/a) = 0 for a>1.
+    # def testDini(self):
+    #     # Reference:
+    #     # Inside interesting integrals, Section 3.8
+    #     file = compstate.CompFile("interesting", "dini")
+    #
+    #     file.add_definition("I(a) = (INT x:[0,pi]. log(1-2*a*cos(x)+a^2))", conds=["a>0", "a!=1"])
+    #
+    #     goal01 = file.add_goal("(D a. I(a)) = "
+    #                            "1 / a * (-(abs(a + 1) * (-(2 * a ^ 2) + 2) / ((a + 1) ^ 2 * abs(-a + 1)) * (LIM {z -> oo}. atan(z * abs(a + 1) / abs(-a + 1)))) + pi)")
+    #     proof_of_goal01 = goal01.proof_by_calculation()
+    #     calc = proof_of_goal01.lhs_calc
+    #     calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.Equation("(-(2 * cos(x)) + 2 * a)", "1/a*(2*a^2-2*a*cos(x))"))
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.Equation("(-(2 * a * cos(x)) + 2 * a ^ 2) / (-(2 * a * cos(x)) + a ^ 2 + 1)",
+    #                                      "1 - (1-a^2) / (-(2 * a * cos(x)) + a ^ 2 + 1)"))
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.DefiniteIntegralIdentity())
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.Substitution(var_name="z", var_subst="tan(x/2)"))
+    #     calc.perform_rule(rules.Equation("(z ^ 2 + 1) * (-(2 * a * (-(z ^ 2) + 1) / (z ^ 2 + 1)) + a ^ 2 + 1)",
+    #                                      "(1+a)^2*z^2+(1-a)^2"))
+    #     calc.perform_rule(rules.Equation("2/((1+a)^2*z^2+(1-a)^2)", "2/(1+a)^2 * 1/(((1-a)/(1+a))^2+z^2)"))
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.Equation("(-a + 1) ^ 2 / (a + 1) ^ 2 + z ^ 2", "z ^ 2 + ((1-a) / (1+a)) ^ 2"))
+    #     calc.perform_rule(rules.DefiniteIntegralIdentity())
+    #     calc.perform_rule(rules.FullSimplify())
+    #
+    #
+    #     goal02 = file.add_goal("I(a)=SKOLEM_CONST(C)", conds=["a>=0", "a<1"])
+    #     proof_of_goal02 = goal02.proof_by_rewrite_goal(begin=goal01)
+    #     calc = proof_of_goal02.begin
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.Equation("(-a + 1) * (2 * a + 2)", "-(2 * a ^ 2) + 2"))
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.IntegralEquation())
+    #     calc.perform_rule(rules.IndefiniteIntegralIdentity())
+    #     calc.perform_rule(rules.FullSimplify())
+    #
+    #     goal03 = file.add_goal("SKOLEM_CONST(C) = 0", conds=["a>=0", "a<1"])
+    #     proof_of_goal03 = goal03.proof_by_rewrite_goal(begin=goal02)
+    #     calc = proof_of_goal03.begin
+    #     calc.perform_rule(rules.VarSubsOfEquation([{'var': 'a', 'expr': "0"}]))
+    #     calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.SolveEquation(parser.parse_expr("SKOLEM_CONST(C)")))
+    #
+    #     goal04 = file.add_goal("I(a) = 0", conds=["a>=0", "a<1"])
+    #     proof_of_goal04 = goal04.proof_by_rewrite_goal(begin=goal02)
+    #     calc = proof_of_goal04.begin
+    #     calc.perform_rule(rules.OnSubterm(rules.ApplyEquation(goal03.goal)))
+    #
+    #     goal05 = file.add_goal("I(1/a) = I(a) - 2*pi*log(a)", conds=["a>1"])
+    #     proof_of_goal05 = goal05.proof_by_calculation()
+    #     calc = proof_of_goal05.lhs_calc
+    #     calc.perform_rule(rules.ExpandDefinition("I"))
+    #     calc.perform_rule(rules.Equation("-(2 * cos(x) / a) + 1 / a ^ 2 + 1", "(a^2-2*a*cos(x)+1)/a^2"))
+    #     calc.perform_rule(rules.ApplyIdentity("log((a^2-2*a*cos(x)+1)/a^2)", "log(a^2-2*a*cos(x)+1) - log(a^2)"))
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.DefiniteIntegralIdentity())
+    #     calc.perform_rule(rules.FullSimplify())
+    #     calc.perform_rule(rules.Equation("-(2 * a * cos(x)) + a ^ 2 + 1", "1-2*a*cos(x)+a^2"))
+    #     calc.perform_rule(rules.OnSubterm(rules.FoldDefinition("I")))
+    #
+    #     goal06 = file.add_goal("I(a) = 2*pi*log(a)", conds=["a>1"])
+    #     proof_of_goal06 = goal06.proof_by_rewrite_goal(begin=goal05)
+    #     calc = proof_of_goal06.begin
+    #     calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal04.goal), "0"))
+    #
+    #     self.checkAndOutput(file)
+
     def testChapter3Practice01(self):
         # Reference:
         # Inside interesting integrals, Section 3.10, C3.1
@@ -2998,7 +3319,7 @@ class IntegralTest(unittest.TestCase):
         # Inside interesting integrals, Section 3.10, C3.10
         file = compstate.CompFile("interesting", "Chapter3Practice09")
 
-        goal01 = file.add_goal("(INT x:[0, 1]. 1 / (a * x + b * (1 - x)) ^ 2) = 1 / (a * b)", conds=["a > 0", "b > 0", "a - b > 0"])
+        goal01 = file.add_goal("(INT x:[0, 1]. 1 / (a * x + b * (1 - x)) ^ 2) = 1 / (a * b)", conds=["a > 0", "b > 0", "a > b"])
         proof_of_goal01 = goal01.proof_by_calculation()
         calc = proof_of_goal01.lhs_calc
         calc.perform_rule(rules.Substitution(var_name="u", var_subst="(a - b) * x + b"))
@@ -3279,23 +3600,33 @@ class IntegralTest(unittest.TestCase):
     #     calc.perform_rule(rules.ExpandPolynomial())
     #     self.checkAndOutput(file)
 
-    # def testChapter1Practice01_04(self):
-    #     # Reference:
-    #     # Inside interesting integrals, C1.5
-    #     file = compstate.CompFile("interesting", "chapter1_practice01_04")
-    #
-    #     goal = file.add_goal("(INT x:[0,pi/3]. 1/cos(x))=log(2+sqrt(3))")
-    #     proof = goal.proof_by_calculation()
-    #     calc = proof.lhs_calc
-    #     calc.perform_rule(rules.Equation("1/cos(x)", "cos(x)/(cos(x))^2"))
-    #     calc.perform_rule(rules.ApplyIdentity("(cos(x))^2", "1-(sin(x))^2"))
-    #     calc.perform_rule(rules.Substitution(var_name="u", var_subst="sin(x)"))
-    #     calc.perform_rule(rules.Equation("1/(-(u^2)+1)", "1/2 * (1/(1-u)+1/(1+u))"))
-    #     calc.perform_rule(rules.FullSimplify())
-    #     calc.perform_rule(rules.DefiniteIntegralIdentity())
-    #     calc.perform_rule(rules.FullSimplify())
-    #
-    #     self.checkAndOutput(file)
+    def testChapter1Practice0104(self):
+        # Reference:
+        # Inside interesting integrals, C1.5
+        file = compstate.CompFile("interesting", "chapter1_practice0104")
+
+        goal = file.add_goal("(INT x:[0,pi/3]. 1/cos(x))=log(2+sqrt(3))")
+        proof = goal.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.Equation("1/cos(x)", "cos(x)/(cos(x))^2"))
+        calc.perform_rule(rules.ApplyIdentity("(cos(x))^2", "1-(sin(x))^2"))
+        calc.perform_rule(rules.Substitution(var_name="u", var_subst="sin(x)"))
+        calc.perform_rule(rules.Equation("1/(-(u^2)+1)", "1/2 * (1/(1-u)+1/(1+u))"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.OnLocation(rules.Substitution(var_name="t", var_subst="-u+1"), "0.1"))
+        calc.perform_rule(rules.DefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("-(1/2 * log(-(sqrt(3) / 2) + 1)) + 1/2 * log(sqrt(3) / 2 + 1)",
+                                         "1/2 * (log(sqrt(3) / 2 + 1) - log(-(sqrt(3) / 2) + 1))"))
+        calc.perform_rule(rules.ApplyIdentity("log(sqrt(3) / 2 + 1) - log(-(sqrt(3) / 2) + 1)",
+                                              "log((sqrt(3) / 2 + 1)/(-(sqrt(3) / 2) + 1))"))
+        calc.perform_rule(rules.Equation("(sqrt(3) / 2 + 1)/(-(sqrt(3) / 2) + 1)", "(2+sqrt(3))^2"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("sqrt(3)+2", "2+sqrt(3)"))
+
+        self.checkAndOutput(file)
 
     def testChapter2Practice01(self):
         # Reference:
@@ -3376,17 +3707,31 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
 
+
     def testChapter2Practice03(self):
         # Reference:
         # Inside interesting integrals, C2.3
         file = compstate.CompFile("interesting", "chapter2_practice03")
 
-        goal = file.add_goal("(INT x:[0, oo]. 1/(x^4+1)^(m+1)) = 4*m*(INT x:[0,oo]. 1/(x^4+1)^(m+1))", conds=["m>0", "isInt(m)"])
-        proof = goal.proof_by_calculation()
+        goal01 = file.add_goal("(INT x:[0, oo]. 1/(x^4+1)^m) = 4*m*((INT x:[0, oo]. 1 / (x^4+1)^m)-(INT x:[0, oo]. 1 / (x^4+1)^(m+1)))", conds=["m>=1", "isInt(m)"])
+        proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
-        calc.perform_rule(rules.IntegrationByParts(u="1/(x^4+1)^(m+1)", v="x"))
+        calc.perform_rule(rules.IntegrationByParts(u="1/(x^4+1)^m", v="x"))
         calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("x ^ 4 * (x ^ 4 + 1) ^ (-m - 1)", "(x^4+1)/(x^4+1)^(m+1)-1/(x^4+1)^(m+1)"))
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "1"))
+        calc.perform_rule(rules.Equation("-(INT x:[0,oo]. (x ^ 4 + 1) ^ (-m - 1)) + (INT x:[0,oo]. (x ^ 4 + 1) ^ -m)",
+                                         "(INT x:[0, oo]. 1 / (x^4+1)^m)-(INT x:[0, oo]. 1 / (x^4+1)^(m+1))"))
+
+        goal02 = file.add_goal("(INT x:[0, oo]. 1/(x^4+1)^(m+1)) = (4*m-1)/(4*m) * (INT x:[0, oo]. 1/(x^4+1)^m)", conds=["m>=1", "isInt(m)"])
+        proof = goal02.proof_by_rewrite_goal(begin=goal01)
+        calc = proof.begin
+        calc.perform_rule(rules.SolveEquation("(INT x:[0, oo]. 1/(x^4+1)^(m+1))"))
+        calc.perform_rule(rules.Equation("-(1 / (4 * m) * (INT x:[0,oo]. (x ^ 4 + 1) ^ -m)) + (INT x:[0,oo]. (x ^ 4 + 1) ^ -m)",
+                                         "(4*m-1)/(4*m) * (INT x:[0, oo]. 1/(x^4+1)^m)"))
+
         self.checkAndOutput(file)
+
     def testChapter2Practice05(self):
         # Reference:
         # Inside interesting integrals, C2.5
@@ -3412,7 +3757,8 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ExpandDefinition("B"))
         calc = proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
-        goal02 = file.add_goal("(INT x:[0,1]. (1-sqrt(x))^n) = 2 / ((n+1)*(n+2))", conds=["n!=-1", "n!=-2"])
+
+        goal02 = file.add_goal("(INT x:[0,1]. (1-sqrt(x))^n) = 2 / ((n+1)*(n+2))", conds=["n>-1"])
         proof = goal02.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.Substitution("u", "sqrt(x)"))
@@ -3428,8 +3774,14 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyIdentity("factorial(n+1)", "(n+1)*factorial(n)"))
         calc.perform_rule(rules.FullSimplify())
 
+        goal03 = file.add_goal("(INT x:[0,1]. (1-sqrt(x))^9) = 1 / 55")
+        proof = goal03.proof_by_rewrite_goal(begin=goal02)
+        calc = proof.begin
+        calc.perform_rule(rules.VarSubsOfEquation([{'var': 'n', 'expr': "9"}]))
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "1"))
         self.checkAndOutput(file)
 
+    # The condition of goal02 can not be weakened until complex integration is supported.
     def testChapter4Practice02(self):
         # Reference:
         # Inside interesting integrals, C4.2
@@ -3440,7 +3792,7 @@ class IntegralTest(unittest.TestCase):
         calc = proof.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("Gamma"))
 
-        goal02 = file.add_goal("(INT x:[0,1]. x^m * log(x)^n) = (-1)^n * factorial(n) / (m+1)^(n+1)", conds=["m + 1 > 0", "n >= 0", "isInt(n)"])
+        goal02 = file.add_goal("(INT x:[0,1]. x^m * log(x)^n) = (-1)^n * factorial(n) / (m+1)^(n+1)", conds=["m > -1", "n >= 0", "isInt(n)"])
         proof = goal02.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.SubstitutionInverse("u", "exp(-u)"))
@@ -3477,7 +3829,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.DefiniteIntegralIdentity(), "0.1"))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation("B(a+1,b+2) = (INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1))"), "1"))
-        calc.perform_rule(rules.ApplyIdentity("B(a + 1,b + 2)","Gamma(a+1) * Gamma(b+2)/Gamma(a+b+3)"))
+        calc.perform_rule(rules.ApplyIdentity("B(a + 1,b + 2)", "Gamma(a+1) * Gamma(b+2)/Gamma(a+b+3)"))
         calc.perform_rule(rules.ApplyIdentity("Gamma(a+1)", "factorial(a)"))
         calc.perform_rule(rules.ApplyIdentity("Gamma(b+2)", "factorial(b+1)"))
         calc.perform_rule(rules.ApplyIdentity("Gamma(a+b+3)", "factorial(a+b+2)"))

@@ -104,6 +104,139 @@
                 "type": "CalculationProof"
             },
             "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a != 0",
+                    "latex_cond": "a \\neq 0"
+                }
+            ],
+            "finished": true,
+            "goal": "(INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2)) = log(2) / a ^ 2",
+            "latex_goal": "\\int_{1}^{\\infty} \\frac{\\log{x}}{a ^ {2} (x + 1) ^ {2}} \\,dx = \\frac{\\log{(2)}}{a ^ {2}}",
+            "proof": {
+                "finished": true,
+                "goal": "(INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2)) = log(2) / a ^ 2",
+                "latex_goal": "\\int_{1}^{\\infty} \\frac{\\log{x}}{a ^ {2} (x + 1) ^ {2}} \\,dx = \\frac{\\log{(2)}}{a ^ {2}}",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "a > 0",
+                            "latex_cond": "a > 0"
+                        }
+                    ],
+                    "latex_start": "\\int_{0}^{\\infty} \\frac{1}{1 + e^{a x}} \\,dx = \\frac{\\log{(2)}}{a}",
+                    "start": "(INT x:[0,oo]. 1 / (1 + exp(a * x))) = log(2) / a",
+                    "steps": [
+                        {
+                            "latex_res": "\\frac{d}{da} \\int_{0}^{\\infty} \\frac{1}{1 + e^{a x}} \\,dx = \\frac{d}{da} \\frac{\\log{(2)}}{a}",
+                            "res": "(D a. INT x:[0,oo]. 1 / (1 + exp(a * x))) = (D a. log(2) / a)",
+                            "rule": {
+                                "name": "DerivEquation",
+                                "str": "derivate both sides",
+                                "var": "a"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "-(\\int_{0}^{\\infty} \\frac{x e^{a x}}{(e^{a x} + 1) ^ {2}} \\,dx) = -\\frac{\\log{(2)}}{a ^ {2}}",
+                            "res": "-(INT x:[0,oo]. x * exp(a * x) / (exp(a * x) + 1) ^ 2) = -(log(2) / a ^ 2)",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "-(\\int_{1}^{\\infty} \\frac{\\log{x}}{a ^ {2} (x + 1) ^ {2}} \\,dx) = -\\frac{\\log{(2)}}{a ^ {2}}",
+                            "res": "-(INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2)) = -(log(2) / a ^ 2)",
+                            "rule": {
+                                "latex_str": "substitute \\(x\\) for \\(e^{a x}\\) at 0.0",
+                                "loc": "0.0",
+                                "name": "Substitution",
+                                "str": "substitute x for exp(a * x) at 0.0",
+                                "var_name": "x",
+                                "var_subst": "exp(a * x)"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "\\int_{1}^{\\infty} \\frac{\\log{x}}{a ^ {2} (x + 1) ^ {2}} \\,dx = \\frac{\\log{(2)}}{a ^ {2}}",
+                            "res": "(INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2)) = log(2) / a ^ 2",
+                            "rule": {
+                                "latex_str": "solve equation for \\(\\int_{1}^{\\infty} \\frac{\\log{x}}{a ^ {2} (x + 1) ^ {2}} \\,dx\\)",
+                                "name": "SolveEquation",
+                                "solve_for": "INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2)",
+                                "str": "solve equation for INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2)"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "finished": true,
+            "goal": "(INT x:[1,oo]. log(x) / (x + 1) ^ 2) = log(2)",
+            "latex_goal": "\\int_{1}^{\\infty} \\frac{\\log{x}}{(x + 1) ^ {2}} \\,dx = \\log{(2)}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{1}^{\\infty} \\frac{\\log{x}}{(x + 1) ^ {2}} \\,dx",
+                        "start": "INT x:[1,oo]. log(x) / (x + 1) ^ 2",
+                        "steps": [
+                            {
+                                "latex_res": "\\int_{1}^{\\infty} \\frac{\\log{x}}{1 ^ {2} (x + 1) ^ {2}} \\,dx",
+                                "res": "INT x:[1,oo]. log(x) / (1 ^ 2 * (x + 1) ^ 2)",
+                                "rule": {
+                                    "latex_str": "rewriting \\((x + 1) ^ {2}\\) to \\(1 ^ {2} (x + 1) ^ {2}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "1 ^ 2 * (x + 1) ^ 2",
+                                    "old_expr": "(x + 1) ^ 2",
+                                    "str": "rewriting (x + 1) ^ 2 to 1 ^ 2 * (x + 1) ^ 2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\log{(2)}}{1 ^ {2}}",
+                                "res": "log(2) / 1 ^ 2",
+                                "rule": {
+                                    "eq": "(INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2)) = log(2) / a ^ 2",
+                                    "latex_str": "apply equation \\(\\int_{1}^{\\infty} \\frac{\\log{x}}{a ^ {2} (x + 1) ^ {2}} \\,dx = \\frac{\\log{(2)}}{a ^ {2}}\\)",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: (INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2)) = log(2) / a ^ 2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\log{(2)}",
+                                "res": "log(2)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\log{(2)}",
+                        "start": "log(2)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(INT x:[1,oo]. log(x) / (x + 1) ^ 2) = log(2)",
+                "latex_goal": "\\int_{1}^{\\infty} \\frac{\\log{x}}{(x + 1) ^ {2}} \\,dx = \\log{(2)}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
         }
     ],
     "name": "easy04"

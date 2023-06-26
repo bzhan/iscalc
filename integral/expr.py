@@ -9,7 +9,7 @@ from typing import Dict, List, Optional, Set, TypeGuard, Tuple, Union, Callable
 
 
 VAR, CONST, OP, FUN, DERIV, INTEGRAL, EVAL_AT, SYMBOL, LIMIT, INF, INDEFINITEINTEGRAL, \
-SKOLEMFUNC, SUMMATION, LAZYSERIES = range(14)
+SKOLEMFUNC, SUMMATION, LAZYSERIES, VECTOR, MATRIX = range(16)
 
 op_priority = {
     "+": 65, "-": 65, "*": 70, "/": 70, "^": 75, "=": 50, "<": 50, ">": 50, "<=": 50, ">=": 50, "!=": 50
@@ -134,6 +134,10 @@ class Expr:
             return 1 + len(self.dependent_vars)
         elif self.ty == SUMMATION:
             return 1 + self.lower.size() + self.upper.size() + self.body.size()
+        elif self.ty == VECTOR:
+            return 1 + sum(e.size() for e in self.data)
+        elif self.ty == MATRIX:
+            return 1 + sum([row.size() for row in self.rows])
         else:
             raise NotImplementedError
 
@@ -306,7 +310,7 @@ class Expr:
         return not self < other
 
     def priority(self):
-        if self.ty in (VAR, SYMBOL, INF, SKOLEMFUNC, LAZYSERIES):
+        if self.ty in (VAR, SYMBOL, INF, SKOLEMFUNC, LAZYSERIES, VECTOR, MATRIX):
             return 100
         elif self.ty == CONST:
             if isinstance(self.val, Fraction) and self.val.denominator != 1:
@@ -799,6 +803,11 @@ class Expr:
         else:
             raise NotImplementedError
 
+    def is_vector(self)  -> TypeGuard["Vector"]:
+        return isinstance(self, Vector) and self.ty == VECTOR
+    def is_matrix(self)  -> TypeGuard["Matrix"]:
+        return isinstance(self, Matrix) and self.ty == MATRIX
+
 
 def match(exp: Expr, pattern: Expr) -> Optional[Dict]:
     """Match expr with given pattern.
@@ -1164,7 +1173,7 @@ class SkolemFunc(Expr):
         return hash((self.name, tuple(self.dependent_vars), self.ty))
 
 
-class Vector:
+class Vector(Expr):
     """ Vector """
 
     @staticmethod
@@ -1176,9 +1185,13 @@ class Vector:
         self.dim = len(self.data)
         self.is_column = is_column
         self.is_row = not is_column
+        self.ty = VECTOR
 
     def __getitem__(self, item):
         return self.data[item]
+
+    def __hash__(self):
+        return hash(tuple(self.data+[self.ty, self.is_column]))
 
     def transpose(self):
         # get transpose of the vector
@@ -1310,7 +1323,7 @@ class Vector:
         return Vector([t * e for e in v.data], is_column=v.is_column)
 
 
-class Matrix:
+class Matrix(Expr):
     """ Matrix """
 
     def __init__(self, shape: Tuple[int], data: List[List[Expr]]):
@@ -1325,11 +1338,20 @@ class Matrix:
                 tmp.append(self.rows[i][j])
             self.cols.append(Vector(tmp, is_column=True))
         self.shape = shape
+        self.ty = MATRIX
 
     @staticmethod
     def unit_matrix(dim: int):
         return Matrix((dim, dim), [[Const(1) if i == j else Const(0) for i in range(dim)] \
                                    for j in range(dim)])
+
+    def __hash__(self):
+        res = []
+        for row in self.data:
+            res = res + row
+        res.append(self.ty)
+        res = res + list(self.shape)
+        return hash(tuple(res))
 
     @staticmethod
     def scalar_mul(scalar: Expr, mat: 'Matrix'):
@@ -1419,7 +1441,7 @@ class Matrix:
         return self == Matrix.scalar_mul(Const(-1), self.transpose())
 
     def __eq__(self, other: 'Matrix'):
-        return self.shape == other.shape and self.data == other.data
+        return isinstance(other, Matrix) and self.shape == other.shape and self.data == other.data
 
     def __sub__(self, other: 'Matrix'):
         assert isinstance(other, Matrix) and self.shape == other.shape

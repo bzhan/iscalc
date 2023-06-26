@@ -5,7 +5,7 @@ import os
 import json
 
 from integral import expr
-from integral.expr import Expr, Eq, Op, Const, expr_to_pattern
+from integral.expr import Expr, Eq, Op, Const, expr_to_pattern, Vector, Matrix
 from integral import parser
 from integral.conditions import Conditions
 
@@ -458,6 +458,10 @@ def apply_subterm(e: Expr, f: Callable[[Expr, Context], Expr], ctx: Context) -> 
             upper = rec(e.upper, ctx)
             body = rec(e.body, body_conds(e, ctx))
             return f(expr.Summation(e.index_var, lower, upper, body), ctx)
+        elif e.is_vector():
+            return Vector([rec(item, ctx) for item in e.data], e.is_column)
+        elif e.is_matrix():
+            return Matrix(e.shape, [[rec(item, ctx) for item in row] for row in e.data])
         else:
             raise NotImplementedError
     return rec(e, ctx)

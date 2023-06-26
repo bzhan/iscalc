@@ -1,8 +1,11 @@
 import unittest
 from typing import List
+
+from integral import rules, context, parser
 from integral.expr import Op, Var, Const, Matrix, Vector, Expr
 class MatrixTest(unittest.TestCase):
-
+    r = rules.FullSimplify()
+    ctx = context.Context()
     def testTranspose1(self):
         m = Matrix((2,3), [[1,2,3],[4,5,6]])
         res = "[1, 4]\n[2, 5]\n[3, 6]"
@@ -22,6 +25,11 @@ class MatrixTest(unittest.TestCase):
         res = "[1 * -5 + 3 * 3 + 5 * 4, 1 * 8 + 3 * 9 + 5 * 0, 1 * 11 + 3 * 21 + 5 * 8]\n\
 [2 * -5 + 4 * 3 + 7 * 4, 2 * 8 + 4 * 9 + 7 * 0, 2 * 11 + 4 * 21 + 7 * 8]"
         assert res == str(m1 * m2)
+        res = self.r.eval(m1 * m2, self.ctx)
+        s = "[24, 35, 114]\n[30, 52, 162]"
+        assert str(res) == s
+
+
 
     def testMultiplication2(self):
         v1 = Vector([Const(1), Const(1), Const(0), Const(0)], is_column=False)
@@ -40,6 +48,10 @@ class MatrixTest(unittest.TestCase):
         self.assertIsInstance(res, Vector)
         self.assertTrue(res.is_column)
         self.assertEqual(str(res), s)
+        res = self.r.eval(res, self.ctx)
+        e = parser.parse_expr("1 * 1 + 3 * 2 + 5 * 1")
+        self.assertEqual(str(res), "[12]\n[17]")
+
 
     def testMultiplication4(self):
         v = Vector([Const(1), Const(2)], is_column=False)

@@ -1835,6 +1835,8 @@ class ExpandDefinition(Rule):
             for identity in ctx.get_definitions():
                 if identity.lhs.is_fun() and identity.lhs.func_name == self.func_name:
                     inst = expr.match(e, identity.lhs)
+                    if inst == None:
+                        continue
                     return normalize(identity.rhs.inst_pat(inst), ctx)
         if e.is_var() and e.name == self.func_name:
             for identity in ctx.get_definitions():

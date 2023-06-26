@@ -1,0 +1,450 @@
+{
+    "content": [
+        {
+            "conds": [
+                {
+                    "cond": "n >= 0",
+                    "latex_cond": "n \\ge 0"
+                },
+                {
+                    "cond": "isInt(n)",
+                    "latex_cond": "n \\in\\mathbb{Z}"
+                }
+            ],
+            "eq": "I(n) = (INT x:[0,oo]. x ^ (2 * n) * exp(-(x ^ 2)))",
+            "latex_eq": "I{(n)} = \\int_{0}^{\\infty} x ^ {2 n} e^{-x ^ {2}} \\,dx",
+            "latex_lhs": "I{(n)}",
+            "type": "FuncDef"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "n >= 1",
+                    "latex_cond": "n \\ge 1"
+                },
+                {
+                    "cond": "isInt(n)",
+                    "latex_cond": "n \\in\\mathbb{Z}"
+                }
+            ],
+            "finished": true,
+            "goal": "(INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = 0",
+            "latex_goal": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx = 0",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx",
+                        "start": "INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))",
+                        "steps": [
+                            {
+                                "latex_res": "0",
+                                "res": "0",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "0",
+                        "start": "0",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = 0",
+                "latex_goal": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx = 0",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "n >= 1",
+                    "latex_cond": "n \\ge 1"
+                },
+                {
+                    "cond": "isInt(n)",
+                    "latex_cond": "n \\in\\mathbb{Z}"
+                }
+            ],
+            "finished": true,
+            "goal": "(INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = (2 * n - 1) * I(n - 1) - 2 * I(n)",
+            "latex_goal": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx = (2 n - 1) I{(n - 1)} - 2 I{(n)}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx",
+                        "start": "INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))",
+                        "steps": [
+                            {
+                                "latex_res": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx",
+                                "res": "INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))",
+                                "rule": {
+                                    "func_name": "I",
+                                    "loc": "subterms",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\infty} x ^ {2 n - 2} e^{-x ^ {2}} (2 n - 1) - 2 x ^ {2 n} e^{-x ^ {2}} \\,dx",
+                                "res": "INT x:[0,oo]. x ^ (2 * n - 2) * exp(-(x ^ 2)) * (2 * n - 1) - 2 * x ^ (2 * n) * exp(-(x ^ 2))",
+                                "rule": {
+                                    "loc": "0",
+                                    "name": "FullSimplify",
+                                    "str": "full simplify at 0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "(2 n - 1) (\\int_{0}^{\\infty} x ^ {2 n - 2} e^{-x ^ {2}} \\,dx) - 2 (\\int_{0}^{\\infty} x ^ {2 n} e^{-x ^ {2}} \\,dx)",
+                                "res": "(2 * n - 1) * (INT x:[0,oo]. x ^ (2 * n - 2) * exp(-(x ^ 2))) - 2 * (INT x:[0,oo]. x ^ (2 * n) * exp(-(x ^ 2)))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "(2 n - 1) (\\int_{0}^{\\infty} x ^ {2 (n - 1)} e^{-x ^ {2}} \\,dx) - 2 (\\int_{0}^{\\infty} x ^ {2 n} e^{-x ^ {2}} \\,dx)",
+                                "res": "(2 * n - 1) * (INT x:[0,oo]. x ^ (2 * (n - 1)) * exp(-(x ^ 2))) - 2 * (INT x:[0,oo]. x ^ (2 * n) * exp(-(x ^ 2)))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(2 n - 2\\) to \\(2 (n - 1)\\)",
+                                    "name": "Equation",
+                                    "new_expr": "2 * (n - 1)",
+                                    "old_expr": "2 * n - 2",
+                                    "str": "rewriting 2 * n - 2 to 2 * (n - 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "(2 n - 1) I{(n - 1)} - 2 I{(n)}",
+                                "res": "(2 * n - 1) * I(n - 1) - 2 * I(n)",
+                                "rule": {
+                                    "func_name": "I",
+                                    "loc": "subterms",
+                                    "name": "FoldDefinition",
+                                    "str": "fold definition on subterms"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "(2 n - 1) I{(n - 1)} - 2 I{(n)}",
+                        "start": "(2 * n - 1) * I(n - 1) - 2 * I(n)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = (2 * n - 1) * I(n - 1) - 2 * I(n)",
+                "latex_goal": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx = (2 n - 1) I{(n - 1)} - 2 I{(n)}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "n >= 1",
+                    "latex_cond": "n \\ge 1"
+                },
+                {
+                    "cond": "isInt(n)",
+                    "latex_cond": "n \\in\\mathbb{Z}"
+                }
+            ],
+            "finished": true,
+            "goal": "I(n) = (2 * n - 1) / 2 * I(n - 1)",
+            "latex_goal": "I{(n)} = \\frac{2 n - 1}{2} I{(n - 1)}",
+            "proof": {
+                "finished": true,
+                "goal": "I(n) = (2 * n - 1) / 2 * I(n - 1)",
+                "latex_goal": "I{(n)} = \\frac{2 n - 1}{2} I{(n - 1)}",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "n >= 1",
+                            "latex_cond": "n \\ge 1"
+                        },
+                        {
+                            "cond": "isInt(n)",
+                            "latex_cond": "n \\in\\mathbb{Z}"
+                        }
+                    ],
+                    "latex_start": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx = 0",
+                    "start": "(INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = 0",
+                    "steps": [
+                        {
+                            "latex_res": "(2 n - 1) I{(n - 1)} - 2 I{(n)} = 0",
+                            "res": "(2 * n - 1) * I(n - 1) - 2 * I(n) = 0",
+                            "rule": {
+                                "eq": "(INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = (2 * n - 1) * I(n - 1) - 2 * I(n)",
+                                "latex_str": "apply equation \\(\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx = (2 n - 1) I{(n - 1)} - 2 I{(n)}\\) at 0",
+                                "loc": "0",
+                                "name": "ApplyEquation",
+                                "str": "apply equation: (INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = (2 * n - 1) * I(n - 1) - 2 * I(n) at 0"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "I{(n)} = \\frac{I{(n - 1)} (2 n - 1)}{2}",
+                            "res": "I(n) = I(n - 1) * (2 * n - 1) / 2",
+                            "rule": {
+                                "latex_str": "solve equation for \\(I{(n)}\\)",
+                                "name": "SolveEquation",
+                                "solve_for": "I(n)",
+                                "str": "solve equation for I(n)"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "I{(n)} = \\frac{2 n - 1}{2} I{(n - 1)}",
+                            "res": "I(n) = (2 * n - 1) / 2 * I(n - 1)",
+                            "rule": {
+                                "latex_str": "rewriting \\(\\frac{I{(n - 1)} (2 n - 1)}{2}\\) to \\(\\frac{2 n - 1}{2} I{(n - 1)}\\)",
+                                "name": "Equation",
+                                "new_expr": "(2 * n - 1) / 2 * I(n - 1)",
+                                "old_expr": "I(n - 1) * (2 * n - 1) / 2",
+                                "str": "rewriting I(n - 1) * (2 * n - 1) / 2 to (2 * n - 1) / 2 * I(n - 1)"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "n >= 0",
+                    "latex_cond": "n \\ge 0"
+                },
+                {
+                    "cond": "isInt(n)",
+                    "latex_cond": "n \\in\\mathbb{Z}"
+                }
+            ],
+            "finished": true,
+            "goal": "I(n) = factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi)",
+            "latex_goal": "I{(n)} = \\frac{(2 n)!}{4 ^ {n} n!}\\cdot (\\frac{1}{2})\\cdot \\sqrt{\\pi}",
+            "proof": {
+                "base_case": {
+                    "finished": true,
+                    "goal": "I(0) = sqrt(pi) / 2",
+                    "latex_goal": "I{(0)} = \\frac{\\sqrt{\\pi}}{2}",
+                    "proof": {
+                        "calcs": [
+                            {
+                                "latex_start": "I{(0)}",
+                                "start": "I(0)",
+                                "steps": [
+                                    {
+                                        "latex_res": "\\int_{0}^{\\infty} e^{-x ^ {2}} \\,dx",
+                                        "res": "INT x:[0,oo]. exp(-(x ^ 2))",
+                                        "rule": {
+                                            "func_name": "I",
+                                            "name": "ExpandDefinition",
+                                            "str": "expand definition"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\int_{0}^{\\infty} \\frac{\\sqrt{2}}{2} e^{-x ^ {2}/2} \\,dx",
+                                        "res": "INT x:[0,oo]. sqrt(2) / 2 * exp(-(x ^ 2 / 2))",
+                                        "rule": {
+                                            "latex_str": "substitute \\(x\\) for \\(\\sqrt{2} x\\)",
+                                            "name": "Substitution",
+                                            "str": "substitute x for sqrt(2) * x",
+                                            "var_name": "x",
+                                            "var_subst": "sqrt(2) * x"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{\\sqrt{2}}{2}\\cdot (\\frac{\\sqrt{2} \\sqrt{\\pi}}{2})",
+                                        "res": "sqrt(2) / 2 * (sqrt(2) * sqrt(pi) / 2)",
+                                        "rule": {
+                                            "name": "DefiniteIntegralIdentity",
+                                            "str": "apply definite integral"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{\\sqrt{\\pi}}{2}",
+                                        "res": "sqrt(pi) / 2",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            },
+                            {
+                                "latex_start": "\\frac{\\sqrt{\\pi}}{2}",
+                                "start": "sqrt(pi) / 2",
+                                "steps": [],
+                                "type": "Calculation"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "I(0) = sqrt(pi) / 2",
+                        "latex_goal": "I{(0)} = \\frac{\\sqrt{\\pi}}{2}",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal"
+                },
+                "finished": true,
+                "goal": "I(n) = factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi)",
+                "induct_case": {
+                    "finished": true,
+                    "goal": "I(n + 1) = 4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))",
+                    "latex_goal": "I{(n + 1)} = \\frac{4 ^ {-n}\\cdot \\sqrt{\\pi} (2 n + 2)!}{8 (n + 1)!}",
+                    "proof": {
+                        "calcs": [
+                            {
+                                "latex_start": "I{(n + 1)}",
+                                "start": "I(n + 1)",
+                                "steps": [
+                                    {
+                                        "latex_res": "\\frac{2 (n + 1) - 1}{2} I{(n + 1 - 1)}",
+                                        "res": "(2 * (n + 1) - 1) / 2 * I(n + 1 - 1)",
+                                        "rule": {
+                                            "eq": "I(n) = (2 * n - 1) / 2 * I(n - 1)",
+                                            "latex_str": "apply equation \\(I{(n)} = \\frac{2 n - 1}{2} I{(n - 1)}\\)",
+                                            "name": "ApplyEquation",
+                                            "str": "apply equation: I(n) = (2 * n - 1) / 2 * I(n - 1)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{I{(n)} (2 n + 1)}{2}",
+                                        "res": "I(n) * (2 * n + 1) / 2",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{\\frac{(2 n)!}{4 ^ {n} n!}\\cdot (\\frac{1}{2})\\cdot \\sqrt{\\pi} (2 n + 1)}{2}",
+                                        "res": "factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi) * (2 * n + 1) / 2",
+                                        "rule": {
+                                            "loc": "subterms",
+                                            "name": "ApplyInductHyp",
+                                            "str": "apply induction hypothesis on subterms"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "4 ^ {-n}\\cdot \\sqrt{\\pi} (\\frac{(2 n + 1) (2 n)!}{4 n!})",
+                                        "res": "4 ^ -n * sqrt(pi) * ((2 * n + 1) * factorial(2 * n) / (4 * factorial(n)))",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(\\frac{\\frac{(2 n)!}{4 ^ {n} n!}\\cdot (\\frac{1}{2})\\cdot \\sqrt{\\pi} (2 n + 1)}{2}\\) to \\(4 ^ {-n}\\cdot \\sqrt{\\pi} (\\frac{(2 n + 1) (2 n)!}{4 n!})\\)",
+                                            "name": "Equation",
+                                            "new_expr": "4 ^ -n * sqrt(pi) * ((2 * n + 1) * factorial(2 * n) / (4 * factorial(n)))",
+                                            "old_expr": "factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi) * (2 * n + 1) / 2",
+                                            "str": "rewriting factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi) * (2 * n + 1) / 2 to 4 ^ -n * sqrt(pi) * ((2 * n + 1) * factorial(2 * n) / (4 * factorial(n)))"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "4 ^ {-n}\\cdot \\sqrt{\\pi} (\\frac{(2 n + 1)!}{4 n!})",
+                                        "res": "4 ^ -n * sqrt(pi) * (factorial(2 * n + 1) / (4 * factorial(n)))",
+                                        "rule": {
+                                            "latex_str": "rewrite \\((2 n + 1) (2 n)!\\) to \\((2 n + 1)!\\) using identity",
+                                            "name": "ApplyIdentity",
+                                            "source": "(2 * n + 1) * factorial(2 * n)",
+                                            "str": "rewrite (2 * n + 1) * factorial(2 * n) to factorial(2 * n + 1) using identity",
+                                            "target": "factorial(2 * n + 1)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "4 ^ {-n}\\cdot \\sqrt{\\pi} (\\frac{(2 n + 1 + 1) (2 n + 1)!}{8 ((n + 1) n!)})",
+                                        "res": "4 ^ -n * sqrt(pi) * ((2 * n + 1 + 1) * factorial(2 * n + 1) / (8 * ((n + 1) * factorial(n))))",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(\\frac{(2 n + 1)!}{4 n!}\\) to \\(\\frac{(2 n + 1 + 1) (2 n + 1)!}{8 ((n + 1) n!)}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "(2 * n + 1 + 1) * factorial(2 * n + 1) / (8 * ((n + 1) * factorial(n)))",
+                                            "old_expr": "factorial(2 * n + 1) / (4 * factorial(n))",
+                                            "str": "rewriting factorial(2 * n + 1) / (4 * factorial(n)) to (2 * n + 1 + 1) * factorial(2 * n + 1) / (8 * ((n + 1) * factorial(n)))"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "4 ^ {-n}\\cdot \\sqrt{\\pi} (\\frac{(2 n + 2)!}{8 ((n + 1) n!)})",
+                                        "res": "4 ^ -n * sqrt(pi) * (factorial(2 * n + 2) / (8 * ((n + 1) * factorial(n))))",
+                                        "rule": {
+                                            "latex_str": "rewrite \\((2 n + 1 + 1) (2 n + 1)!\\) to \\((2 n + 2)!\\) using identity",
+                                            "name": "ApplyIdentity",
+                                            "source": "(2 * n + 1 + 1) * factorial(2 * n + 1)",
+                                            "str": "rewrite (2 * n + 1 + 1) * factorial(2 * n + 1) to factorial(2 * n + 2) using identity",
+                                            "target": "factorial(2 * n + 2)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "4 ^ {-n}\\cdot \\sqrt{\\pi} (\\frac{(2 n + 2)!}{8 (n + 1)!})",
+                                        "res": "4 ^ -n * sqrt(pi) * (factorial(2 * n + 2) / (8 * factorial(n + 1)))",
+                                        "rule": {
+                                            "latex_str": "rewrite \\((n + 1) n!\\) to \\((n + 1)!\\) using identity",
+                                            "name": "ApplyIdentity",
+                                            "source": "(n + 1) * factorial(n)",
+                                            "str": "rewrite (n + 1) * factorial(n) to factorial(n + 1) using identity",
+                                            "target": "factorial(n + 1)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{4 ^ {-n}\\cdot \\sqrt{\\pi} (2 n + 2)!}{8 (n + 1)!}",
+                                        "res": "4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(4 ^ {-n}\\cdot \\sqrt{\\pi} (\\frac{(2 n + 2)!}{8 (n + 1)!})\\) to \\(\\frac{4 ^ {-n}\\cdot \\sqrt{\\pi} (2 n + 2)!}{8 (n + 1)!}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))",
+                                            "old_expr": "4 ^ -n * sqrt(pi) * (factorial(2 * n + 2) / (8 * factorial(n + 1)))",
+                                            "str": "rewriting 4 ^ -n * sqrt(pi) * (factorial(2 * n + 2) / (8 * factorial(n + 1))) to 4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            },
+                            {
+                                "latex_start": "\\frac{4 ^ {-n}\\cdot \\sqrt{\\pi} (2 n + 2)!}{8 (n + 1)!}",
+                                "start": "4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))",
+                                "steps": [],
+                                "type": "Calculation"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "I(n + 1) = 4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))",
+                        "latex_goal": "I{(n + 1)} = \\frac{4 ^ {-n}\\cdot \\sqrt{\\pi} (2 n + 2)!}{8 (n + 1)!}",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal"
+                },
+                "induct_var": "n",
+                "latex_goal": "I{(n)} = \\frac{(2 n)!}{4 ^ {n} n!}\\cdot (\\frac{1}{2})\\cdot \\sqrt{\\pi}",
+                "type": "InductionProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "gaussianPowerExp"
+}

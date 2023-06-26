@@ -184,6 +184,12 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
                 return "\\operatorname{%s}(%s,%s)" % (e.func_name, sx, sy)
             else:
                 return "%s(%s,%s)" % (e.func_name, sx, sy)
+        elif len(e.args) > 2:
+            s = "%s{(" % (e.func_name)
+            for x in e.args:
+                s += "%s," % (convert_expr(x, mode))
+            s = s[:-1] + ")}"
+            return s
         else:
             raise NotImplementedError
     elif e.is_integral():

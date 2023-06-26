@@ -40,8 +40,8 @@
         {
             "conds": [
                 {
-                    "cond": "m + 1 > 0",
-                    "latex_cond": "m + 1 > 0"
+                    "cond": "m > -1",
+                    "latex_cond": "m > -1"
                 },
                 {
                     "cond": "n >= 0",

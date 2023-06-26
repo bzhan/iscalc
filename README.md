@@ -1,5 +1,7 @@
 ## iscalc - An interactive symbolic computation framework
 
+Progress on the textbook *Inside Interesting Integrals* is summarized [here](InterestingIntegrals.md).
+
 ### Installation and usage:
 
 This project requires Python 3.9 or greater and npm:

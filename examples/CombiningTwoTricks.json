@@ -1,0 +1,788 @@
+{
+    "content": [
+        {
+            "conds": [
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                },
+                {
+                    "cond": "b > 0",
+                    "latex_cond": "b > 0"
+                },
+                {
+                    "cond": "n > 0",
+                    "latex_cond": "n > 0"
+                },
+                {
+                    "cond": "isInt(n)",
+                    "latex_cond": "n \\in\\mathbb{Z}"
+                }
+            ],
+            "eq": "I(a,b,n) = (INT x:[0,pi / 2]. 1 / (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ n)",
+            "latex_eq": "I{(a,b,n)} = \\int_{0}^{\\pi/2} \\frac{1}{(a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {n}} \\,dx",
+            "latex_lhs": "I{(a,b,n)}",
+            "type": "FuncDef"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                },
+                {
+                    "cond": "y >= 0",
+                    "latex_cond": "y \\ge 0"
+                },
+                {
+                    "cond": "n > 0",
+                    "latex_cond": "n > 0"
+                },
+                {
+                    "cond": "isInt(n)",
+                    "latex_cond": "n \\in\\mathbb{Z}"
+                }
+            ],
+            "eq": "J(a,y,n) = (INT x:[0,y]. 1 / (x ^ 2 + a ^ 2) ^ n)",
+            "latex_eq": "J{(a,y,n)} = \\int_{0}^{y} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {n}} \\,dx",
+            "latex_lhs": "J{(a,y,n)}",
+            "type": "FuncDef"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                },
+                {
+                    "cond": "b > 0",
+                    "latex_cond": "b > 0"
+                },
+                {
+                    "cond": "n >= 2",
+                    "latex_cond": "n \\ge 2"
+                },
+                {
+                    "cond": "isInt(n)",
+                    "latex_cond": "n \\in\\mathbb{Z}"
+                }
+            ],
+            "finished": true,
+            "goal": "I(a,b,n) = -1 / (n - 1) * ((D a. I(a,b,n - 1)) + (D b. I(a,b,n - 1)))",
+            "latex_goal": "I{(a,b,n)} = \\frac{-1}{n - 1} ((\\frac{d}{da} I{(a,b,n - 1)}) + (\\frac{d}{db} I{(a,b,n - 1)}))",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "I{(a,b,n)}",
+                        "start": "I(a,b,n)",
+                        "steps": [],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{-1}{n - 1} ((\\frac{d}{da} I{(a,b,n - 1)}) + (\\frac{d}{db} I{(a,b,n - 1)}))",
+                        "start": "-1 / (n - 1) * ((D a. I(a,b,n - 1)) + (D b. I(a,b,n - 1)))",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{-1}{n - 1} ((\\frac{d}{da} \\int_{0}^{\\pi/2} (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n + 1} \\,dx) + (\\frac{d}{db} \\int_{0}^{\\pi/2} (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n + 1} \\,dx))",
+                                "res": "-1 / (n - 1) * ((D a. INT x:[0,pi / 2]. (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ (-n + 1)) + (D b. INT x:[0,pi / 2]. (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ (-n + 1)))",
+                                "rule": {
+                                    "func_name": "I",
+                                    "loc": "subterms",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{1}{n - 1} ((-n + 1) (\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (-n + 1) (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx))",
+                                "res": "-(1 / (n - 1) * ((-n + 1) * (INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (-n + 1) * (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{1}{n - 1} ((-n + 1) ((\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx)))",
+                                "res": "-(1 / (n - 1) * ((-n + 1) * ((INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n))))",
+                                "rule": {
+                                    "latex_str": "rewriting \\((-n + 1) (\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (-n + 1) (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx)\\) to \\((-n + 1) ((\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx))\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(-n + 1) * ((INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n))",
+                                    "old_expr": "(-n + 1) * (INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (-n + 1) * (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)",
+                                    "str": "rewriting (-n + 1) * (INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (-n + 1) * (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) to (-n + 1) * ((INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{-n + 1}{n - 1} ((\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx))",
+                                "res": "-((-n + 1) / (n - 1) * ((INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "--1 ((\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx))",
+                                "res": "-(-1 * ((INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{-n + 1}{n - 1}\\) to \\(-1\\)",
+                                    "name": "Equation",
+                                    "new_expr": "-1",
+                                    "old_expr": "(-n + 1) / (n - 1)",
+                                    "str": "rewriting (-n + 1) / (n - 1) to -1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "(\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx)",
+                                "res": "(INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} + \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx",
+                                "res": "INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n + sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n",
+                                "rule": {
+                                    "latex_str": "rewriting \\((\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx)\\) to \\(\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} + \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx\\)",
+                                    "name": "Equation",
+                                    "new_expr": "INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n + sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n",
+                                    "old_expr": "(INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)",
+                                    "str": "rewriting (INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) to INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n + sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\pi/2} (\\sin^{2}(x) + \\cos^{2}(x)) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx",
+                                "res": "INT x:[0,pi / 2]. (sin(x) ^ 2 + cos(x) ^ 2) * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} + \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n}\\) to \\((\\sin^{2}(x) + \\cos^{2}(x)) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(sin(x) ^ 2 + cos(x) ^ 2) * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n",
+                                    "old_expr": "cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n + sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n",
+                                    "str": "rewriting cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n + sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n to (sin(x) ^ 2 + cos(x) ^ 2) * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\pi/2} 1 (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx",
+                                "res": "INT x:[0,pi / 2]. 1 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n",
+                                "rule": {
+                                    "latex_str": "rewrite \\(\\sin^{2}(x) + \\cos^{2}(x)\\) to \\(1\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "sin(x) ^ 2 + cos(x) ^ 2",
+                                    "str": "rewrite sin(x) ^ 2 + cos(x) ^ 2 to 1 using identity",
+                                    "target": "1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{(a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {n}} \\,dx",
+                                "res": "INT x:[0,pi / 2]. 1 / (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ n",
+                                "rule": {
+                                    "latex_str": "rewriting \\(1 (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n}\\) to \\(\\frac{1}{(a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {n}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "1 / (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ n",
+                                    "old_expr": "1 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n",
+                                    "str": "rewriting 1 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n to 1 / (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ n"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "I{(a,b,n)}",
+                                "res": "I(a,b,n)",
+                                "rule": {
+                                    "func_name": "I",
+                                    "name": "FoldDefinition",
+                                    "str": "fold definition"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "I(a,b,n) = -1 / (n - 1) * ((D a. I(a,b,n - 1)) + (D b. I(a,b,n - 1)))",
+                "latex_goal": "I{(a,b,n)} = \\frac{-1}{n - 1} ((\\frac{d}{da} I{(a,b,n - 1)}) + (\\frac{d}{db} I{(a,b,n - 1)}))",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                },
+                {
+                    "cond": "b > 0",
+                    "latex_cond": "b > 0"
+                }
+            ],
+            "finished": true,
+            "goal": "I(a,b,1) = pi / (2 * sqrt(a * b))",
+            "latex_goal": "I{(a,b,1)} = \\frac{\\pi}{2 \\sqrt{a b}}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "I{(a,b,1)}",
+                        "start": "I(a,b,1)",
+                        "steps": [
+                            {
+                                "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{a \\cos^{2}(x) + b \\sin^{2}(x)} \\,dx",
+                                "res": "INT x:[0,pi / 2]. 1 / (a * cos(x) ^ 2 + b * sin(x) ^ 2)",
+                                "rule": {
+                                    "func_name": "I",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\pi/2} \\frac{(\\frac{1}{\\cos{x}}) ^ {2}}{a + b (\\frac{\\sin{x}}{\\cos{x}}) ^ {2}} \\,dx",
+                                "res": "INT x:[0,pi / 2]. (1 / cos(x)) ^ 2 / (a + b * (sin(x) / cos(x)) ^ 2)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{1}{a \\cos^{2}(x) + b \\sin^{2}(x)}\\) to \\(\\frac{(\\frac{1}{\\cos{x}}) ^ {2}}{a + b (\\frac{\\sin{x}}{\\cos{x}}) ^ {2}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(1 / cos(x)) ^ 2 / (a + b * (sin(x) / cos(x)) ^ 2)",
+                                    "old_expr": "1 / (a * cos(x) ^ 2 + b * sin(x) ^ 2)",
+                                    "str": "rewriting 1 / (a * cos(x) ^ 2 + b * sin(x) ^ 2) to (1 / cos(x)) ^ 2 / (a + b * (sin(x) / cos(x)) ^ 2)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\pi/2} \\frac{(\\frac{1}{\\cos{x}}) ^ {2}}{a + b \\tan^{2}(x)} \\,dx",
+                                "res": "INT x:[0,pi / 2]. (1 / cos(x)) ^ 2 / (a + b * tan(x) ^ 2)",
+                                "rule": {
+                                    "latex_str": "rewrite \\(\\frac{\\sin{x}}{\\cos{x}}\\) to \\(\\tan{x}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "sin(x) / cos(x)",
+                                    "str": "rewrite sin(x) / cos(x) to tan(x) using identity",
+                                    "target": "tan(x)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\sec^{2}(x)}{a + b \\tan^{2}(x)} \\,dx",
+                                "res": "INT x:[0,pi / 2]. sec(x) ^ 2 / (a + b * tan(x) ^ 2)",
+                                "rule": {
+                                    "latex_str": "rewrite \\(\\frac{1}{\\cos{x}}\\) to \\(\\sec{x}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "1 / cos(x)",
+                                    "str": "rewrite 1 / cos(x) to sec(x) using identity",
+                                    "target": "sec(x)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\infty} \\frac{1}{b y ^ {2} + a} \\,dy",
+                                "res": "INT y:[0,oo]. 1 / (b * y ^ 2 + a)",
+                                "rule": {
+                                    "latex_str": "substitute \\(y\\) for \\(\\tan{x}\\)",
+                                    "name": "Substitution",
+                                    "str": "substitute y for tan(x)",
+                                    "var_name": "y",
+                                    "var_subst": "tan(x)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\int_{0}^{\\infty} \\frac{\\frac{1}{b}}{y ^ {2} + \\frac{a}{b}} \\,dy",
+                                "res": "INT y:[0,oo]. 1 / b / (y ^ 2 + a / b)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{1}{b y ^ {2} + a}\\) to \\(\\frac{\\frac{1}{b}}{y ^ {2} + \\frac{a}{b}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "1 / b / (y ^ 2 + a / b)",
+                                    "old_expr": "1 / (b * y ^ 2 + a)",
+                                    "str": "rewriting 1 / (b * y ^ 2 + a) to 1 / b / (y ^ 2 + a / b)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{b} (\\left. \\frac{\\sqrt{b}}{\\sqrt{a}} \\tan^{-1}{(\\frac{\\sqrt{b} y}{\\sqrt{a}})} \\right\\vert_{y=0}^{\\infty})",
+                                "res": "1 / b * ([sqrt(b) / sqrt(a) * atan(sqrt(b) * y / sqrt(a))]_y=0,oo)",
+                                "rule": {
+                                    "name": "DefiniteIntegralIdentity",
+                                    "str": "apply definite integral"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\pi}{2 \\sqrt{a} \\sqrt{b}}",
+                                "res": "pi / (2 * sqrt(a) * sqrt(b))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\pi}{2 \\sqrt{a b}}",
+                                "res": "pi / (2 * sqrt(a * b))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(2 \\sqrt{a} \\sqrt{b}\\) to \\(2 \\sqrt{a b}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "2 * sqrt(a * b)",
+                                    "old_expr": "2 * sqrt(a) * sqrt(b)",
+                                    "str": "rewriting 2 * sqrt(a) * sqrt(b) to 2 * sqrt(a * b)"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{\\pi}{2 \\sqrt{a b}}",
+                        "start": "pi / (2 * sqrt(a * b))",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "I(a,b,1) = pi / (2 * sqrt(a * b))",
+                "latex_goal": "I{(a,b,1)} = \\frac{\\pi}{2 \\sqrt{a b}}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                },
+                {
+                    "cond": "b > 0",
+                    "latex_cond": "b > 0"
+                }
+            ],
+            "finished": true,
+            "goal": "I(a,b,2) = pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)",
+            "latex_goal": "I{(a,b,2)} = \\frac{\\pi}{4 \\sqrt{a b}} (\\frac{1}{a} + \\frac{1}{b})",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "I{(a,b,2)}",
+                        "start": "I(a,b,2)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{-1}{2 - 1} ((\\frac{d}{da} I{(a,b,2 - 1)}) + (\\frac{d}{db} I{(a,b,2 - 1)}))",
+                                "res": "-1 / (2 - 1) * ((D a. I(a,b,2 - 1)) + (D b. I(a,b,2 - 1)))",
+                                "rule": {
+                                    "eq": "I(a,b,n) = -1 / (n - 1) * ((D a. I(a,b,n - 1)) + (D b. I(a,b,n - 1)))",
+                                    "latex_str": "apply equation \\(I{(a,b,n)} = \\frac{-1}{n - 1} ((\\frac{d}{da} I{(a,b,n - 1)}) + (\\frac{d}{db} I{(a,b,n - 1)}))\\)",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: I(a,b,n) = -1 / (n - 1) * ((D a. I(a,b,n - 1)) + (D b. I(a,b,n - 1)))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-(\\frac{d}{da} I{(a,b,2 - 1)}) - (\\frac{d}{db} I{(a,b,2 - 1)})",
+                                "res": "-(D a. I(a,b,2 - 1)) - (D b. I(a,b,2 - 1))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-(\\frac{d}{da} I{(a,b,1)}) - (\\frac{d}{db} I{(a,b,2 - 1)})",
+                                "res": "-(D a. I(a,b,1)) - (D b. I(a,b,2 - 1))",
+                                "rule": {
+                                    "loc": "0.0.0.2",
+                                    "name": "FullSimplify",
+                                    "str": "full simplify at 0.0.0.2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-(\\frac{d}{da} I{(a,b,1)}) - (\\frac{d}{db} I{(a,b,1)})",
+                                "res": "-(D a. I(a,b,1)) - (D b. I(a,b,1))",
+                                "rule": {
+                                    "loc": "1.0.2",
+                                    "name": "FullSimplify",
+                                    "str": "full simplify at 1.0.2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-(\\frac{d}{da} \\frac{\\pi}{2 \\sqrt{a b}}) - (\\frac{d}{db} \\frac{\\pi}{2 \\sqrt{a b}})",
+                                "res": "-(D a. pi / (2 * sqrt(a * b))) - (D b. pi / (2 * sqrt(a * b)))",
+                                "rule": {
+                                    "eq": "I(a,b,1) = pi / (2 * sqrt(a * b))",
+                                    "latex_str": "apply equation \\(I{(a,b,1)} = \\frac{\\pi}{2 \\sqrt{a b}}\\) on subterms",
+                                    "loc": "subterms",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: I(a,b,1) = pi / (2 * sqrt(a * b)) on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\pi}{4 a ^ {3/2} \\sqrt{b}} + \\frac{\\pi}{4 \\sqrt{a} b ^ {3/2}}",
+                                "res": "pi / (4 * a ^ (3/2) * sqrt(b)) + pi / (4 * sqrt(a) * b ^ (3/2))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\pi}{4 \\sqrt{a b}} (\\frac{1}{a} + \\frac{1}{b})",
+                                "res": "pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{\\pi}{4 a ^ {3/2} \\sqrt{b}} + \\frac{\\pi}{4 \\sqrt{a} b ^ {3/2}}\\) to \\(\\frac{\\pi}{4 \\sqrt{a b}} (\\frac{1}{a} + \\frac{1}{b})\\)",
+                                    "name": "Equation",
+                                    "new_expr": "pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)",
+                                    "old_expr": "pi / (4 * a ^ (3/2) * sqrt(b)) + pi / (4 * sqrt(a) * b ^ (3/2))",
+                                    "str": "rewriting pi / (4 * a ^ (3/2) * sqrt(b)) + pi / (4 * sqrt(a) * b ^ (3/2)) to pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{\\pi}{4 \\sqrt{a b}} (\\frac{1}{a} + \\frac{1}{b})",
+                        "start": "pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "I(a,b,2) = pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)",
+                "latex_goal": "I{(a,b,2)} = \\frac{\\pi}{4 \\sqrt{a b}} (\\frac{1}{a} + \\frac{1}{b})",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                },
+                {
+                    "cond": "b > 0",
+                    "latex_cond": "b > 0"
+                }
+            ],
+            "finished": true,
+            "goal": "I(a,b,3) = pi / (16 * sqrt(a * b)) * (3 / a ^ 2 + 3 / b ^ 2 + 2 / (a * b))",
+            "latex_goal": "I{(a,b,3)} = \\frac{\\pi}{16 \\sqrt{a b}} (\\frac{3}{a ^ {2}} + \\frac{3}{b ^ {2}} + \\frac{2}{a b})",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "I{(a,b,3)}",
+                        "start": "I(a,b,3)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{-1}{3 - 1} ((\\frac{d}{da} I{(a,b,3 - 1)}) + (\\frac{d}{db} I{(a,b,3 - 1)}))",
+                                "res": "-1 / (3 - 1) * ((D a. I(a,b,3 - 1)) + (D b. I(a,b,3 - 1)))",
+                                "rule": {
+                                    "eq": "I(a,b,n) = -1 / (n - 1) * ((D a. I(a,b,n - 1)) + (D b. I(a,b,n - 1)))",
+                                    "latex_str": "apply equation \\(I{(a,b,n)} = \\frac{-1}{n - 1} ((\\frac{d}{da} I{(a,b,n - 1)}) + (\\frac{d}{db} I{(a,b,n - 1)}))\\)",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: I(a,b,n) = -1 / (n - 1) * ((D a. I(a,b,n - 1)) + (D b. I(a,b,n - 1)))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{\\frac{d}{da} I{(a,b,3 - 1)}}{2} - \\frac{\\frac{d}{db} I{(a,b,3 - 1)}}{2}",
+                                "res": "-((D a. I(a,b,3 - 1)) / 2) - (D b. I(a,b,3 - 1)) / 2",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{\\frac{d}{da} I{(a,b,2)}}{2} - \\frac{\\frac{d}{db} I{(a,b,3 - 1)}}{2}",
+                                "res": "-((D a. I(a,b,2)) / 2) - (D b. I(a,b,3 - 1)) / 2",
+                                "rule": {
+                                    "loc": "0.0.0.0.2",
+                                    "name": "FullSimplify",
+                                    "str": "full simplify at 0.0.0.0.2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{\\frac{d}{da} I{(a,b,2)}}{2} - \\frac{\\frac{d}{db} I{(a,b,2)}}{2}",
+                                "res": "-((D a. I(a,b,2)) / 2) - (D b. I(a,b,2)) / 2",
+                                "rule": {
+                                    "loc": "1.0.0.2",
+                                    "name": "FullSimplify",
+                                    "str": "full simplify at 1.0.0.2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{\\frac{d}{da} \\frac{\\pi}{4 \\sqrt{a b}} (\\frac{1}{a} + \\frac{1}{b})}{2} - \\frac{\\frac{d}{db} \\frac{\\pi}{4 \\sqrt{a b}} (\\frac{1}{a} + \\frac{1}{b})}{2}",
+                                "res": "-((D a. pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)) / 2) - (D b. pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)) / 2",
+                                "rule": {
+                                    "eq": "I(a,b,2) = pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)",
+                                    "latex_str": "apply equation \\(I{(a,b,2)} = \\frac{\\pi}{4 \\sqrt{a b}} (\\frac{1}{a} + \\frac{1}{b})\\) on subterms",
+                                    "loc": "subterms",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: I(a,b,2) = pi / (4 * sqrt(a * b)) * (1 / a + 1 / b) on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\pi}{16 a ^ {3/2} \\sqrt{b}} (\\frac{1}{a} + \\frac{1}{b}) + \\frac{\\pi}{16 \\sqrt{a} b ^ {3/2}} (\\frac{1}{a} + \\frac{1}{b}) + \\frac{\\pi}{8 a ^ {5/2} \\sqrt{b}} + \\frac{\\pi}{8 \\sqrt{a} b ^ {5/2}}",
+                                "res": "pi / (16 * a ^ (3/2) * sqrt(b)) * (1 / a + 1 / b) + pi / (16 * sqrt(a) * b ^ (3/2)) * (1 / a + 1 / b) + pi / (8 * a ^ (5/2) * sqrt(b)) + pi / (8 * sqrt(a) * b ^ (5/2))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{\\pi}{16 \\sqrt{a b}} (\\frac{3}{a ^ {2}} + \\frac{3}{b ^ {2}} + \\frac{2}{a b})",
+                                "res": "pi / (16 * sqrt(a * b)) * (3 / a ^ 2 + 3 / b ^ 2 + 2 / (a * b))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{\\pi}{16 a ^ {3/2} \\sqrt{b}} (\\frac{1}{a} + \\frac{1}{b}) + \\frac{\\pi}{16 \\sqrt{a} b ^ {3/2}} (\\frac{1}{a} + \\frac{1}{b}) + \\frac{\\pi}{8 a ^ {5/2} \\sqrt{b}} + \\frac{\\pi}{8 \\sqrt{a} b ^ {5/2}}\\) to \\(\\frac{\\pi}{16 \\sqrt{a b}} (\\frac{3}{a ^ {2}} + \\frac{3}{b ^ {2}} + \\frac{2}{a b})\\)",
+                                    "name": "Equation",
+                                    "new_expr": "pi / (16 * sqrt(a * b)) * (3 / a ^ 2 + 3 / b ^ 2 + 2 / (a * b))",
+                                    "old_expr": "pi / (16 * a ^ (3/2) * sqrt(b)) * (1 / a + 1 / b) + pi / (16 * sqrt(a) * b ^ (3/2)) * (1 / a + 1 / b) + pi / (8 * a ^ (5/2) * sqrt(b)) + pi / (8 * sqrt(a) * b ^ (5/2))",
+                                    "str": "rewriting pi / (16 * a ^ (3/2) * sqrt(b)) * (1 / a + 1 / b) + pi / (16 * sqrt(a) * b ^ (3/2)) * (1 / a + 1 / b) + pi / (8 * a ^ (5/2) * sqrt(b)) + pi / (8 * sqrt(a) * b ^ (5/2)) to pi / (16 * sqrt(a * b)) * (3 / a ^ 2 + 3 / b ^ 2 + 2 / (a * b))"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{\\pi}{16 \\sqrt{a b}} (\\frac{3}{a ^ {2}} + \\frac{3}{b ^ {2}} + \\frac{2}{a b})",
+                        "start": "pi / (16 * sqrt(a * b)) * (3 / a ^ 2 + 3 / b ^ 2 + 2 / (a * b))",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "I(a,b,3) = pi / (16 * sqrt(a * b)) * (3 / a ^ 2 + 3 / b ^ 2 + 2 / (a * b))",
+                "latex_goal": "I{(a,b,3)} = \\frac{\\pi}{16 \\sqrt{a b}} (\\frac{3}{a ^ {2}} + \\frac{3}{b ^ {2}} + \\frac{2}{a b})",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                },
+                {
+                    "cond": "y >= 0",
+                    "latex_cond": "y \\ge 0"
+                },
+                {
+                    "cond": "n > 0",
+                    "latex_cond": "n > 0"
+                },
+                {
+                    "cond": "isInt(n)",
+                    "latex_cond": "n \\in\\mathbb{Z}"
+                }
+            ],
+            "finished": true,
+            "goal": "J(a,y,n) = y / (y ^ 2 + a ^ 2) ^ n + 2 * n * J(a,y,n) - 2 * n * a ^ 2 * J(a,y,n + 1)",
+            "latex_goal": "J{(a,y,n)} = \\frac{y}{(y ^ {2} + a ^ {2}) ^ {n}} + 2 n J{(a,y,n)} - 2 n a ^ {2} J{(a,y,n + 1)}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "J{(a,y,n)}",
+                        "start": "J(a,y,n)",
+                        "steps": [
+                            {
+                                "latex_res": "\\int_{0}^{y} (a ^ {2} + x ^ {2}) ^ {-n} \\,dx",
+                                "res": "INT x:[0,y]. (a ^ 2 + x ^ 2) ^ -n",
+                                "rule": {
+                                    "func_name": "J",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "(\\left. x (a ^ {2} + x ^ {2}) ^ {-n} \\right\\vert_{x=0}^{y}) - (\\int_{0}^{y} -2 n x ^ {2} (a ^ {2} + x ^ {2}) ^ {-n - 1} \\,dx)",
+                                "res": "([x * (a ^ 2 + x ^ 2) ^ -n]_x=0,y) - (INT x:[0,y]. -(2 * n * x ^ 2 * (a ^ 2 + x ^ 2) ^ (-n - 1)))",
+                                "rule": {
+                                    "latex_str": "integrate by parts \\(u \\to \\frac{1}{(x ^ {2} + a ^ {2}) ^ {n}}, v \\to x\\)",
+                                    "name": "IntegrationByParts",
+                                    "str": "integrate by parts u -> 1 / (x ^ 2 + a ^ 2) ^ n, v -> x",
+                                    "u": "1 / (x ^ 2 + a ^ 2) ^ n",
+                                    "v": "x"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "2 n (\\int_{0}^{y} x ^ {2} (a ^ {2} + x ^ {2}) ^ {-n - 1} \\,dx) + y (a ^ {2} + y ^ {2}) ^ {-n}",
+                                "res": "2 * n * (INT x:[0,y]. x ^ 2 * (a ^ 2 + x ^ 2) ^ (-n - 1)) + y * (a ^ 2 + y ^ 2) ^ -n",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "n (\\int_{0}^{y} \\frac{2 x ^ {2}}{(a ^ {2} + x ^ {2}) ^ {n + 1}} \\,dx) + y (a ^ {2} + y ^ {2}) ^ {-n}",
+                                "res": "n * (INT x:[0,y]. 2 * x ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1)) + y * (a ^ 2 + y ^ 2) ^ -n",
+                                "rule": {
+                                    "latex_str": "rewriting \\(2 n (\\int_{0}^{y} x ^ {2} (a ^ {2} + x ^ {2}) ^ {-n - 1} \\,dx)\\) to \\(n (\\int_{0}^{y} \\frac{2 x ^ {2}}{(a ^ {2} + x ^ {2}) ^ {n + 1}} \\,dx)\\)",
+                                    "name": "Equation",
+                                    "new_expr": "n * (INT x:[0,y]. 2 * x ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1))",
+                                    "old_expr": "2 * n * (INT x:[0,y]. x ^ 2 * (a ^ 2 + x ^ 2) ^ (-n - 1))",
+                                    "str": "rewriting 2 * n * (INT x:[0,y]. x ^ 2 * (a ^ 2 + x ^ 2) ^ (-n - 1)) to n * (INT x:[0,y]. 2 * x ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "n (\\int_{0}^{y} \\frac{2 (x ^ {2} + a ^ {2})}{(a ^ {2} + x ^ {2}) ^ {n + 1}} - \\frac{2 a ^ {2}}{(a ^ {2} + x ^ {2}) ^ {n + 1}} \\,dx) + y (a ^ {2} + y ^ {2}) ^ {-n}",
+                                "res": "n * (INT x:[0,y]. 2 * (x ^ 2 + a ^ 2) / (a ^ 2 + x ^ 2) ^ (n + 1) - 2 * a ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1)) + y * (a ^ 2 + y ^ 2) ^ -n",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{2 x ^ {2}}{(a ^ {2} + x ^ {2}) ^ {n + 1}}\\) to \\(\\frac{2 (x ^ {2} + a ^ {2})}{(a ^ {2} + x ^ {2}) ^ {n + 1}} - \\frac{2 a ^ {2}}{(a ^ {2} + x ^ {2}) ^ {n + 1}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "2 * (x ^ 2 + a ^ 2) / (a ^ 2 + x ^ 2) ^ (n + 1) - 2 * a ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1)",
+                                    "old_expr": "2 * x ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1)",
+                                    "str": "rewriting 2 * x ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1) to 2 * (x ^ 2 + a ^ 2) / (a ^ 2 + x ^ 2) ^ (n + 1) - 2 * a ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "n (2 (\\int_{0}^{y} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {n}} \\,dx) - 2 a ^ {2} (\\int_{0}^{y} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {n + 1}} \\,dx)) + y (a ^ {2} + y ^ {2}) ^ {-n}",
+                                "res": "n * (2 * (INT x:[0,y]. 1 / (x ^ 2 + a ^ 2) ^ n) - 2 * a ^ 2 * (INT x:[0,y]. 1 / (x ^ 2 + a ^ 2) ^ (n + 1))) + y * (a ^ 2 + y ^ 2) ^ -n",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\int_{0}^{y} \\frac{2 (x ^ {2} + a ^ {2})}{(a ^ {2} + x ^ {2}) ^ {n + 1}} - \\frac{2 a ^ {2}}{(a ^ {2} + x ^ {2}) ^ {n + 1}} \\,dx\\) to \\(2 (\\int_{0}^{y} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {n}} \\,dx) - 2 a ^ {2} (\\int_{0}^{y} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {n + 1}} \\,dx)\\)",
+                                    "name": "Equation",
+                                    "new_expr": "2 * (INT x:[0,y]. 1 / (x ^ 2 + a ^ 2) ^ n) - 2 * a ^ 2 * (INT x:[0,y]. 1 / (x ^ 2 + a ^ 2) ^ (n + 1))",
+                                    "old_expr": "INT x:[0,y]. 2 * (x ^ 2 + a ^ 2) / (a ^ 2 + x ^ 2) ^ (n + 1) - 2 * a ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1)",
+                                    "str": "rewriting INT x:[0,y]. 2 * (x ^ 2 + a ^ 2) / (a ^ 2 + x ^ 2) ^ (n + 1) - 2 * a ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1) to 2 * (INT x:[0,y]. 1 / (x ^ 2 + a ^ 2) ^ n) - 2 * a ^ 2 * (INT x:[0,y]. 1 / (x ^ 2 + a ^ 2) ^ (n + 1))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "n (2 J{(a,y,n)} - 2 a ^ {2} J{(a,y,n + 1)}) + y (a ^ {2} + y ^ {2}) ^ {-n}",
+                                "res": "n * (2 * J(a,y,n) - 2 * a ^ 2 * J(a,y,n + 1)) + y * (a ^ 2 + y ^ 2) ^ -n",
+                                "rule": {
+                                    "func_name": "J",
+                                    "loc": "subterms",
+                                    "name": "FoldDefinition",
+                                    "str": "fold definition on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{y}{(y ^ {2} + a ^ {2}) ^ {n}} + 2 n J{(a,y,n)} - 2 n a ^ {2} J{(a,y,n + 1)}",
+                                "res": "y / (y ^ 2 + a ^ 2) ^ n + 2 * n * J(a,y,n) - 2 * n * a ^ 2 * J(a,y,n + 1)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(n (2 J{(a,y,n)} - 2 a ^ {2} J{(a,y,n + 1)}) + y (a ^ {2} + y ^ {2}) ^ {-n}\\) to \\(\\frac{y}{(y ^ {2} + a ^ {2}) ^ {n}} + 2 n J{(a,y,n)} - 2 n a ^ {2} J{(a,y,n + 1)}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "y / (y ^ 2 + a ^ 2) ^ n + 2 * n * J(a,y,n) - 2 * n * a ^ 2 * J(a,y,n + 1)",
+                                    "old_expr": "n * (2 * J(a,y,n) - 2 * a ^ 2 * J(a,y,n + 1)) + y * (a ^ 2 + y ^ 2) ^ -n",
+                                    "str": "rewriting n * (2 * J(a,y,n) - 2 * a ^ 2 * J(a,y,n + 1)) + y * (a ^ 2 + y ^ 2) ^ -n to y / (y ^ 2 + a ^ 2) ^ n + 2 * n * J(a,y,n) - 2 * n * a ^ 2 * J(a,y,n + 1)"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{y}{(y ^ {2} + a ^ {2}) ^ {n}} + 2 n J{(a,y,n)} - 2 n a ^ {2} J{(a,y,n + 1)}",
+                        "start": "y / (y ^ 2 + a ^ 2) ^ n + 2 * n * J(a,y,n) - 2 * n * a ^ 2 * J(a,y,n + 1)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "J(a,y,n) = y / (y ^ 2 + a ^ 2) ^ n + 2 * n * J(a,y,n) - 2 * n * a ^ 2 * J(a,y,n + 1)",
+                "latex_goal": "J{(a,y,n)} = \\frac{y}{(y ^ {2} + a ^ {2}) ^ {n}} + 2 n J{(a,y,n)} - 2 n a ^ {2} J{(a,y,n + 1)}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                },
+                {
+                    "cond": "y >= 0",
+                    "latex_cond": "y \\ge 0"
+                },
+                {
+                    "cond": "n > 0",
+                    "latex_cond": "n > 0"
+                },
+                {
+                    "cond": "isInt(n)",
+                    "latex_cond": "n \\in\\mathbb{Z}"
+                }
+            ],
+            "finished": true,
+            "goal": "J(a,y,n + 1) = y / (2 * n * a ^ 2 * (y ^ 2 + a ^ 2) ^ n) + (2 * n - 1) / (2 * n * a ^ 2) * J(a,y,n)",
+            "latex_goal": "J{(a,y,n + 1)} = \\frac{y}{2 n a ^ {2} (y ^ {2} + a ^ {2}) ^ {n}} + \\frac{2 n - 1}{2 n a ^ {2}} J{(a,y,n)}",
+            "proof": {
+                "finished": true,
+                "goal": "J(a,y,n + 1) = y / (2 * n * a ^ 2 * (y ^ 2 + a ^ 2) ^ n) + (2 * n - 1) / (2 * n * a ^ 2) * J(a,y,n)",
+                "latex_goal": "J{(a,y,n + 1)} = \\frac{y}{2 n a ^ {2} (y ^ {2} + a ^ {2}) ^ {n}} + \\frac{2 n - 1}{2 n a ^ {2}} J{(a,y,n)}",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "a > 0",
+                            "latex_cond": "a > 0"
+                        },
+                        {
+                            "cond": "y >= 0",
+                            "latex_cond": "y \\ge 0"
+                        },
+                        {
+                            "cond": "n > 0",
+                            "latex_cond": "n > 0"
+                        },
+                        {
+                            "cond": "isInt(n)",
+                            "latex_cond": "n \\in\\mathbb{Z}"
+                        }
+                    ],
+                    "latex_start": "J{(a,y,n)} = \\frac{y}{(y ^ {2} + a ^ {2}) ^ {n}} + 2 n J{(a,y,n)} - 2 n a ^ {2} J{(a,y,n + 1)}",
+                    "start": "J(a,y,n) = y / (y ^ 2 + a ^ 2) ^ n + 2 * n * J(a,y,n) - 2 * n * a ^ 2 * J(a,y,n + 1)",
+                    "steps": [
+                        {
+                            "latex_res": "J{(a,y,n + 1)} = \\frac{y (a ^ {2} + y ^ {2}) ^ {-n} + 2 n J{(a,y,n)} - J{(a,y,n)}}{2 a ^ {2} n}",
+                            "res": "J(a,y,n + 1) = (y * (a ^ 2 + y ^ 2) ^ -n + 2 * n * J(a,y,n) - J(a,y,n)) / (2 * a ^ 2 * n)",
+                            "rule": {
+                                "latex_str": "solve equation for \\(J{(a,y,n + 1)}\\)",
+                                "name": "SolveEquation",
+                                "solve_for": "J(a,y,n + 1)",
+                                "str": "solve equation for J(a,y,n + 1)"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "J{(a,y,n + 1)} = \\frac{y}{2 n a ^ {2} (y ^ {2} + a ^ {2}) ^ {n}} + \\frac{2 n - 1}{2 n a ^ {2}} J{(a,y,n)}",
+                            "res": "J(a,y,n + 1) = y / (2 * n * a ^ 2 * (y ^ 2 + a ^ 2) ^ n) + (2 * n - 1) / (2 * n * a ^ 2) * J(a,y,n)",
+                            "rule": {
+                                "latex_str": "rewriting \\(\\frac{y (a ^ {2} + y ^ {2}) ^ {-n} + 2 n J{(a,y,n)} - J{(a,y,n)}}{2 a ^ {2} n}\\) to \\(\\frac{y}{2 n a ^ {2} (y ^ {2} + a ^ {2}) ^ {n}} + \\frac{2 n - 1}{2 n a ^ {2}} J{(a,y,n)}\\)",
+                                "name": "Equation",
+                                "new_expr": "y / (2 * n * a ^ 2 * (y ^ 2 + a ^ 2) ^ n) + (2 * n - 1) / (2 * n * a ^ 2) * J(a,y,n)",
+                                "old_expr": "(y * (a ^ 2 + y ^ 2) ^ -n + 2 * n * J(a,y,n) - J(a,y,n)) / (2 * a ^ 2 * n)",
+                                "str": "rewriting (y * (a ^ 2 + y ^ 2) ^ -n + 2 * n * J(a,y,n) - J(a,y,n)) / (2 * a ^ 2 * n) to y / (2 * n * a ^ 2 * (y ^ 2 + a ^ 2) ^ n) + (2 * n - 1) / (2 * n * a ^ 2) * J(a,y,n)"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "CombiningTwoTricks"
+}

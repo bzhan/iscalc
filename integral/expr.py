@@ -1345,6 +1345,12 @@ class Matrix(Expr):
         return Matrix((dim, dim), [[Const(1) if i == j else Const(0) for i in range(dim)] \
                                    for j in range(dim)])
 
+    @staticmethod
+    def homo_matrix(R, p):
+        row = Vector([Const(0), Const(0), Const(0), Const(1)], is_column=False)
+        return R.concatenate(p).concatenate(row, col_concatenate=False)
+
+
     def __hash__(self):
         res = []
         for row in self.data:
@@ -1377,7 +1383,7 @@ class Matrix(Expr):
     def vectors2arr(vectors: List[Vector], is_row_vectors=True):
         '''
             if is_row_vector = True
-                [[1,2,3],[2,3,4]] this two vectors are treated as row vector
+                [[1,2,3],[2,3,4]] these two vectors are treated as row vector
                 then the final resulting matrix is [[1,2,3],[2,3,4]]
             else
                 this two vectors are treated as column vector
@@ -1436,9 +1442,7 @@ class Matrix(Expr):
     def is_se3(self):
         return self.shape == (4, 4) and self.get_row(3) == Vector.zero(4, is_column=False)
 
-    def is_skew(self):
-        # a.transpose == -a
-        return self == Matrix.scalar_mul(Const(-1), self.transpose())
+
 
     def __eq__(self, other: 'Matrix'):
         return isinstance(other, Matrix) and self.shape == other.shape and self.data == other.data
@@ -1450,36 +1454,6 @@ class Matrix(Expr):
             for j in range(self.shape[1]):
                 arr[i][j] = self.data[i][j] - other.data[i][j]
         return Matrix(self.shape, arr)
-
-    @staticmethod
-    def exp(m, t):
-        # t is a scalar
-        # determine whether self is an instance of se(3) or skew-matrices
-        # assert m.is_se3() or m.is_skew()
-        dim = m.shape[0]
-        if m.is_se3():
-            twist: 'Vector' = m.vee
-            v: 'Vector' = twist.get_line_velocity()
-            w: 'Vector' = twist.get_angle_velocity()
-            part2 = Vector([Const(0), Const(0), Const(0), Const(1)], is_column=False)
-            if w != Vector.zero(3, is_column=True):
-                # formula 2.36 at page 42
-                left_top: 'Matrix' = Matrix.exp(w.hat, t)
-                right_top: 'Vector' = (Matrix.unit_matrix(3) - left_top) * (w.hat * v) + \
-                                      Vector.scalar_mul(t, w * w.t * v)
-                part1 = left_top.concatenate(right_top)
-            else:
-                # formula 2.32 at page 41
-                part1 = Matrix.unit_matrix(3).concatenate(Vector.scalar_mul(t, v))
-            return part1.concatenate(part2, col_concatenate=False)
-        elif m.is_skew():
-            # Rodrigues Formula
-            # Derivation: https://zhuanlan.zhihu.com/p/369659467
-            # exp(self * t) = I + sin(t) * self + (1-cos(t)) * self * self
-            return Matrix.unit_matrix(dim) + Matrix.scalar_mul(Fun('sin', t), m) + \
-                   Matrix.scalar_mul((Const(1) - Fun('cos', t)), m * m)
-        else:
-            raise NotImplementedError
 
     def is_so3(self):
         if self.shape != (3, 3) and not self.is_skew():

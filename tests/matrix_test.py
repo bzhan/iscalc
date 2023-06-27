@@ -81,5 +81,25 @@ class MatrixTest(unittest.TestCase):
         self.assertEqual(str(v.hat), s)
         self.assertEqual(str(v.hat.vee), str(v))
 
+    def testExample4_3(self):
+        t = []
+        t.append(Vector([Const(0), Const(0), Const(0), Const(0), Const(0), Const(1)]))
+        t.append(Vector([Const(0), -Var("l0"), Const(0), Const(-1), Const(0), Const(0)]))
+        t.append(Vector([Const(0), -Var("l0"), Var("l1"), Const(-1), Const(0), Const(0)]))
+        gsl = []
+        link_pos = []
+        link_pos.append((Matrix.unit_matrix(3), Vector([Const(0), Const(0), Var("r0")])))
+        link_pos.append((Matrix.unit_matrix(3), Vector([Const(0), Var("r1"), Var("l0")])))
+        link_pos.append((Matrix.unit_matrix(3), Vector([Const(0), Var("l1")+Var("r2"), Var("l0")])))
+        gsl = [Matrix.homo_matrix(*link_pos[i]) for i in range(3)]
+
+        theta = [Var("θ1"), Var("θ2"), Var("θ3")]
+
+        # compute Jacobian matrices
+        n = 3
+        jsl = rules.compute_jacobian(t, gsl, theta, n, self.ctx)
+        for i in range(n):
+            # print(t[i])
+            print(jsl[i])
 
 

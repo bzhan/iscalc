@@ -31,6 +31,7 @@ grammar = r"""
         | "LIM" "{" CNAME "->" expr "}" "." expr -> limit_inf_expr
         | "LIM" "{" CNAME "->" expr "-}" "."  expr -> limit_l_expr
         | "LIM" "{" CNAME "->" expr "+}" "."  expr -> limit_r_expr
+        | trans
 
     ?uminus: "-" uminus -> uminus_expr | atom  // priority 80
 
@@ -53,7 +54,11 @@ grammar = r"""
         | plus
 
     ?expr: compare
-
+    ?row: "{" expr ("," expr)* "}" -> row_vector
+    ?col: "{" expr ("," expr)* "}'" -> col_vector | row
+    ?matrix: "{" row ("," row)* "}" -> row_matrix | col
+        | "{" col ("," col)* "}" -> col_matrix
+    ?trans: (matrix ".t") -> trans_matrix | matrix
     !interval: ("(" | "[") expr "," expr ("]" | ")") -> interval_expr
 
     %import common.CNAME
@@ -175,6 +180,21 @@ class ExprTransformer(Transformer):
 
     def limit_r_expr(self, var, lim, body):
         return expr.Limit(str(var), lim, body, "+")
+
+    def row_vector(self, *args):
+        return expr.Vector(list(args), is_column=False)
+
+    def col_vector(self, *args):
+        return expr.Vector(list(args), is_column=True)
+
+    def row_matrix(self, *args):
+        return expr.Matrix(args, is_row=True)
+
+    def col_matrix(self, *args):
+        return expr.Matrix(args, is_row=False)
+
+    def trans_matrix(self, m):
+        return m.t
 
 
 expr_parser = Lark(grammar, start="expr", parser="lalr", transformer=ExprTransformer())

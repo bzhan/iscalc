@@ -1177,7 +1177,7 @@ class Vector(Expr):
     """ Vector """
 
     @staticmethod
-    def zero(dim, is_column=True):
+    def zero(dim: int, is_column=True):
         return Vector([Const(0) for i in range(dim)], is_column=is_column)
 
     def __init__(self, data: List[Expr], is_column=True):
@@ -1306,9 +1306,9 @@ class Vector(Expr):
 
     def __str__(self):
         if self.is_row:
-            return "[" + ", ".join(str(item) for item in self.data) + "]"
+            return "{" + ", ".join(str(item) for item in self.data) + "}"
         else:
-            return "\n".join("[" + str(item) + "]" for item in self.data)
+            return "\n".join("{" + str(item) + "}" for item in self.data)
 
     def get_angle_velocity(self):
         assert self.is_column and self.dim == 6
@@ -1322,28 +1322,42 @@ class Vector(Expr):
     def scalar_mul(t, v: 'Vector'):
         return Vector([t * e for e in v.data], is_column=v.is_column)
 
+    @classmethod
+    def row_one(cls, idx:int, dim:int):
+        return Vector([Const(0) if idx!=dim else Const(1) for i in range(dim)], is_column=False)
+
 
 class Matrix(Expr):
     """ Matrix """
 
-    def __init__(self, shape: Tuple[int], data: List[List[Expr]]):
-        self.data = copy.deepcopy(data)
-        self.rows = []  # row vectors
-        for i in range(shape[0]):
-            self.rows.append(Vector(data[i], is_column=False))
-        self.cols = []  # column vectors
-        for j in range(shape[1]):
-            tmp = []
-            for i in range(shape[0]):
-                tmp.append(self.rows[i][j])
-            self.cols.append(Vector(tmp, is_column=True))
-        self.shape = shape
+    def __init__(self, vectors: List[Vector], is_row=True):
+        assert len(vectors) != 0 and all(v.dim == vectors[0].dim for v in vectors)
         self.ty = MATRIX
+        self.rows = []  # row vectors
+        self.cols = []  # column vectors
+        if is_row:
+            self.shape = (len(vectors), vectors[0].dim)
+            for row_vec in vectors:
+                self.rows.append(row_vec)
+            for j in range(self.shape[1]):
+                tmp = []
+                for i in range(self.shape[0]):
+                    tmp.append(self.rows[i][j])
+                self.cols.append(Vector(tmp, is_column=True))
+        else:
+            self.shape = (vectors[0].dim, len(vectors))
+            for col_vec in vectors:
+                self.cols.append(col_vec)
+            for i in range(self.shape[0]):
+                tmp = []
+                for j in range(self.shape[1]):
+                    tmp.append(self.cols[j][i])
+                self.rows.append(Vector(tmp, is_column=False))
+
 
     @staticmethod
     def unit_matrix(dim: int):
-        return Matrix((dim, dim), [[Const(1) if i == j else Const(0) for i in range(dim)] \
-                                   for j in range(dim)])
+        return Matrix([Vector.row_one(i, dim) for i in range(dim)])
 
     @staticmethod
     def homo_matrix(R, p):
@@ -1403,12 +1417,7 @@ class Matrix(Expr):
         return arr
 
     def transpose(self):
-        arr = [[0 for j in range(self.shape[0])] for i in range(self.shape[1])]
-        for i in range(self.shape[1]):
-            for j in range(self.shape[0]):
-                arr[i][j] = self.data[j][i]
-                arr[i][j] = self.data[j][i]
-        return Matrix((self.shape[1], self.shape[0]), arr)
+        return Matrix([col.t for col in self.cols])
 
     def get_row(self, idx):
         return self.rows[idx]
@@ -1445,7 +1454,9 @@ class Matrix(Expr):
 
 
     def __eq__(self, other: 'Matrix'):
-        return isinstance(other, Matrix) and self.shape == other.shape and self.data == other.data
+        return isinstance(other, Matrix) and self.ty == other.ty and self.shape == other.shape and\
+               self.rows == other.rows and self.cols == other.cols
+
 
     def __sub__(self, other: 'Matrix'):
         assert isinstance(other, Matrix) and self.shape == other.shape

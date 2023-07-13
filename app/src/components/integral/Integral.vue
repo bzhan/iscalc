@@ -126,7 +126,8 @@
     </div>
     <!-- Main panel for showing book content-->
     <div v-if="content.length == 0" id="problem">
-      <BookContent v-bind:content="book_content" :book_name="book_name" @open_file='openFile' @select_book_item='selectBookItem'>
+      <BookContent v-bind:content="book_content" :book_name="book_name" @open_file='openFile'
+       @select_book_item='selectBookItem'>
       </BookContent>
     </div>
     <div id="dialog">
@@ -507,6 +508,10 @@ export default {
         console.log("ok")
       }
     },
+    // selectBookItem: function(index) {
+    //     //console.log(index)
+    //     console.log(index)
+    // },
     openFile: async function (filename) {
       const data = {
         filename: filename

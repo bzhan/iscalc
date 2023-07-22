@@ -27,6 +27,18 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "latex_res": "\\int_{0}^{\\infty} e^{-x ^ {2}/2} \\,dx",
+                                "res": "INT x:[0,oo]. exp(-(x ^ 2) / 2)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(-\\frac{x ^ {2}}{2}\\) to \\(\\frac{-x ^ {2}}{2}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "-(x ^ 2) / 2",
+                                    "old_expr": "-(x ^ 2 / 2)",
+                                    "str": "rewriting -(x ^ 2 / 2) to -(x ^ 2) / 2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2}",
                                 "res": "sqrt(2) * sqrt(pi) / 2",
                                 "rule": {

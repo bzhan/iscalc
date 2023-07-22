@@ -1603,10 +1603,11 @@ class IntegralTest(unittest.TestCase):
         Eq0_proof = Eq0.proof_by_calculation()
         calc = Eq0_proof.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("I"))
+        calc.perform_rule(rules.Equation("-(x ^ 2 / 2)", "-(x^2)/2"))
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc = Eq0_proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
-
+        assert Eq0_proof.is_finished()
         # Prove the following equality
         Eq1 = file.add_goal("(D t. I(t)) = -t*I(t)")
         Eq1_proof = Eq1.proof_by_calculation()
@@ -1617,31 +1618,30 @@ class IntegralTest(unittest.TestCase):
         v = parser.parse_expr('-exp(-x^2/2)')
         calc.perform_rule(rules.IntegrationByParts(u, v))
         calc.perform_rule(rules.FullSimplify())
-
         calc = Eq1_proof.rhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
         calc.perform_rule(rules.FullSimplify())
-
+        assert Eq1_proof.is_finished()
         Eq2 = file.add_goal("(D t. log(I(t)) + t^2/2) = 0", conds=["I(t) > 0"])
         Eq2_proof = Eq2.proof_by_calculation()
         calc = Eq2_proof.lhs_calc
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(Eq1.goal), '0.0'))
         calc.perform_rule(rules.FullSimplify())
-
+        assert Eq2_proof.is_finished()
         Eq3 = file.add_goal("1/2 * t ^ 2 + log(I(t)) = SKOLEM_CONST(C)", conds=["I(t) > 0"])
         Eq3_proof = Eq3.proof_by_rewrite_goal(begin=Eq2)
         calc = Eq3_proof.begin
         calc.perform_rule(rules.IntegralEquation())
         calc.perform_rule(rules.IndefiniteIntegralIdentity())
-
+        assert Eq3_proof.is_finished()
         Eq4 = file.add_goal("log(sqrt(pi / 2)) = SKOLEM_CONST(C)")
         Eq4_proof = Eq4.proof_by_rewrite_goal(begin=Eq3)
         calc = Eq4_proof.begin
         calc.perform_rule(rules.LimitEquation('t', expr.Const(0)))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(Eq0.goal), '0.0'))
-
+        assert Eq4_proof.is_finished()
         Eq5 = file.add_goal("log(I(t)) = -t ^ 2 / 2 + log(sqrt(pi / 2))", conds=["I(t) > 0"])
         Eq5_proof = Eq5.proof_by_calculation()
         calc = Eq5_proof.lhs_calc
@@ -1650,7 +1650,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc = Eq5_proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
-
+        assert Eq5_proof.is_finished()
         Eq6 = file.add_goal("I(t) = sqrt(pi/2) * exp(-t^2/2)")
         Eq6_proof = Eq6.proof_by_rewrite_goal(begin=Eq5)
         calc = Eq6_proof.begin
@@ -1659,7 +1659,7 @@ class IntegralTest(unittest.TestCase):
             "exp(-(t ^ 2 / 2) - log(2) / 2 + log(pi) / 2)",
             "2 ^ (1/2) ^ (-1) * pi ^ (1/2) / exp(1/2 * t ^ 2)"))
         calc.perform_rule(rules.FullSimplify())
-
+        assert Eq6_proof.is_finished()
         Eq7 = file.add_goal("(INT x:[-oo, oo]. exp(-x^2/2) * cos(s + t*x)) = sqrt(2*pi)*exp(-t^2/2)*cos(s)")
         Eq7_proof = Eq7.proof_by_calculation()
         calc = Eq7_proof.lhs_calc
@@ -1679,6 +1679,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnSubterm(rules.ApplyEquation(Eq6.goal)))
         calc.perform_rule(rules.Equation("2 * cos(s) * (sqrt(pi / 2) * exp(-(t ^ 2) / 2))",
                                          "sqrt(2*pi)*exp(-t^2/2)*cos(s)"))
+        assert Eq7_proof.is_finished()
         # print(file)
         self.checkAndOutput(file)
 

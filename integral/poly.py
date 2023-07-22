@@ -61,24 +61,28 @@ def collect_pairs_power(ps: Dict[expr.Expr, "Polynomial"], ctx: Context):
             return True
         return False
 
+    vec_list = []
     for v, c in ps:
-        if v in res:
-            if is_non_negative(c) and is_non_negative(res[v]):
-                res[v] += c
-                res[v].reduce(ctx)
-            elif ctx.is_nonzero(v):
-                res[v] += c
-                res[v].reduce(ctx)
-            else:
-                res_list.append((v, c))
-        else:  # v not in res
-            res[v] = c
+        if v.has_vector():
+            vec_list.append((v,c))
+        else:
+            if v in res:
+                if is_non_negative(c) and is_non_negative(res[v]):
+                    res[v] += c
+                    res[v].reduce(ctx)
+                elif ctx.is_nonzero(v):
+                    res[v] += c
+                    res[v].reduce(ctx)
+                else:
+                    res_list.append((v, c))
+            else:  # v not in res
+                res[v] = c
 
     for v, c in res.items():
         if c != Polynomial(tuple()):
             res_list.append((v, c))
-    
-    return tuple(sorted(res_list))
+
+    return tuple(sorted(res_list) + vec_list)
 
 def reduce_power(n: expr.Expr, e: "Polynomial") -> Tuple[Tuple[expr.Expr, "Polynomial"]]:
     """Reduce n ^ e to normal form.
@@ -614,6 +618,16 @@ def simplify_identity(e: expr.Expr, ctx: Context) -> expr.Expr:
                 return identity.rhs.inst_pat(inst)
     return e
 
+def simp_vector(e: expr.Vector, ctx: Context) -> expr.Vector:
+    if not e.is_vector():
+        return e
+    return expr.Vector([from_poly(to_poly(item, ctx)) for item in e.data], e.is_column)
+
+def simp_matrix(e: expr.Matrix, ctx: Context) -> expr.Vector:
+    if not e.is_matrix():
+        return e
+    return expr.Matrix([expr.Vector([from_poly(to_poly(item, ctx)) for item in row.data], row.is_column) for row in e.rows])
+
 def simplify_eq(e: expr.Expr, ctx: Context) -> expr.Expr:
     if not e.is_var():
         return e
@@ -776,6 +790,8 @@ def normalize(e: expr.Expr, ctx: Context) -> expr.Expr:
     for i in range(5):
         old_e = e
         e = from_poly(to_poly(e, ctx))
+        e = simp_vector(e, ctx)
+        e = simp_matrix(e, ctx)
         e = apply_subterm(e, function_table, ctx)
         e = apply_subterm(e, function_eval, ctx)
         e = apply_subterm(e, simplify_identity, ctx)

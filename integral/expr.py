@@ -531,6 +531,10 @@ class Expr:
         elif self.is_summation():
             return Summation(self.index_var, self.lower.subst(var, e), self.upper.subst(var, e),
                              self.body.subst(var, e))
+        elif self.is_vector():
+            return Vector([item.subst(var, e) for item in self.data], self.is_column)
+        elif self.is_matrix():
+            return Matrix([rv.subst(var,e) for rv in self.rows])
         else:
             print('subst on', self)
             raise NotImplementedError
@@ -583,6 +587,12 @@ class Expr:
             elif t.is_equals():
                 rec(t.bd_vars)
                 rec(t.rhs, bd_vars)
+            elif t.is_vector():
+                for item in t.data:
+                    rec(item, bd_vars)
+            elif t.is_matrix():
+                for rv in t.rows:
+                    rec(rv, bd_vars)
             else:
                 print(t, type(t))
                 raise NotImplementedError
@@ -607,6 +617,27 @@ class Expr:
             return self.body.has_symbol() or self.lim.has_symbol()
         elif isinstance(self, Deriv):
             return self.body.has_symbol()
+        else:
+            print(self)
+            raise NotImplementedError
+
+    def has_vector(self):
+        if self.is_vector() or self.is_matrix():
+            return True
+        elif isinstance(self, Union[Var, Const, Inf, SkolemFunc, Symbol]):
+            return False
+        elif isinstance(self, Integral):
+            return self.upper.has_vector() or self.lower.has_vector() or self.body.has_vector()
+        elif isinstance(self, IndefiniteIntegral):
+            return self.body.has_vector()
+        elif isinstance(self, Union[Op, Fun]):
+            return any([arg.has_vector() for arg in self.args])
+        elif isinstance(self, Summation):
+            return self.body.has_vector()
+        elif isinstance(self, Limit):
+            return self.body.has_vector() or self.lim.has_vector()
+        elif isinstance(self, Deriv):
+            return self.body.has_vector()
         else:
             print(self)
             raise NotImplementedError
@@ -778,6 +809,10 @@ class Expr:
                              self.body.inst_pat(mapping))
         elif self.is_limit():
             return Limit(self.var, self.lim.inst_pat(mapping), self.body.inst_pat(mapping), self.drt)
+        elif self.is_vector():
+            return Vector([item.inst_pat(mapping) for item in self.data], self.is_column)
+        elif self.is_matrix():
+            return Matrix([Vector([item.inst_pat(mapping) for item in rv], rv.is_column) for rv in self.rows])
         else:
             print(type(self))
             raise NotImplementedError
@@ -887,8 +922,19 @@ def match(exp: Expr, pattern: Expr) -> Optional[Dict]:
             res2 = rec(exp.lim, pattern.lim, bd_vars)
             del bd_vars[pattern.var]
             return res1 and res2
+        elif exp.is_vector():
+            if exp.is_column != pattern.is_column or exp.dim != pattern.dim:
+                return False
+            return all([rec(item, pattern.data[idx], bd_vars) for (idx, item) in enumerate(exp.data)])
+        elif exp.is_matrix():
+            if exp.shape != pattern.shape:
+                return False
+            return all([all([rec(item, pattern.rows[i].data[j], bd_vars)\
+                        for (j,item) in enumerate(exp.rows[i].data)])\
+                        for (i, rv) in enumerate(exp.rows)])
         else:
             # Currently not implemented
+            print("Match Failed")
             return False
 
     bd_vars = dict()
@@ -902,7 +948,7 @@ def expr_to_pattern(e: Expr) -> Expr:
     """Convert an expression to pattern."""
     vars = e.get_vars()
     for var in vars:
-        e = e.subst(var, Symbol(var, [VAR, CONST, OP, FUN, INTEGRAL]))
+        e = e.subst(var, Symbol(var, [VAR, CONST, OP, FUN, INTEGRAL, MATRIX]))
     return e
 
 
@@ -1246,9 +1292,13 @@ class Vector(Expr):
                         res = res + self[i] * other[i]
                 return res
             elif self.is_column and other.is_row:
-                res = [[self[i] * other[j] for j in range(other.dim)]
-                       for i in range(self.dim)]
-                return Matrix((self.dim, other.dim), res)
+                res = []
+                for a in self.data:
+                    tmp = []
+                    for b in other.data:
+                        tmp.append(a*b)
+                    res.append(Vector(tmp, is_column=False))
+                return Matrix(res)
 
         elif isinstance(other, Matrix):
             if self.is_row:
@@ -1263,6 +1313,11 @@ class Vector(Expr):
     def __add__(self, other:'Vector'):
         assert self.is_column == other.is_column and self.dim == other.dim
         return Vector([self.data[i] + other.data[i] for i in range(self.dim)], is_column=self.is_column)
+
+    def __sub__(self, other: 'Vector'):
+        assert self.is_column == other.is_column and self.dim == other.dim
+        return Vector([self.data[i] - other.data[i] for i in range(self.dim)], is_column=self.is_column)
+
     def concatenate(self, other: Union['Matrix', 'Vector'], col_concatenate: bool = True) -> Union['Matrix', 'Vector']:
         if isinstance(other, Vector):
             if self.dim == other.dim and \
@@ -1308,7 +1363,7 @@ class Vector(Expr):
         if self.is_row:
             return "{" + ", ".join(str(item) for item in self.data) + "}"
         else:
-            return "\n".join("{" + str(item) + "}" for item in self.data)
+            return "T("+str(self.t)+")"
 
     def get_angle_velocity(self):
         assert self.is_column and self.dim == 6
@@ -1367,8 +1422,8 @@ class Matrix(Expr):
 
     def __hash__(self):
         res = []
-        for row in self.data:
-            res = res + row
+        for row in self.rows:
+            res.append(row)
         res.append(self.ty)
         res = res + list(self.shape)
         return hash(tuple(res))
@@ -1381,12 +1436,7 @@ class Matrix(Expr):
 
     def __add__(self, other: 'Matrix'):
         assert isinstance(other, Matrix) and self.shape == other.shape
-        arr1, arr2 = self.data, other.data
-        res = [[0 for j in range(self.shape[1])] for i in range(self.shape[0])]
-        for i in range(self.shape[0]):
-            for j in range(self.shape[1]):
-                res[i][j] = self[i][j] + other[i][j]
-        return Matrix(self.shape, res)
+        return Matrix([rv + other.rows[i] for (i, rv) in enumerate(self.rows)])
 
     def is_orthogonal(self):
         # A * A.t = I
@@ -1458,14 +1508,11 @@ class Matrix(Expr):
                self.rows == other.rows and self.cols == other.cols
 
 
-    def __sub__(self, other: 'Matrix'):
-        assert isinstance(other, Matrix) and self.shape == other.shape
-        arr = [[0 for j in range(self.shape[1])] for i in range(self.shape[0])]
-        for i in range(self.shape[0]):
-            for j in range(self.shape[1]):
-                arr[i][j] = self.data[i][j] - other.data[i][j]
-        return Matrix(self.shape, arr)
-
+    def __sub__(self, other: Union['Matrix','Expr']):
+        if isinstance(other, Matrix) and self.shape == other.shape:
+            return Matrix([rv-other.rows[i] for (i, rv) in enumerate(self.rows)])
+        else:
+            return Op('-', self, other)
     def is_so3(self):
         if self.shape != (3, 3) and not self.is_skew():
             return False
@@ -1554,16 +1601,16 @@ class Matrix(Expr):
         res = Matrix((1, self.shape[1]), [self.data[item]])
         return res
 
-    def __mul__(self, other: Union['Matrix', 'Vector']):
+    def __mul__(self, other: Union['Matrix', 'Vector', 'Expr']):
         if isinstance(other, Matrix):
-            assert other.shape[0] == self.shape[1]
+            assert self.shape[1] == other.shape[0]
             res = []
-            for i in range(self.shape[0]):
+            for (i, rv) in enumerate(self.rows):
                 tmp = []
-                for j in range(other.shape[1]):
-                    tmp.append(self.get_row(i) * other.get_col(j))
-                res.append(tmp)
-            return Matrix((len(res), len(res[0])), res)
+                for (j, cv) in enumerate(other.cols):
+                    tmp.append(rv * cv)
+                res.append(Vector(tmp, is_column=False))
+            return Matrix(res)
         elif isinstance(other, Vector):
             if other.is_column:
                 if self.shape[1] != other.dim:
@@ -1576,10 +1623,14 @@ class Matrix(Expr):
             else:
                 raise NotImplementedError
         else:
-            raise NotImplementedError
+            # raise NotImplementedError(str(self)+"%%%"+str(other))
+            if other.has_vector():
+                return Op('*', self, other)
+            else:
+                return Op('*', other, self)
 
     def __str__(self):
-        return "\n".join(str(row) for row in self.rows)
+        return "{"+", ".join(str(row) for row in self.rows)+"}"
 
     @staticmethod
     def diagonal(arr:List[Expr]):

@@ -61,7 +61,8 @@ class ParserTest(unittest.TestCase):
     def testParseVector(self):
         test_data = [
             ("{1,2,3}", Vector([Const(1), Const(2), Const(3)], is_column=False)),
-            ("{1,2,3}'", Vector([Const(1), Const(2), Const(3)], is_column=True)),
+            ("T({1,2,3})", Vector([Const(1), Const(2), Const(3)], is_column=True)),
+            ("T(T({1,2,3}))", Vector([Const(1), Const(2), Const(3)], is_column=False)),
         ]
         for s, r in test_data:
             e = parse_expr(s)
@@ -71,10 +72,10 @@ class ParserTest(unittest.TestCase):
             ("{{1,2,3}, {4,5,6}}", Matrix([Vector([Const(1), Const(2), Const(3)], is_column=False),\
                                            Vector([Const(4), Const(5), Const(6)], is_column=False)],\
                                            is_row=True)),
-            ("{{1,2,3}', {4,5,6}'}", Matrix([Vector([Const(1), Const(2), Const(3)], is_column=True), \
+            ("{T({1,2,3}), T({4,5,6})}", Matrix([Vector([Const(1), Const(2), Const(3)], is_column=True), \
                                              Vector([Const(4), Const(5), Const(6)], is_column=True)], \
                                              is_row=False)),
-            ("{{1,2,3}', {4,5,6}'}.t", Matrix([Vector([Const(1), Const(2), Const(3)], is_column=False),\
+            ("T({T({1,2,3}), T({4,5,6})})", Matrix([Vector([Const(1), Const(2), Const(3)], is_column=False),\
                                            Vector([Const(4), Const(5), Const(6)], is_column=False)],\
                                            is_row=True))
         ]

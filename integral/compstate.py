@@ -95,8 +95,8 @@ class FuncDef(StateItem):
             raise AssertionError("FuncDef: left side of equation must be variable or function")
         self.body = self.eq.rhs
 
-        if any(not arg.is_var() for arg in self.args) or len(self.args) != len(set(self.args)):
-            raise AssertionError("FuncDef: arguments should be distinct variables")
+        # if any(not arg.is_var() for arg in self.args) or len(self.args) != len(set(self.args)):
+        #     raise AssertionError("FuncDef: arguments should be distinct variables")
 
         if conds is None:
             conds = Conditions()

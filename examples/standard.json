@@ -338,8 +338,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\frac{1}{a} (\\frac{\\tan^{-1}{(\\frac{u}{\\sqrt{1}})}}{\\sqrt{1}}) + C",
-                                "res": "1 / a * (atan(u / sqrt(1)) / sqrt(1)) + SKOLEM_CONST(C)",
+                                "latex_res": "\\frac{1}{a} \\tan^{-1}{u} + C",
+                                "res": "1 / a * atan(u) + SKOLEM_CONST(C)",
                                 "rule": {
                                     "name": "IndefiniteIntegralIdentity",
                                     "str": "apply indefinite integral"
@@ -347,8 +347,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\frac{1}{a} (\\frac{\\tan^{-1}{(\\frac{\\frac{x}{a}}{\\sqrt{1}})}}{\\sqrt{1}}) + C",
-                                "res": "1 / a * (atan(x / a / sqrt(1)) / sqrt(1)) + SKOLEM_CONST(C)",
+                                "latex_res": "\\frac{1}{a} \\tan^{-1}{(\\frac{x}{a})} + C",
+                                "res": "1 / a * atan(x / a) + SKOLEM_CONST(C)",
                                 "rule": {
                                     "name": "ReplaceSubstitution",
                                     "str": "replace substitution"

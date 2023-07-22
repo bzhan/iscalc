@@ -31,7 +31,7 @@ grammar = r"""
         | "LIM" "{" CNAME "->" expr "}" "." expr -> limit_inf_expr
         | "LIM" "{" CNAME "->" expr "-}" "."  expr -> limit_l_expr
         | "LIM" "{" CNAME "->" expr "+}" "."  expr -> limit_r_expr
-        | trans
+        | "{" expr ("," expr)* "}" -> vector_expr
 
     ?uminus: "-" uminus -> uminus_expr | atom  // priority 80
 
@@ -54,11 +54,6 @@ grammar = r"""
         | plus
 
     ?expr: compare
-    ?row: "{" expr ("," expr)* "}" -> row_vector
-    ?col: "{" expr ("," expr)* "}'" -> col_vector | row
-    ?matrix: "{" row ("," row)* "}" -> row_matrix | col
-        | "{" col ("," col)* "}" -> col_matrix
-    ?trans: (matrix ".t") -> trans_matrix | matrix
     !interval: ("(" | "[") expr "," expr ("]" | ")") -> interval_expr
 
     %import common.CNAME
@@ -149,6 +144,8 @@ class ExprTransformer(Transformer):
             return expr.SkolemFunc(str(args[0].func_name), tuple(arg for arg in args[0].args))
         elif func_name == 'SUM':
             return expr.Summation(str(args[0]), *args[1:])
+        elif func_name == 'T' and (isinstance(args[0], expr.Vector) or isinstance(args[0], expr.Matrix)):
+            return args[0].t
         return expr.Fun(func_name, *args)
 
     def abs_expr(self, expr):
@@ -181,20 +178,14 @@ class ExprTransformer(Transformer):
     def limit_r_expr(self, var, lim, body):
         return expr.Limit(str(var), lim, body, "+")
 
-    def row_vector(self, *args):
-        return expr.Vector(list(args), is_column=False)
-
-    def col_vector(self, *args):
-        return expr.Vector(list(args), is_column=True)
-
-    def row_matrix(self, *args):
-        return expr.Matrix(args, is_row=True)
-
-    def col_matrix(self, *args):
-        return expr.Matrix(args, is_row=False)
-
-    def trans_matrix(self, m):
-        return m.t
+    def vector_expr(self, *args):
+        if isinstance(args[0], expr.Vector):
+            if args[0].is_column:
+                return expr.Matrix(list(args), is_row=False)
+            else:
+                return expr.Matrix(list(args), is_row=True)
+        else:
+            return expr.Vector(list(args), is_column=False)
 
 
 expr_parser = Lark(grammar, start="expr", parser="lalr", transformer=ExprTransformer())

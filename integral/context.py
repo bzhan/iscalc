@@ -461,7 +461,7 @@ def apply_subterm(e: Expr, f: Callable[[Expr, Context], Expr], ctx: Context) -> 
         elif e.is_vector():
             return Vector([rec(item, ctx) for item in e.data], e.is_column)
         elif e.is_matrix():
-            return Matrix(e.shape, [[rec(item, ctx) for item in row] for row in e.data])
+            return Matrix([Vector([rec(item, ctx) for item in row], row.is_column) for row in e.rows])
         else:
             raise NotImplementedError
     return rec(e, ctx)

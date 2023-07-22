@@ -23,9 +23,11 @@ def subject_of(cond: Expr) -> Expr:
         return cond.args[0]
     if cond.is_less() or cond.is_less_eq():
         return cond.args[0]
-    if cond.is_fun() and cond.func_name == 'isInt':
-        return cond.args[0]
-    if cond.is_fun() and cond.func_name == 'isEven':
+    # if cond.is_fun() and cond.func_name == 'isInt':
+    #     return cond.args[0]
+    # if cond.is_fun() and cond.func_name == 'isEven':
+    #     return cond.args[0]
+    if cond.is_fun():
         return cond.args[0]
     raise TypeError
 
@@ -92,9 +94,11 @@ def init_all_conds(conds: Conditions) -> Dict[Expr, List[Expr]]:
             if x.is_less():
                 if x.args[1] in all_conds:
                     for y in all_conds[x.args[1]]:
-                        # a<b -> b<c -> a<c
+                        # x: k < b
+                        # y: b < c or b <= c or b = c
+                        # x and y ==> k < c
                         if y.is_less() or y.is_less_eq() or y.is_equals():
-                            all_conds[k].append(Op(x.op, x.args[0], y.args[1]))
+                            all_conds[k].append(Op('<', k, y.args[1]))
     return all_conds
 
 def update_inst(k: str, v: Expr, inst: Dict[str, Expr]) -> Dict[str, Expr]:
@@ -247,7 +251,7 @@ def saturate_expr(e: Expr, ineq: Identity, all_conds: Dict[Expr, List[Expr]], ct
             res = ineq.expr.inst_pat(inst)
             if res.is_compare():
                 res = Op(res.op, res.args[0], normalize(res.args[1], ctx))
-            if check_cond(res, all_conds, inst):
+            if check_cond(res, all_conds, inst) == [inst]:
                 continue  # already exists
             if e not in all_conds:
                 all_conds[e] = list()

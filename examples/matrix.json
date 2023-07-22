@@ -1,0 +1,18 @@
+{
+  "content": [
+    {
+      "attributes": [
+          "bidirectional"
+      ],
+      "category": "matrix-power",
+      "conds": [
+        "isSquareMatrix(A)",
+        "isNonnegativeInteger(n)"
+      ],
+      "expr": "A^n = A^1 * A^(n-1)",
+      "type": "axiom"
+  }
+  ],
+  "imports": [],
+  "name": "interesting"
+}

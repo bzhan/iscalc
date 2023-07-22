@@ -1,8 +1,10 @@
 import unittest
 from typing import List
 
-from integral import rules, context, parser
-from integral.expr import Op, Var, Const, Matrix, Vector, Expr
+from integral import rules, context, parser, compstate
+from integral.expr import Op, Var, Const, Matrix, Vector, Expr, Fun
+
+
 class MatrixTest(unittest.TestCase):
     r = rules.FullSimplify()
     ctx = context.Context()
@@ -81,25 +83,27 @@ class MatrixTest(unittest.TestCase):
         self.assertEqual(str(v.hat), s)
         self.assertEqual(str(v.hat.vee), str(v))
 
-    def testExample4_3(self):
-        t = []
-        t.append(Vector([Const(0), Const(0), Const(0), Const(0), Const(0), Const(1)]))
-        t.append(Vector([Const(0), -Var("l0"), Const(0), Const(-1), Const(0), Const(0)]))
-        t.append(Vector([Const(0), -Var("l0"), Var("l1"), Const(-1), Const(0), Const(0)]))
-        gsl = []
-        link_pos = []
-        link_pos.append((Matrix.unit_matrix(3), Vector([Const(0), Const(0), Var("r0")])))
-        link_pos.append((Matrix.unit_matrix(3), Vector([Const(0), Var("r1"), Var("l0")])))
-        link_pos.append((Matrix.unit_matrix(3), Vector([Const(0), Var("l1")+Var("r2"), Var("l0")])))
-        gsl = [Matrix.homo_matrix(*link_pos[i]) for i in range(3)]
+    def testExample1(self):
+        file = compstate.CompFile("matrix", "example01")
+        file.add_definition("hat({x,y,z}) = {{0,-z,y},{z,0,-x},{-y,x,0}}")
+        file.add_definition("norm({a1,a2,a3}) = sqrt(a1^2 + a2^2 + a3^2)")
+        goal = file.add_goal('hat({a1,a2,a3})^2 = \
+        T({a1,a2,a3}) * {a1,a2,a3} - norm({a1,a2,a3})^2 * {{1,0,0},{0,1,0},{0,0,1}}')
+        proof = goal.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.OnLocation(rules.ExpandDefinition("hat"), "0"))
+        olde = "{{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}}^2"
+        newe = "{{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}}^1 * {{0, -a3, a2},{a3, 0, -a1},{-a2, a1, 0}}^(2-1)"
+        calc.perform_rule(rules.ApplyIdentity(olde, newe))
+        calc.perform_rule(rules.FullSimplify())
+        calc = proof.rhs_calc
+        calc.perform_rule(rules.OnLocation(rules.ExpandDefinition("norm"), "1.0.0"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.OnLocation(rules.MatrixRewrite(), '1'))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.OnLocation(rules.MatrixRewrite(), '0'))
+        calc.perform_rule(rules.FullSimplify())
+        assert proof.is_finished()
 
-        theta = [Var("θ1"), Var("θ2"), Var("θ3")]
-
-        # compute Jacobian matrices
-        n = 3
-        jsl = rules.compute_jacobian(t, gsl, theta, n, self.ctx)
-        for i in range(n):
-            # print(t[i])
-            print(jsl[i])
 
 

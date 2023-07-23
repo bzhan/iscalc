@@ -84,20 +84,16 @@ class MatrixTest(unittest.TestCase):
         self.assertEqual(str(v.hat.vee), str(v))
 
     def testExample1(self):
-        file = compstate.CompFile("matrix", "example01")
-        file.add_definition("hat({x,y,z}) = {{0,-z,y},{z,0,-x},{-y,x,0}}")
-        file.add_definition("norm({a1,a2,a3}) = sqrt(a1^2 + a2^2 + a3^2)")
+        file = compstate.CompFile("matrix", "matrix_example01")
         goal = file.add_goal('hat({a1,a2,a3})^2 = \
-        T({a1,a2,a3}) * {a1,a2,a3} - norm({a1,a2,a3})^2 * {{1,0,0},{0,1,0},{0,0,1}}')
+        T({a1,a2,a3}) * {a1,a2,a3} - norm({a1,a2,a3})^2 * unit_matrix(3)')
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
-        calc.perform_rule(rules.OnLocation(rules.ExpandDefinition("hat"), "0"))
         olde = "{{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}}^2"
         newe = "{{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}}^1 * {{0, -a3, a2},{a3, 0, -a1},{-a2, a1, 0}}^(2-1)"
         calc.perform_rule(rules.ApplyIdentity(olde, newe))
         calc.perform_rule(rules.FullSimplify())
         calc = proof.rhs_calc
-        calc.perform_rule(rules.OnLocation(rules.ExpandDefinition("norm"), "1.0.0"))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.MatrixRewrite(), '1'))
         calc.perform_rule(rules.FullSimplify())
@@ -105,5 +101,11 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         assert proof.is_finished()
 
-
+    def testExample2(self):
+        file = compstate.CompFile("matrix", "matrix_example02")
+        goal = file.add_goal("T({a1,a2,a3})*{a1,a2,a3}*hat({a1,a2,a3}) = zero_matrix(3,3)")
+        proof = goal.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.FullSimplify())
+        assert proof.is_finished()
 

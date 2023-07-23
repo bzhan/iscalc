@@ -2,6 +2,7 @@
 import copy
 import math
 import functools
+import operator
 from decimal import Decimal
 from fractions import Fraction
 from collections.abc import Iterable
@@ -1223,8 +1224,12 @@ class Vector(Expr):
     """ Vector """
 
     @staticmethod
-    def zero(dim: int, is_column=True):
+    def zero(dim: int, is_column=True) -> 'Vector':
         return Vector([Const(0) for i in range(dim)], is_column=is_column)
+    @property
+    def norm(self) -> Expr:
+
+        return Fun("sqrt", functools.reduce(operator.add, (x^2 for x in self.data[1:]), self.data[0]^2))
 
     def __init__(self, data: List[Expr], is_column=True):
         self.data = copy.deepcopy(data)
@@ -1233,13 +1238,13 @@ class Vector(Expr):
         self.is_row = not is_column
         self.ty = VECTOR
 
-    def __getitem__(self, item):
+    def __getitem__(self, item) -> Expr:
         return self.data[item]
 
     def __hash__(self):
         return hash(tuple(self.data+[self.ty, self.is_column]))
 
-    def transpose(self):
+    def transpose(self) -> 'Vector':
         # get transpose of the vector
         return Vector(self.data, is_column=not self.is_column)
 
@@ -1261,15 +1266,15 @@ class Vector(Expr):
 
     @property
     def hat(self):
-        if self.is_row:
-            raise ValueError("hat operator can only apply to column vectors")
+        # if self.is_row:
+        #     raise ValueError("hat operator can only apply to column vectors")
         if self.dim == 3:
             # get skew matrix of the 3-dimension vector
             # formula 2.4 at page 26 of a mathematical introduction of robotic manipulation
-            arr = [[Const(0), -self.data[2], self.data[1]],
-                   [self.data[2], Const(0), -self.data[0]],
-                   [-self.data[1], self.data[0], Const(0)]]
-            return Matrix((3, 3), arr)
+            rows = [Vector([Const(0), -self.data[2], self.data[1]], is_column=False),
+                   Vector([self.data[2], Const(0), -self.data[0]], is_column=False),
+                   Vector([-self.data[1], self.data[0], Const(0)], is_column=False)]
+            return Matrix(rows)
         elif self.dim == 6:
             # get the matrix in se(3) form
             # formula 2.26 at page 39
@@ -1377,9 +1382,9 @@ class Vector(Expr):
     def scalar_mul(t, v: 'Vector'):
         return Vector([t * e for e in v.data], is_column=v.is_column)
 
-    @classmethod
-    def row_one(cls, idx:int, dim:int):
-        return Vector([Const(0) if idx!=dim else Const(1) for i in range(dim)], is_column=False)
+    @staticmethod
+    def row_one(idx:int, dim:int):
+        return Vector([Const(0) if idx != i else Const(1) for i in range(dim)], is_column=False)
 
 
 class Matrix(Expr):
@@ -1571,7 +1576,7 @@ class Matrix(Expr):
 
     @staticmethod
     def zero(shape:Tuple[int]):
-        return Matrix(shape, [[Const(0) for j in range(shape[1])] for i in range(shape[0])])
+        return Matrix([Vector.zero(shape[1],is_column=False) for i in range(shape[0])])
 
     @property
     def t(self):

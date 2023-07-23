@@ -146,6 +146,17 @@ class ExprTransformer(Transformer):
             return expr.Summation(str(args[0]), *args[1:])
         elif func_name == 'T' and (isinstance(args[0], expr.Vector) or isinstance(args[0], expr.Matrix)):
             return args[0].t
+        elif func_name == 'hat' and isinstance(args[0], expr.Vector):
+            return args[0].hat
+        elif func_name == "zero_matrix":
+            assert all(arg.is_const() for arg in args)
+            return expr.Matrix.zero((expr.eval_expr(args[0]), expr.eval_expr(args[1])))
+        elif func_name == "unit_matrix":
+            assert all(arg.is_const() for arg in args)
+            return expr.Matrix.unit_matrix(expr.eval_expr(args[0]))
+        elif func_name == "norm":
+            if args[0].is_vector():
+                return args[0].norm
         return expr.Fun(func_name, *args)
 
     def abs_expr(self, expr):

@@ -1,0 +1,61 @@
+{
+    "content": [
+        {
+            "finished": true,
+            "goal": "T({a1, a2, a3}) * {a1, a2, a3} * hat({a1, a2, a3}) = zero_matrix(3,3)",
+            "latex_goal": "\\begin{bmatrix}a1&a2&a3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}a1&a2&a3\\end{bmatrix} hat{(\\begin{bmatrix}a1&a2&a3\\end{bmatrix})} = O_{3 \\times 3}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\begin{bmatrix}a1&a2&a3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}a1&a2&a3\\end{bmatrix} hat{(\\begin{bmatrix}a1&a2&a3\\end{bmatrix})}",
+                        "start": "T({a1, a2, a3}) * {a1, a2, a3} * hat({a1, a2, a3})",
+                        "steps": [
+                            {
+                                "latex_res": "\\begin{bmatrix}a1\\\\a2\\\\a3\\end{bmatrix} \\begin{bmatrix}a1&a2&a3\\end{bmatrix} \\begin{bmatrix}0&-a3&a2\\\\a3&0&-a1\\\\-a2&a1&0\\end{bmatrix}",
+                                "res": "column({a1, a2, a3}) * {a1, a2, a3} * {{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}}",
+                                "rule": {
+                                    "loc": "subterms",
+                                    "name": "ExpandMatVecFunc",
+                                    "str": "expand functions of vectors or matrices on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
+                                "res": "{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "O_{3 \\times 3}",
+                        "start": "zero_matrix(3,3)",
+                        "steps": [
+                            {
+                                "latex_res": "\\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
+                                "res": "{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}",
+                                "rule": {
+                                    "name": "ExpandMatVecFunc",
+                                    "str": "expand functions of vectors or matrices"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "T({a1, a2, a3}) * {a1, a2, a3} * hat({a1, a2, a3}) = zero_matrix(3,3)",
+                "latex_goal": "\\begin{bmatrix}a1&a2&a3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}a1&a2&a3\\end{bmatrix} hat{(\\begin{bmatrix}a1&a2&a3\\end{bmatrix})} = O_{3 \\times 3}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "matrix_example02"
+}

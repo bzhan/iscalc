@@ -1,0 +1,121 @@
+{
+    "content": [
+        {
+            "finished": true,
+            "goal": "hat({a1, a2, a3}) ^ 2 = T({a1, a2, a3}) * {a1, a2, a3} - norm({a1, a2, a3}) ^ 2 * unit_matrix(3)",
+            "latex_goal": "hat{(\\begin{bmatrix}a1&a2&a3\\end{bmatrix})} ^ {2} = \\begin{bmatrix}a1&a2&a3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}a1&a2&a3\\end{bmatrix} - \\|\\begin{bmatrix}a1&a2&a3\\end{bmatrix}\\| ^ {2}\\cdot I_{3 \\times 3}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "hat{(\\begin{bmatrix}a1&a2&a3\\end{bmatrix})} ^ {2}",
+                        "start": "hat({a1, a2, a3}) ^ 2",
+                        "steps": [
+                            {
+                                "latex_res": "\\begin{bmatrix}0&-a3&a2\\\\a3&0&-a1\\\\-a2&a1&0\\end{bmatrix} ^ {2}",
+                                "res": "{{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}} ^ 2",
+                                "rule": {
+                                    "loc": "0",
+                                    "name": "ExpandMatVecFunc",
+                                    "str": "expand functions of vectors or matrices at 0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}0&-a3&a2\\\\a3&0&-a1\\\\-a2&a1&0\\end{bmatrix} ^ {1} \\begin{bmatrix}0&-a3&a2\\\\a3&0&-a1\\\\-a2&a1&0\\end{bmatrix} ^ {2 - 1}",
+                                "res": "{{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}} ^ 1 * {{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}} ^ (2 - 1)",
+                                "rule": {
+                                    "latex_str": "rewrite \\(\\begin{bmatrix}0&-a3&a2\\\\a3&0&-a1\\\\-a2&a1&0\\end{bmatrix} ^ {2}\\) to \\(\\begin{bmatrix}0&-a3&a2\\\\a3&0&-a1\\\\-a2&a1&0\\end{bmatrix} ^ {1} \\begin{bmatrix}0&-a3&a2\\\\a3&0&-a1\\\\-a2&a1&0\\end{bmatrix} ^ {2 - 1}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "{{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}} ^ 2",
+                                    "str": "rewrite {{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}} ^ 2 to {{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}} ^ 1 * {{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}} ^ (2 - 1) using identity",
+                                    "target": "{{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}} ^ 1 * {{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}} ^ (2 - 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}-a2 ^ {2} - a3 ^ {2}&a1 a2&a1 a3\\\\a1 a2&-a1 ^ {2} - a3 ^ {2}&a2 a3\\\\a1 a3&a2 a3&-a1 ^ {2} - a2 ^ {2}\\end{bmatrix}",
+                                "res": "{{-(a2 ^ 2) - a3 ^ 2, a1 * a2, a1 * a3}, {a1 * a2, -(a1 ^ 2) - a3 ^ 2, a2 * a3}, {a1 * a3, a2 * a3, -(a1 ^ 2) - a2 ^ 2}}",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\begin{bmatrix}a1&a2&a3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}a1&a2&a3\\end{bmatrix} - \\|\\begin{bmatrix}a1&a2&a3\\end{bmatrix}\\| ^ {2}\\cdot I_{3 \\times 3}",
+                        "start": "T({a1, a2, a3}) * {a1, a2, a3} - norm({a1, a2, a3}) ^ 2 * unit_matrix(3)",
+                        "steps": [
+                            {
+                                "latex_res": "\\begin{bmatrix}a1\\\\a2\\\\a3\\end{bmatrix} \\begin{bmatrix}a1&a2&a3\\end{bmatrix} - \\sqrt{a1 ^ {2} + a2 ^ {2} + a3 ^ {2}} ^ {2} \\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&1\\end{bmatrix}",
+                                "res": "column({a1, a2, a3}) * {a1, a2, a3} - sqrt(a1 ^ 2 + a2 ^ 2 + a3 ^ 2) ^ 2 * {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}",
+                                "rule": {
+                                    "loc": "subterms",
+                                    "name": "ExpandMatVecFunc",
+                                    "str": "expand functions of vectors or matrices on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}a1 a1&a1 a2&a1 a3\\\\a2 a1&a2 a2&a2 a3\\\\a3 a1&a3 a2&a3 a3\\end{bmatrix} - (a1 ^ {2} + a2 ^ {2} + a3 ^ {2}) \\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&1\\end{bmatrix}",
+                                "res": "{{a1 * a1, a1 * a2, a1 * a3}, {a2 * a1, a2 * a2, a2 * a3}, {a3 * a1, a3 * a2, a3 * a3}} - (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}a1 a1&a1 a2&a1 a3\\\\a2 a1&a2 a2&a2 a3\\\\a3 a1&a3 a2&a3 a3\\end{bmatrix} - \\begin{bmatrix}(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 1&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0\\\\(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 1&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0\\\\(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 1\\end{bmatrix}",
+                                "res": "{{a1 * a1, a1 * a2, a1 * a3}, {a2 * a1, a2 * a2, a2 * a3}, {a3 * a1, a3 * a2, a3 * a3}} - {{(a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 1, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0}, {(a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 1, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0}, {(a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 1}}",
+                                "rule": {
+                                    "loc": "1",
+                                    "name": "MatrixRewrite",
+                                    "str": "rewrite on matrix at 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\begin{bmatrix}(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 1&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0\\\\(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 1&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0\\\\(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 1\\end{bmatrix} + \\begin{bmatrix}a1 a1&a1 a2&a1 a3\\\\a2 a1&a2 a2&a2 a3\\\\a3 a1&a3 a2&a3 a3\\end{bmatrix}",
+                                "res": "-{{(a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 1, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0}, {(a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 1, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0}, {(a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 1}} + {{a1 * a1, a1 * a2, a1 * a3}, {a2 * a1, a2 * a2, a2 * a3}, {a3 * a1, a3 * a2, a3 * a3}}",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}-(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 1&-(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&-(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0\\\\-(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&-(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 1&-(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0\\\\-(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&-(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&-(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 1\\end{bmatrix} + \\begin{bmatrix}a1 a1&a1 a2&a1 a3\\\\a2 a1&a2 a2&a2 a3\\\\a3 a1&a3 a2&a3 a3\\end{bmatrix}",
+                                "res": "{{-((a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 1), -((a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0), -((a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0)}, {-((a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0), -((a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 1), -((a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0)}, {-((a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0), -((a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0), -((a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 1)}} + {{a1 * a1, a1 * a2, a1 * a3}, {a2 * a1, a2 * a2, a2 * a3}, {a3 * a1, a3 * a2, a3 * a3}}",
+                                "rule": {
+                                    "loc": "0",
+                                    "name": "MatrixRewrite",
+                                    "str": "rewrite on matrix at 0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}-a2 ^ {2} - a3 ^ {2}&a1 a2&a1 a3\\\\a1 a2&-a1 ^ {2} - a3 ^ {2}&a2 a3\\\\a1 a3&a2 a3&-a1 ^ {2} - a2 ^ {2}\\end{bmatrix}",
+                                "res": "{{-(a2 ^ 2) - a3 ^ 2, a1 * a2, a1 * a3}, {a1 * a2, -(a1 ^ 2) - a3 ^ 2, a2 * a3}, {a1 * a3, a2 * a3, -(a1 ^ 2) - a2 ^ 2}}",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "hat({a1, a2, a3}) ^ 2 = T({a1, a2, a3}) * {a1, a2, a3} - norm({a1, a2, a3}) ^ 2 * unit_matrix(3)",
+                "latex_goal": "hat{(\\begin{bmatrix}a1&a2&a3\\end{bmatrix})} ^ {2} = \\begin{bmatrix}a1&a2&a3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}a1&a2&a3\\end{bmatrix} - \\|\\begin{bmatrix}a1&a2&a3\\end{bmatrix}\\| ^ {2}\\cdot I_{3 \\times 3}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "matrix_example01"
+}

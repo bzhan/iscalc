@@ -11,7 +11,19 @@
       ],
       "expr": "A^n = A^1 * A^(n-1)",
       "type": "axiom"
-  }
+    },
+    {
+      "attributes": [
+          "bidirectional"
+      ],
+      "category": "matrix-power",
+      "conds": [
+        "isSquareMatrix(A)",
+        "isNonnegativeInteger(n)"
+      ],
+      "expr": "A^(a+b) = A^a * A^b",
+      "type": "axiom"
+    }
   ],
   "imports": [],
   "name": "interesting"

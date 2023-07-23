@@ -618,6 +618,10 @@ class Expr:
             return self.body.has_symbol() or self.lim.has_symbol()
         elif isinstance(self, Deriv):
             return self.body.has_symbol()
+        elif isinstance(self, Vector):
+            return any([item.has_symbol() for item in self.data])
+        elif isinstance(self, Matrix):
+            return any([rv.has_symbol() for rv in self.rows])
         else:
             print(self)
             raise NotImplementedError
@@ -673,6 +677,10 @@ class Expr:
             return Summation(self.index_var, self.lower, self.upper, self.body.replace(e, repl_e))
         elif self.is_limit():
             return Limit(self.var, self.lim.replace(e, repl_e), self.body.replace(e, repl_e), self.drt)
+        elif self.is_vector():
+            return Vector([item.replace(e, repl_e) for item in self.data], self.is_column)
+        elif self.is_matrix():
+            return Matrix([Vector([item.replace(e, repl_e) for item in rv.data], is_column=False) for rv in self.rows])
         else:
             print(self, e, repl_e)
             raise NotImplementedError
@@ -841,6 +849,7 @@ class Expr:
 
     def is_vector(self)  -> TypeGuard["Vector"]:
         return isinstance(self, Vector) and self.ty == VECTOR
+
     def is_matrix(self)  -> TypeGuard["Matrix"]:
         return isinstance(self, Matrix) and self.ty == MATRIX
 
@@ -1365,10 +1374,11 @@ class Vector(Expr):
             raise TypeError
 
     def __str__(self):
+        res = "{" + ", ".join(str(item) for item in self.data) + "}"
         if self.is_row:
-            return "{" + ", ".join(str(item) for item in self.data) + "}"
+            return res
         else:
-            return "T("+str(self.t)+")"
+            return "column("+res+")"
 
     def get_angle_velocity(self):
         assert self.is_column and self.dim == 6

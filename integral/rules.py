@@ -2280,8 +2280,7 @@ class MatrixRewrite(Rule):
     def export(self):
         return {
             "name": self.name,
-            "str": str(self),
-            "func_name": self.func_name
+            "str": str(self)
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
@@ -2295,3 +2294,33 @@ class MatrixRewrite(Rule):
                 a = e.args[0]
                 return Matrix([expr.Vector([-item for item in rv.data], is_column=False) for rv in a.rows])
         raise NotImplementedError
+
+class ExpandMatVecFunc(Rule):
+    def __init__(self):
+        self.name = "ExpandMatVecFunc"
+
+    def __str__(self):
+        return "expand functions of vectors or matrices"
+
+    def export(self):
+        return {
+            "name": self.name,
+            "str": str(self)
+        }
+
+    def eval(self, e: Expr, ctx: Context) -> Expr:
+        if e.is_fun():
+            if e.func_name == 'hat' and len(e.args) == 1 and e.args[0].is_vector():
+                return e.args[0].hat
+            elif e.func_name == 'unit_matrix' and len(e.args) == 1 and e.args[0].is_const():
+                return Matrix.unit_matrix(expr.eval_expr(e.args[0]))
+            elif e.func_name == 'T' and len(e.args) == 1:
+                if e.args[0].is_matrix() or e.args[0].is_vector():
+                    return e.args[0].t
+                else:
+                    raise NotImplementedError
+            elif e.func_name == "zero_matrix" and len(e.args) == 2 and all(arg.is_const() for arg in e.args):
+                return Matrix.zero((expr.eval_expr(e.args[0]), expr.eval_expr(e.args[1])))
+            elif e.func_name == "norm" and len(e.args) == 1 and e.args[0].is_vector():
+                return e.args[0].norm
+        return e

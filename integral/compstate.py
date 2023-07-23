@@ -879,6 +879,10 @@ def parse_rule(item) -> Rule:
         return rules.FunEquation(func_name)
     elif item['name'] == 'PartialFractionDecomposition':
         return rules.PartialFractionDecomposition()
+    elif item['name'] == 'MatrixRewrite':
+        return rules.MatrixRewrite()
+    elif item['name'] == "ExpandMatVecFunc":
+        return rules.ExpandMatVecFunc()
     else:
         print(item['name'], flush=True)
         raise NotImplementedError

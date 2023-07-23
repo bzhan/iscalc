@@ -144,19 +144,9 @@ class ExprTransformer(Transformer):
             return expr.SkolemFunc(str(args[0].func_name), tuple(arg for arg in args[0].args))
         elif func_name == 'SUM':
             return expr.Summation(str(args[0]), *args[1:])
-        elif func_name == 'T' and (isinstance(args[0], expr.Vector) or isinstance(args[0], expr.Matrix)):
-            return args[0].t
-        elif func_name == 'hat' and isinstance(args[0], expr.Vector):
-            return args[0].hat
-        elif func_name == "zero_matrix":
-            assert all(arg.is_const() for arg in args)
-            return expr.Matrix.zero((expr.eval_expr(args[0]), expr.eval_expr(args[1])))
-        elif func_name == "unit_matrix":
-            assert all(arg.is_const() for arg in args)
-            return expr.Matrix.unit_matrix(expr.eval_expr(args[0]))
-        elif func_name == "norm":
+        elif func_name == 'column':
             if args[0].is_vector():
-                return args[0].norm
+                return args[0].t
         return expr.Fun(func_name, *args)
 
     def abs_expr(self, expr):
@@ -197,7 +187,6 @@ class ExprTransformer(Transformer):
                 return expr.Matrix(list(args), is_row=True)
         else:
             return expr.Vector(list(args), is_column=False)
-
 
 expr_parser = Lark(grammar, start="expr", parser="lalr", transformer=ExprTransformer())
 interval_parser = Lark(grammar, start="interval", parser="lalr", transformer=ExprTransformer())

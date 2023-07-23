@@ -1,3 +1,4 @@
+import json
 import unittest
 from typing import List
 
@@ -6,6 +7,20 @@ from integral.expr import Op, Var, Const, Matrix, Vector, Expr, Fun
 
 
 class MatrixTest(unittest.TestCase):
+    def checkAndOutput(self, file: compstate.CompFile, omit_finish: bool = False):
+        # Test parsing of json file
+        json_file = file.export()
+        for i, item in enumerate(json_file['content']):
+            self.assertEqual(compstate.parse_item(file.content[i].parent, item).export(), file.content[i].export(), "%d:%sasdfasdf%s"%(i, compstate.parse_item(file.content[i].parent, item).export(), file.content[i].export()))
+
+        # Output to file
+        with open('../examples/' + file.name + '.json', 'w', encoding='utf-8') as f:
+            json.dump(file.export(), f, indent=4, ensure_ascii=False, sort_keys=True)
+
+        # Test goals are finished
+        if not omit_finish:
+            for content in file.content:
+                self.assertTrue(content.is_finished())
     r = rules.FullSimplify()
     ctx = context.Context()
     def testTranspose1(self):
@@ -89,23 +104,47 @@ class MatrixTest(unittest.TestCase):
         T({a1,a2,a3}) * {a1,a2,a3} - norm({a1,a2,a3})^2 * unit_matrix(3)')
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
+        calc.perform_rule(rules.OnLocation(rules.ExpandMatVecFunc(), "0"))
         olde = "{{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}}^2"
         newe = "{{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}}^1 * {{0, -a3, a2},{a3, 0, -a1},{-a2, a1, 0}}^(2-1)"
         calc.perform_rule(rules.ApplyIdentity(olde, newe))
         calc.perform_rule(rules.FullSimplify())
         calc = proof.rhs_calc
+        calc.perform_rule(rules.OnSubterm(rules.ExpandMatVecFunc()))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.MatrixRewrite(), '1'))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.MatrixRewrite(), '0'))
         calc.perform_rule(rules.FullSimplify())
-        assert proof.is_finished()
+        self.checkAndOutput(file)
 
     def testExample2(self):
         file = compstate.CompFile("matrix", "matrix_example02")
         goal = file.add_goal("T({a1,a2,a3})*{a1,a2,a3}*hat({a1,a2,a3}) = zero_matrix(3,3)")
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
+        calc.perform_rule(rules.OnSubterm(rules.ExpandMatVecFunc()))
         calc.perform_rule(rules.FullSimplify())
-        assert proof.is_finished()
+        calc = proof.rhs_calc
+        calc.perform_rule(rules.ExpandMatVecFunc())
+        self.checkAndOutput(file)
+
+    def testExample3(self):
+        file = compstate.CompFile("MIRM", "matrix_example03")
+        goal = file.add_goal("hat({w1,w2,w3})^(2*n+1) = (-1)^n * hat({w1,w2,w3})")
+        proof = goal.proof_by_induction('n', 0)
+        base_proof = proof.base_case.proof_by_calculation()
+        induct_proof = proof.induct_case.proof_by_calculation()
+        calc = induct_proof.lhs_calc
+        calc.perform_rule(rules.Equation("(2 * n + 3)", "2 + (2 * n + 1)"))
+        calc.perform_rule(rules.ApplyIdentity("hat({w1,w2,w3})^(2 + (2 * n + 1))", "hat({w1,w2,w3})^2* hat({w1,w2,w3})^(2 * n + 1)"))
+        calc.perform_rule(rules.OnLocation(rules.ApplyInductHyp(),'1'))
+        eq = "hat({a1, a2, a3}) ^ 2 = T({a1, a2, a3}) * {a1, a2,a3} - norm({a1, a2, a3}) ^ 2 * unit_matrix(3)"
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0"))
+        calc.perform_rule(rules.ExpandPolynomial())
+        calc.perform_rule(rules.FullSimplify())
+        # print(file.ctx)
+        # # assert proof.is_finished()
+        # print(file)
+        self.checkAndOutput(file)
 

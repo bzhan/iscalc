@@ -173,6 +173,13 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
                 return "%s \\in\\mathbb{Z}" % sx
             elif e.func_name == 'converges':
                 return "%s\\quad\\mathrm{converges}" % sx
+            elif e.func_name == "T":
+                return "%s^{\\text{T}}" % sx
+            elif e.func_name == "norm":
+                return "\\|%s\\|" % sx
+            elif e.func_name == 'unit_matrix':
+                return "I_{%s \\times %s}"%(sx,sx)
+
             else:
                 return "%s{(%s)}" % (e.func_name, sx)
         elif len(e.args) == 2:
@@ -182,6 +189,8 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
                 return "\\binom{%s}{%s}" % (sx, sy)
             elif e.func_name in ('Li'):
                 return "\\operatorname{%s}(%s,%s)" % (e.func_name, sx, sy)
+            elif e.func_name == 'zero_matrix':
+                return "O_{%s \\times %s}"%(sx, sy)
             else:
                 return "%s(%s,%s)" % (e.func_name, sx, sy)
         elif len(e.args) > 2:
@@ -227,5 +236,18 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
         upper = convert_expr(e.upper, mode)
         body = convert_expr(e.body, mode)
         return "\\sum_{%s=%s}^{%s}{%s}" % (e.index_var, lower, upper, body)
+    elif e.is_vector():
+        res = "\\begin{bmatrix}"
+        if e.is_column:
+            res += "\\\\".join([convert_expr(d, mode) for d in e.data])
+        else:
+            res += "&".join([convert_expr(d, mode) for d in e.data])
+        res += "\\end{bmatrix}"
+        return res
+    elif e.is_matrix():
+        res = "\\begin{bmatrix}"
+        res += "\\\\".join(["&".join([convert_expr(item) for item in rv.data]) for rv in e.rows])
+        res += "\\end{bmatrix}"
+        return res
     else:
         raise NotImplementedError

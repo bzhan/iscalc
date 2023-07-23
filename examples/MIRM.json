@@ -1,0 +1,30 @@
+{
+    "content": [
+        {
+            "level": 1,
+            "name": "Basic Formulas",
+            "type": "header"
+        },
+
+        {
+            "expr": "hat({a1,a2,a3})^2 =  T({a1,a2,a3}) * {a1,a2,a3} - norm({a1,a2,a3})^2 * unit_matrix(3)",
+            "path": "matrix_example01",
+            "type": "problem"
+        },
+        {
+            "expr": "T({a1,a2,a3})*{a1,a2,a3}*hat({a1,a2,a3}) = zero_matrix(3,3)",
+            "path": "matrix_example02",
+            "type": "problem"
+        },
+        {
+            "expr": "hat({w1,w2,w3})^(2*n+1) = (-1)^n * hat({w1,w2,w3})",
+            "path": "matrix_example03",
+            "type": "problem"
+        }
+
+    ],
+    "imports": [
+        "matrix"
+    ],
+    "name": "mirm"
+}

@@ -652,6 +652,28 @@ class RewriteGoalProof(StateItem):
             raise AssertionError("get_by_label: invalid label")
 
 
+class Assumption(StateItem):
+    """Prove an equation by transforming an initial equation.
+        """
+
+    def __init__(self, parent, a: Expr):
+        self.parent = parent
+        self.a = a
+
+    def export(self):
+        return {
+            "type": "Assumption",
+            "expr": str(self.a),
+            "latex_goal": latex.convert_expr(self.a)
+        }
+
+    def __str__(self):
+        return "Assumption:\n  %s\n" % (self.a)
+
+    def get_by_label(self, label: Label):
+        return self
+
+
 class CompFile:
     """Represent a file containing multiple StateItem objects.
     
@@ -769,6 +791,16 @@ class CompFile:
             "name": self.name,
             "content": [item.export() for item in self.content]
         }
+
+    def add_assumption(self, a:Union[str, Expr]):
+        if isinstance(a, str):
+            a = parser.parse_expr(a)
+        self.content.append(Assumption(self, a))
+        if a.is_equals():
+            self.ctx.add_lemma(a, self.ctx.get_conds())
+        else:
+            self.ctx.add_condition(a)
+        return self.content[-1]
 
 
 def parse_rule(item) -> Rule:
@@ -967,6 +999,10 @@ def parse_item(parent, item) -> StateItem:
         res = RewriteGoalProof(parent, goal=goal, begin=Goal(parent, parent.ctx, begin_goal, begin_conds))
         for i, step in enumerate(item['start']['steps']):
             res.begin.add_step(parse_step(res.begin, step, i))
+        return res
+    elif item['type'] == 'Assumption':
+        a = parser.parse_expr(item['expr'])
+        res = Assumption(parent, a)
         return res
     else:
         print(item['type'])

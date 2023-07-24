@@ -1048,7 +1048,8 @@ class FullSimplify(Rule):
         counter = 0
         current = e
         while True:
-            s = OnSubterm(Linearity()).eval(current, ctx)
+            s = OnSubterm(ExpandMatVecFunc()).eval(current, ctx)
+            s = OnSubterm(Linearity()).eval(s, ctx)
             s = Simplify().eval(s, ctx)
             s = OnSubterm(DerivativeSimplify()).eval(s, ctx)
             if s == current:

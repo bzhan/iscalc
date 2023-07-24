@@ -110,7 +110,6 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyIdentity(olde, newe))
         calc.perform_rule(rules.FullSimplify())
         calc = proof.rhs_calc
-        calc.perform_rule(rules.OnSubterm(rules.ExpandMatVecFunc()))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.MatrixRewrite(), '1'))
         calc.perform_rule(rules.FullSimplify())
@@ -123,14 +122,16 @@ class MatrixTest(unittest.TestCase):
         goal = file.add_goal("T({a1,a2,a3})*{a1,a2,a3}*hat({a1,a2,a3}) = zero_matrix(3,3)")
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
-        calc.perform_rule(rules.OnSubterm(rules.ExpandMatVecFunc()))
         calc.perform_rule(rules.FullSimplify())
         calc = proof.rhs_calc
-        calc.perform_rule(rules.ExpandMatVecFunc())
+        calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
 
     def testExample3(self):
         file = compstate.CompFile("MIRM", "matrix_example03")
+        file.add_assumption("norm({w1,w2,w3}) = 1")
+        file.add_assumption("isInt(n)")
+        file.add_assumption("n>=0")
         goal = file.add_goal("hat({w1,w2,w3})^(2*n+1) = (-1)^n * hat({w1,w2,w3})")
         proof = goal.proof_by_induction('n', 0)
         base_proof = proof.base_case.proof_by_calculation()
@@ -141,10 +142,32 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.ApplyInductHyp(),'1'))
         eq = "hat({a1, a2, a3}) ^ 2 = T({a1, a2, a3}) * {a1, a2,a3} - norm({a1, a2, a3}) ^ 2 * unit_matrix(3)"
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0"))
+        eq = "norm({w1,w2,w3}) = 1"
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0.1.0.0"))
         calc.perform_rule(rules.ExpandPolynomial())
+        old_e = "(-1) ^ n * T({w1, w2, w3}) * {w1, w2, w3} * hat({w1, w2, w3})"
+        new_e = "(-1) ^ n * (T({w1, w2, w3}) * {w1, w2, w3} * hat({w1, w2, w3}))"
+        calc.perform_rule(rules.Equation(old_e, new_e))
+        eq = "T({a1, a2, a3}) * {a1, a2, a3} * hat({a1, a2, a3}) = zero_matrix(3,3)"
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0.1"))
         calc.perform_rule(rules.FullSimplify())
-        # print(file.ctx)
-        # # assert proof.is_finished()
-        # print(file)
+        old_e = "(-1) ^ n * {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}} * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}}"
+        new_e = "(-1) ^ n * ({{1, 0, 0}, {0, 1, 0}, {0, 0, 1}} * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}})"
+        calc.perform_rule(rules.Equation(old_e, new_e))
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0.0.1"))
+        calc.perform_rule(rules.OnLocation(rules.MatrixRewrite(), "1"))
+        old_e = "-((-1) ^ n * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}})"
+        new_e = "(-1) ^(n+1) * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}}"
+        calc.perform_rule(rules.Equation(old_e, new_e))
+        calc.perform_rule(rules.OnLocation(rules.MatrixRewrite(), "0"))
+        calc.perform_rule(rules.FullSimplify())
+        calc = induct_proof.rhs_calc
+        calc.perform_rule(rules.FullSimplify())
+        old_e = "-((-1) ^ n * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}})"
+        new_e = "(-1) ^(n+1) * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}}"
+        calc.perform_rule(rules.Equation(old_e, new_e))
+        calc.perform_rule(rules.MatrixRewrite())
+        calc.perform_rule(rules.FullSimplify())
+        assert proof.is_finished()
         self.checkAndOutput(file)
 

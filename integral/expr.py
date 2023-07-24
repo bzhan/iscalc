@@ -297,6 +297,10 @@ class Expr:
             return (self.name, self.dependent_vars) <= (other.name, other.dependent_vars)
         elif self.is_limit():
             return (self.var, self.lim, self.body, self.drt) <= (other.var, other.lim, other.body, other.drt)
+        elif self.is_vector():
+            return (self.is_column, *(item for item in self.data)) <= (other.is_column, *(item for item in other.data))
+        elif self.is_matrix():
+            return (self.shape[0]*self.shape[1], *(rv for rv in self.rows)) <= (other.shape[0]*other.shape[1], *(rv for rv in other.rows))
         else:
             print(type(self))
             raise NotImplementedError

@@ -11,16 +11,6 @@
                         "start": "T({a1, a2, a3}) * {a1, a2, a3} * hat({a1, a2, a3})",
                         "steps": [
                             {
-                                "latex_res": "\\begin{bmatrix}a1\\\\a2\\\\a3\\end{bmatrix} \\begin{bmatrix}a1&a2&a3\\end{bmatrix} \\begin{bmatrix}0&-a3&a2\\\\a3&0&-a1\\\\-a2&a1&0\\end{bmatrix}",
-                                "res": "column({a1, a2, a3}) * {a1, a2, a3} * {{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}}",
-                                "rule": {
-                                    "loc": "subterms",
-                                    "name": "ExpandMatVecFunc",
-                                    "str": "expand functions of vectors or matrices on subterms"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
                                 "latex_res": "\\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
                                 "res": "{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}",
                                 "rule": {
@@ -40,8 +30,8 @@
                                 "latex_res": "\\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
                                 "res": "{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}",
                                 "rule": {
-                                    "name": "ExpandMatVecFunc",
-                                    "str": "expand functions of vectors or matrices"
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
                                 },
                                 "type": "CalculationStep"
                             }

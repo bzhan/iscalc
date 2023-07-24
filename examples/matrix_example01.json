@@ -49,16 +49,6 @@
                         "start": "T({a1, a2, a3}) * {a1, a2, a3} - norm({a1, a2, a3}) ^ 2 * unit_matrix(3)",
                         "steps": [
                             {
-                                "latex_res": "\\begin{bmatrix}a1\\\\a2\\\\a3\\end{bmatrix} \\begin{bmatrix}a1&a2&a3\\end{bmatrix} - \\sqrt{a1 ^ {2} + a2 ^ {2} + a3 ^ {2}} ^ {2} \\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&1\\end{bmatrix}",
-                                "res": "column({a1, a2, a3}) * {a1, a2, a3} - sqrt(a1 ^ 2 + a2 ^ 2 + a3 ^ 2) ^ 2 * {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}",
-                                "rule": {
-                                    "loc": "subterms",
-                                    "name": "ExpandMatVecFunc",
-                                    "str": "expand functions of vectors or matrices on subterms"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
                                 "latex_res": "\\begin{bmatrix}a1 a1&a1 a2&a1 a3\\\\a2 a1&a2 a2&a2 a3\\\\a3 a1&a3 a2&a3 a3\\end{bmatrix} - (a1 ^ {2} + a2 ^ {2} + a3 ^ {2}) \\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&1\\end{bmatrix}",
                                 "res": "{{a1 * a1, a1 * a2, a1 * a3}, {a2 * a1, a2 * a2, a2 * a3}, {a3 * a1, a3 * a2, a3 * a3}} - (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}",
                                 "rule": {

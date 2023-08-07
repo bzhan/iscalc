@@ -1,6 +1,6 @@
 """State of computation"""
 
-from typing import List, Optional, Union
+from typing import List, Optional, Union, Tuple
 
 from integral.expr import Expr, Var, Const
 from integral import rules, expr
@@ -142,6 +142,25 @@ class FuncDef(StateItem):
     def get_facts(self):
         return [self.eq]
 
+class VarDef(StateItem):
+    def __init__(self, parent: "CompFile", ctx: Context, var:Var):
+        self.parent = parent
+        self.ctx = ctx
+        self.var = var
+    def __str__(self):
+        s = "Var Definition:\n"
+        s = s + "  " + self.var.ty2 + " " + self.var.name
+        if self.var.ty2 == 'matrix':
+            s = s + "[%s][%s]" % (str(self.var.shape[0]),str(self.var.shape[1]))
+        return s+"\n"
+
+    def export(self):
+        res = {
+            "type": "VarDef",
+            "var": str(self.var),
+            "latex_var": latex.convert_expr(self.var)
+        }
+        return res
 
 class Goal(StateItem):
     """Goal to be proved."""
@@ -459,6 +478,7 @@ class InductionProof(StateItem):
             raise AssertionError("InductionProof: currently only support equation goals.")
 
         self.parent = parent
+        # self.goal = goal
         self.goal = goal
         self.induct_var = induct_var
         self.ctx = parent.ctx
@@ -471,13 +491,16 @@ class InductionProof(StateItem):
             raise NotImplementedError
 
         # Base case: n = start
-        eq0 = normalize(goal.subst(induct_var, self.start), self.ctx)
+        eq0 = replace_with_var_def(self.ctx.get_var_definitions(), goal)
+        eq0 = normalize(eq0.subst(induct_var, self.start), self.ctx)
+
         self.base_case = Goal(self, self.ctx, eq0)
 
         # Inductive case:
-        eqI = normalize(goal.subst(induct_var, Var(induct_var) + 1), self.ctx)
+        eqI = goal.subst(induct_var, Var(induct_var) + 1)
+        eqI = normalize(replace_with_var_def(self.ctx.get_var_definitions(), eqI), self.ctx)
         ctx = Context(self.ctx)
-        ctx.add_induct_hyp(self.goal)
+        ctx.add_induct_hyp(replace_with_var_def(self.ctx.get_var_definitions(), goal))
         self.induct_case = Goal(self, ctx, eqI)
 
     def __str__(self):
@@ -651,7 +674,6 @@ class RewriteGoalProof(StateItem):
         else:
             raise AssertionError("get_by_label: invalid label")
 
-
 class Assumption(StateItem):
     """Prove an equation by transforming an initial equation.
         """
@@ -672,7 +694,6 @@ class Assumption(StateItem):
 
     def get_by_label(self, label: Label):
         return self
-
 
 class CompFile:
     """Represent a file containing multiple StateItem objects.
@@ -710,6 +731,8 @@ class CompFile:
             elif isinstance(item, Goal):
                 ctx.add_lemma(item.goal, item.conds)
                 ctx.extend_by_item(item.export_book())
+            elif isinstance(item, VarDef):
+                ctx.add_var_definition(item.var)
         return ctx
 
     def add_definition(self, funcdef: Union[str, Expr], *, conds: List[Union[str, Expr]] = None) -> FuncDef:
@@ -729,9 +752,14 @@ class CompFile:
 
         ctx = self.get_context()
         if isinstance(funcdef, str):
-            self.content.append(FuncDef(self, ctx, parser.parse_expr(funcdef), Conditions(conds)))
-        elif isinstance(funcdef, Expr):
-            self.content.append(FuncDef(self, ctx, funcdef, Conditions(conds)))
+            funcdef = parser.parse_expr(funcdef)
+        if isinstance(funcdef, Expr):
+            if funcdef.is_equals():
+                self.content.append(FuncDef(self, ctx, funcdef, Conditions(conds)))
+            elif funcdef.is_var():
+                self.content.append(VarDef(self, ctx, funcdef))
+            else:
+                raise NotImplementedError
         else:
             raise NotImplementedError
         return self.content[-1]
@@ -765,6 +793,7 @@ class CompFile:
         if isinstance(goal, Goal):
             self.content.append(goal)
             return self.content[-1]
+
         if conds is not None:
             for i in range(len(conds)):
                 if isinstance(conds[i], str):
@@ -775,6 +804,9 @@ class CompFile:
         if isinstance(goal, str):
             goal = parser.parse_expr(goal)
         assert isinstance(goal, Expr)
+        for cond in conds:
+            cond = replace_with_var_def(self.ctx.get_var_definitions(), cond)
+        goal = replace_with_var_def(self.ctx.get_var_definitions(), goal)
 
         conds = Conditions(conds)
         ctx = self.get_context()
@@ -801,7 +833,6 @@ class CompFile:
         else:
             self.ctx.add_condition(a)
         return self.content[-1]
-
 
 def parse_rule(item) -> Rule:
     if 'loc' in item:
@@ -982,7 +1013,7 @@ def parse_item(parent, item) -> StateItem:
         res = InductionProof(parent, goal, induct_var)
         res.base_case = parse_item(res, item['base_case'])
         res.induct_case = parse_item(res, item['induct_case'])
-        res.induct_case.ctx.add_induct_hyp(goal)
+        res.induct_case.ctx.add_induct_hyp(replace_with_var_def(res.induct_case.ctx.get_var_definitions(), goal))
         return res
     elif item['type'] == 'CaseProof':
         goal = parser.parse_expr(item['goal'])
@@ -1004,6 +1035,11 @@ def parse_item(parent, item) -> StateItem:
         a = parser.parse_expr(item['expr'])
         res = Assumption(parent, a)
         return res
+    elif item['type'] == 'VarDef':
+        var = parser.parse_expr(item['var'])
+        ctx = parent.get_context() if isinstance(parent, CompFile) else parent.ctx
+        res = VarDef(parent, ctx, var)
+        return res
     else:
         print(item['type'])
         raise NotImplementedError
@@ -1017,3 +1053,10 @@ def get_next_step_label(step: Union[Calculation, CalculationStep], label: Label)
         return Label(label.data + [0])
     else:
         raise NotImplementedError
+
+# replace conds and expressions with variable definitions
+def replace_with_var_def(var_defs, e: Expr):
+    for item in var_defs:
+        name = item.name
+        e = e.replace(Var(name), item)
+    return e

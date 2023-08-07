@@ -61,10 +61,10 @@ def collect_pairs_power(ps: Dict[expr.Expr, "Polynomial"], ctx: Context):
             return True
         return False
 
-    vec_list = []
+    mat_list = []
     for v, c in ps:
-        if v.has_vector():
-            vec_list.append((v,c))
+        if v.get_type() == 'matrix':
+            mat_list.append((v,c))
         else:
             if v in res:
                 if is_non_negative(c) and is_non_negative(res[v]):
@@ -82,7 +82,7 @@ def collect_pairs_power(ps: Dict[expr.Expr, "Polynomial"], ctx: Context):
         if c != Polynomial(tuple()):
             res_list.append((v, c))
 
-    return tuple(sorted(res_list) + vec_list)
+    return tuple(sorted(res_list) + mat_list)
 
 def reduce_power(n: expr.Expr, e: "Polynomial") -> Tuple[Tuple[expr.Expr, "Polynomial"]]:
     """Reduce n ^ e to normal form.
@@ -275,6 +275,11 @@ class Monomial:
     def is_constant(self) -> bool:
         return len(self.factors) == 0
 
+    def is_matrix(self):
+        if len(self.factors) > 0:
+            return all([factor[0].get_type() == 'matrix' for factor in self.factors])
+        return False
+
     def get_constant(self) -> Union[int, Fraction]:
         if len(self.factors) == 0:
             return self.coeff
@@ -365,6 +370,9 @@ class Polynomial:
     def __pow__(self, exp: "Polynomial") -> "Polynomial":
         # Assume self is a monomial and exp is a fraction
         if len(self.monomials) == 1 and isinstance(exp, (int, Fraction)):
+            if self.monomials[0].is_matrix():
+                if type(exp) == int:
+                    return singleton(expr.Op('^', from_mono(self.monomials[0]), expr.Const(exp)))
             return Polynomial([self.monomials[0] ** exp])
         else:
             raise ValueError('%s, %s' % (self, exp))
@@ -618,16 +626,99 @@ def simplify_identity(e: expr.Expr, ctx: Context) -> expr.Expr:
                 return identity.rhs.inst_pat(inst)
     return e
 
-def simp_vector(e: expr.Vector, ctx: Context) -> expr.Vector:
-    if not e.is_vector():
-        return e
-    return expr.Vector([from_poly(to_poly(item, ctx)) for item in e.data], e.is_column)
-
 def simp_matrix(e: expr.Matrix, ctx: Context) -> expr.Vector:
-    if not e.is_matrix():
-        return e
-    return expr.Matrix([expr.Vector([from_poly(to_poly(item, ctx)) for item in row.data], row.is_column) for row in e.rows])
 
+    if e.is_matrix():
+        return expr.Matrix([expr.Vector([from_poly(to_poly(item, ctx)) for item in row.data], row.is_column) for row in e.rows])
+    elif e.is_op():
+        if e.is_power():
+            a, b = e.args
+            if a.get_type() == 'matrix':
+                nb = normalize(b, ctx)
+                if  nb== expr.Const(0):
+                    return expr.Fun("unit_matrix", a.get_shape()[0])
+                elif nb == expr.Const(1):
+                    return a
+        elif e.is_times():
+            # eliminate unit matrix
+            a, b = e.args
+            e = simp_matrix(a, ctx) * simp_matrix(b, ctx)
+            factors = []
+            def get_all_factor(e):
+                nonlocal factors
+                if e.is_times():
+                    a,b = e.args
+                    get_all_factor(a)
+                    get_all_factor(b)
+                else:
+                    factors.append(e)
+            get_all_factor(e)
+            # simp inv(p) * p = unit matrix
+            first = True
+            tmp = []
+            for i in range(len(factors)):
+                if first:
+                    first = False
+                    tmp.append(factors[i])
+                else:
+                    a = factors[i]
+                    b = factors[i-1]
+                    if a.is_fun() and a.func_name == 'inv' and a.args[0] == b:
+                        tmp.pop()
+                        tmp.append(expr.Fun('unit_matrix', a.get_shape()[0]))
+                    elif b.is_fun() and b.func_name == 'inv' and b.args[0] == a:
+                        tmp.pop()
+                        tmp.append(expr.Fun('unit_matrix', a.get_shape()[0]))
+                    else:
+                        tmp.append(a)
+
+            factors = tmp
+            unit_matrix_cnt = 0
+            matrix_cnt = 0
+            for factor in factors:
+                if factor.get_type() == 'matrix':
+                    matrix_cnt = matrix_cnt + 1
+                    if factor.is_fun() and factor.func_name == 'unit_matrix':
+                        unit_matrix_cnt = unit_matrix_cnt + 1
+            remove_unit_matrix, keep_one_unit_matrix = False, False
+            if matrix_cnt > unit_matrix_cnt:
+                remove_unit_matrix = True
+            if unit_matrix_cnt > 1:
+                keep_one_unit_matrix = True
+
+            res_factors = []
+            if remove_unit_matrix:
+                for factor in factors:
+                    if not (factor.get_type() == 'matrix' and factor.is_fun() and \
+                            factor.func_name == 'unit_matrix'):
+                        # res = res *  factor
+                        res_factors.append(factor)
+            else:
+                if keep_one_unit_matrix:
+                    first = True
+                    for factor in factors:
+                        if factor.get_type() == 'matrix' and factor.is_fun() and \
+                                factor.func_name == 'unit_matrix' and first:
+                            # res = res * factor
+                            first = False
+                            res_factors.append(factor)
+                        if not (factor.get_type() == 'matrix' and factor.is_fun() and \
+                                factor.func_name == 'unit_matrix'):
+                            # res = res * factor
+                            res_factors.append(factor)
+                else:
+                    for factor in factors:
+                        # res = res * factor
+                        res_factors.append(factor)
+
+
+
+            res = res_factors[0]
+            for factor in res_factors[1:]:
+                res = expr.Op('*', res, factor)
+
+            return res
+    return e
 def simplify_eq(e: expr.Expr, ctx: Context) -> expr.Expr:
     if not e.is_var():
         return e
@@ -790,7 +881,6 @@ def normalize(e: expr.Expr, ctx: Context) -> expr.Expr:
     for i in range(5):
         old_e = e
         e = from_poly(to_poly(e, ctx))
-        e = simp_vector(e, ctx)
         e = simp_matrix(e, ctx)
         e = apply_subterm(e, function_table, ctx)
         e = apply_subterm(e, function_eval, ctx)
@@ -880,6 +970,9 @@ def from_mono(m: Monomial) -> expr.Expr:
                 denom_factors.append(base ** expr.Const(-power))
             elif isinstance(power, Polynomial):
                 num_factors.append(base ** from_poly(power))
+            elif base.get_type() == 'matrix' and power == 0:
+                # check whether base is a square matrix or not
+                num_factors.append(expr.Fun('unit_matrix', base.get_shape()[0]))
             else:
                 raise TypeError("from_mono: unexpected type %s for power" % type(power))
 

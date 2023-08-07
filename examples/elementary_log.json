@@ -314,7 +314,7 @@
                     "latex_cond": "a > 0"
                 }
             ],
-            "finished": false,
+            "finished": true,
             "goal": "(INT x:[0,a]. x ^ m * log(x) ^ n) = a ^ (m + 1) * SUM(k, 0, n, (-1) ^ k * binom(n,k) * factorial(k) * log(a) ^ (n - k) / (m + 1) ^ (k + 1))",
             "latex_goal": "\\int_{0}^{a} x ^ {m} \\log^{n}(x) \\,dx = a ^ {m + 1} \\sum_{k=0}^{n}{\\frac{(-1) ^ {k} \\binom{n}{k} k! \\log^{n - k}(a)}{(m + 1) ^ {k + 1}}}",
             "proof": {
@@ -423,31 +423,31 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{\\log^{-k + n}(a) \\binom{n}{k} (\\int_{0}^{1} y ^ {m} \\log^{k}(y) \\,dy)}",
-                                "res": "a ^ (m + 1) * SUM(k, 0, n, log(a) ^ (-k + n) * binom(n,k) * (INT y:[0,1]. y ^ m * log(y) ^ k))",
+                                "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{\\log^{-k + n}(a) \\binom{n}{k} I(m,k)}",
+                                "res": "a ^ (m + 1) * SUM(k, 0, n, log(a) ^ (-k + n) * binom(n,k) * I(m,k))",
                                 "rule": {
                                     "func_name": "I",
-                                    "loc": "1.0.1.1",
+                                    "loc": "1.0.1",
                                     "name": "FoldDefinition",
-                                    "str": "fold definition at 1.0.1.1"
+                                    "str": "fold definition at 1.0.1"
                                 },
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{\\log^{-k + n}(a) \\binom{n}{k} (\\int_{0}^{1} y ^ {m} \\log^{k}(y) \\,dy)}",
-                                "res": "a ^ (m + 1) * SUM(k, 0, n, log(a) ^ (-k + n) * binom(n,k) * (INT y:[0,1]. y ^ m * log(y) ^ k))",
+                                "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{\\log^{-k + n}(a) \\binom{n}{k} ((-1) ^ {k} (\\frac{k!}{(m + 1) ^ {k + 1}}))}",
+                                "res": "a ^ (m + 1) * SUM(k, 0, n, log(a) ^ (-k + n) * binom(n,k) * ((-1) ^ k * (factorial(k) / (m + 1) ^ (k + 1))))",
                                 "rule": {
                                     "eq": "I(m,n) = (-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1))",
-                                    "latex_str": "apply equation \\(I(m,n) = (-1) ^ {n} (\\frac{n!}{(m + 1) ^ {n + 1}})\\) at 1.0.1.1",
-                                    "loc": "1.0.1.1",
+                                    "latex_str": "apply equation \\(I(m,n) = (-1) ^ {n} (\\frac{n!}{(m + 1) ^ {n + 1}})\\) at 1.0.1",
+                                    "loc": "1.0.1",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: I(m,n) = (-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1)) at 1.0.1.1"
+                                    "str": "apply equation: I(m,n) = (-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1)) at 1.0.1"
                                 },
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{\\log^{-k + n}(a) \\binom{n}{k} (\\int_{0}^{1} y ^ {m} \\log^{k}(y) \\,dy)}",
-                                "res": "a ^ (m + 1) * SUM(k, 0, n, log(a) ^ (-k + n) * binom(n,k) * (INT y:[0,1]. y ^ m * log(y) ^ k))",
+                                "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{(-1) ^ {k} k! \\log^{-k + n}(a) (m + 1) ^ {-k - 1} \\binom{n}{k}}",
+                                "res": "a ^ (m + 1) * SUM(k, 0, n, (-1) ^ k * factorial(k) * log(a) ^ (-k + n) * (m + 1) ^ (-k - 1) * binom(n,k))",
                                 "rule": {
                                     "name": "FullSimplify",
                                     "str": "full simplify"
@@ -474,7 +474,7 @@
                         "type": "Calculation"
                     }
                 ],
-                "finished": false,
+                "finished": true,
                 "goal": "(INT x:[0,a]. x ^ m * log(x) ^ n) = a ^ (m + 1) * SUM(k, 0, n, (-1) ^ k * binom(n,k) * factorial(k) * log(a) ^ (n - k) / (m + 1) ^ (k + 1))",
                 "latex_goal": "\\int_{0}^{a} x ^ {m} \\log^{n}(x) \\,dx = a ^ {m + 1} \\sum_{k=0}^{n}{\\frac{(-1) ^ {k} \\binom{n}{k} k! \\log^{n - k}(a)}{(m + 1) ^ {k + 1}}}",
                 "type": "CalculationProof"

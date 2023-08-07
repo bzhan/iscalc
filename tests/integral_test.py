@@ -1895,9 +1895,11 @@ class IntegralTest(unittest.TestCase):
         calc = proof_base.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("I"))
         calc.perform_rule(rules.Substitution(var_name="x", var_subst="sqrt(2)*x"))
+        old_expr = "-(x ^ 2 / 2)"
+        new_expr = "-(x ^ 2) / 2"
+        calc.perform_rule(rules.Equation(old_expr, new_expr))
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
-
         calc = proof_induct.lhs_calc
         calc.perform_rule(rules.ApplyEquation(goal03.goal))
         calc.perform_rule(rules.FullSimplify())
@@ -1910,6 +1912,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyIdentity("(n+1)*factorial(n)", "factorial(n+1)"))
         calc.perform_rule(rules.Equation("4 ^ -n * sqrt(pi) * (factorial(2 * n + 2) / (8 * factorial(n + 1)))",
                                          "4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))"))
+
         self.assertTrue(goal04.is_finished())
         self.checkAndOutput(file)
 
@@ -4202,8 +4205,8 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.IntSumExchange(), "1"))
         calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.OnLocation(rules.FoldDefinition("I"), "1.0.1.1"))
-        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal02.goal), "1.0.1.1"))
+        calc.perform_rule(rules.OnLocation(rules.FoldDefinition("I"), "1.0.1"))
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal02.goal), "1.0.1"))
         calc.perform_rule(rules.FullSimplify())
         calc = proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())

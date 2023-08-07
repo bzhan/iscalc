@@ -98,8 +98,8 @@ class MatrixTest(unittest.TestCase):
         self.assertEqual(str(v.hat), s)
         self.assertEqual(str(v.hat.vee), str(v))
 
-    def testExample1(self):
-        file = compstate.CompFile("matrix", "matrix_example01")
+    def testExample02(self):
+        file = compstate.CompFile("matrix", "matrix_example02")
         goal = file.add_goal('hat({a1,a2,a3})^2 = \
         T({a1,a2,a3}) * {a1,a2,a3} - norm({a1,a2,a3})^2 * unit_matrix(3)')
         proof = goal.proof_by_calculation()
@@ -117,8 +117,8 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
 
-    def testExample2(self):
-        file = compstate.CompFile("matrix", "matrix_example02")
+    def testExample03(self):
+        file = compstate.CompFile("matrix", "matrix_example03")
         goal = file.add_goal("T({a1,a2,a3})*{a1,a2,a3}*hat({a1,a2,a3}) = zero_matrix(3,3)")
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
@@ -127,8 +127,8 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
 
-    def testExample3(self):
-        file = compstate.CompFile("MIRM", "matrix_example03")
+    def testExample04(self):
+        file = compstate.CompFile("MIRM", "matrix_example04")
         file.add_assumption("norm({w1,w2,w3}) = 1")
         file.add_assumption("isInt(n)")
         file.add_assumption("n>=0")
@@ -170,4 +170,54 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         assert proof.is_finished()
         self.checkAndOutput(file)
+
+    def testExample01(self):
+        file = compstate.CompFile("MIRM", "matrix_example01")
+        file.add_definition("matrix P[n][n]")
+        file.add_definition("matrix A[n][n]")
+        file.add_definition("int n")
+        file.add_assumption("invertible(P)")
+        file.add_assumption("n > 0")
+        # find same name variable definition
+        # and then use that definition
+        goal = file.add_goal("(inv(P)*A*P)^n = inv(P)*A^n*P")
+        proof = goal.proof_by_induction(induct_var='n', start=0)
+        base_proof = proof.base_case.proof_by_calculation()
+        induct_proof = proof.induct_case.proof_by_calculation()
+        calc = base_proof.lhs_calc
+        calc = base_proof.rhs_calc
+        calc = induct_proof.lhs_calc
+        old_expr = "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ (int n + 1)"
+        new_expr = "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ (int n) * (inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n])"
+        calc.perform_rule(rules.ApplyIdentity(old_expr, new_expr))
+        calc.perform_rule(rules.OnSubterm(rules.ApplyInductHyp()))
+        calc.perform_rule(rules.FullSimplify())
+        old_expr = "inv(matrix P[n][n]) * matrix A[n][n] ^ int n * matrix A[n][n] * matrix P[n][n]"
+        new_expr = "inv(matrix P[n][n]) * (matrix A[n][n] ^ int n * matrix A[n][n]) * matrix P[n][n]"
+        calc.perform_rule(rules.Equation(old_expr, new_expr))
+        old_expr = "matrix A[n][n] ^ int n * matrix A[n][n]"
+        new_expr = "matrix A[n][n] ^ (int n + 1)"
+        calc.perform_rule(rules.ApplyIdentity(old_expr, new_expr))
+        self.checkAndOutput(file)
+
+    def testNormalize(self):
+        e = parser.parse_expr("matrix A[n][n]")
+        e = e ^ Const(0)
+        from integral import poly
+        from integral.poly import normalize
+        ctx = context.Context()
+        e = normalize(e, ctx)
+        self.assertEqual(str(e), "unit_matrix(n)")
+
+    def testGetType(self):
+        e = parser.parse_expr("inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]")
+        ty = e.get_type()
+        print(ty)
+        e = e ^ Const(0)
+        from integral import poly
+        from integral.poly import normalize
+        ctx = context.Context()
+        e = normalize(e, ctx)
+        print(e)
+
 

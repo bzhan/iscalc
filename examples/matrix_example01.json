@@ -1,110 +1,384 @@
 {
     "content": [
         {
+            "latex_var": "P",
+            "type": "VarDef",
+            "var": "matrix P[n][n]"
+        },
+        {
+            "latex_var": "A",
+            "type": "VarDef",
+            "var": "matrix A[n][n]"
+        },
+        {
+            "latex_var": "n",
+            "type": "VarDef",
+            "var": "int n"
+        },
+        {
+            "expr": "invertible(P)",
+            "latex_goal": "invertible{(P)}",
+            "type": "Assumption"
+        },
+        {
+            "expr": "n > 0",
+            "latex_goal": "n > 0",
+            "type": "Assumption"
+        },
+        {
             "finished": true,
-            "goal": "hat({a1, a2, a3}) ^ 2 = T({a1, a2, a3}) * {a1, a2, a3} - norm({a1, a2, a3}) ^ 2 * unit_matrix(3)",
-            "latex_goal": "hat{(\\begin{bmatrix}a1&a2&a3\\end{bmatrix})} ^ {2} = \\begin{bmatrix}a1&a2&a3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}a1&a2&a3\\end{bmatrix} - \\|\\begin{bmatrix}a1&a2&a3\\end{bmatrix}\\| ^ {2}\\cdot I_{3 \\times 3}",
+            "goal": "(inv(P) * A * P) ^ n = inv(P) * A ^ n * P",
+            "latex_goal": "(P ^ {-1} A P) ^ {n} = P ^ {-1} A ^ {n} P",
+            "obligations": [
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "inv(P) * A * P > 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "invertible(P)",
+                            "latex_cond": "invertible{(P)}"
+                        },
+                        {
+                            "cond": "n > 0",
+                            "latex_cond": "n > 0"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "isInt(n)"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "invertible(P)",
+                            "latex_cond": "invertible{(P)}"
+                        },
+                        {
+                            "cond": "n > 0",
+                            "latex_cond": "n > 0"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "n >= 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "invertible(P)",
+                            "latex_cond": "invertible{(P)}"
+                        },
+                        {
+                            "cond": "n > 0",
+                            "latex_cond": "n > 0"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "A > 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "invertible(P)",
+                            "latex_cond": "invertible{(P)}"
+                        },
+                        {
+                            "cond": "n > 0",
+                            "latex_cond": "n > 0"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "isInt(n)"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "invertible(P)",
+                            "latex_cond": "invertible{(P)}"
+                        },
+                        {
+                            "cond": "n > 0",
+                            "latex_cond": "n > 0"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "n >= 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "invertible(P)",
+                            "latex_cond": "invertible{(P)}"
+                        },
+                        {
+                            "cond": "n > 0",
+                            "latex_cond": "n > 0"
+                        }
+                    ]
+                }
+            ],
             "proof": {
-                "calcs": [
-                    {
-                        "latex_start": "hat{(\\begin{bmatrix}a1&a2&a3\\end{bmatrix})} ^ {2}",
-                        "start": "hat({a1, a2, a3}) ^ 2",
-                        "steps": [
+                "base_case": {
+                    "finished": true,
+                    "goal": "unit_matrix(n) = unit_matrix(n)",
+                    "latex_goal": "I_{n \\times n} = I_{n \\times n}",
+                    "proof": {
+                        "calcs": [
                             {
-                                "latex_res": "\\begin{bmatrix}0&-a3&a2\\\\a3&0&-a1\\\\-a2&a1&0\\end{bmatrix} ^ {2}",
-                                "res": "{{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}} ^ 2",
-                                "rule": {
-                                    "loc": "0",
-                                    "name": "ExpandMatVecFunc",
-                                    "str": "expand functions of vectors or matrices at 0"
-                                },
-                                "type": "CalculationStep"
+                                "latex_start": "I_{n \\times n}",
+                                "start": "unit_matrix(n)",
+                                "steps": [],
+                                "type": "Calculation"
                             },
                             {
-                                "latex_res": "\\begin{bmatrix}0&-a3&a2\\\\a3&0&-a1\\\\-a2&a1&0\\end{bmatrix} ^ {1} \\begin{bmatrix}0&-a3&a2\\\\a3&0&-a1\\\\-a2&a1&0\\end{bmatrix} ^ {2 - 1}",
-                                "res": "{{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}} ^ 1 * {{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}} ^ (2 - 1)",
-                                "rule": {
-                                    "latex_str": "rewrite \\(\\begin{bmatrix}0&-a3&a2\\\\a3&0&-a1\\\\-a2&a1&0\\end{bmatrix} ^ {2}\\) to \\(\\begin{bmatrix}0&-a3&a2\\\\a3&0&-a1\\\\-a2&a1&0\\end{bmatrix} ^ {1} \\begin{bmatrix}0&-a3&a2\\\\a3&0&-a1\\\\-a2&a1&0\\end{bmatrix} ^ {2 - 1}\\) using identity",
-                                    "name": "ApplyIdentity",
-                                    "source": "{{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}} ^ 2",
-                                    "str": "rewrite {{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}} ^ 2 to {{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}} ^ 1 * {{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}} ^ (2 - 1) using identity",
-                                    "target": "{{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}} ^ 1 * {{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}} ^ (2 - 1)"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\begin{bmatrix}-a2 ^ {2} - a3 ^ {2}&a1 a2&a1 a3\\\\a1 a2&-a1 ^ {2} - a3 ^ {2}&a2 a3\\\\a1 a3&a2 a3&-a1 ^ {2} - a2 ^ {2}\\end{bmatrix}",
-                                "res": "{{-(a2 ^ 2) - a3 ^ 2, a1 * a2, a1 * a3}, {a1 * a2, -(a1 ^ 2) - a3 ^ 2, a2 * a3}, {a1 * a3, a2 * a3, -(a1 ^ 2) - a2 ^ 2}}",
-                                "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
-                                },
-                                "type": "CalculationStep"
+                                "latex_start": "I_{n \\times n}",
+                                "start": "unit_matrix(n)",
+                                "steps": [],
+                                "type": "Calculation"
                             }
                         ],
-                        "type": "Calculation"
+                        "finished": true,
+                        "goal": "unit_matrix(n) = unit_matrix(n)",
+                        "latex_goal": "I_{n \\times n} = I_{n \\times n}",
+                        "type": "CalculationProof"
                     },
-                    {
-                        "latex_start": "\\begin{bmatrix}a1&a2&a3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}a1&a2&a3\\end{bmatrix} - \\|\\begin{bmatrix}a1&a2&a3\\end{bmatrix}\\| ^ {2}\\cdot I_{3 \\times 3}",
-                        "start": "T({a1, a2, a3}) * {a1, a2, a3} - norm({a1, a2, a3}) ^ 2 * unit_matrix(3)",
-                        "steps": [
-                            {
-                                "latex_res": "\\begin{bmatrix}a1 a1&a1 a2&a1 a3\\\\a2 a1&a2 a2&a2 a3\\\\a3 a1&a3 a2&a3 a3\\end{bmatrix} - (a1 ^ {2} + a2 ^ {2} + a3 ^ {2}) \\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&1\\end{bmatrix}",
-                                "res": "{{a1 * a1, a1 * a2, a1 * a3}, {a2 * a1, a2 * a2, a2 * a3}, {a3 * a1, a3 * a2, a3 * a3}} - (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}",
-                                "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                    "type": "Goal"
+                },
+                "finished": true,
+                "goal": "(inv(P) * A * P) ^ n = inv(P) * A ^ n * P",
+                "induct_case": {
+                    "finished": true,
+                    "goal": "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ (int n + 1) = inv(matrix P[n][n]) * matrix A[n][n] ^ (int n + 1) * matrix P[n][n]",
+                    "latex_goal": "(P ^ {-1} A P) ^ {n + 1} = P ^ {-1} A ^ {n + 1} P",
+                    "obligations": [
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n] > 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "invertible(P)",
+                                    "latex_cond": "invertible{(P)}"
                                 },
-                                "type": "CalculationStep"
+                                {
+                                    "cond": "n > 0",
+                                    "latex_cond": "n > 0"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "isInt(int n + 1)"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "invertible(P)",
+                                    "latex_cond": "invertible{(P)}"
+                                },
+                                {
+                                    "cond": "n > 0",
+                                    "latex_cond": "n > 0"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "int n + 1 >= 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "invertible(P)",
+                                    "latex_cond": "invertible{(P)}"
+                                },
+                                {
+                                    "cond": "n > 0",
+                                    "latex_cond": "n > 0"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "matrix A[n][n] > 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "invertible(P)",
+                                    "latex_cond": "invertible{(P)}"
+                                },
+                                {
+                                    "cond": "n > 0",
+                                    "latex_cond": "n > 0"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "isInt(int n + 1)"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "invertible(P)",
+                                    "latex_cond": "invertible{(P)}"
+                                },
+                                {
+                                    "cond": "n > 0",
+                                    "latex_cond": "n > 0"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "int n + 1 >= 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "invertible(P)",
+                                    "latex_cond": "invertible{(P)}"
+                                },
+                                {
+                                    "cond": "n > 0",
+                                    "latex_cond": "n > 0"
+                                }
+                            ]
+                        }
+                    ],
+                    "proof": {
+                        "calcs": [
+                            {
+                                "latex_start": "(P ^ {-1} A P) ^ {n + 1}",
+                                "start": "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ (int n + 1)",
+                                "steps": [
+                                    {
+                                        "latex_res": "(P ^ {-1} A P) ^ {n} (P ^ {-1} A P)",
+                                        "res": "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ int n * (inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n])",
+                                        "rule": {
+                                            "latex_str": "rewrite \\((P ^ {-1} A P) ^ {n + 1}\\) to \\((P ^ {-1} A P) ^ {n} (P ^ {-1} A P)\\) using identity",
+                                            "name": "ApplyIdentity",
+                                            "source": "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ (int n + 1)",
+                                            "str": "rewrite (inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ (int n + 1) to (inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ int n * (inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) using identity",
+                                            "target": "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ int n * (inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n])"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "P ^ {-1} A ^ {n} P (P ^ {-1} A P)",
+                                        "res": "inv(matrix P[n][n]) * matrix A[n][n] ^ int n * matrix P[n][n] * (inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n])",
+                                        "rule": {
+                                            "loc": "subterms",
+                                            "name": "ApplyInductHyp",
+                                            "str": "apply induction hypothesis on subterms"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "P ^ {-1} A ^ {n} A P",
+                                        "res": "inv(matrix P[n][n]) * matrix A[n][n] ^ int n * matrix A[n][n] * matrix P[n][n]",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "P ^ {-1} (A ^ {n} A) P",
+                                        "res": "inv(matrix P[n][n]) * (matrix A[n][n] ^ int n * matrix A[n][n]) * matrix P[n][n]",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(P ^ {-1} A ^ {n} A P\\) to \\(P ^ {-1} (A ^ {n} A) P\\)",
+                                            "name": "Equation",
+                                            "new_expr": "inv(matrix P[n][n]) * (matrix A[n][n] ^ int n * matrix A[n][n]) * matrix P[n][n]",
+                                            "old_expr": "inv(matrix P[n][n]) * matrix A[n][n] ^ int n * matrix A[n][n] * matrix P[n][n]",
+                                            "str": "rewriting inv(matrix P[n][n]) * matrix A[n][n] ^ int n * matrix A[n][n] * matrix P[n][n] to inv(matrix P[n][n]) * (matrix A[n][n] ^ int n * matrix A[n][n]) * matrix P[n][n]"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "P ^ {-1} A ^ {n + 1} P",
+                                        "res": "inv(matrix P[n][n]) * matrix A[n][n] ^ (int n + 1) * matrix P[n][n]",
+                                        "rule": {
+                                            "latex_str": "rewrite \\(A ^ {n} A\\) to \\(A ^ {n + 1}\\) using identity",
+                                            "name": "ApplyIdentity",
+                                            "source": "matrix A[n][n] ^ int n * matrix A[n][n]",
+                                            "str": "rewrite matrix A[n][n] ^ int n * matrix A[n][n] to matrix A[n][n] ^ (int n + 1) using identity",
+                                            "target": "matrix A[n][n] ^ (int n + 1)"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
                             },
                             {
-                                "latex_res": "\\begin{bmatrix}a1 a1&a1 a2&a1 a3\\\\a2 a1&a2 a2&a2 a3\\\\a3 a1&a3 a2&a3 a3\\end{bmatrix} - \\begin{bmatrix}(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 1&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0\\\\(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 1&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0\\\\(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 1\\end{bmatrix}",
-                                "res": "{{a1 * a1, a1 * a2, a1 * a3}, {a2 * a1, a2 * a2, a2 * a3}, {a3 * a1, a3 * a2, a3 * a3}} - {{(a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 1, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0}, {(a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 1, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0}, {(a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 1}}",
-                                "rule": {
-                                    "loc": "1",
-                                    "name": "MatrixRewrite",
-                                    "str": "rewrite on matrix at 1"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "-\\begin{bmatrix}(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 1&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0\\\\(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 1&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0\\\\(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 1\\end{bmatrix} + \\begin{bmatrix}a1 a1&a1 a2&a1 a3\\\\a2 a1&a2 a2&a2 a3\\\\a3 a1&a3 a2&a3 a3\\end{bmatrix}",
-                                "res": "-{{(a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 1, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0}, {(a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 1, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0}, {(a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0, (a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 1}} + {{a1 * a1, a1 * a2, a1 * a3}, {a2 * a1, a2 * a2, a2 * a3}, {a3 * a1, a3 * a2, a3 * a3}}",
-                                "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\begin{bmatrix}-(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 1&-(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&-(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0\\\\-(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&-(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 1&-(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0\\\\-(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&-(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 0&-(a1 ^ {2} + a2 ^ {2} + a3 ^ {2})\\cdot 1\\end{bmatrix} + \\begin{bmatrix}a1 a1&a1 a2&a1 a3\\\\a2 a1&a2 a2&a2 a3\\\\a3 a1&a3 a2&a3 a3\\end{bmatrix}",
-                                "res": "{{-((a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 1), -((a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0), -((a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0)}, {-((a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0), -((a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 1), -((a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0)}, {-((a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0), -((a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 0), -((a1 ^ 2 + a2 ^ 2 + a3 ^ 2) * 1)}} + {{a1 * a1, a1 * a2, a1 * a3}, {a2 * a1, a2 * a2, a2 * a3}, {a3 * a1, a3 * a2, a3 * a3}}",
-                                "rule": {
-                                    "loc": "0",
-                                    "name": "MatrixRewrite",
-                                    "str": "rewrite on matrix at 0"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\begin{bmatrix}-a2 ^ {2} - a3 ^ {2}&a1 a2&a1 a3\\\\a1 a2&-a1 ^ {2} - a3 ^ {2}&a2 a3\\\\a1 a3&a2 a3&-a1 ^ {2} - a2 ^ {2}\\end{bmatrix}",
-                                "res": "{{-(a2 ^ 2) - a3 ^ 2, a1 * a2, a1 * a3}, {a1 * a2, -(a1 ^ 2) - a3 ^ 2, a2 * a3}, {a1 * a3, a2 * a3, -(a1 ^ 2) - a2 ^ 2}}",
-                                "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
-                                },
-                                "type": "CalculationStep"
+                                "latex_start": "P ^ {-1} A ^ {n + 1} P",
+                                "start": "inv(matrix P[n][n]) * matrix A[n][n] ^ (int n + 1) * matrix P[n][n]",
+                                "steps": [],
+                                "type": "Calculation"
                             }
                         ],
-                        "type": "Calculation"
-                    }
-                ],
-                "finished": true,
-                "goal": "hat({a1, a2, a3}) ^ 2 = T({a1, a2, a3}) * {a1, a2, a3} - norm({a1, a2, a3}) ^ 2 * unit_matrix(3)",
-                "latex_goal": "hat{(\\begin{bmatrix}a1&a2&a3\\end{bmatrix})} ^ {2} = \\begin{bmatrix}a1&a2&a3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}a1&a2&a3\\end{bmatrix} - \\|\\begin{bmatrix}a1&a2&a3\\end{bmatrix}\\| ^ {2}\\cdot I_{3 \\times 3}",
-                "type": "CalculationProof"
+                        "finished": true,
+                        "goal": "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ (int n + 1) = inv(matrix P[n][n]) * matrix A[n][n] ^ (int n + 1) * matrix P[n][n]",
+                        "latex_goal": "(P ^ {-1} A P) ^ {n + 1} = P ^ {-1} A ^ {n + 1} P",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal",
+                    "wellformed": false
+                },
+                "induct_var": "n",
+                "latex_goal": "(P ^ {-1} A P) ^ {n} = P ^ {-1} A ^ {n} P",
+                "type": "InductionProof"
             },
-            "type": "Goal"
+            "type": "Goal",
+            "wellformed": false
         }
     ],
     "name": "matrix_example01"

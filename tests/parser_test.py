@@ -83,5 +83,12 @@ class ParserTest(unittest.TestCase):
             e = parse_expr(s)
             self.assertEqual(e, r)
 
+    def testMatrixVar(self):
+        test_data = [("matrix a[2][3]", "matrix a[2][3]"),
+                     ("matrix A[n][n]", "matrix A[n][n]"),
+                     ("a", "a")]
+        for s, res in test_data:
+            self.assertEqual(str(parse_expr(s)), res)
+
 if __name__ == "__main__":
     unittest.main()

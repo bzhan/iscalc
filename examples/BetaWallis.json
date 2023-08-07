@@ -1307,8 +1307,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(y + 1) ^ {2}} ((\\frac{1}{y + 1}) ^ {n - 1} (-\\frac{1}{y + 1} + 1) ^ {m - 1}) \\,dy",
-                                "res": "INT y:[0,oo]. 1 / (y + 1) ^ 2 * ((1 / (y + 1)) ^ (n - 1) * (-(1 / (y + 1)) + 1) ^ (m - 1))",
+                                "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(y + 1) ^ {2}} (\\frac{1}{y + 1}) ^ {n - 1} (-\\frac{1}{y + 1} + 1) ^ {m - 1} \\,dy",
+                                "res": "INT y:[0,oo]. 1 / (y + 1) ^ 2 * (1 / (y + 1)) ^ (n - 1) * (-(1 / (y + 1)) + 1) ^ (m - 1)",
                                 "rule": {
                                     "latex_str": "substitute \\(y\\) for \\(\\frac{1}{1 - x} - 1\\)",
                                     "name": "Substitution",
@@ -1319,8 +1319,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(y + 1) ^ {2}} ((\\frac{1}{y + 1}) ^ {n - 1} (\\frac{y}{y + 1}) ^ {m - 1}) \\,dy",
-                                "res": "INT y:[0,oo]. 1 / (y + 1) ^ 2 * ((1 / (y + 1)) ^ (n - 1) * (y / (y + 1)) ^ (m - 1))",
+                                "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(y + 1) ^ {2}} (\\frac{1}{y + 1}) ^ {n - 1} (\\frac{y}{y + 1}) ^ {m - 1} \\,dy",
+                                "res": "INT y:[0,oo]. 1 / (y + 1) ^ 2 * (1 / (y + 1)) ^ (n - 1) * (y / (y + 1)) ^ (m - 1)",
                                 "rule": {
                                     "latex_str": "rewriting \\(-\\frac{1}{y + 1} + 1\\) to \\(\\frac{y}{y + 1}\\)",
                                     "name": "Equation",
@@ -1331,8 +1331,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(y + 1) ^ {2}} (\\frac{1}{(y + 1) ^ {n - 1}} (\\frac{y}{y + 1}) ^ {m - 1}) \\,dy",
-                                "res": "INT y:[0,oo]. 1 / (y + 1) ^ 2 * (1 / (y + 1) ^ (n - 1) * (y / (y + 1)) ^ (m - 1))",
+                                "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(y + 1) ^ {2}} (\\frac{1}{(y + 1) ^ {n - 1}}) (\\frac{y}{y + 1}) ^ {m - 1} \\,dy",
+                                "res": "INT y:[0,oo]. 1 / (y + 1) ^ 2 * (1 / (y + 1) ^ (n - 1)) * (y / (y + 1)) ^ (m - 1)",
                                 "rule": {
                                     "latex_str": "rewrite \\((\\frac{1}{y + 1}) ^ {n - 1}\\) to \\(\\frac{1}{(y + 1) ^ {n - 1}}\\) using identity",
                                     "name": "ApplyIdentity",
@@ -1343,8 +1343,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(y + 1) ^ {2}} (\\frac{1}{(y + 1) ^ {n - 1}} (\\frac{y ^ {m - 1}}{(y + 1) ^ {m - 1}})) \\,dy",
-                                "res": "INT y:[0,oo]. 1 / (y + 1) ^ 2 * (1 / (y + 1) ^ (n - 1) * (y ^ (m - 1) / (y + 1) ^ (m - 1)))",
+                                "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(y + 1) ^ {2}} (\\frac{1}{(y + 1) ^ {n - 1}}) (\\frac{y ^ {m - 1}}{(y + 1) ^ {m - 1}}) \\,dy",
+                                "res": "INT y:[0,oo]. 1 / (y + 1) ^ 2 * (1 / (y + 1) ^ (n - 1)) * (y ^ (m - 1) / (y + 1) ^ (m - 1))",
                                 "rule": {
                                     "latex_str": "rewrite \\((\\frac{y}{y + 1}) ^ {m - 1}\\) to \\(\\frac{y ^ {m - 1}}{(y + 1) ^ {m - 1}}\\) using identity",
                                     "name": "ApplyIdentity",
@@ -1358,11 +1358,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{y ^ {m - 1}}{(y + 1) ^ {m + n}} \\,dy",
                                 "res": "INT y:[0,oo]. y ^ (m - 1) / (y + 1) ^ (m + n)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{(y + 1) ^ {2}} (\\frac{1}{(y + 1) ^ {n - 1}} (\\frac{y ^ {m - 1}}{(y + 1) ^ {m - 1}}))\\) to \\(\\frac{y ^ {m - 1}}{(y + 1) ^ {m + n}}\\)",
+                                    "latex_str": "rewriting \\(\\frac{1}{(y + 1) ^ {2}} (\\frac{1}{(y + 1) ^ {n - 1}}) (\\frac{y ^ {m - 1}}{(y + 1) ^ {m - 1}})\\) to \\(\\frac{y ^ {m - 1}}{(y + 1) ^ {m + n}}\\)",
                                     "name": "Equation",
                                     "new_expr": "y ^ (m - 1) / (y + 1) ^ (m + n)",
-                                    "old_expr": "1 / (y + 1) ^ 2 * (1 / (y + 1) ^ (n - 1) * (y ^ (m - 1) / (y + 1) ^ (m - 1)))",
-                                    "str": "rewriting 1 / (y + 1) ^ 2 * (1 / (y + 1) ^ (n - 1) * (y ^ (m - 1) / (y + 1) ^ (m - 1))) to y ^ (m - 1) / (y + 1) ^ (m + n)"
+                                    "old_expr": "1 / (y + 1) ^ 2 * (1 / (y + 1) ^ (n - 1)) * (y ^ (m - 1) / (y + 1) ^ (m - 1))",
+                                    "str": "rewriting 1 / (y + 1) ^ 2 * (1 / (y + 1) ^ (n - 1)) * (y ^ (m - 1) / (y + 1) ^ (m - 1)) to y ^ (m - 1) / (y + 1) ^ (m + n)"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1727,8 +1727,8 @@
                     "start": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT x:[0,1]. x ^ z * (1 - x) ^ z)",
                     "steps": [
                         {
-                            "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\int_{-1}^{1} \\frac{1}{2} ((\\frac{s + 1}{2}) ^ {z} (-\\frac{s + 1}{2} + 1) ^ {z}) \\,ds",
-                            "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT s:[-1,1]. 1/2 * (((s + 1) / 2) ^ z * (-((s + 1) / 2) + 1) ^ z))",
+                            "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\int_{-1}^{1} \\frac{1}{2} (\\frac{s + 1}{2}) ^ {z} (-\\frac{s + 1}{2} + 1) ^ {z} \\,ds",
+                            "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT s:[-1,1]. 1/2 * ((s + 1) / 2) ^ z * (-((s + 1) / 2) + 1) ^ z)",
                             "rule": {
                                 "latex_str": "substitute \\(s\\) for \\(2 x - 1\\) at 1",
                                 "loc": "1",
@@ -1740,8 +1740,8 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\int_{-1}^{1} \\frac{1}{2} ((\\frac{s + 1}{2}) ^ {z} (\\frac{1}{2} (1 - s)) ^ {z}) \\,ds",
-                            "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT s:[-1,1]. 1/2 * (((s + 1) / 2) ^ z * (1/2 * (1 - s)) ^ z))",
+                            "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\int_{-1}^{1} \\frac{1}{2} (\\frac{s + 1}{2}) ^ {z} (\\frac{1}{2} (1 - s)) ^ {z} \\,ds",
+                            "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT s:[-1,1]. 1/2 * ((s + 1) / 2) ^ z * (1/2 * (1 - s)) ^ z)",
                             "rule": {
                                 "latex_str": "rewriting \\(-\\frac{s + 1}{2} + 1\\) to \\(\\frac{1}{2} (1 - s)\\)",
                                 "name": "Equation",
@@ -1752,8 +1752,8 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\int_{-1}^{1} \\frac{1}{2} ((\\frac{1}{2} (1 + s)) ^ {z} (\\frac{1}{2} (1 - s)) ^ {z}) \\,ds",
-                            "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT s:[-1,1]. 1/2 * ((1/2 * (1 + s)) ^ z * (1/2 * (1 - s)) ^ z))",
+                            "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\int_{-1}^{1} \\frac{1}{2} (\\frac{1}{2} (1 + s)) ^ {z} (\\frac{1}{2} (1 - s)) ^ {z} \\,ds",
+                            "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT s:[-1,1]. 1/2 * (1/2 * (1 + s)) ^ z * (1/2 * (1 - s)) ^ z)",
                             "rule": {
                                 "latex_str": "rewriting \\(\\frac{s + 1}{2}\\) to \\(\\frac{1}{2} (1 + s)\\)",
                                 "name": "Equation",
@@ -1764,8 +1764,8 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\int_{-1}^{1} \\frac{1}{2} ((\\frac{1}{2} (1 + s)) ^ {z} ((\\frac{1}{2}) ^ {z} (1 - s) ^ {z})) \\,ds",
-                            "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT s:[-1,1]. 1/2 * ((1/2 * (1 + s)) ^ z * ((1/2) ^ z * (1 - s) ^ z)))",
+                            "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\int_{-1}^{1} \\frac{1}{2} (\\frac{1}{2} (1 + s)) ^ {z} ((\\frac{1}{2}) ^ {z} (1 - s) ^ {z}) \\,ds",
+                            "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT s:[-1,1]. 1/2 * (1/2 * (1 + s)) ^ z * ((1/2) ^ z * (1 - s) ^ z))",
                             "rule": {
                                 "latex_str": "rewrite \\((\\frac{1}{2} (1 - s)) ^ {z}\\) to \\((\\frac{1}{2}) ^ {z} (1 - s) ^ {z}\\) using identity",
                                 "name": "ApplyIdentity",
@@ -1776,8 +1776,8 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\int_{-1}^{1} \\frac{1}{2} ((\\frac{1}{2}) ^ {z} (1 + s) ^ {z} ((\\frac{1}{2}) ^ {z} (1 - s) ^ {z})) \\,ds",
-                            "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT s:[-1,1]. 1/2 * ((1/2) ^ z * (1 + s) ^ z * ((1/2) ^ z * (1 - s) ^ z)))",
+                            "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\int_{-1}^{1} \\frac{1}{2} ((\\frac{1}{2}) ^ {z} (1 + s) ^ {z}) ((\\frac{1}{2}) ^ {z} (1 - s) ^ {z}) \\,ds",
+                            "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT s:[-1,1]. 1/2 * ((1/2) ^ z * (1 + s) ^ z) * ((1/2) ^ z * (1 - s) ^ z))",
                             "rule": {
                                 "latex_str": "rewrite \\((\\frac{1}{2} (1 + s)) ^ {z}\\) to \\((\\frac{1}{2}) ^ {z} (1 + s) ^ {z}\\) using identity",
                                 "name": "ApplyIdentity",

@@ -304,6 +304,27 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "latex_res": "\\frac{1}{b} (\\int_{0}^{\\infty} \\frac{1}{\\frac{a}{b} + y ^ {2}} \\,dy)",
+                                "res": "1 / b * (INT y:[0,oo]. 1 / (a / b + y ^ 2))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{b} (\\int_{0}^{\\infty} \\frac{1}{(\\frac{\\sqrt{a}}{\\sqrt{b}}) ^ {2} + y ^ {2}} \\,dy)",
+                                "res": "1 / b * (INT y:[0,oo]. 1 / ((sqrt(a) / sqrt(b)) ^ 2 + y ^ 2))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{a}{b}\\) to \\((\\frac{\\sqrt{a}}{\\sqrt{b}}) ^ {2}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(sqrt(a) / sqrt(b)) ^ 2",
+                                    "old_expr": "a / b",
+                                    "str": "rewriting a / b to (sqrt(a) / sqrt(b)) ^ 2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
                                 "latex_res": "\\frac{1}{b} (\\left. \\frac{\\sqrt{b}}{\\sqrt{a}} \\tan^{-1}{(\\frac{\\sqrt{b} y}{\\sqrt{a}})} \\right\\vert_{y=0}^{\\infty})",
                                 "res": "1 / b * ([sqrt(b) / sqrt(a) * atan(sqrt(b) * y / sqrt(a))]_y=0,oo)",
                                 "rule": {

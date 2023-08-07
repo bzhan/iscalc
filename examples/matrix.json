@@ -9,7 +9,7 @@
         "isSquareMatrix(A)",
         "isNonnegativeInteger(n)"
       ],
-      "expr": "A^n = A^1 * A^(n-1)",
+      "expr": "A^(a+b) = A^a * A^b",
       "type": "axiom"
     },
     {
@@ -17,11 +17,15 @@
           "bidirectional"
       ],
       "category": "matrix-power",
-      "conds": [
-        "isSquareMatrix(A)",
-        "isNonnegativeInteger(n)"
+      "expr": "A^(a+1) = A^a * A",
+      "type": "axiom"
+    },
+    {
+      "attributes": [
+          "bidirectional"
       ],
-      "expr": "A^(a+b) = A^a * A^b",
+      "category": "matrix-power",
+      "expr": "A^(a+1) = A * A^a",
       "type": "axiom"
     }
   ],

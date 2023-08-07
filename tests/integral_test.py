@@ -2415,6 +2415,8 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyIdentity("1/cos(x)", "sec(x)"))
         calc.perform_rule(rules.Substitution(var_name="y", var_subst="tan(x)"))
         calc.perform_rule(rules.Equation("1 / (b * y ^ 2 + a)", "(1/b)/(y^2+a/b)"))
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Equation("a / b", "(sqrt(a) / sqrt(b))^2"))
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.Equation("2 * sqrt(a) * sqrt(b)", "2 * sqrt(a * b)"))
@@ -3505,7 +3507,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.Equation("-(1 / (y + 1)) + 1", "y / (y + 1)"))
         calc.perform_rule(rules.ApplyIdentity("(1 / (y + 1)) ^ (n - 1)", "1 / (y + 1) ^ (n - 1)"))
         calc.perform_rule(rules.ApplyIdentity("(y / (y + 1)) ^ (m - 1)", "y ^ (m - 1) / (y + 1) ^ (m - 1)"))
-        calc.perform_rule(rules.Equation("1 / (y + 1) ^ 2 * (1 / (y + 1) ^ (n - 1) * (y ^ (m - 1) / (y + 1) ^ (m - 1)))",
+        calc.perform_rule(rules.Equation("1 / (y + 1) ^ 2 * (1 / (y + 1) ^ (n - 1)) * (y ^ (m - 1) / (y + 1) ^ (m - 1))",
                                          "y ^ (m - 1) / (y + 1) ^ (m + n)"))
 
         goal19 = file.add_goal("(INT x:[0, oo]. x ^ (m - 1) / (x + 1)) = B(m, 1 - m)", conds=["m > 0", "m < 1"])

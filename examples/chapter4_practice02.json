@@ -154,8 +154,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "(-1) ^ {n} (\\int_{0}^{\\infty} \\frac{1}{m + 1} ((\\frac{t}{m + 1}) ^ {n} (e^{-t/(m + 1)}) ^ {m + 1}) \\,dt)",
-                                "res": "(-1) ^ n * (INT t:[0,oo]. 1 / (m + 1) * ((t / (m + 1)) ^ n * exp(-(t / (m + 1))) ^ (m + 1)))",
+                                "latex_res": "(-1) ^ {n} (\\int_{0}^{\\infty} \\frac{1}{m + 1} (\\frac{t}{m + 1}) ^ {n} (e^{-t/(m + 1)}) ^ {m + 1} \\,dt)",
+                                "res": "(-1) ^ n * (INT t:[0,oo]. 1 / (m + 1) * (t / (m + 1)) ^ n * exp(-(t / (m + 1))) ^ (m + 1))",
                                 "rule": {
                                     "latex_str": "substitute \\(t\\) for \\((m + 1) u\\)",
                                     "name": "Substitution",
@@ -166,8 +166,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "(-1) ^ {n} (\\int_{0}^{\\infty} \\frac{1}{m + 1} (\\frac{t ^ {n}}{(m + 1) ^ {n}} (e^{-t/(m + 1)}) ^ {m + 1}) \\,dt)",
-                                "res": "(-1) ^ n * (INT t:[0,oo]. 1 / (m + 1) * (t ^ n / (m + 1) ^ n * exp(-(t / (m + 1))) ^ (m + 1)))",
+                                "latex_res": "(-1) ^ {n} (\\int_{0}^{\\infty} \\frac{1}{m + 1} (\\frac{t ^ {n}}{(m + 1) ^ {n}}) (e^{-t/(m + 1)}) ^ {m + 1} \\,dt)",
+                                "res": "(-1) ^ n * (INT t:[0,oo]. 1 / (m + 1) * (t ^ n / (m + 1) ^ n) * exp(-(t / (m + 1))) ^ (m + 1))",
                                 "rule": {
                                     "latex_str": "rewrite \\((\\frac{t}{m + 1}) ^ {n}\\) to \\(\\frac{t ^ {n}}{(m + 1) ^ {n}}\\) using identity",
                                     "name": "ApplyIdentity",
@@ -178,8 +178,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "(-1) ^ {n} (\\int_{0}^{\\infty} \\frac{1}{m + 1} (\\frac{t ^ {n}}{(m + 1) ^ {n}} e^{(-t/(m + 1)) (m + 1)}) \\,dt)",
-                                "res": "(-1) ^ n * (INT t:[0,oo]. 1 / (m + 1) * (t ^ n / (m + 1) ^ n * exp(-(t / (m + 1)) * (m + 1))))",
+                                "latex_res": "(-1) ^ {n} (\\int_{0}^{\\infty} \\frac{1}{m + 1} (\\frac{t ^ {n}}{(m + 1) ^ {n}}) e^{(-t/(m + 1)) (m + 1)} \\,dt)",
+                                "res": "(-1) ^ n * (INT t:[0,oo]. 1 / (m + 1) * (t ^ n / (m + 1) ^ n) * exp(-(t / (m + 1)) * (m + 1)))",
                                 "rule": {
                                     "latex_str": "rewrite \\((e^{-t/(m + 1)}) ^ {m + 1}\\) to \\(e^{(-t/(m + 1)) (m + 1)}\\) using identity",
                                     "name": "ApplyIdentity",

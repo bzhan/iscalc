@@ -71,7 +71,7 @@ class Expr:
         if isinstance(other, (int, Fraction)):
             other = Const(other)
         return Op("-", self, other)
-    
+
     def __rsub__(self, other):
         if isinstance(other, (int, Fraction)):
             other = Const(other)
@@ -159,7 +159,7 @@ class Expr:
 
     def is_skolem_func(self) -> TypeGuard["SkolemFunc"]:
         return self.ty == SKOLEMFUNC
-    
+
     def is_symbol(self) -> TypeGuard["Symbol"]:
         return self.ty == SYMBOL
 
@@ -213,7 +213,7 @@ class Expr:
 
     def is_greater_eq(self):
         return self.ty == OP and self.op == ">="
-    
+
     def is_compare(self) -> bool:
         return self.ty == OP and self.op in ('=', '!=', '<', '<=', '>', '>=')
 
@@ -247,7 +247,7 @@ class Expr:
         if poly.normalize(tmp1 + tmp2, conds) == Const(0):
             return True
         return False
-        
+
     def is_summation(self) -> TypeGuard["Summation"]:
         return self.ty == SUMMATION
 
@@ -470,12 +470,12 @@ class Expr:
 
         find(self, Location(""))
         return locations
-    
+
     def find_subexpr_pred(self, pred: Callable[["Expr"], bool]) -> List[Tuple["Expr", Location]]:
         """Find list of subexpressions satisfying a given predicate.
-        
+
         Larger expressions are placed later.
-        
+
         """
         results = []
 
@@ -546,9 +546,9 @@ class Expr:
 
     def is_constant(self):
         """Determine whether expr is a number.
-        
+
         Note Inf is not considered to be constants.
-        
+
         """
         if self.is_const():
             return True
@@ -556,7 +556,7 @@ class Expr:
             return all(arg.is_constant() for arg in self.args)
         else:
             return False
-        
+
     def is_evaluable(self):
         return self.is_constant() or self.is_inf()
 
@@ -857,6 +857,143 @@ class Expr:
     def is_matrix(self)  -> TypeGuard["Matrix"]:
         return isinstance(self, Matrix) and self.ty == MATRIX
 
+    def get_type(self) -> str:
+        if self.is_constant() or self.is_inf():
+            if self.is_const():
+                if type(self.val) == int:
+                    return 'int'
+            return 'real'
+        elif self.is_matrix():
+            return 'matrix'
+        elif self.is_var():
+            return self.ty2
+        elif self.is_op():
+            if self.is_plus():
+                a, b = self.args
+                if a.get_type() == 'real' and b.get_type() == 'real':
+                    return 'real'
+                elif a.get_type() == 'matrix' and b.get_type() == 'matrix':
+                    # check shapes of a and b
+                    return 'matrix'
+                elif a.get_type() == 'int' and b.get_type() == 'real':
+                    return 'real'
+                elif a.get_type() == 'real' and b.get_type() == 'int':
+                    return 'real'
+                elif a.get_type() == 'int' and b.get_type() == 'int':
+                    return 'int'
+                else:
+                    print(a, b)
+                    print(a.get_type(), b.get_type())
+                    raise TypeError
+            elif self.is_times():
+                a, b = self.args
+                if a.get_type() == 'real' and b.get_type() == 'real':
+                    return 'real'
+                elif a.get_type() == 'real' and b.get_type() == 'matrix':
+                    return 'matrix'
+                elif a.get_type() == 'matrix' and b.get_type() == 'real':
+                    return 'matrix'
+                elif a.get_type() == 'matrix' and b.get_type() == 'matrix':
+                    # check shapes of a and b
+                    return 'matrix'
+                elif a.get_type() == 'int' and b.get_type() == 'real':
+                    return 'real'
+                elif a.get_type() == 'real' and b.get_type() == 'int':
+                    return 'int'
+                else:
+                    print(a,b)
+                    print(a.get_type(), b.get_type())
+                    raise TypeError
+            elif self.is_divides():
+                a, b = self.args
+                if a.get_type() == 'real' and b.get_type() == 'real':
+                    return 'real'
+                elif a.get_type() == 'int' and b.get_type() == 'real':
+                    return 'real'
+                elif a.get_type() == 'real' and b.get_type() == 'int':
+                    return 'real'
+                print(a,b,a.get_type(), b.get_type())
+                raise NotImplementedError
+            elif self.is_uminus() or self.is_minus():
+                a = self.args[0]
+                if a.get_type() == 'real':
+                    return 'real'
+                elif a.get_type() == 'matrix':
+                    return 'matrix'
+                else:
+                    raise NotImplementedError
+            elif self.is_power():
+                a, b = self.args
+                if a.get_type() == 'matrix' and b.get_type() == 'int':
+                    return 'matrix'
+                elif a.get_type() == 'real' and b.get_type() == 'real':
+                    return 'real'
+                elif a.get_type() == 'real' and b.get_type() == 'int':
+                    return 'real'
+                elif a.get_type() == 'int' and b.get_type() == 'real':
+                    return 'real'
+                elif a.get_type() == 'matrix' and b.get_type == 'int':
+                    # TODO: check whether a is a squre matrix and b > 0
+                    return 'matrix'
+                print(a, b)
+                print(a.get_type(), b.get_type())
+                raise NotImplementedError
+        elif self.is_fun():
+            a = self.args[0]
+            if self.func_name in ('hat','trans','inv','exp') and a.get_type() == 'matrix':
+                return 'matrix'
+            elif self.func_name in ('unit_matrix','zero_matrix'):
+                return 'matrix'
+            else:
+                return 'real'
+        elif self.is_integral():
+            if self.body.get_type() in ('int', 'real'):
+                return 'real'
+            print(self.body, self.body.get_type())
+            raise NotImplementedError
+        elif self.is_indefinite_integral():
+            return 'real'
+        elif self.is_summation():
+            return 'real'
+        elif self.is_evalat():
+            return 'real'
+        elif self.is_equals():
+            return 'equation'
+        elif self.is_greater():
+            return 'greater'
+        elif self.is_deriv():
+            return 'real'
+        elif self.is_limit():
+            return 'real'
+        elif self.is_skolem_func():
+            return 'real'
+        elif self.is_symbol():
+            return 'real'
+        elif self.is_skolem_term():
+            return 'real'
+        else:
+            print(self)
+            raise NotImplementedError
+
+    def get_shape(self):
+        if self.is_var():
+            return self.shape
+        elif self.is_fun():
+            if self.func_name == 'inv':
+                return self.args[0].shape
+            raise NotImplementedError
+        elif self.is_op():
+            a, b = self.args
+            if self.is_times():
+                shape1 = a.get_shape()
+                shape2 = b.get_shape()
+                # check shape1[1] = shape2[0]
+                return (shape1[0], shape2[1])
+            raise NotImplementedError
+        else:
+            print(self)
+            raise NotImplementedError
+
 
 def match(exp: Expr, pattern: Expr) -> Optional[Dict]:
     """Match expr with given pattern.
@@ -1018,23 +1155,46 @@ def decompose_expr_factor(e):
     rec(e, 1)
     return num_factors, denom_factors
 
+
+
 class Var(Expr):
     """Variable."""
 
-    def __init__(self, name: str):
+    def __init__(self, name: str, ty2:str=None, shape:List[Expr]=None):
         assert isinstance(name, str)
         self.ty = VAR
         self.name = name
+        if ty2 is None:
+            self.ty2 = 'real'
+            self.shape = (Const(1), Const(1))
+        else:
+            if ty2 == 'matrix':
+                self.ty2 = ty2
+                self.shape = shape
+            elif ty2 == 'int':
+                self.ty2 = ty2
+                self.shape = (Const(1), Const(1))
+            else:
+                raise NotImplementedError
+
+
 
     def __hash__(self):
-        return hash((VAR, self.name))
+        return hash((VAR, self.name, self.ty2, self.shape))
 
     def __eq__(self, other):
-        return isinstance(other, Var) and self.name == other.name
+        return isinstance(other, Var) and self.name == other.name and self.ty2 == other.ty2\
+        and self.shape == other.shape
 
     def __str__(self):
-        return self.name
-
+        if self.ty2 == 'real':
+            return self.name
+        elif self.ty2 == 'matrix':
+            return self.ty2+" "+self.name+"["+str(self.shape[0])+"]["+str(self.shape[1])+"]"
+        elif self.ty2 == 'int':
+            return self.ty2+" "+self.name
+        else:
+            raise NotImplementedError
     def __repr__(self):
         return "Var(%s)" % self.name
 

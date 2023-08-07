@@ -5,7 +5,11 @@
             "name": "Basic Formulas",
             "type": "header"
         },
-
+        {
+            "expr": "(inv(P)*A*P)^n = inv(P)*A^n*P",
+            "path": "matrix_example01",
+            "type": "problem"
+        },
         {
             "expr": "hat({a1,a2,a3})^2 =  T({a1,a2,a3}) * {a1,a2,a3} - norm({a1,a2,a3})^2 * unit_matrix(3)",
             "path": "matrix_example01",

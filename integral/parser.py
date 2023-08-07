@@ -32,6 +32,8 @@ grammar = r"""
         | "LIM" "{" CNAME "->" expr "-}" "."  expr -> limit_l_expr
         | "LIM" "{" CNAME "->" expr "+}" "."  expr -> limit_r_expr
         | "{" expr ("," expr)* "}" -> vector_expr
+        | CNAME CNAME "[" expr "]" "[" expr "]" -> matrix_var
+        | CNAME CNAME -> type_var
 
     ?uminus: "-" uminus -> uminus_expr | atom  // priority 80
 
@@ -71,7 +73,7 @@ class ExprTransformer(Transformer):
 
     def var_expr(self, s):
         return expr.Var(str(s))
-    
+
     def symbol_expr(self, s):
         return expr.Symbol(str(s), [expr.VAR, expr.CONST, expr.OP, expr.FUN])
 
@@ -80,7 +82,7 @@ class ExprTransformer(Transformer):
 
     def decimal_expr(self, n):
         return expr.Const(Decimal(n))
-        
+
     def plus_expr(self, a, b):
         return expr.Op("+", a, b)
 
@@ -116,13 +118,13 @@ class ExprTransformer(Transformer):
 
     def greater_eq_expr(self, a, b):
         return expr.Op(">=", a, b)
-    
+
     def uminus_expr(self, a):
         if a.is_const() and a.val > 0:
             return expr.Const(-a.val)
         else:
             return expr.Op("-", a)
-    
+
     def uminus_pow_expr(self, a, b):
         return expr.Op("-", expr.Op("^", a, b))
 
@@ -147,7 +149,7 @@ class ExprTransformer(Transformer):
         elif func_name == 'column':
             if args[0].is_vector():
                 return args[0].t
-        return expr.Fun(func_name, *args)
+        return expr.Fun(str(func_name), *args)
 
     def abs_expr(self, expr):
         return expr.Fun("abs", expr)
@@ -169,7 +171,7 @@ class ExprTransformer(Transformer):
 
     def eval_at_expr(self, body, var, lower, upper):
         return expr.EvalAt(var, lower, upper, body)
-    
+
     def limit_inf_expr(self, var, lim, body):
         return expr.Limit(str(var), lim, body)
 
@@ -187,6 +189,12 @@ class ExprTransformer(Transformer):
                 return expr.Matrix(list(args), is_row=True)
         else:
             return expr.Vector(list(args), is_column=False)
+
+    def matrix_var(self, ty, name, d1, d2):
+        return expr.Var(str(name), ty2=str(ty), shape=(d1, d2))
+
+    def type_var(self, ty, name):
+        return expr.Var(str(name), ty2=str(ty))
 
 expr_parser = Lark(grammar, start="expr", parser="lalr", transformer=ExprTransformer())
 interval_parser = Lark(grammar, start="interval", parser="lalr", transformer=ExprTransformer())

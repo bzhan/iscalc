@@ -27,6 +27,22 @@
       "category": "matrix-power",
       "expr": "A^(a+1) = A * A^a",
       "type": "axiom"
+    },
+    {
+      "attributes": [
+          "bidirectional"
+      ],
+      "category": "matrix-power",
+      "expr": "A^a = A^(a-1) * A",
+      "type": "axiom"
+    },
+    {
+      "attributes": [
+          "bidirectional"
+      ],
+      "category": "matrix-power",
+      "expr": "A^a = A * A^(a-1)",
+      "type": "axiom"
     }
   ],
   "imports": [],

@@ -1,18 +1,35 @@
 {
     "content": [
         {
+            "latex_var": "w",
+            "type": "VarDef",
+            "var": "matrix w[3][1]"
+        },
+        {
             "finished": true,
-            "goal": "T({a1, a2, a3}) * {a1, a2, a3} * hat({a1, a2, a3}) = zero_matrix(3,3)",
-            "latex_goal": "\\begin{bmatrix}a1&a2&a3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}a1&a2&a3\\end{bmatrix} hat{(\\begin{bmatrix}a1&a2&a3\\end{bmatrix})} = O_{3 \\times 3}",
+            "goal": "hat(matrix w[3][1]) ^ 2 = matrix w[3][1] * T(matrix w[3][1]) - norm(matrix w[3][1]) ^ 2 * unit_matrix(3)",
+            "latex_goal": "\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot I_{3 \\times 3}",
             "proof": {
                 "calcs": [
                     {
-                        "latex_start": "\\begin{bmatrix}a1&a2&a3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}a1&a2&a3\\end{bmatrix} hat{(\\begin{bmatrix}a1&a2&a3\\end{bmatrix})}",
-                        "start": "T({a1, a2, a3}) * {a1, a2, a3} * hat({a1, a2, a3})",
+                        "latex_start": "\\hat{w} ^ {2}",
+                        "start": "hat(matrix w[3][1]) ^ 2",
                         "steps": [
                             {
-                                "latex_res": "\\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
-                                "res": "{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}",
+                                "latex_res": "\\hat{w} ^ {1} \\hat{w} ^ {1}",
+                                "res": "hat(matrix w[3][1]) ^ 1 * hat(matrix w[3][1]) ^ 1",
+                                "rule": {
+                                    "latex_str": "rewrite \\(\\hat{w} ^ {2}\\) to \\(\\hat{w} ^ {1} \\hat{w} ^ {1}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "hat(matrix w[3][1]) ^ 2",
+                                    "str": "rewrite hat(matrix w[3][1]) ^ 2 to hat(matrix w[3][1]) ^ 1 * hat(matrix w[3][1]) ^ 1 using identity",
+                                    "target": "hat(matrix w[3][1]) ^ 1 * hat(matrix w[3][1]) ^ 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}-a2 ^ {2} - a3 ^ {2}&a1 a2&a1 a3\\\\a1 a2&-a1 ^ {2} - a3 ^ {2}&a2 a3\\\\a1 a3&a2 a3&-a1 ^ {2} - a2 ^ {2}\\end{bmatrix}",
+                                "res": "{{-(a2 ^ 2) - a3 ^ 2, a1 * a2, a1 * a3}, {a1 * a2, -(a1 ^ 2) - a3 ^ 2, a2 * a3}, {a1 * a3, a2 * a3, -(a1 ^ 2) - a2 ^ 2}}",
                                 "rule": {
                                     "name": "FullSimplify",
                                     "str": "full simplify"
@@ -23,12 +40,12 @@
                         "type": "Calculation"
                     },
                     {
-                        "latex_start": "O_{3 \\times 3}",
-                        "start": "zero_matrix(3,3)",
+                        "latex_start": "w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot I_{3 \\times 3}",
+                        "start": "matrix w[3][1] * T(matrix w[3][1]) - norm(matrix w[3][1]) ^ 2 * unit_matrix(3)",
                         "steps": [
                             {
-                                "latex_res": "\\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
-                                "res": "{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}",
+                                "latex_res": "\\begin{bmatrix}-a2 ^ {2} - a3 ^ {2}&a1 a2&a1 a3\\\\a1 a2&-a1 ^ {2} - a3 ^ {2}&a2 a3\\\\a1 a3&a2 a3&-a1 ^ {2} - a2 ^ {2}\\end{bmatrix}",
+                                "res": "{{-(a2 ^ 2) - a3 ^ 2, a1 * a2, a1 * a3}, {a1 * a2, -(a1 ^ 2) - a3 ^ 2, a2 * a3}, {a1 * a3, a2 * a3, -(a1 ^ 2) - a2 ^ 2}}",
                                 "rule": {
                                     "name": "FullSimplify",
                                     "str": "full simplify"
@@ -40,8 +57,8 @@
                     }
                 ],
                 "finished": true,
-                "goal": "T({a1, a2, a3}) * {a1, a2, a3} * hat({a1, a2, a3}) = zero_matrix(3,3)",
-                "latex_goal": "\\begin{bmatrix}a1&a2&a3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}a1&a2&a3\\end{bmatrix} hat{(\\begin{bmatrix}a1&a2&a3\\end{bmatrix})} = O_{3 \\times 3}",
+                "goal": "hat(matrix w[3][1]) ^ 2 = matrix w[3][1] * T(matrix w[3][1]) - norm(matrix w[3][1]) ^ 2 * unit_matrix(3)",
+                "latex_goal": "\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot I_{3 \\times 3}",
                 "type": "CalculationProof"
             },
             "type": "Goal"

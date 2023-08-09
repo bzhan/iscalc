@@ -6,11 +6,12 @@ from typing import Optional, Dict, Tuple, Union, List
 import functools
 import operator
 
-from integral import expr
+from integral import expr, matrix
 from integral.expr import Var, Const, Fun, EvalAt, Op, Integral, Symbol, Expr, \
     OP, CONST, VAR, sin, cos, FUN, decompose_expr_factor, \
     Deriv, Inf, Limit, NEG_INF, POS_INF, IndefiniteIntegral, Summation, SUMMATION, Matrix, Vector
 from integral import parser
+from integral.matrix import is_vector
 from integral.solve import solve_equation, solve_for_term
 from integral import latex
 from integral import limits
@@ -1048,7 +1049,7 @@ class FullSimplify(Rule):
         counter = 0
         current = e
         while True:
-            s = OnSubterm(ExpandMatVecFunc()).eval(current, ctx)
+            s = OnSubterm(ExpandMatFunc()).eval(current, ctx)
             s = OnSubterm(Linearity()).eval(s, ctx)
             s = Simplify().eval(s, ctx)
             s = OnSubterm(DerivativeSimplify()).eval(s, ctx)
@@ -2296,12 +2297,12 @@ class MatrixRewrite(Rule):
                 return Matrix([expr.Vector([-item for item in rv.data], is_column=False) for rv in a.rows])
         raise NotImplementedError
 
-class ExpandMatVecFunc(Rule):
+class ExpandMatFunc(Rule):
     def __init__(self):
-        self.name = "ExpandMatVecFunc"
+        self.name = "ExpandMatFunc"
 
     def __str__(self):
-        return "expand functions of vectors or matrices"
+        return "expand functions of matrices"
 
     def export(self):
         return {
@@ -2310,18 +2311,37 @@ class ExpandMatVecFunc(Rule):
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
-        if e.is_fun():
-            if e.func_name == 'hat' and len(e.args) == 1 and e.args[0].is_vector():
-                return e.args[0].hat
+        if e.is_var():
+            var_defs = ctx.get_var_definitions()
+            # print(a)
+            for item in var_defs:
+                if item.rhs != None:
+                    e = e.replace(item.lhs, item.rhs)
+            return e
+        elif e.is_fun():
+            if len(e.args) == 0:
+                return e
+            # find definition of variable from ctx to expand it
+            var_defs = ctx.get_var_definitions()
+            args = e.args
+            # print(a)
+            for a in args:
+                for item in var_defs:
+                    if item.rhs != None:
+                        a = a.replace(item.lhs, item.rhs)
+            e = Fun(e.func_name, *args)
+            if e.func_name == 'hat' and len(e.args) == 1 and matrix.is_vector(e.args[0], ctx):
+                return matrix.hat(e.args[0])
             elif e.func_name == 'unit_matrix' and len(e.args) == 1 and e.args[0].is_const():
-                return Matrix.unit_matrix(expr.eval_expr(e.args[0]))
+                return matrix.unit_matrix(expr.eval_expr(e.args[0]))
             elif e.func_name == 'T' and len(e.args) == 1:
-                if e.args[0].is_matrix() or e.args[0].is_vector():
-                    return e.args[0].t
+                if e.args[0].is_matrix():
+                    return matrix.transpose(e.args[0])
                 else:
+                    print(e)
                     raise NotImplementedError
             elif e.func_name == "zero_matrix" and len(e.args) == 2 and all(arg.is_const() for arg in e.args):
-                return Matrix.zero((expr.eval_expr(e.args[0]), expr.eval_expr(e.args[1])))
-            elif e.func_name == "norm" and len(e.args) == 1 and e.args[0].is_vector():
-                return e.args[0].norm
+                return matrix.zero_matrix(expr.eval_expr(e.args[0]), expr.eval_expr(e.args[1]))
+            elif e.func_name == "norm" and len(e.args) == 1 and is_vector(e.args[0], ctx):
+                return matrix.norm(e.args[0], ctx)
         return e

@@ -3009,7 +3009,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.Equation(None, "pi / (1 + a * b)"))
-
+        assert goal01.is_finished()
         goal02 = file.add_goal("I(a, b) = (pi / b) * log(1 + a * b) + SKOLEM_FUNC(C(b))", conds=["a > 0", "b > 0"])
         proof_of_goal02 = goal02.proof_by_rewrite_goal(begin=goal01)
         calc = proof_of_goal02.begin
@@ -3019,13 +3019,13 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.IndefiniteIntegralIdentity())
         calc.perform_rule(rules.ReplaceSubstitution())
         calc.perform_rule(rules.Equation("abs(1 + a * b)", "(1 + a * b)"))
-
+        assert goal02.is_finished()
         goal03 = file.add_goal("I(0, b) = 0")
         proof_of_goal03 = goal03.proof_by_calculation()
         calc = proof_of_goal03.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("I"))
         calc.perform_rule(rules.FullSimplify())
-
+        assert goal03.is_finished()
         goal04 = file.add_goal("SKOLEM_FUNC(C(b)) = 0")
         proof_of_goal04 = goal04.proof_by_rewrite_goal(begin=goal02)
         calc = proof_of_goal04.begin
@@ -3033,13 +3033,13 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal03.goal), "0"))
         calc.perform_rule(rules.SolveEquation("SKOLEM_FUNC(C(b))"))
-
+        assert goal04.is_finished()
         goal05 = file.add_goal("I(a, b) = (pi / b) * log(1 + a * b)", conds=["a > 0", "b > 0"])
         proof_of_goal05 = goal05.proof_by_rewrite_goal(begin=goal02)
         calc = proof_of_goal05.begin
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal04.goal), "1.1"))
         calc.perform_rule(rules.FullSimplify())
-
+        assert goal05.is_finished()
         self.checkAndOutput(file)
 
     def testChapter3Practice02(self):
@@ -4160,7 +4160,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.FoldDefinition("I"), "0.1"))
         calc.perform_rule(rules.Equation("-(n / (m + 1) * I(m,n - 1))", "-(n / (m + 1)) * I(m, n - 1)"))
         calc = proof.rhs_calc
-
+        assert goal01.is_finished()
         s1 = "I(m,n)"
         s2 = "(-1)^n * (factorial(n) / (m+1)^(n+1))"
         goal02 = file.add_goal(s1 + "=" + s2, conds=["m >= 0", "n >= 0", "isInt(n)", "isInt(m)"])
@@ -4184,7 +4184,7 @@ class IntegralTest(unittest.TestCase):
         s2 = "factorial(n+1)"
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2), "0.1"))
         calc.perform_rule(rules.FullSimplify())
-
+        assert goal02.is_finished()
         s1 = "(INT x:[0,a]. x^m *log(x)^n)"
         s2 = "a^(m+1) * SUM(k, 0, n, (-1)^k*binom(n, k)*factorial(k)*log(a)^(n-k)/(m+1)^(k+1))"
         goal03 = file.add_goal(s1+"="+s2, conds=["m>=0", "n>=0", "isInt(n)", "isInt(m)", "a>0"])
@@ -4210,6 +4210,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc = proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
+        assert goal03.is_finished()
         self.checkAndOutput(file)
 
     def testHarmonicSeries(self):

@@ -1,286 +1,53 @@
 {
     "content": [
         {
-            "expr": "norm({w1, w2, w3}) = 1",
-            "latex_goal": "\\|\\begin{bmatrix}w1&w2&w3\\end{bmatrix}\\| = 1",
-            "type": "Assumption"
-        },
-        {
-            "expr": "isInt(n)",
-            "latex_goal": "n \\in\\mathbb{Z}",
-            "type": "Assumption"
-        },
-        {
-            "expr": "n >= 0",
-            "latex_goal": "n \\ge 0",
-            "type": "Assumption"
+            "latex_var": "w",
+            "type": "VarDef",
+            "var": "matrix w[3][1]"
         },
         {
             "finished": true,
-            "goal": "hat({w1, w2, w3}) ^ (2 * n + 1) = (-1) ^ n * hat({w1, w2, w3})",
-            "latex_goal": "hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})} ^ {2 n + 1} = (-1) ^ {n} hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})}",
+            "goal": "matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1]) = zero_matrix(3,3)",
+            "latex_goal": "w w^{\\text{T}} \\hat{w} = O_{3 \\times 3}",
             "proof": {
-                "base_case": {
-                    "finished": true,
-                    "goal": "hat({w1, w2, w3}) = hat({w1, w2, w3})",
-                    "latex_goal": "hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})} = hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})}",
-                    "proof": {
-                        "calcs": [
+                "calcs": [
+                    {
+                        "latex_start": "w w^{\\text{T}} \\hat{w}",
+                        "start": "matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1])",
+                        "steps": [
                             {
-                                "latex_start": "hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})}",
-                                "start": "hat({w1, w2, w3})",
-                                "steps": [],
-                                "type": "Calculation"
-                            },
-                            {
-                                "latex_start": "hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})}",
-                                "start": "hat({w1, w2, w3})",
-                                "steps": [],
-                                "type": "Calculation"
+                                "latex_res": "\\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
+                                "res": "{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
                             }
                         ],
-                        "finished": true,
-                        "goal": "hat({w1, w2, w3}) = hat({w1, w2, w3})",
-                        "latex_goal": "hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})} = hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})}",
-                        "type": "CalculationProof"
+                        "type": "Calculation"
                     },
-                    "type": "Goal"
-                },
+                    {
+                        "latex_start": "O_{3 \\times 3}",
+                        "start": "zero_matrix(3,3)",
+                        "steps": [
+                            {
+                                "latex_res": "\\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
+                                "res": "{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    }
+                ],
                 "finished": true,
-                "goal": "hat({w1, w2, w3}) ^ (2 * n + 1) = (-1) ^ n * hat({w1, w2, w3})",
-                "induct_case": {
-                    "finished": true,
-                    "goal": "hat({w1, w2, w3}) ^ (2 * n + 3) = -((-1) ^ n * hat({w1, w2, w3}))",
-                    "latex_goal": "hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})} ^ {2 n + 3} = -(-1) ^ {n} hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})}",
-                    "proof": {
-                        "calcs": [
-                            {
-                                "latex_start": "hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})} ^ {2 n + 3}",
-                                "start": "hat({w1, w2, w3}) ^ (2 * n + 3)",
-                                "steps": [
-                                    {
-                                        "latex_res": "hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})} ^ {2 + (2 n + 1)}",
-                                        "res": "hat({w1, w2, w3}) ^ (2 + (2 * n + 1))",
-                                        "rule": {
-                                            "latex_str": "rewriting \\(2 n + 3\\) to \\(2 + (2 n + 1)\\)",
-                                            "name": "Equation",
-                                            "new_expr": "2 + (2 * n + 1)",
-                                            "old_expr": "2 * n + 3",
-                                            "str": "rewriting 2 * n + 3 to 2 + (2 * n + 1)"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
-                                        "latex_res": "hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})} ^ {2} hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})} ^ {2 n + 1}",
-                                        "res": "hat({w1, w2, w3}) ^ 2 * hat({w1, w2, w3}) ^ (2 * n + 1)",
-                                        "rule": {
-                                            "latex_str": "rewrite \\(hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})} ^ {2 + (2 n + 1)}\\) to \\(hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})} ^ {2} hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})} ^ {2 n + 1}\\) using identity",
-                                            "name": "ApplyIdentity",
-                                            "source": "hat({w1, w2, w3}) ^ (2 + (2 * n + 1))",
-                                            "str": "rewrite hat({w1, w2, w3}) ^ (2 + (2 * n + 1)) to hat({w1, w2, w3}) ^ 2 * hat({w1, w2, w3}) ^ (2 * n + 1) using identity",
-                                            "target": "hat({w1, w2, w3}) ^ 2 * hat({w1, w2, w3}) ^ (2 * n + 1)"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
-                                        "latex_res": "hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})} ^ {2} ((-1) ^ {n} hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})})",
-                                        "res": "hat({w1, w2, w3}) ^ 2 * ((-1) ^ n * hat({w1, w2, w3}))",
-                                        "rule": {
-                                            "loc": "1",
-                                            "name": "ApplyInductHyp",
-                                            "str": "apply induction hypothesis at 1"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
-                                        "latex_res": "(\\begin{bmatrix}w1&w2&w3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}w1&w2&w3\\end{bmatrix} - \\|\\begin{bmatrix}w1&w2&w3\\end{bmatrix}\\| ^ {2}\\cdot I_{3 \\times 3}) ((-1) ^ {n} hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})})",
-                                        "res": "(T({w1, w2, w3}) * {w1, w2, w3} - norm({w1, w2, w3}) ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat({w1, w2, w3}))",
-                                        "rule": {
-                                            "eq": "hat({a1, a2, a3}) ^ 2 = T({a1, a2, a3}) * {a1, a2, a3} - norm({a1, a2, a3}) ^ 2 * unit_matrix(3)",
-                                            "latex_str": "apply equation \\(hat{(\\begin{bmatrix}a1&a2&a3\\end{bmatrix})} ^ {2} = \\begin{bmatrix}a1&a2&a3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}a1&a2&a3\\end{bmatrix} - \\|\\begin{bmatrix}a1&a2&a3\\end{bmatrix}\\| ^ {2}\\cdot I_{3 \\times 3}\\) at 0",
-                                            "loc": "0",
-                                            "name": "ApplyEquation",
-                                            "str": "apply equation: hat({a1, a2, a3}) ^ 2 = T({a1, a2, a3}) * {a1, a2, a3} - norm({a1, a2, a3}) ^ 2 * unit_matrix(3) at 0"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
-                                        "latex_res": "(\\begin{bmatrix}w1&w2&w3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}w1&w2&w3\\end{bmatrix} - 1 ^ {2} I_{3 \\times 3}) ((-1) ^ {n} hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})})",
-                                        "res": "(T({w1, w2, w3}) * {w1, w2, w3} - 1 ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat({w1, w2, w3}))",
-                                        "rule": {
-                                            "eq": "norm({w1, w2, w3}) = 1",
-                                            "latex_str": "apply equation \\(\\|\\begin{bmatrix}w1&w2&w3\\end{bmatrix}\\| = 1\\) at 0.1.0.0",
-                                            "loc": "0.1.0.0",
-                                            "name": "ApplyEquation",
-                                            "str": "apply equation: norm({w1, w2, w3}) = 1 at 0.1.0.0"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
-                                        "latex_res": "(-1) ^ {n} \\begin{bmatrix}w1&w2&w3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}w1&w2&w3\\end{bmatrix} hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})} - (-1) ^ {n}\\cdot I_{3 \\times 3} hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})}",
-                                        "res": "(-1) ^ n * T({w1, w2, w3}) * {w1, w2, w3} * hat({w1, w2, w3}) - (-1) ^ n * unit_matrix(3) * hat({w1, w2, w3})",
-                                        "rule": {
-                                            "name": "ExpandPolynomial",
-                                            "str": "expand polynomial"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
-                                        "latex_res": "(-1) ^ {n} (\\begin{bmatrix}w1&w2&w3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}w1&w2&w3\\end{bmatrix} hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})}) - (-1) ^ {n}\\cdot I_{3 \\times 3} hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})}",
-                                        "res": "(-1) ^ n * (T({w1, w2, w3}) * {w1, w2, w3} * hat({w1, w2, w3})) - (-1) ^ n * unit_matrix(3) * hat({w1, w2, w3})",
-                                        "rule": {
-                                            "latex_str": "rewriting \\((-1) ^ {n} \\begin{bmatrix}w1&w2&w3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}w1&w2&w3\\end{bmatrix} hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})}\\) to \\((-1) ^ {n} (\\begin{bmatrix}w1&w2&w3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}w1&w2&w3\\end{bmatrix} hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})})\\)",
-                                            "name": "Equation",
-                                            "new_expr": "(-1) ^ n * (T({w1, w2, w3}) * {w1, w2, w3} * hat({w1, w2, w3}))",
-                                            "old_expr": "(-1) ^ n * T({w1, w2, w3}) * {w1, w2, w3} * hat({w1, w2, w3})",
-                                            "str": "rewriting (-1) ^ n * T({w1, w2, w3}) * {w1, w2, w3} * hat({w1, w2, w3}) to (-1) ^ n * (T({w1, w2, w3}) * {w1, w2, w3} * hat({w1, w2, w3}))"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
-                                        "latex_res": "(-1) ^ {n}\\cdot O_{3 \\times 3} - (-1) ^ {n}\\cdot I_{3 \\times 3} hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})}",
-                                        "res": "(-1) ^ n * zero_matrix(3,3) - (-1) ^ n * unit_matrix(3) * hat({w1, w2, w3})",
-                                        "rule": {
-                                            "eq": "T({a1, a2, a3}) * {a1, a2, a3} * hat({a1, a2, a3}) = zero_matrix(3,3)",
-                                            "latex_str": "apply equation \\(\\begin{bmatrix}a1&a2&a3\\end{bmatrix}^{\\text{T}} \\begin{bmatrix}a1&a2&a3\\end{bmatrix} hat{(\\begin{bmatrix}a1&a2&a3\\end{bmatrix})} = O_{3 \\times 3}\\) at 0.1",
-                                            "loc": "0.1",
-                                            "name": "ApplyEquation",
-                                            "str": "apply equation: T({a1, a2, a3}) * {a1, a2, a3} * hat({a1, a2, a3}) = zero_matrix(3,3) at 0.1"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
-                                        "latex_res": "-(-1) ^ {n} \\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&1\\end{bmatrix} \\begin{bmatrix}0&-w3&w2\\\\w3&0&-w1\\\\-w2&w1&0\\end{bmatrix} + (-1) ^ {n} \\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
-                                        "res": "-((-1) ^ n * {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}} * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}}) + (-1) ^ n * {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}",
-                                        "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
-                                        "latex_res": "-(-1) ^ {n} (\\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&1\\end{bmatrix} \\begin{bmatrix}0&-w3&w2\\\\w3&0&-w1\\\\-w2&w1&0\\end{bmatrix}) + (-1) ^ {n} \\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
-                                        "res": "-((-1) ^ n * ({{1, 0, 0}, {0, 1, 0}, {0, 0, 1}} * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}})) + (-1) ^ n * {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}",
-                                        "rule": {
-                                            "latex_str": "rewriting \\((-1) ^ {n} \\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&1\\end{bmatrix} \\begin{bmatrix}0&-w3&w2\\\\w3&0&-w1\\\\-w2&w1&0\\end{bmatrix}\\) to \\((-1) ^ {n} (\\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&1\\end{bmatrix} \\begin{bmatrix}0&-w3&w2\\\\w3&0&-w1\\\\-w2&w1&0\\end{bmatrix})\\)",
-                                            "name": "Equation",
-                                            "new_expr": "(-1) ^ n * ({{1, 0, 0}, {0, 1, 0}, {0, 0, 1}} * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}})",
-                                            "old_expr": "(-1) ^ n * {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}} * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}}",
-                                            "str": "rewriting (-1) ^ n * {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}} * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}} to (-1) ^ n * ({{1, 0, 0}, {0, 1, 0}, {0, 0, 1}} * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}})"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
-                                        "latex_res": "-(-1) ^ {n} \\begin{bmatrix}0&-w3&w2\\\\w3&0&-w1\\\\-w2&w1&0\\end{bmatrix} + (-1) ^ {n} \\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
-                                        "res": "-((-1) ^ n * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}}) + (-1) ^ n * {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}",
-                                        "rule": {
-                                            "loc": "0.0.1",
-                                            "name": "FullSimplify",
-                                            "str": "full simplify at 0.0.1"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
-                                        "latex_res": "-(-1) ^ {n} \\begin{bmatrix}0&-w3&w2\\\\w3&0&-w1\\\\-w2&w1&0\\end{bmatrix} + \\begin{bmatrix}(-1) ^ {n}\\cdot 0&(-1) ^ {n}\\cdot 0&(-1) ^ {n}\\cdot 0\\\\(-1) ^ {n}\\cdot 0&(-1) ^ {n}\\cdot 0&(-1) ^ {n}\\cdot 0\\\\(-1) ^ {n}\\cdot 0&(-1) ^ {n}\\cdot 0&(-1) ^ {n}\\cdot 0\\end{bmatrix}",
-                                        "res": "-((-1) ^ n * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}}) + {{(-1) ^ n * 0, (-1) ^ n * 0, (-1) ^ n * 0}, {(-1) ^ n * 0, (-1) ^ n * 0, (-1) ^ n * 0}, {(-1) ^ n * 0, (-1) ^ n * 0, (-1) ^ n * 0}}",
-                                        "rule": {
-                                            "loc": "1",
-                                            "name": "MatrixRewrite",
-                                            "str": "rewrite on matrix at 1"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
-                                        "latex_res": "(-1) ^ {n + 1} \\begin{bmatrix}0&-w3&w2\\\\w3&0&-w1\\\\-w2&w1&0\\end{bmatrix} + \\begin{bmatrix}(-1) ^ {n}\\cdot 0&(-1) ^ {n}\\cdot 0&(-1) ^ {n}\\cdot 0\\\\(-1) ^ {n}\\cdot 0&(-1) ^ {n}\\cdot 0&(-1) ^ {n}\\cdot 0\\\\(-1) ^ {n}\\cdot 0&(-1) ^ {n}\\cdot 0&(-1) ^ {n}\\cdot 0\\end{bmatrix}",
-                                        "res": "(-1) ^ (n + 1) * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}} + {{(-1) ^ n * 0, (-1) ^ n * 0, (-1) ^ n * 0}, {(-1) ^ n * 0, (-1) ^ n * 0, (-1) ^ n * 0}, {(-1) ^ n * 0, (-1) ^ n * 0, (-1) ^ n * 0}}",
-                                        "rule": {
-                                            "latex_str": "rewriting \\(-(-1) ^ {n} \\begin{bmatrix}0&-w3&w2\\\\w3&0&-w1\\\\-w2&w1&0\\end{bmatrix}\\) to \\((-1) ^ {n + 1} \\begin{bmatrix}0&-w3&w2\\\\w3&0&-w1\\\\-w2&w1&0\\end{bmatrix}\\)",
-                                            "name": "Equation",
-                                            "new_expr": "(-1) ^ (n + 1) * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}}",
-                                            "old_expr": "-((-1) ^ n * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}})",
-                                            "str": "rewriting -((-1) ^ n * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}}) to (-1) ^ (n + 1) * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}}"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
-                                        "latex_res": "\\begin{bmatrix}(-1) ^ {n + 1}\\cdot 0&(-1) ^ {n + 1} (-w3)&(-1) ^ {n + 1} w2\\\\(-1) ^ {n + 1} w3&(-1) ^ {n + 1}\\cdot 0&(-1) ^ {n + 1} (-w1)\\\\(-1) ^ {n + 1} (-w2)&(-1) ^ {n + 1} w1&(-1) ^ {n + 1}\\cdot 0\\end{bmatrix} + \\begin{bmatrix}(-1) ^ {n}\\cdot 0&(-1) ^ {n}\\cdot 0&(-1) ^ {n}\\cdot 0\\\\(-1) ^ {n}\\cdot 0&(-1) ^ {n}\\cdot 0&(-1) ^ {n}\\cdot 0\\\\(-1) ^ {n}\\cdot 0&(-1) ^ {n}\\cdot 0&(-1) ^ {n}\\cdot 0\\end{bmatrix}",
-                                        "res": "{{(-1) ^ (n + 1) * 0, (-1) ^ (n + 1) * -w3, (-1) ^ (n + 1) * w2}, {(-1) ^ (n + 1) * w3, (-1) ^ (n + 1) * 0, (-1) ^ (n + 1) * -w1}, {(-1) ^ (n + 1) * -w2, (-1) ^ (n + 1) * w1, (-1) ^ (n + 1) * 0}} + {{(-1) ^ n * 0, (-1) ^ n * 0, (-1) ^ n * 0}, {(-1) ^ n * 0, (-1) ^ n * 0, (-1) ^ n * 0}, {(-1) ^ n * 0, (-1) ^ n * 0, (-1) ^ n * 0}}",
-                                        "rule": {
-                                            "loc": "0",
-                                            "name": "MatrixRewrite",
-                                            "str": "rewrite on matrix at 0"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
-                                        "latex_res": "\\begin{bmatrix}0&w3 (-1) ^ {n}&-w2 (-1) ^ {n}\\\\-w3 (-1) ^ {n}&0&w1 (-1) ^ {n}\\\\w2 (-1) ^ {n}&-w1 (-1) ^ {n}&0\\end{bmatrix}",
-                                        "res": "{{0, w3 * (-1) ^ n, -(w2 * (-1) ^ n)}, {-(w3 * (-1) ^ n), 0, w1 * (-1) ^ n}, {w2 * (-1) ^ n, -(w1 * (-1) ^ n), 0}}",
-                                        "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
-                                        },
-                                        "type": "CalculationStep"
-                                    }
-                                ],
-                                "type": "Calculation"
-                            },
-                            {
-                                "latex_start": "-(-1) ^ {n} hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})}",
-                                "start": "-((-1) ^ n * hat({w1, w2, w3}))",
-                                "steps": [
-                                    {
-                                        "latex_res": "-(-1) ^ {n} \\begin{bmatrix}0&-w3&w2\\\\w3&0&-w1\\\\-w2&w1&0\\end{bmatrix}",
-                                        "res": "-((-1) ^ n * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}})",
-                                        "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
-                                        "latex_res": "(-1) ^ {n + 1} \\begin{bmatrix}0&-w3&w2\\\\w3&0&-w1\\\\-w2&w1&0\\end{bmatrix}",
-                                        "res": "(-1) ^ (n + 1) * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}}",
-                                        "rule": {
-                                            "latex_str": "rewriting \\(-(-1) ^ {n} \\begin{bmatrix}0&-w3&w2\\\\w3&0&-w1\\\\-w2&w1&0\\end{bmatrix}\\) to \\((-1) ^ {n + 1} \\begin{bmatrix}0&-w3&w2\\\\w3&0&-w1\\\\-w2&w1&0\\end{bmatrix}\\)",
-                                            "name": "Equation",
-                                            "new_expr": "(-1) ^ (n + 1) * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}}",
-                                            "old_expr": "-((-1) ^ n * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}})",
-                                            "str": "rewriting -((-1) ^ n * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}}) to (-1) ^ (n + 1) * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}}"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
-                                        "latex_res": "\\begin{bmatrix}(-1) ^ {n + 1}\\cdot 0&(-1) ^ {n + 1} (-w3)&(-1) ^ {n + 1} w2\\\\(-1) ^ {n + 1} w3&(-1) ^ {n + 1}\\cdot 0&(-1) ^ {n + 1} (-w1)\\\\(-1) ^ {n + 1} (-w2)&(-1) ^ {n + 1} w1&(-1) ^ {n + 1}\\cdot 0\\end{bmatrix}",
-                                        "res": "{{(-1) ^ (n + 1) * 0, (-1) ^ (n + 1) * -w3, (-1) ^ (n + 1) * w2}, {(-1) ^ (n + 1) * w3, (-1) ^ (n + 1) * 0, (-1) ^ (n + 1) * -w1}, {(-1) ^ (n + 1) * -w2, (-1) ^ (n + 1) * w1, (-1) ^ (n + 1) * 0}}",
-                                        "rule": {
-                                            "name": "MatrixRewrite",
-                                            "str": "rewrite on matrix"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
-                                        "latex_res": "\\begin{bmatrix}0&w3 (-1) ^ {n}&-w2 (-1) ^ {n}\\\\-w3 (-1) ^ {n}&0&w1 (-1) ^ {n}\\\\w2 (-1) ^ {n}&-w1 (-1) ^ {n}&0\\end{bmatrix}",
-                                        "res": "{{0, w3 * (-1) ^ n, -(w2 * (-1) ^ n)}, {-(w3 * (-1) ^ n), 0, w1 * (-1) ^ n}, {w2 * (-1) ^ n, -(w1 * (-1) ^ n), 0}}",
-                                        "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
-                                        },
-                                        "type": "CalculationStep"
-                                    }
-                                ],
-                                "type": "Calculation"
-                            }
-                        ],
-                        "finished": true,
-                        "goal": "hat({w1, w2, w3}) ^ (2 * n + 3) = -((-1) ^ n * hat({w1, w2, w3}))",
-                        "latex_goal": "hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})} ^ {2 n + 3} = -(-1) ^ {n} hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})}",
-                        "type": "CalculationProof"
-                    },
-                    "type": "Goal"
-                },
-                "induct_var": "n",
-                "latex_goal": "hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})} ^ {2 n + 1} = (-1) ^ {n} hat{(\\begin{bmatrix}w1&w2&w3\\end{bmatrix})}",
-                "type": "InductionProof"
+                "goal": "matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1]) = zero_matrix(3,3)",
+                "latex_goal": "w w^{\\text{T}} \\hat{w} = O_{3 \\times 3}",
+                "type": "CalculationProof"
             },
             "type": "Goal"
         }

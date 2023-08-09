@@ -183,12 +183,12 @@ class ExprTransformer(Transformer):
 
     def vector_expr(self, *args):
         if isinstance(args[0], expr.Vector):
-            if args[0].is_column:
-                return expr.Matrix(list(args), is_row=False)
-            else:
-                return expr.Matrix(list(args), is_row=True)
+            data = []
+            for vec in args:
+                data.append(vec.data)
+            return expr.Matrix(data)
         else:
-            return expr.Vector(list(args), is_column=False)
+            return expr.Vector(list(args))
 
     def matrix_var(self, ty, name, d1, d2):
         return expr.Var(str(name), ty2=str(ty), shape=(d1, d2))

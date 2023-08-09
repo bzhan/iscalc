@@ -191,7 +191,7 @@ def get_shape(e:Expr, ctx:Context):
         print(e)
         raise NotImplementedError
 
-def transpose(e:Expr, ctx:Context):
+def transpose(e:Expr):
     if e.is_matrix():
         r, c = len(e.data), len(e.data[0])
         return Matrix([[e.data[j][i] for j in range(r)] for i in range(c)])
@@ -212,8 +212,6 @@ def multiply(a:Matrix, b:Matrix, ctx:Context):
     assert isinstance(a, Matrix)
     assert isinstance(b, Matrix)
     assert len(a.data[0]) == len(b.data)
-
-
     res = []
     for i in range(len(a.data)):
         tmp = []
@@ -221,7 +219,7 @@ def multiply(a:Matrix, b:Matrix, ctx:Context):
             sum = Const(0)
             for k in range(len(a.data[0])):
                 sum = normalize(sum+a.data[i][k]*b.data[k][j], ctx)
-            if len(a.data) == 1:
+            if len(a.data) == 1 and len(b.data[0]) == 1:
                 return sum
             tmp.append(sum)
         res.append(tmp)
@@ -252,10 +250,23 @@ def minus(a, b, ctx):
 def unit_matrix(dim:int):
     return Matrix([[Const(1) if i==j else Const(0) for j in range(dim)] for i in range(dim)])
 
-def hat(e:Expr, ctx:Context):
-    if not e.is_matrix() or len(e.data[0]) != 1 or len(e.data) != 3:
+def zero_matrix(r:int ,c:int):
+    assert type(r) == int and type(c) == int
+    assert r > 0 and c > 0
+    return Matrix([[Const(0) for j in range(c)] for i in range(r)])
+
+def hat(e:Expr):
+    if not e.is_matrix():
         return e
-    res = [[Const(0), -e.data[2][0], e.data[1][0]],
-            [e.data[2][0], Const(0), -e.data[0][0]],
-            [-e.data[1][0], e.data[0][0], Const(0)]]
-    return Matrix(res)
+    if len(e.data[0]) == 1 or len(e.data) == 3:
+        res = [[Const(0), -e.data[2][0], e.data[1][0]],
+                [e.data[2][0], Const(0), -e.data[0][0]],
+                [-e.data[1][0], e.data[0][0], Const(0)]]
+        return Matrix(res)
+    if len(e.data[0]) == 1 and len(e.data) == 6:
+        res = [[Const(0), -e.data[5][0], e.data[4][0], e.data[0][0]],
+               [e.data[5][0], Const(0), -e.data[3][0], e.data[1][0]],
+               [-e.data[4][0], e.data[3][0], Const(0), e.data[2][0]],
+               [Const(0),Const(0),Const(0),Const(0)]]
+        return Matrix(res)
+    raise ValueError(f"{e} should be a vector of 6- or 3-dimension")

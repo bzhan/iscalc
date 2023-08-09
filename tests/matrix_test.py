@@ -2,7 +2,8 @@ import json
 import unittest
 from typing import List
 
-from integral import rules, context, parser, compstate
+from integral import rules, context, parser, compstate, matrix
+from integral.context import Context
 from integral.expr import Op, Var, Const, Matrix, Vector, Expr, Fun
 
 
@@ -24,152 +25,35 @@ class MatrixTest(unittest.TestCase):
     r = rules.FullSimplify()
     ctx = context.Context()
     def testTranspose1(self):
-        m = Matrix((2,3), [[1,2,3],[4,5,6]])
-        res = "[1, 4]\n[2, 5]\n[3, 6]"
-        assert str(m.t) == res
-
-    def testTranspose2(self):
-        m = Matrix((3, 3), [[1, 2, 3], [4, 5, 6], [7,8,9]])
-        res = "[1, 4, 7]\n[2, 5, 8]\n[3, 6, 9]"
-        assert str(m.t) == res
-
-    def testMultiplication1(self):
-        m1 = Matrix((2,3), [[Const(1), Const(3), Const(5)],
-                            [Const(2), Const(4), Const(7)]])
-        m2 = Matrix((3,3), [[Const(-5), Const(8), Const(11)],
-                            [Const(3), Const(9), Const(21)],
-                            [Const(4), Const(0), Const(8)]])
-        res = "[1 * -5 + 3 * 3 + 5 * 4, 1 * 8 + 3 * 9 + 5 * 0, 1 * 11 + 3 * 21 + 5 * 8]\n\
-[2 * -5 + 4 * 3 + 7 * 4, 2 * 8 + 4 * 9 + 7 * 0, 2 * 11 + 4 * 21 + 7 * 8]"
-        assert res == str(m1 * m2)
-        res = self.r.eval(m1 * m2, self.ctx)
-        s = "[24, 35, 114]\n[30, 52, 162]"
-        assert str(res) == s
+        test_data = [("{{1,2,3},{4,5,6}}","{{1,4},{2,5},{3,6}}"),
+                     ("{{1,2,3},{4,5,6},{7,8,9}}","{{1,4,7},{2,5,8},{3,6,9}}")]
+        for a, b in test_data:
+            assert matrix.transpose(parser.parse_expr(a)) == parser.parse_expr(b)
 
 
-
-    def testMultiplication2(self):
-        v1 = Vector([Const(1), Const(1), Const(0), Const(0)], is_column=False)
-        v2 = Vector([Const(1), Const(2), Const(3), Const(4)])
-        res = "1 * 1 + 1 * 2 + 0 * 3 + 0 * 4"
-        self.assertEqual(str(v1 * v2), res)
-        self.assertIsInstance(v1*v2, Expr)
-
-    def testMultiplication3(self):
-        m = Matrix((2,3), [[Const(1), Const(3), Const(5)],
-                            [Const(2), Const(4), Const(7)]])
-        v = Vector([Const(1), Const(2), Const(1)])
-        res = m * v
-        s = "[1 * 1 + 3 * 2 + 5 * 1]\n\
-[2 * 1 + 4 * 2 + 7 * 1]"
-        self.assertIsInstance(res, Vector)
-        self.assertTrue(res.is_column)
-        self.assertEqual(str(res), s)
-        res = self.r.eval(res, self.ctx)
-        e = parser.parse_expr("1 * 1 + 3 * 2 + 5 * 1")
-        self.assertEqual(str(res), "[12]\n[17]")
+    def testMultiplication(self):
+        test_data = [
+                     ("{{1,3,5},{2,4,7}}", "{{-5,8,11},{3,9,21},{4,0,8}}", "{{24,35,114},{30,52,162}}"),
+                     ("{{1,1,0,0}}", "{{1},{2},{3},{4}}", "3"),
+                     ("{{1,2}}", "{{1,3,5},{2,4,7}}", "{{5,11,19}}")
+                     ]
+        ctx = Context()
+        for a, b, c in test_data:
+            m1 = parser.parse_expr(a)
+            m2 = parser.parse_expr(b)
+            res = matrix.multiply(m1, m2, ctx)
+            assert res == parser.parse_expr(c)
 
 
-    def testMultiplication4(self):
-        v = Vector([Const(1), Const(2)], is_column=False)
-        m = Matrix((2, 3), [[Const(1), Const(3), Const(5)],
-                            [Const(2), Const(4), Const(7)]])
-
-        res = v * m
-        s = "[1 * 1 + 2 * 2, 1 * 3 + 2 * 4, 1 * 5 + 2 * 7]"
-        self.assertIsInstance(res, Vector)
-        self.assertTrue(res.is_row)
-        self.assertEqual(str(res), s)
-
-    def testHatAndVee1(self):
-        v = Vector([Var('a1'), Var('a2'), Var('a3')])
-        s = "[0, -a3, a2]\n\
-[a3, 0, -a1]\n\
-[-a2, a1, 0]"
-        self.assertEqual(str(v.hat), s)
-        self.assertEqual(str(v.hat.vee), str(v))
-
-    def testHatAndVee2(self):
-        v = Vector([Var('v1'), Var('v2'), Var('v3'), Var('w1'), Var('w2'), Var('w3')])
-        s = "[0, -w3, w2, v1]\n\
-[w3, 0, -w1, v2]\n\
-[-w2, w1, 0, v3]\n\
-[0, 0, 0, 0]"
-        self.assertEqual(str(v.hat), s)
-        self.assertEqual(str(v.hat.vee), str(v))
-
-    def testExample02(self):
-        file = compstate.CompFile("matrix", "matrix_example02")
-        goal = file.add_goal('hat({a1,a2,a3})^2 = \
-        T({a1,a2,a3}) * {a1,a2,a3} - norm({a1,a2,a3})^2 * unit_matrix(3)')
-        proof = goal.proof_by_calculation()
-        calc = proof.lhs_calc
-        calc.perform_rule(rules.OnLocation(rules.ExpandMatVecFunc(), "0"))
-        olde = "{{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}}^2"
-        newe = "{{0, -a3, a2}, {a3, 0, -a1}, {-a2, a1, 0}}^1 * {{0, -a3, a2},{a3, 0, -a1},{-a2, a1, 0}}^(2-1)"
-        calc.perform_rule(rules.ApplyIdentity(olde, newe))
-        calc.perform_rule(rules.FullSimplify())
-        calc = proof.rhs_calc
-        calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.OnLocation(rules.MatrixRewrite(), '1'))
-        calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.OnLocation(rules.MatrixRewrite(), '0'))
-        calc.perform_rule(rules.FullSimplify())
-        self.checkAndOutput(file)
-
-    def testExample03(self):
-        file = compstate.CompFile("matrix", "matrix_example03")
-        goal = file.add_goal("T({a1,a2,a3})*{a1,a2,a3}*hat({a1,a2,a3}) = zero_matrix(3,3)")
-        proof = goal.proof_by_calculation()
-        calc = proof.lhs_calc
-        calc.perform_rule(rules.FullSimplify())
-        calc = proof.rhs_calc
-        calc.perform_rule(rules.FullSimplify())
-        self.checkAndOutput(file)
-
-    def testExample04(self):
-        file = compstate.CompFile("MIRM", "matrix_example04")
-        file.add_assumption("norm({w1,w2,w3}) = 1")
-        file.add_assumption("isInt(n)")
-        file.add_assumption("n>=0")
-        goal = file.add_goal("hat({w1,w2,w3})^(2*n+1) = (-1)^n * hat({w1,w2,w3})")
-        proof = goal.proof_by_induction('n', 0)
-        base_proof = proof.base_case.proof_by_calculation()
-        induct_proof = proof.induct_case.proof_by_calculation()
-        calc = induct_proof.lhs_calc
-        calc.perform_rule(rules.Equation("(2 * n + 3)", "2 + (2 * n + 1)"))
-        calc.perform_rule(rules.ApplyIdentity("hat({w1,w2,w3})^(2 + (2 * n + 1))", "hat({w1,w2,w3})^2* hat({w1,w2,w3})^(2 * n + 1)"))
-        calc.perform_rule(rules.OnLocation(rules.ApplyInductHyp(),'1'))
-        eq = "hat({a1, a2, a3}) ^ 2 = T({a1, a2, a3}) * {a1, a2,a3} - norm({a1, a2, a3}) ^ 2 * unit_matrix(3)"
-        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0"))
-        eq = "norm({w1,w2,w3}) = 1"
-        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0.1.0.0"))
-        calc.perform_rule(rules.ExpandPolynomial())
-        old_e = "(-1) ^ n * T({w1, w2, w3}) * {w1, w2, w3} * hat({w1, w2, w3})"
-        new_e = "(-1) ^ n * (T({w1, w2, w3}) * {w1, w2, w3} * hat({w1, w2, w3}))"
-        calc.perform_rule(rules.Equation(old_e, new_e))
-        eq = "T({a1, a2, a3}) * {a1, a2, a3} * hat({a1, a2, a3}) = zero_matrix(3,3)"
-        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0.1"))
-        calc.perform_rule(rules.FullSimplify())
-        old_e = "(-1) ^ n * {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}} * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}}"
-        new_e = "(-1) ^ n * ({{1, 0, 0}, {0, 1, 0}, {0, 0, 1}} * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}})"
-        calc.perform_rule(rules.Equation(old_e, new_e))
-        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0.0.1"))
-        calc.perform_rule(rules.OnLocation(rules.MatrixRewrite(), "1"))
-        old_e = "-((-1) ^ n * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}})"
-        new_e = "(-1) ^(n+1) * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}}"
-        calc.perform_rule(rules.Equation(old_e, new_e))
-        calc.perform_rule(rules.OnLocation(rules.MatrixRewrite(), "0"))
-        calc.perform_rule(rules.FullSimplify())
-        calc = induct_proof.rhs_calc
-        calc.perform_rule(rules.FullSimplify())
-        old_e = "-((-1) ^ n * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}})"
-        new_e = "(-1) ^(n+1) * {{0, -w3, w2}, {w3, 0, -w1}, {-w2, w1, 0}}"
-        calc.perform_rule(rules.Equation(old_e, new_e))
-        calc.perform_rule(rules.MatrixRewrite())
-        calc.perform_rule(rules.FullSimplify())
-        assert proof.is_finished()
-        self.checkAndOutput(file)
+    def testHat(self):
+        test_data = [("{{a1},{a2},{a3}}", "{{0,-a3,a2},{a3,0,-a1},{-a2,a1,0}}"),
+                     ("{{v1},{v2},{v3},{w1},{w2},{w3}}",
+                      "{{0, -w3, w2, v1},{w3, 0, -w1, v2},{-w2, w1, 0, v3},{0,0,0,0}}")]
+        ctx = Context()
+        for a, b in test_data:
+            a = parser.parse_expr(a)
+            b = parser.parse_expr(b)
+            matrix.hat(a) == b
 
     def testExample01(self):
         file = compstate.CompFile("MIRM", "matrix_example01")
@@ -198,26 +82,74 @@ class MatrixTest(unittest.TestCase):
         old_expr = "matrix A[n][n] ^ int n * matrix A[n][n]"
         new_expr = "matrix A[n][n] ^ (int n + 1)"
         calc.perform_rule(rules.ApplyIdentity(old_expr, new_expr))
+        # print(file)
         self.checkAndOutput(file)
 
-    def testNormalize(self):
-        e = parser.parse_expr("matrix A[n][n]")
-        e = e ^ Const(0)
-        from integral import poly
-        from integral.poly import normalize
-        ctx = context.Context()
-        e = normalize(e, ctx)
-        self.assertEqual(str(e), "unit_matrix(n)")
+    def testExample02(self):
+        file = compstate.CompFile("matrix", "matrix_example02")
+        file.add_definition("matrix w[3][1] = {{a1},{a2},{a3}}")
+        goal = file.add_goal('hat(w)^2 = w * T(w) - norm(w)^2 * unit_matrix(3)')
+        proof = goal.proof_by_calculation()
+        calc = proof.rhs_calc
+        calc.perform_rule(rules.FullSimplify())
+        calc = proof.lhs_calc
+        old_expr = "hat(matrix w[3][1]) ^ 2"
+        new_expr = "hat(matrix w[3][1]) ^ 1 * hat(matrix w[3][1]) ^ 1"
+        calc.perform_rule(rules.ApplyIdentity(old_expr, new_expr))
+        calc.perform_rule(rules.FullSimplify())
+        # print(file)
+        self.checkAndOutput(file)
+
+    def testExample03(self):
+        file = compstate.CompFile("matrix", "matrix_example03")
+        file.add_definition("matrix w[3][1] = {{a1},{a2},{a3}}")
+        goal = file.add_goal("w*T(w)*hat(w) = zero_matrix(3,3)")
+        proof = goal.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.FullSimplify())
+        calc = proof.rhs_calc
+        calc.perform_rule(rules.FullSimplify())
+        self.checkAndOutput(file)
+
+
+    def testExample04(self):
+        file = compstate.CompFile("MIRM", "matrix_example04")
+        file.add_definition("matrix w[3][1] = {{w_1},{w_2},{w_3}}")
+        file.add_definition("int n")
+        file.add_assumption("norm(w) = 1")
+        file.add_assumption("int n >= 0")
+        goal = file.add_goal("hat(w)^(2*n+1) = (-1)^n * hat(w)")
+        proof = goal.proof_by_induction('n', 0)
+        base_proof = proof.base_case.proof_by_calculation()
+        induct_proof = proof.induct_case.proof_by_calculation()
+        calc = induct_proof.lhs_calc
+        calc.perform_rule(rules.Equation("(2 * int n + 3)", "2 + (2 * int n + 1)"))
+        calc.perform_rule(rules.ApplyIdentity("hat(matrix w[3][1])^(2 + (2 * int n + 1))", "hat(matrix w[3][1])^2* hat(matrix w[3][1])^(2 * int n + 1)"))
+        calc.perform_rule(rules.OnSubterm(rules.ApplyInductHyp()))
+        eq = "hat(w)^2 = w * T(w) - norm(w)^2 * unit_matrix(3)"
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0"))
+        eq = "norm(w) = 1"
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0.1.0.0"))
+        calc.perform_rule(rules.ExpandPolynomial())
+        old_e = "(-1) ^ int n * matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1])"
+        new_e = "(-1) ^ int n * (matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1]))"
+        calc.perform_rule(rules.Equation(old_e, new_e))
+        eq = "w*T(w)*hat(w) = zero_matrix(3,3)"
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0.1"))
+        calc.perform_rule(rules.FullSimplify())
+        calc = induct_proof.rhs_calc
+        calc.perform_rule(rules.FullSimplify())
+        self.checkAndOutput(file)
 
     def testGetType(self):
         e = parser.parse_expr("inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]")
-        ty = e.get_type()
-        print(ty)
+        ctx = Context()
+        ty = matrix.get_type(e, ctx)
+        assert ty == 'matrix'
         e = e ^ Const(0)
         from integral import poly
         from integral.poly import normalize
-        ctx = context.Context()
         e = normalize(e, ctx)
-        print(e)
+        assert e == parser.parse_expr("unit_matrix(n)")
 
 

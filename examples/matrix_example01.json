@@ -27,14 +27,14 @@
         },
         {
             "finished": true,
-            "goal": "(inv(P) * A * P) ^ n = inv(P) * A ^ n * P",
+            "goal": "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ int n = inv(matrix P[n][n]) * matrix A[n][n] ^ int n * matrix P[n][n]",
             "latex_goal": "(P ^ {-1} A P) ^ {n} = P ^ {-1} A ^ {n} P",
             "obligations": [
                 {
                     "branches": [
                         {
                             "exprs": [
-                                "inv(P) * A * P > 0"
+                                "inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n] > 0"
                             ]
                         }
                     ],
@@ -53,7 +53,7 @@
                     "branches": [
                         {
                             "exprs": [
-                                "isInt(n)"
+                                "isInt(int n)"
                             ]
                         }
                     ],
@@ -72,7 +72,7 @@
                     "branches": [
                         {
                             "exprs": [
-                                "n >= 0"
+                                "int n >= 0"
                             ]
                         }
                     ],
@@ -91,7 +91,7 @@
                     "branches": [
                         {
                             "exprs": [
-                                "A > 0"
+                                "matrix A[n][n] > 0"
                             ]
                         }
                     ],
@@ -110,7 +110,7 @@
                     "branches": [
                         {
                             "exprs": [
-                                "isInt(n)"
+                                "isInt(int n)"
                             ]
                         }
                     ],
@@ -129,7 +129,7 @@
                     "branches": [
                         {
                             "exprs": [
-                                "n >= 0"
+                                "int n >= 0"
                             ]
                         }
                     ],
@@ -173,7 +173,7 @@
                     "type": "Goal"
                 },
                 "finished": true,
-                "goal": "(inv(P) * A * P) ^ n = inv(P) * A ^ n * P",
+                "goal": "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ int n = inv(matrix P[n][n]) * matrix A[n][n] ^ int n * matrix P[n][n]",
                 "induct_case": {
                     "finished": true,
                     "goal": "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ (int n + 1) = inv(matrix P[n][n]) * matrix A[n][n] ^ (int n + 1) * matrix P[n][n]",

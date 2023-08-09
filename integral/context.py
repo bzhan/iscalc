@@ -225,10 +225,12 @@ class Context:
         symb_rhs = expr_to_pattern(eq.rhs)
         self.definitions.append(Identity(Eq(symb_lhs, symb_rhs)))
 
-    def add_var_definition(self, v: Expr):
+    def add_var_definition(self, v: Expr, c:Union[Expr,None]):
         if not v.is_var():
             raise TypeError
-        self.var_definitions.append(v)
+        if c is None:
+            c = v
+        self.var_definitions.append(Eq(v, c))
 
     def add_indefinite_integral(self, eq: Expr):
         if not (eq.is_equals() and eq.lhs.is_indefinite_integral()):
@@ -474,10 +476,8 @@ def apply_subterm(e: Expr, f: Callable[[Expr, Context], Expr], ctx: Context) -> 
             upper = rec(e.upper, ctx)
             body = rec(e.body, body_conds(e, ctx))
             return f(expr.Summation(e.index_var, lower, upper, body), ctx)
-        elif e.is_vector():
-            return Vector([rec(item, ctx) for item in e.data], e.is_column)
         elif e.is_matrix():
-            return Matrix([Vector([rec(item, ctx) for item in row], row.is_column) for row in e.rows])
+            return Matrix([[rec(item, ctx) for item in row] for row in e.data])
         else:
             raise NotImplementedError
     return rec(e, ctx)

@@ -143,16 +143,20 @@ class FuncDef(StateItem):
         return [self.eq]
 
 class VarDef(StateItem):
-    def __init__(self, parent: "CompFile", ctx: Context, var:Var):
+    def __init__(self, parent: "CompFile", ctx: Context, var:Var, content:Expr = None):
         self.parent = parent
         self.ctx = ctx
         self.var = var
+        self.content = content
     def __str__(self):
         s = "Var Definition:\n"
         s = s + "  " + self.var.ty2 + " " + self.var.name
         if self.var.ty2 == 'matrix':
             s = s + "[%s][%s]" % (str(self.var.shape[0]),str(self.var.shape[1]))
-        return s+"\n"
+        if self.content is not None:
+            s += " = " + str(self.content)
+        s += '\n'
+        return s
 
     def export(self):
         res = {
@@ -474,7 +478,6 @@ class InductionProof(StateItem):
     """
     def __init__(self, parent, goal: Expr, induct_var: str, *, start: Union[int, Expr] = 0):
         if not goal.is_equals():
-            print(str(goal))
             raise AssertionError("InductionProof: currently only support equation goals.")
 
         self.parent = parent
@@ -732,7 +735,7 @@ class CompFile:
                 ctx.add_lemma(item.goal, item.conds)
                 ctx.extend_by_item(item.export_book())
             elif isinstance(item, VarDef):
-                ctx.add_var_definition(item.var)
+                ctx.add_var_definition(item.var, item.content)
         return ctx
 
     def add_definition(self, funcdef: Union[str, Expr], *, conds: List[Union[str, Expr]] = None) -> FuncDef:
@@ -755,7 +758,10 @@ class CompFile:
             funcdef = parser.parse_expr(funcdef)
         if isinstance(funcdef, Expr):
             if funcdef.is_equals():
-                self.content.append(FuncDef(self, ctx, funcdef, Conditions(conds)))
+                if not funcdef.lhs.is_var():
+                    self.content.append(FuncDef(self, ctx, funcdef, Conditions(conds)))
+                else:
+                    self.content.append(VarDef(self, ctx, funcdef.lhs, funcdef.rhs))
             elif funcdef.is_var():
                 self.content.append(VarDef(self, ctx, funcdef))
             else:
@@ -790,6 +796,7 @@ class CompFile:
                is already of type Goal.
 
         """
+        ctx = self.get_context()
         if isinstance(goal, Goal):
             self.content.append(goal)
             return self.content[-1]
@@ -805,11 +812,11 @@ class CompFile:
             goal = parser.parse_expr(goal)
         assert isinstance(goal, Expr)
         for cond in conds:
-            cond = replace_with_var_def(self.ctx.get_var_definitions(), cond)
-        goal = replace_with_var_def(self.ctx.get_var_definitions(), goal)
-
+            cond = replace_with_var_def(ctx.get_var_definitions(), cond)
+        goal = replace_with_var_def(ctx.get_var_definitions(), goal)
         conds = Conditions(conds)
-        ctx = self.get_context()
+
+
         self.content.append(Goal(self, ctx, goal, conds))
         return self.content[-1]
 
@@ -944,8 +951,8 @@ def parse_rule(item) -> Rule:
         return rules.PartialFractionDecomposition()
     elif item['name'] == 'MatrixRewrite':
         return rules.MatrixRewrite()
-    elif item['name'] == "ExpandMatVecFunc":
-        return rules.ExpandMatVecFunc()
+    elif item['name'] == "ExpandMatFunc":
+        return rules.ExpandMatFunc()
     else:
         print(item['name'], flush=True)
         raise NotImplementedError
@@ -1057,6 +1064,8 @@ def get_next_step_label(step: Union[Calculation, CalculationStep], label: Label)
 # replace conds and expressions with variable definitions
 def replace_with_var_def(var_defs, e: Expr):
     for item in var_defs:
-        name = item.name
-        e = e.replace(Var(name), item)
+        var = item.lhs
+        content = item.rhs
+        name = var.name
+        e = e.replace(Var(name), var)
     return e

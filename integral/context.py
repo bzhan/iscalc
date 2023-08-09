@@ -100,7 +100,10 @@ class Context:
         self.substs: Dict[str, Expr] = dict()
 
         # List of var deifinitions
-        self.var_definitions: [Expr] = list()
+        self.var_definitions: List[Identity] = list()
+
+        # List of assumptions
+        self.assumptions: List[Identity] = list()
 
     def __str__(self):
         res = ""
@@ -143,6 +146,9 @@ class Context:
         res += "Conditions\n"
         for cond in self.get_conds().data:
             res += str(cond) + "\n"
+        res += "Assumptions\n"
+        for assumption in self.get_assumptions():
+            res += str(assumption) + "\n"
         return res
     
     def get_definitions(self) -> List[Identity]:
@@ -150,7 +156,12 @@ class Context:
         res.extend(self.definitions)
         return res
 
-    def get_var_definitions(self) -> List[Expr]:
+    def get_assumptions(self) -> List[Identity]:
+        res = self.parent.get_assumptions() if self.parent is not None else []
+        res.extend(self.assumptions)
+        return res
+
+    def get_var_definitions(self) -> List[Identity]:
         res = self.parent.get_var_definitions() if self.parent is not None else []
         res.extend(self.var_definitions)
         return res
@@ -293,6 +304,13 @@ class Context:
         symb_e = expr_to_pattern(e)
         symb_conds = [expr_to_pattern(cond) for cond in conds.data]
         self.inequalities.append(Identity(symb_e, conds=Conditions(symb_conds)))
+
+    def add_assumption(self, e, conds):
+        if isinstance(e, str):
+            e = parser.parse_expr(e)
+
+        # Note: no conversion to symbols for lemmas within a file.
+        self.assumptions.append(Identity(e, conds=conds))
 
     def add_lemma(self, e: Union[Expr, str], conds: Conditions):
         if isinstance(e, str):

@@ -840,6 +840,7 @@ class CompFile:
         a = replace_with_var_def(ctx.get_var_definitions(), a)
         if a.is_equals():
             self.ctx.add_lemma(a, self.ctx.get_conds())
+            self.ctx.add_assumption(a, self.ctx.get_conds())
         else:
             self.ctx.add_condition(a)
         return self.content[-1]
@@ -1050,6 +1051,7 @@ def parse_item(parent, item) -> StateItem:
         a = replace_with_var_def(ctx.get_var_definitions(), a)
         if a.is_equals():
             parent.ctx.add_lemma(a, ctx.get_conds())
+            parent.ctx.add_assumption(a, ctx.get_conds())
         else:
             parent.ctx.add_condition(a)
         return res

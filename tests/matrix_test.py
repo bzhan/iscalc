@@ -134,7 +134,6 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc = induct_proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
-        # print(goal03)
         self.checkAndOutput(file)
 
 

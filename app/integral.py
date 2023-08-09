@@ -694,6 +694,12 @@ def integral_query_theorems():
                 'eq': str(eq),
                 'latex_eq': integral.latex.convert_expr(eq)
             })
+    # print(file.ctx.get_assumptions(), flush=True)
+    for eq in file.ctx.get_assumptions():
+        eqs.append({
+            'eq': str(eq.expr),
+            'latex_eq': integral.latex.convert_expr(eq.expr)
+        })
     return jsonify({
         "status": "ok",
         "theorems": eqs

@@ -181,6 +181,8 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
                 return "I_{%s \\times %s}"%(sx,sx)
             elif e.func_name == 'inv':
                 return "%s ^ {-1}" % (sx)
+            elif e.func_name == 'hat':
+                return "\hat{%s}" % (sx)
             else:
                 return "%s{(%s)}" % (e.func_name, sx)
         elif len(e.args) == 2:
@@ -247,8 +249,9 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
         return res
     elif e.is_matrix():
         res = "\\begin{bmatrix}"
-        res += "\\\\".join(["&".join([convert_expr(item) for item in rv.data]) for rv in e.rows])
+        res += "\\\\".join(["&".join([convert_expr(item) for item in rv]) for rv in e.data])
         res += "\\end{bmatrix}"
         return res
     else:
+        print(type(e), ":", e, flush=True)
         raise NotImplementedError

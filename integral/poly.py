@@ -373,7 +373,6 @@ class Polynomial:
         # Assume self is a monomial and exp is a fraction
         if len(self.monomials) == 1 and isinstance(exp, (int, Fraction)):
             if self.monomials[0].has_matrix():
-                # 分两部分 数值部分直接分配进去
                 pos = None
                 for i in range(len(self.monomials[0].factors)):
                     if matrix.get_type(self.monomials[0].factors[i][0]) == 'matrix':

@@ -138,7 +138,7 @@ class Expr:
         elif self.ty == VECTOR:
             return 1 + sum(e.size() for e in self.data)
         elif self.ty == MATRIX:
-            return 1 + sum([row.size() for row in self.rows])
+            return 1 + sum([sum([item.size() for item in row]) for row in self.data])
         else:
             raise NotImplementedError
 
@@ -300,7 +300,10 @@ class Expr:
         elif self.is_vector():
             return (self.is_column, *(item for item in self.data)) <= (other.is_column, *(item for item in other.data))
         elif self.is_matrix():
-            return (self.shape[0]*self.shape[1], *(rv for rv in self.rows)) <= (other.shape[0]*other.shape[1], *(rv for rv in other.rows))
+            if self.shape != None and other.shape != None:
+                return (self.shape[0]*self.shape[1], *[[item for item in r] for r in self.data]) <= (other.shape[0]*other.shape[1], *[[item for item in r]for r in other.data])
+            else:
+                return ([[item for item in r] for r in self.data]) <= ([[item for item in r] for r in other.data])
         else:
             print(type(self))
             raise NotImplementedError
@@ -681,10 +684,8 @@ class Expr:
             return Summation(self.index_var, self.lower, self.upper, self.body.replace(e, repl_e))
         elif self.is_limit():
             return Limit(self.var, self.lim.replace(e, repl_e), self.body.replace(e, repl_e), self.drt)
-        elif self.is_vector():
-            return Vector([item.replace(e, repl_e) for item in self.data], self.is_column)
         elif self.is_matrix():
-            return Matrix([Vector([item.replace(e, repl_e) for item in rv.data], is_column=False) for rv in self.rows])
+            return Matrix([[item.replace(e, repl_e) for item in rv] for rv in self.data])
         else:
             print(self, e, repl_e)
             raise NotImplementedError
@@ -851,129 +852,14 @@ class Expr:
         else:
             raise NotImplementedError
 
-    def is_vector(self)  -> TypeGuard["Vector"]:
-        return isinstance(self, Vector) and self.ty == VECTOR
 
-    def is_matrix(self)  -> TypeGuard["Matrix"]:
+
+    def is_matrix(self) -> TypeGuard["Matrix"]:
         return isinstance(self, Matrix) and self.ty == MATRIX
 
-    def get_type(self) -> str:
-        if self.is_constant() or self.is_inf():
-            if self.is_const():
-                if type(self.val) == int:
-                    return 'int'
-            return 'real'
-        elif self.is_matrix():
-            return 'matrix'
-        elif self.is_var():
-            return self.ty2
-        elif self.is_op():
-            if self.is_plus():
-                a, b = self.args
-                if a.get_type() == 'real' and b.get_type() == 'real':
-                    return 'real'
-                elif a.get_type() == 'matrix' and b.get_type() == 'matrix':
-                    # check shapes of a and b
-                    return 'matrix'
-                elif a.get_type() == 'int' and b.get_type() == 'real':
-                    return 'real'
-                elif a.get_type() == 'real' and b.get_type() == 'int':
-                    return 'real'
-                elif a.get_type() == 'int' and b.get_type() == 'int':
-                    return 'int'
-                else:
-                    print(a, b)
-                    print(a.get_type(), b.get_type())
-                    raise TypeError
-            elif self.is_times():
-                a, b = self.args
-                if a.get_type() == 'real' and b.get_type() == 'real':
-                    return 'real'
-                elif a.get_type() == 'real' and b.get_type() == 'matrix':
-                    return 'matrix'
-                elif a.get_type() == 'matrix' and b.get_type() == 'real':
-                    return 'matrix'
-                elif a.get_type() == 'matrix' and b.get_type() == 'matrix':
-                    # check shapes of a and b
-                    return 'matrix'
-                elif a.get_type() == 'int' and b.get_type() == 'real':
-                    return 'real'
-                elif a.get_type() == 'real' and b.get_type() == 'int':
-                    return 'int'
-                else:
-                    print(a,b)
-                    print(a.get_type(), b.get_type())
-                    raise TypeError
-            elif self.is_divides():
-                a, b = self.args
-                if a.get_type() == 'real' and b.get_type() == 'real':
-                    return 'real'
-                elif a.get_type() == 'int' and b.get_type() == 'real':
-                    return 'real'
-                elif a.get_type() == 'real' and b.get_type() == 'int':
-                    return 'real'
-                print(a,b,a.get_type(), b.get_type())
-                raise NotImplementedError
-            elif self.is_uminus() or self.is_minus():
-                a = self.args[0]
-                if a.get_type() == 'real':
-                    return 'real'
-                elif a.get_type() == 'matrix':
-                    return 'matrix'
-                else:
-                    raise NotImplementedError
-            elif self.is_power():
-                a, b = self.args
-                if a.get_type() == 'matrix' and b.get_type() == 'int':
-                    return 'matrix'
-                elif a.get_type() == 'real' and b.get_type() == 'real':
-                    return 'real'
-                elif a.get_type() == 'real' and b.get_type() == 'int':
-                    return 'real'
-                elif a.get_type() == 'int' and b.get_type() == 'real':
-                    return 'real'
-                elif a.get_type() == 'matrix' and b.get_type == 'int':
-                    # TODO: check whether a is a squre matrix and b > 0
-                    return 'matrix'
-                print(a, b)
-                print(a.get_type(), b.get_type())
-                raise NotImplementedError
-        elif self.is_fun():
-            a = self.args[0]
-            if self.func_name in ('hat','trans','inv','exp') and a.get_type() == 'matrix':
-                return 'matrix'
-            elif self.func_name in ('unit_matrix','zero_matrix'):
-                return 'matrix'
-            else:
-                return 'real'
-        elif self.is_integral():
-            if self.body.get_type() in ('int', 'real'):
-                return 'real'
-            print(self.body, self.body.get_type())
-            raise NotImplementedError
-        elif self.is_indefinite_integral():
-            return 'real'
-        elif self.is_summation():
-            return 'real'
-        elif self.is_evalat():
-            return 'real'
-        elif self.is_equals():
-            return 'equation'
-        elif self.is_greater():
-            return 'greater'
-        elif self.is_deriv():
-            return 'real'
-        elif self.is_limit():
-            return 'real'
-        elif self.is_skolem_func():
-            return 'real'
-        elif self.is_symbol():
-            return 'real'
-        elif self.is_skolem_term():
-            return 'real'
-        else:
-            print(self)
-            raise NotImplementedError
+    def is_vector(self) -> TypeGuard["Vector"]:
+        return isinstance(self, Vector) and self.ty == VECTOR
+
 
     def get_shape(self):
         if self.is_var():
@@ -1073,10 +959,6 @@ def match(exp: Expr, pattern: Expr) -> Optional[Dict]:
             res2 = rec(exp.lim, pattern.lim, bd_vars)
             del bd_vars[pattern.var]
             return res1 and res2
-        elif exp.is_vector():
-            if exp.is_column != pattern.is_column or exp.dim != pattern.dim:
-                return False
-            return all([rec(item, pattern.data[idx], bd_vars) for (idx, item) in enumerate(exp.data)])
         elif exp.is_matrix():
             if exp.shape != pattern.shape:
                 return False
@@ -1396,198 +1278,33 @@ class SkolemFunc(Expr):
 class Vector(Expr):
     """ Vector """
 
-    @staticmethod
-    def zero(dim: int, is_column=True) -> 'Vector':
-        return Vector([Const(0) for i in range(dim)], is_column=is_column)
-    @property
-    def norm(self) -> Expr:
 
-        return Fun("sqrt", functools.reduce(operator.add, (x^2 for x in self.data[1:]), self.data[0]^2))
-
-    def __init__(self, data: List[Expr], is_column=True):
+    def __init__(self, data: List[Expr]):
         self.data = copy.deepcopy(data)
         self.dim = len(self.data)
-        self.is_column = is_column
-        self.is_row = not is_column
         self.ty = VECTOR
 
     def __getitem__(self, item) -> Expr:
         return self.data[item]
 
     def __hash__(self):
-        return hash(tuple(self.data+[self.ty, self.is_column]))
-
-    def transpose(self) -> 'Vector':
-        # get transpose of the vector
-        return Vector(self.data, is_column=not self.is_column)
-
-    def get_w(self):
-        assert self.is_column and self.dim == 6
-        return Vector(self.data[3:])
-
-    def get_v(self):
-        assert self.is_column and self.dim == 6
-        return Vector(self.data[0:3])
+        return hash(tuple(self.data+[self.ty,]))
 
     def __eq__(self, other):
-        return isinstance(other, Vector) and self.is_column == other.is_column and \
-               self.data == other.data
-
-    @property
-    def t(self):
-        return self.transpose()
-
-    @property
-    def hat(self):
-        # if self.is_row:
-        #     raise ValueError("hat operator can only apply to column vectors")
-        if self.dim == 3:
-            # get skew matrix of the 3-dimension vector
-            # formula 2.4 at page 26 of a mathematical introduction of robotic manipulation
-            rows = [Vector([Const(0), -self.data[2], self.data[1]], is_column=False),
-                   Vector([self.data[2], Const(0), -self.data[0]], is_column=False),
-                   Vector([-self.data[1], self.data[0], Const(0)], is_column=False)]
-            return Matrix(rows)
-        elif self.dim == 6:
-            # get the matrix in se(3) form
-            # formula 2.26 at page 39
-            v, w = self.get_v(), self.get_w()
-            return w.hat.concatenate(v, col_concatenate=True). \
-                concatenate(Vector.zero(4, is_column=False), col_concatenate=False)
-        else:
-            raise NotImplementedError
-
-    def __mul__(self, other: Union['Vector', 'Matrix']):
-        if isinstance(other, Vector):
-            if self.dim != other.dim:
-                raise ValueError("can not evaluate this multiplication")
-            if self.is_row and other.is_column:
-                res = None
-                for i in range(self.dim):
-                    if i == 0:
-                        res = self[i] * other[i]
-                    else:
-                        res = res + self[i] * other[i]
-                return res
-            elif self.is_column and other.is_row:
-                res = []
-                for a in self.data:
-                    tmp = []
-                    for b in other.data:
-                        tmp.append(a*b)
-                    res.append(Vector(tmp, is_column=False))
-                return Matrix(res)
-
-        elif isinstance(other, Matrix):
-            if self.is_row:
-                if self.dim != other.shape[0]:
-                    raise ValueError("the dimension of vector is not equal to the number of matrix's rows")
-                else:
-                    return Vector([self*other.get_col(i) for i in range(other.shape[1])], is_column=False)
-            else:
-                raise NotImplementedError
-        else:
-            raise NotImplementedError
-    def __add__(self, other:'Vector'):
-        assert self.is_column == other.is_column and self.dim == other.dim
-        return Vector([self.data[i] + other.data[i] for i in range(self.dim)], is_column=self.is_column)
-
-    def __sub__(self, other: 'Vector'):
-        assert self.is_column == other.is_column and self.dim == other.dim
-        return Vector([self.data[i] - other.data[i] for i in range(self.dim)], is_column=self.is_column)
-
-    def concatenate(self, other: Union['Matrix', 'Vector'], col_concatenate: bool = True) -> Union['Matrix', 'Vector']:
-        if isinstance(other, Vector):
-            if self.dim == other.dim and \
-                    (self.is_column and other.is_column or self.is_row and other.is_row):
-                if self.is_column:
-                    if col_concatenate:
-                        res = [[self[i] if j == 0 else other[i] for j in range(2)]
-                               for i in range(self.dim)]
-                        return Matrix((self.dim, 2), res)
-                    else:
-                        res = [self[i] if i < self.dim else other[i - self.dim]
-                               for i in range(self.dim * 2)]
-                        return Vector(res)
-                else:
-                    if col_concatenate:
-                        res = [self[i] if i < self.dim else other[i - self.dim]
-                               for i in range(self.dim * 2)]
-                        return Vector(res, False)
-                    else:
-                        res = [[self[j] if i == 0 else other[j] for j in range(self.dim)] for i in range(2)]
-                        return Matrix((2, self.dim), res)
-            else:
-                return ValueError("can't concatenate these two vectors")
-        elif isinstance(other, Matrix):
-            if col_concatenate:
-                if self.is_column and self.dim == other.shape[0]:
-                    cols = other.cols
-                    arr = Matrix.vectors2arr([self, ] + cols, is_row_vectors=False)
-                    return Matrix((self.dim, len(cols) + 1), arr)
-                else:
-                    return ValueError("can't concatenate this vector with the matrix")
-            else:
-                if self.is_row and self.dim == other.shape[1]:
-                    rows = other.rows
-                    arr = Matrix.vectors2arr([self, ] + rows, is_row_vectors=True)
-                    return Matrix((len(rows) + 1, self.dim), arr)
-                else:
-                    return ValueError("can't concatenate this vector with the matrix")
-        else:
-            raise TypeError
+        return isinstance(other, Vector) and self.data == other.data
 
     def __str__(self):
         res = "{" + ", ".join(str(item) for item in self.data) + "}"
-        if self.is_row:
-            return res
-        else:
-            return "column("+res+")"
-
-    def get_angle_velocity(self):
-        assert self.is_column and self.dim == 6
-        return Vector(self.data[3:], is_column=True)
-
-    def get_line_velocity(self):
-        assert self.is_column and self.dim == 6
-        return Vector(self.data[:3], is_column=True)
-
-    @staticmethod
-    def scalar_mul(t, v: 'Vector'):
-        return Vector([t * e for e in v.data], is_column=v.is_column)
-
-    @staticmethod
-    def row_one(idx:int, dim:int):
-        return Vector([Const(0) if idx != i else Const(1) for i in range(dim)], is_column=False)
+        return res
 
 
 class Matrix(Expr):
     """ Matrix """
 
-    def __init__(self, vectors: List[Vector], is_row=True):
-        assert len(vectors) != 0 and all(v.dim == vectors[0].dim for v in vectors)
+    def __init__(self, data: List[List[Expr]]):
         self.ty = MATRIX
-        self.rows = []  # row vectors
-        self.cols = []  # column vectors
-        if is_row:
-            self.shape = (len(vectors), vectors[0].dim)
-            for row_vec in vectors:
-                self.rows.append(row_vec)
-            for j in range(self.shape[1]):
-                tmp = []
-                for i in range(self.shape[0]):
-                    tmp.append(self.rows[i][j])
-                self.cols.append(Vector(tmp, is_column=True))
-        else:
-            self.shape = (vectors[0].dim, len(vectors))
-            for col_vec in vectors:
-                self.cols.append(col_vec)
-            for i in range(self.shape[0]):
-                tmp = []
-                for j in range(self.shape[1]):
-                    tmp.append(self.cols[j][i])
-                self.rows.append(Vector(tmp, is_column=False))
-
+        self.data = copy.deepcopy(data)
+        self.shape = None
 
     @staticmethod
     def unit_matrix(dim: int):
@@ -1601,10 +1318,12 @@ class Matrix(Expr):
 
     def __hash__(self):
         res = []
-        for row in self.rows:
-            res.append(row)
+        for row in self.data:
+            for c in row:
+                res.append(c)
         res.append(self.ty)
-        res = res + list(self.shape)
+        if self.shape != None:
+            res = res + list(self.shape)
         return hash(tuple(res))
 
     @staticmethod
@@ -1613,9 +1332,6 @@ class Matrix(Expr):
         return Matrix(mat.shape, [[scalar * mat[i][j] for j in range(mat.shape[1])]
                                   for i in range(mat.shape[0])])
 
-    def __add__(self, other: 'Matrix'):
-        assert isinstance(other, Matrix) and self.shape == other.shape
-        return Matrix([rv + other.rows[i] for (i, rv) in enumerate(self.rows)])
 
     def is_orthogonal(self):
         # A * A.t = I
@@ -1683,8 +1399,7 @@ class Matrix(Expr):
 
 
     def __eq__(self, other: 'Matrix'):
-        return isinstance(other, Matrix) and self.ty == other.ty and self.shape == other.shape and\
-               self.rows == other.rows and self.cols == other.cols
+        return isinstance(other, Matrix) and self.ty == other.ty and self.data == other.data
 
 
     def __sub__(self, other: Union['Matrix','Expr']):
@@ -1701,121 +1416,23 @@ class Matrix(Expr):
                     return False
         return True
 
-    @property
-    def vee(self) -> 'Vector':
-        if self.is_se3():
-            # formula 2.30 at page 41
-            w_hat: 'Matrix' = self.get_lt33()
-            v: 'Vector' = self.get_rt31()
-            return v.concatenate(w_hat.vee, col_concatenate=False)
-        elif self.is_so3():
-            return Vector([self.data[2][1], self.data[0][2], self.data[1][0]], is_column=True)
-        else:
-            raise NotImplementedError
 
-    def get_lt33(self):
-        # get the left top 3*3 matrix
-        if self.shape[0] < 3 or self.shape[1] < 3:
-            return None
-        arr = [[0 for i in range(3)] for j in range(3)]
-        for i in range(3):
-            for j in range(3):
-                arr[i][j] = self.data[i][j]
-        return Matrix((3, 3), arr)
 
-    def get_rt31(self):
-        # get the right top 3*1 vector
-        if self.shape[0] < 3:
-            return None
-        arr = [0 for i in range(3)]
-        for i in range(3):
-            arr[i] = self.data[i][-1]
-        return Vector(arr, is_column=True)
-
-    def det(self):
-        # calculate determinant
-        return Const(1)
-
-    def is_SO3(self):
-        return self.is_orthogonal() and self.det() == Const(1)
-
-    def is_SE3(self):
-        # Example A.4 at page 409
-        if self.shape != (4, 4):
-            return False
-        R = self.get_lt33()
-        p = self.get_rt31()
-        # R.is_skew R.is_orthogonal
-        return R.is_SO3() and  p.dim == 3
-
-    @staticmethod
-    def zero(shape:Tuple[int]):
-        return Matrix([Vector.zero(shape[1],is_column=False) for i in range(shape[0])])
-
-    @property
-    def t(self):
-        return self.transpose()
-
-    def adjoint(self, inverse=False):
-        # assert self.is_SE3()
-        # formula 2.58 at page 55
-        R = self.get_lt33()
-        p = self.get_rt31()
-        Zero = Matrix.zero((3,3))
-        if not inverse:
-            part1 = R.concatenate(p.hat * R, col_concatenate=True)
-            part2 = Zero.concatenate(R, col_concatenate=True)
-            return part1.concatenate(part2, col_concatenate=False)
-        else:
-            # at page 56
-            part1 = R.t.concatenate(Matrix.scalar_mul(Const(-1), (R.t * p.hat)))  # scalar operation for matrix
-            part2 = Zero.concatenate(R.t)
-            return part1.concatenate(part2, col_concatenate=False)
-
-    def __getitem__(self, item):
-        if self.shape[0] == 1:
-            return self.data[0][item]
-        if self.shape[1] == 1:
-            return self.data[item][0]
-        res = Matrix((1, self.shape[1]), [self.data[item]])
-        return res
-
-    def __mul__(self, other: Union['Matrix', 'Vector', 'Expr']):
-        if isinstance(other, Matrix):
-            assert self.shape[1] == other.shape[0]
-            res = []
-            for (i, rv) in enumerate(self.rows):
-                tmp = []
-                for (j, cv) in enumerate(other.cols):
-                    tmp.append(rv * cv)
-                res.append(Vector(tmp, is_column=False))
-            return Matrix(res)
-        elif isinstance(other, Vector):
-            if other.is_column:
-                if self.shape[1] != other.dim:
-                    raise ValueError
-                else:
-                    arr = []
-                    for i in range(self.shape[0]):
-                        arr.append(self.rows[i] * other)
-                    return Vector(arr, is_column=True)
-            else:
-                raise NotImplementedError
-        else:
-            # raise NotImplementedError(str(self)+"%%%"+str(other))
-            if other.has_vector():
-                return Op('*', self, other)
-            else:
-                return Op('*', other, self)
 
     def __str__(self):
-        return "{"+", ".join(str(row) for row in self.rows)+"}"
+        s = "{"
+        for i in range(len(self.data)):
+            if i!=0:
+                s += ", "
+            s += "{"
+            for j in range(len(self.data[i])):
+                if j != 0:
+                    s += ", "
+                s += str(self.data[i][j])
+            s += "}"
+        s += "}"
+        return s
 
-    @staticmethod
-    def diagonal(arr:List[Expr]):
-        dim = len(arr)
-        res = [[arr[i] if i==j else Const(0) for j in range(dim)] for i in range(dim)]
-        return Matrix((dim, dim), res)
 
 NEG_INF = Inf(Decimal('-inf'))
 POS_INF = Inf(Decimal('inf'))

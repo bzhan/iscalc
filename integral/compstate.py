@@ -164,6 +164,8 @@ class VarDef(StateItem):
             "var": str(self.var),
             "latex_var": latex.convert_expr(self.var)
         }
+        if self.content is not None:
+            res['content'] = str(self.content)
         return res
 
 class Goal(StateItem):
@@ -811,12 +813,11 @@ class CompFile:
         if isinstance(goal, str):
             goal = parser.parse_expr(goal)
         assert isinstance(goal, Expr)
+        res_conds = []
         for cond in conds:
-            cond = replace_with_var_def(ctx.get_var_definitions(), cond)
+            res_conds.append(replace_with_var_def(ctx.get_var_definitions(), cond))
         goal = replace_with_var_def(ctx.get_var_definitions(), goal)
-        conds = Conditions(conds)
-
-
+        conds = Conditions(res_conds)
         self.content.append(Goal(self, ctx, goal, conds))
         return self.content[-1]
 
@@ -835,6 +836,8 @@ class CompFile:
         if isinstance(a, str):
             a = parser.parse_expr(a)
         self.content.append(Assumption(self, a))
+        ctx = self.get_context()
+        a = replace_with_var_def(ctx.get_var_definitions(), a)
         if a.is_equals():
             self.ctx.add_lemma(a, self.ctx.get_conds())
         else:
@@ -1041,11 +1044,23 @@ def parse_item(parent, item) -> StateItem:
     elif item['type'] == 'Assumption':
         a = parser.parse_expr(item['expr'])
         res = Assumption(parent, a)
+        if not isinstance(parent, CompFile):
+            raise TypeError
+        ctx = parent.get_context()
+        a = replace_with_var_def(ctx.get_var_definitions(), a)
+        if a.is_equals():
+            parent.ctx.add_lemma(a, ctx.get_conds())
+        else:
+            parent.ctx.add_condition(a)
         return res
     elif item['type'] == 'VarDef':
         var = parser.parse_expr(item['var'])
+        if 'content' in item:
+            content = parser.parse_expr(item['content'])
+        else:
+            content = None
         ctx = parent.get_context() if isinstance(parent, CompFile) else parent.ctx
-        res = VarDef(parent, ctx, var)
+        res = VarDef(parent, ctx, var, content)
         return res
     else:
         print(item['type'])

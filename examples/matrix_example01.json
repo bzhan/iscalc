@@ -40,11 +40,11 @@
                     ],
                     "conds": [
                         {
-                            "cond": "invertible(P)",
+                            "cond": "invertible(matrix P[n][n])",
                             "latex_cond": "invertible{(P)}"
                         },
                         {
-                            "cond": "n > 0",
+                            "cond": "int n > 0",
                             "latex_cond": "n > 0"
                         }
                     ]
@@ -59,11 +59,11 @@
                     ],
                     "conds": [
                         {
-                            "cond": "invertible(P)",
+                            "cond": "invertible(matrix P[n][n])",
                             "latex_cond": "invertible{(P)}"
                         },
                         {
-                            "cond": "n > 0",
+                            "cond": "int n > 0",
                             "latex_cond": "n > 0"
                         }
                     ]
@@ -78,11 +78,11 @@
                     ],
                     "conds": [
                         {
-                            "cond": "invertible(P)",
+                            "cond": "invertible(matrix P[n][n])",
                             "latex_cond": "invertible{(P)}"
                         },
                         {
-                            "cond": "n > 0",
+                            "cond": "int n > 0",
                             "latex_cond": "n > 0"
                         }
                     ]
@@ -97,11 +97,11 @@
                     ],
                     "conds": [
                         {
-                            "cond": "invertible(P)",
+                            "cond": "invertible(matrix P[n][n])",
                             "latex_cond": "invertible{(P)}"
                         },
                         {
-                            "cond": "n > 0",
+                            "cond": "int n > 0",
                             "latex_cond": "n > 0"
                         }
                     ]
@@ -116,11 +116,11 @@
                     ],
                     "conds": [
                         {
-                            "cond": "invertible(P)",
+                            "cond": "invertible(matrix P[n][n])",
                             "latex_cond": "invertible{(P)}"
                         },
                         {
-                            "cond": "n > 0",
+                            "cond": "int n > 0",
                             "latex_cond": "n > 0"
                         }
                     ]
@@ -135,11 +135,11 @@
                     ],
                     "conds": [
                         {
-                            "cond": "invertible(P)",
+                            "cond": "invertible(matrix P[n][n])",
                             "latex_cond": "invertible{(P)}"
                         },
                         {
-                            "cond": "n > 0",
+                            "cond": "int n > 0",
                             "latex_cond": "n > 0"
                         }
                     ]
@@ -189,11 +189,11 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "invertible(P)",
+                                    "cond": "invertible(matrix P[n][n])",
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n > 0",
+                                    "cond": "int n > 0",
                                     "latex_cond": "n > 0"
                                 }
                             ]
@@ -208,11 +208,11 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "invertible(P)",
+                                    "cond": "invertible(matrix P[n][n])",
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n > 0",
+                                    "cond": "int n > 0",
                                     "latex_cond": "n > 0"
                                 }
                             ]
@@ -227,11 +227,11 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "invertible(P)",
+                                    "cond": "invertible(matrix P[n][n])",
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n > 0",
+                                    "cond": "int n > 0",
                                     "latex_cond": "n > 0"
                                 }
                             ]
@@ -246,11 +246,11 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "invertible(P)",
+                                    "cond": "invertible(matrix P[n][n])",
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n > 0",
+                                    "cond": "int n > 0",
                                     "latex_cond": "n > 0"
                                 }
                             ]
@@ -265,11 +265,11 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "invertible(P)",
+                                    "cond": "invertible(matrix P[n][n])",
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n > 0",
+                                    "cond": "int n > 0",
                                     "latex_cond": "n > 0"
                                 }
                             ]
@@ -284,11 +284,11 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "invertible(P)",
+                                    "cond": "invertible(matrix P[n][n])",
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n > 0",
+                                    "cond": "int n > 0",
                                     "latex_cond": "n > 0"
                                 }
                             ]

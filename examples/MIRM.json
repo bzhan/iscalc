@@ -11,18 +11,18 @@
             "type": "problem"
         },
         {
-            "expr": "hat(w)^2 =  w * T(w) - norm(w)^2 * unit_matrix(3)",
+            "expr": "hat(matrix w[3][1])^2 =  matrix w[3][1] * T(matrix w[3][1]) - norm(matrix w[3][1])^2 * unit_matrix(3)",
             "path": "matrix_example02",
             "type": "problem"
         },
         {
-            "expr": "w*T(w)*hat(w) = zero_matrix(3,3)",
-            "path": "matrix_example03",
+            "expr": "matrix w[3][1]*T(matrix w[3][1])*hat(matrix w[3][1]) = zero_matrix(3,3)",
+            "path": "matrix_example02",
             "type": "problem"
         },
         {
             "expr": "hat(w)^(2*n+1) = (-1)^n * hat(w)",
-            "path": "matrix_example04",
+            "path": "matrix_example02",
             "type": "problem"
         }
 

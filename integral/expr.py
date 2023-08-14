@@ -959,6 +959,11 @@ def match(exp: Expr, pattern: Expr) -> Optional[Dict]:
             res2 = rec(exp.lim, pattern.lim, bd_vars)
             del bd_vars[pattern.var]
             return res1 and res2
+        elif exp.is_deriv():
+            # TODO: think more about matching of derivatives
+            res1 = pattern.var == exp.var
+            res2 = rec(exp.body, pattern.body, bd_vars)
+            return res1 and res2
         elif exp.is_matrix():
             if exp.shape != pattern.shape:
                 return False
@@ -967,7 +972,7 @@ def match(exp: Expr, pattern: Expr) -> Optional[Dict]:
                         for (i, rv) in enumerate(exp.rows)])
         else:
             # Currently not implemented
-            print("Match Failed")
+            print("Match Failed for type:", type(exp))
             return False
 
     bd_vars = dict()

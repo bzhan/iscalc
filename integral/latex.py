@@ -178,11 +178,11 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
             elif e.func_name == "norm":
                 return "\\|%s\\|" % sx
             elif e.func_name == 'unit_matrix':
-                return "I_{%s \\times %s}"%(sx,sx)
+                return "I_{%s \\times %s}" % (sx, sx)
             elif e.func_name == 'inv':
-                return "%s ^ {-1}" % (sx)
+                return "%s ^ {-1}" % sx
             elif e.func_name == 'hat':
-                return "\hat{%s}" % (sx)
+                return "\hat{%s}" % sx
             else:
                 return "%s{(%s)}" % (e.func_name, sx)
         elif len(e.args) == 2:

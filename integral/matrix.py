@@ -103,9 +103,9 @@ def get_type(e, ctx=None) -> str:
             raise NotImplementedError
     elif e.is_fun():
         a = e.args[0]
-        if e.func_name in ('hat','T','inv','exp') and get_type(a, ctx) == 'matrix':
+        if e.func_name in ('hat', 'T', 'inv', 'exp') and get_type(a, ctx) == 'matrix':
             return 'matrix'
-        elif e.func_name in ('unit_matrix','zero_matrix'):
+        elif e.func_name in ('unit_matrix', 'zero_matrix'):
             return 'matrix'
         else:
             return 'real'
@@ -139,7 +139,7 @@ def get_type(e, ctx=None) -> str:
         raise NotImplementedError
 
 
-def get_shape(e:Expr, ctx:Context):
+def get_shape(e: Expr, ctx: Context):
     if e.is_const():
         return (Const(1), Const(1))
     elif e.is_var():
@@ -191,13 +191,13 @@ def get_shape(e:Expr, ctx:Context):
         print(e)
         raise NotImplementedError
 
-def transpose(e:Expr):
+def transpose(e: Expr):
     if e.is_matrix():
         r, c = len(e.data), len(e.data[0])
         return Matrix([[e.data[j][i] for j in range(r)] for i in range(c)])
     return e
 
-def norm(e:Expr, ctx:Context):
+def norm(e: Expr, ctx: Context):
     if is_vector(e, ctx):
         res = None
         for r in e.data:
@@ -208,7 +208,7 @@ def norm(e:Expr, ctx:Context):
                     res += c^2
         return expr.Fun("sqrt", res)
 
-def multiply(a:Matrix, b:Matrix, ctx:Context):
+def multiply(a: Matrix, b: Matrix, ctx: Context):
     assert isinstance(a, Matrix)
     assert isinstance(b, Matrix)
     assert len(a.data[0]) == len(b.data)
@@ -225,7 +225,7 @@ def multiply(a:Matrix, b:Matrix, ctx:Context):
         res.append(tmp)
     return Matrix(res)
 
-def add(a:Expr, b:Expr, ctx:Context):
+def add(a: Expr, b: Expr, ctx: Context):
     assert a.is_matrix() and b.is_matrix()
     assert get_shape(a, ctx) == get_shape(b, ctx)
     assert len(a.data) == len(b.data)
@@ -247,15 +247,15 @@ def minus(a, b, ctx):
             res[i][j] = normalize(res[i][j] + a.data[i][j] - b.data[i][j], ctx)
     return Matrix(res)
 
-def unit_matrix(dim:int):
+def unit_matrix(dim: int):
     return Matrix([[Const(1) if i==j else Const(0) for j in range(dim)] for i in range(dim)])
 
-def zero_matrix(r:int ,c:int):
+def zero_matrix(r: int, c: int):
     assert type(r) == int and type(c) == int
     assert r > 0 and c > 0
     return Matrix([[Const(0) for j in range(c)] for i in range(r)])
 
-def hat(e:Expr):
+def hat(e: Expr):
     if not e.is_matrix():
         return e
     if len(e.data[0]) == 1 or len(e.data) == 3:

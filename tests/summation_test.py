@@ -39,7 +39,7 @@ class SummationTest(unittest.TestCase):
             self.assertEqual(str(r), res)
 
 
-    def testSplitSummation(self):
+    def testSplitSummation2(self):
         test_data = [
             ("SUM(i, 1, oo, i / (i + 1))", "i % 4", "SUM(i, 1, 4, i / (i + 1)) + SUM(i, 5, 7, i / (i + 1))"),
         ]

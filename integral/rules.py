@@ -2254,12 +2254,18 @@ class SplitSummation(Rule):
             if self.cond.args[1].val <= 0:
                 return e
             if e.upper.is_pos_inf():
-                res = Summation(e.index_var, e.lower, e.upper, e.body)
-                for i in range(1, self.cond.args[1].val):
-                    tmp = Var(e.index_var) * self.cond.args[1] # Error is here
-                    res = normalize(Op('+', res, Summation(e.index_var, e.lower + Const(i), e.body.replace(tmp + e.lower + Const(1)))), ctx)
+                res = Const(0)
+                for i in range(self.cond.args[1].val):
+                    tmp = Var(e.index_var) * self.cond.args[1] + e.lower + Const(i)
+                    res = normalize(Op('+', res, Summation(e.index_var, Const(0), e.upper, e.body.subst(e.index_var, tmp))), ctx)
                 return res
-            pass
+            else:
+                res = Const(0)
+                for i in range(self.cond.args[1].val):
+                    tmp1 = Const((e.upper.val - e.lower.val - i) // self.cond.args[1].val)
+                    tmp2 = Var(e.index_var) * self.cond.args[1] + e.lower + Const(i)
+                    res = normalize(Op('+', res, Summation(e.index_var, Const(0), tmp1, e.body.subst(e.index_var, tmp2))), ctx)
+                return res
         elif self.cond.is_compare():
             if self.cond.op == '<=' or self.cond.op == '>':
                 if self.cond.args[1].val == e.lower.val:

@@ -23,7 +23,6 @@ grammar = r"""
         | CNAME "(" expr ("," expr)* ")" -> fun_expr
         | "(" expr ")"
         | "\|" expr "\|" -> abs_expr 
-        | "$" expr "$" -> trig_expr
         | "INT" CNAME ":[" expr "," expr "]." expr -> integral_expr
         | "INT" CNAME "." expr -> indefinite_integral_expr
         | "INT" CNAME "[" CNAME ("," CNAME)* "]" "." expr -> indefinite_integral_skolem_expr
@@ -31,9 +30,8 @@ grammar = r"""
         | "LIM" "{" CNAME "->" expr "}" "." expr -> limit_inf_expr
         | "LIM" "{" CNAME "->" expr "-}" "."  expr -> limit_l_expr
         | "LIM" "{" CNAME "->" expr "+}" "."  expr -> limit_r_expr
-        | "{" expr ("," expr)* "}" -> vector_expr
-        | CNAME CNAME "[" expr "]" "[" expr "]" -> matrix_var
-        | CNAME CNAME -> type_var
+        | "[" expr ("," expr)* "]" -> vector_expr
+        | "$" CNAME "(" expr ("," expr)* ")" -> type_expr
 
     ?uminus: "-" uminus -> uminus_expr | atom  // priority 80
 
@@ -182,19 +180,17 @@ class ExprTransformer(Transformer):
         return expr.Limit(str(var), lim, body, "+")
 
     def vector_expr(self, *args):
-        if isinstance(args[0], expr.Vector):
-            data = []
-            for vec in args:
-                data.append(vec.data)
-            return expr.Matrix(data)
-        else:
-            return expr.Vector(list(args))
+        data = []
+        for arg in args:
+            if isinstance(arg, expr.Matrix):
+                data.append(arg.data)
+            else:
+                data.append(arg)
+        return expr.Matrix(tuple(data))
 
-    def matrix_var(self, ty, name, d1, d2):
-        return expr.Var(str(name), ty2=str(ty), shape=(d1, d2))
+    def type_expr(self, name, *args) -> expr.Type:
+        return expr.Type(str(name), tuple(args))
 
-    def type_var(self, ty, name):
-        return expr.Var(str(name), ty2=str(ty))
 
 expr_parser = Lark(grammar, start="expr", parser="lalr", transformer=ExprTransformer())
 interval_parser = Lark(grammar, start="interval", parser="lalr", transformer=ExprTransformer())

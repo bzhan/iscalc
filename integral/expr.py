@@ -2,11 +2,74 @@
 import copy
 import math
 import functools
-import operator
 from decimal import Decimal
 from fractions import Fraction
 from collections.abc import Iterable
 from typing import Dict, List, Optional, Set, TypeGuard, Tuple, Union, Callable
+
+
+class Type:
+    """Types of expressions.
+    
+    Each type consists of name and a list of arguments. Each argument
+    may be types or expressions.
+    
+    """
+    def __init__(self, name: str, *args):
+        self.name = name
+        self.args = tuple(args)
+
+    def __eq__(self, other):
+        return isinstance(other, Type) and self.name == other.name and self.args == other.args
+
+    def __repr__(self):
+        return "Type(%s, %s)" % (self.name, ", ".join(str(arg) for arg in self.args))
+
+    def __str__(self):
+        if self.name == "fun":
+            assert len(self.args) >= 2
+            if len(self.args) == 2:
+                return "%s => %s" % (self.args[0], self.args[1])
+            else:
+                return "(%s) => %s" % (', '.join(str(arg) for arg in self.args[:-1]), self.args[-1])
+        elif len(self.args) == 0:
+            return self.name
+        else:
+            return "%s(%s)" % (self.name, ", ".join(str(arg) for arg in self.args))
+        
+
+def FunType(*args) -> Type:
+    """Type of functions. The first n-1 arguments are the input types
+    of the function. The last argument is the return type.
+    
+    """
+    return Type("fun", *args)
+
+# Type of real numbers
+RealType = Type("real")
+
+def TensorType(eleType: Type, *dims) -> Type:
+    """Types of tensors, including vectors and matrices.
+    
+    The first argument is the type of elements in the tensor. The remaining
+    arguments are the dimensions (expressions that should evaluate to integer).
+
+    """
+    return Type("tensor", eleType, *dims)
+
+# Type of vectors (1-dimensional tensor)
+def VectorType(eleType: Type, len: int) -> Type:
+    return TensorType(eleType, len)
+
+# Type of matrices (2-dimensional tensor)
+def MatrixType(eleType: Type, row: int, col: int) -> Type:
+    return TensorType(eleType, row, col)
+
+def is_vector_type(type: Type) -> bool:
+    return type.name == "tensor" and len(type.args) == 2
+
+def is_matrix_type(type: Type) -> bool:
+    return type.name == "tensor" and len(type.args) == 3
 
 
 VAR, CONST, OP, FUN, DERIV, INTEGRAL, EVAL_AT, SYMBOL, LIMIT, INF, INDEFINITEINTEGRAL, \
@@ -56,6 +119,10 @@ class Location:
 
 class Expr:
     """Expressions."""
+    def __init__(self):
+        # Type of the expression. None indicates that type is currently
+        # not inferred.
+        self.type: Optional[Type] = None
 
     def __add__(self, other):
         if isinstance(other, (int, Fraction)):
@@ -1046,42 +1113,24 @@ def decompose_expr_factor(e):
 
 class Var(Expr):
     """Variable."""
-
-    def __init__(self, name: str, ty2:str=None, shape:List[Expr]=None):
+    def __init__(self, name: str, type: Optional[Type] = None):
         assert isinstance(name, str)
         self.ty = VAR
         self.name = name
-        if ty2 is None:
-            self.ty2 = 'real'
-            self.shape = (Const(1), Const(1))
+        if type is None:
+            self.type = RealType  # default
         else:
-            if ty2 == 'matrix':
-                self.ty2 = ty2
-                self.shape = shape
-            elif ty2 == 'int':
-                self.ty2 = ty2
-                self.shape = (Const(1), Const(1))
-            else:
-                raise NotImplementedError
-
-
+            self.type = type
 
     def __hash__(self):
         return hash((VAR, self.name, self.ty2, self.shape))
 
     def __eq__(self, other):
-        return isinstance(other, Var) and self.name == other.name and self.ty2 == other.ty2\
-        and self.shape == other.shape
+        return isinstance(other, Var) and self.name == other.name and self.type == other.type
 
     def __str__(self):
-        if self.ty2 == 'real':
-            return self.name
-        elif self.ty2 == 'matrix':
-            return self.ty2+" "+self.name+"["+str(self.shape[0])+"]["+str(self.shape[1])+"]"
-        elif self.ty2 == 'int':
-            return self.ty2+" "+self.name
-        else:
-            raise NotImplementedError
+        return self.name
+
     def __repr__(self):
         return "Var(%s)" % self.name
 
@@ -1096,6 +1145,7 @@ class Const(Expr):
             self.val = val.numerator
         else:
             self.val = val
+        self.type = RealType
 
     def __hash__(self):
         return hash((CONST, self.val))
@@ -1114,7 +1164,8 @@ class Op(Expr):
     """Operators."""
 
     def __init__(self, op: str, *args):
-        assert isinstance(op, str) and all(isinstance(arg, Expr) for arg in args), str([type(arg) for arg in args])
+        assert isinstance(op, str)
+        assert all(isinstance(arg, Expr) for arg in args)
         if len(args) == 1:
             assert op == "-"
         elif len(args) == 2:
@@ -1124,6 +1175,7 @@ class Op(Expr):
         self.ty = OP
         self.op = op
         self.args = tuple(args)
+        self.type = RealType
 
     def __hash__(self):
         return hash((OP, self.op, tuple(self.args)))
@@ -1280,102 +1332,57 @@ class SkolemFunc(Expr):
         return hash((self.name, tuple(self.dependent_vars), self.ty))
 
 
-class Vector(Expr):
-    """ Vector """
-
-
-    def __init__(self, data: List[Expr]):
-        self.data = copy.deepcopy(data)
-        self.dim = len(self.data)
-        self.ty = VECTOR
-
-    def __getitem__(self, item) -> Expr:
-        return self.data[item]
-
-    def __hash__(self):
-        return hash(tuple(self.data+[self.ty,]))
-
-    def __eq__(self, other):
-        return isinstance(other, Vector) and self.data == other.data
-
-    def __str__(self):
-        res = "{" + ", ".join(str(item) for item in self.data) + "}"
-        return res
-
-
 class Matrix(Expr):
-    """ Matrix """
+    """Matrix expressions.
+    
+    Data is a list/matrix/etc of expressions.
 
-    def __init__(self, data: List[List[Expr]]):
+    """
+    def __init__(self, data):
         self.ty = MATRIX
-        self.data = copy.deepcopy(data)
-        self.shape = None
 
-    @staticmethod
-    def unit_matrix(dim: int):
-        return Matrix([Vector.row_one(i, dim) for i in range(dim)])
+        # Check validity of input and derive type
+        if len(data) == 0:
+            raise AssertionError("Matrix: input is empty")
 
-    @staticmethod
-    def homo_matrix(R, p):
-        row = Vector([Const(0), Const(0), Const(0), Const(1)], is_column=False)
-        return R.concatenate(p).concatenate(row, col_concatenate=False)
-
+        if isinstance(data[0], Expr):
+            # Vector case
+            self.data = tuple(data)
+            self.type = VectorType(data[0].type, len(data))
+        else:
+            # Matrix case
+            self.data = tuple(tuple(row) for row in data)
+            self.type = MatrixType(data[0][0].type, len(data), len(data[0]))
 
     def __hash__(self):
-        res = []
-        for row in self.data:
-            for c in row:
-                res.append(c)
-        res.append(self.ty)
-        if self.shape != None:
-            res = res + list(self.shape)
-        return hash(tuple(res))
+        return hash("Matrix", self.data)
 
     @staticmethod
-    def scalar_mul(scalar: Expr, mat: 'Matrix'):
+    def scalar_mul(scalar: Expr, mat: "Matrix") -> "Matrix":
+        """Multiply a matrix by a scalar"""
         arr = mat.data
         return Matrix(mat.shape, [[scalar * mat[i][j] for j in range(mat.shape[1])]
                                   for i in range(mat.shape[0])])
 
-
-    def is_orthogonal(self):
-        # A * A.t = I
-        return self.shape[0] == self.shape[1] and \
-               self * self.transpose() == Matrix.unit_matrix(self.shap[0])
-
-    @staticmethod
-    def vectors2arr(vectors: List[Vector], is_row_vectors=True):
-        '''
-            if is_row_vector = True
-                [[1,2,3],[2,3,4]] these two vectors are treated as row vector
-                then the final resulting matrix is [[1,2,3],[2,3,4]]
-            else
-                this two vectors are treated as column vector
-                then the final resulting matrix is [[1,2],[2,3],[3,4]]
-        '''
-        arr = []
-        if is_row_vectors:
-            for vec in vectors:
-                arr.append(copy.deepcopy(vec.data))
-        else:
-            m = len(vectors)
-            n = vectors[0].dim
-            arr = [[0 for j in range(m)] for i in range(n)]
-            for i in range(n):
-                for j in range(m):
-                    arr[i][j] = vectors[j][i]
-        return arr
-
     def transpose(self):
-        return Matrix([col.t for col in self.cols])
+        """Compute transpose of a matrix"""
+        if not is_matrix_type(self.type):
+            raise AssertionError("transpose: input must be a matrix")
 
-    def get_row(self, idx):
-        return self.rows[idx]
+        data = tuple(tuple(self.data[j][i] for j in range(self.num_col)) for i in range(self.num_row))
+        return Matrix(data)
 
-    def get_col(self, idx):
-        return self.cols[idx]
+    def num_row(self) -> int:
+        if not is_matrix_type(self.type):
+            raise AssertionError("num_row: input must be a matrix")
+        return self.type.args[1]
+        
+    def num_col(self) -> int:
+        if not is_matrix_type(self.type):
+            raise AssertionError("num_col: input must be a matrix")
+        return self.type.args[2]
 
-    def concatenate(self, other: Union['Matrix', 'Vector'], col_concatenate=True):
+    def concatenate(self, other: Union["Matrix", "Matrix"], col_concatenate=True):
         if isinstance(other, Matrix):
             if col_concatenate:
                 assert self.shape[0] == other.shape[0]
@@ -1385,58 +1392,25 @@ class Matrix(Expr):
                 assert self.shape[1] == other.shape[1]
                 arr = Matrix.vectors2arr(self.rows + other.rows, is_row_vectors=True)
                 return Matrix((self.shape[0] + other.shape[0], self.shape[1]), arr)
-        elif isinstance(other, Vector):
-            if col_concatenate:
-                assert other.is_column and other.dim == self.shape[0]
-                arr = Matrix.vectors2arr(self.cols + [other, ], is_row_vectors=False)
-                return Matrix((self.shape[0], self.shape[1] + 1), arr)
-            else:
-                assert other.is_row and other.dim == self.shape[1]
-                arr = Matrix.vectors2arr(self.rows + [other, ], is_row_vectors=True)
-                return Matrix((self.shape[0] + 1, self.shape[1]), arr)
-
         else:
             raise TypeError
 
-    def is_se3(self):
-        return self.shape == (4, 4) and self.get_row(3) == Vector.zero(4, is_column=False)
-
-
-
     def __eq__(self, other: 'Matrix'):
         return isinstance(other, Matrix) and self.ty == other.ty and self.data == other.data
-
 
     def __sub__(self, other: Union['Matrix','Expr']):
         if isinstance(other, Matrix) and self.shape == other.shape:
             return Matrix([rv-other.rows[i] for (i, rv) in enumerate(self.rows)])
         else:
             return Op('-', self, other)
-    def is_so3(self):
-        if self.shape != (3, 3) and not self.is_skew():
-            return False
-        for i in range(3):
-            for j in range(3):
-                if i == j and self.data[i][j] != Const(0):
-                    return False
-        return True
-
-
-
 
     def __str__(self):
-        s = "{"
-        for i in range(len(self.data)):
-            if i!=0:
-                s += ", "
-            s += "{"
-            for j in range(len(self.data[i])):
-                if j != 0:
-                    s += ", "
-                s += str(self.data[i][j])
-            s += "}"
-        s += "}"
-        return s
+        if is_vector_type(self.type):
+            return "[" + ", ".join(str(val) for val in self.data) + "]"
+        elif is_matrix_type(self.type):
+            return "[" + ", ".join("[" + ", ".join(str(val) for val in row) + "]" for row in self.data) + "]"
+        else:
+            raise NotImplementedError
 
 
 NEG_INF = Inf(Decimal('-inf'))

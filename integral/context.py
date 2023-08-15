@@ -5,7 +5,7 @@ import os
 import json
 
 from integral import expr
-from integral.expr import Expr, Eq, Op, Const, expr_to_pattern, Vector, Matrix
+from integral.expr import Expr, Eq, Op, Const, expr_to_pattern, Matrix
 from integral import parser
 from integral.conditions import Conditions
 

@@ -6,7 +6,7 @@ from typing import List
 
 from integral import rules, context, parser, compstate, matrix
 from integral.context import Context
-from integral.expr import Op, Var, Const, Matrix, Vector, Expr, Fun
+from integral.expr import Op, Var, Const, Matrix, Expr, Fun
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
@@ -28,39 +28,52 @@ class MatrixTest(unittest.TestCase):
             for content in file.content:
                 self.assertTrue(content.is_finished())
 
+    def testParseMatrix(self):
+        test_data = [
+            "[[3]]"
+        ]
+
+        for s in test_data:
+            t = parser.parse_expr(s)
+            self.assertEqual(str(t), s)
+
     def testTranspose1(self):
         test_data = [
-            ("{{1,2,3},{4,5,6}}", "{{1,4},{2,5},{3,6}}"),
-            ("{{1,2,3},{4,5,6},{7,8,9}}", "{{1,4,7},{2,5,8},{3,6,9}}")
-        ]
-        for a, b in test_data:
-            assert matrix.transpose(parser.parse_expr(a)) == parser.parse_expr(b)
-
-    def testMultiplication(self):
-        test_data = [
-            ("{{1,3,5},{2,4,7}}", "{{-5,8,11},{3,9,21},{4,0,8}}", "{{24,35,114},{30,52,162}}"),
-            ("{{1,1,0,0}}", "{{1},{2},{3},{4}}", "3"),
-            ("{{1,2}}", "{{1,3,5},{2,4,7}}", "{{5,11,19}}")
-        ]
-
-        ctx = Context()
-        for a, b, c in test_data:
-            m1 = parser.parse_expr(a)
-            m2 = parser.parse_expr(b)
-            res = matrix.multiply(m1, m2, ctx)
-            assert res == parser.parse_expr(c)
-
-    def testHat(self):
-        test_data = [
-            ("{{a1},{a2},{a3}}", "{{0,-a3,a2},{a3,0,-a1},{-a2,a1,0}}"),
-            ("{{v1},{v2},{v3},{w1},{w2},{w3}}",
-             "{{0, -w3, w2, v1},{w3, 0, -w1, v2},{-w2, w1, 0, v3},{0,0,0,0}}")
+            ("[[1,2,3],[4,5,6]]", "[[1,4],[2,5],[3,6]]"),
+            ("[[1,2,3],[4,5,6],[7,8,9]]", "[[1,4,7],[2,5,8],[3,6,9]]")
         ]
 
         for a, b in test_data:
             a = parser.parse_expr(a)
             b = parser.parse_expr(b)
-            matrix.hat(a) == b
+            self.assertEqual(matrix.transpose(a), b)
+
+    def testMultiplication(self):
+        test_data = [
+            ("[[1,3,5],[2,4,7]]", "[[-5,8,11],[3,9,21],[4,0,8]]", "[[24,35,114],[30,52,162]]"),
+            ("[[1,1,0,0]]", "[[1],[2],[3],[4]]", "[[3]]"),
+            ("[[1,2]]", "[[1,3,5],[2,4,7]]", "[[5,11,19]]")
+        ]
+
+        ctx = Context()
+        for a, b, c in test_data:
+            a = parser.parse_expr(a)
+            b = parser.parse_expr(b)
+            c = parser.parse_expr(c)
+            res = matrix.multiply(a, b, ctx)
+            self.assertEqual(res, c)
+
+    def testHat(self):
+        test_data = [
+            ("[a1,a2,a3]", "[[0,-a3,a2],[a3,0,-a1],[-a2,a1,0]]"),
+            ("[v1,v2,v3,w1,w2,w3]",
+             "[[0, -w3, w2, v1], [w3, 0, -w1, v2], [-w2, w1, 0, v3], [0,0,0,0]]")
+        ]
+
+        for a, b in test_data:
+            a = parser.parse_expr(a)
+            b = parser.parse_expr(b)
+            self.assertEqual(matrix.hat(a), b)
 
     def testExample01(self):
         file = compstate.CompFile("MIRM", "matrix_example01")

@@ -1126,7 +1126,7 @@ class Op(Expr):
         if len(args) == 1:
             assert op == "-"
         elif len(args) == 2:
-            assert op in ["+", "-", "*", "/", "^", "=", "!=", "<", "<=", ">", ">="]
+            assert op in ["+", "-", "*", "/", "%", "^", "=", "!=", "<", "<=", ">", ">="]
         else:
             raise NotImplementedError
         self.ty = OP

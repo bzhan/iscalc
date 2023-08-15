@@ -42,7 +42,9 @@ grammar = r"""
         | uminus
 
     ?times: times "*" pow -> times_expr        // priority 70
-        | times "/" pow -> divides_expr | pow
+        | times "/" pow -> divides_expr 
+        | times "%" pow -> modulo_expr
+        | pow
 
     ?plus: plus "+" times -> plus_expr         // priority 65
         | plus "-" times -> minus_expr | times

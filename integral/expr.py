@@ -13,7 +13,7 @@ VAR, CONST, OP, FUN, DERIV, INTEGRAL, EVAL_AT, SYMBOL, LIMIT, INF, INDEFINITEINT
 SKOLEMFUNC, SUMMATION, LAZYSERIES, VECTOR, MATRIX = range(16)
 
 op_priority = {
-    "+": 65, "-": 65, "*": 70, "/": 70, "^": 75, "=": 50, "<": 50, ">": 50, "<=": 50, ">=": 50, "!=": 50
+    "+": 65, "-": 65, "*": 70, "/": 70, "%": 70, "^": 75, "=": 50, "<": 50, ">": 50, "<=": 50, ">=": 50, "!=": 50
 }
 
 
@@ -1698,6 +1698,8 @@ def eval_expr(e: Expr):
         return eval_expr(e.args[0]) * eval_expr(e.args[1])
     elif e.is_divides():
         return eval_expr(e.args[0]) / eval_expr(e.args[1])
+    elif e.is_mod():
+        return eval_expr(e.args[0]) % eval_expr(e.args[1])
     elif e.is_power():
         return eval_expr(e.args[0]) ** eval_expr(e.args[1])
     elif e.is_fun():

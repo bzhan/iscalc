@@ -100,6 +100,12 @@ class ExprTransformer(Transformer):
         else:
             return expr.Op("/", a, b)
 
+    def modulo_expr(self, a, b):
+        if a.ty == expr.CONST and b.ty == expr.CONST and isinstance(a.val, int) and isinstance(b.val, int):
+            return expr.Const(a.val % b.val)
+        else:
+            return expr.Op("%", a, b)
+
     def pow_expr(self, a, b):
         return expr.Op("^", a, b)
 

@@ -832,19 +832,6 @@ class CompFile:
             "content": [item.export() for item in self.content]
         }
 
-    def add_assumption(self, a:Union[str, Expr]):
-        if isinstance(a, str):
-            a = parser.parse_expr(a)
-        self.content.append(Assumption(self, a))
-        ctx = self.get_context()
-        a = replace_with_var_def(ctx.get_var_definitions(), a)
-        if a.is_equals():
-            self.ctx.add_lemma(a, self.ctx.get_conds())
-            self.ctx.add_assumption(a, self.ctx.get_conds())
-        else:
-            self.ctx.add_condition(a)
-        return self.content[-1]
-
 def parse_rule(item) -> Rule:
     if 'loc' in item:
         if item['loc'] == 'subterms':

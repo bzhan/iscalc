@@ -76,7 +76,7 @@ VAR, CONST, OP, FUN, DERIV, INTEGRAL, EVAL_AT, SYMBOL, LIMIT, INF, INDEFINITEINT
 SKOLEMFUNC, SUMMATION, LAZYSERIES, VECTOR, MATRIX = range(16)
 
 op_priority = {
-    "+": 65, "-": 65, "*": 70, "/": 70, "^": 75, "=": 50, "<": 50, ">": 50, "<=": 50, ">=": 50, "!=": 50
+    "+": 65, "-": 65, "*": 70, "/": 70, "%": 70, "^": 75, "=": 50, "<": 50, ">": 50, "<=": 50, ">=": 50, "!=": 50
 }
 
 
@@ -176,6 +176,11 @@ class Expr:
             other = Const(other)
         return Op("^", self, other)
 
+    def __mod__(self, other):
+        if isinstance(other, (int, Fraction)):
+            other = CONST(other)
+        return Op("%", self, other)
+
     def __neg__(self):
         if self == POS_INF:
             return NEG_INF
@@ -262,6 +267,9 @@ class Expr:
 
     def is_power(self):
         return self.ty == OP and self.op == '^'
+
+    def is_mod(self):
+        return self.ty == OP and self.op == '%'
 
     def is_equals(self):
         return self.ty == OP and self.op == '='
@@ -1169,7 +1177,7 @@ class Op(Expr):
         if len(args) == 1:
             assert op == "-"
         elif len(args) == 2:
-            assert op in ["+", "-", "*", "/", "^", "=", "!=", "<", "<=", ">", ">="]
+            assert op in ["+", "-", "*", "/", "%", "^", "=", "!=", "<", "<=", ">", ">="]
         else:
             raise NotImplementedError
         self.ty = OP
@@ -1664,6 +1672,8 @@ def eval_expr(e: Expr):
         return eval_expr(e.args[0]) * eval_expr(e.args[1])
     elif e.is_divides():
         return eval_expr(e.args[0]) / eval_expr(e.args[1])
+    elif e.is_mod():
+        return eval_expr(e.args[0]) % eval_expr(e.args[1])
     elif e.is_power():
         return eval_expr(e.args[0]) ** eval_expr(e.args[1])
     elif e.is_fun():

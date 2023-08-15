@@ -86,8 +86,10 @@ def deriv(var: str, e: Expr, ctx: Context) -> Expr:
     name var.
 
     """
+
     def normal(x):
         return normalize(x, ctx)
+
     def rec(e):
         if var not in e.get_vars():
             return Const(0)
@@ -196,7 +198,7 @@ def deriv(var: str, e: Expr, ctx: Context) -> Expr:
         elif e.is_integral():
             if e.lower.is_constant():
                 return normal(Integral(e.var, e.lower, e.upper, rec(e.body))
-                          + e.body.subst(e.var, e.upper) * rec(e.upper))
+                              + e.body.subst(e.var, e.upper) * rec(e.upper))
             return normal(Integral(e.var, e.lower, e.upper, rec(e.body))
                           + e.body.subst(e.var, e.upper) * rec(e.upper)
                           - e.body.subst(e.var, e.lower) * rec(e.lower))
@@ -212,9 +214,10 @@ def deriv(var: str, e: Expr, ctx: Context) -> Expr:
 
     return rec(e)
 
+
 class ProofObligationBranch:
-    def __init__(self, exprs:List[Expr], flags:List[bool] = None):
-        self.exprs = exprs # satisfy all expressions
+    def __init__(self, exprs: List[Expr], flags: List[bool] = None):
+        self.exprs = exprs  # satisfy all expressions
         if flags is None or len(flags) != len(exprs):
             self.need_to_be_satisfied = [True for i in range(len(exprs))]
         else:
@@ -232,13 +235,15 @@ class ProofObligationBranch:
         }
         return res
 
+
 class ProofObligation:
     """Represents a proof obligation to prove e using the conditions
     in conds.
     
     """
+
     def __init__(self, branches: List['ProofObligationBranch'], conds: Conditions):
-        self.branches = branches # if any branch is satisfied then the proof obligation is carried out
+        self.branches = branches  # if any branch is satisfied then the proof obligation is carried out
         self.conds = conds
 
     def __eq__(self, other: "ProofObligation"):
@@ -254,9 +259,9 @@ class ProofObligation:
     def __str__(self):
         res = ""
         for i, b in enumerate(self.branches):
-            res += "branch "+str(i)+":\n"
+            res += "branch " + str(i) + ":\n"
             res += str(b) + '\n'
-        #"%s" % self.branches
+        # "%s" % self.branches
         return res
 
     def __repr__(self):
@@ -286,6 +291,7 @@ def check_wellformed(e: Expr, ctx: Context) -> List[ProofObligation]:
         obligation = ProofObligation(branches, ctx.get_conds())
         if obligation not in obligations:
             obligations.append(obligation)
+
     def rec(e: Expr, ctx: Context):
         if e.is_var() or e.is_const():
             pass
@@ -300,7 +306,8 @@ def check_wellformed(e: Expr, ctx: Context) -> List[ProofObligation]:
             if e.is_power():
                 if ctx.check_condition(Op(">", e.args[0], Const(0))):
                     pass
-                elif ctx.check_condition(Fun("isInt", e.args[1])) and ctx.check_condition(Op(">=", e.args[1], Const(0))):
+                elif ctx.check_condition(Fun("isInt", e.args[1])) and ctx.check_condition(
+                        Op(">=", e.args[1], Const(0))):
                     pass
                 else:
                     add_obligation(Op(">", e.args[0], Const(0)), ctx)
@@ -359,8 +366,10 @@ def check_wellformed(e: Expr, ctx: Context) -> List[ProofObligation]:
             rec(e.body, body_conds(e, ctx))
         else:
             pass
+
     rec(e, ctx)
     return obligations
+
 
 def check_asymp_converge(asymp: limits.Asymptote) -> bool:
     if isinstance(asymp, limits.PolyLog):
@@ -381,6 +390,7 @@ def check_asymp_converge(asymp: limits.Asymptote) -> bool:
     else:
         return False
 
+
 def check_converge(e: Expr, ctx: Context) -> bool:
     """Check convergence of the sum or integral."""
     if e.is_summation():
@@ -394,10 +404,10 @@ def check_converge(e: Expr, ctx: Context) -> bool:
             return True
     elif e.is_power():
         if check_converge(e.args[0], ctx) and check_converge(e.args[1], ctx) and \
-            ctx.check_condition(Op(">",e.args[1], Const(0))):
+                ctx.check_condition(Op(">", e.args[1], Const(0))):
             return True
     elif e.is_divides():
-        if ctx.check_condition(Op("!=", e.args[1], Const(0))) and check_converge(e.args[0], ctx) and\
+        if ctx.check_condition(Op("!=", e.args[1], Const(0))) and check_converge(e.args[0], ctx) and \
                 check_converge(e.args[1], ctx):
             return True
     elif e.is_fun():
@@ -406,9 +416,10 @@ def check_converge(e: Expr, ctx: Context) -> bool:
             if not check_converge(arg, ctx):
                 flag = False
                 break
-        if(flag):
+        if (flag):
             return True
     return False
+
 
 class Rule:
     """
@@ -490,12 +501,12 @@ class Linearity(Rule):
             if e.is_integral():
                 if e.body.is_plus():
                     return rec(expr.Integral(e.var, e.lower, e.upper, e.body.args[0])) + \
-                           rec(expr.Integral(e.var, e.lower, e.upper, e.body.args[1]))
+                        rec(expr.Integral(e.var, e.lower, e.upper, e.body.args[1]))
                 elif e.body.is_uminus():
                     return -rec(expr.Integral(e.var, e.lower, e.upper, e.body.args[0]))
                 elif e.body.is_minus():
                     return rec(expr.Integral(e.var, e.lower, e.upper, e.body.args[0])) - \
-                           rec(expr.Integral(e.var, e.lower, e.upper, e.body.args[1]))
+                        rec(expr.Integral(e.var, e.lower, e.upper, e.body.args[1]))
                 elif e.body.is_times() or e.body.is_divides():
                     num_factors, denom_factors = decompose_expr_factor(e.body)
                     b = prod(f for f in num_factors if f.contains_var(e.var))
@@ -517,12 +528,12 @@ class Linearity(Rule):
             elif e.is_indefinite_integral():
                 if e.body.is_plus():
                     return rec(expr.IndefiniteIntegral(e.var, e.body.args[0], e.skolem_args)) + \
-                           rec(expr.IndefiniteIntegral(e.var, e.body.args[1], e.skolem_args))
+                        rec(expr.IndefiniteIntegral(e.var, e.body.args[1], e.skolem_args))
                 elif e.body.is_uminus():
                     return -IndefiniteIntegral(e.var, e.body.args[0], e.skolem_args)
                 elif e.body.is_minus():
                     return rec(expr.IndefiniteIntegral(e.var, e.body.args[0], e.skolem_args)) - \
-                           rec(expr.IndefiniteIntegral(e.var, e.body.args[1], e.skolem_args))
+                        rec(expr.IndefiniteIntegral(e.var, e.body.args[1], e.skolem_args))
                 elif e.body.is_times() or e.body.is_divides():
                     num_factors, denom_factors = decompose_expr_factor(e.body)
                     b = prod(f for f in num_factors if f.contains_var(e.var))
@@ -584,17 +595,19 @@ class Linearity(Rule):
                     return e
             else:
                 return e
+
         return rec(e)
 
 
 class PartialFractionDecomposition(Rule):
     """Apply partial fraction decomposition from sympy."""
+
     def __init__(self):
         self.name = "PartialFractionDecomposition"
 
     def __str__(self):
         return "partial fraction decomposition"
-    
+
     def export(self):
         return {
             "name": self.name,
@@ -606,6 +619,7 @@ class PartialFractionDecomposition(Rule):
             return sympywrapper.partial_fraction(e, ctx)
         else:
             return e
+
 
 class ApplyIdentity(Rule):
     """Apply identities (trigonometric, etc) to the current term.
@@ -1092,6 +1106,10 @@ class ApplyEquation(Rule):
             if self.eq == identity.expr:
                 found = True
                 conds = identity.conds.data
+        for item in ctx.get_eq_conds().data:
+            if self.eq == item:
+                found = True
+                conds = []
         assert found, "ApplyEquation: lemma %s not found" % self.eq
 
         # First try to match the current term with left or right side.
@@ -1527,10 +1545,10 @@ class IntegrationByParts(Rule):
         if equal:
             if e.is_integral():
                 return expr.EvalAt(e.var, e.lower, e.upper, normalize(self.u * self.v, ctx2)) - \
-                       expr.Integral(e.var, e.lower, e.upper, normalize(self.v * du, ctx2))
+                    expr.Integral(e.var, e.lower, e.upper, normalize(self.v * du, ctx2))
             elif e.is_indefinite_integral():
                 return normalize(self.u * self.v, ctx2) - \
-                       expr.IndefiniteIntegral(e.var, normalize(self.v * du, ctx2), e.skolem_args)
+                    expr.IndefiniteIntegral(e.var, normalize(self.v * du, ctx2), e.skolem_args)
         else:
             raise AssertionError("Integration by parts: %s != %s" % (str(udv), str(e.body)))
 
@@ -1566,7 +1584,7 @@ class SplitRegion(Rule):
         is_cpv = limits.reduce_inf_limit(e.body.subst(e.var, self.c + 1 / x), x.name, ctx) in [POS_INF, NEG_INF]
         if not is_cpv:
             return expr.Integral(e.var, e.lower, self.c, e.body) + \
-                   expr.Integral(e.var, self.c, e.upper, e.body)
+                expr.Integral(e.var, self.c, e.upper, e.body)
         else:
             return Limit(x.name, POS_INF, Integral(e.var, e.lower, normalize(self.c - 1 / x, ctx), e.body) +
                          Integral(e.var, normalize(self.c + 1 / x, ctx), e.upper, e.body))
@@ -1992,7 +2010,8 @@ class SummationEquation(Rule):
     '''
     a(n) = b(n) => Sum(n, lower, upper ,a(n)) = Sum(n, lower, upper, b(n))
     '''
-    def __init__(self, index_var:str, lower:Union[Expr,str], upper:Union[Expr,str]):
+
+    def __init__(self, index_var: str, lower: Union[Expr, str], upper: Union[Expr, str]):
         if isinstance(lower, str):
             lower = parser.parse_expr(lower)
         if isinstance(upper, str):
@@ -2025,7 +2044,8 @@ class ChangeSummationIndex(Rule):
     '''
     sum(n, 1, oo, a(n)) => sum(n, 0, oo, a(n+1))
     '''
-    def __init__(self, new_lower:Union[Expr, str]):
+
+    def __init__(self, new_lower: Union[Expr, str]):
         self.name = "ChangeSummationIndex"
         self.new_lower = new_lower if isinstance(new_lower, Expr) else parser.parse_expr(new_lower)
 
@@ -2033,8 +2053,9 @@ class ChangeSummationIndex(Rule):
         assert e.is_summation()
         tmp = normalize(Var(e.index_var) + e.lower - self.new_lower, ctx)
         new_upper = normalize(e.upper + self.new_lower - e.lower, ctx) \
-            if e.upper != POS_INF  else POS_INF
+            if e.upper != POS_INF else POS_INF
         return Summation(e.index_var, self.new_lower, new_upper, e.body.replace(Var(e.index_var), tmp))
+
     def __str__(self):
         return "change summation index"
 
@@ -2086,7 +2107,7 @@ class IntSumExchange(Rule):
 
     def __str__(self):
         return "exchange integral and sum"
-    
+
     def test_converge(self, svar, sl, su, ivar, il, iu, body, ctx: Context):
         if ctx.is_not_negative(body):
             return True
@@ -2192,6 +2213,153 @@ class MergeSummation(Rule):
         return Summation(a.index_var, a.lower, a.upper, Op(e.op, a.body, b.body))
 
 
+class SplitSummation(Rule):
+    """
+    Split a summation into several summations.
+    input: SUM(i, 1, 7, i / (i + 1)), cond: i <= 4
+    output: SUM(i, 1, 4, i / (i + 1)) + SUM(i, 5, 7, i / (i + 1))
+    Currently, the cond only supports two kinds of input forms: i % k and i < k,
+    where i is a variable and k is an integer.
+    ('<' can be replaced with other comparison operators, such as '!=')
+    The lower and upper of summation should be an integer or inf.
+    """
+
+    def __init__(self, cond: Expr):
+        self.name = "SplitSummation"
+        self.cond = cond
+
+    def __str__(self):
+        return "split summation"
+
+    def export(self):
+        return {
+            "name": self.name,
+            "str": str(self)
+        }
+
+    def eval(self, e: Expr, ctx: Context) -> Expr:
+        if not e.is_summation():
+            return e
+        if e.lower.is_const() and e.upper.is_const():
+            if e.lower.val > e.upper.val:
+                return Const(0)
+            elif e.lower.val == e.upper.val:
+                return normalize(e.body.subst(e.index_var, e.lower), ctx)
+        if e.upper.is_neg_inf():
+            return Const(0)
+        if not e.lower.is_const() or not isinstance(e.lower.val, int):
+            return e
+        elif not e.upper.is_pos_inf() and not (e.upper.is_const() and isinstance(e.upper.val, int)):
+            return e
+        elif not isinstance(self.cond.args[0], Var) or self.cond.args[0].name != e.index_var or not (
+                self.cond.args[1].is_const() and isinstance(self.cond.args[1].val, int)):
+            return e
+        elif self.cond.is_mod():
+            if self.cond.args[1].val <= 0:
+                return e
+            if e.upper.is_pos_inf():
+                res = Summation(e.index_var, e.lower, e.upper, e.body)
+                for i in range(1, self.cond.args[1].val):
+                    tmp = Var(e.index_var) * self.cond.args[1] # Error is here
+                    res = normalize(Op('+', res, Summation(e.index_var, e.lower + Const(i), e.body.replace(tmp + e.lower + Const(1)))), ctx)
+                return res
+            pass
+        elif self.cond.is_compare():
+            if self.cond.op == '<=' or self.cond.op == '>':
+                if self.cond.args[1].val == e.lower.val:
+                    if e.upper.is_const() and e.upper.val - e.lower.val == 1:
+                        return normalize(
+                            Op('+',
+                               e.body.subst(e.index_var, self.lower),
+                               e.body.subst(e.index_var, self.upper)), ctx)
+                    else:
+                        return normalize(
+                            Op('+',
+                               e.body.subst(e.index_var, self.cond.args[1]),
+                               Summation(e.index_var, e.lower + 1, e.upper, e.body)), ctx)
+                elif e.lower.val - self.cond.args[1].val >= 1:
+                    return e
+                elif e.upper.is_const() and e.upper.val <= self.cond.args[1].val:
+                    return e
+                else:
+                    return normalize(
+                        Op('+',
+                           Summation(e.index_var, e.lower, self.cond.args[1], e.body),
+                           Summation(e.index_var, self.cond.args[1] + 1, e.upper, e.body)), ctx)
+            elif self.cond.op == '>=' or self.cond.op == '<':
+                if self.cond.args[1].val <= e.lower.val:
+                    return e
+                elif e.upper.is_const() and self.cond.args[1].val - e.upper.val >= 1:
+                    return e
+                elif e.upper.is_const() and self.cond.args[1].val == e.upper.val:
+                    if e.upper.is_const() and e.upper.val - e.lower.val == 1:
+                        return normalize(
+                            Op('+',
+                               e.body.subst(e.index_var, e.lower),
+                               e.body.subst(e.index_var, e.upper)), ctx)
+                    else:
+                        return normalize(
+                            Op('+',
+                               e.body.subst(e.index_var, self.cond.args[1]),
+                               Summation(e.index_var, e.lower, e.upper - 1, e.body)), ctx)
+                else:
+                    return normalize(
+                        Op('+',
+                           Summation(e.index_var, e.lower, self.cond.args[1] - 1, e.body),
+                           Summation(e.index_var, self.cond.args[1], e.upper, e.body)), ctx)
+            elif self.cond.op == '=' or self.cond.op == '!=':
+                if e.upper.is_const() and e.upper.val - e.lower.val == 1:
+                    if e.lower.val <= self.cond.args[1].val <= e.upper.val:
+                        return normalize(
+                            Op('+',
+                               e.body.subst(e.index_var, e.lower),
+                               e.body.subst(e.index_var, e.upper)), ctx)
+                    else:
+                        return e
+                else:
+                    if e.upper.is_pos_inf():
+                        if e.lower.val < self.cond.args[1].val:
+                            return e
+                        elif e.lower.val == self.cond.args[1].val:
+                            return normalize(
+                                Op('+',
+                                   e.body.subst(e.index_var, self.cond.args[1]),
+                                   Summation(e.index_var, self.cond.args[1] + 1, e.upper, e.body)), ctx)
+                        else:
+                            return Op('+',
+                                      Summation(e.index_var, e.lower, self.cond.args[1], e.body),
+                                      Summation(e.index_var, normalize(self.cond.args[1] + 1), e.upper, e.body), ctx)
+                    else:
+                        if not e.lower.val <= self.cond.args[1].val <= e.upper.val:
+                            return e
+                        else:
+                            if e.lower.val == self.cond.args[1].val:
+                                return normalize(
+                                    Op('+',
+                                       e.body.subst(e.index_var, e.lower),
+                                       Summation(e.index_var, self.cond.args[1] + 1, e.upper, e.body)), ctx)
+                            elif e.upper.val == self.cond.args[1].val:
+                                return normalize(
+                                    Op('+',
+                                       Summation(e.index_var, e.lower, self.cond.args[1] - 1, e.body),
+                                       e.body.subst(e.index_var, e.upper)), ctx)
+                            else:
+                                if self.cond.args[1].val - e.lower.val == 1:
+                                    a = e.body.subst(e.index_var, e.lower)
+                                else:
+                                    a = Summation(e.index_var, e.lower, self.cond.args[1] - 1, e.body)
+                                b = e.body.subst(e.index_var, self.cond.args[1])
+                                if e.upper.val - self.cond.args[1].val == 1:
+                                    c = e.body.subst(e.index_var, e.upper)
+                                else:
+                                    c = Summation(e.index_var, self.cond.args[1] + 1, e.upper, e.body)
+                                return normalize(Op('+', a, Op('+', b, c)), ctx)
+            else:
+                return e
+        else:
+            return e
+
+
 class DerivEquation(Rule):
     """Differentiate both sides with respect to some variable."""
 
@@ -2217,6 +2385,7 @@ class DerivEquation(Rule):
 
 class SolveEquation(Rule):
     """Solve equation for the given expression."""
+
     def __init__(self, solve_for: Union[Expr, str]):
         if isinstance(solve_for, str):
             solve_for = parser.parse_expr(solve_for)

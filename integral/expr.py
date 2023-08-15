@@ -109,6 +109,11 @@ class Expr:
             other = Const(other)
         return Op("^", self, other)
 
+    def __mod__(self, other):
+        if isinstance(other, (int, Fraction)):
+            other = CONST(other)
+        return Op("%", self, other)
+
     def __neg__(self):
         if self == POS_INF:
             return NEG_INF
@@ -195,6 +200,9 @@ class Expr:
 
     def is_power(self):
         return self.ty == OP and self.op == '^'
+
+    def is_mod(self):
+        return self.ty == OP and self.op == '%'
 
     def is_equals(self):
         return self.ty == OP and self.op == '='

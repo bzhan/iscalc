@@ -67,11 +67,9 @@ class MatrixTest(unittest.TestCase):
         file.add_definition("matrix P[n][n]")
         file.add_definition("matrix A[n][n]")
         file.add_definition("int n")
-        file.add_assumption("invertible(P)")
-        file.add_assumption("n > 0")
         # find same name variable definition
         # and then use that definition
-        goal = file.add_goal("(inv(P)*A*P)^n = inv(P)*A^n*P")
+        goal = file.add_goal("(inv(P)*A*P)^n = inv(P)*A^n*P", conds=["invertible(P)", "n>0"])
         proof = goal.proof_by_induction(induct_var='n', start=0)
         base_proof = proof.base_case.proof_by_calculation()
         induct_proof = proof.induct_case.proof_by_calculation()
@@ -113,9 +111,7 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
 
         file.add_definition("int n")
-        file.add_assumption("n>=0")
-        file.add_assumption("norm(w)=1")
-        goal03 = file.add_goal("hat(w)^(2*n+1) = (-1)^n * hat(w)")
+        goal03 = file.add_goal("hat(w)^(2*n+1) = (-1)^n * hat(w)", conds = ["n>=0", "norm(w)=1"])
         proof = goal03.proof_by_induction('n', 0)
         base_proof = proof.base_case.proof_by_calculation()
         induct_proof = proof.induct_case.proof_by_calculation()

@@ -116,16 +116,16 @@
             "var": "int n"
         },
         {
-            "expr": "n >= 0",
-            "latex_goal": "n \\ge 0",
-            "type": "Assumption"
-        },
-        {
-            "expr": "norm(w) = 1",
-            "latex_goal": "\\|w\\| = 1",
-            "type": "Assumption"
-        },
-        {
+            "conds": [
+                {
+                    "cond": "int n >= 0",
+                    "latex_cond": "n \\ge 0"
+                },
+                {
+                    "cond": "norm(matrix w[3][1]) = 1",
+                    "latex_cond": "\\|w\\| = 1"
+                }
+            ],
             "finished": true,
             "goal": "hat(matrix w[3][1]) ^ (2 * int n + 1) = (-1) ^ int n * hat(matrix w[3][1])",
             "latex_goal": "\\hat{w} ^ {2 n + 1} = (-1) ^ {n} \\hat{w}",
@@ -142,6 +142,10 @@
                         {
                             "cond": "int n >= 0",
                             "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "norm(matrix w[3][1]) = 1",
+                            "latex_cond": "\\|w\\| = 1"
                         }
                     ]
                 },
@@ -157,6 +161,10 @@
                         {
                             "cond": "int n >= 0",
                             "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "norm(matrix w[3][1]) = 1",
+                            "latex_cond": "\\|w\\| = 1"
                         }
                     ]
                 },
@@ -172,6 +180,10 @@
                         {
                             "cond": "int n >= 0",
                             "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "norm(matrix w[3][1]) = 1",
+                            "latex_cond": "\\|w\\| = 1"
                         }
                     ]
                 },
@@ -187,6 +199,10 @@
                         {
                             "cond": "int n >= 0",
                             "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "norm(matrix w[3][1]) = 1",
+                            "latex_cond": "\\|w\\| = 1"
                         }
                     ]
                 },
@@ -202,6 +218,10 @@
                         {
                             "cond": "int n >= 0",
                             "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "norm(matrix w[3][1]) = 1",
+                            "latex_cond": "\\|w\\| = 1"
                         }
                     ]
                 },
@@ -217,6 +237,10 @@
                         {
                             "cond": "int n >= 0",
                             "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "norm(matrix w[3][1]) = 1",
+                            "latex_cond": "\\|w\\| = 1"
                         }
                     ]
                 }
@@ -267,6 +291,10 @@
                                 {
                                     "cond": "int n >= 0",
                                     "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(matrix w[3][1]) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
                                 }
                             ]
                         },
@@ -282,6 +310,10 @@
                                 {
                                     "cond": "int n >= 0",
                                     "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(matrix w[3][1]) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
                                 }
                             ]
                         },
@@ -297,6 +329,10 @@
                                 {
                                     "cond": "int n >= 0",
                                     "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(matrix w[3][1]) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
                                 }
                             ]
                         },
@@ -312,6 +348,10 @@
                                 {
                                     "cond": "int n >= 0",
                                     "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(matrix w[3][1]) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
                                 }
                             ]
                         },
@@ -327,6 +367,10 @@
                                 {
                                     "cond": "int n >= 0",
                                     "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(matrix w[3][1]) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
                                 }
                             ]
                         },
@@ -342,6 +386,10 @@
                                 {
                                     "cond": "int n >= 0",
                                     "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(matrix w[3][1]) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
                                 }
                             ]
                         }

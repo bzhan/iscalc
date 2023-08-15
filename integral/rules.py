@@ -1106,6 +1106,10 @@ class ApplyEquation(Rule):
             if self.eq == identity.expr:
                 found = True
                 conds = identity.conds.data
+        for item in ctx.get_eq_conds().data:
+            if self.eq == item:
+                found = True
+                conds = []
         assert found, "ApplyEquation: lemma %s not found" % self.eq
 
         # First try to match the current term with left or right side.

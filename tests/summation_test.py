@@ -73,6 +73,3 @@ class SummationTest(unittest.TestCase):
             r = s.eval(e, ctx)
             print(r)
             self.assertEqual(str(r), res)
-
-    def testmy(self):
-        print(5//2)

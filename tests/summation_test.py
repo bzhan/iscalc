@@ -41,7 +41,27 @@ class SummationTest(unittest.TestCase):
 
     def testSplitSummation2(self):
         test_data = [
-            ("SUM(i, 1, oo, i / (i + 1))", "i % 4", "SUM(i, 1, 4, i / (i + 1)) + SUM(i, 5, 7, i / (i + 1))"),
+            ("SUM(i, 1, oo, i / (i + 1))",
+             "i % 4",
+             "SUM(i, 0, oo, (4 * i + 1) / (4 * i + 2)) + "
+             "SUM(i, 0, oo, (4 * i + 2) / (4 * i + 3)) + "
+             "SUM(i, 0, oo, (4 * i + 3) / (4 * i + 4)) + "
+             "SUM(i, 0, oo, (4 * i + 4) / (4 * i + 5))"),
+            ("SUM(i, 5, 21, i / (i + k))",
+             "i % 3",
+             "SUM(i, 0, 5, (3 * i + 5) / (3 * i + k + 5)) + "
+             "SUM(i, 0, 5, (3 * i + 6) / (3 * i + k + 6)) + "
+             "SUM(i, 0, 4, (3 * i + 7) / (3 * i + k + 7))"),
+            ("SUM(i, -4, -oo, i / (i + k))",
+             "i % 100",
+             "0"),
+            ("SUM(i, -7, -2, i / (i + k))",
+             "i % 2",
+             "SUM(i, 0, 2, (2 * i - 6) / (2 * i + k - 6)) + "
+             "SUM(i, 0, 2, (2 * i - 7) / (2 * i + k - 7))"),
+            ("SUM(i, -7, oo, i / (i + k))",
+             "i % 1",
+             "SUM(i, 0, oo, (i - 7) / (i + k - 7))")
         ]
         ctx = Context()
         ctx.load_book('base')

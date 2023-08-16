@@ -9,7 +9,7 @@ import operator
 from integral import expr, matrix
 from integral.expr import Var, Const, Fun, EvalAt, Op, Integral, Symbol, Expr, \
     OP, CONST, VAR, sin, cos, FUN, decompose_expr_factor, \
-    Deriv, Inf, Limit, NEG_INF, POS_INF, IndefiniteIntegral, Summation, SUMMATION, Matrix, Vector
+    Deriv, Inf, Limit, NEG_INF, POS_INF, IndefiniteIntegral, Summation, SUMMATION, Matrix
 from integral import parser
 from integral.matrix import is_vector
 from integral.solve import solve_equation, solve_for_term
@@ -36,19 +36,19 @@ def matrix_exp(m:Matrix, t:Expr, ctx:Context):
     dim = m.shape[0]
     m = normalize(m, ctx)
     if m.is_se3():
-        twist: 'Vector' = m.vee
-        v: 'Vector' = twist.get_line_velocity()
-        w: 'Vector' = twist.get_angle_velocity()
-        part2 = Vector([Const(0), Const(0), Const(0), Const(1)], is_column=False)
-        if w != Vector.zero(3, is_column=True):
+        twist = m.vee
+        v = twist.get_line_velocity()
+        w = twist.get_angle_velocity()
+        part2 = Matrix([Const(0), Const(0), Const(0), Const(1)], is_column=False)
+        if w != Matrix.zero(3, is_column=True):
             # formula 2.36 at page 42
-            left_top: 'Matrix' = matrix_exp(w.hat, t, ctx)
-            right_top: 'Vector' = (Matrix.unit_matrix(3) - left_top) * (w.hat * v) + \
-                                  Vector.scalar_mul(t, w * w.t * v)
+            left_top = matrix_exp(w.hat, t, ctx)
+            right_top = (Matrix.unit_matrix(3) - left_top) * (w.hat * v) + \
+                         Matrix.scalar_mul(t, w * w.t * v)
             part1 = left_top.concatenate(right_top)
         else:
             # formula 2.32 at page 41
-            part1 = Matrix.unit_matrix(3).concatenate(Vector.scalar_mul(t, v))
+            part1 = Matrix.unit_matrix(3).concatenate(Matrix.scalar_mul(t, v))
         return normalize(part1.concatenate(part2, col_concatenate=False), ctx)
     elif is_skew(m, ctx):
         # Rodrigues Formula
@@ -60,7 +60,7 @@ def matrix_exp(m:Matrix, t:Expr, ctx:Context):
     else:
         raise NotImplementedError
 
-def compute_jacobian(t:List[Vector], gsl:List[Matrix], theta:List[Expr], n:int, ctx:Context) -> Matrix:
+def compute_jacobian(t:List[Matrix], gsl:List[Matrix], theta:List[Expr], n:int, ctx:Context) -> Matrix:
     r = FullSimplify()
     jsl = [0 for i in range(n)]
     for i in range(n):
@@ -68,7 +68,7 @@ def compute_jacobian(t:List[Vector], gsl:List[Matrix], theta:List[Expr], n:int, 
         tmp = None
         for j in range(n):
             if j > i:
-                tmp = Vector.zero(6)
+                tmp = Matrix.zero(6)
             else:  # j<=i
                 tmp = Matrix.unit_matrix(4)
                 for k in range(j, i + 1):

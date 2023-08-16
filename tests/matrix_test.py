@@ -6,7 +6,7 @@ from typing import List
 
 from integral import rules, context, parser, compstate, matrix
 from integral.context import Context
-from integral.expr import Op, Var, Const, Matrix, Vector, Expr, Fun
+from integral.expr import Op, Var, Const, Matrix, Expr, Fun
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
@@ -28,66 +28,85 @@ class MatrixTest(unittest.TestCase):
             for content in file.content:
                 self.assertTrue(content.is_finished())
 
+    def testParseMatrix(self):
+        test_data = [
+            "[[3]]"
+        ]
+
+        for s in test_data:
+            t = parser.parse_expr(s)
+            self.assertEqual(str(t), s)
+
     def testTranspose1(self):
         test_data = [
-            ("{{1,2,3},{4,5,6}}", "{{1,4},{2,5},{3,6}}"),
-            ("{{1,2,3},{4,5,6},{7,8,9}}", "{{1,4,7},{2,5,8},{3,6,9}}")
-        ]
-        for a, b in test_data:
-            assert matrix.transpose(parser.parse_expr(a)) == parser.parse_expr(b)
-
-    def testMultiplication(self):
-        test_data = [
-            ("{{1,3,5},{2,4,7}}", "{{-5,8,11},{3,9,21},{4,0,8}}", "{{24,35,114},{30,52,162}}"),
-            ("{{1,1,0,0}}", "{{1},{2},{3},{4}}", "3"),
-            ("{{1,2}}", "{{1,3,5},{2,4,7}}", "{{5,11,19}}")
-        ]
-
-        ctx = Context()
-        for a, b, c in test_data:
-            m1 = parser.parse_expr(a)
-            m2 = parser.parse_expr(b)
-            res = matrix.multiply(m1, m2, ctx)
-            assert res == parser.parse_expr(c)
-
-    def testHat(self):
-        test_data = [
-            ("{{a1},{a2},{a3}}", "{{0,-a3,a2},{a3,0,-a1},{-a2,a1,0}}"),
-            ("{{v1},{v2},{v3},{w1},{w2},{w3}}",
-             "{{0, -w3, w2, v1},{w3, 0, -w1, v2},{-w2, w1, 0, v3},{0,0,0,0}}")
+            ("[[1,2,3],[4,5,6]]", "[[1,4],[2,5],[3,6]]"),
+            ("[[1,2,3],[4,5,6],[7,8,9]]", "[[1,4,7],[2,5,8],[3,6,9]]")
         ]
 
         for a, b in test_data:
             a = parser.parse_expr(a)
             b = parser.parse_expr(b)
-            matrix.hat(a) == b
+            self.assertEqual(matrix.transpose(a), b)
+
+    def testMultiplication(self):
+        test_data = [
+            ("[[1,3,5],[2,4,7]]", "[[-5,8,11],[3,9,21],[4,0,8]]", "[[24,35,114],[30,52,162]]"),
+            ("[[1,1,0,0]]", "[[1],[2],[3],[4]]", "[[3]]"),
+            ("[[1,2]]", "[[1,3,5],[2,4,7]]", "[[5,11,19]]")
+        ]
+
+        ctx = Context()
+        for a, b, c in test_data:
+            a = parser.parse_expr(a)
+            b = parser.parse_expr(b)
+            c = parser.parse_expr(c)
+            res = matrix.multiply(a, b, ctx)
+            self.assertEqual(res, c)
+
+    def testHat(self):
+        test_data = [
+            ("[a1,a2,a3]", "[[0,-a3,a2],[a3,0,-a1],[-a2,a1,0]]"),
+            ("[v1,v2,v3,w1,w2,w3]",
+             "[[0, -w3, w2, v1], [w3, 0, -w1, v2], [-w2, w1, 0, v3], [0,0,0,0]]")
+        ]
+
+        for a, b in test_data:
+            a = parser.parse_expr(a)
+            b = parser.parse_expr(b)
+            self.assertEqual(matrix.hat(a), b)
 
     def testExample01(self):
         file = compstate.CompFile("MIRM", "matrix_example01")
-        file.add_definition("matrix P[n][n]")
-        file.add_definition("matrix A[n][n]")
-        file.add_definition("int n")
-        # find same name variable definition
-        # and then use that definition
-        goal = file.add_goal("(inv(P)*A*P)^n = inv(P)*A^n*P", conds=["invertible(P)", "n>0"])
+        raw_fixes = [
+            ("n", "$int"),
+            ("P", "$tensor($real, n, n)"),
+            ("A", "$tensor($real, n, n)")
+        ]
+        fixes = dict()
+        for s, t in raw_fixes:
+            fixes[s] = parser.parse_expr(t, fixes=fixes)
+
+        goal = file.add_goal("(inv(P) * A * P) ^ n = inv(P) * (A ^ n) * P",
+                             fixes=fixes,
+                             conds=["invertible(P)", "n > 0"])
         proof = goal.proof_by_induction(induct_var='n', start=0)
         base_proof = proof.base_case.proof_by_calculation()
         induct_proof = proof.induct_case.proof_by_calculation()
         calc = base_proof.lhs_calc
         calc = base_proof.rhs_calc
         calc = induct_proof.lhs_calc
-        old_expr = "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ (int n + 1)"
-        new_expr = "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ (int n) * (inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n])"
+        old_expr = parser.parse_expr("(inv(P) * A * P) ^ (n + 1)", fixes=fixes)
+        new_expr = parser.parse_expr("(inv(P) * A * P) ^ n * (inv(P) * A * P)", fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(old_expr, new_expr))
         calc.perform_rule(rules.OnSubterm(rules.ApplyInductHyp()))
         calc.perform_rule(rules.FullSimplify())
-        old_expr = "inv(matrix P[n][n]) * matrix A[n][n] ^ int n * matrix A[n][n] * matrix P[n][n]"
-        new_expr = "inv(matrix P[n][n]) * (matrix A[n][n] ^ int n * matrix A[n][n]) * matrix P[n][n]"
+        old_expr = parser.parse_expr("inv(P) * A ^ n * A * P", fixes=fixes)
+        new_expr = parser.parse_expr("inv(P) * (A ^ n * A) * P", fixes=fixes)
         calc.perform_rule(rules.Equation(old_expr, new_expr))
-        old_expr = "matrix A[n][n] ^ int n * matrix A[n][n]"
-        new_expr = "matrix A[n][n] ^ (int n + 1)"
+        old_expr = parser.parse_expr("A ^ n * A", fixes=fixes)
+        new_expr = parser.parse_expr("A ^ (n + 1)", fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(old_expr, new_expr))
-        # print(file)
+
         self.checkAndOutput(file)
 
     def testExample02(self):

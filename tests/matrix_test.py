@@ -77,30 +77,36 @@ class MatrixTest(unittest.TestCase):
 
     def testExample01(self):
         file = compstate.CompFile("MIRM", "matrix_example01")
-        file.add_definition("matrix P[n][n]")
-        file.add_definition("matrix A[n][n]")
-        file.add_definition("int n")
-        # find same name variable definition
-        # and then use that definition
-        goal = file.add_goal("(inv(P)*A*P)^n = inv(P)*A^n*P", conds=["invertible(P)", "n>0"])
+        raw_fixes = [
+            ("n", "$int"),
+            ("P", "$tensor($real, n, n)"),
+            ("A", "$tensor($real, n, n)")
+        ]
+        fixes = dict()
+        for s, t in raw_fixes:
+            fixes[s] = parser.parse_expr(t, fixes=fixes)
+
+        goal = file.add_goal("(inv(P) * A * P) ^ n = inv(P) * (A ^ n) * P",
+                             fixes=fixes,
+                             conds=["invertible(P)", "n > 0"])
         proof = goal.proof_by_induction(induct_var='n', start=0)
         base_proof = proof.base_case.proof_by_calculation()
         induct_proof = proof.induct_case.proof_by_calculation()
         calc = base_proof.lhs_calc
         calc = base_proof.rhs_calc
         calc = induct_proof.lhs_calc
-        old_expr = "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ (int n + 1)"
-        new_expr = "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ (int n) * (inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n])"
+        old_expr = parser.parse_expr("(inv(P) * A * P) ^ (n + 1)", fixes=fixes)
+        new_expr = parser.parse_expr("(inv(P) * A * P) ^ n * (inv(P) * A * P)", fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(old_expr, new_expr))
         calc.perform_rule(rules.OnSubterm(rules.ApplyInductHyp()))
         calc.perform_rule(rules.FullSimplify())
-        old_expr = "inv(matrix P[n][n]) * matrix A[n][n] ^ int n * matrix A[n][n] * matrix P[n][n]"
-        new_expr = "inv(matrix P[n][n]) * (matrix A[n][n] ^ int n * matrix A[n][n]) * matrix P[n][n]"
+        old_expr = parser.parse_expr("inv(P) * A ^ n * A * P", fixes=fixes)
+        new_expr = parser.parse_expr("inv(P) * (A ^ n * A) * P", fixes=fixes)
         calc.perform_rule(rules.Equation(old_expr, new_expr))
-        old_expr = "matrix A[n][n] ^ int n * matrix A[n][n]"
-        new_expr = "matrix A[n][n] ^ (int n + 1)"
+        old_expr = parser.parse_expr("A ^ n * A", fixes=fixes)
+        new_expr = parser.parse_expr("A ^ (n + 1)", fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(old_expr, new_expr))
-        # print(file)
+
         self.checkAndOutput(file)
 
     def testExample02(self):

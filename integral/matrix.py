@@ -14,6 +14,7 @@ def is_vector(e:Expr, ctx:Context)  -> TypeGuard["Matrix"]:
     flag = flag and (r == Const(1) or c == Const(1))
     return flag
 
+"""
 def get_type(e, ctx=None) -> str:
     # print(e)
     if e.is_constant() or e.is_inf():
@@ -190,6 +191,7 @@ def get_shape(e: Expr, ctx: Context):
     else:
         print(e)
         raise NotImplementedError
+"""
 
 def transpose(e: Expr):
     if e.is_matrix():
@@ -211,7 +213,7 @@ def norm(e: Expr, ctx: Context):
 def multiply(a: Matrix, b: Matrix, ctx: Context):
     assert isinstance(a, Matrix)
     assert isinstance(b, Matrix)
-    assert a.num_col() == b.num_row()
+    assert expr.num_col(a.type) == expr.num_row(b.type)
     res = []
     for i in range(len(a.data)):
         tmp = []
@@ -245,8 +247,9 @@ def minus(a, b, ctx):
             res[i][j] = normalize(res[i][j] + a.data[i][j] - b.data[i][j], ctx)
     return Matrix(res)
 
-def unit_matrix(dim: int):
-    return Matrix([[Const(1) if i==j else Const(0) for j in range(dim)] for i in range(dim)])
+def unit_matrix(dim: int) -> Matrix:
+    """Return the unit matrix of the given dimension."""
+    return Matrix([[Const(1) if i == j else Const(0) for j in range(dim)] for i in range(dim)])
 
 def zero_matrix(r: int, c: int):
     assert type(r) == int and type(c) == int

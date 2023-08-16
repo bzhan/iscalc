@@ -5,11 +5,22 @@ from fractions import Fraction
 from decimal import Decimal
 
 from integral import expr
-from integral.expr import Var, Const, Op, Fun, Vector, Matrix
+from integral.expr import Var, Const, Op, Fun, Matrix
 from integral.parser import parse_expr
 
 
 class ParserTest(unittest.TestCase):
+    def testParseType(self):
+        test_data = [
+            "$real",
+            "$tensor($real, 3)",
+            "$tensor($real, 2, 3)",
+        ]
+
+        for s in test_data:
+            t = parse_expr(s)
+            self.assertEqual(str(t), s)
+
     def testParseTerm(self):
         test_data = [
             "x", "1", "11/10", "-1", "-11/10",

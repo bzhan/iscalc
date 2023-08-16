@@ -33,9 +33,12 @@ class Type:
             else:
                 return "(%s) => %s" % (', '.join(str(arg) for arg in self.args[:-1]), self.args[-1])
         elif len(self.args) == 0:
-            return self.name
+            return "$%s" % self.name
         else:
-            return "%s(%s)" % (self.name, ", ".join(str(arg) for arg in self.args))
+            return "$%s(%s)" % (self.name, ", ".join(str(arg) for arg in self.args))
+        
+    def __hash__(self):
+        return hash(("Type", self.name, self.args))
         
 
 def FunType(*args) -> Type:
@@ -47,6 +50,9 @@ def FunType(*args) -> Type:
 
 # Type of real numbers
 RealType = Type("real")
+
+# Type of integers
+IntType = Type("int")
 
 def TensorType(eleType: Type, *dims) -> Type:
     """Types of tensors, including vectors and matrices.
@@ -71,6 +77,15 @@ def is_vector_type(type: Type) -> bool:
 def is_matrix_type(type: Type) -> bool:
     return type.name == "tensor" and len(type.args) == 3
 
+def num_row(type: Type) -> int:
+    if not is_matrix_type(type):
+        raise AssertionError("num_row: input must be a matrix type, got %s" % type)
+    return type.args[1]
+        
+def num_col(type: Type) -> int:
+    if not is_matrix_type(type):
+        raise AssertionError("num_col: input must be a matrix type, got %s" % type)
+    return type.args[2]
 
 VAR, CONST, OP, FUN, DERIV, INTEGRAL, EVAL_AT, SYMBOL, LIMIT, INF, INDEFINITEINTEGRAL, \
 SKOLEMFUNC, SUMMATION, LAZYSERIES, VECTOR, MATRIX = range(16)
@@ -927,33 +942,8 @@ class Expr:
         else:
             raise NotImplementedError
 
-
-
     def is_matrix(self) -> TypeGuard["Matrix"]:
         return isinstance(self, Matrix) and self.ty == MATRIX
-
-    def is_vector(self) -> TypeGuard["Vector"]:
-        return isinstance(self, Vector) and self.ty == VECTOR
-
-
-    def get_shape(self):
-        if self.is_var():
-            return self.shape
-        elif self.is_fun():
-            if self.func_name == 'inv':
-                return self.args[0].shape
-            raise NotImplementedError
-        elif self.is_op():
-            a, b = self.args
-            if self.is_times():
-                shape1 = a.get_shape()
-                shape2 = b.get_shape()
-                # check shape1[1] = shape2[0]
-                return (shape1[0], shape2[1])
-            raise NotImplementedError
-        else:
-            print(self)
-            raise NotImplementedError
 
 
 def match(exp: Expr, pattern: Expr) -> Optional[Dict]:
@@ -1121,7 +1111,7 @@ def decompose_expr_factor(e):
 
 class Var(Expr):
     """Variable."""
-    def __init__(self, name: str, type: Optional[Type] = None):
+    def __init__(self, name: str, *, type: Optional[Type] = None):
         assert isinstance(name, str)
         self.ty = VAR
         self.name = name
@@ -1131,7 +1121,7 @@ class Var(Expr):
             self.type = type
 
     def __hash__(self):
-        return hash((VAR, self.name, self.ty2, self.shape))
+        return hash((VAR, self.name, self.type))
 
     def __eq__(self, other):
         return isinstance(other, Var) and self.name == other.name and self.type == other.type
@@ -1140,8 +1130,10 @@ class Var(Expr):
         return self.name
 
     def __repr__(self):
-        return "Var(%s)" % self.name
-
+        if self.type == RealType:
+            return "Var(%s)" % self.name
+        else:
+            return "Var(%s,%s)" % (self.name, self.type)
 
 class Const(Expr):
     """Constants."""
@@ -1227,6 +1219,14 @@ class Fun(Expr):
         self.ty = FUN
         self.func_name = func_name
         self.args = tuple(args)
+
+        # TODO: add more type inference
+        if self.func_name == 'unit_matrix':
+            self.type = MatrixType(RealType, self.args[0], self.args[0])
+        elif self.func_name == 'inv':
+            self.type = self.args[0].type
+        else:
+            self.type = RealType
 
     def __hash__(self):
         return hash((FUN, self.func_name, self.args))
@@ -1377,18 +1377,8 @@ class Matrix(Expr):
         if not is_matrix_type(self.type):
             raise AssertionError("transpose: input must be a matrix")
 
-        data = tuple(tuple(self.data[j][i] for j in range(self.num_col)) for i in range(self.num_row))
+        data = tuple(tuple(self.data[j][i] for j in range(num_col(self.type))) for i in range(num_row(self.type)))
         return Matrix(data)
-
-    def num_row(self) -> int:
-        if not is_matrix_type(self.type):
-            raise AssertionError("num_row: input must be a matrix")
-        return self.type.args[1]
-        
-    def num_col(self) -> int:
-        if not is_matrix_type(self.type):
-            raise AssertionError("num_col: input must be a matrix")
-        return self.type.args[2]
 
     def concatenate(self, other: Union["Matrix", "Matrix"], col_concatenate=True):
         if isinstance(other, Matrix):

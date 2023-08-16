@@ -2234,7 +2234,8 @@ class SplitSummation(Rule):
     def export(self):
         return {
             "name": self.name,
-            "str": str(self)
+            "str": str(self),
+            "cond": str(self.cond)
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
@@ -2248,15 +2249,15 @@ class SplitSummation(Rule):
         if e.upper.is_neg_inf():
             return Const(0)
         if not e.lower.is_const() or not isinstance(e.lower.val, int):
-            return e
+            raise AssertionError("Unexpected type or value of the lower of the summation")
         elif not e.upper.is_pos_inf() and not (e.upper.is_const() and isinstance(e.upper.val, int)):
-            return e
+            raise AssertionError("Unexpected type or value of the upper of the summation")
         elif not isinstance(self.cond.args[0], Var) or self.cond.args[0].name != e.index_var or not (
                 self.cond.args[1].is_const() and isinstance(self.cond.args[1].val, int)):
-            return e
+            raise AssertionError("Unexpected form of condition of summation splitting")
         elif self.cond.is_mod():
             if self.cond.args[1].val <= 0:
-                return e
+                return AssertionError("Unexpected value of divisor")
             if e.upper.is_pos_inf():
                 res = Const(0)
                 for i in range(self.cond.args[1].val):

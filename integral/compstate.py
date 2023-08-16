@@ -277,7 +277,7 @@ class Goal(StateItem):
         if len(res) != None:
             e = res[0]
             if isinstance(e, context.Identity):
-                return Goal(self, self.ctx, expr.Op("=", e.lhs, e.rhs), self.conds)
+                return Goal(self, self.ctx, expr.Op("=", e.lhs, e.rhs), conds=self.conds)
         raise NotImplementedError
 
 class CalculationStep(StateItem):
@@ -1045,7 +1045,7 @@ def parse_item(parent, item) -> StateItem:
         goal = parser.parse_expr(item['goal'])
         begin_goal = parser.parse_expr(item['start']['start'])
         begin_conds = parse_conds(item['start'])
-        res = RewriteGoalProof(parent, goal=goal, begin=Goal(parent, parent.ctx, begin_goal, begin_conds))
+        res = RewriteGoalProof(parent, goal=goal, begin=Goal(parent, parent.ctx, begin_goal, conds=begin_conds))
         for i, step in enumerate(item['start']['steps']):
             res.begin.add_step(parse_step(res.begin, step, i))
         return res

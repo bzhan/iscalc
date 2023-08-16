@@ -1265,6 +1265,7 @@ class Limit(Expr):
         self.lim = lim
         self.body = body
         self.drt = drt
+        self.type = RealType
 
     def __eq__(self, other):
         return isinstance(other, Limit) and other.var == self.var and \
@@ -1296,6 +1297,7 @@ class Inf(Expr):
         assert t in (Decimal("inf"), Decimal("-inf"))
         self.ty = INF
         self.t = t
+        self.type = RealType
 
     def __str__(self):
         if self.t == Decimal("inf"):
@@ -1325,6 +1327,7 @@ class SkolemFunc(Expr):
         self.ty = SKOLEMFUNC
         self.name = name
         self.dependent_vars = tuple(dep_vars)
+        self.type = RealType
 
     def __eq__(self, other):
         return isinstance(other, SkolemFunc) and \
@@ -1485,6 +1488,7 @@ class Deriv(Expr):
         self.ty = DERIV
         self.var: str = var
         self.body: Expr = body
+        self.type = RealType
 
     def __hash__(self):
         return hash((DERIV, self.var, self.body))
@@ -1508,6 +1512,7 @@ class IndefiniteIntegral(Expr):
         self.var = var
         self.body = body
         self.skolem_args = tuple(skolem_args)
+        self.type = RealType
 
     def __hash__(self):
         return hash((INDEFINITEINTEGRAL, self.var, self.body, self.skolem_args))
@@ -1542,6 +1547,7 @@ class Integral(Expr):
         self.lower = lower
         self.upper = upper
         self.body = body
+        self.type = RealType
 
     def __hash__(self):
         return hash((INTEGRAL, self.var, self.lower, self.upper, self.body))
@@ -1573,6 +1579,7 @@ class EvalAt(Expr):
         self.lower = lower
         self.upper = upper
         self.body = body
+        self.type = RealType
 
     def __hash__(self):
         return hash((EVAL_AT, self.var, self.lower, self.upper, self.body))
@@ -1598,6 +1605,7 @@ class Symbol(Expr):
         self.ty = SYMBOL
         self.name = name
         self.pat = tuple(pat)
+        self.type = RealType
 
     def __eq__(self, other):
         return isinstance(other, Symbol) and self.name == other.name and self.pat == other.pat
@@ -1620,6 +1628,7 @@ class Summation(Expr):
         self.lower: Expr = lower
         self.upper: Expr = upper
         self.body: Expr = body
+        self.type = RealType
 
     def __str__(self):
         return "SUM(" + self.index_var + ", " + str(self.lower) + ", " + str(self.upper) + ", " + str(self.body) + ")"

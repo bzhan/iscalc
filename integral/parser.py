@@ -1,5 +1,6 @@
 """Parsing"""
 
+from typing import Dict, Optional, Tuple
 from lark import Lark, Transformer, v_args, exceptions
 from decimal import Decimal
 from fractions import Fraction
@@ -23,7 +24,6 @@ grammar = r"""
         | CNAME "(" expr ("," expr)* ")" -> fun_expr
         | "(" expr ")"
         | "\|" expr "\|" -> abs_expr 
-        | "$" expr "$" -> trig_expr
         | "INT" CNAME ":[" expr "," expr "]." expr -> integral_expr
         | "INT" CNAME "." expr -> indefinite_integral_expr
         | "INT" CNAME "[" CNAME ("," CNAME)* "]" "." expr -> indefinite_integral_skolem_expr
@@ -31,9 +31,9 @@ grammar = r"""
         | "LIM" "{" CNAME "->" expr "}" "." expr -> limit_inf_expr
         | "LIM" "{" CNAME "->" expr "-}" "."  expr -> limit_l_expr
         | "LIM" "{" CNAME "->" expr "+}" "."  expr -> limit_r_expr
-        | "{" expr ("," expr)* "}" -> vector_expr
-        | CNAME CNAME "[" expr "]" "[" expr "]" -> matrix_var
-        | CNAME CNAME -> type_var
+        | "[" expr ("," expr)* "]" -> vector_expr
+        | "$" CNAME -> type0_expr
+        | "$" CNAME "(" expr ("," expr)* ")" -> type_expr
 
     ?uminus: "-" uminus -> uminus_expr | atom  // priority 80
 
@@ -71,10 +71,14 @@ grammar = r"""
 @v_args(inline=True)
 class ExprTransformer(Transformer):
     def __init__(self):
-        pass
+        self.fixes: Optional[Dict[str, expr.Type]] = None
 
     def var_expr(self, s):
-        return expr.Var(str(s))
+        s = str(s)
+        if self.fixes is not None and s in self.fixes:
+            return expr.Var(s, type=self.fixes[s])
+        else:
+            return expr.Var(s)
 
     def symbol_expr(self, s):
         return expr.Symbol(str(s), [expr.VAR, expr.CONST, expr.OP, expr.FUN])
@@ -190,27 +194,31 @@ class ExprTransformer(Transformer):
         return expr.Limit(str(var), lim, body, "+")
 
     def vector_expr(self, *args):
-        if isinstance(args[0], expr.Vector):
-            data = []
-            for vec in args:
-                data.append(vec.data)
-            return expr.Matrix(data)
-        else:
-            return expr.Vector(list(args))
+        data = []
+        for arg in args:
+            if isinstance(arg, expr.Matrix):
+                data.append(arg.data)
+            else:
+                data.append(arg)
+        return expr.Matrix(tuple(data))
 
-    def matrix_var(self, ty, name, d1, d2):
-        return expr.Var(str(name), ty2=str(ty), shape=(d1, d2))
+    def type0_expr(self, name) -> expr.Type:
+        return expr.Type(str(name))
 
-    def type_var(self, ty, name):
-        return expr.Var(str(name), ty2=str(ty))
+    def type_expr(self, name, *args) -> expr.Type:
+        return expr.Type(str(name), *args)
 
-expr_parser = Lark(grammar, start="expr", parser="lalr", transformer=ExprTransformer())
-interval_parser = Lark(grammar, start="interval", parser="lalr", transformer=ExprTransformer())
 
-def parse_expr(s: str) -> Expr:
+transformer = ExprTransformer()
+expr_parser = Lark(grammar, start="expr", parser="lalr", transformer=transformer)
+
+def parse_expr(s: str, *, fixes: Optional[Dict[str, expr.Type]] = None) -> Expr:
     """Parse an integral expression."""
     try:
-        return expr_parser.parse(s)
+        transformer.fixes = fixes
+        res = expr_parser.parse(s)
+        transformer.fixes = None
+        return res
     except (exceptions.UnexpectedCharacters, exceptions.UnexpectedToken) as e:
         print("When parsing:", s)
         raise e

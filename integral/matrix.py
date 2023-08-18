@@ -14,6 +14,7 @@ def is_vector(e:Expr, ctx:Context)  -> TypeGuard["Matrix"]:
     flag = flag and (r == Const(1) or c == Const(1))
     return flag
 
+"""
 def get_type(e, ctx=None) -> str:
     # print(e)
     if e.is_constant() or e.is_inf():
@@ -190,6 +191,7 @@ def get_shape(e: Expr, ctx: Context):
     else:
         print(e)
         raise NotImplementedError
+"""
 
 def transpose(e: Expr):
     if e.is_matrix():
@@ -211,16 +213,14 @@ def norm(e: Expr, ctx: Context):
 def multiply(a: Matrix, b: Matrix, ctx: Context):
     assert isinstance(a, Matrix)
     assert isinstance(b, Matrix)
-    assert len(a.data[0]) == len(b.data)
+    assert expr.num_col(a.type) == expr.num_row(b.type)
     res = []
     for i in range(len(a.data)):
         tmp = []
         for j in range(len(b.data[0])):
             sum = Const(0)
             for k in range(len(a.data[0])):
-                sum = normalize(sum+a.data[i][k]*b.data[k][j], ctx)
-            if len(a.data) == 1 and len(b.data[0]) == 1:
-                return sum
+                sum = normalize(sum+a.data[i][k] * b.data[k][j], ctx)
             tmp.append(sum)
         res.append(tmp)
     return Matrix(res)
@@ -247,26 +247,29 @@ def minus(a, b, ctx):
             res[i][j] = normalize(res[i][j] + a.data[i][j] - b.data[i][j], ctx)
     return Matrix(res)
 
-def unit_matrix(dim: int):
-    return Matrix([[Const(1) if i==j else Const(0) for j in range(dim)] for i in range(dim)])
+def unit_matrix(dim: int) -> Matrix:
+    """Return the unit matrix of the given dimension."""
+    return Matrix([[Const(1) if i == j else Const(0) for j in range(dim)] for i in range(dim)])
 
 def zero_matrix(r: int, c: int):
     assert type(r) == int and type(c) == int
     assert r > 0 and c > 0
     return Matrix([[Const(0) for j in range(c)] for i in range(r)])
 
-def hat(e: Expr):
-    if not e.is_matrix():
-        return e
-    if len(e.data[0]) == 1 or len(e.data) == 3:
-        res = [[Const(0), -e.data[2][0], e.data[1][0]],
-                [e.data[2][0], Const(0), -e.data[0][0]],
-                [-e.data[1][0], e.data[0][0], Const(0)]]
+def hat(e: Expr) -> Expr:
+    if not e.is_matrix() and expr.is_matrix_type(e.type):
+        raise AssertionError("hat: type mismatch")
+
+    if e.type == expr.VectorType(expr.RealType, 3):
+        res = [[ Const(0),  -e.data[2],  e.data[1]],
+               [ e.data[2],  Const(0),  -e.data[0]],
+               [-e.data[1],  e.data[0],  Const(0)]]
         return Matrix(res)
-    if len(e.data[0]) == 1 and len(e.data) == 6:
-        res = [[Const(0), -e.data[5][0], e.data[4][0], e.data[0][0]],
-               [e.data[5][0], Const(0), -e.data[3][0], e.data[1][0]],
-               [-e.data[4][0], e.data[3][0], Const(0), e.data[2][0]],
-               [Const(0),Const(0),Const(0),Const(0)]]
+    elif e.type == expr.VectorType(expr.RealType, 6):
+        res = [[ Const(0),  -e.data[5],  e.data[4], e.data[0]],
+               [ e.data[5],  Const(0),  -e.data[3], e.data[1]],
+               [-e.data[4],  e.data[3],  Const(0),  e.data[2]],
+               [ Const(0),   Const(0),   Const(0),  Const(0)]]
         return Matrix(res)
-    raise ValueError(f"{e} should be a vector of 6- or 3-dimension")
+    else:
+        raise AssertionError(f"{e} should be a 3 or 6-dimensional vector")

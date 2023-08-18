@@ -16,16 +16,16 @@
             "var": "int n"
         },
         {
-            "expr": "invertible(P)",
-            "latex_goal": "invertible{(P)}",
-            "type": "Assumption"
-        },
-        {
-            "expr": "n > 0",
-            "latex_goal": "n > 0",
-            "type": "Assumption"
-        },
-        {
+            "conds": [
+                {
+                    "cond": "invertible(matrix P[n][n])",
+                    "latex_cond": "invertible{(P)}"
+                },
+                {
+                    "cond": "int n > 0",
+                    "latex_cond": "n > 0"
+                }
+            ],
             "finished": true,
             "goal": "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ int n = inv(matrix P[n][n]) * matrix A[n][n] ^ int n * matrix P[n][n]",
             "latex_goal": "(P ^ {-1} A P) ^ {n} = P ^ {-1} A ^ {n} P",

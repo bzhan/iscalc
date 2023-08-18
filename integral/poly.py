@@ -63,8 +63,8 @@ def collect_pairs_power(ps: Dict[expr.Expr, "Polynomial"], ctx: Context):
 
     mat_list = []
     for v, c in ps:
-        if matrix.get_type(v, ctx) == 'matrix':
-            mat_list.append((v,c))
+        if expr.is_matrix_type(v.type):
+            mat_list.append((v, c))
         else:
             if v in res:
                 if is_non_negative(c) and is_non_negative(res[v]):
@@ -278,7 +278,7 @@ class Monomial:
     def has_matrix(self):
         if len(self.factors) > 0:
             for factor in self.factors:
-                if matrix.get_type(factor[0]) == 'matrix':
+                if expr.is_matrix_type(factor[0].type):
                     return True
         return False
 
@@ -375,7 +375,7 @@ class Polynomial:
             if self.monomials[0].has_matrix():
                 pos = None
                 for i in range(len(self.monomials[0].factors)):
-                    if matrix.get_type(self.monomials[0].factors[i][0]) == 'matrix':
+                    if expr.is_matrix_type(self.monomials[0].factors[i][0].type):
                         pos = i
                         break
                 if pos != None:
@@ -639,14 +639,20 @@ def simplify_identity(e: expr.Expr, ctx: Context) -> expr.Expr:
     return e
 
 def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
+    """Simplification of matrix expressions.
+    
+    We currently perform the following simplifications:
+    * A ^ 0 = 0
+    * A ^ 1 = A
 
+    """
     if e.is_op():
         if e.is_power():
             a, b = e.args
-            if matrix.get_type(a, ctx) == 'matrix':
+            if expr.is_matrix_type(a.type):
                 nb = normalize(b, ctx)
-                if  nb== expr.Const(0):
-                    return expr.Fun("unit_matrix", a.get_shape()[0])
+                if nb == expr.Const(0):
+                    return expr.Fun("unit_matrix", expr.num_row(a.type))
                 elif nb == expr.Const(1):
                     return a
         elif e.is_times():
@@ -675,10 +681,10 @@ def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
                     b = factors[i-1]
                     if a.is_fun() and a.func_name == 'inv' and a.args[0] == b:
                         tmp.pop()
-                        tmp.append(expr.Fun('unit_matrix', a.get_shape()[0]))
+                        tmp.append(expr.Fun('unit_matrix', expr.num_row(a.type)))
                     elif b.is_fun() and b.func_name == 'inv' and b.args[0] == a:
                         tmp.pop()
-                        tmp.append(expr.Fun('unit_matrix', a.get_shape()[0]))
+                        tmp.append(expr.Fun('unit_matrix', expr.num_row(a.type)))
                     else:
                         tmp.append(a)
 
@@ -686,7 +692,7 @@ def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
             unit_matrix_cnt = 0
             matrix_cnt = 0
             for factor in factors:
-                if matrix.get_type(factor, ctx) == 'matrix':
+                if expr.is_matrix_type(factor.type):
                     matrix_cnt = matrix_cnt + 1
                     if factor.is_fun() and factor.func_name == 'unit_matrix':
                         unit_matrix_cnt = unit_matrix_cnt + 1
@@ -699,20 +705,20 @@ def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
             res_factors = []
             if remove_unit_matrix:
                 for factor in factors:
-                    if not (matrix.get_type(factor, ctx) == 'matrix' and factor.is_fun() and \
+                    if not (expr.is_matrix_type(factor.type) and factor.is_fun() and \
                             factor.func_name == 'unit_matrix'):
-                        # res = res *  factor
+                        # res = res * factor
                         res_factors.append(factor)
             else:
                 if keep_one_unit_matrix:
                     first = True
                     for factor in factors:
-                        if matrix.get_type(factor, ctx) == 'matrix' and factor.is_fun() and \
+                        if expr.is_matrix_type(factor.type) and factor.is_fun() and \
                                 factor.func_name == 'unit_matrix' and first:
                             # res = res * factor
                             first = False
                             res_factors.append(factor)
-                        if not (matrix.get_type(factor, ctx) == 'matrix' and factor.is_fun() and \
+                        if not (expr.is_matrix_type(factor.type) and factor.is_fun() and \
                                 factor.func_name == 'unit_matrix'):
                             # res = res * factor
                             res_factors.append(factor)
@@ -730,9 +736,9 @@ def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
 def simplify_salar_multiply(e: expr.Expr, ctx:Context) -> expr.Expr:
     if e.is_times():
         a, b = e.args
-        if matrix.get_type(a, ctx) != 'matrix' and b.is_matrix():
+        if expr.is_matrix_type(a.type) and b.is_matrix():
             return expr.Matrix([[from_poly(to_poly(a*item, ctx)) for item in r] for r in b.data])
-        elif a.is_matrix() and matrix.get_type(b, ctx) != 'matrix':
+        elif a.is_matrix() and expr.is_matrix_type(b.type):
             return expr.Matrix([[from_poly(to_poly(b * item, ctx)) for item in r] for r in a.data])
     elif e.is_uminus():
         if e.args[0].is_matrix():
@@ -756,6 +762,7 @@ def simplify_matrix_add(e:expr.Expr, ctx:Context):
         if a.is_matrix() and b.is_matrix():
             return matrix.minus(a, b, ctx)
     return e
+
 def simplify_eq(e: expr.Expr, ctx: Context) -> expr.Expr:
     if not e.is_var():
         return e
@@ -1010,9 +1017,9 @@ def from_mono(m: Monomial) -> expr.Expr:
                 denom_factors.append(base ** expr.Const(-power))
             elif isinstance(power, Polynomial):
                 num_factors.append(base ** from_poly(power))
-            elif matrix.get_type(base) == 'matrix' and power == 0:
-                # check whether base is a square matrix or not
-                num_factors.append(expr.Fun('unit_matrix', base.get_shape()[0]))
+            elif expr.is_matrix_type(base.type) and power == 0:
+                # TODO: check whether base is a square matrix or not
+                num_factors.append(expr.Fun('unit_matrix', expr.num_row(base.type)))
             else:
                 raise TypeError("from_mono: unexpected type %s for power" % type(power))
 

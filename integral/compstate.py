@@ -1,6 +1,6 @@
 """State of computation"""
 
-from typing import List, Optional, Union, Tuple
+from typing import Dict, List, Optional, Union, Tuple
 
 from integral.expr import Expr, Var, Const
 from integral import rules, expr
@@ -170,12 +170,24 @@ class VarDef(StateItem):
 
 class Goal(StateItem):
     """Goal to be proved."""
-    def __init__(self, parent, ctx: Context, goal: Expr, conds: Optional[Conditions] = None):
+    def __init__(self, parent, ctx: Context, goal: Expr, *,
+                 fixes: Optional[Dict[str, expr.Type]] = None,
+                 conds: Optional[Conditions] = None):
         self.parent = parent
+
+        # Statement to be proved
         self.goal = goal
+
+        # Mapping from variables to their types
+        self.fixes: Dict[str, expr.Type] = dict()
+        if fixes is not None:
+            self.fixes = fixes
+
+        # List of assumptions for the goal
         if conds is None:
             conds = Conditions()
         self.conds = conds
+
         self.proof = None
         self.ctx = Context(ctx)
         self.ctx.extend_condition(self.conds)
@@ -265,7 +277,7 @@ class Goal(StateItem):
         if len(res) != None:
             e = res[0]
             if isinstance(e, context.Identity):
-                return Goal(self, self.ctx, expr.Op("=", e.lhs, e.rhs), self.conds)
+                return Goal(self, self.ctx, expr.Op("=", e.lhs, e.rhs), conds=self.conds)
         raise NotImplementedError
 
 class CalculationStep(StateItem):
@@ -502,7 +514,7 @@ class InductionProof(StateItem):
         self.base_case = Goal(self, self.ctx, eq0)
 
         # Inductive case:
-        eqI = goal.subst(induct_var, Var(induct_var) + 1)
+        eqI = goal.subst(induct_var, Var(induct_var, type=expr.IntType) + 1)
         eqI = normalize(replace_with_var_def(self.ctx.get_var_definitions(), eqI), self.ctx)
         ctx = Context(self.ctx)
         ctx.add_induct_hyp(replace_with_var_def(self.ctx.get_var_definitions(), goal))
@@ -790,7 +802,9 @@ class CompFile:
             raise NotImplementedError
         return self.content[-1]
 
-    def add_goal(self, goal: Union[str, Expr, Goal], *, conds: List[Union[str, Expr]] = None) -> Goal:
+    def add_goal(self, goal: Union[str, Expr, Goal], *,
+                 fixes: Optional[Dict[str, expr.Type]] = None,
+                 conds: Optional[List[Union[str, Expr]]] = None) -> Goal:
         """Add a goal.
 
         goal: statement of the goal.
@@ -803,6 +817,10 @@ class CompFile:
             self.content.append(goal)
             return self.content[-1]
 
+        # Process fixes
+        if fixes is None:
+            fixes = dict()
+
         if conds is not None:
             for i in range(len(conds)):
                 if isinstance(conds[i], str):
@@ -810,15 +828,17 @@ class CompFile:
         else:
             conds = []
 
+        # Parse goal statement
         if isinstance(goal, str):
-            goal = parser.parse_expr(goal)
+            goal = parser.parse_expr(goal, fixes=fixes)
         assert isinstance(goal, Expr)
+
         res_conds = []
         for cond in conds:
             res_conds.append(replace_with_var_def(ctx.get_var_definitions(), cond))
         goal = replace_with_var_def(ctx.get_var_definitions(), goal)
         conds = Conditions(res_conds)
-        self.content.append(Goal(self, ctx, goal, conds))
+        self.content.append(Goal(self, ctx, goal, fixes=fixes, conds=conds))
         return self.content[-1]
 
     def add_item(self, item: StateItem):
@@ -831,19 +851,6 @@ class CompFile:
             "name": self.name,
             "content": [item.export() for item in self.content]
         }
-
-    def add_assumption(self, a:Union[str, Expr]):
-        if isinstance(a, str):
-            a = parser.parse_expr(a)
-        self.content.append(Assumption(self, a))
-        ctx = self.get_context()
-        a = replace_with_var_def(ctx.get_var_definitions(), a)
-        if a.is_equals():
-            self.ctx.add_lemma(a, self.ctx.get_conds())
-            self.ctx.add_assumption(a, self.ctx.get_conds())
-        else:
-            self.ctx.add_condition(a)
-        return self.content[-1]
 
 def parse_rule(item) -> Rule:
     if 'loc' in item:
@@ -1038,7 +1045,7 @@ def parse_item(parent, item) -> StateItem:
         goal = parser.parse_expr(item['goal'])
         begin_goal = parser.parse_expr(item['start']['start'])
         begin_conds = parse_conds(item['start'])
-        res = RewriteGoalProof(parent, goal=goal, begin=Goal(parent, parent.ctx, begin_goal, begin_conds))
+        res = RewriteGoalProof(parent, goal=goal, begin=Goal(parent, parent.ctx, begin_goal, conds=begin_conds))
         for i, step in enumerate(item['start']['steps']):
             res.begin.add_step(parse_step(res.begin, step, i))
         return res

@@ -2222,6 +2222,8 @@ class SplitSummation(Rule):
 
     def __init__(self, cond: Expr):
         self.name = "SplitSummation"
+        if isinstance(cond, str):
+            cond = parser.parse_expr(cond)
         self.cond = cond
 
     def __str__(self):
@@ -2321,7 +2323,7 @@ class SplitSummation(Rule):
                         return e
                 else:
                     if e.upper.is_pos_inf():
-                        if e.lower.val < self.cond.args[1].val:
+                        if e.lower.val > self.cond.args[1].val:
                             return e
                         elif e.lower.val == self.cond.args[1].val:
                             return normalize(
@@ -2331,7 +2333,7 @@ class SplitSummation(Rule):
                         else:
                             return Op('+',
                                       Summation(e.index_var, e.lower, self.cond.args[1], e.body),
-                                      Summation(e.index_var, normalize(self.cond.args[1] + 1), e.upper, e.body), ctx)
+                                      Summation(e.index_var, normalize(self.cond.args[1] + 1, ctx), e.upper, e.body))
                     else:
                         if not e.lower.val <= self.cond.args[1].val <= e.upper.val:
                             return e

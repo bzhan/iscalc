@@ -45,6 +45,6 @@
       "type": "axiom"
     }
   ],
-  "imports": [],
+  "imports": ["base"],
   "name": "interesting"
 }

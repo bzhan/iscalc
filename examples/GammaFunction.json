@@ -20,6 +20,12 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
             "goal": "Gamma(n) = (n - 1) * Gamma(n - 1)",
             "latex_goal": "\\Gamma{(n)} = (n - 1) \\Gamma{(n - 1)}",
             "proof": {
@@ -96,6 +102,12 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
             "goal": "Gamma(n) = factorial(n - 1)",
             "latex_goal": "\\Gamma{(n)} = (n - 1)!",
             "proof": {

@@ -71,9 +71,8 @@ class ParserTest(unittest.TestCase):
 
     def testParseVector(self):
         test_data = [
-            ("{1,2,3}", Vector([Const(1), Const(2), Const(3)], is_column=False)),
-            ("T({1,2,3})", Vector([Const(1), Const(2), Const(3)], is_column=True)),
-            ("T(T({1,2,3}))", Vector([Const(1), Const(2), Const(3)], is_column=False)),
+            ("[[1],[2],[3]]", Matrix([[Const(1)], [Const(2)], [Const(3)]])),
+            ("T([[1],[2],[3]])", Fun("T",Matrix([[Const(1)], [Const(2)], [Const(3)]])))
         ]
         for s, r in test_data:
             e = parse_expr(s)

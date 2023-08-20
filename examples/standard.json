@@ -473,6 +473,16 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "n",
+                    "$int"
+                ],
+                [
+                    "m",
+                    "$int"
+                ]
+            ],
             "goal": "(INT x:[0,1]. x ^ m * log(x) ^ n) = (-1) ^ n * factorial(n) / (m + 1) ^ (n + 1)",
             "latex_goal": "\\int_{0}^{1} x ^ {m} \\log^{n}(x) \\,dx = \\frac{(-1) ^ {n} n!}{(m + 1) ^ {n + 1}}",
             "proof": {

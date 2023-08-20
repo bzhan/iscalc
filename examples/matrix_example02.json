@@ -1,36 +1,46 @@
 {
     "content": [
         {
-            "content": "{{a_1}, {a_2}, {a_3}}",
+            "content": "[[a_1], [a_2], [a_3]]",
             "latex_var": "w",
             "type": "VarDef",
-            "var": "matrix w[3][1]"
+            "var": "w"
         },
         {
             "finished": true,
-            "goal": "hat(matrix w[3][1]) ^ 2 = matrix w[3][1] * T(matrix w[3][1]) - norm(matrix w[3][1]) ^ 2 * unit_matrix(3)",
+            "fixes": [
+                [
+                    "w",
+                    "$tensor($real, 3, 1)"
+                ],
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
+            "goal": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
             "latex_goal": "\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot I_{3 \\times 3}",
             "proof": {
                 "calcs": [
                     {
                         "latex_start": "\\hat{w} ^ {2}",
-                        "start": "hat(matrix w[3][1]) ^ 2",
+                        "start": "hat(w) ^ 2",
                         "steps": [
                             {
                                 "latex_res": "\\hat{w} ^ {1} \\hat{w} ^ {1}",
-                                "res": "hat(matrix w[3][1]) ^ 1 * hat(matrix w[3][1]) ^ 1",
+                                "res": "hat(w) ^ 1 * hat(w) ^ 1",
                                 "rule": {
                                     "latex_str": "rewrite \\(\\hat{w} ^ {2}\\) to \\(\\hat{w} ^ {1} \\hat{w} ^ {1}\\) using identity",
                                     "name": "ApplyIdentity",
-                                    "source": "hat(matrix w[3][1]) ^ 2",
-                                    "str": "rewrite hat(matrix w[3][1]) ^ 2 to hat(matrix w[3][1]) ^ 1 * hat(matrix w[3][1]) ^ 1 using identity",
-                                    "target": "hat(matrix w[3][1]) ^ 1 * hat(matrix w[3][1]) ^ 1"
+                                    "source": "hat(w) ^ 2",
+                                    "str": "rewrite hat(w) ^ 2 to hat(w) ^ 1 * hat(w) ^ 1 using identity",
+                                    "target": "hat(w) ^ 1 * hat(w) ^ 1"
                                 },
                                 "type": "CalculationStep"
                             },
                             {
                                 "latex_res": "\\begin{bmatrix}-a_2 ^ {2} - a_3 ^ {2}&a_1 a_2&a_1 a_3\\\\a_1 a_2&-a_1 ^ {2} - a_3 ^ {2}&a_2 a_3\\\\a_1 a_3&a_2 a_3&-a_1 ^ {2} - a_2 ^ {2}\\end{bmatrix}",
-                                "res": "{{-(a_2 ^ 2) - a_3 ^ 2, a_1 * a_2, a_1 * a_3}, {a_1 * a_2, -(a_1 ^ 2) - a_3 ^ 2, a_2 * a_3}, {a_1 * a_3, a_2 * a_3, -(a_1 ^ 2) - a_2 ^ 2}}",
+                                "res": "[[-(a_2 ^ 2) - a_3 ^ 2, a_1 * a_2, a_1 * a_3], [a_1 * a_2, -(a_1 ^ 2) - a_3 ^ 2, a_2 * a_3], [a_1 * a_3, a_2 * a_3, -(a_1 ^ 2) - a_2 ^ 2]]",
                                 "rule": {
                                     "name": "FullSimplify",
                                     "str": "full simplify"
@@ -42,11 +52,11 @@
                     },
                     {
                         "latex_start": "w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot I_{3 \\times 3}",
-                        "start": "matrix w[3][1] * T(matrix w[3][1]) - norm(matrix w[3][1]) ^ 2 * unit_matrix(3)",
+                        "start": "w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
                         "steps": [
                             {
                                 "latex_res": "\\begin{bmatrix}-a_2 ^ {2} - a_3 ^ {2}&a_1 a_2&a_1 a_3\\\\a_1 a_2&-a_1 ^ {2} - a_3 ^ {2}&a_2 a_3\\\\a_1 a_3&a_2 a_3&-a_1 ^ {2} - a_2 ^ {2}\\end{bmatrix}",
-                                "res": "{{-(a_2 ^ 2) - a_3 ^ 2, a_1 * a_2, a_1 * a_3}, {a_1 * a_2, -(a_1 ^ 2) - a_3 ^ 2, a_2 * a_3}, {a_1 * a_3, a_2 * a_3, -(a_1 ^ 2) - a_2 ^ 2}}",
+                                "res": "[[-(a_2 ^ 2) - a_3 ^ 2, a_1 * a_2, a_1 * a_3], [a_1 * a_2, -(a_1 ^ 2) - a_3 ^ 2, a_2 * a_3], [a_1 * a_3, a_2 * a_3, -(a_1 ^ 2) - a_2 ^ 2]]",
                                 "rule": {
                                     "name": "FullSimplify",
                                     "str": "full simplify"
@@ -58,7 +68,7 @@
                     }
                 ],
                 "finished": true,
-                "goal": "hat(matrix w[3][1]) ^ 2 = matrix w[3][1] * T(matrix w[3][1]) - norm(matrix w[3][1]) ^ 2 * unit_matrix(3)",
+                "goal": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
                 "latex_goal": "\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot I_{3 \\times 3}",
                 "type": "CalculationProof"
             },
@@ -66,17 +76,27 @@
         },
         {
             "finished": true,
-            "goal": "matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1]) = zero_matrix(3,3)",
+            "fixes": [
+                [
+                    "w",
+                    "$tensor($real, 3, 1)"
+                ],
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
+            "goal": "w * T(w) * hat(w) = zero_matrix(3,3)",
             "latex_goal": "w w^{\\text{T}} \\hat{w} = O_{3 \\times 3}",
             "proof": {
                 "calcs": [
                     {
                         "latex_start": "w w^{\\text{T}} \\hat{w}",
-                        "start": "matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1])",
+                        "start": "w * T(w) * hat(w)",
                         "steps": [
                             {
                                 "latex_res": "\\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
-                                "res": "{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}",
+                                "res": "[[0, 0, 0], [0, 0, 0], [0, 0, 0]]",
                                 "rule": {
                                     "name": "FullSimplify",
                                     "str": "full simplify"
@@ -92,7 +112,7 @@
                         "steps": [
                             {
                                 "latex_res": "\\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
-                                "res": "{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}",
+                                "res": "[[0, 0, 0], [0, 0, 0], [0, 0, 0]]",
                                 "rule": {
                                     "name": "FullSimplify",
                                     "str": "full simplify"
@@ -104,47 +124,52 @@
                     }
                 ],
                 "finished": true,
-                "goal": "matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1]) = zero_matrix(3,3)",
+                "goal": "w * T(w) * hat(w) = zero_matrix(3,3)",
                 "latex_goal": "w w^{\\text{T}} \\hat{w} = O_{3 \\times 3}",
                 "type": "CalculationProof"
             },
             "type": "Goal"
         },
         {
-            "latex_var": "n",
-            "type": "VarDef",
-            "var": "int n"
-        },
-        {
             "conds": [
                 {
-                    "cond": "int n >= 0",
+                    "cond": "n >= 0",
                     "latex_cond": "n \\ge 0"
                 },
                 {
-                    "cond": "norm(matrix w[3][1]) = 1",
+                    "cond": "norm(w) = 1",
                     "latex_cond": "\\|w\\| = 1"
                 }
             ],
             "finished": true,
-            "goal": "hat(matrix w[3][1]) ^ (2 * int n + 1) = (-1) ^ int n * hat(matrix w[3][1])",
+            "fixes": [
+                [
+                    "w",
+                    "$tensor($real, 3, 1)"
+                ],
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
+            "goal": "hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)",
             "latex_goal": "\\hat{w} ^ {2 n + 1} = (-1) ^ {n} \\hat{w}",
             "obligations": [
                 {
                     "branches": [
                         {
                             "exprs": [
-                                "hat(matrix w[3][1]) > 0"
+                                "hat(w) > 0"
                             ]
                         }
                     ],
                     "conds": [
                         {
-                            "cond": "int n >= 0",
+                            "cond": "n >= 0",
                             "latex_cond": "n \\ge 0"
                         },
                         {
-                            "cond": "norm(matrix w[3][1]) = 1",
+                            "cond": "norm(w) = 1",
                             "latex_cond": "\\|w\\| = 1"
                         }
                     ]
@@ -153,17 +178,17 @@
                     "branches": [
                         {
                             "exprs": [
-                                "isInt(2 * int n + 1)"
+                                "isInt(2 * n + 1)"
                             ]
                         }
                     ],
                     "conds": [
                         {
-                            "cond": "int n >= 0",
+                            "cond": "n >= 0",
                             "latex_cond": "n \\ge 0"
                         },
                         {
-                            "cond": "norm(matrix w[3][1]) = 1",
+                            "cond": "norm(w) = 1",
                             "latex_cond": "\\|w\\| = 1"
                         }
                     ]
@@ -172,17 +197,17 @@
                     "branches": [
                         {
                             "exprs": [
-                                "2 * int n + 1 >= 0"
+                                "2 * n + 1 >= 0"
                             ]
                         }
                     ],
                     "conds": [
                         {
-                            "cond": "int n >= 0",
+                            "cond": "n >= 0",
                             "latex_cond": "n \\ge 0"
                         },
                         {
-                            "cond": "norm(matrix w[3][1]) = 1",
+                            "cond": "norm(w) = 1",
                             "latex_cond": "\\|w\\| = 1"
                         }
                     ]
@@ -197,11 +222,11 @@
                     ],
                     "conds": [
                         {
-                            "cond": "int n >= 0",
+                            "cond": "n >= 0",
                             "latex_cond": "n \\ge 0"
                         },
                         {
-                            "cond": "norm(matrix w[3][1]) = 1",
+                            "cond": "norm(w) = 1",
                             "latex_cond": "\\|w\\| = 1"
                         }
                     ]
@@ -210,17 +235,17 @@
                     "branches": [
                         {
                             "exprs": [
-                                "isInt(int n)"
+                                "isInt(n)"
                             ]
                         }
                     ],
                     "conds": [
                         {
-                            "cond": "int n >= 0",
+                            "cond": "n >= 0",
                             "latex_cond": "n \\ge 0"
                         },
                         {
-                            "cond": "norm(matrix w[3][1]) = 1",
+                            "cond": "norm(w) = 1",
                             "latex_cond": "\\|w\\| = 1"
                         }
                     ]
@@ -229,17 +254,17 @@
                     "branches": [
                         {
                             "exprs": [
-                                "int n >= 0"
+                                "n >= 0"
                             ]
                         }
                     ],
                     "conds": [
                         {
-                            "cond": "int n >= 0",
+                            "cond": "n >= 0",
                             "latex_cond": "n \\ge 0"
                         },
                         {
-                            "cond": "norm(matrix w[3][1]) = 1",
+                            "cond": "norm(w) = 1",
                             "latex_cond": "\\|w\\| = 1"
                         }
                     ]
@@ -248,52 +273,52 @@
             "proof": {
                 "base_case": {
                     "finished": true,
-                    "goal": "hat(matrix w[3][1]) = hat(matrix w[3][1])",
+                    "goal": "hat(w) = hat(w)",
                     "latex_goal": "\\hat{w} = \\hat{w}",
                     "proof": {
                         "calcs": [
                             {
                                 "latex_start": "\\hat{w}",
-                                "start": "hat(matrix w[3][1])",
+                                "start": "hat(w)",
                                 "steps": [],
                                 "type": "Calculation"
                             },
                             {
                                 "latex_start": "\\hat{w}",
-                                "start": "hat(matrix w[3][1])",
+                                "start": "hat(w)",
                                 "steps": [],
                                 "type": "Calculation"
                             }
                         ],
                         "finished": true,
-                        "goal": "hat(matrix w[3][1]) = hat(matrix w[3][1])",
+                        "goal": "hat(w) = hat(w)",
                         "latex_goal": "\\hat{w} = \\hat{w}",
                         "type": "CalculationProof"
                     },
                     "type": "Goal"
                 },
                 "finished": true,
-                "goal": "hat(matrix w[3][1]) ^ (2 * int n + 1) = (-1) ^ int n * hat(matrix w[3][1])",
+                "goal": "hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)",
                 "induct_case": {
                     "finished": true,
-                    "goal": "hat(matrix w[3][1]) ^ (2 * int n + 3) = -((-1) ^ int n * hat(matrix w[3][1]))",
+                    "goal": "hat(w) ^ (2 * n + 3) = -((-1) ^ n * hat(w))",
                     "latex_goal": "\\hat{w} ^ {2 n + 3} = -(-1) ^ {n} \\hat{w}",
                     "obligations": [
                         {
                             "branches": [
                                 {
                                     "exprs": [
-                                        "hat(matrix w[3][1]) > 0"
+                                        "hat(w) > 0"
                                     ]
                                 }
                             ],
                             "conds": [
                                 {
-                                    "cond": "int n >= 0",
+                                    "cond": "n >= 0",
                                     "latex_cond": "n \\ge 0"
                                 },
                                 {
-                                    "cond": "norm(matrix w[3][1]) = 1",
+                                    "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
                                 }
                             ]
@@ -302,17 +327,17 @@
                             "branches": [
                                 {
                                     "exprs": [
-                                        "isInt(2 * int n + 3)"
+                                        "isInt(2 * n + 3)"
                                     ]
                                 }
                             ],
                             "conds": [
                                 {
-                                    "cond": "int n >= 0",
+                                    "cond": "n >= 0",
                                     "latex_cond": "n \\ge 0"
                                 },
                                 {
-                                    "cond": "norm(matrix w[3][1]) = 1",
+                                    "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
                                 }
                             ]
@@ -321,17 +346,17 @@
                             "branches": [
                                 {
                                     "exprs": [
-                                        "2 * int n + 3 >= 0"
+                                        "2 * n + 3 >= 0"
                                     ]
                                 }
                             ],
                             "conds": [
                                 {
-                                    "cond": "int n >= 0",
+                                    "cond": "n >= 0",
                                     "latex_cond": "n \\ge 0"
                                 },
                                 {
-                                    "cond": "norm(matrix w[3][1]) = 1",
+                                    "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
                                 }
                             ]
@@ -346,11 +371,11 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "int n >= 0",
+                                    "cond": "n >= 0",
                                     "latex_cond": "n \\ge 0"
                                 },
                                 {
-                                    "cond": "norm(matrix w[3][1]) = 1",
+                                    "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
                                 }
                             ]
@@ -359,17 +384,17 @@
                             "branches": [
                                 {
                                     "exprs": [
-                                        "isInt(int n)"
+                                        "isInt(n)"
                                     ]
                                 }
                             ],
                             "conds": [
                                 {
-                                    "cond": "int n >= 0",
+                                    "cond": "n >= 0",
                                     "latex_cond": "n \\ge 0"
                                 },
                                 {
-                                    "cond": "norm(matrix w[3][1]) = 1",
+                                    "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
                                 }
                             ]
@@ -378,17 +403,17 @@
                             "branches": [
                                 {
                                     "exprs": [
-                                        "int n >= 0"
+                                        "n >= 0"
                                     ]
                                 }
                             ],
                             "conds": [
                                 {
-                                    "cond": "int n >= 0",
+                                    "cond": "n >= 0",
                                     "latex_cond": "n \\ge 0"
                                 },
                                 {
-                                    "cond": "norm(matrix w[3][1]) = 1",
+                                    "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
                                 }
                             ]
@@ -398,35 +423,35 @@
                         "calcs": [
                             {
                                 "latex_start": "\\hat{w} ^ {2 n + 3}",
-                                "start": "hat(matrix w[3][1]) ^ (2 * int n + 3)",
+                                "start": "hat(w) ^ (2 * n + 3)",
                                 "steps": [
                                     {
                                         "latex_res": "\\hat{w} ^ {2 + (2 n + 1)}",
-                                        "res": "hat(matrix w[3][1]) ^ (2 + (2 * int n + 1))",
+                                        "res": "hat(w) ^ (2 + (2 * n + 1))",
                                         "rule": {
                                             "latex_str": "rewriting \\(2 n + 3\\) to \\(2 + (2 n + 1)\\)",
                                             "name": "Equation",
-                                            "new_expr": "2 + (2 * int n + 1)",
-                                            "old_expr": "2 * int n + 3",
-                                            "str": "rewriting 2 * int n + 3 to 2 + (2 * int n + 1)"
+                                            "new_expr": "2 + (2 * n + 1)",
+                                            "old_expr": "2 * n + 3",
+                                            "str": "rewriting 2 * n + 3 to 2 + (2 * n + 1)"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
                                         "latex_res": "\\hat{w} ^ {2} \\hat{w} ^ {2 n + 1}",
-                                        "res": "hat(matrix w[3][1]) ^ 2 * hat(matrix w[3][1]) ^ (2 * int n + 1)",
+                                        "res": "hat(w) ^ 2 * hat(w) ^ (2 * n + 1)",
                                         "rule": {
                                             "latex_str": "rewrite \\(\\hat{w} ^ {2 + (2 n + 1)}\\) to \\(\\hat{w} ^ {2} \\hat{w} ^ {2 n + 1}\\) using identity",
                                             "name": "ApplyIdentity",
-                                            "source": "hat(matrix w[3][1]) ^ (2 + (2 * int n + 1))",
-                                            "str": "rewrite hat(matrix w[3][1]) ^ (2 + (2 * int n + 1)) to hat(matrix w[3][1]) ^ 2 * hat(matrix w[3][1]) ^ (2 * int n + 1) using identity",
-                                            "target": "hat(matrix w[3][1]) ^ 2 * hat(matrix w[3][1]) ^ (2 * int n + 1)"
+                                            "source": "hat(w) ^ (2 + (2 * n + 1))",
+                                            "str": "rewrite hat(w) ^ (2 + (2 * n + 1)) to hat(w) ^ 2 * hat(w) ^ (2 * n + 1) using identity",
+                                            "target": "hat(w) ^ 2 * hat(w) ^ (2 * n + 1)"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
                                         "latex_res": "\\hat{w} ^ {2} ((-1) ^ {n} \\hat{w})",
-                                        "res": "hat(matrix w[3][1]) ^ 2 * ((-1) ^ int n * hat(matrix w[3][1]))",
+                                        "res": "hat(w) ^ 2 * ((-1) ^ n * hat(w))",
                                         "rule": {
                                             "loc": "subterms",
                                             "name": "ApplyInductHyp",
@@ -436,31 +461,31 @@
                                     },
                                     {
                                         "latex_res": "(w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot I_{3 \\times 3}) ((-1) ^ {n} \\hat{w})",
-                                        "res": "(matrix w[3][1] * T(matrix w[3][1]) - norm(matrix w[3][1]) ^ 2 * unit_matrix(3)) * ((-1) ^ int n * hat(matrix w[3][1]))",
+                                        "res": "(w * T(w) - norm(w) ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w))",
                                         "rule": {
-                                            "eq": "hat(matrix w[3][1]) ^ 2 = matrix w[3][1] * T(matrix w[3][1]) - norm(matrix w[3][1]) ^ 2 * unit_matrix(3)",
+                                            "eq": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
                                             "latex_str": "apply equation \\(\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot I_{3 \\times 3}\\) at 0",
                                             "loc": "0",
                                             "name": "ApplyEquation",
-                                            "str": "apply equation: hat(matrix w[3][1]) ^ 2 = matrix w[3][1] * T(matrix w[3][1]) - norm(matrix w[3][1]) ^ 2 * unit_matrix(3) at 0"
+                                            "str": "apply equation: hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3) at 0"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
                                         "latex_res": "(w w^{\\text{T}} - 1 ^ {2} I_{3 \\times 3}) ((-1) ^ {n} \\hat{w})",
-                                        "res": "(matrix w[3][1] * T(matrix w[3][1]) - 1 ^ 2 * unit_matrix(3)) * ((-1) ^ int n * hat(matrix w[3][1]))",
+                                        "res": "(w * T(w) - 1 ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w))",
                                         "rule": {
-                                            "eq": "norm(matrix w[3][1]) = 1",
+                                            "eq": "norm(w) = 1",
                                             "latex_str": "apply equation \\(\\|w\\| = 1\\) at 0.1.0.0",
                                             "loc": "0.1.0.0",
                                             "name": "ApplyEquation",
-                                            "str": "apply equation: norm(matrix w[3][1]) = 1 at 0.1.0.0"
+                                            "str": "apply equation: norm(w) = 1 at 0.1.0.0"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
                                         "latex_res": "(-1) ^ {n} w w^{\\text{T}} \\hat{w} - (-1) ^ {n}\\cdot I_{3 \\times 3} \\hat{w}",
-                                        "res": "(-1) ^ int n * matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1]) - (-1) ^ int n * unit_matrix(3) * hat(matrix w[3][1])",
+                                        "res": "(-1) ^ n * w * T(w) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w)",
                                         "rule": {
                                             "name": "ExpandPolynomial",
                                             "str": "expand polynomial"
@@ -469,31 +494,31 @@
                                     },
                                     {
                                         "latex_res": "(-1) ^ {n} (w w^{\\text{T}} \\hat{w}) - (-1) ^ {n}\\cdot I_{3 \\times 3} \\hat{w}",
-                                        "res": "(-1) ^ int n * (matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1])) - (-1) ^ int n * unit_matrix(3) * hat(matrix w[3][1])",
+                                        "res": "(-1) ^ n * (w * T(w) * hat(w)) - (-1) ^ n * unit_matrix(3) * hat(w)",
                                         "rule": {
                                             "latex_str": "rewriting \\((-1) ^ {n} w w^{\\text{T}} \\hat{w}\\) to \\((-1) ^ {n} (w w^{\\text{T}} \\hat{w})\\)",
                                             "name": "Equation",
-                                            "new_expr": "(-1) ^ int n * (matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1]))",
-                                            "old_expr": "(-1) ^ int n * matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1])",
-                                            "str": "rewriting (-1) ^ int n * matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1]) to (-1) ^ int n * (matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1]))"
+                                            "new_expr": "(-1) ^ n * (w * T(w) * hat(w))",
+                                            "old_expr": "(-1) ^ n * w * T(w) * hat(w)",
+                                            "str": "rewriting (-1) ^ n * w * T(w) * hat(w) to (-1) ^ n * (w * T(w) * hat(w))"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
                                         "latex_res": "(-1) ^ {n}\\cdot O_{3 \\times 3} - (-1) ^ {n}\\cdot I_{3 \\times 3} \\hat{w}",
-                                        "res": "(-1) ^ int n * zero_matrix(3,3) - (-1) ^ int n * unit_matrix(3) * hat(matrix w[3][1])",
+                                        "res": "(-1) ^ n * zero_matrix(3,3) - (-1) ^ n * unit_matrix(3) * hat(w)",
                                         "rule": {
-                                            "eq": "matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1]) = zero_matrix(3,3)",
+                                            "eq": "w * T(w) * hat(w) = zero_matrix(3,3)",
                                             "latex_str": "apply equation \\(w w^{\\text{T}} \\hat{w} = O_{3 \\times 3}\\) at 0.1",
                                             "loc": "0.1",
                                             "name": "ApplyEquation",
-                                            "str": "apply equation: matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1]) = zero_matrix(3,3) at 0.1"
+                                            "str": "apply equation: w * T(w) * hat(w) = zero_matrix(3,3) at 0.1"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
                                         "latex_res": "\\begin{bmatrix}0&a_3 (-1) ^ {n}&-a_2 (-1) ^ {n}\\\\-a_3 (-1) ^ {n}&0&a_1 (-1) ^ {n}\\\\a_2 (-1) ^ {n}&-a_1 (-1) ^ {n}&0\\end{bmatrix}",
-                                        "res": "{{0, a_3 * (-1) ^ int n, -(a_2 * (-1) ^ int n)}, {-(a_3 * (-1) ^ int n), 0, a_1 * (-1) ^ int n}, {a_2 * (-1) ^ int n, -(a_1 * (-1) ^ int n), 0}}",
+                                        "res": "[[0, a_3 * (-1) ^ n, -(a_2 * (-1) ^ n)], [-(a_3 * (-1) ^ n), 0, a_1 * (-1) ^ n], [a_2 * (-1) ^ n, -(a_1 * (-1) ^ n), 0]]",
                                         "rule": {
                                             "name": "FullSimplify",
                                             "str": "full simplify"
@@ -505,11 +530,11 @@
                             },
                             {
                                 "latex_start": "-(-1) ^ {n} \\hat{w}",
-                                "start": "-((-1) ^ int n * hat(matrix w[3][1]))",
+                                "start": "-((-1) ^ n * hat(w))",
                                 "steps": [
                                     {
                                         "latex_res": "\\begin{bmatrix}0&a_3 (-1) ^ {n}&-a_2 (-1) ^ {n}\\\\-a_3 (-1) ^ {n}&0&a_1 (-1) ^ {n}\\\\a_2 (-1) ^ {n}&-a_1 (-1) ^ {n}&0\\end{bmatrix}",
-                                        "res": "{{0, a_3 * (-1) ^ int n, -(a_2 * (-1) ^ int n)}, {-(a_3 * (-1) ^ int n), 0, a_1 * (-1) ^ int n}, {a_2 * (-1) ^ int n, -(a_1 * (-1) ^ int n), 0}}",
+                                        "res": "[[0, a_3 * (-1) ^ n, -(a_2 * (-1) ^ n)], [-(a_3 * (-1) ^ n), 0, a_1 * (-1) ^ n], [a_2 * (-1) ^ n, -(a_1 * (-1) ^ n), 0]]",
                                         "rule": {
                                             "name": "FullSimplify",
                                             "str": "full simplify"
@@ -521,7 +546,7 @@
                             }
                         ],
                         "finished": true,
-                        "goal": "hat(matrix w[3][1]) ^ (2 * int n + 3) = -((-1) ^ int n * hat(matrix w[3][1]))",
+                        "goal": "hat(w) ^ (2 * n + 3) = -((-1) ^ n * hat(w))",
                         "latex_goal": "\\hat{w} ^ {2 n + 3} = -(-1) ^ {n} \\hat{w}",
                         "type": "CalculationProof"
                     },

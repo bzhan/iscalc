@@ -2051,10 +2051,10 @@ class ChangeSummationIndex(Rule):
 
     def eval(self, e: Expr, ctx: Context):
         assert e.is_summation()
-        tmp = normalize(Var(e.index_var) + e.lower - self.new_lower, ctx)
+        tmp = normalize(Var(e.index_var, type=expr.IntType) + e.lower - self.new_lower, ctx)
         new_upper = normalize(e.upper + self.new_lower - e.lower, ctx) \
             if e.upper != POS_INF else POS_INF
-        return Summation(e.index_var, self.new_lower, new_upper, e.body.replace(Var(e.index_var), tmp))
+        return Summation(e.index_var, self.new_lower, new_upper, e.body.replace(Var(e.index_var, type=expr.IntType), tmp))
 
     def __str__(self):
         return "change summation index"
@@ -2121,7 +2121,8 @@ class IntSumExchange(Rule):
         abs_int = normalize(Fun("abs", Integral(ivar, il, iu, body)), ctx)
         goal2 = Fun("converges", Summation(svar, sl, su, abs_int))
         for lemma in ctx.get_lemmas():
-            if lemma.expr == goal1 or lemma.expr == goal2:
+            if normalize(lemma.expr,ctx) == normalize(goal1,ctx) or \
+                    normalize(lemma.expr,ctx) == normalize(goal2,ctx):
                 return True
         return False
 
@@ -2505,7 +2506,7 @@ class ExpandMatFunc(Rule):
                     if item.rhs != None:
                         a = a.replace(item.lhs, item.rhs)
             e = Fun(e.func_name, *args)
-            if e.func_name == 'hat' and len(e.args) == 1 and matrix.is_vector(e.args[0], ctx):
+            if e.func_name == 'hat' and len(e.args) == 1 and expr.is_vector_type(e.args[0].type):
                 return matrix.hat(e.args[0])
             elif e.func_name == 'unit_matrix' and len(e.args) == 1 and e.args[0].is_const():
                 return matrix.unit_matrix(expr.eval_expr(e.args[0]))
@@ -2517,6 +2518,6 @@ class ExpandMatFunc(Rule):
                     raise NotImplementedError
             elif e.func_name == "zero_matrix" and len(e.args) == 2 and all(arg.is_const() for arg in e.args):
                 return matrix.zero_matrix(expr.eval_expr(e.args[0]), expr.eval_expr(e.args[1]))
-            elif e.func_name == "norm" and len(e.args) == 1 and is_vector(e.args[0], ctx):
+            elif e.func_name == "norm" and len(e.args) == 1 and expr.is_vector_type(e.args[0].type):
                 return matrix.norm(e.args[0], ctx)
         return e

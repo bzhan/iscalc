@@ -239,14 +239,6 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
         upper = convert_expr(e.upper, mode)
         body = convert_expr(e.body, mode)
         return "\\sum_{%s=%s}^{%s}{%s}" % (e.index_var, lower, upper, body)
-    elif e.is_vector():
-        res = "\\begin{bmatrix}"
-        if e.is_column:
-            res += "\\\\".join([convert_expr(d, mode) for d in e.data])
-        else:
-            res += "&".join([convert_expr(d, mode) for d in e.data])
-        res += "\\end{bmatrix}"
-        return res
     elif e.is_matrix():
         res = "\\begin{bmatrix}"
         res += "\\\\".join(["&".join([convert_expr(item) for item in rv]) for rv in e.data])

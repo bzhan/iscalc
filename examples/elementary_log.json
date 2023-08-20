@@ -125,6 +125,16 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "m",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
             "goal": "I(m,n) = (-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1))",
             "latex_goal": "I(m,n) = (-1) ^ {n} (\\frac{n!}{(m + 1) ^ {n + 1}})",
             "proof": {
@@ -315,6 +325,16 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "m",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
             "goal": "(INT x:[0,a]. x ^ m * log(x) ^ n) = a ^ (m + 1) * SUM(k, 0, n, (-1) ^ k * binom(n,k) * factorial(k) * log(a) ^ (n - k) / (m + 1) ^ (k + 1))",
             "latex_goal": "\\int_{0}^{a} x ^ {m} \\log^{n}(x) \\,dx = a ^ {m + 1} \\sum_{k=0}^{n}{\\frac{(-1) ^ {k} \\binom{n}{k} k! \\log^{n - k}(a)}{(m + 1) ^ {k + 1}}}",
             "proof": {

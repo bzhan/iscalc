@@ -601,18 +601,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\frac{\\sqrt{2}}{2 \\sqrt{a}} (\\int_{-\\infty}^{\\infty} e^{-u ^ {2}/2} \\,du)",
-                                "res": "sqrt(2) / (2 * sqrt(a)) * (INT u:[-oo,oo]. exp(-(u ^ 2) / 2))",
-                                "rule": {
-                                    "latex_str": "rewriting \\(-\\frac{u ^ {2}}{2}\\) to \\(\\frac{-u ^ {2}}{2}\\)",
-                                    "name": "Equation",
-                                    "new_expr": "-(u ^ 2) / 2",
-                                    "old_expr": "-(u ^ 2 / 2)",
-                                    "str": "rewriting -(u ^ 2 / 2) to -(u ^ 2) / 2"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
                                 "latex_res": "\\frac{\\sqrt{2}}{2 \\sqrt{a}} (\\int_{-\\infty}^{\\infty} e^{-x ^ {2}/2} \\,dx)",
                                 "res": "sqrt(2) / (2 * sqrt(a)) * (INT x:[-oo,oo]. exp(-(x ^ 2 / 2)))",
                                 "rule": {

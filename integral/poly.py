@@ -7,7 +7,7 @@ import operator
 import sympy
 import math
 
-from integral import expr, matrix
+from integral import expr, matrix, context
 from integral.context import Context, apply_subterm
 
 
@@ -588,8 +588,7 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
         l, u = normalize(e.lower, ctx), normalize(e.upper, ctx)
         if l == u:
             return to_poly(e.body.subst(e.index_var, l), ctx)
-        ctx2 = Context(ctx)
-        ctx2.add_condition(expr.Op(">=", expr.Var(e.index_var), l))
+        ctx2 = context.body_conds(e, ctx)
         return singleton(expr.Summation(e.index_var, normalize(e.lower, ctx),
                                         normalize(e.upper, ctx), normalize(e.body, ctx2)))
     else:
@@ -681,7 +680,10 @@ def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
                     b = factors[i-1]
                     if a.is_fun() and a.func_name == 'inv' and a.args[0] == b:
                         tmp.pop()
-                        tmp.append(expr.Fun('unit_matrix', expr.num_row(a.type)))
+                        try:
+                            tmp.append(expr.Fun('unit_matrix', expr.num_row(b.type)))
+                        except:
+                            print(b, b.type)
                     elif b.is_fun() and b.func_name == 'inv' and b.args[0] == a:
                         tmp.pop()
                         tmp.append(expr.Fun('unit_matrix', expr.num_row(a.type)))
@@ -736,9 +738,9 @@ def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
 def simplify_salar_multiply(e: expr.Expr, ctx:Context) -> expr.Expr:
     if e.is_times():
         a, b = e.args
-        if expr.is_matrix_type(a.type) and b.is_matrix():
+        if not expr.is_matrix_type(a.type) and b.is_matrix():
             return expr.Matrix([[from_poly(to_poly(a*item, ctx)) for item in r] for r in b.data])
-        elif a.is_matrix() and expr.is_matrix_type(b.type):
+        elif not expr.is_matrix_type(b.type) and a.is_matrix():
             return expr.Matrix([[from_poly(to_poly(b * item, ctx)) for item in r] for r in a.data])
     elif e.is_uminus():
         if e.args[0].is_matrix():
@@ -755,11 +757,15 @@ def simplify_matrix_multiply(e:expr.Expr, ctx:Context):
 def simplify_matrix_add(e:expr.Expr, ctx:Context):
     if e.is_plus():
         a, b = e.args
-        if a.is_matrix() and b.is_matrix():
+        if expr.is_matrix_type(a.type) and expr.is_matrix_type(b.type):
+            assert expr.num_col(a.type) == expr.num_col(b.type) and \
+                expr.num_row(a.type) == expr.num_row(b.type)
             return matrix.add(a, b, ctx)
     elif e.is_minus():
         a, b = e.args
-        if a.is_matrix() and b.is_matrix():
+        if expr.is_matrix_type(a.type) and expr.is_matrix_type(b.type):
+            assert expr.num_col(a.type) == expr.num_col(b.type) and \
+                   expr.num_row(a.type) == expr.num_row(b.type)
             return matrix.minus(a, b, ctx)
     return e
 
@@ -806,9 +812,14 @@ def simplify_power(e: expr.Expr, ctx: Context) -> expr.Expr:
     elif e.args[1].is_minus() and e.args[0].is_const() and e.args[1].args[1].is_const():
         # c1 ^ (a - c2) => c1 ^ -c2 * c1 ^ a
         return (e.args[0] ^ e.args[1].args[0]) * (e.args[0] ^ (-(e.args[1].args[1])))
-    elif e.args[0].is_uminus() and e.args[1].is_const():
-        # (-a) ^ n = (-1) ^ n * a ^ n
-        return (expr.Const(-1) ^ e.args[1]) * (e.args[0].args[0] ^ e.args[1])
+    elif e.args[0].is_uminus():
+        if e.args[1].is_const():
+            # (-a) ^ n = (-1) ^ n * a ^ n
+            return (expr.Const(-1) ^ e.args[1]) * (e.args[0].args[0] ^ e.args[1])
+        elif normalize(e.args[1] / expr.Const(2), ctx).type == expr.IntType:
+            return e.args[0].args[0] ^ e.args[1]
+        else:
+            return e
     elif e.args[0].is_minus() and e.args[0].args[0].is_uminus() and e.args[1].is_const():
         # (-a - b) ^ n = (-1) ^ n * (a + b) ^ n
         nega, negb = e.args[0].args

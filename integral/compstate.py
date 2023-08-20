@@ -170,6 +170,11 @@ class VarDef(StateItem):
         }
         if self.content is not None:
             res['content'] = str(self.content)
+        if len(self.fixes.items()) > 0:
+            d = list()
+            for a, b in self.fixes.items():
+                d.append((a, str(b)))
+            res['fixes'] = d
         return res
 
 class Goal(StateItem):
@@ -1084,13 +1089,23 @@ def parse_item(parent, item) -> StateItem:
             res.begin.add_step(parse_step(res.begin, step, i))
         return res
     elif item['type'] == 'VarDef':
-        var = parser.parse_expr(item['var'])
+        ctx = parent.get_context() if isinstance(parent, CompFile) else parent.ctx
+        fixes = dict()
+        if 'fixes' in item:
+            raw_fixes = item['fixes']
+            fixes = dict()
+            for s, t in raw_fixes:
+                fixes[s] = parser.parse_expr(t, fixes=fixes)
+        all_fixes = ctx.get_fixes()
+        for s, t in fixes.items():
+            all_fixes[s] = t
+        var = parser.parse_expr(item['var'], fixes = all_fixes)
         if 'content' in item:
-            content = parser.parse_expr(item['content'])
+            content = parser.parse_expr(item['content'], fixes = all_fixes)
         else:
             content = None
         ctx = parent.get_context() if isinstance(parent, CompFile) else parent.ctx
-        res = VarDef(parent, ctx, var, content)
+        res = VarDef(parent, ctx, var, content,fixes=fixes)
         return res
     else:
         print(item['type'])

@@ -2489,7 +2489,6 @@ class ExpandMatFunc(Rule):
     def eval(self, e: Expr, ctx: Context) -> Expr:
         if e.is_var():
             var_defs = ctx.get_var_definitions()
-            # print(a)
             for item in var_defs:
                 if item.rhs != None:
                     e = e.replace(item.lhs, item.rhs)

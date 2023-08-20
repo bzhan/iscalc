@@ -2,6 +2,16 @@
     "content": [
         {
             "content": "[[a_1], [a_2], [a_3]]",
+            "fixes": [
+                [
+                    "w",
+                    "$tensor($real, 3, 1)"
+                ],
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
             "latex_var": "w",
             "type": "VarDef",
             "var": "w"

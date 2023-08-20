@@ -73,3 +73,5 @@ class SummationTest(unittest.TestCase):
             r = s.eval(e, ctx)
             print(r)
             self.assertEqual(str(r), res)
+if __name__ == "__main__":
+    unittest.main()

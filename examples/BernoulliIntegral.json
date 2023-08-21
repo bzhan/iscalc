@@ -12,6 +12,12 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ]
+            ],
             "goal": "converges(SUM(k, 0, oo, abs(INT x:[0,1]. (c * x ^ a * log(x)) ^ k / factorial(k))))",
             "latex_goal": "\\sum_{k=0}^{\\infty}{\\left| \\int_{0}^{1} \\frac{(c x ^ {a} \\log{x}) ^ {k}}{k!} \\,dx \\right|}\\quad\\mathrm{converges}",
             "proof": {
@@ -103,6 +109,12 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ]
+            ],
             "goal": "(INT x:[0,1]. x ^ (c * x ^ a)) = SUM(k, 0, oo, (-c) ^ k / (k * a + 1) ^ (k + 1))",
             "latex_goal": "\\int_{0}^{1} x ^ {c x ^ {a}} \\,dx = \\sum_{k=0}^{\\infty}{\\frac{(-c) ^ {k}}{(k a + 1) ^ {k + 1}}}",
             "proof": {
@@ -247,6 +259,12 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ]
+            ],
             "goal": "(INT x:[0,1]. x ^ x) = SUM(k, 0, oo, (-1) ^ k * (k + 1) ^ (-k - 1))",
             "latex_goal": "\\int_{0}^{1} x ^ {x} \\,dx = \\sum_{k=0}^{\\infty}{(-1) ^ {k} (k + 1) ^ {-k - 1}}",
             "proof": {
@@ -306,6 +324,12 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ]
+            ],
             "goal": "(INT x:[0,1]. x ^ -x) = SUM(k, 0, oo, (k + 1) ^ (-k - 1))",
             "latex_goal": "\\int_{0}^{1} x ^ {-x} \\,dx = \\sum_{k=0}^{\\infty}{(k + 1) ^ {-k - 1}}",
             "proof": {
@@ -365,6 +389,12 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ]
+            ],
             "goal": "(INT x:[0,1]. x ^ (x ^ 2)) = SUM(k, 0, oo, (-1) ^ k * (2 * k + 1) ^ (-k - 1))",
             "latex_goal": "\\int_{0}^{1} x ^ {x ^ {2}} \\,dx = \\sum_{k=0}^{\\infty}{(-1) ^ {k} (2 k + 1) ^ {-k - 1}}",
             "proof": {
@@ -424,6 +454,12 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ]
+            ],
             "goal": "(INT x:[0,1]. x ^ sqrt(x)) = SUM(k, 0, oo, (-1) ^ k * (2 / (k + 2)) ^ (k + 1))",
             "latex_goal": "\\int_{0}^{1} x ^ {\\sqrt{x}} \\,dx = \\sum_{k=0}^{\\infty}{(-1) ^ {k} (\\frac{2}{k + 2}) ^ {k + 1}}",
             "proof": {

@@ -18,6 +18,12 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
             "goal": "Gamma(n + 1/2) = sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))",
             "latex_goal": "\\Gamma{(n + \\frac{1}{2})} = \\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!}",
             "proof": {
@@ -211,6 +217,12 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
             "goal": "converges(SUM(n, 0, oo, INT x:[0,oo]. (-(-1)) ^ n * (abs(t) * abs(x)) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2))))",
             "latex_goal": "\\sum_{n=0}^{\\infty}{\\int_{0}^{\\infty} \\frac{(--1) ^ {n} (\\left| t \\right| \\left| x \\right|) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2} \\,dx}\\quad\\mathrm{converges}",
             "proof": {
@@ -673,6 +685,12 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
             "goal": "I(t) = sqrt(pi / 2) * exp(-(t ^ 2) / 2)",
             "latex_goal": "I{(t)} = \\sqrt{\\frac{\\pi}{2}} e^{-t ^ {2}/2}",
             "proof": {

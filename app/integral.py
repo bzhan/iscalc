@@ -347,7 +347,7 @@ def query_identities():
     st: compstate.StateItem = file.content[cur_id]
     subitem = st.get_by_label(label)
     try:
-        e = integral.parser.parse_expr(data['expr'])
+        e = integral.parser.parse_expr(data['expr'], fixes=subitem.ctx.get_fixes())
         results = integral.rules.ApplyIdentity.search(e, subitem.ctx)
         json_results = []
         for res in results:
@@ -361,6 +361,8 @@ def query_identities():
             "results": json_results
         })
     except Exception as e:
+        print(e, flush=True)
+        print("fail", flush=True)
         return jsonify({
             "status": "fail",
             "exception": str(e)
@@ -632,11 +634,12 @@ def integral_perform_step():
         file.add_item(compstate.parse_item(file, item))
     label = compstate.Label(data['selected_item'])
     st: compstate.StateItem = file.content[cur_id]
-    rule = compstate.parse_rule(data['rule'])
+    subitem = st.get_by_label(label)
+    rule = compstate.parse_rule(data['rule'], subitem)
     if isinstance(rule, (integral.rules.ApplyInductHyp, integral.rules.DerivIntExchange,
                          integral.rules.IntSumExchange, integral.rules.SeriesEvaluationIdentity)):
         rule = integral.rules.OnSubterm(rule)
-    subitem = st.get_by_label(label)
+
     if isinstance(subitem, (compstate.CalculationStep, compstate.Calculation)):
         subitem.perform_rule(rule)
     elif isinstance(subitem, compstate.RewriteGoalProof):
@@ -694,12 +697,6 @@ def integral_query_theorems():
                 'eq': str(eq),
                 'latex_eq': integral.latex.convert_expr(eq)
             })
-    # print(file.ctx.get_assumptions(), flush=True)
-    for eq in file.ctx.get_assumptions():
-        eqs.append({
-            'eq': str(eq.expr),
-            'latex_eq': integral.latex.convert_expr(eq.expr)
-        })
     return jsonify({
         "status": "ok",
         "theorems": eqs

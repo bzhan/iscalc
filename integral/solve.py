@@ -144,7 +144,7 @@ def solve_for_term(eq: Expr, t: Expr, ctx: Context) -> Optional[Expr]:
 
     # Take variable name that have not appeared
     var_name = "_v"
-    var = Var(var_name)
+    var = Var(var_name, type=t.type)
 
     # Replace all appearances of t in equation by var
     eq = eq.replace(t, var)

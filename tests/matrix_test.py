@@ -4,7 +4,7 @@ import sys
 import unittest
 from typing import List
 
-from integral import rules, context, parser, compstate, matrix
+from integral import rules, context, parser, compstate, matrix, expr
 from integral.context import Context
 from integral.expr import Op, Var, Const, Matrix, Expr, Fun
 
@@ -16,7 +16,7 @@ class MatrixTest(unittest.TestCase):
         # Test parsing of json file
         json_file = file.export()
         for i, item in enumerate(json_file['content']):
-            self.assertEqual(compstate.parse_item(file.content[i].parent, item).export(), file.content[i].export(), "%d:%sasdfasdf%s"%(i, compstate.parse_item(file.content[i].parent, item).export(), file.content[i].export()))
+            self.assertEqual(compstate.parse_item(file.content[i].parent, item).export(), file.content[i].export())
 
         # Output to file
         with open('examples/' + file.name + '.json', 'w', encoding='utf-8') as f:
@@ -65,8 +65,8 @@ class MatrixTest(unittest.TestCase):
 
     def testHat(self):
         test_data = [
-            ("[a1,a2,a3]", "[[0,-a3,a2],[a3,0,-a1],[-a2,a1,0]]"),
-            ("[v1,v2,v3,w1,w2,w3]",
+            ("[[a1],[a2],[a3]]", "[[0,-a3,a2],[a3,0,-a1],[-a2,a1,0]]"),
+            ("[[v1],[v2],[v3],[w1],[w2],[w3]]",
              "[[0, -w3, w2, v1], [w3, 0, -w1, v2], [-w2, w1, 0, v3], [0,0,0,0]]")
         ]
 
@@ -83,12 +83,13 @@ class MatrixTest(unittest.TestCase):
             ("A", "$tensor($real, n, n)")
         ]
         fixes = dict()
-        for s, t in raw_fixes:
-            fixes[s] = parser.parse_expr(t, fixes=fixes)
+        for a, b in raw_fixes:
+            fixes[a] = parser.parse_expr(b, fixes= fixes)
 
         goal = file.add_goal("(inv(P) * A * P) ^ n = inv(P) * (A ^ n) * P",
                              fixes=fixes,
                              conds=["invertible(P)", "n > 0"])
+        fixes = goal.ctx.get_fixes()
         proof = goal.proof_by_induction(induct_var='n', start=0)
         base_proof = proof.base_case.proof_by_calculation()
         induct_proof = proof.induct_case.proof_by_calculation()
@@ -106,65 +107,94 @@ class MatrixTest(unittest.TestCase):
         old_expr = parser.parse_expr("A ^ n * A", fixes=fixes)
         new_expr = parser.parse_expr("A ^ (n + 1)", fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(old_expr, new_expr))
-
+        assert goal.is_finished()
         self.checkAndOutput(file)
 
     def testExample02(self):
         file = compstate.CompFile("matrix", "matrix_example02")
-        file.add_definition("matrix w[3][1] = {{a_1},{a_2},{a_3}}")
-        goal01 = file.add_goal('hat(w)^2 = w * T(w) - norm(w)^2 * unit_matrix(3)')
+        raw_fixes = [
+            ("w", "$tensor($real, 3, 1)"),
+            ("n", "$int")
+        ]
+        fixes = dict()
+        for s, t in raw_fixes:
+            fixes[s] = parser.parse_expr(t, fixes=fixes)
+        file.add_definition("w = [[a_1],[a_2],[a_3]]", fixes=fixes)
+        goal01 = file.add_goal('hat(w)^2 = w * T(w) - norm(w)^2 * unit_matrix(3)', fixes = fixes)
         proof = goal01.proof_by_calculation()
         calc = proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
         calc = proof.lhs_calc
-        old_expr = "hat(matrix w[3][1]) ^ 2"
-        new_expr = "hat(matrix w[3][1]) ^ 1 * hat(matrix w[3][1]) ^ 1"
+        old_expr = parser.parse_expr("hat(w) ^ 2", fixes=fixes)
+        new_expr = parser.parse_expr("hat(w) ^ 1 * hat(w) ^ 1", fixes=fixes)
+
         calc.perform_rule(rules.ApplyIdentity(old_expr, new_expr))
         calc.perform_rule(rules.FullSimplify())
-
-        goal02 = file.add_goal("w*T(w)*hat(w) = zero_matrix(3,3)")
+        assert goal01.is_finished()
+        goal02 = file.add_goal("w*T(w)*hat(w) = zero_matrix(3,3)", fixes=fixes)
         proof = goal02.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.FullSimplify())
         calc = proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
+        assert goal02.is_finished()
 
-        file.add_definition("int n")
-        goal03 = file.add_goal("hat(w)^(2*n+1) = (-1)^n * hat(w)", conds = ["n>=0", "norm(w)=1"])
+        goal03 = file.add_goal("hat(w)^(2*n+1) = (-1)^n * hat(w)", conds = ["n>=0", "norm(w)=1"], fixes=fixes)
         proof = goal03.proof_by_induction('n', 0)
         base_proof = proof.base_case.proof_by_calculation()
         induct_proof = proof.induct_case.proof_by_calculation()
         calc = induct_proof.lhs_calc
-        calc.perform_rule(rules.Equation("(2 * int n + 3)", "2 + (2 * int n + 1)"))
-        calc.perform_rule(rules.ApplyIdentity("hat(matrix w[3][1])^(2 + (2 * int n + 1))",
-                                              "hat(matrix w[3][1])^2* hat(matrix w[3][1])^(2 * int n + 1)"))
+        old_expr = parser.parse_expr("(2 * n + 3)", fixes=fixes)
+        new_expr = parser.parse_expr("2 + (2 * n + 1)", fixes=fixes)
+        calc.perform_rule(rules.Equation(old_expr, new_expr))
+        old_expr = parser.parse_expr("hat(w)^(2 + (2 * n + 1))", fixes=fixes)
+        new_expr = parser.parse_expr("hat(w)^2* hat(w)^(2 * n + 1)", fixes=fixes)
+        calc.perform_rule(rules.ApplyIdentity(old_expr, new_expr))
         calc.perform_rule(rules.OnSubterm(rules.ApplyInductHyp()))
-        eq = "hat(matrix w[3][1])^2 = matrix w[3][1] * T(matrix w[3][1]) - norm(matrix w[3][1])^2 * unit_matrix(3)"
+        eq = parser.parse_expr("hat(w)^2 = w * T(w) - norm(w)^2 * unit_matrix(3)", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0"))
-        eq = "norm(matrix w[3][1]) = 1"
+        eq = parser.parse_expr("norm(w) = 1", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0.1.0.0"))
         calc.perform_rule(rules.ExpandPolynomial())
-        old_e = "(-1) ^ int n * matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1])"
-        new_e = "(-1) ^ int n * (matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1]))"
+        old_e = parser.parse_expr("(-1) ^  n *  w * T(w) * hat(w)", fixes=fixes)
+        new_e = parser.parse_expr("(-1) ^  n * (w * T(w) * hat(w))", fixes=fixes)
         calc.perform_rule(rules.Equation(old_e, new_e))
-        eq = "matrix w[3][1] * T(matrix w[3][1]) * hat(matrix w[3][1]) = zero_matrix(3,3)"
+        eq = parser.parse_expr("w * T(w) * hat(w) = zero_matrix(3,3)", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0.1"))
         calc.perform_rule(rules.FullSimplify())
         calc = induct_proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
+        assert goal03.is_finished()
         self.checkAndOutput(file)
 
 
     def testGetType(self):
-        e = parser.parse_expr("inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]")
-        ctx = Context()
-        ty = matrix.get_type(e, ctx)
-        assert ty == 'matrix'
+        raw_fixes = [('n', '$int'), ('P', '$tensor($real, n, n)'), ('A', '$tensor($real, n, n)')]
+        fixes = dict()
+        for a, b in raw_fixes:
+            fixes[a] = parser.parse_expr(b, fixes=fixes)
+        e = parser.parse_expr("inv(P) * A * P", fixes=fixes)
+
+        assert e.type == expr.MatrixType(expr.RealType, Var('n', type=expr.IntType), Var('n', type=expr.IntType))
         e = e ^ Const(0)
         from integral import poly
         from integral.poly import normalize
+        ctx = Context()
         e = normalize(e, ctx)
-        assert e == parser.parse_expr("unit_matrix(n)")
+        assert e == parser.parse_expr("unit_matrix(n)", fixes=fixes)
+
+    def testMy(self):
+        fixes = dict()
+        fixes['n'] = parser.parse_expr('$int')
+        s = "(n+1)/(n+1)"
+        from integral import poly
+        from integral.poly import normalize
+        ctx = Context()
+        ctx.add_condition(parser.parse_expr("n >= 0",fixes=fixes))
+        print(ctx.check_condition(parser.parse_expr("(n+1)!=0", fixes=fixes)))
+        e = parser.parse_expr(s,fixes=fixes)
+        e = normalize(e, ctx)
+        print(e)
 
     def testExample06(self):
         file = compstate.CompFile("base", "matrix_example06")

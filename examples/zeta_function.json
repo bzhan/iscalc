@@ -194,6 +194,20 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "s",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ],
+                [
+                    "k",
+                    "$int"
+                ]
+            ],
             "goal": "(INT y:[0,1]. INT x:[0,1]. 1 / (1 - x * y)) = zeta(2)",
             "latex_goal": "\\int_{0}^{1} \\int_{0}^{1} \\frac{1}{1 - x y} \\,dx \\,dy = \\zeta{(2)}",
             "proof": {
@@ -281,6 +295,20 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "s",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ],
+                [
+                    "k",
+                    "$int"
+                ]
+            ],
             "goal": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a) / (1 - x * y)) = (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + a + 1) ^ s)",
             "latex_goal": "\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y) (x ^ {a} y ^ {a})}{1 - x y} \\,dx \\,dy = (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{\\frac{1}{(n + a + 1) ^ {s}}}",
             "proof": {
@@ -505,6 +533,20 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "s",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ],
+                [
+                    "k",
+                    "$int"
+                ]
+            ],
             "goal": "zeta(s) = (-1) ^ s / factorial(s - 1) * (INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) / (1 - x * y))",
             "latex_goal": "\\zeta{(s)} = \\frac{(-1) ^ {s}}{(s - 1)!} (\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y)}{1 - x y} \\,dx \\,dy)",
             "proof": {
@@ -664,6 +706,20 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "s",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ],
+                [
+                    "k",
+                    "$int"
+                ]
+            ],
             "goal": "(INT x:[0,oo]. exp(-k * x) * x ^ (s - 1)) = Gamma(s) / k ^ s",
             "latex_goal": "\\int_{0}^{\\infty} e^{(-k) x} x ^ {s - 1} \\,dx = \\frac{\\Gamma{(s)}}{k ^ {s}}",
             "proof": {
@@ -757,6 +813,20 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "s",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ],
+                [
+                    "k",
+                    "$int"
+                ]
+            ],
             "goal": "(INT x:[0,oo]. x ^ (s - 1) / (exp(x) - 1)) = Gamma(s) * zeta(s)",
             "latex_goal": "\\int_{0}^{\\infty} \\frac{x ^ {s - 1}}{e^{x} - 1} \\,dx = \\Gamma{(s)} \\zeta{(s)}",
             "proof": {

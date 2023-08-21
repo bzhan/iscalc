@@ -28,6 +28,12 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "m",
+                    "$int"
+                ]
+            ],
             "goal": "(D b. I(m,b)) = -(m + 1) * I(m + 1,b)",
             "latex_goal": "\\frac{d}{db} I(m,b) = (-(m + 1)) I(m + 1,b)",
             "proof": {
@@ -115,6 +121,12 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "m",
+                    "$int"
+                ]
+            ],
             "goal": "I(m,b) = pi / 2 ^ (2 * m + 1) * binom(2 * m,m) * (1 / b ^ ((2 * m + 1) / 2))",
             "latex_goal": "I(m,b) = \\frac{\\pi}{2 ^ {2 m + 1}} \\binom{2 m}{m} (\\frac{1}{b ^ {(2 m + 1)/2}})",
             "proof": {

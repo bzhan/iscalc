@@ -157,10 +157,8 @@ class ExprTransformer(Transformer):
         elif func_name == 'SKOLEM_FUNC':
             return expr.SkolemFunc(str(args[0].func_name), tuple(arg for arg in args[0].args))
         elif func_name == 'SUM':
-            return expr.Summation(str(args[0]), *args[1:])
-        elif func_name == 'column':
-            if args[0].is_vector():
-                return args[0].t
+            e = expr.Summation(str(args[0]), *args[1:])
+            return e.replace(expr.Var(e.index_var), expr.Var(e.index_var, type=expr.IntType))
         return expr.Fun(str(func_name), *args)
 
     def abs_expr(self, expr):

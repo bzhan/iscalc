@@ -163,11 +163,11 @@ def get_shape(e: Expr, ctx: Context):
                 raise ValueError
             return shape1
         elif e.is_power():
-            if get_type(a, ctx) == 'matrix':
+            if e.type == 'tensor':
                 shape = get_shape(a, ctx)
                 if shape[0] != shape[1]:
                     raise ValueError(f'{a} is not a square matrix')
-                if get_type(b, ctx) != 'int':
+                if b.type != 'int':
                     raise ValueError(f'{b} is not int')
                 return shape
             else:
@@ -179,15 +179,7 @@ def get_shape(e: Expr, ctx: Context):
         if e.is_uminus():
             return get_shape(a, ctx)
     elif e.is_matrix():
-        if e.shape == None:
-            rows = Const(0)
-            cols = Const(0)
-            for i in range(len(e.data[0])):
-                cols = cols + get_shape(e.data[0][i], ctx)[1]
-            for i in range(len(e.data)):
-                rows = rows + get_shape(e.data[i][0], ctx)[0]
-            e.shape = (normalize(rows, ctx), normalize(cols, ctx))
-        return e.shape
+        return (e.type.args[0], e.type.args[1])
     else:
         print(e)
         raise NotImplementedError
@@ -200,7 +192,7 @@ def transpose(e: Expr):
     return e
 
 def norm(e: Expr, ctx: Context):
-    if is_vector(e, ctx):
+    if expr.is_vector_type(e.type):
         res = None
         for r in e.data:
             for c in r:
@@ -209,6 +201,7 @@ def norm(e: Expr, ctx: Context):
                 else:
                     res += c^2
         return expr.Fun("sqrt", res)
+    return e
 
 def multiply(a: Matrix, b: Matrix, ctx: Context):
     assert isinstance(a, Matrix)
@@ -227,7 +220,8 @@ def multiply(a: Matrix, b: Matrix, ctx: Context):
 
 def add(a: Expr, b: Expr, ctx: Context):
     assert a.is_matrix() and b.is_matrix()
-    assert get_shape(a, ctx) == get_shape(b, ctx)
+    assert expr.num_col(a.type) == expr.num_col(b.type)
+    assert expr.num_row(a.type) == expr.num_row(b.type)
     assert len(a.data) == len(b.data)
     assert all(len(a.data[i]) == len(b.data[i]) for i in range(len(a.data)))
     res = [[Const(0) for j in range(len(a.data[0]))] for i in range(len(a.data))]
@@ -238,7 +232,8 @@ def add(a: Expr, b: Expr, ctx: Context):
 
 def minus(a, b, ctx):
     assert a.is_matrix() and b.is_matrix()
-    assert get_shape(a, ctx) == get_shape(b, ctx)
+    assert expr.num_col(a.type) == expr.num_col(b.type)
+    assert expr.num_row(a.type) == expr.num_row(b.type)
     assert len(a.data) == len(b.data)
     assert all(len(a.data[i]) == len(b.data[i]) for i in range(len(a.data)))
     res = [[Const(0) for j in range(len(a.data[0]))] for i in range(len(a.data))]
@@ -260,15 +255,15 @@ def hat(e: Expr) -> Expr:
     if not e.is_matrix() and expr.is_matrix_type(e.type):
         raise AssertionError("hat: type mismatch")
 
-    if e.type == expr.VectorType(expr.RealType, 3):
-        res = [[ Const(0),  -e.data[2],  e.data[1]],
-               [ e.data[2],  Const(0),  -e.data[0]],
-               [-e.data[1],  e.data[0],  Const(0)]]
+    if expr.is_vector_type(e.type) and expr.num_row(e.type) == Const(3):
+        res = [[ Const(0),  -e.data[2][0],  e.data[1][0]],
+               [ e.data[2][0],  Const(0),  -e.data[0][0]],
+               [-e.data[1][0],  e.data[0][0],  Const(0)]]
         return Matrix(res)
-    elif e.type == expr.VectorType(expr.RealType, 6):
-        res = [[ Const(0),  -e.data[5],  e.data[4], e.data[0]],
-               [ e.data[5],  Const(0),  -e.data[3], e.data[1]],
-               [-e.data[4],  e.data[3],  Const(0),  e.data[2]],
+    elif expr.is_vector_type(e.type) and expr.num_row(e.type) == Const(6):
+        res = [[ Const(0),  -e.data[5][0],  e.data[4][0], e.data[0][0]],
+               [ e.data[5][0],  Const(0),  -e.data[3][0], e.data[1][0]],
+               [-e.data[4][0],  e.data[3][0],  Const(0),  e.data[2][0]],
                [ Const(0),   Const(0),   Const(0),  Const(0)]]
         return Matrix(res)
     else:

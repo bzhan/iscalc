@@ -82,8 +82,10 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.IndefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
-
-        goal7 = file.add_goal("(INT x:[0,1]. x ^ m * log(x) ^ n) = (-1)^n * factorial(n) / (m+1) ^ (n+1)", conds=["m >= 0", "n >= 0", "isInt(n)"])
+        fixes = dict()
+        fixes['n'] = parser.parse_expr('$int')
+        fixes['m'] = parser.parse_expr('$int')
+        goal7 = file.add_goal("(INT x:[0,1]. x ^ m * log(x) ^ n) = (-1)^n * factorial(n) / (m+1) ^ (n+1)", conds=["m >= 0", "n >= 0", "isInt(n)"], fixes=fixes)
         proof = goal7.proof_by_induction("n")
         proof_base = proof.base_case.proof_by_calculation()
         proof_induct = proof.induct_case.proof_by_calculation()
@@ -95,13 +97,16 @@ class IntegralTest(unittest.TestCase):
 
         calc = proof_induct.lhs_calc
         calc.perform_rule(rules.IntegrationByParts(
-            u=parser.parse_expr("log(x) ^ (n + 1)"),
-            v=parser.parse_expr("x ^ (m+1) / (m+1)")))
+            u=parser.parse_expr("log(x) ^ (n + 1)", fixes=fixes),
+            v=parser.parse_expr("x ^ (m+1) / (m+1)", fixes=fixes)))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnSubterm(rules.ApplyInductHyp()))
         calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.Equation(None, "(-1) ^ (n + 1) * (m + 1) ^ (-n - 2) * ((n + 1) * factorial(n))"))
-        calc.perform_rule(rules.ApplyIdentity("(n + 1) * factorial(n)", "factorial(n + 1)"))
+        s = parser.parse_expr("(-1) ^ (n + 1) * (m + 1) ^ (-n - 2) * ((n + 1) * factorial(n))", fixes=fixes)
+        calc.perform_rule(rules.Equation(None, s))
+        s1 = parser.parse_expr("(n + 1) * factorial(n)", fixes=fixes)
+        s2 = parser.parse_expr("factorial(n + 1)", fixes=fixes)
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.FullSimplify())
 
         goal8 = file.add_goal("(INT x:[0,oo]. exp(-(x * y)) * sin(a * x)) = a / (a ^ 2 + y ^ 2)", conds=["y > 0"])
@@ -796,12 +801,13 @@ class IntegralTest(unittest.TestCase):
         # Reference:
         # Irresistable Integrals, Section 2.3
         file = compstate.CompFile("base", 'wallis')
-
+        fixes = dict()
+        fixes['m'] = parser.parse_expr('$int')
         # Make definition
         file.add_definition("I(m,b) = (INT x:[0,oo]. 1/(x^2+b)^(m+1))", conds=["b > 0", "m >= 0"])
 
         # Prove the following equality
-        Eq1 = file.add_goal("(D b. I(m,b)) = -(m+1) * I(m+1, b)", conds=["b > 0", "m >= 0"])
+        Eq1 = file.add_goal("(D b. I(m,b)) = -(m+1) * I(m+1, b)", conds=["b > 0", "m >= 0"], fixes=fixes)
         proof = Eq1.proof_by_calculation()
 
         calc = proof.lhs_calc
@@ -814,7 +820,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
 
         # Prove the following by induction
-        Eq2 = file.add_goal("I(m,b) = pi / 2^(2*m+1) * binom(2*m, m) * (1/(b^((2*m+1)/2)))", conds=["b > 0", "m >= 0"])
+        Eq2 = file.add_goal("I(m,b) = pi / 2^(2*m+1) * binom(2*m, m) * (1/(b^((2*m+1)/2)))", conds=["b > 0", "m >= 0"], fixes=fixes)
         proof = Eq2.proof_by_induction("m")
         proof_base = proof.base_case.proof_by_calculation()
         proof_induct = proof.induct_case.proof_by_calculation()
@@ -825,7 +831,9 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ElimInfInterval())
         calc.perform_rule(rules.SubstitutionInverse("u", parser.parse_expr("sqrt(b) * u")))
         calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.Equation("1 / (b * u^2 + b)", "(1/b) * (1 / (1^2 + u^2))"))
+        s1 = parser.parse_expr("1 / (b * u^2 + b)", fixes=fixes)
+        s2 = parser.parse_expr("(1/b) * (1 / (1^2 + u^2))", fixes=fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
 
@@ -834,13 +842,20 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyEquation(Eq1.goal))
         calc.perform_rule(rules.OnSubterm(rules.ApplyInductHyp()))
         calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.Equation("-((2 * m + 1) / 2) - 1", "-m - 3/2"))
-        calc.perform_rule(rules.Equation(None, "b ^ (-m - 3/2) * 2 ^ -(2 * m) * pi * (2 * m + 1) / (4 * m + 4) * binom(2 * m,m)"))
+        s1 = parser.parse_expr("-((2 * m + 1) / 2) - 1", fixes = fixes)
+        s2 = parser.parse_expr("-m - 3/2", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
+        s = parser.parse_expr("b ^ (-m - 3/2) * 2 ^ -(2 * m) * pi * (2 * m + 1) / (4 * m + 4) * binom(2 * m,m)" , fixes=fixes)
+        calc.perform_rule(rules.Equation(None, s))
 
         # Induction step, RHS
         calc = proof_induct.rhs_calc
-        calc.perform_rule(rules.ApplyIdentity("binom(2*m+2, m+1)", "2 * binom(2*m, m) * ((2*m+1) / (m+1))"))
-        calc.perform_rule(rules.Equation("-((2 * m + 3) / 2)", "-m - 3/2"))
+        s1 = parser.parse_expr("binom(2*m+2, m+1)", fixes=fixes)
+        s2 = parser.parse_expr("2 * binom(2*m, m) * ((2*m+1) / (m+1))", fixes=fixes)
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        s1 = parser.parse_expr("-((2 * m + 3) / 2)", fixes = fixes)
+        s2 = parser.parse_expr("-m - 3/2", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.FullSimplify())
 
         self.checkAndOutput(file)
@@ -849,24 +864,27 @@ class IntegralTest(unittest.TestCase):
         # Reference:
         # Inside interesting integrals, Section 4.1
         file = compstate.CompFile("interesting", "GammaFunction")
-
+        fixes = dict()
+        fixes['n'] = parser.parse_expr("$int")
         # Definition of Gamma function
         file.add_definition("Gamma(n) = (INT x:[0,oo]. exp(-x) * x^(n-1))", conds=["n > 0"])
 
         # Recursive equation for gamma function
-        goal1 = file.add_goal("Gamma(n) = (n - 1) * Gamma(n - 1)", conds=["n > 1"])
+        goal1 = file.add_goal("Gamma(n) = (n - 1) * Gamma(n - 1)", conds=["n > 1"], fixes=fixes)
 
         proof = goal1.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("Gamma"))
-        calc.perform_rule(rules.IntegrationByParts(parser.parse_expr("x ^ (n - 1)"), parser.parse_expr("-exp(-x)")))
+        u = parser.parse_expr("x ^ (n - 1)",fixes=fixes)
+        v = parser.parse_expr("-exp(-x)",fixes=fixes)
+        calc.perform_rule(rules.IntegrationByParts(u, v))
         calc.perform_rule(rules.FullSimplify())
 
         calc = proof.rhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("Gamma")))
 
         # Gamma function and factorial
-        goal2 = file.add_goal("Gamma(n) = factorial(n - 1)", conds=["n >= 1"])
+        goal2 = file.add_goal("Gamma(n) = factorial(n - 1)", conds=["n >= 1"], fixes=fixes)
 
         proof = goal2.proof_by_induction("n", 1)
         proof_base = proof.base_case.proof_by_calculation()
@@ -876,12 +894,13 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ExpandDefinition("Gamma"))
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
-
         calc = proof_induct.lhs_calc
         calc.perform_rule(rules.ApplyEquation(goal1.goal))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnSubterm(rules.ApplyInductHyp()))
-        calc.perform_rule(rules.ApplyIdentity("n * factorial(n - 1)", "factorial(n)"))
+        source = parser.parse_expr("n * factorial(n - 1)",fixes=fixes)
+        target = parser.parse_expr("factorial(n)",fixes=fixes)
+        calc.perform_rule(rules.ApplyIdentity(source, target))
 
         # Application
         calc = file.add_calculation("INT x:[0,oo]. exp(-x^3)")
@@ -1561,7 +1580,8 @@ class IntegralTest(unittest.TestCase):
 
         calc.perform_rule(rules.Substitution("u", parser.parse_expr("sqrt(2*a) * x")))
         calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.Equation("-(u ^ 2 / 2)", "-u^2 / 2"))
+
+        # calc.perform_rule(rules.Equation("-(u ^ 2 / 2)", "-u^2 / 2"))
         calc.perform_rule(rules.Substitution('x', parser.parse_expr("u")))
         calc.perform_rule(rules.Equation("-(x ^ 2 / 2)", "-x^2 / 2"))
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(Eq6.goal), "1"))
@@ -1692,166 +1712,168 @@ class IntegralTest(unittest.TestCase):
         # Initial state
         file = compstate.CompFile("interesting", 'leibniz03_new')
 
+        fixes = dict()
+        fixes['n'] = parser.parse_expr('$int')
         # Make definition
         file.add_definition("I(t) = INT x:[0,oo]. cos(t*x)*exp(-(x^2)/2)")
-        goal = file.add_goal("Gamma(n+1/2) = sqrt(pi) * factorial(2*n) / (4^n * factorial(n))", conds=["n>=0", 'isInt(n)'])
+        goal = file.add_goal("Gamma(n+1/2) = sqrt(pi) * factorial(2*n) / (4^n * factorial(n))", conds=["n>=0", 'isInt(n)'], fixes=fixes)
         proof = goal.proof_by_induction(induct_var='n')
         base_proof = proof.base_case.proof_by_calculation()
         induct_proof = proof.induct_case.proof_by_calculation()
         calc = base_proof.lhs_calc
         calc.perform_rule(rules.ApplyEquation("Gamma(1/2) = sqrt(pi)"))
         calc = induct_proof.lhs_calc
-        calc.perform_rule(rules.Equation("n+3/2", "(n+1/2)+1"))
-        s1 = "Gamma(n + 1/2 + 1)"
-        s2 = "(n+1/2) * Gamma(n+1/2)"
+        s1 = parser.parse_expr("n+3/2",fixes=fixes)
+        s2 = parser.parse_expr("(n+1/2)+1",fixes=fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
+        s1 = parser.parse_expr("Gamma(n + 1/2 + 1)",fixes=fixes)
+        s2 = parser.parse_expr("(n+1/2) * Gamma(n+1/2)",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.ApplyInductHyp(), '1'))
-        s1 = "n+1/2"
-        s2 = "(2*n+1)*(2*n+2) / (4 * (n+1))"
+        s1 = parser.parse_expr("n+1/2",fixes=fixes)
+        s2 = parser.parse_expr("(2*n+1)*(2*n+2) / (4 * (n+1))",fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "(2 * n + 1) * (2 * n + 2) / (4 * (n + 1)) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n)))"
-        s2 = "sqrt(pi) * ((2*n+1+1) * ((2*n+1) * factorial(2*n)))/ (4^1*4^n*((n+1)*factorial(n)))"
+        s1 = parser.parse_expr("(2 * n + 1) * (2 * n + 2) / (4 * (n + 1)) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n)))",fixes=fixes)
+        s2 = parser.parse_expr("sqrt(pi) * ((2*n+1+1) * ((2*n+1) * factorial(2*n)))/ (4^1*4^n*((n+1)*factorial(n)))",fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "4^1 * 4^n"
-        s2 = "4^(1+n)"
+        s1 = parser.parse_expr("4^1 * 4^n",fixes=fixes)
+        s2 = parser.parse_expr("4^(1+n)",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
-        s1 = "(2*n+1)*factorial(2*n)"
-        s2 = "factorial(2*n+1)"
+        s1 = parser.parse_expr("(2*n+1)*factorial(2*n)",fixes=fixes)
+        s2 = parser.parse_expr("factorial(2*n+1)",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1,s2))
-        s1 = "(2*n+1+1)*factorial(2*n+1)"
-        s2 = "factorial(2*n+2)"
+        s1 = parser.parse_expr("(2*n+1+1)*factorial(2*n+1)",fixes=fixes)
+        s2 = parser.parse_expr("factorial(2*n+2)",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
-        s1 = "(n+1)*factorial(n)"
-        s2 = "factorial(n+1)"
+        s1 = parser.parse_expr("(n+1)*factorial(n)",fixes=fixes)
+        s2 = parser.parse_expr("factorial(n+1)",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.FullSimplify())
         self.assertTrue(goal.is_finished())
 
-        goal = file.add_goal("converges(SUM(n, 0, oo, INT x:[0,oo]. (-(-1)) ^ n * (abs(t) * abs(x)) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2))))")
+        goal = file.add_goal("converges(SUM(n, 0, oo, INT x:[0,oo]. (-(-1)) ^ n * (abs(t) * abs(x)) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2))))", fixes=fixes)
         proof = goal.proof_by_case("t>=0")
         proofa = proof.cases[0].proof_by_calculation()
         calc = proofa.arg_calc
         calc.perform_rule(rules.FullSimplify())
-        s1 = "(t*x)^(2*n)"
-        s2 = "t^(2*n) * x^(2*n)"
+        s1 = parser.parse_expr("(t*x)^(2*n)",fixes=fixes)
+        s2 = parser.parse_expr("t^(2*n) * x^(2*n)",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.Substitution('u', 'x^2/2'), '0.1'))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "(sqrt(u) * sqrt(2)) ^ (2 * n)"
-        s2 = "((sqrt(u)*sqrt(2))^2)^n"
+        s1 = parser.parse_expr("(sqrt(u) * sqrt(2)) ^ (2 * n)",fixes=fixes)
+        s2 = parser.parse_expr("((sqrt(u)*sqrt(2))^2)^n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "(2*u)^n"
-        s2 = "2^n * u^n"
+        s1 = parser.parse_expr("(2*u)^n",fixes=fixes)
+        s2 = parser.parse_expr("2^n * u^n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "u ^ (n - 1/2) * exp(-u)"
-        s2 = "exp(-u) * u^(n+1/2 - 1)"
+        s1 = parser.parse_expr("u ^ (n - 1/2) * exp(-u)",fixes=fixes)
+        s2 = parser.parse_expr("exp(-u) * u^(n+1/2 - 1)",fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.FoldDefinition("Gamma"), "1.0.1"))
-        calc.perform_rule(
-            rules.OnLocation(rules.ApplyEquation("Gamma(n+1/2) = sqrt(pi) * factorial(2*n) / (4^n * factorial(n))"),
-                             "1.0.1"))
+        eq = parser.parse_expr("Gamma(n+1/2) = sqrt(pi) * factorial(2*n) / (4^n * factorial(n))",fixes=fixes)
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "1.0.1"))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "t^(2*n)"
-        s2 = "(t^2)^n"
+        s1 = parser.parse_expr("t^(2*n)",fixes=fixes)
+        s2 = parser.parse_expr("(t^2)^n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
-        s1 = "(t ^ 2 ) ^ n * 2 ^ n"
-        s2 = "(t^2 * 2) ^ n"
+        s1 = parser.parse_expr("(t ^ 2 ) ^ n * 2 ^ n",fixes=fixes)
+        s2 = parser.parse_expr("(t^2 * 2) ^ n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
-        s1 = "4^-n"
-        s2 = "(1/4)^n"
+        s1 = parser.parse_expr("4^-n",fixes=fixes)
+        s2 = parser.parse_expr("(1/4)^n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
-        s1 = "(t ^ 2 * 2) ^ n * (1/4) ^ n"
-        s2 = "(t^2/2)^n"
+        s1 = parser.parse_expr("(t ^ 2 * 2) ^ n * (1/4) ^ n",fixes=fixes)
+        s2 = parser.parse_expr("(t^2/2)^n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.SeriesEvaluationIdentity(), "1"))
         proofb = proof.cases[1].proof_by_calculation()
         calc = proofb.arg_calc
         calc.perform_rule(rules.FullSimplify())
-        s1 = "(t*x)^(2*n)"
-        s2 = "t^(2*n) * x^(2*n)"
+        s1 = parser.parse_expr("(t*x)^(2*n)",fixes=fixes)
+        s2 = parser.parse_expr("t^(2*n) * x^(2*n)",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.Substitution('u', 'x^2/2'), '0.1'))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "(sqrt(u) * sqrt(2)) ^ (2 * n)"
-        s2 = "((sqrt(u)*sqrt(2))^2)^n"
+        s1 = parser.parse_expr("(sqrt(u) * sqrt(2)) ^ (2 * n)",fixes=fixes)
+        s2 = parser.parse_expr("((sqrt(u)*sqrt(2))^2)^n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "(2*u)^n"
-        s2 = "2^n * u^n"
+        s1 = parser.parse_expr("(2*u)^n",fixes=fixes)
+        s2 = parser.parse_expr("2^n * u^n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "u ^ (n - 1/2) * exp(-u)"
-        s2 = "exp(-u) * u^(n+1/2 - 1)"
+        s1 = parser.parse_expr("u ^ (n - 1/2) * exp(-u)",fixes=fixes)
+        s2 = parser.parse_expr("exp(-u) * u^(n+1/2 - 1)",fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.FoldDefinition("Gamma"), "1.0.1"))
-        calc.perform_rule(
-            rules.OnLocation(rules.ApplyEquation("Gamma(n+1/2) = sqrt(pi) * factorial(2*n) / (4^n * factorial(n))"),
-                             "1.0.1"))
+        eq = parser.parse_expr("Gamma(n+1/2) = sqrt(pi) * factorial(2*n) / (4^n * factorial(n))",fixes=fixes)
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "1.0.1"))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "t^(2*n)"
-        s2 = "(t^2)^n"
+        s1 = parser.parse_expr("t^(2*n)",fixes=fixes)
+        s2 = parser.parse_expr("(t^2)^n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
-        s1 = "(t ^ 2 ) ^ n * 2 ^ n"
-        s2 = "(t^2 * 2) ^ n"
+        s1 = parser.parse_expr("(t ^ 2 ) ^ n * 2 ^ n",fixes=fixes)
+        s2 = parser.parse_expr("(t^2 * 2) ^ n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
-        s1 = "4^-n"
-        s2 = "(1/4)^n"
+        s1 = parser.parse_expr("4^-n",fixes=fixes)
+        s2 = parser.parse_expr("(1/4)^n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
-        s1 = "(t ^ 2 * 2) ^ n * (1/4) ^ n"
-        s2 = "(t^2/2)^n"
+        s1 = parser.parse_expr("(t ^ 2 * 2) ^ n * (1/4) ^ n",fixes=fixes)
+        s2 = parser.parse_expr("(t^2/2)^n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.SeriesEvaluationIdentity(), "1"))
         self.assertTrue(goal.is_finished())
 
-        goal = file.add_goal("I(t) = sqrt(pi/2) * exp(-t^2/2)")
+        goal = file.add_goal("I(t) = sqrt(pi/2) * exp(-t^2/2)", fixes=fixes)
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("I"))
         calc.perform_rule(rules.OnLocation(rules.SeriesExpansionIdentity(), "0.0"))
-        s1 = "SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n)) * exp(-(x ^ 2 / 2))"
-        s2 = "SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x^2/2)))"
+        s1 = parser.parse_expr("SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n)) * exp(-(x ^ 2 / 2))",fixes=fixes)
+        s2 = parser.parse_expr("SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x^2/2)))",fixes=fixes)
         calc.perform_rule(rules.Equation(s1,s2))
         calc.perform_rule(rules.IntSumExchange())
-        s1 = "(t*x)^(2*n)"
-        s2 = "t^(2*n) * x^(2*n)"
+        s1 = parser.parse_expr("(t*x)^(2*n)",fixes=fixes)
+        s2 = parser.parse_expr("t^(2*n) * x^(2*n)",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.Substitution('u', 'x^2/2'), '0.1'))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "(sqrt(u) * sqrt(2)) ^ (2 * n)"
-        s2 = "((sqrt(u)*sqrt(2))^2)^n"
+        s1 = parser.parse_expr("(sqrt(u) * sqrt(2)) ^ (2 * n)",fixes=fixes)
+        s2 = parser.parse_expr("((sqrt(u)*sqrt(2))^2)^n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "(2*u)^n"
-        s2 = "2^n * u^n"
+        s1 = parser.parse_expr("(2*u)^n",fixes=fixes)
+        s2 = parser.parse_expr("2^n * u^n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "u ^ (n - 1/2) * exp(-u)"
-        s2 = "exp(-u) * u^(n+1/2 - 1)"
+        s1 = parser.parse_expr("u ^ (n - 1/2) * exp(-u)",fixes=fixes)
+        s2 = parser.parse_expr("exp(-u) * u^(n+1/2 - 1)",fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.FoldDefinition("Gamma"), "1.0.1"))
+        eq = parser.parse_expr("Gamma(n+1/2) = sqrt(pi) * factorial(2*n) / (4^n * factorial(n))",fixes=fixes)
         calc.perform_rule(
-            rules.OnLocation(rules.ApplyEquation("Gamma(n+1/2) = sqrt(pi) * factorial(2*n) / (4^n * factorial(n))"),
-                             "1.0.1"))
+            rules.OnLocation(rules.ApplyEquation(eq), "1.0.1"))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "t^(2*n)"
-        s2 = "(t^2)^n"
+        s1 = parser.parse_expr("t^(2*n)",fixes=fixes)
+        s2 = parser.parse_expr("(t^2)^n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
-        s1 = "(t^2)^n * (-1)^n"
-        s2 = "(t^2*-1)^n"
+        s1 = parser.parse_expr("(t^2)^n * (-1)^n",fixes=fixes)
+        s2 = parser.parse_expr("(t^2*-1)^n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
-        s1 = "(t ^ 2 * -1) ^ n * 2 ^ n"
-        s2 = "(t^2 * -2) ^ n"
+        s1 = parser.parse_expr("(t ^ 2 * -1) ^ n * 2 ^ n",fixes=fixes)
+        s2 = parser.parse_expr("(t^2 * -2) ^ n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
-        s1 = "4^-n"
-        s2 = "(1/4)^n"
+        s1 = parser.parse_expr("4^-n",fixes=fixes)
+        s2 = parser.parse_expr("(1/4)^n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
-        s1 = "(t ^ 2 * -2) ^ n * (1/4) ^ n"
-        s2 = "(-t^2/2)^n"
+        s1 = parser.parse_expr("(t ^ 2 * -2) ^ n * (1/4) ^ n",fixes=fixes)
+        s2 = parser.parse_expr("(-t^2/2)^n",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.SeriesEvaluationIdentity(), '1'))
         calc.perform_rule(rules.FullSimplify())
@@ -1864,54 +1886,70 @@ class IntegralTest(unittest.TestCase):
         # Reference:
         # Inside interesting integrals, Section 2.3
         file = compstate.CompFile("interesting", 'gaussianPowerExp')
-
+        fixes = dict()
+        fixes['n'] = parser.parse_expr('$int')
         file.add_definition("I(n) = (INT x:[0, oo]. x^(2*n) * exp(-x^2))", conds=["n>=0", "isInt(n)"])
 
-        goal01 = file.add_goal("(INT x:[0, oo]. (D x. x^(2*n-1)*exp(-x^2))) = 0", conds=["n>=1", "isInt(n)"])
+        goal01 = file.add_goal("(INT x:[0, oo]. (D x. x^(2*n-1)*exp(-x^2))) = 0", fixes=fixes, conds=["n>=1", "isInt(n)"])
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.FullSimplify())
         self.assertTrue(goal01.is_finished())
-        goal02 = file.add_goal("(INT x:[0, oo]. (D x. x^(2*n-1)*exp(-x^2))) = (2*n-1)*I(n-1) - 2 * I(n)", conds=["n>=1", "isInt(n)"])
+        goal02 = file.add_goal("(INT x:[0, oo]. (D x. x^(2*n-1)*exp(-x^2))) = (2*n-1)*I(n-1) - 2 * I(n)",fixes=fixes,  conds=["n>=1", "isInt(n)"])
         proof = goal02.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
         calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0"))
         calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.Equation("2*n-2", "2*(n-1)"))
+        e1 = parser.parse_expr("2*n-2", fixes=fixes)
+        e2 = parser.parse_expr("2*(n-1)", fixes = fixes)
+        calc.perform_rule(rules.Equation(e1, e2))
         calc.perform_rule(rules.OnSubterm(rules.FoldDefinition("I")))
         self.assertTrue(goal02.is_finished())
-        goal03 = file.add_goal("I(n) = (2 * n - 1) / 2 * I(n - 1)", conds=["n>=1", "isInt(n)"])
+        goal03 = file.add_goal("I(n) = (2 * n - 1) / 2 * I(n - 1)",fixes=fixes,  conds=["n>=1", "isInt(n)"])
         proof = goal03.proof_by_rewrite_goal(begin=goal01)
         calc = proof.begin
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal02.goal), "0"))
-        calc.perform_rule(rules.SolveEquation("I(n)"))
-        calc.perform_rule(rules.Equation("I(n - 1) * (2 * n - 1) / 2", "(2 * n - 1) / 2 * I(n - 1)"))
+        x = parser.parse_expr("I(n)", fixes=fixes)
+        calc.perform_rule(rules.SolveEquation(x))
+        e1 = parser.parse_expr("I(n - 1) * (2 * n - 1) / 2", fixes = fixes)
+        e2 = parser.parse_expr("(2 * n - 1) / 2 * I(n - 1)", fixes = fixes)
+        calc.perform_rule(rules.Equation(e1, e2))
         self.assertTrue(goal03.is_finished())
-        goal04 = file.add_goal("I(n) = factorial(2*n)/(4^n*factorial(n))*(1/2)*sqrt(pi)", conds=["n>=0", "isInt(n)"])
+        goal04 = file.add_goal("I(n) = factorial(2*n)/(4^n*factorial(n))*(1/2)*sqrt(pi)", fixes=fixes, conds=["n>=0", "isInt(n)"])
         proof = goal04.proof_by_induction("n", 0)
         proof_base = proof.base_case.proof_by_calculation()
         proof_induct = proof.induct_case.proof_by_calculation()
         calc = proof_base.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("I"))
         calc.perform_rule(rules.Substitution(var_name="x", var_subst="sqrt(2)*x"))
-        old_expr = "-(x ^ 2 / 2)"
-        new_expr = "-(x ^ 2) / 2"
-        calc.perform_rule(rules.Equation(old_expr, new_expr))
+        e1 = parser.parse_expr("-(x ^ 2 / 2)", fixes = fixes)
+        e2 = parser.parse_expr("-(x ^ 2) / 2", fixes = fixes)
+        calc.perform_rule(rules.Equation(e1, e2))
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
         calc = proof_induct.lhs_calc
         calc.perform_rule(rules.ApplyEquation(goal03.goal))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnSubterm(rules.ApplyInductHyp()))
-        calc.perform_rule(rules.Equation("factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi) * (2 * n + 1) / 2",
-                                         "4 ^ -n * sqrt(pi) * (((2*n+1)*factorial(2*n))/(4 * factorial(n)))"))
-        calc.perform_rule(rules.ApplyIdentity("(2*n+1)*factorial(2*n)", "factorial(2*n+1)"))
-        calc.perform_rule(rules.Equation("factorial(2 * n + 1) / (4 * factorial(n))", "((2*n+1 + 1)*factorial(2 * n + 1)) / (8 * ((n+1)*factorial(n)))"))
-        calc.perform_rule(rules.ApplyIdentity("(2*n+1 + 1)*factorial(2*n+1)", "factorial(2*n+2)"))
-        calc.perform_rule(rules.ApplyIdentity("(n+1)*factorial(n)", "factorial(n+1)"))
-        calc.perform_rule(rules.Equation("4 ^ -n * sqrt(pi) * (factorial(2 * n + 2) / (8 * factorial(n + 1)))",
-                                         "4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))"))
+        e1 = parser.parse_expr("factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi) * (2 * n + 1) / 2", fixes = fixes)
+        e2 = parser.parse_expr("4 ^ -n * sqrt(pi) * (((2*n+1)*factorial(2*n))/(4 * factorial(n)))", fixes = fixes)
+        calc.perform_rule(rules.Equation(e1, e2))
+        e1 = parser.parse_expr("(2*n+1)*factorial(2*n)", fixes = fixes)
+        e2 = parser.parse_expr("factorial(2*n+1)", fixes = fixes)
+        calc.perform_rule(rules.ApplyIdentity(e1, e2))
+        e1 = parser.parse_expr("factorial(2 * n + 1) / (4 * factorial(n))", fixes = fixes)
+        e2 = parser.parse_expr("((2*n+1 + 1)*factorial(2 * n + 1)) / (8 * ((n+1)*factorial(n)))", fixes = fixes)
+        calc.perform_rule(rules.Equation(e1, e2))
+        e1 = parser.parse_expr("(2*n+1 + 1)*factorial(2*n+1)", fixes = fixes)
+        e2 = parser.parse_expr("factorial(2*n+2)", fixes = fixes)
+        calc.perform_rule(rules.ApplyIdentity(e1, e2))
+        e1 = parser.parse_expr("(n+1)*factorial(n)", fixes = fixes)
+        e2 = parser.parse_expr("factorial(n+1)", fixes = fixes)
+        calc.perform_rule(rules.ApplyIdentity(e1, e2))
+        e1 = parser.parse_expr("4 ^ -n * sqrt(pi) * (factorial(2 * n + 2) / (8 * factorial(n + 1)))", fixes = fixes)
+        e2 = parser.parse_expr("4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))", fixes = fixes)
+        calc.perform_rule(rules.Equation(e1, e2))
 
         self.assertTrue(goal04.is_finished())
         self.checkAndOutput(file)
@@ -2477,11 +2515,12 @@ class IntegralTest(unittest.TestCase):
         # Reference:
         # Inside interesting integrals, Section 5.1, example #1
         file = compstate.CompFile("interesting", 'CatalanConstant01')
-
+        fixes = dict()
+        fixes['n'] = parser.parse_expr('$int')
         # Define Catalan's constant
-        file.add_definition("G = SUM(n, 0, oo, (-1)^n / (2*n+1)^2)")
+        file.add_definition("G = SUM(n, 0, oo, (-1)^n / (2*n+1)^2)", fixes=fixes)
 
-        goal = file.add_goal("converges(SUM(n, 0, oo, INT x:[0,1]. x ^ (2 * n) / (2 * n + 1)))")
+        goal = file.add_goal("converges(SUM(n, 0, oo, INT x:[0,1]. x ^ (2 * n) / (2 * n + 1)))", fixes=fixes)
         proof = goal.proof_by_calculation()
         calc = proof.arg_calc
         calc.perform_rule(rules.FullSimplify())
@@ -2490,11 +2529,13 @@ class IntegralTest(unittest.TestCase):
         self.assertTrue(proof.is_finished())
 
         # Evaluate integral of atan(x) / x
-        goal = file.add_goal("(INT x:[0, 1]. atan(x) / x) = G")
+        goal = file.add_goal("(INT x:[0, 1]. atan(x) / x) = G", fixes=fixes)
         proof_of_goal = goal.proof_by_calculation()
         calc = proof_of_goal.lhs_calc
         calc.perform_rule(rules.SeriesExpansionIdentity(old_expr="atan(x)"))
-        calc.perform_rule(rules.Equation("x ^ (2 * n + 1)", "x^ (2*n) * x"))
+        s1 = parser.parse_expr("x ^ (2 * n + 1)", fixes=fixes)
+        s2 = parser.parse_expr("x^ (2*n) * x", fixes=fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.IntSumExchange())
         calc.perform_rule(rules.DefiniteIntegralIdentity())
@@ -2509,62 +2550,82 @@ class IntegralTest(unittest.TestCase):
         # Inside interesting integrals, Section 5.1, example #2 and example #3
         file = compstate.CompFile("interesting", 'CatalanConstant02')
 
+        fixes = dict()
+        fixes['k'] = parser.parse_expr('$int')
+        fixes['n'] = parser.parse_expr('$int')
         # Evaluate I(k)
-        goal1 = file.add_goal("(INT x:[1,oo]. log(x) / (x^k)) = 1/(k-1)^2", conds=["k > 1"])
+        goal1 = file.add_goal("(INT x:[1,oo]. log(x) / (x^k)) = 1/(k-1)^2", conds=["k > 1"], fixes=fixes)
         proof_of_goal1 = goal1.proof_by_calculation()
         calc = proof_of_goal1.lhs_calc
-        u = parser.parse_expr("log(x)")
-        v = parser.parse_expr("(x^(1-k)) / (1-k)")
+        u = parser.parse_expr("log(x)", fixes=fixes)
+        v = parser.parse_expr("(x^(1-k)) / (1-k)", fixes=fixes)
         calc.perform_rule(rules.ElimInfInterval())
         calc.perform_rule(rules.IntegrationByParts(u=u, v=v))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
         calc = proof_of_goal1.rhs_calc
-        calc.perform_rule(rules.Equation("1 / (k-1)^2", "1 / (-k+1)^2"))
+        s1 = parser.parse_expr("1 / (k-1)^2", fixes = fixes)
+        s2 = parser.parse_expr("1 / (-k+1)^2", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         self.assertTrue(goal1.is_finished())
 
-        goal = file.add_goal("converges(SUM(n, 0, oo, INT x:[1,oo]. x ^ (-(2 * n) - 2) * log(x)))")
+        goal = file.add_goal("converges(SUM(n, 0, oo, INT x:[1,oo]. x ^ (-(2 * n) - 2) * log(x)))", fixes=fixes)
         proof = goal.proof_by_calculation()
         calc = proof.arg_calc
-        calc.perform_rule(rules.Equation("x ^ (-(2 * n) - 2) * log(x)", "log(x) / x^(2*n+2)"))
+        s1 = parser.parse_expr("x ^ (-(2 * n) - 2) * log(x)", fixes = fixes)
+        s2 = parser.parse_expr("log(x) / x^(2*n+2)", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal1.goal), "0"))
         calc.perform_rule(rules.FullSimplify())
         self.assertTrue(proof.is_finished())
 
-        goal5 = file.add_goal("(INT x:[1,oo]. log(x) / (x^2+1)) = G")
+        goal5 = file.add_goal("(INT x:[1,oo]. log(x) / (x^2+1)) = G", fixes=fixes)
         proof_of_goal5 = goal5.proof_by_calculation()
         calc = proof_of_goal5.lhs_calc
-        calc.perform_rule(rules.Equation("log(x)/(x^2+1)", "log(x) * (x^-2) * (1 + (1/x^2))^-1"))
+        s1 = parser.parse_expr("log(x)/(x^2+1)", fixes = fixes)
+        s2 = parser.parse_expr("log(x) * (x^-2) * (1 + (1/x^2))^-1", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.SeriesExpansionIdentity(old_expr="(1+(1/x^2))^-1"))
-        calc.perform_rule(rules.Equation(
-            "log(x) * x ^ (-2) * SUM(n, 0, oo, (-1) ^ n * (1 / x ^ 2) ^ n)",
-            "SUM(n, 0, oo, (-1) ^ n * ((1 / x ^ 2) ^ n) * log(x) * x ^ -2)"))
+        s1 = parser.parse_expr("log(x) * x ^ (-2) * SUM(n, 0, oo, (-1) ^ n * (1 / x ^ 2) ^ n)", fixes = fixes)
+        s2 = parser.parse_expr("SUM(n, 0, oo, (-1) ^ n * ((1 / x ^ 2) ^ n) * log(x) * x ^ -2)", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.IntSumExchange())
         calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.Equation("x ^ (-(2 * n) - 2) * log(x)", "log(x) / x^(2*n+2)"))
+        s1 = parser.parse_expr("x ^ (-(2 * n) - 2) * log(x)", fixes = fixes)
+        s2 = parser.parse_expr("log(x) / x^(2*n+2)", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal1.goal), "0.1"))
         calc.perform_rule(rules.FullSimplify())
         calc = proof_of_goal5.rhs_calc
         calc.perform_rule(rules.ExpandDefinition("G"))
         self.assertTrue(goal5.is_finished())
 
-        goal6 = file.add_goal("(INT x:[0, oo]. log(x + 1) / (x ^ 2 + 1)) = pi / 4 * log(2) + G")
+        goal6 = file.add_goal("(INT x:[0, oo]. log(x + 1) / (x ^ 2 + 1)) = pi / 4 * log(2) + G", fixes=fixes)
         proof_of_goal6 = goal6.proof_by_calculation()
         calc = proof_of_goal6.lhs_calc
         calc.perform_rule(rules.SplitRegion("1"))
         calc.perform_rule(rules.DefiniteIntegralIdentity())
-        calc.perform_rule(rules.Equation("x + 1", "x * (1 + 1 / x)"))
-        calc.perform_rule(rules.ApplyIdentity("log(x * (1 + 1 / x))", "log(x) + log(1 + 1 / x)"))
-        calc.perform_rule(rules.Equation("(log(x) + log(1 + 1 / x)) / (x ^ 2 + 1)",
-                                         "log(x) / (x ^ 2 + 1) + log(1 + 1 / x) / (x ^ 2 + 1)"))
+        s1 = parser.parse_expr("x + 1", fixes = fixes)
+        s2 = parser.parse_expr("x * (1 + 1 / x)", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
+        s1 = parser.parse_expr("log(x * (1 + 1 / x))", fixes = fixes)
+        s2 = parser.parse_expr("log(x) + log(1 + 1 / x)", fixes = fixes)
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        s1 = parser.parse_expr("(log(x) + log(1 + 1 / x)) / (x ^ 2 + 1)", fixes = fixes)
+        s2 = parser.parse_expr("log(x) / (x ^ 2 + 1) + log(1 + 1 / x) / (x ^ 2 + 1)", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal5.goal), "0.1"))
         calc.perform_rule(rules.Substitution(var_name="u", var_subst="1 / x"))
-        calc.perform_rule(rules.Equation("u ^ 2 * (1 / u ^ 2 + 1)", "u ^ 2 + 1"))
+        s1 = parser.parse_expr("u ^ 2 * (1 / u ^ 2 + 1)", fixes = fixes)
+        s2 = parser.parse_expr("u ^ 2 + 1", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.Equation("pi * log(2) / 4", "pi / 4 * log(2)"))
+        s1 = parser.parse_expr("pi * log(2) / 4", fixes = fixes)
+        s2 = parser.parse_expr("pi / 4 * log(2)", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         self.assertTrue(goal6.is_finished())
         self.checkAndOutput(file)
 
@@ -2642,57 +2703,69 @@ class IntegralTest(unittest.TestCase):
         # Reference:
         # Inside interesting integrals, Section 5.2, example #2 (5.2.4)
         file = compstate.CompFile("interesting", 'LogFunction02')
-
+        fixes = dict()
+        fixes['k'] = parser.parse_expr('$int')
         goal01 = file.add_goal("-log(1-x) - log(1+x) = \
-                -SUM(k,0,oo,(-1)^k*(-x)^(k+1) / (k+1))-SUM(k,0,oo,(-1)^k*x^(k+1)/(k+1))", conds=["abs(x) < 1"])
+                -SUM(k,0,oo,(-1)^k*(-x)^(k+1) / (k+1))-SUM(k,0,oo,(-1)^k*x^(k+1)/(k+1))", conds=["abs(x) < 1"], fixes=fixes)
         proof_of_goal01 = goal01.proof_by_calculation()
         calc = proof_of_goal01.lhs_calc
         calc.perform_rule(rules.SeriesExpansionIdentity(old_expr="log(1-x)", index_var='k'))
         calc.perform_rule(rules.SeriesExpansionIdentity(old_expr="log(1+x)", index_var='k'))
-
+        assert goal01.is_finished()
         goal02 = file.add_goal("x / (-(x ^ 2) + 1) = \
-                1/2 * SUM(k, 0, oo, x ^ k) - 1/2 * SUM(k, 0, oo, x ^ k * (-1) ^ k)",conds = ["abs(x) < 1"])
+                1/2 * SUM(k, 0, oo, x ^ k) - 1/2 * SUM(k, 0, oo, x ^ k * (-1) ^ k)",conds = ["abs(x) < 1"], fixes=fixes)
         proof_of_goal02 = goal02.proof_by_rewrite_goal(begin = goal01)
         calc = proof_of_goal02.begin
         calc.perform_rule(rules.DerivEquation('x'))
         calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.Equation("1 / (-x + 1) - 1 / (x + 1)", "2 * (x / (1-x^2))"))
-        calc.perform_rule(rules.SolveEquation(parser.parse_expr("x / (1-x^2)")))
-        calc.perform_rule(rules.ApplyIdentity("(-1) ^ k * (-x) ^ k", "x ^ k"))
+        s1 = parser.parse_expr("1 / (-x + 1) - 1 / (x + 1)", fixes = fixes)
+        s2 = parser.parse_expr("2 * (x / (1-x^2))", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
+        calc.perform_rule(rules.SolveEquation(parser.parse_expr("x / (1-x^2)", fixes=fixes)))
+        s1 = parser.parse_expr("(-1) ^ k * (-x) ^ k", fixes = fixes)
+        s2 = parser.parse_expr("x ^ k", fixes = fixes)
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.ExpandPolynomial(), "1"))
+        s1 = parser.parse_expr("-(SUM(k, 0, oo, x ^ k * (-1) ^ k) / 2) + SUM(k, 0, oo, x ^ k) / 2", fixes = fixes)
+        s2 = parser.parse_expr("1/2 * SUM(k, 0, oo, x ^ k) - 1/2 * SUM(k, 0, oo, x ^ k * (-1) ^ k)", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
+        assert goal02.is_finished()
 
-        goal = file.add_goal("converges(SUM(k, 0, oo, INT y:[0,1]. -(y ^ k * log(y))))")
+        goal = file.add_goal("converges(SUM(k, 0, oo, INT y:[0,1]. -(y ^ k * log(y))))", fixes=fixes)
         proof = goal.proof_by_calculation()
         calc = proof.arg_calc
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
-        self.assertTrue(proof.is_finished())
+        self.assertTrue(goal.is_finished())
 
-        goal03 = file.add_goal("(INT x:[0, pi/2]. cos(x)/sin(x) * log(1/cos(x))) = pi^2/24")
+        goal03 = file.add_goal("(INT x:[0, pi/2]. cos(x)/sin(x) * log(1/cos(x))) = pi^2/24", fixes=fixes)
         proof_of_goal03 = goal03.proof_by_calculation()
         calc = proof_of_goal03.lhs_calc
-        e = parser.parse_expr("cos(x)")
+        e = parser.parse_expr("cos(x)", fixes = fixes)
         calc.perform_rule(rules.Substitution(var_name='t', var_subst=e))
         calc.perform_rule(rules.FullSimplify())
-        e = parser.parse_expr("t")
+        e = parser.parse_expr("t", fixes = fixes)
         calc.perform_rule(rules.Substitution(var_name='y', var_subst=e))
-        calc.perform_rule(rules.Equation("y * log(y) / (-(y ^ 2) + 1)",
-                                         "log(y) * (y / (-(y ^ 2) + 1))"))
+        s1 = parser.parse_expr("y * log(y) / (-(y ^ 2) + 1)", fixes = fixes)
+        s2 = parser.parse_expr("log(y) * (y / (-(y ^ 2) + 1))", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal02.goal), "0.0.1"))
         calc.perform_rule(rules.OnLocation(rules.ExpandPolynomial(), "0"))
         calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.Equation("log(y) * SUM(k, 0, oo, y ^ k)",
-                                         "SUM(k, 0, oo, log(y) * y ^ k)"))
-        calc.perform_rule(rules.Equation("log(y) * SUM(k, 0, oo, y ^ k * (-1) ^ k)",
-                                         "SUM(k, 0, oo, log(y) * y ^ k * (-1) ^ k)"))
+        s1 = parser.parse_expr("log(y) * SUM(k, 0, oo, y ^ k)", fixes = fixes)
+        s2 = parser.parse_expr("SUM(k, 0, oo, log(y) * y ^ k)", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
+        s1 = parser.parse_expr("log(y) * SUM(k, 0, oo, y ^ k * (-1) ^ k)", fixes = fixes)
+        s2 = parser.parse_expr("SUM(k, 0, oo, log(y) * y ^ k * (-1) ^ k)", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnSubterm(rules.IntSumExchange()))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnSubterm(rules.SeriesEvaluationIdentity()))
         calc.perform_rule(rules.FullSimplify())
-
+        assert goal03.is_finished()
         self.checkAndOutput(file)
 
 
@@ -2700,63 +2773,90 @@ class IntegralTest(unittest.TestCase):
         # Reference:
         # Inside interesting integrals, Section 6.1
         file = compstate.CompFile("interesting", "BernoulliIntegral")
-
-        goal = file.add_goal("converges(SUM(k, 0, oo, abs(INT x:[0,1]. (c * x ^ a * log(x)) ^ k / factorial(k))))", conds=["a > 0", "c != 0"])
+        fixes = dict()
+        fixes['k'] = parser.parse_expr('$int')
+        goal = file.add_goal("converges(SUM(k, 0, oo, abs(INT x:[0,1]. (c * x ^ a * log(x)) ^ k / factorial(k))))", conds=["a > 0", "c != 0"], fixes=fixes)
         proof = goal.proof_by_calculation()
         calc = proof.arg_calc
         calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.ApplyIdentity("(c*x^a * log(x))^k", "(c*x^a)^k * log(x)^k"))
-        calc.perform_rule(rules.ApplyIdentity("(c*x^a)^k", "c^k * x^a^k"))
+        s1 = parser.parse_expr("(c*x^a * log(x))^k", fixes=fixes)
+        s2 = parser.parse_expr("(c*x^a)^k * log(x)^k", fixes=fixes)
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        s1 = parser.parse_expr("(c*x^a)^k", fixes = fixes)
+        s2 = parser.parse_expr("c^k * x^a^k", fixes = fixes)
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
         self.assertTrue(proof.is_finished())
 
-        goal = file.add_goal("(INT x:[0,1]. x^(c*x^a)) = SUM(k,0,oo,(-c)^k / (k*a+1)^(k+1))", conds=["a > 0", "c != 0"])
+        goal = file.add_goal("(INT x:[0,1]. x^(c*x^a)) = SUM(k,0,oo,(-c)^k / (k*a+1)^(k+1))", conds=["a > 0", "c != 0"], fixes=fixes)
         proof_of_goal = goal.proof_by_calculation()
         calc = proof_of_goal.lhs_calc
-        calc.perform_rule(rules.Equation("x^(c*x^a)", "exp(log(x^(c*x^a)))"))
+        s1 = parser.parse_expr("x^(c*x^a)", fixes = fixes)
+        s2 = parser.parse_expr("exp(log(x^(c*x^a)))", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.SeriesExpansionIdentity(old_expr="exp(log(x^(c*x^a)))", index_var='k'))
         calc.perform_rule(rules.IntSumExchange())
-        calc.perform_rule(rules.ApplyIdentity("log(x^(c*x^a))", "(c*x^a) * log(x)"))
-        calc.perform_rule(rules.ApplyIdentity("(c*x^a * log(x))^k", "(c*x^a)^k * log(x)^k"))
-        calc.perform_rule(rules.ApplyIdentity("(c*x^a)^k", "c^k * x^a^k"))
+        s1 = parser.parse_expr("log(x^(c*x^a))", fixes = fixes)
+        s2 = parser.parse_expr("(c*x^a) * log(x)", fixes = fixes)
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        s1 = parser.parse_expr("(c*x^a * log(x))^k", fixes = fixes)
+        s2 = parser.parse_expr("(c*x^a)^k * log(x)^k", fixes = fixes)
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        s1 = parser.parse_expr("(c*x^a)^k", fixes = fixes)
+        s2 = parser.parse_expr("c^k * x^a^k", fixes = fixes)
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.ApplyIdentity("c^k * (-1)^k", "(-c)^k"))
+        s1 = parser.parse_expr("c^k * (-1)^k", fixes = fixes)
+        s2 = parser.parse_expr("(-c)^k", fixes = fixes)
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc = proof_of_goal.rhs_calc
         calc.perform_rule(rules.FullSimplify())
 
-        goal1 = file.add_goal("(INT x:[0,1]. x^x) = SUM(k, 0, oo, (-1) ^ k * (k + 1) ^ (-k - 1))")
+        goal1 = file.add_goal("(INT x:[0,1]. x^x) = SUM(k, 0, oo, (-1) ^ k * (k + 1) ^ (-k - 1))", fixes=fixes)
         proof_of_goal1 = goal1.proof_by_calculation()
         calc = proof_of_goal1.lhs_calc
-        calc.perform_rule(rules.Equation("x^x", "x^(1*x^1)"))
+        s1 = parser.parse_expr("x^x", fixes = fixes)
+        s2 = parser.parse_expr("x^(1*x^1)", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.ApplyEquation(goal.goal))
         calc.perform_rule(rules.FullSimplify())
 
-        goal2 = file.add_goal("(INT x:[0,1]. x^(-x)) = SUM(k, 0, oo, (k + 1) ^ (-k - 1))")
+        goal2 = file.add_goal("(INT x:[0,1]. x^(-x)) = SUM(k, 0, oo, (k + 1) ^ (-k - 1))", fixes=fixes)
         proof_of_goal2 = goal2.proof_by_calculation()
         calc = proof_of_goal2.lhs_calc
-        calc.perform_rule(rules.Equation("x^(-x)", "x^(-1*x^1)"))
+        s1 = parser.parse_expr("x^(-x)", fixes = fixes)
+        s2 = parser.parse_expr("x^(-1*x^1)", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.ApplyEquation(goal.goal))
         calc.perform_rule(rules.FullSimplify())
 
-        goal3 = file.add_goal("(INT x:[0,1]. x^(x^2)) = SUM(k, 0, oo, (-1) ^ k * (2 * k + 1) ^ (-k - 1))")
+        goal3 = file.add_goal("(INT x:[0,1]. x^(x^2)) = SUM(k, 0, oo, (-1) ^ k * (2 * k + 1) ^ (-k - 1))", fixes=fixes)
         proof_of_goal3 = goal3.proof_by_calculation()
         calc = proof_of_goal3.lhs_calc
-        calc.perform_rule(rules.Equation("x^(x^2)", "x^(1*x^2)"))
+        s1 = parser.parse_expr("x^(x^2)", fixes = fixes)
+        s2 = parser.parse_expr("x^(1*x^2)", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.ApplyEquation(goal.goal))
         calc.perform_rule(rules.FullSimplify())
 
-        goal4 = file.add_goal("(INT x:[0,1]. x^(sqrt(x))) = SUM(k, 0, oo, (-1) ^ k * (2 / (k + 2)) ^ (k+1))")
+        goal4 = file.add_goal("(INT x:[0,1]. x^(sqrt(x))) = SUM(k, 0, oo, (-1) ^ k * (2 / (k + 2)) ^ (k+1))",fixes=fixes)
         proof_of_goal4 = goal4.proof_by_calculation()
         calc = proof_of_goal4.lhs_calc
-        calc.perform_rule(rules.Equation("x^(sqrt(x))", "x^(1*x^(1/2))"))
+        s1 = parser.parse_expr("x^(sqrt(x))", fixes = fixes)
+        s2 = parser.parse_expr("x^(1*x^(1/2))", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.ApplyEquation(goal.goal))
         calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.Equation("(k / 2 + 1)", "(2/(k+2)) ^ (-1)"))
-        calc.perform_rule(rules.OnLocation(rules.ApplyIdentity("(2 / (k + 2)) ^ (-1) ^ (-k - 1)", "(2/(k+2))^(k+1)"), "0.1"))
+        s1 = parser.parse_expr("(k / 2 + 1)", fixes = fixes)
+        s2 = parser.parse_expr("(2/(k+2)) ^ (-1)", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
+        s1 = parser.parse_expr("(2 / (k + 2)) ^ (-1) ^ (-k - 1)", fixes = fixes)
+        s2 = parser.parse_expr("(2/(k+2))^(k+1)", fixes = fixes)
+        calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2), "0.1"))
 
         self.checkAndOutput(file)
 
@@ -3872,30 +3972,33 @@ class IntegralTest(unittest.TestCase):
         # Reference:
         # Inside interesting integrals, section 5.3
         file = compstate.CompFile("interesting", "zeta_function")
-
-        file.add_definition("zeta(s) = SUM(k, 0, oo, 1/(k+1)^s)")
-        s1 = "(INT y:[0,1]. (INT x:[0,1]. x^a * y^a / (1-x*y)))"
-        s2 = "SUM(n, 0, oo, 1/(n+1+a)^2)"
-        goal01 = file.add_goal(s1+"="+s2, conds=["a>-1"])
+        fixes = dict()
+        fixes['s'] = parser.parse_expr('$int')
+        fixes['n'] = parser.parse_expr('$int')
+        fixes['k'] = parser.parse_expr('$int')
+        file.add_definition("zeta(s) = SUM(k, 0, oo, 1/(k+1)^s)", fixes=fixes)
+        s1 = parser.parse_expr("(INT y:[0,1]. (INT x:[0,1]. x^a * y^a / (1-x*y)))", fixes=fixes)
+        s2 = parser.parse_expr("SUM(n, 0, oo, 1/(n+1+a)^2)", fixes=fixes)
+        goal01 = file.add_goal(expr.Op('=', s1, s2), conds=["a>-1"])
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.FullSimplify())
-        s1 = "x ^ a / (-(x * y) + 1)"
-        s2 = "x ^ a * (1-x*y)^(-1)"
+        s1 = parser.parse_expr("x ^ a / (-(x * y) + 1)", fixes=fixes)
+        s2 = parser.parse_expr("x ^ a * (1-x*y)^(-1)", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.SeriesExpansionIdentity(old_expr="(1 - x * y) ^ (-1)", index_var='k'))
-        s1 = "x ^ a * SUM(k, 0, oo, (x * y) ^ k)"
-        s2 = "SUM(k, 0, oo, x ^ a * (x * y) ^ k)"
+        s1 = parser.parse_expr("x ^ a * SUM(k, 0, oo, (x * y) ^ k)", fixes=fixes)
+        s2 = parser.parse_expr("SUM(k, 0, oo, x ^ a * (x * y) ^ k)", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.IntSumExchange(), "0.1"))
-        s1 = " (x * y) ^ k"
-        s2 = " x ^ k * y ^ k"
+        s1 = parser.parse_expr(" (x * y) ^ k", fixes=fixes)
+        s2 = parser.parse_expr(" x ^ k * y ^ k", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2), "0.1.0.0.1"))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.DefiniteIntegralIdentity(), "0"))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "y ^ a * SUM(k, 0, oo, y ^ k / (a + k + 1))"
-        s2 = "SUM(k, 0, oo, y ^ a * (y ^ k / (a + k + 1)))"
+        s1 = parser.parse_expr("y ^ a * SUM(k, 0, oo, y ^ k / (a + k + 1))", fixes=fixes)
+        s2 = parser.parse_expr("SUM(k, 0, oo, y ^ a * (y ^ k / (a + k + 1)))", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.IntSumExchange())
         calc.perform_rule(rules.FullSimplify())
@@ -3905,9 +4008,9 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
 
         #application
-        s1 = "(INT y:[0,1]. (INT x:[0,1]. 1 / (1-x*y)))"
-        s2 = "zeta(2)"
-        goal02 = file.add_goal(s1 + "=" + s2)
+        s1 = parser.parse_expr("(INT y:[0,1]. (INT x:[0,1]. 1 / (1-x*y)))", fixes=fixes)
+        s2 = parser.parse_expr("zeta(2)", fixes=fixes)
+        goal02 = file.add_goal(expr.Op('=', s1, s2), fixes=fixes)
         proof = goal02.proof_by_rewrite_goal(begin=goal01)
         calc = proof.begin
         calc.perform_rule(rules.VarSubsOfEquation([{'var':'a', 'expr':'0'}]))
@@ -3915,9 +4018,9 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.Equation("-(x * y) + 1", "1-x*y"))
         calc.perform_rule(rules.OnLocation(rules.FoldDefinition('zeta'), '1'))
 
-        s1 = "(INT y:[0,1]. (INT x:[0,1]. log(x*y)^(s-2)*(x^a * y^a) / (1-x*y)))"
-        s2 = "(-1)^s * factorial(s-1) * SUM(n, 0, oo, 1/(n+a+1)^s)"
-        goal03 = file.add_goal(s1+"="+s2, conds=["a > -1", "s >= 2", "isInt(s)"])
+        s1 = parser.parse_expr("(INT y:[0,1]. (INT x:[0,1]. log(x*y)^(s-2)*(x^a * y^a) / (1-x*y)))", fixes=fixes)
+        s2 = parser.parse_expr("(-1)^s * factorial(s-1) * SUM(n, 0, oo, 1/(n+a+1)^s)", fixes=fixes)
+        goal03 = file.add_goal(expr.Op('=', s1, s2), conds=["a > -1", "s >= 2", "isInt(s)"], fixes=fixes)
         proof = goal03.proof_by_induction('s', 2)
         proof_base = proof.base_case.proof_by_calculation()
         proof_induct = proof.induct_case.proof_by_rewrite_goal(begin = proof.induct_case.get_induct_hyp_goal())
@@ -3931,93 +4034,101 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.DerivIntExchange(), "0"))
         calc.perform_rule(rules.OnLocation(rules.DerivIntExchange(), "0.0"))
         calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0.0"))
-        s1 = "x ^ a * y ^ a * log(x) + x ^ a * y ^ a * log(y)"
-        s2 = "x ^ a * y ^ a * (log(x) + log(y))"
+        s1 = parser.parse_expr("x ^ a * y ^ a * log(x) + x ^ a * y ^ a * log(y)", fixes=fixes)
+        s2 = parser.parse_expr("x ^ a * y ^ a * (log(x) + log(y))", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "log(x) + log(y)"
-        s2 = "log(x*y)"
+        s1 = parser.parse_expr("log(x) + log(y)", fixes=fixes)
+        s2 = parser.parse_expr("log(x*y)", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "log(x * y) ^ (s - 2) * (x ^ a * y ^ a * log(x * y))"
-        s2 = "x ^ a * y ^ a * log(x * y) ^ (s - 1)"
+        s1 = parser.parse_expr("log(x * y) ^ (s - 2) * (x ^ a * y ^ a * log(x * y))", fixes=fixes)
+        s2 = parser.parse_expr("x ^ a * y ^ a * log(x * y) ^ (s - 1)", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "-(x * y) + 1"
-        s2 = "1 - x*y"
+        s1 = parser.parse_expr("-(x * y) + 1", fixes=fixes)
+        s2 = parser.parse_expr("1 - x*y", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "1"))
-        s1 = "-(s * (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1)))"
-        s2 = "(-1) ^ (s+1) * (s* factorial(s - 1)) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1))"
+        s1 = parser.parse_expr("-(s * (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1)))", fixes=fixes)
+        s2 = parser.parse_expr("(-1) ^ (s+1) * (s* factorial(s - 1)) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1))", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "s* factorial(s - 1)"
-        s2 = "factorial(s)"
+        s1 = parser.parse_expr("s* factorial(s - 1)", fixes=fixes)
+        s2 = parser.parse_expr("factorial(s)", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2), "1.0.1"))
 
-        s1 = 'zeta(s)'
-        s2 = "(-1)^s / factorial(s-1) * (INT y:[0,1]. (INT x:[0,1]. log(x*y)^(s-2)/ (1-x*y)))"
-        goal04 = file.add_goal(s1+"="+s2, conds=["s >= 2", "isInt(s)"])
+
+        s1 = parser.parse_expr('zeta(s)', fixes=fixes)
+        s2 = parser.parse_expr("(-1)^s / factorial(s-1) * \
+        (INT y:[0,1]. (INT x:[0,1]. log(x*y)^(s-2)/ (1-x*y)))", fixes=fixes)
+        goal04 = file.add_goal(expr.Op('=', s1, s2), conds=["s >= 2", "isInt(s)"], fixes=fixes)
         proof = goal04.proof_by_rewrite_goal(begin=goal03)
         calc = proof.begin
         calc.perform_rule(rules.VarSubsOfEquation([{'var':'a', 'expr':'0'}]))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "(n + 1) ^ -s"
-        s2 = "1/(n+1)^s"
+        s1 = parser.parse_expr("(n + 1) ^ -s", fixes=fixes)
+        s2 = parser.parse_expr("1/(n+1)^s", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.FoldDefinition('zeta'), "1.1"))
-        s1 = "-(x * y) + 1"
-        s2 = "1 - x*y"
+        s1 = parser.parse_expr("-(x * y) + 1", fixes=fixes)
+        s2 = parser.parse_expr("1 - x*y", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        calc.perform_rule(rules.SolveEquation("zeta(s)"))
-        s1 = "-s"
-        s2 = "-1*s"
+        s = parser.parse_expr("zeta(s)", fixes=fixes)
+        calc.perform_rule(rules.SolveEquation(s))
+        s1 = parser.parse_expr("-s", fixes=fixes)
+        s2 = parser.parse_expr("-1*s", fixes=fixes)
         calc.perform_rule(rules.Equation(s1,s2))
-        s1 = "(-1) ^ (-1 * s)"
-        s2 = "((-1)^-1^s)"
+        s1 = parser.parse_expr("(-1) ^ (-1 * s)", fixes=fixes)
+        s2 = parser.parse_expr("((-1)^-1^s)", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2), "1.0.0"))
-        s1 = "(-1)^-1"
-        s2 = "-1"
+        s1 = parser.parse_expr("(-1)^-1", fixes=fixes)
+        s2 = parser.parse_expr("-1", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "-(x * y) + 1"
-        s2 = "1 - x * y"
+        s1 = parser.parse_expr("-(x * y) + 1", fixes=fixes)
+        s2 = parser.parse_expr("1 - x * y", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
 
-        s1 = "(INT x:[0, oo]. exp(-k*x) * x^(s-1))"
-        s2 = "Gamma(s) / k^s"
-        goal05 = file.add_goal(s1+"="+s2, conds=["k>0"])
+
+        s1 = parser.parse_expr("(INT x:[0, oo]. exp(-k*x) * x^(s-1))", fixes=fixes)
+        s2 = parser.parse_expr("Gamma(s) / k^s", fixes=fixes)
+        goal05 = file.add_goal(expr.Op('=', s1, s2), conds=["k>0"], fixes=fixes)
         proof = goal05.proof_by_calculation()
         calc = proof.lhs_calc
-        calc.perform_rule(rules.Substitution("u", "k*x"))
-        s1 = "(u / k) ^ (s - 1)"
-        s2 = "u ^ (s - 1) / k ^ (s - 1)"
+        s1 = "u"
+        s2 = parser.parse_expr("k*x", fixes=fixes)
+        calc.perform_rule(rules.Substitution(s1, s2))
+        s1 = parser.parse_expr("(u / k) ^ (s - 1)", fixes=fixes)
+        s2 = parser.parse_expr("u ^ (s - 1) / k ^ (s - 1)", fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "u ^ (s - 1) * exp(-u)"
-        s2 = "exp(-u) * u ^ (s - 1)"
+        s1 = parser.parse_expr("u ^ (s - 1) * exp(-u)", fixes=fixes)
+        s2 = parser.parse_expr("exp(-u) * u ^ (s - 1)", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.FoldDefinition("Gamma"), "1"))
         calc = proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
-        s1 = "(INT x:[0,oo]. x^(s-1)/(exp(x) - 1))"
-        s2 = "Gamma(s) * zeta(s)"
-        goal06 = file.add_goal(s1 + "=" + s2)
+
+
+        s1 = parser.parse_expr("(INT x:[0,oo]. x^(s-1)/(exp(x) - 1))", fixes=fixes)
+        s2 = parser.parse_expr("Gamma(s) * zeta(s)", fixes=fixes)
+        goal06 = file.add_goal(expr.Op('=', s1, s2), fixes=fixes)
         proof = goal06.proof_by_rewrite_goal(begin=goal05)
         calc = proof.begin
         calc.perform_rule(rules.SummationEquation('k', '1', 'oo'))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.ChangeSummationIndex('0'), "1.1"))
-        s1 = "(k + 1) ^ -s"
-        s2 = "1/(k+1)^s"
+        s1 = parser.parse_expr("(k + 1) ^ -s", fixes=fixes)
+        s2 = parser.parse_expr("1/(k+1)^s", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.FoldDefinition("zeta"),"1.1"))
         calc.perform_rule(rules.OnLocation(rules.IntSumExchange(), "0"))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "exp(-(k * x))"
-        s2 = "exp(-x*k)"
+        s1 = parser.parse_expr("exp(-(k * x))", fixes=fixes)
+        s2 = parser.parse_expr("exp(-x*k)", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "exp(-x*k)"
-        s2 = "exp(-x)^k"
+        s1 = parser.parse_expr("exp(-x*k)", fixes=fixes)
+        s2 = parser.parse_expr("exp(-x)^k", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2), "0.0.1.0"))
         calc.perform_rule(rules.OnLocation(rules.SeriesEvaluationIdentity(), "0.0.1"))
-        s1 = "x ^ (s - 1) * (exp(-x) ^ 1 / (1 - exp(-x)))"
-        s2 = "x^(s-1) / (exp(x) - 1)"
+        s1 = parser.parse_expr("x ^ (s - 1) * (exp(-x) ^ 1 / (1 - exp(-x)))", fixes=fixes)
+        s2 = parser.parse_expr("x^(s-1) / (exp(x) - 1)", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
         self.checkAndOutput(file)
 
@@ -4163,7 +4274,11 @@ class IntegralTest(unittest.TestCase):
         assert goal01.is_finished()
         s1 = "I(m,n)"
         s2 = "(-1)^n * (factorial(n) / (m+1)^(n+1))"
-        goal02 = file.add_goal(s1 + "=" + s2, conds=["m >= 0", "n >= 0", "isInt(n)", "isInt(m)"])
+        raw_fixes = [('m', '$int'), ('n', '$int')]
+        fixes = dict()
+        for a, b in raw_fixes:
+            fixes[a] = parser.parse_expr(b, fixes=fixes)
+        goal02 = file.add_goal(s1 + "=" + s2, conds=["m >= 0", "n >= 0", "isInt(n)", "isInt(m)"], fixes = fixes)
         proof = goal02.proof_by_induction("n")
         base_proof = proof.base_case.proof_by_calculation()
         calc = base_proof.lhs_calc
@@ -4177,21 +4292,24 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.ApplyInductHyp(), "0.0.1"))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "-((-1) ^ n * factorial(n) * (m + 1) ^ (-n - 2) * (n + 1))"
-        s2 = "(-1)^(n+1) * ((n+1) * factorial(n)) / (m+1)^(n+2)"
+        s1 = parser.parse_expr("-((-1) ^ n * factorial(n) * (m + 1) ^ (-n - 2) * (n + 1))", fixes=fixes)
+        s2 = parser.parse_expr("(-1)^(n+1) * ((n+1) * factorial(n)) / (m+1)^(n+2)", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "(n+1) * factorial(n)"
-        s2 = "factorial(n+1)"
+        s1 = parser.parse_expr("(n+1) * factorial(n)", fixes=fixes)
+        s2 = parser.parse_expr("factorial(n+1)", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2), "0.1"))
         calc.perform_rule(rules.FullSimplify())
         assert goal02.is_finished()
         s1 = "(INT x:[0,a]. x^m *log(x)^n)"
         s2 = "a^(m+1) * SUM(k, 0, n, (-1)^k*binom(n, k)*factorial(k)*log(a)^(n-k)/(m+1)^(k+1))"
-        goal03 = file.add_goal(s1+"="+s2, conds=["m>=0", "n>=0", "isInt(n)", "isInt(m)", "a>0"])
+        s = parser.parse_expr(s1+"="+s2, fixes=fixes)
+        goal03 = file.add_goal(s, conds=["m>=0", "n>=0", "isInt(n)", "isInt(m)", "a>0"], fixes=fixes)
         proof = goal03.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.SubstitutionInverse("y", "a*y"))
-        calc.perform_rule(rules.ApplyIdentity("(a * y) ^ m", "a^m * y^m"))
+        source = parser.parse_expr("(a * y) ^ m",fixes=fixes)
+        target = parser.parse_expr("a^m * y^m", fixes=fixes)
+        calc.perform_rule(rules.ApplyIdentity(source,target))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.Equation("a*y", "y*a"))
         s1 = "log(y*a)"
@@ -4200,8 +4318,8 @@ class IntegralTest(unittest.TestCase):
         s1 = "(log(y) + log(a))^n"
         s2 = "SUM(k, 0, n, binom(n, k)*log(y)^k*log(a)^(n-k))"
         calc.perform_rule(rules.OnLocation(rules.SeriesExpansionIdentity(index_var = "k"), "1.0.1"))
-        s1 = "y ^ m * SUM(k, 0, n, binom(n,k) * log(y) ^ k * log(a) ^ (n - k))"
-        s2 = "SUM(k, 0, n, y^m * binom(n,k) * log(y) ^ k * log(a) ^ (n - k))"
+        s1 = parser.parse_expr("y ^ m * SUM(k, 0, n, binom(n,k) * log(y) ^ k * log(a) ^ (n - k))", fixes=fixes)
+        s2 = parser.parse_expr("SUM(k, 0, n, y^m * binom(n,k) * log(y) ^ k * log(a) ^ (n - k))",fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.IntSumExchange(), "1"))
         calc.perform_rule(rules.FullSimplify())
@@ -4247,17 +4365,23 @@ class IntegralTest(unittest.TestCase):
         file = compstate.CompFile("impossible", "useful_log")
 
         file.add_definition("Li(s, x) = SUM(k, 1, oo, x^k /k^s)")
-
-        goal = file.add_goal("x/(1-x) = SUM(k, 1, oo, x^k)", conds=["abs(x) < 1"])
+        fixes = dict()
+        fixes['k'] = parser.parse_expr('$int')
+        fixes['n'] = parser.parse_expr('$int')
+        goal = file.add_goal("x/(1-x) = SUM(k, 1, oo, x^k)", conds=["abs(x) < 1"], fixes=fixes)
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.Equation("x/(1-x)", "x * (1-x)^(-1)"))
         calc.perform_rule(rules.OnLocation(rules.SeriesExpansionIdentity(), "1"))
-        s1 = "x * SUM(n, 0, oo, x ^ n)"
-        s2 = "SUM(n, 0, oo, x * x^n)"
+        s1 = parser.parse_expr("x * SUM(n, 0, oo, x ^ n)", fixes=fixes)
+        s2 = parser.parse_expr("SUM(n, 0, oo, x * x^n)", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        calc.perform_rule(rules.Equation("x*x^n", "x^1 * x^n"))
-        calc.perform_rule(rules.OnLocation(rules.ApplyIdentity("x^1 * x^n", "x^(n+1)"), "0"))
+        s1 = parser.parse_expr("x*x^n", fixes=fixes)
+        s2 = parser.parse_expr("x^1 * x^n", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
+        s1 = parser.parse_expr("x^1 * x^n", fixes = fixes)
+        s2 = parser.parse_expr("x^(n+1)", fixes = fixes)
+        calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2), "0"))
         calc.perform_rule(rules.ChangeSummationIndex("1"))
         calc.perform_rule(rules.FullSimplify())
         self.assertTrue(goal.is_finished())
@@ -4268,24 +4392,29 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyEquation("x/(1-x) = SUM(k, 1, oo, x^k)"))
         self.assertTrue(goal.is_finished())
 
-        goal = file.add_goal("Li(s+1, x) = (INT t:[0, x]. Li(s, t) / t)", conds=["abs(x)<1", "s>=0", "isInt(s)"])
+        fixes['s'] = parser.parse_expr('$int')
+        goal = file.add_goal("Li(s+1, x) = (INT t:[0, x]. Li(s, t) / t)", conds=["abs(x)<1", "s>=0", "isInt(s)"], fixes = fixes)
         proof = goal.proof_by_induction("s")
         proof_base = proof.base_case.proof_by_calculation()
         calc = proof_base.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("Li"))
         calc = proof_base.rhs_calc
-        calc.perform_rule(rules.OnLocation(rules.ApplyEquation("Li(0,x)=x/(1-x)"), "0.0"))
-        calc.perform_rule(rules.OnLocation(rules.ApplyEquation("x/(1-x) = SUM(k, 1, oo, x^k)"), "0.0"))
-        s1 = "SUM(k, 1, oo, t ^ k) / t"
-        s2 = "1/t * SUM(k, 1, oo, t ^ k)"
+        s = parser.parse_expr("Li(0,x)=x/(1-x)", fixes = fixes)
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s), "0.0"))
+        s = parser.parse_expr("x/(1-x) = SUM(k, 1, oo, x^k)", fixes = fixes)
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s), "0.0"))
+        s1 = parser.parse_expr("SUM(k, 1, oo, t ^ k) / t", fixes = fixes)
+        s2 = parser.parse_expr("1/t * SUM(k, 1, oo, t ^ k)", fixes = fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "1/t * SUM(k, 1, oo, t ^ k)"
-        s2 = "SUM(k, 1, oo, 1/t * t ^ k)"
+        s1 = parser.parse_expr("1/t * SUM(k, 1, oo, t ^ k)", fixes = fixes)
+        s2 = parser.parse_expr("SUM(k, 1, oo, 1/t * t ^ k)", fixes = fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "1/t * t ^ k"
-        s2 = "t^(-1) * t^k"
+        s1 = parser.parse_expr("1/t * t ^ k", fixes = fixes)
+        s2 = parser.parse_expr("t^(-1) * t^k", fixes = fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        calc.perform_rule(rules.OnLocation(rules.ApplyIdentity("t^(-1)*t^k", "t^(-1+k)"),"0.0"))
+        s1 = parser.parse_expr("t^(-1)*t^k", fixes = fixes)
+        s2 = parser.parse_expr("t^(-1+k)", fixes = fixes)
+        calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2),"0.0"))
         calc.perform_rule(rules.IntSumExchange())
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
@@ -4295,61 +4424,66 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ExpandDefinition("Li"))
         calc = proof_induct.rhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition("Li"), "0.0"))
-        s1 = "SUM(k, 1, oo, k ^ (-s - 1) * t ^ k) / t"
-        s2 = "t^-1 * SUM(k, 1, oo, k ^ (-s - 1) * t ^ k)"
+        s1 = parser.parse_expr("SUM(k, 1, oo, k ^ (-s - 1) * t ^ k) / t", fixes = fixes)
+        s2 = parser.parse_expr("t^-1 * SUM(k, 1, oo, k ^ (-s - 1) * t ^ k)", fixes = fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "t^-1 * SUM(k, 1, oo, k ^ (-s - 1) * t ^ k)"
-        s2 = "SUM(k, 1, oo, t^-1 * (k ^ (-s - 1) * t ^ k))"
+        s1 = parser.parse_expr("t^-1 * SUM(k, 1, oo, k ^ (-s - 1) * t ^ k)", fixes = fixes)
+        s2 = parser.parse_expr("SUM(k, 1, oo, t^-1 * (k ^ (-s - 1) * t ^ k))", fixes = fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "t^-1 * (k ^ (-s - 1) * t ^ k)"
-        s2 = "t^-1 * t^k * k^(-s-1)"
+        s1 = parser.parse_expr("t^-1 * (k ^ (-s - 1) * t ^ k)", fixes = fixes)
+        s2 = parser.parse_expr("t^-1 * t^k * k^(-s-1)", fixes = fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "t^-1 * t^k"
-        s2 = "t^(-1 + k)"
+        s1 = parser.parse_expr("t^-1 * t^k", fixes = fixes)
+        s2 = parser.parse_expr("t^(-1 + k)", fixes = fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2),"0.0.0"))
         calc.perform_rule(rules.IntSumExchange())
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
         self.assertTrue(goal.is_finished())
 
-        goal = file.add_goal("(D x. Li(2, 1-x)) = log(x)/(1-x)", conds=["x < 1", "x>0"])
+        goal = file.add_goal("(D x. Li(2, 1-x)) = log(x)/(1-x)", conds=["x < 1", "x>0"], fixes=fixes)
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition("Li"),"0"))
         calc.perform_rule(rules.FullSimplify())
         calc = proof.rhs_calc
-        calc.perform_rule(rules.Equation("log(x)", "log(1-(1-x))"))
+        s1 = parser.parse_expr("log(x)", fixes=fixes)
+        s2 = parser.parse_expr("log(1-(1-x))", fixes=fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.SeriesExpansionIdentity(), "0"))
-        s1 = "SUM(n, 0, oo, (-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1)) / (1 - x)"
-        s2 = "-(-(1-x))^(-1) * SUM(n, 0, oo, (-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1))"
+        s1 = parser.parse_expr("SUM(n, 0, oo, (-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1)) / (1 - x)", fixes=fixes)
+        s2 = parser.parse_expr("-(-(1-x))^(-1) * SUM(n, 0, oo, (-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1))", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "-(-(1-x))^(-1) * SUM(n, 0, oo, (-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1))"
-        s2 = "SUM(n, 0, oo, -(-(1-x))^(-1) * ((-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1)))"
+        s1 = parser.parse_expr("-(-(1-x))^(-1) * SUM(n, 0, oo, (-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1))", fixes=fixes)
+        s2 = parser.parse_expr("SUM(n, 0, oo, -(-(1-x))^(-1) * ((-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1)))", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = " -(-(1-x))^(-1) * ((-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1))"
-        s2 = "-1 * ((-(1-x))^(-1) * (-(1 - x)) ^ (n + 1)) * (-1) ^ n  / (n + 1)"
+        s1 = parser.parse_expr(" -(-(1-x))^(-1) * ((-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1))", fixes=fixes)
+        s2 = parser.parse_expr("-1 * ((-(1-x))^(-1) * (-(1 - x)) ^ (n + 1)) * (-1) ^ n  / (n + 1)", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "(-(1 - x)) ^ (-1) * (-(1 - x)) ^ (n + 1)"
-        s2 = '(-(1-x))^(-1 + (n+1))'
+        s1 = parser.parse_expr("(-(1 - x)) ^ (-1) * (-(1 - x)) ^ (n + 1)", fixes=fixes)
+        s2 = parser.parse_expr('(-(1-x))^(-1 + (n+1))', fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2), "0.0.0.1"))
         calc.perform_rule(rules.ChangeSummationIndex("1"))
         calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.Equation("x-1", "-1 * (-x+1)"))
-        s1 = "(-1 * (-x + 1)) ^ (n - 1)"
-        s2 = "(-1)^(n-1) * (-x+1)^(n-1)"
+        s1 = parser.parse_expr("x-1", fixes = fixes)
+        s2 = parser.parse_expr("-1 * (-x+1)", fixes = fixes)
+        calc.perform_rule(rules.Equation(s1, s2))
+        s1 = parser.parse_expr("(-1 * (-x + 1)) ^ (n - 1)", fixes=fixes)
+        s2 = parser.parse_expr("(-1)^(n-1) * (-x+1)^(n-1)", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2), "0.0.1"))
         calc.perform_rule(rules.FullSimplify())
         self.assertTrue(goal.is_finished())
 
-        goal = file.add_goal("(D x. -Li(3, 1-x)) = Li(2, -x+1) / (-x+1)", conds = ["x>0","x<1"])
+        goal = file.add_goal("(D x. -Li(3, 1-x)) = Li(2, -x+1) / (-x+1)", conds = ["x>0","x<1"], fixes=fixes)
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.Equation("3", "2+1"))
-        calc.perform_rule(rules.OnLocation(rules.ApplyEquation("Li(s+1, x) = (INT t:[0, x]. Li(s, t) / t)"), "0.0"))
+        s = parser.parse_expr("Li(s+1, x) = (INT t:[0, x]. Li(s, t) / t)", fixes = fixes)
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s), "0.0"))
         calc.perform_rule(rules.FullSimplify())
         self.assertTrue(goal.is_finished())
 
-        goal = file.add_goal("Li(s,1) = zeta(s)", conds=["isInt(s)", "s>1"])
+        goal = file.add_goal("Li(s,1) = zeta(s)", conds=["isInt(s)", "s>1"], fixes = fixes)
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("Li"))
@@ -4359,72 +4493,74 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         self.assertTrue(goal.is_finished())
 
-        s1 = "(INT t:[0,x]. log(1-t)^2 / t)"
-        s2 = "log(x) * log(1-x)^2 + 2 * log(1-x) * Li(2, 1-x) - 2*Li(3,1-x) + 2 * zeta(3)"
-        goal = file.add_goal(s1+"="+s2, conds=["x>0", "x<1"])
+        s1 = parser.parse_expr("(INT t:[0,x]. log(1-t)^2 / t)", fixes = fixes)
+        s2 = parser.parse_expr("log(x) * log(1-x)^2 + 2 * log(1-x) * \
+        Li(2, 1-x) - 2*Li(3,1-x) + 2 * zeta(3)", fixes = fixes)
+        goal = file.add_goal(expr.Op('=',s1,s2), conds=["x>0", "x<1"], fixes=fixes)
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
-        u = "log(1-t)^2"
-        v = "log(t)"
+        u = parser.parse_expr("log(1-t)^2", fixes = fixes)
+        v = parser.parse_expr("log(t)", fixes = fixes)
         calc.perform_rule(rules.IntegrationByParts(u, v))
         calc.perform_rule(rules.FullSimplify())
         # (D x. Li(2, 1-x)) = log(x)/(1-x)
-        s1 = " log(t) * log(-t + 1) / (-t + 1)"
-        s2 = "log(t) / (1-t) * log(-t+1)"
+        s1 = parser.parse_expr(" log(t) * log(-t + 1) / (-t + 1)", fixes = fixes)
+        s2 = parser.parse_expr("log(t) / (1-t) * log(-t+1)", fixes = fixes)
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation("(D x. Li(2, 1-x)) = log(x)/(1-x)"), "0.1.0.0"))
-        u = "log(-t+1)"
-        v = "Li(2, 1-t)"
+        u = parser.parse_expr("log(-t+1)", fixes = fixes)
+        v = parser.parse_expr("Li(2, 1-t)", fixes = fixes)
         calc.perform_rule(rules.OnLocation(rules.IntegrationByParts(u, v), "0.1"))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation("(D x. -Li(3, 1-x)) = Li(2, -x+1) / (-x+1)"), "0.0.1.0"))
         calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.OnLocation(rules.ApplyEquation("Li(s,1) = zeta(s)"), "1.1"))
+        s = parser.parse_expr("Li(s,1) = zeta(s)", fixes = fixes)
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s), "1.1"))
         calc = proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
         self.assertTrue(goal.is_finished())
 
-        s1 = "(D x. Li(2, 1/(1+x)))"
-        s2 = "log(x/(1+x)) / (1+x)"
-        goal = file.add_goal(s1+"="+s2, conds=['x>0', 'x<1'])
+        s1 = parser.parse_expr("(D x. Li(2, 1/(1+x)))", fixes = fixes)
+        s2 = parser.parse_expr("log(x/(1+x)) / (1+x)", fixes = fixes)
+        goal = file.add_goal(expr.Op('=', s1, s2), conds=['x>0', 'x<1'])
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition("Li"), "0"))
         calc.perform_rule(rules.FullSimplify())
         calc = proof.rhs_calc
-        s1 = "x/(1+x)"
-        s2 = "1 - 1/(1+x)"
+        s1 = parser.parse_expr("x/(1+x)", fixes = fixes)
+        s2 = parser.parse_expr("1 - 1/(1+x)", fixes = fixes)
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.SeriesExpansionIdentity(), "0"))
-        s1 = "-(1/(1+x))"
-        s2 = "(-1) * (1/(1+x))"
+        s1 = parser.parse_expr("-(1/(1+x))", fixes = fixes)
+        s2 = parser.parse_expr("(-1) * (1/(1+x))", fixes = fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "((-1) * (1/(1+x)))^(n+1)"
-        s2 = "(-1)^(n+1) * (1/(1+x))^(n+1)"
+        s1 = parser.parse_expr("((-1) * (1/(1+x)))^(n+1)", fixes = fixes)
+        s2 = parser.parse_expr("(-1)^(n+1) * (1/(1+x))^(n+1)", fixes = fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2), "0.0.0.1"))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.ChangeSummationIndex('1'), '0.1'))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "(1 / (x + 1)) ^ n"
-        s2 = "(1 / (x + 1)) ^ (n-1 + 1)"
+        s1 = parser.parse_expr("(1 / (x + 1)) ^ n", fixes = fixes)
+        s2 = parser.parse_expr("(1 / (x + 1)) ^ (n-1 + 1)", fixes = fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "(1 / (x + 1)) ^ (n-1 + 1)"
-        s2 = "(1 / (x + 1)) ^ (n-1) * (1/(x+1))^1"
+        s1 = parser.parse_expr("(1 / (x + 1)) ^ (n-1 + 1)", fixes = fixes)
+        s2 = parser.parse_expr("(1 / (x + 1)) ^ (n-1) * (1/(x+1))^1", fixes = fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2), "0.1.0.1"))
         calc.perform_rule(rules.FullSimplify())
         self.assertTrue(goal.is_finished())
 
-        s1 = "1 / (x + 1) * Li(2,1 / (x + 1))"
-        s2 = "(D x. -Li(3, 1/(x+1)))"
-        goal = file.add_goal(s1+"="+s2, conds=["x>0", "x<1"])
+        s1 = parser.parse_expr("1 / (x + 1) * Li(2,1 / (x + 1))", fixes = fixes)
+        s2 = parser.parse_expr("(D x. -Li(3, 1/(x+1)))", fixes = fixes)
+        goal = file.add_goal(expr.Op('=', s1, s2), conds=["x>0", "x<1"], fixes=fixes)
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition("Li"), "1"))
-        s1 = "(1 / (x + 1)) ^ k"
-        s2 = "(1 / (x + 1)) ^ (k-1 + 1)"
+        s1 = parser.parse_expr("(1 / (x + 1)) ^ k", fixes = fixes)
+        s2 = parser.parse_expr("(1 / (x + 1)) ^ (k-1 + 1)", fixes = fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "(1 / (x + 1)) ^ (k-1 + 1)"
-        s2 = "(1 / (x + 1)) ^ (k-1) * (1/(x+1))^1"
+        s1 = parser.parse_expr("(1 / (x + 1)) ^ (k-1 + 1)", fixes = fixes)
+        s2 = parser.parse_expr("(1 / (x + 1)) ^ (k-1) * (1/(x+1))^1", fixes = fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2), "1.0.1"))
         calc.perform_rule(rules.FullSimplify())
         calc = proof.rhs_calc
@@ -4432,21 +4568,21 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         self.assertTrue(goal.is_finished())
 
-        s1 = "(INT t:[0, x]. log(1+t)^2 / t)"
-        s2 = "log(x)*log(1+x)^2-(2/3)*log(1+x)^3-\
-              2*log(1+x)*Li(2,1/(1+x))-2*Li(3,1/(1+x))+2*zeta(3)"
-        goal = file.add_goal(s1+"="+s2, conds=["x>0", "x<1"])
+        s1 = parser.parse_expr("(INT t:[0, x]. log(1+t)^2 / t)", fixes = fixes)
+        s2 = parser.parse_expr("log(x)*log(1+x)^2-(2/3)*log(1+x)^3-\
+              2*log(1+x)*Li(2,1/(1+x))-2*Li(3,1/(1+x))+2*zeta(3)", fixes = fixes)
+        goal = file.add_goal(expr.Op('=', s1, s2), conds=["x>0", "x<1"], fixes=fixes)
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
-        u = "log(1+t)^2"
-        v = "log(t)"
+        u = parser.parse_expr("log(1+t)^2", fixes = fixes)
+        v = parser.parse_expr("log(t)", fixes = fixes)
         calc.perform_rule(rules.IntegrationByParts(u, v))
         calc.perform_rule(rules.FullSimplify())
-        s1 = "log(t)"
-        s2 = "log((1+t) * (t/(1+t)))"
+        s1 = parser.parse_expr("log(t)", fixes = fixes)
+        s2 = parser.parse_expr("log((1+t) * (t/(1+t)))", fixes = fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = "log((1+t) * (t/(1+t)))"
-        s2 = "log(1+t) + log(t/(1+t))"
+        s1 = parser.parse_expr("log((1+t) * (t/(1+t)))", fixes = fixes)
+        s2 = parser.parse_expr("log(1+t) + log(t/(1+t))", fixes = fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2), "0.0.1.0.0.0"))
         calc.perform_rule(rules.OnLocation(rules.ExpandPolynomial(), "0.0.1.0.0"))
         calc.perform_rule(rules.OnLocation(rules.ExpandPolynomial(), "0.0.1.0"))
@@ -4454,19 +4590,20 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.Substitution('u', 'log(t+1)'), '0.1.1'))
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
-        s1 = "log(t + 1) / (t + 1) * log(t / (t + 1))"
-        s2 = "log(t/(1+t)) / (1+t) * log(t+1)"
+        s1 = parser.parse_expr("log(t + 1) / (t + 1) * log(t / (t + 1))", fixes = fixes)
+        s2 = parser.parse_expr("log(t/(1+t)) / (1+t) * log(t+1)", fixes = fixes)
         calc.perform_rule(rules.Equation(s1, s2))
-        s = "(D x. Li(2, 1/(1+x))) = log(x/(1+x)) / (1+x)"
+        s = parser.parse_expr("(D x. Li(2, 1/(1+x))) = log(x/(1+x)) / (1+x)", fixes = fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s), "0.0.0.1.0.0"))
-        u = "log(t+1)"
-        v = "Li(2, 1/(1+t))"
+        u = parser.parse_expr("log(t+1)", fixes = fixes)
+        v = parser.parse_expr("Li(2, 1/(1+t))", fixes = fixes)
         calc.perform_rule(rules.OnLocation(rules.IntegrationByParts(u, v), "0.0.0.1"))
         calc.perform_rule(rules.FullSimplify())
-        s = "1 / (x + 1) * Li(2,1 / (x + 1)) = (D x. -Li(3, 1/(x+1)))"
+        s = parser.parse_expr("1 / (x + 1) * Li(2,1 / (x + 1)) = (D x. -Li(3, 1/(x+1)))", fixes = fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s), "0.0.0.1.0"))
         calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.OnLocation(rules.ApplyEquation("Li(s,1) = zeta(s)"), "1.1"))
+        s = parser.parse_expr("Li(s,1) = zeta(s)", fixes=fixes)
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s), "1.1"))
         calc = proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
         self.assertTrue(goal.is_finished())

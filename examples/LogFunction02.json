@@ -8,6 +8,12 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ]
+            ],
             "goal": "-log(1 - x) - log(1 + x) = -SUM(k, 0, oo, (-1) ^ k * (-x) ^ (k + 1) / (k + 1)) - SUM(k, 0, oo, (-1) ^ k * x ^ (k + 1) / (k + 1))",
             "latex_goal": "-\\log{(1 - x)} - \\log{(1 + x)} = -\\sum_{k=0}^{\\infty}{\\frac{(-1) ^ {k} (-x) ^ {k + 1}}{k + 1}} - \\sum_{k=0}^{\\infty}{\\frac{(-1) ^ {k} x ^ {k + 1}}{k + 1}}",
             "proof": {
@@ -63,6 +69,12 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ]
+            ],
             "goal": "x / (-(x ^ 2) + 1) = 1/2 * SUM(k, 0, oo, x ^ k) - 1/2 * SUM(k, 0, oo, x ^ k * (-1) ^ k)",
             "latex_goal": "\\frac{x}{-x ^ {2} + 1} = \\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k}} - \\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k} (-1) ^ {k}}",
             "proof": {
@@ -142,6 +154,18 @@
                                 "str": "expand polynomial at 1"
                             },
                             "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "\\frac{x}{1 - x ^ {2}} = \\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k}} - \\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k} (-1) ^ {k}}",
+                            "res": "x / (1 - x ^ 2) = 1/2 * SUM(k, 0, oo, x ^ k) - 1/2 * SUM(k, 0, oo, x ^ k * (-1) ^ k)",
+                            "rule": {
+                                "latex_str": "rewriting \\(-\\frac{\\sum_{k=0}^{\\infty}{x ^ {k} (-1) ^ {k}}}{2} + \\frac{\\sum_{k=0}^{\\infty}{x ^ {k}}}{2}\\) to \\(\\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k}} - \\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k} (-1) ^ {k}}\\)",
+                                "name": "Equation",
+                                "new_expr": "1/2 * SUM(k, 0, oo, x ^ k) - 1/2 * SUM(k, 0, oo, x ^ k * (-1) ^ k)",
+                                "old_expr": "-(SUM(k, 0, oo, x ^ k * (-1) ^ k) / 2) + SUM(k, 0, oo, x ^ k) / 2",
+                                "str": "rewriting -(SUM(k, 0, oo, x ^ k * (-1) ^ k) / 2) + SUM(k, 0, oo, x ^ k) / 2 to 1/2 * SUM(k, 0, oo, x ^ k) - 1/2 * SUM(k, 0, oo, x ^ k * (-1) ^ k)"
+                            },
+                            "type": "CalculationStep"
                         }
                     ],
                     "type": "Calculation"
@@ -152,6 +176,12 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ]
+            ],
             "goal": "converges(SUM(k, 0, oo, INT y:[0,1]. -(y ^ k * log(y))))",
             "latex_goal": "\\sum_{k=0}^{\\infty}{\\int_{0}^{1} -y ^ {k} \\log{y} \\,dy}\\quad\\mathrm{converges}",
             "proof": {
@@ -200,6 +230,12 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ]
+            ],
             "goal": "(INT x:[0,pi / 2]. cos(x) / sin(x) * log(1 / cos(x))) = pi ^ 2 / 24",
             "latex_goal": "\\int_{0}^{\\pi/2} \\frac{\\cos{x}}{\\sin{x}} \\log{(\\frac{1}{\\cos{x}})} \\,dx = \\frac{\\pi ^ {2}}{24}",
             "proof": {

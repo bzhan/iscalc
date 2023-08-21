@@ -8,6 +8,12 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
             "goal": "converges(SUM(n, 0, oo, INT x:[0,1]. x ^ (2 * n) / (2 * n + 1)))",
             "latex_goal": "\\sum_{n=0}^{\\infty}{\\int_{0}^{1} \\frac{x ^ {2 n}}{2 n + 1} \\,dx}\\quad\\mathrm{converges}",
             "proof": {
@@ -56,6 +62,12 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
             "goal": "(INT x:[0,1]. atan(x) / x) = G",
             "latex_goal": "\\int_{0}^{1} \\frac{\\tan^{-1}{x}}{x} \\,dx = G",
             "proof": {

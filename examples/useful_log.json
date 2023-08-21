@@ -14,6 +14,20 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ],
+                [
+                    "s",
+                    "$int"
+                ]
+            ],
             "goal": "x / (1 - x) = SUM(k, 1, oo, x ^ k)",
             "latex_goal": "\\frac{x}{1 - x} = \\sum_{k=1}^{\\infty}{x ^ {k}}",
             "proof": {
@@ -188,6 +202,20 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ],
+                [
+                    "s",
+                    "$int"
+                ]
+            ],
             "goal": "Li(s + 1,x) = (INT t:[0,x]. Li(s,t) / t)",
             "latex_goal": "\\operatorname{Li}(s + 1,x) = \\int_{0}^{x} \\frac{\\operatorname{Li}(s,t)}{t} \\,dt",
             "proof": {
@@ -474,6 +502,20 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ],
+                [
+                    "s",
+                    "$int"
+                ]
+            ],
             "goal": "(D x. Li(2,1 - x)) = log(x) / (1 - x)",
             "latex_goal": "\\frac{d}{dx} \\operatorname{Li}(2,1 - x) = \\frac{\\log{x}}{1 - x}",
             "proof": {
@@ -657,6 +699,20 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ],
+                [
+                    "s",
+                    "$int"
+                ]
+            ],
             "goal": "(D x. -Li(3,1 - x)) = Li(2,-x + 1) / (-x + 1)",
             "latex_goal": "\\frac{d}{dx} (-\\operatorname{Li}(3,1 - x)) = \\frac{\\operatorname{Li}(2,-x + 1)}{-x + 1}",
             "proof": {
@@ -727,6 +783,20 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ],
+                [
+                    "s",
+                    "$int"
+                ]
+            ],
             "goal": "Li(s,1) = zeta(s)",
             "latex_goal": "\\operatorname{Li}(s,1) = \\zeta{(s)}",
             "proof": {
@@ -804,6 +874,20 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ],
+                [
+                    "s",
+                    "$int"
+                ]
+            ],
             "goal": "(INT t:[0,x]. log(-t + 1) ^ 2 / t) = log(x) * log(1 - x) ^ 2 + 2 * log(1 - x) * Li(2,1 - x) - 2 * Li(3,1 - x) + 2 * zeta(3)",
             "latex_goal": "\\int_{0}^{x} \\frac{\\log^{2}(-t + 1)}{t} \\,dt = \\log{x} \\log^{2}(1 - x) + 2 \\log{(1 - x)} \\operatorname{Li}(2,1 - x) - 2 \\operatorname{Li}(3,1 - x) + 2 \\zeta{(3)}",
             "proof": {
@@ -1120,6 +1204,20 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ],
+                [
+                    "s",
+                    "$int"
+                ]
+            ],
             "goal": "1 / (x + 1) * Li(2,1 / (x + 1)) = (D x. -Li(3,1 / (x + 1)))",
             "latex_goal": "\\frac{1}{x + 1} \\operatorname{Li}(2,\\frac{1}{x + 1}) = \\frac{d}{dx} (-\\operatorname{Li}(3,\\frac{1}{x + 1}))",
             "proof": {
@@ -1223,6 +1321,20 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ],
+                [
+                    "s",
+                    "$int"
+                ]
+            ],
             "goal": "(INT t:[0,x]. log(t + 1) ^ 2 / t) = log(x) * log(1 + x) ^ 2 - 2/3 * log(1 + x) ^ 3 - 2 * log(1 + x) * Li(2,1 / (1 + x)) - 2 * Li(3,1 / (1 + x)) + 2 * zeta(3)",
             "latex_goal": "\\int_{0}^{x} \\frac{\\log^{2}(t + 1)}{t} \\,dt = \\log{x} \\log^{2}(1 + x) - \\frac{2}{3} \\log^{3}(1 + x) - 2 \\log{(1 + x)} \\operatorname{Li}(2,\\frac{1}{1 + x}) - 2 \\operatorname{Li}(3,\\frac{1}{1 + x}) + 2 \\zeta{(3)}",
             "proof": {

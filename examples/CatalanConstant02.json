@@ -8,6 +8,16 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
             "goal": "(INT x:[1,oo]. log(x) / x ^ k) = 1 / (k - 1) ^ 2",
             "latex_goal": "\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {k}} \\,dx = \\frac{1}{(k - 1) ^ {2}}",
             "proof": {
@@ -97,6 +107,16 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
             "goal": "converges(SUM(n, 0, oo, INT x:[1,oo]. x ^ (-(2 * n) - 2) * log(x)))",
             "latex_goal": "\\sum_{n=0}^{\\infty}{\\int_{1}^{\\infty} x ^ {-2 n - 2} \\log{x} \\,dx}\\quad\\mathrm{converges}",
             "proof": {
@@ -151,6 +171,16 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
             "goal": "(INT x:[1,oo]. log(x) / (x ^ 2 + 1)) = G",
             "latex_goal": "\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx = G",
             "proof": {
@@ -275,6 +305,16 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
             "goal": "(INT x:[0,oo]. log(x + 1) / (x ^ 2 + 1)) = pi / 4 * log(2) + G",
             "latex_goal": "\\int_{0}^{\\infty} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx = \\frac{\\pi}{4} \\log{(2)} + G",
             "proof": {

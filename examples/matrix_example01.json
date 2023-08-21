@@ -1,50 +1,49 @@
 {
     "content": [
         {
-            "latex_var": "P",
-            "type": "VarDef",
-            "var": "matrix P[n][n]"
-        },
-        {
-            "latex_var": "A",
-            "type": "VarDef",
-            "var": "matrix A[n][n]"
-        },
-        {
-            "latex_var": "n",
-            "type": "VarDef",
-            "var": "int n"
-        },
-        {
             "conds": [
                 {
-                    "cond": "invertible(matrix P[n][n])",
+                    "cond": "invertible(P)",
                     "latex_cond": "invertible{(P)}"
                 },
                 {
-                    "cond": "int n > 0",
+                    "cond": "n > 0",
                     "latex_cond": "n > 0"
                 }
             ],
             "finished": true,
-            "goal": "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ int n = inv(matrix P[n][n]) * matrix A[n][n] ^ int n * matrix P[n][n]",
+            "fixes": [
+                [
+                    "n",
+                    "$int"
+                ],
+                [
+                    "P",
+                    "$tensor($real, n, n)"
+                ],
+                [
+                    "A",
+                    "$tensor($real, n, n)"
+                ]
+            ],
+            "goal": "(inv(P) * A * P) ^ n = inv(P) * A ^ n * P",
             "latex_goal": "(P ^ {-1} A P) ^ {n} = P ^ {-1} A ^ {n} P",
             "obligations": [
                 {
                     "branches": [
                         {
                             "exprs": [
-                                "inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n] > 0"
+                                "inv(P) * A * P > 0"
                             ]
                         }
                     ],
                     "conds": [
                         {
-                            "cond": "invertible(matrix P[n][n])",
+                            "cond": "invertible(P)",
                             "latex_cond": "invertible{(P)}"
                         },
                         {
-                            "cond": "int n > 0",
+                            "cond": "n > 0",
                             "latex_cond": "n > 0"
                         }
                     ]
@@ -53,17 +52,17 @@
                     "branches": [
                         {
                             "exprs": [
-                                "isInt(int n)"
+                                "isInt(n)"
                             ]
                         }
                     ],
                     "conds": [
                         {
-                            "cond": "invertible(matrix P[n][n])",
+                            "cond": "invertible(P)",
                             "latex_cond": "invertible{(P)}"
                         },
                         {
-                            "cond": "int n > 0",
+                            "cond": "n > 0",
                             "latex_cond": "n > 0"
                         }
                     ]
@@ -72,17 +71,17 @@
                     "branches": [
                         {
                             "exprs": [
-                                "int n >= 0"
+                                "n >= 0"
                             ]
                         }
                     ],
                     "conds": [
                         {
-                            "cond": "invertible(matrix P[n][n])",
+                            "cond": "invertible(P)",
                             "latex_cond": "invertible{(P)}"
                         },
                         {
-                            "cond": "int n > 0",
+                            "cond": "n > 0",
                             "latex_cond": "n > 0"
                         }
                     ]
@@ -91,17 +90,17 @@
                     "branches": [
                         {
                             "exprs": [
-                                "matrix A[n][n] > 0"
+                                "A > 0"
                             ]
                         }
                     ],
                     "conds": [
                         {
-                            "cond": "invertible(matrix P[n][n])",
+                            "cond": "invertible(P)",
                             "latex_cond": "invertible{(P)}"
                         },
                         {
-                            "cond": "int n > 0",
+                            "cond": "n > 0",
                             "latex_cond": "n > 0"
                         }
                     ]
@@ -110,17 +109,17 @@
                     "branches": [
                         {
                             "exprs": [
-                                "isInt(int n)"
+                                "isInt(n)"
                             ]
                         }
                     ],
                     "conds": [
                         {
-                            "cond": "invertible(matrix P[n][n])",
+                            "cond": "invertible(P)",
                             "latex_cond": "invertible{(P)}"
                         },
                         {
-                            "cond": "int n > 0",
+                            "cond": "n > 0",
                             "latex_cond": "n > 0"
                         }
                     ]
@@ -129,17 +128,17 @@
                     "branches": [
                         {
                             "exprs": [
-                                "int n >= 0"
+                                "n >= 0"
                             ]
                         }
                     ],
                     "conds": [
                         {
-                            "cond": "invertible(matrix P[n][n])",
+                            "cond": "invertible(P)",
                             "latex_cond": "invertible{(P)}"
                         },
                         {
-                            "cond": "int n > 0",
+                            "cond": "n > 0",
                             "latex_cond": "n > 0"
                         }
                     ]
@@ -173,27 +172,27 @@
                     "type": "Goal"
                 },
                 "finished": true,
-                "goal": "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ int n = inv(matrix P[n][n]) * matrix A[n][n] ^ int n * matrix P[n][n]",
+                "goal": "(inv(P) * A * P) ^ n = inv(P) * A ^ n * P",
                 "induct_case": {
                     "finished": true,
-                    "goal": "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ (int n + 1) = inv(matrix P[n][n]) * matrix A[n][n] ^ (int n + 1) * matrix P[n][n]",
+                    "goal": "(inv(P) * A * P) ^ (n + 1) = inv(P) * A ^ (n + 1) * P",
                     "latex_goal": "(P ^ {-1} A P) ^ {n + 1} = P ^ {-1} A ^ {n + 1} P",
                     "obligations": [
                         {
                             "branches": [
                                 {
                                     "exprs": [
-                                        "inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n] > 0"
+                                        "inv(P) * A * P > 0"
                                     ]
                                 }
                             ],
                             "conds": [
                                 {
-                                    "cond": "invertible(matrix P[n][n])",
+                                    "cond": "invertible(P)",
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "int n > 0",
+                                    "cond": "n > 0",
                                     "latex_cond": "n > 0"
                                 }
                             ]
@@ -202,17 +201,17 @@
                             "branches": [
                                 {
                                     "exprs": [
-                                        "isInt(int n + 1)"
+                                        "isInt(n + 1)"
                                     ]
                                 }
                             ],
                             "conds": [
                                 {
-                                    "cond": "invertible(matrix P[n][n])",
+                                    "cond": "invertible(P)",
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "int n > 0",
+                                    "cond": "n > 0",
                                     "latex_cond": "n > 0"
                                 }
                             ]
@@ -221,17 +220,17 @@
                             "branches": [
                                 {
                                     "exprs": [
-                                        "int n + 1 >= 0"
+                                        "n + 1 >= 0"
                                     ]
                                 }
                             ],
                             "conds": [
                                 {
-                                    "cond": "invertible(matrix P[n][n])",
+                                    "cond": "invertible(P)",
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "int n > 0",
+                                    "cond": "n > 0",
                                     "latex_cond": "n > 0"
                                 }
                             ]
@@ -240,17 +239,17 @@
                             "branches": [
                                 {
                                     "exprs": [
-                                        "matrix A[n][n] > 0"
+                                        "A > 0"
                                     ]
                                 }
                             ],
                             "conds": [
                                 {
-                                    "cond": "invertible(matrix P[n][n])",
+                                    "cond": "invertible(P)",
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "int n > 0",
+                                    "cond": "n > 0",
                                     "latex_cond": "n > 0"
                                 }
                             ]
@@ -259,17 +258,17 @@
                             "branches": [
                                 {
                                     "exprs": [
-                                        "isInt(int n + 1)"
+                                        "isInt(n + 1)"
                                     ]
                                 }
                             ],
                             "conds": [
                                 {
-                                    "cond": "invertible(matrix P[n][n])",
+                                    "cond": "invertible(P)",
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "int n > 0",
+                                    "cond": "n > 0",
                                     "latex_cond": "n > 0"
                                 }
                             ]
@@ -278,17 +277,17 @@
                             "branches": [
                                 {
                                     "exprs": [
-                                        "int n + 1 >= 0"
+                                        "n + 1 >= 0"
                                     ]
                                 }
                             ],
                             "conds": [
                                 {
-                                    "cond": "invertible(matrix P[n][n])",
+                                    "cond": "invertible(P)",
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "int n > 0",
+                                    "cond": "n > 0",
                                     "latex_cond": "n > 0"
                                 }
                             ]
@@ -298,23 +297,23 @@
                         "calcs": [
                             {
                                 "latex_start": "(P ^ {-1} A P) ^ {n + 1}",
-                                "start": "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ (int n + 1)",
+                                "start": "(inv(P) * A * P) ^ (n + 1)",
                                 "steps": [
                                     {
                                         "latex_res": "(P ^ {-1} A P) ^ {n} (P ^ {-1} A P)",
-                                        "res": "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ int n * (inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n])",
+                                        "res": "(inv(P) * A * P) ^ n * (inv(P) * A * P)",
                                         "rule": {
                                             "latex_str": "rewrite \\((P ^ {-1} A P) ^ {n + 1}\\) to \\((P ^ {-1} A P) ^ {n} (P ^ {-1} A P)\\) using identity",
                                             "name": "ApplyIdentity",
-                                            "source": "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ (int n + 1)",
-                                            "str": "rewrite (inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ (int n + 1) to (inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ int n * (inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) using identity",
-                                            "target": "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ int n * (inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n])"
+                                            "source": "(inv(P) * A * P) ^ (n + 1)",
+                                            "str": "rewrite (inv(P) * A * P) ^ (n + 1) to (inv(P) * A * P) ^ n * (inv(P) * A * P) using identity",
+                                            "target": "(inv(P) * A * P) ^ n * (inv(P) * A * P)"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
                                         "latex_res": "P ^ {-1} A ^ {n} P (P ^ {-1} A P)",
-                                        "res": "inv(matrix P[n][n]) * matrix A[n][n] ^ int n * matrix P[n][n] * (inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n])",
+                                        "res": "inv(P) * A ^ n * P * (inv(P) * A * P)",
                                         "rule": {
                                             "loc": "subterms",
                                             "name": "ApplyInductHyp",
@@ -324,7 +323,7 @@
                                     },
                                     {
                                         "latex_res": "P ^ {-1} A ^ {n} A P",
-                                        "res": "inv(matrix P[n][n]) * matrix A[n][n] ^ int n * matrix A[n][n] * matrix P[n][n]",
+                                        "res": "inv(P) * A ^ n * A * P",
                                         "rule": {
                                             "name": "FullSimplify",
                                             "str": "full simplify"
@@ -333,25 +332,25 @@
                                     },
                                     {
                                         "latex_res": "P ^ {-1} (A ^ {n} A) P",
-                                        "res": "inv(matrix P[n][n]) * (matrix A[n][n] ^ int n * matrix A[n][n]) * matrix P[n][n]",
+                                        "res": "inv(P) * (A ^ n * A) * P",
                                         "rule": {
                                             "latex_str": "rewriting \\(P ^ {-1} A ^ {n} A P\\) to \\(P ^ {-1} (A ^ {n} A) P\\)",
                                             "name": "Equation",
-                                            "new_expr": "inv(matrix P[n][n]) * (matrix A[n][n] ^ int n * matrix A[n][n]) * matrix P[n][n]",
-                                            "old_expr": "inv(matrix P[n][n]) * matrix A[n][n] ^ int n * matrix A[n][n] * matrix P[n][n]",
-                                            "str": "rewriting inv(matrix P[n][n]) * matrix A[n][n] ^ int n * matrix A[n][n] * matrix P[n][n] to inv(matrix P[n][n]) * (matrix A[n][n] ^ int n * matrix A[n][n]) * matrix P[n][n]"
+                                            "new_expr": "inv(P) * (A ^ n * A) * P",
+                                            "old_expr": "inv(P) * A ^ n * A * P",
+                                            "str": "rewriting inv(P) * A ^ n * A * P to inv(P) * (A ^ n * A) * P"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
                                         "latex_res": "P ^ {-1} A ^ {n + 1} P",
-                                        "res": "inv(matrix P[n][n]) * matrix A[n][n] ^ (int n + 1) * matrix P[n][n]",
+                                        "res": "inv(P) * A ^ (n + 1) * P",
                                         "rule": {
                                             "latex_str": "rewrite \\(A ^ {n} A\\) to \\(A ^ {n + 1}\\) using identity",
                                             "name": "ApplyIdentity",
-                                            "source": "matrix A[n][n] ^ int n * matrix A[n][n]",
-                                            "str": "rewrite matrix A[n][n] ^ int n * matrix A[n][n] to matrix A[n][n] ^ (int n + 1) using identity",
-                                            "target": "matrix A[n][n] ^ (int n + 1)"
+                                            "source": "A ^ n * A",
+                                            "str": "rewrite A ^ n * A to A ^ (n + 1) using identity",
+                                            "target": "A ^ (n + 1)"
                                         },
                                         "type": "CalculationStep"
                                     }
@@ -360,13 +359,13 @@
                             },
                             {
                                 "latex_start": "P ^ {-1} A ^ {n + 1} P",
-                                "start": "inv(matrix P[n][n]) * matrix A[n][n] ^ (int n + 1) * matrix P[n][n]",
+                                "start": "inv(P) * A ^ (n + 1) * P",
                                 "steps": [],
                                 "type": "Calculation"
                             }
                         ],
                         "finished": true,
-                        "goal": "(inv(matrix P[n][n]) * matrix A[n][n] * matrix P[n][n]) ^ (int n + 1) = inv(matrix P[n][n]) * matrix A[n][n] ^ (int n + 1) * matrix P[n][n]",
+                        "goal": "(inv(P) * A * P) ^ (n + 1) = inv(P) * A ^ (n + 1) * P",
                         "latex_goal": "(P ^ {-1} A P) ^ {n + 1} = P ^ {-1} A ^ {n + 1} P",
                         "type": "CalculationProof"
                     },

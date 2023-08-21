@@ -64,15 +64,16 @@ def TensorType(eleType: Type, *dims) -> Type:
     return Type("tensor", eleType, *dims)
 
 # Type of vectors (1-dimensional tensor)
-def VectorType(eleType: Type, len: int) -> Type:
+def RowVectorType(eleType: Type, len) -> Type:
     return TensorType(eleType, len)
 
 # Type of matrices (2-dimensional tensor)
-def MatrixType(eleType: Type, row: int, col: int) -> Type:
+def MatrixType(eleType: Type, row, col) -> Type:
     return TensorType(eleType, row, col)
 
 def is_vector_type(type: Type) -> bool:
-    return type.name == "tensor" and len(type.args) == 2
+    return type.name == "tensor" and (len(type.args)==2 or len(type.args) == 3 and\
+           (type.args[1] == Const(1) or type.args[2] == Const(1)))
 
 def is_matrix_type(type: Type) -> bool:
     return type.name == "tensor" and len(type.args) == 3
@@ -387,13 +388,8 @@ class Expr:
             return (self.name, self.dependent_vars) <= (other.name, other.dependent_vars)
         elif self.is_limit():
             return (self.var, self.lim, self.body, self.drt) <= (other.var, other.lim, other.body, other.drt)
-        elif self.is_vector():
-            return (self.is_column, *(item for item in self.data)) <= (other.is_column, *(item for item in other.data))
         elif self.is_matrix():
-            if self.shape != None and other.shape != None:
-                return (self.shape[0]*self.shape[1], *[[item for item in r] for r in self.data]) <= (other.shape[0]*other.shape[1], *[[item for item in r]for r in other.data])
-            else:
-                return ([[item for item in r] for r in self.data]) <= ([[item for item in r] for r in other.data])
+            return ([[item for item in r] for r in self.data]) <= ([[item for item in r] for r in other.data])
         else:
             print(type(self))
             raise NotImplementedError
@@ -629,8 +625,6 @@ class Expr:
         elif self.is_summation():
             return Summation(self.index_var, self.lower.subst(var, e), self.upper.subst(var, e),
                              self.body.subst(var, e))
-        elif self.is_vector():
-            return Vector([item.subst(var, e) for item in self.data], self.is_column)
         elif self.is_matrix():
             return Matrix([rv.subst(var,e) for rv in self.rows])
         else:
@@ -661,7 +655,7 @@ class Expr:
             if t.ty == VAR:
                 if t.name not in bd_vars:
                     res.add(t.name)
-            elif t.ty in (CONST, INF, SKOLEMFUNC):
+            elif t.ty in (CONST, INF, SKOLEMFUNC, SYMBOL):
                 return
             elif t.ty in (OP, FUN):
                 for arg in t.args:
@@ -685,9 +679,6 @@ class Expr:
             elif t.is_equals():
                 rec(t.bd_vars)
                 rec(t.rhs, bd_vars)
-            elif t.is_vector():
-                for item in t.data:
-                    rec(item, bd_vars)
             elif t.is_matrix():
                 for rv in t.rows:
                     rec(rv, bd_vars)
@@ -715,8 +706,6 @@ class Expr:
             return self.body.has_symbol() or self.lim.has_symbol()
         elif isinstance(self, Deriv):
             return self.body.has_symbol()
-        elif isinstance(self, Vector):
-            return any([item.has_symbol() for item in self.data])
         elif isinstance(self, Matrix):
             return any([rv.has_symbol() for rv in self.rows])
         else:
@@ -913,10 +902,8 @@ class Expr:
                              self.body.inst_pat(mapping))
         elif self.is_limit():
             return Limit(self.var, self.lim.inst_pat(mapping), self.body.inst_pat(mapping), self.drt)
-        elif self.is_vector():
-            return Vector([item.inst_pat(mapping) for item in self.data], self.is_column)
         elif self.is_matrix():
-            return Matrix([Vector([item.inst_pat(mapping) for item in rv], rv.is_column) for rv in self.rows])
+            return Matrix([[item.inst_pat(mapping) for item in rv] for rv in self.data])
         else:
             print(type(self))
             raise NotImplementedError
@@ -1138,14 +1125,18 @@ class Var(Expr):
 class Const(Expr):
     """Constants."""
 
-    def __init__(self, val: Union[int, Fraction]):
+    def __init__(self, val: Union[int, Fraction], type:Type=None):
         assert isinstance(val, (int, Fraction))
         self.ty = CONST
         if isinstance(val, Fraction) and val.denominator == 1:
             self.val = val.numerator
         else:
             self.val = val
-        self.type = RealType
+
+        if type == IntType or self.val == int(self.val):
+            self.type = IntType
+        else:
+            self.type = RealType
 
     def __hash__(self):
         return hash((CONST, self.val))
@@ -1157,7 +1148,10 @@ class Const(Expr):
         return str(self.val)
 
     def __repr__(self):
-        return "Const(%s)" % str(self.val)
+        if self.type == RealType:
+            return "Const(%s)" % str(self.val)
+        else:
+            return "Const(%s, %s)" % (str(self.val), str(self.type))
 
 
 class Op(Expr):
@@ -1165,7 +1159,7 @@ class Op(Expr):
 
     def __init__(self, op: str, *args):
         assert isinstance(op, str)
-        assert all(isinstance(arg, Expr) for arg in args)
+        assert all(isinstance(arg, Expr) for arg in args), op +":"+ str(args)
         if len(args) == 1:
             assert op == "-"
         elif len(args) == 2:
@@ -1176,6 +1170,38 @@ class Op(Expr):
         self.op = op
         self.args = tuple(args)
         self.type = RealType
+        if len(args) == 2:
+            t1, t2 = args[0].type, args[1].type
+            if op in ['+', '-']:
+                if args[0].type == RealType and args[1].type == RealType:
+                    self.type = RealType
+                elif args[0].type == IntType and args[1].type == IntType:
+                    self.type = IntType
+                elif is_matrix_type(args[0].type) and is_matrix_type(args[1].type):
+                    assert num_row(args[0].type) == num_row(args[1].type) and \
+                           num_col(args[0].type) == num_col(args[1].type) and \
+                           args[0].type.args[0] == args[1].type.args[0]
+                    self.type = MatrixType(args[0].type.args[0], num_row(args[0].type), num_col(args[0].type))
+            elif op == '*':
+                if args[0].type == IntType and args[1].type == IntType:
+                    self.type = IntType
+                elif is_matrix_type(args[0].type) and is_matrix_type(args[1].type):
+                    assert num_col(args[0].type) == num_row(args[1].type)
+                    t1, t2 = args[0].type.args[0], args[1].type.args[0]
+                    if t1 == t2:
+                        t = t1
+                    elif t1 == RealType and t2 == IntType or  t2 == RealType and t1 == IntType:
+                        t = RealType
+                    else:
+                        raise NotImplementedError(t1,t2)
+                    self.type = MatrixType(args[0].type.args[0], num_row(args[0].type), num_col(args[1].type))
+                elif args[0].type == RealType and (args[1].type in (RealType, IntType)):
+                    self.type = RealType
+            elif op == '^':
+                if is_matrix_type(t1) and t2 == IntType:
+                    assert num_row(t1) == num_col(t1), str(t1) +":"+ str(args)
+                    self.type = t1
+
 
     def __hash__(self):
         return hash((OP, self.op, tuple(self.args)))
@@ -1225,6 +1251,24 @@ class Fun(Expr):
             self.type = MatrixType(RealType, self.args[0], self.args[0])
         elif self.func_name == 'inv':
             self.type = self.args[0].type
+        elif self.func_name == 'T':
+            if self.args[0].type == Type('unknown'):
+                self.type = self.args[0].type
+            elif is_matrix_type(self.args[0].type):
+                self.type = MatrixType(self.args[0].type.args[0], num_col(self.args[0].type), num_row(self.args[0].type))
+            else:
+                self.type = Type('unknown')
+        elif self.func_name == 'hat':
+            if is_matrix_type(self.args[0].type):
+                if num_col(self.args[0].type) == Const(1) and num_row(self.args[0].type) == Const(3):
+                    self.type = MatrixType(self.args[0].type.args[0],  Const(3), Const(3))
+                else:
+                    raise NotImplementedError
+            elif self.args[0].type == Type('unknown'):
+                self.type = self.args[0].type
+            else:
+                self.type = Type('unknown')
+                # raise NotImplementedError("hat(%s), args[0].type = %s"%(str(self.args[0]), self.args[0].type))
         else:
             self.type = RealType
 
@@ -1359,29 +1403,14 @@ class Matrix(Expr):
         if isinstance(data[0], Expr):
             # Vector case
             self.data = tuple(data)
-            self.type = VectorType(data[0].type, len(data))
+            self.type = RowVectorType(data[0].type, Const(len(data)))
         else:
             # Matrix case
             self.data = tuple(tuple(row) for row in data)
-            self.type = MatrixType(data[0][0].type, len(data), len(data[0]))
+            self.type = MatrixType(data[0][0].type, Const(len(data)), Const(len(data[0])))
 
     def __hash__(self):
-        return hash("Matrix", self.data)
-
-    @staticmethod
-    def scalar_mul(scalar: Expr, mat: "Matrix") -> "Matrix":
-        """Multiply a matrix by a scalar"""
-        arr = mat.data
-        return Matrix(mat.shape, [[scalar * mat[i][j] for j in range(mat.shape[1])]
-                                  for i in range(mat.shape[0])])
-
-    def transpose(self):
-        """Compute transpose of a matrix"""
-        if not is_matrix_type(self.type):
-            raise AssertionError("transpose: input must be a matrix")
-
-        data = tuple(tuple(self.data[j][i] for j in range(num_col(self.type))) for i in range(num_row(self.type)))
-        return Matrix(data)
+        return hash(("Matrix", self.data))
 
     def concatenate(self, other: Union["Matrix", "Matrix"], col_concatenate=True):
         if isinstance(other, Matrix):
@@ -1399,17 +1428,13 @@ class Matrix(Expr):
     def __eq__(self, other: 'Matrix'):
         return isinstance(other, Matrix) and self.ty == other.ty and self.data == other.data
 
-    def __sub__(self, other: Union['Matrix','Expr']):
-        if isinstance(other, Matrix) and self.shape == other.shape:
-            return Matrix([rv-other.rows[i] for (i, rv) in enumerate(self.rows)])
-        else:
-            return Op('-', self, other)
+
 
     def __str__(self):
-        if is_vector_type(self.type):
-            return "[" + ", ".join(str(val) for val in self.data) + "]"
-        elif is_matrix_type(self.type):
+        if is_matrix_type(self.type):
             return "[" + ", ".join("[" + ", ".join(str(val) for val in row) + "]" for row in self.data) + "]"
+        elif is_vector_type(self.type):
+            return "[" + ", ".join(str(val) for val in self.data) + "]"
         else:
             raise NotImplementedError
 
@@ -1605,7 +1630,7 @@ class Symbol(Expr):
         self.ty = SYMBOL
         self.name = name
         self.pat = tuple(pat)
-        self.type = RealType
+        self.type = Type('unknown')
 
     def __eq__(self, other):
         return isinstance(other, Symbol) and self.name == other.name and self.pat == other.pat
@@ -1650,7 +1675,7 @@ class Summation(Expr):
     def alpha_convert(self, new_var: str):
         """Rename the bound variable of a summation."""
         assert isinstance(new_var, str), "alpha_convert"
-        return Summation(new_var, self.lower, self.upper, self.body.subst(self.index_var, Var(new_var)))
+        return Summation(new_var, self.lower, self.upper, self.body.subst(self.index_var, Var(new_var, type=IntType)))
 
 
 def eval_expr(e: Expr):

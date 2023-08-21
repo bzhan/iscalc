@@ -102,6 +102,9 @@ class Context:
         # List of var deifinitions
         self.var_definitions: List[Identity] = list()
 
+        # List of fixes
+        self.fixes: Dict[str, expr.Type] = dict()
+
     def __str__(self):
         res = ""
         res += "Var Definitions\n"
@@ -143,9 +146,8 @@ class Context:
         res += "Conditions\n"
         for cond in self.get_conds().data:
             res += str(cond) + "\n"
-        res += "Assumptions\n"
-        for assumption in self.get_assumptions():
-            res += str(assumption) + "\n"
+
+
         return res
     
     def get_definitions(self) -> List[Identity]:
@@ -153,10 +155,7 @@ class Context:
         res.extend(self.definitions)
         return res
 
-    def get_assumptions(self) -> List[Identity]:
-        res = self.parent.get_assumptions() if self.parent is not None else []
-        res.extend(self.assumptions)
-        return res
+
 
     def get_var_definitions(self) -> List[Identity]:
         res = self.parent.get_var_definitions() if self.parent is not None else []
@@ -218,6 +217,14 @@ class Context:
         for cond in self.conds.data:
             res.add_condition(cond)
         return res
+
+    def get_fixes(self) -> Dict[str, expr.Type]:
+        res = self.parent.get_fixes() if self.parent is not None else dict()
+        for k, v in self.fixes.items():
+            res[k] = v
+        return res
+
+
     def get_eq_conds(self) -> Conditions:
         res = self.parent.get_conds() if self.parent is not None else Conditions()
         for cond in self.conds.data:
@@ -310,9 +317,10 @@ class Context:
     def add_lemma(self, e: Union[Expr, str], conds: Conditions):
         if isinstance(e, str):
             e = parser.parse_expr(e)
-
+        tmp = Identity(e, conds=conds)
         # Note: no conversion to symbols for lemmas within a file.
-        self.lemmas.append(Identity(e, conds=conds))
+        if tmp not in self.lemmas:
+            self.lemmas.append(tmp)
 
     def add_induct_hyp(self, e: Union[Expr, str]):
         if isinstance(e, str):
@@ -326,9 +334,16 @@ class Context:
             cond = parser.parse_expr(cond)
         self.conds.add_condition(cond)
 
+    def add_fix(self, k:str, v:expr.Type):
+        self.fixes[k] = v
+
     def extend_condition(self, conds: Conditions):
         for cond in conds.data:
             self.add_condition(cond)
+
+    def extend_fixes(self, fixes:Dict[str, expr.Type]):
+        for k, v in fixes.items():
+            self.add_fix(k, v)
 
     def add_subst(self, var: str, expr: Expr):
         self.substs[var] = expr
@@ -339,14 +354,18 @@ class Context:
 
     def extend_by_item(self, item):
         if item['type'] == 'axiom' or item['type'] == 'problem':
-            e = parser.parse_expr(item['expr'])
+            fixes = dict()
+            if 'fixes' in item:
+                for a,b in item['fixes']:
+                    fixes[a] = parser.parse_expr(b, fixes=fixes)
+            e = parser.parse_expr(item['expr'], fixes=fixes)
             if e.is_equals() and e.lhs.is_indefinite_integral():
                 self.add_indefinite_integral(e)
             elif e.is_equals() and e.lhs.is_integral():
                 conds = Conditions()
                 if 'conds' in item:
                     for cond in item['conds']:
-                        conds.add_condition(parser.parse_expr(cond))
+                        conds.add_condition(parser.parse_expr(cond, fixes=fixes))
                 self.add_definite_integral(e, conds)
             elif e.is_equals() and not e.lhs.is_summation() and e.rhs.is_summation():
                 self.add_series_expansion(e)
@@ -358,7 +377,7 @@ class Context:
                 conds = Conditions()
                 if 'conds' in item:
                     for c in item['conds']:
-                        conds.add_condition(parser.parse_expr(c))
+                        conds.add_condition(parser.parse_expr(c, fixes=fixes))
                 self.add_lemma(e, conds)
         if 'attributes' in item and 'simplify' in item['attributes']:
             e = parser.parse_expr(item['expr'])
@@ -449,11 +468,11 @@ def body_conds(e: Expr, ctx: Context) -> Context:
         if e.lim == expr.POS_INF:
             ctx2.add_condition(expr.Op(">", expr.Var(e.var), Const(0)))
     elif e.is_summation():
-        ctx2.add_condition(expr.Op(">=", expr.Var(e.index_var), e.lower))
+        ctx2.add_condition(expr.Op(">=", expr.Var(e.index_var, type=expr.IntType), e.lower))
         if e.upper != expr.POS_INF:
-            ctx2.add_condition(expr.Op("<=", expr.Var(e.index_var), e.upper))
-            ctx2.add_condition(expr.Op(">=", e.upper - expr.Var(e.index_var), Const(0)))
-        ctx2.add_condition(expr.Fun("isInt", expr.Var(e.index_var)))
+            ctx2.add_condition(expr.Op("<=", expr.Var(e.index_var, type=expr.IntType), e.upper))
+            ctx2.add_condition(expr.Op(">=", e.upper - expr.Var(e.index_var, type=expr.IntType), Const(0)))
+        ctx2.add_condition(expr.Fun("isInt", expr.Var(e.index_var, type=expr.IntType)))
     else:
         raise TypeError
     return ctx2

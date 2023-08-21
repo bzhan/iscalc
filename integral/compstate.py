@@ -984,6 +984,10 @@ def parse_rule(item, parent) -> Rule:
         return rules.MatrixRewrite()
     elif item['name'] == "ExpandMatFunc":
         return rules.ExpandMatFunc()
+    elif item['name'] == 'SplitSummation':
+        ctx = parent.ctx
+        cond = parser.parse_expr(item['cond'], fixes=ctx.get_fixes())
+        return rules.SplitSummation(cond)
     else:
         print(item['name'], flush=True)
         raise NotImplementedError

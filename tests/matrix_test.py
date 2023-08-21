@@ -198,19 +198,22 @@ class MatrixTest(unittest.TestCase):
 
     def testExample06(self):
         file = compstate.CompFile("base", "matrix_example06")
-        goal01 = file.add_goal('1 - cos(a) = SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))')
+        fixes = dict()
+        fixes['n'] = parser.parse_expr('$int')
+        goal01 = file.add_goal('1 - cos(a) = SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))', fixes=fixes)
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.SeriesExpansionIdentity(old_expr="cos(a)"))
-        calc.perform_rule(rules.OnLocation(rules.SplitSummation("n = 0"), "1"))
+        s = parser.parse_expr("n = 0", fixes=fixes)
+        calc.perform_rule(rules.OnLocation(rules.SplitSummation(s), "1"))
         calc.perform_rule(rules.FullSimplify())
         s1 = "-SUM(n, 1, oo, a ^ (2 * n) * (-1) ^ n / factorial(2 * n))"
         s2 = "SUM(n, 1, oo, (-1) * ((-1) ^ n * a ^ (2 * n) / factorial(2 * n)))"
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.ChangeSummationIndex(new_lower='0'))
         calc.perform_rule(rules.FullSimplify())
-        s3 = "a ^ (2 * n + 2) * (-1) ^ n / factorial(2 * n + 2)"
-        s4 = "(-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1))"
+        s3 = parser.parse_expr("a ^ (2 * n + 2) * (-1) ^ n / factorial(2 * n + 2)", fixes=fixes)
+        s4 = parser.parse_expr("(-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1))", fixes=fixes)
         calc.perform_rule(rules.Equation(s3, s4))
 
         self.checkAndOutput(file)

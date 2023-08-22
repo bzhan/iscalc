@@ -1029,14 +1029,14 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
 
-        # TODO: Check the condition. The proof is still accessed if a!=0 is missing
-        goal02 = file.add_goal("(INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2))=log(2)/a^2", conds=["a!=0"])
+        goal02 = file.add_goal("(INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2))=log(2)/a^2", conds=["a != 0"])
         proof = goal02.proof_by_rewrite_goal(begin=goal01)
         calc = proof.begin
         calc.perform_rule(rules.DerivEquation("a"))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.Substitution(var_name="x", var_subst="exp(a*x)"), "0.0"))
         calc.perform_rule(rules.SolveEquation("INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2)"))
+        assert goal02.is_finished()
 
         goal03 = file.add_goal("(INT x:[1, oo]. log(x)/(x+1)^2) = log(2)")
         proof = goal03.proof_by_calculation()

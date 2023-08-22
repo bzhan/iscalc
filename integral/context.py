@@ -423,6 +423,12 @@ class Context:
         from integral import condprover
         return condprover.check_condition(e, self)
 
+    def check_all_condtions(self, conds:Conditions):
+        for e in conds.data:
+            if not self.check_condition(e):
+                return False
+        return True
+
     def is_positive(self, e: Expr) -> bool:
         return self.check_condition(Op(">", e, Const(0)))
     

@@ -221,7 +221,20 @@ class Goal(StateItem):
                self.proof == other.proof
 
     def is_finished(self):
-        return self.proof is not None and self.proof.is_finished()
+        # all conds are satisfied under context of proof
+        if self.proof == None:
+            return False
+        proof_has_conds = len(self.proof.ctx.get_conds().data) > 0
+        goal_has_conds = len(self.conds.data) > 0
+        if not goal_has_conds and proof_has_conds:
+            return False
+        elif not goal_has_conds and not proof_has_conds:
+            return self.proof.is_finished()
+        elif goal_has_conds and proof_has_conds:
+            return self.proof.is_finished() and self.proof.ctx.check_all_condtions(self.conds)
+        else:
+            return self.proof.is_finished()
+
 
     def clear(self):
         self.proof = None
@@ -675,7 +688,7 @@ class RewriteGoalProof(StateItem):
 
         self.parent = parent
         self.goal = goal
-        self.ctx = parent.ctx
+        self.ctx = begin.ctx
         self.begin = Calculation(parent, self.ctx, begin.goal, conds=begin.conds, connection_symbol = '==>')
 
     def is_finished(self):

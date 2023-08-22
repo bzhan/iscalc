@@ -538,7 +538,6 @@ class InductionProof(StateItem):
             raise AssertionError("InductionProof: currently only support equation goals.")
 
         self.parent = parent
-        # self.goal = goal
         self.goal = goal
         self.induct_var = induct_var
         self.ctx = parent.ctx

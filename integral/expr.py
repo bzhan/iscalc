@@ -1179,9 +1179,16 @@ class Op(Expr):
                     self.type = IntType
                 elif is_matrix_type(args[0].type) and is_matrix_type(args[1].type):
                     assert num_row(args[0].type) == num_row(args[1].type) and \
-                           num_col(args[0].type) == num_col(args[1].type) and \
-                           args[0].type.args[0] == args[1].type.args[0]
-                    self.type = MatrixType(args[0].type.args[0], num_row(args[0].type), num_col(args[0].type))
+                           num_col(args[0].type) == num_col(args[1].type)
+                    t = RealType
+                    if args[0].type.args[0] == RealType and args[1].type.args[0] in [RealType, IntType]:
+                        t = RealType
+                    elif args[1].type.args[0] == RealType and args[0].type.args[0] in [RealType, IntType]:
+                        t = RealType
+                    elif args[0].type.args[0] == IntType and args[1].type.args[0] == IntType:
+                        t  = IntType
+
+                    self.type = MatrixType(t, num_row(args[0].type), num_col(args[0].type))
             elif op == '*':
                 if args[0].type == IntType and args[1].type == IntType:
                     self.type = IntType

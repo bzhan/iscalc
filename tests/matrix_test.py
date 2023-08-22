@@ -165,6 +165,32 @@ class MatrixTest(unittest.TestCase):
         calc = induct_proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
         assert goal03.is_finished()
+
+        goal04 = file.add_goal("hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2", conds=["n>=0", "norm(w)=1"], fixes=fixes)
+        proof = goal04.proof_by_induction('n', 0)
+        base_proof = proof.base_case.proof_by_calculation()
+        induct_proof = proof.induct_case.proof_by_calculation()
+        calc = induct_proof.lhs_calc
+        old_expr = parser.parse_expr("(2 * n + 4)", fixes=fixes)
+        new_expr = parser.parse_expr("2 + (2 * (n + 1))", fixes=fixes)
+        calc.perform_rule(rules.Equation(old_expr, new_expr))
+        old_expr = parser.parse_expr("hat(w) ^ (2 + (2 * (n + 1)))", fixes=fixes)
+        new_expr = parser.parse_expr("hat(w) ^ 2 * hat(w) ^ (2 * (n + 1))", fixes=fixes)
+        calc.perform_rule(rules.ApplyIdentity(old_expr, new_expr))
+        calc.perform_rule(rules.OnSubterm(rules.ApplyInductHyp()))
+        eq = parser.parse_expr("hat(w)^2 = w * T(w) - norm(w)^2 * unit_matrix(3)", fixes=fixes)
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0"))
+        eq = parser.parse_expr("norm(w) = 1", fixes=fixes)
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0.1.0.0"))
+        calc.perform_rule(rules.ExpandPolynomial())
+        old_e = parser.parse_expr("(-1) ^ n *  w * T(w) * hat(w)", fixes=fixes)
+        new_e = parser.parse_expr("(-1) ^ n * (w * T(w) * hat(w))", fixes=fixes)
+        calc.perform_rule(rules.Equation(old_e, new_e))
+        eq = parser.parse_expr("w * T(w) * hat(w) = zero_matrix(3,3)", fixes=fixes)
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0.0.1"))
+        calc.perform_rule(rules.FullSimplify())
+        assert goal04.is_finished()
+
         self.checkAndOutput(file)
 
 
@@ -223,7 +249,15 @@ class MatrixTest(unittest.TestCase):
         cond = parser.parse_expr("n = 0", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.SplitSummation(cond), "1"))
         calc.perform_rule(rules.OnLocation(rules.ChangeSummationIndex(new_lower="0"), "1.0"))
-        print(file.ctx.get_lemmas())
+        s1 = parser.parse_expr("(x * hat(w)) ^ (2 * n + 1)", fixes=fixes)
+        s2 = parser.parse_expr("x ^ (2 * n + 1) * hat(w) ^ (2 * n + 1)", fixes=fixes)
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        s3 = parser.parse_expr("(x * hat(w)) ^ (2 * (n + 1))", fixes=fixes)
+        s4 = parser.parse_expr("x ^ (2 * (n + 1)) * hat(w) ^ (2 * (n + 1))", fixes=fixes)
+        calc.perform_rule(rules.ApplyIdentity(s3, s4))
+        s5 = parser.parse_expr("hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)")
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s5), "0.0.0.1"))
+        s6 = parser.parse_expr("hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)")
         pass
     def testMy(self):
         e = parser.parse_expr("-(LIM {y -> oo}. atan(y / a)) + SKOLEM_FUNC(C(a))")

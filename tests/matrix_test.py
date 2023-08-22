@@ -183,19 +183,6 @@ class MatrixTest(unittest.TestCase):
         e = normalize(e, ctx)
         assert e == parser.parse_expr("unit_matrix(n)", fixes=fixes)
 
-    def testMy(self):
-        fixes = dict()
-        fixes['n'] = parser.parse_expr('$int')
-        s = "(n+1)/(n+1)"
-        from integral import poly
-        from integral.poly import normalize
-        ctx = Context()
-        ctx.add_condition(parser.parse_expr("n >= 0",fixes=fixes))
-        print(ctx.check_condition(parser.parse_expr("(n+1)!=0", fixes=fixes)))
-        e = parser.parse_expr(s,fixes=fixes)
-        e = normalize(e, ctx)
-        print(e)
-
     def testExample06(self):
         file = compstate.CompFile("base", "matrix_example06")
         fixes = dict()
@@ -223,6 +210,7 @@ class MatrixTest(unittest.TestCase):
         file = compstate.CompFile("matrix", "matrix_rodrigues")
         fixes = dict()
         fixes['w'] = parser.parse_expr('$tensor($real, 3, 1)')
+        fixes['n'] = parser.parse_expr('$int')
         file.add_definition("w = [[a_1],[a_2],[a_3]]", fixes=fixes)
         goal01 = file.add_goal("exp(hat(w) * x) = unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * (hat(w) * x) ^ 2",
                                conds=["x >= 0", "norm(w)=1"],
@@ -230,9 +218,12 @@ class MatrixTest(unittest.TestCase):
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.SeriesExpansionIdentity())
-        calc.perform_rule(rules.SplitSummation("n % 2"))
-        calc.perform_rule(rules.OnLocation(rules.SplitSummation("n = 0"), "1"))
+        cond = parser.parse_expr("n % 2", fixes=fixes)
+        calc.perform_rule(rules.SplitSummation(cond))
+        cond = parser.parse_expr("n = 0", fixes=fixes)
+        calc.perform_rule(rules.OnLocation(rules.SplitSummation(cond), "1"))
         calc.perform_rule(rules.OnLocation(rules.ChangeSummationIndex(new_lower="0"), "1.0"))
+        print(file)
         pass
 
 if __name__ == "__main__":

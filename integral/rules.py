@@ -2264,14 +2264,14 @@ class SplitSummation(Rule):
             if e.upper.is_pos_inf():
                 res = Const(0)
                 for i in range(self.cond.args[1].val):
-                    tmp = Var(e.index_var) * self.cond.args[1] + e.lower + Const(i)
+                    tmp = Var(e.index_var, type=expr.IntType) * self.cond.args[1] + e.lower + Const(i)
                     res = normalize(Op('+', res, Summation(e.index_var, Const(0), e.upper, e.body.subst(e.index_var, tmp))), ctx)
                 return res
             else:
                 res = Const(0)
                 for i in range(self.cond.args[1].val):
                     tmp1 = Const((e.upper.val - e.lower.val - i) // self.cond.args[1].val)
-                    tmp2 = Var(e.index_var) * self.cond.args[1] + e.lower + Const(i)
+                    tmp2 = Var(e.index_var, type=expr.IntType) * self.cond.args[1] + e.lower + Const(i)
                     res = normalize(Op('+', res, Summation(e.index_var, Const(0), tmp1, e.body.subst(e.index_var, tmp2))), ctx)
                 return res
         elif self.cond.is_compare():

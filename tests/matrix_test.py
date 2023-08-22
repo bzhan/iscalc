@@ -219,5 +219,21 @@ class MatrixTest(unittest.TestCase):
         self.checkAndOutput(file)
 
 
+    def testRodrigues(self):
+        file = compstate.CompFile("matrix", "matrix_rodrigues")
+        fixes = dict()
+        fixes['w'] = parser.parse_expr('$tensor($real, 3, 1)')
+        file.add_definition("w = [[a_1],[a_2],[a_3]]", fixes=fixes)
+        goal01 = file.add_goal("exp(hat(w) * x) = unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * (hat(w) * x) ^ 2",
+                               conds=["x >= 0", "norm(w)=1"],
+                               fixes=fixes)
+        proof = goal01.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.SeriesExpansionIdentity())
+        calc.perform_rule(rules.SplitSummation("n % 2"))
+        calc.perform_rule(rules.OnLocation(rules.SplitSummation("n = 0"), "1"))
+        calc.perform_rule(rules.OnLocation(rules.ChangeSummationIndex(new_lower="0"), "1.0"))
+        pass
+
 if __name__ == "__main__":
     unittest.main()

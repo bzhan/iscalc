@@ -347,6 +347,16 @@
                 "finished": true,
                 "goal": "I(n) = factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi)",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "n + 1 >= 0",
+                            "latex_cond": "n + 1 \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(n + 1)",
+                            "latex_cond": "n + 1 \\in\\mathbb{Z}"
+                        }
+                    ],
                     "finished": true,
                     "goal": "I(n + 1) = 4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))",
                     "latex_goal": "I{(n + 1)} = \\frac{4 ^ {-n}\\cdot \\sqrt{\\pi} (2 n + 2)!}{8 (n + 1)!}",

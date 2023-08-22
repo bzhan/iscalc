@@ -193,7 +193,7 @@
             "type": "Goal"
         },
         {
-            "finished": false,
+            "finished": true,
             "fixes": [
                 [
                     "s",
@@ -374,6 +374,20 @@
                 "finished": true,
                 "goal": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a) / (1 - x * y)) = (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + a + 1) ^ s)",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "a > -1",
+                            "latex_cond": "a > -1"
+                        },
+                        {
+                            "cond": "s + 1 >= 2",
+                            "latex_cond": "s + 1 \\ge 2"
+                        },
+                        {
+                            "cond": "isInt(s + 1)",
+                            "latex_cond": "s + 1 \\in\\mathbb{Z}"
+                        }
+                    ],
                     "finished": true,
                     "goal": "(INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a * log(x * y) ^ (s - 1) / (-(x * y) + 1)) = -((-1) ^ s * factorial(s) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1)))",
                     "latex_goal": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a} \\log^{s - 1}(x y)}{-x y + 1} \\,dx \\,dy = -(-1) ^ {s} s! \\sum_{n=0}^{\\infty}{(a + n + 1) ^ {-s - 1}}",
@@ -382,6 +396,20 @@
                         "goal": "(INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a * log(x * y) ^ (s - 1) / (-(x * y) + 1)) = -((-1) ^ s * factorial(s) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1)))",
                         "latex_goal": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a} \\log^{s - 1}(x y)}{-x y + 1} \\,dx \\,dy = -(-1) ^ {s} s! \\sum_{n=0}^{\\infty}{(a + n + 1) ^ {-s - 1}}",
                         "start": {
+                            "conds": [
+                                {
+                                    "cond": "a > -1",
+                                    "latex_cond": "a > -1"
+                                },
+                                {
+                                    "cond": "s >= 2",
+                                    "latex_cond": "s \\ge 2"
+                                },
+                                {
+                                    "cond": "isInt(s)",
+                                    "latex_cond": "s \\in\\mathbb{Z}"
+                                }
+                            ],
                             "latex_start": "\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y) (x ^ {a} y ^ {a})}{1 - x y} \\,dx \\,dy = (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{\\frac{1}{(n + a + 1) ^ {s}}}",
                             "start": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a) / (1 - x * y)) = (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + a + 1) ^ s)",
                             "steps": [
@@ -812,7 +840,7 @@
             "type": "Goal"
         },
         {
-            "finished": false,
+            "finished": true,
             "fixes": [
                 [
                     "s",

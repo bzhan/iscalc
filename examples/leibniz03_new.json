@@ -68,6 +68,16 @@
                 "finished": true,
                 "goal": "Gamma(n + 1/2) = sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "n + 1 >= 0",
+                            "latex_cond": "n + 1 \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(n + 1)",
+                            "latex_cond": "n + 1 \\in\\mathbb{Z}"
+                        }
+                    ],
                     "finished": true,
                     "goal": "Gamma(n + 3/2) = 4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (4 * factorial(n + 1))",
                     "latex_goal": "\\Gamma{(n + \\frac{3}{2})} = \\frac{4 ^ {-n}\\cdot \\sqrt{\\pi} (2 n + 2)!}{4 (n + 1)!}",

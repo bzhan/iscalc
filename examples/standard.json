@@ -534,6 +534,20 @@
                 "finished": true,
                 "goal": "(INT x:[0,1]. x ^ m * log(x) ^ n) = (-1) ^ n * factorial(n) / (m + 1) ^ (n + 1)",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "m >= 0",
+                            "latex_cond": "m \\ge 0"
+                        },
+                        {
+                            "cond": "n + 1 >= 0",
+                            "latex_cond": "n + 1 \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(n + 1)",
+                            "latex_cond": "n + 1 \\in\\mathbb{Z}"
+                        }
+                    ],
                     "finished": true,
                     "goal": "(INT x:[0,1]. x ^ m * log(x) ^ (n + 1)) = -((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
                     "latex_goal": "\\int_{0}^{1} x ^ {m} \\log^{n + 1}(x) \\,dx = -(-1) ^ {n} (m + 1) ^ {-n - 2} (n + 1)!",

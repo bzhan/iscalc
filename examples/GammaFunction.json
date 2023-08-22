@@ -169,6 +169,12 @@
                 "finished": true,
                 "goal": "Gamma(n) = factorial(n - 1)",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "n + 1 >= 1",
+                            "latex_cond": "n + 1 \\ge 1"
+                        }
+                    ],
                     "finished": true,
                     "goal": "Gamma(n + 1) = factorial(n)",
                     "latex_goal": "\\Gamma{(n + 1)} = n!",

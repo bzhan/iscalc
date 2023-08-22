@@ -310,6 +310,16 @@
                 "finished": true,
                 "goal": "hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "n + 1 >= 0",
+                            "latex_cond": "n + 1 \\ge 0"
+                        },
+                        {
+                            "cond": "norm(w) = 1",
+                            "latex_cond": "\\|w\\| = 1"
+                        }
+                    ],
                     "finished": true,
                     "goal": "hat(w) ^ (2 * n + 3) = -((-1) ^ n * hat(w))",
                     "latex_goal": "\\hat{w} ^ {2 n + 3} = -(-1) ^ {n} \\hat{w}",
@@ -326,6 +336,14 @@
                                 {
                                     "cond": "n >= 0",
                                     "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(w) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n + 1 >= 0",
+                                    "latex_cond": "n + 1 \\ge 0"
                                 },
                                 {
                                     "cond": "norm(w) = 1",
@@ -349,6 +367,14 @@
                                 {
                                     "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n + 1 >= 0",
+                                    "latex_cond": "n + 1 \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(w) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
                                 }
                             ]
                         },
@@ -364,6 +390,14 @@
                                 {
                                     "cond": "n >= 0",
                                     "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(w) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n + 1 >= 0",
+                                    "latex_cond": "n + 1 \\ge 0"
                                 },
                                 {
                                     "cond": "norm(w) = 1",
@@ -387,6 +421,14 @@
                                 {
                                     "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n + 1 >= 0",
+                                    "latex_cond": "n + 1 \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(w) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
                                 }
                             ]
                         },
@@ -406,6 +448,14 @@
                                 {
                                     "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n + 1 >= 0",
+                                    "latex_cond": "n + 1 \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(w) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
                                 }
                             ]
                         },
@@ -421,6 +471,14 @@
                                 {
                                     "cond": "n >= 0",
                                     "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(w) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n + 1 >= 0",
+                                    "latex_cond": "n + 1 \\ge 0"
                                 },
                                 {
                                     "cond": "norm(w) = 1",

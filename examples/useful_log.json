@@ -360,6 +360,20 @@
                 "finished": true,
                 "goal": "Li(s + 1,x) = (INT t:[0,x]. Li(s,t) / t)",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "abs(x) < 1",
+                            "latex_cond": "\\left| x \\right| < 1"
+                        },
+                        {
+                            "cond": "s + 1 >= 0",
+                            "latex_cond": "s + 1 \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(s + 1)",
+                            "latex_cond": "s + 1 \\in\\mathbb{Z}"
+                        }
+                    ],
                     "finished": true,
                     "goal": "Li(s + 2,x) = (INT t:[0,x]. Li(s + 1,t) / t)",
                     "latex_goal": "\\operatorname{Li}(s + 2,x) = \\int_{0}^{x} \\frac{\\operatorname{Li}(s + 1,t)}{t} \\,dt",

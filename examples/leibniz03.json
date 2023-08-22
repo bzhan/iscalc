@@ -409,6 +409,12 @@
             "type": "Goal"
         },
         {
+            "conds": [
+                {
+                    "cond": "I(t) > 0",
+                    "latex_cond": "I{(t)} > 0"
+                }
+            ],
             "finished": true,
             "goal": "I(t) = sqrt(pi / 2) * exp(-(t ^ 2) / 2)",
             "latex_goal": "I{(t)} = \\sqrt{\\frac{\\pi}{2}} e^{-t ^ {2}/2}",
@@ -466,6 +472,12 @@
             "type": "Goal"
         },
         {
+            "conds": [
+                {
+                    "cond": "I(t) > 0",
+                    "latex_cond": "I{(t)} > 0"
+                }
+            ],
             "finished": true,
             "goal": "(INT x:[-oo,oo]. exp(-(x ^ 2) / 2) * cos(s + t * x)) = sqrt(2 * pi) * exp(-(t ^ 2) / 2) * cos(s)",
             "latex_goal": "\\int_{-\\infty}^{\\infty} e^{-x ^ {2}/2} \\cos{(s + t x)} \\,dx = \\sqrt{2 \\pi} e^{-t ^ {2}/2} \\cos{s}",

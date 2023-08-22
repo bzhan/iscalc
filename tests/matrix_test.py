@@ -225,6 +225,13 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.ChangeSummationIndex(new_lower="0"), "1.0"))
         print(file.ctx.get_lemmas())
         pass
+    def testMy(self):
+        e = parser.parse_expr("-(LIM {y -> oo}. atan(y / a)) + SKOLEM_FUNC(C(a))")
+        r = rules.FullSimplify()
+        ctx = Context()
+        ctx.add_condition("a>0")
+        e = r.eval(e, ctx)
+        print(e)
 
 if __name__ == "__main__":
     unittest.main()

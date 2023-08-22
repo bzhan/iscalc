@@ -104,11 +104,11 @@
                     "latex_cond": "a \\neq 0"
                 }
             ],
-            "finished": true,
+            "finished": false,
             "goal": "g(y,a) = -atan(y / a) + SKOLEM_FUNC(C(a))",
             "latex_goal": "g(y,a) = -\\tan^{-1}{(\\frac{y}{a})} + C(a)",
             "proof": {
-                "finished": true,
+                "finished": false,
                 "goal": "g(y,a) = -atan(y / a) + SKOLEM_FUNC(C(a))",
                 "latex_goal": "g(y,a) = -\\tan^{-1}{(\\frac{y}{a})} + C(a)",
                 "start": {
@@ -149,8 +149,8 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "latex_res": "g(y,a) = -\\tan^{-1}{(\\frac{y}{a})} + C(a)",
-                            "res": "g(y,a) = -atan(y / a) + SKOLEM_FUNC(C(a))",
+                            "latex_res": "g(y,a) = -\\frac{a}{a} \\tan^{-1}{(\\frac{y}{a})} + C(a)",
+                            "res": "g(y,a) = -(a / a * atan(y / a)) + SKOLEM_FUNC(C(a))",
                             "rule": {
                                 "name": "FullSimplify",
                                 "str": "full simplify"
@@ -224,11 +224,11 @@
                     "latex_cond": "a > 0"
                 }
             ],
-            "finished": true,
+            "finished": false,
             "goal": "SKOLEM_FUNC(C(a)) = pi / 2",
             "latex_goal": "C(a) = \\frac{\\pi}{2}",
             "proof": {
-                "finished": true,
+                "finished": false,
                 "goal": "SKOLEM_FUNC(C(a)) = pi / 2",
                 "latex_goal": "C(a) = \\frac{\\pi}{2}",
                 "start": {
@@ -270,8 +270,8 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "latex_res": "0 = -\\frac{\\pi}{2} + C(a)",
-                            "res": "0 = -(pi / 2) + SKOLEM_FUNC(C(a))",
+                            "latex_res": "0 = -(\\lim\\limits_{y\\to \\infty} \\tan^{-1}{(\\frac{y}{a})}) + C(a)",
+                            "res": "0 = -(LIM {y -> oo}. atan(y / a)) + SKOLEM_FUNC(C(a))",
                             "rule": {
                                 "name": "FullSimplify",
                                 "str": "full simplify"
@@ -279,8 +279,8 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "latex_res": "C(a) = \\frac{\\pi}{2}",
-                            "res": "SKOLEM_FUNC(C(a)) = pi / 2",
+                            "latex_res": "C(a) = \\lim\\limits_{y\\to \\infty} \\tan^{-1}{(\\frac{y}{a})}",
+                            "res": "SKOLEM_FUNC(C(a)) = (LIM {y -> oo}. atan(y / a))",
                             "rule": {
                                 "latex_str": "solve equation for \\(C(a)\\)",
                                 "name": "SolveEquation",
@@ -303,11 +303,11 @@
                     "latex_cond": "a < 0"
                 }
             ],
-            "finished": true,
+            "finished": false,
             "goal": "SKOLEM_FUNC(C(a)) = -(pi / 2)",
             "latex_goal": "C(a) = -\\frac{\\pi}{2}",
             "proof": {
-                "finished": true,
+                "finished": false,
                 "goal": "SKOLEM_FUNC(C(a)) = -(pi / 2)",
                 "latex_goal": "C(a) = -\\frac{\\pi}{2}",
                 "start": {
@@ -349,8 +349,8 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "latex_res": "0 = \\frac{\\pi}{2} + C(a)",
-                            "res": "0 = pi / 2 + SKOLEM_FUNC(C(a))",
+                            "latex_res": "0 = -(\\lim\\limits_{y\\to \\infty} \\tan^{-1}{(\\frac{y}{a})}) + C(a)",
+                            "res": "0 = -(LIM {y -> oo}. atan(y / a)) + SKOLEM_FUNC(C(a))",
                             "rule": {
                                 "name": "FullSimplify",
                                 "str": "full simplify"
@@ -358,8 +358,8 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "latex_res": "C(a) = -\\frac{\\pi}{2}",
-                            "res": "SKOLEM_FUNC(C(a)) = -(pi / 2)",
+                            "latex_res": "C(a) = \\lim\\limits_{y\\to \\infty} \\tan^{-1}{(\\frac{y}{a})}",
+                            "res": "SKOLEM_FUNC(C(a)) = (LIM {y -> oo}. atan(y / a))",
                             "rule": {
                                 "latex_str": "solve equation for \\(C(a)\\)",
                                 "name": "SolveEquation",

@@ -23,6 +23,12 @@ class Identity:
         self.simp_level = simp_level
         self.category = category
 
+    def __eq__(self, other):
+        return self.expr == other.expr and \
+        self.conds == other.conds and \
+        self.simp_level == other.simp_level and \
+        self.category == other.category
+
     @property
     def lhs(self):
         return self.expr.lhs

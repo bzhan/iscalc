@@ -224,14 +224,23 @@ class Goal(StateItem):
         # all conds are satisfied under context of proof
         if self.proof == None:
             return False
-        proof_has_conds = len(self.proof.ctx.get_conds().data) > 0
-        goal_has_conds = len(self.conds.data) > 0
-        if not goal_has_conds and proof_has_conds:
-            return False
-        elif not goal_has_conds and not proof_has_conds:
-            return self.proof.is_finished()
-        elif goal_has_conds and proof_has_conds:
-            return self.proof.is_finished() and self.proof.ctx.check_all_condtions(self.conds)
+        if isinstance(self.proof, RewriteGoalProof):
+            proof_has_conds = len(self.proof.begin.ctx.get_conds().data) > 0
+            goal_has_conds = len(self.ctx.get_conds().data) > 0
+            if not goal_has_conds and proof_has_conds:
+                proof_cond_vars = set()
+                for cond in self.proof.begin.ctx.get_conds().data:
+                    cond:Expr
+                    proof_cond_vars = proof_cond_vars.union(cond.get_vars())
+                goal_vars = self.goal.get_vars()
+                return goal_vars.intersection(proof_cond_vars) == set()
+            elif not goal_has_conds and not proof_has_conds:
+                return self.proof.is_finished()
+            elif goal_has_conds and proof_has_conds:
+                return self.proof.is_finished() and \
+                       self.proof.begin.ctx.check_all_condtions(self.ctx.get_conds())
+            else:
+                return self.proof.is_finished()
         else:
             return self.proof.is_finished()
 
@@ -688,7 +697,10 @@ class RewriteGoalProof(StateItem):
 
         self.parent = parent
         self.goal = goal
-        self.ctx = begin.ctx
+        while not isinstance(parent, CompFile):
+            parent = parent.parent
+        self.ctx = Context(parent.get_context())
+        self.start = begin
         self.begin = Calculation(parent, self.ctx, begin.goal, conds=begin.conds, connection_symbol = '==>')
 
     def is_finished(self):
@@ -725,26 +737,6 @@ class RewriteGoalProof(StateItem):
         else:
             raise AssertionError("get_by_label: invalid label")
 
-class Assumption(StateItem):
-    """Prove an equation by transforming an initial equation.
-        """
-
-    def __init__(self, parent, a: Expr):
-        self.parent = parent
-        self.a = a
-
-    def export(self):
-        return {
-            "type": "Assumption",
-            "expr": str(self.a),
-            "latex_goal": latex.convert_expr(self.a)
-        }
-
-    def __str__(self):
-        return "Assumption:\n  %s\n" % (self.a)
-
-    def get_by_label(self, label: Label):
-        return self
 
 class CompFile:
     """Represent a file containing multiple StateItem objects.
@@ -1042,8 +1034,6 @@ def parse_item(parent, item) -> StateItem:
             all_fixes[s] = t
         goal = parser.parse_expr(item['goal'], fixes=all_fixes)
         conds = parse_conds(item, fixes=all_fixes)
-
-
         res = Goal(parent, ctx, goal, conds=conds, fixes=fixes)
         if 'proof' in item:
             res.proof = parse_item(res, item['proof'])

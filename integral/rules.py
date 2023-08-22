@@ -1014,6 +1014,16 @@ class OnLocation(Rule):
                 return Deriv(cur_e.var, rec(cur_e.body, loc.rest, ctx))
             elif cur_e.is_limit():
                 if loc.head == 0:
+                    cur_e:Var
+                    if cur_e.lim.is_evaluable():
+                        v = expr.eval_expr(cur_e.lim)
+                        var = parser.parse_expr(cur_e.var, fixes=ctx.get_fixes())
+                        if v == float('inf'):
+                            cond = Op('>', var, Const(0))
+                            ctx.add_condition(cond)
+                        elif v == float('-inf'):
+                            cond = Op('<', var, Const(0))
+                            ctx.add_condition(cond)
                     return Limit(cur_e.var, cur_e.lim, rec(cur_e.body, loc.rest, ctx), drt=cur_e.drt)
                 elif loc.head == 1:
                     return Limit(cur_e.var, rec(cur_e.lim, loc.rest, ctx), cur_e.body, drt=cur_e.drt)

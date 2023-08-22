@@ -299,6 +299,12 @@
             "type": "Goal"
         },
         {
+            "conds": [
+                {
+                    "cond": "b > 0",
+                    "latex_cond": "b > 0"
+                }
+            ],
             "finished": true,
             "goal": "SKOLEM_FUNC(C(b)) = 0",
             "latex_goal": "C(b) = 0",

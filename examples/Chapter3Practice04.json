@@ -5,6 +5,14 @@
                 {
                     "cond": "x != b",
                     "latex_cond": "x \\neq b"
+                },
+                {
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
+                },
+                {
+                    "cond": "b > 0",
+                    "latex_cond": "b > 0"
                 }
             ],
             "finished": true,
@@ -114,6 +122,14 @@
                         {
                             "cond": "x != b",
                             "latex_cond": "x \\neq b"
+                        },
+                        {
+                            "cond": "a > 0",
+                            "latex_cond": "a > 0"
+                        },
+                        {
+                            "cond": "b > 0",
+                            "latex_cond": "b > 0"
                         }
                     ],
                     "latex_start": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{x ^ {2} - b ^ {2}} \\,dx = \\frac{1}{2} (\\int_{-\\infty}^{\\infty} \\frac{x \\sin{(a x)}}{x ^ {2} - b ^ {2}} \\,dx)",

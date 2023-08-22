@@ -207,7 +207,7 @@ class MatrixTest(unittest.TestCase):
 
 
     def testRodrigues(self):
-        file = compstate.CompFile("matrix", "matrix_rodrigues")
+        file = compstate.CompFile("MIRM", "matrix_rodrigues")
         fixes = dict()
         fixes['w'] = parser.parse_expr('$tensor($real, 3, 1)')
         fixes['n'] = parser.parse_expr('$int')
@@ -223,14 +223,7 @@ class MatrixTest(unittest.TestCase):
         cond = parser.parse_expr("n = 0", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.SplitSummation(cond), "1"))
         calc.perform_rule(rules.OnLocation(rules.ChangeSummationIndex(new_lower="0"), "1.0"))
-        s1 = parser.parse_expr("(x * hat(w)) ^ (2 * (n + 1))", fixes=fixes)
-        s2 = parser.parse_expr("x ^ (2 * (n + 1)) * hat(w) ^ (2 * (n + 1))", fixes=fixes)
-        calc.perform_rule(rules.ApplyIdentity(s1, s2))
-        s3 = parser.parse_expr("(x * hat(w)) ^ (2 * n + 1)", fixes=fixes)
-        s4 = parser.parse_expr("x ^ (2 * n + 1) * hat(w) ^ (2 * n + 1)", fixes=fixes)
-        calc.perform_rule(rules.ApplyIdentity(s3, s4))
-        s5 = parser.parse_expr("hat(w) ^ (2 * (n + 1))", fixes=fixes)
-        calc.perform_rule(rules.ApplyEquation(s5))
+        print(file.ctx.get_lemmas())
         pass
 
 if __name__ == "__main__":

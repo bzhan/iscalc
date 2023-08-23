@@ -52,6 +52,15 @@
                 ["n", "$int"],
                 ["w", "$tensor($real, 3, 1)"]
             ]
+        },
+        {
+            "expr": "exp(hat(w) * x) = unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * (hat(w)) ^ 2",
+            "path": "matrix_rodrigues",
+            "type": "problem",
+            "fixes": [
+                ["n", "$int"],
+                ["w", "$tensor($real, 3, 1)"]
+            ]
         }
 
     ],

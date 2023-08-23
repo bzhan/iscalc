@@ -375,8 +375,20 @@ class Context:
                 self.add_definite_integral(e, conds)
             elif e.is_equals() and not e.lhs.is_summation() and e.rhs.is_summation():
                 self.add_series_expansion(e)
+                if item['type'] == 'problem':
+                    conds = Conditions()
+                    if 'conds' in item:
+                        for c in item['conds']:
+                            conds.add_condition(parser.parse_expr(c, fixes=fixes))
+                    self.add_lemma(e, conds)
             elif e.is_equals() and e.lhs.is_summation() and not e.rhs.is_summation():
                 self.add_series_evaluation(e)
+                if item['type'] == 'problem':
+                    conds = Conditions()
+                    if 'conds' in item:
+                        for c in item['conds']:
+                            conds.add_condition(parser.parse_expr(c, fixes=fixes))
+                    self.add_lemma(e, conds)
             elif e.is_equals() and 'category' in item:
                 self.add_other_identities(e, item['category'], item.get('attributes'))
             elif e.is_equals() and item['type'] == 'problem':

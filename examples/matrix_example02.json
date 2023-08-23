@@ -627,6 +627,506 @@
             },
             "type": "Goal",
             "wellformed": false
+        },
+        {
+            "conds": [
+                {
+                    "cond": "n >= 0",
+                    "latex_cond": "n \\ge 0"
+                },
+                {
+                    "cond": "norm(w) = 1",
+                    "latex_cond": "\\|w\\| = 1"
+                }
+            ],
+            "finished": true,
+            "fixes": [
+                [
+                    "w",
+                    "$tensor($real, 3, 1)"
+                ],
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
+            "goal": "hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2",
+            "latex_goal": "\\hat{w} ^ {2 (n + 1)} = (-1) ^ {n} \\hat{w} ^ {2}",
+            "obligations": [
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "hat(w) > 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "norm(w) = 1",
+                            "latex_cond": "\\|w\\| = 1"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "isInt(2 * (n + 1))"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "norm(w) = 1",
+                            "latex_cond": "\\|w\\| = 1"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "2 * (n + 1) >= 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "norm(w) = 1",
+                            "latex_cond": "\\|w\\| = 1"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "-1 > 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "norm(w) = 1",
+                            "latex_cond": "\\|w\\| = 1"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "isInt(n)"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "norm(w) = 1",
+                            "latex_cond": "\\|w\\| = 1"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "n >= 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "norm(w) = 1",
+                            "latex_cond": "\\|w\\| = 1"
+                        }
+                    ]
+                }
+            ],
+            "proof": {
+                "base_case": {
+                    "finished": true,
+                    "goal": "hat(w) ^ 2 = hat(w) ^ 2",
+                    "latex_goal": "\\hat{w} ^ {2} = \\hat{w} ^ {2}",
+                    "proof": {
+                        "calcs": [
+                            {
+                                "latex_start": "\\hat{w} ^ {2}",
+                                "start": "hat(w) ^ 2",
+                                "steps": [],
+                                "type": "Calculation"
+                            },
+                            {
+                                "latex_start": "\\hat{w} ^ {2}",
+                                "start": "hat(w) ^ 2",
+                                "steps": [],
+                                "type": "Calculation"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "hat(w) ^ 2 = hat(w) ^ 2",
+                        "latex_goal": "\\hat{w} ^ {2} = \\hat{w} ^ {2}",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal"
+                },
+                "finished": true,
+                "goal": "hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2",
+                "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "n + 1 >= 0",
+                            "latex_cond": "n + 1 \\ge 0"
+                        },
+                        {
+                            "cond": "norm(w) = 1",
+                            "latex_cond": "\\|w\\| = 1"
+                        }
+                    ],
+                    "finished": true,
+                    "goal": "hat(w) ^ (2 * n + 4) = -((-1) ^ n * hat(w) ^ 2)",
+                    "latex_goal": "\\hat{w} ^ {2 n + 4} = -(-1) ^ {n} \\hat{w} ^ {2}",
+                    "obligations": [
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "hat(w) > 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(w) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n + 1 >= 0",
+                                    "latex_cond": "n + 1 \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(w) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "isInt(2 * n + 4)"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(w) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n + 1 >= 0",
+                                    "latex_cond": "n + 1 \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(w) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "2 * n + 4 >= 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(w) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n + 1 >= 0",
+                                    "latex_cond": "n + 1 \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(w) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "-1 > 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(w) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n + 1 >= 0",
+                                    "latex_cond": "n + 1 \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(w) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "isInt(n)"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(w) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n + 1 >= 0",
+                                    "latex_cond": "n + 1 \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(w) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "n >= 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(w) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n + 1 >= 0",
+                                    "latex_cond": "n + 1 \\ge 0"
+                                },
+                                {
+                                    "cond": "norm(w) = 1",
+                                    "latex_cond": "\\|w\\| = 1"
+                                }
+                            ]
+                        }
+                    ],
+                    "proof": {
+                        "calcs": [
+                            {
+                                "latex_start": "\\hat{w} ^ {2 n + 4}",
+                                "start": "hat(w) ^ (2 * n + 4)",
+                                "steps": [
+                                    {
+                                        "latex_res": "\\hat{w} ^ {2 + 2 (n + 1)}",
+                                        "res": "hat(w) ^ (2 + 2 * (n + 1))",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(2 n + 4\\) to \\(2 + 2 (n + 1)\\)",
+                                            "name": "Equation",
+                                            "new_expr": "2 + 2 * (n + 1)",
+                                            "old_expr": "2 * n + 4",
+                                            "str": "rewriting 2 * n + 4 to 2 + 2 * (n + 1)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\hat{w} ^ {2} \\hat{w} ^ {2 (n + 1)}",
+                                        "res": "hat(w) ^ 2 * hat(w) ^ (2 * (n + 1))",
+                                        "rule": {
+                                            "latex_str": "rewrite \\(\\hat{w} ^ {2 + 2 (n + 1)}\\) to \\(\\hat{w} ^ {2} \\hat{w} ^ {2 (n + 1)}\\) using identity",
+                                            "name": "ApplyIdentity",
+                                            "source": "hat(w) ^ (2 + 2 * (n + 1))",
+                                            "str": "rewrite hat(w) ^ (2 + 2 * (n + 1)) to hat(w) ^ 2 * hat(w) ^ (2 * (n + 1)) using identity",
+                                            "target": "hat(w) ^ 2 * hat(w) ^ (2 * (n + 1))"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\hat{w} ^ {2} ((-1) ^ {n} \\hat{w} ^ {2})",
+                                        "res": "hat(w) ^ 2 * ((-1) ^ n * hat(w) ^ 2)",
+                                        "rule": {
+                                            "loc": "subterms",
+                                            "name": "ApplyInductHyp",
+                                            "str": "apply induction hypothesis on subterms"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "(w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot I_{3 \\times 3}) ((-1) ^ {n} \\hat{w} ^ {2})",
+                                        "res": "(w * T(w) - norm(w) ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w) ^ 2)",
+                                        "rule": {
+                                            "eq": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
+                                            "latex_str": "apply equation \\(\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot I_{3 \\times 3}\\) at 0",
+                                            "loc": "0",
+                                            "name": "ApplyEquation",
+                                            "str": "apply equation: hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3) at 0"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "(w w^{\\text{T}} - 1 ^ {2} I_{3 \\times 3}) ((-1) ^ {n} \\hat{w} ^ {2})",
+                                        "res": "(w * T(w) - 1 ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w) ^ 2)",
+                                        "rule": {
+                                            "eq": "norm(w) = 1",
+                                            "latex_str": "apply equation \\(\\|w\\| = 1\\) at 0.1.0.0",
+                                            "loc": "0.1.0.0",
+                                            "name": "ApplyEquation",
+                                            "str": "apply equation: norm(w) = 1 at 0.1.0.0"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "(-1) ^ {n} w w^{\\text{T}} \\hat{w} \\hat{w} - (-1) ^ {n}\\cdot I_{3 \\times 3} \\hat{w} \\hat{w}",
+                                        "res": "(-1) ^ n * w * T(w) * hat(w) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w) * hat(w)",
+                                        "rule": {
+                                            "name": "ExpandPolynomial",
+                                            "str": "expand polynomial"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "(-1) ^ {n} (w w^{\\text{T}} \\hat{w}) \\hat{w} - (-1) ^ {n}\\cdot I_{3 \\times 3} \\hat{w} \\hat{w}",
+                                        "res": "(-1) ^ n * (w * T(w) * hat(w)) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w) * hat(w)",
+                                        "rule": {
+                                            "latex_str": "rewriting \\((-1) ^ {n} w w^{\\text{T}} \\hat{w}\\) to \\((-1) ^ {n} (w w^{\\text{T}} \\hat{w})\\)",
+                                            "name": "Equation",
+                                            "new_expr": "(-1) ^ n * (w * T(w) * hat(w))",
+                                            "old_expr": "(-1) ^ n * w * T(w) * hat(w)",
+                                            "str": "rewriting (-1) ^ n * w * T(w) * hat(w) to (-1) ^ n * (w * T(w) * hat(w))"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "(-1) ^ {n}\\cdot O_{3 \\times 3} \\hat{w} - (-1) ^ {n}\\cdot I_{3 \\times 3} \\hat{w} \\hat{w}",
+                                        "res": "(-1) ^ n * zero_matrix(3,3) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w) * hat(w)",
+                                        "rule": {
+                                            "eq": "w * T(w) * hat(w) = zero_matrix(3,3)",
+                                            "latex_str": "apply equation \\(w w^{\\text{T}} \\hat{w} = O_{3 \\times 3}\\) at 0.0.1",
+                                            "loc": "0.0.1",
+                                            "name": "ApplyEquation",
+                                            "str": "apply equation: w * T(w) * hat(w) = zero_matrix(3,3) at 0.0.1"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\begin{bmatrix}a_2 ^ {2} (-1) ^ {n} + a_3 ^ {2} (-1) ^ {n}&-a_1 a_2 (-1) ^ {n}&-a_1 a_3 (-1) ^ {n}\\\\-a_1 a_2 (-1) ^ {n}&a_1 ^ {2} (-1) ^ {n} + a_3 ^ {2} (-1) ^ {n}&-a_2 a_3 (-1) ^ {n}\\\\-a_1 a_3 (-1) ^ {n}&-a_2 a_3 (-1) ^ {n}&a_1 ^ {2} (-1) ^ {n} + a_2 ^ {2} (-1) ^ {n}\\end{bmatrix}",
+                                        "res": "[[a_2 ^ 2 * (-1) ^ n + a_3 ^ 2 * (-1) ^ n, -(a_1 * a_2 * (-1) ^ n), -(a_1 * a_3 * (-1) ^ n)], [-(a_1 * a_2 * (-1) ^ n), a_1 ^ 2 * (-1) ^ n + a_3 ^ 2 * (-1) ^ n, -(a_2 * a_3 * (-1) ^ n)], [-(a_1 * a_3 * (-1) ^ n), -(a_2 * a_3 * (-1) ^ n), a_1 ^ 2 * (-1) ^ n + a_2 ^ 2 * (-1) ^ n]]",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            },
+                            {
+                                "latex_start": "-(-1) ^ {n} \\hat{w} ^ {2}",
+                                "start": "-((-1) ^ n * hat(w) ^ 2)",
+                                "steps": [
+                                    {
+                                        "latex_res": "-(-1) ^ {n} (\\hat{w} \\hat{w})",
+                                        "res": "-((-1) ^ n * (hat(w) * hat(w)))",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(\\hat{w} ^ {2}\\) to \\(\\hat{w} \\hat{w}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "hat(w) * hat(w)",
+                                            "old_expr": "hat(w) ^ 2",
+                                            "str": "rewriting hat(w) ^ 2 to hat(w) * hat(w)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\begin{bmatrix}a_2 ^ {2} (-1) ^ {n} + a_3 ^ {2} (-1) ^ {n}&-a_1 a_2 (-1) ^ {n}&-a_1 a_3 (-1) ^ {n}\\\\-a_1 a_2 (-1) ^ {n}&a_1 ^ {2} (-1) ^ {n} + a_3 ^ {2} (-1) ^ {n}&-a_2 a_3 (-1) ^ {n}\\\\-a_1 a_3 (-1) ^ {n}&-a_2 a_3 (-1) ^ {n}&a_1 ^ {2} (-1) ^ {n} + a_2 ^ {2} (-1) ^ {n}\\end{bmatrix}",
+                                        "res": "[[a_2 ^ 2 * (-1) ^ n + a_3 ^ 2 * (-1) ^ n, -(a_1 * a_2 * (-1) ^ n), -(a_1 * a_3 * (-1) ^ n)], [-(a_1 * a_2 * (-1) ^ n), a_1 ^ 2 * (-1) ^ n + a_3 ^ 2 * (-1) ^ n, -(a_2 * a_3 * (-1) ^ n)], [-(a_1 * a_3 * (-1) ^ n), -(a_2 * a_3 * (-1) ^ n), a_1 ^ 2 * (-1) ^ n + a_2 ^ 2 * (-1) ^ n]]",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "hat(w) ^ (2 * n + 4) = -((-1) ^ n * hat(w) ^ 2)",
+                        "latex_goal": "\\hat{w} ^ {2 n + 4} = -(-1) ^ {n} \\hat{w} ^ {2}",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal",
+                    "wellformed": false
+                },
+                "induct_var": "n",
+                "latex_goal": "\\hat{w} ^ {2 (n + 1)} = (-1) ^ {n} \\hat{w} ^ {2}",
+                "type": "InductionProof"
+            },
+            "type": "Goal",
+            "wellformed": false
         }
     ],
     "name": "matrix_example02"

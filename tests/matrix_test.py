@@ -189,6 +189,11 @@ class MatrixTest(unittest.TestCase):
         eq = parser.parse_expr("w * T(w) * hat(w) = zero_matrix(3,3)", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0.0.1"))
         calc.perform_rule(rules.FullSimplify())
+        calc = induct_proof.rhs_calc
+        old_e = parser.parse_expr("hat(w) ^ 2", fixes=fixes)
+        new_e = parser.parse_expr("hat(w) * hat(w)", fixes=fixes)
+        calc.perform_rule(rules.Equation(old_e, new_e))
+        calc.perform_rule(rules.FullSimplify())
         assert goal04.is_finished()
 
         self.checkAndOutput(file)
@@ -257,7 +262,8 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyIdentity(s3, s4))
         s5 = parser.parse_expr("hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)")
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s5), "0.0.0.1"))
-        s6 = parser.parse_expr("hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)")
+        s6 = parser.parse_expr("hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2")
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s6), "1.0.0.1"))
         pass
     def testMy(self):
         e = parser.parse_expr("-(LIM {y -> oo}. atan(y / a)) + SKOLEM_FUNC(C(a))")

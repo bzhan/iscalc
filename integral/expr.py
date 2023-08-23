@@ -680,8 +680,9 @@ class Expr:
                 rec(t.bd_vars)
                 rec(t.rhs, bd_vars)
             elif t.is_matrix():
-                for rv in t.rows:
-                    rec(rv, bd_vars)
+                for rv in t.data:
+                    for d in rv:
+                        rec(d, bd_vars)
             else:
                 print(t, type(t))
                 raise NotImplementedError

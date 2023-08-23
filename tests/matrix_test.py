@@ -263,7 +263,10 @@ class MatrixTest(unittest.TestCase):
         s5 = parser.parse_expr("hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s5), "0.0.0.1"))
         s6 = parser.parse_expr("hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2", fixes=fixes)
-        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s6), "1.0.0.1"))
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s6), "1.0.0.0.1"))
+        s7 = parser.parse_expr("SUM(n, 0, oo, x ^ (2 * n + 1) * ((-1) ^ n * hat(w)) / factorial(2 * n + 1))", fixes=fixes)
+        s8 = parser.parse_expr("hat(w) * SUM(n, 0, oo, (-1) ^ n * x ^ (2 * n + 1) / factorial(2 * n + 1))", fixes=fixes)
+        calc.perform_rule(rules.Equation(s7, s8))
         pass
 
     def testMy(self):

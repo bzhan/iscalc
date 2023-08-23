@@ -1924,7 +1924,6 @@ class IntegralTest(unittest.TestCase):
         e1 = parser.parse_expr("I(n - 1) * (2 * n - 1) / 2", fixes = fixes)
         e2 = parser.parse_expr("(2 * n - 1) / 2 * I(n - 1)", fixes = fixes)
         calc.perform_rule(rules.Equation(e1, e2))
-        print(goal03)
         self.assertTrue(goal03.is_finished())
         goal04 = file.add_goal("I(n) = factorial(2*n)/(4^n*factorial(n))*(1/2)*sqrt(pi)", fixes=fixes, conds=["n>=0", "isInt(n)"])
         proof = goal04.proof_by_induction("n", 0)
@@ -2194,7 +2193,6 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal4.goal), "0"))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.SolveEquation(parser.parse_expr("SKOLEM_FUNC(C(a))")))
-        print(goal5)
         assert goal5.is_finished()
         # Evaluate C(a) for a < 0
         goal6 = file.add_goal("SKOLEM_FUNC(C(a)) = -(pi / 2)", conds=["a < 0"])

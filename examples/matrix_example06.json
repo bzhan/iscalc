@@ -1,0 +1,112 @@
+{
+    "content": [
+        {
+            "finished": true,
+            "fixes": [
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
+            "goal": "1 - cos(a) = SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))",
+            "latex_goal": "1 - \\cos{a} = \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} a ^ {2 (n + 1)}}{(2 (n + 1))!}}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "1 - \\cos{a}",
+                        "start": "1 - cos(a)",
+                        "steps": [
+                            {
+                                "latex_res": "1 - \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} a ^ {2 n}}{(2 n)!}}",
+                                "res": "1 - SUM(n, 0, oo, (-1) ^ n * a ^ (2 * n) / factorial(2 * n))",
+                                "rule": {
+                                    "index_var": "n",
+                                    "name": "SeriesExpansionIdentity",
+                                    "old_expr": "cos(a)",
+                                    "str": "apply series expansion"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "1 - (\\sum_{n=1}^{\\infty}{\\frac{a ^ {2 n} (-1) ^ {n}}{(2 n)!}} + 1)",
+                                "res": "1 - (SUM(n, 1, oo, a ^ (2 * n) * (-1) ^ n / factorial(2 * n)) + 1)",
+                                "rule": {
+                                    "cond": "n = 0",
+                                    "loc": "1",
+                                    "name": "SplitSummation",
+                                    "str": "split summation at 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\sum_{n=1}^{\\infty}{\\frac{a ^ {2 n} (-1) ^ {n}}{(2 n)!}}",
+                                "res": "-SUM(n, 1, oo, a ^ (2 * n) * (-1) ^ n / factorial(2 * n))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=1}^{\\infty}{-1 (\\frac{(-1) ^ {n} a ^ {2 n}}{(2 n)!})}",
+                                "res": "SUM(n, 1, oo, -1 * ((-1) ^ n * a ^ (2 * n) / factorial(2 * n)))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(-\\sum_{n=1}^{\\infty}{\\frac{a ^ {2 n} (-1) ^ {n}}{(2 n)!}}\\) to \\(\\sum_{n=1}^{\\infty}{-1 (\\frac{(-1) ^ {n} a ^ {2 n}}{(2 n)!})}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "SUM(n, 1, oo, -1 * ((-1) ^ n * a ^ (2 * n) / factorial(2 * n)))",
+                                    "old_expr": "-SUM(n, 1, oo, a ^ (2 * n) * (-1) ^ n / factorial(2 * n))",
+                                    "str": "rewriting -SUM(n, 1, oo, a ^ (2 * n) * (-1) ^ n / factorial(2 * n)) to SUM(n, 1, oo, -1 * ((-1) ^ n * a ^ (2 * n) / factorial(2 * n)))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=0}^{\\infty}{-1 (\\frac{(-1) ^ {n + 1} a ^ {2 (n + 1)}}{(2 (n + 1))!})}",
+                                "res": "SUM(n, 0, oo, -1 * ((-1) ^ (n + 1) * a ^ (2 * (n + 1)) / factorial(2 * (n + 1))))",
+                                "rule": {
+                                    "name": "ChangeSummationIndex",
+                                    "new_lower": "0",
+                                    "str": "change summation index"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{a ^ {2 n + 2} (-1) ^ {n}}{(2 n + 2)!}}",
+                                "res": "SUM(n, 0, oo, a ^ (2 * n + 2) * (-1) ^ n / factorial(2 * n + 2))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} a ^ {2 (n + 1)}}{(2 (n + 1))!}}",
+                                "res": "SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{a ^ {2 n + 2} (-1) ^ {n}}{(2 n + 2)!}\\) to \\(\\frac{(-1) ^ {n} a ^ {2 (n + 1)}}{(2 (n + 1))!}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1))",
+                                    "old_expr": "a ^ (2 * n + 2) * (-1) ^ n / factorial(2 * n + 2)",
+                                    "str": "rewriting a ^ (2 * n + 2) * (-1) ^ n / factorial(2 * n + 2) to (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1))"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} a ^ {2 (n + 1)}}{(2 (n + 1))!}}",
+                        "start": "SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "1 - cos(a) = SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))",
+                "latex_goal": "1 - \\cos{a} = \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} a ^ {2 (n + 1)}}{(2 (n + 1))!}}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "matrix_example06"
+}

@@ -260,11 +260,12 @@ class MatrixTest(unittest.TestCase):
         s3 = parser.parse_expr("(x * hat(w)) ^ (2 * (n + 1))", fixes=fixes)
         s4 = parser.parse_expr("x ^ (2 * (n + 1)) * hat(w) ^ (2 * (n + 1))", fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s3, s4))
-        s5 = parser.parse_expr("hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)")
+        s5 = parser.parse_expr("hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s5), "0.0.0.1"))
-        s6 = parser.parse_expr("hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2")
+        s6 = parser.parse_expr("hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s6), "1.0.0.1"))
         pass
+
     def testMy(self):
         e = parser.parse_expr("-(LIM {y -> oo}. atan(y / a)) + SKOLEM_FUNC(C(a))")
         r = rules.FullSimplify()

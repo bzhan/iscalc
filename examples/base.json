@@ -98,7 +98,15 @@
             "type": "axiom"
         },
         {
+            "expr": "SUM(n, 0, oo, (-1)^n * x^(2*n+1) / factorial(2*n+1)) = sin(x)",
+            "type": "axiom"
+        },
+        {
             "expr": "cos(x) = SUM(n, 0, oo, (-1)^n * x^(2*n) / factorial(2*n))",
+            "type": "axiom"
+        },
+        {
+            "expr": "SUM(n, 0, oo, (-1)^n * x^(2*n) / factorial(2*n)) = cos(x)",
             "type": "axiom"
         },
         {

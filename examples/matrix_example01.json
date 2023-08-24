@@ -202,14 +202,6 @@
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n > 0",
-                                    "latex_cond": "n > 0"
-                                },
-                                {
-                                    "cond": "invertible(P)",
-                                    "latex_cond": "invertible{(P)}"
-                                },
-                                {
                                     "cond": "n + 1 > 0",
                                     "latex_cond": "n + 1 > 0"
                                 }
@@ -229,14 +221,6 @@
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n > 0",
-                                    "latex_cond": "n > 0"
-                                },
-                                {
-                                    "cond": "invertible(P)",
-                                    "latex_cond": "invertible{(P)}"
-                                },
-                                {
                                     "cond": "n + 1 > 0",
                                     "latex_cond": "n + 1 > 0"
                                 }
@@ -251,14 +235,6 @@
                                 }
                             ],
                             "conds": [
-                                {
-                                    "cond": "invertible(P)",
-                                    "latex_cond": "invertible{(P)}"
-                                },
-                                {
-                                    "cond": "n > 0",
-                                    "latex_cond": "n > 0"
-                                },
                                 {
                                     "cond": "invertible(P)",
                                     "latex_cond": "invertible{(P)}"
@@ -283,14 +259,6 @@
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n > 0",
-                                    "latex_cond": "n > 0"
-                                },
-                                {
-                                    "cond": "invertible(P)",
-                                    "latex_cond": "invertible{(P)}"
-                                },
-                                {
                                     "cond": "n + 1 > 0",
                                     "latex_cond": "n + 1 > 0"
                                 }
@@ -310,14 +278,6 @@
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n > 0",
-                                    "latex_cond": "n > 0"
-                                },
-                                {
-                                    "cond": "invertible(P)",
-                                    "latex_cond": "invertible{(P)}"
-                                },
-                                {
                                     "cond": "n + 1 > 0",
                                     "latex_cond": "n + 1 > 0"
                                 }
@@ -332,14 +292,6 @@
                                 }
                             ],
                             "conds": [
-                                {
-                                    "cond": "invertible(P)",
-                                    "latex_cond": "invertible{(P)}"
-                                },
-                                {
-                                    "cond": "n > 0",
-                                    "latex_cond": "n > 0"
-                                },
                                 {
                                     "cond": "invertible(P)",
                                     "latex_cond": "invertible{(P)}"

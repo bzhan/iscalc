@@ -559,6 +559,7 @@ class InductionProof(StateItem):
         induct_conds = Conditions([normalize(cond.subst(induct_var, Var(induct_var, type=expr.IntType) + Const(1)), self.ctx) for cond in parent.conds.data])
         ctx = Context(self.ctx)
         ctx.add_induct_hyp(goal)
+        ctx.remove_all_conds()
         self.induct_case = Goal(self, ctx, eqI, conds=induct_conds)
 
     def __str__(self):

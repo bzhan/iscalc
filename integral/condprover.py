@@ -450,6 +450,9 @@ def get_standard_inequalities() -> List[Identity]:
         (["isInt(a)", "isInt(b)"], "isInt(a + b)"),
         (["isInt(a)", "isInt(b)"], "isInt(a - b)"),
         (["isInt(a)", "isInt(b)"], "isInt(a * b)"),
+
+        (["a>=b", "a!=b"], "a>b"),
+        (["a<=b", "a!=b"], "a<b")
     ]
 
     ineqs = []

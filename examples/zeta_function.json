@@ -380,12 +380,12 @@
                             "latex_cond": "a > -1"
                         },
                         {
-                            "cond": "s + 1 >= 2",
-                            "latex_cond": "s + 1 \\ge 2"
+                            "cond": "s >= 2",
+                            "latex_cond": "s \\ge 2"
                         },
                         {
-                            "cond": "isInt(s + 1)",
-                            "latex_cond": "s + 1 \\in\\mathbb{Z}"
+                            "cond": "isInt(s)",
+                            "latex_cond": "s \\in\\mathbb{Z}"
                         }
                     ],
                     "finished": true,

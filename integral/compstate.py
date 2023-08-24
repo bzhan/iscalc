@@ -298,9 +298,8 @@ class Goal(StateItem):
         self.proof = InductionProof(self, self.goal, induct_var, start=start)
         return self.proof
 
-    def proof_by_case(self, cond_str: str):
-        e1 = parser.parse_expr(cond_str)
-        self.proof = CaseProof(self, self.goal, split_cond=e1)
+    def proof_by_case(self, split_cond: Expr):
+        self.proof = CaseProof(self, self.goal, split_cond=split_cond)
         return self.proof
 
     def get_by_label(self, label: Label):
@@ -556,11 +555,13 @@ class InductionProof(StateItem):
 
         # Inductive case:
         eqI = normalize(goal.subst(induct_var, Var(induct_var, type=expr.IntType) + Const(1)), self.ctx)
-        induct_conds = Conditions([normalize(cond.subst(induct_var, Var(induct_var, type=expr.IntType) + Const(1)), self.ctx) for cond in parent.conds.data])
-        ctx = Context(self.ctx)
+        # induct_conds = Conditions([normalize(cond.subst(induct_var, Var(induct_var, type=expr.IntType) - Const(1)), self.ctx) for cond in parent.conds.data])
+        p = parent
+        while not isinstance(p, CompFile):
+            p = p.parent
+        ctx = Context(p.get_context())
         ctx.add_induct_hyp(goal)
-        ctx.remove_all_conds()
-        self.induct_case = Goal(self, ctx, eqI, conds=induct_conds)
+        self.induct_case = Goal(self, ctx, eqI, conds=parent.conds)
 
     def __str__(self):
         if self.is_finished():

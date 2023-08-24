@@ -70,12 +70,12 @@
                 "induct_case": {
                     "conds": [
                         {
-                            "cond": "n + 1 >= 0",
-                            "latex_cond": "n + 1 \\ge 0"
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
                         },
                         {
-                            "cond": "isInt(n + 1)",
-                            "latex_cond": "n + 1 \\in\\mathbb{Z}"
+                            "cond": "isInt(n)",
+                            "latex_cond": "n \\in\\mathbb{Z}"
                         }
                     ],
                     "finished": true,

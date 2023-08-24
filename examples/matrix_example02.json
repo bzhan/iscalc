@@ -312,8 +312,8 @@
                 "induct_case": {
                     "conds": [
                         {
-                            "cond": "n + 1 >= 0",
-                            "latex_cond": "n + 1 \\ge 0"
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
                         },
                         {
                             "cond": "norm(w) = 1",
@@ -334,8 +334,8 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n + 1 >= 0",
-                                    "latex_cond": "n + 1 \\ge 0"
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 },
                                 {
                                     "cond": "norm(w) = 1",
@@ -353,8 +353,8 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n + 1 >= 0",
-                                    "latex_cond": "n + 1 \\ge 0"
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 },
                                 {
                                     "cond": "norm(w) = 1",
@@ -372,8 +372,8 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n + 1 >= 0",
-                                    "latex_cond": "n + 1 \\ge 0"
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 },
                                 {
                                     "cond": "norm(w) = 1",
@@ -391,8 +391,8 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n + 1 >= 0",
-                                    "latex_cond": "n + 1 \\ge 0"
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 },
                                 {
                                     "cond": "norm(w) = 1",
@@ -410,8 +410,8 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n + 1 >= 0",
-                                    "latex_cond": "n + 1 \\ge 0"
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 },
                                 {
                                     "cond": "norm(w) = 1",
@@ -429,8 +429,8 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n + 1 >= 0",
-                                    "latex_cond": "n + 1 \\ge 0"
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 },
                                 {
                                     "cond": "norm(w) = 1",
@@ -752,8 +752,8 @@
                 "induct_case": {
                     "conds": [
                         {
-                            "cond": "n + 1 >= 0",
-                            "latex_cond": "n + 1 \\ge 0"
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
                         },
                         {
                             "cond": "norm(w) = 1",
@@ -774,8 +774,8 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n + 1 >= 0",
-                                    "latex_cond": "n + 1 \\ge 0"
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 },
                                 {
                                     "cond": "norm(w) = 1",
@@ -793,8 +793,8 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n + 1 >= 0",
-                                    "latex_cond": "n + 1 \\ge 0"
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 },
                                 {
                                     "cond": "norm(w) = 1",
@@ -812,8 +812,8 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n + 1 >= 0",
-                                    "latex_cond": "n + 1 \\ge 0"
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 },
                                 {
                                     "cond": "norm(w) = 1",
@@ -831,8 +831,8 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n + 1 >= 0",
-                                    "latex_cond": "n + 1 \\ge 0"
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 },
                                 {
                                     "cond": "norm(w) = 1",
@@ -850,8 +850,8 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n + 1 >= 0",
-                                    "latex_cond": "n + 1 \\ge 0"
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 },
                                 {
                                     "cond": "norm(w) = 1",
@@ -869,8 +869,8 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n + 1 >= 0",
-                                    "latex_cond": "n + 1 \\ge 0"
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 },
                                 {
                                     "cond": "norm(w) = 1",

@@ -878,8 +878,19 @@ class IntegralTest(unittest.TestCase):
         # Definition of Gamma function
         file.add_definition("Gamma(n) = (INT x:[0,oo]. exp(-x) * x^(n-1))", conds=["n > 0"])
 
+        lemma = file.add_goal("(LIM {x -> oo}. x ^ (n - 1) * exp(-x))=0", conds=["n>=1"], fixes=fixes)
+        cond = parser.parse_expr("n=1", fixes=fixes)
+        proof = lemma.proof_by_case(cond)
+        case1 = proof.cases[0].proof_by_calculation()
+        case2 = proof.cases[1].proof_by_calculation()
+        calc = case1.lhs_calc
+        calc.perform_rule(rules.FullSimplify())
+        calc = case2.lhs_calc
+        calc.perform_rule(rules.FullSimplify())
+        assert lemma.is_finished()
+
         # Recursive equation for gamma function
-        goal1 = file.add_goal("Gamma(n) = (n - 1) * Gamma(n - 1)", conds=["n > 1"], fixes=fixes)
+        goal1 = file.add_goal("Gamma(n) = (n - 1) * Gamma(n - 1)", conds=["n >= 1"], fixes=fixes)
 
         proof = goal1.proof_by_calculation()
         calc = proof.lhs_calc
@@ -888,9 +899,11 @@ class IntegralTest(unittest.TestCase):
         v = parser.parse_expr("-exp(-x)",fixes=fixes)
         calc.perform_rule(rules.IntegrationByParts(u, v))
         calc.perform_rule(rules.FullSimplify())
-
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(lemma.goal), "1"))
+        calc.perform_rule(rules.FullSimplify())
         calc = proof.rhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("Gamma")))
+        assert goal1.is_finished()
 
         # Gamma function and factorial
         goal2 = file.add_goal("Gamma(n) = factorial(n - 1)", conds=["n >= 1"], fixes=fixes)
@@ -911,6 +924,8 @@ class IntegralTest(unittest.TestCase):
         target = parser.parse_expr("factorial(n)",fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(source, target))
 
+        assert goal2.is_finished()
+
         # Application
         calc = file.add_calculation("INT x:[0,oo]. exp(-x^3)")
         calc.perform_rule(rules.Substitution('y', parser.parse_expr('x^3')))
@@ -919,7 +934,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnSubterm(rules.FoldDefinition("Gamma")))
         calc.perform_rule(rules.Equation(None, "(4/3 - 1) * Gamma(4/3 - 1)"))
         calc.perform_rule(rules.ApplyEquation(goal1.goal))
-        self.assertEqual(str(calc.last_expr), "Gamma(4/3)")
+        assert goal2.is_finished()
 
         self.checkAndOutput(file)
 
@@ -1302,7 +1317,8 @@ class IntegralTest(unittest.TestCase):
         file.add_definition("I(a) = (INT x:[0,oo]. 1 / (x^4 + 2*x^2*cos(2*a) + 1))")
 
         goal = file.add_goal("2*x^2*cos(2*a) + x^4 + 1 != 0", conds=["cos(a) != 0"])
-        proof = goal.proof_by_case("x != 0")
+        cond = parser.parse_expr("x != 0")
+        proof = goal.proof_by_case(cond)
         proofa = proof.cases[0].proof_by_calculation()
         calc = proofa.lhs_calc
         calc.perform_rule(rules.Equation(None, "(x^2 - 1) ^ 2 + 2*x^2*(1+cos(2*a))"))
@@ -1320,7 +1336,8 @@ class IntegralTest(unittest.TestCase):
         self.assertTrue(proof.is_finished())
 
         goal = file.add_goal("(x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1) != 0", conds=["cos(a) != 0"])
-        proof = goal.proof_by_case("x != 0")
+        cond = parser.parse_expr("x != 0")
+        proof = goal.proof_by_case(cond)
         proofa = proof.cases[0].proof_by_calculation()
         calc = proofa.lhs_calc
         calc.perform_rule(rules.ExpandPolynomial())
@@ -1333,7 +1350,8 @@ class IntegralTest(unittest.TestCase):
         self.assertTrue(proof.is_finished())
 
         goal = file.add_goal("-(2 * x * sin(a)) + x^2 + 1 > 0", conds=["cos(a) != 0"])
-        proof = goal.proof_by_case("x")
+        cond = parser.parse_expr("x")
+        proof = goal.proof_by_case(cond)
         proofa = proof.cases[0].proof_by_calculation()
         calc = proofa.lhs_calc
         calc.perform_rule(rules.Equation(None, "(x + 1) ^ 2 - 2 * x * (1 + sin(a))"))
@@ -1761,7 +1779,8 @@ class IntegralTest(unittest.TestCase):
         self.assertTrue(goal.is_finished())
 
         goal = file.add_goal("converges(SUM(n, 0, oo, INT x:[0,oo]. (-(-1)) ^ n * (abs(t) * abs(x)) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2))))", fixes=fixes)
-        proof = goal.proof_by_case("t>=0")
+        cond = parser.parse_expr("t>=0", fixes=fixes)
+        proof = goal.proof_by_case(cond)
         proofa = proof.cases[0].proof_by_calculation()
         calc = proofa.arg_calc
         calc.perform_rule(rules.FullSimplify())
@@ -1943,6 +1962,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnSubterm(rules.ApplyInductHyp()))
         e1 = parser.parse_expr("factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi) * (2 * n + 1) / 2", fixes = fixes)
         e2 = parser.parse_expr("4 ^ -n * sqrt(pi) * (((2*n+1)*factorial(2*n))/(4 * factorial(n)))", fixes = fixes)
+
         calc.perform_rule(rules.Equation(e1, e2))
         e1 = parser.parse_expr("(2*n+1)*factorial(2*n)", fixes = fixes)
         e2 = parser.parse_expr("factorial(2*n+1)", fixes = fixes)
@@ -4173,7 +4193,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.VarSubsOfEquation([{"var": "u", "expr": "sqrt((1+a)/2)"}]))
         calc.perform_rule(rules.FullSimplify())
 
-        self.checkAndOutput(file, omit_finish=True)
+        self.checkAndOutput(file)
 
     def testPowerfulElementaryIntegral(self):
         # Reference: Impossible, Integrals, Sums, and Series

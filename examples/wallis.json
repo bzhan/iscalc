@@ -237,8 +237,8 @@
                             "latex_cond": "b > 0"
                         },
                         {
-                            "cond": "m + 1 >= 0",
-                            "latex_cond": "m + 1 \\ge 0"
+                            "cond": "m >= 0",
+                            "latex_cond": "m \\ge 0"
                         }
                     ],
                     "finished": true,

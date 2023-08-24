@@ -15,8 +15,120 @@
         {
             "conds": [
                 {
-                    "cond": "n > 1",
-                    "latex_cond": "n > 1"
+                    "cond": "n >= 1",
+                    "latex_cond": "n \\ge 1"
+                }
+            ],
+            "finished": true,
+            "fixes": [
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
+            "goal": "(LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0",
+            "latex_goal": "\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,) = 0",
+            "proof": {
+                "cases": [
+                    {
+                        "conds": [
+                            {
+                                "cond": "n = 1",
+                                "latex_cond": "n = 1"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "(LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0",
+                        "latex_goal": "\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,) = 0",
+                        "proof": {
+                            "calcs": [
+                                {
+                                    "latex_start": "\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,)",
+                                    "start": "LIM {x -> oo}. x ^ (n - 1) * exp(-x)",
+                                    "steps": [
+                                        {
+                                            "latex_res": "0",
+                                            "res": "0",
+                                            "rule": {
+                                                "name": "FullSimplify",
+                                                "str": "full simplify"
+                                            },
+                                            "type": "CalculationStep"
+                                        }
+                                    ],
+                                    "type": "Calculation"
+                                },
+                                {
+                                    "latex_start": "0",
+                                    "start": "0",
+                                    "steps": [],
+                                    "type": "Calculation"
+                                }
+                            ],
+                            "finished": true,
+                            "goal": "(LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0",
+                            "latex_goal": "\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,) = 0",
+                            "type": "CalculationProof"
+                        },
+                        "type": "Goal"
+                    },
+                    {
+                        "conds": [
+                            {
+                                "cond": "n != 1",
+                                "latex_cond": "n \\neq 1"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "(LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0",
+                        "latex_goal": "\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,) = 0",
+                        "proof": {
+                            "calcs": [
+                                {
+                                    "latex_start": "\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,)",
+                                    "start": "LIM {x -> oo}. x ^ (n - 1) * exp(-x)",
+                                    "steps": [
+                                        {
+                                            "latex_res": "0",
+                                            "res": "0",
+                                            "rule": {
+                                                "name": "FullSimplify",
+                                                "str": "full simplify"
+                                            },
+                                            "type": "CalculationStep"
+                                        }
+                                    ],
+                                    "type": "Calculation"
+                                },
+                                {
+                                    "latex_start": "0",
+                                    "start": "0",
+                                    "steps": [],
+                                    "type": "Calculation"
+                                }
+                            ],
+                            "finished": true,
+                            "goal": "(LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0",
+                            "latex_goal": "\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,) = 0",
+                            "type": "CalculationProof"
+                        },
+                        "type": "Goal"
+                    }
+                ],
+                "finished": true,
+                "goal": "(LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0",
+                "latex_goal": "\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,) = 0",
+                "latex_split_cond": "n = 1",
+                "split_cond": "n = 1",
+                "type": "CaseProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "n >= 1",
+                    "latex_cond": "n \\ge 1"
                 }
             ],
             "finished": true,
@@ -53,6 +165,27 @@
                                     "str": "integrate by parts u -> x ^ (n - 1), v -> -exp(-x)",
                                     "u": "x ^ (n - 1)",
                                     "v": "-exp(-x)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "(n - 1) (\\int_{0}^{\\infty} x ^ {n - 2} e^{-x} \\,dx) - (\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,))",
+                                "res": "(n - 1) * (INT x:[0,oo]. x ^ (n - 2) * exp(-x)) - (LIM {x -> oo}. x ^ (n - 1) * exp(-x))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "(n - 1) (\\int_{0}^{\\infty} x ^ {n - 2} e^{-x} \\,dx) - 0",
+                                "res": "(n - 1) * (INT x:[0,oo]. x ^ (n - 2) * exp(-x)) - 0",
+                                "rule": {
+                                    "eq": "(LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0",
+                                    "latex_str": "apply equation \\(\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,) = 0\\) at 1",
+                                    "loc": "1",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: (LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0 at 1"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -171,8 +304,8 @@
                 "induct_case": {
                     "conds": [
                         {
-                            "cond": "n + 1 >= 1",
-                            "latex_cond": "n + 1 \\ge 1"
+                            "cond": "n >= 1",
+                            "latex_cond": "n \\ge 1"
                         }
                     ],
                     "finished": true,

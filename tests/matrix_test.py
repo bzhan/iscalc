@@ -281,10 +281,10 @@ class MatrixTest(unittest.TestCase):
         self.checkAndOutput(file)
 
     def testMy(self):
-        e = parser.parse_expr("-(LIM {y -> oo}. atan(y / a)) + SKOLEM_FUNC(C(a))")
+        e = parser.parse_expr("LIM {x -> oo}. x ^ (n - 1) * exp(-x)")
         r = rules.FullSimplify()
         ctx = Context()
-        ctx.add_condition("a>0")
+        ctx.add_condition("n>=1")
         e = r.eval(e, ctx)
         print(e)
 

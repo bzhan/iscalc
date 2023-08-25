@@ -358,9 +358,6 @@ class Context:
         for var, expr in substs.items():
             self.substs[var] = expr
 
-    def remove_parent_conds(self):
-        self.parent.conds = Conditions()
-
     def extend_by_item(self, item):
         if item['type'] == 'axiom' or item['type'] == 'problem':
             fixes = dict()

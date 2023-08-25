@@ -655,7 +655,7 @@ class Expr:
             if t.ty == VAR:
                 if t.name not in bd_vars:
                     res.add(t.name)
-            elif t.ty in (CONST, INF, SKOLEMFUNC, SYMBOL):
+            elif t.ty in (CONST, INF, SYMBOL):
                 return
             elif t.ty in (OP, FUN):
                 for arg in t.args:
@@ -683,6 +683,10 @@ class Expr:
                 for rv in t.data:
                     for d in rv:
                         rec(d, bd_vars)
+            elif t.is_skolem_func():
+                t:SkolemFunc
+                for var in t.dependent_vars:
+                    rec(var, bd_vars)
             else:
                 print(t, type(t))
                 raise NotImplementedError

@@ -106,8 +106,8 @@
                     "latex_cond": "b > 0"
                 },
                 {
-                    "cond": "a - b > 0",
-                    "latex_cond": "a - b > 0"
+                    "cond": "a > b",
+                    "latex_cond": "a > b"
                 }
             ],
             "finished": true,

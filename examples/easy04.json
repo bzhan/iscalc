@@ -108,8 +108,8 @@
         {
             "conds": [
                 {
-                    "cond": "a != 0",
-                    "latex_cond": "a \\neq 0"
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
                 }
             ],
             "finished": true,

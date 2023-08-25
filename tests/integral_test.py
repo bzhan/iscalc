@@ -18,13 +18,13 @@ class IntegralTest(unittest.TestCase):
         for i, item in enumerate(json_file['content']):
             aa, bb = compstate.parse_item(file.content[i].parent, item), file.content[i]
             a, b = aa.export(), bb.export()
-            # if a != b:
-            #     if isinstance(aa, compstate.Goal) and isinstance(bb, compstate.Goal):
-            #         aa.is_finished()
-            #     with open('examples/a.json', 'w', encoding='utf-8') as f:
-            #         json.dump(a, f, indent=4, ensure_ascii=False, sort_keys=True)
-            #     with open('examples/b.json', 'w', encoding='utf-8') as f:
-            #         json.dump(b, f, indent=4, ensure_ascii=False, sort_keys=True)
+            if a != b:
+                if isinstance(aa, compstate.Goal) and isinstance(bb, compstate.Goal):
+                    aa.is_finished()
+                with open('examples/a.json', 'w', encoding='utf-8') as f:
+                    json.dump(a, f, indent=4, ensure_ascii=False, sort_keys=True)
+                with open('examples/b.json', 'w', encoding='utf-8') as f:
+                    json.dump(b, f, indent=4, ensure_ascii=False, sort_keys=True)
             self.assertEqual(a, b)
 
         # Output to file
@@ -1053,7 +1053,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
 
-        goal02 = file.add_goal("(INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2))=log(2)/a^2", conds=["a != 0"])
+        goal02 = file.add_goal("(INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2))=log(2)/a^2", conds=["a > 0"])
         proof = goal02.proof_by_rewrite_goal(begin_expr=goal01.goal, begin_conds=goal01.conds)
         calc = proof.begin
         calc.perform_rule(rules.DerivEquation("a"))
@@ -1705,7 +1705,6 @@ class IntegralTest(unittest.TestCase):
             "exp(-(t ^ 2 / 2) - log(2) / 2 + log(pi) / 2)",
             "2 ^ (1/2) ^ (-1) * pi ^ (1/2) / exp(1/2 * t ^ 2)"))
         calc.perform_rule(rules.FullSimplify())
-        # print(Eq6)
         assert Eq6.is_finished()
         Eq7 = file.add_goal("(INT x:[-oo, oo]. exp(-x^2/2) * cos(s + t*x)) = sqrt(2*pi)*exp(-t^2/2)*cos(s)", conds=['I(t)>0'])
         Eq7_proof = Eq7.proof_by_calculation()
@@ -1727,7 +1726,6 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.Equation("2 * cos(s) * (sqrt(pi / 2) * exp(-(t ^ 2) / 2))",
                                          "sqrt(2*pi)*exp(-t^2/2)*cos(s)"))
         assert Eq7.is_finished()
-        # print(file)
         self.checkAndOutput(file)
 
     def testLeibniz03New(self):
@@ -2174,7 +2172,7 @@ class IntegralTest(unittest.TestCase):
         file = compstate.CompFile("interesting", "dirichletIntegral")
 
         # Define g(y)
-        file.add_definition("g(y, a) = INT x:[0,oo]. exp(-x * y) * sin(a * x) / x", conds=["y >= 0"])
+        file.add_definition("g(y, a) = INT x:[0,oo]. exp(-x * y) * sin(a * x) / x", conds=["y > 0"])
 
         # Differentiate g(y)
         goal2 = file.add_goal("(D y. g(y, a)) = - a / (a ^ 2 + y ^ 2)", conds=["y > 0", "a!=0"])
@@ -2184,13 +2182,12 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.DerivIntExchange())
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.DefiniteIntegralIdentity())
-
         calc = proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
         assert goal2.is_finished()
 
         # Integrate the previous equation on both sides
-        goal3 = file.add_goal("g(y, a) = -atan(y / a) + SKOLEM_FUNC(C(a))", conds=["y >= 0", "a != 0"])
+        goal3 = file.add_goal("g(y, a) = -atan(y / a) + SKOLEM_FUNC(C(a))", conds=["y > 0", "a != 0"])
         proof = goal3.proof_by_rewrite_goal(begin_expr = goal2.goal, begin_conds=goal2.conds)
         calc = proof.begin
         calc.perform_rule(rules.IntegralEquation())
@@ -2199,7 +2196,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         assert goal3.is_finished()
         # Evaluate the case y = oo
-        goal4 = file.add_goal("(LIM {y -> oo}. g(y, a)) = 0", conds=["y>=0"])
+        goal4 = file.add_goal("(LIM {y -> oo}. g(y, a)) = 0", conds=["y > 0"])
         proof = goal4.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("g")))
@@ -2223,36 +2220,49 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.SolveEquation(parser.parse_expr("SKOLEM_FUNC(C(a))")))
         assert goal6.is_finished()
+        goal11 = file.add_goal("g(y,a) = pi / 2 -atan(y / a)", conds=["a>0", "y>0"])
+        proof = goal11.proof_by_rewrite_goal(begin_expr = goal3.goal, begin_conds = goal3.conds)
+        calc = proof.begin
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal5.goal), "1.1"))
+        assert goal11.is_finished()
+
+        goal12 = file.add_goal("g(y,a) = -pi / 2 -atan(y / a)", conds=["a<0", "y>0"])
+        proof = goal12.proof_by_rewrite_goal(begin_expr=goal3.goal, begin_conds=goal3.conds)
+        calc = proof.begin
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal6.goal), "1.1"))
+        assert goal12.is_finished()
+        # TODO: This proof is not valid
         # Case y = 0: g(0) = INT x:[0, oo]. sin(a * x) / x
-        goal7 = file.add_goal("g(0, a) = INT x:[0,oo]. sin(a * x) / x")
-        proof = goal7.proof_by_calculation()
-        calc = proof.lhs_calc
-        calc.perform_rule(rules.ExpandDefinition("g"))  # check 0 satisfies condition y >= 0
-        assert goal7.is_finished()
+        # goal7 = file.add_goal("g(0, a) = INT x:[0,oo]. sin(a * x) / x")
+        # proof = goal7.proof_by_calculation()
+        # calc = proof.lhs_calc
+        # calc.perform_rule(rules.ExpandDefinition("g"))  # check 0 satisfies condition y >= 0
+        # assert goal7.is_finished()
         # Final result: case a > 0
-        goal8 = file.add_goal("(INT x:[0,oo]. sin(a * x) / x) = pi / 2", conds=["a > 0"])
-        proof = goal8.proof_by_calculation()
-        calc = proof.lhs_calc
-        calc.perform_rule(rules.ApplyEquation(goal7.goal))
-        calc.perform_rule(rules.ApplyEquation(goal3.goal))
-        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal5.goal), "1"))
-        calc.perform_rule(rules.FullSimplify())
-        assert goal8.is_finished()
-        # Final result: case a < 0
-        goal9 = file.add_goal("(INT x:[0,oo]. sin(a * x) / x) = -(pi / 2)", conds=["a < 0"])
-        proof = goal9.proof_by_calculation()
-        calc = proof.lhs_calc
-        calc.perform_rule(rules.ApplyEquation(goal7.goal))
-        calc.perform_rule(rules.ApplyEquation(goal3.goal))
-        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal6.goal), "1"))
-        calc.perform_rule(rules.FullSimplify())
-        assert goal9.is_finished()
-        # Final result: case a = 0
-        goal10 = file.add_goal("(INT x:[0,oo]. sin(a * x) / x) = 0", conds=["a = 0"])
-        proof = goal10.proof_by_calculation()
-        calc = proof.lhs_calc
-        calc.perform_rule(rules.FullSimplify())
-        assert goal10.is_finished()
+        # goal8 = file.add_goal("(INT x:[0,oo]. sin(a * x) / x) = pi / 2", conds=["a > 0"])
+        # proof = goal8.proof_by_calculation()
+        # calc = proof.lhs_calc
+        # calc.perform_rule(rules.ApplyEquation(goal7.goal))
+        # calc.perform_rule(rules.ApplyEquation(goal3.goal))
+        # calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal5.goal), "1"))
+        # calc.perform_rule(rules.FullSimplify())
+        # print(goal8)
+        # assert goal8.is_finished()
+        # # Final result: case a < 0
+        # goal9 = file.add_goal("(INT x:[0,oo]. sin(a * x) / x) = -(pi / 2)", conds=["a < 0"])
+        # proof = goal9.proof_by_calculation()
+        # calc = proof.lhs_calc
+        # calc.perform_rule(rules.ApplyEquation(goal7.goal))
+        # calc.perform_rule(rules.ApplyEquation(goal3.goal))
+        # calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal6.goal), "1"))
+        # calc.perform_rule(rules.FullSimplify())
+        # assert goal9.is_finished()
+        # # Final result: case a = 0
+        # goal10 = file.add_goal("(INT x:[0,oo]. sin(a * x) / x) = 0", conds=["a = 0"])
+        # proof = goal10.proof_by_calculation()
+        # calc = proof.lhs_calc
+        # calc.perform_rule(rules.FullSimplify())
+        # assert goal10.is_finished()
         self.checkAndOutput(file)
 
     # TODO: Change the order of integration.
@@ -3466,8 +3476,8 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.Equation("1 / (a - b) * (-(1 / a) + 1 / b)", "1 / (a * b)"))
-
-        goal02 = file.add_goal("(INT x:[0, 1]. x / (a * x + b * (1 - x)) ^ 3) = 1 / (2 * a ^ 2 * b)", conds=["a > 0", "b > 0", "a - b > 0"])
+        # TODO: "a > b" can't be derived from "a - b > 0"
+        goal02 = file.add_goal("(INT x:[0, 1]. x / (a * x + b * (1 - x)) ^ 3) = 1 / (2 * a ^ 2 * b)", conds=["a > 0", "b > 0", "a > b"])
         proof_of_goal02 = goal02.proof_by_rewrite_goal(begin_expr = goal01.goal, begin_conds=goal01.conds)
         calc = proof_of_goal02.begin
         calc.perform_rule(rules.DerivEquation("a"))
@@ -3475,7 +3485,8 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.Equation("(b * (-x + 1) + a * x) ^ 3", "(a * x + b * (1 - x)) ^ 3"))
         calc.perform_rule(rules.SolveEquation("(INT x:[0,1]. x / (a * x + b * (1 - x)) ^ 3)"))
-
+        assert goal01.is_finished()
+        assert goal02.is_finished()
         self.checkAndOutput(file)
 
 
@@ -4096,6 +4107,7 @@ class IntegralTest(unittest.TestCase):
         s1 = parser.parse_expr("s* factorial(s - 1)", fixes=fixes)
         s2 = parser.parse_expr("factorial(s)", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2), "1.0.1"))
+
         assert goal03.is_finished()
 
         s1 = parser.parse_expr('zeta(s)', fixes=fixes)
@@ -4128,7 +4140,6 @@ class IntegralTest(unittest.TestCase):
         s2 = parser.parse_expr("1 - x * y", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
 
-
         s1 = parser.parse_expr("(INT x:[0, oo]. exp(-k*x) * x^(s-1))", fixes=fixes)
         s2 = parser.parse_expr("Gamma(s) / k^s", fixes=fixes)
         goal05 = file.add_goal(expr.Op('=', s1, s2), conds=["k>0"], fixes=fixes)
@@ -4147,7 +4158,6 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.FoldDefinition("Gamma"), "1"))
         calc = proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
-
 
         s1 = parser.parse_expr("(INT x:[0,oo]. x^(s-1)/(exp(x) - 1))", fixes=fixes)
         s2 = parser.parse_expr("Gamma(s) * zeta(s)", fixes=fixes)
@@ -4173,6 +4183,15 @@ class IntegralTest(unittest.TestCase):
         s1 = parser.parse_expr("x ^ (s - 1) * (exp(-x) ^ 1 / (1 - exp(-x)))", fixes=fixes)
         s2 = parser.parse_expr("x^(s-1) / (exp(x) - 1)", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
+        # assert goal03.is_finished()
+        assert goal01.is_finished()
+        assert goal02.is_finished()
+        assert goal03.is_finished()
+        assert goal04.is_finished()
+        assert goal05.is_finished()
+        assert goal06.is_finished()
+
+
         self.checkAndOutput(file)
 
     def testCoxeterIntegral(self):
@@ -4192,7 +4211,8 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.VarSubsOfEquation([{"var": "u", "expr": "sqrt((1+a)/2)"}]))
         calc.perform_rule(rules.FullSimplify())
-
+        print(goal01)
+        assert goal01.is_finished()
         self.checkAndOutput(file)
 
     def testPowerfulElementaryIntegral(self):

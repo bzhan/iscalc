@@ -225,11 +225,11 @@ class Goal(StateItem):
         if self.proof == None:
             return False
         if isinstance(self.proof, RewriteGoalProof):
-            proof_has_conds = len(self.proof.begin.conds.data) > 0
-            goal_has_conds = len(self.conds.data) > 0
+            proof_has_conds = len(self.proof.begin.ctx.get_conds().data) > 0
+            goal_has_conds = len(self.ctx.get_conds().data) > 0
             if not goal_has_conds and proof_has_conds:
                 proof_cond_vars = set()
-                for cond in self.proof.begin.conds.data:
+                for cond in self.proof.begin.ctx.get_conds().data:
                     cond:Expr
                     proof_cond_vars = proof_cond_vars.union(cond.get_vars())
                 goal_vars = self.goal.get_vars()
@@ -237,7 +237,7 @@ class Goal(StateItem):
             elif not goal_has_conds and not proof_has_conds:
                 return self.proof.is_finished()
             elif goal_has_conds and proof_has_conds:
-                return self.proof.is_finished() and self.proof.begin.ctx.check_all_condtions(self.conds)
+                return self.proof.is_finished() and self.ctx.check_all_condtions(self.goal, self.proof.begin.ctx.get_conds())
             else:
                 return self.proof.is_finished()
         else:
@@ -556,12 +556,10 @@ class InductionProof(StateItem):
         # Inductive case:
         eqI = normalize(goal.subst(induct_var, Var(induct_var, type=expr.IntType) + Const(1)), self.ctx)
         # induct_conds = Conditions([normalize(cond.subst(induct_var, Var(induct_var, type=expr.IntType) - Const(1)), self.ctx) for cond in parent.conds.data])
-        p = parent
-        while not isinstance(p, CompFile):
-            p = p.parent
-        ctx = Context(p.get_context())
-        ctx.add_induct_hyp(goal)
-        self.induct_case = Goal(self, ctx, eqI, conds=parent.conds)
+
+        ctx = Context(self.ctx)
+        ctx.add_induct_hyp(self.goal)
+        self.induct_case = Goal(self, ctx, eqI)
 
     def __str__(self):
         if self.is_finished():
@@ -701,10 +699,7 @@ class RewriteGoalProof(StateItem):
         self.parent = parent
         self.goal = goal
         p:CompFile = parent
-        while not isinstance(p, CompFile):
-            p = p.parent
-        self.ctx = Context(p.get_context())
-        self.ctx.extend_fixes(parent.ctx.get_fixes())
+        self.ctx = Context(parent.ctx)
         self.begin = Calculation(self, self.ctx, begin_expr, conds=begin_conds, connection_symbol = '==>')
 
     def is_finished(self):

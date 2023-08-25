@@ -231,16 +231,6 @@
                 "finished": true,
                 "goal": "I(m,b) = pi / 2 ^ (2 * m + 1) * binom(2 * m,m) * (1 / b ^ ((2 * m + 1) / 2))",
                 "induct_case": {
-                    "conds": [
-                        {
-                            "cond": "b > 0",
-                            "latex_cond": "b > 0"
-                        },
-                        {
-                            "cond": "m >= 0",
-                            "latex_cond": "m \\ge 0"
-                        }
-                    ],
                     "finished": true,
                     "goal": "I(m + 1,b) = 2 ^ -(2 * m) * pi / 8 * b ^ -((2 * m + 3) / 2) * binom(2 * m + 2,m + 1)",
                     "latex_goal": "I(m + 1,b) = \\frac{2 ^ {-2 m}\\cdot \\pi}{8} b ^ {-(2 m + 3)/2} \\binom{2 m + 2}{m + 1}",

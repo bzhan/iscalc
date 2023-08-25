@@ -281,12 +281,9 @@ class MatrixTest(unittest.TestCase):
         self.checkAndOutput(file)
 
     def testMy(self):
-        e = parser.parse_expr("LIM {x -> oo}. x ^ (n - 1) * exp(-x)")
-        r = rules.FullSimplify()
-        ctx = Context()
-        ctx.add_condition("n>=1")
-        e = r.eval(e, ctx)
-        print(e)
+        e = parser.parse_expr("SKOLEM_FUNC(C(a))")
+        pat = expr.expr_to_pattern(e)
+        print(pat)
 
 if __name__ == "__main__":
     unittest.main()

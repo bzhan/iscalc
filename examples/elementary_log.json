@@ -196,24 +196,6 @@
                 "finished": true,
                 "goal": "I(m,n) = (-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1))",
                 "induct_case": {
-                    "conds": [
-                        {
-                            "cond": "m >= 0",
-                            "latex_cond": "m \\ge 0"
-                        },
-                        {
-                            "cond": "n >= 0",
-                            "latex_cond": "n \\ge 0"
-                        },
-                        {
-                            "cond": "isInt(n)",
-                            "latex_cond": "n \\in\\mathbb{Z}"
-                        },
-                        {
-                            "cond": "isInt(m)",
-                            "latex_cond": "m \\in\\mathbb{Z}"
-                        }
-                    ],
                     "finished": true,
                     "goal": "I(m,n + 1) = -((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
                     "latex_goal": "I(m,n + 1) = -(-1) ^ {n} (m + 1) ^ {-n - 2} (n + 1)!",

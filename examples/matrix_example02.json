@@ -310,16 +310,6 @@
                 "finished": true,
                 "goal": "hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)",
                 "induct_case": {
-                    "conds": [
-                        {
-                            "cond": "n >= 0",
-                            "latex_cond": "n \\ge 0"
-                        },
-                        {
-                            "cond": "norm(w) = 1",
-                            "latex_cond": "\\|w\\| = 1"
-                        }
-                    ],
                     "finished": true,
                     "goal": "hat(w) ^ (2 * n + 3) = -((-1) ^ n * hat(w))",
                     "latex_goal": "\\hat{w} ^ {2 n + 3} = -(-1) ^ {n} \\hat{w}",
@@ -750,16 +740,6 @@
                 "finished": true,
                 "goal": "hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2",
                 "induct_case": {
-                    "conds": [
-                        {
-                            "cond": "n >= 0",
-                            "latex_cond": "n \\ge 0"
-                        },
-                        {
-                            "cond": "norm(w) = 1",
-                            "latex_cond": "\\|w\\| = 1"
-                        }
-                    ],
                     "finished": true,
                     "goal": "hat(w) ^ (2 * n + 4) = -((-1) ^ n * hat(w) ^ 2)",
                     "latex_goal": "\\hat{w} ^ {2 n + 4} = -(-1) ^ {n} \\hat{w} ^ {2}",

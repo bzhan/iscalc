@@ -441,8 +441,11 @@ class Context:
         from integral import condprover
         return condprover.check_condition(e, self)
 
-    def check_all_condtions(self, conds:Conditions):
+    def check_all_condtions(self, goal:Expr, conds:Conditions):
+        goal_vars = goal.get_vars()
         for e in conds.data:
+            if e.get_vars().intersection(goal_vars) == set():
+                continue;
             if not self.check_condition(e):
                 return False
         return True

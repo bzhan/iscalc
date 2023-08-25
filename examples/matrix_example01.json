@@ -174,16 +174,6 @@
                 "finished": true,
                 "goal": "(inv(P) * A * P) ^ n = inv(P) * A ^ n * P",
                 "induct_case": {
-                    "conds": [
-                        {
-                            "cond": "invertible(P)",
-                            "latex_cond": "invertible{(P)}"
-                        },
-                        {
-                            "cond": "n > 0",
-                            "latex_cond": "n > 0"
-                        }
-                    ],
                     "finished": true,
                     "goal": "(inv(P) * A * P) ^ (n + 1) = inv(P) * A ^ (n + 1) * P",
                     "latex_goal": "(P ^ {-1} A P) ^ {n + 1} = P ^ {-1} A ^ {n + 1} P",

@@ -6,7 +6,7 @@ from typing import Optional, Dict, Tuple, Union, List
 import functools
 import operator
 
-from integral import expr, matrix
+from integral import expr, matrix, context
 from integral.expr import Var, Const, Fun, EvalAt, Op, Integral, Symbol, Expr, \
     OP, CONST, VAR, sin, cos, FUN, decompose_expr_factor, \
     Deriv, Inf, Limit, NEG_INF, POS_INF, IndefiniteIntegral, Summation, SUMMATION, Matrix
@@ -1073,8 +1073,8 @@ class FullSimplify(Rule):
         counter = 0
         current = e
         while True:
-            s = OnSubterm(ExpandMatFunc()).eval(current, ctx)
-            s = OnSubterm(Linearity()).eval(s, ctx)
+            # s = OnSubterm(ExpandMatFunc()).eval(current, ctx)
+            s = OnSubterm(Linearity()).eval(current, ctx)
             s = Simplify().eval(s, ctx)
             s = OnSubterm(DerivativeSimplify()).eval(s, ctx)
             if s == current:
@@ -2254,130 +2254,41 @@ class SplitSummation(Rule):
     def eval(self, e: Expr, ctx: Context) -> Expr:
         if not e.is_summation():
             return e
-        if e.lower.is_const() and e.upper.is_const():
-            if e.lower.val > e.upper.val:
-                return Const(0)
-            elif e.lower.val == e.upper.val:
-                return normalize(e.body.subst(e.index_var, e.lower), ctx)
-        if e.upper.is_neg_inf():
-            return Const(0)
-        if not e.lower.is_const() or not isinstance(e.lower.val, int):
-            raise AssertionError("Unexpected type or value of the lower of the summation")
-        elif not e.upper.is_pos_inf() and not (e.upper.is_const() and isinstance(e.upper.val, int)):
-            raise AssertionError("Unexpected type or value of the upper of the summation")
-        elif not isinstance(self.cond.args[0], Var) or self.cond.args[0].name != e.index_var or not (
-                self.cond.args[1].is_const() and isinstance(self.cond.args[1].val, int)):
-            raise AssertionError("Unexpected form of condition of summation splitting")
-        elif self.cond.is_mod():
+        cond = self.cond
+        for id in ctx.get_summation_split_identities():
+            id: context.Identity
+            inst_split_cond = expr.match(cond, id.split_cond)
+            if inst_split_cond is not None:
+                inst_lhs = expr.match(e, id.expr.lhs, disable_bd=True)
+                if inst_lhs is not None:
+                    inst_split_cond.update(inst_lhs)
+                    tmp_conds = [c.inst_pat(inst_split_cond) for c in id.conds.data]
+                    flag = True
+                    for c in tmp_conds:
+                        if not ctx.check_condition(c):
+                            flag = False
+                            break
+                    if flag:
+                        return id.expr.rhs.inst_pat(inst_split_cond)
+        if cond.is_mod():
             if self.cond.args[1].val <= 0:
                 return AssertionError("Unexpected value of divisor")
             if e.upper.is_pos_inf():
                 res = Const(0)
                 for i in range(self.cond.args[1].val):
                     tmp = Var(e.index_var, type=expr.IntType) * self.cond.args[1] + e.lower + Const(i)
-                    res = normalize(Op('+', res, Summation(e.index_var, Const(0), e.upper, e.body.subst(e.index_var, tmp))), ctx)
+                    res = normalize(
+                        Op('+', res, Summation(e.index_var, Const(0), e.upper, e.body.subst(e.index_var, tmp))), ctx)
                 return res
             else:
                 res = Const(0)
                 for i in range(self.cond.args[1].val):
                     tmp1 = Const((e.upper.val - e.lower.val - i) // self.cond.args[1].val)
                     tmp2 = Var(e.index_var, type=expr.IntType) * self.cond.args[1] + e.lower + Const(i)
-                    res = normalize(Op('+', res, Summation(e.index_var, Const(0), tmp1, e.body.subst(e.index_var, tmp2))), ctx)
+                    res = normalize(
+                        Op('+', res, Summation(e.index_var, Const(0), tmp1, e.body.subst(e.index_var, tmp2))), ctx)
                 return res
-        elif self.cond.is_compare():
-            if self.cond.op == '<=' or self.cond.op == '>':
-                if self.cond.args[1].val == e.lower.val:
-                    if e.upper.is_const() and e.upper.val - e.lower.val == 1:
-                        return normalize(
-                            Op('+',
-                               e.body.subst(e.index_var, self.lower),
-                               e.body.subst(e.index_var, self.upper)), ctx)
-                    else:
-                        return normalize(
-                            Op('+',
-                               e.body.subst(e.index_var, self.cond.args[1]),
-                               Summation(e.index_var, e.lower + 1, e.upper, e.body)), ctx)
-                elif e.lower.val - self.cond.args[1].val >= 1:
-                    return e
-                elif e.upper.is_const() and e.upper.val <= self.cond.args[1].val:
-                    return e
-                else:
-                    return normalize(
-                        Op('+',
-                           Summation(e.index_var, e.lower, self.cond.args[1], e.body),
-                           Summation(e.index_var, self.cond.args[1] + 1, e.upper, e.body)), ctx)
-            elif self.cond.op == '>=' or self.cond.op == '<':
-                if self.cond.args[1].val <= e.lower.val:
-                    return e
-                elif e.upper.is_const() and self.cond.args[1].val - e.upper.val >= 1:
-                    return e
-                elif e.upper.is_const() and self.cond.args[1].val == e.upper.val:
-                    if e.upper.is_const() and e.upper.val - e.lower.val == 1:
-                        return normalize(
-                            Op('+',
-                               e.body.subst(e.index_var, e.lower),
-                               e.body.subst(e.index_var, e.upper)), ctx)
-                    else:
-                        return normalize(
-                            Op('+',
-                               e.body.subst(e.index_var, self.cond.args[1]),
-                               Summation(e.index_var, e.lower, e.upper - 1, e.body)), ctx)
-                else:
-                    return normalize(
-                        Op('+',
-                           Summation(e.index_var, e.lower, self.cond.args[1] - 1, e.body),
-                           Summation(e.index_var, self.cond.args[1], e.upper, e.body)), ctx)
-            elif self.cond.op == '=' or self.cond.op == '!=':
-                if e.upper.is_const() and e.upper.val - e.lower.val == 1:
-                    if e.lower.val <= self.cond.args[1].val <= e.upper.val:
-                        return normalize(
-                            Op('+',
-                               e.body.subst(e.index_var, e.lower),
-                               e.body.subst(e.index_var, e.upper)), ctx)
-                    else:
-                        return e
-                else:
-                    if e.upper.is_pos_inf():
-                        if e.lower.val > self.cond.args[1].val:
-                            return e
-                        elif e.lower.val == self.cond.args[1].val:
-                            return normalize(
-                                Op('+',
-                                   e.body.subst(e.index_var, self.cond.args[1]),
-                                   Summation(e.index_var, self.cond.args[1] + 1, e.upper, e.body)), ctx)
-                        else:
-                            return Op('+',
-                                      Summation(e.index_var, e.lower, self.cond.args[1], e.body),
-                                      Summation(e.index_var, normalize(self.cond.args[1] + 1, ctx), e.upper, e.body))
-                    else:
-                        if not e.lower.val <= self.cond.args[1].val <= e.upper.val:
-                            return e
-                        else:
-                            if e.lower.val == self.cond.args[1].val:
-                                return normalize(
-                                    Op('+',
-                                       e.body.subst(e.index_var, e.lower),
-                                       Summation(e.index_var, self.cond.args[1] + 1, e.upper, e.body)), ctx)
-                            elif e.upper.val == self.cond.args[1].val:
-                                return normalize(
-                                    Op('+',
-                                       Summation(e.index_var, e.lower, self.cond.args[1] - 1, e.body),
-                                       e.body.subst(e.index_var, e.upper)), ctx)
-                            else:
-                                if self.cond.args[1].val - e.lower.val == 1:
-                                    a = e.body.subst(e.index_var, e.lower)
-                                else:
-                                    a = Summation(e.index_var, e.lower, self.cond.args[1] - 1, e.body)
-                                b = e.body.subst(e.index_var, self.cond.args[1])
-                                if e.upper.val - self.cond.args[1].val == 1:
-                                    c = e.body.subst(e.index_var, e.upper)
-                                else:
-                                    c = Summation(e.index_var, self.cond.args[1] + 1, e.upper, e.body)
-                                return normalize(Op('+', a, Op('+', b, c)), ctx)
-            else:
-                return e
-        else:
-            return e
+        return e
 
 
 class DerivEquation(Rule):

@@ -13,7 +13,7 @@ dirname = os.path.dirname(__file__)
 
 class Identity:
     def __init__(self, expr: Union[str, Expr], *,
-                 conds: Optional[Conditions] = None, simp_level: int = 1, category: str = ""):
+                 conds: Optional[Conditions] = None, simp_level: int = 1, category: str = "", split_cond=None):
         if isinstance(expr, str):
             expr = parser.parse_expr(expr)
         self.expr = expr
@@ -22,6 +22,7 @@ class Identity:
         self.conds = conds
         self.simp_level = simp_level
         self.category = category
+        self.split_cond = split_cond
 
     def __eq__(self, other):
         return self.expr == other.expr and \
@@ -41,7 +42,10 @@ class Identity:
         if self.category != "":
             return "%s  [%s] (%s)" % (self.expr, self.conds, self.category)
         else:
-            return "%s  [%s]" % (self.expr, self.conds)
+            if self.split_cond is None:
+                return "%s  [%s]" % (self.expr, self.conds)
+            else:
+                return "%s [%s] {%s}" % (self.expr, self.conds, self.split_cond)
         
     def __repr__(self):
         return str(self)
@@ -111,6 +115,9 @@ class Context:
         # List of fixes
         self.fixes: Dict[str, expr.Type] = dict()
 
+        # List of identities of summation split
+        self.summation_split_identities: List[Identity] = list()
+
     def __str__(self):
         res = ""
         res += "Var Definitions\n"
@@ -161,7 +168,10 @@ class Context:
         res.extend(self.definitions)
         return res
 
-
+    def get_summation_split_identities(self) -> List[Identity]:
+        res = self.parent.get_summation_split_identities() if self.parent is not None else []
+        res.extend(self.summation_split_identities)
+        return res
 
     def get_var_definitions(self) -> List[Identity]:
         res = self.parent.get_var_definitions() if self.parent is not None else []
@@ -324,9 +334,17 @@ class Context:
         if isinstance(e, str):
             e = parser.parse_expr(e)
         tmp = Identity(e, conds=conds)
-        # Note: no conversion to symbols for lemmas within a file.
         if tmp not in self.lemmas:
             self.lemmas.append(tmp)
+
+    def add_summation_split_identities(self, e: Expr, conds: Conditions, split_cond: Expr):
+        symb_lhs = expr_to_pattern(e.lhs)
+        symb_rhs = expr_to_pattern(e.rhs)
+        symb_split_cond = expr_to_pattern(split_cond)
+        symb_conds = [expr_to_pattern(cond) for cond in conds.data]
+        tmp = Identity(Eq(symb_lhs, symb_rhs), conds = Conditions(symb_conds), split_cond=symb_split_cond)
+        if tmp not in self.summation_split_identities:
+            self.summation_split_identities.append(tmp)
 
     def add_induct_hyp(self, e: Union[Expr, str]):
         if isinstance(e, str):
@@ -362,7 +380,7 @@ class Context:
         if item['type'] == 'axiom' or item['type'] == 'problem':
             fixes = dict()
             if 'fixes' in item:
-                for a,b in item['fixes']:
+                for a, b in item['fixes']:
                     fixes[a] = parser.parse_expr(b, fixes=fixes)
             e = parser.parse_expr(item['expr'], fixes=fixes)
             if e.is_equals() and e.lhs.is_indefinite_integral():
@@ -382,13 +400,21 @@ class Context:
                             conds.add_condition(parser.parse_expr(c, fixes=fixes))
                     self.add_lemma(e, conds)
             elif e.is_equals() and e.lhs.is_summation() and not e.rhs.is_summation():
-                self.add_series_evaluation(e)
                 if item['type'] == 'problem':
                     conds = Conditions()
                     if 'conds' in item:
                         for c in item['conds']:
                             conds.add_condition(parser.parse_expr(c, fixes=fixes))
                     self.add_lemma(e, conds)
+                elif 'category' in item and item['category'] == 'summation-split':
+                    conds = Conditions()
+                    if 'conds' in item:
+                        for c in item['conds']:
+                            conds.add_condition(parser.parse_expr(c, fixes=fixes))
+                    split_cond = parser.parse_expr(item['split-cond'], fixes=fixes)
+                    self.add_summation_split_identities(e, conds, split_cond)
+                else:
+                    self.add_series_evaluation(e)
             elif e.is_equals() and 'category' in item:
                 self.add_other_identities(e, item['category'], item.get('attributes'))
             elif e.is_equals() and item['type'] == 'problem':

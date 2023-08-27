@@ -626,7 +626,7 @@ class Expr:
             return Summation(self.index_var, self.lower.subst(var, e), self.upper.subst(var, e),
                              self.body.subst(var, e))
         elif self.is_matrix():
-            return Matrix([rv.subst(var,e) for rv in self.rows])
+            return Matrix([[item.subst(var,e) for item in rv] for rv in self.data])
         else:
             print('subst on', self)
             raise NotImplementedError
@@ -938,7 +938,7 @@ class Expr:
         return isinstance(self, Matrix) and self.ty == MATRIX
 
 
-def match(exp: Expr, pattern: Expr) -> Optional[Dict]:
+def match(exp: Expr, pattern: Expr, disable_bd = False) -> Optional[Dict]:
     """Match expr with given pattern.
 
     If successful, return a dictionary mapping symbols to expressions.
@@ -948,13 +948,15 @@ def match(exp: Expr, pattern: Expr) -> Optional[Dict]:
     d = dict()
 
     def rec(exp: Expr, pattern: Expr, bd_vars: Dict[str, str]):
+        nonlocal disable_bd
         if isinstance(pattern, Symbol):
             if pattern.name in d:
                 return exp == d[pattern.name]
             # Check exp does not contain bound variables
-            for var in exp.get_vars():
-                if var in bd_vars.values():
-                    return False
+            if not disable_bd:
+                for var in exp.get_vars():
+                    if var in bd_vars.values():
+                        return False
             if exp.ty in pattern.pat:
                 d[pattern.name] = exp
                 return True
@@ -1043,7 +1045,7 @@ def expr_to_pattern(e: Expr) -> Expr:
     """Convert an expression to pattern."""
     vars = e.get_vars()
     for var in vars:
-        e = e.subst(var, Symbol(var, [VAR, CONST, OP, FUN, INTEGRAL, MATRIX]))
+        e = e.subst(var, Symbol(var, [VAR, CONST, OP, FUN, INTEGRAL, MATRIX, INF]))
     return e
 
 

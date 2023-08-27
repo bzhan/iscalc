@@ -1104,6 +1104,81 @@
             "expr": "a * b / a = b",
             "reference": "",
             "type": "axiom"
+        },
+        {
+            "level": 1,
+            "name": "summation split",
+            "type": "header"
+        },
+        {
+            "category": "summation-split",
+            "split-cond": "n >= a",
+            "conds": [
+                "a > l",
+                "a <= u"
+            ],
+            "expr": "SUM(n, l, u, fn) = SUM(n, l, a-1, fn) + SUM(n, a, u, fn)",
+            "type": "axiom"
+        },
+        {
+            "category": "summation-split",
+            "split-cond": "n > a",
+            "conds": [
+                "a >= l",
+                "a < u"
+            ],
+            "expr": "SUM(n, l, u, fn) = SUM(n, l, a, fn) + SUM(n, a+1, u, fn)",
+            "type": "axiom"
+        },
+        {
+            "category": "summation-split",
+            "split-cond": "n <= a",
+            "conds": [
+                "a >= l",
+                "a < u"
+            ],
+            "expr": "SUM(n, l, u, fn) = SUM(n, l, a, fn) + SUM(n, a+1, u, fn)",
+            "type": "axiom"
+        },
+        {
+            "category": "summation-split",
+            "split-cond": "n < a",
+            "conds": [
+                "a > l",
+                "a <= u"
+            ],
+            "expr": "SUM(n, l, u, fn) = SUM(n, l, a-1, fn) + SUM(n, a, u, fn)",
+            "type": "axiom"
+        },
+        {
+            "category": "summation-split",
+            "split-cond": "n = a",
+            "conds": [
+                "a > l",
+                "a < u"
+            ],
+            "expr": "SUM(n, l, u, fn) = SUM(n, l, a-1, fn) + SUM(n, a, a, fn) + SUM(n, a+1, u, fn)",
+            "type": "axiom"
+        },
+        {
+            "category": "summation-split",
+            "split-cond": "n = a",
+            "conds": [
+                "a = l",
+                "a < u"
+            ],
+            "expr": "SUM(n, l, u, fn) = SUM(n, a, a, fn) + SUM(n, a+1, u, fn)",
+            "type": "axiom"
+        },
+        {
+            "category": "summation-split",
+            "split-cond": "n = a",
+            "conds": [
+                "a = u",
+                "a > l"
+            ],
+            "expr": "SUM(n, l, u, fn) = SUM(n, l, a-1, fn) + SUM(n, u, u, fn)",
+            "type": "axiom"
         }
     ],
     "name": "Base theory"

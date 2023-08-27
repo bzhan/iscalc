@@ -49,6 +49,16 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "latex_res": "\\begin{bmatrix}0&-a_3&a_2\\\\a_3&0&-a_1\\\\-a_2&a_1&0\\end{bmatrix} ^ {1} \\begin{bmatrix}0&-a_3&a_2\\\\a_3&0&-a_1\\\\-a_2&a_1&0\\end{bmatrix} ^ {1}",
+                                "res": "[[0, -a_3, a_2], [a_3, 0, -a_1], [-a_2, a_1, 0]] ^ 1 * [[0, -a_3, a_2], [a_3, 0, -a_1], [-a_2, a_1, 0]] ^ 1",
+                                "rule": {
+                                    "loc": "subterms",
+                                    "name": "ExpandMatFunc",
+                                    "str": "expand functions of matrices on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
                                 "latex_res": "\\begin{bmatrix}-a_2 ^ {2} - a_3 ^ {2}&a_1 a_2&a_1 a_3\\\\a_1 a_2&-a_1 ^ {2} - a_3 ^ {2}&a_2 a_3\\\\a_1 a_3&a_2 a_3&-a_1 ^ {2} - a_2 ^ {2}\\end{bmatrix}",
                                 "res": "[[-(a_2 ^ 2) - a_3 ^ 2, a_1 * a_2, a_1 * a_3], [a_1 * a_2, -(a_1 ^ 2) - a_3 ^ 2, a_2 * a_3], [a_1 * a_3, a_2 * a_3, -(a_1 ^ 2) - a_2 ^ 2]]",
                                 "rule": {
@@ -64,6 +74,16 @@
                         "latex_start": "w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot I_{3 \\times 3}",
                         "start": "w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
                         "steps": [
+                            {
+                                "latex_res": "\\begin{bmatrix}a_1\\\\a_2\\\\a_3\\end{bmatrix} \\begin{bmatrix}a_1&a_2&a_3\\end{bmatrix} - \\sqrt{a_1 ^ {2} + a_2 ^ {2} + a_3 ^ {2}} ^ {2} \\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&1\\end{bmatrix}",
+                                "res": "[[a_1], [a_2], [a_3]] * [[a_1, a_2, a_3]] - sqrt(a_1 ^ 2 + a_2 ^ 2 + a_3 ^ 2) ^ 2 * [[1, 0, 0], [0, 1, 0], [0, 0, 1]]",
+                                "rule": {
+                                    "loc": "subterms",
+                                    "name": "ExpandMatFunc",
+                                    "str": "expand functions of matrices on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
                             {
                                 "latex_res": "\\begin{bmatrix}-a_2 ^ {2} - a_3 ^ {2}&a_1 a_2&a_1 a_3\\\\a_1 a_2&-a_1 ^ {2} - a_3 ^ {2}&a_2 a_3\\\\a_1 a_3&a_2 a_3&-a_1 ^ {2} - a_2 ^ {2}\\end{bmatrix}",
                                 "res": "[[-(a_2 ^ 2) - a_3 ^ 2, a_1 * a_2, a_1 * a_3], [a_1 * a_2, -(a_1 ^ 2) - a_3 ^ 2, a_2 * a_3], [a_1 * a_3, a_2 * a_3, -(a_1 ^ 2) - a_2 ^ 2]]",
@@ -105,6 +125,16 @@
                         "start": "w * T(w) * hat(w)",
                         "steps": [
                             {
+                                "latex_res": "\\begin{bmatrix}a_1\\\\a_2\\\\a_3\\end{bmatrix} \\begin{bmatrix}a_1&a_2&a_3\\end{bmatrix} \\begin{bmatrix}0&-a_3&a_2\\\\a_3&0&-a_1\\\\-a_2&a_1&0\\end{bmatrix}",
+                                "res": "[[a_1], [a_2], [a_3]] * [[a_1, a_2, a_3]] * [[0, -a_3, a_2], [a_3, 0, -a_1], [-a_2, a_1, 0]]",
+                                "rule": {
+                                    "loc": "subterms",
+                                    "name": "ExpandMatFunc",
+                                    "str": "expand functions of matrices on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
                                 "latex_res": "\\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
                                 "res": "[[0, 0, 0], [0, 0, 0], [0, 0, 0]]",
                                 "rule": {
@@ -120,6 +150,16 @@
                         "latex_start": "O_{3 \\times 3}",
                         "start": "zero_matrix(3,3)",
                         "steps": [
+                            {
+                                "latex_res": "\\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
+                                "res": "[[0, 0, 0], [0, 0, 0], [0, 0, 0]]",
+                                "rule": {
+                                    "loc": "subterms",
+                                    "name": "ExpandMatFunc",
+                                    "str": "expand functions of matrices on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
                             {
                                 "latex_res": "\\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
                                 "res": "[[0, 0, 0], [0, 0, 0], [0, 0, 0]]",
@@ -527,6 +567,16 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "latex_res": "(-1) ^ {n} \\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix} - (-1) ^ {n} \\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&1\\end{bmatrix} \\begin{bmatrix}0&-a_3&a_2\\\\a_3&0&-a_1\\\\-a_2&a_1&0\\end{bmatrix}",
+                                        "res": "(-1) ^ n * [[0, 0, 0], [0, 0, 0], [0, 0, 0]] - (-1) ^ n * [[1, 0, 0], [0, 1, 0], [0, 0, 1]] * [[0, -a_3, a_2], [a_3, 0, -a_1], [-a_2, a_1, 0]]",
+                                        "rule": {
+                                            "loc": "subterms",
+                                            "name": "ExpandMatFunc",
+                                            "str": "expand functions of matrices on subterms"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
                                         "latex_res": "\\begin{bmatrix}0&a_3 (-1) ^ {n}&-a_2 (-1) ^ {n}\\\\-a_3 (-1) ^ {n}&0&a_1 (-1) ^ {n}\\\\a_2 (-1) ^ {n}&-a_1 (-1) ^ {n}&0\\end{bmatrix}",
                                         "res": "[[0, a_3 * (-1) ^ n, -(a_2 * (-1) ^ n)], [-(a_3 * (-1) ^ n), 0, a_1 * (-1) ^ n], [a_2 * (-1) ^ n, -(a_1 * (-1) ^ n), 0]]",
                                         "rule": {
@@ -542,6 +592,16 @@
                                 "latex_start": "-(-1) ^ {n} \\hat{w}",
                                 "start": "-((-1) ^ n * hat(w))",
                                 "steps": [
+                                    {
+                                        "latex_res": "-(-1) ^ {n} \\begin{bmatrix}0&-a_3&a_2\\\\a_3&0&-a_1\\\\-a_2&a_1&0\\end{bmatrix}",
+                                        "res": "-((-1) ^ n * [[0, -a_3, a_2], [a_3, 0, -a_1], [-a_2, a_1, 0]])",
+                                        "rule": {
+                                            "loc": "subterms",
+                                            "name": "ExpandMatFunc",
+                                            "str": "expand functions of matrices on subterms"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
                                     {
                                         "latex_res": "\\begin{bmatrix}0&a_3 (-1) ^ {n}&-a_2 (-1) ^ {n}\\\\-a_3 (-1) ^ {n}&0&a_1 (-1) ^ {n}\\\\a_2 (-1) ^ {n}&-a_1 (-1) ^ {n}&0\\end{bmatrix}",
                                         "res": "[[0, a_3 * (-1) ^ n, -(a_2 * (-1) ^ n)], [-(a_3 * (-1) ^ n), 0, a_1 * (-1) ^ n], [a_2 * (-1) ^ n, -(a_1 * (-1) ^ n), 0]]",
@@ -957,6 +1017,16 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "latex_res": "(-1) ^ {n} \\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix} \\begin{bmatrix}0&-a_3&a_2\\\\a_3&0&-a_1\\\\-a_2&a_1&0\\end{bmatrix} - (-1) ^ {n} \\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&1\\end{bmatrix} \\begin{bmatrix}0&-a_3&a_2\\\\a_3&0&-a_1\\\\-a_2&a_1&0\\end{bmatrix} \\begin{bmatrix}0&-a_3&a_2\\\\a_3&0&-a_1\\\\-a_2&a_1&0\\end{bmatrix}",
+                                        "res": "(-1) ^ n * [[0, 0, 0], [0, 0, 0], [0, 0, 0]] * [[0, -a_3, a_2], [a_3, 0, -a_1], [-a_2, a_1, 0]] - (-1) ^ n * [[1, 0, 0], [0, 1, 0], [0, 0, 1]] * [[0, -a_3, a_2], [a_3, 0, -a_1], [-a_2, a_1, 0]] * [[0, -a_3, a_2], [a_3, 0, -a_1], [-a_2, a_1, 0]]",
+                                        "rule": {
+                                            "loc": "subterms",
+                                            "name": "ExpandMatFunc",
+                                            "str": "expand functions of matrices on subterms"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
                                         "latex_res": "\\begin{bmatrix}a_2 ^ {2} (-1) ^ {n} + a_3 ^ {2} (-1) ^ {n}&-a_1 a_2 (-1) ^ {n}&-a_1 a_3 (-1) ^ {n}\\\\-a_1 a_2 (-1) ^ {n}&a_1 ^ {2} (-1) ^ {n} + a_3 ^ {2} (-1) ^ {n}&-a_2 a_3 (-1) ^ {n}\\\\-a_1 a_3 (-1) ^ {n}&-a_2 a_3 (-1) ^ {n}&a_1 ^ {2} (-1) ^ {n} + a_2 ^ {2} (-1) ^ {n}\\end{bmatrix}",
                                         "res": "[[a_2 ^ 2 * (-1) ^ n + a_3 ^ 2 * (-1) ^ n, -(a_1 * a_2 * (-1) ^ n), -(a_1 * a_3 * (-1) ^ n)], [-(a_1 * a_2 * (-1) ^ n), a_1 ^ 2 * (-1) ^ n + a_3 ^ 2 * (-1) ^ n, -(a_2 * a_3 * (-1) ^ n)], [-(a_1 * a_3 * (-1) ^ n), -(a_2 * a_3 * (-1) ^ n), a_1 ^ 2 * (-1) ^ n + a_2 ^ 2 * (-1) ^ n]]",
                                         "rule": {
@@ -981,6 +1051,16 @@
                                             "new_expr": "hat(w) * hat(w)",
                                             "old_expr": "hat(w) ^ 2",
                                             "str": "rewriting hat(w) ^ 2 to hat(w) * hat(w)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "-(-1) ^ {n} (\\begin{bmatrix}0&-a_3&a_2\\\\a_3&0&-a_1\\\\-a_2&a_1&0\\end{bmatrix} \\begin{bmatrix}0&-a_3&a_2\\\\a_3&0&-a_1\\\\-a_2&a_1&0\\end{bmatrix})",
+                                        "res": "-((-1) ^ n * ([[0, -a_3, a_2], [a_3, 0, -a_1], [-a_2, a_1, 0]] * [[0, -a_3, a_2], [a_3, 0, -a_1], [-a_2, a_1, 0]]))",
+                                        "rule": {
+                                            "loc": "subterms",
+                                            "name": "ExpandMatFunc",
+                                            "str": "expand functions of matrices on subterms"
                                         },
                                         "type": "CalculationStep"
                                     },

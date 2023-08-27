@@ -18,13 +18,13 @@ class IntegralTest(unittest.TestCase):
         for i, item in enumerate(json_file['content']):
             aa, bb = compstate.parse_item(file.content[i].parent, item), file.content[i]
             a, b = aa.export(), bb.export()
-            if a != b:
-                if isinstance(aa, compstate.Goal) and isinstance(bb, compstate.Goal):
-                    aa.is_finished()
-                with open('examples/a.json', 'w', encoding='utf-8') as f:
-                    json.dump(a, f, indent=4, ensure_ascii=False, sort_keys=True)
-                with open('examples/b.json', 'w', encoding='utf-8') as f:
-                    json.dump(b, f, indent=4, ensure_ascii=False, sort_keys=True)
+            # if a != b:
+            #     if isinstance(aa, compstate.Goal) and isinstance(bb, compstate.Goal):
+            #         aa.is_finished()
+            #     with open('examples/a.json', 'w', encoding='utf-8') as f:
+            #         json.dump(a, f, indent=4, ensure_ascii=False, sort_keys=True)
+            #     with open('examples/b.json', 'w', encoding='utf-8') as f:
+            #         json.dump(b, f, indent=4, ensure_ascii=False, sort_keys=True)
             self.assertEqual(a, b)
 
         # Output to file

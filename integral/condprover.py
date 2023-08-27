@@ -485,6 +485,9 @@ def check_condition(e: Expr, ctx: Context) -> bool:
         if new_e != e:
             if check_condition(new_e, ctx):
                 return True
+    # a <= inf or a < inf
+    if (e.is_less() or e.is_less_eq()) and e.args[1].is_pos_inf():
+        return True
 
     conds = ctx.get_conds()
     all_conds = init_all_conds(conds)

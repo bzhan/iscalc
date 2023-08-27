@@ -28,8 +28,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "1 - (\\sum_{n=1}^{\\infty}{\\frac{a ^ {2 n} (-1) ^ {n}}{(2 n)!}} + 1)",
-                                "res": "1 - (SUM(n, 1, oo, a ^ (2 * n) * (-1) ^ n / factorial(2 * n)) + 1)",
+                                "latex_res": "1 - (\\sum_{n=0}^{0}{\\frac{(-1) ^ {n} a ^ {2 n}}{(2 n)!}} + \\sum_{n=0 + 1}^{\\infty}{\\frac{(-1) ^ {n} a ^ {2 n}}{(2 n)!}})",
+                                "res": "1 - (SUM(n, 0, 0, (-1) ^ n * a ^ (2 * n) / factorial(2 * n)) + SUM(n, 0 + 1, oo, (-1) ^ n * a ^ (2 * n) / factorial(2 * n)))",
                                 "rule": {
                                     "cond": "n = 0",
                                     "loc": "1",

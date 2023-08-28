@@ -286,8 +286,8 @@ class Goal(StateItem):
             res['fixes'] = d
         return res
 
-    def proof_by_rewrite_goal(self, *, begin_expr: Expr, begin_conds:Conditions=None):
-        self.proof = RewriteGoalProof(self, self.goal, begin_expr=begin_expr, begin_conds=begin_conds)
+    def proof_by_rewrite_goal(self, *, begin: "Goal"):
+        self.proof = RewriteGoalProof(self, self.goal, begin=begin)
         return self.proof
 
     def proof_by_calculation(self):
@@ -313,14 +313,6 @@ class Goal(StateItem):
     def get_facts(self):
         return [self.goal]
 
-    def get_induct_hyp_goal(self):
-        from integral import context
-        res = self.ctx.get_induct_hyps()
-        if len(res) != None:
-            e = res[0]
-            if isinstance(e, context.Identity):
-                return Goal(self, self.ctx, expr.Op("=", e.lhs, e.rhs), conds=self.conds)
-        raise NotImplementedError
 
 class CalculationStep(StateItem):
     """A step in the calculation."""
@@ -692,15 +684,13 @@ class CaseProof(StateItem):
 class RewriteGoalProof(StateItem):
     """Prove an equation by transforming an initial equation.
     """
-    def __init__(self, parent, goal: Expr, *, begin_expr: Expr, begin_conds: Conditions):
+    def __init__(self, parent, goal: Expr, *, begin: Goal):
         if not goal.is_equals():
             raise AssertionError("RewriteGoalProof: goal is not an equality.")
-
         self.parent = parent
         self.goal = goal
-        p:CompFile = parent
-        self.ctx = Context(parent.ctx)
-        self.begin = Calculation(self, self.ctx, begin_expr, conds=begin_conds, connection_symbol = '==>')
+        self.ctx = parent.ctx
+        self.begin = Calculation(parent, parent.ctx, begin.goal, conds=begin.conds, connection_symbol = '==>')
 
     def is_finished(self):
         f1 = normalize(self.begin.last_expr.lhs, self.ctx) == normalize(self.goal.lhs, self.ctx)
@@ -1088,9 +1078,9 @@ def parse_item(parent, item) -> StateItem:
     elif item['type'] == 'RewriteGoalProof':
         fixes = parent.ctx.get_fixes()
         goal = parser.parse_expr(item['goal'], fixes=fixes)
-        begin_expr = parser.parse_expr(item['start']['start'], fixes=fixes)
+        begin_goal = parser.parse_expr(item['start']['start'], fixes=fixes)
         begin_conds = parse_conds(item['start'], fixes=fixes)
-        res = RewriteGoalProof(parent, goal=goal, begin_expr=begin_expr, begin_conds=begin_conds)
+        res = RewriteGoalProof(parent, goal=goal, begin=Goal(parent, parent.ctx, begin_goal, conds=begin_conds, fixes=fixes))
         for i, step in enumerate(item['start']['steps']):
             res.begin.add_step(parse_step(res.begin, step, i))
         return res

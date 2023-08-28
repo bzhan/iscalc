@@ -1054,7 +1054,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
 
         goal02 = file.add_goal("(INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2))=log(2)/a^2", conds=["a > 0"])
-        proof = goal02.proof_by_rewrite_goal(begin_expr=goal01.goal, begin_conds=goal01.conds)
+        proof = goal02.proof_by_rewrite_goal(begin=goal01)
         calc = proof.begin
         calc.perform_rule(rules.DerivEquation("a"))
         calc.perform_rule(rules.FullSimplify())
@@ -1232,7 +1232,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
 
         goal03 = file.add_goal("(INT x:[0,1]. log(x+1) / (x^2 + 1)) = pi / 8 * log(2)")
-        proof = goal03.proof_by_rewrite_goal(begin_expr=goal02.goal, begin_conds=goal02.conds)
+        proof = goal03.proof_by_rewrite_goal(begin=goal02)
         calc = proof.begin
         calc.perform_rule(rules.SolveEquation("(INT x:[0,1]. log(x+1) / (x^2 + 1))"))
 
@@ -1271,7 +1271,7 @@ class IntegralTest(unittest.TestCase):
 
         goal03 = file.add_goal("(INT t:[0,a]. log(t+a) / (t^2 + a^2)) = pi /(8*a) * log(2*a^2)",
                                conds=["a > 0"])
-        proof = goal03.proof_by_rewrite_goal(begin_expr = goal02.goal, begin_conds=goal02.conds)
+        proof = goal03.proof_by_rewrite_goal(begin=goal02)
         calc = proof.begin
         calc.perform_rule(rules.SolveEquation("INT t:[0,a]. log(t+a) / (t^2 + a^2)"))
         calc.perform_rule(rules.Equation("pi * log(a) / 4", "1/8 * pi * (2 * log(a))"))
@@ -1405,7 +1405,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
 
         goal03 = file.add_goal("I(a) = (1/4 * (INT x:[-oo,oo]. 1 / (cos(a) ^ 2 + x ^ 2)))", conds=["cos(a) != 0"])
-        proof = goal03.proof_by_rewrite_goal(begin_expr = goal02.goal, begin_conds=goal02.conds)
+        proof = goal03.proof_by_rewrite_goal(begin=goal02)
         calc = proof.begin
         calc.perform_rule(rules.SolveEquation("I(a)"))
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal03a.goal), "1.1"))
@@ -1506,7 +1506,7 @@ class IntegralTest(unittest.TestCase):
 
         # Derivate to get integral of 1 / (x^2 + a^2)^2
         goal2 = file.add_goal("(INT x:[0,oo]. 1 / (x^2 + a^2)^2) = pi / (4 * a^3)", conds=["a > 0"])
-        proof = goal2.proof_by_rewrite_goal(begin_expr = goal1.goal, begin_conds=goal1.conds)
+        proof = goal2.proof_by_rewrite_goal(begin=goal1)
         calc = proof.begin
         calc.perform_rule(rules.DerivEquation('a'))
         calc.perform_rule(rules.FullSimplify())
@@ -1514,7 +1514,7 @@ class IntegralTest(unittest.TestCase):
 
         # Derivate again:
         goal3 = file.add_goal("(INT x:[0,oo]. 1 / (x^2 + a^2)^3) = 3*pi / (16 * a^5)", conds=["a > 0"])
-        proof = goal3.proof_by_rewrite_goal(begin_expr = goal2.goal, begin_conds=goal2.conds)
+        proof = goal3.proof_by_rewrite_goal(begin=goal2)
         calc = proof.begin
         calc.perform_rule(rules.DerivEquation('a'))
         calc.perform_rule(rules.FullSimplify())
@@ -1560,14 +1560,14 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         assert Eq2.is_finished()
         Eq3 = file.add_goal("2 * (INT y:[0,1]. exp(1/2 * t ^ 2 * (-(y ^ 2) - 1)) * (y ^ 2 + 1) ^ -1) + g(t) = SKOLEM_CONST(C)", conds=['t>0'])
-        Eq3_proof = Eq3.proof_by_rewrite_goal(begin_expr = Eq2.goal, begin_conds=Eq2.conds)
+        Eq3_proof = Eq3.proof_by_rewrite_goal(begin=Eq2)
         calc = Eq3_proof.begin
         calc.perform_rule(rules.IntegralEquation())
         calc.perform_rule(rules.IndefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
         assert Eq3.is_finished()
         Eq4 = file.add_goal("pi/2 = SKOLEM_CONST(C)")
-        proof_of_Eq4 = Eq4.proof_by_rewrite_goal(begin_expr = Eq3.goal, begin_conds=Eq3.conds)
+        proof_of_Eq4 = Eq4.proof_by_rewrite_goal(begin = Eq3)
         calc = proof_of_Eq4.begin
         calc.perform_rule(rules.LimitEquation('t', expr.Const(0)))
         calc.perform_rule(rules.FullSimplify())
@@ -1592,7 +1592,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         assert Eq6.is_finished()
         Eq7 = file.add_goal("(INT x:[0,oo]. exp(-x^2/2)) = sqrt(2) * sqrt(pi) / 2")
-        proof_of_Eq7 = Eq7.proof_by_rewrite_goal(begin_expr = Eq6.goal, begin_conds=Eq6.conds)
+        proof_of_Eq7 = Eq7.proof_by_rewrite_goal(begin = Eq6)
         calc = proof_of_Eq7.begin
         calc.perform_rule(rules.OnLocation(rules.SplitRegion(expr.Const(0)), "0"))
         calc.perform_rule(rules.OnLocation(rules.Substitution('y', parser.parse_expr("-x")), '0'))
@@ -1617,14 +1617,14 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         assert Eq8.is_finished()
         Eq9 = file.add_goal("(INT x:[0,oo]. exp(-x^2)) = sqrt(pi)/2")
-        proof_of_Eq9 = Eq9.proof_by_rewrite_goal(begin_expr = Eq7.goal, begin_conds=Eq7.conds)
+        proof_of_Eq9 = Eq9.proof_by_rewrite_goal(begin = Eq7)
         calc = proof_of_Eq9.begin
         calc.perform_rule(rules.Substitution(var_name="x", var_subst="x/sqrt(2)"))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.SolveEquation("(INT x:[0,oo]. exp(-x^2))"))
         assert Eq9.is_finished()
         Eq10 = file.add_goal("(INT x:[0,1]. 1/sqrt(-log(x))) = sqrt(pi)")
-        proof_of_Eq10 = Eq10.proof_by_rewrite_goal(begin_expr = Eq9.goal, begin_conds=Eq9.conds)
+        proof_of_Eq10 = Eq10.proof_by_rewrite_goal(begin = Eq9)
         calc = proof_of_Eq10.begin
         calc.perform_rule(rules.Substitution(var_name="t", var_subst="exp(-x^2)"))
         calc.perform_rule(rules.FullSimplify())
@@ -1676,13 +1676,13 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         assert Eq2.is_finished()
         Eq3 = file.add_goal("1/2 * t ^ 2 + log(I(t)) = SKOLEM_CONST(C)", conds=["I(t) > 0"])
-        Eq3_proof = Eq3.proof_by_rewrite_goal(begin_expr = Eq2.goal, begin_conds=Eq2.conds)
+        Eq3_proof = Eq3.proof_by_rewrite_goal(begin = Eq2)
         calc = Eq3_proof.begin
         calc.perform_rule(rules.IntegralEquation())
         calc.perform_rule(rules.IndefiniteIntegralIdentity())
         assert Eq3.is_finished()
         Eq4 = file.add_goal("log(sqrt(pi / 2)) = SKOLEM_CONST(C)")
-        Eq4_proof = Eq4.proof_by_rewrite_goal(begin_expr = Eq3.goal, begin_conds=Eq3.conds)
+        Eq4_proof = Eq4.proof_by_rewrite_goal(begin = Eq3)
         calc = Eq4_proof.begin
         calc.perform_rule(rules.LimitEquation('t', expr.Const(0)))
         calc.perform_rule(rules.FullSimplify())
@@ -1698,7 +1698,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         assert Eq5.is_finished()
         Eq6 = file.add_goal("I(t) = sqrt(pi/2) * exp(-t^2/2)", conds=["I(t) > 0"])
-        Eq6_proof = Eq6.proof_by_rewrite_goal(begin_expr = Eq5.goal, begin_conds=Eq5.conds)
+        Eq6_proof = Eq6.proof_by_rewrite_goal(begin = Eq5)
         calc = Eq6_proof.begin
         calc.perform_rule(rules.SolveEquation(parser.parse_expr("I(t)")))
         calc.perform_rule(rules.Equation(
@@ -1933,7 +1933,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnSubterm(rules.FoldDefinition("I")))
         self.assertTrue(goal02.is_finished())
         goal03 = file.add_goal("I(n) = (2 * n - 1) / 2 * I(n - 1)",fixes=fixes,  conds=["n>=1", "isInt(n)"])
-        proof = goal03.proof_by_rewrite_goal(begin_expr = goal01.goal, begin_conds=goal01.conds)
+        proof = goal03.proof_by_rewrite_goal(begin = goal01)
         calc = proof.begin
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal02.goal), "0"))
         x = parser.parse_expr("I(n)", fixes=fixes)
@@ -2091,7 +2091,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
 
         goal02 = file.add_goal("(INT x:[0, 1]. log(x+1/x)/(x^2+1)) = pi/2 * log(2)")
-        proof = goal02.proof_by_rewrite_goal(begin_expr = goal01.goal, begin_conds=goal01.conds)
+        proof = goal02.proof_by_rewrite_goal(begin = goal01)
         calc = proof.begin
         calc.perform_rule(rules.SplitRegion("1"))
         calc.perform_rule(rules.OnLocation(rules.Substitution(var_name="x", var_subst="1/x"), "0.1"))
@@ -2138,7 +2138,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
 
         goal02 = file.add_goal("(INT x:[0,oo]. log(x) / (x^2-b*x+1)) = 0", conds=["b > -2", "b < 2"])
-        proof = goal02.proof_by_rewrite_goal(begin_expr = goal01.goal, begin_conds=goal01.conds)
+        proof = goal02.proof_by_rewrite_goal(begin = goal01)
         calc = proof.begin
         calc.perform_rule(rules.SolveEquation("INT x:[0,oo]. log(x) / (x^2-b*x+1)"))
 
@@ -2188,7 +2188,7 @@ class IntegralTest(unittest.TestCase):
 
         # Integrate the previous equation on both sides
         goal3 = file.add_goal("g(y, a) = -atan(y / a) + SKOLEM_FUNC(C(a))", conds=["y > 0", "a != 0"])
-        proof = goal3.proof_by_rewrite_goal(begin_expr = goal2.goal, begin_conds=goal2.conds)
+        proof = goal3.proof_by_rewrite_goal(begin = goal2)
         calc = proof.begin
         calc.perform_rule(rules.IntegralEquation())
         calc.perform_rule(rules.FullSimplify())
@@ -2204,7 +2204,7 @@ class IntegralTest(unittest.TestCase):
         assert goal4.is_finished()
         # Evaluate C(a) for a > 0
         goal5 = file.add_goal("SKOLEM_FUNC(C(a)) = pi / 2", conds=["a > 0"])
-        proof = goal5.proof_by_rewrite_goal(begin_expr = goal3.goal, begin_conds=goal3.conds)
+        proof = goal5.proof_by_rewrite_goal(begin = goal3)
         calc = proof.begin
         calc.perform_rule(rules.LimitEquation("y", parser.parse_expr("oo")))
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal4.goal), "0"))
@@ -2213,7 +2213,7 @@ class IntegralTest(unittest.TestCase):
         assert goal5.is_finished()
         # Evaluate C(a) for a < 0
         goal6 = file.add_goal("SKOLEM_FUNC(C(a)) = -(pi / 2)", conds=["a < 0"])
-        proof = goal6.proof_by_rewrite_goal(begin_expr = goal3.goal, begin_conds=goal3.conds)
+        proof = goal6.proof_by_rewrite_goal(begin = goal3)
         calc = proof.begin
         calc.perform_rule(rules.LimitEquation("y", parser.parse_expr("oo")))
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal4.goal), "0"))
@@ -2221,13 +2221,13 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.SolveEquation(parser.parse_expr("SKOLEM_FUNC(C(a))")))
         assert goal6.is_finished()
         goal11 = file.add_goal("g(y,a) = pi / 2 -atan(y / a)", conds=["a>0", "y>0"])
-        proof = goal11.proof_by_rewrite_goal(begin_expr = goal3.goal, begin_conds = goal3.conds)
+        proof = goal11.proof_by_rewrite_goal(begin = goal3)
         calc = proof.begin
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal5.goal), "1.1"))
         assert goal11.is_finished()
 
         goal12 = file.add_goal("g(y,a) = -pi / 2 -atan(y / a)", conds=["a<0", "y>0"])
-        proof = goal12.proof_by_rewrite_goal(begin_expr=goal3.goal, begin_conds=goal3.conds)
+        proof = goal12.proof_by_rewrite_goal(begin=goal3)
         calc = proof.begin
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal6.goal), "1.1"))
         assert goal12.is_finished()
@@ -2311,14 +2311,14 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
 
         goal3 = file.add_goal("I(a) = log(a+1) + SKOLEM_CONST(C)", conds=["a > -1"])
-        proof_of_goal3 = goal3.proof_by_rewrite_goal(begin_expr = goal1.goal, begin_conds=goal1.conds)
+        proof_of_goal3 = goal3.proof_by_rewrite_goal(begin = goal1)
         calc = proof_of_goal3.begin
         calc.perform_rule(rules.IntegralEquation())
         calc.perform_rule(rules.IndefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
         assert goal3.is_finished()
         goal4 = file.add_goal("SKOLEM_CONST(C) = 0")
-        proof_of_goal4 = goal4.proof_by_rewrite_goal(begin_expr = goal3.goal, begin_conds=goal3.conds)
+        proof_of_goal4 = goal4.proof_by_rewrite_goal(begin = goal3)
         calc = proof_of_goal4.begin
         calc.perform_rule(rules.VarSubsOfEquation([{'var': 'a', 'expr': "0"}]))
         calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
@@ -2361,7 +2361,7 @@ class IntegralTest(unittest.TestCase):
 
 
         goal02 = file.add_goal("(INT x:[0,1]. x^a*(log(x))^2) = 2/(a+1)^3", conds=["a>-1"])
-        proof = goal02.proof_by_rewrite_goal(begin_expr = goal01.goal, begin_conds=goal01.conds)
+        proof = goal02.proof_by_rewrite_goal(begin = goal01)
         calc = proof.begin
         calc.perform_rule(rules.FullSimplify())
 
@@ -2418,7 +2418,7 @@ class IntegralTest(unittest.TestCase):
 
         # Integrate the previous result to get formula for I(a,b)
         goal3 = file.add_goal("I(a,b) = pi * log(a) / 2 + SKOLEM_FUNC(C(b))", conds=["a > 0", "b > 0"])
-        proof_of_goal3 = goal3.proof_by_rewrite_goal(begin_expr = goal2.goal, begin_conds=goal2.conds)
+        proof_of_goal3 = goal3.proof_by_rewrite_goal(begin = goal2)
         calc = proof_of_goal3.begin
         calc.perform_rule(rules.IntegralEquation())
         calc.perform_rule(rules.FullSimplify())
@@ -2427,7 +2427,7 @@ class IntegralTest(unittest.TestCase):
 
         # Obtain value of Skolem function
         goal4 = file.add_goal("SKOLEM_FUNC(C(a)) = -(pi * log(a) / 2)", conds=["a > 0"])
-        proof_of_goal4 = goal4.proof_by_rewrite_goal(begin_expr = goal3.goal, begin_conds=goal3.conds)
+        proof_of_goal4 = goal4.proof_by_rewrite_goal(begin = goal3)
         calc = proof_of_goal4.begin
         calc.perform_rule(rules.VarSubsOfEquation([{'var': "b", 'expr': "a"}]))
         calc.perform_rule(rules.SolveEquation(parser.parse_expr("SKOLEM_FUNC(C(a))")))
@@ -2544,7 +2544,7 @@ class IntegralTest(unittest.TestCase):
                                          "y/(y^2+a^2)^n+2*n*J(a,y,n)-(2*n*a^2)*J(a,y,n+1)"))
 
         goal06 = file.add_goal("J(a,y,n+1) = y/(2*n*a^2*(y^2+a^2)^n) + (2*n-1)/(2*n*a^2) * J(a,y,n)", conds=["a>0", "y>=0", "n>0", "isInt(n)"])
-        proof_of_goal06 = goal06.proof_by_rewrite_goal(begin_expr = goal05.goal, begin_conds=goal05.conds)
+        proof_of_goal06 = goal06.proof_by_rewrite_goal(begin = goal05)
         calc = proof_of_goal06.begin
         calc.perform_rule(rules.SolveEquation("J(a,y,n+1)"))
         calc.perform_rule(rules.Equation("(y * (a ^ 2 + y ^ 2) ^ -n + 2 * n * J(a,y,n) - J(a,y,n)) / (2 * a ^ 2 * n)",
@@ -2755,7 +2755,7 @@ class IntegralTest(unittest.TestCase):
         assert goal01.is_finished()
         goal02 = file.add_goal("x / (-(x ^ 2) + 1) = \
                 1/2 * SUM(k, 0, oo, x ^ k) - 1/2 * SUM(k, 0, oo, x ^ k * (-1) ^ k)",conds = ["abs(x) < 1"], fixes=fixes)
-        proof_of_goal02 = goal02.proof_by_rewrite_goal(begin_expr = goal01.goal, begin_conds=goal01.conds)
+        proof_of_goal02 = goal02.proof_by_rewrite_goal(begin = goal01)
         calc = proof_of_goal02.begin
         calc.perform_rule(rules.DerivEquation('x'))
         calc.perform_rule(rules.FullSimplify())
@@ -2982,7 +2982,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
 
         goal05 = file.add_goal("I(1) = 5*pi^2/96")
-        proof_of_goal05 = goal05.proof_by_rewrite_goal(begin_expr = goal03.goal, begin_conds=goal03.conds)
+        proof_of_goal05 = goal05.proof_by_rewrite_goal(begin = goal03)
         calc = proof_of_goal05.begin
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal04.goal), '0'))
         calc.perform_rule(rules.SolveEquation(parser.parse_expr("I(1)")))
@@ -3152,7 +3152,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.Equation(None, "pi / (1 + a * b)"))
         assert goal01.is_finished()
         goal02 = file.add_goal("I(a, b) = (pi / b) * log(1 + a * b) + SKOLEM_FUNC(C(b))", conds=["a > 0", "b > 0"])
-        proof_of_goal02 = goal02.proof_by_rewrite_goal(begin_expr = goal01.goal, begin_conds=goal01.conds)
+        proof_of_goal02 = goal02.proof_by_rewrite_goal(begin = goal01)
         calc = proof_of_goal02.begin
         calc.perform_rule(rules.IntegralEquation())
         calc.perform_rule(rules.Substitution(var_name="u", var_subst="1 + a * b"))
@@ -3168,7 +3168,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         assert goal03.is_finished()
         goal04 = file.add_goal("SKOLEM_FUNC(C(b)) = 0", conds=['b>0'])
-        proof_of_goal04 = goal04.proof_by_rewrite_goal(begin_expr = goal02.goal, begin_conds=goal02.conds)
+        proof_of_goal04 = goal04.proof_by_rewrite_goal(begin = goal02)
         calc = proof_of_goal04.begin
         calc.perform_rule(rules.LimitEquation("a", parser.parse_expr("0")))
         calc.perform_rule(rules.FullSimplify())
@@ -3176,7 +3176,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.SolveEquation("SKOLEM_FUNC(C(b))"))
         assert goal04.is_finished()
         goal05 = file.add_goal("I(a, b) = (pi / b) * log(1 + a * b)", conds=["a > 0", "b > 0"])
-        proof_of_goal05 = goal05.proof_by_rewrite_goal(begin_expr = goal02.goal, begin_conds=goal02.conds)
+        proof_of_goal05 = goal05.proof_by_rewrite_goal(begin = goal02)
         calc = proof_of_goal05.begin
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal04.goal), "1.1"))
         calc.perform_rule(rules.FullSimplify())
@@ -3263,7 +3263,7 @@ class IntegralTest(unittest.TestCase):
         assert goal01.is_finished()
         goal02 = file.add_goal("(INT x:[0, oo]. x * sin(a * x) / (x ^ 2 - b ^ 2)) = pi / 2 * cos(a * b)",
                                conds=["a > 0", "b > 0", "b != x"])
-        proof_of_goal02 = goal02.proof_by_rewrite_goal(begin_expr = goal01.goal, begin_conds=goal01.conds)
+        proof_of_goal02 = goal02.proof_by_rewrite_goal(begin = goal01)
         calc = proof_of_goal02.begin
         calc.perform_rule(rules.OnLocation(rules.Equation("x ^ 2 - b ^ 2", "(x + b) * (x - b)"), "1"))
         calc.perform_rule(rules.Equation("x * sin(a * x) / ((x + b) * (x - b))",
@@ -3409,14 +3409,14 @@ class IntegralTest(unittest.TestCase):
 
         goal04 = file.add_goal("(INT x:[-oo, oo]. x * exp(-(a * x ^ 2) + b * x)) = (b / (2 * a)) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
                                conds=["a > 0"])
-        proof_of_goal04 = goal04.proof_by_rewrite_goal(begin_expr = goal03.goal, begin_conds=goal03.conds)
+        proof_of_goal04 = goal04.proof_by_rewrite_goal(begin = goal03)
         calc = proof_of_goal04.begin
         calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
         calc.perform_rule(rules.FullSimplify())
 
         goal05 = file.add_goal("(INT x:[-oo, oo]. x ^ 2 * exp(-(a * x ^ 2) + b * x)) = (b ^ 2 / (4 * a ^ 2)) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a) + 1 / (2 * a) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
                                conds=["a > 0"])
-        proof_of_goal05 = goal05.proof_by_rewrite_goal(begin_expr = goal02.goal, begin_conds=goal02.conds)
+        proof_of_goal05 = goal05.proof_by_rewrite_goal(begin = goal02)
         calc = proof_of_goal05.begin
         calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("I")))
         calc.perform_rule(rules.FullSimplify())
@@ -3452,7 +3452,7 @@ class IntegralTest(unittest.TestCase):
 
         goal02 = file.add_goal("(INT x:[0, oo]. sin(m * x) / (x * (a ^ 2 + x ^ 2) ^ 2)) = (pi / (2 * a ^ 4)) * (1 - ((2 + m * a) / 2) * exp(- a * m))",
                                conds=["a > 0", "m > 0"])
-        proof_of_goal02 = goal02.proof_by_rewrite_goal(begin_expr = goal01.goal, begin_conds=goal01.conds)
+        proof_of_goal02 = goal02.proof_by_rewrite_goal(begin = goal01)
         calc = proof_of_goal02.begin
         calc.perform_rule(rules.DerivEquation("a"))
         calc.perform_rule(rules.OnSubterm(rules.DerivIntExchange()))
@@ -3478,7 +3478,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.Equation("1 / (a - b) * (-(1 / a) + 1 / b)", "1 / (a * b)"))
         # TODO: "a > b" can't be derived from "a - b > 0"
         goal02 = file.add_goal("(INT x:[0, 1]. x / (a * x + b * (1 - x)) ^ 3) = 1 / (2 * a ^ 2 * b)", conds=["a > 0", "b > 0", "a > b"])
-        proof_of_goal02 = goal02.proof_by_rewrite_goal(begin_expr = goal01.goal, begin_conds=goal01.conds)
+        proof_of_goal02 = goal02.proof_by_rewrite_goal(begin = goal01)
         calc = proof_of_goal02.begin
         calc.perform_rule(rules.DerivEquation("a"))
         calc.perform_rule(rules.OnSubterm(rules.DerivIntExchange()))
@@ -3547,7 +3547,7 @@ class IntegralTest(unittest.TestCase):
         assert goal04.is_finished()
 
         goal05 = file.add_goal("factorial(1/2) = sqrt(pi) / 2")
-        proof_of_goal05 = goal05.proof_by_rewrite_goal(begin_expr = goal03.goal, begin_conds=goal03.conds)
+        proof_of_goal05 = goal05.proof_by_rewrite_goal(begin = goal03)
         calc = proof_of_goal05.begin
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal04.goal), "0"))
         calc.perform_rule(rules.SolveEquation("factorial(1/2)"))
@@ -3585,7 +3585,7 @@ class IntegralTest(unittest.TestCase):
         assert goal08.is_finished()
 
         goal09 = file.add_goal("(INT x:[0, oo]. exp(-x) / sqrt(x)) = sqrt(pi)")
-        proof_of_goal09 = goal09.proof_by_rewrite_goal(begin_expr = goal08.goal, begin_conds=goal08.conds)
+        proof_of_goal09 = goal09.proof_by_rewrite_goal(begin = goal08)
         calc = proof_of_goal09.begin
         calc.perform_rule(rules.Equation("x ^ 2", "1 * x ^ 2"))
         calc.perform_rule(rules.OnLocation(rules.DefiniteIntegralIdentity(), "1"))
@@ -3599,7 +3599,7 @@ class IntegralTest(unittest.TestCase):
         assert goal10.is_finished()
 
         goal11 = file.add_goal("factorial(-1/2) = sqrt(pi)")
-        proof_of_goal11 = goal11.proof_by_rewrite_goal(begin_expr = goal10.goal, begin_conds=goal10.conds)
+        proof_of_goal11 = goal11.proof_by_rewrite_goal(begin = goal10)
         calc = proof_of_goal11.begin
         calc.perform_rule(rules.ApplyIdentity("Gamma(1/2)", "factorial(-1/2)"))
         assert goal11.is_finished()
@@ -3634,13 +3634,13 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.Equation("sqrt(cos(x)) * sqrt(sin(x))", "sqrt(sin(x) * cos(x))"))
         assert goal14.is_finished()
         goal15 = file.add_goal("(INT x:[0, pi / 2]. 1 / sqrt(sin(x) * cos(x))) = Gamma(1/4) ^ 2 / (2 * sqrt(pi))")
-        proof_of_goal15 = goal15.proof_by_rewrite_goal(begin_expr = goal14.goal, begin_conds=goal14.conds)
+        proof_of_goal15 = goal15.proof_by_rewrite_goal(begin = goal14)
         calc = proof_of_goal15.begin
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity("B(1/4, 1/4)", "Gamma(1/4) * Gamma(1/4) / Gamma(1/2)"), "1"))
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal10.goal), "1.1.1"))
         assert goal15.is_finished()
         goal16 = file.add_goal("(INT x:[0, pi / 2]. 1 / sqrt(sin(x))) = Gamma(1/4) ^ 2 / (2 * sqrt(2 * pi))")
-        proof_of_goal16 = goal16.proof_by_rewrite_goal(begin_expr = goal15.goal, begin_conds=goal15.conds)
+        proof_of_goal16 = goal16.proof_by_rewrite_goal(begin = goal15)
         calc = proof_of_goal16.begin
         calc.perform_rule(rules.OnLocation(rules.Substitution(var_name="x", var_subst="2 * x"), "0"))
         calc.perform_rule(rules.Equation("2 * sqrt(cos(x / 2)) * sqrt(sin(x / 2))", "2 * sqrt(sin(1/2 * x) * cos(1/2 * x))"))
@@ -3652,7 +3652,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.SolveEquation("(INT x:[0, pi / 2]. 1 / sqrt(sin(x)))"))
         assert goal16.is_finished()
         goal17 = file.add_goal("(INT x:[0, pi / 2]. 1 / sqrt(cos(x))) = Gamma(1/4) ^ 2 / (2 * sqrt(2 * pi))")
-        proof_of_goal17 = goal17.proof_by_rewrite_goal(begin_expr = goal16.goal, begin_conds=goal16.conds)
+        proof_of_goal17 = goal17.proof_by_rewrite_goal(begin = goal16)
         calc = proof_of_goal17.begin
         calc.perform_rule(rules.Substitution(var_name="x", var_subst="pi / 2 - x"))
         calc.perform_rule(rules.FullSimplify())
@@ -3682,7 +3682,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.Equation("Gamma(m) * Gamma(1 - m) / 1", "Gamma(m) * Gamma(1 - m)"))
         assert goal20.is_finished()
         goal21 = file.add_goal("Gamma(m) * Gamma(1 - m) = pi / sin(m * pi)", conds=["m > 0", "m < 1"])
-        proof_of_goal21 = goal21.proof_by_rewrite_goal(begin_expr = goal19.goal, begin_conds=goal19.conds)
+        proof_of_goal21 = goal21.proof_by_rewrite_goal(begin = goal19)
         calc = proof_of_goal21.begin
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal20.goal), "1"))
         calc.perform_rule(rules.OnLocation(rules.DefiniteIntegralIdentity(), "0"))
@@ -3702,7 +3702,7 @@ class IntegralTest(unittest.TestCase):
         assert goal22.is_finished()
         goal23 = file.add_goal("factorial(z) * factorial(z + 1/2) = 2 ^ (-2 * z - 1) * sqrt(pi) * factorial(2 * z + 1)",
                                conds=["z > -1"])
-        proof_of_goal23 = goal23.proof_by_rewrite_goal(begin_expr = goal22.goal, begin_conds=goal22.conds)
+        proof_of_goal23 = goal23.proof_by_rewrite_goal(begin = goal22)
         calc = proof_of_goal23.begin
         calc.perform_rule(rules.OnLocation(rules.Substitution(var_name="s", var_subst="2 * x - 1"), "1"))
         calc.perform_rule(rules.Equation("-((s + 1) / 2) + 1", "1/2 * (1 - s)"))
@@ -3885,7 +3885,7 @@ class IntegralTest(unittest.TestCase):
                                          "(INT x:[0, oo]. 1 / (x^4+1)^m)-(INT x:[0, oo]. 1 / (x^4+1)^(m+1))"))
 
         goal02 = file.add_goal("(INT x:[0, oo]. 1/(x^4+1)^(m+1)) = (4*m-1)/(4*m) * (INT x:[0, oo]. 1/(x^4+1)^m)", conds=["m>=1", "isInt(m)"])
-        proof = goal02.proof_by_rewrite_goal(begin_expr = goal01.goal, begin_conds=goal01.conds)
+        proof = goal02.proof_by_rewrite_goal(begin = goal01)
         calc = proof.begin
         calc.perform_rule(rules.SolveEquation("(INT x:[0, oo]. 1/(x^4+1)^(m+1))"))
         calc.perform_rule(rules.Equation("-(1 / (4 * m) * (INT x:[0,oo]. (x ^ 4 + 1) ^ -m)) + (INT x:[0,oo]. (x ^ 4 + 1) ^ -m)",
@@ -3936,7 +3936,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
 
         goal03 = file.add_goal("(INT x:[0,1]. (1-sqrt(x))^9) = 1 / 55")
-        proof = goal03.proof_by_rewrite_goal(begin_expr = goal02.goal, begin_conds=goal02.conds)
+        proof = goal03.proof_by_rewrite_goal(begin = goal02)
         calc = proof.begin
         calc.perform_rule(rules.VarSubsOfEquation([{'var': 'n', 'expr': "9"}]))
         calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "1"))
@@ -4066,7 +4066,7 @@ class IntegralTest(unittest.TestCase):
         s1 = parser.parse_expr("(INT y:[0,1]. (INT x:[0,1]. 1 / (1-x*y)))", fixes=fixes)
         s2 = parser.parse_expr("zeta(2)", fixes=fixes)
         goal02 = file.add_goal(expr.Op('=', s1, s2), fixes=fixes)
-        proof = goal02.proof_by_rewrite_goal(begin_expr=goal01.goal, begin_conds = goal01.conds)
+        proof = goal02.proof_by_rewrite_goal(begin=goal01)
         calc = proof.begin
         calc.perform_rule(rules.VarSubsOfEquation([{'var':'a', 'expr':'0'}]))
         calc.perform_rule(rules.FullSimplify())
@@ -4078,7 +4078,7 @@ class IntegralTest(unittest.TestCase):
         goal03 = file.add_goal(expr.Op('=', s1, s2), conds=["a > -1", "s >= 2", "isInt(s)"], fixes=fixes)
         proof = goal03.proof_by_induction('s', 2)
         proof_base = proof.base_case.proof_by_calculation()
-        proof_induct = proof.induct_case.proof_by_rewrite_goal(begin_expr = goal03.goal, begin_conds=goal03.conds)
+        proof_induct = proof.induct_case.proof_by_rewrite_goal(begin = goal03)
         calc = proof_base.lhs_calc
         calc.perform_rule(rules.Equation("-(x * y) + 1", "1-x*y"))
         calc.perform_rule(rules.ApplyEquation(goal01.goal))
@@ -4114,7 +4114,7 @@ class IntegralTest(unittest.TestCase):
         s2 = parser.parse_expr("(-1)^s / factorial(s-1) * \
         (INT y:[0,1]. (INT x:[0,1]. log(x*y)^(s-2)/ (1-x*y)))", fixes=fixes)
         goal04 = file.add_goal(expr.Op('=', s1, s2), conds=["s >= 2", "isInt(s)"], fixes=fixes)
-        proof = goal04.proof_by_rewrite_goal(begin_expr = goal03.goal, begin_conds=goal03.conds)
+        proof = goal04.proof_by_rewrite_goal(begin = goal03)
         calc = proof.begin
         calc.perform_rule(rules.VarSubsOfEquation([{'var':'a', 'expr':'0'}]))
         calc.perform_rule(rules.FullSimplify())
@@ -4162,7 +4162,7 @@ class IntegralTest(unittest.TestCase):
         s1 = parser.parse_expr("(INT x:[0,oo]. x^(s-1)/(exp(x) - 1))", fixes=fixes)
         s2 = parser.parse_expr("Gamma(s) * zeta(s)", fixes=fixes)
         goal06 = file.add_goal(expr.Op('=', s1, s2), fixes=fixes)
-        proof = goal06.proof_by_rewrite_goal(begin_expr = goal05.goal, begin_conds=goal05.conds)
+        proof = goal06.proof_by_rewrite_goal(begin = goal05)
         calc = proof.begin
         calc.perform_rule(rules.SummationEquation('k', '1', 'oo'))
         calc.perform_rule(rules.FullSimplify())
@@ -4203,7 +4203,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyIdentity("cos(2*x)", "2*cos(x)^2 - 1"))
 
         goal01 = file.add_goal("acos(a) = 2*acos(sqrt((1+a) / 2))", conds=["abs(a) <= 1"])
-        proof = goal01.proof_by_rewrite_goal(begin_expr = lemma.goal, begin_conds=lemma.conds)
+        proof = goal01.proof_by_rewrite_goal(begin = lemma)
         calc = proof.begin
         calc.perform_rule(rules.VarSubsOfEquation([{"var":"x", "expr":"acos(u)"}]))
         calc.perform_rule(rules.FullSimplify())

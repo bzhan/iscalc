@@ -24,11 +24,13 @@ class Identity:
         self.category = category
         self.split_cond = split_cond
 
-    def __eq__(self, other):
-        return self.expr == other.expr and \
+    def __eq__(self, other:"Identity"):
+        return isinstance(other, Identity) and\
+        self.expr == other.expr and \
         self.conds == other.conds and \
         self.simp_level == other.simp_level and \
-        self.category == other.category
+        self.category == other.category and \
+        self.split_cond == other.split_cond
 
     @property
     def lhs(self):
@@ -391,6 +393,13 @@ class Context:
                     for cond in item['conds']:
                         conds.add_condition(parser.parse_expr(cond, fixes=fixes))
                 self.add_definite_integral(e, conds)
+            elif 'category' in item and item['category'] == 'summation-split':
+                conds = Conditions()
+                if 'conds' in item:
+                    for c in item['conds']:
+                        conds.add_condition(parser.parse_expr(c, fixes=fixes))
+                split_cond = parser.parse_expr(item['split-cond'], fixes=fixes)
+                self.add_summation_split_identities(e, conds, split_cond)
             elif e.is_equals() and not e.lhs.is_summation() and e.rhs.is_summation():
                 self.add_series_expansion(e)
                 if item['type'] == 'problem':
@@ -406,17 +415,10 @@ class Context:
                         for c in item['conds']:
                             conds.add_condition(parser.parse_expr(c, fixes=fixes))
                     self.add_lemma(e, conds)
-                elif 'category' in item and item['category'] == 'summation-split':
-                    conds = Conditions()
-                    if 'conds' in item:
-                        for c in item['conds']:
-                            conds.add_condition(parser.parse_expr(c, fixes=fixes))
-                    split_cond = parser.parse_expr(item['split-cond'], fixes=fixes)
-                    self.add_summation_split_identities(e, conds, split_cond)
                 else:
                     self.add_series_evaluation(e)
             elif e.is_equals() and 'category' in item:
-                self.add_other_identities(e, item['category'], item.get('attributes'))
+               self.add_other_identities(e, item['category'], item.get('attributes'))
             elif e.is_equals() and item['type'] == 'problem':
                 conds = Conditions()
                 if 'conds' in item:
@@ -563,6 +565,8 @@ def apply_subterm(e: Expr, f: Callable[[Expr, Context], Expr], ctx: Context) -> 
             return f(expr.Summation(e.index_var, lower, upper, body), ctx)
         elif e.is_matrix():
             return Matrix([[rec(item, ctx) for item in row] for row in e.data])
+        elif e.is_symbol():
+            return e
         else:
             raise NotImplementedError
     return rec(e, ctx)

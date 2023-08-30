@@ -606,6 +606,9 @@ def function_eval(e: expr.Expr, ctx: Context) -> expr.Expr:
         if e.args[0].is_const() and abs(round(e.args[0].val) - e.args[0].val) < 1e-15 and round(e.args[0].val) >= 0:
             return expr.Const(math.factorial(round(e.args[0].val)))
 
+    if e.is_fun() and e.func_name == 'floor':
+        if e.args[0].is_inf():
+            return e.args[0]
     return e
 
 def function_table(e: expr.Expr, ctx: Context) -> expr.Expr:
@@ -926,6 +929,18 @@ def simplify_sqrt(e: expr.Expr, ctx: Context) -> expr.Expr:
 
     return e
 
+def simplify_inf(e: expr.Expr, ctx: Context) -> expr.Expr:
+    if e.is_plus():
+        if e.args[0] == expr.POS_INF and e.args[1].is_constant():
+            return e.args[0]
+    elif e.is_minus():
+        if e.args[0] == expr.POS_INF and e.args[1].is_constant():
+            return e.args[0]
+    elif e.is_divides():
+        if e.args[0] == expr.POS_INF and e.args[1].is_constant():
+            if expr.eval_expr(e) != 0:
+                return e.args[0]
+    return e
 def normalize(e: expr.Expr, ctx: Context) -> expr.Expr:
     if e.is_equals():
         return expr.Eq(normalize(e.lhs, ctx), normalize(e.rhs, ctx))
@@ -950,6 +965,7 @@ def normalize(e: expr.Expr, ctx: Context) -> expr.Expr:
         e = apply_subterm(e, simplify_trig, ctx)
         e = apply_subterm(e, simplify_log, ctx)
         e = apply_subterm(e, simplify_sqrt, ctx)
+        e = apply_subterm(e, simplify_inf, ctx)
         if e == old_e:
             break
 

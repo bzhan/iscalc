@@ -1117,7 +1117,7 @@
                 "a > l",
                 "a <= u"
             ],
-            "expr": "SUM(n, l, u, fn) = SUM(n, l, a-1, fn) + SUM(n, a, u, fn)",
+            "expr": "SUM(n, l, u, f(n)) = SUM(n, l, a-1, f(n)) + SUM(n, a, u, f(n))",
             "type": "axiom"
         },
         {
@@ -1127,7 +1127,7 @@
                 "a >= l",
                 "a < u"
             ],
-            "expr": "SUM(n, l, u, fn) = SUM(n, l, a, fn) + SUM(n, a+1, u, fn)",
+            "expr": "SUM(n, l, u, f(n)) = SUM(n, l, a, f(n)) + SUM(n, a+1, u, f(n))",
             "type": "axiom"
         },
         {
@@ -1137,7 +1137,7 @@
                 "a >= l",
                 "a < u"
             ],
-            "expr": "SUM(n, l, u, fn) = SUM(n, l, a, fn) + SUM(n, a+1, u, fn)",
+            "expr": "SUM(n, l, u, f(n)) = SUM(n, l, a, f(n)) + SUM(n, a+1, u, f(n))",
             "type": "axiom"
         },
         {
@@ -1147,7 +1147,7 @@
                 "a > l",
                 "a <= u"
             ],
-            "expr": "SUM(n, l, u, fn) = SUM(n, l, a-1, fn) + SUM(n, a, u, fn)",
+            "expr": "SUM(n, l, u, f(n)) = SUM(n, l, a-1, f(n)) + SUM(n, a, u, f(n))",
             "type": "axiom"
         },
         {
@@ -1157,7 +1157,7 @@
                 "a > l",
                 "a < u"
             ],
-            "expr": "SUM(n, l, u, fn) = SUM(n, l, a-1, fn) + SUM(n, a, a, fn) + SUM(n, a+1, u, fn)",
+            "expr": "SUM(n, l, u, f(n)) = SUM(n, l, a-1, f(n)) + SUM(n, a, a, f(n)) + SUM(n, a+1, u, f(n))",
             "type": "axiom"
         },
         {
@@ -1167,7 +1167,7 @@
                 "a = l",
                 "a < u"
             ],
-            "expr": "SUM(n, l, u, fn) = SUM(n, a, a, fn) + SUM(n, a+1, u, fn)",
+            "expr": "SUM(n, l, u, f(n)) = SUM(n, a, a, f(n)) + SUM(n, a+1, u, f(n))",
             "type": "axiom"
         },
         {
@@ -1177,7 +1177,16 @@
                 "a = u",
                 "a > l"
             ],
-            "expr": "SUM(n, l, u, fn) = SUM(n, l, a-1, fn) + SUM(n, u, u, fn)",
+            "expr": "SUM(n, l, u, f(n)) = SUM(n, l, a-1, f(n)) + SUM(n, u, u, f(n))",
+            "type": "axiom"
+        },
+        {
+            "category": "summation-split",
+            "split-cond": "n % k",
+            "conds": [
+                "k > 0"
+            ],
+            "expr": "SUM(n, l, u, f(n)) = SUM(i, 0, k-1, SUM(n, 0, floor((u-l-i)/k), f(k*n+l+i)))",
             "type": "axiom"
         }
     ],

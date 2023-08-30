@@ -647,7 +647,7 @@ class Expr:
     def is_evaluable(self):
         return self.is_constant() or self.is_inf()
 
-    def get_vars(self) -> Set[str]:
+    def get_vars(self, with_bd = False) -> Set[str]:
         """Obtain the set of variables in self."""
         res = set()
 
@@ -690,9 +690,13 @@ class Expr:
             else:
                 print(t, type(t))
                 raise NotImplementedError
-
-        rec(self, [])
-        return res
+        bd = []
+        rec(self, bd)
+        if not with_bd:
+            return res
+        else:
+            res.union(set(bd))
+            return res
 
     def has_symbol(self) -> bool:
         if isinstance(self, Symbol):
@@ -938,7 +942,7 @@ class Expr:
         return isinstance(self, Matrix) and self.ty == MATRIX
 
 
-def match(exp: Expr, pattern: Expr, disable_bd = False) -> Optional[Dict]:
+def match(exp: Expr, pattern: Expr) -> Optional[Dict]:
     """Match expr with given pattern.
 
     If successful, return a dictionary mapping symbols to expressions.
@@ -948,15 +952,13 @@ def match(exp: Expr, pattern: Expr, disable_bd = False) -> Optional[Dict]:
     d = dict()
 
     def rec(exp: Expr, pattern: Expr, bd_vars: Dict[str, str]):
-        nonlocal disable_bd
         if isinstance(pattern, Symbol):
             if pattern.name in d:
                 return exp == d[pattern.name]
             # Check exp does not contain bound variables
-            if not disable_bd:
-                for var in exp.get_vars():
-                    if var in bd_vars.values():
-                        return False
+            for var in exp.get_vars():
+                if var in bd_vars.values():
+                    return False
             if exp.ty in pattern.pat:
                 d[pattern.name] = exp
                 return True

@@ -2,14 +2,14 @@
 
 from decimal import Decimal
 from fractions import Fraction
-from typing import Optional, Dict, Tuple, Union, List
+from typing import Optional, Dict, Tuple, Union, List, Set
 import functools
 import operator
 
 from integral import expr, matrix, context
 from integral.expr import Var, Const, Fun, EvalAt, Op, Integral, Symbol, Expr, \
     OP, CONST, VAR, sin, cos, FUN, decompose_expr_factor, \
-    Deriv, Inf, Limit, NEG_INF, POS_INF, IndefiniteIntegral, Summation, SUMMATION, Matrix
+    Deriv, Inf, Limit, NEG_INF, POS_INF, IndefiniteIntegral, Summation, SUMMATION, Matrix, INTEGRAL, MATRIX, INF
 from integral import parser
 from integral.matrix import is_vector
 from integral.solve import solve_equation, solve_for_term
@@ -1888,10 +1888,11 @@ class DerivIntExchange(Rule):
 class ExpandDefinition(Rule):
     """Expand a definition"""
 
-    def __init__(self, func_name: str):
+    def __init__(self, func_name: str, simp=True):
         self.name = "ExpandDefinition"
         assert isinstance(func_name, str)
         self.func_name: str = func_name
+        self.simp = simp
 
     def __str__(self):
         return "expand definition"
@@ -1925,7 +1926,10 @@ class ExpandDefinition(Rule):
                     inst = expr.match(e, identity.lhs)
                     if inst == None:
                         continue
-                    return normalize(identity.rhs.inst_pat(inst), ctx)
+                    if self.simp:
+                        return normalize(identity.rhs.inst_pat(inst), ctx)
+                    else:
+                        return identity.rhs.inst_pat(inst)
         if e.is_var() and e.name == self.func_name:
             for identity in ctx.get_definitions():
                 if identity.lhs.is_symbol() and identity.lhs.name == self.func_name:
@@ -2224,6 +2228,28 @@ class MergeSummation(Rule):
         return Summation(a.index_var, a.lower, a.upper, Op(e.op, a.body, b.body))
 
 
+alphabet = "ijkmn"
+def change_index(e:Expr, bd:List):
+    ''' using new index variable for summation '''
+    if e.is_summation():
+        e: Summation
+        if e.index_var in bd:
+            for var in alphabet:
+                if var not in bd:
+                    e = e.alpha_convert(var)
+                    bd.append(var)
+                    break
+        else:
+            bd.append(e.index_var)
+        res = Summation(e.index_var, e.lower, e.upper, change_index(e.body, bd))
+        bd.pop()
+        return res
+    elif e.is_op():
+        args = [change_index(arg, bd) for arg in e.args]
+        return Op(e.op, *args)
+    else:
+        return e
+
 class SplitSummation(Rule):
     """
     Split a summation into several summations.
@@ -2254,12 +2280,23 @@ class SplitSummation(Rule):
     def eval(self, e: Expr, ctx: Context) -> Expr:
         if not e.is_summation():
             return e
+        e: expr.Summation
         cond = self.cond
+        n = Var(e.index_var, type=expr.IntType)
+        eq = expr.Eq(Fun('f', n), e.body)
+        eq_pat = eq.subst(e.index_var, Symbol(e.index_var, pat=[VAR, CONST, OP, FUN, INTEGRAL, MATRIX, INF]))
+        bd = list(eq.rhs.get_vars(with_bd=True))
+        r0 = ExpandDefinition("f", simp=False)
+        r = OnSubterm(r0)
+        tmp_ctx = Context(ctx)
+        tmp_ctx.definitions.append(eq_pat)
         for id in ctx.get_summation_split_identities():
             id: context.Identity
             inst_split_cond = expr.match(cond, id.split_cond)
             if inst_split_cond is not None:
-                inst_lhs = expr.match(e, id.expr.lhs, disable_bd=True)
+                new_expr = change_index(id.expr, bd)
+                new_expr = r.eval(new_expr, tmp_ctx)
+                inst_lhs = expr.match(e, new_expr.lhs)
                 if inst_lhs is not None:
                     inst_split_cond.update(inst_lhs)
                     tmp_conds = [c.inst_pat(inst_split_cond) for c in id.conds.data]
@@ -2269,25 +2306,7 @@ class SplitSummation(Rule):
                             flag = False
                             break
                     if flag:
-                        return id.expr.rhs.inst_pat(inst_split_cond)
-        if cond.is_mod():
-            if self.cond.args[1].val <= 0:
-                return AssertionError("Unexpected value of divisor")
-            if e.upper.is_pos_inf():
-                res = Const(0)
-                for i in range(self.cond.args[1].val):
-                    tmp = Var(e.index_var, type=expr.IntType) * self.cond.args[1] + e.lower + Const(i)
-                    res = normalize(
-                        Op('+', res, Summation(e.index_var, Const(0), e.upper, e.body.subst(e.index_var, tmp))), ctx)
-                return res
-            else:
-                res = Const(0)
-                for i in range(self.cond.args[1].val):
-                    tmp1 = Const((e.upper.val - e.lower.val - i) // self.cond.args[1].val)
-                    tmp2 = Var(e.index_var, type=expr.IntType) * self.cond.args[1] + e.lower + Const(i)
-                    res = normalize(
-                        Op('+', res, Summation(e.index_var, Const(0), tmp1, e.body.subst(e.index_var, tmp2))), ctx)
-                return res
+                        return new_expr.rhs.inst_pat(inst_split_cond)
         return e
 
 

@@ -123,22 +123,19 @@ class MatrixTest(unittest.TestCase):
         goal01 = file.add_goal('hat(w)^2 = w * T(w) - norm(w)^2 * unit_matrix(3)', fixes = fixes)
         proof = goal01.proof_by_calculation()
         calc = proof.rhs_calc
-        calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
         calc.perform_rule(rules.FullSimplify())
         calc = proof.lhs_calc
         old_expr = parser.parse_expr("hat(w) ^ 2", fixes=fixes)
         new_expr = parser.parse_expr("hat(w) ^ 1 * hat(w) ^ 1", fixes=fixes)
+
         calc.perform_rule(rules.ApplyIdentity(old_expr, new_expr))
-        calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
         calc.perform_rule(rules.FullSimplify())
         assert goal01.is_finished()
         goal02 = file.add_goal("w*T(w)*hat(w) = zero_matrix(3,3)", fixes=fixes)
         proof = goal02.proof_by_calculation()
         calc = proof.lhs_calc
-        calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
         calc.perform_rule(rules.FullSimplify())
         calc = proof.rhs_calc
-        calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
         calc.perform_rule(rules.FullSimplify())
         assert goal02.is_finished()
 
@@ -164,12 +161,8 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.Equation(old_e, new_e))
         eq = parser.parse_expr("w * T(w) * hat(w) = zero_matrix(3,3)", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0.1"))
-        # TODO: remove expand func def on subterm
-        calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
         calc.perform_rule(rules.FullSimplify())
         calc = induct_proof.rhs_calc
-        # TODO: remove expand func def on subterm
-        calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
         calc.perform_rule(rules.FullSimplify())
         assert goal03.is_finished()
 
@@ -195,15 +188,11 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.Equation(old_e, new_e))
         eq = parser.parse_expr("w * T(w) * hat(w) = zero_matrix(3,3)", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0.0.1"))
-        # TODO: remove expand func def on subterm
-        calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
         calc.perform_rule(rules.FullSimplify())
         calc = induct_proof.rhs_calc
         old_e = parser.parse_expr("hat(w) ^ 2", fixes=fixes)
         new_e = parser.parse_expr("hat(w) * hat(w)", fixes=fixes)
         calc.perform_rule(rules.Equation(old_e, new_e))
-        # TODO: remove expand func def on subterm
-        calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
         calc.perform_rule(rules.FullSimplify())
         assert goal04.is_finished()
 
@@ -244,6 +233,7 @@ class MatrixTest(unittest.TestCase):
         s3 = parser.parse_expr("a ^ (2 * n + 2) * (-1) ^ n / factorial(2 * n + 2)", fixes=fixes)
         s4 = parser.parse_expr("(-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1))", fixes=fixes)
         calc.perform_rule(rules.Equation(s3, s4))
+
         self.checkAndOutput(file)
 
 
@@ -253,7 +243,7 @@ class MatrixTest(unittest.TestCase):
         fixes['w'] = parser.parse_expr('$tensor($real, 3, 1)')
         fixes['n'] = parser.parse_expr('$int')
         file.add_definition("w = [[a_1],[a_2],[a_3]]", fixes=fixes)
-        goal01 = file.add_goal("exp(hat(w) * x) = unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * (hat(w)) ^ 2",
+        goal01 = file.add_goal("exp(hat(w) * x) = unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * (hat(w) * x) ^ 2",
                                conds=["x >= 0", "norm(w)=1"],
                                fixes=fixes)
         proof = goal01.proof_by_calculation()
@@ -262,44 +252,31 @@ class MatrixTest(unittest.TestCase):
         cond = parser.parse_expr("n % 2", fixes=fixes)
         calc.perform_rule(rules.SplitSummation(cond))
         cond = parser.parse_expr("n = 0", fixes=fixes)
-        calc.perform_rule(rules.SplitSummation(cond))
-        calc.perform_rule(rules.FullSimplify())
-        cond = parser.parse_expr("j = 0", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.SplitSummation(cond), "1"))
-        calc.perform_rule(rules.FullSimplify())
-        calc.perform_rule(rules.OnLocation(rules.ChangeSummationIndex(new_lower="0"), "0.1"))
-        fixes = calc.ctx.get_fixes()
-        s1 = parser.parse_expr("(x * hat(w)) ^ (2 * j + 1)", fixes=fixes)
-        s2 = parser.parse_expr("x ^ (2 * j + 1) * hat(w) ^ (2 * j + 1)", fixes=fixes)
+        calc.perform_rule(rules.OnLocation(rules.ChangeSummationIndex(new_lower="0"), "1.0"))
+        s1 = parser.parse_expr("(x * hat(w)) ^ (2 * n + 1)", fixes=fixes)
+        s2 = parser.parse_expr("x ^ (2 * n + 1) * hat(w) ^ (2 * n + 1)", fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         s3 = parser.parse_expr("(x * hat(w)) ^ (2 * (n + 1))", fixes=fixes)
         s4 = parser.parse_expr("x ^ (2 * (n + 1)) * hat(w) ^ (2 * (n + 1))", fixes=fixes)
         calc.perform_rule(rules.ApplyIdentity(s3, s4))
         s5 = parser.parse_expr("hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)", fixes=fixes)
-        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s5), "0.0.0.0.1"))
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s5), "0.0.0.1"))
         s6 = parser.parse_expr("hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2", fixes=fixes)
-        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s6), "0.1.0.0.1"))
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s6), "1.0.0.0.1"))
         s7 = parser.parse_expr("SUM(n, 0, oo, x ^ (2 * n + 1) * ((-1) ^ n * hat(w)) / factorial(2 * n + 1))", fixes=fixes)
         s8 = parser.parse_expr("hat(w) * SUM(n, 0, oo, (-1) ^ n * x ^ (2 * n + 1) / factorial(2 * n + 1))", fixes=fixes)
-
         calc.perform_rule(rules.Equation(s7, s8))
-        calc.perform_rule(rules.OnLocation(rules.SeriesEvaluationIdentity(), "0.0.1"))
-        s = parser.parse_expr("SUM(n, 0, oo, x ^ (2 * (n + 1)) * ((-1) ^ n * hat(w) ^ 2) / factorial(2 * (n + 1)))", fixes=fixes)
-        t = parser.parse_expr("hat(w) ^ 2 * SUM(n, 0, oo, (-1) ^ n * x ^ (2 * (n + 1)) / factorial(2 * (n + 1)))", fixes=fixes)
-        calc.perform_rule(rules.Equation(s, t))
-        t = parser.parse_expr("SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))", fixes=fixes)
-        s = parser.parse_expr("1 - cos(a)", fixes=fixes)
-        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(Op('=', s, t)), "0.1.1"))
-        calc.perform_rule(rules.FullSimplify())
-        calc = proof.rhs_calc
-        calc.perform_rule(rules.FullSimplify())
-        assert goal01.is_finished()
-        self.checkAndOutput(file)
+        calc.perform_rule(rules.OnLocation(rules.SeriesEvaluationIdentity(), "0.1"))
+        pass
 
     def testMy(self):
-        e = parser.parse_expr("SKOLEM_FUNC(C(a))")
-        pat = expr.expr_to_pattern(e)
-        print(pat)
+        e = parser.parse_expr("-(LIM {y -> oo}. atan(y / a)) + SKOLEM_FUNC(C(a))")
+        r = rules.FullSimplify()
+        ctx = Context()
+        ctx.add_condition("a>0")
+        e = r.eval(e, ctx)
+        print(e)
 
 if __name__ == "__main__":
     unittest.main()

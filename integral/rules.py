@@ -2228,7 +2228,7 @@ class MergeSummation(Rule):
         return Summation(a.index_var, a.lower, a.upper, Op(e.op, a.body, b.body))
 
 
-alphabet = "ijkmn"
+alphabet = "ijkmnabcdef"
 def change_index(e:Expr, bd:List):
     ''' using new index variable for summation '''
     if e.is_summation():
@@ -2285,7 +2285,7 @@ class SplitSummation(Rule):
         n = Var(e.index_var, type=expr.IntType)
         eq = expr.Eq(Fun('f', n), e.body)
         eq_pat = eq.subst(e.index_var, Symbol(e.index_var, pat=[VAR, CONST, OP, FUN, INTEGRAL, MATRIX, INF]))
-        bd = list(eq.rhs.get_vars(with_bd=True))
+        bd = list(e.get_vars(with_bd=True))
         r0 = ExpandDefinition("f", simp=False)
         r = OnSubterm(r0)
         tmp_ctx = Context(ctx)

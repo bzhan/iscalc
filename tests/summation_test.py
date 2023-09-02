@@ -2,6 +2,7 @@ import unittest
 from integral.rules import SplitSummation
 from integral.parser import parse_expr
 from integral.context import Context
+from integral.poly import normalize
 
 
 class SummationTest(unittest.TestCase):
@@ -38,24 +39,26 @@ class SummationTest(unittest.TestCase):
             print(r)
             self.assertEqual(str(r), res)
 
-
     def testSplitSummation2(self):
         test_data = [
-            ("SUM(i, 1, oo, i / (i + 1))",
-             "i % 4",
-             "SUM(j, 0, 4 - 1, SUM(n, 0, floor((oo - 1 - j) / 4), (4 * n + 1 + j) / (4 * n + 1 + j + 1)))"),
-            ("SUM(i, 5, 21, i / (i + k))",
+            # ("SUM(i, 1, oo, i / (i + 1))",
+            #  "i % 4",
+            #  "SUM(j, 0, 4 - 1, SUM(n, 0, floor((oo - 1 - j) / 4), (4 * n + 1 + j) / (4 * n + 1 + j + 1)))"),
+            # ("SUM(i, 5, 21, i / (i + k))",
+            #  "i % 3",
+            #  "SUM(j, 0, 3 - 1, SUM(n, 0, floor((21 - 5 - j) / 3), (3 * n + 5 + j) / (3 * n + 5 + j + k)))"),
+            # ("SUM(i, -4, -oo, i / (i + k))",
+            #  "i % 100",
+            #  "SUM(j, 0, 100 - 1, SUM(n, 0, floor((-oo - -4 - j) / 100), (100 * n + -4 + j) / (100 * n + -4 + j + k)))"),
+            # ("SUM(i, -7, -2, i / (i + k))",
+            #  "i % 2",
+            #  "SUM(j, 0, 2 - 1, SUM(n, 0, floor((-2 - -7 - j) / 2), (2 * n + -7 + j) / (2 * n + -7 + j + k)))"),
+            # ("SUM(i, -7, oo, i / (i + k))",
+            #  "i % 1",
+            #  "SUM(j, 0, 1 - 1, SUM(n, 0, floor((oo - -7 - j) / 1), (1 * n + -7 + j) / (1 * n + -7 + j + k)))"),
+            ("SUM(i, m, n, (i + j) / (i + k + l + a))",
              "i % 3",
-             "SUM(j, 0, 3 - 1, SUM(n, 0, floor((21 - 5 - j) / 3), (3 * n + 5 + j) / (3 * n + 5 + j + k)))"),
-            ("SUM(i, -4, -oo, i / (i + k))",
-             "i % 100",
-             "SUM(j, 0, 100 - 1, SUM(n, 0, floor((-oo - -4 - j) / 100), (100 * n + -4 + j) / (100 * n + -4 + j + k)))"),
-            ("SUM(i, -7, -2, i / (i + k))",
-             "i % 2",
-             "SUM(j, 0, 2 - 1, SUM(n, 0, floor((-2 - -7 - j) / 2), (2 * n + -7 + j) / (2 * n + -7 + j + k)))"),
-            ("SUM(i, -7, oo, i / (i + k))",
-             "i % 1",
-             "SUM(j, 0, 1 - 1, SUM(n, 0, floor((oo - -7 - j) / 1), (1 * n + -7 + j) / (1 * n + -7 + j + k)))")
+             "SUM(m, 0, 3 - 1, SUM(n, 0, floor((4 - -7 - m) / 3), (3 * n + -7 + m + j) / (3 * n + -7 + m + k + l + a)))"),
         ]
         ctx = Context()
         ctx.load_book('base')

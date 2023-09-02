@@ -652,9 +652,13 @@ class Expr:
         res = set()
 
         def rec(t, bd_vars):
+            nonlocal with_bd
             if t.ty == VAR:
-                if t.name not in bd_vars:
+                if with_bd:
                     res.add(t.name)
+                else:
+                    if t.name not in bd_vars:
+                        res.add(t.name)
             elif t.ty in (CONST, INF, SYMBOL):
                 return
             elif t.ty in (OP, FUN):
@@ -692,11 +696,7 @@ class Expr:
                 raise NotImplementedError
         bd = []
         rec(self, bd)
-        if not with_bd:
-            return res
-        else:
-            res.union(set(bd))
-            return res
+        return res
 
     def has_symbol(self) -> bool:
         if isinstance(self, Symbol):

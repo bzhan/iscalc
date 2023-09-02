@@ -10,10 +10,6 @@
                 [
                     "n",
                     "$int"
-                ],
-                [
-                    "j",
-                    "$int"
                 ]
             ],
             "latex_var": "w",
@@ -40,10 +36,6 @@
                 [
                     "n",
                     "$int"
-                ],
-                [
-                    "j",
-                    "$int"
                 ]
             ],
             "goal": "exp(hat(w) * x) = unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * hat(w) ^ 2",
@@ -51,6 +43,20 @@
             "proof": {
                 "calcs": [
                     {
+                        "fixes": [
+                            [
+                                "i",
+                                "$int"
+                            ],
+                            [
+                                "j",
+                                "$int"
+                            ],
+                            [
+                                "n",
+                                "$int"
+                            ]
+                        ],
                         "latex_start": "e^{\\hat{w} x}",
                         "start": "exp(hat(w) * x)",
                         "steps": [

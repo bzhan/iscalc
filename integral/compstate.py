@@ -385,6 +385,11 @@ class Calculation(StateItem):
         }
         if self.conds.data:
             res["conds"] = self.conds.export()
+        if len(self.ctx.fixes.items()) > 0:
+            d = list()
+            for a, b in self.ctx.fixes.items():
+                d.append((a, str(b)))
+            res['fixes'] = d
         return res
 
     def clear(self, id: int = 0):
@@ -1048,12 +1053,15 @@ def parse_item(parent, item) -> StateItem:
             res.calcs[i] = parse_item(res, calc_item)
         return res
     elif item['type'] == 'Calculation':
-
         ctx = parent.get_context() if isinstance(parent, CompFile) else parent.ctx
         fixes = ctx.get_fixes()
         start = parser.parse_expr(item['start'], fixes=fixes)
         conds = parse_conds(item, fixes=fixes)
         res = Calculation(parent, ctx, start, conds=conds)
+        if "fixes" in item:
+            for a, b in item['fixes']:
+                b = parser.parse_expr(b, fixes=fixes)
+                res.ctx.add_fix(a, b)
         for i, step in enumerate(item['steps']):
             res.add_step(parse_step(res, step, i))
         return res

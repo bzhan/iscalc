@@ -2306,7 +2306,11 @@ class SplitSummation(Rule):
                             flag = False
                             break
                     if flag:
-                        return new_expr.rhs.inst_pat(inst_split_cond)
+                        res = new_expr.rhs.inst_pat(inst_split_cond)
+                        other_vars = res.get_vars(with_bd=True).difference(bd)
+                        for var in other_vars:
+                            ctx.parent.add_fix(var, expr.IntType)
+                        return res
         return e
 
 

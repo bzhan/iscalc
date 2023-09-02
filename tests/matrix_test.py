@@ -243,7 +243,7 @@ class MatrixTest(unittest.TestCase):
         fixes['w'] = parser.parse_expr('$tensor($real, 3, 1)')
         fixes['n'] = parser.parse_expr('$int')
         file.add_definition("w = [[a_1],[a_2],[a_3]]", fixes=fixes)
-        goal01 = file.add_goal("exp(hat(w) * x) = unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * (hat(w) * x) ^ 2",
+        goal01 = file.add_goal("exp(hat(w) * x) = unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * (hat(w)) ^ 2",
                                conds=["x >= 0", "norm(w)=1"],
                                fixes=fixes)
         proof = goal01.proof_by_calculation()
@@ -268,7 +268,17 @@ class MatrixTest(unittest.TestCase):
         s8 = parser.parse_expr("hat(w) * SUM(n, 0, oo, (-1) ^ n * x ^ (2 * n + 1) / factorial(2 * n + 1))", fixes=fixes)
         calc.perform_rule(rules.Equation(s7, s8))
         calc.perform_rule(rules.OnLocation(rules.SeriesEvaluationIdentity(), "0.1"))
-        pass
+        s = parser.parse_expr("SUM(n, 0, oo, x ^ (2 * (n + 1)) * ((-1) ^ n * hat(w) ^ 2) / factorial(2 * (n + 1)))", fixes=fixes)
+        t = parser.parse_expr("hat(w) ^ 2 * SUM(n, 0, oo, (-1) ^ n * x ^ (2 * (n + 1)) / factorial(2 * (n + 1)))", fixes=fixes)
+        calc.perform_rule(rules.Equation(s, t))
+        t = parser.parse_expr("SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))", fixes=fixes)
+        s = parser.parse_expr("1 - cos(a)", fixes=fixes)
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(Op('=', s, t)), "1.0.1"))
+        calc.perform_rule(rules.FullSimplify())
+        calc = proof.rhs_calc
+        calc.perform_rule(rules.FullSimplify())
+        assert goal01.is_finished()
+        self.checkAndOutput(file)
 
     def testMy(self):
         e = parser.parse_expr("-(LIM {y -> oo}. atan(y / a)) + SKOLEM_FUNC(C(a))")

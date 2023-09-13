@@ -446,6 +446,9 @@ def get_standard_inequalities() -> List[Identity]:
         # Factorial
         ([], "factorial(x) >= 1"),
 
+        # reflexivity
+        ([], "x = x"),
+
         # isInt
         (["isInt(a)", "isInt(b)"], "isInt(a + b)"),
         (["isInt(a)", "isInt(b)"], "isInt(a - b)"),

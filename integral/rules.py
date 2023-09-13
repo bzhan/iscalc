@@ -1184,6 +1184,8 @@ class ApplyInductHyp(Rule):
         for eq in ctx.get_induct_hyps():
             if e == eq.lhs:
                 return eq.rhs
+            if e == eq.rhs:
+                return eq.lhs
 
         # Not found
         return e

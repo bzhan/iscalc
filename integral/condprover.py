@@ -86,11 +86,6 @@ def init_all_conds(conds: Conditions) -> Dict[Expr, List[Expr]]:
                 all_conds[x.args[0]] = list()
             all_conds[x.args[0]].append(Op("<=", x.args[0], cond.args[1]))
             all_conds[x.args[0]].append(Op(">=", x.args[0], -cond.args[1]))
-        if cond.is_op() and cond.op == '!=':
-            y = cond.args[1]
-            if y not in all_conds:
-                all_conds[y] = list()
-            all_conds[y].append(Op('!=', y, x))
 
     # add simple condition transition
     for k in all_conds:
@@ -277,7 +272,7 @@ def all_conds_size(all_conds: Dict[Expr, List[Expr]]) -> int:
         res += len(conds)
     return res        
 
-def saturate(e: Expr, ineqs: List[Identity], all_conds: Dict[Expr, List[Expr]], ctx: Context, *, 
+def saturate(e: Expr, ineqs: List[Identity], all_conds: Dict[Expr, List[Expr]], ctx: Context, *,
              round_limit: int = 5, size_limit: int = 1000):
     """Saturate up to given number of rounds and size limits.
     

@@ -1494,6 +1494,17 @@ class Equation(Rule):
             if idx not in out.get_vars():
                 e = Summation(idx, sum.lower, sum.upper, out * sum.body)
 
+        # sum(k, l, u, body1) + sum(i, l, u, body2) => sum(k, l, u, body1+body2)
+        x = Symbol('x', [SUMMATION])
+        y = Symbol('y', [SUMMATION])
+        p = x + y
+        mapping = expr.match(e, p)
+        if mapping is not None:
+            sum1:Summation = mapping[x.name]
+            sum2:Summation = mapping[y.name]
+            if sum1.lower == sum2.lower and sum1.upper == sum2.upper:
+                e = Summation(sum1.index_var, sum1.lower,sum1.upper, sum1.body+sum2.body)
+
         if normalize(norm.normalize_exp(e), ctx) == normalize(self.new_expr, ctx):
             return self.new_expr
 

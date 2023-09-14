@@ -1,0 +1,1343 @@
+{
+    "content": [
+        {
+            "eq": "C(n,m) = factorial(n) / (factorial(m) * factorial(n - m))",
+            "latex_eq": "C(n,m) = \\frac{n!}{m! (n - m)!}",
+            "latex_lhs": "C(n,m)",
+            "type": "FuncDef"
+        },
+        {
+            "finished": true,
+            "goal": "C(n,m) = C(n,n - m)",
+            "latex_goal": "C(n,m) = C(n,n - m)",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "C(n,m)",
+                        "start": "C(n,m)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{n!}{m! (-m + n)!}",
+                                "res": "factorial(n) / (factorial(m) * factorial(-m + n))",
+                                "rule": {
+                                    "func_name": "C",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "C(n,n - m)",
+                        "start": "C(n,n - m)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{n!}{m! (-m + n)!}",
+                                "res": "factorial(n) / (factorial(m) * factorial(-m + n))",
+                                "rule": {
+                                    "func_name": "C",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "C(n,m) = C(n,n - m)",
+                "latex_goal": "C(n,m) = C(n,n - m)",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "finished": true,
+            "goal": "C(n,m) * C(m,r) = C(n,r) * C(n - r,m - r)",
+            "latex_goal": "C(n,m) C(m,r) = C(n,r) C(n - r,m - r)",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "C(n,m) C(m,r)",
+                        "start": "C(n,m) * C(m,r)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{n!}{m! (-m + n)!} (\\frac{m!}{r! (m - r)!})",
+                                "res": "factorial(n) / (factorial(m) * factorial(-m + n)) * (factorial(m) / (factorial(r) * factorial(m - r)))",
+                                "rule": {
+                                    "func_name": "C",
+                                    "loc": "subterms",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{n!}{r! (m - r)! (-m + n)!}",
+                                "res": "factorial(n) / (factorial(r) * factorial(m - r) * factorial(-m + n))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "C(n,r) C(n - r,m - r)",
+                        "start": "C(n,r) * C(n - r,m - r)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{n!}{r! (n - r)!} (\\frac{(n - r)!}{(m - r)! (-m + n)!})",
+                                "res": "factorial(n) / (factorial(r) * factorial(n - r)) * (factorial(n - r) / (factorial(m - r) * factorial(-m + n)))",
+                                "rule": {
+                                    "func_name": "C",
+                                    "loc": "subterms",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{n!}{r! (m - r)! (-m + n)!}",
+                                "res": "factorial(n) / (factorial(r) * factorial(m - r) * factorial(-m + n))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "C(n,m) * C(m,r) = C(n,r) * C(n - r,m - r)",
+                "latex_goal": "C(n,m) C(m,r) = C(n,r) C(n - r,m - r)",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "finished": true,
+            "goal": "C(n,m - 1) + C(n,m) = C(n + 1,m)",
+            "latex_goal": "C(n,m - 1) + C(n,m) = C(n + 1,m)",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "C(n,m - 1) + C(n,m)",
+                        "start": "C(n,m - 1) + C(n,m)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{n!}{(m - 1)! (-m + n + 1)!} + \\frac{n!}{m! (-m + n)!}",
+                                "res": "factorial(n) / (factorial(m - 1) * factorial(-m + n + 1)) + factorial(n) / (factorial(m) * factorial(-m + n))",
+                                "rule": {
+                                    "func_name": "C",
+                                    "loc": "subterms",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{n! m}{(m - 1 + 1) (m - 1)! (-m + n + 1)!} + \\frac{n!}{m! (-m + n)!}",
+                                "res": "factorial(n) * m / ((m - 1 + 1) * factorial(m - 1) * factorial(-m + n + 1)) + factorial(n) / (factorial(m) * factorial(-m + n))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{n!}{(m - 1)! (-m + n + 1)!}\\) to \\(\\frac{n! m}{(m - 1 + 1) (m - 1)! (-m + n + 1)!}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "factorial(n) * m / ((m - 1 + 1) * factorial(m - 1) * factorial(-m + n + 1))",
+                                    "old_expr": "factorial(n) / (factorial(m - 1) * factorial(-m + n + 1))",
+                                    "str": "rewriting factorial(n) / (factorial(m - 1) * factorial(-m + n + 1)) to factorial(n) * m / ((m - 1 + 1) * factorial(m - 1) * factorial(-m + n + 1))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{n! m}{(m - 1 + 1) (m - 1)! (-m + n + 1)!} + \\frac{n! (-m + n + 1)}{m! ((-m + n + 1) (-m + n)!)}",
+                                "res": "factorial(n) * m / ((m - 1 + 1) * factorial(m - 1) * factorial(-m + n + 1)) + factorial(n) * (-m + n + 1) / (factorial(m) * ((-m + n + 1) * factorial(-m + n)))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{n!}{m! (-m + n)!}\\) to \\(\\frac{n! (-m + n + 1)}{m! ((-m + n + 1) (-m + n)!)}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "factorial(n) * (-m + n + 1) / (factorial(m) * ((-m + n + 1) * factorial(-m + n)))",
+                                    "old_expr": "factorial(n) / (factorial(m) * factorial(-m + n))",
+                                    "str": "rewriting factorial(n) / (factorial(m) * factorial(-m + n)) to factorial(n) * (-m + n + 1) / (factorial(m) * ((-m + n + 1) * factorial(-m + n)))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{n! m}{(m - 1 + 1) (m - 1)! (-m + n + 1)!} + \\frac{n! (-m + n + 1)}{m! (-m + n + 1)!}",
+                                "res": "factorial(n) * m / ((m - 1 + 1) * factorial(m - 1) * factorial(-m + n + 1)) + factorial(n) * (-m + n + 1) / (factorial(m) * factorial(-m + n + 1))",
+                                "rule": {
+                                    "latex_str": "rewrite \\((-m + n + 1) (-m + n)!\\) to \\((-m + n + 1)!\\) using identity at 1.1.1",
+                                    "loc": "1.1.1",
+                                    "name": "ApplyIdentity",
+                                    "source": "(-m + n + 1) * factorial(-m + n)",
+                                    "str": "rewrite (-m + n + 1) * factorial(-m + n) to factorial(-m + n + 1) using identity at 1.1.1",
+                                    "target": "factorial(-m + n + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{n! m}{(m - 1 + 1)! (-m + n + 1)!} + \\frac{n! (-m + n + 1)}{m! (-m + n + 1)!}",
+                                "res": "factorial(n) * m / (factorial(m - 1 + 1) * factorial(-m + n + 1)) + factorial(n) * (-m + n + 1) / (factorial(m) * factorial(-m + n + 1))",
+                                "rule": {
+                                    "latex_str": "rewrite \\((m - 1 + 1) (m - 1)!\\) to \\((m - 1 + 1)!\\) using identity at 0.1.0",
+                                    "loc": "0.1.0",
+                                    "name": "ApplyIdentity",
+                                    "source": "(m - 1 + 1) * factorial(m - 1)",
+                                    "str": "rewrite (m - 1 + 1) * factorial(m - 1) to factorial(m - 1 + 1) using identity at 0.1.0",
+                                    "target": "factorial(m - 1 + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{n! (-m + n + 1)}{m! (-m + n + 1)!} + \\frac{m n!}{m! (-m + n + 1)!}",
+                                "res": "factorial(n) * (-m + n + 1) / (factorial(m) * factorial(-m + n + 1)) + m * factorial(n) / (factorial(m) * factorial(-m + n + 1))",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{(n + 1) n!}{m! (-m + n + 1)!}",
+                                "res": "(n + 1) * factorial(n) / (factorial(m) * factorial(-m + n + 1))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{n! (-m + n + 1)}{m! (-m + n + 1)!} + \\frac{m n!}{m! (-m + n + 1)!}\\) to \\(\\frac{(n + 1) n!}{m! (-m + n + 1)!}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(n + 1) * factorial(n) / (factorial(m) * factorial(-m + n + 1))",
+                                    "old_expr": "factorial(n) * (-m + n + 1) / (factorial(m) * factorial(-m + n + 1)) + m * factorial(n) / (factorial(m) * factorial(-m + n + 1))",
+                                    "str": "rewriting factorial(n) * (-m + n + 1) / (factorial(m) * factorial(-m + n + 1)) + m * factorial(n) / (factorial(m) * factorial(-m + n + 1)) to (n + 1) * factorial(n) / (factorial(m) * factorial(-m + n + 1))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{(n + 1)!}{m! (-m + n + 1)!}",
+                                "res": "factorial(n + 1) / (factorial(m) * factorial(-m + n + 1))",
+                                "rule": {
+                                    "latex_str": "rewrite \\((n + 1) n!\\) to \\((n + 1)!\\) using identity at 0",
+                                    "loc": "0",
+                                    "name": "ApplyIdentity",
+                                    "source": "(n + 1) * factorial(n)",
+                                    "str": "rewrite (n + 1) * factorial(n) to factorial(n + 1) using identity at 0",
+                                    "target": "factorial(n + 1)"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "C(n + 1,m)",
+                        "start": "C(n + 1,m)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{(n + 1)!}{m! (-m + n + 1)!}",
+                                "res": "factorial(n + 1) / (factorial(m) * factorial(-m + n + 1))",
+                                "rule": {
+                                    "func_name": "C",
+                                    "loc": "subterms",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition on subterms"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "C(n,m - 1) + C(n,m) = C(n + 1,m)",
+                "latex_goal": "C(n,m - 1) + C(n,m) = C(n + 1,m)",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "m >= 0",
+                    "latex_cond": "m \\ge 0"
+                },
+                {
+                    "cond": "n >= 0",
+                    "latex_cond": "n \\ge 0"
+                }
+            ],
+            "finished": true,
+            "fixes": [
+                [
+                    "m",
+                    "$int"
+                ],
+                [
+                    "n",
+                    "$int"
+                ],
+                [
+                    "i",
+                    "$int"
+                ]
+            ],
+            "goal": "C(m + n + 1,m) = SUM(i, 0, m, C(n + i,i))",
+            "latex_goal": "C(m + n + 1,m) = \\sum_{i=0}^{m}{C(n + i,i)}",
+            "proof": {
+                "base_case": {
+                    "finished": true,
+                    "goal": "C(n + 1,0) = C(n,0)",
+                    "latex_goal": "C(n + 1,0) = C(n,0)",
+                    "proof": {
+                        "calcs": [
+                            {
+                                "latex_start": "C(n + 1,0)",
+                                "start": "C(n + 1,0)",
+                                "steps": [
+                                    {
+                                        "latex_res": "1",
+                                        "res": "1",
+                                        "rule": {
+                                            "func_name": "C",
+                                            "name": "ExpandDefinition",
+                                            "str": "expand definition"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            },
+                            {
+                                "latex_start": "C(n,0)",
+                                "start": "C(n,0)",
+                                "steps": [
+                                    {
+                                        "latex_res": "1",
+                                        "res": "1",
+                                        "rule": {
+                                            "func_name": "C",
+                                            "name": "ExpandDefinition",
+                                            "str": "expand definition"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "C(n + 1,0) = C(n,0)",
+                        "latex_goal": "C(n + 1,0) = C(n,0)",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal"
+                },
+                "finished": true,
+                "goal": "C(m + n + 1,m) = SUM(i, 0, m, C(n + i,i))",
+                "induct_case": {
+                    "finished": true,
+                    "goal": "C(m + n + 2,m + 1) = SUM(i, 0, m + 1, C(i + n,i))",
+                    "latex_goal": "C(m + n + 2,m + 1) = \\sum_{i=0}^{m + 1}{C(i + n,i)}",
+                    "proof": {
+                        "calcs": [
+                            {
+                                "latex_start": "C(m + n + 2,m + 1)",
+                                "start": "C(m + n + 2,m + 1)",
+                                "steps": [],
+                                "type": "Calculation"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "j",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_start": "\\sum_{i=0}^{m + 1}{C(i + n,i)}",
+                                "start": "SUM(i, 0, m + 1, C(i + n,i))",
+                                "steps": [
+                                    {
+                                        "latex_res": "\\sum_{j=0}^{m + 1 - 1}{C(j + n,j)} + \\sum_{j=m + 1}^{m + 1}{C(j + n,j)}",
+                                        "res": "SUM(j, 0, m + 1 - 1, C(j + n,j)) + SUM(j, m + 1, m + 1, C(j + n,j))",
+                                        "rule": {
+                                            "cond": "i = m + 1",
+                                            "name": "SplitSummation",
+                                            "str": "split summation"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "C(m + n + 1,m + 1) + \\sum_{j=0}^{m}{C(j + n,j)}",
+                                        "res": "C(m + n + 1,m + 1) + SUM(j, 0, m, C(j + n,j))",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "C(m + n + 1,m + 1) + \\sum_{j=0}^{m}{C(n + j,j)}",
+                                        "res": "C(m + n + 1,m + 1) + SUM(j, 0, m, C(n + j,j))",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(j + n\\) to \\(n + j\\)",
+                                            "name": "Equation",
+                                            "new_expr": "n + j",
+                                            "old_expr": "j + n",
+                                            "str": "rewriting j + n to n + j"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "C(m + n + 1,m + 1) + C(m + n + 1,m)",
+                                        "res": "C(m + n + 1,m + 1) + C(m + n + 1,m)",
+                                        "rule": {
+                                            "loc": "1",
+                                            "name": "ApplyInductHyp",
+                                            "str": "apply induction hypothesis at 1"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "C(m + n + 1,m + 1 - 1) + C(m + n + 1,m + 1)",
+                                        "res": "C(m + n + 1,m + 1 - 1) + C(m + n + 1,m + 1)",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(C(m + n + 1,m + 1) + C(m + n + 1,m)\\) to \\(C(m + n + 1,m + 1 - 1) + C(m + n + 1,m + 1)\\)",
+                                            "name": "Equation",
+                                            "new_expr": "C(m + n + 1,m + 1 - 1) + C(m + n + 1,m + 1)",
+                                            "old_expr": "C(m + n + 1,m + 1) + C(m + n + 1,m)",
+                                            "str": "rewriting C(m + n + 1,m + 1) + C(m + n + 1,m) to C(m + n + 1,m + 1 - 1) + C(m + n + 1,m + 1)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "C(m + n + 1 + 1,m + 1)",
+                                        "res": "C(m + n + 1 + 1,m + 1)",
+                                        "rule": {
+                                            "eq": "C(n,m - 1) + C(n,m) = C(n + 1,m)",
+                                            "latex_str": "apply equation \\(C(n,m - 1) + C(n,m) = C(n + 1,m)\\)",
+                                            "name": "ApplyEquation",
+                                            "str": "apply equation: C(n,m - 1) + C(n,m) = C(n + 1,m)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "C(m + n + 2,m + 1)",
+                                        "res": "C(m + n + 2,m + 1)",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "C(m + n + 2,m + 1) = SUM(i, 0, m + 1, C(i + n,i))",
+                        "latex_goal": "C(m + n + 2,m + 1) = \\sum_{i=0}^{m + 1}{C(i + n,i)}",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal"
+                },
+                "induct_var": "m",
+                "latex_goal": "C(m + n + 1,m) = \\sum_{i=0}^{m}{C(n + i,i)}",
+                "type": "InductionProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "x != 0",
+                    "latex_cond": "x \\neq 0"
+                },
+                {
+                    "cond": "y != 0",
+                    "latex_cond": "y \\neq 0"
+                },
+                {
+                    "cond": "n > 0",
+                    "latex_cond": "n > 0"
+                }
+            ],
+            "finished": true,
+            "fixes": [
+                [
+                    "n",
+                    "$int"
+                ],
+                [
+                    "k",
+                    "$int"
+                ]
+            ],
+            "goal": "(x + y) ^ n = SUM(k, 0, n, C(n,k) * x ^ k * y ^ (n - k))",
+            "latex_goal": "(x + y) ^ {n} = \\sum_{k=0}^{n}{C(n,k) x ^ {k} y ^ {n - k}}",
+            "obligations": [
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "x + y > 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "x != 0",
+                            "latex_cond": "x \\neq 0"
+                        },
+                        {
+                            "cond": "y != 0",
+                            "latex_cond": "y \\neq 0"
+                        },
+                        {
+                            "cond": "n > 0",
+                            "latex_cond": "n > 0"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "isInt(n)"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "x != 0",
+                            "latex_cond": "x \\neq 0"
+                        },
+                        {
+                            "cond": "y != 0",
+                            "latex_cond": "y \\neq 0"
+                        },
+                        {
+                            "cond": "n > 0",
+                            "latex_cond": "n > 0"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "n >= 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "x != 0",
+                            "latex_cond": "x \\neq 0"
+                        },
+                        {
+                            "cond": "y != 0",
+                            "latex_cond": "y \\neq 0"
+                        },
+                        {
+                            "cond": "n > 0",
+                            "latex_cond": "n > 0"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "y > 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "x != 0",
+                            "latex_cond": "x \\neq 0"
+                        },
+                        {
+                            "cond": "y != 0",
+                            "latex_cond": "y \\neq 0"
+                        },
+                        {
+                            "cond": "n > 0",
+                            "latex_cond": "n > 0"
+                        },
+                        {
+                            "cond": "k >= 0",
+                            "latex_cond": "k \\ge 0"
+                        },
+                        {
+                            "cond": "k <= n",
+                            "latex_cond": "k \\le n"
+                        },
+                        {
+                            "cond": "n - k >= 0",
+                            "latex_cond": "n - k \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(k)",
+                            "latex_cond": "k \\in\\mathbb{Z}"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "isInt(n - k)"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "x != 0",
+                            "latex_cond": "x \\neq 0"
+                        },
+                        {
+                            "cond": "y != 0",
+                            "latex_cond": "y \\neq 0"
+                        },
+                        {
+                            "cond": "n > 0",
+                            "latex_cond": "n > 0"
+                        },
+                        {
+                            "cond": "k >= 0",
+                            "latex_cond": "k \\ge 0"
+                        },
+                        {
+                            "cond": "k <= n",
+                            "latex_cond": "k \\le n"
+                        },
+                        {
+                            "cond": "n - k >= 0",
+                            "latex_cond": "n - k \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(k)",
+                            "latex_cond": "k \\in\\mathbb{Z}"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "n - k >= 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "x != 0",
+                            "latex_cond": "x \\neq 0"
+                        },
+                        {
+                            "cond": "y != 0",
+                            "latex_cond": "y \\neq 0"
+                        },
+                        {
+                            "cond": "n > 0",
+                            "latex_cond": "n > 0"
+                        },
+                        {
+                            "cond": "k >= 0",
+                            "latex_cond": "k \\ge 0"
+                        },
+                        {
+                            "cond": "k <= n",
+                            "latex_cond": "k \\le n"
+                        },
+                        {
+                            "cond": "n - k >= 0",
+                            "latex_cond": "n - k \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(k)",
+                            "latex_cond": "k \\in\\mathbb{Z}"
+                        }
+                    ]
+                }
+            ],
+            "proof": {
+                "base_case": {
+                    "finished": true,
+                    "goal": "x + y = SUM(k, 0, 1, x ^ k * y ^ (-k + 1) * C(1,k))",
+                    "latex_goal": "x + y = \\sum_{k=0}^{1}{x ^ {k} y ^ {-k + 1} C(1,k)}",
+                    "obligations": [
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "y > 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "x != 0",
+                                    "latex_cond": "x \\neq 0"
+                                },
+                                {
+                                    "cond": "y != 0",
+                                    "latex_cond": "y \\neq 0"
+                                },
+                                {
+                                    "cond": "n > 0",
+                                    "latex_cond": "n > 0"
+                                },
+                                {
+                                    "cond": "k >= 0",
+                                    "latex_cond": "k \\ge 0"
+                                },
+                                {
+                                    "cond": "k <= 1",
+                                    "latex_cond": "k \\le 1"
+                                },
+                                {
+                                    "cond": "1 - k >= 0",
+                                    "latex_cond": "1 - k \\ge 0"
+                                },
+                                {
+                                    "cond": "isInt(k)",
+                                    "latex_cond": "k \\in\\mathbb{Z}"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "isInt(-k + 1)"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "x != 0",
+                                    "latex_cond": "x \\neq 0"
+                                },
+                                {
+                                    "cond": "y != 0",
+                                    "latex_cond": "y \\neq 0"
+                                },
+                                {
+                                    "cond": "n > 0",
+                                    "latex_cond": "n > 0"
+                                },
+                                {
+                                    "cond": "k >= 0",
+                                    "latex_cond": "k \\ge 0"
+                                },
+                                {
+                                    "cond": "k <= 1",
+                                    "latex_cond": "k \\le 1"
+                                },
+                                {
+                                    "cond": "1 - k >= 0",
+                                    "latex_cond": "1 - k \\ge 0"
+                                },
+                                {
+                                    "cond": "isInt(k)",
+                                    "latex_cond": "k \\in\\mathbb{Z}"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "-k + 1 >= 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "x != 0",
+                                    "latex_cond": "x \\neq 0"
+                                },
+                                {
+                                    "cond": "y != 0",
+                                    "latex_cond": "y \\neq 0"
+                                },
+                                {
+                                    "cond": "n > 0",
+                                    "latex_cond": "n > 0"
+                                },
+                                {
+                                    "cond": "k >= 0",
+                                    "latex_cond": "k \\ge 0"
+                                },
+                                {
+                                    "cond": "k <= 1",
+                                    "latex_cond": "k \\le 1"
+                                },
+                                {
+                                    "cond": "1 - k >= 0",
+                                    "latex_cond": "1 - k \\ge 0"
+                                },
+                                {
+                                    "cond": "isInt(k)",
+                                    "latex_cond": "k \\in\\mathbb{Z}"
+                                }
+                            ]
+                        }
+                    ],
+                    "proof": {
+                        "calcs": [
+                            {
+                                "latex_start": "x + y",
+                                "start": "x + y",
+                                "steps": [],
+                                "type": "Calculation"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_start": "\\sum_{k=0}^{1}{x ^ {k} y ^ {-k + 1} C(1,k)}",
+                                "start": "SUM(k, 0, 1, x ^ k * y ^ (-k + 1) * C(1,k))",
+                                "steps": [
+                                    {
+                                        "latex_res": "\\sum_{n=0}^{0}{x ^ {n} y ^ {-n + 1} C(1,n)} + \\sum_{n=0 + 1}^{1}{x ^ {n} y ^ {-n + 1} C(1,n)}",
+                                        "res": "SUM(n, 0, 0, x ^ n * y ^ (-n + 1) * C(1,n)) + SUM(n, 0 + 1, 1, x ^ n * y ^ (-n + 1) * C(1,n))",
+                                        "rule": {
+                                            "cond": "k = 0",
+                                            "name": "SplitSummation",
+                                            "str": "split summation"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "x\\cdot C(1,1) + y\\cdot C(1,0)",
+                                        "res": "x * C(1,1) + y * C(1,0)",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "x\\cdot 1 + y\\cdot 1",
+                                        "res": "x * 1 + y * 1",
+                                        "rule": {
+                                            "func_name": "C",
+                                            "loc": "subterms",
+                                            "name": "ExpandDefinition",
+                                            "str": "expand definition on subterms"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "x + y",
+                                        "res": "x + y",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "x + y = SUM(k, 0, 1, x ^ k * y ^ (-k + 1) * C(1,k))",
+                        "latex_goal": "x + y = \\sum_{k=0}^{1}{x ^ {k} y ^ {-k + 1} C(1,k)}",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal",
+                    "wellformed": false
+                },
+                "finished": true,
+                "goal": "(x + y) ^ n = SUM(k, 0, n, C(n,k) * x ^ k * y ^ (n - k))",
+                "induct_case": {
+                    "finished": true,
+                    "goal": "(x + y) ^ (n + 1) = SUM(k, 0, n + 1, x ^ k * y ^ (-k + n + 1) * C(n + 1,k))",
+                    "latex_goal": "(x + y) ^ {n + 1} = \\sum_{k=0}^{n + 1}{x ^ {k} y ^ {-k + n + 1} C(n + 1,k)}",
+                    "obligations": [
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "x + y > 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "x != 0",
+                                    "latex_cond": "x \\neq 0"
+                                },
+                                {
+                                    "cond": "y != 0",
+                                    "latex_cond": "y \\neq 0"
+                                },
+                                {
+                                    "cond": "n > 0",
+                                    "latex_cond": "n > 0"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "isInt(n + 1)"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "x != 0",
+                                    "latex_cond": "x \\neq 0"
+                                },
+                                {
+                                    "cond": "y != 0",
+                                    "latex_cond": "y \\neq 0"
+                                },
+                                {
+                                    "cond": "n > 0",
+                                    "latex_cond": "n > 0"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "n + 1 >= 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "x != 0",
+                                    "latex_cond": "x \\neq 0"
+                                },
+                                {
+                                    "cond": "y != 0",
+                                    "latex_cond": "y \\neq 0"
+                                },
+                                {
+                                    "cond": "n > 0",
+                                    "latex_cond": "n > 0"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "y > 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "x != 0",
+                                    "latex_cond": "x \\neq 0"
+                                },
+                                {
+                                    "cond": "y != 0",
+                                    "latex_cond": "y \\neq 0"
+                                },
+                                {
+                                    "cond": "n > 0",
+                                    "latex_cond": "n > 0"
+                                },
+                                {
+                                    "cond": "k >= 0",
+                                    "latex_cond": "k \\ge 0"
+                                },
+                                {
+                                    "cond": "k <= n + 1",
+                                    "latex_cond": "k \\le n + 1"
+                                },
+                                {
+                                    "cond": "n + 1 - k >= 0",
+                                    "latex_cond": "n + 1 - k \\ge 0"
+                                },
+                                {
+                                    "cond": "isInt(k)",
+                                    "latex_cond": "k \\in\\mathbb{Z}"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "isInt(-k + n + 1)"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "x != 0",
+                                    "latex_cond": "x \\neq 0"
+                                },
+                                {
+                                    "cond": "y != 0",
+                                    "latex_cond": "y \\neq 0"
+                                },
+                                {
+                                    "cond": "n > 0",
+                                    "latex_cond": "n > 0"
+                                },
+                                {
+                                    "cond": "k >= 0",
+                                    "latex_cond": "k \\ge 0"
+                                },
+                                {
+                                    "cond": "k <= n + 1",
+                                    "latex_cond": "k \\le n + 1"
+                                },
+                                {
+                                    "cond": "n + 1 - k >= 0",
+                                    "latex_cond": "n + 1 - k \\ge 0"
+                                },
+                                {
+                                    "cond": "isInt(k)",
+                                    "latex_cond": "k \\in\\mathbb{Z}"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "-k + n + 1 >= 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "x != 0",
+                                    "latex_cond": "x \\neq 0"
+                                },
+                                {
+                                    "cond": "y != 0",
+                                    "latex_cond": "y \\neq 0"
+                                },
+                                {
+                                    "cond": "n > 0",
+                                    "latex_cond": "n > 0"
+                                },
+                                {
+                                    "cond": "k >= 0",
+                                    "latex_cond": "k \\ge 0"
+                                },
+                                {
+                                    "cond": "k <= n + 1",
+                                    "latex_cond": "k \\le n + 1"
+                                },
+                                {
+                                    "cond": "n + 1 - k >= 0",
+                                    "latex_cond": "n + 1 - k \\ge 0"
+                                },
+                                {
+                                    "cond": "isInt(k)",
+                                    "latex_cond": "k \\in\\mathbb{Z}"
+                                }
+                            ]
+                        }
+                    ],
+                    "proof": {
+                        "calcs": [
+                            {
+                                "fixes": [
+                                    [
+                                        "i",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_start": "(x + y) ^ {n + 1}",
+                                "start": "(x + y) ^ (n + 1)",
+                                "steps": [
+                                    {
+                                        "latex_res": "(x + y) (x + y) ^ {n}",
+                                        "res": "(x + y) * (x + y) ^ n",
+                                        "rule": {
+                                            "latex_str": "rewriting \\((x + y) ^ {n + 1}\\) to \\((x + y) (x + y) ^ {n}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "(x + y) * (x + y) ^ n",
+                                            "old_expr": "(x + y) ^ (n + 1)",
+                                            "str": "rewriting (x + y) ^ (n + 1) to (x + y) * (x + y) ^ n"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "(x + y) \\sum_{k=0}^{n}{C(n,k) x ^ {k} y ^ {n - k}}",
+                                        "res": "(x + y) * SUM(k, 0, n, C(n,k) * x ^ k * y ^ (n - k))",
+                                        "rule": {
+                                            "loc": "1",
+                                            "name": "ApplyInductHyp",
+                                            "str": "apply induction hypothesis at 1"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "x \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} C(n,k)} + y \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} C(n,k)}",
+                                        "res": "x * SUM(k, 0, n, x ^ k * y ^ (-k + n) * C(n,k)) + y * SUM(k, 0, n, x ^ k * y ^ (-k + n) * C(n,k))",
+                                        "rule": {
+                                            "name": "ExpandPolynomial",
+                                            "str": "expand polynomial"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{k=0}^{n}{x (x ^ {k} y ^ {-k + n} C(n,k))} + y \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} C(n,k)}",
+                                        "res": "SUM(k, 0, n, x * (x ^ k * y ^ (-k + n) * C(n,k))) + y * SUM(k, 0, n, x ^ k * y ^ (-k + n) * C(n,k))",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(x \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} C(n,k)}\\) to \\(\\sum_{k=0}^{n}{x (x ^ {k} y ^ {-k + n} C(n,k))}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "SUM(k, 0, n, x * (x ^ k * y ^ (-k + n) * C(n,k)))",
+                                            "old_expr": "x * SUM(k, 0, n, x ^ k * y ^ (-k + n) * C(n,k))",
+                                            "str": "rewriting x * SUM(k, 0, n, x ^ k * y ^ (-k + n) * C(n,k)) to SUM(k, 0, n, x * (x ^ k * y ^ (-k + n) * C(n,k)))"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{k=0}^{n}{x (x ^ {k} y ^ {-k + n} C(n,k))} + \\sum_{k=0}^{n}{y (x ^ {k} y ^ {-k + n} C(n,k))}",
+                                        "res": "SUM(k, 0, n, x * (x ^ k * y ^ (-k + n) * C(n,k))) + SUM(k, 0, n, y * (x ^ k * y ^ (-k + n) * C(n,k)))",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(y \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} C(n,k)}\\) to \\(\\sum_{k=0}^{n}{y (x ^ {k} y ^ {-k + n} C(n,k))}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "SUM(k, 0, n, y * (x ^ k * y ^ (-k + n) * C(n,k)))",
+                                            "old_expr": "y * SUM(k, 0, n, x ^ k * y ^ (-k + n) * C(n,k))",
+                                            "str": "rewriting y * SUM(k, 0, n, x ^ k * y ^ (-k + n) * C(n,k)) to SUM(k, 0, n, y * (x ^ k * y ^ (-k + n) * C(n,k)))"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{k=0}^{n}{C(n,k) x ^ {k + 1} y ^ {n - k}} + \\sum_{k=0}^{n}{y (x ^ {k} y ^ {-k + n} C(n,k))}",
+                                        "res": "SUM(k, 0, n, C(n,k) * x ^ (k + 1) * y ^ (n - k)) + SUM(k, 0, n, y * (x ^ k * y ^ (-k + n) * C(n,k)))",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(x (x ^ {k} y ^ {-k + n} C(n,k))\\) to \\(C(n,k) x ^ {k + 1} y ^ {n - k}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "C(n,k) * x ^ (k + 1) * y ^ (n - k)",
+                                            "old_expr": "x * (x ^ k * y ^ (-k + n) * C(n,k))",
+                                            "str": "rewriting x * (x ^ k * y ^ (-k + n) * C(n,k)) to C(n,k) * x ^ (k + 1) * y ^ (n - k)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{k=0}^{n}{C(n,k) x ^ {k + 1} y ^ {n - k}} + \\sum_{k=0}^{n}{C(n,k) x ^ {k} y ^ {n - k + 1}}",
+                                        "res": "SUM(k, 0, n, C(n,k) * x ^ (k + 1) * y ^ (n - k)) + SUM(k, 0, n, C(n,k) * x ^ k * y ^ (n - k + 1))",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(y (x ^ {k} y ^ {-k + n} C(n,k))\\) to \\(C(n,k) x ^ {k} y ^ {n - k + 1}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "C(n,k) * x ^ k * y ^ (n - k + 1)",
+                                            "old_expr": "y * (x ^ k * y ^ (-k + n) * C(n,k))",
+                                            "str": "rewriting y * (x ^ k * y ^ (-k + n) * C(n,k)) to C(n,k) * x ^ k * y ^ (n - k + 1)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{i=0}^{n - 1}{C(n,i) x ^ {i + 1} y ^ {n - i}} + \\sum_{i=n}^{n}{C(n,i) x ^ {i + 1} y ^ {n - i}} + \\sum_{k=0}^{n}{C(n,k) x ^ {k} y ^ {n - k + 1}}",
+                                        "res": "SUM(i, 0, n - 1, C(n,i) * x ^ (i + 1) * y ^ (n - i)) + SUM(i, n, n, C(n,i) * x ^ (i + 1) * y ^ (n - i)) + SUM(k, 0, n, C(n,k) * x ^ k * y ^ (n - k + 1))",
+                                        "rule": {
+                                            "cond": "k = n",
+                                            "loc": "0",
+                                            "name": "SplitSummation",
+                                            "str": "split summation at 0"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{i=0}^{n - 1}{C(n,i) x ^ {i + 1} y ^ {n - i}} + \\sum_{i=n}^{n}{C(n,i) x ^ {i + 1} y ^ {n - i}} + (\\sum_{i=0}^{0}{C(n,i) x ^ {i} y ^ {n - i + 1}} + \\sum_{i=0 + 1}^{n}{C(n,i) x ^ {i} y ^ {n - i + 1}})",
+                                        "res": "SUM(i, 0, n - 1, C(n,i) * x ^ (i + 1) * y ^ (n - i)) + SUM(i, n, n, C(n,i) * x ^ (i + 1) * y ^ (n - i)) + (SUM(i, 0, 0, C(n,i) * x ^ i * y ^ (n - i + 1)) + SUM(i, 0 + 1, n, C(n,i) * x ^ i * y ^ (n - i + 1)))",
+                                        "rule": {
+                                            "cond": "k = 0",
+                                            "loc": "1",
+                                            "name": "SplitSummation",
+                                            "str": "split summation at 1"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{i=0}^{n - 1}{x ^ {i + 1} y ^ {-i + n} C(n,i)} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i)} + x ^ {n + 1} C(n,n) + y ^ {n + 1} C(n,0)",
+                                        "res": "SUM(i, 0, n - 1, x ^ (i + 1) * y ^ (-i + n) * C(n,i)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i)) + x ^ (n + 1) * C(n,n) + y ^ (n + 1) * C(n,0)",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{i=0}^{n - 1}{x ^ {i + 1} y ^ {-i + n} C(n,i)} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i)} + x ^ {n + 1}\\cdot 1 + y ^ {n + 1} C(n,0)",
+                                        "res": "SUM(i, 0, n - 1, x ^ (i + 1) * y ^ (-i + n) * C(n,i)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i)) + x ^ (n + 1) * 1 + y ^ (n + 1) * C(n,0)",
+                                        "rule": {
+                                            "func_name": "C",
+                                            "loc": "0.1.1",
+                                            "name": "ExpandDefinition",
+                                            "str": "expand definition at 0.1.1"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{i=0}^{n - 1}{x ^ {i + 1} y ^ {-i + n} C(n,i)} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i)} + x ^ {n + 1}\\cdot 1 + y ^ {n + 1}\\cdot 1",
+                                        "res": "SUM(i, 0, n - 1, x ^ (i + 1) * y ^ (-i + n) * C(n,i)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i)) + x ^ (n + 1) * 1 + y ^ (n + 1) * 1",
+                                        "rule": {
+                                            "func_name": "C",
+                                            "loc": "1.1",
+                                            "name": "ExpandDefinition",
+                                            "str": "expand definition at 1.1"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{i=1}^{n}{x ^ {i - 1 + 1} y ^ {-(i - 1) + n} C(n,i - 1)} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i)} + x ^ {n + 1}\\cdot 1 + y ^ {n + 1}\\cdot 1",
+                                        "res": "SUM(i, 1, n, x ^ (i - 1 + 1) * y ^ (-(i - 1) + n) * C(n,i - 1)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i)) + x ^ (n + 1) * 1 + y ^ (n + 1) * 1",
+                                        "rule": {
+                                            "loc": "0.0.0",
+                                            "name": "ChangeSummationIndex",
+                                            "new_lower": "1",
+                                            "str": "change summation index at 0.0.0"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i - 1)} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i)} + x ^ {n + 1} + y ^ {n + 1}",
+                                        "res": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i - 1)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i)) + x ^ (n + 1) + y ^ (n + 1)",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i - 1) + x ^ {i} y ^ {-i + n + 1} C(n,i)} + x ^ {n + 1} + y ^ {n + 1}",
+                                        "res": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i - 1) + x ^ i * y ^ (-i + n + 1) * C(n,i)) + x ^ (n + 1) + y ^ (n + 1)",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i - 1)} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i)}\\) to \\(\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i - 1) + x ^ {i} y ^ {-i + n + 1} C(n,i)}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i - 1) + x ^ i * y ^ (-i + n + 1) * C(n,i))",
+                                            "old_expr": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i - 1)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i))",
+                                            "str": "rewriting SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i - 1)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i)) to SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i - 1) + x ^ i * y ^ (-i + n + 1) * C(n,i))"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} (C(n,i - 1) + C(n,i))} + x ^ {n + 1} + y ^ {n + 1}",
+                                        "res": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * (C(n,i - 1) + C(n,i))) + x ^ (n + 1) + y ^ (n + 1)",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(x ^ {i} y ^ {-i + n + 1} C(n,i - 1) + x ^ {i} y ^ {-i + n + 1} C(n,i)\\) to \\(x ^ {i} y ^ {-i + n + 1} (C(n,i - 1) + C(n,i))\\)",
+                                            "name": "Equation",
+                                            "new_expr": "x ^ i * y ^ (-i + n + 1) * (C(n,i - 1) + C(n,i))",
+                                            "old_expr": "x ^ i * y ^ (-i + n + 1) * C(n,i - 1) + x ^ i * y ^ (-i + n + 1) * C(n,i)",
+                                            "str": "rewriting x ^ i * y ^ (-i + n + 1) * C(n,i - 1) + x ^ i * y ^ (-i + n + 1) * C(n,i) to x ^ i * y ^ (-i + n + 1) * (C(n,i - 1) + C(n,i))"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n + 1,i)} + x ^ {n + 1} + y ^ {n + 1}",
+                                        "res": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n + 1,i)) + x ^ (n + 1) + y ^ (n + 1)",
+                                        "rule": {
+                                            "eq": "C(n,m - 1) + C(n,m) = C(n + 1,m)",
+                                            "latex_str": "apply equation \\(C(n,m - 1) + C(n,m) = C(n + 1,m)\\) at 0.0.0.1",
+                                            "loc": "0.0.0.1",
+                                            "name": "ApplyEquation",
+                                            "str": "apply equation: C(n,m - 1) + C(n,m) = C(n + 1,m) at 0.0.0.1"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "i",
+                                        "$int"
+                                    ],
+                                    [
+                                        "j",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_start": "\\sum_{k=0}^{n + 1}{x ^ {k} y ^ {-k + n + 1} C(n + 1,k)}",
+                                "start": "SUM(k, 0, n + 1, x ^ k * y ^ (-k + n + 1) * C(n + 1,k))",
+                                "steps": [
+                                    {
+                                        "latex_res": "\\sum_{i=0}^{0}{x ^ {i} y ^ {-i + n + 1} C(n + 1,i)} + \\sum_{i=0 + 1}^{n + 1}{x ^ {i} y ^ {-i + n + 1} C(n + 1,i)}",
+                                        "res": "SUM(i, 0, 0, x ^ i * y ^ (-i + n + 1) * C(n + 1,i)) + SUM(i, 0 + 1, n + 1, x ^ i * y ^ (-i + n + 1) * C(n + 1,i))",
+                                        "rule": {
+                                            "cond": "k = 0",
+                                            "name": "SplitSummation",
+                                            "str": "split summation"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{i=0}^{0}{x ^ {i} y ^ {-i + n + 1} C(n + 1,i)} + (\\sum_{j=0 + 1}^{n + 1 - 1}{x ^ {j} y ^ {-j + n + 1} C(n + 1,j)} + \\sum_{j=n + 1}^{n + 1}{x ^ {j} y ^ {-j + n + 1} C(n + 1,j)})",
+                                        "res": "SUM(i, 0, 0, x ^ i * y ^ (-i + n + 1) * C(n + 1,i)) + (SUM(j, 0 + 1, n + 1 - 1, x ^ j * y ^ (-j + n + 1) * C(n + 1,j)) + SUM(j, n + 1, n + 1, x ^ j * y ^ (-j + n + 1) * C(n + 1,j)))",
+                                        "rule": {
+                                            "cond": "i = n + 1",
+                                            "loc": "1",
+                                            "name": "SplitSummation",
+                                            "str": "split summation at 1"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{i=0}^{0}{x ^ {i} y ^ {-i + n + 1} (\\frac{(n + 1)!}{i! (-i + n + 1)!})} + (\\sum_{j=0 + 1}^{n + 1 - 1}{x ^ {j} y ^ {-j + n + 1} C(n + 1,j)} + \\sum_{j=n + 1}^{n + 1}{x ^ {j} y ^ {-j + n + 1} C(n + 1,j)})",
+                                        "res": "SUM(i, 0, 0, x ^ i * y ^ (-i + n + 1) * (factorial(n + 1) / (factorial(i) * factorial(-i + n + 1)))) + (SUM(j, 0 + 1, n + 1 - 1, x ^ j * y ^ (-j + n + 1) * C(n + 1,j)) + SUM(j, n + 1, n + 1, x ^ j * y ^ (-j + n + 1) * C(n + 1,j)))",
+                                        "rule": {
+                                            "func_name": "C",
+                                            "loc": "0.0.1",
+                                            "name": "ExpandDefinition",
+                                            "str": "expand definition at 0.0.1"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{i=0}^{0}{x ^ {i} y ^ {-i + n + 1} (\\frac{(n + 1)!}{i! (-i + n + 1)!})} + (\\sum_{j=0 + 1}^{n + 1 - 1}{x ^ {j} y ^ {-j + n + 1} C(n + 1,j)} + \\sum_{j=n + 1}^{n + 1}{x ^ {j} y ^ {-j + n + 1} (\\frac{(n + 1)!}{j! (-j + n + 1)!})})",
+                                        "res": "SUM(i, 0, 0, x ^ i * y ^ (-i + n + 1) * (factorial(n + 1) / (factorial(i) * factorial(-i + n + 1)))) + (SUM(j, 0 + 1, n + 1 - 1, x ^ j * y ^ (-j + n + 1) * C(n + 1,j)) + SUM(j, n + 1, n + 1, x ^ j * y ^ (-j + n + 1) * (factorial(n + 1) / (factorial(j) * factorial(-j + n + 1)))))",
+                                        "rule": {
+                                            "func_name": "C",
+                                            "loc": "1.1.0.1",
+                                            "name": "ExpandDefinition",
+                                            "str": "expand definition at 1.1.0.1"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\sum_{j=1}^{n}{x ^ {j} y ^ {-j + n + 1} C(n + 1,j)} + x ^ {n + 1} + y ^ {n + 1}",
+                                        "res": "SUM(j, 1, n, x ^ j * y ^ (-j + n + 1) * C(n + 1,j)) + x ^ (n + 1) + y ^ (n + 1)",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "(x + y) ^ (n + 1) = SUM(k, 0, n + 1, x ^ k * y ^ (-k + n + 1) * C(n + 1,k))",
+                        "latex_goal": "(x + y) ^ {n + 1} = \\sum_{k=0}^{n + 1}{x ^ {k} y ^ {-k + n + 1} C(n + 1,k)}",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal",
+                    "wellformed": false
+                },
+                "induct_var": "n",
+                "latex_goal": "(x + y) ^ {n} = \\sum_{k=0}^{n}{C(n,k) x ^ {k} y ^ {n - k}}",
+                "type": "InductionProof"
+            },
+            "type": "Goal",
+            "wellformed": false
+        }
+    ],
+    "name": "binom_example01"
+}

@@ -467,7 +467,18 @@ class Context:
     def check_condition(self, e: Expr) -> bool:
         """Check the given condition under the extra conditions"""
         from integral import condprover
-        return condprover.check_condition(e, self)
+        f = condprover.check_condition(e, self)
+        if f:
+            return True
+        if e.is_op() and e.op in ('>', '<', '!='):
+            match e.op:
+                case '>':
+                    f = condprover.check_condition(Op('<', e.args[1], e.args[0]), self)
+                case '<':
+                    f = condprover.check_condition(Op('>', e.args[1], e.args[0]), self)
+                case '!=':
+                    f = condprover.check_condition(Op('!=', e.args[1], e.args[0]), self)
+        return f
 
     def check_all_condtions(self, goal:Expr, conds:Conditions):
         goal_vars = goal.get_vars()

@@ -2321,6 +2321,7 @@ class SplitSummation(Rule):
                             break
                     if flag:
                         res = new_expr.rhs.inst_pat(inst_split_cond)
+                        res = r.eval(res, tmp_ctx)
                         other_vars = res.get_vars(with_bd=True).difference(bd)
                         for var in other_vars:
                             if ctx.parent is not None:

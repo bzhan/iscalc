@@ -45,10 +45,6 @@
                     {
                         "fixes": [
                             [
-                                "j",
-                                "$int"
-                            ],
-                            [
                                 "i",
                                 "$int"
                             ],
@@ -71,8 +67,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\sum_{i=0}^{2 - 1}{\\sum_{j=0}^{\\lfloor \\frac{\\infty - 0 - i}{2} \\rfloor}{\\frac{(\\hat{w} x) ^ {2 j + 0 + i}}{(2 j + 0 + i)!}}}",
-                                "res": "SUM(i, 0, 2 - 1, SUM(j, 0, floor((oo - 0 - i) / 2), (hat(w) * x) ^ (2 * j + 0 + i) / factorial(2 * j + 0 + i)))",
+                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{(\\hat{w} x) ^ {2 i + 1}}{(2 i + 1)!}} + \\sum_{i=0}^{\\infty}{\\frac{(\\hat{w} x) ^ {2 i}}{(2 i)!}}",
+                                "res": "SUM(i, 0, oo, (hat(w) * x) ^ (2 * i + 1) / factorial(2 * i + 1)) + SUM(i, 0, oo, (hat(w) * x) ^ (2 * i) / factorial(2 * i))",
                                 "rule": {
                                     "cond": "n % 2",
                                     "latex_str": "split summation on \\(n\\ \\mathrm{mod}\\ 2\\)",
@@ -82,40 +78,20 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\sum_{n=0}^{0}{\\sum_{j=0}^{\\lfloor \\frac{\\infty - 0 - n}{2} \\rfloor}{\\frac{(\\hat{w} x) ^ {2 j + 0 + n}}{(2 j + 0 + n)!}}} + \\sum_{n=0 + 1}^{2 - 1}{\\sum_{j=0}^{\\lfloor \\frac{\\infty - 0 - n}{2} \\rfloor}{\\frac{(\\hat{w} x) ^ {2 j + 0 + n}}{(2 j + 0 + n)!}}}",
-                                "res": "SUM(n, 0, 0, SUM(j, 0, floor((oo - 0 - n) / 2), (hat(w) * x) ^ (2 * j + 0 + n) / factorial(2 * j + 0 + n))) + SUM(n, 0 + 1, 2 - 1, SUM(j, 0, floor((oo - 0 - n) / 2), (hat(w) * x) ^ (2 * j + 0 + n) / factorial(2 * j + 0 + n)))",
+                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{(\\hat{w} x) ^ {2 i + 1}}{(2 i + 1)!}} + (\\frac{(\\hat{w} x) ^ {2\\cdot 0}}{(2\\cdot 0)!} + \\sum_{n=0 + 1}^{\\infty}{\\frac{(\\hat{w} x) ^ {2 n}}{(2 n)!}})",
+                                "res": "SUM(i, 0, oo, (hat(w) * x) ^ (2 * i + 1) / factorial(2 * i + 1)) + ((hat(w) * x) ^ (2 * 0) / factorial(2 * 0) + SUM(n, 0 + 1, oo, (hat(w) * x) ^ (2 * n) / factorial(2 * n)))",
                                 "rule": {
-                                    "cond": "n = 0",
-                                    "latex_str": "split summation on \\(n = 0\\)",
-                                    "name": "SplitSummation",
-                                    "str": "split summation on n = 0"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\sum_{j=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 j + 1}}{(2 j + 1)!}} + \\sum_{j=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 j}}{(2 j)!}}",
-                                "res": "SUM(j, 0, oo, (x * hat(w)) ^ (2 * j + 1) / factorial(2 * j + 1)) + SUM(j, 0, oo, (x * hat(w)) ^ (2 * j) / factorial(2 * j))",
-                                "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\sum_{j=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 j + 1}}{(2 j + 1)!}} + (\\sum_{n=0}^{0}{\\frac{(x \\hat{w}) ^ {2 n}}{(2 n)!}} + \\sum_{n=0 + 1}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 n}}{(2 n)!}})",
-                                "res": "SUM(j, 0, oo, (x * hat(w)) ^ (2 * j + 1) / factorial(2 * j + 1)) + (SUM(n, 0, 0, (x * hat(w)) ^ (2 * n) / factorial(2 * n)) + SUM(n, 0 + 1, oo, (x * hat(w)) ^ (2 * n) / factorial(2 * n)))",
-                                "rule": {
-                                    "cond": "j = 0",
-                                    "latex_str": "split summation on \\(j = 0\\) at 1",
+                                    "cond": "i = 0",
+                                    "latex_str": "split summation on \\(i = 0\\) at 1",
                                     "loc": "1",
                                     "name": "SplitSummation",
-                                    "str": "split summation on j = 0 at 1"
+                                    "str": "split summation on i = 0 at 1"
                                 },
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\sum_{j=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 j + 1}}{(2 j + 1)!}} + \\sum_{n=1}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 n}}{(2 n)!}} + I_{3 \\times 3}",
-                                "res": "SUM(j, 0, oo, (x * hat(w)) ^ (2 * j + 1) / factorial(2 * j + 1)) + SUM(n, 1, oo, (x * hat(w)) ^ (2 * n) / factorial(2 * n)) + unit_matrix(3)",
+                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 i + 1}}{(2 i + 1)!}} + \\sum_{n=1}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 n}}{(2 n)!}} + I_{3 \\times 3}",
+                                "res": "SUM(i, 0, oo, (x * hat(w)) ^ (2 * i + 1) / factorial(2 * i + 1)) + SUM(n, 1, oo, (x * hat(w)) ^ (2 * n) / factorial(2 * n)) + unit_matrix(3)",
                                 "rule": {
                                     "name": "FullSimplify",
                                     "str": "full simplify"
@@ -123,8 +99,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\sum_{j=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 j + 1}}{(2 j + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 (n + 1)}}{(2 (n + 1))!}} + I_{3 \\times 3}",
-                                "res": "SUM(j, 0, oo, (x * hat(w)) ^ (2 * j + 1) / factorial(2 * j + 1)) + SUM(n, 0, oo, (x * hat(w)) ^ (2 * (n + 1)) / factorial(2 * (n + 1))) + unit_matrix(3)",
+                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 i + 1}}{(2 i + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 (n + 1)}}{(2 (n + 1))!}} + I_{3 \\times 3}",
+                                "res": "SUM(i, 0, oo, (x * hat(w)) ^ (2 * i + 1) / factorial(2 * i + 1)) + SUM(n, 0, oo, (x * hat(w)) ^ (2 * (n + 1)) / factorial(2 * (n + 1))) + unit_matrix(3)",
                                 "rule": {
                                     "loc": "0.1",
                                     "name": "ChangeSummationIndex",
@@ -134,20 +110,20 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\sum_{j=0}^{\\infty}{\\frac{x ^ {2 j + 1} \\hat{w} ^ {2 j + 1}}{(2 j + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 (n + 1)}}{(2 (n + 1))!}} + I_{3 \\times 3}",
-                                "res": "SUM(j, 0, oo, x ^ (2 * j + 1) * hat(w) ^ (2 * j + 1) / factorial(2 * j + 1)) + SUM(n, 0, oo, (x * hat(w)) ^ (2 * (n + 1)) / factorial(2 * (n + 1))) + unit_matrix(3)",
+                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{x ^ {2 i + 1} \\hat{w} ^ {2 i + 1}}{(2 i + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 (n + 1)}}{(2 (n + 1))!}} + I_{3 \\times 3}",
+                                "res": "SUM(i, 0, oo, x ^ (2 * i + 1) * hat(w) ^ (2 * i + 1) / factorial(2 * i + 1)) + SUM(n, 0, oo, (x * hat(w)) ^ (2 * (n + 1)) / factorial(2 * (n + 1))) + unit_matrix(3)",
                                 "rule": {
-                                    "latex_str": "rewrite \\((x \\hat{w}) ^ {2 j + 1}\\) to \\(x ^ {2 j + 1} \\hat{w} ^ {2 j + 1}\\) using identity",
+                                    "latex_str": "rewrite \\((x \\hat{w}) ^ {2 i + 1}\\) to \\(x ^ {2 i + 1} \\hat{w} ^ {2 i + 1}\\) using identity",
                                     "name": "ApplyIdentity",
-                                    "source": "(x * hat(w)) ^ (2 * j + 1)",
-                                    "str": "rewrite (x * hat(w)) ^ (2 * j + 1) to x ^ (2 * j + 1) * hat(w) ^ (2 * j + 1) using identity",
-                                    "target": "x ^ (2 * j + 1) * hat(w) ^ (2 * j + 1)"
+                                    "source": "(x * hat(w)) ^ (2 * i + 1)",
+                                    "str": "rewrite (x * hat(w)) ^ (2 * i + 1) to x ^ (2 * i + 1) * hat(w) ^ (2 * i + 1) using identity",
+                                    "target": "x ^ (2 * i + 1) * hat(w) ^ (2 * i + 1)"
                                 },
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\sum_{j=0}^{\\infty}{\\frac{x ^ {2 j + 1} \\hat{w} ^ {2 j + 1}}{(2 j + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} \\hat{w} ^ {2 (n + 1)}}{(2 (n + 1))!}} + I_{3 \\times 3}",
-                                "res": "SUM(j, 0, oo, x ^ (2 * j + 1) * hat(w) ^ (2 * j + 1) / factorial(2 * j + 1)) + SUM(n, 0, oo, x ^ (2 * (n + 1)) * hat(w) ^ (2 * (n + 1)) / factorial(2 * (n + 1))) + unit_matrix(3)",
+                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{x ^ {2 i + 1} \\hat{w} ^ {2 i + 1}}{(2 i + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} \\hat{w} ^ {2 (n + 1)}}{(2 (n + 1))!}} + I_{3 \\times 3}",
+                                "res": "SUM(i, 0, oo, x ^ (2 * i + 1) * hat(w) ^ (2 * i + 1) / factorial(2 * i + 1)) + SUM(n, 0, oo, x ^ (2 * (n + 1)) * hat(w) ^ (2 * (n + 1)) / factorial(2 * (n + 1))) + unit_matrix(3)",
                                 "rule": {
                                     "latex_str": "rewrite \\((x \\hat{w}) ^ {2 (n + 1)}\\) to \\(x ^ {2 (n + 1)} \\hat{w} ^ {2 (n + 1)}\\) using identity",
                                     "name": "ApplyIdentity",
@@ -158,8 +134,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\sum_{j=0}^{\\infty}{\\frac{x ^ {2 j + 1} ((-1) ^ {j} \\hat{w})}{(2 j + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} \\hat{w} ^ {2 (n + 1)}}{(2 (n + 1))!}} + I_{3 \\times 3}",
-                                "res": "SUM(j, 0, oo, x ^ (2 * j + 1) * ((-1) ^ j * hat(w)) / factorial(2 * j + 1)) + SUM(n, 0, oo, x ^ (2 * (n + 1)) * hat(w) ^ (2 * (n + 1)) / factorial(2 * (n + 1))) + unit_matrix(3)",
+                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{x ^ {2 i + 1} ((-1) ^ {i} \\hat{w})}{(2 i + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} \\hat{w} ^ {2 (n + 1)}}{(2 (n + 1))!}} + I_{3 \\times 3}",
+                                "res": "SUM(i, 0, oo, x ^ (2 * i + 1) * ((-1) ^ i * hat(w)) / factorial(2 * i + 1)) + SUM(n, 0, oo, x ^ (2 * (n + 1)) * hat(w) ^ (2 * (n + 1)) / factorial(2 * (n + 1))) + unit_matrix(3)",
                                 "rule": {
                                     "eq": "hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)",
                                     "latex_str": "apply equation \\(\\hat{w} ^ {2 n + 1} = (-1) ^ {n} \\hat{w}\\) at 0.0.0.0.1",
@@ -170,8 +146,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\sum_{j=0}^{\\infty}{\\frac{x ^ {2 j + 1} ((-1) ^ {j} \\hat{w})}{(2 j + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} ((-1) ^ {n} \\hat{w} ^ {2})}{(2 (n + 1))!}} + I_{3 \\times 3}",
-                                "res": "SUM(j, 0, oo, x ^ (2 * j + 1) * ((-1) ^ j * hat(w)) / factorial(2 * j + 1)) + SUM(n, 0, oo, x ^ (2 * (n + 1)) * ((-1) ^ n * hat(w) ^ 2) / factorial(2 * (n + 1))) + unit_matrix(3)",
+                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{x ^ {2 i + 1} ((-1) ^ {i} \\hat{w})}{(2 i + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} ((-1) ^ {n} \\hat{w} ^ {2})}{(2 (n + 1))!}} + I_{3 \\times 3}",
+                                "res": "SUM(i, 0, oo, x ^ (2 * i + 1) * ((-1) ^ i * hat(w)) / factorial(2 * i + 1)) + SUM(n, 0, oo, x ^ (2 * (n + 1)) * ((-1) ^ n * hat(w) ^ 2) / factorial(2 * (n + 1))) + unit_matrix(3)",
                                 "rule": {
                                     "eq": "hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2",
                                     "latex_str": "apply equation \\(\\hat{w} ^ {2 (n + 1)} = (-1) ^ {n} \\hat{w} ^ {2}\\) at 0.1.0.0.1",

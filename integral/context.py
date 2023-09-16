@@ -13,7 +13,8 @@ dirname = os.path.dirname(__file__)
 
 class Identity:
     def __init__(self, expr: Union[str, Expr], *,
-                 conds: Optional[Conditions] = None, simp_level: int = 1, category: str = "", split_cond=None):
+                 conds: Optional[Conditions] = None, simp_level: int = 1, category: str = "",
+                 split_cond: Optional[Expr] = None):
         if isinstance(expr, str):
             expr = parser.parse_expr(expr)
         self.expr = expr

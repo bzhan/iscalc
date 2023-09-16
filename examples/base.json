@@ -1157,7 +1157,7 @@
                 "a > l",
                 "a < u"
             ],
-            "expr": "SUM(n, l, u, f(n)) = SUM(n, l, a-1, f(n)) + SUM(n, a, a, f(n)) + SUM(n, a+1, u, f(n))",
+            "expr": "SUM(n, l, u, f(n)) = SUM(n, l, a-1, f(n)) + f(a) + SUM(n, a+1, u, f(n))",
             "type": "axiom"
         },
         {
@@ -1167,7 +1167,7 @@
                 "a = l",
                 "a < u"
             ],
-            "expr": "SUM(n, l, u, f(n)) = SUM(n, a, a, f(n)) + SUM(n, a+1, u, f(n))",
+            "expr": "SUM(n, l, u, f(n)) = f(a) + SUM(n, a+1, u, f(n))",
             "type": "axiom"
         },
         {
@@ -1177,16 +1177,13 @@
                 "a = u",
                 "a > l"
             ],
-            "expr": "SUM(n, l, u, f(n)) = SUM(n, l, a-1, f(n)) + SUM(n, u, u, f(n))",
+            "expr": "SUM(n, l, u, f(n)) = SUM(n, l, a-1, f(n)) + f(u)",
             "type": "axiom"
         },
         {
             "category": "summation-split",
-            "split-cond": "n % k",
-            "conds": [
-                "k > 0"
-            ],
-            "expr": "SUM(n, l, u, f(n)) = SUM(i, 0, k-1, SUM(n, 0, floor((u-l-i)/k), f(k*n+l+i)))",
+            "split-cond": "n % 2",
+            "expr": "SUM(n, 0, oo, f(n)) = SUM(n, 0, oo, f(2*n+1)) + SUM(n, 0, oo, f(2*n))",
             "type": "axiom"
         }
     ],

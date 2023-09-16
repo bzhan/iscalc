@@ -71,22 +71,24 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\sum_{i=0}^{2 - 1}{\\sum_{j=0}^{floor{(\\frac{\\infty - 0 - i}{2})}}{\\frac{(\\hat{w} x) ^ {2 j + 0 + i}}{(2 j + 0 + i)!}}}",
+                                "latex_res": "\\sum_{i=0}^{2 - 1}{\\sum_{j=0}^{\\lfloor \\frac{\\infty - 0 - i}{2} \\rfloor}{\\frac{(\\hat{w} x) ^ {2 j + 0 + i}}{(2 j + 0 + i)!}}}",
                                 "res": "SUM(i, 0, 2 - 1, SUM(j, 0, floor((oo - 0 - i) / 2), (hat(w) * x) ^ (2 * j + 0 + i) / factorial(2 * j + 0 + i)))",
                                 "rule": {
                                     "cond": "n % 2",
+                                    "latex_str": "split summation on \\(n\\ \\mathrm{mod}\\ 2\\)",
                                     "name": "SplitSummation",
-                                    "str": "split summation"
+                                    "str": "split summation on n % 2"
                                 },
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\sum_{n=0}^{0}{\\sum_{j=0}^{floor{(\\frac{\\infty - 0 - n}{2})}}{\\frac{(\\hat{w} x) ^ {2 j + 0 + n}}{(2 j + 0 + n)!}}} + \\sum_{n=0 + 1}^{2 - 1}{\\sum_{j=0}^{floor{(\\frac{\\infty - 0 - n}{2})}}{\\frac{(\\hat{w} x) ^ {2 j + 0 + n}}{(2 j + 0 + n)!}}}",
+                                "latex_res": "\\sum_{n=0}^{0}{\\sum_{j=0}^{\\lfloor \\frac{\\infty - 0 - n}{2} \\rfloor}{\\frac{(\\hat{w} x) ^ {2 j + 0 + n}}{(2 j + 0 + n)!}}} + \\sum_{n=0 + 1}^{2 - 1}{\\sum_{j=0}^{\\lfloor \\frac{\\infty - 0 - n}{2} \\rfloor}{\\frac{(\\hat{w} x) ^ {2 j + 0 + n}}{(2 j + 0 + n)!}}}",
                                 "res": "SUM(n, 0, 0, SUM(j, 0, floor((oo - 0 - n) / 2), (hat(w) * x) ^ (2 * j + 0 + n) / factorial(2 * j + 0 + n))) + SUM(n, 0 + 1, 2 - 1, SUM(j, 0, floor((oo - 0 - n) / 2), (hat(w) * x) ^ (2 * j + 0 + n) / factorial(2 * j + 0 + n)))",
                                 "rule": {
                                     "cond": "n = 0",
+                                    "latex_str": "split summation on \\(n = 0\\)",
                                     "name": "SplitSummation",
-                                    "str": "split summation"
+                                    "str": "split summation on n = 0"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -104,9 +106,10 @@
                                 "res": "SUM(j, 0, oo, (x * hat(w)) ^ (2 * j + 1) / factorial(2 * j + 1)) + (SUM(n, 0, 0, (x * hat(w)) ^ (2 * n) / factorial(2 * n)) + SUM(n, 0 + 1, oo, (x * hat(w)) ^ (2 * n) / factorial(2 * n)))",
                                 "rule": {
                                     "cond": "j = 0",
+                                    "latex_str": "split summation on \\(j = 0\\) at 1",
                                     "loc": "1",
                                     "name": "SplitSummation",
-                                    "str": "split summation at 1"
+                                    "str": "split summation on j = 0 at 1"
                                 },
                                 "type": "CalculationStep"
                             },

@@ -254,7 +254,7 @@ class MatrixTest(unittest.TestCase):
         fixes['n'] = parser.parse_expr('$int')
         file.add_definition("w = [[a_1],[a_2],[a_3]]", fixes=fixes)
         goal01 = file.add_goal("exp(hat(w) * x) = unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * (hat(w)) ^ 2",
-                               conds=["x >= 0", "norm(w)=1"],
+                               conds=["x >= 0", "norm(w) = 1"],
                                fixes=fixes)
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc

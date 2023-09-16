@@ -110,6 +110,8 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
                 return "%s \\ge %s" % (sx, sy)
             elif e.op == "!=":
                 return "%s \\neq %s" % (sx, sy)
+            elif e.op == "%":
+                return "%s\\ \\mathrm{mod}\\ %s" % (sx, sy)
             else:
                 raise NotImplementedError
         else:
@@ -183,6 +185,8 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
                 return "%s ^ {-1}" % sx
             elif e.func_name == 'hat':
                 return "\hat{%s}" % sx
+            elif e.func_name == 'floor':
+                return "\\lfloor %s \\rfloor" % sx
             else:
                 return "%s{(%s)}" % (e.func_name, sx)
         elif len(e.args) == 2:

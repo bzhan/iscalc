@@ -38,9 +38,10 @@
                                 "res": "1 - (SUM(i, 0, 0, (-1) ^ i * a ^ (2 * i) / factorial(2 * i)) + SUM(i, 0 + 1, oo, (-1) ^ i * a ^ (2 * i) / factorial(2 * i)))",
                                 "rule": {
                                     "cond": "n = 0",
+                                    "latex_str": "split summation on \\(n = 0\\) at 1",
                                     "loc": "1",
                                     "name": "SplitSummation",
-                                    "str": "split summation at 1"
+                                    "str": "split summation on n = 0 at 1"
                                 },
                                 "type": "CalculationStep"
                             },

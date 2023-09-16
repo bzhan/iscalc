@@ -2281,13 +2281,14 @@ class SplitSummation(Rule):
         self.cond = cond
 
     def __str__(self):
-        return "split summation"
+        return "split summation on %s" % self.cond
 
     def export(self):
         return {
             "name": self.name,
             "str": str(self),
-            "cond": str(self.cond)
+            "cond": str(self.cond),
+            "latex_str": "split summation on \\(%s\\)" % latex.convert_expr(self.cond)
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:

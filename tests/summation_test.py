@@ -57,8 +57,11 @@ class SummationTest(unittest.TestCase):
              "i % 1",
              "SUM(j, 0, 1 - 1, SUM(n, 0, floor((oo - -7 - j) / 1), (1 * n + -7 + j) / (1 * n + -7 + j + k)))"),
             ("SUM(i, m, n, (i+j)/(i+k+l+a))",
-             "i%3",
-             "SUM(b, 0, 3 - 1, SUM(c, 0, floor((n - m - b) / 3), (3 * c + m + b + j) / (3 * c + m + b + k + l + a)))")
+             "i % 3",
+             "SUM(b, 0, 3 - 1, SUM(c, 0, floor((n - m - b) / 3), (3 * c + m + b + j) / (3 * c + m + b + k + l + a)))"),
+            ("SUM(i, m, n, SUM(j, k, l, (j + a + b - i) * (c - a)))",
+             "i % 3",
+             "SUM(d, 0, 3 - 1, SUM(e, 0, floor((n - m - d) / 3), SUM(j, k, l, (j + a + b - (3 * e + m + d)) * (c - a))))")
         ]
         ctx = Context()
         ctx.load_book('base')

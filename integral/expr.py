@@ -1265,6 +1265,8 @@ class Fun(Expr):
         # TODO: add more type inference
         if self.func_name == 'unit_matrix':
             self.type = MatrixType(RealType, self.args[0], self.args[0])
+        elif self.func_name == 'zero_matrix':
+            self.type = MatrixType(RealType, self.args[0], self.args[1])
         elif self.func_name == 'inv':
             self.type = self.args[0].type
         elif self.func_name == 'T':

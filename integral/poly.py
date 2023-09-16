@@ -657,6 +657,8 @@ def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
                     return expr.Fun("unit_matrix", expr.num_row(a.type))
                 elif nb == expr.Const(1):
                     return a
+        elif e.is_plus() and e.args[1].is_fun() and e.args[1].func_name == 'zero_matrix':
+            return e.args[0]
         elif e.is_times():
             # eliminate unit matrix
             a, b = e.args
@@ -694,51 +696,36 @@ def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
                         tmp.append(a)
 
             factors = tmp
-            unit_matrix_cnt = 0
-            matrix_cnt = 0
+            has_zero_matrix = False
+            all_mat_factors = []
+            nonunit_mat_factors = []
+            scalar_factors = []
             for factor in factors:
                 if expr.is_matrix_type(factor.type):
-                    matrix_cnt = matrix_cnt + 1
+                    all_mat_factors.append(factor)
                     if factor.is_fun() and factor.func_name == 'unit_matrix':
-                        unit_matrix_cnt = unit_matrix_cnt + 1
-            remove_unit_matrix, keep_one_unit_matrix = False, False
-            if matrix_cnt > unit_matrix_cnt:
-                remove_unit_matrix = True
-            if unit_matrix_cnt > 1:
-                keep_one_unit_matrix = True
-
-            res_factors = []
-            if remove_unit_matrix:
-                for factor in factors:
-                    if not (expr.is_matrix_type(factor.type) and factor.is_fun() and \
-                            factor.func_name == 'unit_matrix'):
-                        # res = res * factor
-                        res_factors.append(factor)
-            else:
-                if keep_one_unit_matrix:
-                    first = True
-                    for factor in factors:
-                        if expr.is_matrix_type(factor.type) and factor.is_fun() and \
-                                factor.func_name == 'unit_matrix' and first:
-                            # res = res * factor
-                            first = False
-                            res_factors.append(factor)
-                        if not (expr.is_matrix_type(factor.type) and factor.is_fun() and \
-                                factor.func_name == 'unit_matrix'):
-                            # res = res * factor
-                            res_factors.append(factor)
+                        continue
+                    if factor.is_fun() and factor.func_name == 'zero_matrix':
+                        has_zero_matrix = True
+                    nonunit_mat_factors.append(factor)
                 else:
-                    for factor in factors:
-                        # res = res * factor
-                        res_factors.append(factor)
-            res = res_factors[0]
-            for factor in res_factors[1:]:
-                res = expr.Op('*', res, factor)
+                    scalar_factors.append(factor)
 
-            return res
+            if has_zero_matrix:
+                row, col = expr.num_row(all_mat_factors[0].type), expr.num_col(all_mat_factors[-1].type)
+                return expr.Fun("zero_matrix", row, col)
+            else:
+                all_factors = scalar_factors + nonunit_mat_factors
+                if len(nonunit_mat_factors) == 0 and len(all_mat_factors) != 0:
+                    row, col = expr.num_row(all_mat_factors[0].type), expr.num_col(all_mat_factors[-1].type)
+                    all_factors.append(expr.Fun("unit_matrix", row))
+                res = all_factors[0]
+                for factor in all_factors[1:]:
+                    res = expr.Op('*', res, factor)
+                return res
     return e
 
-def simplify_salar_multiply(e: expr.Expr, ctx:Context) -> expr.Expr:
+def simplify_scalar_multiply(e: expr.Expr, ctx:Context) -> expr.Expr:
     if e.is_times():
         a, b = e.args
         if not expr.is_matrix_type(a.type) and b.is_matrix():
@@ -941,6 +928,7 @@ def simplify_inf(e: expr.Expr, ctx: Context) -> expr.Expr:
             if expr.eval_expr(e) != 0:
                 return e.args[0]
     return e
+
 def normalize(e: expr.Expr, ctx: Context) -> expr.Expr:
     if e.is_equals():
         return expr.Eq(normalize(e.lhs, ctx), normalize(e.rhs, ctx))
@@ -951,8 +939,8 @@ def normalize(e: expr.Expr, ctx: Context) -> expr.Expr:
     for i in range(5):
         old_e = e
         e = from_poly(to_poly(e, ctx))
-        e = simp_matrix(e, ctx)
-        e = apply_subterm(e, simplify_salar_multiply, ctx)
+        e = apply_subterm(e, simp_matrix, ctx)
+        e = apply_subterm(e, simplify_scalar_multiply, ctx)
         e = apply_subterm(e, simplify_matrix_multiply, ctx)
         e = apply_subterm(e, simplify_matrix_add, ctx)
         e = apply_subterm(e, function_table, ctx)

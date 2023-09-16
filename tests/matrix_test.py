@@ -164,13 +164,8 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.Equation(old_e, new_e))
         eq = parser.parse_expr("w * T(w) * hat(w) = zero_matrix(3,3)", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0.1"))
-        # TODO: remove expand func def on subterm
-        calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
         calc.perform_rule(rules.FullSimplify())
         calc = induct_proof.rhs_calc
-        # TODO: remove expand func def on subterm
-        calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
-        calc.perform_rule(rules.FullSimplify())
         assert goal03.is_finished()
 
         goal04 = file.add_goal("hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2", conds=["n>=0", "norm(w)=1"], fixes=fixes)
@@ -195,20 +190,15 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.Equation(old_e, new_e))
         eq = parser.parse_expr("w * T(w) * hat(w) = zero_matrix(3,3)", fixes=fixes)
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(eq), "0.0.1"))
-        # TODO: remove expand func def on subterm
-        calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
         calc.perform_rule(rules.FullSimplify())
         calc = induct_proof.rhs_calc
         old_e = parser.parse_expr("hat(w) ^ 2", fixes=fixes)
         new_e = parser.parse_expr("hat(w) * hat(w)", fixes=fixes)
         calc.perform_rule(rules.Equation(old_e, new_e))
-        # TODO: remove expand func def on subterm
-        calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
         calc.perform_rule(rules.FullSimplify())
         assert goal04.is_finished()
 
         self.checkAndOutput(file)
-
 
     def testGetType(self):
         raw_fixes = [('n', '$int'), ('P', '$tensor($real, n, n)'), ('A', '$tensor($real, n, n)')]

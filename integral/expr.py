@@ -72,18 +72,17 @@ def MatrixType(eleType: Type, row, col) -> Type:
     return TensorType(eleType, row, col)
 
 def is_vector_type(type: Type) -> bool:
-    return type.name == "tensor" and (len(type.args)==2 or len(type.args) == 3 and\
-           (type.args[1] == Const(1) or type.args[2] == Const(1)))
+    return type.name == "tensor" and len(type.args) == 2
 
 def is_matrix_type(type: Type) -> bool:
     return type.name == "tensor" and len(type.args) == 3
 
-def num_row(type: Type) -> int:
+def num_row(type: Type) -> "Expr":
     if not is_matrix_type(type):
         raise AssertionError("num_row: input must be a matrix type, got %s" % type)
     return type.args[1]
         
-def num_col(type: Type) -> int:
+def num_col(type: Type) -> "Expr":
     if not is_matrix_type(type):
         raise AssertionError("num_col: input must be a matrix type, got %s" % type)
     return type.args[2]
@@ -1163,7 +1162,7 @@ class Op(Expr):
                 elif args[0].type == RealType and (args[1].type in (RealType, IntType)):
                     self.type = RealType
             elif op == '^':
-                if is_matrix_type(t1) and t2 == IntType:
+                if is_matrix_type(t1):
                     assert num_row(t1) == num_col(t1), str(t1) +":"+ str(args)
                     self.type = t1
 
@@ -1394,8 +1393,6 @@ class Matrix(Expr):
 
     def __eq__(self, other: 'Matrix'):
         return isinstance(other, Matrix) and self.ty == other.ty and self.data == other.data
-
-
 
     def __str__(self):
         if is_matrix_type(self.type):

@@ -117,19 +117,16 @@ class MatrixTest(unittest.TestCase):
         fixes = dict()
         for s, t in raw_fixes:
             fixes[s] = parser.parse_expr(t, fixes=fixes)
-        file.add_definition("w = [[a_1],[a_2],[a_3]]", fixes=fixes)
+
         goal01 = file.add_goal('hat(w)^2 = w * T(w) - norm(w)^2 * unit_matrix(3)', fixes = fixes)
         proof = goal01.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
         calc = proof.rhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
         calc.perform_rule(rules.FullSimplify())
-        calc = proof.lhs_calc
-        old_expr = calc.parse_expr("hat(w) ^ 2")
-        new_expr = calc.parse_expr("hat(w) ^ 1 * hat(w) ^ 1")
-        calc.perform_rule(rules.ApplyIdentity(old_expr, new_expr))
-        calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
-        calc.perform_rule(rules.FullSimplify())
         assert goal01.is_finished()
+
         goal02 = file.add_goal("w*T(w)*hat(w) = zero_matrix(3,3)", fixes=fixes)
         proof = goal02.proof_by_calculation()
         calc = proof.lhs_calc
@@ -137,12 +134,11 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc = proof.rhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
-        calc.perform_rule(rules.FullSimplify())
         assert goal02.is_finished()
 
         goal03 = file.add_goal("hat(w)^(2*n+1) = (-1)^n * hat(w)", conds = ["n>=0", "norm(w)=1"], fixes=fixes)
         proof = goal03.proof_by_induction('n', 0)
-        base_proof = proof.base_case.proof_by_calculation()
+        _ = proof.base_case.proof_by_calculation()
         induct_proof = proof.induct_case.proof_by_calculation()
         calc = induct_proof.lhs_calc
         old_expr = calc.parse_expr("(2 * n + 3)")
@@ -240,7 +236,7 @@ class MatrixTest(unittest.TestCase):
         fixes = dict()
         fixes['w'] = parser.parse_expr('$tensor($real, 3, 1)')
         fixes['n'] = parser.parse_expr('$int')
-        file.add_definition("w = [[a_1],[a_2],[a_3]]", fixes=fixes)
+
         goal01 = file.add_goal("exp(hat(w) * x) = unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * (hat(w)) ^ 2",
                                conds=["x >= 0", "norm(w) = 1"],
                                fixes=fixes)

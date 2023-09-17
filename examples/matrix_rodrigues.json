@@ -1,22 +1,6 @@
 {
     "content": [
         {
-            "content": "[[a_1], [a_2], [a_3]]",
-            "fixes": [
-                [
-                    "w",
-                    "$tensor($real, 3, 1)"
-                ],
-                [
-                    "n",
-                    "$int"
-                ]
-            ],
-            "latex_var": "w",
-            "type": "VarDef",
-            "var": "w"
-        },
-        {
             "conds": [
                 {
                     "cond": "x >= 0",
@@ -39,7 +23,7 @@
                 ]
             ],
             "goal": "exp(hat(w) * x) = unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * hat(w) ^ 2",
-            "latex_goal": "e^{\\hat{w} x} = I_{3 \\times 3} + \\sin{x} \\hat{w} + (1 - \\cos{x}) \\hat{w} ^ {2}",
+            "latex_goal": "e^{\\hat{w} x} = \\mathbf{1}_{3 \\times 3} + \\sin{x} \\hat{w} + (1 - \\cos{x}) \\hat{w} ^ {2}",
             "proof": {
                 "calcs": [
                     {
@@ -90,7 +74,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 i + 1}}{(2 i + 1)!}} + \\sum_{n=1}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 n}}{(2 n)!}} + I_{3 \\times 3}",
+                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 i + 1}}{(2 i + 1)!}} + \\sum_{n=1}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 n}}{(2 n)!}} + \\mathbf{1}_{3 \\times 3}",
                                 "res": "SUM(i, 0, oo, (x * hat(w)) ^ (2 * i + 1) / factorial(2 * i + 1)) + SUM(n, 1, oo, (x * hat(w)) ^ (2 * n) / factorial(2 * n)) + unit_matrix(3)",
                                 "rule": {
                                     "name": "FullSimplify",
@@ -99,7 +83,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 i + 1}}{(2 i + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 (n + 1)}}{(2 (n + 1))!}} + I_{3 \\times 3}",
+                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 i + 1}}{(2 i + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 (n + 1)}}{(2 (n + 1))!}} + \\mathbf{1}_{3 \\times 3}",
                                 "res": "SUM(i, 0, oo, (x * hat(w)) ^ (2 * i + 1) / factorial(2 * i + 1)) + SUM(n, 0, oo, (x * hat(w)) ^ (2 * (n + 1)) / factorial(2 * (n + 1))) + unit_matrix(3)",
                                 "rule": {
                                     "loc": "0.1",
@@ -110,7 +94,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{x ^ {2 i + 1} \\hat{w} ^ {2 i + 1}}{(2 i + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 (n + 1)}}{(2 (n + 1))!}} + I_{3 \\times 3}",
+                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{x ^ {2 i + 1} \\hat{w} ^ {2 i + 1}}{(2 i + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{(x \\hat{w}) ^ {2 (n + 1)}}{(2 (n + 1))!}} + \\mathbf{1}_{3 \\times 3}",
                                 "res": "SUM(i, 0, oo, x ^ (2 * i + 1) * hat(w) ^ (2 * i + 1) / factorial(2 * i + 1)) + SUM(n, 0, oo, (x * hat(w)) ^ (2 * (n + 1)) / factorial(2 * (n + 1))) + unit_matrix(3)",
                                 "rule": {
                                     "latex_str": "rewrite \\((x \\hat{w}) ^ {2 i + 1}\\) to \\(x ^ {2 i + 1} \\hat{w} ^ {2 i + 1}\\) using identity",
@@ -122,7 +106,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{x ^ {2 i + 1} \\hat{w} ^ {2 i + 1}}{(2 i + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} \\hat{w} ^ {2 (n + 1)}}{(2 (n + 1))!}} + I_{3 \\times 3}",
+                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{x ^ {2 i + 1} \\hat{w} ^ {2 i + 1}}{(2 i + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} \\hat{w} ^ {2 (n + 1)}}{(2 (n + 1))!}} + \\mathbf{1}_{3 \\times 3}",
                                 "res": "SUM(i, 0, oo, x ^ (2 * i + 1) * hat(w) ^ (2 * i + 1) / factorial(2 * i + 1)) + SUM(n, 0, oo, x ^ (2 * (n + 1)) * hat(w) ^ (2 * (n + 1)) / factorial(2 * (n + 1))) + unit_matrix(3)",
                                 "rule": {
                                     "latex_str": "rewrite \\((x \\hat{w}) ^ {2 (n + 1)}\\) to \\(x ^ {2 (n + 1)} \\hat{w} ^ {2 (n + 1)}\\) using identity",
@@ -134,7 +118,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{x ^ {2 i + 1} ((-1) ^ {i} \\hat{w})}{(2 i + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} \\hat{w} ^ {2 (n + 1)}}{(2 (n + 1))!}} + I_{3 \\times 3}",
+                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{x ^ {2 i + 1} ((-1) ^ {i} \\hat{w})}{(2 i + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} \\hat{w} ^ {2 (n + 1)}}{(2 (n + 1))!}} + \\mathbf{1}_{3 \\times 3}",
                                 "res": "SUM(i, 0, oo, x ^ (2 * i + 1) * ((-1) ^ i * hat(w)) / factorial(2 * i + 1)) + SUM(n, 0, oo, x ^ (2 * (n + 1)) * hat(w) ^ (2 * (n + 1)) / factorial(2 * (n + 1))) + unit_matrix(3)",
                                 "rule": {
                                     "eq": "hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)",
@@ -146,7 +130,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{x ^ {2 i + 1} ((-1) ^ {i} \\hat{w})}{(2 i + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} ((-1) ^ {n} \\hat{w} ^ {2})}{(2 (n + 1))!}} + I_{3 \\times 3}",
+                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{x ^ {2 i + 1} ((-1) ^ {i} \\hat{w})}{(2 i + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} ((-1) ^ {n} \\hat{w} ^ {2})}{(2 (n + 1))!}} + \\mathbf{1}_{3 \\times 3}",
                                 "res": "SUM(i, 0, oo, x ^ (2 * i + 1) * ((-1) ^ i * hat(w)) / factorial(2 * i + 1)) + SUM(n, 0, oo, x ^ (2 * (n + 1)) * ((-1) ^ n * hat(w) ^ 2) / factorial(2 * (n + 1))) + unit_matrix(3)",
                                 "rule": {
                                     "eq": "hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2",
@@ -158,7 +142,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\hat{w} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {2 n + 1}}{(2 n + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} ((-1) ^ {n} \\hat{w} ^ {2})}{(2 (n + 1))!}} + I_{3 \\times 3}",
+                                "latex_res": "\\hat{w} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {2 n + 1}}{(2 n + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} ((-1) ^ {n} \\hat{w} ^ {2})}{(2 (n + 1))!}} + \\mathbf{1}_{3 \\times 3}",
                                 "res": "hat(w) * SUM(n, 0, oo, (-1) ^ n * x ^ (2 * n + 1) / factorial(2 * n + 1)) + SUM(n, 0, oo, x ^ (2 * (n + 1)) * ((-1) ^ n * hat(w) ^ 2) / factorial(2 * (n + 1))) + unit_matrix(3)",
                                 "rule": {
                                     "latex_str": "rewriting \\(\\sum_{n=0}^{\\infty}{\\frac{x ^ {2 n + 1} ((-1) ^ {n} \\hat{w})}{(2 n + 1)!}}\\) to \\(\\hat{w} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {2 n + 1}}{(2 n + 1)!}}\\)",
@@ -170,7 +154,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\hat{w} \\sin{x} + \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} ((-1) ^ {n} \\hat{w} ^ {2})}{(2 (n + 1))!}} + I_{3 \\times 3}",
+                                "latex_res": "\\hat{w} \\sin{x} + \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} ((-1) ^ {n} \\hat{w} ^ {2})}{(2 (n + 1))!}} + \\mathbf{1}_{3 \\times 3}",
                                 "res": "hat(w) * sin(x) + SUM(n, 0, oo, x ^ (2 * (n + 1)) * ((-1) ^ n * hat(w) ^ 2) / factorial(2 * (n + 1))) + unit_matrix(3)",
                                 "rule": {
                                     "loc": "0.0.1",
@@ -180,7 +164,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\hat{w} \\sin{x} + \\hat{w} ^ {2} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {2 (n + 1)}}{(2 (n + 1))!}} + I_{3 \\times 3}",
+                                "latex_res": "\\hat{w} \\sin{x} + \\hat{w} ^ {2} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {2 (n + 1)}}{(2 (n + 1))!}} + \\mathbf{1}_{3 \\times 3}",
                                 "res": "hat(w) * sin(x) + hat(w) ^ 2 * SUM(n, 0, oo, (-1) ^ n * x ^ (2 * (n + 1)) / factorial(2 * (n + 1))) + unit_matrix(3)",
                                 "rule": {
                                     "latex_str": "rewriting \\(\\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} ((-1) ^ {n} \\hat{w} ^ {2})}{(2 (n + 1))!}}\\) to \\(\\hat{w} ^ {2} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {2 (n + 1)}}{(2 (n + 1))!}}\\)",
@@ -192,7 +176,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\hat{w} \\sin{x} + \\hat{w} ^ {2} (1 - \\cos{x}) + I_{3 \\times 3}",
+                                "latex_res": "\\hat{w} \\sin{x} + \\hat{w} ^ {2} (1 - \\cos{x}) + \\mathbf{1}_{3 \\times 3}",
                                 "res": "hat(w) * sin(x) + hat(w) ^ 2 * (1 - cos(x)) + unit_matrix(3)",
                                 "rule": {
                                     "eq": "1 - cos(a) = SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))",
@@ -204,7 +188,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "(-\\cos{x} + 1) \\hat{w} ^ {2} + \\sin{x} \\hat{w} + I_{3 \\times 3}",
+                                "latex_res": "(-\\cos{x} + 1) \\hat{w} ^ {2} + \\sin{x} \\hat{w} + \\mathbf{1}_{3 \\times 3}",
                                 "res": "(-cos(x) + 1) * hat(w) ^ 2 + sin(x) * hat(w) + unit_matrix(3)",
                                 "rule": {
                                     "name": "FullSimplify",
@@ -216,11 +200,11 @@
                         "type": "Calculation"
                     },
                     {
-                        "latex_start": "I_{3 \\times 3} + \\sin{x} \\hat{w} + (1 - \\cos{x}) \\hat{w} ^ {2}",
+                        "latex_start": "\\mathbf{1}_{3 \\times 3} + \\sin{x} \\hat{w} + (1 - \\cos{x}) \\hat{w} ^ {2}",
                         "start": "unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * hat(w) ^ 2",
                         "steps": [
                             {
-                                "latex_res": "(-\\cos{x} + 1) \\hat{w} ^ {2} + \\sin{x} \\hat{w} + I_{3 \\times 3}",
+                                "latex_res": "(-\\cos{x} + 1) \\hat{w} ^ {2} + \\sin{x} \\hat{w} + \\mathbf{1}_{3 \\times 3}",
                                 "res": "(-cos(x) + 1) * hat(w) ^ 2 + sin(x) * hat(w) + unit_matrix(3)",
                                 "rule": {
                                     "name": "FullSimplify",
@@ -234,7 +218,7 @@
                 ],
                 "finished": true,
                 "goal": "exp(hat(w) * x) = unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * hat(w) ^ 2",
-                "latex_goal": "e^{\\hat{w} x} = I_{3 \\times 3} + \\sin{x} \\hat{w} + (1 - \\cos{x}) \\hat{w} ^ {2}",
+                "latex_goal": "e^{\\hat{w} x} = \\mathbf{1}_{3 \\times 3} + \\sin{x} \\hat{w} + (1 - \\cos{x}) \\hat{w} ^ {2}",
                 "type": "CalculationProof"
             },
             "type": "Goal"

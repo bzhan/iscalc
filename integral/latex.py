@@ -180,7 +180,7 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
             elif e.func_name == "norm":
                 return "\\|%s\\|" % sx
             elif e.func_name == 'unit_matrix':
-                return "I_{%s \\times %s}" % (sx, sx)
+                return "\\mathbf{1}_{%s \\times %s}" % (sx, sx)
             elif e.func_name == 'inv':
                 return "%s ^ {-1}" % sx
             elif e.func_name == 'hat':
@@ -197,9 +197,11 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
             elif e.func_name in ('Li'):
                 return "\\operatorname{%s}(%s,%s)" % (e.func_name, sx, sy)
             elif e.func_name == 'zero_matrix':
-                return "O_{%s \\times %s}"%(sx, sy)
+                return "\\mathbf{0}_{%s \\times %s}"%(sx, sy)
             else:
                 return "%s(%s,%s)" % (e.func_name, sx, sy)
+        elif len(e.args) == 3 and e.func_name == 'nth':
+            return "%s_{%s%s}" % (e.args[0], e.args[1], e.args[2])
         elif len(e.args) > 2:
             s = "%s{(" % (e.func_name)
             for x in e.args:

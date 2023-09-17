@@ -204,8 +204,8 @@ def transpose(e: Expr):
         return Matrix([[e.data[j][i] for j in range(r)] for i in range(c)])
     return e
 
-def norm(e: Expr, ctx: Context):
-    if expr.is_vector_type(e.type):
+def norm(e: Expr) -> Expr:
+    if expr.is_matrix_type(e.type):
         res = None
         for r in e.data:
             for c in r:
@@ -268,12 +268,12 @@ def hat(e: Expr) -> Expr:
     if not expr.is_matrix(e) and expr.is_matrix_type(e.type):
         raise AssertionError("hat: type mismatch")
 
-    if expr.is_vector_type(e.type) and expr.num_row(e.type) == Const(3):
+    if expr.is_matrix_type(e.type) and expr.num_row(e.type) == Const(3) and expr.num_col(e.type) == Const(1):
         res = [[ Const(0),  -e.data[2][0],  e.data[1][0]],
                [ e.data[2][0],  Const(0),  -e.data[0][0]],
                [-e.data[1][0],  e.data[0][0],  Const(0)]]
         return Matrix(res)
-    elif expr.is_vector_type(e.type) and expr.num_row(e.type) == Const(6):
+    elif expr.is_matrix_type(e.type) and expr.num_row(e.type) == Const(6) and expr.num_col(e.type) == Const(1):
         res = [[ Const(0),  -e.data[5][0],  e.data[4][0], e.data[0][0]],
                [ e.data[5][0],  Const(0),  -e.data[3][0], e.data[1][0]],
                [-e.data[4][0],  e.data[3][0],  Const(0),  e.data[2][0]],
@@ -281,3 +281,6 @@ def hat(e: Expr) -> Expr:
         return Matrix(res)
     else:
         raise AssertionError(f"{e} should be a 3 or 6-dimensional vector")
+
+def unfold_matrix(e: Expr, r: int, c: int) -> Expr:
+    return Matrix([[expr.Fun("nth", e, Const(i), Const(j)) for j in range(c)] for i in range(r)])

@@ -1,22 +1,6 @@
 {
     "content": [
         {
-            "content": "[[a_1], [a_2], [a_3]]",
-            "fixes": [
-                [
-                    "w",
-                    "$tensor($real, 3, 1)"
-                ],
-                [
-                    "n",
-                    "$int"
-                ]
-            ],
-            "latex_var": "w",
-            "type": "VarDef",
-            "var": "w"
-        },
-        {
             "finished": true,
             "fixes": [
                 [
@@ -29,7 +13,7 @@
                 ]
             ],
             "goal": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
-            "latex_goal": "\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot I_{3 \\times 3}",
+            "latex_goal": "\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot \\mathbf{1}_{3 \\times 3}",
             "proof": {
                 "calcs": [
                     {
@@ -37,33 +21,12 @@
                         "start": "hat(w) ^ 2",
                         "steps": [
                             {
-                                "latex_res": "\\hat{w} ^ {1} \\hat{w} ^ {1}",
-                                "res": "hat(w) ^ 1 * hat(w) ^ 1",
-                                "rule": {
-                                    "latex_str": "rewrite \\(\\hat{w} ^ {2}\\) to \\(\\hat{w} ^ {1} \\hat{w} ^ {1}\\) using identity",
-                                    "name": "ApplyIdentity",
-                                    "source": "hat(w) ^ 2",
-                                    "str": "rewrite hat(w) ^ 2 to hat(w) ^ 1 * hat(w) ^ 1 using identity",
-                                    "target": "hat(w) ^ 1 * hat(w) ^ 1"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\begin{bmatrix}0&-a_3&a_2\\\\a_3&0&-a_1\\\\-a_2&a_1&0\\end{bmatrix} ^ {1} \\begin{bmatrix}0&-a_3&a_2\\\\a_3&0&-a_1\\\\-a_2&a_1&0\\end{bmatrix} ^ {1}",
-                                "res": "[[0, -a_3, a_2], [a_3, 0, -a_1], [-a_2, a_1, 0]] ^ 1 * [[0, -a_3, a_2], [a_3, 0, -a_1], [-a_2, a_1, 0]] ^ 1",
+                                "latex_res": "\\begin{bmatrix}-w_{10} ^ {2} - w_{20} ^ {2}&w_{00} w_{10}&w_{00} w_{20}\\\\w_{00} w_{10}&-w_{00} ^ {2} - w_{20} ^ {2}&w_{10} w_{20}\\\\w_{00} w_{20}&w_{10} w_{20}&-w_{00} ^ {2} - w_{10} ^ {2}\\end{bmatrix}",
+                                "res": "[[-(nth(w,1,0) ^ 2) - nth(w,2,0) ^ 2, nth(w,0,0) * nth(w,1,0), nth(w,0,0) * nth(w,2,0)], [nth(w,0,0) * nth(w,1,0), -(nth(w,0,0) ^ 2) - nth(w,2,0) ^ 2, nth(w,1,0) * nth(w,2,0)], [nth(w,0,0) * nth(w,2,0), nth(w,1,0) * nth(w,2,0), -(nth(w,0,0) ^ 2) - nth(w,1,0) ^ 2]]",
                                 "rule": {
                                     "loc": "subterms",
                                     "name": "ExpandMatFunc",
                                     "str": "expand functions of matrices on subterms"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\begin{bmatrix}-a_2 ^ {2} - a_3 ^ {2}&a_1 a_2&a_1 a_3\\\\a_1 a_2&-a_1 ^ {2} - a_3 ^ {2}&a_2 a_3\\\\a_1 a_3&a_2 a_3&-a_1 ^ {2} - a_2 ^ {2}\\end{bmatrix}",
-                                "res": "[[-(a_2 ^ 2) - a_3 ^ 2, a_1 * a_2, a_1 * a_3], [a_1 * a_2, -(a_1 ^ 2) - a_3 ^ 2, a_2 * a_3], [a_1 * a_3, a_2 * a_3, -(a_1 ^ 2) - a_2 ^ 2]]",
-                                "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -71,12 +34,12 @@
                         "type": "Calculation"
                     },
                     {
-                        "latex_start": "w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot I_{3 \\times 3}",
+                        "latex_start": "w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot \\mathbf{1}_{3 \\times 3}",
                         "start": "w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
                         "steps": [
                             {
-                                "latex_res": "\\begin{bmatrix}a_1\\\\a_2\\\\a_3\\end{bmatrix} \\begin{bmatrix}a_1&a_2&a_3\\end{bmatrix} - \\sqrt{a_1 ^ {2} + a_2 ^ {2} + a_3 ^ {2}} ^ {2} \\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&1\\end{bmatrix}",
-                                "res": "[[a_1], [a_2], [a_3]] * [[a_1, a_2, a_3]] - sqrt(a_1 ^ 2 + a_2 ^ 2 + a_3 ^ 2) ^ 2 * [[1, 0, 0], [0, 1, 0], [0, 0, 1]]",
+                                "latex_res": "\\begin{bmatrix}w_{00}\\\\w_{10}\\\\w_{20}\\end{bmatrix} \\begin{bmatrix}w_{00}&w_{10}&w_{20}\\end{bmatrix} - \\sqrt{w_{00} ^ {2} + w_{10} ^ {2} + w_{20} ^ {2}} ^ {2} \\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&1\\end{bmatrix}",
+                                "res": "[[nth(w,0,0)], [nth(w,1,0)], [nth(w,2,0)]] * [[nth(w,0,0), nth(w,1,0), nth(w,2,0)]] - sqrt(nth(w,0,0) ^ 2 + nth(w,1,0) ^ 2 + nth(w,2,0) ^ 2) ^ 2 * [[1, 0, 0], [0, 1, 0], [0, 0, 1]]",
                                 "rule": {
                                     "loc": "subterms",
                                     "name": "ExpandMatFunc",
@@ -85,8 +48,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\begin{bmatrix}-a_2 ^ {2} - a_3 ^ {2}&a_1 a_2&a_1 a_3\\\\a_1 a_2&-a_1 ^ {2} - a_3 ^ {2}&a_2 a_3\\\\a_1 a_3&a_2 a_3&-a_1 ^ {2} - a_2 ^ {2}\\end{bmatrix}",
-                                "res": "[[-(a_2 ^ 2) - a_3 ^ 2, a_1 * a_2, a_1 * a_3], [a_1 * a_2, -(a_1 ^ 2) - a_3 ^ 2, a_2 * a_3], [a_1 * a_3, a_2 * a_3, -(a_1 ^ 2) - a_2 ^ 2]]",
+                                "latex_res": "\\begin{bmatrix}-w_{10} ^ {2} - w_{20} ^ {2}&w_{00} w_{10}&w_{00} w_{20}\\\\w_{00} w_{10}&-w_{00} ^ {2} - w_{20} ^ {2}&w_{10} w_{20}\\\\w_{00} w_{20}&w_{10} w_{20}&-w_{00} ^ {2} - w_{10} ^ {2}\\end{bmatrix}",
+                                "res": "[[-(nth(w,1,0) ^ 2) - nth(w,2,0) ^ 2, nth(w,0,0) * nth(w,1,0), nth(w,0,0) * nth(w,2,0)], [nth(w,0,0) * nth(w,1,0), -(nth(w,0,0) ^ 2) - nth(w,2,0) ^ 2, nth(w,1,0) * nth(w,2,0)], [nth(w,0,0) * nth(w,2,0), nth(w,1,0) * nth(w,2,0), -(nth(w,0,0) ^ 2) - nth(w,1,0) ^ 2]]",
                                 "rule": {
                                     "name": "FullSimplify",
                                     "str": "full simplify"
@@ -99,7 +62,7 @@
                 ],
                 "finished": true,
                 "goal": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
-                "latex_goal": "\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot I_{3 \\times 3}",
+                "latex_goal": "\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot \\mathbf{1}_{3 \\times 3}",
                 "type": "CalculationProof"
             },
             "type": "Goal"
@@ -117,7 +80,7 @@
                 ]
             ],
             "goal": "w * T(w) * hat(w) = zero_matrix(3,3)",
-            "latex_goal": "w w^{\\text{T}} \\hat{w} = O_{3 \\times 3}",
+            "latex_goal": "w w^{\\text{T}} \\hat{w} = \\mathbf{0}_{3 \\times 3}",
             "proof": {
                 "calcs": [
                     {
@@ -125,8 +88,8 @@
                         "start": "w * T(w) * hat(w)",
                         "steps": [
                             {
-                                "latex_res": "\\begin{bmatrix}a_1\\\\a_2\\\\a_3\\end{bmatrix} \\begin{bmatrix}a_1&a_2&a_3\\end{bmatrix} \\begin{bmatrix}0&-a_3&a_2\\\\a_3&0&-a_1\\\\-a_2&a_1&0\\end{bmatrix}",
-                                "res": "[[a_1], [a_2], [a_3]] * [[a_1, a_2, a_3]] * [[0, -a_3, a_2], [a_3, 0, -a_1], [-a_2, a_1, 0]]",
+                                "latex_res": "\\begin{bmatrix}w_{00}\\\\w_{10}\\\\w_{20}\\end{bmatrix} \\begin{bmatrix}w_{00}&w_{10}&w_{20}\\end{bmatrix} \\begin{bmatrix}0&-w_{20}&w_{10}\\\\w_{20}&0&-w_{00}\\\\-w_{10}&w_{00}&0\\end{bmatrix}",
+                                "res": "[[nth(w,0,0)], [nth(w,1,0)], [nth(w,2,0)]] * [[nth(w,0,0), nth(w,1,0), nth(w,2,0)]] * [[0, -nth(w,2,0), nth(w,1,0)], [nth(w,2,0), 0, -nth(w,0,0)], [-nth(w,1,0), nth(w,0,0), 0]]",
                                 "rule": {
                                     "loc": "subterms",
                                     "name": "ExpandMatFunc",
@@ -147,7 +110,7 @@
                         "type": "Calculation"
                     },
                     {
-                        "latex_start": "O_{3 \\times 3}",
+                        "latex_start": "\\mathbf{0}_{3 \\times 3}",
                         "start": "zero_matrix(3,3)",
                         "steps": [
                             {
@@ -159,15 +122,6 @@
                                     "str": "expand functions of matrices on subterms"
                                 },
                                 "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
-                                "res": "[[0, 0, 0], [0, 0, 0], [0, 0, 0]]",
-                                "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
-                                },
-                                "type": "CalculationStep"
                             }
                         ],
                         "type": "Calculation"
@@ -175,7 +129,7 @@
                 ],
                 "finished": true,
                 "goal": "w * T(w) * hat(w) = zero_matrix(3,3)",
-                "latex_goal": "w w^{\\text{T}} \\hat{w} = O_{3 \\times 3}",
+                "latex_goal": "w w^{\\text{T}} \\hat{w} = \\mathbf{0}_{3 \\times 3}",
                 "type": "CalculationProof"
             },
             "type": "Goal"
@@ -510,11 +464,11 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "(w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot I_{3 \\times 3}) ((-1) ^ {n} \\hat{w})",
+                                        "latex_res": "(w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot \\mathbf{1}_{3 \\times 3}) ((-1) ^ {n} \\hat{w})",
                                         "res": "(w * T(w) - norm(w) ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w))",
                                         "rule": {
                                             "eq": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
-                                            "latex_str": "apply equation \\(\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot I_{3 \\times 3}\\) at 0",
+                                            "latex_str": "apply equation \\(\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot \\mathbf{1}_{3 \\times 3}\\) at 0",
                                             "loc": "0",
                                             "name": "ApplyEquation",
                                             "str": "apply equation: hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3) at 0"
@@ -522,7 +476,7 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "(w w^{\\text{T}} - 1 ^ {2} I_{3 \\times 3}) ((-1) ^ {n} \\hat{w})",
+                                        "latex_res": "(w w^{\\text{T}} - 1 ^ {2} \\mathbf{1}_{3 \\times 3}) ((-1) ^ {n} \\hat{w})",
                                         "res": "(w * T(w) - 1 ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w))",
                                         "rule": {
                                             "eq": "norm(w) = 1",
@@ -534,7 +488,7 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "(-1) ^ {n} w w^{\\text{T}} \\hat{w} - (-1) ^ {n}\\cdot I_{3 \\times 3} \\hat{w}",
+                                        "latex_res": "(-1) ^ {n} w w^{\\text{T}} \\hat{w} - (-1) ^ {n}\\cdot \\mathbf{1}_{3 \\times 3} \\hat{w}",
                                         "res": "(-1) ^ n * w * T(w) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w)",
                                         "rule": {
                                             "name": "ExpandPolynomial",
@@ -543,7 +497,7 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "(-1) ^ {n} (w w^{\\text{T}} \\hat{w}) - (-1) ^ {n}\\cdot I_{3 \\times 3} \\hat{w}",
+                                        "latex_res": "(-1) ^ {n} (w w^{\\text{T}} \\hat{w}) - (-1) ^ {n}\\cdot \\mathbf{1}_{3 \\times 3} \\hat{w}",
                                         "res": "(-1) ^ n * (w * T(w) * hat(w)) - (-1) ^ n * unit_matrix(3) * hat(w)",
                                         "rule": {
                                             "latex_str": "rewriting \\((-1) ^ {n} w w^{\\text{T}} \\hat{w}\\) to \\((-1) ^ {n} (w w^{\\text{T}} \\hat{w})\\)",
@@ -555,11 +509,11 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "(-1) ^ {n}\\cdot O_{3 \\times 3} - (-1) ^ {n}\\cdot I_{3 \\times 3} \\hat{w}",
+                                        "latex_res": "(-1) ^ {n}\\cdot \\mathbf{0}_{3 \\times 3} - (-1) ^ {n}\\cdot \\mathbf{1}_{3 \\times 3} \\hat{w}",
                                         "res": "(-1) ^ n * zero_matrix(3,3) - (-1) ^ n * unit_matrix(3) * hat(w)",
                                         "rule": {
                                             "eq": "w * T(w) * hat(w) = zero_matrix(3,3)",
-                                            "latex_str": "apply equation \\(w w^{\\text{T}} \\hat{w} = O_{3 \\times 3}\\) at 0.1",
+                                            "latex_str": "apply equation \\(w w^{\\text{T}} \\hat{w} = \\mathbf{0}_{3 \\times 3}\\) at 0.1",
                                             "loc": "0.1",
                                             "name": "ApplyEquation",
                                             "str": "apply equation: w * T(w) * hat(w) = zero_matrix(3,3) at 0.1"
@@ -930,11 +884,11 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "(w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot I_{3 \\times 3}) ((-1) ^ {n} \\hat{w} ^ {2})",
+                                        "latex_res": "(w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot \\mathbf{1}_{3 \\times 3}) ((-1) ^ {n} \\hat{w} ^ {2})",
                                         "res": "(w * T(w) - norm(w) ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w) ^ 2)",
                                         "rule": {
                                             "eq": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
-                                            "latex_str": "apply equation \\(\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot I_{3 \\times 3}\\) at 0",
+                                            "latex_str": "apply equation \\(\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2}\\cdot \\mathbf{1}_{3 \\times 3}\\) at 0",
                                             "loc": "0",
                                             "name": "ApplyEquation",
                                             "str": "apply equation: hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3) at 0"
@@ -942,7 +896,7 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "(w w^{\\text{T}} - 1 ^ {2} I_{3 \\times 3}) ((-1) ^ {n} \\hat{w} ^ {2})",
+                                        "latex_res": "(w w^{\\text{T}} - 1 ^ {2} \\mathbf{1}_{3 \\times 3}) ((-1) ^ {n} \\hat{w} ^ {2})",
                                         "res": "(w * T(w) - 1 ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w) ^ 2)",
                                         "rule": {
                                             "eq": "norm(w) = 1",
@@ -954,7 +908,7 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "(-1) ^ {n} w w^{\\text{T}} \\hat{w} \\hat{w} - (-1) ^ {n}\\cdot I_{3 \\times 3} \\hat{w} \\hat{w}",
+                                        "latex_res": "(-1) ^ {n} w w^{\\text{T}} \\hat{w} \\hat{w} - (-1) ^ {n}\\cdot \\mathbf{1}_{3 \\times 3} \\hat{w} \\hat{w}",
                                         "res": "(-1) ^ n * w * T(w) * hat(w) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w) * hat(w)",
                                         "rule": {
                                             "name": "ExpandPolynomial",
@@ -963,7 +917,7 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "(-1) ^ {n} (w w^{\\text{T}} \\hat{w}) \\hat{w} - (-1) ^ {n}\\cdot I_{3 \\times 3} \\hat{w} \\hat{w}",
+                                        "latex_res": "(-1) ^ {n} (w w^{\\text{T}} \\hat{w}) \\hat{w} - (-1) ^ {n}\\cdot \\mathbf{1}_{3 \\times 3} \\hat{w} \\hat{w}",
                                         "res": "(-1) ^ n * (w * T(w) * hat(w)) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w) * hat(w)",
                                         "rule": {
                                             "latex_str": "rewriting \\((-1) ^ {n} w w^{\\text{T}} \\hat{w}\\) to \\((-1) ^ {n} (w w^{\\text{T}} \\hat{w})\\)",
@@ -975,11 +929,11 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "(-1) ^ {n}\\cdot O_{3 \\times 3} \\hat{w} - (-1) ^ {n}\\cdot I_{3 \\times 3} \\hat{w} \\hat{w}",
+                                        "latex_res": "(-1) ^ {n}\\cdot \\mathbf{0}_{3 \\times 3} \\hat{w} - (-1) ^ {n}\\cdot \\mathbf{1}_{3 \\times 3} \\hat{w} \\hat{w}",
                                         "res": "(-1) ^ n * zero_matrix(3,3) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w) * hat(w)",
                                         "rule": {
                                             "eq": "w * T(w) * hat(w) = zero_matrix(3,3)",
-                                            "latex_str": "apply equation \\(w w^{\\text{T}} \\hat{w} = O_{3 \\times 3}\\) at 0.0.1",
+                                            "latex_str": "apply equation \\(w w^{\\text{T}} \\hat{w} = \\mathbf{0}_{3 \\times 3}\\) at 0.0.1",
                                             "loc": "0.0.1",
                                             "name": "ApplyEquation",
                                             "str": "apply equation: w * T(w) * hat(w) = zero_matrix(3,3) at 0.0.1"

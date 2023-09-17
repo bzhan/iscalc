@@ -2434,6 +2434,7 @@ class MatrixRewrite(Rule):
         raise NotImplementedError
 
 class ExpandMatFunc(Rule):
+    """Expand functions on matrices."""
     def __init__(self):
         self.name = "ExpandMatFunc"
 
@@ -2448,35 +2449,24 @@ class ExpandMatFunc(Rule):
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
         if expr.is_var(e):
-            var_defs = ctx.get_var_definitions()
-            for item in var_defs:
-                if item.rhs != None:
-                    e = e.replace(item.lhs, item.rhs)
+            if expr.is_matrix_type(e.type):
+                r, c = expr.num_row(e.type), expr.num_col(e.type)
+                if expr.is_const(r) and expr.is_const(c):
+                    # Expand into matrix form
+                    return matrix.unfold_matrix(e, r.val, c.val)
+            # All other cases: leave unchanged
             return e
+        elif e.is_power() and expr.is_matrix(e.args[0]) and e.args[1] == Const(2):
+            return matrix.multiply(e.args[0], e.args[0], ctx)
         elif expr.is_fun(e):
-            if len(e.args) == 0:
-                return e
-            # find definition of variable from ctx to expand it
-            var_defs = ctx.get_var_definitions()
-            args = e.args
-            # print(a)
-            for a in args:
-                for item in var_defs:
-                    if item.rhs != None:
-                        a = a.replace(item.lhs, item.rhs)
-            e = Fun(e.func_name, *args)
-            if e.func_name == 'hat' and len(e.args) == 1 and expr.is_vector_type(e.args[0].type):
+            if e.func_name == 'hat' and len(e.args) == 1 and expr.is_matrix_type(e.args[0].type):
                 return matrix.hat(e.args[0])
             elif e.func_name == 'unit_matrix' and len(e.args) == 1 and expr.is_const(e.args[0]):
-                return matrix.unit_matrix(expr.eval_expr(e.args[0]))
+                return matrix.unit_matrix(e.args[0].val)
             elif e.func_name == 'T' and len(e.args) == 1:
-                if expr.is_matrix(e.args[0]):
-                    return matrix.transpose(e.args[0])
-                else:
-                    print(e)
-                    raise NotImplementedError
+                return matrix.transpose(e.args[0])
             elif e.func_name == "zero_matrix" and len(e.args) == 2 and all(expr.is_const(arg) for arg in e.args):
-                return matrix.zero_matrix(expr.eval_expr(e.args[0]), expr.eval_expr(e.args[1]))
-            elif e.func_name == "norm" and len(e.args) == 1 and expr.is_vector_type(e.args[0].type):
-                return matrix.norm(e.args[0], ctx)
+                return matrix.zero_matrix(e.args[0].val, e.args[1].val)
+            elif e.func_name == "norm" and len(e.args) == 1 and expr.is_matrix_type(e.args[0].type):
+                return matrix.norm(e.args[0])
         return e

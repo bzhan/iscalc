@@ -1,7 +1,7 @@
-from random import random
-from typing import Set, Dict, Tuple
+from typing import Dict, Tuple
 
 from integral.context import Context
+from integral import expr
 from integral.expr import Op, Fun, Expr, Var, POS_INF, NEG_INF, Const
 from integral.poly import normalize
 from integral.series import expand_series
@@ -11,6 +11,7 @@ def dummy_var():
     global count
     count = count + 1
     return Var("_d"+str(count))
+
 class SubsSet(dict):
     """
     Stores (expr, dummy) pairs, and how to rewrite expr-s.
@@ -108,9 +109,10 @@ class SubsSet(dict):
 
     def __str__(self):
         return ', '.join(['('+ str(a)+', '+str(b)+ ')' for (a, b) in self.items()]) + '\n' + str(self.rewrites)
-def rewrite(e:Expr, omega: SubsSet, x:str, w:Var, ctx:Context) -> Dict['Expr', 'Expr']:
+
+def rewrite(e: Expr, omega: SubsSet, x: str, w: Var, ctx: Context) -> Dict['Expr', 'Expr']:
     for i in omega:
-        assert i.is_fun() and i.func_name == 'exp', 'value should be exp'
+        assert expr.is_fun(i) and i.func_name == 'exp', 'value should be exp'
 
     rewrites = omega.rewrites
     omega = list(omega.items())
@@ -141,12 +143,12 @@ def rewrite(e:Expr, omega: SubsSet, x:str, w:Var, ctx:Context) -> Dict['Expr', '
         e = e.replace(a, b)
     return e, logw
 
-def compare(x:str, f:Expr, g:Expr, ctx:Context) -> str:
-    if f.is_fun() and f.func_name == 'exp':
+def compare(x: str, f: Expr, g: Expr, ctx: Context) -> str:
+    if expr.is_fun(f) and f.func_name == 'exp':
         lnf = f.args[0]
     else:
         lnf = Fun('log', f)
-    if g.is_fun() and g.func_name == 'exp':
+    if expr.is_fun(g) and g.func_name == 'exp':
         lng = g.args[0]
     else:
         lng = Fun('log', g)
@@ -205,10 +207,10 @@ def mrv(e:Expr, x:str, ctx:Context):
             return s, Op('^', base_exps, e.args[1])
         else:
             return mrv(Fun('exp', normalize(e.args[1] * Fun('log', e.args[0]), ctx)), x, ctx)
-    elif e.is_fun() and e.func_name == 'log':
+    elif expr.is_fun(e) and e.func_name == 'log':
             s, exps = mrv(e.args[0], x, ctx)
             return s, Fun('log', exps)
-    elif e.is_fun() and e.func_name == 'exp':
+    elif expr.is_fun(e) and e.func_name == 'exp':
         l = limit_inf(e.args[0], x, ctx)
         if l in (POS_INF, NEG_INF):
             f = SubsSet()

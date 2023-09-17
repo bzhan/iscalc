@@ -265,14 +265,14 @@ class Context:
         self.definitions.append(Identity(Eq(symb_lhs, symb_rhs)))
 
     def add_var_definition(self, v: Expr, c:Union[Expr,None]):
-        if not v.is_var():
+        if not expr.is_var(v):
             raise TypeError
         if c is None:
             c = v
         self.var_definitions.append(Eq(v, c))
 
     def add_indefinite_integral(self, eq: Expr):
-        if not (eq.is_equals() and eq.lhs.is_indefinite_integral()):
+        if not (eq.is_equals() and expr.is_indefinite_integral(eq.lhs)):
             raise TypeError
         
         symb_lhs = expr_to_pattern(eq.lhs)
@@ -280,7 +280,7 @@ class Context:
         self.indefinite_integrals.append(Identity(Eq(symb_lhs, symb_rhs)))
 
     def add_definite_integral(self, eq: Expr, conds: Conditions):
-        if not (eq.is_equals() and eq.lhs.is_integral()):
+        if not (eq.is_equals() and expr.is_integral(eq.lhs)):
             raise TypeError
         
         symb_lhs = expr_to_pattern(eq.lhs)
@@ -288,7 +288,7 @@ class Context:
         self.definite_integrals.append(Identity(Eq(symb_lhs, symb_rhs), conds=conds))
 
     def add_series_expansion(self, eq: Expr):
-        if not (eq.is_equals() and not eq.lhs.is_summation() and eq.rhs.is_summation()):
+        if not (eq.is_equals() and not expr.is_summation(eq.lhs) and expr.is_summation(eq.rhs)):
             raise TypeError
         
         symb_lhs = expr_to_pattern(eq.lhs)
@@ -296,7 +296,7 @@ class Context:
         self.series_expansions.append(Identity(Eq(symb_lhs, symb_rhs)))
 
     def add_series_evaluation(self, eq: Expr):
-        if not (eq.is_equals() and eq.lhs.is_summation() and not eq.rhs.is_summation()):
+        if not (eq.is_equals() and expr.is_summation(eq.lhs) and not expr.is_summation(eq.rhs)):
             raise TypeError
         
         symb_lhs = expr_to_pattern(eq.lhs)
@@ -386,9 +386,9 @@ class Context:
                 for a, b in item['fixes']:
                     fixes[a] = parser.parse_expr(b, fixes=fixes)
             e = parser.parse_expr(item['expr'], fixes=fixes)
-            if e.is_equals() and e.lhs.is_indefinite_integral():
+            if e.is_equals() and expr.is_indefinite_integral(e.lhs):
                 self.add_indefinite_integral(e)
-            elif e.is_equals() and e.lhs.is_integral():
+            elif e.is_equals() and expr.is_integral(e.lhs):
                 conds = Conditions()
                 if 'conds' in item:
                     for cond in item['conds']:
@@ -401,7 +401,7 @@ class Context:
                         conds.add_condition(parser.parse_expr(c, fixes=fixes))
                 split_cond = parser.parse_expr(item['split-cond'], fixes=fixes)
                 self.add_summation_split_identities(e, conds, split_cond)
-            elif e.is_equals() and not e.lhs.is_summation() and e.rhs.is_summation():
+            elif e.is_equals() and not expr.is_summation(e.lhs) and expr.is_summation(e.rhs):
                 self.add_series_expansion(e)
                 if item['type'] == 'problem':
                     conds = Conditions()
@@ -409,7 +409,7 @@ class Context:
                         for c in item['conds']:
                             conds.add_condition(parser.parse_expr(c, fixes=fixes))
                     self.add_lemma(e, conds)
-            elif e.is_equals() and e.lhs.is_summation() and not e.rhs.is_summation():
+            elif e.is_equals() and expr.is_summation(e.lhs) and not expr.is_summation(e.rhs):
                 if item['type'] == 'problem':
                     conds = Conditions()
                     if 'conds' in item:
@@ -471,7 +471,7 @@ class Context:
         f = condprover.check_condition(e, self)
         if f:
             return True
-        if e.is_op() and e.op in ('>', '<', '!='):
+        if expr.is_op(e) and e.op in ('>', '<', '!='):
             match e.op:
                 case '>':
                     f = condprover.check_condition(Op('<', e.args[1], e.args[0]), self)
@@ -485,7 +485,7 @@ class Context:
         goal_vars = goal.get_vars()
         for e in conds.data:
             if e.get_vars().intersection(goal_vars) == set():
-                continue;
+                continue
             if not self.check_condition(e):
                 return False
         return True
@@ -524,17 +524,17 @@ class Context:
 def body_conds(e: Expr, ctx: Context) -> Context:
     """Return the conditions in the body."""
     ctx2 = Context(ctx)
-    if e.is_integral():
+    if expr.is_integral(e):
         if e.lower != expr.NEG_INF:
             ctx2.add_condition(Op(">", expr.Var(e.var), e.lower))
         if e.upper != expr.POS_INF:
             ctx2.add_condition(Op("<", expr.Var(e.var), e.upper))
-    elif e.is_indefinite_integral():
+    elif expr.is_indefinite_integral(e):
         pass
-    elif e.is_limit():
+    elif expr.is_limit(e):
         if e.lim == expr.POS_INF:
             ctx2.add_condition(expr.Op(">", expr.Var(e.var), Const(0)))
-    elif e.is_summation():
+    elif expr.is_summation(e):
         ctx2.add_condition(expr.Op(">=", expr.Var(e.index_var, type=expr.IntType), e.lower))
         if e.upper != expr.POS_INF:
             ctx2.add_condition(expr.Op("<=", expr.Var(e.index_var, type=expr.IntType), e.upper))
@@ -546,38 +546,38 @@ def body_conds(e: Expr, ctx: Context) -> Context:
 
 def apply_subterm(e: Expr, f: Callable[[Expr, Context], Expr], ctx: Context) -> Expr:
     def rec(e: Expr, ctx: Context):
-        if e.is_var() or e.is_const() or e.is_inf() or e.is_skolem_func():
+        if expr.is_var(e) or expr.is_const(e) or expr.is_inf(e) or expr.is_skolem_func(e):
             return f(e, ctx)
-        elif e.is_op():
+        elif expr.is_op(e):
             args = [rec(arg, ctx) for arg in e.args]
             return f(expr.Op(e.op, *args), ctx)
-        elif e.is_fun():
+        elif expr.is_fun(e):
             args = [rec(arg, ctx) for arg in e.args]
             return f(expr.Fun(e.func_name, *args), ctx)
-        elif e.is_deriv():
+        elif expr.is_deriv(e):
             return f(expr.Deriv(e.var, rec(e.body, ctx)), ctx)
-        elif e.is_integral():
+        elif expr.is_integral(e):
             lower = rec(e.lower, ctx)
             upper = rec(e.upper, ctx)
             body = rec(e.body, body_conds(e, ctx))
             return f(expr.Integral(e.var, lower, upper, body), ctx)
-        elif e.is_evalat():
+        elif expr.is_evalat(e):
             lower = rec(e.lower, ctx)
             upper = rec(e.upper, ctx)
             body = rec(e.body, ctx)
             return f(expr.EvalAt(e.var, lower, upper, body), ctx)
-        elif e.is_limit():
+        elif expr.is_limit(e):
             return f(expr.Limit(e.var, rec(e.lim, ctx), rec(e.body, body_conds(e, ctx))), ctx)
-        elif e.is_indefinite_integral():
+        elif expr.is_indefinite_integral(e):
             return f(expr.IndefiniteIntegral(e.var, rec(e.body, ctx), e.skolem_args), ctx)
-        elif e.is_summation():
+        elif expr.is_summation(e):
             lower = rec(e.lower, ctx)
             upper = rec(e.upper, ctx)
             body = rec(e.body, body_conds(e, ctx))
             return f(expr.Summation(e.index_var, lower, upper, body), ctx)
-        elif e.is_matrix():
+        elif expr.is_matrix(e):
             return Matrix([[rec(item, ctx) for item in row] for row in e.data])
-        elif e.is_symbol():
+        elif expr.is_symbol(e):
             return e
         else:
             raise NotImplementedError

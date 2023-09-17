@@ -173,7 +173,7 @@ class Expr:
     def __truediv__(self, other):
         if isinstance(other, (int, Fraction)):
             other = Const(other)
-        if self.is_const() and other.is_const() and isinstance(self.val, int) and isinstance(other.val, int):
+        if is_const(self) and is_const(other) and isinstance(self.val, int) and isinstance(other.val, int):
             return Const(Fraction(self.val, other.val))
         return Op("/", self, other)
 
@@ -202,69 +202,34 @@ class Expr:
             return NEG_INF
         elif self == NEG_INF:
             return POS_INF
-        elif self.is_const() and self.val > 0:
+        elif is_const(self) and self.val > 0:
             return Const(-self.val)
         return Op("-", self)
 
     def size(self):
         if self.ty in (VAR, CONST, SYMBOL, INF):
             return 1
-        elif self.is_op() or self.is_fun():
+        elif is_op(self) or is_fun(self):
             return 1 + sum(arg.size() for arg in self.args)
-        elif self.is_deriv():
+        elif is_deriv(self):
             return 1 + self.body.size()
-        elif self.ty in (INTEGRAL, EVAL_AT):
+        elif is_integral(self) or is_evalat(self):
             return 1 + self.lower.size() + self.upper.size() + self.body.size()
-        elif self.ty == LIMIT:
+        elif is_limit(self):
             return 1 + self.lim.size() + self.body.size()
-        elif self.ty == INDEFINITEINTEGRAL:
+        elif is_indefinite_integral(self):
             return 1 + self.body.size()
-        elif self.ty == SKOLEMFUNC:
+        elif is_skolem_func(self):
             return 1 + len(self.dependent_vars)
-        elif self.ty == SUMMATION:
+        elif is_summation(self):
             return 1 + self.lower.size() + self.upper.size() + self.body.size()
-        elif self.ty == VECTOR:
-            return 1 + sum(e.size() for e in self.data)
-        elif self.ty == MATRIX:
+        elif is_matrix(self):
             return 1 + sum([sum([item.size() for item in row]) for row in self.data])
         else:
             raise NotImplementedError
 
-    def is_var(self) -> TypeGuard["Var"]:
-        return self.ty == VAR
-
-    def is_const(self) -> TypeGuard["Const"]:
-        return self.ty == CONST
-
-    def is_op(self) -> TypeGuard["Op"]:
-        return self.ty == OP
-
-    def is_fun(self) -> TypeGuard["Fun"]:
-        return self.ty == FUN
-
-    def is_deriv(self) -> TypeGuard["Deriv"]:
-        return self.ty == DERIV
-
-    def is_skolem_func(self) -> TypeGuard["SkolemFunc"]:
-        return self.ty == SKOLEMFUNC
-
-    def is_symbol(self) -> TypeGuard["Symbol"]:
-        return self.ty == SYMBOL
-
     def is_zero(self) -> bool:
-        return self.is_const() and self.val == 0
-
-    def is_integral(self) -> bool:
-        return self.ty == INTEGRAL
-
-    def is_indefinite_integral(self) -> bool:
-        return self.ty == INDEFINITEINTEGRAL
-
-    def is_evalat(self) -> bool:
-        return self.ty == EVAL_AT
-
-    def is_limit(self) -> bool:
-        return self.ty == LIMIT
+        return is_const(self) and self.val == 0
 
     def is_plus(self):
         return self.ty == OP and self.op == '+'
@@ -308,15 +273,6 @@ class Expr:
     def is_compare(self) -> bool:
         return self.ty == OP and self.op in ('=', '!=', '<', '<=', '>', '>=')
 
-    def is_inf(self):
-        return self.ty == INF and (self.t == Decimal("inf") or self.t == Decimal("-inf"))
-
-    def is_pos_inf(self):
-        return self.ty == INF and self.t == Decimal("inf")
-
-    def is_neg_inf(self):
-        return self.ty == INF and self.t == Decimal("-inf")
-
     def is_trig(self):
         return self.ty == FUN and self.func_name in ("sin", "cos", "tan", "cot", "csc", "sec")
 
@@ -338,9 +294,6 @@ class Expr:
         if poly.normalize(tmp1 + tmp2, conds) == Const(0):
             return True
         return False
-
-    def is_summation(self) -> TypeGuard["Summation"]:
-        return self.ty == SUMMATION
 
     @property
     def lhs(self) -> "Expr":
@@ -366,25 +319,25 @@ class Expr:
         if self.ty != other.ty:
             return self.ty <= other.ty
 
-        if self.is_var():
+        if is_var(self):
             return self.name <= other.name
-        elif self.is_const():
+        elif is_const(self):
             return self.val <= other.val
-        elif self.is_op():
+        elif is_op(self):
             return (self.op, self.args) <= (other.op, other.args)
-        elif self.is_fun():
+        elif is_fun(self):
             return (self.func_name, self.args) <= (other.func_name, other.args)
-        elif self.is_deriv() or self.is_indefinite_integral():
+        elif is_deriv(self) or is_indefinite_integral(self):
             return (self.body, self.var) <= (other.body, other.var)
-        elif self.is_integral() or self.is_evalat():
+        elif is_integral(self) or is_evalat(self):
             return (self.body, self.lower, self.upper, self.var) <= \
                    (other.body, other.lower, other.upper, other.var)
-        elif self.is_symbol():
+        elif is_symbol(self):
             return sum(self.ty) <= sum(other.ty)
-        elif self.is_summation():
+        elif is_summation(self):
             return (self.body, self.lower, self.upper, self.index_var) <= \
                    (other.body, other.lower, other.upper, other.index_var)
-        elif self.is_skolem_func():
+        elif is_skolem_func(self):
             return (self.name, self.dependent_vars) <= (other.name, other.dependent_vars)
         elif self.is_limit():
             return (self.var, self.lim, self.body, self.drt) <= (other.var, other.lim, other.body, other.drt)
@@ -439,15 +392,15 @@ class Expr:
             loc = Location(loc)
         if loc.is_empty():
             return self
-        elif self.is_var() or self.is_const():
+        elif is_var(self) or is_const(self):
             raise AssertionError("get_subexpr: invalid location")
-        elif self.is_op() or self.is_fun():
+        elif is_op(self) or is_fun(self):
             assert loc.head < len(self.args), "get_subexpr: invalid location"
             return self.args[loc.head].get_subexpr(loc.rest)
-        elif self.is_deriv():
+        elif is_deriv(self):
             assert loc.head == 0, "get_subexpr: invalid location"
             return self.body.get_subexpr(loc.rest)
-        elif self.is_integral() or self.is_evalat():
+        elif is_integral(self) or is_evalat(self):
             if loc.head == 0:
                 return self.body.get_subexpr(loc.rest)
             elif loc.head == 1:
@@ -456,7 +409,7 @@ class Expr:
                 return self.upper.get_subexpr(loc.rest)
             else:
                 raise AssertionError("get_subexpr: invalid location")
-        elif self.is_limit():
+        elif is_limit(self):
             assert loc.head == 0, "get_subexpr: invalid location"
             return self.body.get_subexpr(loc.rest)
 
@@ -469,9 +422,9 @@ class Expr:
             loc = Location(loc)
         if loc.is_empty():
             return new_expr
-        elif self.is_var() or self.is_const():
+        elif is_var(self) or is_const(self):
             raise AssertionError("replace_expr: invalid location")
-        elif self.is_op():
+        elif is_op(self):
             assert loc.head < len(self.args), "replace_expr: invalid location"
             if len(self.args) == 1:
                 return Op(self.op, self.args[0].replace_expr(loc.rest, new_expr))
@@ -484,11 +437,11 @@ class Expr:
                     raise AssertionError("replace_expr: invalid location")
             else:
                 raise NotImplementedError
-        elif self.is_fun():
+        elif is_fun(self):
             assert loc.head < len(self.args), "replace_expr: invalid location"
             arg = self.args[loc.head].replace_expr(loc.rest, new_expr)
             return Fun(self.func_name, arg)
-        elif self.is_integral():
+        elif is_integral(self):
             if loc.head == 0:
                 return Integral(self.var, self.lower, self.upper, self.body.replace_expr(loc.rest, new_expr))
             elif loc.head == 1:
@@ -497,7 +450,7 @@ class Expr:
                 return Integral(self.var, self.lower, self.upper.replace_expr(loc.rest, new_expr), self.body)
             else:
                 raise AssertionError("replace_expr: invalid location")
-        elif self.is_evalat():
+        elif is_evalat(self):
             if loc.head == 0:
                 return EvalAt(self.var, self.lower, self.upper, self.body.replace_expr(loc.rest, new_expr))
             elif loc.head == 1:
@@ -506,10 +459,10 @@ class Expr:
                 return EvalAt(self.var, self.lower, self.upper.replace_expr(loc.rest, new_expr), self.body)
             else:
                 raise AssertionError("replace_expr: invalid location")
-        elif self.is_deriv():
+        elif is_deriv(self):
             assert loc.head == 0, "replace_expr: invalid location"
             return Deriv(self.var, self.body.replace_expr(loc.rest, new_expr))
-        elif self.is_limit():
+        elif is_limit(self):
             assert loc.head == 0, "replace_expr: invalid location"
             return Limit(self.var, self.limit, self.body.replace_expr(loc.rest, new_expr))
         else:
@@ -523,14 +476,14 @@ class Expr:
             if hasattr(exp, 'selected') and exp.selected == True:
                 location.append(loc[1:])
                 exp.selected = False  # Once it is found, restore it.
-            elif exp.is_op() or exp.is_fun():
+            elif is_op(exp) or is_fun(exp):
                 for i in range(len(exp.args)):
                     get(exp.args[i], loc + "." + str(i))
-            elif exp.is_integral() or exp.is_evalat():
+            elif is_integral(exp) or is_evalat(exp):
                 get(exp.lower, loc + ".1")
                 get(exp.upper, loc + ".2")
                 get(exp.body, loc + ".0")
-            elif exp.is_deriv() or exp.is_summation() or exp.is_limit():
+            elif is_deriv(exp) or is_summation(exp) or is_limit(exp):
                 get(exp.body, loc + ".0")
 
         get(self)
@@ -543,16 +496,16 @@ class Expr:
         def find(e: Expr, loc: Location):
             if e == subexpr:
                 locations.append(Location(loc))
-            elif e.is_op() or e.is_fun():
+            elif is_op(e) or is_fun(e):
                 for i, arg in enumerate(e.args):
                     find(arg, loc.append(i))
-            elif e.is_integral() or e.is_evalat():
+            elif is_integral(e) or is_evalat(e):
                 find(e.lower, loc.append(1))
                 find(e.upper, loc.append(2))
                 find(e.body, loc.append(0))
-            elif e.is_deriv() or e.is_limit() or e.is_indefinite_integral():
+            elif is_deriv(e) or is_limit(e) or is_indefinite_integral(e):
                 find(e.body, loc.append(0))
-            elif e.is_summation():
+            elif is_summation(e):
                 find(e.body, loc.append(0))
                 find(e.lower, loc.append(1))
                 find(e.upper, loc.append(2))
@@ -569,16 +522,16 @@ class Expr:
         results = []
 
         def find(e: Expr, loc: Location):
-            if e.is_op() or e.is_fun():
+            if is_op(e) or is_fun(e):
                 for i, arg in enumerate(e.args):
                     find(arg, loc.append(i))
-            elif e.is_integral() or e.is_evalat():
+            elif is_integral(e) or is_evalat(e):
                 find(e.lower, loc.append(1))
                 find(e.upper, loc.append(2))
                 find(e.body, loc.append(0))
-            elif e.is_deriv() or e.is_limit() or e.is_indefinite_integral():
+            elif is_deriv(e) or is_limit(e) or is_indefinite_integral(e):
                 find(e.body, loc.append(0))
-            elif e.is_summation():
+            elif is_summation(e):
                 find(e.body, loc.append(0))
                 find(e.lower, loc.append(1))
                 find(e.upper, loc.append(2))
@@ -595,37 +548,37 @@ class Expr:
     def subst(self, var: str, e: "Expr") -> "Expr":
         """Substitute occurrence of var for e in self."""
         assert isinstance(var, str) and isinstance(e, Expr)
-        if self.is_var():
+        if is_var(self):
             if self.name == var:
                 return e
             else:
                 return self
-        elif self.is_const():
+        elif is_const(self):
             return self
-        elif self.is_skolem_func():
+        elif is_skolem_func(self):
             return SkolemFunc(self.name, tuple(arg.subst(var, e) for arg in self.dependent_vars))
-        elif self.is_symbol():
+        elif is_symbol(self):
             return self
-        elif self.is_op():
+        elif is_op(self):
             return Op(self.op, *[arg.subst(var, e) for arg in self.args])
-        elif self.is_fun():
+        elif is_fun(self):
             return Fun(self.func_name, *[arg.subst(var, e) for arg in self.args])
-        elif self.is_deriv():
+        elif is_deriv(self):
             return Deriv(self.var, self.body.subst(var, e))
-        elif self.is_limit():
+        elif is_limit(self):
             return Limit(self.var, self.lim.subst(var, e), self.body.subst(var, e))
-        elif self.is_inf():
+        elif is_inf(self):
             return self
-        elif self.is_integral():
+        elif is_integral(self):
             return Integral(self.var, self.lower.subst(var, e), self.upper.subst(var, e), self.body.subst(var, e))
-        elif self.is_indefinite_integral():
+        elif is_indefinite_integral(self):
             return IndefiniteIntegral(self.var, self.body.subst(var, e), self.skolem_args)
-        elif self.is_evalat():
+        elif is_evalat(self):
             return EvalAt(self.var, self.lower.subst(var, e), self.upper.subst(var, e), self.body.subst(var, e))
-        elif self.is_summation():
+        elif is_summation(self):
             return Summation(self.index_var, self.lower.subst(var, e), self.upper.subst(var, e),
                              self.body.subst(var, e))
-        elif self.is_matrix():
+        elif is_matrix(self):
             return Matrix([[item.subst(var,e) for item in rv] for rv in self.data])
         else:
             print('subst on', self)
@@ -637,15 +590,15 @@ class Expr:
         Note Inf is not considered to be constants.
 
         """
-        if self.is_const():
+        if is_const(self):
             return True
-        elif self.is_fun() or self.is_op():
+        elif is_fun(self) or is_op(self):
             return all(arg.is_constant() for arg in self.args)
         else:
             return False
 
     def is_evaluable(self):
-        return self.is_constant() or self.is_inf()
+        return self.is_constant() or is_inf(self)
 
     def get_vars(self, with_bd = False) -> Set[str]:
         """Obtain the set of variables in self."""
@@ -653,7 +606,7 @@ class Expr:
 
         def rec(t, bd_vars):
             nonlocal with_bd
-            if t.ty == VAR:
+            if is_var(t):
                 if with_bd:
                     res.add(t.name)
                 else:
@@ -661,33 +614,33 @@ class Expr:
                         res.add(t.name)
             elif t.ty in (CONST, INF, SYMBOL):
                 return
-            elif t.ty in (OP, FUN):
+            elif is_op(t) or is_fun(t):
                 for arg in t.args:
                     rec(arg, bd_vars)
-            elif t.ty == DERIV:
+            elif is_deriv(t):
                 res.add(t.var)
                 rec(t.body, bd_vars + [t.var])
-            elif t.ty == LIMIT:
+            elif is_limit(t):
                 rec(t.lim, bd_vars + [t.var])
                 rec(t.body, bd_vars + [t.var])
-            elif t.ty in (INTEGRAL, EVAL_AT):
+            elif is_integral(t) or is_evalat(t):
                 rec(t.lower, bd_vars + [t.var])
                 rec(t.upper, bd_vars + [t.var])
                 rec(t.body, bd_vars + [t.var])
-            elif t.ty == INDEFINITEINTEGRAL:
+            elif is_indefinite_integral(t):
                 rec(t.body, bd_vars + [t.var])
-            elif t.ty == SUMMATION:
+            elif is_summation(t):
                 rec(t.lower, bd_vars + [t.index_var])
                 rec(t.upper, bd_vars + [t.index_var])
                 rec(t.body, bd_vars + [t.index_var])
             elif t.is_equals():
                 rec(t.bd_vars)
                 rec(t.rhs, bd_vars)
-            elif t.is_matrix():
+            elif is_matrix(t):
                 for rv in t.data:
                     for d in rv:
                         rec(d, bd_vars)
-            elif t.is_skolem_func():
+            elif is_skolem_func(t):
                 t:SkolemFunc
                 for var in t.dependent_vars:
                     rec(var, bd_vars)
@@ -733,25 +686,25 @@ class Expr:
             return repl_e
         elif self.ty in (VAR, CONST, INF):
             return self
-        elif self.is_op():
+        elif is_op(self):
             return Op(self.op, *[arg.replace(e, repl_e) for arg in self.args])
-        elif self.is_fun():
+        elif is_fun(self):
             return Fun(self.func_name, *[arg.replace(e, repl_e) for arg in self.args])
-        elif self.is_deriv():
+        elif is_deriv(self):
             return Deriv(self.var, self.body.replace(e, repl_e))
-        elif self.is_integral():
+        elif is_integral(self):
             return Integral(self.var, self.lower.replace(e, repl_e), self.upper.replace(e, repl_e),
                             self.body.replace(e, repl_e))
-        elif self.is_evalat():
+        elif is_evalat(self):
             return EvalAt(self.var, self.lower.replace(e, repl_e), self.upper.replace(e, repl_e),
                           self.body.replace(e, repl_e))
-        elif self.is_skolem_func():
+        elif is_skolem_func(self):
             return SkolemFunc(self.name, tuple(var.replace(e, repl_e) for var in self.dependent_vars))
-        elif self.is_summation():
+        elif is_summation(self):
             return Summation(self.index_var, self.lower, self.upper, self.body.replace(e, repl_e))
-        elif self.is_limit():
+        elif is_limit(self):
             return Limit(self.var, self.lim.replace(e, repl_e), self.body.replace(e, repl_e), self.drt)
-        elif self.is_matrix():
+        elif is_matrix(self):
             return Matrix([[item.replace(e, repl_e) for item in rv] for rv in self.data])
         else:
             print(self, e, repl_e)
@@ -759,17 +712,15 @@ class Expr:
 
     def separate_integral(self) -> List[Tuple["Expr", Location]]:
         """Collect the list of all integrals appearing in self."""
-        return self.find_subexpr_pred(
-            lambda e: e.is_integral() or e.is_indefinite_integral())
+        return self.find_subexpr_pred(lambda e: is_integral(e) or is_indefinite_integral(e))
 
     def separate_limits(self) -> List[Tuple["Expr", Location]]:
         """Collect the list of all integrals appearing in self."""
-        return self.find_subexpr_pred(lambda e: e.is_limit())
+        return self.find_subexpr_pred(lambda e: is_limit(e))
 
     @property
     def depth(self):
         """Return the depth of expression as an estimate of problem difficulty."""
-
         def d(expr):
             if expr.ty in (VAR, CONST):
                 return 0
@@ -837,33 +788,33 @@ class Expr:
 
     def inst_pat(self, mapping: Dict) -> "Expr":
         """Instantiate by replacing symbols in term with mapping."""
-        if self.is_var() or self.is_const() or self.is_inf():
+        if is_var(self) or is_const(self) or is_inf(self):
             return self
-        elif self.is_symbol():
+        elif is_symbol(self):
             if self.name in mapping:
                 return mapping[self.name]
             else:
                 return self
-        elif self.is_op():
+        elif is_op(self):
             return Op(self.op, *(arg.inst_pat(mapping) for arg in self.args))
-        elif self.is_fun():
+        elif is_fun(self):
             return Fun(self.func_name, *(arg.inst_pat(mapping) for arg in self.args))
-        elif self.is_skolem_func():
+        elif is_skolem_func(self):
             return SkolemFunc(self.name, tuple(arg.inst_pat(mapping) for arg in self.dependent_vars))
-        elif self.is_integral():
+        elif is_integral(self):
             return Integral(self.var, self.lower.inst_pat(mapping), self.upper.inst_pat(mapping),
                             self.body.inst_pat(mapping))
-        elif self.is_evalat():
+        elif is_evalat(self):
             return EvalAt(self.var, self.lower.inst_pat(mapping), self.upper.inst_pat(mapping),
                           self.body.inst_pat(mapping))
-        elif self.is_deriv():
-            if self.var in mapping and mapping[self.var].is_var():
+        elif is_deriv(self):
+            if self.var in mapping and is_var(mapping[self.var]):
                 return Deriv(mapping[self.var].name, self.body.inst_pat(mapping))
             return Deriv(self.var, self.body.inst_pat(mapping))
-        elif self.is_summation():
+        elif is_summation(self):
             return Summation(self.index_var, self.lower.inst_pat(mapping), self.upper.inst_pat(mapping), \
                              self.body.inst_pat(mapping))
-        elif self.is_limit():
+        elif is_limit(self):
             return Limit(self.var, self.lim.inst_pat(mapping), self.body.inst_pat(mapping), self.drt)
         elif self.is_matrix():
             return Matrix([[item.inst_pat(mapping) for item in rv] for rv in self.data])
@@ -892,9 +843,54 @@ class Expr:
         else:
             raise NotImplementedError
 
-    def is_matrix(self) -> TypeGuard["Matrix"]:
-        return isinstance(self, Matrix) and self.ty == MATRIX
 
+def is_var(e: Expr) -> TypeGuard["Var"]:
+    return e.ty == VAR
+
+def is_const(e: Expr) -> TypeGuard["Const"]:
+    return e.ty == CONST
+
+def is_op(e: Expr) -> TypeGuard["Op"]:
+    return e.ty == OP
+
+def is_fun(e: Expr) -> TypeGuard["Fun"]:
+    return e.ty == FUN
+
+def is_deriv(e: Expr) -> TypeGuard["Deriv"]:
+    return e.ty == DERIV
+
+def is_skolem_func(e: Expr) -> TypeGuard["SkolemFunc"]:
+    return e.ty == SKOLEMFUNC
+
+def is_symbol(e: Expr) -> TypeGuard["Symbol"]:
+    return e.ty == SYMBOL
+
+def is_integral(e: Expr) -> TypeGuard["Integral"]:
+    return e.ty == INTEGRAL
+
+def is_indefinite_integral(e: Expr) -> TypeGuard["IndefiniteIntegral"]:
+    return e.ty == INDEFINITEINTEGRAL
+
+def is_evalat(e: Expr) -> TypeGuard["EvalAt"]:
+    return e.ty == EVAL_AT
+
+def is_limit(e: Expr) -> TypeGuard["Limit"]:
+    return e.ty == LIMIT
+
+def is_summation(e: Expr) -> TypeGuard["Summation"]:
+    return e.ty == SUMMATION
+
+def is_inf(e: Expr) -> TypeGuard["Inf"]:
+    return e.ty == INF and (e.t == Decimal("inf") or e.t == Decimal("-inf"))
+
+def is_pos_inf(e: Expr) -> TypeGuard["Inf"]:
+    return e.ty == INF and e.t == Decimal("inf")
+
+def is_neg_inf(e: Expr) -> TypeGuard["Inf"]:
+    return e.ty == INF and e.t == Decimal("-inf")
+
+def is_matrix(e: Expr) -> TypeGuard["Matrix"]:
+    return e.ty == MATRIX
 
 def match(exp: Expr, pattern: Expr) -> Optional[Dict]:
     """Match expr with given pattern.
@@ -920,66 +916,66 @@ def match(exp: Expr, pattern: Expr) -> Optional[Dict]:
                 return False
         if exp.ty != pattern.ty:
             return False
-        if exp.is_var():
+        if is_var(exp):
             return pattern.name == exp.name or \
                 (pattern.name in bd_vars and bd_vars[pattern.name] == exp.name)
-        elif exp.is_const():
+        elif is_const(exp):
             return pattern.val == exp.val
-        elif exp.is_op():
+        elif is_op(exp):
             if exp.op != pattern.op or len(exp.args) != len(pattern.args):
                 return False
             for i in range(len(exp.args)):
                 if not rec(exp.args[i], pattern.args[i], bd_vars):
                     return False
             return True
-        elif exp.is_fun():
+        elif is_fun(exp):
             if exp.func_name != pattern.func_name or len(exp.args) != len(pattern.args):
                 return False
             for i in range(len(exp.args)):
                 if not rec(exp.args[i], pattern.args[i], bd_vars):
                     return False
             return True
-        elif exp.is_skolem_func():
+        elif is_skolem_func(exp):
             if exp.name != pattern.name or len(exp.dependent_vars) != len(pattern.dependent_vars):
                 return False
             for i in range(len(exp.dependent_vars)):
                 if not rec(exp.dependent_vars[i], pattern.dependent_vars[i], bd_vars):
                     return False
             return True
-        elif exp.is_indefinite_integral():
+        elif is_indefinite_integral(exp):
             # Note this ignores set of skolem arguments
             bd_vars[pattern.var] = exp.var
             res = rec(exp.body, pattern.body, bd_vars)
             del bd_vars[pattern.var]
             return res
-        elif exp.is_integral():
+        elif is_integral(exp):
             bd_vars[pattern.var] = exp.var
             res1 = rec(exp.upper, pattern.upper, bd_vars)
             res2 = rec(exp.lower, pattern.lower, bd_vars)
             res3 = rec(exp.body, pattern.body, bd_vars)
             del bd_vars[pattern.var]
             return res1 and res2 and res3
-        elif exp.is_summation():
+        elif is_summation(exp):
             bd_vars[pattern.index_var] = exp.index_var
             res1 = rec(exp.upper, pattern.upper, bd_vars)
             res2 = rec(exp.lower, pattern.lower, bd_vars)
             res3 = rec(exp.body, pattern.body, bd_vars)
             del bd_vars[pattern.index_var]
             return res1 and res2 and res3
-        elif exp.is_inf():
+        elif is_inf(exp):
             return exp.t == pattern.t
-        elif exp.is_limit():
+        elif is_limit(exp):
             bd_vars[pattern.var] = exp.var
             res1 = rec(exp.body, pattern.body, bd_vars)
             res2 = rec(exp.lim, pattern.lim, bd_vars)
             del bd_vars[pattern.var]
             return res1 and res2
-        elif exp.is_deriv():
+        elif is_deriv(exp):
             # TODO: think more about matching of derivatives
             res1 = pattern.var == exp.var
             res2 = rec(exp.body, pattern.body, bd_vars)
             return res1 and res2
-        elif exp.is_matrix():
+        elif is_matrix(exp):
             if exp.shape != pattern.shape:
                 return False
             return all([all([rec(item, pattern.rows[i].data[j], bd_vars)\
@@ -1119,7 +1115,6 @@ class Const(Expr):
 
 class Op(Expr):
     """Operators."""
-    args: Tuple[Expr]
     def __init__(self, op: str, *args):
         assert isinstance(op, str)
         assert all(isinstance(arg, Expr) for arg in args), op +":"+ str(args)
@@ -1131,7 +1126,7 @@ class Op(Expr):
             raise NotImplementedError
         self.ty = OP
         self.op = op
-        self.args = tuple(args)
+        self.args: Tuple[Expr] = tuple(args)
         self.type = RealType
         if len(args) == 2:
             t1, t2 = args[0].type, args[1].type
@@ -1188,7 +1183,7 @@ class Op(Expr):
             return "%s%s" % (self.op, s)
         elif len(self.args) == 2:
             a, b = self.args
-            if self.op == '/' and a.is_const() and b.is_const() and isinstance(a.val, int) and isinstance(b.val, int):
+            if self.op == '/' and is_const(a) and is_const(b) and isinstance(a.val, int) and isinstance(b.val, int):
                 return "%s/%s" % (a.val, b.val)
             s1, s2 = str(a), str(b)
             if a.priority() < op_priority[self.op]:
@@ -1206,10 +1201,6 @@ class Op(Expr):
         return "Op(%s,%s)" % (self.op, ",".join(repr(arg) for arg in self.args))
 
 
-def test(a: Expr):
-    if a.is_power():
-        return a.args
-
 class Fun(Expr):
     """Functions."""
 
@@ -1218,7 +1209,7 @@ class Fun(Expr):
 
         self.ty = FUN
         self.func_name = func_name
-        self.args = tuple(args)
+        self.args: Tuple[Expr] = tuple(args)
 
         # TODO: add more type inference
         if self.func_name == 'unit_matrix':
@@ -1343,10 +1334,10 @@ class Inf(Expr):
 
 class SkolemFunc(Expr):
     """Skolem variable or function"""
-    def __init__(self, name, dep_vars: Tuple[Expr]):
+    def __init__(self, name: str, dep_vars: Iterable[Expr]):
         self.ty = SKOLEMFUNC
         self.name = name
-        self.dependent_vars = tuple(dep_vars)
+        self.dependent_vars: Tuple[Expr] = tuple(dep_vars)
         self.type = RealType
 
     def __eq__(self, other):
@@ -1655,12 +1646,12 @@ class Summation(Expr):
 
 
 def eval_expr(e: Expr):
-    if e.is_inf():
+    if is_inf(e):
         if e == POS_INF:
             return float('inf')
         else:
             return float('-inf')
-    elif e.is_const():
+    elif is_const(e):
         return e.val
     elif e.is_plus():
         return eval_expr(e.args[0]) + eval_expr(e.args[1])
@@ -1676,7 +1667,7 @@ def eval_expr(e: Expr):
         return eval_expr(e.args[0]) % eval_expr(e.args[1])
     elif e.is_power():
         return eval_expr(e.args[0]) ** eval_expr(e.args[1])
-    elif e.is_fun():
+    elif is_fun(e):
         if e.func_name == 'sqrt':
             return math.sqrt(eval_expr(e.args[0]))
         elif e.func_name == 'exp':
@@ -1722,7 +1713,7 @@ def eval_expr(e: Expr):
 
 
 def neg_expr(ex: Expr):
-    if ex.is_op():
+    if is_op(ex):
         if ex.op == "=":
             return Op("!=", ex.args[0], ex.args[1])
         elif ex.op == "!=":

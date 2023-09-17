@@ -119,9 +119,9 @@ def normalize_quotient(e: Expr, ctx: Context) -> NormalQuotient:
                     return res_e
             return divide_normal_quotient(rec(e.args[0]), rec(e.args[1]), ctx)
         elif e.is_power():
-            if e.args[1].is_const():
+            if expr.is_const(e.args[1]):
                 return exp_normal_quotient(rec(e.args[0]), e.args[1].val, ctx)
-        elif e.is_fun():
+        elif expr.is_fun(e):
             if e.func_name == 'sqrt':
                 return rec(e.args[0] ** Const(Fraction(1,2)))
             else:
@@ -275,9 +275,9 @@ def normalize_power(e: Expr, ctx: Context) -> NormalPower:
         elif e.is_divides():
             return divide_normal_power(rec(e.args[0]), rec(e.args[1]))
         elif e.is_power():
-            if e.args[1].is_const():
+            if expr.is_const(e.args[1]):
                 return exp_normal_power(rec(e.args[0]), e.args[1].val)
-        elif e.is_fun():
+        elif expr.is_fun(e):
             if e.func_name == 'sqrt':
                 return rec(e.args[0] ** Const(Fraction(1,2)))
 
@@ -318,7 +318,7 @@ def normalize_log(e: Expr, ctx: Context) -> NormalLog:
             return minus_normal_log(rec(e.args[0]), rec(e.args[1]))
         elif e.is_plus():
             return add_normal_log(rec(e.args[0]), rec(e.args[1]))
-        elif e.is_fun() and e.func_name == 'log':
+        elif expr.is_fun(e) and e.func_name == 'log':
             return NormalLog(poly.singleton(e.args[0]))
         return NormalLog(poly.singleton(expr.Fun("exp", e)))
 
@@ -336,7 +336,7 @@ def eq_log(t1: Expr, t2: Expr, ctx: Context) -> bool:
 
 def normalize_exp(t: Expr) -> Expr:
     def rec(t):
-        if t.is_fun() and t.func_name == 'exp':
+        if expr.is_fun(t) and t.func_name == 'exp':
             a = t.args[0]
             if a.is_plus():
                 return rec(expr.exp(a.args[0])) * rec(expr.exp(a.args[1]))
@@ -344,9 +344,9 @@ def normalize_exp(t: Expr) -> Expr:
                 return rec(expr.exp(a.args[0])) / rec(expr.exp(a.args[1]))
             elif a.is_uminus():
                 return rec(expr.exp(a.args[0])) ** (-1)
-            elif a.is_divides() and a.args[0].is_fun() and a.args[0].func_name == 'log':
+            elif a.is_divides() and expr.is_fun(a.args[0]) and a.args[0].func_name == 'log':
                 return rec(a.args[0].args[0] ** (1 / a.args[1]))
-            elif a.is_fun() and a.func_name == 'log':
+            elif expr.is_fun(a) and a.func_name == 'log':
                 return a.args[0]
             else:
                 return t
@@ -387,7 +387,7 @@ def normalize_definite_integral(e: Expr, ctx: Context):
             return add_normal_definite_integral(rec(e.args[0]), rec(e.args[1]), ctx)
         elif e.is_minus():
             return minus_normal_definite_integral(rec(e.args[0]), rec(e.args[1]), ctx)
-        elif e.is_integral():
+        elif expr.is_integral(e):
             return NormalDefiniteIntegral(e.var, to_poly(e.lower, ctx), to_poly(e.upper, ctx), to_poly(e.body, ctx), ctx)
         else:
             return NormalDefiniteIntegral("_x", to_poly(Const(0), ctx), to_poly(Const(1), ctx), to_poly(e, ctx), ctx)
@@ -399,7 +399,7 @@ def eq_definite_integral(t1: Expr, t2: Expr, ctx: Context) -> bool:
     return equal_normal_definite_integral(n1, n2)
 
 def simp_definite_integral(e: Integral, ctx: Context) -> Expr:
-    if not e.is_integral():
+    if not expr.is_integral(e):
         return e
     if e.body.is_odd(e.var, ctx) and \
         from_poly(to_poly(e.lower, ctx)) == from_poly(to_poly(expr.Op("-", e.upper), ctx)):

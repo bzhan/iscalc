@@ -132,7 +132,7 @@ class ExprTransformer(Transformer):
         return expr.Op(">=", a, b)
 
     def uminus_expr(self, a):
-        if a.is_const() and a.val > 0:
+        if expr.is_const(a) and a.val > 0:
             return expr.Const(-a.val)
         else:
             return expr.Op("-", a)

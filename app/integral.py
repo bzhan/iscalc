@@ -11,6 +11,7 @@ import integral
 from integral import compstate
 from integral import slagle
 from integral import parser
+from integral import expr
 from app.app import app
 
 dirname = os.path.dirname(__file__)
@@ -504,9 +505,9 @@ def expand_definition():
         results = integral.rules.ExpandDefinition.search(e, subitem.ctx)
         if len(results) == 1:
             sube, loc = results[0]
-            if sube.is_fun():
+            if expr.is_fun(sube):
                 rule = integral.rules.ExpandDefinition(sube.func_name)
-            elif sube.is_var():
+            elif expr.is_var(sube):
                 rule = integral.rules.ExpandDefinition(sube.name)
             else:
                 raise TypeError

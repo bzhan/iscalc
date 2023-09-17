@@ -85,18 +85,18 @@ class FuncDef(StateItem):
         self.ctx = ctx
 
         self.eq = eq
-        if self.eq.lhs.is_fun():
+        if expr.is_fun(self.eq.lhs):
             self.symb = self.eq.lhs.func_name
             self.args = self.eq.lhs.args
-        elif self.eq.lhs.is_var():
+        elif expr.is_var(self.eq.lhs):
             self.symb = self.eq.lhs.name
             self.args = []
         else:
             raise AssertionError("FuncDef: left side of equation must be variable or function")
         self.body = self.eq.rhs
 
-        # if any(not arg.is_var() for arg in self.args) or len(self.args) != len(set(self.args)):
-        #     raise AssertionError("FuncDef: arguments should be distinct variables")
+        if any (not expr.is_var(arg) for arg in self.args) or len(self.args) != len(set(self.args)):
+            raise AssertionError("FuncDef: arguments should be distinct variables")
 
         if conds is None:
             conds = Conditions()
@@ -453,7 +453,7 @@ class CalculationProof(StateItem):
             self.predicate = goal.op
             self.calcs.append(Calculation(self, self.ctx, self.goal.args[0]))
             self.calcs.append(Calculation(self, self.ctx, self.goal.args[1]))
-        elif goal.is_fun() and goal.func_name == "converges":
+        elif expr.is_fun(goal) and goal.func_name == "converges":
             self.predicate = goal.func_name
             self.calcs.append(Calculation(self, self.ctx, self.goal.args[0]))
         else:
@@ -481,7 +481,7 @@ class CalculationProof(StateItem):
 
     @property
     def arg_calc(self) -> Calculation:
-        assert self.goal.is_fun()
+        assert expr.is_fun(self.goal)
         return self.calcs[0]
 
     def is_finished(self):
@@ -794,7 +794,7 @@ class CompFile:
             funcdef = parser.parse_expr(funcdef, fixes = fixes)
         if isinstance(funcdef, Expr):
             if funcdef.is_equals():
-                if not funcdef.lhs.is_var():
+                if not expr.is_var(funcdef.lhs):
                     self.content.append(FuncDef(self, ctx, funcdef, Conditions(conds)))
                 else:
                     self.content.append(VarDef(self, ctx, funcdef.lhs, funcdef.rhs, fixes = fixes))

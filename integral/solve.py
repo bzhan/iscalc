@@ -20,7 +20,7 @@ def solve_equation(f: Expr, a: Expr, x: str, ctx: Context) -> Optional[Expr]:
     one of the solutions.
 
     """
-    if f.is_var():
+    if expr.is_var(f):
         if f.name == x:
             return a
     if f.is_plus():
@@ -67,7 +67,7 @@ def solve_equation(f: Expr, a: Expr, x: str, ctx: Context) -> Optional[Expr]:
         if not v.contains_var(x):
             # u ^ v = a  ==>  u = a ^ (1/v)
             return solve_equation(u, a ^ (1/v), x, ctx)
-    if f.is_fun():
+    if expr.is_fun(f):
         if f.func_name == "log":
             return solve_equation(f.args[0], expr.exp(a), x, ctx)
         elif f.func_name == "exp":
@@ -98,7 +98,7 @@ def extract_linear(e: Expr, x: str) -> Optional[Tuple[Expr, Expr]]:
     """
     if not e.contains_var(x):
         return Const(0), e
-    elif e.is_var():
+    elif expr.is_var(e):
         assert e.name == x
         return Const(1), Const(0)
     elif e.is_plus():

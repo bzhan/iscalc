@@ -16,7 +16,7 @@ def get_type(e, ctx=None) -> str:
         return 'real'
     elif e.is_matrix():
         return 'matrix'
-    elif e.is_var():
+    elif expr.is_var(e):
         return e.ty2
     elif e.is_op():
         if e.is_plus():
@@ -135,7 +135,7 @@ def get_type(e, ctx=None) -> str:
 def get_shape(e: Expr, ctx: Context):
     if e.is_const():
         return (Const(1), Const(1))
-    elif e.is_var():
+    elif expr.is_var(e):
         return e.shape
     elif e.is_fun():
         if e.func_name == 'inv':
@@ -178,28 +178,28 @@ def get_shape(e: Expr, ctx: Context):
 """
 
 def has_vector(e: Expr):
-    if e.is_matrix():
+    if expr.is_matrix(e):
         return True
     elif isinstance(e, Union[expr.Var, Const, expr.Inf, expr.SkolemFunc, expr.Symbol]):
         return False
-    elif e.is_integral():
+    elif expr.is_integral(e):
         return e.upper.has_vector() or e.lower.has_vector() or e.body.has_vector()
-    elif e.is_indefinite_integral():
+    elif expr.is_indefinite_integral(e):
         return e.body.has_vector()
-    elif e.is_op() or e.is_fun():
+    elif expr.is_op(e) or expr.is_fun(e):
         return any([arg.has_vector() for arg in e.args])
-    elif e.is_summation():
+    elif expr.is_summation(e):
         return e.body.has_vector()
-    elif e.is_limit():
+    elif expr.is_limit(e):
         return e.body.has_vector() or e.lim.has_vector()
-    elif e.is_deriv():
+    elif expr.is_deriv(e):
         return e.body.has_vector()
     else:
         print(e)
         raise NotImplementedError
 
 def transpose(e: Expr):
-    if e.is_matrix():
+    if expr.is_matrix(e):
         r, c = len(e.data), len(e.data[0])
         return Matrix([[e.data[j][i] for j in range(r)] for i in range(c)])
     return e
@@ -232,7 +232,7 @@ def multiply(a: Matrix, b: Matrix, ctx: Context):
     return Matrix(res)
 
 def add(a: Expr, b: Expr, ctx: Context):
-    assert a.is_matrix() and b.is_matrix()
+    assert expr.is_matrix(a) and expr.is_matrix(b)
     assert expr.num_col(a.type) == expr.num_col(b.type)
     assert expr.num_row(a.type) == expr.num_row(b.type)
     assert len(a.data) == len(b.data)
@@ -243,8 +243,8 @@ def add(a: Expr, b: Expr, ctx: Context):
             res[i][j] = normalize(res[i][j]+a.data[i][j]+b.data[i][j],ctx)
     return Matrix(res)
 
-def minus(a, b, ctx):
-    assert a.is_matrix() and b.is_matrix()
+def minus(a: Expr, b: Expr, ctx: Context):
+    assert expr.is_matrix(a) and expr.is_matrix(b)
     assert expr.num_col(a.type) == expr.num_col(b.type)
     assert expr.num_row(a.type) == expr.num_row(b.type)
     assert len(a.data) == len(b.data)
@@ -265,7 +265,7 @@ def zero_matrix(r: int, c: int):
     return Matrix([[Const(0) for j in range(c)] for i in range(r)])
 
 def hat(e: Expr) -> Expr:
-    if not e.is_matrix() and expr.is_matrix_type(e.type):
+    if not expr.is_matrix(e) and expr.is_matrix_type(e.type):
         raise AssertionError("hat: type mismatch")
 
     if expr.is_vector_type(e.type) and expr.num_row(e.type) == Const(3):

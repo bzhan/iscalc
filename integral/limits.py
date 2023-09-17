@@ -478,13 +478,13 @@ def limit_power(a: Limit, b: Limit, ctx: Context) -> Limit:
         else:
             return Limit(None)
     elif a.e == NEG_INF:
-        if b.e.is_const() and b.e.val > 0:
+        if expr.is_const(b.e) and b.e.val > 0:
             # Positive power, test for parity of numerator
             if Fraction(b.e.val).numerator % 2 == 0:
                 return Limit(POS_INF, asymp=asymp_power(a.asymp, b.e, ctx))
             else:
                 return Limit(NEG_INF, asymp=asymp_power(a.asymp, b.e, ctx))
-        elif b.e.is_const() and b.e.val < 0:
+        elif expr.is_const(b.e) and b.e.val < 0:
             # Negative power, test for parity of numerator
             if Fraction(b.e.val).numerator % 2 == 0:
                 return Limit(Const(0), asymp=asymp_power(a.asymp, -(b.e), ctx), side=FROM_ABOVE)
@@ -503,7 +503,7 @@ def limit_power(a: Limit, b: Limit, ctx: Context) -> Limit:
             return Limit(normalize(a.e ^ b.e, ctx))
     elif ctx.is_negative(a.e):
         # Base is negative
-        if b.e.is_const() and b.e.val > 0 and b.side == AT_CONST:
+        if expr.is_const(b.e) and b.e.val > 0 and b.side == AT_CONST:
             return Limit(normalize(a.e ^ b.e, ctx))
         else:
             return Limit(None)
@@ -522,7 +522,7 @@ def limit_power(a: Limit, b: Limit, ctx: Context) -> Limit:
         elif a.side == FROM_BELOW:
             if b.e == POS_INF or b.e == NEG_INF:
                 return Limit(None)
-            elif b.e.is_const() and b.e.val > 0 and b.side == AT_CONST:
+            elif expr.is_const(b.e) and b.e.val > 0 and b.side == AT_CONST:
                 if Fraction(b.e.val).numerator % 2 == 0:
                     return Limit(Const(0), asymp=asymp_power(a.asymp, b.e, ctx), side=FROM_ABOVE)
                 else:
@@ -532,7 +532,7 @@ def limit_power(a: Limit, b: Limit, ctx: Context) -> Limit:
         elif a.side == TWO_SIDED:
             if b.e == POS_INF or b.e == NEG_INF:
                 return Limit(None)
-            elif b.e.is_const() and b.e.val > 0 and b.side == AT_CONST:
+            elif expr.is_const(b.e) and b.e.val > 0 and b.side == AT_CONST:
                 return Limit(Const(0), asymp=asymp_power(a.asymp, b.e, ctx))
             else:
                 return Limit(None)
@@ -550,11 +550,11 @@ def limit_power(a: Limit, b: Limit, ctx: Context) -> Limit:
 
 def limit_of_expr(e: Expr, var_name: str, ctx: Context) -> Limit:
     """Compute the limit of an expression as variable goes to infinity."""
-    if e.is_const() or e.is_fun() and len(e.args) == 0:
+    if expr.is_const(e) or expr.is_fun(e) and len(e.args) == 0:
         return Limit(e, side=AT_CONST)
-    elif e.is_inf():
+    elif expr.is_inf(e):
         return Limit(e)
-    elif e.is_var():
+    elif expr.is_var(e):
         if e.name == var_name:
             return Limit(POS_INF, asymp=PolyLog(Const(1)))
         else:
@@ -585,7 +585,7 @@ def limit_of_expr(e: Expr, var_name: str, ctx: Context) -> Limit:
         else:
             l1 = limit_of_expr(e.args[0], var_name, ctx)
             l2 = limit_of_expr(e.args[1], var_name, ctx)
-            if l1.e is not None and l1.e.is_const() and expr.eval_expr(l1.e) == 1 and l2.e == POS_INF:
+            if l1.e is not None and expr.is_const(l1.e) and expr.eval_expr(l1.e) == 1 and l2.e == POS_INF:
                 x = limit_of_expr(e.args[1] * expr.Fun('log', e.args[0]), var_name, ctx)
                 if x.e == None:
                     return Limit(None)
@@ -596,10 +596,10 @@ def limit_of_expr(e: Expr, var_name: str, ctx: Context) -> Limit:
                 else:
                     return Limit(expr.Fun("exp", x.e), asymp = Exp(x.asymp), side = x.side)
             return limit_power(l1, l2, ctx)
-    elif e.is_fun() and e.func_name == 'exp':
+    elif expr.is_fun(e) and e.func_name == 'exp':
         l = limit_of_expr(e.args[0], var_name, ctx)
         return limit_power(Limit(expr.E, side=AT_CONST), l, ctx)
-    elif e.is_fun() and e.func_name == 'atan':
+    elif expr.is_fun(e) and e.func_name == 'atan':
         l = limit_of_expr(e.args[0], var_name, ctx)
         if l.e is None:
             return Limit(None)
@@ -609,20 +609,20 @@ def limit_of_expr(e: Expr, var_name: str, ctx: Context) -> Limit:
             return Limit(-expr.pi/2, side=FROM_ABOVE)
         else:
             return Limit(expr.Fun('atan', l.e))
-    elif e.is_fun() and e.func_name == 'log':
+    elif expr.is_fun(e) and e.func_name == 'log':
         l = limit_of_expr(e.args[0], var_name, ctx)
         if l.e is None or l.e == NEG_INF or ctx.is_negative(l.e) or \
-            l.e.is_const() and l.e.val==0 and l.side == FROM_BELOW:
+            expr.is_const(l.e) and l.e.val == 0 and l.side == FROM_BELOW:
             return Limit(None)
-        elif l.e.is_const() and l.e.val==0 and l.side == FROM_ABOVE:
+        elif expr.is_const(l.e) and l.e.val == 0 and l.side == FROM_ABOVE:
             return Limit(NEG_INF, asymp = PolyLog(0, *l.asymp.order), side=FROM_ABOVE)
-        elif l.e.is_const() and l.e.val == 1:
+        elif expr.is_const(l.e) and l.e.val == 1:
             return Limit(Const(0), asymp = l.asymp, side = l.side)
         elif l.e == POS_INF:
             return Limit(POS_INF, asymp=PolyLog(0, *l.asymp.order), side=FROM_BELOW)
         else:
             return Limit(expr.Fun('log', l.e))
-    elif e.is_fun() and e.func_name == 'sin':
+    elif expr.is_fun(e) and e.func_name == 'sin':
         l = limit_of_expr(e.args[0], var_name, ctx)
         if l.e == None or l.e in [POS_INF, NEG_INF]:
             res = Limit(None)
@@ -631,7 +631,7 @@ def limit_of_expr(e: Expr, var_name: str, ctx: Context) -> Limit:
             res = Limit(expr.Fun("sin", l.e), asymp=l.asymp)
             res.is_bounded = True
         return res
-    elif e.is_fun() and e.func_name == 'cos':
+    elif expr.is_fun(e) and e.func_name == 'cos':
         l = limit_of_expr(e.args[0],var_name, ctx)
         if l.e == None:
             res = Limit(None)
@@ -639,14 +639,14 @@ def limit_of_expr(e: Expr, var_name: str, ctx: Context) -> Limit:
             res = Limit(expr.Fun("cos", l.e), side=AT_CONST)
         res.is_bounded = True
         return res
-    elif e.is_fun() and e.func_name == 'tan':
+    elif expr.is_fun(e) and e.func_name == 'tan':
         l = limit_of_expr(e.args[0], var_name, ctx)
         if normalize(l.e, ctx) == expr.Fun('pi')/Const(2) and l.side == FROM_BELOW:
             return Limit(POS_INF)
         else:
             # TODO: miss many cases
             return Limit(expr.Fun(e.func_name, l.e))
-    elif e.is_fun() and e.func_name == 'sqrt':
+    elif expr.is_fun(e) and e.func_name == 'sqrt':
         l = limit_of_expr(e.args[0], var_name, ctx)
         if l.e == None:
             return Limit(None)
@@ -667,19 +667,19 @@ def limit_of_expr(e: Expr, var_name: str, ctx: Context) -> Limit:
                 return Limit(expr.Fun('sqrt', l.e), asymp=Exp(1/2 *l.asymp.order), side=l.side)
             else:
                 raise AssertionError("Unknown asymptote!")
-    elif e.is_fun() and len(e.args) == 1:
+    elif expr.is_fun(e) and len(e.args) == 1:
         # TODO: currently assumes continuity of functions 
         l = limit_of_expr(e.args[0], var_name, ctx)
-        if l.e is None or l.e.is_inf():
+        if l.e is None or expr.is_inf(l.e):
             return Limit(None)
         else:
             return Limit(expr.Fun(e.func_name, l.e))
-    elif e.is_integral():
+    elif expr.is_integral(e):
         # TODO: in the case of limit on body, assumes uniform convergence
         body = limit_of_expr(e.body, var_name, ctx)
         lower = limit_of_expr(e.lower, var_name, ctx)
         upper = limit_of_expr(e.upper, var_name, ctx)
-        if body.e is None or lower.e is None or upper.e is None or body.e.is_inf():
+        if body.e is None or lower.e is None or upper.e is None or expr.is_inf(body.e):
             return Limit(None)
         else:
             return Limit(expr.Integral(e.var, lower.e, upper.e, body.e))
@@ -718,7 +718,7 @@ def reduce_inf_limit(e: Expr, var_name: str, ctx: Context) -> Expr:
             return normalize(e.args[1] * reduce_inf_limit(e.args[0], var_name, ctx), ctx)
         else:
             return expr.Limit(var_name, POS_INF, e)
-    elif e.is_integral():
+    elif expr.is_integral(e):
         ctx2 = Context(ctx)
         ctx2.add_condition(expr.Op('>', expr.Var(e.var), e.lower))
         ctx2.add_condition(expr.Op('<', expr.Var(e.var), e.upper))
@@ -733,18 +733,18 @@ def is_INF(e: Expr, ctx: Context) -> bool:
     """Determine whether e approaches infinity."""
     if e.is_power():
         a, b = e.args
-        if a.is_const() and b.is_const():
+        if expr.is_const(a) and expr.is_const(b):
             return a.val == 0 and b.val < 0
     elif e.is_divides():
         a, b = e.args
-        if a.is_const() and b.is_const():
+        if expr.is_const(a) and expr.is_const(b):
             return a.val != 0 and b.val == 0
-    elif e.is_fun():
+    elif expr.is_fun(e):
         if e.func_name == 'tan':
             a = normalize(e.args[0] / expr.Fun('pi'), ctx)
             # the coefficient of pi
             coef = normalize(a * 2, ctx)
-            if coef.is_const() and coef.val % 2 == 1:
+            if expr.is_const(coef) and coef.val % 2 == 1:
                 return True
     return False
 
@@ -759,10 +759,10 @@ def is_indeterminate_form(e: Expr, ctx: Context) -> bool:
             # 0 * INF or INF * 0
             if l[0].is_zero() and is_INF(l[1]) or l[1].is_zero() and is_INF(l[0]):
                 return True
-        elif body.is_fun():
+        elif expr.is_fun(body):
             if body.func_name in ('sin', 'cos'):
                 a0 = body.args[0]
-                if a0.subst(var, lim).is_const():
+                if expr.is_const(a0.subst(var, lim)):
                     return False
         else:
             return False

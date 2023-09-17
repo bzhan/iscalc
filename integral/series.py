@@ -323,10 +323,12 @@ def expand_series(e: Expr, x: str, logx:Expr=None, ctx:Context = None):
     if ctx == None:
         ctx = Context()
         ctx.load_book('base')
-    if e.is_const() or e.is_constant() or e.is_var() and e.name != x or e.is_fun() and len(e.args) == 0 or\
+    if expr.is_const(e) or e.is_constant() or \
+        expr.is_var(e) and e.name != x or \
+        expr.is_fun(e) and len(e.args) == 0 or \
         not e.contains_var(x):
         return LazySeries([e, Const(0)], None, None, x)
-    elif e.is_var() and e.name == x:
+    elif expr.is_var(e) and e.name == x:
         return LazySeries([Const(1), Const(1)], None, None, x)
     elif e.is_plus():
         return add_series(expand_series(e.args[0],x), expand_series(e.args[1],x))
@@ -341,14 +343,14 @@ def expand_series(e: Expr, x: str, logx:Expr=None, ctx:Context = None):
         b = expand_series(e.args[1], x)
         return divide_series(a, b)
     elif e.is_power():
-        if e.args[0].is_var() and e.args[0].name == x and not e.args[1].contains_var(x):
+        if expr.is_var(e.args[0]) and e.args[0].name == x and not e.args[1].contains_var(x):
             return LazySeries([Const(1), e.args[1]], None, None, x)
         elif e.args[0].is_divides() and e.args[0].args[0] == Const(1) and \
             e.args[0].args[1] == Var(x) and not e.args[1].contains_var(x):
             return LazySeries([Const(1), normalize(e.args[1] * Const(-1),ctx)], None, None, x)
         else:
             raise NotImplementedError
-    elif e.is_fun():
+    elif expr.is_fun(e):
         if e.func_name == 'exp':
             return exp_series(expand_series(e.args[0], x))
         elif e.func_name == 'log':
@@ -359,5 +361,5 @@ def expand_series(e: Expr, x: str, logx:Expr=None, ctx:Context = None):
             return cos_series(expand_series(e.args[0], x))
         elif e.func_name == 'tan':
             return tan_series(expand_series(e.args[0], x))
-    print(e,x,type(e))
+    print(e, x, type(e))
     raise NotImplementedError

@@ -435,6 +435,9 @@ class Calculation(StateItem):
             return self.steps[label.head]
         else:
             raise AssertionError("get_by_label: invalid label")
+        
+    def parse_expr(self, s: str) -> Expr:
+        return parser.parse_expr(s, fixes=self.ctx.get_fixes())
 
 
 class CalculationProof(StateItem):
@@ -828,6 +831,7 @@ class CompFile:
         """Add a goal.
 
         goal: statement of the goal.
+        fixes: list of fixed variables
         conds: list of conditions for the goal. This is ignored if input goal
                is already of type Goal.
 

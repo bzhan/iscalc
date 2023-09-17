@@ -243,7 +243,6 @@ class Context:
             res[k] = v
         return res
 
-
     def get_eq_conds(self) -> Conditions:
         res = self.parent.get_conds() if self.parent is not None else Conditions()
         for cond in self.conds.data:

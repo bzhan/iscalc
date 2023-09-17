@@ -342,14 +342,14 @@ class Context:
             cond = parser.parse_expr(cond)
         self.conds.add_condition(cond)
 
-    def add_fix(self, k:str, v:expr.Type):
-        self.fixes[k] = v
-
     def extend_condition(self, conds: Conditions):
         for cond in conds.data:
             self.add_condition(cond)
 
-    def extend_fixes(self, fixes:Dict[str, expr.Type]):
+    def add_fix(self, k: str, v: expr.Type):
+        self.fixes[k] = v
+
+    def extend_fixes(self, fixes: Dict[str, expr.Type]):
         for k, v in fixes.items():
             self.add_fix(k, v)
 

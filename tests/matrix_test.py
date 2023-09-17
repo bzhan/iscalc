@@ -89,7 +89,6 @@ class MatrixTest(unittest.TestCase):
         goal = file.add_goal("(inv(P) * A * P) ^ n = inv(P) * (A ^ n) * P",
                              fixes=fixes,
                              conds=["invertible(P)", "n > 0"])
-        fixes = goal.ctx.get_fixes()
         proof = goal.proof_by_induction(induct_var='n', start=0)
         _ = proof.base_case.proof_by_calculation()
         induct_proof = proof.induct_case.proof_by_calculation()
@@ -238,7 +237,7 @@ class MatrixTest(unittest.TestCase):
         fixes['n'] = parser.parse_expr('$int')
 
         goal01 = file.add_goal("exp(hat(w) * x) = unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * (hat(w)) ^ 2",
-                               conds=["x >= 0", "norm(w) = 1"],
+                               conds=["norm(w) = 1"],
                                fixes=fixes)
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
@@ -249,7 +248,6 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.SplitSummation(cond), "1"))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.ChangeSummationIndex(new_lower="0"), "0.1"))
-        fixes = calc.ctx.get_fixes()
         s1 = calc.parse_expr("(x * hat(w)) ^ (2 * i + 1)")
         s2 = calc.parse_expr("x ^ (2 * i + 1) * hat(w) ^ (2 * i + 1)")
         calc.perform_rule(rules.ApplyIdentity(s1, s2))

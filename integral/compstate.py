@@ -944,8 +944,6 @@ def parse_rule(item, parent) -> Rule:
         return rules.FunEquation(func_name)
     elif item['name'] == 'PartialFractionDecomposition':
         return rules.PartialFractionDecomposition()
-    elif item['name'] == 'MatrixRewrite':
-        return rules.MatrixRewrite()
     elif item['name'] == "ExpandMatFunc":
         return rules.ExpandMatFunc()
     elif item['name'] == 'SplitSummation':

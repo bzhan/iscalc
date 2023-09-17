@@ -2404,34 +2404,6 @@ class FunEquation(Rule):
             return ne
         return e
 
-class MatrixRewrite(Rule):
-    '''
-    scalar * {{a,b},{c,d}} ==> {{scalar*a,scalar*b},{scalar*c,scalar*d}}
-    -{{a,b},{c,d}} ==> {{-a, -b}, {-c, -d}}
-    '''
-    def __init__(self):
-        self.name = "MatrixRewrite"
-
-    def __str__(self):
-        return "rewrite on matrix"
-
-    def export(self):
-        return {
-            "name": self.name,
-            "str": str(self)
-        }
-
-    def eval(self, e: Expr, ctx: Context) -> Expr:
-        if e.is_times():
-            a,b = e.args
-            if not matrix.has_vector(a):
-                if b.is_matrix():
-                    return Matrix([expr.Vector([a*item for item in rv.data],is_column=False) for rv in b.rows])
-        elif e.is_uminus():
-            if e.args[0].is_matrix():
-                a = e.args[0]
-                return Matrix([expr.Vector([-item for item in rv.data], is_column=False) for rv in a.rows])
-        raise NotImplementedError
 
 class ExpandMatFunc(Rule):
     """Expand functions on matrices."""

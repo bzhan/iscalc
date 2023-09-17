@@ -3,10 +3,6 @@
         {
             "conds": [
                 {
-                    "cond": "x >= 0",
-                    "latex_cond": "x \\ge 0"
-                },
-                {
                     "cond": "norm(w) = 1",
                     "latex_cond": "\\|w\\| = 1"
                 }

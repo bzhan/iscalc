@@ -1166,7 +1166,6 @@ class Op(Expr):
                     assert num_row(t1) == num_col(t1), str(t1) +":"+ str(args)
                     self.type = t1
 
-
     def __hash__(self):
         return hash((OP, self.op, tuple(self.args)))
 

@@ -721,27 +721,6 @@ class Expr:
             print(self)
             raise NotImplementedError
 
-    def has_vector(self):
-        if self.is_vector() or self.is_matrix():
-            return True
-        elif isinstance(self, Union[Var, Const, Inf, SkolemFunc, Symbol]):
-            return False
-        elif isinstance(self, Integral):
-            return self.upper.has_vector() or self.lower.has_vector() or self.body.has_vector()
-        elif isinstance(self, IndefiniteIntegral):
-            return self.body.has_vector()
-        elif isinstance(self, Union[Op, Fun]):
-            return any([arg.has_vector() for arg in self.args])
-        elif isinstance(self, Summation):
-            return self.body.has_vector()
-        elif isinstance(self, Limit):
-            return self.body.has_vector() or self.lim.has_vector()
-        elif isinstance(self, Deriv):
-            return self.body.has_vector()
-        else:
-            print(self)
-            raise NotImplementedError
-
     def contains_var(self, x: str) -> bool:
         """Whether self contains variable x."""
         assert isinstance(x, str)
@@ -777,31 +756,6 @@ class Expr:
         else:
             print(self, e, repl_e)
             raise NotImplementedError
-
-    def has_func(self, func_name: str) -> bool:
-        # determine whether expression has function called func_name
-
-        if self.is_op():
-            args = self.args
-            for a in args:
-                if a.has_func(func_name):
-                    return True
-        elif self.is_fun():
-            if (self.func_name == func_name):
-                return True
-            else:
-                args = self.args
-                for a in args:
-                    if a.has_func(func_name):
-                        return True
-        elif self.is_integral():
-            return self.lower.has_func(func_name) or self.upper.has_func(func_name) or self.body.has_func(func_name)
-        elif self.is_deriv():
-            return self.body.has_func(func_name)
-        elif self.is_limit():
-            return self.body.has_func(func_name)
-        else:
-            return False
 
     def separate_integral(self) -> List[Tuple["Expr", Location]]:
         """Collect the list of all integrals appearing in self."""
@@ -1165,7 +1119,7 @@ class Const(Expr):
 
 class Op(Expr):
     """Operators."""
-
+    args: Tuple[Expr]
     def __init__(self, op: str, *args):
         assert isinstance(op, str)
         assert all(isinstance(arg, Expr) for arg in args), op +":"+ str(args)
@@ -1251,6 +1205,10 @@ class Op(Expr):
     def __repr__(self):
         return "Op(%s,%s)" % (self.op, ",".join(repr(arg) for arg in self.args))
 
+
+def test(a: Expr):
+    if a.is_power():
+        return a.args
 
 class Fun(Expr):
     """Functions."""

@@ -11,7 +11,6 @@ from integral.expr import Var, Const, Fun, EvalAt, Op, Integral, Symbol, Expr, \
     OP, CONST, VAR, sin, cos, FUN, decompose_expr_factor, \
     Deriv, Inf, Limit, NEG_INF, POS_INF, IndefiniteIntegral, Summation, SUMMATION, Matrix, INTEGRAL, MATRIX, INF
 from integral import parser
-from integral.matrix import is_vector
 from integral.solve import solve_equation, solve_for_term
 from integral import latex
 from integral import limits
@@ -2427,7 +2426,7 @@ class MatrixRewrite(Rule):
     def eval(self, e: Expr, ctx: Context) -> Expr:
         if e.is_times():
             a,b = e.args
-            if not a.has_vector():
+            if not matrix.has_vector(a):
                 if b.is_matrix():
                     return Matrix([expr.Vector([a*item for item in rv.data],is_column=False) for rv in b.rows])
         elif e.is_uminus():

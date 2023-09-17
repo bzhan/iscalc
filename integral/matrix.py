@@ -6,14 +6,6 @@ from integral.expr import Matrix, Const, Expr
 from integral.poly import normalize
 
 
-def is_vector(e:Expr, ctx:Context)  -> TypeGuard["Matrix"]:
-    flag = isinstance(e, Matrix)
-    if not flag:
-        return flag
-    r, c = get_shape(e, ctx)
-    flag = flag and (r == Const(1) or c == Const(1))
-    return flag
-
 """
 def get_type(e, ctx=None) -> str:
     # print(e)
@@ -184,6 +176,27 @@ def get_shape(e: Expr, ctx: Context):
         print(e)
         raise NotImplementedError
 """
+
+def has_vector(e: Expr):
+    if e.is_matrix():
+        return True
+    elif isinstance(e, Union[expr.Var, Const, expr.Inf, expr.SkolemFunc, expr.Symbol]):
+        return False
+    elif e.is_integral():
+        return e.upper.has_vector() or e.lower.has_vector() or e.body.has_vector()
+    elif e.is_indefinite_integral():
+        return e.body.has_vector()
+    elif e.is_op() or e.is_fun():
+        return any([arg.has_vector() for arg in e.args])
+    elif e.is_summation():
+        return e.body.has_vector()
+    elif e.is_limit():
+        return e.body.has_vector() or e.lim.has_vector()
+    elif e.is_deriv():
+        return e.body.has_vector()
+    else:
+        print(e)
+        raise NotImplementedError
 
 def transpose(e: Expr):
     if e.is_matrix():

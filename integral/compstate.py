@@ -142,40 +142,6 @@ class FuncDef(StateItem):
     def get_facts(self):
         return [self.eq]
 
-class VarDef(StateItem):
-    def __init__(self, parent: "CompFile", ctx: Context, var:Var, content:Expr = None, fixes = None):
-        self.parent = parent
-        self.ctx = ctx
-        self.var = var
-        self.content = content
-        if fixes == None:
-            fixes = dict()
-        self.fixes = fixes
-        self.ctx.extend_fixes(fixes)
-    def __str__(self):
-        s = "Var Definition:\n"
-        s = s + "  " + str(self.var.type) + " " + self.var.name
-        if expr.is_matrix_type(self.var.type):
-            s = s + "[%s][%s]" % (str(expr.num_row(self.var.type)),str(expr.num_col(self.var.type)))
-        if self.content is not None:
-            s += " = " + str(self.content)
-        s += '\n'
-        return s
-
-    def export(self):
-        res = {
-            "type": "VarDef",
-            "var": str(self.var),
-            "latex_var": latex.convert_expr(self.var)
-        }
-        if self.content is not None:
-            res['content'] = str(self.content)
-        if len(self.fixes.items()) > 0:
-            d = list()
-            for a, b in self.fixes.items():
-                d.append((a, str(b)))
-            res['fixes'] = d
-        return res
 
 class Goal(StateItem):
     """Goal to be proved."""
@@ -771,8 +737,6 @@ class CompFile:
             elif isinstance(item, Goal):
                 ctx.add_lemma(item.goal, item.conds)
                 ctx.extend_by_item(item.export_book())
-            elif isinstance(item, VarDef):
-                ctx.add_var_definition(item.var, item.content)
         return ctx
 
     def add_definition(self, funcdef: Union[str, Expr], *,fixes=None, conds: List[Union[str, Expr]] = None) -> FuncDef:
@@ -797,10 +761,7 @@ class CompFile:
             funcdef = parser.parse_expr(funcdef, fixes = fixes)
         if isinstance(funcdef, Expr):
             if funcdef.is_equals():
-                if not expr.is_var(funcdef.lhs):
-                    self.content.append(FuncDef(self, ctx, funcdef, Conditions(conds)))
-                else:
-                    self.content.append(VarDef(self, ctx, funcdef.lhs, funcdef.rhs, fixes = fixes))
+                self.content.append(FuncDef(self, ctx, funcdef, Conditions(conds)))
             else:
                 raise NotImplementedError
         else:
@@ -1095,25 +1056,6 @@ def parse_item(parent, item) -> StateItem:
         res = RewriteGoalProof(parent, goal=goal, begin=Goal(parent, parent.ctx, begin_goal, conds=begin_conds, fixes=fixes))
         for i, step in enumerate(item['start']['steps']):
             res.begin.add_step(parse_step(res.begin, step, i))
-        return res
-    elif item['type'] == 'VarDef':
-        ctx = parent.get_context() if isinstance(parent, CompFile) else parent.ctx
-        fixes = dict()
-        if 'fixes' in item:
-            raw_fixes = item['fixes']
-            fixes = dict()
-            for s, t in raw_fixes:
-                fixes[s] = parser.parse_expr(t, fixes=fixes)
-        all_fixes = ctx.get_fixes()
-        for s, t in fixes.items():
-            all_fixes[s] = t
-        var = parser.parse_expr(item['var'], fixes = all_fixes)
-        if 'content' in item:
-            content = parser.parse_expr(item['content'], fixes = all_fixes)
-        else:
-            content = None
-        ctx = parent.get_context() if isinstance(parent, CompFile) else parent.ctx
-        res = VarDef(parent, ctx, var, content,fixes=fixes)
         return res
     else:
         print(item['type'])

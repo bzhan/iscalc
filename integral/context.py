@@ -112,9 +112,6 @@ class Context:
         # List of substitutions
         self.substs: Dict[str, Expr] = dict()
 
-        # List of var deifinitions
-        self.var_definitions: List[Identity] = list()
-
         # List of fixes
         self.fixes: Dict[str, expr.Type] = dict()
 
@@ -123,9 +120,6 @@ class Context:
 
     def __str__(self):
         res = ""
-        res += "Var Definitions\n"
-        for var in self.get_var_definitions():
-            res += str(var) + "\n"
         res += "Definitions\n"
         for identity in self.get_definitions():
             res += str(identity) + "\n"
@@ -174,11 +168,6 @@ class Context:
     def get_summation_split_identities(self) -> List[Identity]:
         res = self.parent.get_summation_split_identities() if self.parent is not None else []
         res.extend(self.summation_split_identities)
-        return res
-
-    def get_var_definitions(self) -> List[Identity]:
-        res = self.parent.get_var_definitions() if self.parent is not None else []
-        res.extend(self.var_definitions)
         return res
 
     def get_indefinite_integrals(self) -> List[Identity]:
@@ -262,13 +251,6 @@ class Context:
         symb_lhs = expr_to_pattern(eq.lhs)
         symb_rhs = expr_to_pattern(eq.rhs)
         self.definitions.append(Identity(Eq(symb_lhs, symb_rhs)))
-
-    def add_var_definition(self, v: Expr, c:Union[Expr,None]):
-        if not expr.is_var(v):
-            raise TypeError
-        if c is None:
-            c = v
-        self.var_definitions.append(Eq(v, c))
 
     def add_indefinite_integral(self, eq: Expr):
         if not (eq.is_equals() and expr.is_indefinite_integral(eq.lhs)):

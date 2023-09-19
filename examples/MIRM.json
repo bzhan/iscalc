@@ -60,9 +60,9 @@
             "fixes": [
                 ["n", "$int"],
                 ["w", "$tensor($real, 3, 1)"]
-            ]
+            ],
+            "conds": ["shape(w, 3, 1)"]
         }
-
     ],
     "imports": [
         "matrix"

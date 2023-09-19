@@ -763,7 +763,7 @@ class CompFile:
         ctx = Context(self.ctx)
         for item in (self.content if index == -1 else self.content[:index]):
             if isinstance(item, FuncDef):
-                ctx.add_definition(item.eq)
+                ctx.add_definition(item.eq, item.conds)
                 ctx.add_lemma(item.eq, item.conds)
             elif isinstance(item, Goal):
                 ctx.add_lemma(item.goal, item.conds)
@@ -794,10 +794,7 @@ class CompFile:
             funcdef = parser.parse_expr(funcdef, fixes = fixes)
         if isinstance(funcdef, Expr):
             if funcdef.is_equals():
-                if not funcdef.lhs.is_var():
-                    self.content.append(FuncDef(self, ctx, funcdef, Conditions(conds)))
-                else:
-                    self.content.append(VarDef(self, ctx, funcdef.lhs, funcdef.rhs, fixes = fixes))
+                self.content.append(FuncDef(self, ctx, funcdef, Conditions(conds)))
             else:
                 raise NotImplementedError
         else:

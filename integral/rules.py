@@ -1939,6 +1939,7 @@ class ExpandDefinition(Rule):
                     inst = expr.match(e, identity.lhs)
                     if inst == None:
                         continue
+                    # TODO: condtions check
                     if self.simp:
                         return normalize(identity.rhs.inst_pat(inst), ctx)
                     else:

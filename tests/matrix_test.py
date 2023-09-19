@@ -296,6 +296,24 @@ class MatrixTest(unittest.TestCase):
         assert goal01.is_finished()
         self.checkAndOutput(file)
 
+    def testTwistMatrixExpInv(self):
+        file = compstate.CompFile("MIRM", "twist_matrix_exp_inv")
+        raw_fixes = [('w', '$tensor($real, 3, 1)'),
+                     ('v', '$tensor($real, 3, 1)')]
+        fixes = dict()
+        file.add_definition("hm(R, p) = ccon(rcon(R,p), rcon(zero_matrix(1,3),unit_matrix(1)))", conds=['shape(w, 3, 1)', 'shape(v, 3, 1)'])
+        file.add_definition("hmf(t, w, v) = hm(unit_matrix(3), t*v)", conds=['shape(w, 3, 1)', 'shape(v, 3, 1)', 'norm(w)=0'])
+        file.add_definition("hmf(t, w, v) = hm(exp(t*w), (unit_matrix(3)-exp(t*w))*(hat(w)*v)*(w*T(w)*v*t))",
+                            conds=['shape(w, 3, 1)', 'shape(v, 3, 1)', 'norm(w)!=0'])
+        goal01 = file.add_goal("hmf(t, w, v) * hmf(-t, w, v) = unit_matrix(4)", fixes=fixes)
+        split_cond = parser.parse_expr("norm(w)!=0", fixes=fixes)
+        proof = goal01.proof_by_case(split_cond=split_cond)
+        case1 = proof.cases[0].proof_by_calculation()
+        calc = case1.lhs_calc
+        calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '0'))
+        calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '1'))
+
+        print(file)
     def testMy(self):
         e = parser.parse_expr("SKOLEM_FUNC(C(a))")
         pat = expr.expr_to_pattern(e)

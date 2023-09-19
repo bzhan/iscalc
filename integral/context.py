@@ -249,26 +249,20 @@ class Context:
             if cond.is_equals():
                 res.add_condition(cond)
         return res
+
     def get_substs(self) -> Dict[str, Expr]:
         res = self.parent.get_substs() if self.parent is not None else dict()
         for var, expr in self.substs.items():
             res[var] = expr
         return res
 
-    def add_definition(self, eq: Expr):
+    def add_definition(self, eq: Expr, conds:Conditions):
         if not eq.is_equals():
             raise TypeError
 
-        symb_lhs = expr_to_pattern(eq.lhs)
-        symb_rhs = expr_to_pattern(eq.rhs)
-        self.definitions.append(Identity(Eq(symb_lhs, symb_rhs)))
-
-    def add_var_definition(self, v: Expr, c:Union[Expr,None]):
-        if not v.is_var():
-            raise TypeError
-        if c is None:
-            c = v
-        self.var_definitions.append(Eq(v, c))
+        symb_e = expr_to_pattern(eq)
+        symb_conds = [expr_to_pattern(cond) for cond in conds.data]
+        self.definitions.append(Identity(symb_e, conds=Conditions(symb_conds)))
 
     def add_indefinite_integral(self, eq: Expr):
         if not (eq.is_equals() and eq.lhs.is_indefinite_integral()):
@@ -441,7 +435,11 @@ class Context:
             self.add_inequality(e, conds)
         if item['type'] == 'definition':
             e = parser.parse_expr(item['expr'])
-            self.add_definition(e)
+            conds = Conditions()
+            if 'conds' in item:
+                for cond in item['conds']:
+                    conds.add_condition(parser.parse_expr(cond))
+            self.add_definition(e, conds)
         if item['type'] == 'table':
             self.add_function_table(item['name'], item['table'])
 

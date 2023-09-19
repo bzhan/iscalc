@@ -277,9 +277,9 @@ class MatrixTest(unittest.TestCase):
 
     def testTwistMatrixExpInv(self):
         file = compstate.CompFile("MIRM", "twist_matrix_exp_inv")
-        raw_fixes = [('w', '$tensor($real, 3, 1)'),
-                     ('v', '$tensor($real, 3, 1)')]
         fixes = dict()
+        fixes['w'] = parser.parse_expr('$tensor($real, 3, 1)')
+        fixes['v'] = parser.parse_expr('$tensor($real, 3, 1)')
         file.add_definition("hm(R, p) = ccon(rcon(R,p), rcon(zero_matrix(1,3),unit_matrix(1)))", conds=['shape(w, 3, 1)', 'shape(v, 3, 1)'])
         file.add_definition("hmf(t, w, v) = hm(unit_matrix(3), t*v)", conds=['shape(w, 3, 1)', 'shape(v, 3, 1)', 'norm(w)=0'])
         file.add_definition("hmf(t, w, v) = hm(exp(t*w), (unit_matrix(3)-exp(t*w))*(hat(w)*v)*(w*T(w)*v*t))",
@@ -294,9 +294,11 @@ class MatrixTest(unittest.TestCase):
 
         print(file)
     def testMy(self):
-        e = parser.parse_expr("SKOLEM_FUNC(C(a))")
-        pat = expr.expr_to_pattern(e)
-        print(pat)
+        e = parser.parse_expr("D a. log(x * y) ^ (s - 2) * (x ^ a * y ^ a) / (1 - x * y)")
+        ctx = Context()
+        r = rules.FullSimplify()
+        e = r.eval(e, ctx)
+        print(e)
 
 if __name__ == "__main__":
     unittest.main()

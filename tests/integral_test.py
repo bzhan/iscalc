@@ -890,7 +890,7 @@ class IntegralTest(unittest.TestCase):
         assert lemma.is_finished()
 
         # Recursive equation for gamma function
-        goal1 = file.add_goal("Gamma(n) = (n - 1) * Gamma(n - 1)", conds=["n >= 1"], fixes=fixes)
+        goal1 = file.add_goal("Gamma(n) = (n - 1) * Gamma(n - 1)", conds=["n > 1"], fixes=fixes)
 
         proof = goal1.proof_by_calculation()
         calc = proof.lhs_calc
@@ -1993,7 +1993,7 @@ class IntegralTest(unittest.TestCase):
         file.add_definition("J(a) = INT x:[0,pi/2]. log(a * sin(2*x))", conds=["a > 0"])
 
         # Prove J(a) = I(a)
-        goal1 = file.add_goal("J(a) = I(a)")
+        goal1 = file.add_goal("J(a) = I(a)", conds=['a>0'])
         proof = goal1.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("J"))
@@ -4091,9 +4091,8 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.DerivIntExchange(), "0"))
         calc.perform_rule(rules.OnLocation(rules.DerivIntExchange(), "0.0"))
         calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0.0"))
-        s1 = parser.parse_expr("x ^ a * y ^ a * log(x) + x ^ a * y ^ a * log(y)", fixes=fixes)
-        s2 = parser.parse_expr("x ^ a * y ^ a * (log(x) + log(y))", fixes=fixes)
-        print(goal03)
+        s1 = parser.parse_expr("x ^ a * y ^ a * log(x) * log(x * y) ^ (s - 2) + x ^ a * y ^ a * log(y) * log(x * y) ^ (s - 2)", fixes=fixes)
+        s2 = parser.parse_expr("log(x * y) ^ (s - 2) * (x ^ a * y ^ a * (log(x) + log(y)))", fixes=fixes)
         calc.perform_rule(rules.Equation(s1, s2))
         s1 = parser.parse_expr("log(x) + log(y)", fixes=fixes)
         s2 = parser.parse_expr("log(x*y)", fixes=fixes)

@@ -127,8 +127,8 @@
         {
             "conds": [
                 {
-                    "cond": "n >= 1",
-                    "latex_cond": "n \\ge 1"
+                    "cond": "n > 1",
+                    "latex_cond": "n > 1"
                 }
             ],
             "finished": true,
@@ -169,8 +169,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "(n - 1) (\\int_{0}^{\\infty} x ^ {n - 2} e^{-x} \\,dx) - (\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,))",
-                                "res": "(n - 1) * (INT x:[0,oo]. x ^ (n - 2) * exp(-x)) - (LIM {x -> oo}. x ^ (n - 1) * exp(-x))",
+                                "latex_res": "(n - 1) (\\int_{0}^{\\infty} x ^ {n - 2} e^{-x} \\,dx)",
+                                "res": "(n - 1) * (INT x:[0,oo]. x ^ (n - 2) * exp(-x))",
                                 "rule": {
                                     "name": "FullSimplify",
                                     "str": "full simplify"
@@ -178,8 +178,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "(n - 1) (\\int_{0}^{\\infty} x ^ {n - 2} e^{-x} \\,dx) - 0",
-                                "res": "(n - 1) * (INT x:[0,oo]. x ^ (n - 2) * exp(-x)) - 0",
+                                "latex_res": "(n - 1) (\\int_{0}^{\\infty} x ^ {n - 2} e^{-x} \\,dx)",
+                                "res": "(n - 1) * (INT x:[0,oo]. x ^ (n - 2) * exp(-x))",
                                 "rule": {
                                     "eq": "(LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0",
                                     "latex_str": "apply equation \\(\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,) = 0\\) at 1",

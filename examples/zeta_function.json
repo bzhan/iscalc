@@ -430,8 +430,8 @@
                                     "type": "CalculationStep"
                                 },
                                 {
-                                    "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y) (x ^ {a} y ^ {a} \\log{x} + x ^ {a} y ^ {a} \\log{y})}{-x y + 1} \\,dx \\,dy = \\frac{d}{da} (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{\\frac{1}{(n + a + 1) ^ {s}}}",
-                                    "res": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a * log(x) + x ^ a * y ^ a * log(y)) / (-(x * y) + 1)) = (D a. (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + a + 1) ^ s))",
+                                    "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a} \\log{x} \\log^{s - 2}(x y) + x ^ {a} y ^ {a} \\log{y} \\log^{s - 2}(x y)}{-x y + 1} \\,dx \\,dy = \\frac{d}{da} (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{\\frac{1}{(n + a + 1) ^ {s}}}",
+                                    "res": "(INT y:[0,1]. INT x:[0,1]. (x ^ a * y ^ a * log(x) * log(x * y) ^ (s - 2) + x ^ a * y ^ a * log(y) * log(x * y) ^ (s - 2)) / (-(x * y) + 1)) = (D a. (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + a + 1) ^ s))",
                                     "rule": {
                                         "loc": "0.0",
                                         "name": "FullSimplify",
@@ -443,11 +443,11 @@
                                     "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y) (x ^ {a} y ^ {a} (\\log{x} + \\log{y}))}{-x y + 1} \\,dx \\,dy = \\frac{d}{da} (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{\\frac{1}{(n + a + 1) ^ {s}}}",
                                     "res": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a * (log(x) + log(y))) / (-(x * y) + 1)) = (D a. (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + a + 1) ^ s))",
                                     "rule": {
-                                        "latex_str": "rewriting \\(x ^ {a} y ^ {a} \\log{x} + x ^ {a} y ^ {a} \\log{y}\\) to \\(x ^ {a} y ^ {a} (\\log{x} + \\log{y})\\)",
+                                        "latex_str": "rewriting \\(x ^ {a} y ^ {a} \\log{x} \\log^{s - 2}(x y) + x ^ {a} y ^ {a} \\log{y} \\log^{s - 2}(x y)\\) to \\(\\log^{s - 2}(x y) (x ^ {a} y ^ {a} (\\log{x} + \\log{y}))\\)",
                                         "name": "Equation",
-                                        "new_expr": "x ^ a * y ^ a * (log(x) + log(y))",
-                                        "old_expr": "x ^ a * y ^ a * log(x) + x ^ a * y ^ a * log(y)",
-                                        "str": "rewriting x ^ a * y ^ a * log(x) + x ^ a * y ^ a * log(y) to x ^ a * y ^ a * (log(x) + log(y))"
+                                        "new_expr": "log(x * y) ^ (s - 2) * (x ^ a * y ^ a * (log(x) + log(y)))",
+                                        "old_expr": "x ^ a * y ^ a * log(x) * log(x * y) ^ (s - 2) + x ^ a * y ^ a * log(y) * log(x * y) ^ (s - 2)",
+                                        "str": "rewriting x ^ a * y ^ a * log(x) * log(x * y) ^ (s - 2) + x ^ a * y ^ a * log(y) * log(x * y) ^ (s - 2) to log(x * y) ^ (s - 2) * (x ^ a * y ^ a * (log(x) + log(y)))"
                                     },
                                     "type": "CalculationStep"
                                 },

@@ -217,6 +217,7 @@ class MatrixTest(unittest.TestCase):
         calc = proof.lhs_calc
         calc.perform_rule(rules.SeriesExpansionIdentity(old_expr="cos(a)"))
         s = parser.parse_expr("n = 0", fixes=fixes)
+        print(goal01)
         calc.perform_rule(rules.OnLocation(rules.SplitSummation(s), "1"))
         calc.perform_rule(rules.FullSimplify())
         s1 = "-SUM(n, 1, oo, a ^ (2 * n) * (-1) ^ n / factorial(2 * n))"
@@ -250,6 +251,7 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.ChangeSummationIndex(new_lower="0"), "0.1"))
         s1 = calc.parse_expr("(x * hat(w)) ^ (2 * i + 1)")
         s2 = calc.parse_expr("x ^ (2 * i + 1) * hat(w) ^ (2 * i + 1)")
+        print(file)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         s3 = calc.parse_expr("(x * hat(w)) ^ (2 * (n + 1))")
         s4 = calc.parse_expr("x ^ (2 * (n + 1)) * hat(w) ^ (2 * (n + 1))")

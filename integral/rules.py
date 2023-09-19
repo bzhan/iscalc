@@ -2081,7 +2081,8 @@ class ChangeSummationIndex(Rule):
         self.new_lower = new_lower if isinstance(new_lower, Expr) else parser.parse_expr(new_lower)
 
     def eval(self, e: Expr, ctx: Context):
-        assert expr.is_summation(e)
+        if not expr.is_summation(e):
+            return e
         tmp = normalize(Var(e.index_var, type=expr.IntType) + e.lower - self.new_lower, ctx)
         new_upper = normalize(e.upper + self.new_lower - e.lower, ctx) \
             if e.upper != POS_INF else POS_INF
@@ -2306,7 +2307,7 @@ class SplitSummation(Rule):
         r0 = ExpandDefinition("f", simp=False)
         r = OnSubterm(r0)
         tmp_ctx = Context(ctx)
-        tmp_ctx.definitions.append(eq_pat)
+        tmp_ctx.definitions.append(context.Identity(eq_pat))
         for id in ctx.get_summation_split_identities():
             id: context.Identity
             inst_split_cond = expr.match(cond, id.split_cond)

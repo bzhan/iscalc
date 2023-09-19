@@ -95,8 +95,8 @@ class FuncDef(StateItem):
             raise AssertionError("FuncDef: left side of equation must be variable or function")
         self.body = self.eq.rhs
 
-        # if any(not arg.is_var() for arg in self.args) or len(self.args) != len(set(self.args)):
-        #     raise AssertionError("FuncDef: arguments should be distinct variables")
+        if any (not expr.is_var(arg) for arg in self.args) or len(self.args) != len(set(self.args)):
+            raise AssertionError("FuncDef: arguments should be distinct variables")
 
         if conds is None:
             conds = Conditions()
@@ -142,40 +142,6 @@ class FuncDef(StateItem):
     def get_facts(self):
         return [self.eq]
 
-class VarDef(StateItem):
-    def __init__(self, parent: "CompFile", ctx: Context, var:Var, content:Expr = None, fixes = None):
-        self.parent = parent
-        self.ctx = ctx
-        self.var = var
-        self.content = content
-        if fixes == None:
-            fixes = dict()
-        self.fixes = fixes
-        self.ctx.extend_fixes(fixes)
-    def __str__(self):
-        s = "Var Definition:\n"
-        s = s + "  " + str(self.var.type) + " " + self.var.name
-        if expr.is_matrix_type(self.var.type):
-            s = s + "[%s][%s]" % (str(expr.num_row(self.var.type)),str(expr.num_col(self.var.type)))
-        if self.content is not None:
-            s += " = " + str(self.content)
-        s += '\n'
-        return s
-
-    def export(self):
-        res = {
-            "type": "VarDef",
-            "var": str(self.var),
-            "latex_var": latex.convert_expr(self.var)
-        }
-        if self.content is not None:
-            res['content'] = str(self.content)
-        if len(self.fixes.items()) > 0:
-            d = list()
-            for a, b in self.fixes.items():
-                d.append((a, str(b)))
-            res['fixes'] = d
-        return res
 
 class Goal(StateItem):
     """Goal to be proved."""
@@ -435,6 +401,9 @@ class Calculation(StateItem):
             return self.steps[label.head]
         else:
             raise AssertionError("get_by_label: invalid label")
+
+    def parse_expr(self, s: str) -> Expr:
+        return parser.parse_expr(s, fixes=self.ctx.get_fixes())
 
 
 class CalculationProof(StateItem):

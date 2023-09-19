@@ -3980,12 +3980,12 @@ class IntegralTest(unittest.TestCase):
         # Reference:
         # Inside interesting integrals, C4.3
         file = compstate.CompFile("interesting", "chapter4_practice03")
-        goal01 = file.add_goal("B(a+1,b+2) = (INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1))")
+        goal01 = file.add_goal("B(a+1,b+2) = (INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1))", conds=['a>-1', 'b>-2'])
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("B"))
-
-        goal02 = file.add_goal("(INT x:[0,1]. x^a * (INT y:[0 ,1-x]. y^b)) = factorial(a) * factorial(b) / factorial(a+b+2)", conds=["b >= 0"])
+        assert goal01.is_finished()
+        goal02 = file.add_goal("(INT x:[0,1]. x^a * (INT y:[0 ,1-x]. y^b)) = factorial(a) * factorial(b) / factorial(a+b+2)", conds=["b >= 0", 'a>=0'])
         proof = goal02.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.OnLocation(rules.DefiniteIntegralIdentity(), "0.1"))
@@ -3997,7 +3997,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyIdentity("Gamma(a+b+3)", "factorial(a+b+2)"))
         calc.perform_rule(rules.ApplyIdentity("factorial(b+1)","(b+1)*factorial(b)"))
         calc.perform_rule(rules.FullSimplify())
-
+        assert goal02.is_finished()
         self.checkAndOutput(file)
 
     def testExpSinh(self):

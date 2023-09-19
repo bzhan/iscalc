@@ -1,6 +1,16 @@
 {
     "content": [
         {
+            "conds": [
+                {
+                    "cond": "a > -1",
+                    "latex_cond": "a > -1"
+                },
+                {
+                    "cond": "b > -2",
+                    "latex_cond": "b > -2"
+                }
+            ],
             "finished": true,
             "goal": "B(a + 1,b + 2) = (INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1))",
             "latex_goal": "B(a + 1,b + 2) = \\int_{0}^{1} x ^ {a} (-x + 1) ^ {b + 1} \\,dx",
@@ -42,6 +52,10 @@
                 {
                     "cond": "b >= 0",
                     "latex_cond": "b \\ge 0"
+                },
+                {
+                    "cond": "a >= 0",
+                    "latex_cond": "a \\ge 0"
                 }
             ],
             "finished": true,

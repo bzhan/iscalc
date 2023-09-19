@@ -1,6 +1,12 @@
 {
     "content": [
         {
+            "conds": [
+                {
+                    "cond": "n > -1",
+                    "latex_cond": "n > -1"
+                }
+            ],
             "finished": true,
             "goal": "B(2,n + 1) = (INT u:[0,1]. u * (1 - u) ^ n)",
             "latex_goal": "B(2,n + 1) = \\int_{0}^{1} u (1 - u) ^ {n} \\,du",

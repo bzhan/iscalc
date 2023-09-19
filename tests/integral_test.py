@@ -3912,13 +3912,13 @@ class IntegralTest(unittest.TestCase):
         # Reference:
         # Inside interesting integrals, C4.1
         file = compstate.CompFile("interesting", "chapter4_practice01")
-        goal01 = file.add_goal("B(2, n+1) = INT u:[0,1]. u * (1-u)^n")
+        goal01 = file.add_goal("B(2, n+1) = INT u:[0,1]. u * (1-u)^n", conds=['n>-1'])
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("B"))
         calc = proof.rhs_calc
         calc.perform_rule(rules.FullSimplify())
-
+        assert goal01.is_finished()
         goal02 = file.add_goal("(INT x:[0,1]. (1-sqrt(x))^n) = 2 / ((n+1)*(n+2))", conds=["n>-1"])
         proof = goal02.proof_by_calculation()
         calc = proof.lhs_calc
@@ -3934,12 +3934,13 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyIdentity("factorial(n+2)", "(n+2)*factorial(n+1)"))
         calc.perform_rule(rules.ApplyIdentity("factorial(n+1)", "(n+1)*factorial(n)"))
         calc.perform_rule(rules.FullSimplify())
-
+        assert goal02.is_finished()
         goal03 = file.add_goal("(INT x:[0,1]. (1-sqrt(x))^9) = 1 / 55")
         proof = goal03.proof_by_rewrite_goal(begin = goal02)
         calc = proof.begin
         calc.perform_rule(rules.VarSubsOfEquation([{'var': 'n', 'expr': "9"}]))
         calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "1"))
+        assert goal03.is_finished()
         self.checkAndOutput(file)
 
     # The condition of goal02 can not be weakened until complex integration is supported.
@@ -4065,6 +4066,7 @@ class IntegralTest(unittest.TestCase):
         #application
         s1 = parser.parse_expr("(INT y:[0,1]. (INT x:[0,1]. 1 / (1-x*y)))", fixes=fixes)
         s2 = parser.parse_expr("zeta(2)", fixes=fixes)
+        assert goal01.is_finished()
         goal02 = file.add_goal(expr.Op('=', s1, s2), fixes=fixes)
         proof = goal02.proof_by_rewrite_goal(begin=goal01)
         calc = proof.begin
@@ -4075,6 +4077,7 @@ class IntegralTest(unittest.TestCase):
 
         s1 = parser.parse_expr("(INT y:[0,1]. (INT x:[0,1]. log(x*y)^(s-2)*(x^a * y^a) / (1-x*y)))", fixes=fixes)
         s2 = parser.parse_expr("(-1)^s * factorial(s-1) * SUM(n, 0, oo, 1/(n+a+1)^s)", fixes=fixes)
+        assert goal02.is_finished()
         goal03 = file.add_goal(expr.Op('=', s1, s2), conds=["a > -1", "s >= 2", "isInt(s)"], fixes=fixes)
         proof = goal03.proof_by_induction('s', 2)
         proof_base = proof.base_case.proof_by_calculation()
@@ -4090,6 +4093,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0.0"))
         s1 = parser.parse_expr("x ^ a * y ^ a * log(x) + x ^ a * y ^ a * log(y)", fixes=fixes)
         s2 = parser.parse_expr("x ^ a * y ^ a * (log(x) + log(y))", fixes=fixes)
+        print(goal03)
         calc.perform_rule(rules.Equation(s1, s2))
         s1 = parser.parse_expr("log(x) + log(y)", fixes=fixes)
         s2 = parser.parse_expr("log(x*y)", fixes=fixes)

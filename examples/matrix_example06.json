@@ -34,8 +34,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "1 - (\\frac{(-1) ^ {0} a ^ {2\\cdot 0}}{(2\\cdot 0)!} + \\sum_{i=0 + 1}^{\\infty}{\\frac{(-1) ^ {i} a ^ {2 i}}{(2 i)!}})",
-                                "res": "1 - ((-1) ^ 0 * a ^ (2 * 0) / factorial(2 * 0) + SUM(i, 0 + 1, oo, (-1) ^ i * a ^ (2 * i) / factorial(2 * i)))",
+                                "latex_res": "1 - (\\sum_{i=0}^{0}{\\frac{(-1) ^ {i} a ^ {2 i}}{(2 i)!}} + \\sum_{i=0 + 1}^{\\infty}{\\frac{(-1) ^ {i} a ^ {2 i}}{(2 i)!}})",
+                                "res": "1 - (SUM(i, 0, 0, (-1) ^ i * a ^ (2 * i) / factorial(2 * i)) + SUM(i, 0 + 1, oo, (-1) ^ i * a ^ (2 * i) / factorial(2 * i)))",
                                 "rule": {
                                     "cond": "n = 0",
                                     "latex_str": "split summation on \\(n = 0\\) at 1",

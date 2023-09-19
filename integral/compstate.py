@@ -85,10 +85,10 @@ class FuncDef(StateItem):
         self.ctx = ctx
 
         self.eq = eq
-        if self.eq.lhs.is_fun():
+        if expr.is_fun(self.eq.lhs):
             self.symb = self.eq.lhs.func_name
             self.args = self.eq.lhs.args
-        elif self.eq.lhs.is_var():
+        elif expr.is_var(self.eq.lhs):
             self.symb = self.eq.lhs.name
             self.args = []
         else:

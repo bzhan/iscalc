@@ -1937,7 +1937,12 @@ class ExpandDefinition(Rule):
                     inst = expr.match(e, identity.lhs)
                     if inst == None:
                         continue
-                    # TODO: condtions check
+                    tmp_conds = [cond.inst_pat(inst) for cond in identity.conds.data]
+                    flag = True
+                    for cond in tmp_conds:
+                        flag = flag and ctx.check_condition(cond)
+                    if not flag:
+                        return e
                     if self.simp:
                         return normalize(identity.rhs.inst_pat(inst), ctx)
                     else:

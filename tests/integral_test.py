@@ -3134,7 +3134,7 @@ class IntegralTest(unittest.TestCase):
         file = compstate.CompFile("interesting", "Chapter3Practice01")
 
         file.add_definition("I(a, b) = (INT x:[0, oo]. log(1 + a ^ 2 * x ^ 2) / (b ^ 2 + x ^ 2))",
-                             conds=["a > 0", "b > 0"])
+                             conds=["a >= 0", "b > 0"])
 
         goal01 = file.add_goal("(D a. I(a,b)) = pi / (1 + a * b)", conds=["a > 0", "b > 0"])
         proof_of_goal01 = goal01.proof_by_calculation()
@@ -3161,7 +3161,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ReplaceSubstitution())
         calc.perform_rule(rules.Equation("abs(1 + a * b)", "(1 + a * b)"))
         assert goal02.is_finished()
-        goal03 = file.add_goal("I(0, b) = 0")
+        goal03 = file.add_goal("I(0, b) = 0", conds=['b>0'])
         proof_of_goal03 = goal03.proof_by_calculation()
         calc = proof_of_goal03.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("I"))

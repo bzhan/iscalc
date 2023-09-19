@@ -3,8 +3,8 @@
         {
             "conds": [
                 {
-                    "cond": "a > 0",
-                    "latex_cond": "a > 0"
+                    "cond": "a >= 0",
+                    "latex_cond": "a \\ge 0"
                 },
                 {
                     "cond": "b > 0",
@@ -253,6 +253,12 @@
             "type": "Goal"
         },
         {
+            "conds": [
+                {
+                    "cond": "b > 0",
+                    "latex_cond": "b > 0"
+                }
+            ],
             "finished": true,
             "goal": "I(0,b) = 0",
             "latex_goal": "I(0,b) = 0",

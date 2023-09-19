@@ -11,7 +11,6 @@ from integral.expr import Var, Const, Fun, EvalAt, Op, Integral, Symbol, Expr, \
     OP, CONST, VAR, sin, cos, FUN, decompose_expr_factor, \
     Deriv, Inf, Limit, NEG_INF, POS_INF, IndefiniteIntegral, Summation, SUMMATION, Matrix, INTEGRAL, MATRIX, INF
 from integral import parser
-from integral.matrix import is_vector
 from integral.solve import solve_equation, solve_for_term
 from integral import latex
 from integral import limits
@@ -93,17 +92,17 @@ def deriv(var: str, e: Expr, ctx: Context) -> Expr:
     def rec(e):
         if var not in e.get_vars():
             return Const(0)
-        elif e.is_var():
+        elif expr.is_var(e):
             if e.name == var:
                 # dx. x = 1
                 return Const(1)
             else:
                 # dx. y = 0
                 return Const(0)
-        elif e.is_const():
+        elif expr.is_const(e):
             # dx. c = 0
             return Const(0)
-        elif e.is_op():
+        elif expr.is_op(e):
             if e.op == "+":
                 x, y = e.args
                 return normal(rec(x) + rec(y))
@@ -142,7 +141,7 @@ def deriv(var: str, e: Expr, ctx: Context) -> Expr:
                     return normal(rec(expr.exp(y * expr.log(x))))
             else:
                 raise NotImplementedError
-        elif e.ty == FUN:
+        elif expr.is_fun(e):
             if e.func_name == "sin":
                 x, = e.args
                 return normal(cos(x) * rec(x))
@@ -195,18 +194,18 @@ def deriv(var: str, e: Expr, ctx: Context) -> Expr:
                 return Const(0)
             else:
                 return Deriv(var, e)
-        elif e.is_integral():
+        elif expr.is_integral(e):
             if e.lower.is_constant():
                 return normal(Integral(e.var, e.lower, e.upper, rec(e.body))
                               + e.body.subst(e.var, e.upper) * rec(e.upper))
             return normal(Integral(e.var, e.lower, e.upper, rec(e.body))
                           + e.body.subst(e.var, e.upper) * rec(e.upper)
                           - e.body.subst(e.var, e.lower) * rec(e.lower))
-        elif e.is_limit():
+        elif expr.is_limit(e):
             return Limit(e.var, e.lim, rec(e.body))
-        elif e.is_summation():
+        elif expr.is_summation(e):
             return Summation(e.index_var, e.lower, e.upper, rec(e.body))
-        elif e.is_inf():
+        elif expr.is_inf(e):
             return Const(0)
         else:
             print(e, type(e))
@@ -293,9 +292,9 @@ def check_wellformed(e: Expr, ctx: Context) -> List[ProofObligation]:
             obligations.append(obligation)
 
     def rec(e: Expr, ctx: Context):
-        if e.is_var() or e.is_const():
+        if expr.is_var(e) or expr.is_const(e):
             pass
-        elif e.is_op():
+        elif expr.is_op(e):
             for arg in e.args:
                 rec(arg, ctx)
             if e.is_divides():
@@ -313,7 +312,7 @@ def check_wellformed(e: Expr, ctx: Context) -> List[ProofObligation]:
                     add_obligation(Op(">", e.args[0], Const(0)), ctx)
                     add_obligation(Fun("isInt", e.args[1]), ctx)
                     add_obligation(Op(">=", e.args[1], Const(0)), ctx)
-        elif e.is_fun():
+        elif expr.is_fun(e):
             for arg in e.args:
                 rec(arg, ctx)
             if e.func_name == 'log':
@@ -356,11 +355,11 @@ def check_wellformed(e: Expr, ctx: Context) -> List[ProofObligation]:
                     branch2 = ProofObligationBranch([Fun("isEven", tmp)])
                     add_obligation([branch1, branch2], ctx)
             # TODO: add checks for other functions
-        elif e.is_integral():
+        elif expr.is_integral(e):
             rec(e.body, body_conds(e, ctx))
-        elif e.is_deriv():
+        elif expr.is_deriv(e):
             rec(e.body, ctx)
-        elif e.is_summation():
+        elif expr.is_summation(e):
             rec(e.lower, ctx)
             rec(e.upper, ctx)
             rec(e.body, body_conds(e, ctx))
@@ -393,11 +392,11 @@ def check_asymp_converge(asymp: limits.Asymptote) -> bool:
 
 def check_converge(e: Expr, ctx: Context) -> bool:
     """Check convergence of the sum or integral."""
-    if e.is_summation():
+    if expr.is_summation(e):
         lim = limits.limit_of_expr(e.body, e.index_var, ctx)
         if lim.e == Const(0) and check_asymp_converge(lim.asymp):
             return True
-    elif e.is_var() or e.is_constant():
+    elif expr.is_var(e) or e.is_constant():
         return True
     elif e.is_times() or e.is_plus():
         if check_converge(e.args[0], ctx) and check_converge(e.args[1], ctx):
@@ -410,7 +409,7 @@ def check_converge(e: Expr, ctx: Context) -> bool:
         if ctx.check_condition(Op("!=", e.args[1], Const(0))) and check_converge(e.args[0], ctx) and \
                 check_converge(e.args[1], ctx):
             return True
-    elif e.is_fun():
+    elif expr.is_fun(e):
         flag = True
         for arg in e.args:
             if not check_converge(arg, ctx):
@@ -498,7 +497,7 @@ class Linearity(Rule):
                 return functools.reduce(operator.mul, es[1:], es[0])
 
         def rec(e: Expr):
-            if e.is_integral():
+            if expr.is_integral(e):
                 if e.body.is_plus():
                     return rec(expr.Integral(e.var, e.lower, e.upper, e.body.args[0])) + \
                         rec(expr.Integral(e.var, e.lower, e.upper, e.body.args[1]))
@@ -525,7 +524,7 @@ class Linearity(Rule):
                     return e.body * expr.Integral(e.var, e.lower, e.upper, Const(1))
                 else:
                     return e
-            elif e.is_indefinite_integral():
+            elif expr.is_indefinite_integral(e):
                 if e.body.is_plus():
                     return rec(expr.IndefiniteIntegral(e.var, e.body.args[0], e.skolem_args)) + \
                         rec(expr.IndefiniteIntegral(e.var, e.body.args[1], e.skolem_args))
@@ -550,7 +549,7 @@ class Linearity(Rule):
                         return c * rec(IndefiniteIntegral(e.var, b, e.skolem_args))
                 else:
                     return e
-            elif e.is_limit():
+            elif expr.is_limit(e):
                 if e.body.is_uminus():
                     return -Limit(e.var, e.lim, e.body.args[0])
                 elif e.body.is_times() or e.body.is_divides():
@@ -569,7 +568,7 @@ class Linearity(Rule):
                     return c * Limit(e.var, e.lim, b)
                 else:
                     return e
-            elif e.is_summation():
+            elif expr.is_summation(e):
                 v, l, u, body = e.index_var, e.lower, e.upper, e.body
                 if e.body.is_minus():
                     return Summation(v, l, u, body.args[0]) - Summation(v, l, u, body.args[1])
@@ -699,10 +698,10 @@ class DefiniteIntegralIdentity(Rule):
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
         # Apply linearity
-        if e.is_integral() or e.is_indefinite_integral():
+        if expr.is_integral(e) or expr.is_indefinite_integral(e):
             e = Linearity().eval(e, ctx)
 
-        if not (e.is_integral() or e.is_indefinite_integral()):
+        if not (expr.is_integral(e) or expr.is_indefinite_integral(e)):
             sep_ints = e.separate_integral()
             for _, loc in sep_ints:
                 e = OnLocation(self, loc).eval(e, ctx)
@@ -715,7 +714,7 @@ class DefiniteIntegralIdentity(Rule):
                 continue
 
             inst[identity.lhs.var] = Var(e.var)
-            assert identity.rhs.is_plus() and identity.rhs.args[1].is_skolem_func()
+            assert identity.rhs.is_plus() and expr.is_skolem_func(identity.rhs.args[1])
             pat_rhs = identity.rhs.args[0]  # remove Skolem constant C
             return EvalAt(e.var, e.lower, e.upper, normalize(pat_rhs.inst_pat(inst), ctx))
 
@@ -778,7 +777,7 @@ class SeriesExpansionIdentity(Rule):
                 continue
 
             res = identity.rhs.inst_pat(inst)
-            assert res.is_summation()
+            assert expr.is_summation(res)
             res = res.alpha_convert(self.index_var)
             return res
 
@@ -802,7 +801,7 @@ class SeriesEvaluationIdentity(Rule):
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
-        if not e.is_summation():
+        if not expr.is_summation(e):
             return e
         for identity in ctx.get_series_evaluations():
             inst = expr.match(e, identity.lhs)
@@ -839,14 +838,14 @@ class IndefiniteIntegralIdentity(Rule):
                     continue
 
                 inst['x'] = Var(e.var)
-                assert indef.rhs.is_plus() and indef.rhs.args[1].is_skolem_func()
+                assert indef.rhs.is_plus() and expr.is_skolem_func(indef.rhs.args[1])
                 return indef.rhs.args[0].inst_pat(inst)
 
             # No matching identity found
             return e
 
         # Apply linearity
-        if e.is_integral() or e.is_indefinite_integral():
+        if expr.is_integral(e) or expr.is_indefinite_integral(e):
             e = Linearity().eval(e, ctx)
 
         if e.is_equals():
@@ -860,7 +859,7 @@ class IndefiniteIntegralIdentity(Rule):
                 e = e.replace_expr(loc, new_e)
                 skolem_args = skolem_args.union(set(sub_e.skolem_args))
 
-        if e.is_plus() and e.args[1].is_skolem_func():
+        if e.is_plus() and expr.is_skolem_func(e.args[1]):
             # If already has Skolem variable at right
             skolem_args = skolem_args.union(set(arg.name for arg in e.args[1].dependent_vars))
             e = e.args[0] + expr.SkolemFunc(e.args[1].name, tuple(Var(arg) for arg in skolem_args))
@@ -970,9 +969,9 @@ class OnLocation(Rule):
         def rec(cur_e, loc, ctx):
             if loc.is_empty():
                 return self.rule.eval(cur_e, ctx)
-            elif cur_e.is_var() or cur_e.is_const():
+            elif expr.is_var(cur_e) or expr.is_const(cur_e):
                 raise AssertionError("OnLocation: invalid location")
-            elif cur_e.is_op():
+            elif expr.is_op(cur_e):
                 assert loc.head < len(cur_e.args), "OnLocation: invalid location"
                 if len(cur_e.args) == 1:
                     return Op(cur_e.op, rec(cur_e.args[0], loc.rest, ctx))
@@ -985,12 +984,12 @@ class OnLocation(Rule):
                         raise AssertionError("OnLocation: invalid location")
                 else:
                     raise NotImplementedError
-            elif cur_e.is_fun():
+            elif expr.is_fun(cur_e):
                 assert loc.head < len(cur_e.args), "OnLocation: invalid location"
                 new_args = list(cur_e.args)
                 new_args[loc.head] = rec(cur_e.args[loc.head], loc.rest, ctx)
                 return Fun(cur_e.func_name, *tuple(new_args))
-            elif cur_e.is_integral():
+            elif expr.is_integral(cur_e):
                 ctx2 = body_conds(cur_e, ctx)
                 if loc.head == 0:
                     return Integral(cur_e.var, cur_e.lower, cur_e.upper, rec(cur_e.body, loc.rest, ctx2))
@@ -1000,7 +999,7 @@ class OnLocation(Rule):
                     return Integral(cur_e.var, cur_e.lower, rec(cur_e.upper, loc.rest, ctx), cur_e.body)
                 else:
                     raise AssertionError("OnLocation: invalid location")
-            elif cur_e.is_evalat():
+            elif expr.is_evalat(cur_e):
                 if loc.head == 0:
                     return EvalAt(cur_e.var, cur_e.lower, cur_e.upper, rec(cur_e.body, loc.rest, ctx))
                 elif loc.head == 1:
@@ -1009,12 +1008,11 @@ class OnLocation(Rule):
                     return EvalAt(cur_e.var, cur_e.lower, rec(cur_e.upper, loc.rest, ctx), cur_e.body)
                 else:
                     raise AssertionError("OnLocation: invalid location")
-            elif cur_e.is_deriv():
+            elif expr.is_deriv(cur_e):
                 assert loc.head == 0, "OnLocation: invalid location"
                 return Deriv(cur_e.var, rec(cur_e.body, loc.rest, ctx))
-            elif cur_e.is_limit():
+            elif expr.is_limit(cur_e):
                 if loc.head == 0:
-                    cur_e:Var
                     if cur_e.lim.is_evaluable():
                         v = expr.eval_expr(cur_e.lim)
                         var = parser.parse_expr(cur_e.var, fixes=ctx.get_fixes())
@@ -1029,10 +1027,10 @@ class OnLocation(Rule):
                     return Limit(cur_e.var, rec(cur_e.lim, loc.rest, ctx), cur_e.body, drt=cur_e.drt)
                 else:
                     raise AssertionError("OnLocation: invalid location")
-            elif cur_e.is_indefinite_integral():
+            elif expr.is_indefinite_integral(cur_e):
                 assert loc.head == 0, "OnLocation: invalid location"
                 return IndefiniteIntegral(cur_e.var, rec(cur_e.body, loc.rest, ctx), cur_e.skolem_args)
-            elif cur_e.is_summation():
+            elif expr.is_summation(cur_e):
                 ctx2 = body_conds(cur_e, ctx)
                 if loc.head == 0:
                     return Summation(cur_e.index_var, cur_e.lower, cur_e.upper, rec(cur_e.body, loc.rest, ctx2))
@@ -1238,7 +1236,7 @@ class Substitution(Rule):
         specify the substitution.
 
         """
-        if not (e.is_integral() or e.is_indefinite_integral()):
+        if not (expr.is_integral(e) or expr.is_indefinite_integral(e)):
             sep_ints = e.separate_integral()
             if len(sep_ints) == 0:
                 return e
@@ -1278,7 +1276,7 @@ class Substitution(Rule):
             new_problem_body = c * deriv(str(var_name), gu, ctx)
             self.f = new_problem_body
 
-        if e.is_integral():
+        if expr.is_integral(e):
             if e.lower == expr.NEG_INF:
                 lower = limits.reduce_neg_inf_limit(var_subst, e.var, ctx)
             else:
@@ -1297,7 +1295,7 @@ class Substitution(Rule):
                 return normalize(Integral(self.var_name, upper, lower, Op("-", self.f)), ctx)
             else:
                 return normalize(Integral(self.var_name, lower, upper, self.f), ctx)
-        elif e.is_indefinite_integral():
+        elif expr.is_indefinite_integral(e):
             return normalize(IndefiniteIntegral(self.var_name, self.f, e.skolem_args), ctx)
         else:
             raise TypeError
@@ -1331,7 +1329,7 @@ class SubstitutionInverse(Rule):
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
-        if not e.is_integral():
+        if not expr.is_integral(e):
             sep_ints = e.separate_integral()
             if len(sep_ints) == 0:
                 return e
@@ -1382,7 +1380,7 @@ class ExpandPolynomial(Rule):
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
-        if e.is_power() and e.args[1].is_const() and e.args[1].val > 1 and \
+        if e.is_power() and expr.is_const(e.args[1]) and e.args[1].val > 1 and \
                 int(e.args[1].val) == e.args[1].val:
             n = int(e.args[1].val)
             base = to_poly(self.eval(e.args[0], ctx), ctx)
@@ -1400,10 +1398,10 @@ class ExpandPolynomial(Rule):
                 return from_poly((p1 / p2).reduce(ctx))
             else:
                 return from_poly((p1 / poly.singleton(from_poly(p2))).reduce(ctx))
-        elif e.is_integral():
+        elif expr.is_integral(e):
             ctx2 = body_conds(e, ctx)
             return expr.Integral(e.var, e.lower, e.upper, self.eval(e.body, ctx2))
-        elif e.is_indefinite_integral():
+        elif expr.is_indefinite_integral(e):
             ctx2 = body_conds(e, ctx)
             return expr.IndefiniteIntegral(e.var, self.eval(e.body, ctx2), e.skolem_args)
         else:
@@ -1542,7 +1540,7 @@ class IntegrationByParts(Rule):
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
-        if not (e.is_integral() or e.is_indefinite_integral()):
+        if not (expr.is_integral(e) or expr.is_indefinite_integral(e)):
             sep_ints = e.separate_integral()
             if len(sep_ints) == 0:
                 return e
@@ -1566,10 +1564,10 @@ class IntegrationByParts(Rule):
             equal = True
 
         if equal:
-            if e.is_integral():
+            if expr.is_integral(e):
                 return expr.EvalAt(e.var, e.lower, e.upper, normalize(self.u * self.v, ctx2)) - \
                     expr.Integral(e.var, e.lower, e.upper, normalize(self.v * du, ctx2))
-            elif e.is_indefinite_integral():
+            elif expr.is_indefinite_integral(e):
                 return normalize(self.u * self.v, ctx2) - \
                     expr.IndefiniteIntegral(e.var, normalize(self.v * du, ctx2), e.skolem_args)
         else:
@@ -1596,7 +1594,7 @@ class SplitRegion(Rule):
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
-        if not e.is_integral():
+        if not expr.is_integral(e):
             sep_ints = e.separate_integral()
             if len(sep_ints) == 0:
                 return e
@@ -1642,7 +1640,7 @@ class IntegrateByEquation(Rule):
         def get_coeff(t: Expr):
             nonlocal rhs_var
             if t == lhs:
-                if t.is_integral():
+                if expr.is_integral(t):
                     rhs_var = t.var
                 return Const(1)
 
@@ -1699,7 +1697,7 @@ class ElimInfInterval(Rule):
         def gen_lim_expr(new_var, lim, lower, upper, drt=None):
             return expr.Limit(new_var, lim, expr.Integral(e.var, lower, upper, e.body), drt)
 
-        if not e.is_integral():
+        if not expr.is_integral(e):
             sep_ints = e.separate_integral()
             if len(sep_ints) == 0:
                 return e
@@ -1753,7 +1751,7 @@ class LHopital(Rule):
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
-        if not e.is_limit():
+        if not expr.is_limit(e):
             sep_lims = e.separate_limits()
             if len(sep_lims) == 0:
                 return e
@@ -1886,13 +1884,13 @@ class DerivIntExchange(Rule):
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
-        if e.is_deriv() and e.body.is_integral():
+        if expr.is_deriv(e) and expr.is_integral(e.body):
             return Integral(e.body.var, e.body.lower, e.body.upper, Deriv(e.var, e.body.body))
-        elif e.is_deriv() and e.body.is_indefinite_integral():
+        elif expr.is_deriv(e) and expr.is_indefinite_integral(e.body):
             return IndefiniteIntegral(e.body.var, Deriv(e.var, e.body.body), e.skolem_args)
-        elif e.is_indefinite_integral() and e.body.is_deriv():
+        elif expr.is_indefinite_integral(e) and expr.is_deriv(e.body):
             return Deriv(e.body.var, IndefiniteIntegral(e.var, e.body.body, e.skolem_args))
-        elif e.is_integral() and e.body.is_deriv():
+        elif expr.is_integral(e) and expr.is_deriv(e.body):
             return Deriv(e.body.var, Integral(e.var, e.upper, e.lower, e.body.body))
         else:
             return e
@@ -1919,23 +1917,23 @@ class ExpandDefinition(Rule):
 
     @staticmethod
     def search(e: Expr, ctx: Context) -> List[Tuple[Expr, expr.Location]]:
-        subexprs = e.find_subexpr_pred(lambda t: t.is_var() or t.is_fun())
+        subexprs = e.find_subexpr_pred(lambda t: expr.is_var(t) or expr.is_fun(t))
         res = []
         for sube, loc in subexprs:
-            if sube.is_fun():
+            if expr.is_fun(sube):
                 for identity in ctx.get_definitions():
-                    if identity.lhs.is_fun() and identity.lhs.func_name == sube.func_name:
+                    if expr.is_fun(identity.lhs) and identity.lhs.func_name == sube.func_name:
                         res.append((sube, loc))
-            if sube.is_var():
+            if expr.is_var(sube):
                 for identity in ctx.get_definitions():
-                    if identity.lhs.is_symbol() and identity.lhs.name == sube.name:
+                    if expr.is_symbol(identity.lhs) and identity.lhs.name == sube.name:
                         res.append((sube, loc))
         return res
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
-        if e.is_fun() and e.func_name == self.func_name:
+        if expr.is_fun(e) and e.func_name == self.func_name:
             for identity in ctx.get_definitions():
-                if identity.lhs.is_fun() and identity.lhs.func_name == self.func_name:
+                if expr.is_fun(identity.lhs) and identity.lhs.func_name == self.func_name:
                     inst = expr.match(e, identity.lhs)
                     if inst == None:
                         continue
@@ -1944,7 +1942,7 @@ class ExpandDefinition(Rule):
                         return normalize(identity.rhs.inst_pat(inst), ctx)
                     else:
                         return identity.rhs.inst_pat(inst)
-        if e.is_var() and e.name == self.func_name:
+        if expr.is_var(e) and e.name == self.func_name:
             for identity in ctx.get_definitions():
                 if identity.lhs.is_symbol() and identity.lhs.name == self.func_name:
                     return identity.rhs
@@ -1979,7 +1977,7 @@ class FoldDefinition(Rule):
             for identity in ctx.get_definitions():
                 inst = expr.match(sube, identity.rhs)
                 if inst:
-                    if identity.lhs.is_fun():
+                    if expr.is_fun(identity.lhs):
                         res.append((sube, loc, identity.lhs.func_name))
                     else:
                         res.append((sube, loc, identity.lhs.name))
@@ -1987,12 +1985,12 @@ class FoldDefinition(Rule):
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
         for identity in ctx.get_definitions():
-            if identity.lhs.is_fun() and identity.lhs.func_name == self.func_name:
+            if expr.is_fun(identity.lhs) and identity.lhs.func_name == self.func_name:
                 inst = expr.match(e, identity.rhs)
                 if inst:
                     return normalize(identity.lhs.inst_pat(inst), ctx)
 
-            if identity.lhs.is_symbol() and identity.lhs.name == self.func_name:
+            if expr.is_symbol(identity.lhs) and identity.lhs.name == self.func_name:
                 if e == identity.rhs:
                     return identity.lhs
 
@@ -2012,7 +2010,7 @@ class IntegralEquation(Rule):
         self.name = "IntegrateBothSide"
 
     def eval(self, e: Expr, ctx: Context):
-        assert e.is_equals() and e.lhs.is_deriv()
+        assert e.is_equals() and expr.is_deriv(e.lhs)
 
         # Variable to differentiate, this will also be the variable
         # of integration.
@@ -2078,7 +2076,7 @@ class ChangeSummationIndex(Rule):
         self.new_lower = new_lower if isinstance(new_lower, Expr) else parser.parse_expr(new_lower)
 
     def eval(self, e: Expr, ctx: Context):
-        assert e.is_summation()
+        assert expr.is_summation(e)
         tmp = normalize(Var(e.index_var, type=expr.IntType) + e.lower - self.new_lower, ctx)
         new_upper = normalize(e.upper + self.new_lower - e.lower, ctx) \
             if e.upper != POS_INF else POS_INF
@@ -2155,12 +2153,12 @@ class IntSumExchange(Rule):
         return False
 
     def eval(self, e: Expr, ctx: Context):
-        if e.is_integral() and e.body.is_summation():
+        if expr.is_integral(e) and expr.is_summation(e.body):
             ctx2 = body_conds(e, body_conds(e.body, ctx))
             s = e.body
             if self.test_converge(s.index_var, s.lower, s.upper, e.var, e.lower, e.upper, e.body.body, ctx2):
                 return Summation(s.index_var, s.lower, s.upper, Integral(e.var, e.lower, e.upper, s.body))
-        elif e.is_summation() and e.body.is_integral():
+        elif expr.is_summation(e) and expr.is_integral(e.body):
             ctx2 = body_conds(e, body_conds(e.body, ctx))
             i = e.body
             if self.test_converge(e.index_var, e.lower, e.upper, i.var, i.lower, i.upper, e.body.body, ctx2):
@@ -2245,8 +2243,7 @@ class MergeSummation(Rule):
 alphabet = "ijkmnabcdef"
 def change_index(e:Expr, bd:List):
     ''' using new index variable for summation '''
-    if e.is_summation():
-        e: Summation
+    if expr.is_summation(e):
         if e.index_var in bd:
             for var in alphabet:
                 if var not in bd:
@@ -2258,7 +2255,7 @@ def change_index(e:Expr, bd:List):
         res = Summation(e.index_var, e.lower, e.upper, change_index(e.body, bd))
         bd.pop()
         return res
-    elif e.is_op():
+    elif expr.is_op(e):
         args = [change_index(arg, bd) for arg in e.args]
         return Op(e.op, *args)
     else:
@@ -2282,19 +2279,20 @@ class SplitSummation(Rule):
         self.cond = cond
 
     def __str__(self):
-        return "split summation"
+        return "split summation on %s" % self.cond
 
     def export(self):
         return {
             "name": self.name,
             "str": str(self),
-            "cond": str(self.cond)
+            "cond": str(self.cond),
+            "latex_str": "split summation on \\(%s\\)" % latex.convert_expr(self.cond)
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
-        if not e.is_summation():
+        if not expr.is_summation(e):
             return e
-        e: expr.Summation
+
         cond = self.cond
         n = Var(e.index_var, type=expr.IntType)
         eq = expr.Eq(Fun('f', n), e.body)
@@ -2321,6 +2319,7 @@ class SplitSummation(Rule):
                             break
                     if flag:
                         res = new_expr.rhs.inst_pat(inst_split_cond)
+                        res = r.eval(res, tmp_ctx)
                         other_vars = res.get_vars(with_bd=True).difference(bd)
                         for var in other_vars:
                             if ctx.parent is not None:
@@ -2406,36 +2405,9 @@ class FunEquation(Rule):
             return ne
         return e
 
-class MatrixRewrite(Rule):
-    '''
-    scalar * {{a,b},{c,d}} ==> {{scalar*a,scalar*b},{scalar*c,scalar*d}}
-    -{{a,b},{c,d}} ==> {{-a, -b}, {-c, -d}}
-    '''
-    def __init__(self):
-        self.name = "MatrixRewrite"
-
-    def __str__(self):
-        return "rewrite on matrix"
-
-    def export(self):
-        return {
-            "name": self.name,
-            "str": str(self)
-        }
-
-    def eval(self, e: Expr, ctx: Context) -> Expr:
-        if e.is_times():
-            a,b = e.args
-            if not a.has_vector():
-                if b.is_matrix():
-                    return Matrix([expr.Vector([a*item for item in rv.data],is_column=False) for rv in b.rows])
-        elif e.is_uminus():
-            if e.args[0].is_matrix():
-                a = e.args[0]
-                return Matrix([expr.Vector([-item for item in rv.data], is_column=False) for rv in a.rows])
-        raise NotImplementedError
 
 class ExpandMatFunc(Rule):
+    """Expand functions on matrices."""
     def __init__(self):
         self.name = "ExpandMatFunc"
 
@@ -2449,36 +2421,25 @@ class ExpandMatFunc(Rule):
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
-        if e.is_var():
-            var_defs = ctx.get_var_definitions()
-            for item in var_defs:
-                if item.rhs != None:
-                    e = e.replace(item.lhs, item.rhs)
+        if expr.is_var(e):
+            if expr.is_matrix_type(e.type):
+                r, c = expr.num_row(e.type), expr.num_col(e.type)
+                if expr.is_const(r) and expr.is_const(c):
+                    # Expand into matrix form
+                    return matrix.unfold_matrix(e, r.val, c.val)
+            # All other cases: leave unchanged
             return e
-        elif e.is_fun():
-            if len(e.args) == 0:
-                return e
-            # find definition of variable from ctx to expand it
-            var_defs = ctx.get_var_definitions()
-            args = e.args
-            # print(a)
-            for a in args:
-                for item in var_defs:
-                    if item.rhs != None:
-                        a = a.replace(item.lhs, item.rhs)
-            e = Fun(e.func_name, *args)
-            if e.func_name == 'hat' and len(e.args) == 1 and expr.is_vector_type(e.args[0].type):
+        elif e.is_power() and expr.is_matrix(e.args[0]) and e.args[1] == Const(2):
+            return matrix.multiply(e.args[0], e.args[0], ctx)
+        elif expr.is_fun(e):
+            if e.func_name == 'hat' and len(e.args) == 1 and expr.is_matrix_type(e.args[0].type):
                 return matrix.hat(e.args[0])
-            elif e.func_name == 'unit_matrix' and len(e.args) == 1 and e.args[0].is_const():
-                return matrix.unit_matrix(expr.eval_expr(e.args[0]))
+            elif e.func_name == 'unit_matrix' and len(e.args) == 1 and expr.is_const(e.args[0]):
+                return matrix.unit_matrix(e.args[0].val)
             elif e.func_name == 'T' and len(e.args) == 1:
-                if e.args[0].is_matrix():
-                    return matrix.transpose(e.args[0])
-                else:
-                    print(e)
-                    raise NotImplementedError
-            elif e.func_name == "zero_matrix" and len(e.args) == 2 and all(arg.is_const() for arg in e.args):
-                return matrix.zero_matrix(expr.eval_expr(e.args[0]), expr.eval_expr(e.args[1]))
-            elif e.func_name == "norm" and len(e.args) == 1 and expr.is_vector_type(e.args[0].type):
-                return matrix.norm(e.args[0], ctx)
+                return matrix.transpose(e.args[0])
+            elif e.func_name == "zero_matrix" and len(e.args) == 2 and all(expr.is_const(arg) for arg in e.args):
+                return matrix.zero_matrix(e.args[0].val, e.args[1].val)
+            elif e.func_name == "norm" and len(e.args) == 1 and expr.is_matrix_type(e.args[0].type):
+                return matrix.norm(e.args[0])
         return e

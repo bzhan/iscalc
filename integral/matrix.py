@@ -6,14 +6,6 @@ from integral.expr import Matrix, Const, Expr
 from integral.poly import normalize
 
 
-def is_vector(e:Expr, ctx:Context)  -> TypeGuard["Matrix"]:
-    flag = isinstance(e, Matrix)
-    if not flag:
-        return flag
-    r, c = get_shape(e, ctx)
-    flag = flag and (r == Const(1) or c == Const(1))
-    return flag
-
 """
 def get_type(e, ctx=None) -> str:
     # print(e)
@@ -24,7 +16,7 @@ def get_type(e, ctx=None) -> str:
         return 'real'
     elif e.is_matrix():
         return 'matrix'
-    elif e.is_var():
+    elif expr.is_var(e):
         return e.ty2
     elif e.is_op():
         if e.is_plus():
@@ -143,7 +135,7 @@ def get_type(e, ctx=None) -> str:
 def get_shape(e: Expr, ctx: Context):
     if e.is_const():
         return (Const(1), Const(1))
-    elif e.is_var():
+    elif expr.is_var(e):
         return e.shape
     elif e.is_fun():
         if e.func_name == 'inv':
@@ -185,14 +177,35 @@ def get_shape(e: Expr, ctx: Context):
         raise NotImplementedError
 """
 
+def has_vector(e: Expr):
+    if expr.is_matrix(e):
+        return True
+    elif isinstance(e, Union[expr.Var, Const, expr.Inf, expr.SkolemFunc, expr.Symbol]):
+        return False
+    elif expr.is_integral(e):
+        return e.upper.has_vector() or e.lower.has_vector() or e.body.has_vector()
+    elif expr.is_indefinite_integral(e):
+        return e.body.has_vector()
+    elif expr.is_op(e) or expr.is_fun(e):
+        return any([arg.has_vector() for arg in e.args])
+    elif expr.is_summation(e):
+        return e.body.has_vector()
+    elif expr.is_limit(e):
+        return e.body.has_vector() or e.lim.has_vector()
+    elif expr.is_deriv(e):
+        return e.body.has_vector()
+    else:
+        print(e)
+        raise NotImplementedError
+
 def transpose(e: Expr):
-    if e.is_matrix():
+    if expr.is_matrix(e):
         r, c = len(e.data), len(e.data[0])
         return Matrix([[e.data[j][i] for j in range(r)] for i in range(c)])
     return e
 
-def norm(e: Expr, ctx: Context):
-    if expr.is_vector_type(e.type):
+def norm(e: Expr) -> Expr:
+    if expr.is_matrix_type(e.type):
         res = None
         for r in e.data:
             for c in r:
@@ -219,7 +232,7 @@ def multiply(a: Matrix, b: Matrix, ctx: Context):
     return Matrix(res)
 
 def add(a: Expr, b: Expr, ctx: Context):
-    assert a.is_matrix() and b.is_matrix()
+    assert expr.is_matrix(a) and expr.is_matrix(b)
     assert expr.num_col(a.type) == expr.num_col(b.type)
     assert expr.num_row(a.type) == expr.num_row(b.type)
     assert len(a.data) == len(b.data)
@@ -230,8 +243,8 @@ def add(a: Expr, b: Expr, ctx: Context):
             res[i][j] = normalize(res[i][j]+a.data[i][j]+b.data[i][j],ctx)
     return Matrix(res)
 
-def minus(a, b, ctx):
-    assert a.is_matrix() and b.is_matrix()
+def minus(a: Expr, b: Expr, ctx: Context):
+    assert expr.is_matrix(a) and expr.is_matrix(b)
     assert expr.num_col(a.type) == expr.num_col(b.type)
     assert expr.num_row(a.type) == expr.num_row(b.type)
     assert len(a.data) == len(b.data)
@@ -252,15 +265,15 @@ def zero_matrix(r: int, c: int):
     return Matrix([[Const(0) for j in range(c)] for i in range(r)])
 
 def hat(e: Expr) -> Expr:
-    if not e.is_matrix() and expr.is_matrix_type(e.type):
+    if not expr.is_matrix(e) and expr.is_matrix_type(e.type):
         raise AssertionError("hat: type mismatch")
 
-    if expr.is_vector_type(e.type) and expr.num_row(e.type) == Const(3):
+    if expr.is_matrix_type(e.type) and expr.num_row(e.type) == Const(3) and expr.num_col(e.type) == Const(1):
         res = [[ Const(0),  -e.data[2][0],  e.data[1][0]],
                [ e.data[2][0],  Const(0),  -e.data[0][0]],
                [-e.data[1][0],  e.data[0][0],  Const(0)]]
         return Matrix(res)
-    elif expr.is_vector_type(e.type) and expr.num_row(e.type) == Const(6):
+    elif expr.is_matrix_type(e.type) and expr.num_row(e.type) == Const(6) and expr.num_col(e.type) == Const(1):
         res = [[ Const(0),  -e.data[5][0],  e.data[4][0], e.data[0][0]],
                [ e.data[5][0],  Const(0),  -e.data[3][0], e.data[1][0]],
                [-e.data[4][0],  e.data[3][0],  Const(0),  e.data[2][0]],
@@ -268,3 +281,6 @@ def hat(e: Expr) -> Expr:
         return Matrix(res)
     else:
         raise AssertionError(f"{e} should be a 3 or 6-dimensional vector")
+
+def unfold_matrix(e: Expr, r: int, c: int) -> Expr:
+    return Matrix([[expr.Fun("nth", e, Const(i), Const(j)) for j in range(c)] for i in range(r)])

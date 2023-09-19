@@ -148,17 +148,17 @@
                 "base_case": {
                     "finished": true,
                     "goal": "unit_matrix(n) = unit_matrix(n)",
-                    "latex_goal": "I_{n \\times n} = I_{n \\times n}",
+                    "latex_goal": "\\mathbf{1}_{n \\times n} = \\mathbf{1}_{n \\times n}",
                     "proof": {
                         "calcs": [
                             {
-                                "latex_start": "I_{n \\times n}",
+                                "latex_start": "\\mathbf{1}_{n \\times n}",
                                 "start": "unit_matrix(n)",
                                 "steps": [],
                                 "type": "Calculation"
                             },
                             {
-                                "latex_start": "I_{n \\times n}",
+                                "latex_start": "\\mathbf{1}_{n \\times n}",
                                 "start": "unit_matrix(n)",
                                 "steps": [],
                                 "type": "Calculation"
@@ -166,7 +166,7 @@
                         ],
                         "finished": true,
                         "goal": "unit_matrix(n) = unit_matrix(n)",
-                        "latex_goal": "I_{n \\times n} = I_{n \\times n}",
+                        "latex_goal": "\\mathbf{1}_{n \\times n} = \\mathbf{1}_{n \\times n}",
                         "type": "CalculationProof"
                     },
                     "type": "Goal"

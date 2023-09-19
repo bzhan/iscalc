@@ -57,7 +57,7 @@ def collect_pairs_power(ps: Dict[expr.Expr, "Polynomial"], ctx: Context):
         if c.is_fraction() and c.get_fraction() >= 0:
             return True
         e = from_poly(c)
-        if e.is_var() and ctx.is_not_negative(e):
+        if expr.is_var(e) and ctx.is_not_negative(e):
             return True
         return False
 
@@ -93,7 +93,7 @@ def reduce_power(n: expr.Expr, e: "Polynomial") -> Tuple[Tuple[expr.Expr, "Polyn
     it is factored to simplify the representation.
 
     """
-    if n.is_const() and isinstance(n.val, int) and e.is_fraction():
+    if expr.is_const(n) and isinstance(n.val, int) and e.is_fraction():
         if n.val >= 0:
             # Compute factors of n. Let n = (n_1 ^ e_1) * ... * (n_k ^ e_k), then
             # n ^ e = (n_1 ^ (e * e_1)) * ... * (n_k ^ (e * e_k)).
@@ -122,7 +122,7 @@ def extract_frac(ps: Tuple[Tuple[expr.Expr, "Polynomial"]]) -> Tuple[Tuple[Tuple
     coeff = 1
 
     for n, e in ps:
-        if n.is_const() and e.is_fraction():
+        if expr.is_const(n) and e.is_fraction():
             bval = n.val
             val = e.get_fraction()
             if val >= 1:
@@ -428,7 +428,7 @@ def constant(c: Union[int, Fraction]) -> Polynomial:
 
 def singleton(s: expr.Expr) -> Polynomial:
     """Polynomial for 1*s^1."""
-    if s.is_const():
+    if expr.is_const(s):
         return constant(s.val)
     else:
         return Polynomial([Monomial(1, [(s, 1)])])
@@ -440,7 +440,7 @@ Conversion from expressions to polynomials.
 
 def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
     """Convert expression to polynomial."""
-    if e.is_var():
+    if expr.is_var(e):
         return singleton(e)
 
     elif e.is_plus():
@@ -493,16 +493,16 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
         else:
             return Polynomial([Monomial(1, [(from_poly(a), b)])])
 
-    elif e.is_fun() and e.func_name == "exp":
+    elif expr.is_fun(e) and e.func_name == "exp":
         a = e.args[0]
-        if a.is_fun() and a.func_name == "log":
+        if expr.is_fun(a) and a.func_name == "log":
             return to_poly(a.args[0], ctx)
         else:
             return Polynomial([Monomial(1, [(expr.E, to_poly(a, ctx))])])
 
-    elif e.is_fun() and e.func_name in ("sin", "cos", "tan", "cot", "csc", "sec"):
+    elif expr.is_fun(e) and e.func_name in ("sin", "cos", "tan", "cot", "csc", "sec"):
         a = e.args[0]
-        if a.is_fun() and a.func_name == "a" + e.func_name:
+        if expr.is_fun(a) and a.func_name == "a" + e.func_name:
             # sin(asin(x)) = x
             return to_poly(a.args[0], ctx)
         else:
@@ -512,23 +512,23 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
             else:
                 return singleton(expr.Fun(e.func_name, tmp))
 
-    elif e.is_fun() and e.func_name in ("asin", "acos", "atan", "acot", "acsc", "asec"):
+    elif expr.is_fun(e) and e.func_name in ("asin", "acos", "atan", "acot", "acsc", "asec"):
         a, = e.args
-        if e.func_name in ("atan", "acot", "acos") and a.is_fun() and a.func_name == e.func_name[1:]:
+        if e.func_name in ("atan", "acot", "acos") and expr.is_fun(a) and a.func_name == e.func_name[1:]:
             # TODO: determine domain range of cos(x)
             # atan(tan(x)) = x
             return to_poly(a.args[0], ctx)
         else:
             return singleton(expr.Fun(e.func_name, normalize(a, ctx)))
 
-    elif e.is_fun() and e.func_name == "sqrt":
+    elif expr.is_fun(e) and e.func_name == "sqrt":
         return to_poly(expr.Op("^", e.args[0], expr.Const(Fraction(1, 2))), ctx)
 
-    elif e.is_fun():
+    elif expr.is_fun(e):
         args_norm = [normalize(arg, ctx) for arg in e.args]
         return singleton(expr.Fun(e.func_name, *args_norm))
 
-    elif e.is_evalat():
+    elif expr.is_evalat(e):
         if e.upper == expr.POS_INF:
             upper = expr.Limit(e.var, expr.POS_INF, e.body)
         elif e.upper == expr.NEG_INF:
@@ -556,7 +556,7 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
                 lower = expr.Limit(e.var, expr.POS_INF, e.body.subst(e.var, a + 1 / x))
         return to_poly(normalize(upper, ctx) - normalize(lower, ctx), ctx)
 
-    elif e.is_integral():
+    elif expr.is_integral(e):
         ctx2 = Context(ctx)
         ctx2.add_condition(expr.Op(">", expr.Var(e.var), e.lower))
         ctx2.add_condition(expr.Op("<", expr.Var(e.var), e.upper))
@@ -569,22 +569,22 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
                 return singleton(-expr.Integral(e.var, h, l, body))
         return singleton(expr.Integral(e.var, normalize(e.lower, ctx), normalize(e.upper, ctx), body))
 
-    elif e.is_limit():
+    elif expr.is_limit(e):
         ctx2 = Context(ctx)
         if e.lim == expr.POS_INF:
             ctx2.add_condition(expr.Op(">", expr.Var(e.var), expr.Const(0)))
         return singleton(expr.Limit(e.var, normalize(e.lim, ctx), normalize(e.body, ctx2)))
 
-    elif e.is_inf():
+    elif expr.is_inf(e):
         if e == expr.POS_INF:
             return singleton(e)
         else:
             return -singleton(expr.POS_INF)
 
-    elif e.is_indefinite_integral():
+    elif expr.is_indefinite_integral(e):
         return singleton(expr.IndefiniteIntegral(e.var, normalize(e.body, ctx), e.skolem_args))
 
-    elif e.is_summation():
+    elif expr.is_summation(e):
         l, u = normalize(e.lower, ctx), normalize(e.upper, ctx)
         if l == u:
             return to_poly(e.body.subst(e.index_var, l), ctx)
@@ -598,21 +598,21 @@ def to_poly(e: expr.Expr, ctx: Context) -> expr.Expr:
     return to_poly_r(e, ctx).reduce(ctx)
 
 def function_eval(e: expr.Expr, ctx: Context) -> expr.Expr:
-    if e.is_fun() and e.func_name == "binom":
-        if e.args[0].is_const() and e.args[1].is_const():
+    if expr.is_fun(e) and e.func_name == "binom":
+        if expr.is_const(e.args[0]) and expr.is_const(e.args[1]):
             return expr.Const(math.comb(e.args[0].val, e.args[1].val))
 
-    if e.is_fun() and e.func_name == 'factorial':
-        if e.args[0].is_const() and abs(round(e.args[0].val) - e.args[0].val) < 1e-15 and round(e.args[0].val) >= 0:
+    if expr.is_fun(e) and e.func_name == 'factorial':
+        if expr.is_const(e.args[0]) and abs(round(e.args[0].val) - e.args[0].val) < 1e-15 and round(e.args[0].val) >= 0:
             return expr.Const(math.factorial(round(e.args[0].val)))
 
-    if e.is_fun() and e.func_name == 'floor':
-        if e.args[0].is_inf():
+    if expr.is_fun(e) and e.func_name == 'floor':
+        if expr.is_inf(e.args[0]):
             return e.args[0]
     return e
 
 def function_table(e: expr.Expr, ctx: Context) -> expr.Expr:
-    if not e.is_fun() or len(e.args) != 1:
+    if not expr.is_fun(e) or len(e.args) != 1:
         return e
 
     func_table = ctx.get_function_tables()
@@ -648,7 +648,7 @@ def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
     * A ^ 1 = A
 
     """
-    if e.is_op():
+    if expr.is_op(e):
         if e.is_power():
             a, b = e.args
             if expr.is_matrix_type(a.type):
@@ -657,6 +657,8 @@ def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
                     return expr.Fun("unit_matrix", expr.num_row(a.type))
                 elif nb == expr.Const(1):
                     return a
+        elif e.is_plus() and expr.is_fun(e.args[1]) and e.args[1].func_name == 'zero_matrix':
+            return e.args[0]
         elif e.is_times():
             # eliminate unit matrix
             a, b = e.args
@@ -681,83 +683,68 @@ def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
                 else:
                     a = factors[i]
                     b = factors[i-1]
-                    if a.is_fun() and a.func_name == 'inv' and a.args[0] == b:
+                    if expr.is_fun(a) and a.func_name == 'inv' and a.args[0] == b:
                         tmp.pop()
                         try:
                             tmp.append(expr.Fun('unit_matrix', expr.num_row(b.type)))
                         except:
                             print(b, b.type)
-                    elif b.is_fun() and b.func_name == 'inv' and b.args[0] == a:
+                    elif expr.is_fun(b) and b.func_name == 'inv' and b.args[0] == a:
                         tmp.pop()
                         tmp.append(expr.Fun('unit_matrix', expr.num_row(a.type)))
                     else:
                         tmp.append(a)
 
             factors = tmp
-            unit_matrix_cnt = 0
-            matrix_cnt = 0
+            has_zero_matrix = False
+            all_mat_factors = []
+            nonunit_mat_factors = []
+            scalar_factors = []
             for factor in factors:
                 if expr.is_matrix_type(factor.type):
-                    matrix_cnt = matrix_cnt + 1
-                    if factor.is_fun() and factor.func_name == 'unit_matrix':
-                        unit_matrix_cnt = unit_matrix_cnt + 1
-            remove_unit_matrix, keep_one_unit_matrix = False, False
-            if matrix_cnt > unit_matrix_cnt:
-                remove_unit_matrix = True
-            if unit_matrix_cnt > 1:
-                keep_one_unit_matrix = True
-
-            res_factors = []
-            if remove_unit_matrix:
-                for factor in factors:
-                    if not (expr.is_matrix_type(factor.type) and factor.is_fun() and \
-                            factor.func_name == 'unit_matrix'):
-                        # res = res * factor
-                        res_factors.append(factor)
-            else:
-                if keep_one_unit_matrix:
-                    first = True
-                    for factor in factors:
-                        if expr.is_matrix_type(factor.type) and factor.is_fun() and \
-                                factor.func_name == 'unit_matrix' and first:
-                            # res = res * factor
-                            first = False
-                            res_factors.append(factor)
-                        if not (expr.is_matrix_type(factor.type) and factor.is_fun() and \
-                                factor.func_name == 'unit_matrix'):
-                            # res = res * factor
-                            res_factors.append(factor)
+                    all_mat_factors.append(factor)
+                    if expr.is_fun(factor) and factor.func_name == 'unit_matrix':
+                        continue
+                    if expr.is_fun(factor) and factor.func_name == 'zero_matrix':
+                        has_zero_matrix = True
+                    nonunit_mat_factors.append(factor)
                 else:
-                    for factor in factors:
-                        # res = res * factor
-                        res_factors.append(factor)
-            res = res_factors[0]
-            for factor in res_factors[1:]:
-                res = expr.Op('*', res, factor)
+                    scalar_factors.append(factor)
 
-            return res
+            if has_zero_matrix:
+                row, col = expr.num_row(all_mat_factors[0].type), expr.num_col(all_mat_factors[-1].type)
+                return expr.Fun("zero_matrix", row, col)
+            else:
+                all_factors = scalar_factors + nonunit_mat_factors
+                if len(nonunit_mat_factors) == 0 and len(all_mat_factors) != 0:
+                    row, col = expr.num_row(all_mat_factors[0].type), expr.num_col(all_mat_factors[-1].type)
+                    all_factors.append(expr.Fun("unit_matrix", row))
+                res = all_factors[0]
+                for factor in all_factors[1:]:
+                    res = expr.Op('*', res, factor)
+                return res
     return e
 
-def simplify_salar_multiply(e: expr.Expr, ctx:Context) -> expr.Expr:
+def simplify_scalar_multiply(e: expr.Expr, ctx:Context) -> expr.Expr:
     if e.is_times():
         a, b = e.args
-        if not expr.is_matrix_type(a.type) and b.is_matrix():
+        if not expr.is_matrix_type(a.type) and expr.is_matrix(b):
             return expr.Matrix([[from_poly(to_poly(a*item, ctx)) for item in r] for r in b.data])
-        elif not expr.is_matrix_type(b.type) and a.is_matrix():
+        elif not expr.is_matrix_type(b.type) and expr.is_matrix(a):
             return expr.Matrix([[from_poly(to_poly(b * item, ctx)) for item in r] for r in a.data])
     elif e.is_uminus():
-        if e.args[0].is_matrix():
+        if expr.is_matrix(e.args[0]):
             return expr.Matrix([[from_poly(to_poly(-item, ctx)) for item in r] for r in e.args[0].data])
     return e
 
-def simplify_matrix_multiply(e:expr.Expr, ctx:Context):
+def simplify_matrix_multiply(e: expr.Expr, ctx: Context):
     if e.is_times():
-        a,b = e.args
-        if a.is_matrix() and b.is_matrix():
-            return matrix.multiply(a,b,ctx)
+        a, b = e.args
+        if expr.is_matrix(a) and expr.is_matrix(b):
+            return matrix.multiply(a, b, ctx)
     return e
 
-def simplify_matrix_add(e:expr.Expr, ctx:Context):
+def simplify_matrix_add(e: expr.Expr, ctx: Context):
     if e.is_plus():
         a, b = e.args
         if expr.is_matrix_type(a.type) and expr.is_matrix_type(b.type):
@@ -773,7 +760,7 @@ def simplify_matrix_add(e:expr.Expr, ctx:Context):
     return e
 
 def simplify_eq(e: expr.Expr, ctx: Context) -> expr.Expr:
-    if not e.is_var():
+    if not expr.is_var(e):
         return e
 
     for eq in ctx.get_conds().data:
@@ -783,7 +770,7 @@ def simplify_eq(e: expr.Expr, ctx: Context) -> expr.Expr:
 
 def simplify_limit(e: expr.Expr, ctx: Context) -> expr.Expr:
     from integral import limits
-    if not e.is_limit():
+    if not expr.is_limit(e):
         return e
     if e.var not in e.body.get_vars():
         return e.body
@@ -796,10 +783,10 @@ def simplify_limit(e: expr.Expr, ctx: Context) -> expr.Expr:
         return limits.reduce_finite_limit(e, ctx)
 
 def simplify_integral(e: expr.Expr, ctx: Context) -> expr.Expr:
-    if not e.is_integral():
+    if not expr.is_integral(e):
         return e
 
-    if e.body.is_deriv() and e.body.var == e.var:
+    if expr.is_deriv(e.body) and e.body.var == e.var:
         return expr.EvalAt(e.var, e.lower, e.upper, e.body.body)
     elif e.lower == e.upper:
         return expr.Const(0)
@@ -809,21 +796,21 @@ def simplify_integral(e: expr.Expr, ctx: Context) -> expr.Expr:
 def simplify_power(e: expr.Expr, ctx: Context) -> expr.Expr:
     if not e.is_power():
         return e
-    if e.args[1].is_plus() and e.args[0].is_const() and e.args[1].args[1].is_const():
+    if e.args[1].is_plus() and expr.is_const(e.args[0]) and expr.is_const(e.args[1].args[1]):
         # c1 ^ (a + c2) => c1 ^ c2 * c1 ^ a
         return (e.args[0] ^ e.args[1].args[1]) * (e.args[0] ^ e.args[1].args[0])
-    elif e.args[1].is_minus() and e.args[0].is_const() and e.args[1].args[1].is_const():
+    elif e.args[1].is_minus() and expr.is_const(e.args[0]) and expr.is_const(e.args[1].args[1]):
         # c1 ^ (a - c2) => c1 ^ -c2 * c1 ^ a
         return (e.args[0] ^ e.args[1].args[0]) * (e.args[0] ^ (-(e.args[1].args[1])))
     elif e.args[0].is_uminus():
-        if e.args[1].is_const():
+        if expr.is_const(e.args[1]):
             # (-a) ^ n = (-1) ^ n * a ^ n
             return (expr.Const(-1) ^ e.args[1]) * (e.args[0].args[0] ^ e.args[1])
         elif normalize(e.args[1] / expr.Const(2), ctx).type == expr.IntType:
             return e.args[0].args[0] ^ e.args[1]
         else:
             return e
-    elif e.args[0].is_minus() and e.args[0].args[0].is_uminus() and e.args[1].is_const():
+    elif e.args[0].is_minus() and e.args[0].args[0].is_uminus() and expr.is_const(e.args[1]):
         # (-a - b) ^ n = (-1) ^ n * (a + b) ^ n
         nega, negb = e.args[0].args
         return (expr.Const(-1) ^ e.args[1]) * ((nega.args[0] + negb) ^ e.args[1])
@@ -831,7 +818,7 @@ def simplify_power(e: expr.Expr, ctx: Context) -> expr.Expr:
         return e
 
 def simplify_trig(e: expr.Expr, ctx: Context) -> expr.Expr:
-    if not (e.is_fun() and e.func_name in ('sin', 'cos', 'tan', 'cot', 'csc', 'sec')):
+    if not (expr.is_fun(e) and e.func_name in ('sin', 'cos', 'tan', 'cot', 'csc', 'sec')):
         return e
 
     a = e.args[0]
@@ -885,14 +872,14 @@ def simplify_trig(e: expr.Expr, ctx: Context) -> expr.Expr:
         return build(coeff)
 
 def simplify_log(e: expr.Expr, ctx: Context) -> expr.Expr:
-    if not (e.is_fun() and e.func_name == 'log'):
+    if not (expr.is_fun(e) and e.func_name == 'log'):
         return e
     
     a = e.args[0]
     if not a.is_constant():
         return e
 
-    if a.is_const() and isinstance(a.val, int):
+    if expr.is_const(a) and isinstance(a.val, int):
         int_factors = sympy.factorint(a.val)
         log_ints = []
         for b, e in int_factors.items():
@@ -901,19 +888,19 @@ def simplify_log(e: expr.Expr, ctx: Context) -> expr.Expr:
             else:
                 log_ints.append(expr.log(expr.Const(b)))
             return sum(log_ints[1:], log_ints[0])
-    elif a.is_const() and isinstance(a.val, Fraction):
+    elif expr.is_const(a) and isinstance(a.val, Fraction):
         return expr.log(expr.Const(a.val.numerator)) - expr.log(expr.Const(a.val.denominator))
     elif a.is_times():
         return expr.log(a.args[0]) + expr.log(a.args[1])
     elif a.is_divides():
         return expr.log(a.args[0]) - expr.log(a.args[1])
-    elif a.is_fun() and a.func_name == 'sqrt':
+    elif expr.is_fun(a) and a.func_name == 'sqrt':
         return expr.log(a.args[0]) / 2
     else:
         return e
 
 def simplify_sqrt(e: expr.Expr, ctx: Context) -> expr.Expr:
-    if not (e.is_fun() and e.func_name == 'sqrt'):
+    if not (expr.is_fun(e) and e.func_name == 'sqrt'):
         return e
 
     if e.args[0] == expr.Const(0):
@@ -941,18 +928,19 @@ def simplify_inf(e: expr.Expr, ctx: Context) -> expr.Expr:
             if expr.eval_expr(e) != 0:
                 return e.args[0]
     return e
+
 def normalize(e: expr.Expr, ctx: Context) -> expr.Expr:
     if e.is_equals():
         return expr.Eq(normalize(e.lhs, ctx), normalize(e.rhs, ctx))
 
-    if e.is_const():
+    if expr.is_const(e):
         return e
 
     for i in range(5):
         old_e = e
         e = from_poly(to_poly(e, ctx))
-        e = simp_matrix(e, ctx)
-        e = apply_subterm(e, simplify_salar_multiply, ctx)
+        e = apply_subterm(e, simp_matrix, ctx)
+        e = apply_subterm(e, simplify_scalar_multiply, ctx)
         e = apply_subterm(e, simplify_matrix_multiply, ctx)
         e = apply_subterm(e, simplify_matrix_add, ctx)
         e = apply_subterm(e, function_table, ctx)
@@ -977,7 +965,7 @@ Conversion from polynomials to terms.
 
 def rsize(e: expr.Expr) -> int:
     """Find size of term without constants."""
-    if e.is_const():
+    if expr.is_const(e):
         return 0
     elif e.is_uminus():
         return rsize(e.args[0])
@@ -989,7 +977,7 @@ def rsize(e: expr.Expr) -> int:
 def display_large(e: expr.Expr) -> bool:
     """Determine whether the expression requires large display."""
     def pred(e: expr.Expr) -> bool:
-        return e.is_integral() or e.is_divides() or (e.is_fun() and e.func_name == "binom")
+        return expr.is_integral(e) or e.is_divides() or (expr.is_fun(e) and e.func_name == "binom")
     return len(e.find_subexpr_pred(pred)) > 0
 
 def from_mono(m: Monomial) -> expr.Expr:
@@ -1084,9 +1072,9 @@ def from_poly(p: Polynomial) -> expr.Expr:
                 res = res - mono.args[0]
             elif mono.is_times() and mono.args[0].is_uminus():
                 res = res - mono.args[0].args[0] * mono.args[1]
-            elif mono.is_times() and mono.args[0].is_const() and mono.args[0].val < 0:
+            elif mono.is_times() and expr.is_const(mono.args[0]) and mono.args[0].val < 0:
                 res = res - expr.Const(-mono.args[0].val) * mono.args[1]
-            elif mono.is_const() and mono.val < 0:
+            elif expr.is_const(mono) and mono.val < 0:
                 res = res - expr.Const(-mono.val)
             else:
                 res = res + mono

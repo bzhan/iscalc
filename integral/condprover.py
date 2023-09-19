@@ -3,6 +3,7 @@
 from copy import copy
 from typing import Dict, List
 
+from integral import expr
 from integral.expr import Expr, eval_expr, match, expr_to_pattern, Op, Const, Var
 from integral.conditions import Conditions
 from integral.context import Context, Identity
@@ -26,7 +27,7 @@ def subject_of(cond: Expr) -> Expr:
     #     return cond.args[0]
     # if cond.is_fun() and cond.func_name == 'isEven':
     #     return cond.args[0]
-    if cond.is_fun():
+    if expr.is_fun(cond):
         return cond.args[0]
     raise TypeError
 
@@ -76,12 +77,12 @@ def init_all_conds(conds: Conditions) -> Dict[Expr, List[Expr]]:
         if x not in all_conds:
             all_conds[x] = list()
         all_conds[x].append(cond)
-        if x.is_fun() and x.func_name == 'abs' and cond.is_less():
+        if expr.is_fun(x) and x.func_name == 'abs' and cond.is_less():
             if x.args[0] not in all_conds:
                 all_conds[x.args[0]] = list()
             all_conds[x.args[0]].append(Op("<", x.args[0], cond.args[1]))
             all_conds[x.args[0]].append(Op(">", x.args[0], -cond.args[1]))
-        if x.is_fun() and x.func_name == 'abs' and cond.is_less_eq():
+        if expr.is_fun(x) and x.func_name == 'abs' and cond.is_less_eq():
             if x.args[0] not in all_conds:
                 all_conds[x.args[0]] = list()
             all_conds[x.args[0]].append(Op("<=", x.args[0], cond.args[1]))
@@ -146,10 +147,10 @@ def check_cond(cond: Expr, all_conds: Dict[Expr, List[Expr]], inst: Dict[str, Ex
         elif cond.is_less_eq() and cond.args[1].is_constant():
             if approx_less_eq(x, cond.args[1]):
                 return [inst]
-        elif cond.is_fun() and cond.func_name == 'isInt':
+        elif expr.is_fun(cond) and cond.func_name == 'isInt':
             if approx_integer(x):
                 return [inst]
-        elif cond.is_fun() and cond.func_name == 'isEven':
+        elif expr.is_fun(cond) and cond.func_name == 'isEven':
             if approx_even(x):
                 return [inst]
 
@@ -205,7 +206,7 @@ def check_cond(cond: Expr, all_conds: Dict[Expr, List[Expr]], inst: Dict[str, Ex
                     return [inst]
         
     # If the other side of cond is a pattern
-    if cond.is_compare() and x in all_conds and cond.args[1].is_symbol():
+    if cond.is_compare() and x in all_conds and expr.is_symbol(cond.args[1]):
         symb = cond.args[1].name
         res = []
         for fact in all_conds[x]:
@@ -466,12 +467,12 @@ def check_condition(e: Expr, ctx: Context) -> bool:
     """Check whether e holds under the given context."""
 
     # Some special checks
-    if e.is_greater_eq() and e.args[0].is_integral() and e.args[1] == Const(0):
+    if e.is_greater_eq() and expr.is_integral(e.args[0]) and e.args[1] == Const(0):
         ctx2 = Context(ctx)
         ctx2.add_condition(Op(">", Var(e.args[0].var), e.args[0].lower))
         ctx2.add_condition(Op("<", Var(e.args[0].var), e.args[0].upper))
         return check_condition(Op(">=", e.args[0].body, Const(0)), ctx2)
-    if e.is_less() and e.args[0].is_fun() and e.args[0].func_name == 'abs':
+    if e.is_less() and expr.is_fun(e.args[0]) and e.args[0].func_name == 'abs':
         arg = e.args[0].args[0]
         e1 = Op("<", arg, e.args[1])
         e2 = Op(">", arg, -e.args[1])
@@ -484,7 +485,7 @@ def check_condition(e: Expr, ctx: Context) -> bool:
             if check_condition(new_e, ctx):
                 return True
     # a <= inf or a < inf
-    if (e.is_less() or e.is_less_eq()) and e.args[1].is_pos_inf():
+    if (e.is_less() or e.is_less_eq()) and expr.is_pos_inf(e.args[1]):
         return True
 
     conds = ctx.get_conds()

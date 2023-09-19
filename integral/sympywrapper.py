@@ -3,18 +3,19 @@ import math
 import sympy
 from fractions import Fraction
 
+from integral import expr
 from integral.expr import Expr, Var, Const
 from integral.poly import normalize
 from integral.context import Context
 
 def is_rational(e: Expr) -> bool:
     """Detect rational functions in x."""
-    if e.is_var() or e.is_const():
+    if expr.is_var(e) or expr.is_const(e):
         return True
-    elif e.is_op() and e.op in ('+', '-', '*', '/'):
+    elif expr.is_op(e) and e.op in ('+', '-', '*', '/'):
         return all(is_rational(arg) for arg in e.args)
-    elif e.is_op() and e.op == '^':
-        return is_rational(e.args[0]) and e.args[1].is_const() and isinstance(e.args[1].val, int)
+    elif expr.is_op(e) and e.op == '^':
+        return is_rational(e.args[0]) and expr.is_const(e.args[1]) and isinstance(e.args[1].val, int)
     else:
         return False
 
@@ -25,9 +26,9 @@ def convert_to_sympy(e: Expr):
     
     """
     def rec(e: Expr):
-        if e.is_var():
+        if expr.is_var(e):
             return sympy.symbols(e.name)
-        elif e.is_const():
+        elif expr.is_const(e):
             return e.val
         elif e.is_plus():
             return rec(e.args[0]) + rec(e.args[1])

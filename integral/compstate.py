@@ -453,7 +453,7 @@ class CalculationProof(StateItem):
             self.predicate = goal.op
             self.calcs.append(Calculation(self, self.ctx, self.goal.args[0]))
             self.calcs.append(Calculation(self, self.ctx, self.goal.args[1]))
-        elif goal.is_fun() and goal.func_name == "converges":
+        elif expr.is_fun(goal) and goal.func_name == "converges":
             self.predicate = goal.func_name
             self.calcs.append(Calculation(self, self.ctx, self.goal.args[0]))
         else:
@@ -481,7 +481,7 @@ class CalculationProof(StateItem):
 
     @property
     def arg_calc(self) -> Calculation:
-        assert self.goal.is_fun()
+        assert expr.is_fun(self.goal)
         return self.calcs[0]
 
     def is_finished(self):
@@ -768,8 +768,6 @@ class CompFile:
             elif isinstance(item, Goal):
                 ctx.add_lemma(item.goal, item.conds)
                 ctx.extend_by_item(item.export_book())
-            elif isinstance(item, VarDef):
-                ctx.add_var_definition(item.var, item.content)
         return ctx
 
     def add_definition(self, funcdef: Union[str, Expr], *,fixes=None, conds: List[Union[str, Expr]] = None) -> FuncDef:
@@ -825,6 +823,7 @@ class CompFile:
         """Add a goal.
 
         goal: statement of the goal.
+        fixes: list of fixed variables
         conds: list of conditions for the goal. This is ignored if input goal
                is already of type Goal.
 
@@ -976,8 +975,6 @@ def parse_rule(item, parent) -> Rule:
         return rules.FunEquation(func_name)
     elif item['name'] == 'PartialFractionDecomposition':
         return rules.PartialFractionDecomposition()
-    elif item['name'] == 'MatrixRewrite':
-        return rules.MatrixRewrite()
     elif item['name'] == "ExpandMatFunc":
         return rules.ExpandMatFunc()
     elif item['name'] == 'SplitSummation':
@@ -1088,25 +1085,6 @@ def parse_item(parent, item) -> StateItem:
         res = RewriteGoalProof(parent, goal=goal, begin=Goal(parent, parent.ctx, begin_goal, conds=begin_conds, fixes=fixes))
         for i, step in enumerate(item['start']['steps']):
             res.begin.add_step(parse_step(res.begin, step, i))
-        return res
-    elif item['type'] == 'VarDef':
-        ctx = parent.get_context() if isinstance(parent, CompFile) else parent.ctx
-        fixes = dict()
-        if 'fixes' in item:
-            raw_fixes = item['fixes']
-            fixes = dict()
-            for s, t in raw_fixes:
-                fixes[s] = parser.parse_expr(t, fixes=fixes)
-        all_fixes = ctx.get_fixes()
-        for s, t in fixes.items():
-            all_fixes[s] = t
-        var = parser.parse_expr(item['var'], fixes = all_fixes)
-        if 'content' in item:
-            content = parser.parse_expr(item['content'], fixes = all_fixes)
-        else:
-            content = None
-        ctx = parent.get_context() if isinstance(parent, CompFile) else parent.ctx
-        res = VarDef(parent, ctx, var, content,fixes=fixes)
         return res
     else:
         print(item['type'])

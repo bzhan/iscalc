@@ -708,14 +708,13 @@ class HeuristicIntegrationByParts(HeuristicRule):
                 if e.op in ("+", "-"):
                     return all(well_formed_eval_at(arg) for arg in e.args)
                 elif e.op == "*":
-                    return well_formed_eval_at(e.args[1]) and \
-                        e.args[0].is_const()
+                    return well_formed_eval_at(e.args[1]) and is_const(e.args[0])
                 else:
                     return False
             else:
                 return False
         def separate_evalat(e : Expr) -> list[tuple["Expr", Location]]:
-            return e.find_subexpr_pred(lambda e: e.is_evalat())
+            return e.find_subexpr_pred(lambda e: is_evalat(e))
         def find_anti_deriv(e : Expr) -> Optional[Expr]:
             """e is an expression ∫hdx after applying rule DefiniteIntegral,
             find h's antiderivative.
@@ -1055,7 +1054,7 @@ class OrNode(GoalNode):
                 algo_steps.append(calc.SimplifyStep(norm_integral, self.loc))
                 cur_integral = norm_integral
 
-        if cur_integral.is_integral():
+        if is_integral(cur_integral):
             # Single integral case
             for rule in heuristic_rules:
                 res = rule().eval(cur_integral)
@@ -1066,7 +1065,7 @@ class OrNode(GoalNode):
                         norm_r = rules.FullSimplify().eval(r, ctx=ctx)
                         if norm_r != r:
                             steps.append(calc.SimplifyStep(norm_r, self.loc))
-                        if norm_r.is_integral() and norm_r not in not_solved_integral:
+                        if is_integral(norm_r) and norm_r not in not_solved_integral:
                             self.children.append(OrNode(norm_r, loc=self.loc, parent=self, steps=algo_steps+steps))
                         elif norm_r not in not_solved_integral:
                             self.children.append(AndNode(norm_r, loc=self.loc, parent=self, steps=algo_steps+steps))

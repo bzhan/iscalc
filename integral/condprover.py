@@ -232,6 +232,19 @@ def check_cond(cond: Expr, all_conds: Dict[Expr, List[Expr]], inst: Dict[str, Ex
                     res.append(update_inst(symb, fact.args[1], inst))
         return res
 
+    if expr.is_fun(cond) and cond.func_name == 'type':
+        n = len(cond.args)
+        assert n in [3, 4]
+        v = cond.args[0]
+        type_mapping = {Const(0): expr.RealType}
+        ele_type = type_mapping[cond.args[1]]
+        if n == 4:
+            r, c = cond.args[2:]
+            if v.type == expr.MatrixType(ele_type, r, c):
+                return [inst]
+        else:
+            raise NotImplementedError
+
     # Not found
     return list()
 

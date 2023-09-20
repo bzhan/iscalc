@@ -561,7 +561,7 @@ def apply_subterm(e: Expr, f: Callable[[Expr, Context], Expr], ctx: Context) -> 
             body = rec(e.body, body_conds(e, ctx))
             return f(expr.Summation(e.index_var, lower, upper, body), ctx)
         elif expr.is_matrix(e):
-            return Matrix([[rec(item, ctx) for item in row] for row in e.data], e.type)
+            return f(Matrix([[rec(item, ctx) for item in row] for row in e.data], e.type), ctx)
         elif expr.is_symbol(e):
             return e
         else:

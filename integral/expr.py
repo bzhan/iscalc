@@ -39,7 +39,7 @@ class Type:
         
     def __hash__(self):
         return hash(("Type", self.name, self.args))
-        
+
 
 def FunType(*args) -> Type:
     """Type of functions. The first n-1 arguments are the input types
@@ -93,7 +93,11 @@ SKOLEMFUNC, SUMMATION, LAZYSERIES, VECTOR, MATRIX = range(16)
 op_priority = {
     "+": 65, "-": 65, "*": 70, "/": 70, "%": 70, "^": 75, "=": 50, "<": 50, ">": 50, "<=": 50, ">=": 50, "!=": 50
 }
-
+# matrix addition, multiplication, concatenation
+type_mapping = {(RealType, RealType):RealType,
+                    (RealType, IntType):RealType,
+                    (IntType, RealType):RealType,
+                    (IntType, IntType):IntType}
 
 class Location:
     """Location within an expression."""
@@ -820,7 +824,7 @@ class Expr:
                              self.body.inst_pat(mapping))
         elif is_limit(self):
             return Limit(self.var, self.lim.inst_pat(mapping), self.body.inst_pat(mapping), self.drt)
-        elif self.is_matrix():
+        elif is_matrix(self):
             return Matrix([[item.inst_pat(mapping) for item in rv] for rv in self.data])
         else:
             print(type(self))
@@ -980,11 +984,13 @@ def match(exp: Expr, pattern: Expr) -> Optional[Dict]:
             res2 = rec(exp.body, pattern.body, bd_vars)
             return res1 and res2
         elif is_matrix(exp):
-            if exp.shape != pattern.shape:
+            if len(exp.data) == len(pattern.data) and \
+                    all(len(exp.data[i]) == len(pattern.data[i]) for i in range(len(exp.data))):
+                return all([all([rec(item, pattern.data[i][j], bd_vars)\
+                            for (j, item) in enumerate(rv)])\
+                            for (i, rv) in enumerate(exp.data)])
+            else:
                 return False
-            return all([all([rec(item, pattern.rows[i].data[j], bd_vars)\
-                        for (j,item) in enumerate(exp.rows[i].data)])\
-                        for (i, rv) in enumerate(exp.rows)])
         else:
             # Currently not implemented
             print("Match Failed for type:", type(exp))
@@ -1140,8 +1146,9 @@ class Op(Expr):
                 elif args[0].type == IntType and args[1].type == IntType:
                     self.type = IntType
                 elif is_matrix_type(args[0].type) and is_matrix_type(args[1].type):
-                    assert num_row(args[0].type) == num_row(args[1].type) and \
-                           num_col(args[0].type) == num_col(args[1].type)
+                    if not (num_row(args[0].type) == num_row(args[1].type) and \
+                           num_col(args[0].type) == num_col(args[1].type)):
+                        raise AssertionError
                     t = RealType
                     if args[0].type.args[0] == RealType and args[1].type.args[0] in [RealType, IntType]:
                         t = RealType
@@ -1160,7 +1167,9 @@ class Op(Expr):
                     t1, t2 = args[0].type.args[0], args[1].type.args[0]
                     if t1 == t2:
                         t = t1
-                    elif t1 == RealType and t2 == IntType or  t2 == RealType and t1 == IntType:
+                    elif t1 == RealType and t2 == IntType or  \
+                            t2 == RealType and t1 == IntType or \
+                            t1 == RealType and t2 == RealType:
                         t = RealType
                     else:
                         raise NotImplementedError(t1,t2)
@@ -1220,7 +1229,7 @@ class Fun(Expr):
         self.ty = FUN
         self.func_name = func_name
         self.args: Tuple[Expr] = tuple(args)
-
+        self.type = RealType
         # TODO: add more type inference
         if self.func_name == 'unit_matrix':
             self.type = MatrixType(RealType, self.args[0], self.args[0])
@@ -1246,9 +1255,35 @@ class Fun(Expr):
             else:
                 self.type = Type('unknown')
                 # raise NotImplementedError("hat(%s), args[0].type = %s"%(str(self.args[0]), self.args[0].type))
-        else:
-            self.type = RealType
-
+        elif self.func_name == 'ccon':
+            assert len(self.args) == 2
+            a, b = self.args
+            # assert is_matrix_type(a.type) and is_matrix_type(b.type)
+            f1 = is_matrix_type(a.type) and is_matrix_type(b.type)
+            # assert num_row(a.type) == num_row(b.type)
+            f2 = True if f1 and num_row(a.type) == num_row(b.type) else False
+            if f1 and f2:
+                self.type = MatrixType(type_mapping[(a.type.args[0], b.type.args[0])],
+                                       num_row(a.type),
+                                       num_col(b.type) + num_col(a.type))
+        elif self.func_name == 'rcon':
+            assert len(self.args) == 2
+            a, b = self.args
+            # assert is_matrix_type(a.type) and is_matrix_type(b.type)
+            f1 = is_matrix_type(a.type) and is_matrix_type(b.type)
+            # assert num_col(a.type) == num_col(b.type)
+            f2 = True if f1 and num_col(a.type) == num_col(b.type) else False
+            if f1 and f2:
+                self.type = MatrixType(type_mapping[(a.type.args[0], b.type.args[0])],
+                                       num_row(b.type) + num_row(a.type),
+                                       num_col(a.type))
+        elif self.func_name == 'exp':
+            t = self.args[0].type
+            if is_matrix_type(t):
+                if num_row(t) == Const(3) and num_col(t) == Const(1):
+                    self.type = MatrixType(t.args[0], Const(3), Const(3))
+                else:
+                    raise NotImplementedError
     def __hash__(self):
         return hash((FUN, self.func_name, self.args))
 

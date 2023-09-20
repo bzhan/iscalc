@@ -21,65 +21,6 @@ from integral.poly import from_poly, to_poly, normalize
 from integral.conditions import Conditions
 from integral import sympywrapper
 
-
-def is_skew(m:Matrix, ctx:Context):
-    if not isinstance(m, Matrix):
-        return False
-    # a.transpose == -a
-    return normalize(m, ctx) == normalize(Matrix.scalar_mul(Const(-1), m.transpose()), ctx)
-
-def matrix_exp(m:Matrix, t:Expr, ctx:Context):
-    # t is a scalar
-    # determine whether self is an instance of se(3) or skew-matrices
-    # assert m.is_se3() or m.is_skew()
-    dim = m.shape[0]
-    m = normalize(m, ctx)
-    if m.is_se3():
-        twist = m.vee
-        v = twist.get_line_velocity()
-        w = twist.get_angle_velocity()
-        part2 = Matrix([Const(0), Const(0), Const(0), Const(1)], is_column=False)
-        if w != Matrix.zero(3, is_column=True):
-            # formula 2.36 at page 42
-            left_top = matrix_exp(w.hat, t, ctx)
-            right_top = (Matrix.unit_matrix(3) - left_top) * (w.hat * v) + \
-                         Matrix.scalar_mul(t, w * w.t * v)
-            part1 = left_top.concatenate(right_top)
-        else:
-            # formula 2.32 at page 41
-            part1 = Matrix.unit_matrix(3).concatenate(Matrix.scalar_mul(t, v))
-        return normalize(part1.concatenate(part2, col_concatenate=False), ctx)
-    elif is_skew(m, ctx):
-        # Rodrigues Formula
-        # Derivation: https://zhuanlan.zhihu.com/p/369659467
-        # exp(self * t) = I + sin(t) * self + (1-cos(t)) * self * self
-        res = Matrix.unit_matrix(dim) + Matrix.scalar_mul(Fun('sin', t), m) + \
-               Matrix.scalar_mul((Const(1) - Fun('cos', t)), m * m)
-        return normalize(res, ctx)
-    else:
-        raise NotImplementedError
-
-def compute_jacobian(t:List[Matrix], gsl:List[Matrix], theta:List[Expr], n:int, ctx:Context) -> Matrix:
-    r = FullSimplify()
-    jsl = [0 for i in range(n)]
-    for i in range(n):
-        jsl[i] = []
-        tmp = None
-        for j in range(n):
-            if j > i:
-                tmp = Matrix.zero(6)
-            else:  # j<=i
-                tmp = Matrix.unit_matrix(4)
-                for k in range(j, i + 1):
-                    tmp = tmp * matrix_exp(t[k].hat, theta[k], ctx)
-                tmp = tmp * gsl[i]
-                tmp = tmp.adjoint(inverse=True)
-                tmp = tmp * t[j]
-            jsl[i].append(tmp.data)
-        jsl[i] = normalize(Matrix((n, 6), jsl[i]).t,ctx)
-    return jsl
-
-
 def deriv(var: str, e: Expr, ctx: Context) -> Expr:
     """Compute the derivative of e with respect to variable
     name var.
@@ -1941,12 +1882,11 @@ class ExpandDefinition(Rule):
                     flag = True
                     for cond in tmp_conds:
                         flag = flag and ctx.check_condition(cond)
-                    if not flag:
-                        return e
-                    if self.simp:
-                        return normalize(identity.rhs.inst_pat(inst), ctx)
-                    else:
-                        return identity.rhs.inst_pat(inst)
+                    if flag:
+                        if self.simp:
+                            return normalize(identity.rhs.inst_pat(inst), ctx)
+                        else:
+                            return identity.rhs.inst_pat(inst)
         if expr.is_var(e) and e.name == self.func_name:
             for identity in ctx.get_definitions():
                 if identity.lhs.is_symbol() and identity.lhs.name == self.func_name:

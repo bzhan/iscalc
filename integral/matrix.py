@@ -232,7 +232,7 @@ def multiply(a: Matrix, b: Matrix, ctx: Context):
     return Matrix(res)
 
 def add(a: Expr, b: Expr, ctx: Context):
-    assert expr.is_matrix(a) and expr.is_matrix(b)
+    assert expr.is_matrix(a) and expr.is_matrix(b), str(a) + ", " + str(b)
     assert expr.num_col(a.type) == expr.num_col(b.type)
     assert expr.num_row(a.type) == expr.num_row(b.type)
     assert len(a.data) == len(b.data)
@@ -283,4 +283,62 @@ def hat(e: Expr) -> Expr:
         raise AssertionError(f"{e} should be a 3 or 6-dimensional vector")
 
 def unfold_matrix(e: Expr, r: int, c: int) -> Expr:
-    return Matrix([[expr.Fun("nth", e, Const(i), Const(j)) for j in range(c)] for i in range(r)])
+    return Matrix([[expr.Fun("nth", e, Const(i), Const(j)) for j in range(c)] for i in range(r)], e.type)
+
+
+# def is_skew(m:Matrix, ctx:Context):
+#     if not isinstance(m, Matrix):
+#         return False
+#     # a.transpose == -a
+#     return normalize(m, ctx) == normalize(Matrix.scalar_mul(Const(-1), m.transpose()), ctx)
+#
+# def matrix_exp(m:Matrix, t:Expr, ctx:Context):
+#     # t is a scalar
+#     # determine whether self is an instance of se(3) or skew-matrices
+#     # assert m.is_se3() or m.is_skew()
+#     dim = m.shape[0]
+#     m = normalize(m, ctx)
+#     if m.is_se3():
+#         twist = m.vee
+#         v = twist.get_line_velocity()
+#         w = twist.get_angle_velocity()
+#         part2 = Matrix([Const(0), Const(0), Const(0), Const(1)], is_column=False)
+#         if w != Matrix.zero(3, is_column=True):
+#             # formula 2.36 at page 42
+#             left_top = matrix_exp(w.hat, t, ctx)
+#             right_top = (Matrix.unit_matrix(3) - left_top) * (w.hat * v) + \
+#                          Matrix.scalar_mul(t, w * w.t * v)
+#             part1 = left_top.concatenate(right_top)
+#         else:
+#             # formula 2.32 at page 41
+#             part1 = Matrix.unit_matrix(3).concatenate(Matrix.scalar_mul(t, v))
+#         return normalize(part1.concatenate(part2, col_concatenate=False), ctx)
+#     elif is_skew(m, ctx):
+#         # Rodrigues Formula
+#         # Derivation: https://zhuanlan.zhihu.com/p/369659467
+#         # exp(self * t) = I + sin(t) * self + (1-cos(t)) * self * self
+#         res = Matrix.unit_matrix(dim) + Matrix.scalar_mul(Fun('sin', t), m) + \
+#                Matrix.scalar_mul((Const(1) - Fun('cos', t)), m * m)
+#         return normalize(res, ctx)
+#     else:
+#         raise NotImplementedError
+#
+# def compute_jacobian(t:List[Matrix], gsl:List[Matrix], theta:List[Expr], n:int, ctx:Context) -> Matrix:
+#     r = FullSimplify()
+#     jsl = [0 for i in range(n)]
+#     for i in range(n):
+#         jsl[i] = []
+#         tmp = None
+#         for j in range(n):
+#             if j > i:
+#                 tmp = Matrix.zero(6)
+#             else:  # j<=i
+#                 tmp = Matrix.unit_matrix(4)
+#                 for k in range(j, i + 1):
+#                     tmp = tmp * matrix_exp(t[k].hat, theta[k], ctx)
+#                 tmp = tmp * gsl[i]
+#                 tmp = tmp.adjoint(inverse=True)
+#                 tmp = tmp * t[j]
+#             jsl[i].append(tmp.data)
+#         jsl[i] = normalize(Matrix((n, 6), jsl[i]).t,ctx)
+#     return jsl

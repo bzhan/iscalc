@@ -10,6 +10,10 @@ import math
 from integral import expr, matrix, context
 from integral.context import Context, apply_subterm
 
+type_mapping = {(expr.RealType, expr.RealType):expr.RealType,
+                    (expr.RealType, expr.IntType):expr.RealType,
+                    (expr.IntType, expr.RealType):expr.RealType,
+                    (expr.IntType, expr.IntType):expr.IntType}
 
 def collect_pairs(ps):
     """
@@ -609,6 +613,48 @@ def function_eval(e: expr.Expr, ctx: Context) -> expr.Expr:
     if expr.is_fun(e) and e.func_name == 'floor':
         if expr.is_inf(e.args[0]):
             return e.args[0]
+    if expr.is_fun(e) and e.func_name == 'ccon':
+        assert len(e.args) == 2, "wrong number of ccon arguments"
+        a, b = (function_eval(arg, ctx) for arg in e.args)
+        if expr.is_matrix_type(a.type) and expr.is_matrix_type(b.type):
+            assert expr.num_row(a.type) == expr.num_row(b.type), \
+                "two matrices can not be concatenated by column as they have a different row number"
+            res_type = expr.MatrixType(type_mapping[(a.type.args[0], b.type.args[0])],
+                                       expr.num_row(a.type),
+                                       normalize(expr.num_col(a.type) + expr.num_col(b.type), ctx))
+            if not expr.is_matrix(a) and not expr.is_matrix(b):
+                res_data = [[a, b]]
+                res = expr.Matrix(res_data, res_type)
+                return res
+            elif expr.is_matrix(a) and expr.is_matrix(b):
+                res_data = a.data
+                for i, row in enumerate(b.data):
+                    for item in row:
+                        res_data[i].append(item)
+                res = expr.Matrix(res_data, res_type)
+                return res
+
+
+    if expr.is_fun(e) and e.func_name == 'rcon':
+        assert len(e.args) == 2, "wrong number of rcon arguments"
+        a, b = (function_eval(arg, ctx) for arg in e.args)
+        if expr.is_matrix_type(a.type) and expr.is_matrix_type(b.type):
+            assert expr.num_col(a.type) == expr.num_col(b.type), \
+                f"two matrices can not be concatenated by row as they have a different column number:\n" \
+                f"%s[%s], %s[%s]" %\
+                (str(a),str(a.type),str(b),str(b.type))
+            res_type = expr.MatrixType(type_mapping[(a.type.args[0], b.type.args[0])],
+                                       normalize(expr.num_row(a.type) + expr.num_row(b.type), ctx),
+                                       expr.num_col(a.type))
+            if not expr.is_matrix(a) and not expr.is_matrix(b):
+                res_data = [[a], [b]]
+                res = expr.Matrix(res_data, res_type)
+                return res
+            elif expr.is_matrix(a) and expr.is_matrix(b):
+                res_data = list(a.data)+ list(b.data)
+                res = expr.Matrix(res_data, res_type)
+                return res
+
     return e
 
 def function_table(e: expr.Expr, ctx: Context) -> expr.Expr:
@@ -729,12 +775,18 @@ def simplify_scalar_multiply(e: expr.Expr, ctx:Context) -> expr.Expr:
     if e.is_times():
         a, b = e.args
         if not expr.is_matrix_type(a.type) and expr.is_matrix(b):
-            return expr.Matrix([[from_poly(to_poly(a*item, ctx)) for item in r] for r in b.data])
+            res_type = expr.MatrixType(type_mapping[(b.type.args[0], a.type)],
+                                       expr.num_row(b.type),
+                                       expr.num_col(b.type))
+            return expr.Matrix([[from_poly(to_poly(a*item, ctx)) for item in r] for r in b.data], res_type)
         elif not expr.is_matrix_type(b.type) and expr.is_matrix(a):
-            return expr.Matrix([[from_poly(to_poly(b * item, ctx)) for item in r] for r in a.data])
+            res_type = expr.MatrixType(type_mapping[(a.type.args[0], b.type)],
+                                       expr.num_row(a.type),
+                                       expr.num_col(a.type))
+            return expr.Matrix([[from_poly(to_poly(b * item, ctx)) for item in r] for r in a.data], res_type)
     elif e.is_uminus():
         if expr.is_matrix(e.args[0]):
-            return expr.Matrix([[from_poly(to_poly(-item, ctx)) for item in r] for r in e.args[0].data])
+            return expr.Matrix([[from_poly(to_poly(-item, ctx)) for item in r] for r in e.args[0].data], e.args[0].type)
     return e
 
 def simplify_matrix_multiply(e: expr.Expr, ctx: Context):
@@ -747,13 +799,17 @@ def simplify_matrix_multiply(e: expr.Expr, ctx: Context):
 def simplify_matrix_add(e: expr.Expr, ctx: Context):
     if e.is_plus():
         a, b = e.args
-        if expr.is_matrix_type(a.type) and expr.is_matrix_type(b.type):
+        if expr.is_matrix(a) and expr.is_matrix(b):
+            if not expr.is_matrix_type(a.type):
+                raise AssertionError
+            if not expr.is_matrix_type(b.type):
+                raise AssertionError
             assert expr.num_col(a.type) == expr.num_col(b.type) and \
                 expr.num_row(a.type) == expr.num_row(b.type)
             return matrix.add(a, b, ctx)
     elif e.is_minus():
         a, b = e.args
-        if expr.is_matrix_type(a.type) and expr.is_matrix_type(b.type):
+        if expr.is_matrix(a) and expr.is_matrix(b):
             assert expr.num_col(a.type) == expr.num_col(b.type) and \
                    expr.num_row(a.type) == expr.num_row(b.type)
             return matrix.minus(a, b, ctx)
@@ -935,7 +991,6 @@ def normalize(e: expr.Expr, ctx: Context) -> expr.Expr:
 
     if expr.is_const(e):
         return e
-
     for i in range(5):
         old_e = e
         e = from_poly(to_poly(e, ctx))

@@ -224,12 +224,26 @@ def multiply(a: Matrix, b: Matrix, ctx: Context):
     for i in range(len(a.data)):
         tmp = []
         for j in range(len(b.data[0])):
-            sum = Const(0)
             for k in range(len(a.data[0])):
-                sum = normalize(sum+a.data[i][k] * b.data[k][j], ctx)
+                if k == 0:
+                    sum = normalize(expr.Op('*', a.data[i][k], b.data[k][j]), ctx)
+                else:
+                    sum = normalize(expr.Op('+', sum, a.data[i][k] * b.data[k][j]), ctx)
             tmp.append(sum)
         res.append(tmp)
-    return Matrix(res)
+    if all(all(not expr.is_matrix_type(ele.type) for ele in rv) for rv in res):
+        return Matrix(res)
+    elif all(all(expr.is_matrix_type(ele.type) for ele in rv) for rv in res):
+        for idx, item in enumerate(res[0]):
+            col = normalize(expr.num_col(res[0][idx].type), ctx) if idx==0 \
+                else normalize(col + expr.num_col(res[0][idx].type), ctx)
+        for idx, item in enumerate(res):
+            row = normalize(expr.num_row(res[idx][0].type), ctx) if idx==0 \
+                else normalize(row + expr.num_row(res[idx][0].type), ctx)
+        type = expr.MatrixType(expr.RealType, row, col)
+        return Matrix(res, type)
+    else:
+        raise NotImplementedError
 
 def add(a: Expr, b: Expr, ctx: Context):
     assert expr.is_matrix(a) and expr.is_matrix(b), str(a) + ", " + str(b)
@@ -260,7 +274,7 @@ def unit_matrix(dim: int) -> Matrix:
     return Matrix([[Const(1) if i == j else Const(0) for j in range(dim)] for i in range(dim)])
 
 def zero_matrix(r: int, c: int):
-    assert type(r) == int and type(c) == int
+    assert type(r) == int and type(c) == int, str(r)+","+str(c)
     assert r > 0 and c > 0
     return Matrix([[Const(0) for j in range(c)] for i in range(r)])
 

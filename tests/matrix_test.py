@@ -280,11 +280,14 @@ class MatrixTest(unittest.TestCase):
         fixes = dict()
         fixes['w'] = parser.parse_expr('$tensor($real, 3, 1)')
         fixes['v'] = parser.parse_expr('$tensor($real, 3, 1)')
-        file.add_definition("hm(R, p) = rcon(ccon(R,p), ccon(zero_matrix(1,3),unit_matrix(1)))",
+        fixes2 = dict()
+        fixes['R'] = parser.parse_expr('$tensor($real, 3, 1)')
+        fixes['p'] = parser.parse_expr('$tensor($real, 3, 1)')
+        file.add_definition("hm(R, p) = rcon(ccon(R,p), ccon(zero_matrix(1,3),unit_matrix(1)))", fixes=fixes2,
                             conds=['type(R, 0, 3, 3)', 'type(p, 0 ,3, 1)'])
-        file.add_definition("hmf(t, w, v) = hm(unit_matrix(3), t*v)",
+        file.add_definition("hmf(t, w, v) = hm(unit_matrix(3), t*v)", fixes=fixes,
                             conds=['type(w, 0 ,3)', 'type(v, 0 ,3)', 'norm(w)=0'])
-        file.add_definition("hmf(t, w, v) = hm(exp(t*w), (unit_matrix(3)-exp(t*w))*(hat(w)*v)+(w*T(w)*v*t))",
+        file.add_definition("hmf(t, w, v) = hm(exp(t*w), (unit_matrix(3)-exp(t*w))*(hat(w)*v)+(w*T(w)*v*t))", fixes=fixes,
                             conds=['type(w, 0, 3)', 'type(v, 0, 3)', 'norm(w)!=0'])
         goal01 = file.add_goal("hmf(t, w, v) * hmf(-t, w, v) = unit_matrix(4)", fixes=fixes,
                                conds=['type(w, 0, 3)', 'type(v, 0, 3)'])
@@ -294,22 +297,27 @@ class MatrixTest(unittest.TestCase):
         calc = case1.lhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '0'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '1'))
+        calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '0'))
+        calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '1'))
+        calc.perform_rule(rules.FullSimplify())
+        print(case1)
         case2 = proof.cases[1].proof_by_calculation()
         calc = case2.lhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '0'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '1'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '0'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '1'))
+        calc.perform_rule(rules.FullSimplify())
 
-        print(file)
-    # def testMy(self):
-    #     e = parser.parse_expr("a")
-    #     ctx = Context()
-    #     r = rules.Simplify()
-    #     from integral import poly
-    #     e = context.apply_subterm(e, poly.simp_matrix, ctx)
-    #
-    #     print(e)
+
+    def testMy(self):
+        fixes = dict()
+        fixes['w'] = parser.parse_expr("$tensor($real, 3, 1)")
+        e = parser.parse_expr("zero_matrix(1,3) * exp(-(t * w))", fixes=fixes)
+        ctx = Context()
+        from integral import poly
+        p = poly.to_poly_r(e, ctx)
+        print(p)
 
 if __name__ == "__main__":
     unittest.main()

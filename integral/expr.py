@@ -591,7 +591,12 @@ class Expr:
         """
         if is_const(self):
             return True
-        elif is_fun(self) or is_op(self):
+        elif is_op(self):
+            return all(arg.is_constant() for arg in self.args)
+        elif is_fun(self):
+            self: Fun
+            if self.func_name in ('inv', 'unit_matrix', 'zero_matrix'):
+                return False
             return all(arg.is_constant() for arg in self.args)
         else:
             return False
@@ -1150,7 +1155,8 @@ class Op(Expr):
                 if args[0].type == IntType and args[1].type == IntType:
                     self.type = IntType
                 elif is_matrix_type(args[0].type) and is_matrix_type(args[1].type):
-                    assert num_col(args[0].type) == num_row(args[1].type)
+                    assert num_col(args[0].type) == num_row(args[1].type), \
+                        str(args[0])+","+str(args[1])+":"+str(args[0].type) + ", " + str(args[1].type)
                     t1, t2 = args[0].type.args[0], args[1].type.args[0]
                     if t1 == t2:
                         t = t1
@@ -1161,11 +1167,17 @@ class Op(Expr):
                     self.type = MatrixType(args[0].type.args[0], num_row(args[0].type), num_col(args[1].type))
                 elif args[0].type == RealType and (args[1].type in (RealType, IntType)):
                     self.type = RealType
+                elif args[0].type == RealType and is_matrix_type(args[1].type):
+                    if args[1].type.args[0] in (IntType, RealType):
+                        self.type = MatrixType(RealType, num_row(args[1].type), num_col(args[1].type))
             elif op == '^':
                 if is_matrix_type(t1):
                     assert num_row(t1) == num_col(t1), str(t1) +":"+ str(args)
                     self.type = t1
-
+        elif len(self.args) == 1:
+            if op == '-':
+                if is_matrix_type(self.args[0].type):
+                    self.type = self.args[0].type
     def __hash__(self):
         return hash((OP, self.op, tuple(self.args)))
 
@@ -1358,7 +1370,7 @@ class Matrix(Expr):
     Data is a list/matrix/etc of expressions.
 
     """
-    def __init__(self, data):
+    def __init__(self, data, type:Type=None):
         self.ty = MATRIX
 
         # Check validity of input and derive type
@@ -1370,9 +1382,13 @@ class Matrix(Expr):
             self.data = tuple(data)
             self.type = RowVectorType(data[0].type, Const(len(data)))
         else:
-            # Matrix case
-            self.data = tuple(tuple(row) for row in data)
-            self.type = MatrixType(data[0][0].type, Const(len(data)), Const(len(data[0])))
+            if type == None:
+                # Matrix case
+                self.data = tuple(tuple(row) for row in data)
+                self.type = MatrixType(data[0][0].type, Const(len(data)), Const(len(data[0])))
+            else:
+                self.data = tuple(tuple(row) for row in data)
+                self.type = type
 
     def __hash__(self):
         return hash(("Matrix", self.data))

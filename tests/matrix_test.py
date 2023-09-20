@@ -217,7 +217,6 @@ class MatrixTest(unittest.TestCase):
         calc = proof.lhs_calc
         calc.perform_rule(rules.SeriesExpansionIdentity(old_expr="cos(a)"))
         s = parser.parse_expr("n = 0", fixes=fixes)
-        print(goal01)
         calc.perform_rule(rules.OnLocation(rules.SplitSummation(s), "1"))
         calc.perform_rule(rules.FullSimplify())
         s1 = "-SUM(n, 1, oo, a ^ (2 * n) * (-1) ^ n / factorial(2 * n))"
@@ -251,7 +250,6 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.ChangeSummationIndex(new_lower="0"), "0.1"))
         s1 = calc.parse_expr("(x * hat(w)) ^ (2 * i + 1)")
         s2 = calc.parse_expr("x ^ (2 * i + 1) * hat(w) ^ (2 * i + 1)")
-        print(file)
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         s3 = calc.parse_expr("(x * hat(w)) ^ (2 * (n + 1))")
         s4 = calc.parse_expr("x ^ (2 * (n + 1)) * hat(w) ^ (2 * (n + 1))")
@@ -282,25 +280,36 @@ class MatrixTest(unittest.TestCase):
         fixes = dict()
         fixes['w'] = parser.parse_expr('$tensor($real, 3, 1)')
         fixes['v'] = parser.parse_expr('$tensor($real, 3, 1)')
-        file.add_definition("hm(R, p) = ccon(rcon(R,p), rcon(zero_matrix(1,3),unit_matrix(1)))", conds=['shape(w, 3, 1)', 'shape(v, 3, 1)'])
-        file.add_definition("hmf(t, w, v) = hm(unit_matrix(3), t*v)", conds=['shape(w, 3, 1)', 'shape(v, 3, 1)', 'norm(w)=0'])
-        file.add_definition("hmf(t, w, v) = hm(exp(t*w), (unit_matrix(3)-exp(t*w))*(hat(w)*v)*(w*T(w)*v*t))",
-                            conds=['shape(w, 3, 1)', 'shape(v, 3, 1)', 'norm(w)!=0'])
-        goal01 = file.add_goal("hmf(t, w, v) * hmf(-t, w, v) = unit_matrix(4)", fixes=fixes)
+        file.add_definition("hm(R, p) = rcon(ccon(R,p), ccon(zero_matrix(1,3),unit_matrix(1)))",
+                            conds=['type(R, 0, 3, 3)', 'type(p, 0 ,3, 1)'])
+        file.add_definition("hmf(t, w, v) = hm(unit_matrix(3), t*v)",
+                            conds=['type(w, 0 ,3)', 'type(v, 0 ,3)', 'norm(w)=0'])
+        file.add_definition("hmf(t, w, v) = hm(exp(t*w), (unit_matrix(3)-exp(t*w))*(hat(w)*v)+(w*T(w)*v*t))",
+                            conds=['type(w, 0, 3)', 'type(v, 0, 3)', 'norm(w)!=0'])
+        goal01 = file.add_goal("hmf(t, w, v) * hmf(-t, w, v) = unit_matrix(4)", fixes=fixes,
+                               conds=['type(w, 0, 3)', 'type(v, 0, 3)'])
         split_cond = parser.parse_expr("norm(w)!=0", fixes=fixes)
         proof = goal01.proof_by_case(split_cond=split_cond)
         case1 = proof.cases[0].proof_by_calculation()
         calc = case1.lhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '0'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '1'))
+        case2 = proof.cases[1].proof_by_calculation()
+        calc = case2.lhs_calc
+        calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '0'))
+        calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '1'))
+        calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '0'))
+        calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '1'))
 
         print(file)
-    def testMy(self):
-        e = parser.parse_expr("D a. log(x * y) ^ (s - 2) * (x ^ a * y ^ a) / (1 - x * y)")
-        ctx = Context()
-        r = rules.FullSimplify()
-        e = r.eval(e, ctx)
-        print(e)
+    # def testMy(self):
+    #     e = parser.parse_expr("a")
+    #     ctx = Context()
+    #     r = rules.Simplify()
+    #     from integral import poly
+    #     e = context.apply_subterm(e, poly.simp_matrix, ctx)
+    #
+    #     print(e)
 
 if __name__ == "__main__":
     unittest.main()

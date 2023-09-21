@@ -284,7 +284,7 @@ class MatrixTest(unittest.TestCase):
         file.add_definition("hmf(t, w, v) = hm(unit_matrix(3), t*v)",
                             conds=['type(w, 0 ,3)', 'type(v, 0 ,3)', 'norm(w)=0'])
         file.add_definition("hmf(t, w, v) = hm(exp(t*hat(w)), (unit_matrix(3)-exp(t*hat(w)))*(hat(w)*v)+(w*T(w)*v*t))",
-                            conds=['type(w, 0, 3)', 'type(v, 0, 3)', 'norm(w)!=0'])
+                            conds=['type(w, 0, 3)', 'type(v, 0, 3)', 'norm(w)=1'])
         # TODO: exp(-t*hat(w)) * T(exp(t*hat(w))
         goal01 = file.add_goal("exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3)", fixes=fixes, conds=["norm(w)=1"])
         proof = goal01.proof_by_calculation()

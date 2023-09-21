@@ -987,6 +987,14 @@ class OnLocation(Rule):
                     return Summation(cur_e.index_var, cur_e.lower, rec(cur_e.upper, loc.rest, ctx), cur_e.body)
                 else:
                     raise AssertionError("OnLocation: invalid location")
+            elif expr.is_matrix(cur_e):
+                a, b = loc.top2
+                n = len(cur_e.data)
+                m = len(cur_e.data[0])
+                assert a >= 0 and a < n and b >= 0 and b < m
+                res_data = [list(rv) for rv in cur_e.data]
+                res_data[a][b] = rec(res_data[a][b], loc.rest2, ctx)
+                return Matrix(res_data, cur_e.type)
             else:
                 raise NotImplementedError
 
@@ -1081,7 +1089,16 @@ class ApplyEquation(Rule):
                 tmp_inst_rhs = expr.match(self.eq.rhs, pat.rhs)
                 tmp = tmp.inst_pat(tmp_inst_rhs)
                 tmp_conds = [cond_pattern.inst_pat(tmp_inst_rhs) for cond_pattern in conds_pattern]
-
+        # Prevent both inst_lhs and inst_lhs from being not None
+        if tmp != None:
+            if tmp_conds == []:
+                return tmp
+            flag = True
+            # check whether all conditions of the lemma have been satisfied
+            for cond in tmp_conds:
+                flag = flag and ctx.check_condition(cond)
+            if flag:
+                return tmp
         if inst_rhs is not None:
             tmp = pat.lhs.inst_pat(inst_rhs)
             tmp_conds = [cond_pattern.inst_pat(inst_rhs) for cond_pattern in conds_pattern]

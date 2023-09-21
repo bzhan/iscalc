@@ -7,8 +7,8 @@
                     "latex_cond": "type{(R,0,3,3)}"
                 },
                 {
-                    "cond": "type(p,0,3,1)",
-                    "latex_cond": "type{(p,0,3,1)}"
+                    "cond": "type(p,0,3)",
+                    "latex_cond": "type{(p,0,3)}"
                 }
             ],
             "eq": "hm(R,p) = rcon(ccon(R,p),ccon(zero_matrix(1,3),unit_matrix(1)))",
@@ -689,271 +689,259 @@
             "goal": "hmf(t,w,v) * hmf(-t,w,v) = unit_matrix(4)",
             "latex_goal": "hmf{(t,w,v)} hmf{(-t,w,v)} = \\mathbf{1}_{4 \\times 4}",
             "proof": {
-                "cases": [
+                "calcs": [
                     {
-                        "conds": [
+                        "latex_start": "hmf{(t,w,v)} hmf{(-t,w,v)}",
+                        "start": "hmf(t,w,v) * hmf(-t,w,v)",
+                        "steps": [
                             {
-                                "cond": "norm(w) != 0",
-                                "latex_cond": "\\|w\\| \\neq 0"
+                                "latex_res": "hm(e^{t \\hat{w}},(-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v) hmf{(-t,w,v)}",
+                                "res": "hm(exp(t * hat(w)),(-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v) * hmf(-t,w,v)",
+                                "rule": {
+                                    "func_name": "hmf",
+                                    "loc": "0",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition at 0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "hm(e^{t \\hat{w}},(-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v) hm(e^{-t \\hat{w}},(-e^{-t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v - t w w^{\\text{T}} v)",
+                                "res": "hm(exp(t * hat(w)),(-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v) * hm(exp(-(t * hat(w))),(-exp(-(t * hat(w))) + unit_matrix(3)) * hat(w) * v - t * w * T(w) * v)",
+                                "rule": {
+                                    "func_name": "hmf",
+                                    "loc": "1",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition at 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}e^{t \\hat{w}}&(-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix} hm(e^{-t \\hat{w}},(-e^{-t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v - t w w^{\\text{T}} v)",
+                                "res": "[[exp(t * hat(w)), (-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]] * hm(exp(-(t * hat(w))),(-exp(-(t * hat(w))) + unit_matrix(3)) * hat(w) * v - t * w * T(w) * v)",
+                                "rule": {
+                                    "func_name": "hm",
+                                    "loc": "0",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition at 0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}e^{t \\hat{w}}&(-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix} \\begin{bmatrix}e^{-t \\hat{w}}&(-e^{-t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v - t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
+                                "res": "[[exp(t * hat(w)), (-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]] * [[exp(-(t * hat(w))), (-exp(-(t * hat(w))) + unit_matrix(3)) * hat(w) * v - t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
+                                "rule": {
+                                    "func_name": "hm",
+                                    "loc": "1",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition at 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}e^{t \\hat{w}} e^{-t \\hat{w}}&e^{t \\hat{w}} ((-e^{-t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v - t w w^{\\text{T}} v) + (-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
+                                "res": "[[exp(t * hat(w)) * exp(-(t * hat(w))), exp(t * hat(w)) * ((-exp(-(t * hat(w))) + unit_matrix(3)) * hat(w) * v - t * w * T(w) * v) + (-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&e^{t \\hat{w}} ((-e^{-t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v - t w w^{\\text{T}} v) + (-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
+                                "res": "[[unit_matrix(3), exp(t * hat(w)) * ((-exp(-(t * hat(w))) + unit_matrix(3)) * hat(w) * v - t * w * T(w) * v) + (-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
+                                "rule": {
+                                    "eq": "exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3)",
+                                    "latex_str": "apply equation \\(e^{t \\hat{w}} e^{-t \\hat{w}} = \\mathbf{1}_{3 \\times 3}\\) at 0.0",
+                                    "loc": "0.0",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3) at 0.0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&-e^{t \\hat{w}} e^{-t \\hat{w}} \\hat{w} v - t e^{t \\hat{w}} w w^{\\text{T}} v + e^{t \\hat{w}} \\mathbf{1}_{3 \\times 3} \\hat{w} v + (-e^{t \\hat{w}} \\hat{w} v + \\mathbf{1}_{3 \\times 3} \\hat{w} v) + t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
+                                "res": "[[unit_matrix(3), -(exp(t * hat(w)) * exp(-(t * hat(w))) * hat(w) * v) - t * exp(t * hat(w)) * w * T(w) * v + exp(t * hat(w)) * unit_matrix(3) * hat(w) * v + (-(exp(t * hat(w)) * hat(w) * v) + unit_matrix(3) * hat(w) * v) + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
+                                "rule": {
+                                    "loc": "subterms",
+                                    "name": "ExpandPolynomial",
+                                    "str": "expand polynomial on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&-e^{t \\hat{w}} e^{-t \\hat{w}} \\hat{w} v - t e^{t \\hat{w}} w w^{\\text{T}} v + t w w^{\\text{T}} v + \\hat{w} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
+                                "res": "[[unit_matrix(3), -(exp(t * hat(w)) * exp(-(t * hat(w))) * hat(w) * v) - t * exp(t * hat(w)) * w * T(w) * v + t * w * T(w) * v + hat(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&-\\mathbf{1}_{3 \\times 3} \\hat{w} v - t e^{t \\hat{w}} w w^{\\text{T}} v + t w w^{\\text{T}} v + \\hat{w} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
+                                "res": "[[unit_matrix(3), -(unit_matrix(3) * hat(w) * v) - t * exp(t * hat(w)) * w * T(w) * v + t * w * T(w) * v + hat(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
+                                "rule": {
+                                    "eq": "exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3)",
+                                    "latex_str": "apply equation \\(e^{t \\hat{w}} e^{-t \\hat{w}} = \\mathbf{1}_{3 \\times 3}\\) at 0.1.0.0.0.0.0.0",
+                                    "loc": "0.1.0.0.0.0.0.0",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3) at 0.1.0.0.0.0.0.0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&-t e^{t \\hat{w}} w w^{\\text{T}} v + t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
+                                "res": "[[unit_matrix(3), -(t * exp(t * hat(w)) * w * T(w) * v) + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&-t (e^{t \\hat{w}} w) w^{\\text{T}} v + t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
+                                "res": "[[unit_matrix(3), -(t * (exp(t * hat(w)) * w) * T(w) * v) + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
+                                "rule": {
+                                    "latex_str": "rewriting \\(t e^{t \\hat{w}} w w^{\\text{T}} v\\) to \\(t (e^{t \\hat{w}} w) w^{\\text{T}} v\\)",
+                                    "name": "Equation",
+                                    "new_expr": "t * (exp(t * hat(w)) * w) * T(w) * v",
+                                    "old_expr": "t * exp(t * hat(w)) * w * T(w) * v",
+                                    "str": "rewriting t * exp(t * hat(w)) * w * T(w) * v to t * (exp(t * hat(w)) * w) * T(w) * v"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&-t w w^{\\text{T}} v + t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
+                                "res": "[[unit_matrix(3), -(t * w * T(w) * v) + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
+                                "rule": {
+                                    "eq": "exp(t * hat(w)) * w = w",
+                                    "latex_str": "apply equation \\(e^{t \\hat{w}} w = w\\) at 0.1.0.0.0.0.1",
+                                    "loc": "0.1.0.0.0.0.1",
+                                    "name": "ApplyEquation",
+                                    "str": "apply equation: exp(t * hat(w)) * w = w at 0.1.0.0.0.0.1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\mathbf{1}_{4 \\times 4}",
+                                "res": "unit_matrix(4)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
                             }
                         ],
-                        "finished": true,
-                        "goal": "hmf(t,w,v) * hmf(-t,w,v) = unit_matrix(4)",
-                        "latex_goal": "hmf{(t,w,v)} hmf{(-t,w,v)} = \\mathbf{1}_{4 \\times 4}",
-                        "proof": {
-                            "calcs": [
-                                {
-                                    "latex_start": "hmf{(t,w,v)} hmf{(-t,w,v)}",
-                                    "start": "hmf(t,w,v) * hmf(-t,w,v)",
-                                    "steps": [
-                                        {
-                                            "latex_res": "hm(e^{t \\hat{w}},(-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v) hmf{(-t,w,v)}",
-                                            "res": "hm(exp(t * hat(w)),(-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v) * hmf(-t,w,v)",
-                                            "rule": {
-                                                "func_name": "hmf",
-                                                "loc": "0",
-                                                "name": "ExpandDefinition",
-                                                "str": "expand definition at 0"
-                                            },
-                                            "type": "CalculationStep"
-                                        },
-                                        {
-                                            "latex_res": "hm(e^{t \\hat{w}},(-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v) hm(e^{-t \\hat{w}},(-e^{-t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v - t w w^{\\text{T}} v)",
-                                            "res": "hm(exp(t * hat(w)),(-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v) * hm(exp(-(t * hat(w))),(-exp(-(t * hat(w))) + unit_matrix(3)) * hat(w) * v - t * w * T(w) * v)",
-                                            "rule": {
-                                                "func_name": "hmf",
-                                                "loc": "1",
-                                                "name": "ExpandDefinition",
-                                                "str": "expand definition at 1"
-                                            },
-                                            "type": "CalculationStep"
-                                        },
-                                        {
-                                            "latex_res": "\\begin{bmatrix}e^{t \\hat{w}}&(-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix} hm(e^{-t \\hat{w}},(-e^{-t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v - t w w^{\\text{T}} v)",
-                                            "res": "[[exp(t * hat(w)), (-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]] * hm(exp(-(t * hat(w))),(-exp(-(t * hat(w))) + unit_matrix(3)) * hat(w) * v - t * w * T(w) * v)",
-                                            "rule": {
-                                                "func_name": "hm",
-                                                "loc": "0",
-                                                "name": "ExpandDefinition",
-                                                "str": "expand definition at 0"
-                                            },
-                                            "type": "CalculationStep"
-                                        },
-                                        {
-                                            "latex_res": "\\begin{bmatrix}e^{t \\hat{w}}&(-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix} \\begin{bmatrix}e^{-t \\hat{w}}&(-e^{-t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v - t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
-                                            "res": "[[exp(t * hat(w)), (-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]] * [[exp(-(t * hat(w))), (-exp(-(t * hat(w))) + unit_matrix(3)) * hat(w) * v - t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
-                                            "rule": {
-                                                "func_name": "hm",
-                                                "loc": "1",
-                                                "name": "ExpandDefinition",
-                                                "str": "expand definition at 1"
-                                            },
-                                            "type": "CalculationStep"
-                                        },
-                                        {
-                                            "latex_res": "\\begin{bmatrix}e^{t \\hat{w}} e^{-t \\hat{w}}&e^{t \\hat{w}} ((-e^{-t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v - t w w^{\\text{T}} v) + (-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
-                                            "res": "[[exp(t * hat(w)) * exp(-(t * hat(w))), exp(t * hat(w)) * ((-exp(-(t * hat(w))) + unit_matrix(3)) * hat(w) * v - t * w * T(w) * v) + (-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
-                                            "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
-                                            },
-                                            "type": "CalculationStep"
-                                        },
-                                        {
-                                            "latex_res": "\\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&e^{t \\hat{w}} ((-e^{-t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v - t w w^{\\text{T}} v) + (-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
-                                            "res": "[[unit_matrix(3), exp(t * hat(w)) * ((-exp(-(t * hat(w))) + unit_matrix(3)) * hat(w) * v - t * w * T(w) * v) + (-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
-                                            "rule": {
-                                                "eq": "exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3)",
-                                                "latex_str": "apply equation \\(e^{t \\hat{w}} e^{-t \\hat{w}} = \\mathbf{1}_{3 \\times 3}\\) at 0.0",
-                                                "loc": "0.0",
-                                                "name": "ApplyEquation",
-                                                "str": "apply equation: exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3) at 0.0"
-                                            },
-                                            "type": "CalculationStep"
-                                        },
-                                        {
-                                            "latex_res": "\\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&-e^{t \\hat{w}} e^{-t \\hat{w}} \\hat{w} v - t e^{t \\hat{w}} w w^{\\text{T}} v + e^{t \\hat{w}} \\mathbf{1}_{3 \\times 3} \\hat{w} v + (-e^{t \\hat{w}} \\hat{w} v + \\mathbf{1}_{3 \\times 3} \\hat{w} v) + t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
-                                            "res": "[[unit_matrix(3), -(exp(t * hat(w)) * exp(-(t * hat(w))) * hat(w) * v) - t * exp(t * hat(w)) * w * T(w) * v + exp(t * hat(w)) * unit_matrix(3) * hat(w) * v + (-(exp(t * hat(w)) * hat(w) * v) + unit_matrix(3) * hat(w) * v) + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
-                                            "rule": {
-                                                "loc": "subterms",
-                                                "name": "ExpandPolynomial",
-                                                "str": "expand polynomial on subterms"
-                                            },
-                                            "type": "CalculationStep"
-                                        },
-                                        {
-                                            "latex_res": "\\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&-e^{t \\hat{w}} e^{-t \\hat{w}} \\hat{w} v - t e^{t \\hat{w}} w w^{\\text{T}} v + t w w^{\\text{T}} v + \\hat{w} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
-                                            "res": "[[unit_matrix(3), -(exp(t * hat(w)) * exp(-(t * hat(w))) * hat(w) * v) - t * exp(t * hat(w)) * w * T(w) * v + t * w * T(w) * v + hat(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
-                                            "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
-                                            },
-                                            "type": "CalculationStep"
-                                        },
-                                        {
-                                            "latex_res": "\\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&-\\mathbf{1}_{3 \\times 3} \\hat{w} v - t e^{t \\hat{w}} w w^{\\text{T}} v + t w w^{\\text{T}} v + \\hat{w} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
-                                            "res": "[[unit_matrix(3), -(unit_matrix(3) * hat(w) * v) - t * exp(t * hat(w)) * w * T(w) * v + t * w * T(w) * v + hat(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
-                                            "rule": {
-                                                "eq": "exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3)",
-                                                "latex_str": "apply equation \\(e^{t \\hat{w}} e^{-t \\hat{w}} = \\mathbf{1}_{3 \\times 3}\\) at 0.1.0.0.0.0.0.0",
-                                                "loc": "0.1.0.0.0.0.0.0",
-                                                "name": "ApplyEquation",
-                                                "str": "apply equation: exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3) at 0.1.0.0.0.0.0.0"
-                                            },
-                                            "type": "CalculationStep"
-                                        },
-                                        {
-                                            "latex_res": "\\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&-t e^{t \\hat{w}} w w^{\\text{T}} v + t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
-                                            "res": "[[unit_matrix(3), -(t * exp(t * hat(w)) * w * T(w) * v) + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
-                                            "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
-                                            },
-                                            "type": "CalculationStep"
-                                        },
-                                        {
-                                            "latex_res": "\\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&-t (e^{t \\hat{w}} w) w^{\\text{T}} v + t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
-                                            "res": "[[unit_matrix(3), -(t * (exp(t * hat(w)) * w) * T(w) * v) + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
-                                            "rule": {
-                                                "latex_str": "rewriting \\(t e^{t \\hat{w}} w w^{\\text{T}} v\\) to \\(t (e^{t \\hat{w}} w) w^{\\text{T}} v\\)",
-                                                "name": "Equation",
-                                                "new_expr": "t * (exp(t * hat(w)) * w) * T(w) * v",
-                                                "old_expr": "t * exp(t * hat(w)) * w * T(w) * v",
-                                                "str": "rewriting t * exp(t * hat(w)) * w * T(w) * v to t * (exp(t * hat(w)) * w) * T(w) * v"
-                                            },
-                                            "type": "CalculationStep"
-                                        },
-                                        {
-                                            "latex_res": "\\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&-t w w^{\\text{T}} v + t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
-                                            "res": "[[unit_matrix(3), -(t * w * T(w) * v) + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
-                                            "rule": {
-                                                "eq": "exp(t * hat(w)) * w = w",
-                                                "latex_str": "apply equation \\(e^{t \\hat{w}} w = w\\) at 0.1.0.0.0.0.1",
-                                                "loc": "0.1.0.0.0.0.1",
-                                                "name": "ApplyEquation",
-                                                "str": "apply equation: exp(t * hat(w)) * w = w at 0.1.0.0.0.0.1"
-                                            },
-                                            "type": "CalculationStep"
-                                        },
-                                        {
-                                            "latex_res": "\\mathbf{1}_{4 \\times 4}",
-                                            "res": "unit_matrix(4)",
-                                            "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
-                                            },
-                                            "type": "CalculationStep"
-                                        }
-                                    ],
-                                    "type": "Calculation"
-                                },
-                                {
-                                    "latex_start": "\\mathbf{1}_{4 \\times 4}",
-                                    "start": "unit_matrix(4)",
-                                    "steps": [],
-                                    "type": "Calculation"
-                                }
-                            ],
-                            "finished": true,
-                            "goal": "hmf(t,w,v) * hmf(-t,w,v) = unit_matrix(4)",
-                            "latex_goal": "hmf{(t,w,v)} hmf{(-t,w,v)} = \\mathbf{1}_{4 \\times 4}",
-                            "type": "CalculationProof"
-                        },
-                        "type": "Goal"
+                        "type": "Calculation"
                     },
                     {
-                        "conds": [
-                            {
-                                "cond": "norm(w) = 0",
-                                "latex_cond": "\\|w\\| = 0"
-                            }
-                        ],
-                        "finished": true,
-                        "goal": "hmf(t,w,v) * hmf(-t,w,v) = unit_matrix(4)",
-                        "latex_goal": "hmf{(t,w,v)} hmf{(-t,w,v)} = \\mathbf{1}_{4 \\times 4}",
-                        "proof": {
-                            "calcs": [
-                                {
-                                    "latex_start": "hmf{(t,w,v)} hmf{(-t,w,v)}",
-                                    "start": "hmf(t,w,v) * hmf(-t,w,v)",
-                                    "steps": [
-                                        {
-                                            "latex_res": "hm(\\mathbf{1}_{3 \\times 3},t v) hmf{(-t,w,v)}",
-                                            "res": "hm(unit_matrix(3),t * v) * hmf(-t,w,v)",
-                                            "rule": {
-                                                "func_name": "hmf",
-                                                "loc": "0",
-                                                "name": "ExpandDefinition",
-                                                "str": "expand definition at 0"
-                                            },
-                                            "type": "CalculationStep"
-                                        },
-                                        {
-                                            "latex_res": "hm(\\mathbf{1}_{3 \\times 3},t v) hm(\\mathbf{1}_{3 \\times 3},-t v)",
-                                            "res": "hm(unit_matrix(3),t * v) * hm(unit_matrix(3),-(t * v))",
-                                            "rule": {
-                                                "func_name": "hmf",
-                                                "loc": "1",
-                                                "name": "ExpandDefinition",
-                                                "str": "expand definition at 1"
-                                            },
-                                            "type": "CalculationStep"
-                                        },
-                                        {
-                                            "latex_res": "\\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&t v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix} hm(\\mathbf{1}_{3 \\times 3},-t v)",
-                                            "res": "[[unit_matrix(3), t * v], [zero_matrix(1,3), unit_matrix(1)]] * hm(unit_matrix(3),-(t * v))",
-                                            "rule": {
-                                                "func_name": "hm",
-                                                "loc": "0",
-                                                "name": "ExpandDefinition",
-                                                "str": "expand definition at 0"
-                                            },
-                                            "type": "CalculationStep"
-                                        },
-                                        {
-                                            "latex_res": "\\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&t v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix} \\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&-t v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
-                                            "res": "[[unit_matrix(3), t * v], [zero_matrix(1,3), unit_matrix(1)]] * [[unit_matrix(3), -(t * v)], [zero_matrix(1,3), unit_matrix(1)]]",
-                                            "rule": {
-                                                "func_name": "hm",
-                                                "loc": "1",
-                                                "name": "ExpandDefinition",
-                                                "str": "expand definition at 1"
-                                            },
-                                            "type": "CalculationStep"
-                                        },
-                                        {
-                                            "latex_res": "\\mathbf{1}_{4 \\times 4}",
-                                            "res": "unit_matrix(4)",
-                                            "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
-                                            },
-                                            "type": "CalculationStep"
-                                        }
-                                    ],
-                                    "type": "Calculation"
-                                },
-                                {
-                                    "latex_start": "\\mathbf{1}_{4 \\times 4}",
-                                    "start": "unit_matrix(4)",
-                                    "steps": [],
-                                    "type": "Calculation"
-                                }
-                            ],
-                            "finished": true,
-                            "goal": "hmf(t,w,v) * hmf(-t,w,v) = unit_matrix(4)",
-                            "latex_goal": "hmf{(t,w,v)} hmf{(-t,w,v)} = \\mathbf{1}_{4 \\times 4}",
-                            "type": "CalculationProof"
-                        },
-                        "type": "Goal"
+                        "latex_start": "\\mathbf{1}_{4 \\times 4}",
+                        "start": "unit_matrix(4)",
+                        "steps": [],
+                        "type": "Calculation"
                     }
                 ],
                 "finished": true,
                 "goal": "hmf(t,w,v) * hmf(-t,w,v) = unit_matrix(4)",
                 "latex_goal": "hmf{(t,w,v)} hmf{(-t,w,v)} = \\mathbf{1}_{4 \\times 4}",
-                "latex_split_cond": "\\|w\\| \\neq 0",
-                "split_cond": "norm(w) != 0",
-                "type": "CaseProof"
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "norm(w) = 0",
+                    "latex_cond": "\\|w\\| = 0"
+                }
+            ],
+            "finished": true,
+            "fixes": [
+                [
+                    "w",
+                    "$tensor($real, 3, 1)"
+                ],
+                [
+                    "v",
+                    "$tensor($real, 3, 1)"
+                ]
+            ],
+            "goal": "hmf(t,w,v) * hmf(-t,w,v) = unit_matrix(4)",
+            "latex_goal": "hmf{(t,w,v)} hmf{(-t,w,v)} = \\mathbf{1}_{4 \\times 4}",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "hmf{(t,w,v)} hmf{(-t,w,v)}",
+                        "start": "hmf(t,w,v) * hmf(-t,w,v)",
+                        "steps": [
+                            {
+                                "latex_res": "hm(\\mathbf{1}_{3 \\times 3},t v) hmf{(-t,w,v)}",
+                                "res": "hm(unit_matrix(3),t * v) * hmf(-t,w,v)",
+                                "rule": {
+                                    "func_name": "hmf",
+                                    "loc": "0",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition at 0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "hm(\\mathbf{1}_{3 \\times 3},t v) hm(\\mathbf{1}_{3 \\times 3},-t v)",
+                                "res": "hm(unit_matrix(3),t * v) * hm(unit_matrix(3),-(t * v))",
+                                "rule": {
+                                    "func_name": "hmf",
+                                    "loc": "1",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition at 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&t v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix} hm(\\mathbf{1}_{3 \\times 3},-t v)",
+                                "res": "[[unit_matrix(3), t * v], [zero_matrix(1,3), unit_matrix(1)]] * hm(unit_matrix(3),-(t * v))",
+                                "rule": {
+                                    "func_name": "hm",
+                                    "loc": "0",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition at 0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&t v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix} \\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&-t v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
+                                "res": "[[unit_matrix(3), t * v], [zero_matrix(1,3), unit_matrix(1)]] * [[unit_matrix(3), -(t * v)], [zero_matrix(1,3), unit_matrix(1)]]",
+                                "rule": {
+                                    "func_name": "hm",
+                                    "loc": "1",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition at 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\mathbf{1}_{4 \\times 4}",
+                                "res": "unit_matrix(4)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\mathbf{1}_{4 \\times 4}",
+                        "start": "unit_matrix(4)",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "hmf(t,w,v) * hmf(-t,w,v) = unit_matrix(4)",
+                "latex_goal": "hmf{(t,w,v)} hmf{(-t,w,v)} = \\mathbf{1}_{4 \\times 4}",
+                "type": "CalculationProof"
             },
             "type": "Goal"
         }

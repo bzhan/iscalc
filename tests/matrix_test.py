@@ -280,7 +280,7 @@ class MatrixTest(unittest.TestCase):
         fixes = dict()
         fixes['w'] = parser.parse_expr('$tensor($real, 3, 1)')
         file.add_definition("hm(R, p) = rcon(ccon(R,p), ccon(zero_matrix(1,3),unit_matrix(1)))",
-                            conds=['type(R, 0, 3, 3)', 'type(p, 0 ,3, 1)'])
+                            conds=['type(R, 0, 3, 3)', 'type(p, 0 ,3)'])
         file.add_definition("hmf(t, w, v) = hm(unit_matrix(3), t*v)",
                             conds=['type(w, 0 ,3)', 'type(v, 0 ,3)', 'norm(w)=0'])
         file.add_definition("hmf(t, w, v) = hm(exp(t*hat(w)), (unit_matrix(3)-exp(t*hat(w)))*(hat(w)*v)+(w*T(w)*v*t))",
@@ -374,9 +374,8 @@ class MatrixTest(unittest.TestCase):
         goal04 = file.add_goal("hmf(t, w, v) * hmf(-t, w, v) = unit_matrix(4)", fixes=fixes,
                                conds=['norm(w)=1'])
         split_cond = parser.parse_expr("norm(w)!=0", fixes=fixes)
-        proof = goal04.proof_by_case(split_cond=split_cond)
-        case1 = proof.cases[0].proof_by_calculation()
-        calc = case1.lhs_calc
+        proof = goal04.proof_by_calculation()
+        calc = proof.lhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '0'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '1'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '0'))
@@ -392,14 +391,16 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.Equation(s1,s2))
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal03.goal), "0.1.0.0.0.0.1"))
         calc.perform_rule(rules.FullSimplify())
-        case2 = proof.cases[1].proof_by_calculation()
-        calc = case2.lhs_calc
+        goal05 = file.add_goal("hmf(t, w, v) * hmf(-t, w, v) = unit_matrix(4)", fixes=fixes,
+                               conds=['norm(w)=0'])
+        proof = goal05.proof_by_calculation()
+        calc = proof.lhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '0'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '1'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '0'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '1'))
         calc.perform_rule(rules.FullSimplify())
-        self.checkAndOutput(file, omit_finish=False)
+        self.checkAndOutput(file)
 
     # def testMy(self):
     #     fixes = dict()

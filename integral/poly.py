@@ -608,6 +608,9 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
         ctx2 = context.body_conds(e, ctx)
         return singleton(expr.Summation(e.index_var, normalize(e.lower, ctx),
                                         normalize(e.upper, ctx), normalize(e.body, ctx2)))
+    elif expr.is_matrix(e):
+        res_data = [[normalize(item, ctx) for item in rv] for rv in e.data]
+        return singleton(expr.Matrix(res_data, e.type))
     else:
         return singleton(e)
 

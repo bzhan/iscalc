@@ -129,8 +129,15 @@ class Location:
         return self.data[0]
 
     @property
+    def top2(self):
+        return self.data[:2]
+    @property
     def rest(self):
         return Location(self.data[1:])
+
+    @property
+    def rest2(self):
+        return Location(self.data[2:])
 
     def append(self, i: int) -> "Location":
         return Location(self.data + (i,))
@@ -511,7 +518,10 @@ class Expr:
                 find(e.body, loc.append(0))
                 find(e.lower, loc.append(1))
                 find(e.upper, loc.append(2))
-
+            elif is_matrix(e):
+                for i, rv in enumerate(e.data):
+                    for j, item in enumerate(rv):
+                        find(item, loc.append(i).append(j))
         find(self, Location(""))
         return locations
 

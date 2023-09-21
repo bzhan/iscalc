@@ -85,7 +85,6 @@ class MatrixTest(unittest.TestCase):
         fixes = dict()
         for a, b in raw_fixes:
             fixes[a] = parser.parse_expr(b, fixes= fixes)
-
         goal = file.add_goal("(inv(P) * A * P) ^ n = inv(P) * (A ^ n) * P",
                              fixes=fixes,
                              conds=["invertible(P)", "n > 0"])

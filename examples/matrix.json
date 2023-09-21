@@ -6,8 +6,9 @@
       ],
       "category": "matrix-power",
       "conds": [
-        "isSquareMatrix(A)",
-        "isNonnegativeInteger(n)"
+        "isSquare(A)",
+        "a >= 0",
+        "b >= 0"
       ],
       "expr": "A^(a+b) = A^a * A^b",
       "type": "axiom"
@@ -17,6 +18,10 @@
           "bidirectional"
       ],
       "category": "matrix-power",
+      "conds": [
+        "isSquare(A)",
+        "a >= 0"
+      ],
       "expr": "A^(a+1) = A^a * A",
       "type": "axiom"
     },
@@ -25,6 +30,10 @@
           "bidirectional"
       ],
       "category": "matrix-power",
+      "conds": [
+        "isSquare(A)",
+        "a >= 0"
+      ],
       "expr": "A^(a+1) = A * A^a",
       "type": "axiom"
     },
@@ -33,6 +42,10 @@
           "bidirectional"
       ],
       "category": "matrix-power",
+      "conds": [
+        "isSquare(A)",
+        "a >= 0"
+      ],
       "expr": "A^a = A^(a-1) * A",
       "type": "axiom"
     },
@@ -40,7 +53,12 @@
       "attributes": [
           "bidirectional"
       ],
+
       "category": "matrix-power",
+      "conds": [
+        "isSquare(A)",
+        "a >= 0"
+      ],
       "expr": "A^a = A * A^(a-1)",
       "type": "axiom"
     }

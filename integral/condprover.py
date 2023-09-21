@@ -255,6 +255,10 @@ def check_cond(cond: Expr, all_conds: Dict[Expr, List[Expr]], inst: Dict[str, Ex
         else:
             raise NotImplementedError
 
+    if expr.is_fun(cond) and cond.func_name == 'isSquare':
+        a = cond.args[0]
+        if expr.is_matrix_type(a.type) and expr.num_col(a.type) == expr.num_row(a.type):
+            return [inst]
     # Not found
     return list()
 

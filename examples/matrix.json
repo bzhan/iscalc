@@ -61,6 +61,28 @@
       ],
       "expr": "A^a = A * A^(a-1)",
       "type": "axiom"
+    },
+    {
+      "attributes": [
+          "bidirectional"
+      ],
+      "category": "matrix-arith",
+      "conds": [
+        "type(A, 2)"
+      ],
+      "expr": "(x+y)*A = x * A + y * A",
+      "type": "axiom"
+    },
+    {
+      "attributes": [
+          "bidirectional"
+      ],
+      "category": "matrix-arith",
+      "conds": [
+        "type(A, 2)"
+      ],
+      "expr": "(x-y)*A = x * A - y * A",
+      "type": "axiom"
     }
   ],
   "imports": ["base"],

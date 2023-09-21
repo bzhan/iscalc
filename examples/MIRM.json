@@ -33,11 +33,8 @@
         {
             "expr": "hat(w)^(2*n+1) = (-1)^n * hat(w)",
             "path": "matrix_example02",
-            "type": "problem",
-            "fixes": [
-                ["n", "$int"],
-                ["w", "$tensor($real, 3, 1)"]
-            ]
+            "conds": ["type(w, 0, 3)", "n>=0", "type(n, 1)", "norm(w) = 1"],
+            "type": "problem"
         },
         {
             "expr": "1 - cos(a) = SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))",
@@ -46,20 +43,15 @@
         },
         {
             "expr": "hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2",
+            "conds": ["type(w, 0, 3)", "n>=0", "type(n, 1)", "norm(w) = 1"],
             "path": "matrix_example02",
-            "type": "problem",
-            "fixes": [
-                ["n", "$int"],
-                ["w", "$tensor($real, 3, 1)"]
-            ]
+            "type": "problem"
         },
         {
             "expr": "exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * (hat(w)) ^ 2",
             "path": "matrix_rodrigues",
             "type": "problem",
-            "fixes": [
-                ["w", "$tensor($real, 3, 1)"]
-            ]
+            "conds": ["type(w, 0, 3)", "norm(w) = 1"]
         },
         {
             "expr": "hmf(t, w, v) * hmf(-t, w, v) = unit_matrix(4)",

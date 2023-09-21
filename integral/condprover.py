@@ -236,7 +236,7 @@ def check_cond(cond: Expr, all_conds: Dict[Expr, List[Expr]], inst: Dict[str, Ex
         n = len(cond.args)
         assert n in [2, 3, 4]
         v = cond.args[0]
-        type_mapping = {Const(0): expr.RealType, Const(1): expr.IntType}
+        type_mapping = {Const(0): expr.RealType, Const(1): expr.IntType, Const(2):'tensor'}
         ele_type = type_mapping[cond.args[1]]
         if n == 4:
             r, c = cond.args[2:]
@@ -251,6 +251,8 @@ def check_cond(cond: Expr, all_conds: Dict[Expr, List[Expr]], inst: Dict[str, Ex
             if v.type == ele_type:
                 return [inst]
             if v.type == expr.IntType and ele_type == expr.RealType:
+                return [inst]
+            if ele_type == 'tensor' and expr.is_matrix_type(v.type):
                 return [inst]
         else:
             raise NotImplementedError

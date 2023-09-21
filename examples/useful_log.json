@@ -31,104 +31,178 @@
             "goal": "x / (1 - x) = SUM(k, 1, oo, x ^ k)",
             "latex_goal": "\\frac{x}{1 - x} = \\sum_{k=1}^{\\infty}{x ^ {k}}",
             "proof": {
-                "calcs": [
+                "cases": [
                     {
-                        "latex_start": "\\frac{x}{1 - x}",
-                        "start": "x / (1 - x)",
-                        "steps": [
+                        "conds": [
                             {
-                                "latex_res": "x (1 - x) ^ {-1}",
-                                "res": "x * (1 - x) ^ (-1)",
-                                "rule": {
-                                    "latex_str": "rewriting \\(\\frac{x}{1 - x}\\) to \\(x (1 - x) ^ {-1}\\)",
-                                    "name": "Equation",
-                                    "new_expr": "x * (1 - x) ^ (-1)",
-                                    "old_expr": "x / (1 - x)",
-                                    "str": "rewriting x / (1 - x) to x * (1 - x) ^ (-1)"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "x \\sum_{n=0}^{\\infty}{x ^ {n}}",
-                                "res": "x * SUM(n, 0, oo, x ^ n)",
-                                "rule": {
-                                    "index_var": "n",
-                                    "loc": "1",
-                                    "name": "SeriesExpansionIdentity",
-                                    "str": "apply series expansion at 1"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\sum_{n=0}^{\\infty}{x x ^ {n}}",
-                                "res": "SUM(n, 0, oo, x * x ^ n)",
-                                "rule": {
-                                    "latex_str": "rewriting \\(x \\sum_{n=0}^{\\infty}{x ^ {n}}\\) to \\(\\sum_{n=0}^{\\infty}{x x ^ {n}}\\)",
-                                    "name": "Equation",
-                                    "new_expr": "SUM(n, 0, oo, x * x ^ n)",
-                                    "old_expr": "x * SUM(n, 0, oo, x ^ n)",
-                                    "str": "rewriting x * SUM(n, 0, oo, x ^ n) to SUM(n, 0, oo, x * x ^ n)"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\sum_{n=0}^{\\infty}{x ^ {1} x ^ {n}}",
-                                "res": "SUM(n, 0, oo, x ^ 1 * x ^ n)",
-                                "rule": {
-                                    "latex_str": "rewriting \\(x x ^ {n}\\) to \\(x ^ {1} x ^ {n}\\)",
-                                    "name": "Equation",
-                                    "new_expr": "x ^ 1 * x ^ n",
-                                    "old_expr": "x * x ^ n",
-                                    "str": "rewriting x * x ^ n to x ^ 1 * x ^ n"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\sum_{n=0}^{\\infty}{x ^ {n + 1}}",
-                                "res": "SUM(n, 0, oo, x ^ (n + 1))",
-                                "rule": {
-                                    "latex_str": "rewrite \\(x ^ {1} x ^ {n}\\) to \\(x ^ {n + 1}\\) using identity at 0",
-                                    "loc": "0",
-                                    "name": "ApplyIdentity",
-                                    "source": "x ^ 1 * x ^ n",
-                                    "str": "rewrite x ^ 1 * x ^ n to x ^ (n + 1) using identity at 0",
-                                    "target": "x ^ (n + 1)"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\sum_{n=1}^{\\infty}{x ^ {n - 1 + 1}}",
-                                "res": "SUM(n, 1, oo, x ^ (n - 1 + 1))",
-                                "rule": {
-                                    "name": "ChangeSummationIndex",
-                                    "new_lower": "1",
-                                    "str": "change summation index"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\sum_{n=1}^{\\infty}{x ^ {n}}",
-                                "res": "SUM(n, 1, oo, x ^ n)",
-                                "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
-                                },
-                                "type": "CalculationStep"
+                                "cond": "x != 0",
+                                "latex_cond": "x \\neq 0"
                             }
                         ],
-                        "type": "Calculation"
+                        "finished": true,
+                        "goal": "x / (1 - x) = SUM(k, 1, oo, x ^ k)",
+                        "latex_goal": "\\frac{x}{1 - x} = \\sum_{k=1}^{\\infty}{x ^ {k}}",
+                        "proof": {
+                            "calcs": [
+                                {
+                                    "latex_start": "\\frac{x}{1 - x}",
+                                    "start": "x / (1 - x)",
+                                    "steps": [
+                                        {
+                                            "latex_res": "x (1 - x) ^ {-1}",
+                                            "res": "x * (1 - x) ^ (-1)",
+                                            "rule": {
+                                                "latex_str": "rewriting \\(\\frac{x}{1 - x}\\) to \\(x (1 - x) ^ {-1}\\)",
+                                                "name": "Equation",
+                                                "new_expr": "x * (1 - x) ^ (-1)",
+                                                "old_expr": "x / (1 - x)",
+                                                "str": "rewriting x / (1 - x) to x * (1 - x) ^ (-1)"
+                                            },
+                                            "type": "CalculationStep"
+                                        },
+                                        {
+                                            "latex_res": "x \\sum_{n=0}^{\\infty}{x ^ {n}}",
+                                            "res": "x * SUM(n, 0, oo, x ^ n)",
+                                            "rule": {
+                                                "index_var": "n",
+                                                "loc": "1",
+                                                "name": "SeriesExpansionIdentity",
+                                                "str": "apply series expansion at 1"
+                                            },
+                                            "type": "CalculationStep"
+                                        },
+                                        {
+                                            "latex_res": "\\sum_{n=0}^{\\infty}{x x ^ {n}}",
+                                            "res": "SUM(n, 0, oo, x * x ^ n)",
+                                            "rule": {
+                                                "latex_str": "rewriting \\(x \\sum_{n=0}^{\\infty}{x ^ {n}}\\) to \\(\\sum_{n=0}^{\\infty}{x x ^ {n}}\\)",
+                                                "name": "Equation",
+                                                "new_expr": "SUM(n, 0, oo, x * x ^ n)",
+                                                "old_expr": "x * SUM(n, 0, oo, x ^ n)",
+                                                "str": "rewriting x * SUM(n, 0, oo, x ^ n) to SUM(n, 0, oo, x * x ^ n)"
+                                            },
+                                            "type": "CalculationStep"
+                                        },
+                                        {
+                                            "latex_res": "\\sum_{n=0}^{\\infty}{x ^ {1} x ^ {n}}",
+                                            "res": "SUM(n, 0, oo, x ^ 1 * x ^ n)",
+                                            "rule": {
+                                                "latex_str": "rewriting \\(x x ^ {n}\\) to \\(x ^ {1} x ^ {n}\\)",
+                                                "name": "Equation",
+                                                "new_expr": "x ^ 1 * x ^ n",
+                                                "old_expr": "x * x ^ n",
+                                                "str": "rewriting x * x ^ n to x ^ 1 * x ^ n"
+                                            },
+                                            "type": "CalculationStep"
+                                        },
+                                        {
+                                            "latex_res": "\\sum_{n=0}^{\\infty}{x ^ {n + 1}}",
+                                            "res": "SUM(n, 0, oo, x ^ (n + 1))",
+                                            "rule": {
+                                                "latex_str": "rewrite \\(x ^ {1} x ^ {n}\\) to \\(x ^ {n + 1}\\) using identity at 0",
+                                                "loc": "0",
+                                                "name": "ApplyIdentity",
+                                                "source": "x ^ 1 * x ^ n",
+                                                "str": "rewrite x ^ 1 * x ^ n to x ^ (n + 1) using identity at 0",
+                                                "target": "x ^ (n + 1)"
+                                            },
+                                            "type": "CalculationStep"
+                                        },
+                                        {
+                                            "latex_res": "\\sum_{n=1}^{\\infty}{x ^ {n - 1 + 1}}",
+                                            "res": "SUM(n, 1, oo, x ^ (n - 1 + 1))",
+                                            "rule": {
+                                                "name": "ChangeSummationIndex",
+                                                "new_lower": "1",
+                                                "str": "change summation index"
+                                            },
+                                            "type": "CalculationStep"
+                                        },
+                                        {
+                                            "latex_res": "\\sum_{n=1}^{\\infty}{x ^ {n}}",
+                                            "res": "SUM(n, 1, oo, x ^ n)",
+                                            "rule": {
+                                                "name": "FullSimplify",
+                                                "str": "full simplify"
+                                            },
+                                            "type": "CalculationStep"
+                                        }
+                                    ],
+                                    "type": "Calculation"
+                                },
+                                {
+                                    "latex_start": "\\sum_{k=1}^{\\infty}{x ^ {k}}",
+                                    "start": "SUM(k, 1, oo, x ^ k)",
+                                    "steps": [],
+                                    "type": "Calculation"
+                                }
+                            ],
+                            "finished": true,
+                            "goal": "x / (1 - x) = SUM(k, 1, oo, x ^ k)",
+                            "latex_goal": "\\frac{x}{1 - x} = \\sum_{k=1}^{\\infty}{x ^ {k}}",
+                            "type": "CalculationProof"
+                        },
+                        "type": "Goal"
                     },
                     {
-                        "latex_start": "\\sum_{k=1}^{\\infty}{x ^ {k}}",
-                        "start": "SUM(k, 1, oo, x ^ k)",
-                        "steps": [],
-                        "type": "Calculation"
+                        "conds": [
+                            {
+                                "cond": "x = 0",
+                                "latex_cond": "x = 0"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "x / (1 - x) = SUM(k, 1, oo, x ^ k)",
+                        "latex_goal": "\\frac{x}{1 - x} = \\sum_{k=1}^{\\infty}{x ^ {k}}",
+                        "proof": {
+                            "calcs": [
+                                {
+                                    "latex_start": "\\frac{x}{1 - x}",
+                                    "start": "x / (1 - x)",
+                                    "steps": [
+                                        {
+                                            "latex_res": "0",
+                                            "res": "0",
+                                            "rule": {
+                                                "name": "FullSimplify",
+                                                "str": "full simplify"
+                                            },
+                                            "type": "CalculationStep"
+                                        }
+                                    ],
+                                    "type": "Calculation"
+                                },
+                                {
+                                    "latex_start": "\\sum_{k=1}^{\\infty}{x ^ {k}}",
+                                    "start": "SUM(k, 1, oo, x ^ k)",
+                                    "steps": [
+                                        {
+                                            "latex_res": "0",
+                                            "res": "0",
+                                            "rule": {
+                                                "name": "FullSimplify",
+                                                "str": "full simplify"
+                                            },
+                                            "type": "CalculationStep"
+                                        }
+                                    ],
+                                    "type": "Calculation"
+                                }
+                            ],
+                            "finished": true,
+                            "goal": "x / (1 - x) = SUM(k, 1, oo, x ^ k)",
+                            "latex_goal": "\\frac{x}{1 - x} = \\sum_{k=1}^{\\infty}{x ^ {k}}",
+                            "type": "CalculationProof"
+                        },
+                        "type": "Goal"
                     }
                 ],
                 "finished": true,
                 "goal": "x / (1 - x) = SUM(k, 1, oo, x ^ k)",
                 "latex_goal": "\\frac{x}{1 - x} = \\sum_{k=1}^{\\infty}{x ^ {k}}",
-                "type": "CalculationProof"
+                "latex_split_cond": "x \\neq 0",
+                "split_cond": "x != 0",
+                "type": "CaseProof"
             },
             "type": "Goal"
         },

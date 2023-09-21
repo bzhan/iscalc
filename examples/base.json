@@ -271,6 +271,33 @@
         },
         {
             "attributes": [
+                "bidirectional",
+                "simplify"
+            ],
+            "category": "power",
+            "conds": [
+                "a = 0",
+                "x * y > 0"
+            ],
+            "expr": "a ^ x ^ y = a ^ (x * y)",
+            "type": "axiom"
+        },
+        {
+            "attributes": [
+                "bidirectional",
+                "simplify"
+            ],
+            "category": "power",
+            "conds": [
+                "a < 0",
+                "type(x, 1)",
+                "type(y, 1)"
+            ],
+            "expr": "a ^ x ^ y = a ^ (x * y)",
+            "type": "axiom"
+        },
+        {
+            "attributes": [
                 "simplify"
             ],
             "category": "power",
@@ -286,7 +313,44 @@
             ],
             "category": "power",
             "expr": "x^a * x^b = x^(a+b)",
-            "type": "axiom"
+            "type": "axiom",
+            "conds": ["x=0", "a>0", "b>0"]
+        },
+        {
+            "attributes": [
+                "bidirectional"
+            ],
+            "category": "power",
+            "expr": "x^a * x^b = x^(a+b)",
+            "type": "axiom",
+            "conds": ["x>0"]
+        },
+        {
+            "attributes": [
+                "bidirectional"
+            ],
+            "category": "power",
+            "expr": "x^a * x^b = x^(a+b)",
+            "type": "axiom",
+            "conds": ["x!=0", "a>=0", "b>=0"]
+        },
+        {
+            "attributes": [
+                "bidirectional"
+            ],
+            "category": "power",
+            "expr": "x^a * x^b = x^(a+b)",
+            "type": "axiom",
+            "conds": ["a>0", "b>0", "type(a,1)", "type(b,1)", "type(x,0)"]
+        },
+        {
+            "attributes": [
+                "bidirectional"
+            ],
+            "category": "power",
+            "expr": "x^a * x^b = x^(a+b)",
+            "type": "axiom",
+            "conds": ["x<0", "type(a,1)", "type(b,1)"]
         },
         {
             "attributes": [
@@ -409,7 +473,8 @@
             ],
             "category": "exp-log",
             "conds": [
-                "x > 0"
+                "type(x,0)",
+                "type(a,0)"
             ],
             "expr": "log(x ^ a) = a * log(x)",
             "type": "axiom"

@@ -87,7 +87,7 @@ def normalize_quotient(e: Expr, ctx: Context) -> NormalQuotient:
     def rec(e: Expr) -> NormalQuotient:
         if e.is_plus():
             return add_normal_quotient(rec(e.args[0]), rec(e.args[1]), ctx)
-        elif e.is_uminus():
+        elif expr.is_uminus(e):
             return uminus_normal_quotient(rec(e.args[0]), ctx)
         elif e.is_minus():
             return minus_normal_quotient(rec(e.args[0]), rec(e.args[1]), ctx)
@@ -266,7 +266,7 @@ def normalize_power(e: Expr, ctx: Context) -> NormalPower:
     def rec(e: Expr) -> NormalPower:
         if e.is_plus():
             return add_normal_power(rec(e.args[0]), rec(e.args[1]))
-        elif e.is_uminus():
+        elif expr.is_uminus(e):
             return uminus_normal_power(rec(e.args[0]))
         elif e.is_minus():
             return minus_normal_power(rec(e.args[0]), rec(e.args[1]))
@@ -342,7 +342,7 @@ def normalize_exp(t: Expr) -> Expr:
                 return rec(expr.exp(a.args[0])) * rec(expr.exp(a.args[1]))
             elif a.is_minus():
                 return rec(expr.exp(a.args[0])) / rec(expr.exp(a.args[1]))
-            elif a.is_uminus():
+            elif expr.is_uminus(a):
                 return rec(expr.exp(a.args[0])) ** (-1)
             elif a.is_divides() and expr.is_fun(a.args[0]) and a.args[0].func_name == 'log':
                 return rec(a.args[0].args[0] ** (1 / a.args[1]))

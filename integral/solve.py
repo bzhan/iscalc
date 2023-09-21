@@ -31,7 +31,7 @@ def solve_equation(f: Expr, a: Expr, x: str, ctx: Context) -> Optional[Expr]:
         if not v.contains_var(x):
             # u + v = a  ==>  u = a - v
             return solve_equation(u, a - v, x, ctx)
-    if f.is_uminus():
+    if expr.is_uminus(f):
         # -u = a  ==>  u = -a
         u, = f.args
         return solve_equation(u, -a, x, ctx)
@@ -106,7 +106,7 @@ def extract_linear(e: Expr, x: str) -> Optional[Tuple[Expr, Expr]]:
         res2 = extract_linear(e.args[1], x)
         if res1 and res2:
             return res1[0] + res2[0], res1[1] + res2[1]
-    elif e.is_uminus():
+    elif expr.is_uminus(e):
         res = extract_linear(e.args[0], x)
         if res:
             return -res[0], -res[1]

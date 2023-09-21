@@ -237,8 +237,7 @@ class Expr:
     def is_plus(self):
         return self.ty == OP and self.op == '+'
 
-    def is_uminus(self):
-        return self.ty == OP and self.op == '-' and len(self.args) == 1
+
 
     def is_minus(self):
         return self.ty == OP and self.op == '-' and len(self.args) == 2
@@ -900,6 +899,9 @@ def is_neg_inf(e: Expr) -> TypeGuard["Inf"]:
 def is_matrix(e: Expr) -> TypeGuard["Matrix"]:
     return e.ty == MATRIX
 
+def is_uminus(e: Expr):
+    return e.ty == OP and e.op == '-' and len(e.args) == 1
+
 def match(exp: Expr, pattern: Expr) -> Optional[Dict]:
     """Match expr with given pattern.
 
@@ -1050,7 +1052,7 @@ def decompose_expr_factor(e):
         if e.is_times():
             rec(e.args[0], sign)
             rec(e.args[1], sign)
-        elif e.is_uminus():
+        elif is_uminus(e):
             num_factors.append(Const(-1))
             rec(e.args[0], sign)
         elif e.is_divides():
@@ -1210,7 +1212,7 @@ class Op(Expr):
             if b.priority() <= op_priority[self.op]:
                 s2 = "(%s)" % s2
             if a.priority() > op_priority[self.op]:
-                if a.is_uminus() and self.op == '^':
+                if is_uminus(a) and self.op == '^':
                     s1 = "(%s)" % s1
             return "%s %s %s" % (s1, self.op, s2)
         else:
@@ -1280,7 +1282,7 @@ class Fun(Expr):
         elif self.func_name == 'exp':
             t = self.args[0].type
             if is_matrix_type(t):
-                if num_row(t) == Const(3) and num_col(t) == Const(1):
+                if num_row(t) == Const(3) and num_col(t) == Const(3):
                     self.type = MatrixType(t.args[0], Const(3), Const(3))
                 else:
                     raise NotImplementedError
@@ -1702,7 +1704,7 @@ def eval_expr(e: Expr):
         return e.val
     elif e.is_plus():
         return eval_expr(e.args[0]) + eval_expr(e.args[1])
-    elif e.is_uminus():
+    elif is_uminus(e):
         return -eval_expr(e.args[0])
     elif e.is_minus():
         return eval_expr(e.args[0]) - eval_expr(e.args[1])

@@ -52,10 +52,12 @@ def collect_pairs(ps):
             # ([(v, 1)], 0) -> zero_matrix
             e = from_poly(Polynomial([Monomial(1, k)]))
             if expr.is_matrix_type(e.type):
-                res_list.append(([(expr.Fun('zero_matrix', expr.num_row(e.type), expr.num_col(e.type)), 1)], 1))
-    
-    return tuple(sorted(res_list))
-
+                res_list.append((((expr.Fun('zero_matrix', expr.num_row(e.type), expr.num_col(e.type)), 1),), 1))
+    try:
+        res = tuple(sorted(res_list))
+    except:
+        print(res_list)
+    return res
 def collect_pairs_power(ps: Dict[expr.Expr, "Polynomial"], ctx: Context):
     res = {}
     res_list = []
@@ -310,6 +312,7 @@ class Polynomial:
     def reduce(self, ctx: Context) -> "Polynomial":
         for mono in self.monomials:
             mono.reduce(ctx)
+        assert all(isinstance(mono.coeff, (int, Fraction)) for mono in self.monomials)
         ts = collect_pairs((mono.factors, mono.coeff) for mono in self.monomials)
         self.monomials = tuple(Monomial(coeff, factor) for factor, coeff in ts if coeff != 0)
         return self
@@ -452,7 +455,7 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
     elif e.is_plus():
         return to_poly(e.args[0], ctx) + to_poly(e.args[1], ctx)
 
-    elif e.is_uminus():
+    elif expr.is_uminus(e):
         return -to_poly(e.args[0], ctx)
 
     elif e.is_minus():
@@ -462,7 +465,9 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
         a, b = to_poly(e.args[0], ctx), to_poly(e.args[1], ctx)
         if a.is_monomial() and b.is_monomial():
             return a * b
-        elif a.is_fraction() or b.is_fraction():
+        elif (a.is_fraction() or b.is_fraction()) and \
+                not expr.is_matrix_type(e.args[1].type) and \
+                not expr.is_matrix_type(e.args[0].type):
             return a * b
         elif a.is_monomial():
             return a * singleton(from_poly(b))
@@ -519,7 +524,7 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
             return to_poly(a.args[0], ctx)
         else:
             tmp = normalize(a, ctx)
-            if e.func_name == "cos" and tmp.is_uminus():
+            if e.func_name == "cos" and expr.is_uminus(tmp):
                 return singleton(expr.Fun(e.func_name, tmp.args[0]), )
             else:
                 return singleton(expr.Fun(e.func_name, tmp))
@@ -662,6 +667,10 @@ def function_eval(e: expr.Expr, ctx: Context) -> expr.Expr:
                 res_data = list(a.data)+ list(b.data)
                 res = expr.Matrix(res_data, res_type)
                 return res
+    if expr.is_fun(e) and e.func_name == 'sin':
+        a = e.args[0]
+        if expr.is_uminus(a):
+            return -expr.Fun('sin', a.args[0])
 
     return e
 
@@ -804,7 +813,7 @@ def simplify_scalar_multiply(e: expr.Expr, ctx:Context) -> expr.Expr:
                                        expr.num_row(a.type),
                                        expr.num_col(a.type))
             return expr.Matrix([[from_poly(to_poly(b * item, ctx)) for item in r] for r in a.data], res_type)
-    elif e.is_uminus():
+    elif expr.is_uminus(e):
         a = e.args[0]
         if expr.is_matrix(a):
             # concrete matrix
@@ -895,7 +904,7 @@ def simplify_power(e: expr.Expr, ctx: Context) -> expr.Expr:
     elif e.args[1].is_minus() and expr.is_const(e.args[0]) and expr.is_const(e.args[1].args[1]):
         # c1 ^ (a - c2) => c1 ^ -c2 * c1 ^ a
         return (e.args[0] ^ e.args[1].args[0]) * (e.args[0] ^ (-(e.args[1].args[1])))
-    elif e.args[0].is_uminus():
+    elif expr.is_uminus(e.args[0]):
         if expr.is_const(e.args[1]):
             # (-a) ^ n = (-1) ^ n * a ^ n
             return (expr.Const(-1) ^ e.args[1]) * (e.args[0].args[0] ^ e.args[1])
@@ -903,7 +912,7 @@ def simplify_power(e: expr.Expr, ctx: Context) -> expr.Expr:
             return e.args[0].args[0] ^ e.args[1]
         else:
             return e
-    elif e.args[0].is_minus() and e.args[0].args[0].is_uminus() and expr.is_const(e.args[1]):
+    elif e.args[0].is_minus() and expr.is_uminus(e.args[0].args[0]) and expr.is_const(e.args[1]):
         # (-a - b) ^ n = (-1) ^ n * (a + b) ^ n
         nega, negb = e.args[0].args
         return (expr.Const(-1) ^ e.args[1]) * ((nega.args[0] + negb) ^ e.args[1])
@@ -1008,7 +1017,13 @@ def simplify_sqrt(e: expr.Expr, ctx: Context) -> expr.Expr:
         return 1 / expr.sqrt(expr.Const(2))
 
     return e
-
+def simplify_sum(e: expr.Expr, ctx:Context) -> expr.Expr:
+    if expr.is_summation(e):
+        if e.lower == e.upper and e.lower not in (expr.POS_INF, expr.NEG_INF):
+            return e.body
+        if e.body == expr.Const(0):
+            return e.body
+    return e
 def simplify_inf(e: expr.Expr, ctx: Context) -> expr.Expr:
     if e.is_plus():
         if e.args[0] == expr.POS_INF and e.args[1].is_constant():
@@ -1046,6 +1061,7 @@ def normalize(e: expr.Expr, ctx: Context) -> expr.Expr:
         e = apply_subterm(e, simplify_log, ctx)
         e = apply_subterm(e, simplify_sqrt, ctx)
         e = apply_subterm(e, simplify_inf, ctx)
+        e = apply_subterm(e, simplify_sum, ctx)
         if e == old_e:
             break
 
@@ -1059,7 +1075,7 @@ def rsize(e: expr.Expr) -> int:
     """Find size of term without constants."""
     if expr.is_const(e):
         return 0
-    elif e.is_uminus():
+    elif expr.is_uminus(e):
         return rsize(e.args[0])
     elif e.is_times():
         return rsize(e.args[0]) + e.args[1].size() + 1
@@ -1160,9 +1176,9 @@ def from_poly(p: Polynomial) -> expr.Expr:
         monos = sorted(monos, key=lambda p: rsize(p), reverse=True)
         res = monos[0]
         for mono in monos[1:]:
-            if mono.is_uminus():
+            if expr.is_uminus(mono):
                 res = res - mono.args[0]
-            elif mono.is_times() and mono.args[0].is_uminus():
+            elif mono.is_times() and expr.is_uminus(mono.args[0]):
                 res = res - mono.args[0].args[0] * mono.args[1]
             elif mono.is_times() and expr.is_const(mono.args[0]) and mono.args[0].val < 0:
                 res = res - expr.Const(-mono.args[0].val) * mono.args[1]

@@ -153,6 +153,12 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "n",
+                    "$int"
+                ]
+            ],
             "goal": "(INT x:[0,1]. (x - x ^ 2) ^ n) = factorial(n) ^ 2 / factorial(2 * n + 1)",
             "latex_goal": "\\int_{0}^{1} (x - x ^ {2}) ^ {n} \\,dx = \\frac{(n!)^{2}}{(2 n + 1)!}",
             "proof": {

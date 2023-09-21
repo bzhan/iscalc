@@ -54,14 +54,17 @@
             ]
         },
         {
-            "expr": "exp(hat(w) * x) = unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * (hat(w)) ^ 2",
+            "expr": "exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * (hat(w)) ^ 2",
             "path": "matrix_rodrigues",
             "type": "problem",
             "fixes": [
-                ["n", "$int"],
                 ["w", "$tensor($real, 3, 1)"]
-            ],
-            "conds": ["shape(w, 3, 1)"]
+            ]
+        },
+        {
+            "expr": "hmf(t, w, v) * hmf(-t, w, v) = unit_matrix(4)",
+            "path": "twist_matrix_exp_inv",
+            "type": "problem"
         }
     ],
     "imports": [

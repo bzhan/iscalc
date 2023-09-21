@@ -670,6 +670,16 @@
             "type": "Calculation"
         },
         {
+            "conds": [
+                {
+                    "cond": "x > -pi / 2",
+                    "latex_cond": "x > \\frac{-\\pi}{2}"
+                },
+                {
+                    "cond": "x < pi / 2",
+                    "latex_cond": "x < \\frac{\\pi}{2}"
+                }
+            ],
             "latex_start": "\\int \\frac{\\sin{x}}{1 + \\sin{x}} \\,dx",
             "start": "INT x. sin(x) / (1 + sin(x))",
             "steps": [

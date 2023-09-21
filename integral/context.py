@@ -284,15 +284,17 @@ class Context:
         symb_rhs = expr_to_pattern(eq.rhs)
         self.series_evaluations.append(Identity(Eq(symb_lhs, symb_rhs)))
 
-    def add_other_identities(self, eq: Expr, category: str, attributes: Optional[List[str]] = None):
+    def add_other_identities(self, eq: Expr, category: str, \
+                             attributes: Optional[List[str]] = None, conds: Conditions = None):
         if not eq.is_equals():
             raise TypeError
         
         symb_lhs = expr_to_pattern(eq.lhs)
         symb_rhs = expr_to_pattern(eq.rhs)
-        self.other_identities.append(Identity(Eq(symb_lhs, symb_rhs), category=category))
+        symb_conds = [expr_to_pattern(cond) for cond in conds.data] if conds != None else []
+        self.other_identities.append(Identity(Eq(symb_lhs, symb_rhs), category=category, conds=Conditions(symb_conds)))
         if attributes is not None and 'bidirectional' in attributes:
-            self.other_identities.append(Identity(Eq(symb_rhs, symb_lhs), category=category))
+            self.other_identities.append(Identity(Eq(symb_rhs, symb_lhs), category=category, conds=Conditions(symb_conds)))
 
     def add_simp_identity(self, eq: Expr, conds: Conditions):
         if not eq.is_equals():
@@ -300,7 +302,8 @@ class Context:
         
         symb_lhs = expr_to_pattern(eq.lhs)
         symb_rhs = expr_to_pattern(eq.rhs)
-        self.simp_identities.append(Identity(Eq(symb_lhs, symb_rhs), conds=conds))
+        symb_conds = [expr_to_pattern(cond) for cond in conds.data]
+        self.simp_identities.append(Identity(Eq(symb_lhs, symb_rhs), conds=Conditions(conds)))
 
     def add_function_table(self, funcname: str, table: Dict[str, str]):
         self.function_tables[funcname] = dict()
@@ -400,7 +403,11 @@ class Context:
                 else:
                     self.add_series_evaluation(e)
             elif e.is_equals() and 'category' in item:
-               self.add_other_identities(e, item['category'], item.get('attributes'))
+                conds = Conditions()
+                if 'conds' in item:
+                    for c in item['conds']:
+                        conds.add_condition(parser.parse_expr(c, fixes=fixes))
+                self.add_other_identities(e, item['category'], item.get('attributes'), conds)
             elif e.is_equals() and item['type'] == 'problem':
                 conds = Conditions()
                 if 'conds' in item:

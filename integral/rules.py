@@ -442,7 +442,7 @@ class Linearity(Rule):
                 if e.body.is_plus():
                     return rec(expr.Integral(e.var, e.lower, e.upper, e.body.args[0])) + \
                         rec(expr.Integral(e.var, e.lower, e.upper, e.body.args[1]))
-                elif e.body.is_uminus():
+                elif expr.is_uminus(e.body):
                     return -rec(expr.Integral(e.var, e.lower, e.upper, e.body.args[0]))
                 elif e.body.is_minus():
                     return rec(expr.Integral(e.var, e.lower, e.upper, e.body.args[0])) - \
@@ -469,7 +469,7 @@ class Linearity(Rule):
                 if e.body.is_plus():
                     return rec(expr.IndefiniteIntegral(e.var, e.body.args[0], e.skolem_args)) + \
                         rec(expr.IndefiniteIntegral(e.var, e.body.args[1], e.skolem_args))
-                elif e.body.is_uminus():
+                elif expr.is_uminus(e.body):
                     return -IndefiniteIntegral(e.var, e.body.args[0], e.skolem_args)
                 elif e.body.is_minus():
                     return rec(expr.IndefiniteIntegral(e.var, e.body.args[0], e.skolem_args)) - \
@@ -491,7 +491,7 @@ class Linearity(Rule):
                 else:
                     return e
             elif expr.is_limit(e):
-                if e.body.is_uminus():
+                if expr.is_uminus(e.body):
                     return -Limit(e.var, e.lim, e.body.args[0])
                 elif e.body.is_times() or e.body.is_divides():
                     num_factors, denom_factors = decompose_expr_factor(e.body)
@@ -513,7 +513,7 @@ class Linearity(Rule):
                 v, l, u, body = e.index_var, e.lower, e.upper, e.body
                 if e.body.is_minus():
                     return Summation(v, l, u, body.args[0]) - Summation(v, l, u, body.args[1])
-                elif e.body.is_uminus():
+                elif expr.is_uminus(e.body):
                     return -Summation(v, l, u, body.args[0])
                 elif e.body.is_times() or e.body.is_divides():
                     num_factors, denom_factors = decompose_expr_factor(e.body)
@@ -616,6 +616,12 @@ class ApplyIdentity(Rule):
             inst = expr.match(e, identity.lhs)
             if inst is not None:
                 expected_rhs = identity.rhs.inst_pat(inst)
+                tmp_conds = [cond.inst_pat(inst) for cond in identity.conds.data]
+                flag = True
+                for cond in tmp_conds:
+                    flag = flag and ctx.check_condition(cond)
+                if not flag:
+                    continue
                 if normalize(expected_rhs, ctx) == normalize(self.target, ctx):
                     return self.target
 
@@ -1589,7 +1595,7 @@ class IntegrateByEquation(Rule):
                 return get_coeff(t.args[0]) + get_coeff(t.args[1])
             elif t.is_minus():
                 return get_coeff(t.args[0]) - get_coeff(t.args[1])
-            elif t.is_uminus():
+            elif expr.is_uminus(t):
                 return -get_coeff(t.args[0])
             elif t.is_times():
                 return t.args[0] * get_coeff(t.args[1])

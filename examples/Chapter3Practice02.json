@@ -193,8 +193,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\frac{\\sin{(a b)}}{b} ((\\int_{0}^{\\infty} -\\frac{\\sin{(-a u)}}{u} \\,du) + (\\int_{0}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du))",
-                                "res": "sin(a * b) / b * ((INT u:[0,oo]. -(sin(-(a * u)) / u)) + (INT u:[0,oo]. sin(a * u) / u))",
+                                "latex_res": "\\frac{\\sin{(a b)}}{b} ((\\int_{0}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du) + (\\int_{0}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du))",
+                                "res": "sin(a * b) / b * ((INT u:[0,oo]. sin(a * u) / u) + (INT u:[0,oo]. sin(a * u) / u))",
                                 "rule": {
                                     "latex_str": "substitute \\(u\\) for \\(-u\\) at 1.0",
                                     "loc": "1.0",
@@ -202,18 +202,6 @@
                                     "str": "substitute u for -u at 1.0",
                                     "var_name": "u",
                                     "var_subst": "-u"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\frac{\\sin{(a b)}}{b} ((\\int_{0}^{\\infty} -\\frac{-\\sin{(a u)}}{u} \\,du) + (\\int_{0}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du))",
-                                "res": "sin(a * b) / b * ((INT u:[0,oo]. -(-sin(a * u) / u)) + (INT u:[0,oo]. sin(a * u) / u))",
-                                "rule": {
-                                    "latex_str": "rewrite \\(\\sin{(-a u)}\\) to \\(-\\sin{(a u)}\\) using identity",
-                                    "name": "ApplyIdentity",
-                                    "source": "sin(-(a * u))",
-                                    "str": "rewrite sin(-(a * u)) to -sin(a * u) using identity",
-                                    "target": "-sin(a * u)"
                                 },
                                 "type": "CalculationStep"
                             },

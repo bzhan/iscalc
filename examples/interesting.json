@@ -498,7 +498,8 @@
         {
             "category": "gamma-beta",
             "conds": [
-                "n >= 1"
+                "n > 0",
+                "type(n, 0)"
             ],
             "expr": "Gamma(n) = factorial(n - 1)",
             "path": "GammaFunction",

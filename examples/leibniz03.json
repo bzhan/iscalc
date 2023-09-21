@@ -532,8 +532,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\cos{s} (\\int_{-\\infty}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx) - \\sin{s} ((\\int_{0}^{\\infty} \\sin{(-t x)} e^{-x ^ {2}/2} \\,dx) + (\\int_{0}^{\\infty} \\sin{(t x)} e^{-x ^ {2}/2} \\,dx))",
-                                "res": "cos(s) * (INT x:[-oo,oo]. cos(t * x) * exp(-(x ^ 2 / 2))) - sin(s) * ((INT x:[0,oo]. sin(-(t * x)) * exp(-(x ^ 2 / 2))) + (INT x:[0,oo]. sin(t * x) * exp(-(x ^ 2 / 2))))",
+                                "latex_res": "\\cos{s} (\\int_{-\\infty}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx) - \\sin{s} ((\\int_{0}^{\\infty} -\\sin{(t x)} e^{-x ^ {2}/2} \\,dx) + (\\int_{0}^{\\infty} \\sin{(t x)} e^{-x ^ {2}/2} \\,dx))",
+                                "res": "cos(s) * (INT x:[-oo,oo]. cos(t * x) * exp(-(x ^ 2 / 2))) - sin(s) * ((INT x:[0,oo]. -(sin(t * x) * exp(-(x ^ 2 / 2)))) + (INT x:[0,oo]. sin(t * x) * exp(-(x ^ 2 / 2))))",
                                 "rule": {
                                     "latex_str": "substitute \\(x\\) for \\(-x\\) at 1.1.0",
                                     "loc": "1.1.0",
@@ -541,18 +541,6 @@
                                     "str": "substitute x for -x at 1.1.0",
                                     "var_name": "x",
                                     "var_subst": "-x"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\cos{s} (\\int_{-\\infty}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx) - \\sin{s} ((\\int_{0}^{\\infty} (-\\sin{(t x)}) e^{-x ^ {2}/2} \\,dx) + (\\int_{0}^{\\infty} \\sin{(t x)} e^{-x ^ {2}/2} \\,dx))",
-                                "res": "cos(s) * (INT x:[-oo,oo]. cos(t * x) * exp(-(x ^ 2 / 2))) - sin(s) * ((INT x:[0,oo]. -sin(t * x) * exp(-(x ^ 2 / 2))) + (INT x:[0,oo]. sin(t * x) * exp(-(x ^ 2 / 2))))",
-                                "rule": {
-                                    "latex_str": "rewrite \\(\\sin{(-t x)}\\) to \\(-\\sin{(t x)}\\) using identity",
-                                    "name": "ApplyIdentity",
-                                    "source": "sin(-(t * x))",
-                                    "str": "rewrite sin(-(t * x)) to -sin(t * x) using identity",
-                                    "target": "-sin(t * x)"
                                 },
                                 "type": "CalculationStep"
                             },

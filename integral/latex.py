@@ -63,7 +63,7 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
                 else:
                     # Ordinary cases
                     sy = convert_expr(y, mode="short")
-                    if x.priority() <= e.priority() or x.is_uminus() or expr.is_fun(x) and x.func_name == 'exp':
+                    if x.priority() <= e.priority() or expr.is_uminus(x) or expr.is_fun(x) and x.func_name == 'exp':
                         sx = "(%s)" % sx
                     sy = "{%s}" % sy
                     return "%s %s %s" % (sx, e.op, sy)
@@ -75,9 +75,9 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
                     sy = "(%s)" % sy
                 return "%s %s %s" % (sx, e.op, sy)
             elif e.op == "*":
-                if x.priority() < e.priority() or x.is_uminus():
+                if x.priority() < e.priority() or expr.is_uminus(x):
                     sx = "(%s)" % sx
-                if y.priority() <= e.priority() or y.is_uminus():
+                if y.priority() <= e.priority() or expr.is_uminus(y):
                     sy = "(%s)" % sy
                 if mode == 'short' and expr.is_const(x) and isinstance(x.val, Fraction) and \
                     x.val.denominator != 1:

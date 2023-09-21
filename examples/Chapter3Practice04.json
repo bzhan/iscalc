@@ -51,8 +51,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\frac{1}{2} ((\\int_{0}^{\\infty} -\\frac{x \\sin{(-a x)}}{-b ^ {2} + x ^ {2}} \\,dx) + (\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{x ^ {2} - b ^ {2}} \\,dx))",
-                                "res": "1/2 * ((INT x:[0,oo]. -(x * sin(-(a * x)) / (-(b ^ 2) + x ^ 2))) + (INT x:[0,oo]. x * sin(a * x) / (x ^ 2 - b ^ 2)))",
+                                "latex_res": "\\frac{1}{2} ((\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx) + (\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{x ^ {2} - b ^ {2}} \\,dx))",
+                                "res": "1/2 * ((INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) + (INT x:[0,oo]. x * sin(a * x) / (x ^ 2 - b ^ 2)))",
                                 "rule": {
                                     "latex_str": "substitute \\(x\\) for \\(-x\\) at 1.0",
                                     "loc": "1.0",
@@ -60,18 +60,6 @@
                                     "str": "substitute x for -x at 1.0",
                                     "var_name": "x",
                                     "var_subst": "-x"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\frac{1}{2} ((\\int_{0}^{\\infty} -\\frac{x (-\\sin{(a x)})}{-b ^ {2} + x ^ {2}} \\,dx) + (\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{x ^ {2} - b ^ {2}} \\,dx))",
-                                "res": "1/2 * ((INT x:[0,oo]. -(x * -sin(a * x) / (-(b ^ 2) + x ^ 2))) + (INT x:[0,oo]. x * sin(a * x) / (x ^ 2 - b ^ 2)))",
-                                "rule": {
-                                    "latex_str": "rewrite \\(\\sin{(-a x)}\\) to \\(-\\sin{(a x)}\\) using identity",
-                                    "name": "ApplyIdentity",
-                                    "source": "sin(-(a * x))",
-                                    "str": "rewrite sin(-(a * x)) to -sin(a * x) using identity",
-                                    "target": "-sin(a * x)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -322,8 +310,8 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{2 b} (b (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a b - a u)}}{u} \\,du) - ((\\int_{0}^{\\infty} \\frac{\\sin{(-s)}}{a} \\,ds) + (\\int_{0}^{\\infty} \\frac{\\sin{s}}{a} \\,ds)))",
-                            "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (2 * b) * (b * (INT u:[-oo,oo]. sin(a * b - a * u) / u) - ((INT s:[0,oo]. sin(-s) / a) + (INT s:[0,oo]. sin(s) / a))))",
+                            "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{2 b} (b (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a b - a u)}}{u} \\,du) - ((\\int_{0}^{\\infty} -\\frac{\\sin{s}}{a} \\,ds) + (\\int_{0}^{\\infty} \\frac{\\sin{s}}{a} \\,ds)))",
+                            "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (2 * b) * (b * (INT u:[-oo,oo]. sin(a * b - a * u) / u) - ((INT s:[0,oo]. -(sin(s) / a)) + (INT s:[0,oo]. sin(s) / a))))",
                             "rule": {
                                 "latex_str": "substitute \\(s\\) for \\(-s\\) at 1.0.1.1.0",
                                 "loc": "1.0.1.1.0",
@@ -331,18 +319,6 @@
                                 "str": "substitute s for -s at 1.0.1.1.0",
                                 "var_name": "s",
                                 "var_subst": "-s"
-                            },
-                            "type": "CalculationStep"
-                        },
-                        {
-                            "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{2 b} (b (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a b - a u)}}{u} \\,du) - ((\\int_{0}^{\\infty} \\frac{-\\sin{s}}{a} \\,ds) + (\\int_{0}^{\\infty} \\frac{\\sin{s}}{a} \\,ds)))",
-                            "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (2 * b) * (b * (INT u:[-oo,oo]. sin(a * b - a * u) / u) - ((INT s:[0,oo]. -sin(s) / a) + (INT s:[0,oo]. sin(s) / a))))",
-                            "rule": {
-                                "latex_str": "rewrite \\(\\sin{(-s)}\\) to \\(-\\sin{s}\\) using identity",
-                                "name": "ApplyIdentity",
-                                "source": "sin(-s)",
-                                "str": "rewrite sin(-s) to -sin(s) using identity",
-                                "target": "-sin(s)"
                             },
                             "type": "CalculationStep"
                         },
@@ -424,8 +400,8 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = \\frac{\\cos{(a b)}}{2} ((\\int_{0}^{\\infty} -\\frac{\\sin{(-a u)}}{u} \\,du) + (\\int_{0}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du)) - \\frac{\\sin{(a b)}}{2} (\\lim\\limits_{c\\to \\infty} (\\,(\\int_{\\infty}^{1/c} \\frac{\\cos{(a u)}}{u} \\,du) + (\\int_{1/c}^{\\infty} \\frac{\\cos{(a u)}}{u} \\,du)\\,))",
-                            "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = cos(a * b) / 2 * ((INT u:[0,oo]. -(sin(-(a * u)) / u)) + (INT u:[0,oo]. sin(a * u) / u)) - sin(a * b) / 2 * (LIM {c -> oo}. (INT u:[oo,1 / c]. cos(a * u) / u) + (INT u:[1 / c,oo]. cos(a * u) / u))",
+                            "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = \\frac{\\cos{(a b)}}{2} ((\\int_{0}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du) + (\\int_{0}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du)) - \\frac{\\sin{(a b)}}{2} (\\lim\\limits_{c\\to \\infty} (\\,(\\int_{\\infty}^{1/c} \\frac{\\cos{(a u)}}{u} \\,du) + (\\int_{1/c}^{\\infty} \\frac{\\cos{(a u)}}{u} \\,du)\\,))",
+                            "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = cos(a * b) / 2 * ((INT u:[0,oo]. sin(a * u) / u) + (INT u:[0,oo]. sin(a * u) / u)) - sin(a * b) / 2 * (LIM {c -> oo}. (INT u:[oo,1 / c]. cos(a * u) / u) + (INT u:[1 / c,oo]. cos(a * u) / u))",
                             "rule": {
                                 "latex_str": "substitute \\(u\\) for \\(-u\\) at 1.0.1.0",
                                 "loc": "1.0.1.0",
@@ -433,18 +409,6 @@
                                 "str": "substitute u for -u at 1.0.1.0",
                                 "var_name": "u",
                                 "var_subst": "-u"
-                            },
-                            "type": "CalculationStep"
-                        },
-                        {
-                            "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = \\frac{\\cos{(a b)}}{2} ((\\int_{0}^{\\infty} -\\frac{-\\sin{(a u)}}{u} \\,du) + (\\int_{0}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du)) - \\frac{\\sin{(a b)}}{2} (\\lim\\limits_{c\\to \\infty} (\\,(\\int_{\\infty}^{1/c} \\frac{\\cos{(a u)}}{u} \\,du) + (\\int_{1/c}^{\\infty} \\frac{\\cos{(a u)}}{u} \\,du)\\,))",
-                            "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = cos(a * b) / 2 * ((INT u:[0,oo]. -(-sin(a * u) / u)) + (INT u:[0,oo]. sin(a * u) / u)) - sin(a * b) / 2 * (LIM {c -> oo}. (INT u:[oo,1 / c]. cos(a * u) / u) + (INT u:[1 / c,oo]. cos(a * u) / u))",
-                            "rule": {
-                                "latex_str": "rewrite \\(\\sin{(-a u)}\\) to \\(-\\sin{(a u)}\\) using identity",
-                                "name": "ApplyIdentity",
-                                "source": "sin(-(a * u))",
-                                "str": "rewrite sin(-(a * u)) to -sin(a * u) using identity",
-                                "target": "-sin(a * u)"
                             },
                             "type": "CalculationStep"
                         },

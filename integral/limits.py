@@ -563,7 +563,7 @@ def limit_of_expr(e: Expr, var_name: str, ctx: Context) -> Limit:
         l1 = limit_of_expr(e.args[0], var_name, ctx)
         l2 = limit_of_expr(e.args[1], var_name, ctx)
         return limit_add(l1, l2, ctx)
-    elif e.is_uminus():
+    elif expr.is_uminus(e):
         l = limit_of_expr(e.args[0], var_name, ctx)
         return limit_uminus(l, ctx)
     elif e.is_minus():

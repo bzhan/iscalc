@@ -234,13 +234,23 @@ def check_cond(cond: Expr, all_conds: Dict[Expr, List[Expr]], inst: Dict[str, Ex
 
     if expr.is_fun(cond) and cond.func_name == 'type':
         n = len(cond.args)
-        assert n in [3, 4]
+        assert n in [2, 3, 4]
         v = cond.args[0]
-        type_mapping = {Const(0): expr.RealType}
+        type_mapping = {Const(0): expr.RealType, Const(1): expr.IntType}
         ele_type = type_mapping[cond.args[1]]
         if n == 4:
             r, c = cond.args[2:]
             if v.type == expr.MatrixType(ele_type, r, c):
+                return [inst]
+        elif n == 3:
+            r = cond.args[2]
+            c = Const(1)
+            if v.type == expr.MatrixType(ele_type, r, c):
+                return [inst]
+        elif n == 2:
+            if v.type == ele_type:
+                return [inst]
+            if v.type == expr.IntType and ele_type == expr.RealType:
                 return [inst]
         else:
             raise NotImplementedError
@@ -462,6 +472,7 @@ def get_standard_inequalities() -> List[Identity]:
         (["isInt(a)", "isInt(b)"], "isInt(a + b)"),
         (["isInt(a)", "isInt(b)"], "isInt(a - b)"),
         (["isInt(a)", "isInt(b)"], "isInt(a * b)"),
+        (["type(a, 1)", "a > b"], "a >= b+1"),
 
         (["a>=b", "a!=b"], "a>b"),
         (["a<=b", "a!=b"], "a<b")

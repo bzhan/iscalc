@@ -287,12 +287,30 @@ class MatrixTest(unittest.TestCase):
                             conds=['type(R, 0, 3, 3)', 'type(p, 0 ,3, 1)'])
         file.add_definition("hmf(t, w, v) = hm(unit_matrix(3), t*v)", fixes=fixes,
                             conds=['type(w, 0 ,3)', 'type(v, 0 ,3)', 'norm(w)=0'])
-        file.add_definition("hmf(t, w, v) = hm(exp(t*w), (unit_matrix(3)-exp(t*w))*(hat(w)*v)+(w*T(w)*v*t))", fixes=fixes,
+        file.add_definition("hmf(t, w, v) = hm(exp(t*hat(w)), (unit_matrix(3)-exp(t*hat(w)))*(hat(w)*v)+(w*T(w)*v*t))", fixes=fixes,
                             conds=['type(w, 0, 3)', 'type(v, 0, 3)', 'norm(w)!=0'])
-        goal01 = file.add_goal("hmf(t, w, v) * hmf(-t, w, v) = unit_matrix(4)", fixes=fixes,
-                               conds=['type(w, 0, 3)', 'type(v, 0, 3)'])
+        goal01 = file.add_goal("exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3)", fixes=fixes)
+        proof = goal01.proof_by_calculation()
+        calc = proof.lhs_calc
+        lemma = calc.parse_expr("exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * (hat(w)) ^ 2")
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(lemma), '0'))
+        s1 = calc.parse_expr("-(t * hat(w))")
+        s2 = calc.parse_expr("-t * hat(w)")
+        calc.perform_rule(rules.Equation(s1, s2))
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(lemma), '1'))
+        calc.perform_rule(rules.ExpandPolynomial())
+        calc.perform_rule(rules.FullSimplify())
+        s1 = calc.parse_expr("(-cos(t) + 1) ^ 2 * hat(w) ^ 2 * hat(w) ^ 2")
+        s2 = calc.parse_expr("(-cos(t) + 1) ^ 2 * (hat(w) ^ 2 * hat(w) ^ 2)")
+        calc.perform_rule(rules.Equation(s1, s2))
+        s1 = calc.parse_expr("hat(w) ^ 2 * hat(w) ^ 2")
+        s2 = calc.parse_expr("hat(w) ^ (2 + 2)")
+        calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2), "0.0.0.0.0.1"))
+        print(goal01)
+        goal02 = file.add_goal("hmf(t, w, v) * hmf(-t, w, v) = unit_matrix(4)", fixes=fixes,
+                               conds=['norm(w)=1'])
         split_cond = parser.parse_expr("norm(w)!=0", fixes=fixes)
-        proof = goal01.proof_by_case(split_cond=split_cond)
+        proof = goal02.proof_by_case(split_cond=split_cond)
         case1 = proof.cases[0].proof_by_calculation()
         calc = case1.lhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '0'))
@@ -300,7 +318,7 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '0'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '1'))
         calc.perform_rule(rules.FullSimplify())
-        print(case1)
+        # print(case1)
         case2 = proof.cases[1].proof_by_calculation()
         calc = case2.lhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '0'))
@@ -308,15 +326,16 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '0'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '1'))
         calc.perform_rule(rules.FullSimplify())
-
+        # print(case2)
+        # self.checkAndOutput(file, omit_finish=True)
 
     def testMy(self):
-        fixes = dict()
-        fixes['w'] = parser.parse_expr("$tensor($real, 3, 1)")
-        e = parser.parse_expr("zero_matrix(1,3) * exp(-(t * w))", fixes=fixes)
+
         ctx = Context()
-        from integral import poly
-        p = poly.to_poly_r(e, ctx)
+        ctx.add_condition("x > 0")
+        ctx.add_condition("x < pi/2")
+        e = parser.parse_expr("cos(x) != 0")
+        p = ctx.check_condition(e)
         print(p)
 
 if __name__ == "__main__":

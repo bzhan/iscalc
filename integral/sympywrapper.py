@@ -32,7 +32,7 @@ def convert_to_sympy(e: Expr):
             return e.val
         elif e.is_plus():
             return rec(e.args[0]) + rec(e.args[1])
-        elif e.is_uminus():
+        elif expr.is_uminus(e):
             return -rec(e.args[0])
         elif e.is_minus():
             return rec(e.args[0]) - rec(e.args[1])

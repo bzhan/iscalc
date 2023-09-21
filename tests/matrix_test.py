@@ -392,7 +392,6 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.Equation(s1,s2))
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(goal03.goal), "0.1.0.0.0.0.1"))
         calc.perform_rule(rules.FullSimplify())
-        print(case1)
         case2 = proof.cases[1].proof_by_calculation()
         calc = case2.lhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '0'))
@@ -400,23 +399,22 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '0'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '1'))
         calc.perform_rule(rules.FullSimplify())
-        # print(case2)
         self.checkAndOutput(file, omit_finish=False)
 
-    def testMy(self):
-        fixes = dict()
-        fixes['a'] = parser.parse_expr("$tensor($real, 3,1)")
-        fixes['b'] = parser.parse_expr("$tensor($real, 1,3)")
-        fixes['c'] = parser.parse_expr("$tensor($real, 3,1)")
-        ctx = Context()
-        e = parser.parse_expr("hat(a) + (-(a*b) + hat(c)*hat(a))", fixes=fixes)
-        from integral import poly
-        p = poly.to_poly_r(e, ctx)
-        print(p)
-        p = p.reduce(ctx)
-        print(p)
-        p = poly.from_poly(p)
-        print(p)
+    # def testMy(self):
+    #     fixes = dict()
+    #     fixes['a'] = parser.parse_expr("$tensor($real, 3,1)")
+    #     fixes['b'] = parser.parse_expr("$tensor($real, 1,3)")
+    #     fixes['c'] = parser.parse_expr("$tensor($real, 3,1)")
+    #     ctx = Context()
+    #     e = parser.parse_expr("hat(a) + (-(a*b) + hat(c)*hat(a))", fixes=fixes)
+    #     from integral import poly
+    #     p = poly.to_poly_r(e, ctx)
+    #     print(p)
+    #     p = p.reduce(ctx)
+    #     print(p)
+    #     p = poly.from_poly(p)
+    #     print(p)
 
 if __name__ == "__main__":
     unittest.main()

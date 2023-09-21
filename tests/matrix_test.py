@@ -373,7 +373,6 @@ class MatrixTest(unittest.TestCase):
         fixes['v'] = parser.parse_expr('$tensor($real, 3, 1)')
         goal04 = file.add_goal("hmf(t, w, v) * hmf(-t, w, v) = unit_matrix(4)", fixes=fixes,
                                conds=['norm(w)=1'])
-        split_cond = parser.parse_expr("norm(w)!=0", fixes=fixes)
         proof = goal04.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '0'))

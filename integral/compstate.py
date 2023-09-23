@@ -666,6 +666,7 @@ class RewriteGoalProof(StateItem):
         self.parent = parent
         self.goal = goal
         self.ctx = parent.ctx
+        self.begin_fixes = begin.ctx.get_fixes()
         ctx = Context(self.ctx)
         ctx.extend_fixes(begin.ctx.get_fixes())
         self.begin = Calculation(self, ctx, begin.goal, conds=begin.conds, connection_symbol = '==>')
@@ -676,13 +677,19 @@ class RewriteGoalProof(StateItem):
         return f1 and f2
 
     def export(self):
-        return {
+        res = {
             "type": "RewriteGoalProof",
             "goal": str(self.goal),
             "latex_goal": latex.convert_expr(self.goal),
             "start": self.begin.export(),
-            "finished": self.is_finished()
+            "finished": self.is_finished(),
         }
+        if len(self.begin_fixes.items()) > 0:
+            d = list()
+            for a, b in self.begin_fixes.items():
+                d.append((a, str(b)))
+            res['begin_fixes'] = d
+        return res
 
     def clear(self):
         self.begin.clear()
@@ -1059,7 +1066,12 @@ def parse_item(parent, item) -> StateItem:
         goal = parser.parse_expr(item['goal'], fixes=fixes)
         begin_goal = parser.parse_expr(item['start']['start'], fixes=fixes)
         begin_conds = parse_conds(item['start'], fixes=fixes)
-        res = RewriteGoalProof(parent, goal=goal, begin=Goal(parent, parent.ctx, begin_goal, conds=begin_conds, fixes=fixes))
+        begin_fixes = dict()
+        if 'begin_fixes' in item:
+            for k, v in item['begin_fixes']:
+                begin_fixes[k] = parser.parse_expr(v, begin_fixes)
+        res = RewriteGoalProof(parent, goal=goal, \
+                               begin=Goal(parent, parent.ctx, begin_goal, conds=begin_conds, fixes=begin_fixes))
         for i, step in enumerate(item['start']['steps']):
             res.begin.add_step(parse_step(res.begin, step, i))
         return res

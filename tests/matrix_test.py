@@ -16,7 +16,8 @@ class MatrixTest(unittest.TestCase):
         # Test parsing of json file
         json_file = file.export()
         for i, item in enumerate(json_file['content']):
-            aa, bb = compstate.parse_item(file.content[i].parent, item), file.content[i]
+            aa = compstate.parse_item(file.content[i].parent, item)
+            bb = file.content[i]
             a, b = aa.export(), bb.export()
             if a != b:
                 if isinstance(aa, compstate.Goal) and isinstance(bb, compstate.Goal):
@@ -246,8 +247,8 @@ class MatrixTest(unittest.TestCase):
     def testRodrigues(self):
         file = compstate.CompFile("MIRM", "matrix_rodrigues")
         fixes = dict()
+
         fixes['w'] = parser.parse_expr('$tensor($real, 3, 1)')
-        fixes['n'] = parser.parse_expr('$int')
 
         goal01 = file.add_goal("exp(hat(w) * x) = unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * (hat(w)) ^ 2",
                                conds=["norm(w) = 1"],
@@ -425,20 +426,25 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
 
-    # def testMy(self):
-    #     fixes = dict()
-    #     fixes['a'] = parser.parse_expr("$tensor($real, 3,1)")
-    #     fixes['b'] = parser.parse_expr("$tensor($real, 1,3)")
-    #     fixes['c'] = parser.parse_expr("$tensor($real, 3,1)")
-    #     ctx = Context()
-    #     e = parser.parse_expr("hat(a) + (-(a*b) + hat(c)*hat(a))", fixes=fixes)
-    #     from integral import poly
-    #     p = poly.to_poly_r(e, ctx)
-    #     print(p)
-    #     p = p.reduce(ctx)
-    #     print(p)
-    #     p = poly.from_poly(p)
-    #     print(p)
+    def testFixes01(self):
+        file = compstate.CompFile("base", "test_fixes_01")
+        fixes = dict()
+        fixes['x'] = parser.parse_expr('$real')
+        fixes['y'] = parser.parse_expr('$real')
+        goal = file.add_goal("(cos(y) + (sin(x)^2+cos(x)^2)) = " + \
+                             "SUM(k, 0, oo, (-1)^k*y^(2*k) / factorial(2*k)) + 1",
+                             fixes=fixes)
+        proof = goal.proof_by_calculation()
+        calc = proof.lhs_calc
+        s1 = calc.parse_expr("sin(x)^2 + cos(x)^2")
+        s2 = calc.parse_expr("1")
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
+        assert calc.ctx.get_fixes() == {'y': expr.RealType}
+        assert calc.ctx.dead_vars == {'x': None}
+        calc.perform_rule(rules.OnLocation(rules.SeriesExpansionIdentity(index_var='x'), '0'))
+        assert calc.ctx.get_fixes() == {'y': expr.RealType, 'x': expr.IntType}
+        assert calc.ctx.dead_vars == dict()
+        assert goal.is_finished()
 
 if __name__ == "__main__":
     unittest.main()

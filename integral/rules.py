@@ -1038,15 +1038,15 @@ class FullSimplify(Rule):
                 raise AssertionError("Loop in FullSimplify")
         return current
 
-
 class ApplyEquation(Rule):
     """Apply the given equation for rewriting."""
 
-    def __init__(self, eq: Union[Expr, str]):
+    def __init__(self, eq: Union[Expr, str], source:Expr):
         self.name = "ApplyEquation"
         if isinstance(eq, str):
             eq = parser.parse_expr(eq)
         self.eq = eq
+        self.source = source
 
     def __str__(self):
         return "apply equation: " + str(self.eq)
@@ -1055,14 +1055,26 @@ class ApplyEquation(Rule):
         return "apply equation \\(%s\\)" % latex.convert_expr(self.eq)
 
     def export(self):
+        eq_fixes = list(self.eq.get_vars(with_bd=True, with_type=True))
         return {
             "name": self.name,
             "eq": str(self.eq),
+            "eq_fixes": eq_fixes,
+            "source": str(self.source),
             "str": str(self),
             "latex_str": self.latex_str()
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
+        # Find source within e
+        if self.source != e:
+            find_res = e.find_subexpr(self.source)
+            if len(find_res) == 0:
+                raise AssertionError("ApplyIdentity: source expression not found")
+            loc = find_res[0]
+            return OnLocation(self, loc).eval(e, ctx)
+        assert self.source == e
+        # Find lemma
         found = False
         conds = None
         for identity in ctx.get_lemmas():
@@ -1089,16 +1101,15 @@ class ApplyEquation(Rule):
                 tmp_inst_rhs = expr.match(self.eq.rhs, pat.rhs)
                 tmp = tmp.inst_pat(tmp_inst_rhs)
                 tmp_conds = [cond_pattern.inst_pat(tmp_inst_rhs) for cond_pattern in conds_pattern]
-        # Prevent both inst_lhs and inst_lhs from being not None
-        if tmp != None:
-            if tmp_conds == []:
-                return tmp
-            flag = True
-            # check whether all conditions of the lemma have been satisfied
-            for cond in tmp_conds:
-                flag = flag and ctx.check_condition(cond)
-            if flag:
-                return tmp
+            if tmp != None and pat.lhs.inst_pat(inst_lhs) == self.source:
+                if tmp_conds == []:
+                    return tmp
+                flag = True
+                # check whether all conditions of the lemma have been satisfied
+                for cond in tmp_conds:
+                    flag = flag and ctx.check_condition(cond)
+                if flag:
+                    return tmp
         if inst_rhs is not None:
             tmp = pat.lhs.inst_pat(inst_rhs)
             tmp_conds = [cond_pattern.inst_pat(inst_rhs) for cond_pattern in conds_pattern]
@@ -1106,15 +1117,15 @@ class ApplyEquation(Rule):
                 tmp_inst_lhs = expr.match(self.eq.lhs, pat.lhs)
                 tmp = tmp.inst_pat(tmp_inst_lhs)
                 tmp_conds = [cond_pattern.inst_pat(tmp_inst_lhs) for cond_pattern in conds_pattern]
-        if tmp != None:
-            if tmp_conds == []:
-                return tmp
-            flag = True
-            # check whether all conditions of the lemma have been satisfied
-            for cond in tmp_conds:
-                flag = flag and ctx.check_condition(cond)
-            if flag:
-                return tmp
+            if tmp != None and pat.rhs.inst_pat(inst_rhs) == self.source:
+                if tmp_conds == []:
+                    return tmp
+                flag = True
+                # check whether all conditions of the lemma have been satisfied
+                for cond in tmp_conds:
+                    flag = flag and ctx.check_condition(cond)
+                if flag:
+                    return tmp
         # print("solve equation %s for %s"%(self.eq, e))
         # Finally, try to solve for e in the equation.
         res = solve_for_term(self.eq, e, ctx)

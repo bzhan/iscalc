@@ -880,8 +880,14 @@ def parse_rule(item, parent) -> Rule:
         old_expr = parser.parse_expr(item['old_expr'], fixes=fixes) if ('old_expr' in item) else None
         return rules.Equation(old_expr, new_expr)
     elif item['name'] == 'ApplyEquation':
-        eq = parser.parse_expr(item['eq'], fixes=fixes)
-        return rules.ApplyEquation(eq)
+        eq_fixes = dict()
+        if 'eq_fixes' in item:
+            raw_fixes = item['eq_fixes']
+            for s, t in raw_fixes:
+                eq_fixes[s] = parser.parse_expr(t, fixes=eq_fixes)
+        eq = parser.parse_expr(item['eq'], fixes=eq_fixes)
+        source = parser.parse_expr(item['source'], fixes=fixes)
+        return rules.ApplyEquation(eq, source)
     elif item['name'] == 'ExpandPolynomial':
         return rules.ExpandPolynomial()
     elif item['name'] == 'SplitRegion':

@@ -118,10 +118,20 @@
                                 "res": "SUM(i, 0, oo, x ^ (2 * i + 1) * ((-1) ^ i * hat(w)) / factorial(2 * i + 1)) + SUM(n, 0, oo, x ^ (2 * (n + 1)) * hat(w) ^ (2 * (n + 1)) / factorial(2 * (n + 1))) + unit_matrix(3)",
                                 "rule": {
                                     "eq": "hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)",
-                                    "latex_str": "apply equation \\(\\hat{w} ^ {2 n + 1} = (-1) ^ {n} \\hat{w}\\) at 0.0.0.0.1",
-                                    "loc": "0.0.0.0.1",
+                                    "eq_fixes": [
+                                        [
+                                            "w",
+                                            "$real"
+                                        ],
+                                        [
+                                            "n",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(\\hat{w} ^ {2 n + 1} = (-1) ^ {n} \\hat{w}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w) at 0.0.0.0.1"
+                                    "source": "hat(w) ^ (2 * i + 1)",
+                                    "str": "apply equation: hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -130,10 +140,20 @@
                                 "res": "SUM(i, 0, oo, x ^ (2 * i + 1) * ((-1) ^ i * hat(w)) / factorial(2 * i + 1)) + SUM(n, 0, oo, x ^ (2 * (n + 1)) * ((-1) ^ n * hat(w) ^ 2) / factorial(2 * (n + 1))) + unit_matrix(3)",
                                 "rule": {
                                     "eq": "hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2",
-                                    "latex_str": "apply equation \\(\\hat{w} ^ {2 (n + 1)} = (-1) ^ {n} \\hat{w} ^ {2}\\) at 0.1.0.0.1",
-                                    "loc": "0.1.0.0.1",
+                                    "eq_fixes": [
+                                        [
+                                            "w",
+                                            "$real"
+                                        ],
+                                        [
+                                            "n",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(\\hat{w} ^ {2 (n + 1)} = (-1) ^ {n} \\hat{w} ^ {2}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2 at 0.1.0.0.1"
+                                    "source": "hat(w) ^ (2 * (n + 1))",
+                                    "str": "apply equation: hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -176,10 +196,20 @@
                                 "res": "hat(w) * sin(x) + hat(w) ^ 2 * (1 - cos(x)) + unit_matrix(3)",
                                 "rule": {
                                     "eq": "1 - cos(a) = SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))",
-                                    "latex_str": "apply equation \\(1 - \\cos{a} = \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} a ^ {2 (n + 1)}}{(2 (n + 1))!}}\\) at 0.1.1",
-                                    "loc": "0.1.1",
+                                    "eq_fixes": [
+                                        [
+                                            "a",
+                                            "$real"
+                                        ],
+                                        [
+                                            "n",
+                                            "$int"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(1 - \\cos{a} = \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} a ^ {2 (n + 1)}}{(2 (n + 1))!}}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: 1 - cos(a) = SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1))) at 0.1.1"
+                                    "source": "SUM(n, 0, oo, (-1) ^ n * x ^ (2 * (n + 1)) / factorial(2 * (n + 1)))",
+                                    "str": "apply equation: 1 - cos(a) = SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))"
                                 },
                                 "type": "CalculationStep"
                             },

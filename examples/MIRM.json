@@ -9,26 +9,19 @@
             "expr": "(inv(P)*A*P)^n = inv(P)*A^n*P",
             "path": "matrix_example01",
             "type": "problem",
-            "fixes": [
-                ["P", "$tensor($real, n, n)"],
-                ["A", "$tensor($real, n, n)"]
-            ]
+            "conds": ["invertible(P)", "isSquare(A)"]
         },
         {
             "expr": "hat(w)^2 =  w * T(w) - norm(w)^2 * unit_matrix(3)",
             "path": "matrix_example02",
             "type": "problem",
-            "fixes": [
-                ["w", "$tensor($real, 3, 1)"]
-            ]
+            "conds": ["type(w,0,3)"]
         },
         {
             "expr": "w*T(w)*hat(w) = zero_matrix(3,3)",
             "path": "matrix_example02",
             "type": "problem",
-            "fixes": [
-                ["w", "$tensor($real, 3, 1)"]
-            ]
+            "conds": ["type(w,0,3)"]
         },
         {
             "expr": "hat(w)^(2*n+1) = (-1)^n * hat(w)",

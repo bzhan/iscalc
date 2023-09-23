@@ -12,7 +12,7 @@
                 }
             ],
             "eq": "hm(R,p) = rcon(ccon(R,p),ccon(zero_matrix(1,3),unit_matrix(1)))",
-            "latex_eq": "hm(R,p) = rcon(ccon(R,p),ccon(\\mathbf{0}_{1 \\times 3},\\mathbf{1}_{1 \\times 1}))",
+            "latex_eq": "hm(R,p) = \\begin{array}{c} \\begin{array}{c : c} R & p \\end{array} \\\\ \\hdashline \\begin{array}{c : c} \\mathbf{0}_{1 \\times 3} & \\mathbf{1}_{1 \\times 1} \\end{array} \\end{array}",
             "latex_lhs": "hm(R,p)",
             "type": "FuncDef"
         },
@@ -87,10 +87,20 @@
                                 "res": "(unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2) * exp(-(t * hat(w)))",
                                 "rule": {
                                     "eq": "exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2",
-                                    "latex_str": "apply equation \\(e^{t \\hat{w}} = \\mathbf{1}_{3 \\times 3} + \\sin{t} \\hat{w} + (1 - \\cos{t}) \\hat{w} ^ {2}\\) at 0",
-                                    "loc": "0",
+                                    "eq_fixes": [
+                                        [
+                                            "t",
+                                            "$real"
+                                        ],
+                                        [
+                                            "w",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(e^{t \\hat{w}} = \\mathbf{1}_{3 \\times 3} + \\sin{t} \\hat{w} + (1 - \\cos{t}) \\hat{w} ^ {2}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2 at 0"
+                                    "source": "exp(t * hat(w))",
+                                    "str": "apply equation: exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -111,10 +121,20 @@
                                 "res": "(unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2) * (unit_matrix(3) + sin(-t) * hat(w) + (1 - cos(-t)) * hat(w) ^ 2)",
                                 "rule": {
                                     "eq": "exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2",
-                                    "latex_str": "apply equation \\(e^{t \\hat{w}} = \\mathbf{1}_{3 \\times 3} + \\sin{t} \\hat{w} + (1 - \\cos{t}) \\hat{w} ^ {2}\\) at 1",
-                                    "loc": "1",
+                                    "eq_fixes": [
+                                        [
+                                            "t",
+                                            "$real"
+                                        ],
+                                        [
+                                            "w",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(e^{t \\hat{w}} = \\mathbf{1}_{3 \\times 3} + \\sin{t} \\hat{w} + (1 - \\cos{t}) \\hat{w} ^ {2}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2 at 1"
+                                    "source": "exp(-t * hat(w))",
+                                    "str": "apply equation: exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -198,10 +218,20 @@
                                 "res": "(-cos(t) + 1) ^ 2 * ((-1) ^ 1 * hat(w) ^ 2) + (-(2 * cos(t)) + 2) * hat(w) ^ 2 - sin(t) ^ 2 * hat(w) * hat(w) + unit_matrix(3)",
                                 "rule": {
                                     "eq": "hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2",
-                                    "latex_str": "apply equation \\(\\hat{w} ^ {2 (n + 1)} = (-1) ^ {n} \\hat{w} ^ {2}\\) at 0.0.0.1",
-                                    "loc": "0.0.0.1",
+                                    "eq_fixes": [
+                                        [
+                                            "w",
+                                            "$real"
+                                        ],
+                                        [
+                                            "n",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(\\hat{w} ^ {2 (n + 1)} = (-1) ^ {n} \\hat{w} ^ {2}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2 at 0.0.0.1"
+                                    "source": "hat(w) ^ (2 * (1 + 1))",
+                                    "str": "apply equation: hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -578,10 +608,20 @@
                                 "res": "(unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2) * w",
                                 "rule": {
                                     "eq": "exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2",
-                                    "latex_str": "apply equation \\(e^{t \\hat{w}} = \\mathbf{1}_{3 \\times 3} + \\sin{t} \\hat{w} + (1 - \\cos{t}) \\hat{w} ^ {2}\\) at 0",
-                                    "loc": "0",
+                                    "eq_fixes": [
+                                        [
+                                            "t",
+                                            "$real"
+                                        ],
+                                        [
+                                            "w",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(e^{t \\hat{w}} = \\mathbf{1}_{3 \\times 3} + \\sin{t} \\hat{w} + (1 - \\cos{t}) \\hat{w} ^ {2}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2 at 0"
+                                    "source": "exp(t * hat(w))",
+                                    "str": "apply equation: exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -623,10 +663,20 @@
                                 "res": "(-cos(t) + 1) * zero_matrix(3,1) + sin(t) * (hat(w) ^ 1 * w) + unit_matrix(3) * w",
                                 "rule": {
                                     "eq": "hat(w) ^ n * w = zero_matrix(3,1)",
-                                    "latex_str": "apply equation \\(\\hat{w} ^ {n} w = \\mathbf{0}_{3 \\times 1}\\) at 0.0.1",
-                                    "loc": "0.0.1",
+                                    "eq_fixes": [
+                                        [
+                                            "n",
+                                            "$int"
+                                        ],
+                                        [
+                                            "w",
+                                            "$tensor($real, 3, 1)"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(\\hat{w} ^ {n} w = \\mathbf{0}_{3 \\times 1}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: hat(w) ^ n * w = zero_matrix(3,1) at 0.0.1"
+                                    "source": "hat(w) ^ 2 * w",
+                                    "str": "apply equation: hat(w) ^ n * w = zero_matrix(3,1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -635,10 +685,20 @@
                                 "res": "(-cos(t) + 1) * zero_matrix(3,1) + sin(t) * zero_matrix(3,1) + unit_matrix(3) * w",
                                 "rule": {
                                     "eq": "hat(w) ^ n * w = zero_matrix(3,1)",
-                                    "latex_str": "apply equation \\(\\hat{w} ^ {n} w = \\mathbf{0}_{3 \\times 1}\\) at 0.1.1",
-                                    "loc": "0.1.1",
+                                    "eq_fixes": [
+                                        [
+                                            "n",
+                                            "$int"
+                                        ],
+                                        [
+                                            "w",
+                                            "$tensor($real, 3, 1)"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(\\hat{w} ^ {n} w = \\mathbf{0}_{3 \\times 1}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: hat(w) ^ n * w = zero_matrix(3,1) at 0.1.1"
+                                    "source": "hat(w) ^ 1 * w",
+                                    "str": "apply equation: hat(w) ^ n * w = zero_matrix(3,1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -752,10 +812,20 @@
                                 "res": "[[unit_matrix(3), exp(t * hat(w)) * ((-exp(-(t * hat(w))) + unit_matrix(3)) * hat(w) * v - t * w * T(w) * v) + (-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
                                 "rule": {
                                     "eq": "exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3)",
-                                    "latex_str": "apply equation \\(e^{t \\hat{w}} e^{-t \\hat{w}} = \\mathbf{1}_{3 \\times 3}\\) at 0.0",
-                                    "loc": "0.0",
+                                    "eq_fixes": [
+                                        [
+                                            "t",
+                                            "$real"
+                                        ],
+                                        [
+                                            "w",
+                                            "$tensor($real, 3, 1)"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(e^{t \\hat{w}} e^{-t \\hat{w}} = \\mathbf{1}_{3 \\times 3}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3) at 0.0"
+                                    "source": "exp(t * hat(w)) * exp(-(t * hat(w)))",
+                                    "str": "apply equation: exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -783,10 +853,20 @@
                                 "res": "[[unit_matrix(3), -(unit_matrix(3) * hat(w) * v) - t * exp(t * hat(w)) * w * T(w) * v + t * w * T(w) * v + hat(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
                                 "rule": {
                                     "eq": "exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3)",
-                                    "latex_str": "apply equation \\(e^{t \\hat{w}} e^{-t \\hat{w}} = \\mathbf{1}_{3 \\times 3}\\) at 0.1.0.0.0.0.0.0",
-                                    "loc": "0.1.0.0.0.0.0.0",
+                                    "eq_fixes": [
+                                        [
+                                            "t",
+                                            "$real"
+                                        ],
+                                        [
+                                            "w",
+                                            "$tensor($real, 3, 1)"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(e^{t \\hat{w}} e^{-t \\hat{w}} = \\mathbf{1}_{3 \\times 3}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3) at 0.1.0.0.0.0.0.0"
+                                    "source": "exp(t * hat(w)) * exp(-(t * hat(w)))",
+                                    "str": "apply equation: exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -816,10 +896,20 @@
                                 "res": "[[unit_matrix(3), -(t * w * T(w) * v) + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
                                 "rule": {
                                     "eq": "exp(t * hat(w)) * w = w",
-                                    "latex_str": "apply equation \\(e^{t \\hat{w}} w = w\\) at 0.1.0.0.0.0.1",
-                                    "loc": "0.1.0.0.0.0.1",
+                                    "eq_fixes": [
+                                        [
+                                            "t",
+                                            "$real"
+                                        ],
+                                        [
+                                            "w",
+                                            "$tensor($real, 3, 1)"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(e^{t \\hat{w}} w = w\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: exp(t * hat(w)) * w = w at 0.1.0.0.0.0.1"
+                                    "source": "exp(t * hat(w)) * w",
+                                    "str": "apply equation: exp(t * hat(w)) * w = w"
                                 },
                                 "type": "CalculationStep"
                             },

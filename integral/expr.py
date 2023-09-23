@@ -75,7 +75,7 @@ def is_vector_type(type: Type) -> bool:
     return type.name == "tensor" and len(type.args) == 2
 
 def is_matrix_type(type: Type) -> bool:
-    return type.name == "tensor" and len(type.args) == 3
+    return isinstance(type, Type) and type.name == "tensor" and len(type.args) == 3
 
 def num_row(type: Type) -> "Expr":
     if not is_matrix_type(type):
@@ -640,7 +640,6 @@ class Expr:
                 for arg in t.args:
                     rec(arg, bd_vars)
             elif is_deriv(t):
-                res.add(t.var)
                 rec(t.body, bd_vars + [t.var])
             elif is_limit(t):
                 rec(t.lim, bd_vars + [t.var])

@@ -574,9 +574,7 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
         return to_poly(normalize(upper, ctx) - normalize(lower, ctx), ctx)
 
     elif expr.is_integral(e):
-        ctx2 = Context(ctx)
-        ctx2.add_condition(expr.Op(">", expr.Var(e.var), e.lower))
-        ctx2.add_condition(expr.Op("<", expr.Var(e.var), e.upper))
+        ctx2 = context.body_conds(e, ctx)
         body = normalize(e.body, ctx2)
         l, h = normalize(e.lower, ctx), normalize(e.upper, ctx)
 
@@ -585,19 +583,14 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
             if ll > hh:
                 return singleton(-expr.Integral(e.var, h, l, body))
         return singleton(expr.Integral(e.var, normalize(e.lower, ctx), normalize(e.upper, ctx), body))
-
     elif expr.is_limit(e):
-        ctx2 = Context(ctx)
-        if e.lim == expr.POS_INF:
-            ctx2.add_condition(expr.Op(">", expr.Var(e.var), expr.Const(0)))
+        ctx2 = context.body_conds(e,ctx)
         return singleton(expr.Limit(e.var, normalize(e.lim, ctx), normalize(e.body, ctx2)))
-
     elif expr.is_inf(e):
         if e == expr.POS_INF:
             return singleton(e)
         else:
             return -singleton(expr.POS_INF)
-
     elif expr.is_indefinite_integral(e):
         return singleton(expr.IndefiniteIntegral(e.var, normalize(e.body, ctx), e.skolem_args))
 
@@ -611,6 +604,8 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
     elif expr.is_matrix(e):
         res_data = [[normalize(item, ctx) for item in rv] for rv in e.data]
         return singleton(expr.Matrix(res_data, e.type))
+    elif expr.is_deriv(e):
+        return singleton(expr.Deriv(e.var, normalize(e.body, ctx)))
     else:
         return singleton(e)
 
@@ -751,10 +746,7 @@ def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
                     b = factors[i-1]
                     if expr.is_fun(a) and a.func_name == 'inv' and a.args[0] == b:
                         tmp.pop()
-                        try:
-                            tmp.append(expr.Fun('unit_matrix', expr.num_row(b.type)))
-                        except:
-                            print(b, b.type)
+                        tmp.append(expr.Fun('unit_matrix', expr.num_row(b.type)))
                     elif expr.is_fun(b) and b.func_name == 'inv' and b.args[0] == a:
                         tmp.pop()
                         tmp.append(expr.Fun('unit_matrix', expr.num_row(a.type)))

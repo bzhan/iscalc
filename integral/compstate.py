@@ -330,10 +330,8 @@ class Calculation(StateItem):
             conds = Conditions()
         self.conds = conds
         self.connection_symbol = connection_symbol
-        if conds is None:
-            self.ctx = ctx
-        else:
-            self.ctx = Context(ctx)
+        self.ctx = Context(ctx)
+        if conds is not None:
             self.ctx.extend_condition(self.conds)
 
     def __str__(self):
@@ -351,11 +349,6 @@ class Calculation(StateItem):
         }
         if self.conds.data:
             res["conds"] = self.conds.export()
-        if len(self.ctx.fixes.items()) > 0:
-            d = list()
-            for a, b in self.ctx.fixes.items():
-                d.append((a, str(b)))
-            res['fixes'] = d
         return res
 
     def clear(self, id: int = 0):
@@ -382,13 +375,25 @@ class Calculation(StateItem):
             id = len(self.steps) - 1
 
         e = self.last_expr
-        ctx = Context(self.ctx)
+        ctx = Context(self.ctx, self.ctx.d + 1)
         for step in self.steps:
             for var, subst_e in step.rule.get_substs().items():
                 ctx.add_subst(var, subst_e)
                 ctx.add_condition(expr.Op("=", expr.Var(var), subst_e))
         new_e = rule.eval(e, ctx)
         self.add_step(CalculationStep(self, rule, new_e, id + 1))
+
+        # update fixes and dead_vars of calculation
+        remove_vars = e.get_vars(with_bd=True).difference(new_e.get_vars(with_bd=True))
+        tmp = dict()
+        goal_fixes = self.ctx.parent.get_fixes()
+        for v in remove_vars:
+            if v in goal_fixes:
+                tmp[v] = None
+            if v in self.ctx.fixes:
+                del self.ctx.fixes[v]
+        self.ctx.dead_vars.update(tmp)
+
 
     def perform_rules(self, calc_rules: tuple[Rule], id: Optional[int] = None):
         for rule in calc_rules:
@@ -566,9 +571,6 @@ class InductionProof(StateItem):
         else:
             raise AssertionError("get_by_label: invalid label")
 
-
-
-
 class CaseProof(StateItem):
     """Prove an equation by cases.
     
@@ -664,7 +666,9 @@ class RewriteGoalProof(StateItem):
         self.parent = parent
         self.goal = goal
         self.ctx = parent.ctx
-        self.begin = Calculation(parent, parent.ctx, begin.goal, conds=begin.conds, connection_symbol = '==>')
+        ctx = Context(self.ctx)
+        ctx.extend_fixes(begin.ctx.get_fixes())
+        self.begin = Calculation(self, ctx, begin.goal, conds=begin.conds, connection_symbol = '==>')
 
     def is_finished(self):
         f1 = normalize(self.begin.last_expr.lhs, self.ctx) == normalize(self.goal.lhs, self.ctx)
@@ -1009,7 +1013,7 @@ def parse_item(parent, item) -> StateItem:
                     for b in obligation['branches']:
                         tmp = list()
                         for e in b['exprs']:
-                            tmp.append(parser.parse_expr(e, fixes=all_fixes))
+                            tmp.append(parser.parse_expr(e, fixes=fixes))
                         branches.append(rules.ProofObligationBranch(tmp))
                     c = parse_conds(obligation, fixes = fixes)
                     res.proof_obligations.append(rules.ProofObligation(branches, c))
@@ -1027,16 +1031,13 @@ def parse_item(parent, item) -> StateItem:
         start = parser.parse_expr(item['start'], fixes=fixes)
         conds = parse_conds(item, fixes=fixes)
         res = Calculation(parent, ctx, start, conds=conds)
-        if "fixes" in item:
-            for a, b in item['fixes']:
-                b = parser.parse_expr(b, fixes=fixes)
-                res.ctx.add_fix(a, b)
         for i, step in enumerate(item['steps']):
             res.add_step(parse_step(res, step, i))
         return res
     elif item['type'] == 'InductionProof':
         ctx = parent.ctx
-        goal = parser.parse_expr(item['goal'], fixes=ctx.get_fixes())
+        fixes = ctx.get_fixes()
+        goal = parser.parse_expr(item['goal'], fixes=fixes)
         induct_var = item['induct_var']
         res = InductionProof(parent, goal, induct_var)
         res.base_case = parse_item(res, item['base_case'])
@@ -1045,8 +1046,9 @@ def parse_item(parent, item) -> StateItem:
         return res
     elif item['type'] == 'CaseProof':
         ctx = parent.ctx
-        goal = parser.parse_expr(item['goal'], fixes=ctx.get_fixes())
-        split_cond = parser.parse_expr(item['split_cond'], fixes=ctx.get_fixes())
+        fixes = ctx.get_fixes()
+        goal = parser.parse_expr(item['goal'], fixes=fixes)
+        split_cond = parser.parse_expr(item['split_cond'], fixes=fixes)
         res = CaseProof(parent, goal, split_cond=split_cond)
         assert len(res.cases) == len(item['cases'])
         for i, case in enumerate(item['cases']):

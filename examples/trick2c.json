@@ -132,12 +132,6 @@
                                 "res": "1/2 * (INT x:[0,pi / 2]. sin(x) ^ 2 / (sin(x) + cos(x))) + 1/2 * (INT x:[0,pi / 2]. sin(x) ^ 2 / (cos(x) + sin(x)))",
                                 "rule": {
                                     "eq": "(INT x:[0,pi / 2]. sin(x) ^ 2 / (sin(x) + cos(x))) = (INT x:[0,pi / 2]. cos(x) ^ 2 / (sin(x) + cos(x)))",
-                                    "eq_fixes": [
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\int_{0}^{\\pi/2} \\frac{\\sin^{2}(x)}{\\sin{x} + \\cos{x}} \\,dx = \\int_{0}^{\\pi/2} \\frac{\\cos^{2}(x)}{\\sin{x} + \\cos{x}} \\,dx\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[0,pi / 2]. cos(x) ^ 2 / (sin(x) + cos(x))",
@@ -180,12 +174,6 @@
                                 "res": "1/2 * (INT x:[0,pi / 2]. 1 / (sin(x) + cos(x)))",
                                 "rule": {
                                     "eq": "(INT x:[0,pi / 2]. sin(x) ^ 2 / (sin(x) + cos(x))) = 1/2 * (INT x:[0,pi / 2]. 1 / (sin(x) + cos(x)))",
-                                    "eq_fixes": [
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\int_{0}^{\\pi/2} \\frac{\\sin^{2}(x)}{\\sin{x} + \\cos{x}} \\,dx = \\frac{1}{2} (\\int_{0}^{\\pi/2} \\frac{1}{\\sin{x} + \\cos{x}} \\,dx)\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[0,pi / 2]. sin(x) ^ 2 / (sin(x) + cos(x))",

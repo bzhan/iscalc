@@ -392,16 +392,6 @@
                                 "res": "SKOLEM_CONST(C) - 2 * (INT y:[0,1]. exp(1/2 * t ^ 2 * (-(y ^ 2) - 1)) * (y ^ 2 + 1) ^ (-1))",
                                 "rule": {
                                     "eq": "2 * (INT y:[0,1]. exp(1/2 * t ^ 2 * (-(y ^ 2) - 1)) * (y ^ 2 + 1) ^ (-1)) + g(t) = SKOLEM_CONST(C)",
-                                    "eq_fixes": [
-                                        [
-                                            "y",
-                                            "$real"
-                                        ],
-                                        [
-                                            "t",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(2 (\\int_{0}^{1} e^{1/2\\cdot t ^ {2} (-y ^ {2} - 1)} (y ^ {2} + 1) ^ {-1} \\,dy) + g{(t)} = C\\)",
                                     "name": "ApplyEquation",
                                     "source": "g(t)",
@@ -462,16 +452,6 @@
                                 "res": "2 * (LIM {t -> oo}. sqrt(g(t)))",
                                 "rule": {
                                     "eq": "(INT x:[-oo,oo]. exp(-(x ^ 2) / 2)) = 2 * (LIM {t -> oo}. sqrt(g(t)))",
-                                    "eq_fixes": [
-                                        [
-                                            "x",
-                                            "$real"
-                                        ],
-                                        [
-                                            "t",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\int_{-\\infty}^{\\infty} e^{-x ^ {2}/2} \\,dx = 2 (\\lim\\limits_{t\\to \\infty} \\sqrt{g{(t)}})\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[-oo,oo]. exp(-(x ^ 2) / 2)",
@@ -484,16 +464,6 @@
                                 "res": "2 * (LIM {t -> oo}. sqrt(-(2 * (INT y:[0,1]. 1 / (y ^ 2 + 1) * exp(t ^ 2 * (-(y ^ 2) - 1) / 2))) + pi / 2))",
                                 "rule": {
                                     "eq": "g(t) = -(2 * (INT y:[0,1]. 1 / (y ^ 2 + 1) * exp(t ^ 2 * (-(y ^ 2) - 1) / 2))) + pi / 2",
-                                    "eq_fixes": [
-                                        [
-                                            "y",
-                                            "$real"
-                                        ],
-                                        [
-                                            "t",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(g{(t)} = -2 (\\int_{0}^{1} \\frac{1}{y ^ {2} + 1} e^{t ^ {2} (-y ^ {2} - 1)/2} \\,dy) + \\frac{\\pi}{2}\\)",
                                     "name": "ApplyEquation",
                                     "source": "g(t)",
@@ -679,12 +649,6 @@
                                 "res": "sqrt(2) / (2 * sqrt(a)) * sqrt(2 * pi)",
                                 "rule": {
                                     "eq": "(INT x:[-oo,oo]. exp(-(x ^ 2) / 2)) = sqrt(2 * pi)",
-                                    "eq_fixes": [
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\int_{-\\infty}^{\\infty} e^{-x ^ {2}/2} \\,dx = \\sqrt{2 \\pi}\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[-oo,oo]. exp(-(x ^ 2) / 2)",

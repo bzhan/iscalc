@@ -366,12 +366,6 @@
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n / factorial(2 * n) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))))",
                                             "rule": {
                                                 "eq": "Gamma(n + 1/2) = sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))",
-                                                "eq_fixes": [
-                                                    [
-                                                        "n",
-                                                        "$int"
-                                                    ]
-                                                ],
                                                 "latex_str": "apply equation \\(\\Gamma{(n + \\frac{1}{2})} = \\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!}\\)",
                                                 "name": "ApplyEquation",
                                                 "source": "Gamma(n + 1/2)",
@@ -631,12 +625,6 @@
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n / factorial(2 * n) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))))",
                                             "rule": {
                                                 "eq": "Gamma(n + 1/2) = sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))",
-                                                "eq_fixes": [
-                                                    [
-                                                        "n",
-                                                        "$int"
-                                                    ]
-                                                ],
                                                 "latex_str": "apply equation \\(\\Gamma{(n + \\frac{1}{2})} = \\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!}\\)",
                                                 "name": "ApplyEquation",
                                                 "source": "Gamma(n + 1/2)",
@@ -909,12 +897,6 @@
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n / factorial(2 * n) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))))",
                                 "rule": {
                                     "eq": "Gamma(n + 1/2) = sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))",
-                                    "eq_fixes": [
-                                        [
-                                            "n",
-                                            "$int"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\Gamma{(n + \\frac{1}{2})} = \\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!}\\)",
                                     "name": "ApplyEquation",
                                     "source": "Gamma(n + 1/2)",
@@ -1214,12 +1196,6 @@
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n / factorial(2 * n) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))))",
                                 "rule": {
                                     "eq": "Gamma(n + 1/2) = sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))",
-                                    "eq_fixes": [
-                                        [
-                                            "n",
-                                            "$int"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\Gamma{(n + \\frac{1}{2})} = \\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!}\\)",
                                     "name": "ApplyEquation",
                                     "source": "Gamma(n + 1/2)",

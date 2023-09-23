@@ -91,20 +91,6 @@
                                 "res": "1 / (b + 1) * B(a + 1,b + 2)",
                                 "rule": {
                                     "eq": "B(a + 1,b + 2) = (INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1))",
-                                    "eq_fixes": [
-                                        [
-                                            "b",
-                                            "$real"
-                                        ],
-                                        [
-                                            "x",
-                                            "$real"
-                                        ],
-                                        [
-                                            "a",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(B(a + 1,b + 2) = \\int_{0}^{1} x ^ {a} (-x + 1) ^ {b + 1} \\,dx\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1)",

@@ -597,16 +597,6 @@
                                 "res": "(INT x:[0,oo]. 1 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)) + (INT x:[0,oo]. x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1))",
                                 "rule": {
                                     "eq": "I(a) = (INT x:[0,oo]. x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1))",
-                                    "eq_fixes": [
-                                        [
-                                            "x",
-                                            "$real"
-                                        ],
-                                        [
-                                            "a",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(I{(a)} = \\int_{0}^{\\infty} \\frac{x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1} \\,dx\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(a)",
@@ -842,16 +832,6 @@
                             "res": "I(a) = 1/2 * ((INT x:[-oo,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)) / 2)",
                             "rule": {
                                 "eq": "(INT x:[-oo,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)) = 2 * (INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1))",
-                                "eq_fixes": [
-                                    [
-                                        "x",
-                                        "$real"
-                                    ],
-                                    [
-                                        "a",
-                                        "$real"
-                                    ]
-                                ],
                                 "latex_str": "apply equation \\(\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx = 2 (\\int_{0}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx)\\)",
                                 "name": "ApplyEquation",
                                 "source": "INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)",
@@ -909,16 +889,6 @@
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + 1/4 * (INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)))",
                             "rule": {
                                 "eq": "(INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) = 0",
-                                "eq_fixes": [
-                                    [
-                                        "x",
-                                        "$real"
-                                    ],
-                                    [
-                                        "a",
-                                        "$real"
-                                    ]
-                                ],
                                 "latex_str": "apply equation \\(\\int_{-\\infty}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx = 0\\)",
                                 "name": "ApplyEquation",
                                 "source": "0",
@@ -1036,16 +1006,6 @@
                                 "res": "1/4 * (INT x:[-oo,oo]. 1 / (cos(a) ^ 2 + x ^ 2))",
                                 "rule": {
                                     "eq": "I(a) = 1/4 * (INT x:[-oo,oo]. 1 / (cos(a) ^ 2 + x ^ 2))",
-                                    "eq_fixes": [
-                                        [
-                                            "x",
-                                            "$real"
-                                        ],
-                                        [
-                                            "a",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{1}{\\cos^{2}(a) + x ^ {2}} \\,dx)\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(a)",
@@ -1109,16 +1069,6 @@
                                 "res": "1/4 * (INT x:[-oo,oo]. 1 / (cos(a) ^ 2 + x ^ 2))",
                                 "rule": {
                                     "eq": "I(a) = 1/4 * (INT x:[-oo,oo]. 1 / (cos(a) ^ 2 + x ^ 2))",
-                                    "eq_fixes": [
-                                        [
-                                            "x",
-                                            "$real"
-                                        ],
-                                        [
-                                            "a",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{1}{\\cos^{2}(a) + x ^ {2}} \\,dx)\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(a)",
@@ -1198,12 +1148,6 @@
                                 "res": "pi / (4 * cos(pi / 4))",
                                 "rule": {
                                     "eq": "I(a) = pi / (4 * cos(a))",
-                                    "eq_fixes": [
-                                        [
-                                            "a",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(I{(a)} = \\frac{\\pi}{4 \\cos{a}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(pi / 4)",
@@ -1337,12 +1281,6 @@
                                 "res": "pi / (4 * cos(pi / 6))",
                                 "rule": {
                                     "eq": "I(a) = pi / (4 * cos(a))",
-                                    "eq_fixes": [
-                                        [
-                                            "a",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(I{(a)} = \\frac{\\pi}{4 \\cos{a}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(pi / 6)",
@@ -1442,12 +1380,6 @@
                                 "res": "pi / (4 * cos(pi / 3))",
                                 "rule": {
                                     "eq": "I(a) = pi / (4 * cos(a))",
-                                    "eq_fixes": [
-                                        [
-                                            "a",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(I{(a)} = \\frac{\\pi}{4 \\cos{a}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(pi / 3)",
@@ -1519,12 +1451,6 @@
                                 "res": "pi / (4 * cos(0))",
                                 "rule": {
                                     "eq": "I(a) = pi / (4 * cos(a))",
-                                    "eq_fixes": [
-                                        [
-                                            "a",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(I{(a)} = \\frac{\\pi}{4 \\cos{a}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(0)",

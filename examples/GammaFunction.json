@@ -182,16 +182,6 @@
                                 "res": "(n - 1) * (INT x:[0,oo]. x ^ (n - 2) * exp(-x))",
                                 "rule": {
                                     "eq": "(LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0",
-                                    "eq_fixes": [
-                                        [
-                                            "n",
-                                            "$int"
-                                        ],
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,) = 0\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[0,oo]. x ^ (n - 2) * exp(-x)",
@@ -326,12 +316,6 @@
                                         "res": "(n + 1 - 1) * Gamma(n + 1 - 1)",
                                         "rule": {
                                             "eq": "Gamma(n) = (n - 1) * Gamma(n - 1)",
-                                            "eq_fixes": [
-                                                [
-                                                    "n",
-                                                    "$int"
-                                                ]
-                                            ],
                                             "latex_str": "apply equation \\(\\Gamma{(n)} = (n - 1) \\Gamma{(n - 1)}\\)",
                                             "name": "ApplyEquation",
                                             "source": "Gamma(n + 1)",
@@ -457,12 +441,6 @@
                     "res": "Gamma(4/3)",
                     "rule": {
                         "eq": "Gamma(n) = (n - 1) * Gamma(n - 1)",
-                        "eq_fixes": [
-                            [
-                                "n",
-                                "$int"
-                            ]
-                        ],
                         "latex_str": "apply equation \\(\\Gamma{(n)} = (n - 1) \\Gamma{(n - 1)}\\)",
                         "name": "ApplyEquation",
                         "source": "(4/3 - 1) * Gamma(4/3 - 1)",

@@ -345,16 +345,6 @@
                                 "res": "INT y:[-1,1]. 2 / sqrt(-(y ^ 2) + 1) * (atan((y + 1) / sqrt(-(y ^ 2) + 1)) - atan(y / sqrt(-(y ^ 2) + 1)))",
                                 "rule": {
                                     "eq": "(INT x:[0,1]. 1 / ((1 + y * x) * sqrt(1 - x ^ 2))) = 2 / sqrt(-(y ^ 2) + 1) * (atan((y + 1) / sqrt(-(y ^ 2) + 1)) - atan(y / sqrt(-(y ^ 2) + 1)))",
-                                    "eq_fixes": [
-                                        [
-                                            "y",
-                                            "$real"
-                                        ],
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\int_{0}^{1} \\frac{1}{(1 + y x) \\sqrt{1 - x ^ {2}}} \\,dx = \\frac{2}{\\sqrt{-y ^ {2} + 1}} (\\tan^{-1}{(\\frac{y + 1}{\\sqrt{-y ^ {2} + 1}})} - \\tan^{-1}{(\\frac{y}{\\sqrt{-y ^ {2} + 1}})})\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[0,1]. 1 / ((1 + y * x) * sqrt(1 - x ^ 2))",

@@ -270,16 +270,6 @@
                             "res": "0 = (LIM {y -> oo}. -atan(y / a) + SKOLEM_FUNC(C(a)))",
                             "rule": {
                                 "eq": "(LIM {y -> oo}. g(y,a)) = 0",
-                                "eq_fixes": [
-                                    [
-                                        "y",
-                                        "$real"
-                                    ],
-                                    [
-                                        "a",
-                                        "$real"
-                                    ]
-                                ],
                                 "latex_str": "apply equation \\(\\lim\\limits_{y\\to \\infty} g(y,a) = 0\\)",
                                 "name": "ApplyEquation",
                                 "source": "LIM {y -> oo}. g(y,a)",
@@ -359,16 +349,6 @@
                             "res": "0 = (LIM {y -> oo}. -atan(y / a) + SKOLEM_FUNC(C(a)))",
                             "rule": {
                                 "eq": "(LIM {y -> oo}. g(y,a)) = 0",
-                                "eq_fixes": [
-                                    [
-                                        "y",
-                                        "$real"
-                                    ],
-                                    [
-                                        "a",
-                                        "$real"
-                                    ]
-                                ],
                                 "latex_str": "apply equation \\(\\lim\\limits_{y\\to \\infty} g(y,a) = 0\\)",
                                 "name": "ApplyEquation",
                                 "source": "LIM {y -> oo}. g(y,a)",
@@ -440,12 +420,6 @@
                             "res": "g(y,a) = -atan(y / a) + pi / 2",
                             "rule": {
                                 "eq": "SKOLEM_FUNC(C(a)) = pi / 2",
-                                "eq_fixes": [
-                                    [
-                                        "a",
-                                        "$real"
-                                    ]
-                                ],
                                 "latex_str": "apply equation \\(C(a) = \\frac{\\pi}{2}\\)",
                                 "name": "ApplyEquation",
                                 "source": "SKOLEM_FUNC(C(a))",
@@ -497,12 +471,6 @@
                             "res": "g(y,a) = -atan(y / a) + -(pi / 2)",
                             "rule": {
                                 "eq": "SKOLEM_FUNC(C(a)) = -(pi / 2)",
-                                "eq_fixes": [
-                                    [
-                                        "a",
-                                        "$real"
-                                    ]
-                                ],
                                 "latex_str": "apply equation \\(C(a) = -\\frac{\\pi}{2}\\)",
                                 "name": "ApplyEquation",
                                 "source": "SKOLEM_FUNC(C(a))",

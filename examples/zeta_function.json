@@ -339,24 +339,6 @@
                                         "res": "SUM(n, 0, oo, 1 / (n + 1 + a) ^ 2)",
                                         "rule": {
                                             "eq": "(INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a / (1 - x * y)) = SUM(n, 0, oo, 1 / (n + 1 + a) ^ 2)",
-                                            "eq_fixes": [
-                                                [
-                                                    "x",
-                                                    "$real"
-                                                ],
-                                                [
-                                                    "n",
-                                                    "$int"
-                                                ],
-                                                [
-                                                    "y",
-                                                    "$real"
-                                                ],
-                                                [
-                                                    "a",
-                                                    "$real"
-                                                ]
-                                            ],
                                             "latex_str": "apply equation \\(\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a}}{1 - x y} \\,dx \\,dy = \\sum_{n=0}^{\\infty}{\\frac{1}{(n + 1 + a) ^ {2}}}\\)",
                                             "name": "ApplyEquation",
                                             "source": "INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a / (1 - x * y)",

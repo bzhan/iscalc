@@ -193,12 +193,6 @@
                                 "res": "-t * I(t) / I(t) + t",
                                 "rule": {
                                     "eq": "(D t. I(t)) = -t * I(t)",
-                                    "eq_fixes": [
-                                        [
-                                            "t",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\frac{d}{dt} I{(t)} = (-t) I{(t)}\\)",
                                     "name": "ApplyEquation",
                                     "source": "D t. I(t)",
@@ -360,12 +354,6 @@
                                 "res": "SKOLEM_CONST(C) - 1/2 * t ^ 2",
                                 "rule": {
                                     "eq": "1/2 * t ^ 2 + log(I(t)) = SKOLEM_CONST(C)",
-                                    "eq_fixes": [
-                                        [
-                                            "t",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\frac{1}{2} t ^ {2} + \\log{(I{(t)})} = C\\)",
                                     "name": "ApplyEquation",
                                     "source": "log(I(t))",
@@ -626,12 +614,6 @@
                                 "res": "2 * cos(s) * (sqrt(pi / 2) * exp(-(t ^ 2) / 2))",
                                 "rule": {
                                     "eq": "I(t) = sqrt(pi / 2) * exp(-(t ^ 2) / 2)",
-                                    "eq_fixes": [
-                                        [
-                                            "t",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(I{(t)} = \\sqrt{\\frac{\\pi}{2}} e^{-t ^ {2}/2}\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(t)",

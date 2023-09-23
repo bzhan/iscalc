@@ -1060,7 +1060,6 @@ class ApplyEquation(Rule):
         return "apply equation \\(%s\\)" % latex.convert_expr(self.eq)
 
     def export(self):
-        eq_fixes = list(self.eq.get_vars(with_bd=True, with_type=True))
         res = {
             "name": self.name,
             "eq": str(self.eq),
@@ -1068,10 +1067,6 @@ class ApplyEquation(Rule):
             "str": str(self),
             "latex_str": self.latex_str()
         }
-        if eq_fixes != list():
-            if not all(len(item) == 2 for item in eq_fixes):
-                raise AssertionError
-            res['eq_fixes'] = eq_fixes
         return res
 
     def eval(self, e: Expr, ctx: Context) -> Expr:

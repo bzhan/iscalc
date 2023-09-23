@@ -243,12 +243,6 @@
                                 "res": "log(a + 1) + SKOLEM_CONST(C)",
                                 "rule": {
                                     "eq": "I(a) = log(a + 1) + SKOLEM_CONST(C)",
-                                    "eq_fixes": [
-                                        [
-                                            "a",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(I{(a)} = \\log{(a + 1)} + C\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(a)",

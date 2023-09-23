@@ -178,20 +178,6 @@
                                 "res": "INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)",
                                 "rule": {
                                     "eq": "(INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)) = a * (INT t:[0,a]. log(t + a) / (t ^ 2 + a ^ 2)) - pi / 4 * log(a)",
-                                    "eq_fixes": [
-                                        [
-                                            "x",
-                                            "$real"
-                                        ],
-                                        [
-                                            "a",
-                                            "$real"
-                                        ],
-                                        [
-                                            "t",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\int_{0}^{1} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx = a (\\int_{0}^{a} \\frac{\\log{(t + a)}}{t ^ {2} + a ^ {2}} \\,dt) - \\frac{\\pi}{4} \\log{a}\\)",
                                     "name": "ApplyEquation",
                                     "source": "a * (INT t:[0,a]. log(t + a) / (t ^ 2 + a ^ 2)) - pi / 4 * log(a)",

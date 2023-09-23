@@ -107,16 +107,6 @@
                                 "res": "2 * B(2,n + 1)",
                                 "rule": {
                                     "eq": "B(2,n + 1) = (INT u:[0,1]. u * (1 - u) ^ n)",
-                                    "eq_fixes": [
-                                        [
-                                            "u",
-                                            "$real"
-                                        ],
-                                        [
-                                            "n",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(B(2,n + 1) = \\int_{0}^{1} u (1 - u) ^ {n} \\,du\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT u:[0,1]. u * (1 - u) ^ n",

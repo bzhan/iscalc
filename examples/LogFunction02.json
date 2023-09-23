@@ -300,16 +300,6 @@
                                 "res": "-(INT y:[0,1]. log(y) * (1/2 * SUM(k, 0, oo, y ^ k) - 1/2 * SUM(k, 0, oo, y ^ k * (-1) ^ k)))",
                                 "rule": {
                                     "eq": "x / (-(x ^ 2) + 1) = 1/2 * SUM(k, 0, oo, x ^ k) - 1/2 * SUM(k, 0, oo, x ^ k * (-1) ^ k)",
-                                    "eq_fixes": [
-                                        [
-                                            "k",
-                                            "$int"
-                                        ],
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\frac{x}{-x ^ {2} + 1} = \\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k}} - \\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k} (-1) ^ {k}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "y / (-(y ^ 2) + 1)",

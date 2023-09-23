@@ -358,12 +358,6 @@
                             "res": "0 = SKOLEM_FUNC(C(b))",
                             "rule": {
                                 "eq": "I(0,b) = 0",
-                                "eq_fixes": [
-                                    [
-                                        "b",
-                                        "$real"
-                                    ]
-                                ],
                                 "latex_str": "apply equation \\(I(0,b) = 0\\)",
                                 "name": "ApplyEquation",
                                 "source": "I(0,b)",
@@ -426,12 +420,6 @@
                             "res": "I(a,b) = pi / b * log(1 + a * b) + 0",
                             "rule": {
                                 "eq": "SKOLEM_FUNC(C(b)) = 0",
-                                "eq_fixes": [
-                                    [
-                                        "b",
-                                        "$real"
-                                    ]
-                                ],
                                 "latex_str": "apply equation \\(C(b) = 0\\)",
                                 "name": "ApplyEquation",
                                 "source": "SKOLEM_FUNC(C(b))",

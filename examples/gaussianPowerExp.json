@@ -213,16 +213,6 @@
                             "res": "(2 * n - 1) * I(n - 1) - 2 * I(n) = 0",
                             "rule": {
                                 "eq": "(INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = (2 * n - 1) * I(n - 1) - 2 * I(n)",
-                                "eq_fixes": [
-                                    [
-                                        "n",
-                                        "$int"
-                                    ],
-                                    [
-                                        "x",
-                                        "$real"
-                                    ]
-                                ],
                                 "latex_str": "apply equation \\(\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx = (2 n - 1) I{(n - 1)} - 2 I{(n)}\\)",
                                 "name": "ApplyEquation",
                                 "source": "INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))",
@@ -377,12 +367,6 @@
                                         "res": "(2 * (n + 1) - 1) / 2 * I(n + 1 - 1)",
                                         "rule": {
                                             "eq": "I(n) = (2 * n - 1) / 2 * I(n - 1)",
-                                            "eq_fixes": [
-                                                [
-                                                    "n",
-                                                    "$int"
-                                                ]
-                                            ],
                                             "latex_str": "apply equation \\(I{(n)} = \\frac{2 n - 1}{2} I{(n - 1)}\\)",
                                             "name": "ApplyEquation",
                                             "source": "I(n + 1)",

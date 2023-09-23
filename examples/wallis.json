@@ -245,16 +245,6 @@
                                         "res": "(D b. I(m,b)) / -(m + 1)",
                                         "rule": {
                                             "eq": "(D b. I(m,b)) = -(m + 1) * I(m + 1,b)",
-                                            "eq_fixes": [
-                                                [
-                                                    "m",
-                                                    "$int"
-                                                ],
-                                                [
-                                                    "b",
-                                                    "$real"
-                                                ]
-                                            ],
                                             "latex_str": "apply equation \\(\\frac{d}{db} I(m,b) = (-(m + 1)) I(m + 1,b)\\)",
                                             "name": "ApplyEquation",
                                             "source": "I(m + 1,b)",

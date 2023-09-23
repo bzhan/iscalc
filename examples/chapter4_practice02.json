@@ -203,16 +203,6 @@
                                 "res": "(-1) ^ n * (m + 1) ^ (-n - 1) * Gamma(n + 1)",
                                 "rule": {
                                     "eq": "Gamma(n + 1) = (INT t:[0,oo]. t ^ n * exp(-t))",
-                                    "eq_fixes": [
-                                        [
-                                            "t",
-                                            "$real"
-                                        ],
-                                        [
-                                            "n",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\Gamma{(n + 1)} = \\int_{0}^{\\infty} t ^ {n} e^{-t} \\,dt\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT t:[0,oo]. t ^ n * exp(-t)",

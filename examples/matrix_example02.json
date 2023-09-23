@@ -468,12 +468,6 @@
                                         "res": "(w * T(w) - norm(w) ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w))",
                                         "rule": {
                                             "eq": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
-                                            "eq_fixes": [
-                                                [
-                                                    "w",
-                                                    "$tensor($real, 3, 1)"
-                                                ]
-                                            ],
                                             "latex_str": "apply equation \\(\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2} \\mathbf{1}_{3 \\times 3}\\)",
                                             "name": "ApplyEquation",
                                             "source": "hat(w) ^ 2",
@@ -486,12 +480,6 @@
                                         "res": "(w * T(w) - 1 ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w))",
                                         "rule": {
                                             "eq": "norm(w) = 1",
-                                            "eq_fixes": [
-                                                [
-                                                    "w",
-                                                    "$tensor($real, 3, 1)"
-                                                ]
-                                            ],
                                             "latex_str": "apply equation \\(\\|w\\| = 1\\)",
                                             "name": "ApplyEquation",
                                             "source": "norm(w)",
@@ -525,12 +513,6 @@
                                         "res": "(-1) ^ n * zero_matrix(3,3) - (-1) ^ n * unit_matrix(3) * hat(w)",
                                         "rule": {
                                             "eq": "w * T(w) * hat(w) = zero_matrix(3,3)",
-                                            "eq_fixes": [
-                                                [
-                                                    "w",
-                                                    "$tensor($real, 3, 1)"
-                                                ]
-                                            ],
                                             "latex_str": "apply equation \\(w w^{\\text{T}} \\hat{w} = \\mathbf{0}_{3 \\times 3}\\)",
                                             "name": "ApplyEquation",
                                             "source": "w * T(w) * hat(w)",
@@ -906,12 +888,6 @@
                                         "res": "(w * T(w) - norm(w) ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w) ^ 2)",
                                         "rule": {
                                             "eq": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
-                                            "eq_fixes": [
-                                                [
-                                                    "w",
-                                                    "$tensor($real, 3, 1)"
-                                                ]
-                                            ],
                                             "latex_str": "apply equation \\(\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2} \\mathbf{1}_{3 \\times 3}\\)",
                                             "name": "ApplyEquation",
                                             "source": "hat(w) ^ 2",
@@ -924,12 +900,6 @@
                                         "res": "(w * T(w) - 1 ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w) ^ 2)",
                                         "rule": {
                                             "eq": "norm(w) = 1",
-                                            "eq_fixes": [
-                                                [
-                                                    "w",
-                                                    "$tensor($real, 3, 1)"
-                                                ]
-                                            ],
                                             "latex_str": "apply equation \\(\\|w\\| = 1\\)",
                                             "name": "ApplyEquation",
                                             "source": "norm(w)",
@@ -963,12 +933,6 @@
                                         "res": "(-1) ^ n * zero_matrix(3,3) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w) * hat(w)",
                                         "rule": {
                                             "eq": "w * T(w) * hat(w) = zero_matrix(3,3)",
-                                            "eq_fixes": [
-                                                [
-                                                    "w",
-                                                    "$tensor($real, 3, 1)"
-                                                ]
-                                            ],
                                             "latex_str": "apply equation \\(w w^{\\text{T}} \\hat{w} = \\mathbf{0}_{3 \\times 3}\\)",
                                             "name": "ApplyEquation",
                                             "source": "w * T(w) * hat(w)",

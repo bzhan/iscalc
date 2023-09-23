@@ -142,16 +142,6 @@
                                 "res": "SUM(n, 0, oo, 1 / (2 * n + 2 - 1) ^ 2)",
                                 "rule": {
                                     "eq": "(INT x:[1,oo]. log(x) / x ^ k) = 1 / (k - 1) ^ 2",
-                                    "eq_fixes": [
-                                        [
-                                            "k",
-                                            "$int"
-                                        ],
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {k}} \\,dx = \\frac{1}{(k - 1) ^ {2}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[1,oo]. log(x) / x ^ (2 * n + 2)",
@@ -269,16 +259,6 @@
                                 "res": "SUM(n, 0, oo, (-1) ^ n * (1 / (2 * n + 2 - 1) ^ 2))",
                                 "rule": {
                                     "eq": "(INT x:[1,oo]. log(x) / x ^ k) = 1 / (k - 1) ^ 2",
-                                    "eq_fixes": [
-                                        [
-                                            "k",
-                                            "$int"
-                                        ],
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {k}} \\,dx = \\frac{1}{(k - 1) ^ {2}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[1,oo]. log(x) / x ^ (2 * n + 2)",
@@ -412,12 +392,6 @@
                                 "res": "(INT x:[1,oo]. 1 / (x ^ 2 + 1) * log(1 / x + 1)) + G + pi * log(2) / 8",
                                 "rule": {
                                     "eq": "(INT x:[1,oo]. log(x) / (x ^ 2 + 1)) = G",
-                                    "eq_fixes": [
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx = G\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[1,oo]. log(x) / (x ^ 2 + 1)",

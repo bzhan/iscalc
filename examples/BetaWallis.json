@@ -394,16 +394,6 @@
                                 "res": "factorial(1/2) ^ 2 / factorial(2 * (1/2) + 1)",
                                 "rule": {
                                     "eq": "(INT x:[0,1]. (x - x ^ 2) ^ n) = factorial(n) ^ 2 / factorial(2 * n + 1)",
-                                    "eq_fixes": [
-                                        [
-                                            "n",
-                                            "$int"
-                                        ],
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\int_{0}^{1} (x - x ^ {2}) ^ {n} \\,dx = \\frac{(n!)^{2}}{(2 n + 1)!}\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[0,1]. (x - x ^ 2) ^ (1/2)",
@@ -466,12 +456,6 @@
                             "res": "factorial(1/2) ^ 2 / 2 = pi / 8",
                             "rule": {
                                 "eq": "(INT x:[0,1]. (x - x ^ 2) ^ (1/2)) = factorial(1/2) ^ 2 / 2",
-                                "eq_fixes": [
-                                    [
-                                        "x",
-                                        "$real"
-                                    ]
-                                ],
                                 "latex_str": "apply equation \\(\\int_{0}^{1} (x - x ^ {2}) ^ {1/2} \\,dx = \\frac{((\\frac{1}{2})!)^{2}}{2}\\)",
                                 "name": "ApplyEquation",
                                 "source": "INT x:[0,1]. (x - x ^ 2) ^ (1/2)",
@@ -630,12 +614,6 @@
                                 "res": "sqrt(pi) / 2",
                                 "rule": {
                                     "eq": "(INT x:[0,oo]. exp(-x) * sqrt(x)) = sqrt(pi) / 2",
-                                    "eq_fixes": [
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\int_{0}^{\\infty} e^{-x} \\sqrt{x} \\,dx = \\frac{\\sqrt{\\pi}}{2}\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT y:[0,oo]. exp(-y) * sqrt(y)",
@@ -810,12 +788,6 @@
                                 "res": "sqrt(pi)",
                                 "rule": {
                                     "eq": "(INT x:[0,oo]. exp(-x) / sqrt(x)) = sqrt(pi)",
-                                    "eq_fixes": [
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(\\int_{0}^{\\infty} \\frac{e^{-x}}{\\sqrt{x}} \\,dx = \\sqrt{\\pi}\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[0,oo]. exp(-x) / sqrt(x)",
@@ -1082,20 +1054,6 @@
                                 "res": "1/2 * (2 * (INT x:[0,pi / 2]. cos(x) ^ (2 * (1/4) - 1) * sin(x) ^ (2 * (1/4) - 1)))",
                                 "rule": {
                                     "eq": "B(m,n) = 2 * (INT x:[0,pi / 2]. cos(x) ^ (2 * m - 1) * sin(x) ^ (2 * n - 1))",
-                                    "eq_fixes": [
-                                        [
-                                            "n",
-                                            "$real"
-                                        ],
-                                        [
-                                            "x",
-                                            "$real"
-                                        ],
-                                        [
-                                            "m",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(B(m,n) = 2 (\\int_{0}^{\\pi/2} \\cos^{2 m - 1}(x) \\sin^{2 n - 1}(x) \\,dx)\\)",
                                     "name": "ApplyEquation",
                                     "source": "B(1/4,1/4)",
@@ -1466,20 +1424,6 @@
                                 "res": "INT x:[0,oo]. x ^ (m - 1) / (x + 1) ^ (m + (1 - m))",
                                 "rule": {
                                     "eq": "B(m,n) = (INT x:[0,oo]. x ^ (m - 1) / (x + 1) ^ (m + n))",
-                                    "eq_fixes": [
-                                        [
-                                            "n",
-                                            "$real"
-                                        ],
-                                        [
-                                            "x",
-                                            "$real"
-                                        ],
-                                        [
-                                            "m",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "apply equation \\(B(m,n) = \\int_{0}^{\\infty} \\frac{x ^ {m - 1}}{(x + 1) ^ {m + n}} \\,dx\\)",
                                     "name": "ApplyEquation",
                                     "source": "B(m,1 - m)",
@@ -1617,12 +1561,6 @@
                             "res": "(INT x:[0,oo]. x ^ (m - 1) / (x + 1)) = Gamma(m) * Gamma(1 - m)",
                             "rule": {
                                 "eq": "B(m,1 - m) = Gamma(m) * Gamma(1 - m)",
-                                "eq_fixes": [
-                                    [
-                                        "m",
-                                        "$real"
-                                    ]
-                                ],
                                 "latex_str": "apply equation \\(B(m,1 - m) = \\Gamma{(m)} \\Gamma{(1 - m)}\\)",
                                 "name": "ApplyEquation",
                                 "source": "B(m,1 - m)",

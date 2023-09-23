@@ -726,6 +726,11 @@ class SeriesExpansionIdentity(Rule):
             res = identity.rhs.inst_pat(inst)
             assert expr.is_summation(res)
             res = res.alpha_convert(self.index_var)
+            other_vars = res.get_vars(with_bd=True).difference(e.get_vars(with_bd=True))
+            for var in other_vars:
+                while ctx.d != 0:
+                    ctx = ctx.parent
+                ctx.add_fix(var, expr.IntType)
             return res
 
         # No matching identity found
@@ -1056,14 +1061,18 @@ class ApplyEquation(Rule):
 
     def export(self):
         eq_fixes = list(self.eq.get_vars(with_bd=True, with_type=True))
-        return {
+        res = {
             "name": self.name,
             "eq": str(self.eq),
-            "eq_fixes": eq_fixes,
             "source": str(self.source),
             "str": str(self),
             "latex_str": self.latex_str()
         }
+        if eq_fixes != list():
+            if not all(len(item) == 2 for item in eq_fixes):
+                raise AssertionError
+            res['eq_fixes'] = eq_fixes
+        return res
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
         # Find source within e
@@ -2280,7 +2289,7 @@ class SplitSummation(Rule):
         bd = list(e.get_vars(with_bd=True))
         r0 = ExpandDefinition("f", simp=False)
         r = OnSubterm(r0)
-        tmp_ctx = Context(ctx)
+        tmp_ctx = Context(ctx, ctx.d+1)
         tmp_ctx.definitions.append(context.Identity(eq_pat))
         for id in ctx.get_summation_split_identities():
             id: context.Identity
@@ -2302,8 +2311,9 @@ class SplitSummation(Rule):
                         res = r.eval(res, tmp_ctx)
                         other_vars = res.get_vars(with_bd=True).difference(bd)
                         for var in other_vars:
-                            if ctx.parent is not None:
-                                ctx.parent.add_fix(var, expr.IntType)
+                            while ctx.d != 0:
+                                ctx = ctx.parent
+                            ctx.add_fix(var, expr.IntType)
                         return res
         return e
 

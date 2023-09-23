@@ -133,6 +133,10 @@
                 [
                     "n",
                     "$int"
+                ],
+                [
+                    "k",
+                    "$int"
                 ]
             ],
             "goal": "I(m,n) = (-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1))",
@@ -210,8 +214,19 @@
                                         "res": "-((n + 1) / (m + 1)) * I(m,n + 1 - 1)",
                                         "rule": {
                                             "eq": "I(m,n) = -(n / (m + 1)) * I(m,n - 1)",
+                                            "eq_fixes": [
+                                                [
+                                                    "n",
+                                                    "$real"
+                                                ],
+                                                [
+                                                    "m",
+                                                    "$real"
+                                                ]
+                                            ],
                                             "latex_str": "apply equation \\(I(m,n) = (-\\frac{n}{m + 1}) I(m,n - 1)\\)",
                                             "name": "ApplyEquation",
+                                            "source": "I(m,n + 1)",
                                             "str": "apply equation: I(m,n) = -(n / (m + 1)) * I(m,n - 1)"
                                         },
                                         "type": "CalculationStep"
@@ -332,6 +347,10 @@
                 ],
                 [
                     "n",
+                    "$int"
+                ],
+                [
+                    "k",
                     "$int"
                 ]
             ],
@@ -458,10 +477,20 @@
                                 "res": "a ^ (m + 1) * SUM(k, 0, n, log(a) ^ (-k + n) * binom(n,k) * ((-1) ^ k * (factorial(k) / (m + 1) ^ (k + 1))))",
                                 "rule": {
                                     "eq": "I(m,n) = (-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1))",
-                                    "latex_str": "apply equation \\(I(m,n) = (-1) ^ {n} (\\frac{n!}{(m + 1) ^ {n + 1}})\\) at 1.0.1",
-                                    "loc": "1.0.1",
+                                    "eq_fixes": [
+                                        [
+                                            "m",
+                                            "$int"
+                                        ],
+                                        [
+                                            "n",
+                                            "$int"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(I(m,n) = (-1) ^ {n} (\\frac{n!}{(m + 1) ^ {n + 1}})\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: I(m,n) = (-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1)) at 1.0.1"
+                                    "source": "I(m,k)",
+                                    "str": "apply equation: I(m,n) = (-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1))"
                                 },
                                 "type": "CalculationStep"
                             },

@@ -307,10 +307,16 @@
                                 "res": "INT u:[1,oo]. 1 / (1 + u ^ 2) * (pi / 4 - u / sqrt(1 + 2 * u ^ 2) * atan(u / sqrt(1 + 2 * u ^ 2)))",
                                 "rule": {
                                     "eq": "(D u. I(u)) = 1 / (1 + u ^ 2) * (pi / 4 - u / sqrt(1 + 2 * u ^ 2) * atan(u / sqrt(1 + 2 * u ^ 2)))",
-                                    "latex_str": "apply equation \\(\\frac{d}{du} I{(u)} = \\frac{1}{1 + u ^ {2}} (\\frac{\\pi}{4} - \\frac{u}{\\sqrt{1 + 2 u ^ {2}}} \\tan^{-1}{(\\frac{u}{\\sqrt{1 + 2 u ^ {2}}})})\\) at 0",
-                                    "loc": "0",
+                                    "eq_fixes": [
+                                        [
+                                            "u",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(\\frac{d}{du} I{(u)} = \\frac{1}{1 + u ^ {2}} (\\frac{\\pi}{4} - \\frac{u}{\\sqrt{1 + 2 u ^ {2}}} \\tan^{-1}{(\\frac{u}{\\sqrt{1 + 2 u ^ {2}}})})\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: (D u. I(u)) = 1 / (1 + u ^ 2) * (pi / 4 - u / sqrt(1 + 2 * u ^ 2) * atan(u / sqrt(1 + 2 * u ^ 2))) at 0"
+                                    "source": "D u. I(u)",
+                                    "str": "apply equation: (D u. I(u)) = 1 / (1 + u ^ 2) * (pi / 4 - u / sqrt(1 + 2 * u ^ 2) * atan(u / sqrt(1 + 2 * u ^ 2)))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -447,10 +453,16 @@
                                 "res": "I(1) - pi / 2 * (INT x:[0,1]. 1 / (x ^ 2 * sqrt(x ^ 2 + 2) + sqrt(x ^ 2 + 2))) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
                                     "eq": "I(1) = (INT x:[0,1]. atan(sqrt(x ^ 2 + 2)) / ((x ^ 2 + 1) * sqrt(x ^ 2 + 2)))",
-                                    "latex_str": "apply equation \\(I{(1)} = \\int_{0}^{1} \\frac{\\tan^{-1}{(\\sqrt{x ^ {2} + 2})}}{(x ^ {2} + 1) \\sqrt{x ^ {2} + 2}} \\,dx\\) at 0.0",
-                                    "loc": "0.0",
+                                    "eq_fixes": [
+                                        [
+                                            "x",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(I{(1)} = \\int_{0}^{1} \\frac{\\tan^{-1}{(\\sqrt{x ^ {2} + 2})}}{(x ^ {2} + 1) \\sqrt{x ^ {2} + 2}} \\,dx\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: I(1) = (INT x:[0,1]. atan(sqrt(x ^ 2 + 2)) / ((x ^ 2 + 1) * sqrt(x ^ 2 + 2))) at 0.0"
+                                    "source": "INT x:[0,1]. atan(sqrt(x ^ 2 + 2)) / ((x ^ 2 + 1) * sqrt(x ^ 2 + 2))",
+                                    "str": "apply equation: I(1) = (INT x:[0,1]. atan(sqrt(x ^ 2 + 2)) / ((x ^ 2 + 1) * sqrt(x ^ 2 + 2)))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -518,10 +530,16 @@
                             "res": "-(pi ^ 2 / 48) + I(1) = pi ^ 2 / 12 - I(1)",
                             "rule": {
                                 "eq": "(INT u:[1,oo]. D u. I(u)) = -(pi ^ 2 / 48) + I(1)",
-                                "latex_str": "apply equation \\(\\int_{1}^{\\infty} \\frac{d}{du} I{(u)} \\,du = -\\frac{\\pi ^ {2}}{48} + I{(1)}\\) at 0",
-                                "loc": "0",
+                                "eq_fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_str": "apply equation \\(\\int_{1}^{\\infty} \\frac{d}{du} I{(u)} \\,du = -\\frac{\\pi ^ {2}}{48} + I{(1)}\\)",
                                 "name": "ApplyEquation",
-                                "str": "apply equation: (INT u:[1,oo]. D u. I(u)) = -(pi ^ 2 / 48) + I(1) at 0"
+                                "source": "INT u:[1,oo]. D u. I(u)",
+                                "str": "apply equation: (INT u:[1,oo]. D u. I(u)) = -(pi ^ 2 / 48) + I(1)"
                             },
                             "type": "CalculationStep"
                         },

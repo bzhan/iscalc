@@ -135,10 +135,24 @@
                                 "res": "1/2 * ((INT x:[0,pi]. x * sin(x) / (b * cos(x) ^ 2 + a)) + (INT x:[0,pi]. (pi - x) * sin(x) / (a + b * cos(x) ^ 2)))",
                                 "rule": {
                                     "eq": "I(a,b) = (INT x:[0,pi]. (pi - x) * sin(x) / (a + b * cos(x) ^ 2))",
-                                    "latex_str": "apply equation \\(I(a,b) = \\int_{0}^{\\pi} \\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)} \\,dx\\) at 1.1",
-                                    "loc": "1.1",
+                                    "eq_fixes": [
+                                        [
+                                            "b",
+                                            "$real"
+                                        ],
+                                        [
+                                            "x",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(I(a,b) = \\int_{0}^{\\pi} \\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)} \\,dx\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: I(a,b) = (INT x:[0,pi]. (pi - x) * sin(x) / (a + b * cos(x) ^ 2)) at 1.1"
+                                    "source": "I(a,b)",
+                                    "str": "apply equation: I(a,b) = (INT x:[0,pi]. (pi - x) * sin(x) / (a + b * cos(x) ^ 2))"
                                 },
                                 "type": "CalculationStep"
                             },

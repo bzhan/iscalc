@@ -185,6 +185,12 @@
             "goal": "I(n) = (2 * n - 1) / 2 * I(n - 1)",
             "latex_goal": "I{(n)} = \\frac{2 n - 1}{2} I{(n - 1)}",
             "proof": {
+                "begin_fixes": [
+                    [
+                        "n",
+                        "$int"
+                    ]
+                ],
                 "finished": true,
                 "goal": "I(n) = (2 * n - 1) / 2 * I(n - 1)",
                 "latex_goal": "I{(n)} = \\frac{2 n - 1}{2} I{(n - 1)}",
@@ -207,10 +213,20 @@
                             "res": "(2 * n - 1) * I(n - 1) - 2 * I(n) = 0",
                             "rule": {
                                 "eq": "(INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = (2 * n - 1) * I(n - 1) - 2 * I(n)",
-                                "latex_str": "apply equation \\(\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx = (2 n - 1) I{(n - 1)} - 2 I{(n)}\\) at 0",
-                                "loc": "0",
+                                "eq_fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ],
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_str": "apply equation \\(\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx = (2 n - 1) I{(n - 1)} - 2 I{(n)}\\)",
                                 "name": "ApplyEquation",
-                                "str": "apply equation: (INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = (2 * n - 1) * I(n - 1) - 2 * I(n) at 0"
+                                "source": "INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))",
+                                "str": "apply equation: (INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = (2 * n - 1) * I(n - 1) - 2 * I(n)"
                             },
                             "type": "CalculationStep"
                         },
@@ -361,8 +377,15 @@
                                         "res": "(2 * (n + 1) - 1) / 2 * I(n + 1 - 1)",
                                         "rule": {
                                             "eq": "I(n) = (2 * n - 1) / 2 * I(n - 1)",
+                                            "eq_fixes": [
+                                                [
+                                                    "n",
+                                                    "$int"
+                                                ]
+                                            ],
                                             "latex_str": "apply equation \\(I{(n)} = \\frac{2 n - 1}{2} I{(n - 1)}\\)",
                                             "name": "ApplyEquation",
+                                            "source": "I(n + 1)",
                                             "str": "apply equation: I(n) = (2 * n - 1) / 2 * I(n - 1)"
                                         },
                                         "type": "CalculationStep"

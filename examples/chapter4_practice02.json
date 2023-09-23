@@ -203,10 +203,20 @@
                                 "res": "(-1) ^ n * (m + 1) ^ (-n - 1) * Gamma(n + 1)",
                                 "rule": {
                                     "eq": "Gamma(n + 1) = (INT t:[0,oo]. t ^ n * exp(-t))",
-                                    "latex_str": "apply equation \\(\\Gamma{(n + 1)} = \\int_{0}^{\\infty} t ^ {n} e^{-t} \\,dt\\) at 1",
-                                    "loc": "1",
+                                    "eq_fixes": [
+                                        [
+                                            "t",
+                                            "$real"
+                                        ],
+                                        [
+                                            "n",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(\\Gamma{(n + 1)} = \\int_{0}^{\\infty} t ^ {n} e^{-t} \\,dt\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: Gamma(n + 1) = (INT t:[0,oo]. t ^ n * exp(-t)) at 1"
+                                    "source": "INT t:[0,oo]. t ^ n * exp(-t)",
+                                    "str": "apply equation: Gamma(n + 1) = (INT t:[0,oo]. t ^ n * exp(-t))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -214,11 +224,10 @@
                                 "latex_res": "(-1) ^ {n} (m + 1) ^ {-n - 1} n!",
                                 "res": "(-1) ^ n * (m + 1) ^ (-n - 1) * factorial(n)",
                                 "rule": {
-                                    "latex_str": "rewrite \\(\\Gamma{(n + 1)}\\) to \\(n!\\) using identity at 1",
-                                    "loc": "1",
+                                    "latex_str": "rewrite \\(\\Gamma{(n + 1)}\\) to \\(n!\\) using identity",
                                     "name": "ApplyIdentity",
                                     "source": "Gamma(n + 1)",
-                                    "str": "rewrite Gamma(n + 1) to factorial(n) using identity at 1",
+                                    "str": "rewrite Gamma(n + 1) to factorial(n) using identity",
                                     "target": "factorial(n)"
                                 },
                                 "type": "CalculationStep"

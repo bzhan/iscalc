@@ -142,10 +142,20 @@
                                 "res": "SUM(n, 0, oo, 1 / (2 * n + 2 - 1) ^ 2)",
                                 "rule": {
                                     "eq": "(INT x:[1,oo]. log(x) / x ^ k) = 1 / (k - 1) ^ 2",
-                                    "latex_str": "apply equation \\(\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {k}} \\,dx = \\frac{1}{(k - 1) ^ {2}}\\) at 0",
-                                    "loc": "0",
+                                    "eq_fixes": [
+                                        [
+                                            "k",
+                                            "$int"
+                                        ],
+                                        [
+                                            "x",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {k}} \\,dx = \\frac{1}{(k - 1) ^ {2}}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: (INT x:[1,oo]. log(x) / x ^ k) = 1 / (k - 1) ^ 2 at 0"
+                                    "source": "INT x:[1,oo]. log(x) / x ^ (2 * n + 2)",
+                                    "str": "apply equation: (INT x:[1,oo]. log(x) / x ^ k) = 1 / (k - 1) ^ 2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -259,10 +269,20 @@
                                 "res": "SUM(n, 0, oo, (-1) ^ n * (1 / (2 * n + 2 - 1) ^ 2))",
                                 "rule": {
                                     "eq": "(INT x:[1,oo]. log(x) / x ^ k) = 1 / (k - 1) ^ 2",
-                                    "latex_str": "apply equation \\(\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {k}} \\,dx = \\frac{1}{(k - 1) ^ {2}}\\) at 0.1",
-                                    "loc": "0.1",
+                                    "eq_fixes": [
+                                        [
+                                            "k",
+                                            "$int"
+                                        ],
+                                        [
+                                            "x",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {k}} \\,dx = \\frac{1}{(k - 1) ^ {2}}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: (INT x:[1,oo]. log(x) / x ^ k) = 1 / (k - 1) ^ 2 at 0.1"
+                                    "source": "INT x:[1,oo]. log(x) / x ^ (2 * n + 2)",
+                                    "str": "apply equation: (INT x:[1,oo]. log(x) / x ^ k) = 1 / (k - 1) ^ 2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -392,10 +412,16 @@
                                 "res": "(INT x:[1,oo]. 1 / (x ^ 2 + 1) * log(1 / x + 1)) + G + pi * log(2) / 8",
                                 "rule": {
                                     "eq": "(INT x:[1,oo]. log(x) / (x ^ 2 + 1)) = G",
-                                    "latex_str": "apply equation \\(\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx = G\\) at 0.1",
-                                    "loc": "0.1",
+                                    "eq_fixes": [
+                                        [
+                                            "x",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx = G\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: (INT x:[1,oo]. log(x) / (x ^ 2 + 1)) = G at 0.1"
+                                    "source": "INT x:[1,oo]. log(x) / (x ^ 2 + 1)",
+                                    "str": "apply equation: (INT x:[1,oo]. log(x) / (x ^ 2 + 1)) = G"
                                 },
                                 "type": "CalculationStep"
                             },

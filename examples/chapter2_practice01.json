@@ -337,10 +337,16 @@
                                 "res": "2 * log(2) * pi + (INT y:[0,1]. log(y) / (sqrt(y) * sqrt(1 - y)))",
                                 "rule": {
                                     "eq": "(INT y:[0,1]. 1 / (sqrt(y) * sqrt(1 - y))) = pi",
-                                    "latex_str": "apply equation \\(\\int_{0}^{1} \\frac{1}{\\sqrt{y} \\sqrt{1 - y}} \\,dy = \\pi\\) at 0.1",
-                                    "loc": "0.1",
+                                    "eq_fixes": [
+                                        [
+                                            "y",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(\\int_{0}^{1} \\frac{1}{\\sqrt{y} \\sqrt{1 - y}} \\,dy = \\pi\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: (INT y:[0,1]. 1 / (sqrt(y) * sqrt(1 - y))) = pi at 0.1"
+                                    "source": "INT y:[0,1]. 1 / (sqrt(y) * sqrt(1 - y))",
+                                    "str": "apply equation: (INT y:[0,1]. 1 / (sqrt(y) * sqrt(1 - y))) = pi"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -349,10 +355,16 @@
                                 "res": "2 * log(2) * pi + -(2 * pi * log(2))",
                                 "rule": {
                                     "eq": "(INT y:[0,1]. log(y) / (sqrt(y) * sqrt(1 - y))) = -(2 * pi * log(2))",
-                                    "latex_str": "apply equation \\(\\int_{0}^{1} \\frac{\\log{y}}{\\sqrt{y} \\sqrt{1 - y}} \\,dy = -2 \\pi \\log{(2)}\\) at 1",
-                                    "loc": "1",
+                                    "eq_fixes": [
+                                        [
+                                            "y",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(\\int_{0}^{1} \\frac{\\log{y}}{\\sqrt{y} \\sqrt{1 - y}} \\,dy = -2 \\pi \\log{(2)}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: (INT y:[0,1]. log(y) / (sqrt(y) * sqrt(1 - y))) = -(2 * pi * log(2)) at 1"
+                                    "source": "INT y:[0,1]. log(y) / (sqrt(y) * sqrt(1 - y))",
+                                    "str": "apply equation: (INT y:[0,1]. log(y) / (sqrt(y) * sqrt(1 - y))) = -(2 * pi * log(2))"
                                 },
                                 "type": "CalculationStep"
                             },

@@ -75,8 +75,15 @@
                                 "res": "INT x:[0,pi / 4]. log(tan(x) + 1)",
                                 "rule": {
                                     "eq": "(INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)) = (INT x:[0,pi / 4]. log(tan(x) + 1))",
+                                    "eq_fixes": [
+                                        [
+                                            "x",
+                                            "$real"
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(\\int_{0}^{1} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx = \\int_{0}^{\\pi/4} \\log{(\\tan{x} + 1)} \\,dx\\)",
                                     "name": "ApplyEquation",
+                                    "source": "INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)",
                                     "str": "apply equation: (INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)) = (INT x:[0,pi / 4]. log(tan(x) + 1))"
                                 },
                                 "type": "CalculationStep"
@@ -170,10 +177,16 @@
                                 "res": "-(INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)) + pi * log(2) / 4",
                                 "rule": {
                                     "eq": "(INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)) = (INT x:[0,pi / 4]. log(tan(x) + 1))",
-                                    "latex_str": "apply equation \\(\\int_{0}^{1} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx = \\int_{0}^{\\pi/4} \\log{(\\tan{x} + 1)} \\,dx\\) at 0.0",
-                                    "loc": "0.0",
+                                    "eq_fixes": [
+                                        [
+                                            "x",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(\\int_{0}^{1} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx = \\int_{0}^{\\pi/4} \\log{(\\tan{x} + 1)} \\,dx\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: (INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)) = (INT x:[0,pi / 4]. log(tan(x) + 1)) at 0.0"
+                                    "source": "INT x:[0,pi / 4]. log(tan(x) + 1)",
+                                    "str": "apply equation: (INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)) = (INT x:[0,pi / 4]. log(tan(x) + 1))"
                                 },
                                 "type": "CalculationStep"
                             }

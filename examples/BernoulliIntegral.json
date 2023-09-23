@@ -290,8 +290,27 @@
                                 "res": "SUM(k, 0, oo, (-1) ^ k / (k * 1 + 1) ^ (k + 1))",
                                 "rule": {
                                     "eq": "(INT x:[0,1]. x ^ (c * x ^ a)) = SUM(k, 0, oo, (-c) ^ k / (k * a + 1) ^ (k + 1))",
+                                    "eq_fixes": [
+                                        [
+                                            "c",
+                                            "$real"
+                                        ],
+                                        [
+                                            "k",
+                                            "$int"
+                                        ],
+                                        [
+                                            "x",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(\\int_{0}^{1} x ^ {c x ^ {a}} \\,dx = \\sum_{k=0}^{\\infty}{\\frac{(-c) ^ {k}}{(k a + 1) ^ {k + 1}}}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "INT x:[0,1]. x ^ (1 * x ^ 1)",
                                     "str": "apply equation: (INT x:[0,1]. x ^ (c * x ^ a)) = SUM(k, 0, oo, (-c) ^ k / (k * a + 1) ^ (k + 1))"
                                 },
                                 "type": "CalculationStep"
@@ -355,8 +374,27 @@
                                 "res": "SUM(k, 0, oo, (-(-1)) ^ k / (k * 1 + 1) ^ (k + 1))",
                                 "rule": {
                                     "eq": "(INT x:[0,1]. x ^ (c * x ^ a)) = SUM(k, 0, oo, (-c) ^ k / (k * a + 1) ^ (k + 1))",
+                                    "eq_fixes": [
+                                        [
+                                            "c",
+                                            "$real"
+                                        ],
+                                        [
+                                            "k",
+                                            "$int"
+                                        ],
+                                        [
+                                            "x",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(\\int_{0}^{1} x ^ {c x ^ {a}} \\,dx = \\sum_{k=0}^{\\infty}{\\frac{(-c) ^ {k}}{(k a + 1) ^ {k + 1}}}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "INT x:[0,1]. x ^ (-1 * x ^ 1)",
                                     "str": "apply equation: (INT x:[0,1]. x ^ (c * x ^ a)) = SUM(k, 0, oo, (-c) ^ k / (k * a + 1) ^ (k + 1))"
                                 },
                                 "type": "CalculationStep"
@@ -420,8 +458,27 @@
                                 "res": "SUM(k, 0, oo, (-1) ^ k / (k * 2 + 1) ^ (k + 1))",
                                 "rule": {
                                     "eq": "(INT x:[0,1]. x ^ (c * x ^ a)) = SUM(k, 0, oo, (-c) ^ k / (k * a + 1) ^ (k + 1))",
+                                    "eq_fixes": [
+                                        [
+                                            "c",
+                                            "$real"
+                                        ],
+                                        [
+                                            "k",
+                                            "$int"
+                                        ],
+                                        [
+                                            "x",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(\\int_{0}^{1} x ^ {c x ^ {a}} \\,dx = \\sum_{k=0}^{\\infty}{\\frac{(-c) ^ {k}}{(k a + 1) ^ {k + 1}}}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "INT x:[0,1]. x ^ (1 * x ^ 2)",
                                     "str": "apply equation: (INT x:[0,1]. x ^ (c * x ^ a)) = SUM(k, 0, oo, (-c) ^ k / (k * a + 1) ^ (k + 1))"
                                 },
                                 "type": "CalculationStep"
@@ -485,8 +542,27 @@
                                 "res": "SUM(k, 0, oo, (-1) ^ k / (k * (1/2) + 1) ^ (k + 1))",
                                 "rule": {
                                     "eq": "(INT x:[0,1]. x ^ (c * x ^ a)) = SUM(k, 0, oo, (-c) ^ k / (k * a + 1) ^ (k + 1))",
+                                    "eq_fixes": [
+                                        [
+                                            "c",
+                                            "$real"
+                                        ],
+                                        [
+                                            "k",
+                                            "$int"
+                                        ],
+                                        [
+                                            "x",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(\\int_{0}^{1} x ^ {c x ^ {a}} \\,dx = \\sum_{k=0}^{\\infty}{\\frac{(-c) ^ {k}}{(k a + 1) ^ {k + 1}}}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "INT x:[0,1]. x ^ (1 * x ^ (1/2))",
                                     "str": "apply equation: (INT x:[0,1]. x ^ (c * x ^ a)) = SUM(k, 0, oo, (-c) ^ k / (k * a + 1) ^ (k + 1))"
                                 },
                                 "type": "CalculationStep"

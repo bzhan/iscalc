@@ -345,10 +345,20 @@
                                 "res": "INT y:[-1,1]. 2 / sqrt(-(y ^ 2) + 1) * (atan((y + 1) / sqrt(-(y ^ 2) + 1)) - atan(y / sqrt(-(y ^ 2) + 1)))",
                                 "rule": {
                                     "eq": "(INT x:[0,1]. 1 / ((1 + y * x) * sqrt(1 - x ^ 2))) = 2 / sqrt(-(y ^ 2) + 1) * (atan((y + 1) / sqrt(-(y ^ 2) + 1)) - atan(y / sqrt(-(y ^ 2) + 1)))",
-                                    "latex_str": "apply equation \\(\\int_{0}^{1} \\frac{1}{(1 + y x) \\sqrt{1 - x ^ {2}}} \\,dx = \\frac{2}{\\sqrt{-y ^ {2} + 1}} (\\tan^{-1}{(\\frac{y + 1}{\\sqrt{-y ^ {2} + 1}})} - \\tan^{-1}{(\\frac{y}{\\sqrt{-y ^ {2} + 1}})})\\) at 0",
-                                    "loc": "0",
+                                    "eq_fixes": [
+                                        [
+                                            "y",
+                                            "$real"
+                                        ],
+                                        [
+                                            "x",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(\\int_{0}^{1} \\frac{1}{(1 + y x) \\sqrt{1 - x ^ {2}}} \\,dx = \\frac{2}{\\sqrt{-y ^ {2} + 1}} (\\tan^{-1}{(\\frac{y + 1}{\\sqrt{-y ^ {2} + 1}})} - \\tan^{-1}{(\\frac{y}{\\sqrt{-y ^ {2} + 1}})})\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: (INT x:[0,1]. 1 / ((1 + y * x) * sqrt(1 - x ^ 2))) = 2 / sqrt(-(y ^ 2) + 1) * (atan((y + 1) / sqrt(-(y ^ 2) + 1)) - atan(y / sqrt(-(y ^ 2) + 1))) at 0"
+                                    "source": "INT x:[0,1]. 1 / ((1 + y * x) * sqrt(1 - x ^ 2))",
+                                    "str": "apply equation: (INT x:[0,1]. 1 / ((1 + y * x) * sqrt(1 - x ^ 2))) = 2 / sqrt(-(y ^ 2) + 1) * (atan((y + 1) / sqrt(-(y ^ 2) + 1)) - atan(y / sqrt(-(y ^ 2) + 1)))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -356,11 +366,10 @@
                                 "latex_res": "\\int_{-1}^{1} \\frac{2}{\\sqrt{-y ^ {2} + 1}} \\tan^{-1}{(\\frac{\\frac{y + 1}{\\sqrt{-y ^ {2} + 1}} - \\frac{y}{\\sqrt{-y ^ {2} + 1}}}{1 + \\frac{y + 1}{\\sqrt{-y ^ {2} + 1}} (\\frac{y}{\\sqrt{-y ^ {2} + 1}})})} \\,dy",
                                 "res": "INT y:[-1,1]. 2 / sqrt(-(y ^ 2) + 1) * atan(((y + 1) / sqrt(-(y ^ 2) + 1) - y / sqrt(-(y ^ 2) + 1)) / (1 + (y + 1) / sqrt(-(y ^ 2) + 1) * (y / sqrt(-(y ^ 2) + 1))))",
                                 "rule": {
-                                    "latex_str": "rewrite \\(\\tan^{-1}{(\\frac{y + 1}{\\sqrt{-y ^ {2} + 1}})} - \\tan^{-1}{(\\frac{y}{\\sqrt{-y ^ {2} + 1}})}\\) to \\(\\tan^{-1}{(\\frac{\\frac{y + 1}{\\sqrt{-y ^ {2} + 1}} - \\frac{y}{\\sqrt{-y ^ {2} + 1}}}{1 + \\frac{y + 1}{\\sqrt{-y ^ {2} + 1}} (\\frac{y}{\\sqrt{-y ^ {2} + 1}})})}\\) using identity at 0.1",
-                                    "loc": "0.1",
+                                    "latex_str": "rewrite \\(\\tan^{-1}{(\\frac{y + 1}{\\sqrt{-y ^ {2} + 1}})} - \\tan^{-1}{(\\frac{y}{\\sqrt{-y ^ {2} + 1}})}\\) to \\(\\tan^{-1}{(\\frac{\\frac{y + 1}{\\sqrt{-y ^ {2} + 1}} - \\frac{y}{\\sqrt{-y ^ {2} + 1}}}{1 + \\frac{y + 1}{\\sqrt{-y ^ {2} + 1}} (\\frac{y}{\\sqrt{-y ^ {2} + 1}})})}\\) using identity",
                                     "name": "ApplyIdentity",
                                     "source": "atan((y + 1) / sqrt(-(y ^ 2) + 1)) - atan(y / sqrt(-(y ^ 2) + 1))",
-                                    "str": "rewrite atan((y + 1) / sqrt(-(y ^ 2) + 1)) - atan(y / sqrt(-(y ^ 2) + 1)) to atan(((y + 1) / sqrt(-(y ^ 2) + 1) - y / sqrt(-(y ^ 2) + 1)) / (1 + (y + 1) / sqrt(-(y ^ 2) + 1) * (y / sqrt(-(y ^ 2) + 1)))) using identity at 0.1",
+                                    "str": "rewrite atan((y + 1) / sqrt(-(y ^ 2) + 1)) - atan(y / sqrt(-(y ^ 2) + 1)) to atan(((y + 1) / sqrt(-(y ^ 2) + 1) - y / sqrt(-(y ^ 2) + 1)) / (1 + (y + 1) / sqrt(-(y ^ 2) + 1) * (y / sqrt(-(y ^ 2) + 1)))) using identity",
                                     "target": "atan(((y + 1) / sqrt(-(y ^ 2) + 1) - y / sqrt(-(y ^ 2) + 1)) / (1 + (y + 1) / sqrt(-(y ^ 2) + 1) * (y / sqrt(-(y ^ 2) + 1))))"
                                 },
                                 "type": "CalculationStep"
@@ -453,11 +462,10 @@
                                 "latex_res": "\\int_{-1}^{1} \\frac{2}{\\sqrt{-y ^ {2} + 1}} (\\frac{\\cos^{-1}{y}}{2}) \\,dy",
                                 "res": "INT y:[-1,1]. 2 / sqrt(-(y ^ 2) + 1) * (acos(y) / 2)",
                                 "rule": {
-                                    "latex_str": "rewrite \\(\\tan^{-1}{(\\sqrt{\\frac{1 - y}{1 + y}})}\\) to \\(\\frac{\\cos^{-1}{y}}{2}\\) using identity at 0.1",
-                                    "loc": "0.1",
+                                    "latex_str": "rewrite \\(\\tan^{-1}{(\\sqrt{\\frac{1 - y}{1 + y}})}\\) to \\(\\frac{\\cos^{-1}{y}}{2}\\) using identity",
                                     "name": "ApplyIdentity",
                                     "source": "atan(sqrt((1 - y) / (1 + y)))",
-                                    "str": "rewrite atan(sqrt((1 - y) / (1 + y))) to acos(y) / 2 using identity at 0.1",
+                                    "str": "rewrite atan(sqrt((1 - y) / (1 + y))) to acos(y) / 2 using identity",
                                     "target": "acos(y) / 2"
                                 },
                                 "type": "CalculationStep"

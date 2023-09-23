@@ -147,8 +147,23 @@
                                 "res": "1/2 * (INT x:[0,oo]. sin((b + a) * x) / x) + 1/2 * (INT x:[0,oo]. sin((b - a) * x) / x)",
                                 "rule": {
                                     "eq": "I(a,b) = 1/2 * (INT x:[0,oo]. sin((b + a) * x) / x) + 1/2 * (INT x:[0,oo]. sin((b - a) * x) / x)",
+                                    "eq_fixes": [
+                                        [
+                                            "b",
+                                            "$real"
+                                        ],
+                                        [
+                                            "x",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(I(a,b) = \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b + a) x)}}{x} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b - a) x)}}{x} \\,dx)\\)",
                                     "name": "ApplyEquation",
+                                    "source": "I(a,b)",
                                     "str": "apply equation: I(a,b) = 1/2 * (INT x:[0,oo]. sin((b + a) * x) / x) + 1/2 * (INT x:[0,oo]. sin((b - a) * x) / x)"
                                 },
                                 "type": "CalculationStep"
@@ -217,8 +232,23 @@
                                 "res": "1/2 * (INT x:[0,oo]. sin((b + a) * x) / x) + 1/2 * (INT x:[0,oo]. sin((b - a) * x) / x)",
                                 "rule": {
                                     "eq": "I(a,b) = 1/2 * (INT x:[0,oo]. sin((b + a) * x) / x) + 1/2 * (INT x:[0,oo]. sin((b - a) * x) / x)",
+                                    "eq_fixes": [
+                                        [
+                                            "b",
+                                            "$real"
+                                        ],
+                                        [
+                                            "x",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(I(a,b) = \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b + a) x)}}{x} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b - a) x)}}{x} \\,dx)\\)",
                                     "name": "ApplyEquation",
+                                    "source": "I(a,b)",
                                     "str": "apply equation: I(a,b) = 1/2 * (INT x:[0,oo]. sin((b + a) * x) / x) + 1/2 * (INT x:[0,oo]. sin((b - a) * x) / x)"
                                 },
                                 "type": "CalculationStep"
@@ -287,8 +317,23 @@
                                 "res": "1/2 * (INT x:[0,oo]. sin((b + a) * x) / x) + 1/2 * (INT x:[0,oo]. sin((b - a) * x) / x)",
                                 "rule": {
                                     "eq": "I(a,b) = 1/2 * (INT x:[0,oo]. sin((b + a) * x) / x) + 1/2 * (INT x:[0,oo]. sin((b - a) * x) / x)",
+                                    "eq_fixes": [
+                                        [
+                                            "b",
+                                            "$real"
+                                        ],
+                                        [
+                                            "x",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(I(a,b) = \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b + a) x)}}{x} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b - a) x)}}{x} \\,dx)\\)",
                                     "name": "ApplyEquation",
+                                    "source": "I(a,b)",
                                     "str": "apply equation: I(a,b) = 1/2 * (INT x:[0,oo]. sin((b + a) * x) / x) + 1/2 * (INT x:[0,oo]. sin((b - a) * x) / x)"
                                 },
                                 "type": "CalculationStep"

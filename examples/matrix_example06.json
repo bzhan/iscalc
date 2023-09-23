@@ -13,12 +13,6 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [
-                            [
-                                "i",
-                                "$int"
-                            ]
-                        ],
                         "latex_start": "1 - \\cos{a}",
                         "start": "1 - cos(a)",
                         "steps": [

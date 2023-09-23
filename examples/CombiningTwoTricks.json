@@ -396,28 +396,24 @@
                                 "res": "-1 / (2 - 1) * ((D a. I(a,b,2 - 1)) + (D b. I(a,b,2 - 1)))",
                                 "rule": {
                                     "eq": "I(a,b,n) = -1 / (n - 1) * ((D a. I(a,b,n - 1)) + (D b. I(a,b,n - 1)))",
+                                    "eq_fixes": [
+                                        [
+                                            "b",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ],
+                                        [
+                                            "n",
+                                            "$real"
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(I{(a,b,n)} = \\frac{-1}{n - 1} ((\\frac{d}{da} I{(a,b,n - 1)}) + (\\frac{d}{db} I{(a,b,n - 1)}))\\)",
                                     "name": "ApplyEquation",
+                                    "source": "I(a,b,2)",
                                     "str": "apply equation: I(a,b,n) = -1 / (n - 1) * ((D a. I(a,b,n - 1)) + (D b. I(a,b,n - 1)))"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "-(\\frac{d}{da} I{(a,b,2 - 1)}) - (\\frac{d}{db} I{(a,b,2 - 1)})",
-                                "res": "-(D a. I(a,b,2 - 1)) - (D b. I(a,b,2 - 1))",
-                                "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "-(\\frac{d}{da} I{(a,b,1)}) - (\\frac{d}{db} I{(a,b,2 - 1)})",
-                                "res": "-(D a. I(a,b,1)) - (D b. I(a,b,2 - 1))",
-                                "rule": {
-                                    "loc": "0.0.0.2",
-                                    "name": "FullSimplify",
-                                    "str": "full simplify at 0.0.0.2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -425,9 +421,30 @@
                                 "latex_res": "-(\\frac{d}{da} I{(a,b,1)}) - (\\frac{d}{db} I{(a,b,1)})",
                                 "res": "-(D a. I(a,b,1)) - (D b. I(a,b,1))",
                                 "rule": {
-                                    "loc": "1.0.2",
                                     "name": "FullSimplify",
-                                    "str": "full simplify at 1.0.2"
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-(\\frac{d}{da} \\frac{\\pi}{2 \\sqrt{a b}}) - (\\frac{d}{db} I{(a,b,1)})",
+                                "res": "-(D a. pi / (2 * sqrt(a * b))) - (D b. I(a,b,1))",
+                                "rule": {
+                                    "eq": "I(a,b,1) = pi / (2 * sqrt(a * b))",
+                                    "eq_fixes": [
+                                        [
+                                            "b",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(I{(a,b,1)} = \\frac{\\pi}{2 \\sqrt{a b}}\\)",
+                                    "name": "ApplyEquation",
+                                    "source": "I(a,b,1)",
+                                    "str": "apply equation: I(a,b,1) = pi / (2 * sqrt(a * b))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -436,10 +453,20 @@
                                 "res": "-(D a. pi / (2 * sqrt(a * b))) - (D b. pi / (2 * sqrt(a * b)))",
                                 "rule": {
                                     "eq": "I(a,b,1) = pi / (2 * sqrt(a * b))",
-                                    "latex_str": "apply equation \\(I{(a,b,1)} = \\frac{\\pi}{2 \\sqrt{a b}}\\) on subterms",
-                                    "loc": "subterms",
+                                    "eq_fixes": [
+                                        [
+                                            "b",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(I{(a,b,1)} = \\frac{\\pi}{2 \\sqrt{a b}}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: I(a,b,1) = pi / (2 * sqrt(a * b)) on subterms"
+                                    "source": "I(a,b,1)",
+                                    "str": "apply equation: I(a,b,1) = pi / (2 * sqrt(a * b))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -506,28 +533,24 @@
                                 "res": "-1 / (3 - 1) * ((D a. I(a,b,3 - 1)) + (D b. I(a,b,3 - 1)))",
                                 "rule": {
                                     "eq": "I(a,b,n) = -1 / (n - 1) * ((D a. I(a,b,n - 1)) + (D b. I(a,b,n - 1)))",
+                                    "eq_fixes": [
+                                        [
+                                            "b",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ],
+                                        [
+                                            "n",
+                                            "$real"
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(I{(a,b,n)} = \\frac{-1}{n - 1} ((\\frac{d}{da} I{(a,b,n - 1)}) + (\\frac{d}{db} I{(a,b,n - 1)}))\\)",
                                     "name": "ApplyEquation",
+                                    "source": "I(a,b,3)",
                                     "str": "apply equation: I(a,b,n) = -1 / (n - 1) * ((D a. I(a,b,n - 1)) + (D b. I(a,b,n - 1)))"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "-\\frac{\\frac{d}{da} I{(a,b,3 - 1)}}{2} - \\frac{\\frac{d}{db} I{(a,b,3 - 1)}}{2}",
-                                "res": "-((D a. I(a,b,3 - 1)) / 2) - (D b. I(a,b,3 - 1)) / 2",
-                                "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "-\\frac{\\frac{d}{da} I{(a,b,2)}}{2} - \\frac{\\frac{d}{db} I{(a,b,3 - 1)}}{2}",
-                                "res": "-((D a. I(a,b,2)) / 2) - (D b. I(a,b,3 - 1)) / 2",
-                                "rule": {
-                                    "loc": "0.0.0.0.2",
-                                    "name": "FullSimplify",
-                                    "str": "full simplify at 0.0.0.0.2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -535,9 +558,30 @@
                                 "latex_res": "-\\frac{\\frac{d}{da} I{(a,b,2)}}{2} - \\frac{\\frac{d}{db} I{(a,b,2)}}{2}",
                                 "res": "-((D a. I(a,b,2)) / 2) - (D b. I(a,b,2)) / 2",
                                 "rule": {
-                                    "loc": "1.0.0.2",
                                     "name": "FullSimplify",
-                                    "str": "full simplify at 1.0.0.2"
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "-\\frac{\\frac{d}{da} \\frac{\\pi}{4 \\sqrt{a b}} (\\frac{1}{a} + \\frac{1}{b})}{2} - \\frac{\\frac{d}{db} I{(a,b,2)}}{2}",
+                                "res": "-((D a. pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)) / 2) - (D b. I(a,b,2)) / 2",
+                                "rule": {
+                                    "eq": "I(a,b,2) = pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)",
+                                    "eq_fixes": [
+                                        [
+                                            "b",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(I{(a,b,2)} = \\frac{\\pi}{4 \\sqrt{a b}} (\\frac{1}{a} + \\frac{1}{b})\\)",
+                                    "name": "ApplyEquation",
+                                    "source": "I(a,b,2)",
+                                    "str": "apply equation: I(a,b,2) = pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -546,10 +590,20 @@
                                 "res": "-((D a. pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)) / 2) - (D b. pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)) / 2",
                                 "rule": {
                                     "eq": "I(a,b,2) = pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)",
-                                    "latex_str": "apply equation \\(I{(a,b,2)} = \\frac{\\pi}{4 \\sqrt{a b}} (\\frac{1}{a} + \\frac{1}{b})\\) on subterms",
-                                    "loc": "subterms",
+                                    "eq_fixes": [
+                                        [
+                                            "b",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(I{(a,b,2)} = \\frac{\\pi}{4 \\sqrt{a b}} (\\frac{1}{a} + \\frac{1}{b})\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: I(a,b,2) = pi / (4 * sqrt(a * b)) * (1 / a + 1 / b) on subterms"
+                                    "source": "I(a,b,2)",
+                                    "str": "apply equation: I(a,b,2) = pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)"
                                 },
                                 "type": "CalculationStep"
                             },

@@ -149,10 +149,20 @@
                                 "res": "D a. exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
                                 "rule": {
                                     "eq": "I(a,b) = exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
-                                    "latex_str": "apply equation \\(I(a,b) = e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}\\) on subterms",
-                                    "loc": "subterms",
+                                    "eq_fixes": [
+                                        [
+                                            "b",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(I(a,b) = e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: I(a,b) = exp(b ^ 2 / (4 * a)) * sqrt(pi / a) on subterms"
+                                    "source": "I(a,b)",
+                                    "str": "apply equation: I(a,b) = exp(b ^ 2 / (4 * a)) * sqrt(pi / a)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -213,10 +223,20 @@
                                 "res": "D b. exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
                                 "rule": {
                                     "eq": "I(a,b) = exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
-                                    "latex_str": "apply equation \\(I(a,b) = e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}\\) on subterms",
-                                    "loc": "subterms",
+                                    "eq_fixes": [
+                                        [
+                                            "b",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(I(a,b) = e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: I(a,b) = exp(b ^ 2 / (4 * a)) * sqrt(pi / a) on subterms"
+                                    "source": "I(a,b)",
+                                    "str": "apply equation: I(a,b) = exp(b ^ 2 / (4 * a)) * sqrt(pi / a)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -396,8 +416,23 @@
                                 "res": "-1 / (2 * 1) * exp((-1) ^ 2 / (4 * 1)) * sqrt(pi / 1)",
                                 "rule": {
                                     "eq": "(INT x:[-oo,oo]. x * exp(-(a * x ^ 2) + b * x)) = b / (2 * a) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
+                                    "eq_fixes": [
+                                        [
+                                            "b",
+                                            "$real"
+                                        ],
+                                        [
+                                            "x",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(\\int_{-\\infty}^{\\infty} x e^{-a x ^ {2} + b x} \\,dx = \\frac{b}{2 a} e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "INT x:[-oo,oo]. x * exp(-(1 * x ^ 2) + -1 * x)",
                                     "str": "apply equation: (INT x:[-oo,oo]. x * exp(-(a * x ^ 2) + b * x)) = b / (2 * a) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a)"
                                 },
                                 "type": "CalculationStep"
@@ -457,8 +492,23 @@
                                 "res": "(-1) ^ 2 / (4 * 1 ^ 2) * exp((-1) ^ 2 / (4 * 1)) * sqrt(pi / 1) + 1 / (2 * 1) * exp((-1) ^ 2 / (4 * 1)) * sqrt(pi / 1)",
                                 "rule": {
                                     "eq": "(INT x:[-oo,oo]. x ^ 2 * exp(-(a * x ^ 2) + b * x)) = b ^ 2 / (4 * a ^ 2) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a) + 1 / (2 * a) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
+                                    "eq_fixes": [
+                                        [
+                                            "b",
+                                            "$real"
+                                        ],
+                                        [
+                                            "x",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(\\int_{-\\infty}^{\\infty} x ^ {2} e^{-a x ^ {2} + b x} \\,dx = \\frac{b ^ {2}}{4 a ^ {2}} e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}} + \\frac{1}{2 a} e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "INT x:[-oo,oo]. x ^ 2 * exp(-(1 * x ^ 2) + -1 * x)",
                                     "str": "apply equation: (INT x:[-oo,oo]. x ^ 2 * exp(-(a * x ^ 2) + b * x)) = b ^ 2 / (4 * a ^ 2) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a) + 1 / (2 * a) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a)"
                                 },
                                 "type": "CalculationStep"

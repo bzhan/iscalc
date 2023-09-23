@@ -294,8 +294,19 @@
                                 "res": "pi * log(a) / 2 + SKOLEM_FUNC(C(b))",
                                 "rule": {
                                     "eq": "I(a,b) = pi * log(a) / 2 + SKOLEM_FUNC(C(b))",
+                                    "eq_fixes": [
+                                        [
+                                            "b",
+                                            "$real"
+                                        ],
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(I(a,b) = \\frac{\\pi \\log{a}}{2} + C(b)\\)",
                                     "name": "ApplyEquation",
+                                    "source": "I(a,b)",
                                     "str": "apply equation: I(a,b) = pi * log(a) / 2 + SKOLEM_FUNC(C(b))"
                                 },
                                 "type": "CalculationStep"
@@ -305,10 +316,16 @@
                                 "res": "pi * log(a) / 2 + -(pi * log(b) / 2)",
                                 "rule": {
                                     "eq": "SKOLEM_FUNC(C(a)) = -(pi * log(a) / 2)",
-                                    "latex_str": "apply equation \\(C(a) = -\\frac{\\pi \\log{a}}{2}\\) at 1",
-                                    "loc": "1",
+                                    "eq_fixes": [
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(C(a) = -\\frac{\\pi \\log{a}}{2}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: SKOLEM_FUNC(C(a)) = -(pi * log(a) / 2) at 1"
+                                    "source": "SKOLEM_FUNC(C(b))",
+                                    "str": "apply equation: SKOLEM_FUNC(C(a)) = -(pi * log(a) / 2)"
                                 },
                                 "type": "CalculationStep"
                             },

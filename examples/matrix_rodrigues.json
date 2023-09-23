@@ -12,10 +12,6 @@
                 [
                     "w",
                     "$tensor($real, 3, 1)"
-                ],
-                [
-                    "n",
-                    "$int"
                 ]
             ],
             "goal": "exp(hat(w) * x) = unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * hat(w) ^ 2",
@@ -23,16 +19,6 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [
-                            [
-                                "i",
-                                "$int"
-                            ],
-                            [
-                                "n",
-                                "$int"
-                            ]
-                        ],
                         "latex_start": "e^{\\hat{w} x}",
                         "start": "exp(hat(w) * x)",
                         "steps": [

@@ -89,11 +89,11 @@
                                     "eq": "exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2",
                                     "eq_fixes": [
                                         [
-                                            "t",
+                                            "w",
                                             "$real"
                                         ],
                                         [
-                                            "w",
+                                            "t",
                                             "$real"
                                         ]
                                     ],
@@ -123,11 +123,11 @@
                                     "eq": "exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2",
                                     "eq_fixes": [
                                         [
-                                            "t",
+                                            "w",
                                             "$real"
                                         ],
                                         [
-                                            "w",
+                                            "t",
                                             "$real"
                                         ]
                                     ],
@@ -610,11 +610,11 @@
                                     "eq": "exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2",
                                     "eq_fixes": [
                                         [
-                                            "t",
+                                            "w",
                                             "$real"
                                         ],
                                         [
-                                            "w",
+                                            "t",
                                             "$real"
                                         ]
                                     ],
@@ -665,12 +665,12 @@
                                     "eq": "hat(w) ^ n * w = zero_matrix(3,1)",
                                     "eq_fixes": [
                                         [
-                                            "n",
-                                            "$int"
-                                        ],
-                                        [
                                             "w",
                                             "$tensor($real, 3, 1)"
+                                        ],
+                                        [
+                                            "n",
+                                            "$int"
                                         ]
                                     ],
                                     "latex_str": "apply equation \\(\\hat{w} ^ {n} w = \\mathbf{0}_{3 \\times 1}\\)",
@@ -687,12 +687,12 @@
                                     "eq": "hat(w) ^ n * w = zero_matrix(3,1)",
                                     "eq_fixes": [
                                         [
-                                            "n",
-                                            "$int"
-                                        ],
-                                        [
                                             "w",
                                             "$tensor($real, 3, 1)"
+                                        ],
+                                        [
+                                            "n",
+                                            "$int"
                                         ]
                                     ],
                                     "latex_str": "apply equation \\(\\hat{w} ^ {n} w = \\mathbf{0}_{3 \\times 1}\\)",

@@ -328,8 +328,15 @@
                                 "res": "J(a)",
                                 "rule": {
                                     "eq": "J(a) = I(a)",
+                                    "eq_fixes": [
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(J{(a)} = I{(a)}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "I(a)",
                                     "str": "apply equation: J(a) = I(a)"
                                 },
                                 "type": "CalculationStep"
@@ -339,8 +346,15 @@
                                 "res": "pi / 2 * log(2 / a) + 2 * I(a)",
                                 "rule": {
                                     "eq": "J(a) = pi / 2 * log(2 / a) + 2 * I(a)",
+                                    "eq_fixes": [
+                                        [
+                                            "a",
+                                            "$real"
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(J{(a)} = \\frac{\\pi}{2} \\log{(\\frac{2}{a})} + 2 I{(a)}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "J(a)",
                                     "str": "apply equation: J(a) = pi / 2 * log(2 / a) + 2 * I(a)"
                                 },
                                 "type": "CalculationStep"

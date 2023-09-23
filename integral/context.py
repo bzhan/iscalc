@@ -68,7 +68,9 @@ class Context:
     - List of variable substitutions.
 
     """
-    def __init__(self, parent: Optional["Context"] = None):
+    def __init__(self, parent: Optional["Context"] = None, d:int = 0):
+        self.d = d
+
         # Parent context
         self.parent = parent
 
@@ -113,6 +115,7 @@ class Context:
 
         # List of fixes
         self.fixes: Dict[str, expr.Type] = dict()
+        self.dead_vars: Dict[str, None] = dict()
 
         # List of identities of summation split
         self.summation_split_identities: List[Identity] = list()
@@ -227,8 +230,9 @@ class Context:
 
     def get_fixes(self) -> Dict[str, expr.Type]:
         res = self.parent.get_fixes() if self.parent is not None else dict()
-        for k, v in self.fixes.items():
-            res[k] = v
+        res.update(self.fixes)
+        for k in self.dead_vars:
+            del res[k]
         return res
 
     def get_eq_conds(self) -> Conditions:
@@ -350,7 +354,23 @@ class Context:
             self.add_condition(cond)
 
     def add_fix(self, k: str, v: expr.Type):
-        self.fixes[k] = v
+        parent_fixes = self.parent.get_fixes()
+        if k in self.dead_vars:
+            del self.dead_vars[k]
+        if k in parent_fixes:
+            if k in self.dead_vars:
+                del self.dead_vars[k]
+                if parent_fixes[k] != v:
+                    self.fixes[k] = v
+            else:
+                if parent_fixes[k] != v:
+                    self.fixes[k] = v
+        else:
+            if k in self.dead_vars:
+                del self.dead_vars[k]
+                self.fixes[k] = v
+            else:
+                self.fixes[k] = v
 
     def extend_fixes(self, fixes: Dict[str, expr.Type]):
         for k, v in fixes.items():
@@ -365,25 +385,21 @@ class Context:
 
     def extend_by_item(self, item):
         if item['type'] == 'axiom' or item['type'] == 'problem':
-            fixes = dict()
-            if 'fixes' in item:
-                for a, b in item['fixes']:
-                    fixes[a] = parser.parse_expr(b, fixes=fixes)
-            e = parser.parse_expr(item['expr'], fixes=fixes)
+            e = parser.parse_expr(item['expr'])
             if e.is_equals() and expr.is_indefinite_integral(e.lhs):
                 self.add_indefinite_integral(e)
             elif e.is_equals() and expr.is_integral(e.lhs):
                 conds = Conditions()
                 if 'conds' in item:
                     for cond in item['conds']:
-                        conds.add_condition(parser.parse_expr(cond, fixes=fixes))
+                        conds.add_condition(parser.parse_expr(cond))
                 self.add_definite_integral(e, conds)
             elif 'category' in item and item['category'] == 'summation-split':
                 conds = Conditions()
                 if 'conds' in item:
                     for c in item['conds']:
-                        conds.add_condition(parser.parse_expr(c, fixes=fixes))
-                split_cond = parser.parse_expr(item['split-cond'], fixes=fixes)
+                        conds.add_condition(parser.parse_expr(c))
+                split_cond = parser.parse_expr(item['split-cond'])
                 self.add_summation_split_identities(e, conds, split_cond)
             elif e.is_equals() and not expr.is_summation(e.lhs) and expr.is_summation(e.rhs):
                 self.add_series_expansion(e)
@@ -391,14 +407,14 @@ class Context:
                     conds = Conditions()
                     if 'conds' in item:
                         for c in item['conds']:
-                            conds.add_condition(parser.parse_expr(c, fixes=fixes))
+                            conds.add_condition(parser.parse_expr(c))
                     self.add_lemma(e, conds)
             elif e.is_equals() and expr.is_summation(e.lhs) and not expr.is_summation(e.rhs):
                 if item['type'] == 'problem':
                     conds = Conditions()
                     if 'conds' in item:
                         for c in item['conds']:
-                            conds.add_condition(parser.parse_expr(c, fixes=fixes))
+                            conds.add_condition(parser.parse_expr(c))
                     self.add_lemma(e, conds)
                 else:
                     self.add_series_evaluation(e)
@@ -406,13 +422,13 @@ class Context:
                 conds = Conditions()
                 if 'conds' in item:
                     for c in item['conds']:
-                        conds.add_condition(parser.parse_expr(c, fixes=fixes))
+                        conds.add_condition(parser.parse_expr(c))
                 self.add_other_identities(e, item['category'], item.get('attributes'), conds)
             elif e.is_equals() and item['type'] == 'problem':
                 conds = Conditions()
                 if 'conds' in item:
                     for c in item['conds']:
-                        conds.add_condition(parser.parse_expr(c, fixes=fixes))
+                        conds.add_condition(parser.parse_expr(c))
                 self.add_lemma(e, conds)
         if 'attributes' in item and 'simplify' in item['attributes']:
             e = parser.parse_expr(item['expr'])
@@ -515,7 +531,7 @@ class Context:
 
 def body_conds(e: Expr, ctx: Context) -> Context:
     """Return the conditions in the body."""
-    ctx2 = Context(ctx)
+    ctx2 = Context(ctx,ctx.d+1)
     if expr.is_integral(e):
         if e.lower != expr.NEG_INF:
             ctx2.add_condition(Op(">", expr.Var(e.var), e.lower))

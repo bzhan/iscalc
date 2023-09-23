@@ -446,5 +446,26 @@ class MatrixTest(unittest.TestCase):
         assert calc.ctx.dead_vars == dict()
         assert goal.is_finished()
 
+    def testFixes02(self):
+        file = compstate.CompFile("base", "test_fixes_01")
+        fixes = dict()
+        fixes['x'] = parser.parse_expr('$real')
+        goal = file.add_goal("1 / cos(x) = sec(x)",
+                             fixes=fixes,
+                             conds=["cos(x)!=0"])
+        proof = goal.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.OnLocation(rules.SeriesExpansionIdentity(),'1'))
+
+        assert calc.ctx.get_fixes() == {'x': expr.RealType, 'n':expr.IntType}
+        assert calc.ctx.dead_vars == dict()
+        assert calc.ctx.fixes == {'n':expr.IntType}
+        calc.perform_rule(rules.OnLocation(rules.SeriesEvaluationIdentity(),'1'))
+        assert calc.ctx.fixes == dict()
+        assert calc.ctx.dead_vars == dict()
+        assert calc.ctx.get_fixes() == {'x': expr.RealType}
+        calc.perform_rule(rules.ApplyIdentity("1/cos(x)", "sec(x)"))
+        assert goal.is_finished()
+
 if __name__ == "__main__":
     unittest.main()

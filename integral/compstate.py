@@ -1069,7 +1069,7 @@ def parse_item(parent, item) -> StateItem:
         begin_fixes = dict()
         if 'begin_fixes' in item:
             for k, v in item['begin_fixes']:
-                begin_fixes[k] = parser.parse_expr(v, begin_fixes)
+                begin_fixes[k] = parser.parse_expr(v, fixes=begin_fixes)
         res = RewriteGoalProof(parent, goal=goal, \
                                begin=Goal(parent, parent.ctx, begin_goal, conds=begin_conds, fixes=begin_fixes))
         for i, step in enumerate(item['start']['steps']):

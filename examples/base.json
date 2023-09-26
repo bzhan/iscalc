@@ -1017,10 +1017,10 @@
             "type": "header"
         },
         {
-                    "expr": "(INT x. 1 / (x + a)) = log(abs(x + a)) + SKOLEM_CONST(C)",
-                    "path": "standard",
-                    "type": "problem"
-                },
+            "expr": "(INT x. 1 / (x + a)) = log(abs(x + a)) + SKOLEM_CONST(C)",
+            "path": "standard",
+            "type": "problem"
+        },
         {
             "conds": [
                 "a != 0"
@@ -1249,6 +1249,15 @@
             "category": "summation-split",
             "split-cond": "n % 2",
             "expr": "SUM(n, 0, oo, f(n)) = SUM(n, 0, oo, f(2*n+1)) + SUM(n, 0, oo, f(2*n))",
+            "type": "axiom"
+        },
+        {
+            "level": 1,
+            "name": "Ramanujan series",
+            "type": "header"
+        },
+        {
+            "expr": "SUM(n, 0, oo, (4 * n + 1) * binom(2*n, n) / (-64) ^ n) = 2 / pi",
             "type": "axiom"
         }
     ],

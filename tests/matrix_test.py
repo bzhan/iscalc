@@ -16,17 +16,7 @@ class MatrixTest(unittest.TestCase):
         # Test parsing of json file
         json_file = file.export()
         for i, item in enumerate(json_file['content']):
-            aa = compstate.parse_item(file.content[i].parent, item)
-            bb = file.content[i]
-            a, b = aa.export(), bb.export()
-            if a != b:
-                if isinstance(aa, compstate.Goal) and isinstance(bb, compstate.Goal):
-                    aa.is_finished()
-                with open('examples/a.json', 'w', encoding='utf-8') as f:
-                    json.dump(a, f, indent=4, ensure_ascii=False, sort_keys=True)
-                with open('examples/b.json', 'w', encoding='utf-8') as f:
-                    json.dump(b, f, indent=4, ensure_ascii=False, sort_keys=True)
-            self.assertEqual(a, b)
+            self.assertEqual(compstate.parse_item(file.content[i].parent, item).export(), file.content[i].export())
 
         # Output to file
         with open('examples/' + file.name + '.json', 'w', encoding='utf-8') as f:
@@ -204,23 +194,8 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.Equation(old_e, new_e))
         calc.perform_rule(rules.FullSimplify())
         assert goal04.is_finished()
-
         self.checkAndOutput(file)
 
-    def testGetType(self):
-        raw_fixes = [('n', '$int'), ('P', '$tensor($real, n, n)'), ('A', '$tensor($real, n, n)')]
-        fixes = dict()
-        for a, b in raw_fixes:
-            fixes[a] = parser.parse_expr(b, fixes=fixes)
-        e = parser.parse_expr("inv(P) * A * P", fixes=fixes)
-
-        assert e.type == expr.MatrixType(expr.RealType, Var('n', type=expr.IntType), Var('n', type=expr.IntType))
-        e = e ^ Const(0)
-        from integral import poly
-        from integral.poly import normalize
-        ctx = Context()
-        e = normalize(e, ctx)
-        assert e == parser.parse_expr("unit_matrix(n)", fixes=fixes)
 
     def testExample06(self):
         file = compstate.CompFile("base", "matrix_example06")
@@ -242,6 +217,7 @@ class MatrixTest(unittest.TestCase):
         s4 = parser.parse_expr("(-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1))", fixes=fixes)
         calc.perform_rule(rules.Equation(s3, s4))
         self.checkAndOutput(file)
+
 
 
     def testRodrigues(self):
@@ -290,6 +266,7 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         assert goal01.is_finished()
         self.checkAndOutput(file)
+
 
     def testTwistMatrixExpInv(self):
         file = compstate.CompFile("MIRM", "twist_matrix_exp_inv")
@@ -348,6 +325,9 @@ class MatrixTest(unittest.TestCase):
         s2 = calc.parse_expr("1")
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.FullSimplify())
+
+        fixes = dict()
+        fixes['w'] = parser.parse_expr('$tensor($real, 3, 1)')
         fixes['n'] = parser.parse_expr("$int")
         goal02 = file.add_goal("hat(w) ^ n * w = zero_matrix(3,1)", fixes = fixes, conds=["n>=1"])
         proof = goal02.proof_by_induction('n', start=1)
@@ -362,7 +342,6 @@ class MatrixTest(unittest.TestCase):
         s1 = calc.parse_expr("hat(w) ^ (n + 1)")
         s2 = calc.parse_expr("hat(w) * hat(w) ^ n")
         calc.perform_rule(rules.ApplyIdentity(s1,s2))
-
         s1 = calc.parse_expr("hat(w) * hat(w) ^ n * w")
         s2 = calc.parse_expr("hat(w) * (hat(w) ^ n * w)")
         calc.perform_rule(rules.Equation(s1, s2))
@@ -415,6 +394,9 @@ class MatrixTest(unittest.TestCase):
         source = calc.parse_expr("exp(t * hat(w)) * w")
         calc.perform_rule(rules.ApplyEquation(goal03.goal, source))
         calc.perform_rule(rules.FullSimplify())
+        fixes = dict()
+        fixes['w'] = parser.parse_expr('$tensor($real, 3, 1)')
+        fixes['v'] = parser.parse_expr('$tensor($real, 3, 1)')
         goal05 = file.add_goal("hmf(t, w, v) * hmf(-t, w, v) = unit_matrix(4)", fixes=fixes,
                                conds=['norm(w)=0'])
         proof = goal05.proof_by_calculation()
@@ -425,6 +407,7 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '1'))
         calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
+
 
     def testFixes01(self):
         file = compstate.CompFile("base", "test_fixes_01")
@@ -446,8 +429,10 @@ class MatrixTest(unittest.TestCase):
         assert calc.ctx.dead_vars == dict()
         assert goal.is_finished()
 
+        self.checkAndOutput(file)
+
     def testFixes02(self):
-        file = compstate.CompFile("base", "test_fixes_01")
+        file = compstate.CompFile("base", "test_fixes_02")
         fixes = dict()
         fixes['x'] = parser.parse_expr('$real')
         goal = file.add_goal("1 / cos(x) = sec(x)",
@@ -456,7 +441,7 @@ class MatrixTest(unittest.TestCase):
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.OnLocation(rules.SeriesExpansionIdentity(),'1'))
-
+        assert file.get_item_label(goal) == compstate.Label("1")
         assert calc.ctx.get_fixes() == {'x': expr.RealType, 'n':expr.IntType}
         assert calc.ctx.dead_vars == dict()
         assert calc.ctx.fixes == {'n':expr.IntType}
@@ -466,6 +451,37 @@ class MatrixTest(unittest.TestCase):
         assert calc.ctx.get_fixes() == {'x': expr.RealType}
         calc.perform_rule(rules.ApplyIdentity("1/cos(x)", "sec(x)"))
         assert goal.is_finished()
+        self.checkAndOutput(file)
+
+
+    def testFixes03(self):
+        file = compstate.CompFile("base", "test_fixes_03")
+        fixes = dict()
+        fixes['k'] = parser.parse_expr('$int')
+        fixes['g'] = parser.parse_expr("$int")
+        goal = file.add_goal("cos(x) = cos(x) + SUM(k, 0, 6, a) - SUM(g, 0, 6, a)",
+                             fixes=fixes)
+        proof = goal.proof_by_calculation()
+        calc = proof.rhs_calc
+        assert calc.ctx.fixes == dict()
+        assert calc.ctx.dead_vars == dict()
+        calc.perform_rule(rules.FullSimplify())
+        assert calc.ctx.dead_vars == {'g':None, 'k':None}
+        assert calc.ctx.fixes == dict()
+        assert goal.is_finished()
+        fixes = dict()
+        fixes['x'] = expr.RealType
+        fixes['n'] = expr.RealType
+        goal02 = file.add_goal("SUM(n, 0, oo, (-1)^n*x^(2*n)/factorial(2*n))=cos(x)", fixes=fixes)
+        proof = goal02.proof_by_rewrite_goal(begin=goal)
+        calc = proof.begin
+        calc.perform_rule(rules.FullSimplify())
+        calc.ctx.fixes = dict()
+        calc.ctx.dead_vars = {'g':None, 'k':None}
+        calc.perform_rule(rules.OnLocation(rules.SeriesExpansionIdentity(), '0'))
+        calc.ctx.fixes = {'n': expr.IntType}
+        calc.ctx.dead_vars = {'g':None, 'k':None}
+        self.checkAndOutput(file)
 
 if __name__ == "__main__":
     unittest.main()

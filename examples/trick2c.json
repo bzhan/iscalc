@@ -7,10 +7,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\pi/2} \\frac{\\sin^{2}(x)}{\\sin{x} + \\cos{x}} \\,dx",
                         "start": "INT x:[0,pi / 2]. sin(x) ^ 2 / (sin(x) + cos(x))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\cos^{2}(y)}{\\cos{y} + \\sin{y}} \\,dy",
                                 "res": "INT y:[0,pi / 2]. cos(y) ^ 2 / (cos(y) + sin(y))",
                                 "rule": {
@@ -26,10 +30,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\pi/2} \\frac{\\cos^{2}(x)}{\\sin{x} + \\cos{x}} \\,dx",
                         "start": "INT x:[0,pi / 2]. cos(x) ^ 2 / (sin(x) + cos(x))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\cos^{2}(x)}{\\cos{x} + \\sin{x}} \\,dx",
                                 "res": "INT x:[0,pi / 2]. cos(x) ^ 2 / (cos(x) + sin(x))",
                                 "rule": {
@@ -56,10 +64,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\pi/2} \\frac{\\sin^{2}(x)}{\\sin{x} + \\cos{x}} \\,dx",
                         "start": "INT x:[0,pi / 2]. sin(x) ^ 2 / (sin(x) + cos(x))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\sin^{2}(x)}{\\cos{x} + \\sin{x}} \\,dx",
                                 "res": "INT x:[0,pi / 2]. sin(x) ^ 2 / (cos(x) + sin(x))",
                                 "rule": {
@@ -72,10 +84,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{1}{2} (\\int_{0}^{\\pi/2} \\frac{1}{\\sin{x} + \\cos{x}} \\,dx)",
                         "start": "1/2 * (INT x:[0,pi / 2]. 1 / (sin(x) + cos(x)))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi/2} \\frac{1}{\\cos{x} + \\sin{x}} \\,dx)",
                                 "res": "1/2 * (INT x:[0,pi / 2]. 1 / (cos(x) + sin(x)))",
                                 "rule": {
@@ -85,6 +101,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi/2} \\frac{\\sin^{2}(x) + \\cos^{2}(x)}{\\cos{x} + \\sin{x}} \\,dx)",
                                 "res": "1/2 * (INT x:[0,pi / 2]. (sin(x) ^ 2 + cos(x) ^ 2) / (cos(x) + sin(x)))",
                                 "rule": {
@@ -97,6 +115,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi/2} \\frac{\\cos^{2}(x)}{\\cos{x} + \\sin{x}} + \\frac{\\sin^{2}(x)}{\\cos{x} + \\sin{x}} \\,dx)",
                                 "res": "1/2 * (INT x:[0,pi / 2]. cos(x) ^ 2 / (cos(x) + sin(x)) + sin(x) ^ 2 / (cos(x) + sin(x)))",
                                 "rule": {
@@ -106,6 +126,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi/2} \\frac{\\cos^{2}(x)}{\\cos{x} + \\sin{x}} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\pi/2} \\frac{\\sin^{2}(x)}{\\cos{x} + \\sin{x}} \\,dx)",
                                 "res": "1/2 * (INT x:[0,pi / 2]. cos(x) ^ 2 / (cos(x) + sin(x))) + 1/2 * (INT x:[0,pi / 2]. sin(x) ^ 2 / (cos(x) + sin(x)))",
                                 "rule": {
@@ -115,6 +137,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi/2} \\frac{\\cos^{2}(x)}{\\sin{x} + \\cos{x}} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\pi/2} \\frac{\\sin^{2}(x)}{\\cos{x} + \\sin{x}} \\,dx)",
                                 "res": "1/2 * (INT x:[0,pi / 2]. cos(x) ^ 2 / (sin(x) + cos(x))) + 1/2 * (INT x:[0,pi / 2]. sin(x) ^ 2 / (cos(x) + sin(x)))",
                                 "rule": {
@@ -128,6 +152,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi/2} \\frac{\\sin^{2}(x)}{\\sin{x} + \\cos{x}} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\pi/2} \\frac{\\sin^{2}(x)}{\\cos{x} + \\sin{x}} \\,dx)",
                                 "res": "1/2 * (INT x:[0,pi / 2]. sin(x) ^ 2 / (sin(x) + cos(x))) + 1/2 * (INT x:[0,pi / 2]. sin(x) ^ 2 / (cos(x) + sin(x)))",
                                 "rule": {
@@ -140,6 +166,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\sin^{2}(x)}{\\cos{x} + \\sin{x}} \\,dx",
                                 "res": "INT x:[0,pi / 2]. sin(x) ^ 2 / (cos(x) + sin(x))",
                                 "rule": {
@@ -166,10 +194,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\pi/2} \\frac{\\sin^{2}(x)}{\\sin{x} + \\cos{x}} \\,dx",
                         "start": "INT x:[0,pi / 2]. sin(x) ^ 2 / (sin(x) + cos(x))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi/2} \\frac{1}{\\sin{x} + \\cos{x}} \\,dx)",
                                 "res": "1/2 * (INT x:[0,pi / 2]. 1 / (sin(x) + cos(x)))",
                                 "rule": {
@@ -182,6 +214,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{1} \\frac{2}{(z ^ {2} + 1) (\\frac{-z ^ {2} + 1}{z ^ {2} + 1} + \\frac{2 z}{z ^ {2} + 1})} \\,dz)",
                                 "res": "1/2 * (INT z:[0,1]. 2 / ((z ^ 2 + 1) * ((-(z ^ 2) + 1) / (z ^ 2 + 1) + 2 * z / (z ^ 2 + 1))))",
                                 "rule": {
@@ -194,6 +228,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{1}{(z ^ {2} + 1) (\\frac{-z ^ {2} + 1}{z ^ {2} + 1} + \\frac{2 z}{z ^ {2} + 1})} \\,dz",
                                 "res": "INT z:[0,1]. 1 / ((z ^ 2 + 1) * ((-(z ^ 2) + 1) / (z ^ 2 + 1) + 2 * z / (z ^ 2 + 1)))",
                                 "rule": {
@@ -203,6 +239,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{1}{(z ^ {2} + 1) (\\frac{2 - (z - 1) ^ {2}}{z ^ {2} + 1})} \\,dz",
                                 "res": "INT z:[0,1]. 1 / ((z ^ 2 + 1) * ((2 - (z - 1) ^ 2) / (z ^ 2 + 1)))",
                                 "rule": {
@@ -215,6 +253,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{1}{2 - (z - 1) ^ {2}} \\,dz",
                                 "res": "INT z:[0,1]. 1 / (2 - (z - 1) ^ 2)",
                                 "rule": {
@@ -227,6 +267,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{1}{(\\sqrt{2} + (z - 1)) (\\sqrt{2} - (z - 1))} \\,dz",
                                 "res": "INT z:[0,1]. 1 / ((sqrt(2) + (z - 1)) * (sqrt(2) - (z - 1)))",
                                 "rule": {
@@ -239,6 +281,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{\\sqrt{2}}{4} (\\frac{1}{\\sqrt{2} + (z - 1)} + \\frac{1}{\\sqrt{2} - (z - 1)}) \\,dz",
                                 "res": "INT z:[0,1]. sqrt(2) / 4 * (1 / (sqrt(2) + (z - 1)) + 1 / (sqrt(2) - (z - 1)))",
                                 "rule": {
@@ -251,6 +295,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{4} ((\\int_{0}^{1} \\frac{1}{\\sqrt{2} - z + 1} \\,dz) + (\\int_{0}^{1} \\frac{1}{\\sqrt{2} + z - 1} \\,dz))",
                                 "res": "sqrt(2) / 4 * ((INT z:[0,1]. 1 / (sqrt(2) - z + 1)) + (INT z:[0,1]. 1 / (sqrt(2) + z - 1)))",
                                 "rule": {
@@ -260,6 +306,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{4} ((\\int_{\\sqrt{2}}^{\\sqrt{2} + 1} \\frac{1}{u} \\,du) + (\\int_{0}^{1} \\frac{1}{\\sqrt{2} + z - 1} \\,dz))",
                                 "res": "sqrt(2) / 4 * ((INT u:[sqrt(2),sqrt(2) + 1]. 1 / u) + (INT z:[0,1]. 1 / (sqrt(2) + z - 1)))",
                                 "rule": {
@@ -273,6 +321,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{4} ((\\int_{\\sqrt{2}}^{\\sqrt{2} + 1} \\frac{1}{u} \\,du) + (\\int_{\\sqrt{2} - 1}^{\\sqrt{2}} \\frac{1}{u} \\,du))",
                                 "res": "sqrt(2) / 4 * ((INT u:[sqrt(2),sqrt(2) + 1]. 1 / u) + (INT u:[sqrt(2) - 1,sqrt(2)]. 1 / u))",
                                 "rule": {
@@ -286,6 +336,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{4} ((\\left. \\log{(\\left| u \\right|)} \\right\\vert_{u=\\sqrt{2}}^{\\sqrt{2} + 1}) + (\\left. \\log{(\\left| u \\right|)} \\right\\vert_{u=\\sqrt{2} - 1}^{\\sqrt{2}}))",
                                 "res": "sqrt(2) / 4 * (([log(abs(u))]_u=sqrt(2),sqrt(2) + 1) + ([log(abs(u))]_u=sqrt(2) - 1,sqrt(2)))",
                                 "rule": {
@@ -295,6 +347,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}\\cdot (\\log{(\\sqrt{2} + 1)} - \\log{(\\sqrt{2} - 1)})}{4}",
                                 "res": "sqrt(2) * (log(sqrt(2) + 1) - log(sqrt(2) - 1)) / 4",
                                 "rule": {
@@ -304,6 +358,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{4} \\sqrt{2}\\cdot (\\log{(\\sqrt{2} + 1)} - \\log{(\\sqrt{2} - 1)})",
                                 "res": "1/4 * sqrt(2) * (log(sqrt(2) + 1) - log(sqrt(2) - 1))",
                                 "rule": {
@@ -316,6 +372,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{4} \\sqrt{2} \\log{(\\frac{\\sqrt{2} + 1}{\\sqrt{2} - 1})}",
                                 "res": "1/4 * sqrt(2) * log((sqrt(2) + 1) / (sqrt(2) - 1))",
                                 "rule": {
@@ -328,6 +386,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{4} \\sqrt{2} \\log{(3 + 2 \\sqrt{2})}",
                                 "res": "1/4 * sqrt(2) * log(3 + 2 * sqrt(2))",
                                 "rule": {
@@ -340,6 +400,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\log{(2 \\sqrt{2} + 3)}}{4}",
                                 "res": "sqrt(2) * log(2 * sqrt(2) + 3) / 4",
                                 "rule": {
@@ -352,10 +414,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\sqrt{2}}{4} \\log{(3 + 2 \\sqrt{2})}",
                         "start": "sqrt(2) / 4 * log(3 + 2 * sqrt(2))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\log{(2 \\sqrt{2} + 3)}}{4}",
                                 "res": "sqrt(2) * log(2 * sqrt(2) + 3) / 4",
                                 "rule": {

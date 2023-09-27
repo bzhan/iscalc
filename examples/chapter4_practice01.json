@@ -13,10 +13,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "B(2,n + 1)",
                         "start": "B(2,n + 1)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} x (-x + 1) ^ {n} \\,dx",
                                 "res": "INT x:[0,1]. x * (-x + 1) ^ n",
                                 "rule": {
@@ -30,10 +34,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} u (1 - u) ^ {n} \\,du",
                         "start": "INT u:[0,1]. u * (1 - u) ^ n",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} u (-u + 1) ^ {n} \\,du",
                                 "res": "INT u:[0,1]. u * (-u + 1) ^ n",
                                 "rule": {
@@ -66,10 +74,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} (1 - \\sqrt{x}) ^ {n} \\,dx",
                         "start": "INT x:[0,1]. (1 - sqrt(x)) ^ n",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} 2 u (-u + 1) ^ {n} \\,du",
                                 "res": "INT u:[0,1]. 2 * u * (-u + 1) ^ n",
                                 "rule": {
@@ -82,6 +94,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{1} u (-u + 1) ^ {n} \\,du)",
                                 "res": "2 * (INT u:[0,1]. u * (-u + 1) ^ n)",
                                 "rule": {
@@ -91,6 +105,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{1} u (1 - u) ^ {n} \\,du)",
                                 "res": "2 * (INT u:[0,1]. u * (1 - u) ^ n)",
                                 "rule": {
@@ -103,6 +119,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 B(2,n + 1)",
                                 "res": "2 * B(2,n + 1)",
                                 "rule": {
@@ -115,6 +133,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\frac{\\Gamma{(2)} \\Gamma{(n + 1)}}{\\Gamma{(n + 3)}})",
                                 "res": "2 * (Gamma(2) * Gamma(n + 1) / Gamma(n + 3))",
                                 "rule": {
@@ -127,6 +147,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\frac{(1)! \\Gamma{(n + 1)}}{\\Gamma{(n + 3)}})",
                                 "res": "2 * (factorial(1) * Gamma(n + 1) / Gamma(n + 3))",
                                 "rule": {
@@ -139,6 +161,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\frac{(1)! n!}{\\Gamma{(n + 3)}})",
                                 "res": "2 * (factorial(1) * factorial(n) / Gamma(n + 3))",
                                 "rule": {
@@ -151,6 +175,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\frac{(1)! n!}{(n + 2)!})",
                                 "res": "2 * (factorial(1) * factorial(n) / factorial(n + 2))",
                                 "rule": {
@@ -163,6 +189,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{2 n!}{(n + 2)!}",
                                 "res": "2 * factorial(n) / factorial(n + 2)",
                                 "rule": {
@@ -172,6 +200,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{2 n!}{(n + 2) (n + 1)!}",
                                 "res": "2 * factorial(n) / ((n + 2) * factorial(n + 1))",
                                 "rule": {
@@ -184,6 +214,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{2 n!}{(n + 2) ((n + 1) n!)}",
                                 "res": "2 * factorial(n) / ((n + 2) * ((n + 1) * factorial(n)))",
                                 "rule": {
@@ -196,6 +228,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{2}{(n + 1) (n + 2)}",
                                 "res": "2 / ((n + 1) * (n + 2))",
                                 "rule": {
@@ -208,6 +242,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{2}{(n + 1) (n + 2)}",
                         "start": "2 / ((n + 1) * (n + 2))",
                         "steps": [],
@@ -226,20 +262,19 @@
             "goal": "(INT x:[0,1]. (1 - sqrt(x)) ^ 9) = 1/55",
             "latex_goal": "\\int_{0}^{1} (1 - \\sqrt{x}) ^ {9} \\,dx = \\frac{1}{55}",
             "proof": {
+                "begin_label": "2.",
                 "finished": true,
                 "goal": "(INT x:[0,1]. (1 - sqrt(x)) ^ 9) = 1/55",
                 "latex_goal": "\\int_{0}^{1} (1 - \\sqrt{x}) ^ {9} \\,dx = \\frac{1}{55}",
                 "start": {
-                    "conds": [
-                        {
-                            "cond": "n > -1",
-                            "latex_cond": "n > -1"
-                        }
-                    ],
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_start": "\\int_{0}^{1} (1 - \\sqrt{x}) ^ {n} \\,dx = \\frac{2}{(n + 1) (n + 2)}",
                     "start": "(INT x:[0,1]. (1 - sqrt(x)) ^ n) = 2 / ((n + 1) * (n + 2))",
                     "steps": [
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\int_{0}^{1} (1 - \\sqrt{x}) ^ {9} \\,dx = \\frac{2}{(9 + 1)\\cdot (9 + 2)}",
                             "res": "(INT x:[0,1]. (1 - sqrt(x)) ^ 9) = 2 / ((9 + 1) * (9 + 2))",
                             "rule": {
@@ -256,6 +291,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\int_{0}^{1} (-\\sqrt{x} + 1) ^ {9} \\,dx = \\frac{1}{55}",
                             "res": "(INT x:[0,1]. (-sqrt(x) + 1) ^ 9) = 1/55",
                             "rule": {

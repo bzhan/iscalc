@@ -17,10 +17,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\hat{w} ^ {2}",
                         "start": "hat(w) ^ 2",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\begin{bmatrix}-w_{10} ^ {2} - w_{20} ^ {2}&w_{00} w_{10}&w_{00} w_{20}\\\\w_{00} w_{10}&-w_{00} ^ {2} - w_{20} ^ {2}&w_{10} w_{20}\\\\w_{00} w_{20}&w_{10} w_{20}&-w_{00} ^ {2} - w_{10} ^ {2}\\end{bmatrix}",
                                 "res": "[[-(nth(w,1,0) ^ 2) - nth(w,2,0) ^ 2, nth(w,0,0) * nth(w,1,0), nth(w,0,0) * nth(w,2,0)], [nth(w,0,0) * nth(w,1,0), -(nth(w,0,0) ^ 2) - nth(w,2,0) ^ 2, nth(w,1,0) * nth(w,2,0)], [nth(w,0,0) * nth(w,2,0), nth(w,1,0) * nth(w,2,0), -(nth(w,0,0) ^ 2) - nth(w,1,0) ^ 2]]",
                                 "rule": {
@@ -34,10 +38,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "w w^{\\text{T}} - \\|w\\| ^ {2} \\mathbf{1}_{3 \\times 3}",
                         "start": "w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\begin{bmatrix}w_{00}\\\\w_{10}\\\\w_{20}\\end{bmatrix} \\begin{bmatrix}w_{00}&w_{10}&w_{20}\\end{bmatrix} - \\sqrt{w_{00} ^ {2} + w_{10} ^ {2} + w_{20} ^ {2}} ^ {2} \\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&1\\end{bmatrix}",
                                 "res": "[[nth(w,0,0)], [nth(w,1,0)], [nth(w,2,0)]] * [[nth(w,0,0), nth(w,1,0), nth(w,2,0)]] - sqrt(nth(w,0,0) ^ 2 + nth(w,1,0) ^ 2 + nth(w,2,0) ^ 2) ^ 2 * [[1, 0, 0], [0, 1, 0], [0, 0, 1]]",
                                 "rule": {
@@ -48,6 +56,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\begin{bmatrix}-w_{10} ^ {2} - w_{20} ^ {2}&w_{00} w_{10}&w_{00} w_{20}\\\\w_{00} w_{10}&-w_{00} ^ {2} - w_{20} ^ {2}&w_{10} w_{20}\\\\w_{00} w_{20}&w_{10} w_{20}&-w_{00} ^ {2} - w_{10} ^ {2}\\end{bmatrix}",
                                 "res": "[[-(nth(w,1,0) ^ 2) - nth(w,2,0) ^ 2, nth(w,0,0) * nth(w,1,0), nth(w,0,0) * nth(w,2,0)], [nth(w,0,0) * nth(w,1,0), -(nth(w,0,0) ^ 2) - nth(w,2,0) ^ 2, nth(w,1,0) * nth(w,2,0)], [nth(w,0,0) * nth(w,2,0), nth(w,1,0) * nth(w,2,0), -(nth(w,0,0) ^ 2) - nth(w,1,0) ^ 2]]",
                                 "rule": {
@@ -84,10 +94,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [
+                            "w"
+                        ],
+                        "fixes": [],
                         "latex_start": "w w^{\\text{T}} \\hat{w}",
                         "start": "w * T(w) * hat(w)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\begin{bmatrix}w_{00}\\\\w_{10}\\\\w_{20}\\end{bmatrix} \\begin{bmatrix}w_{00}&w_{10}&w_{20}\\end{bmatrix} \\begin{bmatrix}0&-w_{20}&w_{10}\\\\w_{20}&0&-w_{00}\\\\-w_{10}&w_{00}&0\\end{bmatrix}",
                                 "res": "[[nth(w,0,0)], [nth(w,1,0)], [nth(w,2,0)]] * [[nth(w,0,0), nth(w,1,0), nth(w,2,0)]] * [[0, -nth(w,2,0), nth(w,1,0)], [nth(w,2,0), 0, -nth(w,0,0)], [-nth(w,1,0), nth(w,0,0), 0]]",
                                 "rule": {
@@ -98,6 +114,10 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [
+                                    "w"
+                                ],
+                                "fixes": [],
                                 "latex_res": "\\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
                                 "res": "[[0, 0, 0], [0, 0, 0], [0, 0, 0]]",
                                 "rule": {
@@ -110,10 +130,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\mathbf{0}_{3 \\times 3}",
                         "start": "zero_matrix(3,3)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\begin{bmatrix}0&0&0\\\\0&0&0\\\\0&0&0\\end{bmatrix}",
                                 "res": "[[0, 0, 0], [0, 0, 0], [0, 0, 0]]",
                                 "rule": {
@@ -282,12 +306,16 @@
                     "proof": {
                         "calcs": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "\\hat{w}",
                                 "start": "hat(w)",
                                 "steps": [],
                                 "type": "Calculation"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "\\hat{w}",
                                 "start": "hat(w)",
                                 "steps": [],
@@ -426,10 +454,14 @@
                     "proof": {
                         "calcs": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "\\hat{w} ^ {2 n + 3}",
                                 "start": "hat(w) ^ (2 * n + 3)",
                                 "steps": [
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\hat{w} ^ {2 + (2 n + 1)}",
                                         "res": "hat(w) ^ (2 + (2 * n + 1))",
                                         "rule": {
@@ -442,6 +474,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\hat{w} ^ {2} \\hat{w} ^ {2 n + 1}",
                                         "res": "hat(w) ^ 2 * hat(w) ^ (2 * n + 1)",
                                         "rule": {
@@ -454,6 +488,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\hat{w} ^ {2} ((-1) ^ {n} \\hat{w})",
                                         "res": "hat(w) ^ 2 * ((-1) ^ n * hat(w))",
                                         "rule": {
@@ -464,6 +500,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "(w w^{\\text{T}} - \\|w\\| ^ {2} \\mathbf{1}_{3 \\times 3}) ((-1) ^ {n} \\hat{w})",
                                         "res": "(w * T(w) - norm(w) ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w))",
                                         "rule": {
@@ -476,6 +514,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "(w w^{\\text{T}} - 1 ^ {2} \\mathbf{1}_{3 \\times 3}) ((-1) ^ {n} \\hat{w})",
                                         "res": "(w * T(w) - 1 ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w))",
                                         "rule": {
@@ -488,6 +528,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "(-1) ^ {n} w w^{\\text{T}} \\hat{w} - (-1) ^ {n} \\mathbf{1}_{3 \\times 3} \\hat{w}",
                                         "res": "(-1) ^ n * w * T(w) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w)",
                                         "rule": {
@@ -497,6 +539,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "(-1) ^ {n} (w w^{\\text{T}} \\hat{w}) - (-1) ^ {n} \\mathbf{1}_{3 \\times 3} \\hat{w}",
                                         "res": "(-1) ^ n * (w * T(w) * hat(w)) - (-1) ^ n * unit_matrix(3) * hat(w)",
                                         "rule": {
@@ -509,6 +553,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "(-1) ^ {n} \\mathbf{0}_{3 \\times 3} - (-1) ^ {n} \\mathbf{1}_{3 \\times 3} \\hat{w}",
                                         "res": "(-1) ^ n * zero_matrix(3,3) - (-1) ^ n * unit_matrix(3) * hat(w)",
                                         "rule": {
@@ -521,6 +567,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "-(-1) ^ {n} \\hat{w}",
                                         "res": "-((-1) ^ n * hat(w))",
                                         "rule": {
@@ -533,6 +581,8 @@
                                 "type": "Calculation"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "-(-1) ^ {n} \\hat{w}",
                                 "start": "-((-1) ^ n * hat(w))",
                                 "steps": [],
@@ -549,6 +599,7 @@
                 },
                 "induct_var": "n",
                 "latex_goal": "\\hat{w} ^ {2 n + 1} = (-1) ^ {n} \\hat{w}",
+                "start": "0",
                 "type": "InductionProof"
             },
             "type": "Goal",
@@ -702,12 +753,16 @@
                     "proof": {
                         "calcs": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "\\hat{w} ^ {2}",
                                 "start": "hat(w) ^ 2",
                                 "steps": [],
                                 "type": "Calculation"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "\\hat{w} ^ {2}",
                                 "start": "hat(w) ^ 2",
                                 "steps": [],
@@ -846,10 +901,14 @@
                     "proof": {
                         "calcs": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "\\hat{w} ^ {2 n + 4}",
                                 "start": "hat(w) ^ (2 * n + 4)",
                                 "steps": [
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\hat{w} ^ {2 + 2 (n + 1)}",
                                         "res": "hat(w) ^ (2 + 2 * (n + 1))",
                                         "rule": {
@@ -862,6 +921,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\hat{w} ^ {2} \\hat{w} ^ {2 (n + 1)}",
                                         "res": "hat(w) ^ 2 * hat(w) ^ (2 * (n + 1))",
                                         "rule": {
@@ -874,6 +935,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\hat{w} ^ {2} ((-1) ^ {n} \\hat{w} ^ {2})",
                                         "res": "hat(w) ^ 2 * ((-1) ^ n * hat(w) ^ 2)",
                                         "rule": {
@@ -884,6 +947,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "(w w^{\\text{T}} - \\|w\\| ^ {2} \\mathbf{1}_{3 \\times 3}) ((-1) ^ {n} \\hat{w} ^ {2})",
                                         "res": "(w * T(w) - norm(w) ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w) ^ 2)",
                                         "rule": {
@@ -896,6 +961,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "(w w^{\\text{T}} - 1 ^ {2} \\mathbf{1}_{3 \\times 3}) ((-1) ^ {n} \\hat{w} ^ {2})",
                                         "res": "(w * T(w) - 1 ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w) ^ 2)",
                                         "rule": {
@@ -908,6 +975,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "(-1) ^ {n} w w^{\\text{T}} \\hat{w} \\hat{w} - (-1) ^ {n} \\mathbf{1}_{3 \\times 3} \\hat{w} \\hat{w}",
                                         "res": "(-1) ^ n * w * T(w) * hat(w) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w) * hat(w)",
                                         "rule": {
@@ -917,6 +986,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "(-1) ^ {n} (w w^{\\text{T}} \\hat{w}) \\hat{w} - (-1) ^ {n} \\mathbf{1}_{3 \\times 3} \\hat{w} \\hat{w}",
                                         "res": "(-1) ^ n * (w * T(w) * hat(w)) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w) * hat(w)",
                                         "rule": {
@@ -929,6 +1000,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "(-1) ^ {n} \\mathbf{0}_{3 \\times 3} \\hat{w} - (-1) ^ {n} \\mathbf{1}_{3 \\times 3} \\hat{w} \\hat{w}",
                                         "res": "(-1) ^ n * zero_matrix(3,3) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w) * hat(w)",
                                         "rule": {
@@ -941,6 +1014,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "-(-1) ^ {n} \\hat{w} \\hat{w}",
                                         "res": "-((-1) ^ n * hat(w) * hat(w))",
                                         "rule": {
@@ -953,10 +1028,14 @@
                                 "type": "Calculation"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "-(-1) ^ {n} \\hat{w} ^ {2}",
                                 "start": "-((-1) ^ n * hat(w) ^ 2)",
                                 "steps": [
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "-(-1) ^ {n} (\\hat{w} \\hat{w})",
                                         "res": "-((-1) ^ n * (hat(w) * hat(w)))",
                                         "rule": {
@@ -969,6 +1048,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "-(-1) ^ {n} \\hat{w} \\hat{w}",
                                         "res": "-((-1) ^ n * hat(w) * hat(w))",
                                         "rule": {
@@ -991,6 +1072,7 @@
                 },
                 "induct_var": "n",
                 "latex_goal": "\\hat{w} ^ {2 (n + 1)} = (-1) ^ {n} \\hat{w} ^ {2}",
+                "start": "0",
                 "type": "InductionProof"
             },
             "type": "Goal",

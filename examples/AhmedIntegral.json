@@ -19,10 +19,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "I{(1)}",
                         "start": "I(1)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{\\tan^{-1}{(\\sqrt{x ^ {2} + 2})}}{(x ^ {2} + 1) \\sqrt{x ^ {2} + 2}} \\,dx",
                                 "res": "INT x:[0,1]. atan(sqrt(x ^ 2 + 2)) / ((x ^ 2 + 1) * sqrt(x ^ 2 + 2))",
                                 "rule": {
@@ -36,6 +40,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} \\frac{\\tan^{-1}{(\\sqrt{x ^ {2} + 2})}}{(x ^ {2} + 1) \\sqrt{x ^ {2} + 2}} \\,dx",
                         "start": "INT x:[0,1]. atan(sqrt(x ^ 2 + 2)) / ((x ^ 2 + 1) * sqrt(x ^ 2 + 2))",
                         "steps": [],
@@ -62,10 +68,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{d}{du} I{(u)}",
                         "start": "D u. I(u)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{d}{du} \\int_{0}^{1} \\frac{\\tan^{-1}{(u \\sqrt{x ^ {2} + 2})}}{(x ^ {2} + 1) \\sqrt{x ^ {2} + 2}} \\,dx",
                                 "res": "D u. INT x:[0,1]. atan(u * sqrt(x ^ 2 + 2)) / ((x ^ 2 + 1) * sqrt(x ^ 2 + 2))",
                                 "rule": {
@@ -77,6 +87,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{d}{du} \\frac{\\tan^{-1}{(u \\sqrt{x ^ {2} + 2})}}{(x ^ {2} + 1) \\sqrt{x ^ {2} + 2}} \\,dx",
                                 "res": "INT x:[0,1]. D u. atan(u * sqrt(x ^ 2 + 2)) / ((x ^ 2 + 1) * sqrt(x ^ 2 + 2))",
                                 "rule": {
@@ -86,6 +98,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{1}{(x ^ {2} + 1) (u ^ {2} (x ^ {2} + 2) + 1)} \\,dx",
                                 "res": "INT x:[0,1]. 1 / ((x ^ 2 + 1) * (u ^ 2 * (x ^ 2 + 2) + 1))",
                                 "rule": {
@@ -95,6 +109,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{1}{u ^ {2} + 1} (\\frac{1}{1 + x ^ {2}} - \\frac{u ^ {2}}{1 + 2 u ^ {2} + u ^ {2} x ^ {2}}) \\,dx",
                                 "res": "INT x:[0,1]. 1 / (u ^ 2 + 1) * (1 / (1 + x ^ 2) - u ^ 2 / (1 + 2 * u ^ 2 + u ^ 2 * x ^ 2))",
                                 "rule": {
@@ -107,6 +123,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{u ^ {2} + 1} (-u ^ {2} (\\int_{0}^{1} \\frac{1}{u ^ {2} x ^ {2} + 2 u ^ {2} + 1} \\,dx) + (\\int_{0}^{1} \\frac{1}{x ^ {2} + 1} \\,dx))",
                                 "res": "1 / (u ^ 2 + 1) * (-(u ^ 2 * (INT x:[0,1]. 1 / (u ^ 2 * x ^ 2 + 2 * u ^ 2 + 1))) + (INT x:[0,1]. 1 / (x ^ 2 + 1)))",
                                 "rule": {
@@ -116,6 +134,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{u ^ {2} + 1} (-u ^ {2} (\\int_{0}^{1} u ^ {-2} (x ^ {2} + \\frac{2 u ^ {2} + 1}{u ^ {2}}) ^ {-1} \\,dx) + (\\int_{0}^{1} \\frac{1}{x ^ {2} + 1} \\,dx))",
                                 "res": "1 / (u ^ 2 + 1) * (-(u ^ 2 * (INT x:[0,1]. u ^ (-2) * (x ^ 2 + (2 * u ^ 2 + 1) / u ^ 2) ^ (-1))) + (INT x:[0,1]. 1 / (x ^ 2 + 1)))",
                                 "rule": {
@@ -128,6 +148,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{u ^ {2} + 1} (-(\\int_{0}^{1} \\frac{1}{\\frac{2 u ^ {2} + 1}{u ^ {2}} + x ^ {2}} \\,dx) + (\\int_{0}^{1} \\frac{1}{x ^ {2} + 1} \\,dx))",
                                 "res": "1 / (u ^ 2 + 1) * (-(INT x:[0,1]. 1 / ((2 * u ^ 2 + 1) / u ^ 2 + x ^ 2)) + (INT x:[0,1]. 1 / (x ^ 2 + 1)))",
                                 "rule": {
@@ -137,6 +159,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{u ^ {2} + 1} (-(\\int_{0}^{u/\\sqrt{2 u ^ {2} + 1}} \\frac{1}{\\frac{2 u ^ {2} + 1}{u ^ {2}} + (y \\sqrt{u ^ {-2} (2 u ^ {2} + 1)}) ^ {2}} (\\frac{\\sqrt{2 u ^ {2} + 1}}{u}) \\,dy) + (\\int_{0}^{1} \\frac{1}{x ^ {2} + 1} \\,dx))",
                                 "res": "1 / (u ^ 2 + 1) * (-(INT y:[0,u / sqrt(2 * u ^ 2 + 1)]. 1 / ((2 * u ^ 2 + 1) / u ^ 2 + (y * sqrt(u ^ (-2) * (2 * u ^ 2 + 1))) ^ 2) * (sqrt(2 * u ^ 2 + 1) / u)) + (INT x:[0,1]. 1 / (x ^ 2 + 1)))",
                                 "rule": {
@@ -150,6 +174,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{u ^ {2} + 1} (-\\frac{\\sqrt{2 u ^ {2} + 1}}{u} (\\int_{0}^{u/\\sqrt{2 u ^ {2} + 1}} \\frac{1}{\\frac{y ^ {2} (2 u ^ {2} + 1)}{u ^ {2}} + \\frac{2 u ^ {2} + 1}{u ^ {2}}} \\,dy) + (\\int_{0}^{1} \\frac{1}{x ^ {2} + 1} \\,dx))",
                                 "res": "1 / (u ^ 2 + 1) * (-(sqrt(2 * u ^ 2 + 1) / u * (INT y:[0,u / sqrt(2 * u ^ 2 + 1)]. 1 / (y ^ 2 * (2 * u ^ 2 + 1) / u ^ 2 + (2 * u ^ 2 + 1) / u ^ 2))) + (INT x:[0,1]. 1 / (x ^ 2 + 1)))",
                                 "rule": {
@@ -159,6 +185,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{u ^ {2} + 1} (-\\frac{\\sqrt{2 u ^ {2} + 1}}{u} (\\int_{0}^{u/\\sqrt{2 u ^ {2} + 1}} \\frac{1}{y ^ {2} + 1} (\\frac{u ^ {2}}{2 u ^ {2} + 1}) \\,dy) + (\\int_{0}^{1} \\frac{1}{x ^ {2} + 1} \\,dx))",
                                 "res": "1 / (u ^ 2 + 1) * (-(sqrt(2 * u ^ 2 + 1) / u * (INT y:[0,u / sqrt(2 * u ^ 2 + 1)]. 1 / (y ^ 2 + 1) * (u ^ 2 / (2 * u ^ 2 + 1)))) + (INT x:[0,1]. 1 / (x ^ 2 + 1)))",
                                 "rule": {
@@ -171,6 +199,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{u ^ {2} + 1} (-\\frac{\\sqrt{2 u ^ {2} + 1}}{u} (\\frac{1 u ^ {2}}{2 u ^ {2} + 1} (\\left. \\tan^{-1}{y} \\right\\vert_{y=0}^{u/\\sqrt{2 u ^ {2} + 1}})) + (\\left. \\tan^{-1}{x} \\right\\vert_{x=0}^{1}))",
                                 "res": "1 / (u ^ 2 + 1) * (-(sqrt(2 * u ^ 2 + 1) / u * (1 * u ^ 2 / (2 * u ^ 2 + 1) * ([atan(y)]_y=0,u / sqrt(2 * u ^ 2 + 1)))) + ([atan(x)]_x=0,1))",
                                 "rule": {
@@ -180,6 +210,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{u ^ {2} + 1} (-\\frac{u}{\\sqrt{2 u ^ {2} + 1}} \\tan^{-1}{(\\frac{u}{\\sqrt{2 u ^ {2} + 1}})} + \\frac{\\pi}{4})",
                                 "res": "1 / (u ^ 2 + 1) * (-(u / sqrt(2 * u ^ 2 + 1) * atan(u / sqrt(2 * u ^ 2 + 1))) + pi / 4)",
                                 "rule": {
@@ -192,10 +224,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{1}{1 + u ^ {2}} (\\frac{\\pi}{4} - \\frac{u}{\\sqrt{1 + 2 u ^ {2}}} \\tan^{-1}{(\\frac{u}{\\sqrt{1 + 2 u ^ {2}}})})",
                         "start": "1 / (1 + u ^ 2) * (pi / 4 - u / sqrt(1 + 2 * u ^ 2) * atan(u / sqrt(1 + 2 * u ^ 2)))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{u ^ {2} + 1} (-\\frac{u}{\\sqrt{2 u ^ {2} + 1}} \\tan^{-1}{(\\frac{u}{\\sqrt{2 u ^ {2} + 1}})} + \\frac{\\pi}{4})",
                                 "res": "1 / (u ^ 2 + 1) * (-(u / sqrt(2 * u ^ 2 + 1) * atan(u / sqrt(2 * u ^ 2 + 1))) + pi / 4)",
                                 "rule": {
@@ -222,10 +258,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{1}^{\\infty} \\frac{d}{du} I{(u)} \\,du",
                         "start": "INT u:[1,oo]. D u. I(u)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\lim\\limits_{u\\to \\infty} I{(u)}) - I{(1)}",
                                 "res": "(LIM {u -> oo}. I(u)) - I(1)",
                                 "rule": {
@@ -235,6 +275,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\lim\\limits_{u\\to \\infty} \\int_{0}^{1} \\frac{\\tan^{-1}{(u \\sqrt{x ^ {2} + 2})}}{(x ^ {2} + 1) \\sqrt{x ^ {2} + 2}} \\,dx) - I{(1)}",
                                 "res": "(LIM {u -> oo}. INT x:[0,1]. atan(u * sqrt(x ^ 2 + 2)) / ((x ^ 2 + 1) * sqrt(x ^ 2 + 2))) - I(1)",
                                 "rule": {
@@ -246,6 +288,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\pi (\\int_{0}^{1} \\frac{1}{\\sqrt{x ^ {2} + 2} (2 x ^ {2} + 2)} \\,dx) - I{(1)}",
                                 "res": "pi * (INT x:[0,1]. 1 / (sqrt(x ^ 2 + 2) * (2 * x ^ 2 + 2))) - I(1)",
                                 "rule": {
@@ -255,6 +299,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\pi ((\\left. \\frac{1}{2} \\tan^{-1}{(\\frac{x}{\\sqrt{x ^ {2} + 2}})} \\right\\vert_{x=0}^{1}) - (\\int_{0}^{1} 0 \\,dx)) - I{(1)}",
                                 "res": "pi * (([1/2 * atan(x / sqrt(x ^ 2 + 2))]_x=0,1) - (INT x:[0,1]. 0)) - I(1)",
                                 "rule": {
@@ -267,6 +313,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi ^ {2}}{12} - I{(1)}",
                                 "res": "pi ^ 2 / 12 - I(1)",
                                 "rule": {
@@ -279,6 +327,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\pi ^ {2}}{12} - I{(1)}",
                         "start": "pi ^ 2 / 12 - I(1)",
                         "steps": [],
@@ -299,10 +349,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{1}^{\\infty} \\frac{d}{du} I{(u)} \\,du",
                         "start": "INT u:[1,oo]. D u. I(u)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{1}^{\\infty} \\frac{1}{1 + u ^ {2}} (\\frac{\\pi}{4} - \\frac{u}{\\sqrt{1 + 2 u ^ {2}}} \\tan^{-1}{(\\frac{u}{\\sqrt{1 + 2 u ^ {2}}})}) \\,du",
                                 "res": "INT u:[1,oo]. 1 / (1 + u ^ 2) * (pi / 4 - u / sqrt(1 + 2 * u ^ 2) * atan(u / sqrt(1 + 2 * u ^ 2)))",
                                 "rule": {
@@ -315,6 +369,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{1}^{\\infty} -\\frac{u}{(u ^ {2} + 1) \\sqrt{2 u ^ {2} + 1}} \\tan^{-1}{(\\frac{u}{\\sqrt{2 u ^ {2} + 1}})} + \\frac{\\pi}{4 (u ^ {2} + 1)} \\,du",
                                 "res": "INT u:[1,oo]. -(u / ((u ^ 2 + 1) * sqrt(2 * u ^ 2 + 1)) * atan(u / sqrt(2 * u ^ 2 + 1))) + pi / (4 * (u ^ 2 + 1))",
                                 "rule": {
@@ -325,6 +381,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(\\int_{1}^{\\infty} \\frac{u}{(u ^ {2} + 1) \\sqrt{2 u ^ {2} + 1}} \\tan^{-1}{(\\frac{u}{\\sqrt{2 u ^ {2} + 1}})} \\,du) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "-(INT u:[1,oo]. u / ((u ^ 2 + 1) * sqrt(2 * u ^ 2 + 1)) * atan(u / sqrt(2 * u ^ 2 + 1))) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
@@ -334,6 +392,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "--(\\int_{0}^{1} \\frac{\\frac{1}{x}}{((\\frac{1}{x}) ^ {2} + 1) \\sqrt{2 (\\frac{1}{x}) ^ {2} + 1}} \\tan^{-1}{(\\frac{\\frac{1}{x}}{\\sqrt{2 (\\frac{1}{x}) ^ {2} + 1}})} (-\\frac{1}{x ^ {2}}) \\,dx) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "--(INT x:[0,1]. 1 / x / (((1 / x) ^ 2 + 1) * sqrt(2 * (1 / x) ^ 2 + 1)) * atan(1 / x / sqrt(2 * (1 / x) ^ 2 + 1)) * -(1 / x ^ 2)) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
@@ -346,6 +406,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{1} \\frac{1}{x ^ {3} (\\frac{1}{x ^ {2}} + 1) \\sqrt{\\frac{2}{x ^ {2}} + 1}} \\tan^{-1}{(\\frac{1}{x \\sqrt{\\frac{2}{x ^ {2}} + 1}})} \\,dx) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "-(INT x:[0,1]. 1 / (x ^ 3 * (1 / x ^ 2 + 1) * sqrt(2 / x ^ 2 + 1)) * atan(1 / (x * sqrt(2 / x ^ 2 + 1)))) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
@@ -355,6 +417,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{1} \\frac{1}{\\sqrt{(1 + x ^ {2}) ^ {2} (2 + x ^ {2})}} \\tan^{-1}{(\\frac{1}{x \\sqrt{\\frac{2}{x ^ {2}} + 1}})} \\,dx) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "-(INT x:[0,1]. 1 / sqrt((1 + x ^ 2) ^ 2 * (2 + x ^ 2)) * atan(1 / (x * sqrt(2 / x ^ 2 + 1)))) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
@@ -367,6 +431,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{1} \\frac{1}{\\sqrt{(1 + x ^ {2}) ^ {2} (2 + x ^ {2})}} \\tan^{-1}{(\\frac{1}{\\sqrt{x ^ {2} + 2}})} \\,dx) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "-(INT x:[0,1]. 1 / sqrt((1 + x ^ 2) ^ 2 * (2 + x ^ 2)) * atan(1 / sqrt(x ^ 2 + 2))) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
@@ -379,6 +445,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{1} \\frac{1}{(x ^ {2} + 1) \\sqrt{x ^ {2} + 2}} \\tan^{-1}{(\\frac{1}{\\sqrt{x ^ {2} + 2}})} \\,dx) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "-(INT x:[0,1]. 1 / ((x ^ 2 + 1) * sqrt(x ^ 2 + 2)) * atan(1 / sqrt(x ^ 2 + 2))) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
@@ -388,6 +456,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{1} \\frac{1}{(x ^ {2} + 1) \\sqrt{x ^ {2} + 2}} \\tan^{-1}{(\\sqrt{x ^ {2} + 2} ^ {-1})} \\,dx) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "-(INT x:[0,1]. 1 / ((x ^ 2 + 1) * sqrt(x ^ 2 + 2)) * atan(sqrt(x ^ 2 + 2) ^ (-1))) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
@@ -400,6 +470,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{1} \\frac{1}{(x ^ {2} + 1) \\sqrt{x ^ {2} + 2}} (\\frac{\\pi}{2} - \\tan^{-1}{(\\sqrt{x ^ {2} + 2})}) \\,dx) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "-(INT x:[0,1]. 1 / ((x ^ 2 + 1) * sqrt(x ^ 2 + 2)) * (pi / 2 - atan(sqrt(x ^ 2 + 2)))) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
@@ -412,6 +484,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{1} -\\frac{\\tan^{-1}{(\\sqrt{x ^ {2} + 2})}}{x ^ {2} \\sqrt{x ^ {2} + 2} + \\sqrt{x ^ {2} + 2}} + \\frac{\\pi}{2 (x ^ {2} \\sqrt{x ^ {2} + 2} + \\sqrt{x ^ {2} + 2})} \\,dx) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "-(INT x:[0,1]. -(atan(sqrt(x ^ 2 + 2)) / (x ^ 2 * sqrt(x ^ 2 + 2) + sqrt(x ^ 2 + 2))) + pi / (2 * (x ^ 2 * sqrt(x ^ 2 + 2) + sqrt(x ^ 2 + 2)))) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
@@ -422,6 +496,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{1} \\frac{\\tan^{-1}{(\\sqrt{x ^ {2} + 2})}}{x ^ {2} \\sqrt{x ^ {2} + 2} + \\sqrt{x ^ {2} + 2}} \\,dx) - \\frac{\\pi}{2} (\\int_{0}^{1} \\frac{1}{x ^ {2} \\sqrt{x ^ {2} + 2} + \\sqrt{x ^ {2} + 2}} \\,dx) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "(INT x:[0,1]. atan(sqrt(x ^ 2 + 2)) / (x ^ 2 * sqrt(x ^ 2 + 2) + sqrt(x ^ 2 + 2))) - pi / 2 * (INT x:[0,1]. 1 / (x ^ 2 * sqrt(x ^ 2 + 2) + sqrt(x ^ 2 + 2))) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
@@ -431,6 +507,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{1} \\frac{\\tan^{-1}{(\\sqrt{x ^ {2} + 2})}}{(x ^ {2} + 1) \\sqrt{x ^ {2} + 2}} \\,dx) - \\frac{\\pi}{2} (\\int_{0}^{1} \\frac{1}{x ^ {2} \\sqrt{x ^ {2} + 2} + \\sqrt{x ^ {2} + 2}} \\,dx) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "(INT x:[0,1]. atan(sqrt(x ^ 2 + 2)) / ((x ^ 2 + 1) * sqrt(x ^ 2 + 2))) - pi / 2 * (INT x:[0,1]. 1 / (x ^ 2 * sqrt(x ^ 2 + 2) + sqrt(x ^ 2 + 2))) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
@@ -443,6 +521,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "I{(1)} - \\frac{\\pi}{2} (\\int_{0}^{1} \\frac{1}{x ^ {2} \\sqrt{x ^ {2} + 2} + \\sqrt{x ^ {2} + 2}} \\,dx) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "I(1) - pi / 2 * (INT x:[0,1]. 1 / (x ^ 2 * sqrt(x ^ 2 + 2) + sqrt(x ^ 2 + 2))) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
@@ -455,6 +535,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "I{(1)} - \\frac{\\pi}{2} ((\\left. \\tan^{-1}{(\\frac{x}{\\sqrt{x ^ {2} + 2}})} \\right\\vert_{x=0}^{1}) - (\\int_{0}^{1} 0 \\,dx)) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "I(1) - pi / 2 * (([atan(x / sqrt(x ^ 2 + 2))]_x=0,1) - (INT x:[0,1]. 0)) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
@@ -467,6 +549,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "I{(1)} - \\frac{\\pi}{2} ((\\left. \\tan^{-1}{(\\frac{x}{\\sqrt{x ^ {2} + 2}})} \\right\\vert_{x=0}^{1}) - 0 (\\left. x \\right\\vert_{x=0}^{1})) + \\frac{\\pi}{4} (\\left. \\tan^{-1}{u} \\right\\vert_{u=1}^{\\infty})",
                                 "res": "I(1) - pi / 2 * (([atan(x / sqrt(x ^ 2 + 2))]_x=0,1) - 0 * ([x]_x=0,1)) + pi / 4 * ([atan(u)]_u=1,oo)",
                                 "rule": {
@@ -476,6 +560,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{\\pi ^ {2}}{48} + I{(1)}",
                                 "res": "-(pi ^ 2 / 48) + I(1)",
                                 "rule": {
@@ -488,6 +574,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "-\\frac{\\pi ^ {2}}{48} + I{(1)}",
                         "start": "-(pi ^ 2 / 48) + I(1)",
                         "steps": [],
@@ -506,14 +594,19 @@
             "goal": "I(1) = 5 * pi ^ 2 / 96",
             "latex_goal": "I{(1)} = \\frac{5\\cdot \\pi ^ {2}}{96}",
             "proof": {
+                "begin_label": "4.",
                 "finished": true,
                 "goal": "I(1) = 5 * pi ^ 2 / 96",
                 "latex_goal": "I{(1)} = \\frac{5\\cdot \\pi ^ {2}}{96}",
                 "start": {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_start": "\\int_{1}^{\\infty} \\frac{d}{du} I{(u)} \\,du = \\frac{\\pi ^ {2}}{12} - I{(1)}",
                     "start": "(INT u:[1,oo]. D u. I(u)) = pi ^ 2 / 12 - I(1)",
                     "steps": [
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "-\\frac{\\pi ^ {2}}{48} + I{(1)} = \\frac{\\pi ^ {2}}{12} - I{(1)}",
                             "res": "-(pi ^ 2 / 48) + I(1) = pi ^ 2 / 12 - I(1)",
                             "rule": {
@@ -526,6 +619,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "I{(1)} = \\frac{5\\cdot \\pi ^ {2}}{96}",
                             "res": "I(1) = 5 * pi ^ 2 / 96",
                             "rule": {

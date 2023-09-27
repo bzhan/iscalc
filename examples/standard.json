@@ -13,10 +13,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int \\frac{1}{x + a} \\,dx",
                         "start": "INT x. 1 / (x + a)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int \\frac{1}{u} \\,du",
                                 "res": "INT u. 1 / u",
                                 "rule": {
@@ -29,6 +33,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\log{(\\left| u \\right|)} + C",
                                 "res": "log(abs(u)) + SKOLEM_CONST(C)",
                                 "rule": {
@@ -38,6 +44,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\log{(\\left| x + a \\right|)} + C",
                                 "res": "log(abs(x + a)) + SKOLEM_CONST(C)",
                                 "rule": {
@@ -50,6 +58,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\log{(\\left| x + a \\right|)} + C",
                         "start": "log(abs(x + a)) + SKOLEM_CONST(C)",
                         "steps": [],
@@ -76,10 +86,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int e^{a x} \\,dx",
                         "start": "INT x. exp(a * x)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int \\frac{e^{u}}{a} \\,du",
                                 "res": "INT u. exp(u) / a",
                                 "rule": {
@@ -92,6 +106,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\int e^{u} \\,du}{a}",
                                 "res": "(INT u. exp(u)) / a",
                                 "rule": {
@@ -101,6 +117,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{e^{u}}{a} + C",
                                 "res": "exp(u) / a + SKOLEM_CONST(C)",
                                 "rule": {
@@ -110,6 +128,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{e^{a x}}{a} + C",
                                 "res": "exp(a * x) / a + SKOLEM_CONST(C)",
                                 "rule": {
@@ -122,6 +142,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{e^{a x}}{a} + C",
                         "start": "exp(a * x) / a + SKOLEM_CONST(C)",
                         "steps": [],
@@ -148,10 +170,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int \\sin{(a x)} \\,dx",
                         "start": "INT x. sin(a * x)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int \\frac{\\sin{u}}{a} \\,du",
                                 "res": "INT u. sin(u) / a",
                                 "rule": {
@@ -164,6 +190,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\int \\sin{u} \\,du}{a}",
                                 "res": "(INT u. sin(u)) / a",
                                 "rule": {
@@ -173,6 +201,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{-\\cos{u}}{a} + C",
                                 "res": "-cos(u) / a + SKOLEM_CONST(C)",
                                 "rule": {
@@ -182,6 +212,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{-\\cos{(a x)}}{a} + C",
                                 "res": "-cos(a * x) / a + SKOLEM_CONST(C)",
                                 "rule": {
@@ -191,6 +223,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{\\cos{(a x)}}{a} + C",
                                 "res": "-(cos(a * x) / a) + SKOLEM_CONST(C)",
                                 "rule": {
@@ -203,6 +237,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "-\\frac{\\cos{(a x)}}{a} + C",
                         "start": "-(cos(a * x) / a) + SKOLEM_CONST(C)",
                         "steps": [],
@@ -229,10 +265,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int \\cos{(a x)} \\,dx",
                         "start": "INT x. cos(a * x)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int \\frac{\\cos{u}}{a} \\,du",
                                 "res": "INT u. cos(u) / a",
                                 "rule": {
@@ -245,6 +285,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\int \\cos{u} \\,du}{a}",
                                 "res": "(INT u. cos(u)) / a",
                                 "rule": {
@@ -254,6 +296,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\sin{u}}{a} + C",
                                 "res": "sin(u) / a + SKOLEM_CONST(C)",
                                 "rule": {
@@ -263,6 +307,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\sin{(a x)}}{a} + C",
                                 "res": "sin(a * x) / a + SKOLEM_CONST(C)",
                                 "rule": {
@@ -275,6 +321,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\sin{(a x)}}{a} + C",
                         "start": "sin(a * x) / a + SKOLEM_CONST(C)",
                         "steps": [],
@@ -301,10 +349,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int \\frac{1}{a ^ {2} + x ^ {2}} \\,dx",
                         "start": "INT x. 1 / (a ^ 2 + x ^ 2)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int \\frac{a}{a ^ {2} u ^ {2} + a ^ {2}} \\,du",
                                 "res": "INT u. a / (a ^ 2 * u ^ 2 + a ^ 2)",
                                 "rule": {
@@ -317,6 +369,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int \\frac{a}{a ^ {2} (u ^ {2} + 1)} \\,du",
                                 "res": "INT u. a / (a ^ 2 * (u ^ 2 + 1))",
                                 "rule": {
@@ -329,6 +383,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{a} (\\int \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "1 / a * (INT u. 1 / (u ^ 2 + 1))",
                                 "rule": {
@@ -338,6 +394,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{a} \\tan^{-1}{u} + C",
                                 "res": "1 / a * atan(u) + SKOLEM_CONST(C)",
                                 "rule": {
@@ -347,6 +405,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{a} \\tan^{-1}{(\\frac{x}{a})} + C",
                                 "res": "1 / a * atan(x / a) + SKOLEM_CONST(C)",
                                 "rule": {
@@ -356,6 +416,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{a} \\tan^{-1}{(\\frac{x}{a})} + C",
                                 "res": "1 / a * atan(x / a) + SKOLEM_CONST(C)",
                                 "rule": {
@@ -368,6 +430,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{1}{a} \\tan^{-1}{(\\frac{x}{a})} + C",
                         "start": "1 / a * atan(x / a) + SKOLEM_CONST(C)",
                         "steps": [],
@@ -398,10 +462,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int x ^ {k} \\log{x} \\,dx",
                         "start": "INT x. x ^ k * log(x)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{x ^ {k + 1} \\log{x}}{k + 1} - (\\int \\frac{x ^ {k}}{k + 1} \\,dx)",
                                 "res": "x ^ (k + 1) * log(x) / (k + 1) - (INT x. x ^ k / (k + 1))",
                                 "rule": {
@@ -414,6 +482,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{x ^ {k + 1} \\log{x}}{k + 1} - \\frac{\\int x ^ {k} \\,dx}{k + 1}",
                                 "res": "x ^ (k + 1) * log(x) / (k + 1) - (INT x. x ^ k) / (k + 1)",
                                 "rule": {
@@ -423,6 +493,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{x ^ {k + 1} \\log{x}}{k + 1} - \\frac{\\frac{x ^ {k + 1}}{k + 1}}{k + 1} + C",
                                 "res": "x ^ (k + 1) * log(x) / (k + 1) - x ^ (k + 1) / (k + 1) / (k + 1) + SKOLEM_CONST(C)",
                                 "rule": {
@@ -432,6 +504,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{x ^ {k + 1} \\log{x}}{k + 1} - \\frac{x ^ {k + 1}}{(k + 1) ^ {2}} + C",
                                 "res": "x ^ (k + 1) * log(x) / (k + 1) - x ^ (k + 1) / (k + 1) ^ 2 + SKOLEM_CONST(C)",
                                 "rule": {
@@ -444,6 +518,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{x ^ {k + 1} \\log{x}}{k + 1} - \\frac{x ^ {k + 1}}{(k + 1) ^ {2}} + C",
                         "start": "x ^ (k + 1) * log(x) / (k + 1) - x ^ (k + 1) / (k + 1) ^ 2 + SKOLEM_CONST(C)",
                         "steps": [],
@@ -493,10 +569,14 @@
                     "proof": {
                         "calcs": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "\\int_{0}^{1} x ^ {m} \\,dx",
                                 "start": "INT x:[0,1]. x ^ m",
                                 "steps": [
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\left. \\frac{x ^ {m + 1}}{m + 1} \\right\\vert_{x=0}^{1}",
                                         "res": "[x ^ (m + 1) / (m + 1)]_x=0,1",
                                         "rule": {
@@ -506,6 +586,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\frac{1}{m + 1}",
                                         "res": "1 / (m + 1)",
                                         "rule": {
@@ -518,6 +600,8 @@
                                 "type": "Calculation"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "\\frac{1}{m + 1}",
                                 "start": "1 / (m + 1)",
                                 "steps": [],
@@ -540,10 +624,14 @@
                     "proof": {
                         "calcs": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "\\int_{0}^{1} x ^ {m} \\log^{n + 1}(x) \\,dx",
                                 "start": "INT x:[0,1]. x ^ m * log(x) ^ (n + 1)",
                                 "steps": [
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "(\\left. \\frac{x ^ {m + 1} \\log^{n + 1}(x)}{m + 1} \\right\\vert_{x=0}^{1}) - (\\int_{0}^{1} \\frac{x ^ {m} \\log^{n}(x) (n + 1)}{m + 1} \\,dx)",
                                         "res": "([x ^ (m + 1) * log(x) ^ (n + 1) / (m + 1)]_x=0,1) - (INT x:[0,1]. x ^ m * log(x) ^ n * (n + 1) / (m + 1))",
                                         "rule": {
@@ -556,6 +644,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "-\\frac{n + 1}{m + 1} (\\int_{0}^{1} x ^ {m} \\log^{n}(x) \\,dx)",
                                         "res": "-((n + 1) / (m + 1) * (INT x:[0,1]. x ^ m * log(x) ^ n))",
                                         "rule": {
@@ -565,6 +655,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "-\\frac{n + 1}{m + 1} (\\frac{(-1) ^ {n} n!}{(m + 1) ^ {n + 1}})",
                                         "res": "-((n + 1) / (m + 1) * ((-1) ^ n * factorial(n) / (m + 1) ^ (n + 1)))",
                                         "rule": {
@@ -575,6 +667,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "-(-1) ^ {n} n! (m + 1) ^ {-n - 2} (n + 1)",
                                         "res": "-((-1) ^ n * factorial(n) * (m + 1) ^ (-n - 2) * (n + 1))",
                                         "rule": {
@@ -584,6 +678,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "(-1) ^ {n + 1} (m + 1) ^ {-n - 2} ((n + 1) n!)",
                                         "res": "(-1) ^ (n + 1) * (m + 1) ^ (-n - 2) * ((n + 1) * factorial(n))",
                                         "rule": {
@@ -595,6 +691,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "(-1) ^ {n + 1} (m + 1) ^ {-n - 2} (n + 1)!",
                                         "res": "(-1) ^ (n + 1) * (m + 1) ^ (-n - 2) * factorial(n + 1)",
                                         "rule": {
@@ -607,6 +705,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "-(-1) ^ {n} (m + 1) ^ {-n - 2} (n + 1)!",
                                         "res": "-((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
                                         "rule": {
@@ -619,6 +719,8 @@
                                 "type": "Calculation"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "-(-1) ^ {n} (m + 1) ^ {-n - 2} (n + 1)!",
                                 "start": "-((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
                                 "steps": [],
@@ -634,6 +736,7 @@
                 },
                 "induct_var": "n",
                 "latex_goal": "\\int_{0}^{1} x ^ {m} \\log^{n}(x) \\,dx = \\frac{(-1) ^ {n} n!}{(m + 1) ^ {n + 1}}",
+                "start": "0",
                 "type": "InductionProof"
             },
             "type": "Goal"
@@ -651,10 +754,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} e^{-x y} \\sin{(a x)} \\,dx",
                         "start": "INT x:[0,oo]. exp(-(x * y)) * sin(a * x)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\left. -\\frac{e^{-x y} \\cos{(a x)}}{a} \\right\\vert_{x=0}^{\\infty}) - (\\int_{0}^{\\infty} \\frac{y e^{-x y} \\cos{(a x)}}{a} \\,dx)",
                                 "res": "([-(exp(-(x * y)) * cos(a * x) / a)]_x=0,oo) - (INT x:[0,oo]. y * exp(-(x * y)) * cos(a * x) / a)",
                                 "rule": {
@@ -667,6 +774,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{y}{a} (\\int_{0}^{\\infty} e^{-x y} \\cos{(a x)} \\,dx) + \\frac{1}{a}",
                                 "res": "-(y / a * (INT x:[0,oo]. exp(-(x * y)) * cos(a * x))) + 1 / a",
                                 "rule": {
@@ -676,6 +785,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{y}{a} ((\\left. \\frac{e^{-x y} \\sin{(a x)}}{a} \\right\\vert_{x=0}^{\\infty}) - (\\int_{0}^{\\infty} -\\frac{y e^{-x y} \\sin{(a x)}}{a} \\,dx)) + \\frac{1}{a}",
                                 "res": "-(y / a * (([exp(-(x * y)) * sin(a * x) / a]_x=0,oo) - (INT x:[0,oo]. -(y * exp(-(x * y)) * sin(a * x) / a)))) + 1 / a",
                                 "rule": {
@@ -688,6 +799,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{y ^ {2}}{a ^ {2}} (\\int_{0}^{\\infty} e^{-x y} \\sin{(a x)} \\,dx) + \\frac{1}{a}",
                                 "res": "-(y ^ 2 / a ^ 2 * (INT x:[0,oo]. exp(-(x * y)) * sin(a * x))) + 1 / a",
                                 "rule": {
@@ -697,6 +810,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{a (\\frac{y ^ {2}}{a ^ {2}} + 1)}",
                                 "res": "1 / (a * (y ^ 2 / a ^ 2 + 1))",
                                 "rule": {
@@ -707,6 +822,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{a}{a ^ {2} + y ^ {2}}",
                                 "res": "a / (a ^ 2 + y ^ 2)",
                                 "rule": {
@@ -721,6 +838,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{a}{a ^ {2} + y ^ {2}}",
                         "start": "a / (a ^ 2 + y ^ 2)",
                         "steps": [],
@@ -751,10 +870,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int a ^ {x} \\,dx",
                         "start": "INT x. a ^ x",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int e^{\\log{a} x} \\,dx",
                                 "res": "INT x. exp(log(a) * x)",
                                 "rule": {
@@ -767,6 +890,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{e^{\\log{a} x}}{\\log{a}} + C",
                                 "res": "exp(log(a) * x) / log(a) + SKOLEM_CONST(C)",
                                 "rule": {
@@ -776,6 +901,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{a ^ {x}}{\\log{a}} + C",
                                 "res": "a ^ x / log(a) + SKOLEM_CONST(C)",
                                 "rule": {
@@ -788,6 +915,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{a ^ {x}}{\\log{a}} + C",
                         "start": "a ^ x / log(a) + SKOLEM_CONST(C)",
                         "steps": [],
@@ -808,10 +937,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int \\cos^{2}(x) \\,dx",
                         "start": "INT x. cos(x) ^ 2",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int \\frac{1 + \\cos{(2 x)}}{2} \\,dx",
                                 "res": "INT x. (1 + cos(2 * x)) / 2",
                                 "rule": {
@@ -824,6 +957,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (1 x + \\frac{\\sin{(2 x)}}{2}) + C",
                                 "res": "1/2 * (1 * x + sin(2 * x) / 2) + SKOLEM_CONST(C)",
                                 "rule": {
@@ -833,6 +968,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\sin{(2 x)}}{4} + \\frac{x}{2} + C",
                                 "res": "sin(2 * x) / 4 + x / 2 + SKOLEM_CONST(C)",
                                 "rule": {
@@ -845,6 +982,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\sin{(2 x)}}{4} + \\frac{x}{2} + C",
                         "start": "sin(2 * x) / 4 + x / 2 + SKOLEM_CONST(C)",
                         "steps": [],

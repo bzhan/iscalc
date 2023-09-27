@@ -23,10 +23,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {k}} \\,dx",
                         "start": "INT x:[1,oo]. log(x) / x ^ k",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\lim\\limits_{t\\to \\infty} \\int_{1}^{t} x ^ {-k} \\log{x} \\,dx",
                                 "res": "LIM {t -> oo}. INT x:[1,t]. x ^ -k * log(x)",
                                 "rule": {
@@ -37,6 +41,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\lim\\limits_{t\\to \\infty} (\\,(\\left. \\frac{x ^ {-k + 1} \\log{x}}{-k + 1} \\right\\vert_{x=1}^{t}) - (\\int_{1}^{t} \\frac{x ^ {-k}}{-k + 1} \\,dx)\\,)",
                                 "res": "LIM {t -> oo}. ([x ^ (-k + 1) * log(x) / (-k + 1)]_x=1,t) - (INT x:[1,t]. x ^ -k / (-k + 1))",
                                 "rule": {
@@ -49,6 +55,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{1}{-k + 1} (\\int_{1}^{\\infty} x ^ {-k} \\,dx)",
                                 "res": "-(1 / (-k + 1) * (INT x:[1,oo]. x ^ -k))",
                                 "rule": {
@@ -58,6 +66,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{1}{-k + 1} (\\left. \\frac{x ^ {-k + 1}}{-k + 1} \\right\\vert_{x=1}^{\\infty})",
                                 "res": "-(1 / (-k + 1) * ([x ^ (-k + 1) / (-k + 1)]_x=1,oo))",
                                 "rule": {
@@ -67,6 +77,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{(-k + 1) ^ {2}}",
                                 "res": "1 / (-k + 1) ^ 2",
                                 "rule": {
@@ -79,10 +91,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{1}{(k - 1) ^ {2}}",
                         "start": "1 / (k - 1) ^ 2",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{(-k + 1) ^ {2}}",
                                 "res": "1 / (-k + 1) ^ 2",
                                 "rule": {
@@ -122,10 +138,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\sum_{n=0}^{\\infty}{\\int_{1}^{\\infty} x ^ {-2 n - 2} \\log{x} \\,dx}",
                         "start": "SUM(n, 0, oo, INT x:[1,oo]. x ^ (-(2 * n) - 2) * log(x))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2 n + 2}} \\,dx}",
                                 "res": "SUM(n, 0, oo, INT x:[1,oo]. log(x) / x ^ (2 * n + 2))",
                                 "rule": {
@@ -138,6 +158,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{(2 n + 2 - 1) ^ {2}}}",
                                 "res": "SUM(n, 0, oo, 1 / (2 * n + 2 - 1) ^ 2)",
                                 "rule": {
@@ -150,6 +172,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{(2 n + 1) ^ {2}}}",
                                 "res": "SUM(n, 0, oo, 1 / (2 * n + 1) ^ 2)",
                                 "rule": {
@@ -186,10 +210,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx",
                         "start": "INT x:[1,oo]. log(x) / (x ^ 2 + 1)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{1}^{\\infty} \\log{x} x ^ {-2} (1 + \\frac{1}{x ^ {2}}) ^ {-1} \\,dx",
                                 "res": "INT x:[1,oo]. log(x) * x ^ (-2) * (1 + 1 / x ^ 2) ^ (-1)",
                                 "rule": {
@@ -202,6 +230,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{1}^{\\infty} \\log{x} x ^ {-2} \\sum_{n=0}^{\\infty}{(-1) ^ {n} (\\frac{1}{x ^ {2}}) ^ {n}} \\,dx",
                                 "res": "INT x:[1,oo]. log(x) * x ^ (-2) * SUM(n, 0, oo, (-1) ^ n * (1 / x ^ 2) ^ n)",
                                 "rule": {
@@ -213,6 +243,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{1}^{\\infty} \\sum_{n=0}^{\\infty}{(-1) ^ {n} (\\frac{1}{x ^ {2}}) ^ {n} \\log{x} x ^ {-2}} \\,dx",
                                 "res": "INT x:[1,oo]. SUM(n, 0, oo, (-1) ^ n * (1 / x ^ 2) ^ n * log(x) * x ^ (-2))",
                                 "rule": {
@@ -225,6 +257,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\int_{1}^{\\infty} (-1) ^ {n} (\\frac{1}{x ^ {2}}) ^ {n} \\log{x} x ^ {-2} \\,dx}",
                                 "res": "SUM(n, 0, oo, INT x:[1,oo]. (-1) ^ n * (1 / x ^ 2) ^ n * log(x) * x ^ (-2))",
                                 "rule": {
@@ -234,6 +268,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{(-1) ^ {n} (\\int_{1}^{\\infty} x ^ {-2 n - 2} \\log{x} \\,dx)}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n * (INT x:[1,oo]. x ^ (-(2 * n) - 2) * log(x)))",
                                 "rule": {
@@ -243,6 +279,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{(-1) ^ {n} (\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2 n + 2}} \\,dx)}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n * (INT x:[1,oo]. log(x) / x ^ (2 * n + 2)))",
                                 "rule": {
@@ -255,6 +293,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{(-1) ^ {n} (\\frac{1}{(2 n + 2 - 1) ^ {2}})}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n * (1 / (2 * n + 2 - 1) ^ 2))",
                                 "rule": {
@@ -267,6 +307,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n}}{(2 n + 1) ^ {2}}}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n / (2 * n + 1) ^ 2)",
                                 "rule": {
@@ -279,10 +321,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "G",
                         "start": "G",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n}}{(2 n + 1) ^ {2}}}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n / (2 * n + 1) ^ 2)",
                                 "rule": {
@@ -320,10 +366,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx",
                         "start": "INT x:[0,oo]. log(x + 1) / (x ^ 2 + 1)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{1} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx) + (\\int_{1}^{\\infty} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx)",
                                 "res": "(INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)) + (INT x:[1,oo]. log(x + 1) / (x ^ 2 + 1))",
                                 "rule": {
@@ -334,6 +384,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi \\log{(2)}}{8} + (\\int_{1}^{\\infty} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx)",
                                 "res": "pi * log(2) / 8 + (INT x:[1,oo]. log(x + 1) / (x ^ 2 + 1))",
                                 "rule": {
@@ -343,6 +395,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi \\log{(2)}}{8} + (\\int_{1}^{\\infty} \\frac{\\log{(x (1 + \\frac{1}{x}))}}{x ^ {2} + 1} \\,dx)",
                                 "res": "pi * log(2) / 8 + (INT x:[1,oo]. log(x * (1 + 1 / x)) / (x ^ 2 + 1))",
                                 "rule": {
@@ -355,6 +409,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi \\log{(2)}}{8} + (\\int_{1}^{\\infty} \\frac{\\log{x} + \\log{(1 + \\frac{1}{x})}}{x ^ {2} + 1} \\,dx)",
                                 "res": "pi * log(2) / 8 + (INT x:[1,oo]. (log(x) + log(1 + 1 / x)) / (x ^ 2 + 1))",
                                 "rule": {
@@ -367,6 +423,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi \\log{(2)}}{8} + (\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} + \\frac{\\log{(1 + \\frac{1}{x})}}{x ^ {2} + 1} \\,dx)",
                                 "res": "pi * log(2) / 8 + (INT x:[1,oo]. log(x) / (x ^ 2 + 1) + log(1 + 1 / x) / (x ^ 2 + 1))",
                                 "rule": {
@@ -379,6 +437,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{1}^{\\infty} \\frac{1}{x ^ {2} + 1} \\log{(\\frac{1}{x} + 1)} \\,dx) + (\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx) + \\frac{\\pi \\log{(2)}}{8}",
                                 "res": "(INT x:[1,oo]. 1 / (x ^ 2 + 1) * log(1 / x + 1)) + (INT x:[1,oo]. log(x) / (x ^ 2 + 1)) + pi * log(2) / 8",
                                 "rule": {
@@ -388,6 +448,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{1}^{\\infty} \\frac{1}{x ^ {2} + 1} \\log{(\\frac{1}{x} + 1)} \\,dx) + G + \\frac{\\pi \\log{(2)}}{8}",
                                 "res": "(INT x:[1,oo]. 1 / (x ^ 2 + 1) * log(1 / x + 1)) + G + pi * log(2) / 8",
                                 "rule": {
@@ -400,6 +462,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{1} \\frac{\\log{(u + 1)}}{u ^ {2} (\\frac{1}{u ^ {2}} + 1)} \\,du) + G + \\frac{\\pi \\log{(2)}}{8}",
                                 "res": "(INT u:[0,1]. log(u + 1) / (u ^ 2 * (1 / u ^ 2 + 1))) + G + pi * log(2) / 8",
                                 "rule": {
@@ -412,6 +476,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{1} \\frac{\\log{(u + 1)}}{u ^ {2} + 1} \\,du) + G + \\frac{\\pi \\log{(2)}}{8}",
                                 "res": "(INT u:[0,1]. log(u + 1) / (u ^ 2 + 1)) + G + pi * log(2) / 8",
                                 "rule": {
@@ -424,6 +490,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi \\log{(2)}}{8} + G + \\frac{\\pi \\log{(2)}}{8}",
                                 "res": "pi * log(2) / 8 + G + pi * log(2) / 8",
                                 "rule": {
@@ -433,6 +501,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi \\log{(2)}}{4} + G",
                                 "res": "pi * log(2) / 4 + G",
                                 "rule": {
@@ -442,6 +512,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{4} \\log{(2)} + G",
                                 "res": "pi / 4 * log(2) + G",
                                 "rule": {
@@ -457,6 +529,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\pi}{4} \\log{(2)} + G",
                         "start": "pi / 4 * log(2) + G",
                         "steps": [],

@@ -33,10 +33,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "B(m,n)",
                         "start": "B(m,n)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} x ^ {m - 1} (-x + 1) ^ {n - 1} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (m - 1) * (-x + 1) ^ (n - 1)",
                                 "rule": {
@@ -47,6 +51,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{\\pi/2} (\\cos^{2}(x)) ^ {m - 1} (-\\cos^{2}(x) + 1) ^ {n - 1} (-2 \\cos{x} \\sin{x}) \\,dx)",
                                 "res": "-(INT x:[0,pi / 2]. cos(x) ^ 2 ^ (m - 1) * (-(cos(x) ^ 2) + 1) ^ (n - 1) * -(2 * cos(x) * sin(x)))",
                                 "rule": {
@@ -59,6 +65,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{\\pi/2} (\\cos^{2}(x)) ^ {m - 1} (-(1 - \\sin^{2}(x)) + 1) ^ {n - 1} (-2 \\cos{x} \\sin{x}) \\,dx)",
                                 "res": "-(INT x:[0,pi / 2]. cos(x) ^ 2 ^ (m - 1) * (-(1 - sin(x) ^ 2) + 1) ^ (n - 1) * -(2 * cos(x) * sin(x)))",
                                 "rule": {
@@ -72,6 +80,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{\\pi/2} \\cos^{2 m - 1}(x) \\sin^{2 n - 1}(x) \\,dx)",
                                 "res": "2 * (INT x:[0,pi / 2]. cos(x) ^ (2 * m - 1) * sin(x) ^ (2 * n - 1))",
                                 "rule": {
@@ -84,6 +94,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "2 (\\int_{0}^{\\pi/2} \\cos^{2 m - 1}(x) \\sin^{2 n - 1}(x) \\,dx)",
                         "start": "2 * (INT x:[0,pi / 2]. cos(x) ^ (2 * m - 1) * sin(x) ^ (2 * n - 1))",
                         "steps": [],
@@ -114,10 +126,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "x - x ^ {2}",
                         "start": "x - x ^ 2",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "x (1 - x)",
                                 "res": "x * (1 - x)",
                                 "rule": {
@@ -132,6 +148,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "0",
                         "start": "0",
                         "steps": [],
@@ -164,10 +182,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} (x - x ^ {2}) ^ {n} \\,dx",
                         "start": "INT x:[0,1]. (x - x ^ 2) ^ n",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} (x (1 - x)) ^ {n} \\,dx",
                                 "res": "INT x:[0,1]. (x * (1 - x)) ^ n",
                                 "rule": {
@@ -180,6 +202,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} x ^ {n} (1 - x) ^ {n} \\,dx",
                                 "res": "INT x:[0,1]. x ^ n * (1 - x) ^ n",
                                 "rule": {
@@ -192,6 +216,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} x ^ {n + 1 - 1} (1 - x) ^ {n} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (n + 1 - 1) * (1 - x) ^ n",
                                 "rule": {
@@ -205,6 +231,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} x ^ {n + 1 - 1} (1 - x) ^ {n + 1 - 1} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (n + 1 - 1) * (1 - x) ^ (n + 1 - 1)",
                                 "rule": {
@@ -218,6 +246,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "B(n + 1,n + 1)",
                                 "res": "B(n + 1,n + 1)",
                                 "rule": {
@@ -228,6 +258,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\Gamma{(n + 1)} \\Gamma{(n + 1)}}{\\Gamma{(2 n + 2)}}",
                                 "res": "Gamma(n + 1) * Gamma(n + 1) / Gamma(2 * n + 2)",
                                 "rule": {
@@ -240,6 +272,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\Gamma{(n + 1)} ^ {2}}{\\Gamma{(2 n + 2)}}",
                                 "res": "Gamma(n + 1) ^ 2 / Gamma(2 * n + 2)",
                                 "rule": {
@@ -249,6 +283,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{(n!)^{2}}{\\Gamma{(2 n + 2)}}",
                                 "res": "factorial(n) ^ 2 / Gamma(2 * n + 2)",
                                 "rule": {
@@ -261,6 +297,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{(n!)^{2}}{(2 n + 1)!}",
                                 "res": "factorial(n) ^ 2 / factorial(2 * n + 1)",
                                 "rule": {
@@ -276,6 +314,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{(n!)^{2}}{(2 n + 1)!}",
                         "start": "factorial(n) ^ 2 / factorial(2 * n + 1)",
                         "steps": [],
@@ -296,10 +336,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} (x - x ^ {2}) ^ {1/2} \\,dx",
                         "start": "INT x:[0,1]. (x - x ^ 2) ^ (1/2)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{-\\pi/2}^{\\pi/2} (\\frac{1}{2} + \\frac{1}{2} \\sin{u} - (\\frac{1}{2} + \\frac{1}{2} \\sin{u}) ^ {2}) ^ {1/2} (\\frac{\\cos{u}}{2}) \\,du",
                                 "res": "INT u:[-(pi / 2),pi / 2]. (1/2 + 1/2 * sin(u) - (1/2 + 1/2 * sin(u)) ^ 2) ^ (1/2) * (cos(u) / 2)",
                                 "rule": {
@@ -312,6 +356,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{-\\pi/2}^{\\pi/2} (\\frac{1}{4} (1 - \\sin^{2}(u))) ^ {1/2} (\\frac{\\cos{u}}{2}) \\,du",
                                 "res": "INT u:[-(pi / 2),pi / 2]. (1/4 * (1 - sin(u) ^ 2)) ^ (1/2) * (cos(u) / 2)",
                                 "rule": {
@@ -324,6 +370,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{-\\pi/2}^{\\pi/2} (\\frac{1}{4} \\cos^{2}(u)) ^ {1/2} (\\frac{\\cos{u}}{2}) \\,du",
                                 "res": "INT u:[-(pi / 2),pi / 2]. (1/4 * cos(u) ^ 2) ^ (1/2) * (cos(u) / 2)",
                                 "rule": {
@@ -336,6 +384,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{4} (\\int_{-\\pi/2}^{\\pi/2} \\cos^{2}(u) \\,du)",
                                 "res": "1/4 * (INT u:[-(pi / 2),pi / 2]. cos(u) ^ 2)",
                                 "rule": {
@@ -345,6 +395,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{4} (\\left. \\frac{\\sin{(2 u)}}{4} + \\frac{u}{2} \\right\\vert_{u=-\\pi/2}^{\\pi/2})",
                                 "res": "1/4 * ([sin(2 * u) / 4 + u / 2]_u=-(pi / 2),pi / 2)",
                                 "rule": {
@@ -354,6 +406,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{8}",
                                 "res": "pi / 8",
                                 "rule": {
@@ -366,6 +420,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\pi}{8}",
                         "start": "pi / 8",
                         "steps": [],
@@ -386,10 +442,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} (x - x ^ {2}) ^ {1/2} \\,dx",
                         "start": "INT x:[0,1]. (x - x ^ 2) ^ (1/2)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{((\\frac{1}{2})!)^{2}}{(2\\cdot (\\frac{1}{2}) + 1)!}",
                                 "res": "factorial(1/2) ^ 2 / factorial(2 * (1/2) + 1)",
                                 "rule": {
@@ -402,6 +462,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{((\\frac{1}{2})!)^{2}}{(2)!}",
                                 "res": "factorial(1/2) ^ 2 / factorial(2)",
                                 "rule": {
@@ -414,6 +476,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{((\\frac{1}{2})!)^{2}}{2}",
                                 "res": "factorial(1/2) ^ 2 / 2",
                                 "rule": {
@@ -426,6 +490,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{((\\frac{1}{2})!)^{2}}{2}",
                         "start": "factorial(1/2) ^ 2 / 2",
                         "steps": [],
@@ -444,14 +510,19 @@
             "goal": "factorial(1/2) = sqrt(pi) / 2",
             "latex_goal": "(\\frac{1}{2})! = \\frac{\\sqrt{\\pi}}{2}",
             "proof": {
+                "begin_label": "5.",
                 "finished": true,
                 "goal": "factorial(1/2) = sqrt(pi) / 2",
                 "latex_goal": "(\\frac{1}{2})! = \\frac{\\sqrt{\\pi}}{2}",
                 "start": {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_start": "\\int_{0}^{1} (x - x ^ {2}) ^ {1/2} \\,dx = \\frac{\\pi}{8}",
                     "start": "(INT x:[0,1]. (x - x ^ 2) ^ (1/2)) = pi / 8",
                     "steps": [
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{((\\frac{1}{2})!)^{2}}{2} = \\frac{\\pi}{8}",
                             "res": "factorial(1/2) ^ 2 / 2 = pi / 8",
                             "rule": {
@@ -464,6 +535,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "(\\frac{1}{2})! = \\frac{\\sqrt{\\pi}}{2}",
                             "res": "factorial(1/2) = sqrt(pi) / 2",
                             "rule": {
@@ -488,10 +561,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} e^{-x} \\sqrt{x} \\,dx",
                         "start": "INT x:[0,oo]. exp(-x) * sqrt(x)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} e^{-x} x ^ {1/2} \\,dx",
                                 "res": "INT x:[0,oo]. exp(-x) * x ^ (1/2)",
                                 "rule": {
@@ -504,6 +581,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} e^{-x} x ^ {3/2 - 1} \\,dx",
                                 "res": "INT x:[0,oo]. exp(-x) * x ^ (3/2 - 1)",
                                 "rule": {
@@ -516,6 +595,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\Gamma{(\\frac{3}{2})}",
                                 "res": "Gamma(3/2)",
                                 "rule": {
@@ -526,6 +607,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\frac{1}{2})!",
                                 "res": "factorial(1/2)",
                                 "rule": {
@@ -538,6 +621,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{\\pi}}{2}",
                                 "res": "sqrt(pi) / 2",
                                 "rule": {
@@ -553,6 +638,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\sqrt{\\pi}}{2}",
                         "start": "sqrt(pi) / 2",
                         "steps": [],
@@ -573,10 +660,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} \\sqrt{-\\log{x}} \\,dx",
                         "start": "INT x:[0,1]. sqrt(-log(x))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{\\infty} \\sqrt{-\\log{(e^{-y})}} (-e^{-y}) \\,dy)",
                                 "res": "-(INT y:[0,oo]. sqrt(-log(exp(-y))) * -exp(-y))",
                                 "rule": {
@@ -589,6 +680,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\sqrt{y} e^{-y} \\,dy",
                                 "res": "INT y:[0,oo]. sqrt(y) * exp(-y)",
                                 "rule": {
@@ -598,6 +691,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} e^{-y} \\sqrt{y} \\,dy",
                                 "res": "INT y:[0,oo]. exp(-y) * sqrt(y)",
                                 "rule": {
@@ -610,6 +705,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{\\pi}}{2}",
                                 "res": "sqrt(pi) / 2",
                                 "rule": {
@@ -625,6 +722,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\sqrt{\\pi}}{2}",
                         "start": "sqrt(pi) / 2",
                         "steps": [],
@@ -645,10 +744,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{e^{-x}}{\\sqrt{x}} \\,dx",
                         "start": "INT x:[0,oo]. exp(-x) / sqrt(x)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} 2 e^{-y ^ {2}} \\,dy",
                                 "res": "INT y:[0,oo]. 2 * exp(-(y ^ 2))",
                                 "rule": {
@@ -661,6 +764,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{\\infty} e^{-y ^ {2}} \\,dy)",
                                 "res": "2 * (INT y:[0,oo]. exp(-(y ^ 2)))",
                                 "rule": {
@@ -670,6 +775,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{\\infty} e^{-y ^ {2}} \\,dy) + (\\int_{0}^{\\infty} e^{-y ^ {2}} \\,dy)",
                                 "res": "(INT y:[0,oo]. exp(-(y ^ 2))) + (INT y:[0,oo]. exp(-(y ^ 2)))",
                                 "rule": {
@@ -682,6 +789,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{-\\infty}^{0} e^{-z ^ {2}} \\,dz) + (\\int_{0}^{\\infty} e^{-y ^ {2}} \\,dy)",
                                 "res": "(INT z:[-oo,0]. exp(-(z ^ 2))) + (INT y:[0,oo]. exp(-(y ^ 2)))",
                                 "rule": {
@@ -698,10 +807,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{-\\infty}^{\\infty} e^{-x ^ {2}} \\,dx",
                         "start": "INT x:[-oo,oo]. exp(-(x ^ 2))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{-\\infty}^{0} e^{-x ^ {2}} \\,dx) + (\\int_{0}^{\\infty} e^{-x ^ {2}} \\,dx)",
                                 "res": "(INT x:[-oo,0]. exp(-(x ^ 2))) + (INT x:[0,oo]. exp(-(x ^ 2)))",
                                 "rule": {
@@ -727,14 +840,19 @@
             "goal": "(INT x:[0,oo]. exp(-x) / sqrt(x)) = sqrt(pi)",
             "latex_goal": "\\int_{0}^{\\infty} \\frac{e^{-x}}{\\sqrt{x}} \\,dx = \\sqrt{\\pi}",
             "proof": {
+                "begin_label": "10.",
                 "finished": true,
                 "goal": "(INT x:[0,oo]. exp(-x) / sqrt(x)) = sqrt(pi)",
                 "latex_goal": "\\int_{0}^{\\infty} \\frac{e^{-x}}{\\sqrt{x}} \\,dx = \\sqrt{\\pi}",
                 "start": {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_start": "\\int_{0}^{\\infty} \\frac{e^{-x}}{\\sqrt{x}} \\,dx = \\int_{-\\infty}^{\\infty} e^{-x ^ {2}} \\,dx",
                     "start": "(INT x:[0,oo]. exp(-x) / sqrt(x)) = (INT x:[-oo,oo]. exp(-(x ^ 2)))",
                     "steps": [
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{e^{-x}}{\\sqrt{x}} \\,dx = \\int_{-\\infty}^{\\infty} e^{-1 x ^ {2}} \\,dx",
                             "res": "(INT x:[0,oo]. exp(-x) / sqrt(x)) = (INT x:[-oo,oo]. exp(-(1 * x ^ 2)))",
                             "rule": {
@@ -747,6 +865,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{e^{-x}}{\\sqrt{x}} \\,dx = \\sqrt{\\pi}",
                             "res": "(INT x:[0,oo]. exp(-x) / sqrt(x)) = sqrt(pi)",
                             "rule": {
@@ -770,10 +890,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\Gamma{(\\frac{1}{2})}",
                         "start": "Gamma(1/2)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{e^{-x}}{\\sqrt{x}} \\,dx",
                                 "res": "INT x:[0,oo]. exp(-x) / sqrt(x)",
                                 "rule": {
@@ -784,6 +908,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sqrt{\\pi}",
                                 "res": "sqrt(pi)",
                                 "rule": {
@@ -799,6 +925,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\sqrt{\\pi}",
                         "start": "sqrt(pi)",
                         "steps": [],
@@ -817,14 +945,19 @@
             "goal": "factorial(-1/2) = sqrt(pi)",
             "latex_goal": "(-\\frac{1}{2})! = \\sqrt{\\pi}",
             "proof": {
+                "begin_label": "12.",
                 "finished": true,
                 "goal": "factorial(-1/2) = sqrt(pi)",
                 "latex_goal": "(-\\frac{1}{2})! = \\sqrt{\\pi}",
                 "start": {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_start": "\\Gamma{(\\frac{1}{2})} = \\sqrt{\\pi}",
                     "start": "Gamma(1/2) = sqrt(pi)",
                     "steps": [
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "(-\\frac{1}{2})! = \\sqrt{\\pi}",
                             "res": "factorial(-1/2) = sqrt(pi)",
                             "rule": {
@@ -850,10 +983,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\pi/2} \\sqrt{\\sin{x}} \\,dx",
                         "start": "INT x:[0,pi / 2]. sqrt(sin(x))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{1}{2 u ^ {1/4} \\sqrt{-u + 1}} \\,du",
                                 "res": "INT u:[0,1]. 1 / (2 * u ^ (1/4) * sqrt(-u + 1))",
                                 "rule": {
@@ -866,6 +1003,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{1} \\frac{1}{u ^ {1/4} \\sqrt{-u + 1}} \\,du)",
                                 "res": "1/2 * (INT u:[0,1]. 1 / (u ^ (1/4) * sqrt(-u + 1)))",
                                 "rule": {
@@ -875,6 +1014,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{1} u ^ {3/4 - 1} (1 - u) ^ {1/2 - 1} \\,du)",
                                 "res": "1/2 * (INT u:[0,1]. u ^ (3/4 - 1) * (1 - u) ^ (1/2 - 1))",
                                 "rule": {
@@ -887,6 +1028,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} B(\\frac{3}{4},\\frac{1}{2})",
                                 "res": "1/2 * B(3/4,1/2)",
                                 "rule": {
@@ -898,6 +1041,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2}\\cdot (\\frac{\\Gamma{(\\frac{3}{4})} \\Gamma{(\\frac{1}{2})}}{\\Gamma{(\\frac{5}{4})}})",
                                 "res": "1/2 * (Gamma(3/4) * Gamma(1/2) / Gamma(5/4))",
                                 "rule": {
@@ -910,6 +1055,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\Gamma{(\\frac{3}{4})} \\Gamma{(\\frac{1}{2})}}{2 \\Gamma{(\\frac{5}{4})}}",
                                 "res": "Gamma(3/4) * Gamma(1/2) / (2 * Gamma(5/4))",
                                 "rule": {
@@ -925,6 +1072,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\Gamma{(\\frac{3}{4})} \\Gamma{(\\frac{1}{2})}}{2 \\Gamma{(\\frac{5}{4})}}",
                         "start": "Gamma(3/4) * Gamma(1/2) / (2 * Gamma(5/4))",
                         "steps": [],
@@ -945,10 +1094,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\pi/2} \\sqrt{\\cos{x}} \\,dx",
                         "start": "INT x:[0,pi / 2]. sqrt(cos(x))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{1}{2 u ^ {1/4} \\sqrt{-u + 1}} \\,du",
                                 "res": "INT u:[0,1]. 1 / (2 * u ^ (1/4) * sqrt(-u + 1))",
                                 "rule": {
@@ -961,6 +1114,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{1} \\frac{1}{u ^ {1/4} \\sqrt{-u + 1}} \\,du)",
                                 "res": "1/2 * (INT u:[0,1]. 1 / (u ^ (1/4) * sqrt(-u + 1)))",
                                 "rule": {
@@ -970,6 +1125,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{1} u ^ {3/4 - 1} (1 - u) ^ {1/2 - 1} \\,du)",
                                 "res": "1/2 * (INT u:[0,1]. u ^ (3/4 - 1) * (1 - u) ^ (1/2 - 1))",
                                 "rule": {
@@ -982,6 +1139,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} B(\\frac{3}{4},\\frac{1}{2})",
                                 "res": "1/2 * B(3/4,1/2)",
                                 "rule": {
@@ -993,6 +1152,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2}\\cdot (\\frac{\\Gamma{(\\frac{3}{4})} \\Gamma{(\\frac{1}{2})}}{\\Gamma{(\\frac{5}{4})}})",
                                 "res": "1/2 * (Gamma(3/4) * Gamma(1/2) / Gamma(5/4))",
                                 "rule": {
@@ -1005,6 +1166,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\Gamma{(\\frac{3}{4})} \\Gamma{(\\frac{1}{2})}}{2 \\Gamma{(\\frac{5}{4})}}",
                                 "res": "Gamma(3/4) * Gamma(1/2) / (2 * Gamma(5/4))",
                                 "rule": {
@@ -1020,6 +1183,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\Gamma{(\\frac{3}{4})} \\Gamma{(\\frac{1}{2})}}{2 \\Gamma{(\\frac{5}{4})}}",
                         "start": "Gamma(3/4) * Gamma(1/2) / (2 * Gamma(5/4))",
                         "steps": [],
@@ -1040,16 +1205,22 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin{x} \\cos{x}}} \\,dx",
                         "start": "INT x:[0,pi / 2]. 1 / sqrt(sin(x) * cos(x))",
                         "steps": [],
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{1}{2} B(\\frac{1}{4},\\frac{1}{4})",
                         "start": "1/2 * B(1/4,1/4)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (2 (\\int_{0}^{\\pi/2} \\cos^{2\\cdot (1/4) - 1}(x) \\sin^{2\\cdot (1/4) - 1}(x) \\,dx))",
                                 "res": "1/2 * (2 * (INT x:[0,pi / 2]. cos(x) ^ (2 * (1/4) - 1) * sin(x) ^ (2 * (1/4) - 1)))",
                                 "rule": {
@@ -1062,6 +1233,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\cos{x}} \\sqrt{\\sin{x}}} \\,dx",
                                 "res": "INT x:[0,pi / 2]. 1 / (sqrt(cos(x)) * sqrt(sin(x)))",
                                 "rule": {
@@ -1071,6 +1244,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin{x} \\cos{x}}} \\,dx",
                                 "res": "INT x:[0,pi / 2]. 1 / sqrt(sin(x) * cos(x))",
                                 "rule": {
@@ -1098,14 +1273,19 @@
             "goal": "(INT x:[0,pi / 2]. 1 / sqrt(sin(x) * cos(x))) = Gamma(1/4) ^ 2 / (2 * sqrt(pi))",
             "latex_goal": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin{x} \\cos{x}}} \\,dx = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{\\pi}}",
             "proof": {
+                "begin_label": "16.",
                 "finished": true,
                 "goal": "(INT x:[0,pi / 2]. 1 / sqrt(sin(x) * cos(x))) = Gamma(1/4) ^ 2 / (2 * sqrt(pi))",
                 "latex_goal": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin{x} \\cos{x}}} \\,dx = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{\\pi}}",
                 "start": {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_start": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin{x} \\cos{x}}} \\,dx = \\frac{1}{2} B(\\frac{1}{4},\\frac{1}{4})",
                     "start": "(INT x:[0,pi / 2]. 1 / sqrt(sin(x) * cos(x))) = 1/2 * B(1/4,1/4)",
                     "steps": [
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin{x} \\cos{x}}} \\,dx = \\frac{1}{2}\\cdot (\\frac{\\Gamma{(\\frac{1}{4})} \\Gamma{(\\frac{1}{4})}}{\\Gamma{(\\frac{1}{2})}})",
                             "res": "(INT x:[0,pi / 2]. 1 / sqrt(sin(x) * cos(x))) = 1/2 * (Gamma(1/4) * Gamma(1/4) / Gamma(1/2))",
                             "rule": {
@@ -1119,6 +1299,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin{x} \\cos{x}}} \\,dx = \\frac{1}{2}\\cdot (\\frac{\\Gamma{(\\frac{1}{4})} \\Gamma{(\\frac{1}{4})}}{\\sqrt{\\pi}})",
                             "res": "(INT x:[0,pi / 2]. 1 / sqrt(sin(x) * cos(x))) = 1/2 * (Gamma(1/4) * Gamma(1/4) / sqrt(pi))",
                             "rule": {
@@ -1142,14 +1324,19 @@
             "goal": "(INT x:[0,pi / 2]. 1 / sqrt(sin(x))) = Gamma(1/4) ^ 2 / (2 * sqrt(2 * pi))",
             "latex_goal": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin{x}}} \\,dx = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{2 \\pi}}",
             "proof": {
+                "begin_label": "17.",
                 "finished": true,
                 "goal": "(INT x:[0,pi / 2]. 1 / sqrt(sin(x))) = Gamma(1/4) ^ 2 / (2 * sqrt(2 * pi))",
                 "latex_goal": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin{x}}} \\,dx = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{2 \\pi}}",
                 "start": {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_start": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin{x} \\cos{x}}} \\,dx = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{\\pi}}",
                     "start": "(INT x:[0,pi / 2]. 1 / sqrt(sin(x) * cos(x))) = Gamma(1/4) ^ 2 / (2 * sqrt(pi))",
                     "steps": [
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\int_{0}^{\\pi} \\frac{1}{2 \\sqrt{\\cos{(\\frac{x}{2})}} \\sqrt{\\sin{(\\frac{x}{2})}}} \\,dx = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{\\pi}}",
                             "res": "(INT x:[0,pi]. 1 / (2 * sqrt(cos(x / 2)) * sqrt(sin(x / 2)))) = Gamma(1/4) ^ 2 / (2 * sqrt(pi))",
                             "rule": {
@@ -1163,6 +1350,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\int_{0}^{\\pi} \\frac{1}{2 \\sqrt{\\sin{(\\frac{1}{2} x)} \\cos{(\\frac{1}{2} x)}}} \\,dx = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{\\pi}}",
                             "res": "(INT x:[0,pi]. 1 / (2 * sqrt(sin(1/2 * x) * cos(1/2 * x)))) = Gamma(1/4) ^ 2 / (2 * sqrt(pi))",
                             "rule": {
@@ -1175,6 +1364,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\int_{0}^{\\pi} \\frac{1}{2 \\sqrt{\\frac{1}{2} (\\sin{(\\frac{1}{2} x + \\frac{1}{2} x)} + \\sin{(\\frac{1}{2} x - \\frac{1}{2} x)})}} \\,dx = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{\\pi}}",
                             "res": "(INT x:[0,pi]. 1 / (2 * sqrt(1/2 * (sin(1/2 * x + 1/2 * x) + sin(1/2 * x - 1/2 * x))))) = Gamma(1/4) ^ 2 / (2 * sqrt(pi))",
                             "rule": {
@@ -1187,6 +1378,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{\\sqrt{2}}{2} (\\int_{0}^{\\pi} \\frac{1}{\\sqrt{\\sin{x}}} \\,dx) = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{\\pi}}",
                             "res": "sqrt(2) / 2 * (INT x:[0,pi]. 1 / sqrt(sin(x))) = Gamma(1/4) ^ 2 / (2 * sqrt(pi))",
                             "rule": {
@@ -1196,6 +1389,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{\\sqrt{2}}{2} ((\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin{x}}} \\,dx) + (\\int_{\\pi/2}^{\\pi} \\frac{1}{\\sqrt{\\sin{x}}} \\,dx)) = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{\\pi}}",
                             "res": "sqrt(2) / 2 * ((INT x:[0,pi / 2]. 1 / sqrt(sin(x))) + (INT x:[pi / 2,pi]. 1 / sqrt(sin(x)))) = Gamma(1/4) ^ 2 / (2 * sqrt(pi))",
                             "rule": {
@@ -1207,6 +1402,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{\\sqrt{2}}{2} ((\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin{x}}} \\,dx) + (\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin{x}}} \\,dx)) = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{\\pi}}",
                             "res": "sqrt(2) / 2 * ((INT x:[0,pi / 2]. 1 / sqrt(sin(x))) + (INT x:[0,pi / 2]. 1 / sqrt(sin(x)))) = Gamma(1/4) ^ 2 / (2 * sqrt(pi))",
                             "rule": {
@@ -1220,6 +1417,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\sqrt{2} (\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin{x}}} \\,dx) = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{\\pi}}",
                             "res": "sqrt(2) * (INT x:[0,pi / 2]. 1 / sqrt(sin(x))) = Gamma(1/4) ^ 2 / (2 * sqrt(pi))",
                             "rule": {
@@ -1229,6 +1428,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin{x}}} \\,dx = \\frac{\\sqrt{2}\\cdot \\Gamma{(\\frac{1}{4})} ^ {2}}{4 \\sqrt{\\pi}}",
                             "res": "(INT x:[0,pi / 2]. 1 / sqrt(sin(x))) = sqrt(2) * Gamma(1/4) ^ 2 / (4 * sqrt(pi))",
                             "rule": {
@@ -1251,14 +1452,19 @@
             "goal": "(INT x:[0,pi / 2]. 1 / sqrt(cos(x))) = Gamma(1/4) ^ 2 / (2 * sqrt(2 * pi))",
             "latex_goal": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\cos{x}}} \\,dx = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{2 \\pi}}",
             "proof": {
+                "begin_label": "18.",
                 "finished": true,
                 "goal": "(INT x:[0,pi / 2]. 1 / sqrt(cos(x))) = Gamma(1/4) ^ 2 / (2 * sqrt(2 * pi))",
                 "latex_goal": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\cos{x}}} \\,dx = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{2 \\pi}}",
                 "start": {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_start": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin{x}}} \\,dx = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{2 \\pi}}",
                     "start": "(INT x:[0,pi / 2]. 1 / sqrt(sin(x))) = Gamma(1/4) ^ 2 / (2 * sqrt(2 * pi))",
                     "steps": [
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\cos{x}}} \\,dx = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{2 \\pi}}",
                             "res": "(INT x:[0,pi / 2]. 1 / sqrt(cos(x))) = Gamma(1/4) ^ 2 / (2 * sqrt(2 * pi))",
                             "rule": {
@@ -1271,6 +1477,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\cos{x}}} \\,dx = \\frac{\\sqrt{2}\\cdot \\Gamma{(\\frac{1}{4})} ^ {2}}{4 \\sqrt{\\pi}}",
                             "res": "(INT x:[0,pi / 2]. 1 / sqrt(cos(x))) = sqrt(2) * Gamma(1/4) ^ 2 / (4 * sqrt(pi))",
                             "rule": {
@@ -1303,10 +1511,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "B(m,n)",
                         "start": "B(m,n)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} x ^ {m - 1} (-x + 1) ^ {n - 1} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (m - 1) * (-x + 1) ^ (n - 1)",
                                 "rule": {
@@ -1317,6 +1529,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(y + 1) ^ {2}} (\\frac{1}{y + 1}) ^ {n - 1} (-\\frac{1}{y + 1} + 1) ^ {m - 1} \\,dy",
                                 "res": "INT y:[0,oo]. 1 / (y + 1) ^ 2 * (1 / (y + 1)) ^ (n - 1) * (-(1 / (y + 1)) + 1) ^ (m - 1)",
                                 "rule": {
@@ -1329,6 +1543,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(y + 1) ^ {2}} (\\frac{1}{y + 1}) ^ {n - 1} (\\frac{y}{y + 1}) ^ {m - 1} \\,dy",
                                 "res": "INT y:[0,oo]. 1 / (y + 1) ^ 2 * (1 / (y + 1)) ^ (n - 1) * (y / (y + 1)) ^ (m - 1)",
                                 "rule": {
@@ -1341,6 +1557,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(y + 1) ^ {2}} (\\frac{1}{(y + 1) ^ {n - 1}}) (\\frac{y}{y + 1}) ^ {m - 1} \\,dy",
                                 "res": "INT y:[0,oo]. 1 / (y + 1) ^ 2 * (1 / (y + 1) ^ (n - 1)) * (y / (y + 1)) ^ (m - 1)",
                                 "rule": {
@@ -1353,6 +1571,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(y + 1) ^ {2}} (\\frac{1}{(y + 1) ^ {n - 1}}) (\\frac{y ^ {m - 1}}{(y + 1) ^ {m - 1}}) \\,dy",
                                 "res": "INT y:[0,oo]. 1 / (y + 1) ^ 2 * (1 / (y + 1) ^ (n - 1)) * (y ^ (m - 1) / (y + 1) ^ (m - 1))",
                                 "rule": {
@@ -1365,6 +1585,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{y ^ {m - 1}}{(y + 1) ^ {m + n}} \\,dy",
                                 "res": "INT y:[0,oo]. y ^ (m - 1) / (y + 1) ^ (m + n)",
                                 "rule": {
@@ -1380,6 +1602,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{x ^ {m - 1}}{(x + 1) ^ {m + n}} \\,dx",
                         "start": "INT x:[0,oo]. x ^ (m - 1) / (x + 1) ^ (m + n)",
                         "steps": [],
@@ -1410,16 +1634,22 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{x ^ {m - 1}}{x + 1} \\,dx",
                         "start": "INT x:[0,oo]. x ^ (m - 1) / (x + 1)",
                         "steps": [],
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "B(m,1 - m)",
                         "start": "B(m,1 - m)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{x ^ {m - 1}}{(x + 1) ^ {m + (1 - m)}} \\,dx",
                                 "res": "INT x:[0,oo]. x ^ (m - 1) / (x + 1) ^ (m + (1 - m))",
                                 "rule": {
@@ -1432,6 +1662,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{x ^ {m - 1}}{x + 1} \\,dx",
                                 "res": "INT x:[0,oo]. x ^ (m - 1) / (x + 1)",
                                 "rule": {
@@ -1468,10 +1700,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "B(m,1 - m)",
                         "start": "B(m,1 - m)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\Gamma{(m)} \\Gamma{(1 - m)}}{\\Gamma{(1)}}",
                                 "res": "Gamma(m) * Gamma(1 - m) / Gamma(1)",
                                 "rule": {
@@ -1484,6 +1720,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\Gamma{(m)} \\Gamma{(1 - m)}}{1}",
                                 "res": "Gamma(m) * Gamma(1 - m) / 1",
                                 "rule": {
@@ -1496,6 +1734,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\Gamma{(m)} \\Gamma{(1 - m)}",
                                 "res": "Gamma(m) * Gamma(1 - m)",
                                 "rule": {
@@ -1511,6 +1751,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\Gamma{(m)} \\Gamma{(1 - m)}",
                         "start": "Gamma(m) * Gamma(1 - m)",
                         "steps": [],
@@ -1539,24 +1781,19 @@
             "goal": "Gamma(m) * Gamma(1 - m) = pi / sin(m * pi)",
             "latex_goal": "\\Gamma{(m)} \\Gamma{(1 - m)} = \\frac{\\pi}{\\sin{(m\\cdot \\pi)}}",
             "proof": {
+                "begin_label": "21.",
                 "finished": true,
                 "goal": "Gamma(m) * Gamma(1 - m) = pi / sin(m * pi)",
                 "latex_goal": "\\Gamma{(m)} \\Gamma{(1 - m)} = \\frac{\\pi}{\\sin{(m\\cdot \\pi)}}",
                 "start": {
-                    "conds": [
-                        {
-                            "cond": "m > 0",
-                            "latex_cond": "m > 0"
-                        },
-                        {
-                            "cond": "m < 1",
-                            "latex_cond": "m < 1"
-                        }
-                    ],
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_start": "\\int_{0}^{\\infty} \\frac{x ^ {m - 1}}{x + 1} \\,dx = B(m,1 - m)",
                     "start": "(INT x:[0,oo]. x ^ (m - 1) / (x + 1)) = B(m,1 - m)",
                     "steps": [
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x ^ {m - 1}}{x + 1} \\,dx = \\Gamma{(m)} \\Gamma{(1 - m)}",
                             "res": "(INT x:[0,oo]. x ^ (m - 1) / (x + 1)) = Gamma(m) * Gamma(1 - m)",
                             "rule": {
@@ -1569,6 +1806,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{\\pi}{\\sin{(m\\cdot \\pi)}} = \\Gamma{(m)} \\Gamma{(1 - m)}",
                             "res": "pi / sin(m * pi) = Gamma(m) * Gamma(1 - m)",
                             "rule": {
@@ -1579,6 +1818,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\Gamma{(m)} \\Gamma{(1 - m)} = \\frac{\\pi}{\\sin{(m\\cdot \\pi)}}",
                             "res": "Gamma(m) * Gamma(1 - m) = pi / sin(m * pi)",
                             "rule": {
@@ -1609,16 +1850,22 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{z! z!}{(2 z + 1)!}",
                         "start": "factorial(z) * factorial(z) / factorial(2 * z + 1)",
                         "steps": [],
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} x ^ {z} (1 - x) ^ {z} \\,dx",
                         "start": "INT x:[0,1]. x ^ z * (1 - x) ^ z",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} x ^ {z + 1 - 1} (1 - x) ^ {z} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (z + 1 - 1) * (1 - x) ^ z",
                                 "rule": {
@@ -1632,6 +1879,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} x ^ {z + 1 - 1} (1 - x) ^ {z + 1 - 1} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (z + 1 - 1) * (1 - x) ^ (z + 1 - 1)",
                                 "rule": {
@@ -1645,6 +1894,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "B(z + 1,z + 1)",
                                 "res": "B(z + 1,z + 1)",
                                 "rule": {
@@ -1655,6 +1906,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\Gamma{(z + 1)} \\Gamma{(z + 1)}}{\\Gamma{(2 z + 2)}}",
                                 "res": "Gamma(z + 1) * Gamma(z + 1) / Gamma(2 * z + 2)",
                                 "rule": {
@@ -1667,6 +1920,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{z! \\Gamma{(z + 1)}}{\\Gamma{(2 z + 2)}}",
                                 "res": "factorial(z) * Gamma(z + 1) / Gamma(2 * z + 2)",
                                 "rule": {
@@ -1679,6 +1934,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{z! z!}{\\Gamma{(2 z + 2)}}",
                                 "res": "factorial(z) * factorial(z) / Gamma(2 * z + 2)",
                                 "rule": {
@@ -1691,6 +1948,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{z! z!}{(2 z + 1)!}",
                                 "res": "factorial(z) * factorial(z) / factorial(2 * z + 1)",
                                 "rule": {
@@ -1724,20 +1983,19 @@
             "goal": "factorial(z) * factorial(z + 1/2) = 2 ^ (-2 * z - 1) * sqrt(pi) * factorial(2 * z + 1)",
             "latex_goal": "z! (z + \\frac{1}{2})! = 2 ^ {-2 z - 1}\\cdot \\sqrt{\\pi} (2 z + 1)!",
             "proof": {
+                "begin_label": "24.",
                 "finished": true,
                 "goal": "factorial(z) * factorial(z + 1/2) = 2 ^ (-2 * z - 1) * sqrt(pi) * factorial(2 * z + 1)",
                 "latex_goal": "z! (z + \\frac{1}{2})! = 2 ^ {-2 z - 1}\\cdot \\sqrt{\\pi} (2 z + 1)!",
                 "start": {
-                    "conds": [
-                        {
-                            "cond": "z > -1",
-                            "latex_cond": "z > -1"
-                        }
-                    ],
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_start": "\\frac{z! z!}{(2 z + 1)!} = \\int_{0}^{1} x ^ {z} (1 - x) ^ {z} \\,dx",
                     "start": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT x:[0,1]. x ^ z * (1 - x) ^ z)",
                     "steps": [
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\int_{-1}^{1} \\frac{1}{2} (\\frac{s + 1}{2}) ^ {z} (-\\frac{s + 1}{2} + 1) ^ {z} \\,ds",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT s:[-1,1]. 1/2 * ((s + 1) / 2) ^ z * (-((s + 1) / 2) + 1) ^ z)",
                             "rule": {
@@ -1751,6 +2009,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\int_{-1}^{1} \\frac{1}{2} (\\frac{s + 1}{2}) ^ {z} (\\frac{1}{2} (1 - s)) ^ {z} \\,ds",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT s:[-1,1]. 1/2 * ((s + 1) / 2) ^ z * (1/2 * (1 - s)) ^ z)",
                             "rule": {
@@ -1763,6 +2023,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\int_{-1}^{1} \\frac{1}{2} (\\frac{1}{2} (1 + s)) ^ {z} (\\frac{1}{2} (1 - s)) ^ {z} \\,ds",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT s:[-1,1]. 1/2 * (1/2 * (1 + s)) ^ z * (1/2 * (1 - s)) ^ z)",
                             "rule": {
@@ -1775,6 +2037,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\int_{-1}^{1} \\frac{1}{2} (\\frac{1}{2} (1 + s)) ^ {z} ((\\frac{1}{2}) ^ {z} (1 - s) ^ {z}) \\,ds",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT s:[-1,1]. 1/2 * (1/2 * (1 + s)) ^ z * ((1/2) ^ z * (1 - s) ^ z))",
                             "rule": {
@@ -1787,6 +2051,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\int_{-1}^{1} \\frac{1}{2} ((\\frac{1}{2}) ^ {z} (1 + s) ^ {z}) ((\\frac{1}{2}) ^ {z} (1 - s) ^ {z}) \\,ds",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT s:[-1,1]. 1/2 * ((1/2) ^ z * (1 + s) ^ z) * ((1/2) ^ z * (1 - s) ^ z))",
                             "rule": {
@@ -1799,6 +2065,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\frac{(\\frac{1}{2}) ^ {2 z}}{2} (\\int_{-1}^{1} (s + 1) ^ {z} (-s + 1) ^ {z} \\,ds)",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) / 2 * (INT s:[-1,1]. (s + 1) ^ z * (-s + 1) ^ z)",
                             "rule": {
@@ -1809,6 +2077,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\frac{(\\frac{1}{2}) ^ {2 z}}{2} (\\int_{-1}^{1} ((s + 1) (-s + 1)) ^ {z} \\,ds)",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) / 2 * (INT s:[-1,1]. ((s + 1) * (-s + 1)) ^ z)",
                             "rule": {
@@ -1821,6 +2091,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\frac{(\\frac{1}{2}) ^ {2 z}}{2} (\\int_{-1}^{1} (1 - s ^ {2}) ^ {z} \\,ds)",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) / 2 * (INT s:[-1,1]. (1 - s ^ 2) ^ z)",
                             "rule": {
@@ -1833,6 +2105,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\frac{(\\frac{1}{2}) ^ {2 z}}{2} ((\\int_{-1}^{0} (1 - s ^ {2}) ^ {z} \\,ds) + (\\int_{0}^{1} (1 - s ^ {2}) ^ {z} \\,ds))",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) / 2 * ((INT s:[-1,0]. (1 - s ^ 2) ^ z) + (INT s:[0,1]. (1 - s ^ 2) ^ z))",
                             "rule": {
@@ -1843,6 +2117,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\frac{(\\frac{1}{2}) ^ {2 z}}{2} ((\\int_{0}^{1} (-s ^ {2} + 1) ^ {z} \\,ds) + (\\int_{0}^{1} (1 - s ^ {2}) ^ {z} \\,ds))",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) / 2 * ((INT s:[0,1]. (-(s ^ 2) + 1) ^ z) + (INT s:[0,1]. (1 - s ^ 2) ^ z))",
                             "rule": {
@@ -1856,6 +2132,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = (\\frac{1}{2}) ^ {2 z} (\\int_{0}^{1} (-s ^ {2} + 1) ^ {z} \\,ds)",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) * (INT s:[0,1]. (-(s ^ 2) + 1) ^ z)",
                             "rule": {
@@ -1866,6 +2144,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = (\\frac{1}{2}) ^ {2 z} (\\int_{0}^{1} \\frac{(-u + 1) ^ {z}}{2 \\sqrt{u}} \\,du)",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) * (INT u:[0,1]. (-u + 1) ^ z / (2 * sqrt(u)))",
                             "rule": {
@@ -1878,6 +2158,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\frac{(\\frac{1}{2}) ^ {2 z}}{2} (\\int_{0}^{1} \\frac{(-u + 1) ^ {z}}{\\sqrt{u}} \\,du)",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) / 2 * (INT u:[0,1]. (-u + 1) ^ z / sqrt(u))",
                             "rule": {
@@ -1888,6 +2170,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\frac{(\\frac{1}{2}) ^ {2 z}}{2} (\\int_{0}^{1} u ^ {1/2 - 1} (1 - u) ^ {z + 1 - 1} \\,du)",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) / 2 * (INT u:[0,1]. u ^ (1/2 - 1) * (1 - u) ^ (z + 1 - 1))",
                             "rule": {
@@ -1900,6 +2184,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\frac{(\\frac{1}{2}) ^ {2 z}}{2} B(\\frac{1}{2},z + 1)",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) / 2 * B(1/2,z + 1)",
                             "rule": {
@@ -1911,6 +2197,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\frac{(\\frac{1}{2}) ^ {2 z}}{2} (\\frac{\\Gamma{(\\frac{1}{2})} \\Gamma{(z + 1)}}{\\Gamma{(z + \\frac{3}{2})}})",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) / 2 * (Gamma(1/2) * Gamma(z + 1) / Gamma(z + 3/2))",
                             "rule": {
@@ -1923,6 +2211,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\frac{(\\frac{1}{2}) ^ {2 z}}{2} (\\frac{\\sqrt{\\pi} \\Gamma{(z + 1)}}{\\Gamma{(z + \\frac{3}{2})}})",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) / 2 * (sqrt(pi) * Gamma(z + 1) / Gamma(z + 3/2))",
                             "rule": {
@@ -1935,6 +2225,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\frac{(\\frac{1}{2}) ^ {2 z}}{2} (\\frac{\\sqrt{\\pi} z!}{\\Gamma{(z + \\frac{3}{2})}})",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) / 2 * (sqrt(pi) * factorial(z) / Gamma(z + 3/2))",
                             "rule": {
@@ -1947,6 +2239,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\frac{(\\frac{1}{2}) ^ {2 z}}{2} (\\frac{\\sqrt{\\pi} z!}{(z + \\frac{1}{2})!})",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) / 2 * (sqrt(pi) * factorial(z) / factorial(z + 1/2))",
                             "rule": {
@@ -1959,6 +2253,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "(2 z + 1)! = \\frac{2 (\\frac{1}{2}) ^ {-2 z} z! (z + \\frac{1}{2})!}{\\sqrt{\\pi}}",
                             "res": "factorial(2 * z + 1) = 2 * (1/2) ^ -(2 * z) * factorial(z) * factorial(z + 1/2) / sqrt(pi)",
                             "rule": {
@@ -1970,6 +2266,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "(2 z + 1)! = \\frac{2}{\\sqrt{\\pi}} (\\frac{1}{2}) ^ {-2 z} (z! (z + \\frac{1}{2})!)",
                             "res": "factorial(2 * z + 1) = 2 / sqrt(pi) * (1/2) ^ (-2 * z) * (factorial(z) * factorial(z + 1/2))",
                             "rule": {
@@ -1982,6 +2280,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "z! (z + \\frac{1}{2})! = \\frac{(\\frac{1}{2}) ^ {2 z}\\cdot \\sqrt{\\pi} (2 z + 1)!}{2}",
                             "res": "factorial(z) * factorial(z + 1/2) = (1/2) ^ (2 * z) * sqrt(pi) * factorial(2 * z + 1) / 2",
                             "rule": {
@@ -1993,6 +2293,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "z! (z + \\frac{1}{2})! = \\sqrt{\\pi}\\cdot 2 ^ {-1} (2 ^ {-1}) ^ {2 z} (2 z + 1)!",
                             "res": "factorial(z) * factorial(z + 1/2) = sqrt(pi) * 2 ^ (-1) * 2 ^ (-1) ^ (2 * z) * factorial(2 * z + 1)",
                             "rule": {
@@ -2005,6 +2307,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "z! (z + \\frac{1}{2})! = \\sqrt{\\pi}\\cdot 2 ^ {-1} 2 ^ {-2 z} (2 z + 1)!",
                             "res": "factorial(z) * factorial(z + 1/2) = sqrt(pi) * 2 ^ (-1) * 2 ^ (-2 * z) * factorial(2 * z + 1)",
                             "rule": {
@@ -2017,6 +2321,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "z! (z + \\frac{1}{2})! = 2 ^ {-2 z - 1}\\cdot \\sqrt{\\pi} (2 z + 1)!",
                             "res": "factorial(z) * factorial(z + 1/2) = 2 ^ (-2 * z - 1) * sqrt(pi) * factorial(2 * z + 1)",
                             "rule": {

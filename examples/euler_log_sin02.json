@@ -7,10 +7,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\pi/2} \\log{(\\frac{\\sin{x}}{x})} \\,dx",
                         "start": "INT x:[0,pi / 2]. log(sin(x) / x)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\log{(\\sin{x})} - \\log{x} \\,dx",
                                 "res": "INT x:[0,pi / 2]. log(sin(x)) - log(x)",
                                 "rule": {
@@ -24,6 +28,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{\\pi/2} \\log{(\\sin{x})} \\,dx) - (\\int_{0}^{\\pi/2} \\log{x} \\,dx)",
                                 "res": "(INT x:[0,pi / 2]. log(sin(x))) - (INT x:[0,pi / 2]. log(x))",
                                 "rule": {
@@ -33,6 +39,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{\\pi/2} \\log{(1 \\sin{x})} \\,dx) - (\\int_{0}^{\\pi/2} \\log{x} \\,dx)",
                                 "res": "(INT x:[0,pi / 2]. log(1 * sin(x))) - (INT x:[0,pi / 2]. log(x))",
                                 "rule": {
@@ -45,6 +53,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{\\pi \\log{(2)}}{2} - (\\int_{0}^{\\pi/2} \\log{x} \\,dx)",
                                 "res": "-(pi * log(2) / 2) - (INT x:[0,pi / 2]. log(x))",
                                 "rule": {
@@ -54,6 +64,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{\\pi \\log{(2)}}{2} - ((\\left. x \\log{x} \\right\\vert_{x=0}^{\\pi/2}) - (\\int_{0}^{\\pi/2} 1 \\,dx))",
                                 "res": "-(pi * log(2) / 2) - (([x * log(x)]_x=0,pi / 2) - (INT x:[0,pi / 2]. 1))",
                                 "rule": {
@@ -67,6 +79,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{\\pi \\log{(2)}}{2} - ((\\left. x \\log{x} \\right\\vert_{x=0}^{\\pi/2}) - (\\left. x \\right\\vert_{x=0}^{\\pi/2}))",
                                 "res": "-(pi * log(2) / 2) - (([x * log(x)]_x=0,pi / 2) - ([x]_x=0,pi / 2))",
                                 "rule": {
@@ -76,6 +90,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{\\pi\\cdot (-\\log{(2)} + \\log{(\\pi)})}{2} - \\frac{\\pi \\log{(2)}}{2} + \\frac{\\pi}{2}",
                                 "res": "-(pi * (-log(2) + log(pi)) / 2) - pi * log(2) / 2 + pi / 2",
                                 "rule": {
@@ -85,6 +101,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(-\\frac{\\pi \\log{(2)}}{2} + \\frac{\\pi \\log{(\\pi)}}{2}) - \\frac{\\pi \\log{(2)}}{2} + \\frac{\\pi}{2}",
                                 "res": "-(-(pi * log(2) / 2) + pi * log(pi) / 2) - pi * log(2) / 2 + pi / 2",
                                 "rule": {
@@ -95,6 +113,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{\\pi \\log{(\\pi)}}{2} + \\frac{\\pi}{2}",
                                 "res": "-(pi * log(pi) / 2) + pi / 2",
                                 "rule": {
@@ -107,10 +127,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\pi}{2}\\cdot (1 - \\log{(\\pi)})",
                         "start": "pi / 2 * (1 - log(pi))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{\\pi \\log{(\\pi)}}{2} + \\frac{\\pi}{2}",
                                 "res": "-(pi * log(pi) / 2) + pi / 2",
                                 "rule": {

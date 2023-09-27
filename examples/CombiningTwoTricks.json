@@ -73,16 +73,22 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "I{(a,b,n)}",
                         "start": "I(a,b,n)",
                         "steps": [],
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{-1}{n - 1} ((\\frac{d}{da} I{(a,b,n - 1)}) + (\\frac{d}{db} I{(a,b,n - 1)}))",
                         "start": "-1 / (n - 1) * ((D a. I(a,b,n - 1)) + (D b. I(a,b,n - 1)))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{-1}{n - 1} ((\\frac{d}{da} \\int_{0}^{\\pi/2} (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n + 1} \\,dx) + (\\frac{d}{db} \\int_{0}^{\\pi/2} (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n + 1} \\,dx))",
                                 "res": "-1 / (n - 1) * ((D a. INT x:[0,pi / 2]. (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ (-n + 1)) + (D b. INT x:[0,pi / 2]. (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ (-n + 1)))",
                                 "rule": {
@@ -94,6 +100,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{1}{n - 1} ((-n + 1) (\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (-n + 1) (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx))",
                                 "res": "-(1 / (n - 1) * ((-n + 1) * (INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (-n + 1) * (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)))",
                                 "rule": {
@@ -103,6 +111,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{1}{n - 1} ((-n + 1) ((\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx)))",
                                 "res": "-(1 / (n - 1) * ((-n + 1) * ((INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n))))",
                                 "rule": {
@@ -115,6 +125,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{-n + 1}{n - 1} ((\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx))",
                                 "res": "-((-n + 1) / (n - 1) * ((INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)))",
                                 "rule": {
@@ -124,6 +136,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "--1 ((\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx))",
                                 "res": "-(-1 * ((INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)))",
                                 "rule": {
@@ -136,6 +150,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx)",
                                 "res": "(INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)",
                                 "rule": {
@@ -145,6 +161,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} + \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx",
                                 "res": "INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n + sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n",
                                 "rule": {
@@ -157,6 +175,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} (\\sin^{2}(x) + \\cos^{2}(x)) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx",
                                 "res": "INT x:[0,pi / 2]. (sin(x) ^ 2 + cos(x) ^ 2) * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n",
                                 "rule": {
@@ -169,6 +189,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} 1 (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx",
                                 "res": "INT x:[0,pi / 2]. 1 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n",
                                 "rule": {
@@ -181,6 +203,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{(a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {n}} \\,dx",
                                 "res": "INT x:[0,pi / 2]. 1 / (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ n",
                                 "rule": {
@@ -193,6 +217,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "I{(a,b,n)}",
                                 "res": "I(a,b,n)",
                                 "rule": {
@@ -230,10 +256,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "I{(a,b,1)}",
                         "start": "I(a,b,1)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{a \\cos^{2}(x) + b \\sin^{2}(x)} \\,dx",
                                 "res": "INT x:[0,pi / 2]. 1 / (a * cos(x) ^ 2 + b * sin(x) ^ 2)",
                                 "rule": {
@@ -244,6 +274,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{(\\frac{1}{\\cos{x}}) ^ {2}}{a + b (\\frac{\\sin{x}}{\\cos{x}}) ^ {2}} \\,dx",
                                 "res": "INT x:[0,pi / 2]. (1 / cos(x)) ^ 2 / (a + b * (sin(x) / cos(x)) ^ 2)",
                                 "rule": {
@@ -256,6 +288,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{(\\frac{1}{\\cos{x}}) ^ {2}}{a + b \\tan^{2}(x)} \\,dx",
                                 "res": "INT x:[0,pi / 2]. (1 / cos(x)) ^ 2 / (a + b * tan(x) ^ 2)",
                                 "rule": {
@@ -268,6 +302,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\sec^{2}(x)}{a + b \\tan^{2}(x)} \\,dx",
                                 "res": "INT x:[0,pi / 2]. sec(x) ^ 2 / (a + b * tan(x) ^ 2)",
                                 "rule": {
@@ -280,6 +316,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{b y ^ {2} + a} \\,dy",
                                 "res": "INT y:[0,oo]. 1 / (b * y ^ 2 + a)",
                                 "rule": {
@@ -292,6 +330,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{\\frac{1}{b}}{y ^ {2} + \\frac{a}{b}} \\,dy",
                                 "res": "INT y:[0,oo]. 1 / b / (y ^ 2 + a / b)",
                                 "rule": {
@@ -304,6 +344,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{b} (\\int_{0}^{\\infty} \\frac{1}{\\frac{a}{b} + y ^ {2}} \\,dy)",
                                 "res": "1 / b * (INT y:[0,oo]. 1 / (a / b + y ^ 2))",
                                 "rule": {
@@ -313,6 +355,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{b} (\\int_{0}^{\\infty} \\frac{1}{(\\frac{\\sqrt{a}}{\\sqrt{b}}) ^ {2} + y ^ {2}} \\,dy)",
                                 "res": "1 / b * (INT y:[0,oo]. 1 / ((sqrt(a) / sqrt(b)) ^ 2 + y ^ 2))",
                                 "rule": {
@@ -325,6 +369,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{b} (\\left. \\frac{\\sqrt{b}}{\\sqrt{a}} \\tan^{-1}{(\\frac{\\sqrt{b} y}{\\sqrt{a}})} \\right\\vert_{y=0}^{\\infty})",
                                 "res": "1 / b * ([sqrt(b) / sqrt(a) * atan(sqrt(b) * y / sqrt(a))]_y=0,oo)",
                                 "rule": {
@@ -334,6 +380,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{2 \\sqrt{a} \\sqrt{b}}",
                                 "res": "pi / (2 * sqrt(a) * sqrt(b))",
                                 "rule": {
@@ -343,6 +391,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{2 \\sqrt{a b}}",
                                 "res": "pi / (2 * sqrt(a * b))",
                                 "rule": {
@@ -358,6 +408,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\pi}{2 \\sqrt{a b}}",
                         "start": "pi / (2 * sqrt(a * b))",
                         "steps": [],
@@ -388,10 +440,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "I{(a,b,2)}",
                         "start": "I(a,b,2)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{-1}{2 - 1} ((\\frac{d}{da} I{(a,b,2 - 1)}) + (\\frac{d}{db} I{(a,b,2 - 1)}))",
                                 "res": "-1 / (2 - 1) * ((D a. I(a,b,2 - 1)) + (D b. I(a,b,2 - 1)))",
                                 "rule": {
@@ -404,6 +460,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(\\frac{d}{da} I{(a,b,1)}) - (\\frac{d}{db} I{(a,b,1)})",
                                 "res": "-(D a. I(a,b,1)) - (D b. I(a,b,1))",
                                 "rule": {
@@ -413,6 +471,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(\\frac{d}{da} \\frac{\\pi}{2 \\sqrt{a b}}) - (\\frac{d}{db} I{(a,b,1)})",
                                 "res": "-(D a. pi / (2 * sqrt(a * b))) - (D b. I(a,b,1))",
                                 "rule": {
@@ -425,6 +485,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(\\frac{d}{da} \\frac{\\pi}{2 \\sqrt{a b}}) - (\\frac{d}{db} \\frac{\\pi}{2 \\sqrt{a b}})",
                                 "res": "-(D a. pi / (2 * sqrt(a * b))) - (D b. pi / (2 * sqrt(a * b)))",
                                 "rule": {
@@ -437,6 +499,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{4 a ^ {3/2} \\sqrt{b}} + \\frac{\\pi}{4 \\sqrt{a} b ^ {3/2}}",
                                 "res": "pi / (4 * a ^ (3/2) * sqrt(b)) + pi / (4 * sqrt(a) * b ^ (3/2))",
                                 "rule": {
@@ -446,6 +510,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{4 \\sqrt{a b}} (\\frac{1}{a} + \\frac{1}{b})",
                                 "res": "pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)",
                                 "rule": {
@@ -461,6 +527,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\pi}{4 \\sqrt{a b}} (\\frac{1}{a} + \\frac{1}{b})",
                         "start": "pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)",
                         "steps": [],
@@ -491,10 +559,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "I{(a,b,3)}",
                         "start": "I(a,b,3)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{-1}{3 - 1} ((\\frac{d}{da} I{(a,b,3 - 1)}) + (\\frac{d}{db} I{(a,b,3 - 1)}))",
                                 "res": "-1 / (3 - 1) * ((D a. I(a,b,3 - 1)) + (D b. I(a,b,3 - 1)))",
                                 "rule": {
@@ -507,6 +579,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{\\frac{d}{da} I{(a,b,2)}}{2} - \\frac{\\frac{d}{db} I{(a,b,2)}}{2}",
                                 "res": "-((D a. I(a,b,2)) / 2) - (D b. I(a,b,2)) / 2",
                                 "rule": {
@@ -516,6 +590,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{\\frac{d}{da} \\frac{\\pi}{4 \\sqrt{a b}} (\\frac{1}{a} + \\frac{1}{b})}{2} - \\frac{\\frac{d}{db} I{(a,b,2)}}{2}",
                                 "res": "-((D a. pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)) / 2) - (D b. I(a,b,2)) / 2",
                                 "rule": {
@@ -528,6 +604,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{\\frac{d}{da} \\frac{\\pi}{4 \\sqrt{a b}} (\\frac{1}{a} + \\frac{1}{b})}{2} - \\frac{\\frac{d}{db} \\frac{\\pi}{4 \\sqrt{a b}} (\\frac{1}{a} + \\frac{1}{b})}{2}",
                                 "res": "-((D a. pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)) / 2) - (D b. pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)) / 2",
                                 "rule": {
@@ -540,6 +618,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{16 a ^ {3/2} \\sqrt{b}} (\\frac{1}{a} + \\frac{1}{b}) + \\frac{\\pi}{16 \\sqrt{a} b ^ {3/2}} (\\frac{1}{a} + \\frac{1}{b}) + \\frac{\\pi}{8 a ^ {5/2} \\sqrt{b}} + \\frac{\\pi}{8 \\sqrt{a} b ^ {5/2}}",
                                 "res": "pi / (16 * a ^ (3/2) * sqrt(b)) * (1 / a + 1 / b) + pi / (16 * sqrt(a) * b ^ (3/2)) * (1 / a + 1 / b) + pi / (8 * a ^ (5/2) * sqrt(b)) + pi / (8 * sqrt(a) * b ^ (5/2))",
                                 "rule": {
@@ -549,6 +629,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{16 \\sqrt{a b}} (\\frac{3}{a ^ {2}} + \\frac{3}{b ^ {2}} + \\frac{2}{a b})",
                                 "res": "pi / (16 * sqrt(a * b)) * (3 / a ^ 2 + 3 / b ^ 2 + 2 / (a * b))",
                                 "rule": {
@@ -564,6 +646,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\pi}{16 \\sqrt{a b}} (\\frac{3}{a ^ {2}} + \\frac{3}{b ^ {2}} + \\frac{2}{a b})",
                         "start": "pi / (16 * sqrt(a * b)) * (3 / a ^ 2 + 3 / b ^ 2 + 2 / (a * b))",
                         "steps": [],
@@ -602,10 +686,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "J{(a,y,n)}",
                         "start": "J(a,y,n)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{y} (a ^ {2} + x ^ {2}) ^ {-n} \\,dx",
                                 "res": "INT x:[0,y]. (a ^ 2 + x ^ 2) ^ -n",
                                 "rule": {
@@ -616,6 +704,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\left. x (a ^ {2} + x ^ {2}) ^ {-n} \\right\\vert_{x=0}^{y}) - (\\int_{0}^{y} -2 n x ^ {2} (a ^ {2} + x ^ {2}) ^ {-n - 1} \\,dx)",
                                 "res": "([x * (a ^ 2 + x ^ 2) ^ -n]_x=0,y) - (INT x:[0,y]. -(2 * n * x ^ 2 * (a ^ 2 + x ^ 2) ^ (-n - 1)))",
                                 "rule": {
@@ -628,6 +718,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 n (\\int_{0}^{y} x ^ {2} (a ^ {2} + x ^ {2}) ^ {-n - 1} \\,dx) + y (a ^ {2} + y ^ {2}) ^ {-n}",
                                 "res": "2 * n * (INT x:[0,y]. x ^ 2 * (a ^ 2 + x ^ 2) ^ (-n - 1)) + y * (a ^ 2 + y ^ 2) ^ -n",
                                 "rule": {
@@ -637,6 +729,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "n (\\int_{0}^{y} \\frac{2 x ^ {2}}{(a ^ {2} + x ^ {2}) ^ {n + 1}} \\,dx) + y (a ^ {2} + y ^ {2}) ^ {-n}",
                                 "res": "n * (INT x:[0,y]. 2 * x ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1)) + y * (a ^ 2 + y ^ 2) ^ -n",
                                 "rule": {
@@ -649,6 +743,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "n (\\int_{0}^{y} \\frac{2 (x ^ {2} + a ^ {2})}{(a ^ {2} + x ^ {2}) ^ {n + 1}} - \\frac{2 a ^ {2}}{(a ^ {2} + x ^ {2}) ^ {n + 1}} \\,dx) + y (a ^ {2} + y ^ {2}) ^ {-n}",
                                 "res": "n * (INT x:[0,y]. 2 * (x ^ 2 + a ^ 2) / (a ^ 2 + x ^ 2) ^ (n + 1) - 2 * a ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1)) + y * (a ^ 2 + y ^ 2) ^ -n",
                                 "rule": {
@@ -661,6 +757,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "n (2 (\\int_{0}^{y} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {n}} \\,dx) - 2 a ^ {2} (\\int_{0}^{y} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {n + 1}} \\,dx)) + y (a ^ {2} + y ^ {2}) ^ {-n}",
                                 "res": "n * (2 * (INT x:[0,y]. 1 / (x ^ 2 + a ^ 2) ^ n) - 2 * a ^ 2 * (INT x:[0,y]. 1 / (x ^ 2 + a ^ 2) ^ (n + 1))) + y * (a ^ 2 + y ^ 2) ^ -n",
                                 "rule": {
@@ -673,6 +771,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "n (2 J{(a,y,n)} - 2 a ^ {2} J{(a,y,n + 1)}) + y (a ^ {2} + y ^ {2}) ^ {-n}",
                                 "res": "n * (2 * J(a,y,n) - 2 * a ^ 2 * J(a,y,n + 1)) + y * (a ^ 2 + y ^ 2) ^ -n",
                                 "rule": {
@@ -684,6 +784,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{y}{(y ^ {2} + a ^ {2}) ^ {n}} + 2 n J{(a,y,n)} - 2 n a ^ {2} J{(a,y,n + 1)}",
                                 "res": "y / (y ^ 2 + a ^ 2) ^ n + 2 * n * J(a,y,n) - 2 * n * a ^ 2 * J(a,y,n + 1)",
                                 "rule": {
@@ -699,6 +801,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{y}{(y ^ {2} + a ^ {2}) ^ {n}} + 2 n J{(a,y,n)} - 2 n a ^ {2} J{(a,y,n + 1)}",
                         "start": "y / (y ^ 2 + a ^ 2) ^ n + 2 * n * J(a,y,n) - 2 * n * a ^ 2 * J(a,y,n + 1)",
                         "steps": [],
@@ -735,32 +839,19 @@
             "goal": "J(a,y,n + 1) = y / (2 * n * a ^ 2 * (y ^ 2 + a ^ 2) ^ n) + (2 * n - 1) / (2 * n * a ^ 2) * J(a,y,n)",
             "latex_goal": "J{(a,y,n + 1)} = \\frac{y}{2 n a ^ {2} (y ^ {2} + a ^ {2}) ^ {n}} + \\frac{2 n - 1}{2 n a ^ {2}} J{(a,y,n)}",
             "proof": {
+                "begin_label": "7.",
                 "finished": true,
                 "goal": "J(a,y,n + 1) = y / (2 * n * a ^ 2 * (y ^ 2 + a ^ 2) ^ n) + (2 * n - 1) / (2 * n * a ^ 2) * J(a,y,n)",
                 "latex_goal": "J{(a,y,n + 1)} = \\frac{y}{2 n a ^ {2} (y ^ {2} + a ^ {2}) ^ {n}} + \\frac{2 n - 1}{2 n a ^ {2}} J{(a,y,n)}",
                 "start": {
-                    "conds": [
-                        {
-                            "cond": "a > 0",
-                            "latex_cond": "a > 0"
-                        },
-                        {
-                            "cond": "y >= 0",
-                            "latex_cond": "y \\ge 0"
-                        },
-                        {
-                            "cond": "n > 0",
-                            "latex_cond": "n > 0"
-                        },
-                        {
-                            "cond": "isInt(n)",
-                            "latex_cond": "n \\in\\mathbb{Z}"
-                        }
-                    ],
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_start": "J{(a,y,n)} = \\frac{y}{(y ^ {2} + a ^ {2}) ^ {n}} + 2 n J{(a,y,n)} - 2 n a ^ {2} J{(a,y,n + 1)}",
                     "start": "J(a,y,n) = y / (y ^ 2 + a ^ 2) ^ n + 2 * n * J(a,y,n) - 2 * n * a ^ 2 * J(a,y,n + 1)",
                     "steps": [
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "J{(a,y,n + 1)} = \\frac{y (a ^ {2} + y ^ {2}) ^ {-n} + 2 n J{(a,y,n)} - J{(a,y,n)}}{2 a ^ {2} n}",
                             "res": "J(a,y,n + 1) = (y * (a ^ 2 + y ^ 2) ^ -n + 2 * n * J(a,y,n) - J(a,y,n)) / (2 * a ^ 2 * n)",
                             "rule": {
@@ -772,6 +863,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "J{(a,y,n + 1)} = \\frac{y}{2 n a ^ {2} (y ^ {2} + a ^ {2}) ^ {n}} + \\frac{2 n - 1}{2 n a ^ {2}} J{(a,y,n)}",
                             "res": "J(a,y,n + 1) = y / (2 * n * a ^ 2 * (y ^ 2 + a ^ 2) ^ n) + (2 * n - 1) / (2 * n * a ^ 2) * J(a,y,n)",
                             "rule": {

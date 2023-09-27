@@ -43,10 +43,18 @@
                         "proof": {
                             "calcs": [
                                 {
+                                    "dead_vars": [
+                                        "n"
+                                    ],
+                                    "fixes": [],
                                     "latex_start": "\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,)",
                                     "start": "LIM {x -> oo}. x ^ (n - 1) * exp(-x)",
                                     "steps": [
                                         {
+                                            "dead_vars": [
+                                                "n"
+                                            ],
+                                            "fixes": [],
                                             "latex_res": "0",
                                             "res": "0",
                                             "rule": {
@@ -59,6 +67,8 @@
                                     "type": "Calculation"
                                 },
                                 {
+                                    "dead_vars": [],
+                                    "fixes": [],
                                     "latex_start": "0",
                                     "start": "0",
                                     "steps": [],
@@ -85,10 +95,18 @@
                         "proof": {
                             "calcs": [
                                 {
+                                    "dead_vars": [
+                                        "n"
+                                    ],
+                                    "fixes": [],
                                     "latex_start": "\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,)",
                                     "start": "LIM {x -> oo}. x ^ (n - 1) * exp(-x)",
                                     "steps": [
                                         {
+                                            "dead_vars": [
+                                                "n"
+                                            ],
+                                            "fixes": [],
                                             "latex_res": "0",
                                             "res": "0",
                                             "rule": {
@@ -101,6 +119,8 @@
                                     "type": "Calculation"
                                 },
                                 {
+                                    "dead_vars": [],
+                                    "fixes": [],
                                     "latex_start": "0",
                                     "start": "0",
                                     "steps": [],
@@ -143,10 +163,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\Gamma{(n)}",
                         "start": "Gamma(n)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} x ^ {n - 1} e^{-x} \\,dx",
                                 "res": "INT x:[0,oo]. x ^ (n - 1) * exp(-x)",
                                 "rule": {
@@ -157,6 +181,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\left. -x ^ {n - 1} e^{-x} \\right\\vert_{x=0}^{\\infty}) - (\\int_{0}^{\\infty} -x ^ {n - 2} e^{-x} (n - 1) \\,dx)",
                                 "res": "([-(x ^ (n - 1) * exp(-x))]_x=0,oo) - (INT x:[0,oo]. -(x ^ (n - 2) * exp(-x) * (n - 1)))",
                                 "rule": {
@@ -169,6 +195,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(n - 1) (\\int_{0}^{\\infty} x ^ {n - 2} e^{-x} \\,dx)",
                                 "res": "(n - 1) * (INT x:[0,oo]. x ^ (n - 2) * exp(-x))",
                                 "rule": {
@@ -178,6 +206,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(n - 1) (\\int_{0}^{\\infty} x ^ {n - 2} e^{-x} \\,dx)",
                                 "res": "(n - 1) * (INT x:[0,oo]. x ^ (n - 2) * exp(-x))",
                                 "rule": {
@@ -190,6 +220,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(n - 1) (\\int_{0}^{\\infty} x ^ {n - 2} e^{-x} \\,dx)",
                                 "res": "(n - 1) * (INT x:[0,oo]. x ^ (n - 2) * exp(-x))",
                                 "rule": {
@@ -202,10 +234,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "(n - 1) \\Gamma{(n - 1)}",
                         "start": "(n - 1) * Gamma(n - 1)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(n - 1) (\\int_{0}^{\\infty} x ^ {n - 2} e^{-x} \\,dx)",
                                 "res": "(n - 1) * (INT x:[0,oo]. x ^ (n - 2) * exp(-x))",
                                 "rule": {
@@ -251,10 +287,14 @@
                     "proof": {
                         "calcs": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "\\Gamma{(1)}",
                                 "start": "Gamma(1)",
                                 "steps": [
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\int_{0}^{\\infty} e^{-x} \\,dx",
                                         "res": "INT x:[0,oo]. exp(-x)",
                                         "rule": {
@@ -265,6 +305,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\left. -e^{-x} \\right\\vert_{x=0}^{\\infty}",
                                         "res": "[-exp(-x)]_x=0,oo",
                                         "rule": {
@@ -274,6 +316,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "1",
                                         "res": "1",
                                         "rule": {
@@ -286,6 +330,8 @@
                                 "type": "Calculation"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "1",
                                 "start": "1",
                                 "steps": [],
@@ -308,10 +354,14 @@
                     "proof": {
                         "calcs": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "\\Gamma{(n + 1)}",
                                 "start": "Gamma(n + 1)",
                                 "steps": [
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "(n + 1 - 1) \\Gamma{(n + 1 - 1)}",
                                         "res": "(n + 1 - 1) * Gamma(n + 1 - 1)",
                                         "rule": {
@@ -324,6 +374,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "n \\Gamma{(n)}",
                                         "res": "n * Gamma(n)",
                                         "rule": {
@@ -333,6 +385,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "n (n - 1)!",
                                         "res": "n * factorial(n - 1)",
                                         "rule": {
@@ -343,6 +397,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "n!",
                                         "res": "factorial(n)",
                                         "rule": {
@@ -358,6 +414,8 @@
                                 "type": "Calculation"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "n!",
                                 "start": "factorial(n)",
                                 "steps": [],
@@ -373,15 +431,20 @@
                 },
                 "induct_var": "n",
                 "latex_goal": "\\Gamma{(n)} = (n - 1)!",
+                "start": "1",
                 "type": "InductionProof"
             },
             "type": "Goal"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int_{0}^{\\infty} e^{-x ^ {3}} \\,dx",
             "start": "INT x:[0,oo]. exp(-(x ^ 3))",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int_{0}^{\\infty} \\frac{e^{-y}}{3 y ^ {2/3}} \\,dy",
                     "res": "INT y:[0,oo]. exp(-y) / (3 * y ^ (2/3))",
                     "rule": {
@@ -394,6 +457,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{1}{3} (\\int_{0}^{\\infty} \\frac{e^{-y}}{y ^ {2/3}} \\,dy)",
                     "res": "1/3 * (INT y:[0,oo]. exp(-y) / y ^ (2/3))",
                     "rule": {
@@ -403,6 +468,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{1}{3} (\\int_{0}^{\\infty} e^{-y} y ^ {1/3 - 1} \\,dy)",
                     "res": "1/3 * (INT y:[0,oo]. exp(-y) * y ^ (1/3 - 1))",
                     "rule": {
@@ -415,6 +482,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{1}{3} \\Gamma{(\\frac{1}{3})}",
                     "res": "1/3 * Gamma(1/3)",
                     "rule": {
@@ -426,6 +495,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "(\\frac{4}{3} - 1) \\Gamma{(\\frac{4}{3} - 1)}",
                     "res": "(4/3 - 1) * Gamma(4/3 - 1)",
                     "rule": {
@@ -437,6 +508,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\Gamma{(\\frac{4}{3})}",
                     "res": "Gamma(4/3)",
                     "rule": {

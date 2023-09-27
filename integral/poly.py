@@ -1018,6 +1018,21 @@ def simplify_sum(e: expr.Expr, ctx:Context) -> expr.Expr:
             return e.body
         if e.body == expr.Const(0):
             return e.body
+    elif e.is_plus():
+        a = expr.Symbol('a',[expr.SUMMATION])
+        b = expr.Symbol('b',[expr.SUMMATION])
+        pat_list = [a+b, -(a)+b, a - b, -(a) - b]
+        for pat in pat_list:
+            inst = expr.match(e, pat)
+            if inst != None:
+                tmpa:expr.Summation = a.inst_pat(inst)
+                tmpb:expr.Summation = b.inst_pat(inst)
+                al, bl, au, bu, av, bv = tmpa.lower,tmpb.lower,tmpa.upper,tmpb.upper, tmpa.index_var, tmpb.index_var
+                ab, bb = tmpa.body, tmpb.body
+                if al == bl and au == bu and ab == bb:
+                    new_inst = {'a':ab, 'b':bb}
+                    new_body = pat.inst_pat(new_inst)
+                    return expr.Summation(av, al, au, new_body)
     return e
 def simplify_inf(e: expr.Expr, ctx: Context) -> expr.Expr:
     if e.is_plus():

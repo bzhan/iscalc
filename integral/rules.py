@@ -875,6 +875,7 @@ class OnSubterm(Rule):
     def __init__(self, rule: Rule):
         assert isinstance(rule, Rule)
         self.rule = rule
+        self.name = 'OnSubterm'
 
     def __str__(self):
         return "%s on subterms" % self.rule

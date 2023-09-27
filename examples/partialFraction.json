@@ -7,10 +7,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{1}{x ^ {4} + 2 x ^ {2} \\cosh{(2 a)} + 1} \\,dx",
                         "start": "INT x:[0,oo]. 1 / (x ^ 4 + 2 * x ^ 2 * cosh(2 * a) + 1)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{x ^ {4} + 2 x ^ {2} (\\frac{e^{-2 a} + e^{2 a}}{2}) + 1} \\,dx",
                                 "res": "INT x:[0,oo]. 1 / (x ^ 4 + 2 * x ^ 2 * ((exp(-(2 * a)) + exp(2 * a)) / 2) + 1)",
                                 "rule": {
@@ -22,6 +26,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(x ^ {2} + e^{2 a}) (x ^ {2} + e^{-2 a})} \\,dx",
                                 "res": "INT x:[0,oo]. 1 / ((x ^ 2 + exp(2 * a)) * (x ^ 2 + exp(-(2 * a))))",
                                 "rule": {
@@ -34,6 +40,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{e^{2 a} - e^{-2 a}} (\\frac{1}{x ^ {2} + e^{-2 a}} - \\frac{1}{x ^ {2} + e^{2 a}}) \\,dx",
                                 "res": "INT x:[0,oo]. 1 / (exp(2 * a) - exp(-(2 * a))) * (1 / (x ^ 2 + exp(-(2 * a))) - 1 / (x ^ 2 + exp(2 * a)))",
                                 "rule": {
@@ -46,6 +54,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{-e^{-2 a} + e^{2 a}} ((\\int_{0}^{\\infty} \\frac{1}{e^{-2 a} + x ^ {2}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{e^{2 a} + x ^ {2}} \\,dx))",
                                 "res": "1 / (-exp(-(2 * a)) + exp(2 * a)) * ((INT x:[0,oo]. 1 / (exp(-(2 * a)) + x ^ 2)) - (INT x:[0,oo]. 1 / (exp(2 * a) + x ^ 2)))",
                                 "rule": {
@@ -55,6 +65,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{-(e^{-a}) ^ {2} + e^{2 a}} ((\\int_{0}^{\\infty} \\frac{1}{e^{-2 a} + x ^ {2}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{e^{2 a} + x ^ {2}} \\,dx))",
                                 "res": "1 / (-(exp(-a) ^ 2) + exp(2 * a)) * ((INT x:[0,oo]. 1 / (exp(-(2 * a)) + x ^ 2)) - (INT x:[0,oo]. 1 / (exp(2 * a) + x ^ 2)))",
                                 "rule": {
@@ -67,6 +79,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{-(e^{-a}) ^ {2} + e^{2 a}} ((\\int_{0}^{\\infty} \\frac{1}{(e^{-a}) ^ {2} + x ^ {2}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{e^{2 a} + x ^ {2}} \\,dx))",
                                 "res": "1 / (-(exp(-a) ^ 2) + exp(2 * a)) * ((INT x:[0,oo]. 1 / (exp(-a) ^ 2 + x ^ 2)) - (INT x:[0,oo]. 1 / (exp(2 * a) + x ^ 2)))",
                                 "rule": {
@@ -79,6 +93,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{-(e^{-a}) ^ {2} + (e^{a}) ^ {2}} ((\\int_{0}^{\\infty} \\frac{1}{(e^{-a}) ^ {2} + x ^ {2}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{e^{2 a} + x ^ {2}} \\,dx))",
                                 "res": "1 / (-(exp(-a) ^ 2) + exp(a) ^ 2) * ((INT x:[0,oo]. 1 / (exp(-a) ^ 2 + x ^ 2)) - (INT x:[0,oo]. 1 / (exp(2 * a) + x ^ 2)))",
                                 "rule": {
@@ -91,6 +107,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{-(e^{-a}) ^ {2} + (e^{a}) ^ {2}} ((\\int_{0}^{\\infty} \\frac{1}{(e^{-a}) ^ {2} + x ^ {2}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{(e^{a}) ^ {2} + x ^ {2}} \\,dx))",
                                 "res": "1 / (-(exp(-a) ^ 2) + exp(a) ^ 2) * ((INT x:[0,oo]. 1 / (exp(-a) ^ 2 + x ^ 2)) - (INT x:[0,oo]. 1 / (exp(a) ^ 2 + x ^ 2)))",
                                 "rule": {
@@ -103,6 +121,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{-(e^{-a}) ^ {2} + (e^{a}) ^ {2}} ((\\left. e^{a} \\tan^{-1}{(x e^{a})} \\right\\vert_{x=0}^{\\infty}) - (\\left. e^{-a} \\tan^{-1}{(x e^{-a})} \\right\\vert_{x=0}^{\\infty}))",
                                 "res": "1 / (-(exp(-a) ^ 2) + exp(a) ^ 2) * (([exp(a) * atan(x * exp(a))]_x=0,oo) - ([exp(-a) * atan(x * exp(-a))]_x=0,oo))",
                                 "rule": {
@@ -112,6 +132,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{-e^{-2 a} + e^{2 a}} (-\\frac{\\pi e^{-a}}{2} + \\frac{\\pi e^{a}}{2})",
                                 "res": "1 / (-exp(-(2 * a)) + exp(2 * a)) * (-(pi * exp(-a) / 2) + pi * exp(a) / 2)",
                                 "rule": {
@@ -121,6 +143,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{4 (\\frac{e^{a} + e^{-a}}{2})}",
                                 "res": "pi / (4 * ((exp(a) + exp(-a)) / 2))",
                                 "rule": {
@@ -132,6 +156,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{4 \\cosh{a}}",
                                 "res": "pi / (4 * cosh(a))",
                                 "rule": {
@@ -146,6 +172,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\pi}{4 \\cosh{a}}",
                         "start": "pi / (4 * cosh(a))",
                         "steps": [],

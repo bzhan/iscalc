@@ -152,12 +152,16 @@
                     "proof": {
                         "calcs": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "\\mathbf{1}_{n \\times n}",
                                 "start": "unit_matrix(n)",
                                 "steps": [],
                                 "type": "Calculation"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "\\mathbf{1}_{n \\times n}",
                                 "start": "unit_matrix(n)",
                                 "steps": [],
@@ -296,10 +300,14 @@
                     "proof": {
                         "calcs": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "(P ^ {-1} A P) ^ {n + 1}",
                                 "start": "(inv(P) * A * P) ^ (n + 1)",
                                 "steps": [
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "(P ^ {-1} A P) ^ {n} (P ^ {-1} A P)",
                                         "res": "(inv(P) * A * P) ^ n * (inv(P) * A * P)",
                                         "rule": {
@@ -312,6 +320,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "P ^ {-1} A ^ {n} P (P ^ {-1} A P)",
                                         "res": "inv(P) * A ^ n * P * (inv(P) * A * P)",
                                         "rule": {
@@ -322,6 +332,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "P ^ {-1} A ^ {n} A P",
                                         "res": "inv(P) * A ^ n * A * P",
                                         "rule": {
@@ -331,6 +343,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "P ^ {-1} (A ^ {n} A) P",
                                         "res": "inv(P) * (A ^ n * A) * P",
                                         "rule": {
@@ -343,6 +357,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "P ^ {-1} A ^ {n + 1} P",
                                         "res": "inv(P) * A ^ (n + 1) * P",
                                         "rule": {
@@ -358,6 +374,8 @@
                                 "type": "Calculation"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "P ^ {-1} A ^ {n + 1} P",
                                 "start": "inv(P) * A ^ (n + 1) * P",
                                 "steps": [],
@@ -374,6 +392,7 @@
                 },
                 "induct_var": "n",
                 "latex_goal": "(P ^ {-1} A P) ^ {n} = P ^ {-1} A ^ {n} P",
+                "start": "0",
                 "type": "InductionProof"
             },
             "type": "Goal",

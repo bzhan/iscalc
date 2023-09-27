@@ -67,7 +67,7 @@ class BinomTest(unittest.TestCase):
         s2 = parser.parse_expr("(factorial(n) * m) / (((m-1+1) * factorial(m - 1)) * factorial(-m + n + 1))")
         calc.perform_rule(rules.Equation(s1, s2))
         s1 = parser.parse_expr("factorial(n) / (factorial(m) * factorial(-m + n))")
-        s2 = parser.parse_expr("factorial(n)*(-m+n +1) / (factorial(m) * ((-m+n+1)*factorial(-m + n))zei)")
+        s2 = parser.parse_expr("factorial(n)*(-m+n +1) / (factorial(m) * ((-m+n+1)*factorial(-m + n)))")
         calc.perform_rule(rules.Equation(s1, s2))
         s1 = parser.parse_expr("(-m+n+1)*factorial(-m + n)")
         s2 = parser.parse_expr("factorial(-m+n+1)")

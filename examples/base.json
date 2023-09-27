@@ -1259,6 +1259,15 @@
         {
             "expr": "SUM(n, 0, oo, (4 * n + 1) * binom(2*n, n) / (-64) ^ n) = 2 / pi",
             "type": "axiom"
+        },
+        {
+            "level": 1,
+            "name": "Stirling's formula",
+            "type": "header"
+        },
+        {
+            "expr": "(LIM {n->oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) = 1",
+            "type": "axiom"
         }
     ],
     "name": "Base theory"

@@ -247,6 +247,7 @@
                                             "eq": "(D b. I(m,b)) = -(m + 1) * I(m + 1,b)",
                                             "latex_str": "apply equation \\(\\frac{d}{db} I(m,b) = (-(m + 1)) I(m + 1,b)\\)",
                                             "name": "ApplyEquation",
+                                            "source": "I(m + 1,b)",
                                             "str": "apply equation: (D b. I(m,b)) = -(m + 1) * I(m + 1,b)"
                                         },
                                         "type": "CalculationStep"

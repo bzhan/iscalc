@@ -193,10 +193,10 @@
                                 "res": "-t * I(t) / I(t) + t",
                                 "rule": {
                                     "eq": "(D t. I(t)) = -t * I(t)",
-                                    "latex_str": "apply equation \\(\\frac{d}{dt} I{(t)} = (-t) I{(t)}\\) at 0.0",
-                                    "loc": "0.0",
+                                    "latex_str": "apply equation \\(\\frac{d}{dt} I{(t)} = (-t) I{(t)}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: (D t. I(t)) = -t * I(t) at 0.0"
+                                    "source": "D t. I(t)",
+                                    "str": "apply equation: (D t. I(t)) = -t * I(t)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -319,10 +319,10 @@
                             "res": "log(sqrt(pi / 2)) = SKOLEM_CONST(C)",
                             "rule": {
                                 "eq": "I(0) = sqrt(pi / 2)",
-                                "latex_str": "apply equation \\(I{(0)} = \\sqrt{\\frac{\\pi}{2}}\\) at 0.0",
-                                "loc": "0.0",
+                                "latex_str": "apply equation \\(I{(0)} = \\sqrt{\\frac{\\pi}{2}}\\)",
                                 "name": "ApplyEquation",
-                                "str": "apply equation: I(0) = sqrt(pi / 2) at 0.0"
+                                "source": "I(0)",
+                                "str": "apply equation: I(0) = sqrt(pi / 2)"
                             },
                             "type": "CalculationStep"
                         }
@@ -356,6 +356,7 @@
                                     "eq": "1/2 * t ^ 2 + log(I(t)) = SKOLEM_CONST(C)",
                                     "latex_str": "apply equation \\(\\frac{1}{2} t ^ {2} + \\log{(I{(t)})} = C\\)",
                                     "name": "ApplyEquation",
+                                    "source": "log(I(t))",
                                     "str": "apply equation: 1/2 * t ^ 2 + log(I(t)) = SKOLEM_CONST(C)"
                                 },
                                 "type": "CalculationStep"
@@ -365,10 +366,10 @@
                                 "res": "log(sqrt(pi / 2)) - 1/2 * t ^ 2",
                                 "rule": {
                                     "eq": "log(sqrt(pi / 2)) = SKOLEM_CONST(C)",
-                                    "latex_str": "apply equation \\(\\log{(\\sqrt{\\frac{\\pi}{2}})} = C\\) at 0",
-                                    "loc": "0",
+                                    "latex_str": "apply equation \\(\\log{(\\sqrt{\\frac{\\pi}{2}})} = C\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: log(sqrt(pi / 2)) = SKOLEM_CONST(C) at 0"
+                                    "source": "SKOLEM_CONST(C)",
+                                    "str": "apply equation: log(sqrt(pi / 2)) = SKOLEM_CONST(C)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -613,10 +614,10 @@
                                 "res": "2 * cos(s) * (sqrt(pi / 2) * exp(-(t ^ 2) / 2))",
                                 "rule": {
                                     "eq": "I(t) = sqrt(pi / 2) * exp(-(t ^ 2) / 2)",
-                                    "latex_str": "apply equation \\(I{(t)} = \\sqrt{\\frac{\\pi}{2}} e^{-t ^ {2}/2}\\) on subterms",
-                                    "loc": "subterms",
+                                    "latex_str": "apply equation \\(I{(t)} = \\sqrt{\\frac{\\pi}{2}} e^{-t ^ {2}/2}\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: I(t) = sqrt(pi / 2) * exp(-(t ^ 2) / 2) on subterms"
+                                    "source": "I(t)",
+                                    "str": "apply equation: I(t) = sqrt(pi / 2) * exp(-(t ^ 2) / 2)"
                                 },
                                 "type": "CalculationStep"
                             },

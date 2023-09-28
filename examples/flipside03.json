@@ -245,6 +245,7 @@
                                     "eq": "I(a) = log(a + 1) + SKOLEM_CONST(C)",
                                     "latex_str": "apply equation \\(I{(a)} = \\log{(a + 1)} + C\\)",
                                     "name": "ApplyEquation",
+                                    "source": "I(a)",
                                     "str": "apply equation: I(a) = log(a + 1) + SKOLEM_CONST(C)"
                                 },
                                 "type": "CalculationStep"
@@ -254,10 +255,10 @@
                                 "res": "log(a + 1) + 0",
                                 "rule": {
                                     "eq": "SKOLEM_CONST(C) = 0",
-                                    "latex_str": "apply equation \\(C = 0\\) at 1",
-                                    "loc": "1",
+                                    "latex_str": "apply equation \\(C = 0\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: SKOLEM_CONST(C) = 0 at 1"
+                                    "source": "SKOLEM_CONST(C)",
+                                    "str": "apply equation: SKOLEM_CONST(C) = 0"
                                 },
                                 "type": "CalculationStep"
                             },

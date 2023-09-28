@@ -75,7 +75,7 @@ def is_vector_type(type: Type) -> bool:
     return type.name == "tensor" and len(type.args) == 2
 
 def is_matrix_type(type: Type) -> bool:
-    return type.name == "tensor" and len(type.args) == 3
+    return isinstance(type, Type) and type.name == "tensor" and len(type.args) == 3
 
 def num_row(type: Type) -> "Expr":
     if not is_matrix_type(type):
@@ -617,14 +617,19 @@ class Expr:
     def is_evaluable(self):
         return self.is_constant() or is_inf(self)
 
-    def get_vars(self, with_bd = False) -> Set[str]:
+    def get_vars(self, with_bd = False, with_type = False) -> Set[str]:
         """Obtain the set of variables in self."""
         res = set()
 
         def rec(t, bd_vars):
-            nonlocal with_bd
+            nonlocal with_bd, with_type
             if is_var(t):
-                if with_bd:
+                if with_type and with_bd:
+                    res.add((t.name, str(t.type)))
+                elif with_type and not with_bd:
+                    if t.name not in bd_vars:
+                        res.add((t.name, str(t.type)))
+                elif not with_type and with_bd:
                     res.add(t.name)
                 else:
                     if t.name not in bd_vars:
@@ -635,7 +640,6 @@ class Expr:
                 for arg in t.args:
                     rec(arg, bd_vars)
             elif is_deriv(t):
-                res.add(t.var)
                 rec(t.body, bd_vars + [t.var])
             elif is_limit(t):
                 rec(t.lim, bd_vars + [t.var])
@@ -1417,7 +1421,7 @@ class Matrix(Expr):
     Data is a list/matrix/etc of expressions.
 
     """
-    def __init__(self, data, type:Type=None):
+    def __init__(self, data: Union[List[Expr], List[List[Expr]]], type:Type=None):
         self.ty = MATRIX
 
         # Check validity of input and derive type

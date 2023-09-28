@@ -468,10 +468,10 @@
                                         "res": "(w * T(w) - norm(w) ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w))",
                                         "rule": {
                                             "eq": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
-                                            "latex_str": "apply equation \\(\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2} \\mathbf{1}_{3 \\times 3}\\) at 0",
-                                            "loc": "0",
+                                            "latex_str": "apply equation \\(\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2} \\mathbf{1}_{3 \\times 3}\\)",
                                             "name": "ApplyEquation",
-                                            "str": "apply equation: hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3) at 0"
+                                            "source": "hat(w) ^ 2",
+                                            "str": "apply equation: hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -480,10 +480,10 @@
                                         "res": "(w * T(w) - 1 ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w))",
                                         "rule": {
                                             "eq": "norm(w) = 1",
-                                            "latex_str": "apply equation \\(\\|w\\| = 1\\) at 0.1.0.0",
-                                            "loc": "0.1.0.0",
+                                            "latex_str": "apply equation \\(\\|w\\| = 1\\)",
                                             "name": "ApplyEquation",
-                                            "str": "apply equation: norm(w) = 1 at 0.1.0.0"
+                                            "source": "norm(w)",
+                                            "str": "apply equation: norm(w) = 1"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -513,10 +513,10 @@
                                         "res": "(-1) ^ n * zero_matrix(3,3) - (-1) ^ n * unit_matrix(3) * hat(w)",
                                         "rule": {
                                             "eq": "w * T(w) * hat(w) = zero_matrix(3,3)",
-                                            "latex_str": "apply equation \\(w w^{\\text{T}} \\hat{w} = \\mathbf{0}_{3 \\times 3}\\) at 0.1",
-                                            "loc": "0.1",
+                                            "latex_str": "apply equation \\(w w^{\\text{T}} \\hat{w} = \\mathbf{0}_{3 \\times 3}\\)",
                                             "name": "ApplyEquation",
-                                            "str": "apply equation: w * T(w) * hat(w) = zero_matrix(3,3) at 0.1"
+                                            "source": "w * T(w) * hat(w)",
+                                            "str": "apply equation: w * T(w) * hat(w) = zero_matrix(3,3)"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -888,10 +888,10 @@
                                         "res": "(w * T(w) - norm(w) ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w) ^ 2)",
                                         "rule": {
                                             "eq": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
-                                            "latex_str": "apply equation \\(\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2} \\mathbf{1}_{3 \\times 3}\\) at 0",
-                                            "loc": "0",
+                                            "latex_str": "apply equation \\(\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2} \\mathbf{1}_{3 \\times 3}\\)",
                                             "name": "ApplyEquation",
-                                            "str": "apply equation: hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3) at 0"
+                                            "source": "hat(w) ^ 2",
+                                            "str": "apply equation: hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -900,10 +900,10 @@
                                         "res": "(w * T(w) - 1 ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w) ^ 2)",
                                         "rule": {
                                             "eq": "norm(w) = 1",
-                                            "latex_str": "apply equation \\(\\|w\\| = 1\\) at 0.1.0.0",
-                                            "loc": "0.1.0.0",
+                                            "latex_str": "apply equation \\(\\|w\\| = 1\\)",
                                             "name": "ApplyEquation",
-                                            "str": "apply equation: norm(w) = 1 at 0.1.0.0"
+                                            "source": "norm(w)",
+                                            "str": "apply equation: norm(w) = 1"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -933,10 +933,10 @@
                                         "res": "(-1) ^ n * zero_matrix(3,3) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w) * hat(w)",
                                         "rule": {
                                             "eq": "w * T(w) * hat(w) = zero_matrix(3,3)",
-                                            "latex_str": "apply equation \\(w w^{\\text{T}} \\hat{w} = \\mathbf{0}_{3 \\times 3}\\) at 0.0.1",
-                                            "loc": "0.0.1",
+                                            "latex_str": "apply equation \\(w w^{\\text{T}} \\hat{w} = \\mathbf{0}_{3 \\times 3}\\)",
                                             "name": "ApplyEquation",
-                                            "str": "apply equation: w * T(w) * hat(w) = zero_matrix(3,3) at 0.0.1"
+                                            "source": "w * T(w) * hat(w)",
+                                            "str": "apply equation: w * T(w) * hat(w) = zero_matrix(3,3)"
                                         },
                                         "type": "CalculationStep"
                                     },

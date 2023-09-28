@@ -358,10 +358,10 @@
                             "res": "0 = SKOLEM_FUNC(C(b))",
                             "rule": {
                                 "eq": "I(0,b) = 0",
-                                "latex_str": "apply equation \\(I(0,b) = 0\\) at 0",
-                                "loc": "0",
+                                "latex_str": "apply equation \\(I(0,b) = 0\\)",
                                 "name": "ApplyEquation",
-                                "str": "apply equation: I(0,b) = 0 at 0"
+                                "source": "I(0,b)",
+                                "str": "apply equation: I(0,b) = 0"
                             },
                             "type": "CalculationStep"
                         },
@@ -420,10 +420,10 @@
                             "res": "I(a,b) = pi / b * log(1 + a * b) + 0",
                             "rule": {
                                 "eq": "SKOLEM_FUNC(C(b)) = 0",
-                                "latex_str": "apply equation \\(C(b) = 0\\) at 1.1",
-                                "loc": "1.1",
+                                "latex_str": "apply equation \\(C(b) = 0\\)",
                                 "name": "ApplyEquation",
-                                "str": "apply equation: SKOLEM_FUNC(C(b)) = 0 at 1.1"
+                                "source": "SKOLEM_FUNC(C(b))",
+                                "str": "apply equation: SKOLEM_FUNC(C(b)) = 0"
                             },
                             "type": "CalculationStep"
                         },

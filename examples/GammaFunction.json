@@ -182,10 +182,10 @@
                                 "res": "(n - 1) * (INT x:[0,oo]. x ^ (n - 2) * exp(-x))",
                                 "rule": {
                                     "eq": "(LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0",
-                                    "latex_str": "apply equation \\(\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,) = 0\\) at 1",
-                                    "loc": "1",
+                                    "latex_str": "apply equation \\(\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,) = 0\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: (LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0 at 1"
+                                    "source": "INT x:[0,oo]. x ^ (n - 2) * exp(-x)",
+                                    "str": "apply equation: (LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -318,6 +318,7 @@
                                             "eq": "Gamma(n) = (n - 1) * Gamma(n - 1)",
                                             "latex_str": "apply equation \\(\\Gamma{(n)} = (n - 1) \\Gamma{(n - 1)}\\)",
                                             "name": "ApplyEquation",
+                                            "source": "Gamma(n + 1)",
                                             "str": "apply equation: Gamma(n) = (n - 1) * Gamma(n - 1)"
                                         },
                                         "type": "CalculationStep"
@@ -442,6 +443,7 @@
                         "eq": "Gamma(n) = (n - 1) * Gamma(n - 1)",
                         "latex_str": "apply equation \\(\\Gamma{(n)} = (n - 1) \\Gamma{(n - 1)}\\)",
                         "name": "ApplyEquation",
+                        "source": "(4/3 - 1) * Gamma(4/3 - 1)",
                         "str": "apply equation: Gamma(n) = (n - 1) * Gamma(n - 1)"
                     },
                     "type": "CalculationStep"

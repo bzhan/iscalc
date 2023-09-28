@@ -91,10 +91,10 @@
                                 "res": "1 / (b + 1) * B(a + 1,b + 2)",
                                 "rule": {
                                     "eq": "B(a + 1,b + 2) = (INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1))",
-                                    "latex_str": "apply equation \\(B(a + 1,b + 2) = \\int_{0}^{1} x ^ {a} (-x + 1) ^ {b + 1} \\,dx\\) at 1",
-                                    "loc": "1",
+                                    "latex_str": "apply equation \\(B(a + 1,b + 2) = \\int_{0}^{1} x ^ {a} (-x + 1) ^ {b + 1} \\,dx\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: B(a + 1,b + 2) = (INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1)) at 1"
+                                    "source": "INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1)",
+                                    "str": "apply equation: B(a + 1,b + 2) = (INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1))"
                                 },
                                 "type": "CalculationStep"
                             },

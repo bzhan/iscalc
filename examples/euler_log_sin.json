@@ -330,6 +330,7 @@
                                     "eq": "J(a) = I(a)",
                                     "latex_str": "apply equation \\(J{(a)} = I{(a)}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "I(a)",
                                     "str": "apply equation: J(a) = I(a)"
                                 },
                                 "type": "CalculationStep"
@@ -341,6 +342,7 @@
                                     "eq": "J(a) = pi / 2 * log(2 / a) + 2 * I(a)",
                                     "latex_str": "apply equation \\(J{(a)} = \\frac{\\pi}{2} \\log{(\\frac{2}{a})} + 2 I{(a)}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "J(a)",
                                     "str": "apply equation: J(a) = pi / 2 * log(2 / a) + 2 * I(a)"
                                 },
                                 "type": "CalculationStep"

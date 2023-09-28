@@ -597,10 +597,10 @@
                                 "res": "(INT x:[0,oo]. 1 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)) + (INT x:[0,oo]. x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1))",
                                 "rule": {
                                     "eq": "I(a) = (INT x:[0,oo]. x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1))",
-                                    "latex_str": "apply equation \\(I{(a)} = \\int_{0}^{\\infty} \\frac{x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1} \\,dx\\) at 1",
-                                    "loc": "1",
+                                    "latex_str": "apply equation \\(I{(a)} = \\int_{0}^{\\infty} \\frac{x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1} \\,dx\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: I(a) = (INT x:[0,oo]. x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1)) at 1"
+                                    "source": "I(a)",
+                                    "str": "apply equation: I(a) = (INT x:[0,oo]. x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -832,10 +832,10 @@
                             "res": "I(a) = 1/2 * ((INT x:[-oo,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)) / 2)",
                             "rule": {
                                 "eq": "(INT x:[-oo,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)) = 2 * (INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1))",
-                                "latex_str": "apply equation \\(\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx = 2 (\\int_{0}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx)\\) at 1.1",
-                                "loc": "1.1",
+                                "latex_str": "apply equation \\(\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx = 2 (\\int_{0}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx)\\)",
                                 "name": "ApplyEquation",
-                                "str": "apply equation: (INT x:[-oo,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)) = 2 * (INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)) at 1.1"
+                                "source": "INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)",
+                                "str": "apply equation: (INT x:[-oo,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)) = 2 * (INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1))"
                             },
                             "type": "CalculationStep"
                         },
@@ -889,10 +889,10 @@
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + 1/4 * (INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)))",
                             "rule": {
                                 "eq": "(INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) = 0",
-                                "latex_str": "apply equation \\(\\int_{-\\infty}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx = 0\\) at 1.1.1",
-                                "loc": "1.1.1",
+                                "latex_str": "apply equation \\(\\int_{-\\infty}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx = 0\\)",
                                 "name": "ApplyEquation",
-                                "str": "apply equation: (INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) = 0 at 1.1.1"
+                                "source": "0",
+                                "str": "apply equation: (INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) = 0"
                             },
                             "type": "CalculationStep"
                         },
@@ -1008,6 +1008,7 @@
                                     "eq": "I(a) = 1/4 * (INT x:[-oo,oo]. 1 / (cos(a) ^ 2 + x ^ 2))",
                                     "latex_str": "apply equation \\(I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{1}{\\cos^{2}(a) + x ^ {2}} \\,dx)\\)",
                                     "name": "ApplyEquation",
+                                    "source": "I(a)",
                                     "str": "apply equation: I(a) = 1/4 * (INT x:[-oo,oo]. 1 / (cos(a) ^ 2 + x ^ 2))"
                                 },
                                 "type": "CalculationStep"
@@ -1070,6 +1071,7 @@
                                     "eq": "I(a) = 1/4 * (INT x:[-oo,oo]. 1 / (cos(a) ^ 2 + x ^ 2))",
                                     "latex_str": "apply equation \\(I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{1}{\\cos^{2}(a) + x ^ {2}} \\,dx)\\)",
                                     "name": "ApplyEquation",
+                                    "source": "I(a)",
                                     "str": "apply equation: I(a) = 1/4 * (INT x:[-oo,oo]. 1 / (cos(a) ^ 2 + x ^ 2))"
                                 },
                                 "type": "CalculationStep"
@@ -1148,6 +1150,7 @@
                                     "eq": "I(a) = pi / (4 * cos(a))",
                                     "latex_str": "apply equation \\(I{(a)} = \\frac{\\pi}{4 \\cos{a}}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "I(pi / 4)",
                                     "str": "apply equation: I(a) = pi / (4 * cos(a))"
                                 },
                                 "type": "CalculationStep"
@@ -1280,6 +1283,7 @@
                                     "eq": "I(a) = pi / (4 * cos(a))",
                                     "latex_str": "apply equation \\(I{(a)} = \\frac{\\pi}{4 \\cos{a}}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "I(pi / 6)",
                                     "str": "apply equation: I(a) = pi / (4 * cos(a))"
                                 },
                                 "type": "CalculationStep"
@@ -1378,6 +1382,7 @@
                                     "eq": "I(a) = pi / (4 * cos(a))",
                                     "latex_str": "apply equation \\(I{(a)} = \\frac{\\pi}{4 \\cos{a}}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "I(pi / 3)",
                                     "str": "apply equation: I(a) = pi / (4 * cos(a))"
                                 },
                                 "type": "CalculationStep"
@@ -1448,6 +1453,7 @@
                                     "eq": "I(a) = pi / (4 * cos(a))",
                                     "latex_str": "apply equation \\(I{(a)} = \\frac{\\pi}{4 \\cos{a}}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "I(0)",
                                     "str": "apply equation: I(a) = pi / (4 * cos(a))"
                                 },
                                 "type": "CalculationStep"

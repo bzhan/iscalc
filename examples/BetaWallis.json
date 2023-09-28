@@ -396,6 +396,7 @@
                                     "eq": "(INT x:[0,1]. (x - x ^ 2) ^ n) = factorial(n) ^ 2 / factorial(2 * n + 1)",
                                     "latex_str": "apply equation \\(\\int_{0}^{1} (x - x ^ {2}) ^ {n} \\,dx = \\frac{(n!)^{2}}{(2 n + 1)!}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "INT x:[0,1]. (x - x ^ 2) ^ (1/2)",
                                     "str": "apply equation: (INT x:[0,1]. (x - x ^ 2) ^ n) = factorial(n) ^ 2 / factorial(2 * n + 1)"
                                 },
                                 "type": "CalculationStep"
@@ -455,10 +456,10 @@
                             "res": "factorial(1/2) ^ 2 / 2 = pi / 8",
                             "rule": {
                                 "eq": "(INT x:[0,1]. (x - x ^ 2) ^ (1/2)) = factorial(1/2) ^ 2 / 2",
-                                "latex_str": "apply equation \\(\\int_{0}^{1} (x - x ^ {2}) ^ {1/2} \\,dx = \\frac{((\\frac{1}{2})!)^{2}}{2}\\) at 0",
-                                "loc": "0",
+                                "latex_str": "apply equation \\(\\int_{0}^{1} (x - x ^ {2}) ^ {1/2} \\,dx = \\frac{((\\frac{1}{2})!)^{2}}{2}\\)",
                                 "name": "ApplyEquation",
-                                "str": "apply equation: (INT x:[0,1]. (x - x ^ 2) ^ (1/2)) = factorial(1/2) ^ 2 / 2 at 0"
+                                "source": "INT x:[0,1]. (x - x ^ 2) ^ (1/2)",
+                                "str": "apply equation: (INT x:[0,1]. (x - x ^ 2) ^ (1/2)) = factorial(1/2) ^ 2 / 2"
                             },
                             "type": "CalculationStep"
                         },
@@ -543,6 +544,7 @@
                                     "eq": "factorial(1/2) = sqrt(pi) / 2",
                                     "latex_str": "apply equation \\((\\frac{1}{2})! = \\frac{\\sqrt{\\pi}}{2}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "factorial(1/2)",
                                     "str": "apply equation: factorial(1/2) = sqrt(pi) / 2"
                                 },
                                 "type": "CalculationStep"
@@ -614,6 +616,7 @@
                                     "eq": "(INT x:[0,oo]. exp(-x) * sqrt(x)) = sqrt(pi) / 2",
                                     "latex_str": "apply equation \\(\\int_{0}^{\\infty} e^{-x} \\sqrt{x} \\,dx = \\frac{\\sqrt{\\pi}}{2}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "INT y:[0,oo]. exp(-y) * sqrt(y)",
                                     "str": "apply equation: (INT x:[0,oo]. exp(-x) * sqrt(x)) = sqrt(pi) / 2"
                                 },
                                 "type": "CalculationStep"
@@ -787,6 +790,7 @@
                                     "eq": "(INT x:[0,oo]. exp(-x) / sqrt(x)) = sqrt(pi)",
                                     "latex_str": "apply equation \\(\\int_{0}^{\\infty} \\frac{e^{-x}}{\\sqrt{x}} \\,dx = \\sqrt{\\pi}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "INT x:[0,oo]. exp(-x) / sqrt(x)",
                                     "str": "apply equation: (INT x:[0,oo]. exp(-x) / sqrt(x)) = sqrt(pi)"
                                 },
                                 "type": "CalculationStep"
@@ -1050,10 +1054,10 @@
                                 "res": "1/2 * (2 * (INT x:[0,pi / 2]. cos(x) ^ (2 * (1/4) - 1) * sin(x) ^ (2 * (1/4) - 1)))",
                                 "rule": {
                                     "eq": "B(m,n) = 2 * (INT x:[0,pi / 2]. cos(x) ^ (2 * m - 1) * sin(x) ^ (2 * n - 1))",
-                                    "latex_str": "apply equation \\(B(m,n) = 2 (\\int_{0}^{\\pi/2} \\cos^{2 m - 1}(x) \\sin^{2 n - 1}(x) \\,dx)\\) at 1",
-                                    "loc": "1",
+                                    "latex_str": "apply equation \\(B(m,n) = 2 (\\int_{0}^{\\pi/2} \\cos^{2 m - 1}(x) \\sin^{2 n - 1}(x) \\,dx)\\)",
                                     "name": "ApplyEquation",
-                                    "str": "apply equation: B(m,n) = 2 * (INT x:[0,pi / 2]. cos(x) ^ (2 * m - 1) * sin(x) ^ (2 * n - 1)) at 1"
+                                    "source": "B(1/4,1/4)",
+                                    "str": "apply equation: B(m,n) = 2 * (INT x:[0,pi / 2]. cos(x) ^ (2 * m - 1) * sin(x) ^ (2 * n - 1))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1119,10 +1123,10 @@
                             "res": "(INT x:[0,pi / 2]. 1 / sqrt(sin(x) * cos(x))) = 1/2 * (Gamma(1/4) * Gamma(1/4) / sqrt(pi))",
                             "rule": {
                                 "eq": "Gamma(1/2) = sqrt(pi)",
-                                "latex_str": "apply equation \\(\\Gamma{(\\frac{1}{2})} = \\sqrt{\\pi}\\) at 1.1.1",
-                                "loc": "1.1.1",
+                                "latex_str": "apply equation \\(\\Gamma{(\\frac{1}{2})} = \\sqrt{\\pi}\\)",
                                 "name": "ApplyEquation",
-                                "str": "apply equation: Gamma(1/2) = sqrt(pi) at 1.1.1"
+                                "source": "Gamma(1/2)",
+                                "str": "apply equation: Gamma(1/2) = sqrt(pi)"
                             },
                             "type": "CalculationStep"
                         }
@@ -1422,6 +1426,7 @@
                                     "eq": "B(m,n) = (INT x:[0,oo]. x ^ (m - 1) / (x + 1) ^ (m + n))",
                                     "latex_str": "apply equation \\(B(m,n) = \\int_{0}^{\\infty} \\frac{x ^ {m - 1}}{(x + 1) ^ {m + n}} \\,dx\\)",
                                     "name": "ApplyEquation",
+                                    "source": "B(m,1 - m)",
                                     "str": "apply equation: B(m,n) = (INT x:[0,oo]. x ^ (m - 1) / (x + 1) ^ (m + n))"
                                 },
                                 "type": "CalculationStep"
@@ -1556,10 +1561,10 @@
                             "res": "(INT x:[0,oo]. x ^ (m - 1) / (x + 1)) = Gamma(m) * Gamma(1 - m)",
                             "rule": {
                                 "eq": "B(m,1 - m) = Gamma(m) * Gamma(1 - m)",
-                                "latex_str": "apply equation \\(B(m,1 - m) = \\Gamma{(m)} \\Gamma{(1 - m)}\\) at 1",
-                                "loc": "1",
+                                "latex_str": "apply equation \\(B(m,1 - m) = \\Gamma{(m)} \\Gamma{(1 - m)}\\)",
                                 "name": "ApplyEquation",
-                                "str": "apply equation: B(m,1 - m) = Gamma(m) * Gamma(1 - m) at 1"
+                                "source": "B(m,1 - m)",
+                                "str": "apply equation: B(m,1 - m) = Gamma(m) * Gamma(1 - m)"
                             },
                             "type": "CalculationStep"
                         },
@@ -1922,10 +1927,10 @@
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) / 2 * (sqrt(pi) * Gamma(z + 1) / Gamma(z + 3/2))",
                             "rule": {
                                 "eq": "Gamma(1/2) = sqrt(pi)",
-                                "latex_str": "apply equation \\(\\Gamma{(\\frac{1}{2})} = \\sqrt{\\pi}\\) at 1.1.0.0",
-                                "loc": "1.1.0.0",
+                                "latex_str": "apply equation \\(\\Gamma{(\\frac{1}{2})} = \\sqrt{\\pi}\\)",
                                 "name": "ApplyEquation",
-                                "str": "apply equation: Gamma(1/2) = sqrt(pi) at 1.1.0.0"
+                                "source": "Gamma(1/2)",
+                                "str": "apply equation: Gamma(1/2) = sqrt(pi)"
                             },
                             "type": "CalculationStep"
                         },

@@ -54,24 +54,14 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "4 m (-(\\int_{0}^{\\infty} (x ^ {4} + 1) ^ {-m - 1} \\,dx) + (\\int_{0}^{\\infty} (x ^ {4} + 1) ^ {-m} \\,dx))",
-                                "res": "4 * m * (-(INT x:[0,oo]. (x ^ 4 + 1) ^ (-m - 1)) + (INT x:[0,oo]. (x ^ 4 + 1) ^ -m))",
-                                "rule": {
-                                    "loc": "1",
-                                    "name": "FullSimplify",
-                                    "str": "full simplify at 1"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
                                 "latex_res": "4 m ((\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx))",
                                 "res": "4 * m * ((INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m) - (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(-(\\int_{0}^{\\infty} (x ^ {4} + 1) ^ {-m - 1} \\,dx) + (\\int_{0}^{\\infty} (x ^ {4} + 1) ^ {-m} \\,dx)\\) to \\((\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx)\\)",
+                                    "latex_str": "rewriting \\(\\int_{0}^{\\infty} \\frac{x ^ {4} + 1}{(x ^ {4} + 1) ^ {m + 1}} - \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx\\) to \\((\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx)\\)",
                                     "name": "Equation",
                                     "new_expr": "(INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m) - (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1))",
-                                    "old_expr": "-(INT x:[0,oo]. (x ^ 4 + 1) ^ (-m - 1)) + (INT x:[0,oo]. (x ^ 4 + 1) ^ -m)",
-                                    "str": "rewriting -(INT x:[0,oo]. (x ^ 4 + 1) ^ (-m - 1)) + (INT x:[0,oo]. (x ^ 4 + 1) ^ -m) to (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m) - (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1))"
+                                    "old_expr": "INT x:[0,oo]. (x ^ 4 + 1) / (x ^ 4 + 1) ^ (m + 1) - 1 / (x ^ 4 + 1) ^ (m + 1)",
+                                    "str": "rewriting INT x:[0,oo]. (x ^ 4 + 1) / (x ^ 4 + 1) ^ (m + 1) - 1 / (x ^ 4 + 1) ^ (m + 1) to (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m) - (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1))"
                                 },
                                 "type": "CalculationStep"
                             }

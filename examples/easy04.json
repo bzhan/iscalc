@@ -208,6 +208,7 @@
                                     "eq": "(INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2)) = log(2) / a ^ 2",
                                     "latex_str": "apply equation \\(\\int_{1}^{\\infty} \\frac{\\log{x}}{a ^ {2} (x + 1) ^ {2}} \\,dx = \\frac{\\log{(2)}}{a ^ {2}}\\)",
                                     "name": "ApplyEquation",
+                                    "source": "INT x:[1,oo]. log(x) / (1 ^ 2 * (x + 1) ^ 2)",
                                     "str": "apply equation: (INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2)) = log(2) / a ^ 2"
                                 },
                                 "type": "CalculationStep"

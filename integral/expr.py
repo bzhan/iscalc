@@ -624,13 +624,9 @@ class Expr:
         def rec(t, bd_vars):
             nonlocal with_bd, with_type
             if is_var(t):
-                if with_type and with_bd:
-                    res.add((t.name, str(t.type)))
-                elif with_type and not with_bd:
+                if with_type:
                     if t.name not in bd_vars:
                         res.add((t.name, str(t.type)))
-                elif not with_type and with_bd:
-                    res.add(t.name)
                 else:
                     if t.name not in bd_vars:
                         res.add(t.name)
@@ -640,17 +636,42 @@ class Expr:
                 for arg in t.args:
                     rec(arg, bd_vars)
             elif is_deriv(t):
+                if with_bd:
+                    if with_type:
+                        res.add((t.var, RealType))
+                    else:
+                        res.add(t.var)
                 rec(t.body, bd_vars + [t.var])
             elif is_limit(t):
+                if with_bd:
+                    if with_type:
+                        res.add((t.var, RealType))
+                    else:
+                        res.add(t.var)
                 rec(t.lim, bd_vars + [t.var])
                 rec(t.body, bd_vars + [t.var])
             elif is_integral(t) or is_evalat(t):
+                if with_bd:
+                    if with_type:
+                        res.add((t.var, RealType))
+                    else:
+                        res.add(t.var)
                 rec(t.lower, bd_vars + [t.var])
                 rec(t.upper, bd_vars + [t.var])
                 rec(t.body, bd_vars + [t.var])
             elif is_indefinite_integral(t):
+                if with_bd:
+                    if with_type:
+                        res.add((t.var, RealType))
+                    else:
+                        res.add(t.var)
                 rec(t.body, bd_vars + [t.var])
             elif is_summation(t):
+                if with_bd:
+                    if with_type:
+                        res.add((t.index_var, IntType))
+                    else:
+                        res.add(t.index_var)
                 rec(t.lower, bd_vars + [t.index_var])
                 rec(t.upper, bd_vars + [t.index_var])
                 rec(t.body, bd_vars + [t.index_var])

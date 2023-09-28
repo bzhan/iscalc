@@ -17,10 +17,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{\\sin{(m x)}}{x (a ^ {2} + x ^ {2})} \\,dx",
                         "start": "INT x:[0,oo]. sin(m * x) / (x * (a ^ 2 + x ^ 2))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi (-e^{-a m} + 1)}{2 a ^ {2}}",
                                 "res": "pi * (-exp(-(a * m)) + 1) / (2 * a ^ 2)",
                                 "rule": {
@@ -33,10 +37,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\pi (1 - e^{(-a) m})}{2 a ^ {2}}",
                         "start": "pi * (1 - exp(-a * m)) / (2 * a ^ 2)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi (-e^{-a m} + 1)}{2 a ^ {2}}",
                                 "res": "pi * (-exp(-(a * m)) + 1) / (2 * a ^ 2)",
                                 "rule": {
@@ -71,24 +79,19 @@
             "goal": "(INT x:[0,oo]. sin(m * x) / (x * (a ^ 2 + x ^ 2) ^ 2)) = pi / (2 * a ^ 4) * (1 - (2 + m * a) / 2 * exp(-a * m))",
             "latex_goal": "\\int_{0}^{\\infty} \\frac{\\sin{(m x)}}{x (a ^ {2} + x ^ {2}) ^ {2}} \\,dx = \\frac{\\pi}{2 a ^ {4}} (1 - \\frac{2 + m a}{2} e^{(-a) m})",
             "proof": {
+                "begin_label": "1.",
                 "finished": true,
                 "goal": "(INT x:[0,oo]. sin(m * x) / (x * (a ^ 2 + x ^ 2) ^ 2)) = pi / (2 * a ^ 4) * (1 - (2 + m * a) / 2 * exp(-a * m))",
                 "latex_goal": "\\int_{0}^{\\infty} \\frac{\\sin{(m x)}}{x (a ^ {2} + x ^ {2}) ^ {2}} \\,dx = \\frac{\\pi}{2 a ^ {4}} (1 - \\frac{2 + m a}{2} e^{(-a) m})",
                 "start": {
-                    "conds": [
-                        {
-                            "cond": "a > 0",
-                            "latex_cond": "a > 0"
-                        },
-                        {
-                            "cond": "m > 0",
-                            "latex_cond": "m > 0"
-                        }
-                    ],
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_start": "\\int_{0}^{\\infty} \\frac{\\sin{(m x)}}{x (a ^ {2} + x ^ {2})} \\,dx = \\frac{\\pi (1 - e^{(-a) m})}{2 a ^ {2}}",
                     "start": "(INT x:[0,oo]. sin(m * x) / (x * (a ^ 2 + x ^ 2))) = pi * (1 - exp(-a * m)) / (2 * a ^ 2)",
                     "steps": [
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{d}{da} \\int_{0}^{\\infty} \\frac{\\sin{(m x)}}{x (a ^ {2} + x ^ {2})} \\,dx = \\frac{d}{da} \\frac{\\pi (1 - e^{(-a) m})}{2 a ^ {2}}",
                             "res": "(D a. INT x:[0,oo]. sin(m * x) / (x * (a ^ 2 + x ^ 2))) = (D a. pi * (1 - exp(-a * m)) / (2 * a ^ 2))",
                             "rule": {
@@ -99,6 +102,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{d}{da} \\frac{\\sin{(m x)}}{x (a ^ {2} + x ^ {2})} \\,dx = \\frac{d}{da} \\frac{\\pi (1 - e^{(-a) m})}{2 a ^ {2}}",
                             "res": "(INT x:[0,oo]. D a. sin(m * x) / (x * (a ^ 2 + x ^ 2))) = (D a. pi * (1 - exp(-a * m)) / (2 * a ^ 2))",
                             "rule": {
@@ -109,6 +114,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "-2 a (\\int_{0}^{\\infty} \\frac{\\sin{(m x)}}{x (a ^ {2} + x ^ {2}) ^ {2}} \\,dx) = \\frac{2 a ^ {2} m\\cdot \\pi e^{-a m} - 4 a\\cdot \\pi (-e^{-a m} + 1)}{4 a ^ {4}}",
                             "res": "-(2 * a * (INT x:[0,oo]. sin(m * x) / (x * (a ^ 2 + x ^ 2) ^ 2))) = (2 * a ^ 2 * m * pi * exp(-(a * m)) - 4 * a * pi * (-exp(-(a * m)) + 1)) / (4 * a ^ 4)",
                             "rule": {
@@ -118,6 +125,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{\\sin{(m x)}}{x (a ^ {2} + x ^ {2}) ^ {2}} \\,dx = -\\frac{2 a ^ {2} m\\cdot \\pi e^{-a m} - 4 a\\cdot \\pi (-e^{-a m} + 1)}{8 a ^ {5}}",
                             "res": "(INT x:[0,oo]. sin(m * x) / (x * (a ^ 2 + x ^ 2) ^ 2)) = -((2 * a ^ 2 * m * pi * exp(-(a * m)) - 4 * a * pi * (-exp(-(a * m)) + 1)) / (8 * a ^ 5))",
                             "rule": {
@@ -129,6 +138,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{\\sin{(m x)}}{x (a ^ {2} + x ^ {2}) ^ {2}} \\,dx = \\frac{\\pi}{2 a ^ {4}} (1 - \\frac{2 + m a}{2} e^{(-a) m})",
                             "res": "(INT x:[0,oo]. sin(m * x) / (x * (a ^ 2 + x ^ 2) ^ 2)) = pi / (2 * a ^ 4) * (1 - (2 + m * a) / 2 * exp(-a * m))",
                             "rule": {

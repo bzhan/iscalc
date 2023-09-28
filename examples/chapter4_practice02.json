@@ -7,10 +7,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\Gamma{(n + 1)}",
                         "start": "Gamma(n + 1)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} x ^ {n} e^{-x} \\,dx",
                                 "res": "INT x:[0,oo]. x ^ n * exp(-x)",
                                 "rule": {
@@ -24,6 +28,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} t ^ {n} e^{-t} \\,dt",
                         "start": "INT t:[0,oo]. t ^ n * exp(-t)",
                         "steps": [],
@@ -58,10 +64,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} x ^ {m} \\log^{n}(x) \\,dx",
                         "start": "INT x:[0,1]. x ^ m * log(x) ^ n",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{\\infty} (e^{-u}) ^ {m} \\log^{n}(e^{-u}) (-e^{-u}) \\,du)",
                                 "res": "-(INT u:[0,oo]. exp(-u) ^ m * log(exp(-u)) ^ n * -exp(-u))",
                                 "rule": {
@@ -74,6 +84,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} (-u) ^ {n} e^{-u} (e^{-u}) ^ {m} \\,du",
                                 "res": "INT u:[0,oo]. (-u) ^ n * exp(-u) * exp(-u) ^ m",
                                 "rule": {
@@ -83,6 +95,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} (-u) ^ {n} (e^{-u} (e^{-u}) ^ {m}) \\,du",
                                 "res": "INT u:[0,oo]. (-u) ^ n * (exp(-u) * exp(-u) ^ m)",
                                 "rule": {
@@ -95,6 +109,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} (-u) ^ {n} ((e^{-u}) ^ {1} (e^{-u}) ^ {m}) \\,du",
                                 "res": "INT u:[0,oo]. (-u) ^ n * (exp(-u) ^ 1 * exp(-u) ^ m)",
                                 "rule": {
@@ -107,6 +123,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} (-u) ^ {n} (e^{-u}) ^ {m + 1} \\,du",
                                 "res": "INT u:[0,oo]. (-u) ^ n * exp(-u) ^ (m + 1)",
                                 "rule": {
@@ -120,6 +138,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} (-1 u) ^ {n} (e^{-u}) ^ {m + 1} \\,du",
                                 "res": "INT u:[0,oo]. (-1 * u) ^ n * exp(-u) ^ (m + 1)",
                                 "rule": {
@@ -132,6 +152,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} (-1) ^ {n} u ^ {n} (e^{-u}) ^ {m + 1} \\,du",
                                 "res": "INT u:[0,oo]. (-1) ^ n * u ^ n * exp(-u) ^ (m + 1)",
                                 "rule": {
@@ -145,6 +167,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(-1) ^ {n} (\\int_{0}^{\\infty} u ^ {n} (e^{-u}) ^ {m + 1} \\,du)",
                                 "res": "(-1) ^ n * (INT u:[0,oo]. u ^ n * exp(-u) ^ (m + 1))",
                                 "rule": {
@@ -154,6 +178,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(-1) ^ {n} (\\int_{0}^{\\infty} \\frac{1}{m + 1} (\\frac{t}{m + 1}) ^ {n} (e^{-t/(m + 1)}) ^ {m + 1} \\,dt)",
                                 "res": "(-1) ^ n * (INT t:[0,oo]. 1 / (m + 1) * (t / (m + 1)) ^ n * exp(-(t / (m + 1))) ^ (m + 1))",
                                 "rule": {
@@ -166,6 +192,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(-1) ^ {n} (\\int_{0}^{\\infty} \\frac{1}{m + 1} (\\frac{t ^ {n}}{(m + 1) ^ {n}}) (e^{-t/(m + 1)}) ^ {m + 1} \\,dt)",
                                 "res": "(-1) ^ n * (INT t:[0,oo]. 1 / (m + 1) * (t ^ n / (m + 1) ^ n) * exp(-(t / (m + 1))) ^ (m + 1))",
                                 "rule": {
@@ -178,6 +206,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(-1) ^ {n} (\\int_{0}^{\\infty} \\frac{1}{m + 1} (\\frac{t ^ {n}}{(m + 1) ^ {n}}) e^{(-t/(m + 1)) (m + 1)} \\,dt)",
                                 "res": "(-1) ^ n * (INT t:[0,oo]. 1 / (m + 1) * (t ^ n / (m + 1) ^ n) * exp(-(t / (m + 1)) * (m + 1)))",
                                 "rule": {
@@ -190,6 +220,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(-1) ^ {n} (m + 1) ^ {-n - 1} (\\int_{0}^{\\infty} t ^ {n} e^{-t} \\,dt)",
                                 "res": "(-1) ^ n * (m + 1) ^ (-n - 1) * (INT t:[0,oo]. t ^ n * exp(-t))",
                                 "rule": {
@@ -199,6 +231,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(-1) ^ {n} (m + 1) ^ {-n - 1} \\Gamma{(n + 1)}",
                                 "res": "(-1) ^ n * (m + 1) ^ (-n - 1) * Gamma(n + 1)",
                                 "rule": {
@@ -211,6 +245,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(-1) ^ {n} (m + 1) ^ {-n - 1} n!",
                                 "res": "(-1) ^ n * (m + 1) ^ (-n - 1) * factorial(n)",
                                 "rule": {
@@ -223,6 +259,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(-1) ^ {n} n! (m + 1) ^ {-n - 1}",
                                 "res": "(-1) ^ n * factorial(n) * (m + 1) ^ (-n - 1)",
                                 "rule": {
@@ -235,10 +273,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{(-1) ^ {n} n!}{(m + 1) ^ {n + 1}}",
                         "start": "(-1) ^ n * factorial(n) / (m + 1) ^ (n + 1)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(-1) ^ {n} n! (m + 1) ^ {-n - 1}",
                                 "res": "(-1) ^ n * factorial(n) * (m + 1) ^ (-n - 1)",
                                 "rule": {

@@ -13,10 +13,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{1}^{\\infty} \\frac{1}{(x + a) \\sqrt{x - 1}} \\,dx",
                         "start": "INT x:[1,oo]. 1 / ((x + a) * sqrt(x - 1))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{2}{t ^ {2} + a + 1} \\,dt",
                                 "res": "INT t:[0,oo]. 2 / (t ^ 2 + a + 1)",
                                 "rule": {
@@ -29,6 +33,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{\\infty} \\frac{1}{t ^ {2} + a + 1} \\,dt)",
                                 "res": "2 * (INT t:[0,oo]. 1 / (t ^ 2 + a + 1))",
                                 "rule": {
@@ -38,6 +44,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{\\infty} \\frac{\\sqrt{a + 1}}{y ^ {2} (a + 1) + a + 1} \\,dy)",
                                 "res": "2 * (INT y:[0,oo]. sqrt(a + 1) / (y ^ 2 * (a + 1) + a + 1))",
                                 "rule": {
@@ -50,6 +58,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{\\infty} \\frac{\\sqrt{a + 1}}{(a + 1) (y ^ {2} + 1)} \\,dy)",
                                 "res": "2 * (INT y:[0,oo]. sqrt(a + 1) / ((a + 1) * (y ^ 2 + 1)))",
                                 "rule": {
@@ -62,6 +72,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\frac{\\sqrt{a + 1}}{a + 1} (\\left. \\tan^{-1}{y} \\right\\vert_{y=0}^{\\infty}))",
                                 "res": "2 * (sqrt(a + 1) / (a + 1) * ([atan(y)]_y=0,oo))",
                                 "rule": {
@@ -71,6 +83,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{\\sqrt{a + 1}}",
                                 "res": "pi / sqrt(a + 1)",
                                 "rule": {
@@ -83,6 +97,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\pi}{\\sqrt{a + 1}}",
                         "start": "pi / sqrt(a + 1)",
                         "steps": [],

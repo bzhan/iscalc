@@ -41,10 +41,19 @@
                         "proof": {
                             "calcs": [
                                 {
+                                    "dead_vars": [],
+                                    "fixes": [
+                                        [
+                                            "n",
+                                            "$int"
+                                        ]
+                                    ],
                                     "latex_start": "\\frac{x}{1 - x}",
                                     "start": "x / (1 - x)",
                                     "steps": [
                                         {
+                                            "dead_vars": [],
+                                            "fixes": [],
                                             "latex_res": "x (1 - x) ^ {-1}",
                                             "res": "x * (1 - x) ^ (-1)",
                                             "rule": {
@@ -57,6 +66,13 @@
                                             "type": "CalculationStep"
                                         },
                                         {
+                                            "dead_vars": [],
+                                            "fixes": [
+                                                [
+                                                    "n",
+                                                    "$int"
+                                                ]
+                                            ],
                                             "latex_res": "x \\sum_{n=0}^{\\infty}{x ^ {n}}",
                                             "res": "x * SUM(n, 0, oo, x ^ n)",
                                             "rule": {
@@ -68,6 +84,13 @@
                                             "type": "CalculationStep"
                                         },
                                         {
+                                            "dead_vars": [],
+                                            "fixes": [
+                                                [
+                                                    "n",
+                                                    "$int"
+                                                ]
+                                            ],
                                             "latex_res": "\\sum_{n=0}^{\\infty}{x x ^ {n}}",
                                             "res": "SUM(n, 0, oo, x * x ^ n)",
                                             "rule": {
@@ -80,6 +103,13 @@
                                             "type": "CalculationStep"
                                         },
                                         {
+                                            "dead_vars": [],
+                                            "fixes": [
+                                                [
+                                                    "n",
+                                                    "$int"
+                                                ]
+                                            ],
                                             "latex_res": "\\sum_{n=0}^{\\infty}{x ^ {1} x ^ {n}}",
                                             "res": "SUM(n, 0, oo, x ^ 1 * x ^ n)",
                                             "rule": {
@@ -92,6 +122,13 @@
                                             "type": "CalculationStep"
                                         },
                                         {
+                                            "dead_vars": [],
+                                            "fixes": [
+                                                [
+                                                    "n",
+                                                    "$int"
+                                                ]
+                                            ],
                                             "latex_res": "\\sum_{n=0}^{\\infty}{x ^ {n + 1}}",
                                             "res": "SUM(n, 0, oo, x ^ (n + 1))",
                                             "rule": {
@@ -104,6 +141,13 @@
                                             "type": "CalculationStep"
                                         },
                                         {
+                                            "dead_vars": [],
+                                            "fixes": [
+                                                [
+                                                    "n",
+                                                    "$int"
+                                                ]
+                                            ],
                                             "latex_res": "\\sum_{n=1}^{\\infty}{x ^ {n - 1 + 1}}",
                                             "res": "SUM(n, 1, oo, x ^ (n - 1 + 1))",
                                             "rule": {
@@ -114,6 +158,13 @@
                                             "type": "CalculationStep"
                                         },
                                         {
+                                            "dead_vars": [],
+                                            "fixes": [
+                                                [
+                                                    "n",
+                                                    "$int"
+                                                ]
+                                            ],
                                             "latex_res": "\\sum_{n=1}^{\\infty}{x ^ {n}}",
                                             "res": "SUM(n, 1, oo, x ^ n)",
                                             "rule": {
@@ -126,6 +177,8 @@
                                     "type": "Calculation"
                                 },
                                 {
+                                    "dead_vars": [],
+                                    "fixes": [],
                                     "latex_start": "\\sum_{k=1}^{\\infty}{x ^ {k}}",
                                     "start": "SUM(k, 1, oo, x ^ k)",
                                     "steps": [],
@@ -152,10 +205,14 @@
                         "proof": {
                             "calcs": [
                                 {
+                                    "dead_vars": [],
+                                    "fixes": [],
                                     "latex_start": "\\frac{x}{1 - x}",
                                     "start": "x / (1 - x)",
                                     "steps": [
                                         {
+                                            "dead_vars": [],
+                                            "fixes": [],
                                             "latex_res": "0",
                                             "res": "0",
                                             "rule": {
@@ -168,10 +225,18 @@
                                     "type": "Calculation"
                                 },
                                 {
+                                    "dead_vars": [
+                                        "k"
+                                    ],
+                                    "fixes": [],
                                     "latex_start": "\\sum_{k=1}^{\\infty}{x ^ {k}}",
                                     "start": "SUM(k, 1, oo, x ^ k)",
                                     "steps": [
                                         {
+                                            "dead_vars": [
+                                                "k"
+                                            ],
+                                            "fixes": [],
                                             "latex_res": "0",
                                             "res": "0",
                                             "rule": {
@@ -214,10 +279,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\operatorname{Li}(0,x)",
                         "start": "Li(0,x)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sum_{k=1}^{\\infty}{x ^ {k}}",
                                 "res": "SUM(k, 1, oo, x ^ k)",
                                 "rule": {
@@ -228,6 +297,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{x}{1 - x}",
                                 "res": "x / (1 - x)",
                                 "rule": {
@@ -243,6 +314,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{x}{1 - x}",
                         "start": "x / (1 - x)",
                         "steps": [],
@@ -292,10 +365,14 @@
                     "proof": {
                         "calcs": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "\\operatorname{Li}(1,x)",
                                 "start": "Li(1,x)",
                                 "steps": [
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\sum_{k=1}^{\\infty}{\\frac{x ^ {k}}{k}}",
                                         "res": "SUM(k, 1, oo, x ^ k / k)",
                                         "rule": {
@@ -309,10 +386,14 @@
                                 "type": "Calculation"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "\\int_{0}^{x} \\frac{\\operatorname{Li}(0,t)}{t} \\,dt",
                                 "start": "INT t:[0,x]. Li(0,t) / t",
                                 "steps": [
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\int_{0}^{x} \\frac{\\frac{t}{1 - t}}{t} \\,dt",
                                         "res": "INT t:[0,x]. t / (1 - t) / t",
                                         "rule": {
@@ -325,6 +406,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\int_{0}^{x} \\frac{\\sum_{k=1}^{\\infty}{t ^ {k}}}{t} \\,dt",
                                         "res": "INT t:[0,x]. SUM(k, 1, oo, t ^ k) / t",
                                         "rule": {
@@ -337,6 +420,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\int_{0}^{x} \\frac{1}{t} \\sum_{k=1}^{\\infty}{t ^ {k}} \\,dt",
                                         "res": "INT t:[0,x]. 1 / t * SUM(k, 1, oo, t ^ k)",
                                         "rule": {
@@ -349,6 +434,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\int_{0}^{x} \\sum_{k=1}^{\\infty}{\\frac{1}{t} t ^ {k}} \\,dt",
                                         "res": "INT t:[0,x]. SUM(k, 1, oo, 1 / t * t ^ k)",
                                         "rule": {
@@ -361,6 +448,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\int_{0}^{x} \\sum_{k=1}^{\\infty}{t ^ {-1} t ^ {k}} \\,dt",
                                         "res": "INT t:[0,x]. SUM(k, 1, oo, t ^ (-1) * t ^ k)",
                                         "rule": {
@@ -373,6 +462,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\int_{0}^{x} \\sum_{k=1}^{\\infty}{t ^ {-1 + k}} \\,dt",
                                         "res": "INT t:[0,x]. SUM(k, 1, oo, t ^ (-1 + k))",
                                         "rule": {
@@ -386,6 +477,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\sum_{k=1}^{\\infty}{\\int_{0}^{x} t ^ {-1 + k} \\,dt}",
                                         "res": "SUM(k, 1, oo, INT t:[0,x]. t ^ (-1 + k))",
                                         "rule": {
@@ -395,6 +488,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\sum_{k=1}^{\\infty}{\\left. \\frac{t ^ {k}}{k} \\right\\vert_{t=0}^{x}}",
                                         "res": "SUM(k, 1, oo, [t ^ k / k]_t=0,x)",
                                         "rule": {
@@ -404,6 +499,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\sum_{k=1}^{\\infty}{\\frac{x ^ {k}}{k}}",
                                         "res": "SUM(k, 1, oo, x ^ k / k)",
                                         "rule": {
@@ -432,10 +529,14 @@
                     "proof": {
                         "calcs": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "\\operatorname{Li}(s + 2,x)",
                                 "start": "Li(s + 2,x)",
                                 "steps": [
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\sum_{k=1}^{\\infty}{k ^ {-s - 2} x ^ {k}}",
                                         "res": "SUM(k, 1, oo, k ^ (-s - 2) * x ^ k)",
                                         "rule": {
@@ -449,10 +550,14 @@
                                 "type": "Calculation"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "\\int_{0}^{x} \\frac{\\operatorname{Li}(s + 1,t)}{t} \\,dt",
                                 "start": "INT t:[0,x]. Li(s + 1,t) / t",
                                 "steps": [
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\int_{0}^{x} \\frac{\\sum_{k=1}^{\\infty}{k ^ {-s - 1} t ^ {k}}}{t} \\,dt",
                                         "res": "INT t:[0,x]. SUM(k, 1, oo, k ^ (-s - 1) * t ^ k) / t",
                                         "rule": {
@@ -464,6 +569,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\int_{0}^{x} t ^ {-1} \\sum_{k=1}^{\\infty}{k ^ {-s - 1} t ^ {k}} \\,dt",
                                         "res": "INT t:[0,x]. t ^ (-1) * SUM(k, 1, oo, k ^ (-s - 1) * t ^ k)",
                                         "rule": {
@@ -476,6 +583,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\int_{0}^{x} \\sum_{k=1}^{\\infty}{t ^ {-1} (k ^ {-s - 1} t ^ {k})} \\,dt",
                                         "res": "INT t:[0,x]. SUM(k, 1, oo, t ^ (-1) * (k ^ (-s - 1) * t ^ k))",
                                         "rule": {
@@ -488,6 +597,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\int_{0}^{x} \\sum_{k=1}^{\\infty}{t ^ {-1} t ^ {k} k ^ {-s - 1}} \\,dt",
                                         "res": "INT t:[0,x]. SUM(k, 1, oo, t ^ (-1) * t ^ k * k ^ (-s - 1))",
                                         "rule": {
@@ -500,6 +611,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\int_{0}^{x} \\sum_{k=1}^{\\infty}{t ^ {-1 + k} k ^ {-s - 1}} \\,dt",
                                         "res": "INT t:[0,x]. SUM(k, 1, oo, t ^ (-1 + k) * k ^ (-s - 1))",
                                         "rule": {
@@ -513,6 +626,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\sum_{k=1}^{\\infty}{\\int_{0}^{x} t ^ {-1 + k} k ^ {-s - 1} \\,dt}",
                                         "res": "SUM(k, 1, oo, INT t:[0,x]. t ^ (-1 + k) * k ^ (-s - 1))",
                                         "rule": {
@@ -522,6 +637,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\sum_{k=1}^{\\infty}{k ^ {-s - 1} (\\left. \\frac{t ^ {k}}{k} \\right\\vert_{t=0}^{x})}",
                                         "res": "SUM(k, 1, oo, k ^ (-s - 1) * ([t ^ k / k]_t=0,x))",
                                         "rule": {
@@ -531,6 +648,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "\\sum_{k=1}^{\\infty}{k ^ {-s - 2} x ^ {k}}",
                                         "res": "SUM(k, 1, oo, k ^ (-s - 2) * x ^ k)",
                                         "rule": {
@@ -552,6 +671,7 @@
                 },
                 "induct_var": "s",
                 "latex_goal": "\\operatorname{Li}(s + 1,x) = \\int_{0}^{x} \\frac{\\operatorname{Li}(s,t)}{t} \\,dt",
+                "start": "0",
                 "type": "InductionProof"
             },
             "type": "Goal"
@@ -583,10 +703,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{d}{dx} \\operatorname{Li}(2,1 - x)",
                         "start": "D x. Li(2,1 - x)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{d}{dx} \\sum_{k=1}^{\\infty}{\\frac{(-x + 1) ^ {k}}{k ^ {2}}}",
                                 "res": "D x. SUM(k, 1, oo, (-x + 1) ^ k / k ^ 2)",
                                 "rule": {
@@ -598,6 +722,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\sum_{k=1}^{\\infty}{\\frac{(-x + 1) ^ {k - 1}}{k}}",
                                 "res": "-SUM(k, 1, oo, (-x + 1) ^ (k - 1) / k)",
                                 "rule": {
@@ -610,10 +736,19 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [
+                            [
+                                "n",
+                                "$int"
+                            ]
+                        ],
                         "latex_start": "\\frac{\\log{x}}{1 - x}",
                         "start": "log(x) / (1 - x)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\log{(1 - (1 - x))}}{1 - x}",
                                 "res": "log(1 - (1 - x)) / (1 - x)",
                                 "rule": {
@@ -626,6 +761,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (-(1 - x)) ^ {n + 1}}{n + 1}}}{1 - x}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1)) / (1 - x)",
                                 "rule": {
@@ -637,6 +779,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "(-(-(1 - x)) ^ {-1}) \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (-(1 - x)) ^ {n + 1}}{n + 1}}",
                                 "res": "-((-(1 - x)) ^ (-1)) * SUM(n, 0, oo, (-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1))",
                                 "rule": {
@@ -649,6 +798,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{(-(-(1 - x)) ^ {-1}) (\\frac{(-1) ^ {n} (-(1 - x)) ^ {n + 1}}{n + 1})}",
                                 "res": "SUM(n, 0, oo, -((-(1 - x)) ^ (-1)) * ((-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1)))",
                                 "rule": {
@@ -661,6 +817,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{-1 ((-(1 - x)) ^ {-1} (-(1 - x)) ^ {n + 1}) (-1) ^ {n}}{n + 1}}",
                                 "res": "SUM(n, 0, oo, -1 * ((-(1 - x)) ^ (-1) * (-(1 - x)) ^ (n + 1)) * (-1) ^ n / (n + 1))",
                                 "rule": {
@@ -673,6 +836,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{-1 (-(1 - x)) ^ {-1 + (n + 1)} (-1) ^ {n}}{n + 1}}",
                                 "res": "SUM(n, 0, oo, -1 * (-(1 - x)) ^ (-1 + (n + 1)) * (-1) ^ n / (n + 1))",
                                 "rule": {
@@ -685,6 +855,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\sum_{n=1}^{\\infty}{\\frac{-1 (-(1 - x)) ^ {-1 + (n - 1 + 1)} (-1) ^ {n - 1}}{n - 1 + 1}}",
                                 "res": "SUM(n, 1, oo, -1 * (-(1 - x)) ^ (-1 + (n - 1 + 1)) * (-1) ^ (n - 1) / (n - 1 + 1))",
                                 "rule": {
@@ -695,6 +872,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\sum_{n=1}^{\\infty}{\\frac{(-1) ^ {n} (x - 1) ^ {n - 1}}{n}}",
                                 "res": "SUM(n, 1, oo, (-1) ^ n * (x - 1) ^ (n - 1) / n)",
                                 "rule": {
@@ -704,6 +888,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\sum_{n=1}^{\\infty}{\\frac{(-1) ^ {n} (-1 (-x + 1)) ^ {n - 1}}{n}}",
                                 "res": "SUM(n, 1, oo, (-1) ^ n * (-1 * (-x + 1)) ^ (n - 1) / n)",
                                 "rule": {
@@ -716,6 +907,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\sum_{n=1}^{\\infty}{\\frac{(-1) ^ {n} ((-1) ^ {n - 1} (-x + 1) ^ {n - 1})}{n}}",
                                 "res": "SUM(n, 1, oo, (-1) ^ n * ((-1) ^ (n - 1) * (-x + 1) ^ (n - 1)) / n)",
                                 "rule": {
@@ -729,6 +927,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "-\\sum_{n=1}^{\\infty}{\\frac{(-x + 1) ^ {n - 1}}{n}}",
                                 "res": "-SUM(n, 1, oo, (-x + 1) ^ (n - 1) / n)",
                                 "rule": {
@@ -775,10 +980,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{d}{dx} (-\\operatorname{Li}(3,1 - x))",
                         "start": "D x. -Li(3,1 - x)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{d}{dx} (-\\operatorname{Li}(2 + 1,1 - x))",
                                 "res": "D x. -Li(2 + 1,1 - x)",
                                 "rule": {
@@ -791,6 +1000,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{d}{dx} (-(\\int_{0}^{1 - x} \\frac{\\operatorname{Li}(2,t)}{t} \\,dt))",
                                 "res": "D x. -(INT t:[0,1 - x]. Li(2,t) / t)",
                                 "rule": {
@@ -803,6 +1014,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\operatorname{Li}(2,-x + 1)}{-x + 1}",
                                 "res": "Li(2,-x + 1) / (-x + 1)",
                                 "rule": {
@@ -815,6 +1028,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\operatorname{Li}(2,-x + 1)}{-x + 1}",
                         "start": "Li(2,-x + 1) / (-x + 1)",
                         "steps": [],
@@ -855,10 +1070,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\operatorname{Li}(s,1)",
                         "start": "Li(s,1)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sum_{k=1}^{\\infty}{k ^ {-s}}",
                                 "res": "SUM(k, 1, oo, k ^ -s)",
                                 "rule": {
@@ -872,10 +1091,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\zeta{(s)}",
                         "start": "zeta(s)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{(k + 1) ^ {-s}}",
                                 "res": "SUM(k, 0, oo, (k + 1) ^ -s)",
                                 "rule": {
@@ -886,6 +1109,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sum_{k=1}^{\\infty}{(k - 1 + 1) ^ {-s}}",
                                 "res": "SUM(k, 1, oo, (k - 1 + 1) ^ -s)",
                                 "rule": {
@@ -896,6 +1121,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sum_{k=1}^{\\infty}{k ^ {-s}}",
                                 "res": "SUM(k, 1, oo, k ^ -s)",
                                 "rule": {
@@ -942,10 +1169,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{x} \\frac{\\log^{2}(-t + 1)}{t} \\,dt",
                         "start": "INT t:[0,x]. log(-t + 1) ^ 2 / t",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\left. \\log{t} \\log^{2}(-t + 1) \\right\\vert_{t=0}^{x}) - (\\int_{0}^{x} -\\frac{2 \\log{t} \\log{(-t + 1)}}{-t + 1} \\,dt)",
                                 "res": "([log(t) * log(-t + 1) ^ 2]_t=0,x) - (INT t:[0,x]. -(2 * log(t) * log(-t + 1) / (-t + 1)))",
                                 "rule": {
@@ -958,6 +1189,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{x} \\frac{\\log{t} \\log{(-t + 1)}}{-t + 1} \\,dt) + \\log{x} \\log^{2}(-x + 1)",
                                 "res": "2 * (INT t:[0,x]. log(t) * log(-t + 1) / (-t + 1)) + log(x) * log(-x + 1) ^ 2",
                                 "rule": {
@@ -967,6 +1200,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{x} \\frac{\\log{t}}{1 - t} \\log{(-t + 1)} \\,dt) + \\log{x} \\log^{2}(-x + 1)",
                                 "res": "2 * (INT t:[0,x]. log(t) / (1 - t) * log(-t + 1)) + log(x) * log(-x + 1) ^ 2",
                                 "rule": {
@@ -979,6 +1214,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{x} \\log{(-t + 1)} (\\frac{d}{dt} \\operatorname{Li}(2,-t + 1)) \\,dt) + \\log{x} \\log^{2}(-x + 1)",
                                 "res": "2 * (INT t:[0,x]. log(-t + 1) * (D t. Li(2,-t + 1))) + log(x) * log(-x + 1) ^ 2",
                                 "rule": {
@@ -991,6 +1228,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 ((\\left. \\log{(-t + 1)} \\operatorname{Li}(2,-t + 1) \\right\\vert_{t=0}^{x}) - (\\int_{0}^{x} -\\frac{\\operatorname{Li}(2,-t + 1)}{-t + 1} \\,dt)) + \\log{x} \\log^{2}(-x + 1)",
                                 "res": "2 * (([log(-t + 1) * Li(2,-t + 1)]_t=0,x) - (INT t:[0,x]. -(Li(2,-t + 1) / (-t + 1)))) + log(x) * log(-x + 1) ^ 2",
                                 "rule": {
@@ -1004,6 +1243,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{x} \\frac{\\operatorname{Li}(2,-t + 1)}{-t + 1} \\,dt) + 2 \\log{(-x + 1)} \\operatorname{Li}(2,-x + 1) + \\log{x} \\log^{2}(-x + 1)",
                                 "res": "2 * (INT t:[0,x]. Li(2,-t + 1) / (-t + 1)) + 2 * log(-x + 1) * Li(2,-x + 1) + log(x) * log(-x + 1) ^ 2",
                                 "rule": {
@@ -1013,6 +1254,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{x} \\frac{d}{dt} (-\\operatorname{Li}(3,1 - t)) \\,dt) + 2 \\log{(-x + 1)} \\operatorname{Li}(2,-x + 1) + \\log{x} \\log^{2}(-x + 1)",
                                 "res": "2 * (INT t:[0,x]. D t. -Li(3,1 - t)) + 2 * log(-x + 1) * Li(2,-x + 1) + log(x) * log(-x + 1) ^ 2",
                                 "rule": {
@@ -1025,6 +1268,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 \\log{(-x + 1)} \\operatorname{Li}(2,-x + 1) + \\log{x} \\log^{2}(-x + 1) - 2 \\operatorname{Li}(3,-x + 1) + 2 \\operatorname{Li}(3,1)",
                                 "res": "2 * log(-x + 1) * Li(2,-x + 1) + log(x) * log(-x + 1) ^ 2 - 2 * Li(3,-x + 1) + 2 * Li(3,1)",
                                 "rule": {
@@ -1034,6 +1279,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 \\log{(-x + 1)} \\operatorname{Li}(2,-x + 1) + \\log{x} \\log^{2}(-x + 1) - 2 \\operatorname{Li}(3,-x + 1) + 2 \\zeta{(3)}",
                                 "res": "2 * log(-x + 1) * Li(2,-x + 1) + log(x) * log(-x + 1) ^ 2 - 2 * Li(3,-x + 1) + 2 * zeta(3)",
                                 "rule": {
@@ -1050,10 +1297,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\log{x} \\log^{2}(1 - x) + 2 \\log{(1 - x)} \\operatorname{Li}(2,1 - x) - 2 \\operatorname{Li}(3,1 - x) + 2 \\zeta{(3)}",
                         "start": "log(x) * log(1 - x) ^ 2 + 2 * log(1 - x) * Li(2,1 - x) - 2 * Li(3,1 - x) + 2 * zeta(3)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 \\log{(-x + 1)} \\operatorname{Li}(2,-x + 1) + \\log{x} \\log^{2}(-x + 1) - 2 \\operatorname{Li}(3,-x + 1) + 2 \\zeta{(3)}",
                                 "res": "2 * log(-x + 1) * Li(2,-x + 1) + log(x) * log(-x + 1) ^ 2 - 2 * Li(3,-x + 1) + 2 * zeta(3)",
                                 "rule": {
@@ -1100,10 +1351,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{d}{dx} \\operatorname{Li}(2,\\frac{1}{1 + x})",
                         "start": "D x. Li(2,1 / (1 + x))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{d}{dx} \\sum_{k=1}^{\\infty}{\\frac{1}{k ^ {2}} (\\frac{1}{x + 1}) ^ {k}}",
                                 "res": "D x. SUM(k, 1, oo, 1 / k ^ 2 * (1 / (x + 1)) ^ k)",
                                 "rule": {
@@ -1115,6 +1370,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{1}{(x + 1) ^ {2}} \\sum_{k=1}^{\\infty}{\\frac{1}{k} (\\frac{1}{x + 1}) ^ {k - 1}}",
                                 "res": "-(1 / (x + 1) ^ 2 * SUM(k, 1, oo, 1 / k * (1 / (x + 1)) ^ (k - 1)))",
                                 "rule": {
@@ -1127,10 +1384,19 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [
+                            [
+                                "n",
+                                "$int"
+                            ]
+                        ],
                         "latex_start": "\\frac{\\log{(\\frac{x}{1 + x})}}{1 + x}",
                         "start": "log(x / (1 + x)) / (1 + x)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\log{(1 - \\frac{1}{1 + x})}}{1 + x}",
                                 "res": "log(1 - 1 / (1 + x)) / (1 + x)",
                                 "rule": {
@@ -1143,6 +1409,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (-\\frac{1}{1 + x}) ^ {n + 1}}{n + 1}}}{1 + x}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n * (-(1 / (1 + x))) ^ (n + 1) / (n + 1)) / (1 + x)",
                                 "rule": {
@@ -1154,6 +1427,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (-1 (\\frac{1}{1 + x})) ^ {n + 1}}{n + 1}}}{1 + x}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n * (-1 * (1 / (1 + x))) ^ (n + 1) / (n + 1)) / (1 + x)",
                                 "rule": {
@@ -1166,6 +1446,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} ((-1) ^ {n + 1} (\\frac{1}{1 + x}) ^ {n + 1})}{n + 1}}}{1 + x}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n * ((-1) ^ (n + 1) * (1 / (1 + x)) ^ (n + 1)) / (n + 1)) / (1 + x)",
                                 "rule": {
@@ -1179,6 +1466,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "-\\frac{1}{x + 1} \\sum_{n=0}^{\\infty}{\\frac{1}{n + 1} (\\frac{1}{x + 1}) ^ {n + 1}}",
                                 "res": "-(1 / (x + 1) * SUM(n, 0, oo, 1 / (n + 1) * (1 / (x + 1)) ^ (n + 1)))",
                                 "rule": {
@@ -1188,6 +1482,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "-\\frac{1}{x + 1} \\sum_{n=1}^{\\infty}{\\frac{1}{n - 1 + 1} (\\frac{1}{x + 1}) ^ {n - 1 + 1}}",
                                 "res": "-(1 / (x + 1) * SUM(n, 1, oo, 1 / (n - 1 + 1) * (1 / (x + 1)) ^ (n - 1 + 1)))",
                                 "rule": {
@@ -1199,6 +1500,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "-\\frac{1}{x + 1} \\sum_{n=1}^{\\infty}{\\frac{1}{n} (\\frac{1}{x + 1}) ^ {n}}",
                                 "res": "-(1 / (x + 1) * SUM(n, 1, oo, 1 / n * (1 / (x + 1)) ^ n))",
                                 "rule": {
@@ -1208,6 +1516,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "-\\frac{1}{x + 1} \\sum_{n=1}^{\\infty}{\\frac{1}{n} (\\frac{1}{x + 1}) ^ {n - 1 + 1}}",
                                 "res": "-(1 / (x + 1) * SUM(n, 1, oo, 1 / n * (1 / (x + 1)) ^ (n - 1 + 1)))",
                                 "rule": {
@@ -1220,6 +1535,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "-\\frac{1}{x + 1} \\sum_{n=1}^{\\infty}{\\frac{1}{n} ((\\frac{1}{x + 1}) ^ {n - 1} (\\frac{1}{x + 1}) ^ {1})}",
                                 "res": "-(1 / (x + 1) * SUM(n, 1, oo, 1 / n * ((1 / (x + 1)) ^ (n - 1) * (1 / (x + 1)) ^ 1)))",
                                 "rule": {
@@ -1233,6 +1555,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "-\\frac{1}{(x + 1) ^ {2}} \\sum_{n=1}^{\\infty}{\\frac{1}{n} (\\frac{1}{x + 1}) ^ {n - 1}}",
                                 "res": "-(1 / (x + 1) ^ 2 * SUM(n, 1, oo, 1 / n * (1 / (x + 1)) ^ (n - 1)))",
                                 "rule": {
@@ -1279,10 +1608,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{1}{x + 1} \\operatorname{Li}(2,\\frac{1}{x + 1})",
                         "start": "1 / (x + 1) * Li(2,1 / (x + 1))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{x + 1} \\sum_{k=1}^{\\infty}{\\frac{1}{k ^ {2}} (\\frac{1}{x + 1}) ^ {k}}",
                                 "res": "1 / (x + 1) * SUM(k, 1, oo, 1 / k ^ 2 * (1 / (x + 1)) ^ k)",
                                 "rule": {
@@ -1294,6 +1627,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{x + 1} \\sum_{k=1}^{\\infty}{\\frac{1}{k ^ {2}} (\\frac{1}{x + 1}) ^ {k - 1 + 1}}",
                                 "res": "1 / (x + 1) * SUM(k, 1, oo, 1 / k ^ 2 * (1 / (x + 1)) ^ (k - 1 + 1))",
                                 "rule": {
@@ -1306,6 +1641,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{x + 1} \\sum_{k=1}^{\\infty}{\\frac{1}{k ^ {2}} ((\\frac{1}{x + 1}) ^ {k - 1} (\\frac{1}{x + 1}) ^ {1})}",
                                 "res": "1 / (x + 1) * SUM(k, 1, oo, 1 / k ^ 2 * ((1 / (x + 1)) ^ (k - 1) * (1 / (x + 1)) ^ 1))",
                                 "rule": {
@@ -1319,6 +1656,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{(x + 1) ^ {2}} \\sum_{k=1}^{\\infty}{\\frac{1}{k ^ {2}} (\\frac{1}{x + 1}) ^ {k - 1}}",
                                 "res": "1 / (x + 1) ^ 2 * SUM(k, 1, oo, 1 / k ^ 2 * (1 / (x + 1)) ^ (k - 1))",
                                 "rule": {
@@ -1331,10 +1670,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{d}{dx} (-\\operatorname{Li}(3,\\frac{1}{x + 1}))",
                         "start": "D x. -Li(3,1 / (x + 1))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{d}{dx} (-\\sum_{k=1}^{\\infty}{\\frac{1}{k ^ {3}} (\\frac{1}{x + 1}) ^ {k}})",
                                 "res": "D x. -SUM(k, 1, oo, 1 / k ^ 3 * (1 / (x + 1)) ^ k)",
                                 "rule": {
@@ -1346,6 +1689,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{(x + 1) ^ {2}} \\sum_{k=1}^{\\infty}{\\frac{1}{k ^ {2}} (\\frac{1}{x + 1}) ^ {k - 1}}",
                                 "res": "1 / (x + 1) ^ 2 * SUM(k, 1, oo, 1 / k ^ 2 * (1 / (x + 1)) ^ (k - 1))",
                                 "rule": {
@@ -1392,10 +1737,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{x} \\frac{\\log^{2}(t + 1)}{t} \\,dt",
                         "start": "INT t:[0,x]. log(t + 1) ^ 2 / t",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\left. \\log{t} \\log^{2}(t + 1) \\right\\vert_{t=0}^{x}) - (\\int_{0}^{x} \\frac{2 \\log{t} \\log{(t + 1)}}{t + 1} \\,dt)",
                                 "res": "([log(t) * log(t + 1) ^ 2]_t=0,x) - (INT t:[0,x]. 2 * log(t) * log(t + 1) / (t + 1))",
                                 "rule": {
@@ -1408,6 +1757,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{t} \\log{(t + 1)}}{t + 1} \\,dt) + \\log{x} \\log^{2}(x + 1)",
                                 "res": "-(2 * (INT t:[0,x]. log(t) * log(t + 1) / (t + 1))) + log(x) * log(x + 1) ^ 2",
                                 "rule": {
@@ -1417,6 +1768,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{((1 + t) (\\frac{t}{1 + t}))} \\log{(t + 1)}}{t + 1} \\,dt) + \\log{x} \\log^{2}(x + 1)",
                                 "res": "-(2 * (INT t:[0,x]. log((1 + t) * (t / (1 + t))) * log(t + 1) / (t + 1))) + log(x) * log(x + 1) ^ 2",
                                 "rule": {
@@ -1429,6 +1782,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-2 (\\int_{0}^{x} \\frac{(\\log{(1 + t)} + \\log{(\\frac{t}{1 + t})}) \\log{(t + 1)}}{t + 1} \\,dt) + \\log{x} \\log^{2}(x + 1)",
                                 "res": "-(2 * (INT t:[0,x]. (log(1 + t) + log(t / (1 + t))) * log(t + 1) / (t + 1))) + log(x) * log(x + 1) ^ 2",
                                 "rule": {
@@ -1442,6 +1797,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{(t + 1)} \\log{(\\frac{t}{t + 1})} + \\log^{2}(t + 1)}{t + 1} \\,dt) + \\log{x} \\log^{2}(x + 1)",
                                 "res": "-(2 * (INT t:[0,x]. (log(t + 1) * log(t / (t + 1)) + log(t + 1) ^ 2) / (t + 1))) + log(x) * log(x + 1) ^ 2",
                                 "rule": {
@@ -1452,6 +1809,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{(t + 1)}}{t + 1} \\log{(\\frac{t}{t + 1})} + \\frac{\\log^{2}(t + 1)}{t + 1} \\,dt) + \\log{x} \\log^{2}(x + 1)",
                                 "res": "-(2 * (INT t:[0,x]. log(t + 1) / (t + 1) * log(t / (t + 1)) + log(t + 1) ^ 2 / (t + 1))) + log(x) * log(x + 1) ^ 2",
                                 "rule": {
@@ -1462,6 +1821,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{(t + 1)}}{t + 1} \\log{(\\frac{t}{t + 1})} \\,dt) - 2 (\\int_{0}^{x} \\frac{\\log^{2}(t + 1)}{t + 1} \\,dt) + \\log{x} \\log^{2}(x + 1)",
                                 "res": "-(2 * (INT t:[0,x]. log(t + 1) / (t + 1) * log(t / (t + 1)))) - 2 * (INT t:[0,x]. log(t + 1) ^ 2 / (t + 1)) + log(x) * log(x + 1) ^ 2",
                                 "rule": {
@@ -1471,6 +1832,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{(t + 1)}}{t + 1} \\log{(\\frac{t}{t + 1})} \\,dt) - 2 (\\int_{0}^{\\log{(x + 1)}} u ^ {2} \\,du) + \\log{x} \\log^{2}(x + 1)",
                                 "res": "-(2 * (INT t:[0,x]. log(t + 1) / (t + 1) * log(t / (t + 1)))) - 2 * (INT u:[0,log(x + 1)]. u ^ 2) + log(x) * log(x + 1) ^ 2",
                                 "rule": {
@@ -1484,6 +1847,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{(t + 1)} \\log{(\\frac{t}{t + 1})}}{t + 1} \\,dt) - 2 (\\left. \\frac{u ^ {3}}{3} \\right\\vert_{u=0}^{\\log{(x + 1)}}) + \\log{x} \\log^{2}(x + 1)",
                                 "res": "-(2 * (INT t:[0,x]. log(t + 1) * log(t / (t + 1)) / (t + 1))) - 2 * ([u ^ 3 / 3]_u=0,log(x + 1)) + log(x) * log(x + 1) ^ 2",
                                 "rule": {
@@ -1493,6 +1858,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{(t + 1)}}{t + 1} \\log{(\\frac{t}{t + 1})} \\,dt) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1)",
                                 "res": "-(2 * (INT t:[0,x]. log(t + 1) / (t + 1) * log(t / (t + 1)))) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2",
                                 "rule": {
@@ -1502,6 +1869,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{(\\frac{t}{1 + t})}}{1 + t} \\log{(t + 1)} \\,dt) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1)",
                                 "res": "-(2 * (INT t:[0,x]. log(t / (1 + t)) / (1 + t) * log(t + 1))) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2",
                                 "rule": {
@@ -1514,6 +1883,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-2 (\\int_{0}^{x} \\log{(t + 1)} (\\frac{d}{dt} \\operatorname{Li}(2,\\frac{1}{t + 1})) \\,dt) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1)",
                                 "res": "-(2 * (INT t:[0,x]. log(t + 1) * (D t. Li(2,1 / (t + 1))))) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2",
                                 "rule": {
@@ -1526,6 +1897,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-2 ((\\left. \\log{(t + 1)} \\operatorname{Li}(2,\\frac{1}{t + 1}) \\right\\vert_{t=0}^{x}) - (\\int_{0}^{x} \\frac{1}{t + 1} \\operatorname{Li}(2,\\frac{1}{t + 1}) \\,dt)) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1)",
                                 "res": "-(2 * (([log(t + 1) * Li(2,1 / (t + 1))]_t=0,x) - (INT t:[0,x]. 1 / (t + 1) * Li(2,1 / (t + 1))))) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2",
                                 "rule": {
@@ -1539,6 +1912,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{x} \\frac{1}{t + 1} \\operatorname{Li}(2,\\frac{1}{t + 1}) \\,dt) - 2 \\log{(x + 1)} \\operatorname{Li}(2,\\frac{1}{x + 1}) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1)",
                                 "res": "2 * (INT t:[0,x]. 1 / (t + 1) * Li(2,1 / (t + 1))) - 2 * log(x + 1) * Li(2,1 / (x + 1)) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2",
                                 "rule": {
@@ -1548,6 +1923,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{x} \\frac{d}{dt} (-\\operatorname{Li}(3,\\frac{1}{t + 1})) \\,dt) - 2 \\log{(x + 1)} \\operatorname{Li}(2,\\frac{1}{x + 1}) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1)",
                                 "res": "2 * (INT t:[0,x]. D t. -Li(3,1 / (t + 1))) - 2 * log(x + 1) * Li(2,1 / (x + 1)) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2",
                                 "rule": {
@@ -1560,6 +1937,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-2 \\log{(x + 1)} \\operatorname{Li}(2,\\frac{1}{x + 1}) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1) - 2 \\operatorname{Li}(3,\\frac{1}{x + 1}) + 2 \\operatorname{Li}(3,1)",
                                 "res": "-(2 * log(x + 1) * Li(2,1 / (x + 1))) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2 - 2 * Li(3,1 / (x + 1)) + 2 * Li(3,1)",
                                 "rule": {
@@ -1569,6 +1948,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-2 \\log{(x + 1)} \\operatorname{Li}(2,\\frac{1}{x + 1}) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1) - 2 \\operatorname{Li}(3,\\frac{1}{x + 1}) + 2 \\zeta{(3)}",
                                 "res": "-(2 * log(x + 1) * Li(2,1 / (x + 1))) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2 - 2 * Li(3,1 / (x + 1)) + 2 * zeta(3)",
                                 "rule": {
@@ -1584,10 +1965,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\log{x} \\log^{2}(1 + x) - \\frac{2}{3} \\log^{3}(1 + x) - 2 \\log{(1 + x)} \\operatorname{Li}(2,\\frac{1}{1 + x}) - 2 \\operatorname{Li}(3,\\frac{1}{1 + x}) + 2 \\zeta{(3)}",
                         "start": "log(x) * log(1 + x) ^ 2 - 2/3 * log(1 + x) ^ 3 - 2 * log(1 + x) * Li(2,1 / (1 + x)) - 2 * Li(3,1 / (1 + x)) + 2 * zeta(3)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-2 \\log{(x + 1)} \\operatorname{Li}(2,\\frac{1}{x + 1}) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1) - 2 \\operatorname{Li}(3,\\frac{1}{x + 1}) + 2 \\zeta{(3)}",
                                 "res": "-(2 * log(x + 1) * Li(2,1 / (x + 1))) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2 - 2 * Li(3,1 / (x + 1)) + 2 * zeta(3)",
                                 "rule": {

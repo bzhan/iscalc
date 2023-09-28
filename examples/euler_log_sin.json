@@ -37,10 +37,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "J{(a)}",
                         "start": "J(a)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\log{(a \\sin{(2 x)})} \\,dx",
                                 "res": "INT x:[0,pi / 2]. log(a * sin(2 * x))",
                                 "rule": {
@@ -51,6 +55,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi} \\frac{\\log{(a \\sin{t})}}{2} \\,dt",
                                 "res": "INT t:[0,pi]. log(a * sin(t)) / 2",
                                 "rule": {
@@ -63,6 +69,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{\\pi/2} \\frac{\\log{(a \\sin{t})}}{2} \\,dt) + (\\int_{\\pi/2}^{\\pi} \\frac{\\log{(a \\sin{t})}}{2} \\,dt)",
                                 "res": "(INT t:[0,pi / 2]. log(a * sin(t)) / 2) + (INT t:[pi / 2,pi]. log(a * sin(t)) / 2)",
                                 "rule": {
@@ -73,6 +81,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{\\pi/2} \\frac{\\log{(a \\sin{t})}}{2} \\,dt) + (\\int_{0}^{\\pi/2} \\frac{\\log{(a \\sin{x})}}{2} \\,dx)",
                                 "res": "(INT t:[0,pi / 2]. log(a * sin(t)) / 2) + (INT x:[0,pi / 2]. log(a * sin(x)) / 2)",
                                 "rule": {
@@ -86,6 +96,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi/2} \\log{(a \\sin{t})} \\,dt) + \\frac{1}{2} (\\int_{0}^{\\pi/2} \\log{(a \\sin{x})} \\,dx)",
                                 "res": "1/2 * (INT t:[0,pi / 2]. log(a * sin(t))) + 1/2 * (INT x:[0,pi / 2]. log(a * sin(x)))",
                                 "rule": {
@@ -95,6 +107,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi/2} \\log{(a \\sin{x})} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\pi/2} \\log{(a \\sin{x})} \\,dx)",
                                 "res": "1/2 * (INT x:[0,pi / 2]. log(a * sin(x))) + 1/2 * (INT x:[0,pi / 2]. log(a * sin(x)))",
                                 "rule": {
@@ -108,6 +122,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\log{(a \\sin{x})} \\,dx",
                                 "res": "INT x:[0,pi / 2]. log(a * sin(x))",
                                 "rule": {
@@ -120,10 +136,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "I{(a)}",
                         "start": "I(a)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\log{(a \\sin{x})} \\,dx",
                                 "res": "INT x:[0,pi / 2]. log(a * sin(x))",
                                 "rule": {
@@ -157,10 +177,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "J{(a)}",
                         "start": "J(a)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\log{(a \\sin{(2 x)})} \\,dx",
                                 "res": "INT x:[0,pi / 2]. log(a * sin(2 * x))",
                                 "rule": {
@@ -171,6 +195,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\log{(a (2 \\sin{x} \\cos{x}))} \\,dx",
                                 "res": "INT x:[0,pi / 2]. log(a * (2 * sin(x) * cos(x)))",
                                 "rule": {
@@ -183,6 +209,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\log{(\\frac{2}{a} (a \\sin{x}) (a \\cos{x}))} \\,dx",
                                 "res": "INT x:[0,pi / 2]. log(2 / a * (a * sin(x)) * (a * cos(x)))",
                                 "rule": {
@@ -195,6 +223,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\log{(\\frac{2}{a} (a \\sin{x}))} + \\log{(a \\cos{x})} \\,dx",
                                 "res": "INT x:[0,pi / 2]. log(2 / a * (a * sin(x))) + log(a * cos(x))",
                                 "rule": {
@@ -207,6 +237,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\log{(\\frac{2}{a})} + \\log{(a \\sin{x})} + \\log{(a \\cos{x})} \\,dx",
                                 "res": "INT x:[0,pi / 2]. log(2 / a) + log(a * sin(x)) + log(a * cos(x))",
                                 "rule": {
@@ -219,6 +251,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\left. x \\log{(\\frac{2}{a})} \\right\\vert_{x=0}^{\\pi/2}) + (\\int_{0}^{\\pi/2} \\log{(a \\sin{x})} \\,dx) + (\\int_{0}^{\\pi/2} \\log{(a \\cos{x})} \\,dx)",
                                 "res": "([x * log(2 / a)]_x=0,pi / 2) + (INT x:[0,pi / 2]. log(a * sin(x))) + (INT x:[0,pi / 2]. log(a * cos(x)))",
                                 "rule": {
@@ -228,6 +262,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{\\pi/2} \\log{(a \\cos{x})} \\,dx) + (\\int_{0}^{\\pi/2} \\log{(a \\sin{x})} \\,dx) + \\frac{\\pi}{2} \\log{(\\frac{2}{a})}",
                                 "res": "(INT x:[0,pi / 2]. log(a * cos(x))) + (INT x:[0,pi / 2]. log(a * sin(x))) + pi / 2 * log(2 / a)",
                                 "rule": {
@@ -237,6 +273,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{\\pi/2} \\log{(a \\sin{t})} \\,dt) + (\\int_{0}^{\\pi/2} \\log{(a \\sin{x})} \\,dx) + \\frac{\\pi}{2} \\log{(\\frac{2}{a})}",
                                 "res": "(INT t:[0,pi / 2]. log(a * sin(t))) + (INT x:[0,pi / 2]. log(a * sin(x))) + pi / 2 * log(2 / a)",
                                 "rule": {
@@ -249,6 +287,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{\\pi/2} \\log{(a \\sin{x})} \\,dx) + (\\int_{0}^{\\pi/2} \\log{(a \\sin{x})} \\,dx) + \\frac{\\pi}{2} \\log{(\\frac{2}{a})}",
                                 "res": "(INT x:[0,pi / 2]. log(a * sin(x))) + (INT x:[0,pi / 2]. log(a * sin(x))) + pi / 2 * log(2 / a)",
                                 "rule": {
@@ -261,6 +301,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{\\pi/2} \\log{(a \\sin{x})} \\,dx) + \\frac{\\pi}{2} \\log{(\\frac{2}{a})}",
                                 "res": "2 * (INT x:[0,pi / 2]. log(a * sin(x))) + pi / 2 * log(2 / a)",
                                 "rule": {
@@ -273,10 +315,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\pi}{2} \\log{(\\frac{2}{a})} + 2 I{(a)}",
                         "start": "pi / 2 * log(2 / a) + 2 * I(a)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{2} \\log{(\\frac{2}{a})} + 2 (\\int_{0}^{\\pi/2} \\log{(a \\sin{x})} \\,dx)",
                                 "res": "pi / 2 * log(2 / a) + 2 * (INT x:[0,pi / 2]. log(a * sin(x)))",
                                 "rule": {
@@ -288,6 +334,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{\\pi/2} \\log{(a \\sin{x})} \\,dx) + \\frac{\\pi}{2} \\log{(\\frac{2}{a})}",
                                 "res": "2 * (INT x:[0,pi / 2]. log(a * sin(x))) + pi / 2 * log(2 / a)",
                                 "rule": {
@@ -320,10 +368,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "I{(a)}",
                         "start": "I(a)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "J{(a)}",
                                 "res": "J(a)",
                                 "rule": {
@@ -336,6 +388,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{2} \\log{(\\frac{2}{a})} + 2 I{(a)}",
                                 "res": "pi / 2 * log(2 / a) + 2 * I(a)",
                                 "rule": {
@@ -348,6 +402,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{\\pi}{2} \\log{(\\frac{2}{a})}",
                                 "res": "-(pi / 2 * log(2 / a))",
                                 "rule": {
@@ -358,6 +414,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{\\pi}{2} (\\log{(2)} + \\log{(\\frac{1}{a})})",
                                 "res": "-(pi / 2 * (log(2) + log(1 / a)))",
                                 "rule": {
@@ -370,6 +428,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(\\frac{\\pi}{2} \\log{(\\frac{1}{a})} + \\frac{\\pi \\log{(2)}}{2})",
                                 "res": "-(pi / 2 * log(1 / a) + pi * log(2) / 2)",
                                 "rule": {
@@ -380,6 +440,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi \\log{a}}{2} - \\frac{\\pi \\log{(2)}}{2}",
                                 "res": "pi * log(a) / 2 - pi * log(2) / 2",
                                 "rule": {
@@ -392,10 +454,14 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\pi}{2} \\log{(\\frac{a}{2})}",
                         "start": "pi / 2 * log(a / 2)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{2} (\\log{a} - \\log{(2)})",
                                 "res": "pi / 2 * (log(a) - log(2))",
                                 "rule": {
@@ -408,6 +474,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi \\log{a}}{2} - \\frac{\\pi \\log{(2)}}{2}",
                                 "res": "pi * log(a) / 2 - pi * log(2) / 2",
                                 "rule": {

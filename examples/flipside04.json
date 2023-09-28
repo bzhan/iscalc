@@ -17,10 +17,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} \\frac{x ^ {a} - x ^ {b}}{\\log{x}} \\,dx",
                         "start": "INT x:[0,1]. (x ^ a - x ^ b) / log(x)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{x ^ {a} - 1 - (x ^ {b} - 1)}{\\log{x}} \\,dx",
                                 "res": "INT x:[0,1]. (x ^ a - 1 - (x ^ b - 1)) / log(x)",
                                 "rule": {
@@ -33,6 +37,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{x ^ {a} - 1}{\\log{x}} - \\frac{x ^ {b} - 1}{\\log{x}} \\,dx",
                                 "res": "INT x:[0,1]. (x ^ a - 1) / log(x) - (x ^ b - 1) / log(x)",
                                 "rule": {
@@ -45,6 +51,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{1} \\frac{x ^ {a} - 1}{\\log{x}} \\,dx) - (\\int_{0}^{1} \\frac{x ^ {b} - 1}{\\log{x}} \\,dx)",
                                 "res": "(INT x:[0,1]. (x ^ a - 1) / log(x)) - (INT x:[0,1]. (x ^ b - 1) / log(x))",
                                 "rule": {
@@ -54,6 +62,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\log{(a + 1)} - \\log{(b + 1)}",
                                 "res": "log(a + 1) - log(b + 1)",
                                 "rule": {
@@ -63,6 +73,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\log{(\\frac{a + 1}{b + 1})}",
                                 "res": "log((a + 1) / (b + 1))",
                                 "rule": {
@@ -78,6 +90,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\log{(\\frac{a + 1}{b + 1})}",
                         "start": "log((a + 1) / (b + 1))",
                         "steps": [],

@@ -7,10 +7,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} \\frac{1 - x}{1 + x + x ^ {2}} \\,dx",
                         "start": "INT x:[0,1]. (1 - x) / (1 + x + x ^ 2)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{1 - x}{(x + \\frac{1}{2}) ^ {2} + \\frac{3}{4}} \\,dx",
                                 "res": "INT x:[0,1]. (1 - x) / ((x + 1/2) ^ 2 + 3/4)",
                                 "rule": {
@@ -23,6 +27,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{\\sqrt{3}/3}^{\\sqrt{3}} \\frac{\\sqrt{3}}{\\frac{3 u ^ {2}}{2} + \\frac{3}{2}} (-\\frac{u\\cdot \\sqrt{3}}{2} + \\frac{3}{2}) \\,du",
                                 "res": "INT u:[sqrt(3) / 3,sqrt(3)]. sqrt(3) / (3 * u ^ 2 / 2 + 3/2) * (-(u * sqrt(3) / 2) + 3/2)",
                                 "rule": {
@@ -35,6 +41,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{\\sqrt{3}/3}^{\\sqrt{3}} \\frac{\\sqrt{3}}{\\frac{3}{2} (u ^ {2} + 1)} (-\\frac{u\\cdot \\sqrt{3}}{2} + \\frac{3}{2}) \\,du",
                                 "res": "INT u:[sqrt(3) / 3,sqrt(3)]. sqrt(3) / (3/2 * (u ^ 2 + 1)) * (-(u * sqrt(3) / 2) + 3/2)",
                                 "rule": {
@@ -47,6 +55,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{2 \\sqrt{3}}{3} (\\int_{\\sqrt{3}/3}^{\\sqrt{3}} \\frac{1}{u ^ {2} + 1} (-\\frac{u\\cdot \\sqrt{3}}{2} + \\frac{3}{2}) \\,du)",
                                 "res": "2 * sqrt(3) / 3 * (INT u:[sqrt(3) / 3,sqrt(3)]. 1 / (u ^ 2 + 1) * (-(u * sqrt(3) / 2) + 3/2))",
                                 "rule": {
@@ -56,6 +66,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{2 \\sqrt{3}}{3} (\\int_{\\sqrt{3}/3}^{\\sqrt{3}} -\\frac{u\\cdot \\sqrt{3}}{2 (u ^ {2} + 1)} + \\frac{3}{2 (u ^ {2} + 1)} \\,du)",
                                 "res": "2 * sqrt(3) / 3 * (INT u:[sqrt(3) / 3,sqrt(3)]. -(u * sqrt(3) / (2 * (u ^ 2 + 1))) + 3 / (2 * (u ^ 2 + 1)))",
                                 "rule": {
@@ -66,6 +78,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{2 \\sqrt{3}}{3} (-\\frac{\\sqrt{3}}{2} (\\int_{\\sqrt{3}/3}^{\\sqrt{3}} \\frac{u}{u ^ {2} + 1} \\,du) + \\frac{3}{2} (\\int_{\\sqrt{3}/3}^{\\sqrt{3}} \\frac{1}{u ^ {2} + 1} \\,du))",
                                 "res": "2 * sqrt(3) / 3 * (-(sqrt(3) / 2 * (INT u:[sqrt(3) / 3,sqrt(3)]. u / (u ^ 2 + 1))) + 3/2 * (INT u:[sqrt(3) / 3,sqrt(3)]. 1 / (u ^ 2 + 1)))",
                                 "rule": {
@@ -75,6 +89,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sqrt{3} (\\int_{\\sqrt{3}/3}^{\\sqrt{3}} \\frac{1}{u ^ {2} + 1} \\,du) - (\\int_{\\sqrt{3}/3}^{\\sqrt{3}} \\frac{u}{u ^ {2} + 1} \\,du)",
                                 "res": "sqrt(3) * (INT u:[sqrt(3) / 3,sqrt(3)]. 1 / (u ^ 2 + 1)) - (INT u:[sqrt(3) / 3,sqrt(3)]. u / (u ^ 2 + 1))",
                                 "rule": {
@@ -84,6 +100,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sqrt{3} (\\left. \\tan^{-1}{u} \\right\\vert_{u=\\sqrt{3}/3}^{\\sqrt{3}}) - (\\int_{\\sqrt{3}/3}^{\\sqrt{3}} \\frac{u}{u ^ {2} + 1} \\,du)",
                                 "res": "sqrt(3) * ([atan(u)]_u=sqrt(3) / 3,sqrt(3)) - (INT u:[sqrt(3) / 3,sqrt(3)]. u / (u ^ 2 + 1))",
                                 "rule": {
@@ -93,6 +111,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(\\int_{\\sqrt{3}/3}^{\\sqrt{3}} \\frac{u}{u ^ {2} + 1} \\,du) + \\frac{\\sqrt{3} \\pi}{6}",
                                 "res": "-(INT u:[sqrt(3) / 3,sqrt(3)]. u / (u ^ 2 + 1)) + sqrt(3) * pi / 6",
                                 "rule": {
@@ -102,6 +122,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-(\\int_{4/3}^{4} \\frac{1}{2 t} \\,dt) + \\frac{\\sqrt{3} \\pi}{6}",
                                 "res": "-(INT t:[4/3,4]. 1 / (2 * t)) + sqrt(3) * pi / 6",
                                 "rule": {
@@ -115,6 +137,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{1}{2} (\\left. \\log{t} \\right\\vert_{t=4/3}^{4}) + \\frac{\\sqrt{3} \\pi}{6}",
                                 "res": "-(1/2 * ([log(t)]_t=4/3,4)) + sqrt(3) * pi / 6",
                                 "rule": {
@@ -124,6 +148,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{3} \\pi}{6} - \\frac{\\log{(3)}}{2}",
                                 "res": "sqrt(3) * pi / 6 - log(3) / 2",
                                 "rule": {
@@ -136,6 +162,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\sqrt{3} \\pi}{6} - \\frac{\\log{(3)}}{2}",
                         "start": "sqrt(3) * pi / 6 - log(3) / 2",
                         "steps": [],

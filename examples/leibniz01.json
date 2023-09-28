@@ -13,10 +13,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{1}{x ^ {2} + a ^ {2}} \\,dx",
                         "start": "INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\lim\\limits_{t\\to \\infty} \\int_{0}^{t} \\frac{1}{x ^ {2} + a ^ {2}} \\,dx",
                                 "res": "LIM {t -> oo}. INT x:[0,t]. 1 / (x ^ 2 + a ^ 2)",
                                 "rule": {
@@ -27,6 +31,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\lim\\limits_{t\\to \\infty} \\int_{0}^{t/a} \\frac{1}{(a u) ^ {2} + a ^ {2}} a \\,du",
                                 "res": "LIM {t -> oo}. INT u:[0,t / a]. 1 / ((a * u) ^ 2 + a ^ 2) * a",
                                 "rule": {
@@ -39,6 +45,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "a (\\int_{0}^{\\infty} \\frac{1}{a ^ {2} u ^ {2} + a ^ {2}} \\,du)",
                                 "res": "a * (INT u:[0,oo]. 1 / (a ^ 2 * u ^ 2 + a ^ 2))",
                                 "rule": {
@@ -48,6 +56,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "a (\\int_{0}^{\\infty} \\frac{1}{a ^ {2} (u ^ {2} + 1)} \\,du)",
                                 "res": "a * (INT u:[0,oo]. 1 / (a ^ 2 * (u ^ 2 + 1)))",
                                 "rule": {
@@ -60,6 +70,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{a} (\\int_{0}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "1 / a * (INT u:[0,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
@@ -69,6 +81,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{a} (\\left. \\tan^{-1}{u} \\right\\vert_{u=0}^{\\infty})",
                                 "res": "1 / a * ([atan(u)]_u=0,oo)",
                                 "rule": {
@@ -78,6 +92,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{2 a}",
                                 "res": "pi / (2 * a)",
                                 "rule": {
@@ -90,6 +106,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\pi}{2 a}",
                         "start": "pi / (2 * a)",
                         "steps": [],
@@ -114,20 +132,19 @@
             "goal": "(INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2) ^ 2) = pi / (4 * a ^ 3)",
             "latex_goal": "\\int_{0}^{\\infty} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {2}} \\,dx = \\frac{\\pi}{4 a ^ {3}}",
             "proof": {
+                "begin_label": "1.",
                 "finished": true,
                 "goal": "(INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2) ^ 2) = pi / (4 * a ^ 3)",
                 "latex_goal": "\\int_{0}^{\\infty} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {2}} \\,dx = \\frac{\\pi}{4 a ^ {3}}",
                 "start": {
-                    "conds": [
-                        {
-                            "cond": "a > 0",
-                            "latex_cond": "a > 0"
-                        }
-                    ],
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_start": "\\int_{0}^{\\infty} \\frac{1}{x ^ {2} + a ^ {2}} \\,dx = \\frac{\\pi}{2 a}",
                     "start": "(INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2)) = pi / (2 * a)",
                     "steps": [
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{d}{da} \\int_{0}^{\\infty} \\frac{1}{x ^ {2} + a ^ {2}} \\,dx = \\frac{d}{da} \\frac{\\pi}{2 a}",
                             "res": "(D a. INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2)) = (D a. pi / (2 * a))",
                             "rule": {
@@ -138,6 +155,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "-2 a (\\int_{0}^{\\infty} \\frac{1}{(a ^ {2} + x ^ {2}) ^ {2}} \\,dx) = -\\frac{\\pi}{2 a ^ {2}}",
                             "res": "-(2 * a * (INT x:[0,oo]. 1 / (a ^ 2 + x ^ 2) ^ 2)) = -(pi / (2 * a ^ 2))",
                             "rule": {
@@ -147,6 +166,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(a ^ {2} + x ^ {2}) ^ {2}} \\,dx = \\frac{\\pi}{4 a ^ {3}}",
                             "res": "(INT x:[0,oo]. 1 / (a ^ 2 + x ^ 2) ^ 2) = pi / (4 * a ^ 3)",
                             "rule": {
@@ -175,20 +196,19 @@
             "goal": "(INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2) ^ 3) = 3 * pi / (16 * a ^ 5)",
             "latex_goal": "\\int_{0}^{\\infty} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {3}} \\,dx = \\frac{3 \\pi}{16 a ^ {5}}",
             "proof": {
+                "begin_label": "2.",
                 "finished": true,
                 "goal": "(INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2) ^ 3) = 3 * pi / (16 * a ^ 5)",
                 "latex_goal": "\\int_{0}^{\\infty} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {3}} \\,dx = \\frac{3 \\pi}{16 a ^ {5}}",
                 "start": {
-                    "conds": [
-                        {
-                            "cond": "a > 0",
-                            "latex_cond": "a > 0"
-                        }
-                    ],
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_start": "\\int_{0}^{\\infty} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {2}} \\,dx = \\frac{\\pi}{4 a ^ {3}}",
                     "start": "(INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2) ^ 2) = pi / (4 * a ^ 3)",
                     "steps": [
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\frac{d}{da} \\int_{0}^{\\infty} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {2}} \\,dx = \\frac{d}{da} \\frac{\\pi}{4 a ^ {3}}",
                             "res": "(D a. INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2) ^ 2) = (D a. pi / (4 * a ^ 3))",
                             "rule": {
@@ -199,6 +219,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "-4 a (\\int_{0}^{\\infty} \\frac{1}{(a ^ {2} + x ^ {2}) ^ {3}} \\,dx) = -\\frac{3 \\pi}{4 a ^ {4}}",
                             "res": "-(4 * a * (INT x:[0,oo]. 1 / (a ^ 2 + x ^ 2) ^ 3)) = -(3 * pi / (4 * a ^ 4))",
                             "rule": {
@@ -208,6 +230,8 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "dead_vars": [],
+                            "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(a ^ {2} + x ^ {2}) ^ {3}} \\,dx = \\frac{3 \\pi}{16 a ^ {5}}",
                             "res": "(INT x:[0,oo]. 1 / (a ^ 2 + x ^ 2) ^ 3) = 3 * pi / (16 * a ^ 5)",
                             "rule": {

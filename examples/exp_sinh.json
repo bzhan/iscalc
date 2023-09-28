@@ -13,10 +13,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "9 - 10 p ^ {2} + p ^ {4}",
                         "start": "9 - 10 * p ^ 2 + p ^ 4",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "(p ^ {2} - 5) ^ {2} - 16",
                                 "res": "(p ^ 2 - 5) ^ 2 - 16",
                                 "rule": {
@@ -32,6 +36,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "0",
                         "start": "0",
                         "steps": [],
@@ -58,10 +64,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} e^{(-p) t} \\sinh{t} ^ {3} \\,dt",
                         "start": "INT t:[0,oo]. exp(-p * t) * sinh(t) ^ 3",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} e^{(-p) t} (\\frac{-e^{-t} + e^{t}}{2}) ^ {3} \\,dt",
                                 "res": "INT t:[0,oo]. exp(-p * t) * ((-exp(-t) + exp(t)) / 2) ^ 3",
                                 "rule": {
@@ -73,6 +83,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} -\\frac{e^{-p t - 3 t}}{8} + \\frac{3 e^{-p t - t}}{8} - \\frac{3 e^{-p t + t}}{8} + \\frac{e^{-p t + 3 t}}{8} \\,dt",
                                 "res": "INT t:[0,oo]. -(exp(-(p * t) - 3 * t) / 8) + 3 * exp(-(p * t) - t) / 8 - 3 * exp(-(p * t) + t) / 8 + exp(-(p * t) + 3 * t) / 8",
                                 "rule": {
@@ -82,6 +94,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} -\\frac{e^{(-p - 3) t}}{8} + \\frac{3 e^{-p t - t}}{8} - \\frac{3 e^{-p t + t}}{8} + \\frac{e^{-p t + 3 t}}{8} \\,dt",
                                 "res": "INT t:[0,oo]. -(exp((-p - 3) * t) / 8) + 3 * exp(-(p * t) - t) / 8 - 3 * exp(-(p * t) + t) / 8 + exp(-(p * t) + 3 * t) / 8",
                                 "rule": {
@@ -94,6 +108,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} -\\frac{e^{(-p - 3) t}}{8} + \\frac{3 e^{-p t - t}}{8} - \\frac{3 e^{-p t + t}}{8} + \\frac{e^{(3 - p) t}}{8} \\,dt",
                                 "res": "INT t:[0,oo]. -(exp((-p - 3) * t) / 8) + 3 * exp(-(p * t) - t) / 8 - 3 * exp(-(p * t) + t) / 8 + exp((3 - p) * t) / 8",
                                 "rule": {
@@ -106,6 +122,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} -\\frac{e^{(-p - 3) t}}{8} + \\frac{3 e^{(-p - 1) t}}{8} - \\frac{3 e^{-p t + t}}{8} + \\frac{e^{(3 - p) t}}{8} \\,dt",
                                 "res": "INT t:[0,oo]. -(exp((-p - 3) * t) / 8) + 3 * exp((-p - 1) * t) / 8 - 3 * exp(-(p * t) + t) / 8 + exp((3 - p) * t) / 8",
                                 "rule": {
@@ -118,6 +136,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} -\\frac{e^{(-p - 3) t}}{8} + \\frac{3 e^{(-p - 1) t}}{8} - \\frac{3 e^{(1 - p) t}}{8} + \\frac{e^{(3 - p) t}}{8} \\,dt",
                                 "res": "INT t:[0,oo]. -(exp((-p - 3) * t) / 8) + 3 * exp((-p - 1) * t) / 8 - 3 * exp((1 - p) * t) / 8 + exp((3 - p) * t) / 8",
                                 "rule": {
@@ -130,6 +150,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "-\\frac{1}{8} (\\left. \\frac{e^{t (-p - 3)}}{-p - 3} \\right\\vert_{t=0}^{\\infty}) + \\frac{3}{8} (\\left. \\frac{e^{t (-p - 1)}}{-p - 1} \\right\\vert_{t=0}^{\\infty}) - \\frac{3}{8} (\\left. \\frac{e^{t (-p + 1)}}{-p + 1} \\right\\vert_{t=0}^{\\infty}) + \\frac{1}{8} (\\left. \\frac{e^{t (-p + 3)}}{-p + 3} \\right\\vert_{t=0}^{\\infty})",
                                 "res": "-(1/8 * ([exp(t * (-p - 3)) / (-p - 3)]_t=0,oo)) + 3/8 * ([exp(t * (-p - 1)) / (-p - 1)]_t=0,oo) - 3/8 * ([exp(t * (-p + 1)) / (-p + 1)]_t=0,oo) + 1/8 * ([exp(t * (-p + 3)) / (-p + 3)]_t=0,oo)",
                                 "rule": {
@@ -139,6 +161,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{3}{-8 p + 8} - \\frac{1}{-8 p + 24} - \\frac{3}{-8 p - 8} + \\frac{1}{-8 p - 24}",
                                 "res": "3 / (-(8 * p) + 8) - 1 / (-(8 * p) + 24) - 3 / (-(8 * p) - 8) + 1 / (-(8 * p) - 24)",
                                 "rule": {
@@ -148,6 +172,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{6}{9 - 10 p ^ {2} + p ^ {4}}",
                                 "res": "6 / (9 - 10 * p ^ 2 + p ^ 4)",
                                 "rule": {
@@ -163,6 +189,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{6}{9 - 10 p ^ {2} + p ^ {4}}",
                         "start": "6 / (9 - 10 * p ^ 2 + p ^ 4)",
                         "steps": [],

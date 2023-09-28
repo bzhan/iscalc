@@ -1,10 +1,14 @@
 {
     "content": [
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int \\sin{(3 x)} \\,dx",
             "start": "INT x. sin(3 * x)",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{\\cos{(3 x)}}{3} + C",
                     "res": "-(cos(3 * x) / 3) + SKOLEM_CONST(C)",
                     "rule": {
@@ -27,10 +31,14 @@
                     "latex_cond": "x < \\frac{\\pi}{10}"
                 }
             ],
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int \\tan{(5 x)} \\,dx",
             "start": "INT x. tan(5 * x)",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\frac{\\sin{(5 x)}}{\\cos{(5 x)}} \\,dx",
                     "res": "INT x. sin(5 * x) / cos(5 * x)",
                     "rule": {
@@ -43,6 +51,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int -\\frac{1}{5 u} \\,du",
                     "res": "INT u. -(1 / (5 * u))",
                     "rule": {
@@ -55,6 +65,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{1}{5} (\\int \\frac{1}{u} \\,du)",
                     "res": "-(1/5 * (INT u. 1 / u))",
                     "rule": {
@@ -64,6 +76,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{1}{5} \\log{(\\left| u \\right|)} + C",
                     "res": "-(1/5 * log(abs(u))) + SKOLEM_CONST(C)",
                     "rule": {
@@ -73,6 +87,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{1}{5} \\log{(\\left| \\cos{(5 x)} \\right|)} + C",
                     "res": "-(1/5 * log(abs(cos(5 * x)))) + SKOLEM_CONST(C)",
                     "rule": {
@@ -82,6 +98,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{\\log{(\\cos{(5 x)})}}{5} + C",
                     "res": "-(log(cos(5 * x)) / 5) + SKOLEM_CONST(C)",
                     "rule": {
@@ -104,10 +122,14 @@
                     "latex_cond": "x < \\frac{\\pi}{8}"
                 }
             ],
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int 5 \\sec{(4 x)} \\tan{(4 x)} \\,dx",
             "start": "INT x. 5 * sec(4 * x) * tan(4 * x)",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int 5 (\\frac{1}{\\cos{(4 x)}}) \\tan{(4 x)} \\,dx",
                     "res": "INT x. 5 * (1 / cos(4 * x)) * tan(4 * x)",
                     "rule": {
@@ -120,6 +142,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int 5 (\\frac{1}{\\cos{(4 x)}}) (\\frac{\\sin{(4 x)}}{\\cos{(4 x)}}) \\,dx",
                     "res": "INT x. 5 * (1 / cos(4 * x)) * (sin(4 * x) / cos(4 * x))",
                     "rule": {
@@ -132,6 +156,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "5 (\\int \\frac{\\sin{(4 x)}}{\\cos^{2}(4 x)} \\,dx)",
                     "res": "5 * (INT x. sin(4 * x) / cos(4 * x) ^ 2)",
                     "rule": {
@@ -141,6 +167,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "5 (\\int -\\frac{1}{4 u ^ {2}} \\,du)",
                     "res": "5 * (INT u. -(1 / (4 * u ^ 2)))",
                     "rule": {
@@ -153,6 +181,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{5}{4} (\\int \\frac{1}{u ^ {2}} \\,du)",
                     "res": "-(5/4 * (INT u. 1 / u ^ 2))",
                     "rule": {
@@ -162,6 +192,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{5}{4} (\\frac{1}{-(2 - 1) u ^ {2 - 1}}) + C",
                     "res": "-(5/4 * (1 / -((2 - 1) * u ^ (2 - 1)))) + SKOLEM_CONST(C)",
                     "rule": {
@@ -171,6 +203,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{5}{4} (\\frac{1}{-(2 - 1) \\cos^{2 - 1}(4 x)}) + C",
                     "res": "-(5/4 * (1 / -((2 - 1) * cos(4 * x) ^ (2 - 1)))) + SKOLEM_CONST(C)",
                     "rule": {
@@ -180,6 +214,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{5}{4 \\cos{(4 x)}} + C",
                     "res": "5 / (4 * cos(4 * x)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -202,10 +238,14 @@
                     "latex_cond": "x < \\frac{\\pi}{2}"
                 }
             ],
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int (\\sin{x} + \\cos{x}) ^ {2} \\,dx",
             "start": "INT x. (sin(x) + cos(x)) ^ 2",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int 2 \\cos{x} \\sin{x} + \\cos^{2}(x) + \\sin^{2}(x) \\,dx",
                     "res": "INT x. 2 * cos(x) * sin(x) + cos(x) ^ 2 + sin(x) ^ 2",
                     "rule": {
@@ -215,6 +255,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int 2 \\cos{x} \\sin{x} + (\\sin^{2}(x) + \\cos^{2}(x)) \\,dx",
                     "res": "INT x. 2 * cos(x) * sin(x) + (sin(x) ^ 2 + cos(x) ^ 2)",
                     "rule": {
@@ -227,6 +269,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int 2 \\cos{x} \\sin{x} + 1 \\,dx",
                     "res": "INT x. 2 * cos(x) * sin(x) + 1",
                     "rule": {
@@ -239,6 +283,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "2 (\\int \\cos{x} \\sin{x} \\,dx) + (\\int 1 \\,dx)",
                     "res": "2 * (INT x. cos(x) * sin(x)) + (INT x. 1)",
                     "rule": {
@@ -248,6 +294,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "2 (\\int u \\,du) + (\\int 1 \\,dx)",
                     "res": "2 * (INT u. u) + (INT x. 1)",
                     "rule": {
@@ -260,6 +308,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "2 (\\frac{u ^ {2}}{2}) + 1 x + C",
                     "res": "2 * (u ^ 2 / 2) + 1 * x + SKOLEM_CONST(C)",
                     "rule": {
@@ -269,6 +319,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "2 (\\frac{\\sin^{2}(x)}{2}) + 1 x + C",
                     "res": "2 * (sin(x) ^ 2 / 2) + 1 * x + SKOLEM_CONST(C)",
                     "rule": {
@@ -278,6 +330,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\sin^{2}(x) + x + C",
                     "res": "sin(x) ^ 2 + x + SKOLEM_CONST(C)",
                     "rule": {
@@ -290,10 +344,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int 3 \\cos^{2}(5 x) \\,dx",
             "start": "INT x. 3 * cos(5 * x) ^ 2",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\frac{3 \\cos^{2}(u)}{5} \\,du",
                     "res": "INT u. 3 * cos(u) ^ 2 / 5",
                     "rule": {
@@ -306,6 +364,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{3}{5} (\\frac{1}{4} \\sin{(2 u)} + \\frac{1}{2} u) + C",
                     "res": "3/5 * (1/4 * sin(2 * u) + 1/2 * u) + SKOLEM_CONST(C)",
                     "rule": {
@@ -315,6 +375,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{3}{5} (\\frac{1}{4} \\sin{(2 (5 x))} + \\frac{1}{2} (5 x)) + C",
                     "res": "3/5 * (1/4 * sin(2 * (5 * x)) + 1/2 * (5 * x)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -324,6 +386,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{3 \\sin{(10 x)}}{20} + \\frac{3 x}{2} + C",
                     "res": "3 * sin(10 * x) / 20 + 3 * x / 2 + SKOLEM_CONST(C)",
                     "rule": {
@@ -336,10 +400,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int (2 + \\tan{x}) ^ {2} \\,dx",
             "start": "INT x. (2 + tan(x)) ^ 2",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\tan^{2}(x) + 4 \\tan{x} + 4 \\,dx",
                     "res": "INT x. tan(x) ^ 2 + 4 * tan(x) + 4",
                     "rule": {
@@ -349,6 +417,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "(\\int \\tan^{2}(x) \\,dx) + 4 (\\int \\tan{x} \\,dx) + (\\int 4 \\,dx)",
                     "res": "(INT x. tan(x) ^ 2) + 4 * (INT x. tan(x)) + (INT x. 4)",
                     "rule": {
@@ -358,6 +428,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "(\\int \\tan^{2}(x) \\,dx) + 4 \\log{(\\left| \\sec{x} \\right|)} + 4 x + C",
                     "res": "(INT x. tan(x) ^ 2) + 4 * log(abs(sec(x))) + 4 * x + SKOLEM_CONST(C)",
                     "rule": {
@@ -367,6 +439,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "(\\int \\sec^{2}(x) - 1 \\,dx) + 4 \\log{(\\left| \\sec{x} \\right|)} + 4 x + C",
                     "res": "(INT x. sec(x) ^ 2 - 1) + 4 * log(abs(sec(x))) + 4 * x + SKOLEM_CONST(C)",
                     "rule": {
@@ -379,6 +453,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "4 \\log{(\\left| \\sec{x} \\right|)} + (\\int \\sec^{2}(x) \\,dx) + 4 x - (\\int 1 \\,dx) + C",
                     "res": "4 * log(abs(sec(x))) + (INT x. sec(x) ^ 2) + 4 * x - (INT x. 1) + SKOLEM_CONST(C)",
                     "rule": {
@@ -388,6 +464,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "4 \\log{(\\left| \\sec{x} \\right|)} + \\tan{x} + 4 x - 1 x + C",
                     "res": "4 * log(abs(sec(x))) + tan(x) + 4 * x - 1 * x + SKOLEM_CONST(C)",
                     "rule": {
@@ -397,6 +475,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "4 \\log{(\\left| \\sec{x} \\right|)} + 3 x + \\tan{x} + C",
                     "res": "4 * log(abs(sec(x))) + 3 * x + tan(x) + SKOLEM_CONST(C)",
                     "rule": {
@@ -419,10 +499,14 @@
                     "latex_cond": "x < \\frac{\\pi}{2}"
                 }
             ],
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int \\sin^{3}(x) \\,dx",
             "start": "INT x. sin(x) ^ 3",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\sin{x} \\sin^{2}(x) \\,dx",
                     "res": "INT x. sin(x) * sin(x) ^ 2",
                     "rule": {
@@ -435,6 +519,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\sin{x} (1 - \\cos^{2}(x)) \\,dx",
                     "res": "INT x. sin(x) * (1 - cos(x) ^ 2)",
                     "rule": {
@@ -447,6 +533,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int -\\cos^{2}(x) \\sin{x} + \\sin{x} \\,dx",
                     "res": "INT x. -(cos(x) ^ 2 * sin(x)) + sin(x)",
                     "rule": {
@@ -456,6 +544,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-(\\int \\cos^{2}(x) \\sin{x} \\,dx) + -\\cos{x} + C",
                     "res": "-(INT x. cos(x) ^ 2 * sin(x)) + -cos(x) + SKOLEM_CONST(C)",
                     "rule": {
@@ -465,6 +555,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-(\\int -u ^ {2} \\,du) + -\\cos{x} + C",
                     "res": "-(INT u. -(u ^ 2)) + -cos(x) + SKOLEM_CONST(C)",
                     "rule": {
@@ -477,6 +569,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "(\\int u ^ {2} \\,du) - \\cos{x} + C",
                     "res": "(INT u. u ^ 2) - cos(x) + SKOLEM_CONST(C)",
                     "rule": {
@@ -486,6 +580,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{u ^ {2 + 1}}{2 + 1} - \\cos{x} + C",
                     "res": "u ^ (2 + 1) / (2 + 1) - cos(x) + SKOLEM_CONST(C)",
                     "rule": {
@@ -495,6 +591,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{\\cos^{2 + 1}(x)}{2 + 1} - \\cos{x} + C",
                     "res": "cos(x) ^ (2 + 1) / (2 + 1) - cos(x) + SKOLEM_CONST(C)",
                     "rule": {
@@ -504,6 +602,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{\\cos^{3}(x)}{3} - \\cos{x} + C",
                     "res": "cos(x) ^ 3 / 3 - cos(x) + SKOLEM_CONST(C)",
                     "rule": {
@@ -526,10 +626,14 @@
                     "latex_cond": "x < \\frac{\\pi}{10}"
                 }
             ],
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int \\frac{\\cos{(5 x)}}{3 + \\sin{(5 x)}} \\,dx",
             "start": "INT x. cos(5 * x) / (3 + sin(5 * x))",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\frac{1}{5 u + 15} \\,du",
                     "res": "INT u. 1 / (5 * u + 15)",
                     "rule": {
@@ -542,6 +646,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\frac{1}{5 v} \\,dv",
                     "res": "INT v. 1 / (5 * v)",
                     "rule": {
@@ -554,6 +660,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{1}{5} (\\int \\frac{1}{v} \\,dv)",
                     "res": "1/5 * (INT v. 1 / v)",
                     "rule": {
@@ -563,6 +671,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{1}{5} \\log{(\\left| v \\right|)} + C",
                     "res": "1/5 * log(abs(v)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -572,6 +682,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{1}{5} \\log{(\\left| 5 u + 15 \\right|)} + C",
                     "res": "1/5 * log(abs(5 * u + 15)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -581,6 +693,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{1}{5} \\log{(\\left| 5 \\sin{(5 x)} + 15 \\right|)} + C",
                     "res": "1/5 * log(abs(5 * sin(5 * x) + 15)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -590,6 +704,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{\\log{(5 \\sin{(5 x)} + 15)}}{5} + C",
                     "res": "log(5 * sin(5 * x) + 15) / 5 + SKOLEM_CONST(C)",
                     "rule": {
@@ -612,10 +728,14 @@
                     "latex_cond": "x < \\frac{\\pi}{2}"
                 }
             ],
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int \\frac{\\cos^{2}(x)}{1 + \\sin{x}} \\,dx",
             "start": "INT x. cos(x) ^ 2 / (1 + sin(x))",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\frac{1 - \\sin^{2}(x)}{1 + \\sin{x}} \\,dx",
                     "res": "INT x. (1 - sin(x) ^ 2) / (1 + sin(x))",
                     "rule": {
@@ -628,6 +748,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\frac{(1 + \\sin{x}) (1 - \\sin{x})}{1 + \\sin{x}} \\,dx",
                     "res": "INT x. (1 + sin(x)) * (1 - sin(x)) / (1 + sin(x))",
                     "rule": {
@@ -640,6 +762,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-(\\int \\sin{x} \\,dx) + (\\int 1 \\,dx)",
                     "res": "-(INT x. sin(x)) + (INT x. 1)",
                     "rule": {
@@ -649,6 +773,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "--\\cos{x} + 1 x + C",
                     "res": "--cos(x) + 1 * x + SKOLEM_CONST(C)",
                     "rule": {
@@ -658,6 +784,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\cos{x} + x + C",
                     "res": "cos(x) + x + SKOLEM_CONST(C)",
                     "rule": {
@@ -680,10 +808,14 @@
                     "latex_cond": "x < \\frac{\\pi}{2}"
                 }
             ],
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int \\frac{\\sin{x}}{1 + \\sin{x}} \\,dx",
             "start": "INT x. sin(x) / (1 + sin(x))",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\frac{\\sin{x} (1 - \\sin{x})}{1 - \\sin^{2}(x)} \\,dx",
                     "res": "INT x. sin(x) * (1 - sin(x)) / (1 - sin(x) ^ 2)",
                     "rule": {
@@ -696,6 +828,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\frac{\\sin{x} (1 - \\sin{x})}{\\cos^{2}(x)} \\,dx",
                     "res": "INT x. sin(x) * (1 - sin(x)) / cos(x) ^ 2",
                     "rule": {
@@ -708,6 +842,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\frac{1}{\\cos{x}} (\\frac{\\sin{x}}{\\cos{x}}) - (\\frac{\\sin{x}}{\\cos{x}}) ^ {2} \\,dx",
                     "res": "INT x. 1 / cos(x) * (sin(x) / cos(x)) - (sin(x) / cos(x)) ^ 2",
                     "rule": {
@@ -720,6 +856,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\sec{x} (\\frac{\\sin{x}}{\\cos{x}}) - (\\frac{\\sin{x}}{\\cos{x}}) ^ {2} \\,dx",
                     "res": "INT x. sec(x) * (sin(x) / cos(x)) - (sin(x) / cos(x)) ^ 2",
                     "rule": {
@@ -732,6 +870,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\sec{x} \\tan{x} - (\\frac{\\sin{x}}{\\cos{x}}) ^ {2} \\,dx",
                     "res": "INT x. sec(x) * tan(x) - (sin(x) / cos(x)) ^ 2",
                     "rule": {
@@ -744,6 +884,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\sec{x} \\tan{x} - \\tan^{2}(x) \\,dx",
                     "res": "INT x. sec(x) * tan(x) - tan(x) ^ 2",
                     "rule": {
@@ -756,6 +898,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\sec{x} \\tan{x} - (\\sec^{2}(x) - 1) \\,dx",
                     "res": "INT x. sec(x) * tan(x) - (sec(x) ^ 2 - 1)",
                     "rule": {
@@ -768,6 +912,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "(\\int \\sec{x} \\tan{x} \\,dx) - (\\int \\sec^{2}(x) \\,dx) + (\\int 1 \\,dx)",
                     "res": "(INT x. sec(x) * tan(x)) - (INT x. sec(x) ^ 2) + (INT x. 1)",
                     "rule": {
@@ -777,6 +923,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\sec{x} - \\tan{x} + 1 x + C",
                     "res": "sec(x) - tan(x) + 1 * x + SKOLEM_CONST(C)",
                     "rule": {
@@ -786,6 +934,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\sec{x} - \\tan{x} + x + C",
                     "res": "sec(x) - tan(x) + x + SKOLEM_CONST(C)",
                     "rule": {
@@ -798,10 +948,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int (\\csc{(3 x)} + \\cot{(3 x)}) ^ {2} \\,dx",
             "start": "INT x. (csc(3 * x) + cot(3 * x)) ^ 2",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int 2 \\cot{(3 x)} \\csc{(3 x)} + \\cot^{2}(3 x) + \\csc^{2}(3 x) \\,dx",
                     "res": "INT x. 2 * cot(3 * x) * csc(3 * x) + cot(3 * x) ^ 2 + csc(3 * x) ^ 2",
                     "rule": {
@@ -811,6 +965,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int 2 \\cot{(3 x)} \\csc{(3 x)} + (\\csc^{2}(3 x) - 1) + \\csc^{2}(3 x) \\,dx",
                     "res": "INT x. 2 * cot(3 * x) * csc(3 * x) + (csc(3 * x) ^ 2 - 1) + csc(3 * x) ^ 2",
                     "rule": {
@@ -823,6 +979,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "2 (\\int \\cot{(3 x)} \\csc{(3 x)} \\,dx) + 2 (\\int \\csc^{2}(3 x) \\,dx) - (\\int 1 \\,dx)",
                     "res": "2 * (INT x. cot(3 * x) * csc(3 * x)) + 2 * (INT x. csc(3 * x) ^ 2) - (INT x. 1)",
                     "rule": {
@@ -832,6 +990,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "2 (\\int \\frac{\\cot{u} \\csc{u}}{3} \\,du) + 2 (\\int \\csc^{2}(3 x) \\,dx) - (\\int 1 \\,dx)",
                     "res": "2 * (INT u. cot(u) * csc(u) / 3) + 2 * (INT x. csc(3 * x) ^ 2) - (INT x. 1)",
                     "rule": {
@@ -844,6 +1004,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{2 (\\int \\cot{u} \\csc{u} \\,du)}{3} + 2 (\\int \\csc^{2}(3 x) \\,dx) - (\\int 1 \\,dx)",
                     "res": "2 * (INT u. cot(u) * csc(u)) / 3 + 2 * (INT x. csc(3 * x) ^ 2) - (INT x. 1)",
                     "rule": {
@@ -853,6 +1015,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{2 (-\\csc{u})}{3} + 2 (\\int \\csc^{2}(3 x) \\,dx) - 1 x + C",
                     "res": "2 * -csc(u) / 3 + 2 * (INT x. csc(3 * x) ^ 2) - 1 * x + SKOLEM_CONST(C)",
                     "rule": {
@@ -862,6 +1026,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{2 (-\\csc{(3 x)})}{3} + 2 (\\int \\csc^{2}(3 x) \\,dx) - 1 x + C",
                     "res": "2 * -csc(3 * x) / 3 + 2 * (INT x. csc(3 * x) ^ 2) - 1 * x + SKOLEM_CONST(C)",
                     "rule": {
@@ -871,6 +1037,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{2 (-\\csc{(3 x)})}{3} + 2 (\\int \\frac{\\csc^{2}(u)}{3} \\,du) - 1 x + C",
                     "res": "2 * -csc(3 * x) / 3 + 2 * (INT u. csc(u) ^ 2 / 3) - 1 * x + SKOLEM_CONST(C)",
                     "rule": {
@@ -883,6 +1051,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{2 (\\int \\csc^{2}(u) \\,du)}{3} - \\frac{2 \\csc{(3 x)}}{3} - x + C",
                     "res": "2 * (INT u. csc(u) ^ 2) / 3 - 2 * csc(3 * x) / 3 - x + SKOLEM_CONST(C)",
                     "rule": {
@@ -892,6 +1062,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{2 (-\\cot{u})}{3} - \\frac{2 \\csc{(3 x)}}{3} - x + C",
                     "res": "2 * -cot(u) / 3 - 2 * csc(3 * x) / 3 - x + SKOLEM_CONST(C)",
                     "rule": {
@@ -901,6 +1073,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{2 (-\\cot{(3 x)})}{3} - \\frac{2 \\csc{(3 x)}}{3} - x + C",
                     "res": "2 * -cot(3 * x) / 3 - 2 * csc(3 * x) / 3 - x + SKOLEM_CONST(C)",
                     "rule": {
@@ -910,6 +1084,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{2 \\cot{(3 x)}}{3} - \\frac{2 \\csc{(3 x)}}{3} - x + C",
                     "res": "-(2 * cot(3 * x) / 3) - 2 * csc(3 * x) / 3 - x + SKOLEM_CONST(C)",
                     "rule": {
@@ -922,10 +1098,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int \\sec^{2}(x) \\sqrt{5 + \\tan{x}} \\,dx",
             "start": "INT x. sec(x) ^ 2 * sqrt(5 + tan(x))",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\sqrt{u} \\,du",
                     "res": "INT u. sqrt(u)",
                     "rule": {
@@ -938,6 +1118,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{2}{3} u ^ {3/2} + C",
                     "res": "2/3 * u ^ (3/2) + SKOLEM_CONST(C)",
                     "rule": {
@@ -947,6 +1129,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{2}{3} (5 + \\tan{x}) ^ {3/2} + C",
                     "res": "2/3 * (5 + tan(x)) ^ (3/2) + SKOLEM_CONST(C)",
                     "rule": {
@@ -956,6 +1140,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{2 (\\tan{x} + 5) ^ {3/2}}{3} + C",
                     "res": "2 * (tan(x) + 5) ^ (3/2) / 3 + SKOLEM_CONST(C)",
                     "rule": {
@@ -968,10 +1154,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int \\tan^{5}(x) \\,dx",
             "start": "INT x. tan(x) ^ 5",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\tan^{3}(x) \\tan^{2}(x) \\,dx",
                     "res": "INT x. tan(x) ^ 3 * tan(x) ^ 2",
                     "rule": {
@@ -984,6 +1174,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\tan^{3}(x) (\\sec^{2}(x) - 1) \\,dx",
                     "res": "INT x. tan(x) ^ 3 * (sec(x) ^ 2 - 1)",
                     "rule": {
@@ -996,6 +1188,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\sec^{2}(x) \\tan^{3}(x) - \\tan^{3}(x) \\,dx",
                     "res": "INT x. sec(x) ^ 2 * tan(x) ^ 3 - tan(x) ^ 3",
                     "rule": {
@@ -1005,6 +1199,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "(\\int \\sec^{2}(x) \\tan^{3}(x) \\,dx) - (\\int \\tan^{3}(x) \\,dx)",
                     "res": "(INT x. sec(x) ^ 2 * tan(x) ^ 3) - (INT x. tan(x) ^ 3)",
                     "rule": {
@@ -1014,6 +1210,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "(\\int u ^ {3} \\,du) - (\\int \\tan^{3}(x) \\,dx)",
                     "res": "(INT u. u ^ 3) - (INT x. tan(x) ^ 3)",
                     "rule": {
@@ -1026,6 +1224,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{u ^ {3 + 1}}{3 + 1} - (\\int \\tan^{3}(x) \\,dx) + C",
                     "res": "u ^ (3 + 1) / (3 + 1) - (INT x. tan(x) ^ 3) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1035,6 +1235,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{\\tan^{3 + 1}(x)}{3 + 1} - (\\int \\tan^{3}(x) \\,dx) + C",
                     "res": "tan(x) ^ (3 + 1) / (3 + 1) - (INT x. tan(x) ^ 3) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1044,6 +1246,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{\\tan^{4}(x)}{4} - (\\int \\tan^{3}(x) \\,dx) + C",
                     "res": "tan(x) ^ 4 / 4 - (INT x. tan(x) ^ 3) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1053,6 +1257,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{\\tan^{4}(x)}{4} - (\\int \\tan{x} \\tan^{2}(x) \\,dx) + C",
                     "res": "tan(x) ^ 4 / 4 - (INT x. tan(x) * tan(x) ^ 2) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1065,6 +1271,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{\\tan^{4}(x)}{4} - (\\int \\tan{x} (\\sec^{2}(x) - 1) \\,dx) + C",
                     "res": "tan(x) ^ 4 / 4 - (INT x. tan(x) * (sec(x) ^ 2 - 1)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1077,6 +1285,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{\\tan^{4}(x)}{4} - (\\int \\sec^{2}(x) \\tan{x} - \\tan{x} \\,dx) + C",
                     "res": "tan(x) ^ 4 / 4 - (INT x. sec(x) ^ 2 * tan(x) - tan(x)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1087,6 +1297,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-(\\int \\sec^{2}(x) \\tan{x} \\,dx) + \\frac{\\tan^{4}(x)}{4} + (\\int \\tan{x} \\,dx) + C",
                     "res": "-(INT x. sec(x) ^ 2 * tan(x)) + tan(x) ^ 4 / 4 + (INT x. tan(x)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1096,6 +1308,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-(\\int u \\,du) + \\frac{\\tan^{4}(x)}{4} + (\\int \\tan{x} \\,dx) + C",
                     "res": "-(INT u. u) + tan(x) ^ 4 / 4 + (INT x. tan(x)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1108,6 +1322,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{u ^ {2}}{2} + \\frac{\\tan^{4}(x)}{4} + \\log{(\\left| \\sec{x} \\right|)} + C",
                     "res": "-(u ^ 2 / 2) + tan(x) ^ 4 / 4 + log(abs(sec(x))) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1117,6 +1333,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{\\tan^{2}(x)}{2} + \\frac{\\tan^{4}(x)}{4} + \\log{(\\left| \\sec{x} \\right|)} + C",
                     "res": "-(tan(x) ^ 2 / 2) + tan(x) ^ 4 / 4 + log(abs(sec(x))) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1126,6 +1344,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{\\tan^{2}(x)}{2} + \\frac{\\tan^{4}(x)}{4} + \\log{(\\left| \\sec{x} \\right|)} + C",
                     "res": "-(tan(x) ^ 2 / 2) + tan(x) ^ 4 / 4 + log(abs(sec(x))) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1138,10 +1358,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int (\\sin{x} - \\cos{x}) (\\sin{x} + \\cos{x}) ^ {5} \\,dx",
             "start": "INT x. (sin(x) - cos(x)) * (sin(x) + cos(x)) ^ 5",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int (-(\\sin{x} + \\cos{x}) ^ {5}) (\\cos{x} - \\sin{x}) \\,dx",
                     "res": "INT x. -((sin(x) + cos(x)) ^ 5) * (cos(x) - sin(x))",
                     "rule": {
@@ -1154,6 +1378,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int -u ^ {5} \\,du",
                     "res": "INT u. -(u ^ 5)",
                     "rule": {
@@ -1166,6 +1392,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{u ^ {5 + 1}}{5 + 1} + C",
                     "res": "-(u ^ (5 + 1) / (5 + 1)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1175,6 +1403,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{(\\sin{x} + \\cos{x}) ^ {5 + 1}}{5 + 1} + C",
                     "res": "-((sin(x) + cos(x)) ^ (5 + 1) / (5 + 1)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1184,6 +1414,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{(\\cos{x} + \\sin{x}) ^ {6}}{6} + C",
                     "res": "-((cos(x) + sin(x)) ^ 6 / 6) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1196,10 +1428,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int \\cos{x} e^{4 + \\sin{x}} \\,dx",
             "start": "INT x. cos(x) * exp(4 + sin(x))",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int e^{4 + \\sin{x}} \\cos{x} \\,dx",
                     "res": "INT x. exp(4 + sin(x)) * cos(x)",
                     "rule": {
@@ -1212,6 +1448,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int e^{u} \\,du",
                     "res": "INT u. exp(u)",
                     "rule": {
@@ -1224,6 +1462,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "e^{u} + C",
                     "res": "exp(u) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1233,6 +1473,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "e^{4 + \\sin{x}} + C",
                     "res": "exp(4 + sin(x)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1242,6 +1484,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "e^{\\sin{x} + 4} + C",
                     "res": "exp(sin(x) + 4) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1254,10 +1498,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int \\sin{(3 x)} \\sin{(\\cos{(3 x)})} \\,dx",
             "start": "INT x. sin(3 * x) * sin(cos(3 * x))",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\frac{-\\sin{(\\cos{(3 x)})}}{3} (-3 \\sin{(3 x)}) \\,dx",
                     "res": "INT x. -sin(cos(3 * x)) / 3 * -(3 * sin(3 * x))",
                     "rule": {
@@ -1270,6 +1518,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int -\\frac{\\sin{u}}{3} \\,du",
                     "res": "INT u. -(sin(u) / 3)",
                     "rule": {
@@ -1282,6 +1532,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{\\int \\sin{u} \\,du}{3}",
                     "res": "-((INT u. sin(u)) / 3)",
                     "rule": {
@@ -1291,6 +1543,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{-\\cos{u}}{3} + C",
                     "res": "-(-cos(u) / 3) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1300,6 +1554,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{-\\cos{(\\cos{(3 x)})}}{3} + C",
                     "res": "-(-cos(cos(3 * x)) / 3) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1309,6 +1565,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{\\cos{(\\cos{(3 x)})}}{3} + C",
                     "res": "cos(cos(3 * x)) / 3 + SKOLEM_CONST(C)",
                     "rule": {
@@ -1321,10 +1579,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int \\frac{\\cos{x} \\log{(\\sin{x})}}{\\sin{x}} \\,dx",
             "start": "INT x. cos(x) * log(sin(x)) / sin(x)",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\log{(\\sin{x})} (\\frac{\\cos{x}}{\\sin{x}}) \\,dx",
                     "res": "INT x. log(sin(x)) * (cos(x) / sin(x))",
                     "rule": {
@@ -1337,6 +1599,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int u \\,du",
                     "res": "INT u. u",
                     "rule": {
@@ -1349,6 +1613,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{u ^ {2}}{2} + C",
                     "res": "u ^ 2 / 2 + SKOLEM_CONST(C)",
                     "rule": {
@@ -1358,6 +1624,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{\\log^{2}(\\sin{x})}{2} + C",
                     "res": "log(sin(x)) ^ 2 / 2 + SKOLEM_CONST(C)",
                     "rule": {
@@ -1367,6 +1635,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{\\log^{2}(\\sin{x})}{2} + C",
                     "res": "log(sin(x)) ^ 2 / 2 + SKOLEM_CONST(C)",
                     "rule": {
@@ -1379,10 +1649,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int \\sec{x} \\tan{x} \\sqrt{4 + 3 \\sec{x}} \\,dx",
             "start": "INT x. sec(x) * tan(x) * sqrt(4 + 3 * sec(x))",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\frac{\\sqrt{4 + 3 \\sec{x}}}{3} (3 \\sec{x} \\tan{x}) \\,dx",
                     "res": "INT x. sqrt(4 + 3 * sec(x)) / 3 * (3 * sec(x) * tan(x))",
                     "rule": {
@@ -1395,6 +1669,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\frac{\\sqrt{u}}{3} \\,du",
                     "res": "INT u. sqrt(u) / 3",
                     "rule": {
@@ -1407,6 +1683,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{1}{3} (\\frac{2}{3} u ^ {3/2}) + C",
                     "res": "1/3 * (2/3 * u ^ (3/2)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1416,6 +1694,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{1}{3} (\\frac{2}{3} (4 + 3 \\sec{x}) ^ {3/2}) + C",
                     "res": "1/3 * (2/3 * (4 + 3 * sec(x)) ^ (3/2)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1425,6 +1705,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{2 (3 \\sec{x} + 4) ^ {3/2}}{9} + C",
                     "res": "2 * (3 * sec(x) + 4) ^ (3/2) / 9 + SKOLEM_CONST(C)",
                     "rule": {
@@ -1437,10 +1719,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int e^{x} \\cos{(e^{x})} \\,dx",
             "start": "INT x. exp(x) * cos(exp(x))",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\cos{u} \\,du",
                     "res": "INT u. cos(u)",
                     "rule": {
@@ -1453,6 +1739,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\sin{u} + C",
                     "res": "sin(u) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1462,6 +1750,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\sin{(e^{x})} + C",
                     "res": "sin(exp(x)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1471,6 +1761,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\sin{(e^{x})} + C",
                     "res": "sin(exp(x)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1483,10 +1775,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int x \\sin{(3 x)} \\,dx",
             "start": "INT x. x * sin(3 * x)",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{x \\cos{(3 x)}}{3} - (\\int -\\frac{\\cos{(3 x)}}{3} \\,dx)",
                     "res": "-(x * cos(3 * x) / 3) - (INT x. -(cos(3 * x) / 3))",
                     "rule": {
@@ -1499,6 +1795,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{x \\cos{(3 x)}}{3} + \\frac{\\int \\cos{(3 x)} \\,dx}{3}",
                     "res": "-(x * cos(3 * x) / 3) + (INT x. cos(3 * x)) / 3",
                     "rule": {
@@ -1508,6 +1806,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{x \\cos{(3 x)}}{3} + \\frac{\\frac{\\sin{(3 x)}}{3}}{3} + C",
                     "res": "-(x * cos(3 * x) / 3) + sin(3 * x) / 3 / 3 + SKOLEM_CONST(C)",
                     "rule": {
@@ -1517,6 +1817,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{x \\cos{(3 x)}}{3} + \\frac{\\sin{(3 x)}}{9} + C",
                     "res": "-(x * cos(3 * x) / 3) + sin(3 * x) / 9 + SKOLEM_CONST(C)",
                     "rule": {
@@ -1529,10 +1831,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int x ^ {2} \\cos{x} \\,dx",
             "start": "INT x. x ^ 2 * cos(x)",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "x ^ {2} \\sin{x} - (\\int 2 x \\sin{x} \\,dx)",
                     "res": "x ^ 2 * sin(x) - (INT x. 2 * x * sin(x))",
                     "rule": {
@@ -1545,6 +1851,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "x ^ {2} \\sin{x} - 2 (\\int x \\sin{x} \\,dx)",
                     "res": "x ^ 2 * sin(x) - 2 * (INT x. x * sin(x))",
                     "rule": {
@@ -1554,6 +1862,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "x ^ {2} \\sin{x} - 2 (-x \\cos{x} - (\\int -\\cos{x} \\,dx))",
                     "res": "x ^ 2 * sin(x) - 2 * (-(x * cos(x)) - (INT x. -cos(x)))",
                     "rule": {
@@ -1566,6 +1876,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "x ^ {2} \\sin{x} + 2 x \\cos{x} - 2 (\\int \\cos{x} \\,dx)",
                     "res": "x ^ 2 * sin(x) + 2 * x * cos(x) - 2 * (INT x. cos(x))",
                     "rule": {
@@ -1575,6 +1887,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "x ^ {2} \\sin{x} + 2 x \\cos{x} - 2 \\sin{x} + C",
                     "res": "x ^ 2 * sin(x) + 2 * x * cos(x) - 2 * sin(x) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1584,6 +1898,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "x ^ {2} \\sin{x} + 2 x \\cos{x} - 2 \\sin{x} + C",
                     "res": "x ^ 2 * sin(x) + 2 * x * cos(x) - 2 * sin(x) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1596,10 +1912,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int \\sin{x} \\cos{x} e^{\\sin{x}} \\,dx",
             "start": "INT x. sin(x) * cos(x) * exp(sin(x))",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\sin{x} e^{\\sin{x}} \\cos{x} \\,dx",
                     "res": "INT x. sin(x) * exp(sin(x)) * cos(x)",
                     "rule": {
@@ -1612,6 +1932,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int u e^{u} \\,du",
                     "res": "INT u. u * exp(u)",
                     "rule": {
@@ -1624,6 +1946,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "u e^{u} - (\\int e^{u} \\,du)",
                     "res": "u * exp(u) - (INT u. exp(u))",
                     "rule": {
@@ -1636,6 +1960,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "u e^{u} - e^{u} + C",
                     "res": "u * exp(u) - exp(u) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1645,6 +1971,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\sin{x} e^{\\sin{x}} - e^{\\sin{x}} + C",
                     "res": "sin(x) * exp(sin(x)) - exp(sin(x)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1654,6 +1982,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "e^{\\sin{x}} \\sin{x} - e^{\\sin{x}} + C",
                     "res": "exp(sin(x)) * sin(x) - exp(sin(x)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1666,10 +1996,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int e^{x} \\sin{x} \\,dx",
             "start": "INT x. exp(x) * sin(x)",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\cos{x} e^{x} - (\\int -\\cos{x} e^{x} \\,dx)",
                     "res": "-(cos(x) * exp(x)) - (INT x. -(cos(x) * exp(x)))",
                     "rule": {
@@ -1682,6 +2016,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "(\\int \\cos{x} e^{x} \\,dx) - \\cos{x} e^{x}",
                     "res": "(INT x. cos(x) * exp(x)) - cos(x) * exp(x)",
                     "rule": {
@@ -1691,6 +2027,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "e^{x} \\sin{x} - (\\int e^{x} \\sin{x} \\,dx) - \\cos{x} e^{x}",
                     "res": "exp(x) * sin(x) - (INT x. exp(x) * sin(x)) - cos(x) * exp(x)",
                     "rule": {
@@ -1703,6 +2041,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{-\\cos{x} e^{x} + e^{x} \\sin{x}}{2}",
                     "res": "(-(cos(x) * exp(x)) + exp(x) * sin(x)) / 2",
                     "rule": {
@@ -1716,10 +2056,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int \\cos{(4 x)} \\sin{(3 x)} \\,dx",
             "start": "INT x. cos(4 * x) * sin(3 * x)",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{\\sin{(3 x)} \\sin{(4 x)}}{4} - (\\int \\frac{3 \\cos{(3 x)} \\sin{(4 x)}}{4} \\,dx)",
                     "res": "sin(3 * x) * sin(4 * x) / 4 - (INT x. 3 * cos(3 * x) * sin(4 * x) / 4)",
                     "rule": {
@@ -1732,6 +2076,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{3 (\\int \\cos{(3 x)} \\sin{(4 x)} \\,dx)}{4} + \\frac{\\sin{(3 x)} \\sin{(4 x)}}{4}",
                     "res": "-(3 * (INT x. cos(3 * x) * sin(4 * x)) / 4) + sin(3 * x) * sin(4 * x) / 4",
                     "rule": {
@@ -1741,6 +2087,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{3 (-\\frac{\\cos{(3 x)} \\cos{(4 x)}}{4} - (\\int \\frac{3 \\cos{(4 x)} \\sin{(3 x)}}{4} \\,dx))}{4} + \\frac{\\sin{(3 x)} \\sin{(4 x)}}{4}",
                     "res": "-(3 * (-(cos(3 * x) * cos(4 * x) / 4) - (INT x. 3 * cos(4 * x) * sin(3 * x) / 4)) / 4) + sin(3 * x) * sin(4 * x) / 4",
                     "rule": {
@@ -1753,6 +2101,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{9 (\\int \\cos{(4 x)} \\sin{(3 x)} \\,dx)}{16} + \\frac{3 \\cos{(3 x)} \\cos{(4 x)}}{16} + \\frac{\\sin{(3 x)} \\sin{(4 x)}}{4}",
                     "res": "9 * (INT x. cos(4 * x) * sin(3 * x)) / 16 + 3 * cos(3 * x) * cos(4 * x) / 16 + sin(3 * x) * sin(4 * x) / 4",
                     "rule": {
@@ -1762,6 +2112,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\frac{3 \\cos{(3 x)} \\cos{(4 x)}}{7} + \\frac{4 \\sin{(3 x)} \\sin{(4 x)}}{7}",
                     "res": "3 * cos(3 * x) * cos(4 * x) / 7 + 4 * sin(3 * x) * sin(4 * x) / 7",
                     "rule": {
@@ -1775,10 +2127,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int \\sec{x} \\sqrt{\\sec{x} + \\tan{x}} \\,dx",
             "start": "INT x. sec(x) * sqrt(sec(x) + tan(x))",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int 2 (\\frac{\\sec{x} \\tan{x} + \\sec^{2}(x)}{2 \\sqrt{\\sec{x} + \\tan{x}}}) \\,dx",
                     "res": "INT x. 2 * ((sec(x) * tan(x) + sec(x) ^ 2) / (2 * sqrt(sec(x) + tan(x))))",
                     "rule": {
@@ -1791,6 +2147,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int 2 \\,du",
                     "res": "INT u. 2",
                     "rule": {
@@ -1803,6 +2161,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "2 u + C",
                     "res": "2 * u + SKOLEM_CONST(C)",
                     "rule": {
@@ -1812,6 +2172,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "2 \\sqrt{\\sec{x} + \\tan{x}} + C",
                     "res": "2 * sqrt(sec(x) + tan(x)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1824,10 +2186,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int \\frac{\\sin{(2 x)} - \\cos{(2 x)}}{\\sin{(2 x)} + \\cos{(2 x)}} \\,dx",
             "start": "INT x. (sin(2 * x) - cos(2 * x)) / (sin(2 * x) + cos(2 * x))",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\frac{-1}{2 (\\sin{(2 x)} + \\cos{(2 x)})} (2 \\cos{(2 x)} - 2 \\sin{(2 x)}) \\,dx",
                     "res": "INT x. -1 / (2 * (sin(2 * x) + cos(2 * x))) * (2 * cos(2 * x) - 2 * sin(2 * x))",
                     "rule": {
@@ -1840,6 +2206,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int -\\frac{1}{2 u} \\,du",
                     "res": "INT u. -(1 / (2 * u))",
                     "rule": {
@@ -1852,6 +2220,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{1}{2} (\\int \\frac{1}{u} \\,du)",
                     "res": "-(1/2 * (INT u. 1 / u))",
                     "rule": {
@@ -1861,6 +2231,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{1}{2} \\log{(\\left| u \\right|)} + C",
                     "res": "-(1/2 * log(abs(u))) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1870,6 +2242,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{1}{2} \\log{(\\left| \\sin{(2 x)} + \\cos{(2 x)} \\right|)} + C",
                     "res": "-(1/2 * log(abs(sin(2 * x) + cos(2 * x)))) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1879,6 +2253,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "-\\frac{\\log{(\\left| \\cos{(2 x)} + \\sin{(2 x)} \\right|)}}{2} + C",
                     "res": "-(log(abs(cos(2 * x) + sin(2 * x))) / 2) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1891,10 +2267,14 @@
             "type": "Calculation"
         },
         {
+            "dead_vars": [],
+            "fixes": [],
             "latex_start": "\\int \\frac{\\sin{x} + \\cos{x}}{e^{-x} + \\sin{x}} \\,dx",
             "start": "INT x. (sin(x) + cos(x)) / (exp(-x) + sin(x))",
             "steps": [
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\frac{1}{1 + e^{x} \\sin{x}} (\\cos{x} e^{x} + e^{x} \\sin{x}) \\,dx",
                     "res": "INT x. 1 / (1 + exp(x) * sin(x)) * (cos(x) * exp(x) + exp(x) * sin(x))",
                     "rule": {
@@ -1907,6 +2287,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\int \\frac{1}{u} \\,du",
                     "res": "INT u. 1 / u",
                     "rule": {
@@ -1919,6 +2301,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\log{(\\left| u \\right|)} + C",
                     "res": "log(abs(u)) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1928,6 +2312,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\log{(\\left| 1 + e^{x} \\sin{x} \\right|)} + C",
                     "res": "log(abs(1 + exp(x) * sin(x))) + SKOLEM_CONST(C)",
                     "rule": {
@@ -1937,6 +2323,8 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "dead_vars": [],
+                    "fixes": [],
                     "latex_res": "\\log{(\\left| e^{x} \\sin{x} + 1 \\right|)} + C",
                     "res": "log(abs(exp(x) * sin(x) + 1)) + SKOLEM_CONST(C)",
                     "rule": {

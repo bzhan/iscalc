@@ -7,10 +7,14 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\sum_{n=0}^{\\infty}{\\int_{0}^{1} \\frac{x ^ {n}}{n + 1} \\,dx}",
                         "start": "SUM(n, 0, oo, INT x:[0,1]. x ^ n / (n + 1))",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{n + 1} (\\int_{0}^{1} x ^ {n} \\,dx)}",
                                 "res": "SUM(n, 0, oo, 1 / (n + 1) * (INT x:[0,1]. x ^ n))",
                                 "rule": {
@@ -20,6 +24,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{n + 1} (\\left. \\frac{x ^ {n + 1}}{n + 1} \\right\\vert_{x=0}^{1})}",
                                 "res": "SUM(n, 0, oo, 1 / (n + 1) * ([x ^ (n + 1) / (n + 1)]_x=0,1))",
                                 "rule": {
@@ -29,6 +35,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{(n + 1) ^ {2}}}",
                                 "res": "SUM(n, 0, oo, 1 / (n + 1) ^ 2)",
                                 "rule": {
@@ -55,10 +63,19 @@
             "proof": {
                 "calcs": [
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} \\frac{\\log{(1 + x)}}{x} \\,dx",
                         "start": "INT x:[0,1]. log(1 + x) / x",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{1} \\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {n + 1}}{n + 1}}}{x} \\,dx",
                                 "res": "INT x:[0,1]. SUM(n, 0, oo, (-1) ^ n * x ^ (n + 1) / (n + 1)) / x",
                                 "rule": {
@@ -70,6 +87,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{1} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {n + 1}}{n + 1} (\\frac{1}{x})} \\,dx",
                                 "res": "INT x:[0,1]. SUM(n, 0, oo, (-1) ^ n * x ^ (n + 1) / (n + 1) * (1 / x))",
                                 "rule": {
@@ -82,6 +106,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\int_{0}^{1} \\frac{(-1) ^ {n} x ^ {n + 1}}{n + 1} (\\frac{1}{x}) \\,dx}",
                                 "res": "SUM(n, 0, oo, INT x:[0,1]. (-1) ^ n * x ^ (n + 1) / (n + 1) * (1 / x))",
                                 "rule": {
@@ -91,6 +122,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n}}{n + 1} (\\int_{0}^{1} x ^ {n} \\,dx)}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n / (n + 1) * (INT x:[0,1]. x ^ n))",
                                 "rule": {
@@ -100,6 +138,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n}}{n + 1} (\\left. \\frac{x ^ {n + 1}}{n + 1} \\right\\vert_{x=0}^{1})}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n / (n + 1) * ([x ^ (n + 1) / (n + 1)]_x=0,1))",
                                 "rule": {
@@ -109,6 +154,13 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n}}{(n + 1) ^ {2}}}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n / (n + 1) ^ 2)",
                                 "rule": {
@@ -118,6 +170,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{\\pi ^ {2}}{12}",
                                 "res": "pi ^ 2 / 12",
                                 "rule": {
@@ -130,6 +184,8 @@
                         "type": "Calculation"
                     },
                     {
+                        "dead_vars": [],
+                        "fixes": [],
                         "latex_start": "\\frac{\\pi ^ {2}}{12}",
                         "start": "pi ^ 2 / 12",
                         "steps": [],

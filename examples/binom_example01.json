@@ -1,26 +1,24 @@
 {
     "content": [
         {
-            "eq": "C(n,m) = factorial(n) / (factorial(m) * factorial(n - m))",
-            "latex_eq": "C(n,m) = \\frac{n!}{m! (n - m)!}",
-            "latex_lhs": "C(n,m)",
-            "type": "FuncDef"
-        },
-        {
             "finished": true,
-            "goal": "C(n,m) = C(n,n - m)",
-            "latex_goal": "C(n,m) = C(n,n - m)",
+            "goal": "binom(n,m) = binom(n,n - m)",
+            "latex_goal": "\\binom{n}{m} = \\binom{n}{n - m}",
             "proof": {
                 "calcs": [
                     {
-                        "latex_start": "C(n,m)",
-                        "start": "C(n,m)",
+                        "dead_vars": [],
+                        "fixes": [],
+                        "latex_start": "\\binom{n}{m}",
+                        "start": "binom(n,m)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{n!}{m! (-m + n)!}",
                                 "res": "factorial(n) / (factorial(m) * factorial(-m + n))",
                                 "rule": {
-                                    "func_name": "C",
+                                    "func_name": "binom",
                                     "name": "ExpandDefinition",
                                     "str": "expand definition"
                                 },
@@ -30,14 +28,18 @@
                         "type": "Calculation"
                     },
                     {
-                        "latex_start": "C(n,n - m)",
-                        "start": "C(n,n - m)",
+                        "dead_vars": [],
+                        "fixes": [],
+                        "latex_start": "\\binom{n}{n - m}",
+                        "start": "binom(n,n - m)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{n!}{m! (-m + n)!}",
                                 "res": "factorial(n) / (factorial(m) * factorial(-m + n))",
                                 "rule": {
-                                    "func_name": "C",
+                                    "func_name": "binom",
                                     "name": "ExpandDefinition",
                                     "str": "expand definition"
                                 },
@@ -48,27 +50,31 @@
                     }
                 ],
                 "finished": true,
-                "goal": "C(n,m) = C(n,n - m)",
-                "latex_goal": "C(n,m) = C(n,n - m)",
+                "goal": "binom(n,m) = binom(n,n - m)",
+                "latex_goal": "\\binom{n}{m} = \\binom{n}{n - m}",
                 "type": "CalculationProof"
             },
             "type": "Goal"
         },
         {
             "finished": true,
-            "goal": "C(n,m) * C(m,r) = C(n,r) * C(n - r,m - r)",
-            "latex_goal": "C(n,m) C(m,r) = C(n,r) C(n - r,m - r)",
+            "goal": "binom(n,m) * binom(m,r) = binom(n,r) * binom(n - r,m - r)",
+            "latex_goal": "\\binom{n}{m} \\binom{m}{r} = \\binom{n}{r} \\binom{n - r}{m - r}",
             "proof": {
                 "calcs": [
                     {
-                        "latex_start": "C(n,m) C(m,r)",
-                        "start": "C(n,m) * C(m,r)",
+                        "dead_vars": [],
+                        "fixes": [],
+                        "latex_start": "\\binom{n}{m} \\binom{m}{r}",
+                        "start": "binom(n,m) * binom(m,r)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{n!}{m! (-m + n)!} (\\frac{m!}{r! (m - r)!})",
                                 "res": "factorial(n) / (factorial(m) * factorial(-m + n)) * (factorial(m) / (factorial(r) * factorial(m - r)))",
                                 "rule": {
-                                    "func_name": "C",
+                                    "func_name": "binom",
                                     "loc": "subterms",
                                     "name": "ExpandDefinition",
                                     "str": "expand definition on subterms"
@@ -76,6 +82,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{n!}{r! (m - r)! (-m + n)!}",
                                 "res": "factorial(n) / (factorial(r) * factorial(m - r) * factorial(-m + n))",
                                 "rule": {
@@ -88,14 +96,18 @@
                         "type": "Calculation"
                     },
                     {
-                        "latex_start": "C(n,r) C(n - r,m - r)",
-                        "start": "C(n,r) * C(n - r,m - r)",
+                        "dead_vars": [],
+                        "fixes": [],
+                        "latex_start": "\\binom{n}{r} \\binom{n - r}{m - r}",
+                        "start": "binom(n,r) * binom(n - r,m - r)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{n!}{r! (n - r)!} (\\frac{(n - r)!}{(m - r)! (-m + n)!})",
                                 "res": "factorial(n) / (factorial(r) * factorial(n - r)) * (factorial(n - r) / (factorial(m - r) * factorial(-m + n)))",
                                 "rule": {
-                                    "func_name": "C",
+                                    "func_name": "binom",
                                     "loc": "subterms",
                                     "name": "ExpandDefinition",
                                     "str": "expand definition on subterms"
@@ -103,6 +115,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{n!}{r! (m - r)! (-m + n)!}",
                                 "res": "factorial(n) / (factorial(r) * factorial(m - r) * factorial(-m + n))",
                                 "rule": {
@@ -116,27 +130,31 @@
                     }
                 ],
                 "finished": true,
-                "goal": "C(n,m) * C(m,r) = C(n,r) * C(n - r,m - r)",
-                "latex_goal": "C(n,m) C(m,r) = C(n,r) C(n - r,m - r)",
+                "goal": "binom(n,m) * binom(m,r) = binom(n,r) * binom(n - r,m - r)",
+                "latex_goal": "\\binom{n}{m} \\binom{m}{r} = \\binom{n}{r} \\binom{n - r}{m - r}",
                 "type": "CalculationProof"
             },
             "type": "Goal"
         },
         {
             "finished": true,
-            "goal": "C(n,m - 1) + C(n,m) = C(n + 1,m)",
-            "latex_goal": "C(n,m - 1) + C(n,m) = C(n + 1,m)",
+            "goal": "binom(n,m - 1) + binom(n,m) = binom(n + 1,m)",
+            "latex_goal": "\\binom{n}{m - 1} + \\binom{n}{m} = \\binom{n + 1}{m}",
             "proof": {
                 "calcs": [
                     {
-                        "latex_start": "C(n,m - 1) + C(n,m)",
-                        "start": "C(n,m - 1) + C(n,m)",
+                        "dead_vars": [],
+                        "fixes": [],
+                        "latex_start": "\\binom{n}{m - 1} + \\binom{n}{m}",
+                        "start": "binom(n,m - 1) + binom(n,m)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{n!}{(m - 1)! (-m + n + 1)!} + \\frac{n!}{m! (-m + n)!}",
                                 "res": "factorial(n) / (factorial(m - 1) * factorial(-m + n + 1)) + factorial(n) / (factorial(m) * factorial(-m + n))",
                                 "rule": {
-                                    "func_name": "C",
+                                    "func_name": "binom",
                                     "loc": "subterms",
                                     "name": "ExpandDefinition",
                                     "str": "expand definition on subterms"
@@ -144,6 +162,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{n! m}{(m - 1 + 1) (m - 1)! (-m + n + 1)!} + \\frac{n!}{m! (-m + n)!}",
                                 "res": "factorial(n) * m / ((m - 1 + 1) * factorial(m - 1) * factorial(-m + n + 1)) + factorial(n) / (factorial(m) * factorial(-m + n))",
                                 "rule": {
@@ -156,6 +176,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{n! m}{(m - 1 + 1) (m - 1)! (-m + n + 1)!} + \\frac{n! (-m + n + 1)}{m! ((-m + n + 1) (-m + n)!)}",
                                 "res": "factorial(n) * m / ((m - 1 + 1) * factorial(m - 1) * factorial(-m + n + 1)) + factorial(n) * (-m + n + 1) / (factorial(m) * ((-m + n + 1) * factorial(-m + n)))",
                                 "rule": {
@@ -168,6 +190,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{n! m}{(m - 1 + 1) (m - 1)! (-m + n + 1)!} + \\frac{n! (-m + n + 1)}{m! (-m + n + 1)!}",
                                 "res": "factorial(n) * m / ((m - 1 + 1) * factorial(m - 1) * factorial(-m + n + 1)) + factorial(n) * (-m + n + 1) / (factorial(m) * factorial(-m + n + 1))",
                                 "rule": {
@@ -181,6 +205,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{n! m}{(m - 1 + 1)! (-m + n + 1)!} + \\frac{n! (-m + n + 1)}{m! (-m + n + 1)!}",
                                 "res": "factorial(n) * m / (factorial(m - 1 + 1) * factorial(-m + n + 1)) + factorial(n) * (-m + n + 1) / (factorial(m) * factorial(-m + n + 1))",
                                 "rule": {
@@ -194,6 +220,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{n! (-m + n + 1)}{m! (-m + n + 1)!} + \\frac{m n!}{m! (-m + n + 1)!}",
                                 "res": "factorial(n) * (-m + n + 1) / (factorial(m) * factorial(-m + n + 1)) + m * factorial(n) / (factorial(m) * factorial(-m + n + 1))",
                                 "rule": {
@@ -203,6 +231,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{(n + 1) n!}{m! (-m + n + 1)!}",
                                 "res": "(n + 1) * factorial(n) / (factorial(m) * factorial(-m + n + 1))",
                                 "rule": {
@@ -215,6 +245,8 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{(n + 1)!}{m! (-m + n + 1)!}",
                                 "res": "factorial(n + 1) / (factorial(m) * factorial(-m + n + 1))",
                                 "rule": {
@@ -231,14 +263,18 @@
                         "type": "Calculation"
                     },
                     {
-                        "latex_start": "C(n + 1,m)",
-                        "start": "C(n + 1,m)",
+                        "dead_vars": [],
+                        "fixes": [],
+                        "latex_start": "\\binom{n + 1}{m}",
+                        "start": "binom(n + 1,m)",
                         "steps": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_res": "\\frac{(n + 1)!}{m! (-m + n + 1)!}",
                                 "res": "factorial(n + 1) / (factorial(m) * factorial(-m + n + 1))",
                                 "rule": {
-                                    "func_name": "C",
+                                    "func_name": "binom",
                                     "loc": "subterms",
                                     "name": "ExpandDefinition",
                                     "str": "expand definition on subterms"
@@ -250,8 +286,8 @@
                     }
                 ],
                 "finished": true,
-                "goal": "C(n,m - 1) + C(n,m) = C(n + 1,m)",
-                "latex_goal": "C(n,m - 1) + C(n,m) = C(n + 1,m)",
+                "goal": "binom(n,m - 1) + binom(n,m) = binom(n + 1,m)",
+                "latex_goal": "\\binom{n}{m - 1} + \\binom{n}{m} = \\binom{n + 1}{m}",
                 "type": "CalculationProof"
             },
             "type": "Goal"
@@ -282,24 +318,32 @@
                     "$int"
                 ]
             ],
-            "goal": "C(m + n + 1,m) = SUM(i, 0, m, C(n + i,i))",
-            "latex_goal": "C(m + n + 1,m) = \\sum_{i=0}^{m}{C(n + i,i)}",
+            "goal": "binom(m + n + 1,m) = SUM(i, 0, m, binom(n + i,i))",
+            "latex_goal": "\\binom{m + n + 1}{m} = \\sum_{i=0}^{m}{\\binom{n + i}{i}}",
             "proof": {
                 "base_case": {
                     "finished": true,
-                    "goal": "C(n + 1,0) = C(n,0)",
-                    "latex_goal": "C(n + 1,0) = C(n,0)",
+                    "goal": "binom(n + 1,0) = binom(n,0)",
+                    "latex_goal": "\\binom{n + 1}{0} = \\binom{n}{0}",
                     "proof": {
                         "calcs": [
                             {
-                                "latex_start": "C(n + 1,0)",
-                                "start": "C(n + 1,0)",
+                                "dead_vars": [
+                                    "n"
+                                ],
+                                "fixes": [],
+                                "latex_start": "\\binom{n + 1}{0}",
+                                "start": "binom(n + 1,0)",
                                 "steps": [
                                     {
+                                        "dead_vars": [
+                                            "n"
+                                        ],
+                                        "fixes": [],
                                         "latex_res": "1",
                                         "res": "1",
                                         "rule": {
-                                            "func_name": "C",
+                                            "func_name": "binom",
                                             "name": "ExpandDefinition",
                                             "str": "expand definition"
                                         },
@@ -309,14 +353,22 @@
                                 "type": "Calculation"
                             },
                             {
-                                "latex_start": "C(n,0)",
-                                "start": "C(n,0)",
+                                "dead_vars": [
+                                    "n"
+                                ],
+                                "fixes": [],
+                                "latex_start": "\\binom{n}{0}",
+                                "start": "binom(n,0)",
                                 "steps": [
                                     {
+                                        "dead_vars": [
+                                            "n"
+                                        ],
+                                        "fixes": [],
                                         "latex_res": "1",
                                         "res": "1",
                                         "rule": {
-                                            "func_name": "C",
+                                            "func_name": "binom",
                                             "name": "ExpandDefinition",
                                             "str": "expand definition"
                                         },
@@ -327,49 +379,68 @@
                             }
                         ],
                         "finished": true,
-                        "goal": "C(n + 1,0) = C(n,0)",
-                        "latex_goal": "C(n + 1,0) = C(n,0)",
+                        "goal": "binom(n + 1,0) = binom(n,0)",
+                        "latex_goal": "\\binom{n + 1}{0} = \\binom{n}{0}",
                         "type": "CalculationProof"
                     },
                     "type": "Goal"
                 },
                 "finished": true,
-                "goal": "C(m + n + 1,m) = SUM(i, 0, m, C(n + i,i))",
+                "goal": "binom(m + n + 1,m) = SUM(i, 0, m, binom(n + i,i))",
                 "induct_case": {
                     "finished": true,
-                    "goal": "C(m + n + 2,m + 1) = SUM(i, 0, m + 1, C(i + n,i))",
-                    "latex_goal": "C(m + n + 2,m + 1) = \\sum_{i=0}^{m + 1}{C(i + n,i)}",
+                    "goal": "binom(m + n + 2,m + 1) = SUM(i, 0, m + 1, binom(i + n,i))",
+                    "latex_goal": "\\binom{m + n + 2}{m + 1} = \\sum_{i=0}^{m + 1}{\\binom{i + n}{i}}",
                     "proof": {
                         "calcs": [
                             {
-                                "latex_start": "C(m + n + 2,m + 1)",
-                                "start": "C(m + n + 2,m + 1)",
+                                "dead_vars": [],
+                                "fixes": [],
+                                "latex_start": "\\binom{m + n + 2}{m + 1}",
+                                "start": "binom(m + n + 2,m + 1)",
                                 "steps": [],
                                 "type": "Calculation"
                             },
                             {
-                                "fixes": [
-                                    [
-                                        "j",
-                                        "$int"
-                                    ]
+                                "dead_vars": [
+                                    "i"
                                 ],
-                                "latex_start": "\\sum_{i=0}^{m + 1}{C(i + n,i)}",
-                                "start": "SUM(i, 0, m + 1, C(i + n,i))",
+                                "fixes": [],
+                                "latex_start": "\\sum_{i=0}^{m + 1}{\\binom{i + n}{i}}",
+                                "start": "SUM(i, 0, m + 1, binom(i + n,i))",
                                 "steps": [
                                     {
-                                        "latex_res": "\\sum_{j=0}^{m + 1 - 1}{C(j + n,j)} + \\sum_{j=m + 1}^{m + 1}{C(j + n,j)}",
-                                        "res": "SUM(j, 0, m + 1 - 1, C(j + n,j)) + SUM(j, m + 1, m + 1, C(j + n,j))",
+                                        "dead_vars": [
+                                            "i"
+                                        ],
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\sum_{j=0}^{m + 1 - 1}{\\binom{j + n}{j}} + \\binom{m + 1 + n}{m + 1}",
+                                        "res": "SUM(j, 0, m + 1 - 1, binom(j + n,j)) + binom(m + 1 + n,m + 1)",
                                         "rule": {
                                             "cond": "i = m + 1",
+                                            "latex_str": "split summation on \\(i = m + 1\\)",
                                             "name": "SplitSummation",
-                                            "str": "split summation"
+                                            "str": "split summation on i = m + 1"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "C(m + n + 1,m + 1) + \\sum_{j=0}^{m}{C(j + n,j)}",
-                                        "res": "C(m + n + 1,m + 1) + SUM(j, 0, m, C(j + n,j))",
+                                        "dead_vars": [
+                                            "i"
+                                        ],
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\binom{m + n + 1}{m + 1} + \\sum_{j=0}^{m}{\\binom{j + n}{j}}",
+                                        "res": "binom(m + n + 1,m + 1) + SUM(j, 0, m, binom(j + n,j))",
                                         "rule": {
                                             "name": "FullSimplify",
                                             "str": "full simplify"
@@ -377,8 +448,17 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "C(m + n + 1,m + 1) + \\sum_{j=0}^{m}{C(n + j,j)}",
-                                        "res": "C(m + n + 1,m + 1) + SUM(j, 0, m, C(n + j,j))",
+                                        "dead_vars": [
+                                            "i"
+                                        ],
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\binom{m + n + 1}{m + 1} + \\sum_{j=0}^{m}{\\binom{n + j}{j}}",
+                                        "res": "binom(m + n + 1,m + 1) + SUM(j, 0, m, binom(n + j,j))",
                                         "rule": {
                                             "latex_str": "rewriting \\(j + n\\) to \\(n + j\\)",
                                             "name": "Equation",
@@ -389,8 +469,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "C(m + n + 1,m + 1) + C(m + n + 1,m)",
-                                        "res": "C(m + n + 1,m + 1) + C(m + n + 1,m)",
+                                        "dead_vars": [
+                                            "i"
+                                        ],
+                                        "fixes": [],
+                                        "latex_res": "\\binom{m + n + 1}{m + 1} + \\binom{m + n + 1}{m}",
+                                        "res": "binom(m + n + 1,m + 1) + binom(m + n + 1,m)",
                                         "rule": {
                                             "loc": "1",
                                             "name": "ApplyInductHyp",
@@ -399,31 +483,44 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "C(m + n + 1,m + 1 - 1) + C(m + n + 1,m + 1)",
-                                        "res": "C(m + n + 1,m + 1 - 1) + C(m + n + 1,m + 1)",
+                                        "dead_vars": [
+                                            "i"
+                                        ],
+                                        "fixes": [],
+                                        "latex_res": "\\binom{m + n + 1}{m + 1 - 1} + \\binom{m + n + 1}{m + 1}",
+                                        "res": "binom(m + n + 1,m + 1 - 1) + binom(m + n + 1,m + 1)",
                                         "rule": {
-                                            "latex_str": "rewriting \\(C(m + n + 1,m + 1) + C(m + n + 1,m)\\) to \\(C(m + n + 1,m + 1 - 1) + C(m + n + 1,m + 1)\\)",
+                                            "latex_str": "rewriting \\(\\binom{m + n + 1}{m + 1} + \\binom{m + n + 1}{m}\\) to \\(\\binom{m + n + 1}{m + 1 - 1} + \\binom{m + n + 1}{m + 1}\\)",
                                             "name": "Equation",
-                                            "new_expr": "C(m + n + 1,m + 1 - 1) + C(m + n + 1,m + 1)",
-                                            "old_expr": "C(m + n + 1,m + 1) + C(m + n + 1,m)",
-                                            "str": "rewriting C(m + n + 1,m + 1) + C(m + n + 1,m) to C(m + n + 1,m + 1 - 1) + C(m + n + 1,m + 1)"
+                                            "new_expr": "binom(m + n + 1,m + 1 - 1) + binom(m + n + 1,m + 1)",
+                                            "old_expr": "binom(m + n + 1,m + 1) + binom(m + n + 1,m)",
+                                            "str": "rewriting binom(m + n + 1,m + 1) + binom(m + n + 1,m) to binom(m + n + 1,m + 1 - 1) + binom(m + n + 1,m + 1)"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "C(m + n + 1 + 1,m + 1)",
-                                        "res": "C(m + n + 1 + 1,m + 1)",
+                                        "dead_vars": [
+                                            "i"
+                                        ],
+                                        "fixes": [],
+                                        "latex_res": "\\binom{m + n + 1 + 1}{m + 1}",
+                                        "res": "binom(m + n + 1 + 1,m + 1)",
                                         "rule": {
-                                            "eq": "C(n,m - 1) + C(n,m) = C(n + 1,m)",
-                                            "latex_str": "apply equation \\(C(n,m - 1) + C(n,m) = C(n + 1,m)\\)",
+                                            "eq": "binom(n,m - 1) + binom(n,m) = binom(n + 1,m)",
+                                            "latex_str": "apply equation \\(\\binom{n}{m - 1} + \\binom{n}{m} = \\binom{n + 1}{m}\\)",
                                             "name": "ApplyEquation",
-                                            "str": "apply equation: C(n,m - 1) + C(n,m) = C(n + 1,m)"
+                                            "source": "binom(m + n + 1,m + 1 - 1) + binom(m + n + 1,m + 1)",
+                                            "str": "apply equation: binom(n,m - 1) + binom(n,m) = binom(n + 1,m)"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "C(m + n + 2,m + 1)",
-                                        "res": "C(m + n + 2,m + 1)",
+                                        "dead_vars": [
+                                            "i"
+                                        ],
+                                        "fixes": [],
+                                        "latex_res": "\\binom{m + n + 2}{m + 1}",
+                                        "res": "binom(m + n + 2,m + 1)",
                                         "rule": {
                                             "name": "FullSimplify",
                                             "str": "full simplify"
@@ -435,14 +532,15 @@
                             }
                         ],
                         "finished": true,
-                        "goal": "C(m + n + 2,m + 1) = SUM(i, 0, m + 1, C(i + n,i))",
-                        "latex_goal": "C(m + n + 2,m + 1) = \\sum_{i=0}^{m + 1}{C(i + n,i)}",
+                        "goal": "binom(m + n + 2,m + 1) = SUM(i, 0, m + 1, binom(i + n,i))",
+                        "latex_goal": "\\binom{m + n + 2}{m + 1} = \\sum_{i=0}^{m + 1}{\\binom{i + n}{i}}",
                         "type": "CalculationProof"
                     },
                     "type": "Goal"
                 },
                 "induct_var": "m",
-                "latex_goal": "C(m + n + 1,m) = \\sum_{i=0}^{m}{C(n + i,i)}",
+                "latex_goal": "\\binom{m + n + 1}{m} = \\sum_{i=0}^{m}{\\binom{n + i}{i}}",
+                "start": "0",
                 "type": "InductionProof"
             },
             "type": "Goal"
@@ -473,8 +571,8 @@
                     "$int"
                 ]
             ],
-            "goal": "(x + y) ^ n = SUM(k, 0, n, C(n,k) * x ^ k * y ^ (n - k))",
-            "latex_goal": "(x + y) ^ {n} = \\sum_{k=0}^{n}{C(n,k) x ^ {k} y ^ {n - k}}",
+            "goal": "(x + y) ^ n = SUM(k, 0, n, binom(n,k) * x ^ k * y ^ (n - k))",
+            "latex_goal": "(x + y) ^ {n} = \\sum_{k=0}^{n}{\\binom{n}{k} x ^ {k} y ^ {n - k}}",
             "obligations": [
                 {
                     "branches": [
@@ -666,8 +764,8 @@
             "proof": {
                 "base_case": {
                     "finished": true,
-                    "goal": "x + y = SUM(k, 0, 1, x ^ k * y ^ (-k + 1) * C(1,k))",
-                    "latex_goal": "x + y = \\sum_{k=0}^{1}{x ^ {k} y ^ {-k + 1} C(1,k)}",
+                    "goal": "x + y = SUM(k, 0, 1, x ^ k * y ^ (-k + 1) * binom(1,k))",
+                    "latex_goal": "x + y = \\sum_{k=0}^{1}{x ^ {k} y ^ {-k + 1} \\binom{1}{k}}",
                     "obligations": [
                         {
                             "branches": [
@@ -790,34 +888,45 @@
                     "proof": {
                         "calcs": [
                             {
+                                "dead_vars": [],
+                                "fixes": [],
                                 "latex_start": "x + y",
                                 "start": "x + y",
                                 "steps": [],
                                 "type": "Calculation"
                             },
                             {
-                                "fixes": [
-                                    [
-                                        "n",
-                                        "$int"
-                                    ]
+                                "dead_vars": [
+                                    "k",
+                                    "n"
                                 ],
-                                "latex_start": "\\sum_{k=0}^{1}{x ^ {k} y ^ {-k + 1} C(1,k)}",
-                                "start": "SUM(k, 0, 1, x ^ k * y ^ (-k + 1) * C(1,k))",
+                                "fixes": [],
+                                "latex_start": "\\sum_{k=0}^{1}{x ^ {k} y ^ {-k + 1} \\binom{1}{k}}",
+                                "start": "SUM(k, 0, 1, x ^ k * y ^ (-k + 1) * binom(1,k))",
                                 "steps": [
                                     {
-                                        "latex_res": "\\sum_{n=0}^{0}{x ^ {n} y ^ {-n + 1} C(1,n)} + \\sum_{n=0 + 1}^{1}{x ^ {n} y ^ {-n + 1} C(1,n)}",
-                                        "res": "SUM(n, 0, 0, x ^ n * y ^ (-n + 1) * C(1,n)) + SUM(n, 0 + 1, 1, x ^ n * y ^ (-n + 1) * C(1,n))",
+                                        "dead_vars": [
+                                            "k"
+                                        ],
+                                        "fixes": [],
+                                        "latex_res": "x ^ {0} y ^ {-0 + 1}\\cdot \\binom{1}{0} + \\sum_{n=0 + 1}^{1}{x ^ {n} y ^ {-n + 1} \\binom{1}{n}}",
+                                        "res": "x ^ 0 * y ^ (-0 + 1) * binom(1,0) + SUM(n, 0 + 1, 1, x ^ n * y ^ (-n + 1) * binom(1,n))",
                                         "rule": {
                                             "cond": "k = 0",
+                                            "latex_str": "split summation on \\(k = 0\\)",
                                             "name": "SplitSummation",
-                                            "str": "split summation"
+                                            "str": "split summation on k = 0"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "x\\cdot C(1,1) + y\\cdot C(1,0)",
-                                        "res": "x * C(1,1) + y * C(1,0)",
+                                        "dead_vars": [
+                                            "k",
+                                            "n"
+                                        ],
+                                        "fixes": [],
+                                        "latex_res": "x + y",
+                                        "res": "x + y",
                                         "rule": {
                                             "name": "FullSimplify",
                                             "str": "full simplify"
@@ -825,10 +934,15 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "x\\cdot 1 + y\\cdot 1",
-                                        "res": "x * 1 + y * 1",
+                                        "dead_vars": [
+                                            "k",
+                                            "n"
+                                        ],
+                                        "fixes": [],
+                                        "latex_res": "x + y",
+                                        "res": "x + y",
                                         "rule": {
-                                            "func_name": "C",
+                                            "func_name": "binom",
                                             "loc": "subterms",
                                             "name": "ExpandDefinition",
                                             "str": "expand definition on subterms"
@@ -836,6 +950,11 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "dead_vars": [
+                                            "k",
+                                            "n"
+                                        ],
+                                        "fixes": [],
                                         "latex_res": "x + y",
                                         "res": "x + y",
                                         "rule": {
@@ -849,19 +968,19 @@
                             }
                         ],
                         "finished": true,
-                        "goal": "x + y = SUM(k, 0, 1, x ^ k * y ^ (-k + 1) * C(1,k))",
-                        "latex_goal": "x + y = \\sum_{k=0}^{1}{x ^ {k} y ^ {-k + 1} C(1,k)}",
+                        "goal": "x + y = SUM(k, 0, 1, x ^ k * y ^ (-k + 1) * binom(1,k))",
+                        "latex_goal": "x + y = \\sum_{k=0}^{1}{x ^ {k} y ^ {-k + 1} \\binom{1}{k}}",
                         "type": "CalculationProof"
                     },
                     "type": "Goal",
                     "wellformed": false
                 },
                 "finished": true,
-                "goal": "(x + y) ^ n = SUM(k, 0, n, C(n,k) * x ^ k * y ^ (n - k))",
+                "goal": "(x + y) ^ n = SUM(k, 0, n, binom(n,k) * x ^ k * y ^ (n - k))",
                 "induct_case": {
                     "finished": true,
-                    "goal": "(x + y) ^ (n + 1) = SUM(k, 0, n + 1, x ^ k * y ^ (-k + n + 1) * C(n + 1,k))",
-                    "latex_goal": "(x + y) ^ {n + 1} = \\sum_{k=0}^{n + 1}{x ^ {k} y ^ {-k + n + 1} C(n + 1,k)}",
+                    "goal": "(x + y) ^ (n + 1) = SUM(k, 0, n + 1, x ^ k * y ^ (-k + n + 1) * binom(n + 1,k))",
+                    "latex_goal": "(x + y) ^ {n + 1} = \\sum_{k=0}^{n + 1}{x ^ {k} y ^ {-k + n + 1} \\binom{n + 1}{k}}",
                     "obligations": [
                         {
                             "branches": [
@@ -1053,6 +1172,9 @@
                     "proof": {
                         "calcs": [
                             {
+                                "dead_vars": [
+                                    "k"
+                                ],
                                 "fixes": [
                                     [
                                         "i",
@@ -1063,6 +1185,8 @@
                                 "start": "(x + y) ^ (n + 1)",
                                 "steps": [
                                     {
+                                        "dead_vars": [],
+                                        "fixes": [],
                                         "latex_res": "(x + y) (x + y) ^ {n}",
                                         "res": "(x + y) * (x + y) ^ n",
                                         "rule": {
@@ -1075,8 +1199,10 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "(x + y) \\sum_{k=0}^{n}{C(n,k) x ^ {k} y ^ {n - k}}",
-                                        "res": "(x + y) * SUM(k, 0, n, C(n,k) * x ^ k * y ^ (n - k))",
+                                        "dead_vars": [],
+                                        "fixes": [],
+                                        "latex_res": "(x + y) \\sum_{k=0}^{n}{\\binom{n}{k} x ^ {k} y ^ {n - k}}",
+                                        "res": "(x + y) * SUM(k, 0, n, binom(n,k) * x ^ k * y ^ (n - k))",
                                         "rule": {
                                             "loc": "1",
                                             "name": "ApplyInductHyp",
@@ -1085,8 +1211,10 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "x \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} C(n,k)} + y \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} C(n,k)}",
-                                        "res": "x * SUM(k, 0, n, x ^ k * y ^ (-k + n) * C(n,k)) + y * SUM(k, 0, n, x ^ k * y ^ (-k + n) * C(n,k))",
+                                        "dead_vars": [],
+                                        "fixes": [],
+                                        "latex_res": "x \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} \\binom{n}{k}} + y \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} \\binom{n}{k}}",
+                                        "res": "x * SUM(k, 0, n, x ^ k * y ^ (-k + n) * binom(n,k)) + y * SUM(k, 0, n, x ^ k * y ^ (-k + n) * binom(n,k))",
                                         "rule": {
                                             "name": "ExpandPolynomial",
                                             "str": "expand polynomial"
@@ -1094,78 +1222,113 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\sum_{k=0}^{n}{x (x ^ {k} y ^ {-k + n} C(n,k))} + y \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} C(n,k)}",
-                                        "res": "SUM(k, 0, n, x * (x ^ k * y ^ (-k + n) * C(n,k))) + y * SUM(k, 0, n, x ^ k * y ^ (-k + n) * C(n,k))",
+                                        "dead_vars": [],
+                                        "fixes": [],
+                                        "latex_res": "\\sum_{k=0}^{n}{x (x ^ {k} y ^ {-k + n} \\binom{n}{k})} + y \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} \\binom{n}{k}}",
+                                        "res": "SUM(k, 0, n, x * (x ^ k * y ^ (-k + n) * binom(n,k))) + y * SUM(k, 0, n, x ^ k * y ^ (-k + n) * binom(n,k))",
                                         "rule": {
-                                            "latex_str": "rewriting \\(x \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} C(n,k)}\\) to \\(\\sum_{k=0}^{n}{x (x ^ {k} y ^ {-k + n} C(n,k))}\\)",
+                                            "latex_str": "rewriting \\(x \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} \\binom{n}{k}}\\) to \\(\\sum_{k=0}^{n}{x (x ^ {k} y ^ {-k + n} \\binom{n}{k})}\\)",
                                             "name": "Equation",
-                                            "new_expr": "SUM(k, 0, n, x * (x ^ k * y ^ (-k + n) * C(n,k)))",
-                                            "old_expr": "x * SUM(k, 0, n, x ^ k * y ^ (-k + n) * C(n,k))",
-                                            "str": "rewriting x * SUM(k, 0, n, x ^ k * y ^ (-k + n) * C(n,k)) to SUM(k, 0, n, x * (x ^ k * y ^ (-k + n) * C(n,k)))"
+                                            "new_expr": "SUM(k, 0, n, x * (x ^ k * y ^ (-k + n) * binom(n,k)))",
+                                            "old_expr": "x * SUM(k, 0, n, x ^ k * y ^ (-k + n) * binom(n,k))",
+                                            "str": "rewriting x * SUM(k, 0, n, x ^ k * y ^ (-k + n) * binom(n,k)) to SUM(k, 0, n, x * (x ^ k * y ^ (-k + n) * binom(n,k)))"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\sum_{k=0}^{n}{x (x ^ {k} y ^ {-k + n} C(n,k))} + \\sum_{k=0}^{n}{y (x ^ {k} y ^ {-k + n} C(n,k))}",
-                                        "res": "SUM(k, 0, n, x * (x ^ k * y ^ (-k + n) * C(n,k))) + SUM(k, 0, n, y * (x ^ k * y ^ (-k + n) * C(n,k)))",
+                                        "dead_vars": [],
+                                        "fixes": [],
+                                        "latex_res": "\\sum_{k=0}^{n}{x (x ^ {k} y ^ {-k + n} \\binom{n}{k})} + \\sum_{k=0}^{n}{y (x ^ {k} y ^ {-k + n} \\binom{n}{k})}",
+                                        "res": "SUM(k, 0, n, x * (x ^ k * y ^ (-k + n) * binom(n,k))) + SUM(k, 0, n, y * (x ^ k * y ^ (-k + n) * binom(n,k)))",
                                         "rule": {
-                                            "latex_str": "rewriting \\(y \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} C(n,k)}\\) to \\(\\sum_{k=0}^{n}{y (x ^ {k} y ^ {-k + n} C(n,k))}\\)",
+                                            "latex_str": "rewriting \\(y \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} \\binom{n}{k}}\\) to \\(\\sum_{k=0}^{n}{y (x ^ {k} y ^ {-k + n} \\binom{n}{k})}\\)",
                                             "name": "Equation",
-                                            "new_expr": "SUM(k, 0, n, y * (x ^ k * y ^ (-k + n) * C(n,k)))",
-                                            "old_expr": "y * SUM(k, 0, n, x ^ k * y ^ (-k + n) * C(n,k))",
-                                            "str": "rewriting y * SUM(k, 0, n, x ^ k * y ^ (-k + n) * C(n,k)) to SUM(k, 0, n, y * (x ^ k * y ^ (-k + n) * C(n,k)))"
+                                            "new_expr": "SUM(k, 0, n, y * (x ^ k * y ^ (-k + n) * binom(n,k)))",
+                                            "old_expr": "y * SUM(k, 0, n, x ^ k * y ^ (-k + n) * binom(n,k))",
+                                            "str": "rewriting y * SUM(k, 0, n, x ^ k * y ^ (-k + n) * binom(n,k)) to SUM(k, 0, n, y * (x ^ k * y ^ (-k + n) * binom(n,k)))"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\sum_{k=0}^{n}{C(n,k) x ^ {k + 1} y ^ {n - k}} + \\sum_{k=0}^{n}{y (x ^ {k} y ^ {-k + n} C(n,k))}",
-                                        "res": "SUM(k, 0, n, C(n,k) * x ^ (k + 1) * y ^ (n - k)) + SUM(k, 0, n, y * (x ^ k * y ^ (-k + n) * C(n,k)))",
+                                        "dead_vars": [],
+                                        "fixes": [],
+                                        "latex_res": "\\sum_{k=0}^{n}{\\binom{n}{k} x ^ {k + 1} y ^ {n - k}} + \\sum_{k=0}^{n}{y (x ^ {k} y ^ {-k + n} \\binom{n}{k})}",
+                                        "res": "SUM(k, 0, n, binom(n,k) * x ^ (k + 1) * y ^ (n - k)) + SUM(k, 0, n, y * (x ^ k * y ^ (-k + n) * binom(n,k)))",
                                         "rule": {
-                                            "latex_str": "rewriting \\(x (x ^ {k} y ^ {-k + n} C(n,k))\\) to \\(C(n,k) x ^ {k + 1} y ^ {n - k}\\)",
+                                            "latex_str": "rewriting \\(x (x ^ {k} y ^ {-k + n} \\binom{n}{k})\\) to \\(\\binom{n}{k} x ^ {k + 1} y ^ {n - k}\\)",
                                             "name": "Equation",
-                                            "new_expr": "C(n,k) * x ^ (k + 1) * y ^ (n - k)",
-                                            "old_expr": "x * (x ^ k * y ^ (-k + n) * C(n,k))",
-                                            "str": "rewriting x * (x ^ k * y ^ (-k + n) * C(n,k)) to C(n,k) * x ^ (k + 1) * y ^ (n - k)"
+                                            "new_expr": "binom(n,k) * x ^ (k + 1) * y ^ (n - k)",
+                                            "old_expr": "x * (x ^ k * y ^ (-k + n) * binom(n,k))",
+                                            "str": "rewriting x * (x ^ k * y ^ (-k + n) * binom(n,k)) to binom(n,k) * x ^ (k + 1) * y ^ (n - k)"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\sum_{k=0}^{n}{C(n,k) x ^ {k + 1} y ^ {n - k}} + \\sum_{k=0}^{n}{C(n,k) x ^ {k} y ^ {n - k + 1}}",
-                                        "res": "SUM(k, 0, n, C(n,k) * x ^ (k + 1) * y ^ (n - k)) + SUM(k, 0, n, C(n,k) * x ^ k * y ^ (n - k + 1))",
+                                        "dead_vars": [],
+                                        "fixes": [],
+                                        "latex_res": "\\sum_{k=0}^{n}{\\binom{n}{k} x ^ {k + 1} y ^ {n - k}} + \\sum_{k=0}^{n}{\\binom{n}{k} x ^ {k} y ^ {n - k + 1}}",
+                                        "res": "SUM(k, 0, n, binom(n,k) * x ^ (k + 1) * y ^ (n - k)) + SUM(k, 0, n, binom(n,k) * x ^ k * y ^ (n - k + 1))",
                                         "rule": {
-                                            "latex_str": "rewriting \\(y (x ^ {k} y ^ {-k + n} C(n,k))\\) to \\(C(n,k) x ^ {k} y ^ {n - k + 1}\\)",
+                                            "latex_str": "rewriting \\(y (x ^ {k} y ^ {-k + n} \\binom{n}{k})\\) to \\(\\binom{n}{k} x ^ {k} y ^ {n - k + 1}\\)",
                                             "name": "Equation",
-                                            "new_expr": "C(n,k) * x ^ k * y ^ (n - k + 1)",
-                                            "old_expr": "y * (x ^ k * y ^ (-k + n) * C(n,k))",
-                                            "str": "rewriting y * (x ^ k * y ^ (-k + n) * C(n,k)) to C(n,k) * x ^ k * y ^ (n - k + 1)"
+                                            "new_expr": "binom(n,k) * x ^ k * y ^ (n - k + 1)",
+                                            "old_expr": "y * (x ^ k * y ^ (-k + n) * binom(n,k))",
+                                            "str": "rewriting y * (x ^ k * y ^ (-k + n) * binom(n,k)) to binom(n,k) * x ^ k * y ^ (n - k + 1)"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\sum_{i=0}^{n - 1}{C(n,i) x ^ {i + 1} y ^ {n - i}} + \\sum_{i=n}^{n}{C(n,i) x ^ {i + 1} y ^ {n - i}} + \\sum_{k=0}^{n}{C(n,k) x ^ {k} y ^ {n - k + 1}}",
-                                        "res": "SUM(i, 0, n - 1, C(n,i) * x ^ (i + 1) * y ^ (n - i)) + SUM(i, n, n, C(n,i) * x ^ (i + 1) * y ^ (n - i)) + SUM(k, 0, n, C(n,k) * x ^ k * y ^ (n - k + 1))",
+                                        "dead_vars": [],
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\sum_{i=0}^{n - 1}{\\binom{n}{i} x ^ {i + 1} y ^ {n - i}} + \\binom{n}{n} x ^ {n + 1} y ^ {n - n} + \\sum_{k=0}^{n}{\\binom{n}{k} x ^ {k} y ^ {n - k + 1}}",
+                                        "res": "SUM(i, 0, n - 1, binom(n,i) * x ^ (i + 1) * y ^ (n - i)) + binom(n,n) * x ^ (n + 1) * y ^ (n - n) + SUM(k, 0, n, binom(n,k) * x ^ k * y ^ (n - k + 1))",
                                         "rule": {
                                             "cond": "k = n",
+                                            "latex_str": "split summation on \\(k = n\\) at 0",
                                             "loc": "0",
                                             "name": "SplitSummation",
-                                            "str": "split summation at 0"
+                                            "str": "split summation on k = n at 0"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\sum_{i=0}^{n - 1}{C(n,i) x ^ {i + 1} y ^ {n - i}} + \\sum_{i=n}^{n}{C(n,i) x ^ {i + 1} y ^ {n - i}} + (\\sum_{i=0}^{0}{C(n,i) x ^ {i} y ^ {n - i + 1}} + \\sum_{i=0 + 1}^{n}{C(n,i) x ^ {i} y ^ {n - i + 1}})",
-                                        "res": "SUM(i, 0, n - 1, C(n,i) * x ^ (i + 1) * y ^ (n - i)) + SUM(i, n, n, C(n,i) * x ^ (i + 1) * y ^ (n - i)) + (SUM(i, 0, 0, C(n,i) * x ^ i * y ^ (n - i + 1)) + SUM(i, 0 + 1, n, C(n,i) * x ^ i * y ^ (n - i + 1)))",
+                                        "dead_vars": [
+                                            "k"
+                                        ],
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\sum_{i=0}^{n - 1}{\\binom{n}{i} x ^ {i + 1} y ^ {n - i}} + \\binom{n}{n} x ^ {n + 1} y ^ {n - n} + (\\binom{n}{0} x ^ {0} y ^ {n - 0 + 1} + \\sum_{i=0 + 1}^{n}{\\binom{n}{i} x ^ {i} y ^ {n - i + 1}})",
+                                        "res": "SUM(i, 0, n - 1, binom(n,i) * x ^ (i + 1) * y ^ (n - i)) + binom(n,n) * x ^ (n + 1) * y ^ (n - n) + (binom(n,0) * x ^ 0 * y ^ (n - 0 + 1) + SUM(i, 0 + 1, n, binom(n,i) * x ^ i * y ^ (n - i + 1)))",
                                         "rule": {
                                             "cond": "k = 0",
+                                            "latex_str": "split summation on \\(k = 0\\) at 1",
                                             "loc": "1",
                                             "name": "SplitSummation",
-                                            "str": "split summation at 1"
+                                            "str": "split summation on k = 0 at 1"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\sum_{i=0}^{n - 1}{x ^ {i + 1} y ^ {-i + n} C(n,i)} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i)} + x ^ {n + 1} C(n,n) + y ^ {n + 1} C(n,0)",
-                                        "res": "SUM(i, 0, n - 1, x ^ (i + 1) * y ^ (-i + n) * C(n,i)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i)) + x ^ (n + 1) * C(n,n) + y ^ (n + 1) * C(n,0)",
+                                        "dead_vars": [
+                                            "k"
+                                        ],
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\sum_{i=0}^{n - 1}{x ^ {i + 1} y ^ {-i + n} \\binom{n}{i}} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}} + x ^ {n + 1} \\binom{n}{n} + y ^ {n + 1} \\binom{n}{0}",
+                                        "res": "SUM(i, 0, n - 1, x ^ (i + 1) * y ^ (-i + n) * binom(n,i)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i)) + x ^ (n + 1) * binom(n,n) + y ^ (n + 1) * binom(n,0)",
                                         "rule": {
                                             "name": "FullSimplify",
                                             "str": "full simplify"
@@ -1173,10 +1336,19 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\sum_{i=0}^{n - 1}{x ^ {i + 1} y ^ {-i + n} C(n,i)} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i)} + x ^ {n + 1}\\cdot 1 + y ^ {n + 1} C(n,0)",
-                                        "res": "SUM(i, 0, n - 1, x ^ (i + 1) * y ^ (-i + n) * C(n,i)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i)) + x ^ (n + 1) * 1 + y ^ (n + 1) * C(n,0)",
+                                        "dead_vars": [
+                                            "k"
+                                        ],
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\sum_{i=0}^{n - 1}{x ^ {i + 1} y ^ {-i + n} \\binom{n}{i}} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}} + x ^ {n + 1}\\cdot 1 + y ^ {n + 1} \\binom{n}{0}",
+                                        "res": "SUM(i, 0, n - 1, x ^ (i + 1) * y ^ (-i + n) * binom(n,i)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i)) + x ^ (n + 1) * 1 + y ^ (n + 1) * binom(n,0)",
                                         "rule": {
-                                            "func_name": "C",
+                                            "func_name": "binom",
                                             "loc": "0.1.1",
                                             "name": "ExpandDefinition",
                                             "str": "expand definition at 0.1.1"
@@ -1184,10 +1356,19 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\sum_{i=0}^{n - 1}{x ^ {i + 1} y ^ {-i + n} C(n,i)} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i)} + x ^ {n + 1}\\cdot 1 + y ^ {n + 1}\\cdot 1",
-                                        "res": "SUM(i, 0, n - 1, x ^ (i + 1) * y ^ (-i + n) * C(n,i)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i)) + x ^ (n + 1) * 1 + y ^ (n + 1) * 1",
+                                        "dead_vars": [
+                                            "k"
+                                        ],
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\sum_{i=0}^{n - 1}{x ^ {i + 1} y ^ {-i + n} \\binom{n}{i}} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}} + x ^ {n + 1}\\cdot 1 + y ^ {n + 1}\\cdot 1",
+                                        "res": "SUM(i, 0, n - 1, x ^ (i + 1) * y ^ (-i + n) * binom(n,i)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i)) + x ^ (n + 1) * 1 + y ^ (n + 1) * 1",
                                         "rule": {
-                                            "func_name": "C",
+                                            "func_name": "binom",
                                             "loc": "1.1",
                                             "name": "ExpandDefinition",
                                             "str": "expand definition at 1.1"
@@ -1195,8 +1376,17 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\sum_{i=1}^{n}{x ^ {i - 1 + 1} y ^ {-(i - 1) + n} C(n,i - 1)} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i)} + x ^ {n + 1}\\cdot 1 + y ^ {n + 1}\\cdot 1",
-                                        "res": "SUM(i, 1, n, x ^ (i - 1 + 1) * y ^ (-(i - 1) + n) * C(n,i - 1)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i)) + x ^ (n + 1) * 1 + y ^ (n + 1) * 1",
+                                        "dead_vars": [
+                                            "k"
+                                        ],
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\sum_{i=1}^{n}{x ^ {i - 1 + 1} y ^ {-(i - 1) + n} \\binom{n}{i - 1}} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}} + x ^ {n + 1}\\cdot 1 + y ^ {n + 1}\\cdot 1",
+                                        "res": "SUM(i, 1, n, x ^ (i - 1 + 1) * y ^ (-(i - 1) + n) * binom(n,i - 1)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i)) + x ^ (n + 1) * 1 + y ^ (n + 1) * 1",
                                         "rule": {
                                             "loc": "0.0.0",
                                             "name": "ChangeSummationIndex",
@@ -1206,8 +1396,17 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i - 1)} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i)} + x ^ {n + 1} + y ^ {n + 1}",
-                                        "res": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i - 1)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i)) + x ^ (n + 1) + y ^ (n + 1)",
+                                        "dead_vars": [
+                                            "k"
+                                        ],
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i - 1}} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}} + x ^ {n + 1} + y ^ {n + 1}",
+                                        "res": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i - 1)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i)) + x ^ (n + 1) + y ^ (n + 1)",
                                         "rule": {
                                             "name": "FullSimplify",
                                             "str": "full simplify"
@@ -1215,38 +1414,65 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i - 1) + x ^ {i} y ^ {-i + n + 1} C(n,i)} + x ^ {n + 1} + y ^ {n + 1}",
-                                        "res": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i - 1) + x ^ i * y ^ (-i + n + 1) * C(n,i)) + x ^ (n + 1) + y ^ (n + 1)",
+                                        "dead_vars": [
+                                            "k"
+                                        ],
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i - 1} + x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}} + x ^ {n + 1} + y ^ {n + 1}",
+                                        "res": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i - 1) + x ^ i * y ^ (-i + n + 1) * binom(n,i)) + x ^ (n + 1) + y ^ (n + 1)",
                                         "rule": {
-                                            "latex_str": "rewriting \\(\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i - 1)} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i)}\\) to \\(\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n,i - 1) + x ^ {i} y ^ {-i + n + 1} C(n,i)}\\)",
+                                            "latex_str": "rewriting \\(\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i - 1}} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}}\\) to \\(\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i - 1} + x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}}\\)",
                                             "name": "Equation",
-                                            "new_expr": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i - 1) + x ^ i * y ^ (-i + n + 1) * C(n,i))",
-                                            "old_expr": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i - 1)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i))",
-                                            "str": "rewriting SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i - 1)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i)) to SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n,i - 1) + x ^ i * y ^ (-i + n + 1) * C(n,i))"
+                                            "new_expr": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i - 1) + x ^ i * y ^ (-i + n + 1) * binom(n,i))",
+                                            "old_expr": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i - 1)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i))",
+                                            "str": "rewriting SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i - 1)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i)) to SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i - 1) + x ^ i * y ^ (-i + n + 1) * binom(n,i))"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} (C(n,i - 1) + C(n,i))} + x ^ {n + 1} + y ^ {n + 1}",
-                                        "res": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * (C(n,i - 1) + C(n,i))) + x ^ (n + 1) + y ^ (n + 1)",
+                                        "dead_vars": [
+                                            "k"
+                                        ],
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} (\\binom{n}{i - 1} + \\binom{n}{i})} + x ^ {n + 1} + y ^ {n + 1}",
+                                        "res": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * (binom(n,i - 1) + binom(n,i))) + x ^ (n + 1) + y ^ (n + 1)",
                                         "rule": {
-                                            "latex_str": "rewriting \\(x ^ {i} y ^ {-i + n + 1} C(n,i - 1) + x ^ {i} y ^ {-i + n + 1} C(n,i)\\) to \\(x ^ {i} y ^ {-i + n + 1} (C(n,i - 1) + C(n,i))\\)",
+                                            "latex_str": "rewriting \\(x ^ {i} y ^ {-i + n + 1} \\binom{n}{i - 1} + x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}\\) to \\(x ^ {i} y ^ {-i + n + 1} (\\binom{n}{i - 1} + \\binom{n}{i})\\)",
                                             "name": "Equation",
-                                            "new_expr": "x ^ i * y ^ (-i + n + 1) * (C(n,i - 1) + C(n,i))",
-                                            "old_expr": "x ^ i * y ^ (-i + n + 1) * C(n,i - 1) + x ^ i * y ^ (-i + n + 1) * C(n,i)",
-                                            "str": "rewriting x ^ i * y ^ (-i + n + 1) * C(n,i - 1) + x ^ i * y ^ (-i + n + 1) * C(n,i) to x ^ i * y ^ (-i + n + 1) * (C(n,i - 1) + C(n,i))"
+                                            "new_expr": "x ^ i * y ^ (-i + n + 1) * (binom(n,i - 1) + binom(n,i))",
+                                            "old_expr": "x ^ i * y ^ (-i + n + 1) * binom(n,i - 1) + x ^ i * y ^ (-i + n + 1) * binom(n,i)",
+                                            "str": "rewriting x ^ i * y ^ (-i + n + 1) * binom(n,i - 1) + x ^ i * y ^ (-i + n + 1) * binom(n,i) to x ^ i * y ^ (-i + n + 1) * (binom(n,i - 1) + binom(n,i))"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} C(n + 1,i)} + x ^ {n + 1} + y ^ {n + 1}",
-                                        "res": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * C(n + 1,i)) + x ^ (n + 1) + y ^ (n + 1)",
+                                        "dead_vars": [
+                                            "k"
+                                        ],
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n + 1}{i}} + x ^ {n + 1} + y ^ {n + 1}",
+                                        "res": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n + 1,i)) + x ^ (n + 1) + y ^ (n + 1)",
                                         "rule": {
-                                            "eq": "C(n,m - 1) + C(n,m) = C(n + 1,m)",
-                                            "latex_str": "apply equation \\(C(n,m - 1) + C(n,m) = C(n + 1,m)\\) at 0.0.0.1",
-                                            "loc": "0.0.0.1",
+                                            "eq": "binom(n,m - 1) + binom(n,m) = binom(n + 1,m)",
+                                            "latex_str": "apply equation \\(\\binom{n}{m - 1} + \\binom{n}{m} = \\binom{n + 1}{m}\\)",
                                             "name": "ApplyEquation",
-                                            "str": "apply equation: C(n,m - 1) + C(n,m) = C(n + 1,m) at 0.0.0.1"
+                                            "source": "binom(n,i - 1) + binom(n,i)",
+                                            "str": "apply equation: binom(n,m - 1) + binom(n,m) = binom(n + 1,m)"
                                         },
                                         "type": "CalculationStep"
                                     }
@@ -1254,65 +1480,111 @@
                                 "type": "Calculation"
                             },
                             {
+                                "dead_vars": [
+                                    "k"
+                                ],
                                 "fixes": [
-                                    [
-                                        "i",
-                                        "$int"
-                                    ],
                                     [
                                         "j",
                                         "$int"
                                     ]
                                 ],
-                                "latex_start": "\\sum_{k=0}^{n + 1}{x ^ {k} y ^ {-k + n + 1} C(n + 1,k)}",
-                                "start": "SUM(k, 0, n + 1, x ^ k * y ^ (-k + n + 1) * C(n + 1,k))",
+                                "latex_start": "\\sum_{k=0}^{n + 1}{x ^ {k} y ^ {-k + n + 1} \\binom{n + 1}{k}}",
+                                "start": "SUM(k, 0, n + 1, x ^ k * y ^ (-k + n + 1) * binom(n + 1,k))",
                                 "steps": [
                                     {
-                                        "latex_res": "\\sum_{i=0}^{0}{x ^ {i} y ^ {-i + n + 1} C(n + 1,i)} + \\sum_{i=0 + 1}^{n + 1}{x ^ {i} y ^ {-i + n + 1} C(n + 1,i)}",
-                                        "res": "SUM(i, 0, 0, x ^ i * y ^ (-i + n + 1) * C(n + 1,i)) + SUM(i, 0 + 1, n + 1, x ^ i * y ^ (-i + n + 1) * C(n + 1,i))",
+                                        "dead_vars": [
+                                            "k"
+                                        ],
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "x ^ {0} y ^ {-0 + n + 1} \\binom{n + 1}{0} + \\sum_{i=0 + 1}^{n + 1}{x ^ {i} y ^ {-i + n + 1} \\binom{n + 1}{i}}",
+                                        "res": "x ^ 0 * y ^ (-0 + n + 1) * binom(n + 1,0) + SUM(i, 0 + 1, n + 1, x ^ i * y ^ (-i + n + 1) * binom(n + 1,i))",
                                         "rule": {
                                             "cond": "k = 0",
+                                            "latex_str": "split summation on \\(k = 0\\)",
                                             "name": "SplitSummation",
-                                            "str": "split summation"
+                                            "str": "split summation on k = 0"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\sum_{i=0}^{0}{x ^ {i} y ^ {-i + n + 1} C(n + 1,i)} + (\\sum_{j=0 + 1}^{n + 1 - 1}{x ^ {j} y ^ {-j + n + 1} C(n + 1,j)} + \\sum_{j=n + 1}^{n + 1}{x ^ {j} y ^ {-j + n + 1} C(n + 1,j)})",
-                                        "res": "SUM(i, 0, 0, x ^ i * y ^ (-i + n + 1) * C(n + 1,i)) + (SUM(j, 0 + 1, n + 1 - 1, x ^ j * y ^ (-j + n + 1) * C(n + 1,j)) + SUM(j, n + 1, n + 1, x ^ j * y ^ (-j + n + 1) * C(n + 1,j)))",
+                                        "dead_vars": [
+                                            "k"
+                                        ],
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "x ^ {0} y ^ {-0 + n + 1} \\binom{n + 1}{0} + (\\sum_{j=0 + 1}^{n + 1 - 1}{x ^ {j} y ^ {-j + n + 1} \\binom{n + 1}{j}} + x ^ {n + 1} y ^ {-(n + 1) + n + 1} \\binom{n + 1}{n + 1})",
+                                        "res": "x ^ 0 * y ^ (-0 + n + 1) * binom(n + 1,0) + (SUM(j, 0 + 1, n + 1 - 1, x ^ j * y ^ (-j + n + 1) * binom(n + 1,j)) + x ^ (n + 1) * y ^ (-(n + 1) + n + 1) * binom(n + 1,n + 1))",
                                         "rule": {
                                             "cond": "i = n + 1",
+                                            "latex_str": "split summation on \\(i = n + 1\\) at 1",
                                             "loc": "1",
                                             "name": "SplitSummation",
-                                            "str": "split summation at 1"
+                                            "str": "split summation on i = n + 1 at 1"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\sum_{i=0}^{0}{x ^ {i} y ^ {-i + n + 1} (\\frac{(n + 1)!}{i! (-i + n + 1)!})} + (\\sum_{j=0 + 1}^{n + 1 - 1}{x ^ {j} y ^ {-j + n + 1} C(n + 1,j)} + \\sum_{j=n + 1}^{n + 1}{x ^ {j} y ^ {-j + n + 1} C(n + 1,j)})",
-                                        "res": "SUM(i, 0, 0, x ^ i * y ^ (-i + n + 1) * (factorial(n + 1) / (factorial(i) * factorial(-i + n + 1)))) + (SUM(j, 0 + 1, n + 1 - 1, x ^ j * y ^ (-j + n + 1) * C(n + 1,j)) + SUM(j, n + 1, n + 1, x ^ j * y ^ (-j + n + 1) * C(n + 1,j)))",
+                                        "dead_vars": [
+                                            "k"
+                                        ],
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "x ^ {0} y ^ {-0 + n + 1}\\cdot 1 + (\\sum_{j=0 + 1}^{n + 1 - 1}{x ^ {j} y ^ {-j + n + 1} \\binom{n + 1}{j}} + x ^ {n + 1} y ^ {-(n + 1) + n + 1} \\binom{n + 1}{n + 1})",
+                                        "res": "x ^ 0 * y ^ (-0 + n + 1) * 1 + (SUM(j, 0 + 1, n + 1 - 1, x ^ j * y ^ (-j + n + 1) * binom(n + 1,j)) + x ^ (n + 1) * y ^ (-(n + 1) + n + 1) * binom(n + 1,n + 1))",
                                         "rule": {
-                                            "func_name": "C",
-                                            "loc": "0.0.1",
+                                            "func_name": "binom",
+                                            "loc": "0.1",
                                             "name": "ExpandDefinition",
-                                            "str": "expand definition at 0.0.1"
+                                            "str": "expand definition at 0.1"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\sum_{i=0}^{0}{x ^ {i} y ^ {-i + n + 1} (\\frac{(n + 1)!}{i! (-i + n + 1)!})} + (\\sum_{j=0 + 1}^{n + 1 - 1}{x ^ {j} y ^ {-j + n + 1} C(n + 1,j)} + \\sum_{j=n + 1}^{n + 1}{x ^ {j} y ^ {-j + n + 1} (\\frac{(n + 1)!}{j! (-j + n + 1)!})})",
-                                        "res": "SUM(i, 0, 0, x ^ i * y ^ (-i + n + 1) * (factorial(n + 1) / (factorial(i) * factorial(-i + n + 1)))) + (SUM(j, 0 + 1, n + 1 - 1, x ^ j * y ^ (-j + n + 1) * C(n + 1,j)) + SUM(j, n + 1, n + 1, x ^ j * y ^ (-j + n + 1) * (factorial(n + 1) / (factorial(j) * factorial(-j + n + 1)))))",
+                                        "dead_vars": [
+                                            "k"
+                                        ],
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "x ^ {0} y ^ {-0 + n + 1}\\cdot 1 + (\\sum_{j=0 + 1}^{n + 1 - 1}{x ^ {j} y ^ {-j + n + 1} \\binom{n + 1}{j}} + x ^ {n + 1} y ^ {-(n + 1) + n + 1}\\cdot 1)",
+                                        "res": "x ^ 0 * y ^ (-0 + n + 1) * 1 + (SUM(j, 0 + 1, n + 1 - 1, x ^ j * y ^ (-j + n + 1) * binom(n + 1,j)) + x ^ (n + 1) * y ^ (-(n + 1) + n + 1) * 1)",
                                         "rule": {
-                                            "func_name": "C",
-                                            "loc": "1.1.0.1",
+                                            "func_name": "binom",
+                                            "loc": "1.1.1",
                                             "name": "ExpandDefinition",
-                                            "str": "expand definition at 1.1.0.1"
+                                            "str": "expand definition at 1.1.1"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "\\sum_{j=1}^{n}{x ^ {j} y ^ {-j + n + 1} C(n + 1,j)} + x ^ {n + 1} + y ^ {n + 1}",
-                                        "res": "SUM(j, 1, n, x ^ j * y ^ (-j + n + 1) * C(n + 1,j)) + x ^ (n + 1) + y ^ (n + 1)",
+                                        "dead_vars": [
+                                            "k"
+                                        ],
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\sum_{j=1}^{n}{x ^ {j} y ^ {-j + n + 1} \\binom{n + 1}{j}} + x ^ {n + 1} + y ^ {n + 1}",
+                                        "res": "SUM(j, 1, n, x ^ j * y ^ (-j + n + 1) * binom(n + 1,j)) + x ^ (n + 1) + y ^ (n + 1)",
                                         "rule": {
                                             "name": "FullSimplify",
                                             "str": "full simplify"
@@ -1324,15 +1596,16 @@
                             }
                         ],
                         "finished": true,
-                        "goal": "(x + y) ^ (n + 1) = SUM(k, 0, n + 1, x ^ k * y ^ (-k + n + 1) * C(n + 1,k))",
-                        "latex_goal": "(x + y) ^ {n + 1} = \\sum_{k=0}^{n + 1}{x ^ {k} y ^ {-k + n + 1} C(n + 1,k)}",
+                        "goal": "(x + y) ^ (n + 1) = SUM(k, 0, n + 1, x ^ k * y ^ (-k + n + 1) * binom(n + 1,k))",
+                        "latex_goal": "(x + y) ^ {n + 1} = \\sum_{k=0}^{n + 1}{x ^ {k} y ^ {-k + n + 1} \\binom{n + 1}{k}}",
                         "type": "CalculationProof"
                     },
                     "type": "Goal",
                     "wellformed": false
                 },
                 "induct_var": "n",
-                "latex_goal": "(x + y) ^ {n} = \\sum_{k=0}^{n}{C(n,k) x ^ {k} y ^ {n - k}}",
+                "latex_goal": "(x + y) ^ {n} = \\sum_{k=0}^{n}{\\binom{n}{k} x ^ {k} y ^ {n - k}}",
+                "start": "1",
                 "type": "InductionProof"
             },
             "type": "Goal",

@@ -621,6 +621,13 @@ class Expr:
         """Obtain the set of variables in self."""
         res = set()
 
+        def add(res, with_bd, with_type, name, type=None):
+            if with_bd:
+                if with_type:
+                    res.add((name, type))
+                else:
+                    res.add(name)
+
         def rec(t, bd_vars):
             nonlocal with_bd, with_type
             if is_var(t):
@@ -636,47 +643,27 @@ class Expr:
                 for arg in t.args:
                     rec(arg, bd_vars)
             elif is_deriv(t):
-                if with_bd:
-                    if with_type:
-                        res.add((t.var, RealType))
-                    else:
-                        res.add(t.var)
+                add(res, with_bd, with_type, t.var, RealType)
                 rec(t.body, bd_vars + [t.var])
             elif is_limit(t):
-                if with_bd:
-                    if with_type:
-                        res.add((t.var, RealType))
-                    else:
-                        res.add(t.var)
+                add(res, with_bd, with_type, t.var, RealType)
                 rec(t.lim, bd_vars + [t.var])
                 rec(t.body, bd_vars + [t.var])
             elif is_integral(t) or is_evalat(t):
-                if with_bd:
-                    if with_type:
-                        res.add((t.var, RealType))
-                    else:
-                        res.add(t.var)
+                add(res, with_bd, with_type, t.var, RealType)
                 rec(t.lower, bd_vars + [t.var])
                 rec(t.upper, bd_vars + [t.var])
                 rec(t.body, bd_vars + [t.var])
             elif is_indefinite_integral(t):
-                if with_bd:
-                    if with_type:
-                        res.add((t.var, RealType))
-                    else:
-                        res.add(t.var)
+                add(res, with_bd, with_type, t.var, RealType)
                 rec(t.body, bd_vars + [t.var])
             elif is_summation(t):
-                if with_bd:
-                    if with_type:
-                        res.add((t.index_var, IntType))
-                    else:
-                        res.add(t.index_var)
+                add(res, with_bd, with_type, t.index_var, IntType)
                 rec(t.lower, bd_vars + [t.index_var])
                 rec(t.upper, bd_vars + [t.index_var])
                 rec(t.body, bd_vars + [t.index_var])
             elif t.is_equals():
-                rec(t.bd_vars)
+                rec(t.lhs, bd_vars)
                 rec(t.rhs, bd_vars)
             elif is_matrix(t):
                 for rv in t.data:

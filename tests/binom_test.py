@@ -169,5 +169,49 @@ class BinomTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         self.checkAndOutput(file)
 
+
+    def testExample02(self):
+        fixes = dict()
+        fixes['n'] = parser.parse_expr('$int')
+        file = compstate.CompFile("base", "binom_example02")
+        goal01 = file.add_goal("(LIM {n->oo}. (binom(2 * n, n) / (4 ^ n / sqrt(n * pi)))) = 1")
+        proof = goal01.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("binom")))
+        s1 = "factorial(2 * n)"
+        s2 = "(factorial(2*n)/(sqrt(4*pi*n)*(2*n/exp(1))^(2*n)))*(sqrt(4*pi*n)*(2*n/exp(1))^(2*n))"
+        calc.perform_rule(rules.Equation(s1, s2))
+        s3 = "factorial(n)"
+        s4 = "(factorial(n)/(sqrt(2*pi*n)*(n/exp(1))^n))*(sqrt(2*pi*n)*(n/exp(1))^n)"
+        calc.perform_rule(rules.Equation(s3, s4))
+        s5 = "(factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) * (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2"
+        s6 = "(factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2"
+        calc.perform_rule(rules.Equation(s5, s6))
+        s7 = "factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) * (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / ((factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2) "
+        s8 = "((factorial(2*n)/(sqrt(4*pi*n)*(2*n/exp(1))^(2*n)))/((factorial(n)/(sqrt(2*pi*n)*(n/exp(1))^n))^2))*(sqrt(4*pi*n)*(2*n/exp(1))^(2*n))/((sqrt(2*pi*n)*(n/exp(1))^n)^2)"
+        calc.perform_rule(rules.Equation(s7, s8))
+        s9 = "factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2 / (4 ^ n / sqrt(n * pi))"
+        s10 = "(factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2) * ((sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2 / (4 ^ n / sqrt(n * pi)))"
+        calc.perform_rule(rules.Equation(s9, s10))
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0.1"))
+        s11 = "2 * n * exp(-1)"
+        s12 = "2 * (n * exp(-1))"
+        calc.perform_rule(rules.Equation(s11, s12))
+        s13 = "(2 * (n * exp(-1))) ^ (2 * n)"
+        s14 = "2 ^ (2 * n) * (n * exp(-1)) ^ (2 * n)"
+        calc.perform_rule(rules.ApplyIdentity(s13, s14))
+        s15 = "2 ^ (2 * n)"
+        s16 = "(2 ^ 2) ^ n"
+        calc.perform_rule(rules.ApplyIdentity(s15, s16))
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0.1"))
+        s17 = "factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * 1"
+        s18 = "(factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n))) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2"
+        calc.perform_rule(rules.Equation(s17, s18))
+        s19 = "LIM {n -> oo}. (factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n))) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2"
+        s20 = "(LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n))) / (LIM {n -> oo}. (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2)"
+        calc.perform_rule(rules.Equation(s19, s20))
+        pass
+
+
 if __name__ == "__main__":
     unittest.main()

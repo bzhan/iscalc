@@ -207,10 +207,10 @@ class BinomTest(unittest.TestCase):
         s17 = "factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * 1"
         s18 = "(factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n))) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2"
         calc.perform_rule(rules.Equation(s17, s18))
-        s19 = "LIM {n -> oo}. (factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n))) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2"
-        s20 = "(LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n))) / (LIM {n -> oo}. (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2)"
+        s19 = calc.parse_expr("LIM {n -> oo}. (factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n))) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2")
+        s20 = calc.parse_expr("(LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n))) / (LIM {n -> oo}. (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2)")
         calc.perform_rule(rules.Equation(s19, s20))
-        pass
+        print(calc)
 
 
 if __name__ == "__main__":

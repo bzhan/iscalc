@@ -1482,7 +1482,10 @@ class Equation(Rule):
             sum2:Summation = mapping[y.name]
             if sum1.lower == sum2.lower and sum1.upper == sum2.upper:
                 e = Summation(sum1.index_var, sum1.lower,sum1.upper, sum1.body+sum2.body)
-
+        # rewrite limit expression
+        r = LimRewrite(self.old_expr, self.new_expr)
+        if r.eval(e, ctx) == self.new_expr:
+            return self.new_expr
         if normalize(norm.normalize_exp(e), ctx) == normalize(self.new_expr, ctx):
             return self.new_expr
 
@@ -2428,4 +2431,45 @@ class ExpandMatFunc(Rule):
                 return matrix.zero_matrix(e.args[0].val, e.args[1].val)
             elif e.func_name == "norm" and len(e.args) == 1 and expr.is_matrix_type(e.args[0].type):
                 return matrix.norm(e.args[0])
+        return e
+
+class LimRewrite(Rule):
+    """Expand functions on matrices."""
+    def __init__(self, source:Expr, target:Expr):
+        self.name = "LimRewrite"
+        self.source = source
+        self.target = target
+
+    def __str__(self):
+        return "rewrite limit expression"
+
+    def export(self):
+        return {
+            "name": self.name,
+            "str": str(self)
+        }
+
+    def eval(self, e: Expr, ctx: Context) -> Expr:
+        if self.source != e:
+            find_res = e.find_subexpr(self.source)
+            if len(find_res) == 0:
+                raise AssertionError("LimRewrite: source expression not found")
+            loc = find_res[0]
+            return OnLocation(self, loc).eval(e, ctx)
+        assert self.source == e
+        if expr.is_limit(e):
+            e: Limit
+            b = e.body
+            res = None
+            # TODO: check whether limit values exist
+            if expr.is_op(b):
+                if len(b.args) == 2:
+                    if b.op in "+-*/":
+                        res = Op(b.op, Limit(e.var, e.lim, b.args[0], e.drt),
+                                        Limit(e.var, e.lim, b.args[1], e.drt))
+                elif len(b.args) == 1:
+                    if b.op == '-':
+                        res = -Limit(e.var, e.lim, b.args[0], e.drt)
+            if res != None and normalize(res, ctx) == normalize(self.target, ctx):
+                return self.target
         return e

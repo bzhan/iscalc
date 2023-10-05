@@ -81,6 +81,18 @@
             "path": "twist_matrix_exp_inv",
             "type": "problem",
             "conds": ["type(w, 0, 3)","type(v, 0, 3)", "norm(w) = 1"]
+        },
+        {
+            "expr": "(D t. hmf(t, w, v)) = twist(w, v) * hmf(t, w, v)",
+            "path": "twist_derive_hmf",
+            "type": "problem",
+            "conds": ["type(w, 0, 3)","type(v, 0, 3)", "norm(w) = 0"]
+        },
+        {
+            "expr": "(D t. hmf(t, w, v)) = twist(w, v) * hmf(t, w, v)",
+            "path": "twist_derive_hmf",
+            "type": "problem",
+            "conds": ["type(w, 0, 3)","type(v, 0, 3)", "norm(w) = 1"]
         }
     ],
     "imports": [

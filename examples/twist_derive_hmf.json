@@ -103,7 +103,7 @@
                             {
                                 "dead_vars": [],
                                 "fixes": [],
-                                "latex_res": "\\hat{\\begin{bmatrix}w\\\\v\\end{bmatrix}} hmf{(t,w,v)}",
+                                "latex_res": "hat({\\begin{bmatrix}w\\\\v\\end{bmatrix}}) hmf{(t,w,v)}",
                                 "res": "hat([[w], [v]]) * hmf(t,w,v)",
                                 "rule": {
                                     "func_name": "twist",
@@ -116,7 +116,7 @@
                             {
                                 "dead_vars": [],
                                 "fixes": [],
-                                "latex_res": "\\hat{\\begin{bmatrix}w\\\\v\\end{bmatrix}} hm(\\mathbf{1}_{3 \\times 3},t v)",
+                                "latex_res": "hat({\\begin{bmatrix}w\\\\v\\end{bmatrix}}) hm(\\mathbf{1}_{3 \\times 3},t v)",
                                 "res": "hat([[w], [v]]) * hm(unit_matrix(3),t * v)",
                                 "rule": {
                                     "func_name": "hmf",
@@ -129,7 +129,7 @@
                             {
                                 "dead_vars": [],
                                 "fixes": [],
-                                "latex_res": "\\hat{\\begin{bmatrix}w\\\\v\\end{bmatrix}} \\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&t v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
+                                "latex_res": "hat({\\begin{bmatrix}w\\\\v\\end{bmatrix}}) \\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&t v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "hat([[w], [v]]) * [[unit_matrix(3), t * v], [zero_matrix(1,3), unit_matrix(1)]]",
                                 "rule": {
                                     "func_name": "hm",
@@ -483,7 +483,7 @@
                             {
                                 "dead_vars": [],
                                 "fixes": [],
-                                "latex_res": "\\hat{\\begin{bmatrix}w\\\\v\\end{bmatrix}} hmf{(t,w,v)}",
+                                "latex_res": "hat({\\begin{bmatrix}w\\\\v\\end{bmatrix}}) hmf{(t,w,v)}",
                                 "res": "hat([[w], [v]]) * hmf(t,w,v)",
                                 "rule": {
                                     "func_name": "twist",
@@ -496,7 +496,7 @@
                             {
                                 "dead_vars": [],
                                 "fixes": [],
-                                "latex_res": "\\hat{\\begin{bmatrix}w\\\\v\\end{bmatrix}} hm(e^{t \\hat{w}},(-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v)",
+                                "latex_res": "hat({\\begin{bmatrix}w\\\\v\\end{bmatrix}}) hm(e^{t \\hat{w}},(-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v)",
                                 "res": "hat([[w], [v]]) * hm(exp(t * hat(w)),(-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v)",
                                 "rule": {
                                     "func_name": "hmf",

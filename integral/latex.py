@@ -184,7 +184,10 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
             elif e.func_name == 'inv':
                 return "%s ^ {-1}" % sx
             elif e.func_name == 'hat':
-                return "\hat{%s}" % sx
+                if not expr.is_matrix(x):
+                    return "\hat{%s}" % sx
+                else:
+                    return "hat({%s})" % sx
             elif e.func_name == 'floor':
                 return "\\lfloor %s \\rfloor" % sx
             else:

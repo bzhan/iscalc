@@ -12,7 +12,7 @@
                 }
             ],
             "eq": "twist(w,v) = hat(rcon(w,v))",
-            "latex_eq": "twist(w,v) = \\hat{rcon(w,v)}",
+            "latex_eq": "twist(w,v) = hat({rcon(w,v)})",
             "latex_lhs": "twist(w,v)",
             "type": "FuncDef"
         },
@@ -156,7 +156,7 @@
                                     "w"
                                 ],
                                 "fixes": [],
-                                "latex_res": "\\begin{bmatrix}\\hat{\\mathbf{0}_{3 \\times 1}}&v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix} \\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&t v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
+                                "latex_res": "\\begin{bmatrix}hat({\\mathbf{0}_{3 \\times 1}})&v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix} \\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&t v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(zero_matrix(3,1)), v], [zero_matrix(1,3), zero_matrix(1,1)]] * [[unit_matrix(3), t * v], [zero_matrix(1,3), unit_matrix(1)]]",
                                 "rule": {
                                     "latex_str": "rewriting \\(w\\) to \\(\\mathbf{0}_{3 \\times 1}\\)",

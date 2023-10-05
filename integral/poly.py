@@ -665,11 +665,17 @@ def function_eval(e: expr.Expr, ctx: Context) -> expr.Expr:
                 res_data = list(a.data)+ list(b.data)
                 res = expr.Matrix(res_data, res_type)
                 return res
+
     if expr.is_fun(e) and e.func_name == 'sin':
         a = e.args[0]
         if expr.is_uminus(a):
             return -expr.Fun('sin', a.args[0])
-
+    if expr.is_fun(e) and e.func_name == 'hat':
+        a = e.args[0]
+        t = a.type
+        if expr.is_fun(a) and a.func_name == 'zero_matrix' and expr.eval_expr(t.args[1]) == 3 \
+            and expr.eval_expr(t.args[2]) == 1:
+            return expr.Fun('zero_matrix', expr.Const(3), expr.Const(3))
     return e
 
 def function_table(e: expr.Expr, ctx: Context) -> expr.Expr:

@@ -279,20 +279,43 @@ def zero_matrix(r: int, c: int):
     return Matrix([[Const(0) for j in range(c)] for i in range(r)])
 
 def hat(e: Expr) -> Expr:
-    if not expr.is_matrix(e) and expr.is_matrix_type(e.type):
+    if not expr.is_matrix(e) and not expr.is_matrix_type(e.type):
         raise AssertionError("hat: type mismatch")
-
-    if expr.is_matrix_type(e.type) and expr.num_row(e.type) == Const(3) and expr.num_col(e.type) == Const(1):
+    r = expr.eval_expr(expr.num_row(e.type))
+    c = expr.eval_expr(expr.num_col(e.type))
+    te = e.type
+    res = None
+    if expr.is_matrix(e) and r == 3 and c == 1:
         res = [[ Const(0),  -e.data[2][0],  e.data[1][0]],
                [ e.data[2][0],  Const(0),  -e.data[0][0]],
                [-e.data[1][0],  e.data[0][0],  Const(0)]]
-        return Matrix(res)
-    elif expr.is_matrix_type(e.type) and expr.num_row(e.type) == Const(6) and expr.num_col(e.type) == Const(1):
-        res = [[ Const(0),  -e.data[5][0],  e.data[4][0], e.data[0][0]],
-               [ e.data[5][0],  Const(0),  -e.data[3][0], e.data[1][0]],
-               [-e.data[4][0],  e.data[3][0],  Const(0),  e.data[2][0]],
-               [ Const(0),   Const(0),   Const(0),  Const(0)]]
-        return Matrix(res)
+        te = expr.TensorType(te.args[0], Const(3), Const(3))
+        return Matrix(res, te)
+    elif expr.is_matrix(e) and r == 6 and c == 1:
+        data_r = len(e.data)
+        data_c = len(e.data[0])
+        if data_r == r and data_c == c:
+            res = [[ Const(0),  -e.data[5][0],  e.data[4][0], e.data[0][0]],
+                   [ e.data[5][0],  Const(0),  -e.data[3][0], e.data[1][0]],
+                   [-e.data[4][0],  e.data[3][0],  Const(0),  e.data[2][0]],
+                   [ Const(0),   Const(0),   Const(0),  Const(0)]]
+            te = expr.TensorType(te.args[0], Const(4), Const(4))
+        elif data_r == 2 and data_c == 1:
+            w = e.data[0][0]
+            v = e.data[1][0]
+            tw = w.type
+            tv = v.type
+            twr = expr.eval_expr(expr.num_row(tw))
+            twc = expr.eval_expr(expr.num_col(tw))
+            tvr = expr.eval_expr(expr.num_row(tv))
+            tvc = expr.eval_expr(expr.num_col(tv))
+            assert twr == 3 and twc == 1 and tvr == 3 and tvc == 1
+            res = [[expr.Fun('hat', w), v],
+                   [expr.Fun('zero_matrix', Const(1), Const(3)), expr.Fun('zero_matrix', Const(1), Const(1))]]
+            te = expr.TensorType(te.args[0], Const(4), Const(4))
+        else:
+            raise NotImplementedError
+        return Matrix(res, te)
     else:
         raise AssertionError(f"{e} should be a 3 or 6-dimensional vector")
 

@@ -31,15 +31,21 @@ def deriv(var: str, e: Expr, ctx: Context) -> Expr:
         return normalize(x, ctx)
 
     def rec(e):
-        if var not in e.get_vars():
+        if var not in e.get_vars() and e.type == expr.RealType:
             return Const(0)
         elif expr.is_var(e):
-            if e.name == var:
-                # dx. x = 1
-                return Const(1)
+            if not expr.is_matrix_type(e.type):
+                if e.name == var:
+                    # dx. x = 1
+                    return Const(1)
+                else:
+                    # dx. y = 0
+                    return Const(0)
             else:
-                # dx. y = 0
-                return Const(0)
+                if e.name != var:
+                    return Fun('zero_matrix', e.type.args[1], e.type.args[2])
+                else:
+                    raise NotImplementedError
         elif expr.is_const(e):
             # dx. c = 0
             return Const(0)
@@ -74,12 +80,15 @@ def deriv(var: str, e: Expr, ctx: Context) -> Expr:
                     return normal((rec(x) * y - x * rec(y)) / (y ^ Const(2)))
             elif e.op == "^":
                 x, y = e.args
-                if y.ty == CONST:
-                    return normal(y * (x ^ Const(y.val - 1)) * rec(x))
-                elif var not in y.get_vars():
-                    return normal(y * (x ^ (y - 1)) * rec(x))
+                if not expr.is_matrix_type(x.type):
+                    if y.ty == CONST:
+                        return normal(y * (x ^ Const(y.val - 1)) * rec(x))
+                    elif var not in y.get_vars():
+                        return normal(y * (x ^ (y - 1)) * rec(x))
+                    else:
+                        return normal(rec(expr.exp(y * expr.log(x))))
                 else:
-                    return normal(rec(expr.exp(y * expr.log(x))))
+                    raise NotImplementedError
             else:
                 raise NotImplementedError
         elif expr.is_fun(e):
@@ -109,7 +118,10 @@ def deriv(var: str, e: Expr, ctx: Context) -> Expr:
                 return normal(rec(x) / x)
             elif e.func_name == "exp":
                 x, = e.args
-                return normal(expr.exp(x) * rec(x))
+                if not expr.is_matrix_type(x.type):
+                    return normal(expr.exp(x) * rec(x))
+                else:
+                    return Deriv(var, e)
             elif e.func_name == "pi":
                 return Const(0)
             elif e.func_name == "sqrt":
@@ -133,6 +145,10 @@ def deriv(var: str, e: Expr, ctx: Context) -> Expr:
                 # Arguments should be integers
                 assert not e.contains_var(var), "deriv: binom applied to real variables"
                 return Const(0)
+            elif e.func_name == 'unit_matrix':
+                return Fun('zero_matrix', e.args[0], e.args[0])
+            elif e.func_name == 'zero_matrix':
+                return Fun('zero_matrix', e.args[0], e.args[1])
             else:
                 return Deriv(var, e)
         elif expr.is_integral(e):
@@ -148,6 +164,9 @@ def deriv(var: str, e: Expr, ctx: Context) -> Expr:
             return Summation(e.index_var, e.lower, e.upper, rec(e.body))
         elif expr.is_inf(e):
             return Const(0)
+        elif expr.is_matrix(e):
+            e:Matrix
+            return Matrix([[rec(item) for item in row] for row in e.data], e.type)
         else:
             print(e, type(e))
             raise NotImplementedError
@@ -1451,7 +1470,7 @@ class Equation(Rule):
         if norm.eq_power(e, self.new_expr, ctx):
             return self.new_expr
 
-        if norm.eq_log(e, self.new_expr, ctx):
+        if not expr.is_matrix_type(e.type) and norm.eq_log(e, self.new_expr, ctx):
             return self.new_expr
 
         if norm.eq_definite_integral(e, self.new_expr, ctx):
@@ -1488,6 +1507,12 @@ class Equation(Rule):
             return self.new_expr
         if normalize(norm.normalize_exp(e), ctx) == normalize(self.new_expr, ctx):
             return self.new_expr
+        t = e.type
+        if expr.is_matrix_type(t):
+            if expr.is_vector_type(t):
+                if ctx.check_condition(Op('=', Fun('norm', e), Const(0))) and \
+                    normalize(self.new_expr, ctx) == Fun('zero_matrix', t.args[1], t.args[2]):
+                    return self.new_expr
 
         raise AssertionError("Equation: rewriting %s to %s failed" % (e, self.new_expr))
 
@@ -1912,8 +1937,14 @@ class ExpandDefinition(Rule):
                     if expr.is_symbol(identity.lhs) and identity.lhs.name == sube.name:
                         res.append((sube, loc))
         return res
-
+    def simp_type(e:Expr, ctx:Context):
+        if expr.is_fun(e):
+            if e.func_name == 'rcon':
+                t = e.type
+                e.type = expr.Matrix(t.args[0], normalize(t.args[0],ctx), normalize(t.args[1],ctx))
+        return e
     def eval(self, e: Expr, ctx: Context) -> Expr:
+        e = ExpandDefinition.simp_type(e, ctx)
         if expr.is_fun(e) and e.func_name == self.func_name:
             for identity in ctx.get_definitions():
                 if expr.is_fun(identity.lhs) and identity.lhs.func_name == self.func_name:

@@ -66,6 +66,18 @@
       "attributes": [
           "bidirectional"
       ],
+
+      "category": "matrix-power",
+      "conds": [
+        "isSquare(A)"
+      ],
+      "expr": "A^2 = A * A",
+      "type": "axiom"
+    },
+    {
+      "attributes": [
+          "bidirectional"
+      ],
       "category": "matrix-arith",
       "conds": [
         "type(A, 2)"

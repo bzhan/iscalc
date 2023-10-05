@@ -72,6 +72,9 @@ def MatrixType(eleType: Type, row, col) -> Type:
     return TensorType(eleType, row, col)
 
 def is_vector_type(type: Type) -> bool:
+    return type.name == "tensor" and len(type.args) == 3 and eval_expr(type.args[2]) == 1
+
+def is_row_type(type: Type) -> bool:
     return type.name == "tensor" and len(type.args) == 2
 
 def is_matrix_type(type: Type) -> bool:
@@ -1186,7 +1189,10 @@ class Op(Expr):
                 if args[0].type == IntType and args[1].type == IntType:
                     self.type = IntType
                 elif is_matrix_type(args[0].type) and is_matrix_type(args[1].type):
-                    assert num_col(args[0].type) == num_row(args[1].type), \
+                    c = num_col(args[0].type)
+                    r = num_row(args[1].type)
+                    assert c.is_evaluable() and r.is_evaluable() and eval_expr(c) == eval_expr(r) or \
+                            num_col(args[0].type) == num_row(args[1].type), \
                         str(args[0])+","+str(args[1])+":"+str(args[0].type) + ", " + str(args[1].type)
                     t1, t2 = args[0].type.args[0], args[1].type.args[0]
                     if t1 == t2:
@@ -1205,7 +1211,7 @@ class Op(Expr):
                         self.type = MatrixType(RealType, num_row(args[1].type), num_col(args[1].type))
             elif op == '^':
                 if is_matrix_type(t1):
-                    assert num_row(t1) == num_col(t1), str(t1) +":"+ str(args)
+                    assert num_row(t1) == num_col(t1), str(args[0]) + "," + str(t1) +":"+ str(args)
                     self.type = t1
         elif len(self.args) == 1:
             if op == '-':
@@ -1270,10 +1276,13 @@ class Fun(Expr):
                 self.type = Type('unknown')
         elif self.func_name == 'hat':
             if is_matrix_type(self.args[0].type):
-                if num_col(self.args[0].type) == Const(1) and num_row(self.args[0].type) == Const(3):
-                    self.type = MatrixType(self.args[0].type.args[0],  Const(3), Const(3))
+                t = self.args[0].type
+                if eval_expr(num_col(t)) == 1 and eval_expr(num_row(t)) == 3:
+                    self.type = MatrixType(t.args[0],  Const(3), Const(3))
+                elif eval_expr(num_col(t)) == 1 and eval_expr(num_row(t)) == 6:
+                    self.type = MatrixType(t.args[0], Const(4), Const(4))
                 else:
-                    raise NotImplementedError
+                    raise NotImplementedError(str(self.args[0])+": "+str(num_row(t))+","+str(num_col(t)))
             elif self.args[0].type == Type('unknown'):
                 self.type = self.args[0].type
             else:
@@ -1304,10 +1313,10 @@ class Fun(Expr):
         elif self.func_name == 'exp':
             t = self.args[0].type
             if is_matrix_type(t):
-                if num_row(t) == Const(3) and num_col(t) == Const(3):
+                if eval_expr(num_row(t)) == 3 and eval_expr(num_col(t)) == 3:
                     self.type = MatrixType(t.args[0], Const(3), Const(3))
                 else:
-                    raise NotImplementedError
+                    raise NotImplementedError(str(self)+"-"+str(t))
     def __hash__(self):
         return hash((FUN, self.func_name, self.args))
 
@@ -1444,7 +1453,17 @@ class Matrix(Expr):
             if type == None:
                 # Matrix case
                 self.data = tuple(tuple(row) for row in data)
-                self.type = MatrixType(data[0][0].type, Const(len(data)), Const(len(data[0])))
+                if data[0][0].type in (RealType, IntType):
+                    self.type = MatrixType(data[0][0].type, Const(len(data)), Const(len(data[0])))
+                elif is_matrix_type(data[0][0].type):
+                    assert all(all(is_matrix_type(ele.type) for ele in rv) for rv in data)
+                    for idx, item in enumerate(data[0]):
+                        col = num_col(data[0][idx].type) if idx == 0 \
+                            else col + num_col(data[0][idx].type)
+                    for idx, item in enumerate(data):
+                        row = num_row(data[idx][0].type) if idx == 0 \
+                            else row + num_row(data[idx][0].type)
+                    self.type = MatrixType(RealType, row, col)
             else:
                 self.data = tuple(tuple(row) for row in data)
                 self.type = type
@@ -1471,7 +1490,7 @@ class Matrix(Expr):
     def __str__(self):
         if is_matrix_type(self.type):
             return "[" + ", ".join("[" + ", ".join(str(val) for val in row) + "]" for row in self.data) + "]"
-        elif is_vector_type(self.type):
+        elif is_row_type(self.type):
             return "[" + ", ".join(str(val) for val in self.data) + "]"
         else:
             raise NotImplementedError
@@ -1552,6 +1571,8 @@ class Deriv(Expr):
         self.var: str = var
         self.body: Expr = body
         self.type = RealType
+        if is_matrix_type(body.type):
+            self.type = body.type
 
     def __hash__(self):
         return hash((DERIV, self.var, self.body))
@@ -1779,8 +1800,7 @@ def eval_expr(e: Expr):
             from scipy.special import gamma
             return gamma(float(arg))
 
-    print(e)
-    raise NotImplementedError
+    raise NotImplementedError(str(e))
 
 
 def neg_expr(ex: Expr):

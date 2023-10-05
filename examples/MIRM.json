@@ -50,19 +50,31 @@
             "expr": "hm(R, p) = rcon(ccon(R,p), ccon(zero_matrix(1,3),unit_matrix(1)))",
             "path": "twist_matrix_exp_inv",
             "type": "definition",
-            "conds": ["type(R, 0, 3, 3)","type(p, 0 ,3)", "norm(w) = 1"]
+            "conds": ["type(R, 0, 3, 3)","type(p, 0 ,3)"]
         },
         {
             "expr": "hmf(t, w, v) = hm(unit_matrix(3), t*v)",
             "path": "twist_matrix_exp_inv",
             "type": "definition",
-            "conds": ["type(v, 0, 3)","type(w, 0 ,3)", "norm(w) = 1"]
+            "conds": ["type(v, 0, 3)","type(w, 0 ,3)", "norm(w) = 0"]
         },
         {
             "expr": "hmf(t, w, v) = hm(exp(t*hat(w)), (unit_matrix(3)-exp(t*hat(w)))*(hat(w)*v)+(w*T(w)*v*t))",
             "path": "twist_matrix_exp_inv",
             "type": "definition",
-            "conds": ["type(v, 0, 3)","type(w, 0 ,3)", "norm(w) = 0"]
+            "conds": ["type(v, 0, 3)","type(w, 0 ,3)", "norm(w) = 1"]
+        },
+        {
+            "expr": "hat(w) ^ n * w = zero_matrix(3,1)",
+            "path": "twist_matrix_exp_inv",
+            "type": "problem",
+            "conds": ["type(n, 1)","type(w, 0 ,3)", "n>=1"]
+        },
+        {
+            "expr": "hat(w) * w = zero_matrix(3,1)",
+            "path": "twist_matrix_exp_inv",
+            "type": "problem",
+            "conds": ["type(w, 0 ,3)"]
         },
         {
             "expr": "hmf(t, w, v) * hmf(-t, w, v) = unit_matrix(4)",

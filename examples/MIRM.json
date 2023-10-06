@@ -9,7 +9,7 @@
             "expr": "(inv(P)*A*P)^n = inv(P)*A^n*P",
             "path": "matrix_example01",
             "type": "problem",
-            "conds": ["invertible(P)", "isSquare(A)"]
+            "conds": ["invertible(P)", "isSquare(A)", "type(n,1)", "n>=0"]
         },
         {
             "expr": "hat(w)^2 =  w * T(w) - norm(w)^2 * unit_matrix(3)",

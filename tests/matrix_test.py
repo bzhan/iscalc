@@ -87,7 +87,7 @@ class MatrixTest(unittest.TestCase):
             fixes[a] = parser.parse_expr(b, fixes= fixes)
         goal = file.add_goal("(inv(P) * A * P) ^ n = inv(P) * (A ^ n) * P",
                              fixes=fixes,
-                             conds=["invertible(P)", "n > 0"])
+                             conds=["invertible(P)", "n >= 0"])
         proof = goal.proof_by_induction(induct_var='n', start=0)
         _ = proof.base_case.proof_by_calculation()
         induct_proof = proof.induct_case.proof_by_calculation()

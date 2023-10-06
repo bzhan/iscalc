@@ -7,8 +7,8 @@
                     "latex_cond": "invertible{(P)}"
                 },
                 {
-                    "cond": "n > 0",
-                    "latex_cond": "n > 0"
+                    "cond": "n >= 0",
+                    "latex_cond": "n \\ge 0"
                 }
             ],
             "finished": true,
@@ -43,8 +43,8 @@
                             "latex_cond": "invertible{(P)}"
                         },
                         {
-                            "cond": "n > 0",
-                            "latex_cond": "n > 0"
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
                         }
                     ]
                 },
@@ -62,8 +62,8 @@
                             "latex_cond": "invertible{(P)}"
                         },
                         {
-                            "cond": "n > 0",
-                            "latex_cond": "n > 0"
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
                         }
                     ]
                 },
@@ -81,8 +81,8 @@
                             "latex_cond": "invertible{(P)}"
                         },
                         {
-                            "cond": "n > 0",
-                            "latex_cond": "n > 0"
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
                         }
                     ]
                 },
@@ -100,8 +100,8 @@
                             "latex_cond": "invertible{(P)}"
                         },
                         {
-                            "cond": "n > 0",
-                            "latex_cond": "n > 0"
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
                         }
                     ]
                 },
@@ -119,8 +119,8 @@
                             "latex_cond": "invertible{(P)}"
                         },
                         {
-                            "cond": "n > 0",
-                            "latex_cond": "n > 0"
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
                         }
                     ]
                 },
@@ -138,8 +138,8 @@
                             "latex_cond": "invertible{(P)}"
                         },
                         {
-                            "cond": "n > 0",
-                            "latex_cond": "n > 0"
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
                         }
                     ]
                 }
@@ -196,8 +196,8 @@
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n > 0",
-                                    "latex_cond": "n > 0"
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -215,8 +215,8 @@
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n > 0",
-                                    "latex_cond": "n > 0"
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -234,8 +234,8 @@
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n > 0",
-                                    "latex_cond": "n > 0"
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -253,8 +253,8 @@
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n > 0",
-                                    "latex_cond": "n > 0"
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -272,8 +272,8 @@
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n > 0",
-                                    "latex_cond": "n > 0"
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -291,8 +291,8 @@
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n > 0",
-                                    "latex_cond": "n > 0"
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         }

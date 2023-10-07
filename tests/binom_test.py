@@ -216,16 +216,16 @@ class BinomTest(unittest.TestCase):
         s23 = "LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) * (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n))"
         s24 = "(LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) * (LIM {n -> oo}. (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)))"
         calc.perform_rule(rules.Equation(s23, s24))
-        calc.perform_rule(rules.OnLocation(rules.Substitution("n", "2 * n"), "0"))
-        s25 = "sqrt(2) * factorial(n) * (n * exp(-1)) ^ -n / (2 * sqrt(n) * sqrt(pi))"
-        s26 = "factorial(n) / (2 * sqrt(n) * sqrt(pi) / sqrt(2) * (n / exp(1)) ^ n)"
+        calc.perform_rule(rules.OnLocation(rules.Substitution("k", "2 * n"), "0"))
+        s25 = "sqrt(2) * factorial(k) * (k * exp(-1)) ^ -k / (2 * sqrt(k) * sqrt(pi))"
+        s26 = "factorial(k) / (2 * sqrt(k) * sqrt(pi) / sqrt(2) * (k / exp(1)) ^ k)"
         calc.perform_rule(rules.Equation(s25, s26))
-        s27 = "2 * sqrt(n) * sqrt(pi) / sqrt(2)"
-        s28 = "sqrt(2 * pi * n)"
+        s27 = "2 * sqrt(k) * sqrt(pi) / sqrt(2)"
+        s28 = "sqrt(2 * pi * k)"
         calc.perform_rule(rules.Equation(s27, s28))
-        s29 = "LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)"
+        s29 = "LIM {k -> oo}. factorial(k) / (sqrt(2 * pi * k) * (k / exp(1)) ^ k)"
         s30 = "1"
-        calc.perform_rule(rules.ApplyIdentity(s29, s30))
+        calc.perform_rule(rules.ApplyEquation(s29, s30))
         print(calc)
 
 

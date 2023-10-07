@@ -223,9 +223,9 @@ class BinomTest(unittest.TestCase):
         s27 = "2 * sqrt(k) * sqrt(pi) / sqrt(2)"
         s28 = "sqrt(2 * pi * k)"
         calc.perform_rule(rules.Equation(s27, s28))
-        s29 = "LIM {k -> oo}. factorial(k) / (sqrt(2 * pi * k) * (k / exp(1)) ^ k)"
-        s30 = "1"
-        calc.perform_rule(rules.ApplyEquation(s29, s30))
+        s = calc.parse_expr("(LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n))")
+        t = calc.parse_expr("1")
+        calc.perform_rule(rules.ApplyIdentity(s,t))
         print(calc)
 
 

@@ -1094,7 +1094,7 @@ class ApplyEquation(Rule):
         if self.source != e:
             find_res = e.find_subexpr(self.source)
             if len(find_res) == 0:
-                raise AssertionError("ApplyIdentity: source expression not found")
+                raise AssertionError("ApplyEquation: source expression not found")
             loc = find_res[0]
             return OnLocation(self, loc).eval(e, ctx)
         assert self.source == e

@@ -1271,7 +1271,7 @@
             "type": "header"
         },
         {
-            "expr": "(LIM {n->oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) = 1",
+            "expr": "(LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) = 1",
             "type": "axiom"
         }
     ],

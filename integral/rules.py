@@ -1235,8 +1235,9 @@ class Substitution(Rule):
         specify the substitution.
 
         """
-        if not (expr.is_integral(e) or expr.is_indefinite_integral(e)):
+        if not (expr.is_integral(e) or expr.is_indefinite_integral(e) or expr.is_limit(e)):
             sep_ints = e.separate_integral()
+            sep_lims = e.separate_limits()
             if len(sep_ints) == 0:
                 return e
             else:
@@ -1272,7 +1273,10 @@ class Substitution(Rule):
 
             gu = normalize(gu, ctx)
             c = e.body.replace(parser.parse_expr(e.var), gu)
-            new_problem_body = c * deriv(str(var_name), gu, ctx)
+            if not expr.is_limit(e):
+                new_problem_body = c * deriv(str(var_name), gu, ctx)
+            else:
+                new_problem_body = c
             self.f = new_problem_body
 
         if expr.is_integral(e):
@@ -1296,6 +1300,25 @@ class Substitution(Rule):
                 return normalize(Integral(self.var_name, lower, upper, self.f), ctx)
         elif expr.is_indefinite_integral(e):
             return normalize(IndefiniteIntegral(self.var_name, self.f, e.skolem_args), ctx)
+        elif expr.is_limit(e):
+            # Perhaps need to be improved when drt is not None
+            if e.lim == expr.NEG_INF:
+                lim = limits.reduce_neg_inf_limit(var_subst, e.var, ctx)
+            elif e.lim == expr.POS_INF:
+                lim = limits.reduce_inf_limit(var_subst, e.var, ctx)
+            else:
+                x = Var(e.var)
+                left = self.var_subst
+                left = limits.reduce_inf_limit(left.subst(e.var, (1 / x) + e.lim), e.var, ctx)
+                left = normalize(left, ctx)
+                right = self.var_subst
+                right = limits.reduce_inf_limit(right.subst(e.var, e.lim - (1 / x)), e.var, ctx)
+                right = normalize(right, ctx)
+                if left.is_evaluable() and right.is_evaluable() and expr.eval_expr(left) == expr.eval_expr(right):
+                    return normalize(Limit(self.var_name, left, self.f, None), ctx)
+                else:
+                    return e
+            return normalize(Limit(self.var_name, lim, self.f, None), ctx)
         else:
             raise TypeError
 

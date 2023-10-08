@@ -277,13 +277,13 @@ class BinomTest(unittest.TestCase):
         fixes['n'] = parser.parse_expr('$int')
         fixes['i'] = parser.parse_expr('$int')
         file = compstate.CompFile("base", "binom_example04")
-        goal01 = file.add_goal("SUM(i, 0, n, (((8 - m / 8) * i ^ 3 - 4 * i ^ 2 - 2 * i + 1) * binom(2 * i, i)) / ((2 * i - 1) ^ 2 * m ^ i)) = (2 * n + 1) / m ^ n * binom(2 * n, n) ^ 3", conds=['m != 0'], fixes=fixes)
+        goal01 = file.add_goal("SUM(i, 0, n, (((8 - m / 8) * i ^ 3 - 4 * i ^ 2 - 2 * i + 1) * binom(2 * i, i)) / ((2 * i - 1) ^ 2 * m ^ i)) = (2 * n + 1) / m ^ n * binom(2 * n, n) ^ 3", conds=['m != 0', 'n>=0'], fixes=fixes)
         proof = goal01.proof_by_induction("n", 0)
         proof_base = proof.base_case.proof_by_calculation()
         proof_induct = proof.induct_case.proof_by_calculation()
         calc = proof_base.lhs_calc
         calc = proof_induct.lhs_calc
-        cond = "i <= n"
+        cond = calc.parse_expr("i <= n")
         calc.perform_rule(rules.SplitSummation(cond))
         self.checkAndOutput(file)
 

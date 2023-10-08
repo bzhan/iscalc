@@ -1526,6 +1526,8 @@ class Equation(Rule):
             sum2:Summation = mapping[y.name]
             if sum1.lower == sum2.lower and sum1.upper == sum2.upper:
                 e = Summation(sum1.index_var, sum1.lower,sum1.upper, sum1.body+sum2.body)
+            if normalize(e, ctx) == normalize(self.new_expr, ctx):
+                return self.new_expr
         # rewrite limit expression
         r = LimRewrite(self.old_expr, self.new_expr)
         if r.eval(e, ctx) == self.new_expr:
@@ -2359,6 +2361,7 @@ class SplitSummation(Rule):
 
                 if inst_lhs is not None:
                     inst_split_cond.update(inst_lhs)
+                    inst_split_cond['n'] = Var(new_expr.lhs.index_var, type=expr.IntType)
                     tmp_conds = [c.inst_pat(inst_split_cond, func_type) for c in id.conds.data]
                     flag = True
                     for c in tmp_conds:

@@ -329,6 +329,7 @@ def print_all_conds(all_conds: Dict[Expr, List[Expr]]):
 def get_standard_inequalities() -> List[Identity]:
     data = [
         # Addition
+        (["c > 0"], "a + c > a"),
         (["a > b"], "a + c > b + c"),
         (["a > b"], "c + a > c + b"),
         (["a < b"], "a + c < b + c"),

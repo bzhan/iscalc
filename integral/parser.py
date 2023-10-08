@@ -159,7 +159,11 @@ class ExprTransformer(Transformer):
         elif func_name == 'SUM':
             e = expr.Summation(str(args[0]), *args[1:])
             return e.replace(expr.Var(e.index_var), expr.Var(e.index_var, type=expr.IntType))
-        return expr.Fun(str(func_name), *args)
+        s = str(func_name)
+        if self.fixes is not None and s in self.fixes:
+            return expr.Fun((s, self.fixes[s]), *args)
+        else:
+            return expr.Fun(s, *args)
 
     def abs_expr(self, expr):
         return expr.Fun("abs", expr)

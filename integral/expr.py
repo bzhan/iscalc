@@ -1,5 +1,4 @@
 """Expressions."""
-import copy
 import math
 import functools
 from decimal import Decimal
@@ -452,7 +451,7 @@ class Expr:
         elif is_fun(self):
             assert loc.head < len(self.args), "replace_expr: invalid location"
             arg = self.args[loc.head].replace_expr(loc.rest, new_expr)
-            return Fun(self.func_name, arg)
+            return Fun((self.func_name, self.type), arg)
         elif is_integral(self):
             if loc.head == 0:
                 return Integral(self.var, self.lower, self.upper, self.body.replace_expr(loc.rest, new_expr))
@@ -577,7 +576,7 @@ class Expr:
         elif is_op(self):
             return Op(self.op, *[arg.subst(var, e) for arg in self.args])
         elif is_fun(self):
-            return Fun(self.func_name, *[arg.subst(var, e) for arg in self.args])
+            return Fun((self.func_name,self.type), *[arg.subst(var, e) for arg in self.args])
         elif is_deriv(self):
             return Deriv(self.var, self.body.subst(var, e))
         elif is_limit(self):
@@ -818,7 +817,7 @@ class Expr:
             subs.remove(self)
         return tuple(subs)
 
-    def inst_pat(self, mapping: Dict) -> "Expr":
+    def inst_pat(self, mapping: Dict, func_type:Dict=None) -> "Expr":
         """Instantiate by replacing symbols in term with mapping."""
         if is_var(self) or is_const(self) or is_inf(self):
             return self
@@ -828,28 +827,31 @@ class Expr:
             else:
                 return self
         elif is_op(self):
-            return Op(self.op, *(arg.inst_pat(mapping) for arg in self.args))
+            return Op(self.op, *(arg.inst_pat(mapping, func_type) for arg in self.args))
         elif is_fun(self):
-            return Fun(self.func_name, *(arg.inst_pat(mapping) for arg in self.args))
+            if func_type != None and self.func_name in func_type:
+                return Fun((self.func_name, func_type[self.func_name]), *(arg.inst_pat(mapping, func_type) for arg in self.args))
+            else:
+                return Fun(self.func_name, *(arg.inst_pat(mapping, func_type) for arg in self.args))
         elif is_skolem_func(self):
-            return SkolemFunc(self.name, tuple(arg.inst_pat(mapping) for arg in self.dependent_vars))
+            return SkolemFunc(self.name, tuple(arg.inst_pat(mapping, func_type) for arg in self.dependent_vars))
         elif is_integral(self):
-            return Integral(self.var, self.lower.inst_pat(mapping), self.upper.inst_pat(mapping),
-                            self.body.inst_pat(mapping))
+            return Integral(self.var, self.lower.inst_pat(mapping, func_type), self.upper.inst_pat(mapping, func_type),
+                            self.body.inst_pat(mapping, func_type))
         elif is_evalat(self):
-            return EvalAt(self.var, self.lower.inst_pat(mapping), self.upper.inst_pat(mapping),
-                          self.body.inst_pat(mapping))
+            return EvalAt(self.var, self.lower.inst_pat(mapping, func_type), self.upper.inst_pat(mapping, func_type),
+                          self.body.inst_pat(mapping, func_type))
         elif is_deriv(self):
             if self.var in mapping and is_var(mapping[self.var]):
-                return Deriv(mapping[self.var].name, self.body.inst_pat(mapping))
-            return Deriv(self.var, self.body.inst_pat(mapping))
+                return Deriv(mapping[self.var].name, self.body.inst_pat(mapping, func_type))
+            return Deriv(self.var, self.body.inst_pat(mapping, func_type))
         elif is_summation(self):
-            return Summation(self.index_var, self.lower.inst_pat(mapping), self.upper.inst_pat(mapping), \
-                             self.body.inst_pat(mapping))
+            return Summation(self.index_var, self.lower.inst_pat(mapping, func_type), self.upper.inst_pat(mapping, func_type), \
+                             self.body.inst_pat(mapping, func_type))
         elif is_limit(self):
-            return Limit(self.var, self.lim.inst_pat(mapping), self.body.inst_pat(mapping), self.drt)
+            return Limit(self.var, self.lim.inst_pat(mapping, func_type), self.body.inst_pat(mapping, func_type), self.drt)
         elif is_matrix(self):
-            return Matrix([[item.inst_pat(mapping) for item in rv] for rv in self.data])
+            return Matrix([[item.inst_pat(mapping, func_type) for item in rv] for rv in self.data])
         else:
             print(type(self))
             raise NotImplementedError
@@ -1253,70 +1255,76 @@ class Op(Expr):
 class Fun(Expr):
     """Functions."""
 
-    def __init__(self, func_name: str, *args):
-        assert isinstance(func_name, str) and all(isinstance(arg, Expr) for arg in args)
+    def __init__(self, func_name: Union[str, Tuple[str, Type]], *args):
+        assert (isinstance(func_name, str) or isinstance(func_name,tuple)) and \
+               all(isinstance(arg, Expr) for arg in args)
 
         self.ty = FUN
-        self.func_name = func_name
         self.args: Tuple[Expr] = tuple(args)
-        self.type = RealType
-        # TODO: add more type inference
-        if self.func_name == 'unit_matrix':
-            self.type = MatrixType(RealType, self.args[0], self.args[0])
-        elif self.func_name == 'zero_matrix':
-            self.type = MatrixType(RealType, self.args[0], self.args[1])
-        elif self.func_name == 'inv':
-            self.type = self.args[0].type
-        elif self.func_name == 'T':
-            if self.args[0].type == Type('unknown'):
+        if isinstance(func_name, str):
+            self.func_name = func_name
+
+            self.type = RealType
+            # TODO: add more type inference
+            if self.func_name == 'unit_matrix':
+                self.type = MatrixType(RealType, self.args[0], self.args[0])
+            elif self.func_name == 'zero_matrix':
+                self.type = MatrixType(RealType, self.args[0], self.args[1])
+            elif self.func_name == 'inv':
                 self.type = self.args[0].type
-            elif is_matrix_type(self.args[0].type):
-                self.type = MatrixType(self.args[0].type.args[0], num_col(self.args[0].type), num_row(self.args[0].type))
-            else:
-                self.type = Type('unknown')
-        elif self.func_name == 'hat':
-            if is_matrix_type(self.args[0].type):
+            elif self.func_name == 'T':
+                if self.args[0].type == Type('unknown'):
+                    self.type = self.args[0].type
+                elif is_matrix_type(self.args[0].type):
+                    self.type = MatrixType(self.args[0].type.args[0], num_col(self.args[0].type), num_row(self.args[0].type))
+                else:
+                    self.type = Type('unknown')
+            elif self.func_name == 'hat':
+                if is_matrix_type(self.args[0].type):
+                    t = self.args[0].type
+                    if eval_expr(num_col(t)) == 1 and eval_expr(num_row(t)) == 3:
+                        self.type = MatrixType(t.args[0],  Const(3), Const(3))
+                    elif eval_expr(num_col(t)) == 1 and eval_expr(num_row(t)) == 6:
+                        self.type = MatrixType(t.args[0], Const(4), Const(4))
+                    else:
+                        raise NotImplementedError(str(self.args[0])+": "+str(num_row(t))+","+str(num_col(t)))
+                elif self.args[0].type == Type('unknown'):
+                    self.type = self.args[0].type
+                else:
+                    self.type = Type('unknown')
+                    # raise NotImplementedError("hat(%s), args[0].type = %s"%(str(self.args[0]), self.args[0].type))
+            elif self.func_name == 'ccon':
+                assert len(self.args) == 2
+                a, b = self.args
+                # assert is_matrix_type(a.type) and is_matrix_type(b.type)
+                f1 = is_matrix_type(a.type) and is_matrix_type(b.type)
+                # assert num_row(a.type) == num_row(b.type)
+                f2 = True if f1 and num_row(a.type) == num_row(b.type) else False
+                if f1 and f2:
+                    self.type = MatrixType(type_mapping[(a.type.args[0], b.type.args[0])],
+                                           num_row(a.type),
+                                           num_col(b.type) + num_col(a.type))
+            elif self.func_name == 'rcon':
+                assert len(self.args) == 2
+                a, b = self.args
+                # assert is_matrix_type(a.type) and is_matrix_type(b.type)
+                f1 = is_matrix_type(a.type) and is_matrix_type(b.type)
+                # assert num_col(a.type) == num_col(b.type)
+                f2 = True if f1 and num_col(a.type) == num_col(b.type) else False
+                if f1 and f2:
+                    self.type = MatrixType(type_mapping[(a.type.args[0], b.type.args[0])],
+                                           num_row(b.type) + num_row(a.type),
+                                           num_col(a.type))
+            elif self.func_name == 'exp':
                 t = self.args[0].type
-                if eval_expr(num_col(t)) == 1 and eval_expr(num_row(t)) == 3:
-                    self.type = MatrixType(t.args[0],  Const(3), Const(3))
-                elif eval_expr(num_col(t)) == 1 and eval_expr(num_row(t)) == 6:
-                    self.type = MatrixType(t.args[0], Const(4), Const(4))
-                else:
-                    raise NotImplementedError(str(self.args[0])+": "+str(num_row(t))+","+str(num_col(t)))
-            elif self.args[0].type == Type('unknown'):
-                self.type = self.args[0].type
-            else:
-                self.type = Type('unknown')
-                # raise NotImplementedError("hat(%s), args[0].type = %s"%(str(self.args[0]), self.args[0].type))
-        elif self.func_name == 'ccon':
-            assert len(self.args) == 2
-            a, b = self.args
-            # assert is_matrix_type(a.type) and is_matrix_type(b.type)
-            f1 = is_matrix_type(a.type) and is_matrix_type(b.type)
-            # assert num_row(a.type) == num_row(b.type)
-            f2 = True if f1 and num_row(a.type) == num_row(b.type) else False
-            if f1 and f2:
-                self.type = MatrixType(type_mapping[(a.type.args[0], b.type.args[0])],
-                                       num_row(a.type),
-                                       num_col(b.type) + num_col(a.type))
-        elif self.func_name == 'rcon':
-            assert len(self.args) == 2
-            a, b = self.args
-            # assert is_matrix_type(a.type) and is_matrix_type(b.type)
-            f1 = is_matrix_type(a.type) and is_matrix_type(b.type)
-            # assert num_col(a.type) == num_col(b.type)
-            f2 = True if f1 and num_col(a.type) == num_col(b.type) else False
-            if f1 and f2:
-                self.type = MatrixType(type_mapping[(a.type.args[0], b.type.args[0])],
-                                       num_row(b.type) + num_row(a.type),
-                                       num_col(a.type))
-        elif self.func_name == 'exp':
-            t = self.args[0].type
-            if is_matrix_type(t):
-                if eval_expr(num_row(t)) == 3 and eval_expr(num_col(t)) == 3:
-                    self.type = MatrixType(t.args[0], Const(3), Const(3))
-                else:
-                    raise NotImplementedError(str(self)+"-"+str(t))
+                if is_matrix_type(t):
+                    if eval_expr(num_row(t)) == 3 and eval_expr(num_col(t)) == 3:
+                        self.type = MatrixType(t.args[0], Const(3), Const(3))
+                    else:
+                        raise NotImplementedError(str(self)+"-"+str(t))
+        else:
+            self.func_name, self.type = func_name
+
     def __hash__(self):
         return hash((FUN, self.func_name, self.args))
 

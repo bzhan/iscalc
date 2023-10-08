@@ -451,6 +451,8 @@ class Context:
                 for cond in item['conds']:
                     conds.add_condition(parser.parse_expr(cond))
             self.add_definition(e, conds)
+            if 'range' in item and expr.is_fun(e.lhs):
+                self.fixes[e.lhs.func_name] = parser.parse_expr(item['range'])
         if item['type'] == 'table':
             self.add_function_table(item['name'], item['table'])
 
@@ -561,7 +563,7 @@ def apply_subterm(e: Expr, f: Callable[[Expr, Context], Expr], ctx: Context) -> 
             return f(expr.Op(e.op, *args), ctx)
         elif expr.is_fun(e):
             args = [rec(arg, ctx) for arg in e.args]
-            return f(expr.Fun(e.func_name, *args), ctx)
+            return f(expr.Fun((e.func_name, e.type), *args), ctx)
         elif expr.is_deriv(e):
             return f(expr.Deriv(e.var, rec(e.body, ctx)), ctx)
         elif expr.is_integral(e):

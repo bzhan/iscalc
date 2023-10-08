@@ -26,6 +26,14 @@
             "finished": true,
             "fixes": [
                 [
+                    "hm",
+                    "$tensor($real, 4, 4)"
+                ],
+                [
+                    "hmf",
+                    "$tensor($real, 4, 4)"
+                ],
+                [
                     "w",
                     "$tensor($real, 3, 1)"
                 ],
@@ -200,6 +208,14 @@
             ],
             "finished": true,
             "fixes": [
+                [
+                    "hm",
+                    "$tensor($real, 4, 4)"
+                ],
+                [
+                    "hmf",
+                    "$tensor($real, 4, 4)"
+                ],
                 [
                     "w",
                     "$tensor($real, 3, 1)"
@@ -387,6 +403,14 @@
             ],
             "finished": true,
             "fixes": [
+                [
+                    "hm",
+                    "$tensor($real, 4, 4)"
+                ],
+                [
+                    "hmf",
+                    "$tensor($real, 4, 4)"
+                ],
                 [
                     "w",
                     "$tensor($real, 3, 1)"

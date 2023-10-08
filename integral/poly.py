@@ -543,7 +543,7 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
 
     elif expr.is_fun(e):
         args_norm = [normalize(arg, ctx) for arg in e.args]
-        return singleton(expr.Fun(e.func_name, *args_norm))
+        return singleton(expr.Fun((e.func_name, e.type), *args_norm))
 
     elif expr.is_evalat(e):
         if e.upper == expr.POS_INF:

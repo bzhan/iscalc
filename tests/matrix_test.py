@@ -411,7 +411,7 @@ class MatrixTest(unittest.TestCase):
     def testHMFDerive(self):
         file = compstate.CompFile("MIRM", "twist_derive_hmf")
         file.add_definition("twist(w, v) = hat(rcon(w, v))", conds=["type(w, 0, 3)", "type(v, 0, 3)"])
-        fixes = dict()
+        fixes = file.ctx.get_fixes()
         fixes['w'] = parser.parse_expr("$tensor($real, 3, 1)")
         fixes['v'] = parser.parse_expr("$tensor($real, 3, 1)")
         goal01 = file.add_goal("(D t. hmf(t, w, v)) = twist(w, v) * hmf(t, w, v)",
@@ -431,7 +431,7 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.Equation(s, t))
         calc.perform_rule(rules.FullSimplify())
         assert goal01.is_finished()
-        fixes = dict()
+        fixes = file.ctx.get_fixes()
         fixes['w'] = parser.parse_expr("$tensor($real, 3, 1)")
         lemma = file.add_goal("(D t. exp(t * hat(w))) = hat(w)*exp(t*hat(w))",
                              conds=["norm(w)=1"], fixes=fixes)
@@ -448,6 +448,7 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.ExpandPolynomial())
         s = calc.parse_expr("(-cos(t) + 1) * hat(w) * hat(w) ^ 2")
         t = calc.parse_expr("(-cos(t) + 1) * (hat(w) * hat(w) ^ 2)")
+        print(calc)
         calc.perform_rule(rules.Equation(s, t))
         s = calc.parse_expr("hat(w) * hat(w) ^ 2")
         t = calc.parse_expr("hat(w) ^ (2*1 + 1)")
@@ -464,7 +465,7 @@ class MatrixTest(unittest.TestCase):
         t = calc.parse_expr("hat(w)^2")
         calc.perform_rule(rules.ApplyIdentity(s, t))
         assert lemma.is_finished()
-        fixes = dict()
+        fixes = file.ctx.get_fixes()
         fixes['w'] = parser.parse_expr("$tensor($real, 3, 1)")
         fixes['v'] = parser.parse_expr("$tensor($real, 3, 1)")
         goal02 = file.add_goal("(D t. hmf(t, w, v)) = twist(w, v) * hmf(t, w, v)",
@@ -508,6 +509,25 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         assert goal02.is_finished()
         self.checkAndOutput(file)
+
+    def testMatrixPoeInv(self):
+        file = compstate.CompFile("MIRM", "matrix_poe_inv")
+        # ic: initial configuration
+        d = "gst(t, n, w, v, ic) = MUL(i, 0, n-1, hmf(nth(t, i, 0), twist(nthc(w, i), nthc(v, i)))) * ic"
+        conds = ['isSE3(ic)', 'type(n,0)', 'n>=1', 'type(t, 0, n)', "type(w, 0, 3, n)", "type(v,0,3,n)"]
+        file.add_definition(d, conds=conds)
+        fixes = file.ctx.get_fixes()
+        fixes['n'] = parser.parse_expr('$int')
+        fixes['t'] = parser.parse_expr("$tensor($real, n, n)", fixes=fixes)
+        fixes['w'] = parser.parse_expr("$tensor($real, 3, n)", fixes=fixes)
+        fixes['v'] = parser.parse_expr("$tensor($real, 3, n)", fixes=fixes)
+        g = "(inv(ic) * MUL(i, 0, n-1, hmf(-nth(t, n-i-1, 0), twist(nthc(w, n-i-1), nthc(v, n-i-1)))))*gst(t, n, w, v, ic) = unit_matrix(4)"
+        goal01 = file.add_goal(g, fixes=fixes)
+        cases = goal01.proof_by_induction(induct_var='n', start=1)
+        proof = cases.base_case.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.FullSimplify())
+        print(proof)
 
     def testFixes01(self):
         file = compstate.CompFile("base", "test_fixes_01")

@@ -613,10 +613,11 @@ class ApplyIdentity(Rule):
     @staticmethod
     def search(e: Expr, ctx: Context) -> List[Expr]:
         res = []
+        func_type = ctx.get_fixes()
         for identity in ctx.get_other_identities():
             inst = expr.match(e, identity.lhs)
             if inst is not None:
-                expected_rhs = identity.rhs.inst_pat(inst)
+                expected_rhs = identity.rhs.inst_pat(inst, func_type)
                 res.append(normalize(expected_rhs, ctx))
         return res
 
@@ -960,7 +961,7 @@ class OnLocation(Rule):
                 assert loc.head < len(cur_e.args), "OnLocation: invalid location"
                 new_args = list(cur_e.args)
                 new_args[loc.head] = rec(cur_e.args[loc.head], loc.rest, ctx)
-                return Fun(cur_e.func_name, *tuple(new_args))
+                return Fun((cur_e.func_name, cur_e.type), *tuple(new_args))
             elif expr.is_integral(cur_e):
                 ctx2 = body_conds(cur_e, ctx)
                 if loc.head == 0:
@@ -1118,14 +1119,15 @@ class ApplyEquation(Rule):
         inst_rhs = expr.match(e, pat.rhs)
         tmp = None
         tmp_conds = []
+        func_type = ctx.get_fixes()
         if inst_lhs is not None:
-            tmp = pat.rhs.inst_pat(inst_lhs)
-            tmp_conds = [cond_pattern.inst_pat(inst_lhs) for cond_pattern in conds_pattern]
+            tmp = pat.rhs.inst_pat(inst_lhs, func_type)
+            tmp_conds = [cond_pattern.inst_pat(inst_lhs, func_type) for cond_pattern in conds_pattern]
             if tmp.has_symbol() or any([cond.has_symbol() for cond in tmp_conds]):
                 tmp_inst_rhs = expr.match(self.eq.rhs, pat.rhs)
-                tmp = tmp.inst_pat(tmp_inst_rhs)
-                tmp_conds = [cond_pattern.inst_pat(tmp_inst_rhs) for cond_pattern in conds_pattern]
-            if tmp != None and pat.lhs.inst_pat(inst_lhs) == self.source:
+                tmp = tmp.inst_pat(tmp_inst_rhs, func_type)
+                tmp_conds = [cond_pattern.inst_pat(tmp_inst_rhs, func_type) for cond_pattern in conds_pattern]
+            if tmp != None and pat.lhs.inst_pat(inst_lhs, func_type) == self.source:
                 if tmp_conds == []:
                     return tmp
                 flag = True
@@ -1135,13 +1137,13 @@ class ApplyEquation(Rule):
                 if flag:
                     return tmp
         if inst_rhs is not None:
-            tmp = pat.lhs.inst_pat(inst_rhs)
-            tmp_conds = [cond_pattern.inst_pat(inst_rhs) for cond_pattern in conds_pattern]
+            tmp = pat.lhs.inst_pat(inst_rhs, func_type)
+            tmp_conds = [cond_pattern.inst_pat(inst_rhs, func_type) for cond_pattern in conds_pattern]
             if tmp.has_symbol() or any([cond.has_symbol() for cond in tmp_conds]):
                 tmp_inst_lhs = expr.match(self.eq.lhs, pat.lhs)
-                tmp = tmp.inst_pat(tmp_inst_lhs)
-                tmp_conds = [cond_pattern.inst_pat(tmp_inst_lhs) for cond_pattern in conds_pattern]
-            if tmp != None and pat.rhs.inst_pat(inst_rhs) == self.source:
+                tmp = tmp.inst_pat(tmp_inst_lhs, func_type)
+                tmp_conds = [cond_pattern.inst_pat(tmp_inst_lhs, func_type) for cond_pattern in conds_pattern]
+            if tmp != None and pat.rhs.inst_pat(inst_rhs, func_type) == self.source:
                 if tmp_conds == []:
                     return tmp
                 flag = True
@@ -1968,21 +1970,22 @@ class ExpandDefinition(Rule):
         return e
     def eval(self, e: Expr, ctx: Context) -> Expr:
         e = ExpandDefinition.simp_type(e, ctx)
+        func_type = ctx.get_fixes()
         if expr.is_fun(e) and e.func_name == self.func_name:
             for identity in ctx.get_definitions():
                 if expr.is_fun(identity.lhs) and identity.lhs.func_name == self.func_name:
                     inst = expr.match(e, identity.lhs)
                     if inst == None:
                         continue
-                    tmp_conds = [cond.inst_pat(inst) for cond in identity.conds.data]
+                    tmp_conds = [cond.inst_pat(inst, func_type) for cond in identity.conds.data]
                     flag = True
                     for cond in tmp_conds:
                         flag = flag and ctx.check_condition(cond)
                     if flag:
                         if self.simp:
-                            return normalize(identity.rhs.inst_pat(inst), ctx)
+                            return normalize(identity.rhs.inst_pat(inst, func_type), ctx)
                         else:
-                            return identity.rhs.inst_pat(inst)
+                            return identity.rhs.inst_pat(inst, func_type)
         if expr.is_var(e) and e.name == self.func_name:
             for identity in ctx.get_definitions():
                 if identity.lhs.is_symbol() and identity.lhs.name == self.func_name:
@@ -2025,11 +2028,12 @@ class FoldDefinition(Rule):
         return res
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
+        func_type = ctx.get_fixes()
         for identity in ctx.get_definitions():
             if expr.is_fun(identity.lhs) and identity.lhs.func_name == self.func_name:
                 inst = expr.match(e, identity.rhs)
                 if inst:
-                    return normalize(identity.lhs.inst_pat(inst), ctx)
+                    return normalize(identity.lhs.inst_pat(inst, func_type), ctx)
 
             if expr.is_symbol(identity.lhs) and identity.lhs.name == self.func_name:
                 if e == identity.rhs:
@@ -2344,6 +2348,7 @@ class SplitSummation(Rule):
         r = OnSubterm(r0)
         tmp_ctx = Context(ctx, ctx.d+1)
         tmp_ctx.definitions.append(context.Identity(eq_pat))
+        func_type = ctx.get_fixes()
         for id in ctx.get_summation_split_identities():
             id: context.Identity
             inst_split_cond = expr.match(cond, id.split_cond)
@@ -2351,16 +2356,17 @@ class SplitSummation(Rule):
                 new_expr = change_index(id.expr, bd)
                 new_expr = r.eval(new_expr, tmp_ctx)
                 inst_lhs = expr.match(e, new_expr.lhs)
+
                 if inst_lhs is not None:
                     inst_split_cond.update(inst_lhs)
-                    tmp_conds = [c.inst_pat(inst_split_cond) for c in id.conds.data]
+                    tmp_conds = [c.inst_pat(inst_split_cond, func_type) for c in id.conds.data]
                     flag = True
                     for c in tmp_conds:
                         if not ctx.check_condition(c):
                             flag = False
                             break
                     if flag:
-                        res = new_expr.rhs.inst_pat(inst_split_cond)
+                        res = new_expr.rhs.inst_pat(inst_split_cond, func_type)
                         res = r.eval(res, tmp_ctx)
                         other_vars = res.get_vars(with_bd=True).difference(bd)
                         for var in other_vars:

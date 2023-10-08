@@ -174,7 +174,7 @@ class BinomTest(unittest.TestCase):
         fixes = dict()
         fixes['n'] = parser.parse_expr('$int')
         file = compstate.CompFile("base", "binom_example02")
-        goal01 = file.add_goal("(LIM {n->oo}. (binom(2 * n, n) / (4 ^ n / sqrt(n * pi)))) = 1")
+        goal01 = file.add_goal("(LIM {n -> oo}. (binom(2 * n, n) / (4 ^ n / sqrt(n * pi)))) = 1")
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("binom")))
@@ -223,11 +223,69 @@ class BinomTest(unittest.TestCase):
         s27 = "2 * sqrt(k) * sqrt(pi) / sqrt(2)"
         s28 = "sqrt(2 * pi * k)"
         calc.perform_rule(rules.Equation(s27, s28))
-        s = calc.parse_expr("(LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n))")
-        t = calc.parse_expr("1")
-        calc.perform_rule(rules.ApplyIdentity(s,t))
-        print(calc)
+        s29 = calc.parse_expr("(LIM {k -> oo}. factorial(k) / (sqrt(2 * pi * k) * (k / exp(1)) ^ k))")
+        s30 = calc.parse_expr("1")
+        calc.perform_rule(rules.ApplyIdentity(s29, s30))
+        s31 = calc.parse_expr("(LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n))")
+        s32 = calc.parse_expr("1")
+        calc.perform_rule(rules.ApplyIdentity(s31, s32))
+        s33 = calc.parse_expr("(LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n))")
+        s34 = calc.parse_expr("1")
+        calc.perform_rule(rules.ApplyIdentity(s33, s34))
+        calc.perform_rule(rules.FullSimplify())
 
+        self.checkAndOutput(file)
+
+
+    def testExample03(self):
+        fixes = dict()
+        fixes['k'] = parser.parse_expr('$int')
+        file = compstate.CompFile("base", "binom_example03")
+        goal01 = file.add_goal("binom(2 * k, k) = (k + 1) / (2 * (2 * k + 1)) * binom(2 * k + 2, k + 1)")
+        proof = goal01.proof_by_calculation()
+        calc = proof.lhs_calc
+        calc.perform_rule(rules.ExpandDefinition("binom"))
+        s1 = "factorial(2 * k) / factorial(k) ^ 2"
+        s2 = "((k + 1) * (2 * k + 2) * ((2 * k + 1) * factorial(2 * k))) / (2 * ((k + 1) * factorial(k)) * ((k + 1) * factorial(k)) * (2 * k + 1))"
+        calc.perform_rule(rules.Equation(s1, s2))
+        s3 = "(2 * k + 1) * factorial(2 * k)"
+        s4 = "factorial(2 * k + 1)"
+        calc.perform_rule(rules.ApplyIdentity(s3, s4))
+        s5 = "(k + 1) * factorial(k)"
+        s6 = "factorial(k + 1)"
+        calc.perform_rule(rules.ApplyIdentity(s5, s6))
+        s7 = "(k + 1) * factorial(k)"
+        s8 = "factorial(k + 1)"
+        calc.perform_rule(rules.ApplyIdentity(s7, s8))
+        s9 = "(k + 1) * (2 * k + 2) * factorial(2 * k + 1)"
+        s10 = "(k + 1) * ((2 * k + 1 + 1) * factorial(2 * k + 1))"
+        calc.perform_rule(rules.Equation(s9, s10))
+        s11 = "(2 * k + 1 + 1) * factorial(2 * k + 1)"
+        s12 = "factorial(2 * k + 2)"
+        calc.perform_rule(rules.ApplyIdentity(s11, s12))
+        s13 = "(k + 1) * factorial(2 * k + 2) / (2 * factorial(k + 1) * factorial(k + 1) * (2 * k + 1))"
+        s14 = "(k + 1) / (2 * (2 * k + 1)) * (factorial(2 * k + 2) / (factorial(k + 1)) ^ 2)"
+        calc.perform_rule(rules.Equation(s13, s14))
+        calc = proof.rhs_calc
+        calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("binom")))
+
+        self.checkAndOutput(file)
+
+    def testExample04(self):
+        fixes = dict()
+        fixes['m'] = parser.parse_expr('$int')
+        fixes['n'] = parser.parse_expr('$int')
+        fixes['i'] = parser.parse_expr('$int')
+        file = compstate.CompFile("base", "binom_example04")
+        goal01 = file.add_goal("SUM(i, 0, n, (((8 - m / 8) * i ^ 3 - 4 * i ^ 2 - 2 * i + 1) * binom(2 * i, i)) / ((2 * i - 1) ^ 2 * m ^ i)) = (2 * n + 1) / m ^ n * binom(2 * n, n) ^ 3", conds=['m != 0'], fixes=fixes)
+        proof = goal01.proof_by_induction("n", 0)
+        proof_base = proof.base_case.proof_by_calculation()
+        proof_induct = proof.induct_case.proof_by_calculation()
+        calc = proof_base.lhs_calc
+        calc = proof_induct.lhs_calc
+        cond = "i <= n"
+        calc.perform_rule(rules.SplitSummation(cond))
+        self.checkAndOutput(file)
 
 if __name__ == "__main__":
     unittest.main()

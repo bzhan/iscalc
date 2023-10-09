@@ -276,7 +276,7 @@ class BinomTest(unittest.TestCase):
         fixes['m'] = parser.parse_expr('$int')
         fixes['n'] = parser.parse_expr('$int')
         fixes['i'] = parser.parse_expr('$int')
-        file = compstate.CompFile("base", "binom_example04")
+        file = compstate.CompFile("binom", "binom_example04")
         goal01 = file.add_goal("SUM(i, 0, n, (((8 - m / 8) * i ^ 3 - 4 * i ^ 2 - 2 * i + 1) * binom(2 * i, i)) / ((2 * i - 1) ^ 2 * m ^ i)) = (2 * n + 1) / m ^ n * binom(2 * n, n) ^ 3", conds=['m != 0', 'n>=0'], fixes=fixes)
         proof = goal01.proof_by_induction("n", 0)
         proof_base = proof.base_case.proof_by_calculation()
@@ -290,11 +290,11 @@ class BinomTest(unittest.TestCase):
         s1 = calc.parse_expr(s1)
         s2 = "(((8 - m / 8) * j ^ 3 - 4 * j ^ 2 - 2 * j + 1) * binom(2 * j, j)) / ((2 * j - 1) ^ 2 * m ^ j)"
         s2 = calc.parse_expr(s2)
-        calc.perform_rule(rules.OnLocation(rules.Equation(s1, s2), "0.0"))
+        calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.ApplyInductHyp(), "0"))
-        s3 = "binom(2 * n,n)"
-        s3 = calc.parse_expr(s3)
-        s4 = "(n + 1) / (2 * (2 * n + 1)) * binom(2 * n + 2, n + 1)"
+        s3 = "binom(2 * k, k) = (k + 1) / (2 * (2 * k + 1)) * binom(2 * k + 2, k + 1)"
+        s3 = parser.parse_expr(s3)
+        s4 = "binom(2 * n,n)"
         s4 = calc.parse_expr(s4)
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s3, s4), "0.1.0"))
         self.checkAndOutput(file)

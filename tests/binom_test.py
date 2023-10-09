@@ -285,6 +285,12 @@ class BinomTest(unittest.TestCase):
         calc = proof_induct.lhs_calc
         cond = calc.parse_expr("i <= n")
         calc.perform_rule(rules.SplitSummation(cond))
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "1"))
+        s1 = "m ^ -j / (2 * j - 1) ^ 2 * binom(2 * j,j) * (j ^ 3 * (-(m / 8) + 8) - 4 * j ^ 2 - 2 * j + 1)"
+        s2 = "(((8 - m / 8) * j ^ 3 - 4 * j ^ 2 - 2 * j + 1) * binom(2 * j, j)) / ((2 * j - 1) ^ 2 * m ^ j)"
+        calc.perform_rule(rules.OnLocation(rules.Equation(s1, s2), "0.0"))
+        calc.perform_rule(rules.OnLocation(rules.ApplyInductHyp(), "0"))
+
         self.checkAndOutput(file)
 
 if __name__ == "__main__":

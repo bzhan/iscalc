@@ -277,7 +277,7 @@ class BinomTest(unittest.TestCase):
         fixes['n'] = parser.parse_expr('$int')
         fixes['i'] = parser.parse_expr('$int')
         file = compstate.CompFile("binom", "binom_example04")
-        goal01 = file.add_goal("SUM(i, 0, n, (((8 - m / 8) * i ^ 3 - 4 * i ^ 2 - 2 * i + 1) * binom(2 * i, i)) / ((2 * i - 1) ^ 2 * m ^ i)) = (2 * n + 1) / m ^ n * binom(2 * n, n) ^ 3", conds=['m != 0', 'n>=0'], fixes=fixes)
+        goal01 = file.add_goal("SUM(i, 0, n, (((8 - m / 8) * i ^ 3 - 4 * i ^ 2 - 2 * i + 1) * binom(2 * i, i) ^ 3) / ((2 * i - 1) ^ 2 * m ^ i)) = (2 * n + 1) / m ^ n * binom(2 * n, n) ^ 3", conds=['m != 0', 'n>=0'], fixes=fixes)
         proof = goal01.proof_by_induction("n", 0)
         proof_base = proof.base_case.proof_by_calculation()
         proof_induct = proof.induct_case.proof_by_calculation()
@@ -286,17 +286,39 @@ class BinomTest(unittest.TestCase):
         cond = calc.parse_expr("i <= n")
         calc.perform_rule(rules.SplitSummation(cond))
         calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "1"))
-        s1 = "m ^ -j / (2 * j - 1) ^ 2 * binom(2 * j,j) * (j ^ 3 * (-(m / 8) + 8) - 4 * j ^ 2 - 2 * j + 1)"
+        s1 = "m ^ -j / (2 * j - 1) ^ 2 * binom(2 * j,j) ^ 3 * (j ^ 3 * (-(m / 8) + 8) - 4 * j ^ 2 - 2 * j + 1)"
         s1 = calc.parse_expr(s1)
-        s2 = "(((8 - m / 8) * j ^ 3 - 4 * j ^ 2 - 2 * j + 1) * binom(2 * j, j)) / ((2 * j - 1) ^ 2 * m ^ j)"
+        s2 = "(((8 - m / 8) * j ^ 3 - 4 * j ^ 2 - 2 * j + 1) * binom(2 * j, j) ^ 3) / ((2 * j - 1) ^ 2 * m ^ j)"
         s2 = calc.parse_expr(s2)
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.ApplyInductHyp(), "0"))
         s3 = "binom(2 * k, k) = (k + 1) / (2 * (2 * k + 1)) * binom(2 * k + 2, k + 1)"
-        s3 = parser.parse_expr(s3)
+        s3 = calc.parse_expr(s3)
         s4 = "binom(2 * n,n)"
         s4 = calc.parse_expr(s4)
         calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s3, s4), "0.1.0"))
+        s5 = "(2 * n + 1) / m ^ n * ((n + 1) / (2 * (2 * n + 1)) * binom(2 * n + 2,n + 1)) ^ 3"
+        s5 = calc.parse_expr(s5)
+        s6 = "((m / 8) * (n + 1) ^ 3) / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2, n + 1) ^ 3"
+        s6 = calc.parse_expr(s6)
+        calc.perform_rule(rules.Equation(s5, s6))
+        s7 = "m ^ (-n - 1) / (2 * n + 1) ^ 2 * binom(2 * n + 2,n + 1) ^ 3 * ((n + 1) ^ 3 * (-(m / 8) + 8) - 4 * (n + 1) ^ 2 - 2 * n - 1)"
+        s7 = calc.parse_expr(s7)
+        s8 = "((8 - m / 8) * (n + 1) ^ 3- 4 * (n + 1) ^ 2 - 2 * n - 1) / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2, n + 1) ^ 3"
+        s8 = calc.parse_expr(s8)
+        calc.perform_rule(rules.Equation(s7, s8))
+        s9 = "m / 8 * (n + 1) ^ 3 / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3 + ((8 - m / 8) * (n + 1) ^ 3 - 4 * (n + 1) ^ 2 - 2 * n - 1) / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3"
+        s9 = calc.parse_expr(s9)
+        s10 = "(8 * (n + 1) ^ 3 - 4 * (n + 1) ^ 2 - 2 * (n + 1) + 1) / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3"
+        s10 = calc.parse_expr(s10)
+        calc.perform_rule(rules.Equation(s9, s10))
+        s11 = "8 * (n + 1) ^ 3 - 4 * (n + 1) ^ 2 - 2 * (n + 1) + 1"
+        s11 = calc.parse_expr(s11)
+        s12 = "(2 * n + 1) ^ 2 * (2 * n + 3)"
+        s12 = calc.parse_expr(s12)
+        calc.perform_rule(rules.Equation(s11, s12))
+        calc.perform_rule(rules.FullSimplify())
+
         self.checkAndOutput(file)
 
 if __name__ == "__main__":

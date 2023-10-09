@@ -43,6 +43,7 @@ grammar = r"""
 
     ?times: times "*" pow -> times_expr        // priority 70
         | times "/" pow -> divides_expr 
+        | times "//" pow -> divides_expr2 
         | times "%" pow -> modulo_expr
         | pow
 
@@ -103,6 +104,8 @@ class ExprTransformer(Transformer):
             return expr.Const(Fraction(a.val) / Fraction(b.val))
         else:
             return expr.Op("/", a, b)
+    def divides_expr2(self, a, b):
+        return expr.Op("/", a, b)
 
     def modulo_expr(self, a, b):
         if a.ty == expr.CONST and b.ty == expr.CONST and isinstance(a.val, int) and isinstance(b.val, int):

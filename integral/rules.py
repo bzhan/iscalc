@@ -1528,6 +1528,27 @@ class Equation(Rule):
                 e = Summation(sum1.index_var, sum1.lower,sum1.upper, sum1.body+sum2.body)
             if normalize(e, ctx) == normalize(self.new_expr, ctx):
                 return self.new_expr
+
+        if expr.is_summation(e):
+            # SUM(i, 0, oo, body) -> LIM {n->oo}. SUM(i, 0, n, body)
+            if e.upper == expr.POS_INF:
+                vars = e.get_vars(with_bd=True)
+                all_index_vars = "ijklmn"
+                flag = False
+                for v in all_index_vars:
+                    if v not in vars:
+                        tmp = Limit(v, expr.POS_INF, Summation(e.index_var, e.lower, Var(v), e.body))
+                        flag = True
+                        break
+                if not flag:
+                    raise AssertionError("all variables are run out")
+                if normalize(tmp, ctx) == normalize(self.new_expr, ctx):
+                    while ctx.d != 0:
+                        ctx = ctx.parent
+                    ctx.add_fix(self.new_expr.var, expr.IntType)
+                    return self.new_expr
+
+
         # rewrite limit expression
         r = LimRewrite(self.old_expr, self.new_expr)
         if r.eval(e, ctx) == self.new_expr:

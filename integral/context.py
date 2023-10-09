@@ -481,12 +481,16 @@ class Context:
         f = condprover.check_condition(e, self)
         if f:
             return True
-        if expr.is_op(e) and e.op in ('>', '<', '!='):
+        if expr.is_op(e) and e.op in ('>', '<', '!=', '>=', '<='):
             match e.op:
                 case '>':
                     f = condprover.check_condition(Op('<', e.args[1], e.args[0]), self)
                 case '<':
                     f = condprover.check_condition(Op('>', e.args[1], e.args[0]), self)
+                case '>=':
+                    f = condprover.check_condition(Op('<=', e.args[1], e.args[0]), self)
+                case '<=':
+                    f = condprover.check_condition(Op('>=', e.args[1], e.args[0]), self)
                 case '!=':
                     f = condprover.check_condition(Op('!=', e.args[1], e.args[0]), self)
         return f

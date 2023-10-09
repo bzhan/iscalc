@@ -1370,10 +1370,21 @@ class Limit(Expr):
         self.drt = drt
         self.type = RealType
 
+    def alpha_convert(self, new_name: str):
+        """Change the variable of limit expression to new_name."""
+        assert isinstance(new_name, str), "alpha_convert"
+        return Limit(new_name, self.lim, self.body.subst(self.var, Var(new_name)), self.drt)
+
     def __eq__(self, other):
-        return isinstance(other, Limit) and other.var == self.var and \
-               other.drt == self.drt and self.lim == other.lim and \
-               self.body == other.body
+
+        if not isinstance(other, Limit):
+            return False
+        if other.var == self.var:
+            return other.drt == self.drt and \
+                other.lim == self.lim and \
+                other.body == self.body
+        else:
+            return other.alpha_convert(self.var) == self
 
     def __hash__(self):
         return hash((LIMIT, self.var, self.lim, self.body, self.drt))

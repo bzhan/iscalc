@@ -318,7 +318,33 @@ class BinomTest(unittest.TestCase):
         s12 = calc.parse_expr(s12)
         calc.perform_rule(rules.Equation(s11, s12))
         calc.perform_rule(rules.FullSimplify())
+        fixes = dict()
+        fixes['m'] = parser.parse_expr('$int')
+        fixes['n'] = parser.parse_expr('$int')
+        fixes['i'] = parser.parse_expr('$int')
+        file = compstate.CompFile("binom", "binom_example04")
+        goal02 = file.add_goal(
+            "(LIM {n->oo}. SUM(i, 0, n, (((8 - m / 8) * i ^ 3 - 4 * i ^ 2 - 2 * i + 1) * binom(2 * i, i) ^ 3) / ((2 * i - 1) ^ 2 * m ^ i))) = LIM {n->oo}. (2 * n + 1) / m ^ n * binom(2 * n, n) ^ 3",
+            conds=['m != 0'], fixes=fixes)
+        proof = goal02.proof_by_rewrite_goal(begin=goal01)
+        calc = proof.begin
+        calc.perform_rule(rules.LimitEquation('n', expr.POS_INF))
 
+        s = "SUM(k, 0, oo, (16*k^3 - 4*k^2-2*k+1) * binom(2*k, k)^3 / ((2*k-1)^2*(-64)^k)) = 0"
+        fixes = dict()
+        fixes['k'] = expr.IntType
+        goal03 = file.add_goal(s, fixes=fixes, conds=["k>=0"])
+        proof = goal03.proof_by_calculation()
+        calc = proof.lhs_calc
+        s1 = calc.parse_expr("16")
+        s2 = calc.parse_expr("8-((-64) / 8)")
+        calc.perform_rule(rules.Equation(s1, s2))
+        s1 = calc.parse_expr("SUM(k, 0, oo, ((8 - -64/8) * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))")
+        new_v = {'n':expr.IntType}
+        s2 = calc.parse_expr("LIM {n->oo}. SUM(k, 0, n, ((8 - -64//8) * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))", fixes=new_v)
+        calc.perform_rule(rules.Equation(s1, s2))
+        source = calc.parse_expr("LIM {n->oo}. SUM(k, 0, n, ((8 - -64//8) * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))")
+        calc.perform_rule(rules.ApplyEquation(goal02.goal, source))
         self.checkAndOutput(file)
 
 if __name__ == "__main__":

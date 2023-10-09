@@ -785,8 +785,8 @@
                 "calcs": [
                     {
                         "dead_vars": [
-                            "v",
-                            "w"
+                            "w",
+                            "v"
                         ],
                         "fixes": [],
                         "latex_start": "hmf{(t,w,v)} hmf{(-t,w,v)}",
@@ -947,8 +947,8 @@
                             },
                             {
                                 "dead_vars": [
-                                    "v",
-                                    "w"
+                                    "w",
+                                    "v"
                                 ],
                                 "fixes": [],
                                 "latex_res": "\\mathbf{1}_{4 \\times 4}",

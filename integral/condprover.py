@@ -285,7 +285,8 @@ def saturate_expr(e: Expr, ineq: Identity, all_conds: Dict[Expr, List[Expr]], ct
                 continue  # already exists
             if e not in all_conds:
                 all_conds[e] = list()
-            all_conds[e].append(res)
+            if res not in all_conds[e]:
+                all_conds[e].append(res)
     return
 
 def saturate_once(e: Expr, ineqs: List[Identity], all_conds: Dict[Expr, List[Expr]], ctx: Context):

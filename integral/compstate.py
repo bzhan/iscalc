@@ -433,8 +433,10 @@ class Calculation(StateItem):
         else:
             raise AssertionError("get_by_label: invalid label")
 
-    def parse_expr(self, s: str) -> Expr:
-        return parser.parse_expr(s, fixes=self.ctx.get_fixes())
+    def parse_expr(self, s: str, fixes = dict()) -> Expr:
+        d = self.ctx.get_fixes()
+        d.update(fixes)
+        return parser.parse_expr(s, fixes=d)
 
 
 class CalculationProof(StateItem):

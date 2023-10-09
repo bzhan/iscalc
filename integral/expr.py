@@ -682,29 +682,6 @@ class Expr:
         rec(self, bd)
         return res
 
-    def has_symbol(self) -> bool:
-        if isinstance(self, Symbol):
-            return True
-        elif isinstance(self, Union[Var, Const, Inf, SkolemFunc]):
-            return False
-        elif isinstance(self, Integral):
-            return self.upper.has_symbol() or self.lower.has_symbol() or self.body.has_symbol()
-        elif isinstance(self, IndefiniteIntegral):
-            return self.body.has_symbol()
-        elif isinstance(self, Union[Op, Fun]):
-            return any([arg.has_symbol() for arg in self.args])
-        elif isinstance(self, Summation):
-            return self.body.has_symbol()
-        elif isinstance(self, Limit):
-            return self.body.has_symbol() or self.lim.has_symbol()
-        elif isinstance(self, Deriv):
-            return self.body.has_symbol()
-        elif isinstance(self, Matrix):
-            return any([rv.has_symbol() for rv in self.rows])
-        else:
-            print(self)
-            raise NotImplementedError
-
     def contains_var(self, x: str) -> bool:
         """Whether self contains variable x."""
         assert isinstance(x, str)

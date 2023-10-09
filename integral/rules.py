@@ -1123,10 +1123,6 @@ class ApplyEquation(Rule):
         if inst_lhs is not None:
             tmp = pat.rhs.inst_pat(inst_lhs, func_type)
             tmp_conds = [cond_pattern.inst_pat(inst_lhs, func_type) for cond_pattern in conds_pattern]
-            if tmp.has_symbol() or any([cond.has_symbol() for cond in tmp_conds]):
-                tmp_inst_rhs = expr.match(self.eq.rhs, pat.rhs)
-                tmp = tmp.inst_pat(tmp_inst_rhs, func_type)
-                tmp_conds = [cond_pattern.inst_pat(tmp_inst_rhs, func_type) for cond_pattern in conds_pattern]
             if tmp != None and pat.lhs.inst_pat(inst_lhs, func_type) == self.source:
                 if tmp_conds == []:
                     return tmp
@@ -1139,10 +1135,6 @@ class ApplyEquation(Rule):
         if inst_rhs is not None:
             tmp = pat.lhs.inst_pat(inst_rhs, func_type)
             tmp_conds = [cond_pattern.inst_pat(inst_rhs, func_type) for cond_pattern in conds_pattern]
-            if tmp.has_symbol() or any([cond.has_symbol() for cond in tmp_conds]):
-                tmp_inst_lhs = expr.match(self.eq.lhs, pat.lhs)
-                tmp = tmp.inst_pat(tmp_inst_lhs, func_type)
-                tmp_conds = [cond_pattern.inst_pat(tmp_inst_lhs, func_type) for cond_pattern in conds_pattern]
             if tmp != None and pat.rhs.inst_pat(inst_rhs, func_type) == self.source:
                 if tmp_conds == []:
                     return tmp

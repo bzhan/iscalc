@@ -104,6 +104,7 @@ class ExprTransformer(Transformer):
             return expr.Const(Fraction(a.val) / Fraction(b.val))
         else:
             return expr.Op("/", a, b)
+
     def divides_expr2(self, a, b):
         return expr.Op("/", a, b)
 

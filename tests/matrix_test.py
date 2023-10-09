@@ -515,12 +515,14 @@ class MatrixTest(unittest.TestCase):
         # ic: initial configuration
         d = "gst(t, n, w, v, ic) = MUL(i, 0, n-1, hmf(nth(t, i, 0), twist(nthc(w, i), nthc(v, i)))) * ic"
         conds = ['isSE3(ic)', 'type(n,0)', 'n>=1', 'type(t, 0, n)', "type(w, 0, 3, n)", "type(v,0,3,n)"]
-        file.add_definition(d, conds=conds)
+        rt = parser.parse_expr("$tensor($real, 4, 4)")
+        file.add_definition(d, conds=conds, range_type=rt)
         fixes = file.ctx.get_fixes()
         fixes['n'] = parser.parse_expr('$int')
         fixes['t'] = parser.parse_expr("$tensor($real, n, n)", fixes=fixes)
         fixes['w'] = parser.parse_expr("$tensor($real, 3, n)", fixes=fixes)
         fixes['v'] = parser.parse_expr("$tensor($real, 3, n)", fixes=fixes)
+        fixes['ic'] = parser.parse_expr("$tensor($real, 4, 4)", fixes=fixes)
         g = "(inv(ic) * MUL(i, 0, n-1, hmf(-nth(t, n-i-1, 0), twist(nthc(w, n-i-1), nthc(v, n-i-1)))))*gst(t, n, w, v, ic) = unit_matrix(4)"
         goal01 = file.add_goal(g, fixes=fixes)
         cases = goal01.proof_by_induction(induct_var='n', start=1)

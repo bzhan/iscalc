@@ -804,7 +804,7 @@ class CompFile:
                 ctx.extend_by_item(item.export_book())
         return ctx
 
-    def add_definition(self, funcdef: Union[str, Expr], *,fixes=None, conds: List[Union[str, Expr]] = None) -> FuncDef:
+    def add_definition(self, funcdef: Union[str, Expr], *,fixes=None, conds: List[Union[str, Expr]] = None, range_type:expr.Type=expr.RealType) -> FuncDef:
         """Add a function definition.
         
         funcdef: statement of the definition.
@@ -827,10 +827,12 @@ class CompFile:
         if isinstance(funcdef, Expr):
             if funcdef.is_equals():
                 self.content.append(FuncDef(self, ctx, funcdef, Conditions(conds)))
+                self.ctx.fixes[funcdef.lhs.func_name] = range_type
             else:
                 raise NotImplementedError
         else:
             raise NotImplementedError
+
         return self.content[-1]
 
     def add_calculation(self, calc: Union[str, Expr], *, conds: List[Union[str, Expr]] = None) -> Calculation:

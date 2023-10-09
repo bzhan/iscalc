@@ -1322,6 +1322,12 @@ class Fun(Expr):
                         self.type = MatrixType(t.args[0], Const(3), Const(3))
                     else:
                         raise NotImplementedError(str(self)+"-"+str(t))
+            elif self.func_name == 'inv':
+                t = self.args[0].type
+                if is_matrix_type(t):
+                    self.type = t
+                else:
+                    raise NotImplementedError(str(self) + "-" + str(t))
         else:
             self.func_name, self.type = func_name
 

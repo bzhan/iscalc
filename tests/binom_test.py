@@ -275,20 +275,20 @@ class BinomTest(unittest.TestCase):
         fixes = dict()
         fixes['m'] = parser.parse_expr('$int')
         fixes['n'] = parser.parse_expr('$int')
-        fixes['i'] = parser.parse_expr('$int')
+        fixes['k'] = parser.parse_expr('$int')
         file = compstate.CompFile("binom", "binom_example04")
-        goal01 = file.add_goal("SUM(i, 0, n, (((8 - m / 8) * i ^ 3 - 4 * i ^ 2 - 2 * i + 1) * binom(2 * i, i) ^ 3) / ((2 * i - 1) ^ 2 * m ^ i)) = (2 * n + 1) / m ^ n * binom(2 * n, n) ^ 3", conds=['m != 0', 'n>=0'], fixes=fixes)
+        goal01 = file.add_goal("SUM(k, 0, n, (((8 - m / 8) * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 2 * m ^ k)) = (2 * n + 1) / m ^ n * binom(2 * n, n) ^ 3", conds=['m != 0', 'n>=0'], fixes=fixes)
         proof = goal01.proof_by_induction("n", 0)
         proof_base = proof.base_case.proof_by_calculation()
         proof_induct = proof.induct_case.proof_by_calculation()
         calc = proof_base.lhs_calc
         calc = proof_induct.lhs_calc
-        cond = calc.parse_expr("i <= n")
+        cond = calc.parse_expr("k <= n")
         calc.perform_rule(rules.SplitSummation(cond))
         calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "1"))
-        s1 = "m ^ -j / (2 * j - 1) ^ 2 * binom(2 * j,j) ^ 3 * (j ^ 3 * (-(m / 8) + 8) - 4 * j ^ 2 - 2 * j + 1)"
+        s1 = "m ^ -i / (2 * i - 1) ^ 2 * binom(2 * i,i) ^ 3 * (i ^ 3 * (-(m / 8) + 8) - 4 * i ^ 2 - 2 * i + 1)"
         s1 = calc.parse_expr(s1)
-        s2 = "(((8 - m / 8) * j ^ 3 - 4 * j ^ 2 - 2 * j + 1) * binom(2 * j, j) ^ 3) / ((2 * j - 1) ^ 2 * m ^ j)"
+        s2 = "(((8 - m / 8) * i ^ 3 - 4 * i ^ 2 - 2 * i + 1) * binom(2 * i, i) ^ 3) / ((2 * i - 1) ^ 2 * m ^ i)"
         s2 = calc.parse_expr(s2)
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.ApplyInductHyp(), "0"))
@@ -321,11 +321,10 @@ class BinomTest(unittest.TestCase):
         fixes = dict()
         fixes['m'] = parser.parse_expr('$int')
         fixes['n'] = parser.parse_expr('$int')
-        fixes['i'] = parser.parse_expr('$int')
-        file = compstate.CompFile("binom", "binom_example04")
+        fixes['k'] = parser.parse_expr('$int')
         goal02 = file.add_goal(
-            "(LIM {n->oo}. SUM(i, 0, n, (((8 - m / 8) * i ^ 3 - 4 * i ^ 2 - 2 * i + 1) * binom(2 * i, i) ^ 3) / ((2 * i - 1) ^ 2 * m ^ i))) = LIM {n->oo}. (2 * n + 1) / m ^ n * binom(2 * n, n) ^ 3",
-            conds=['m != 0'], fixes=fixes)
+            "(LIM {n->oo}. SUM(k, 0, n, (((8 - m / 8) * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 2 * m ^ k))) = LIM {n->oo}. (2 * n + 1) / m ^ n * binom(2 * n, n) ^ 3",
+            conds=['m != 0', 'n >= 0'], fixes=fixes)
         proof = goal02.proof_by_rewrite_goal(begin=goal01)
         calc = proof.begin
         calc.perform_rule(rules.LimitEquation('n', expr.POS_INF))
@@ -343,9 +342,17 @@ class BinomTest(unittest.TestCase):
         new_v = {'n':expr.IntType}
         s2 = calc.parse_expr("LIM {n->oo}. SUM(k, 0, n, ((8 - -64//8) * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))", fixes=new_v)
         calc.perform_rule(rules.Equation(s1, s2))
-        source = calc.parse_expr("LIM {n->oo}. SUM(k, 0, n, ((8 - -64//8) * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))")
+        source = calc.parse_expr("LIM {n->oo}. SUM(k, 0, n, ((8 - (-64)//8) * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))")
         calc.perform_rule(rules.ApplyEquation(goal02.goal, source))
+
+        goal04 = file.add_goal("SUM(k, 0, oo, (k * (4 * k - 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 2 * (-64) ^ k)) = -1 / pi")
+        proof = goal04.proof_by_rewrite_goal(begin=goal03)
+        calc = proof.begin
+        s1 = "16 * k ^ 3 - 4 * k ^ 2 - 2 * k + 1"
+        s2 = "(4 * k + 1) * (2 * k - 1) ^ 2 + 2 * k * (4 * k - 1)"
+        calc.perform_rule(rules.OnLocation(rules.Equation(s1, s2), "0.0.0"))
         self.checkAndOutput(file)
+
 
 if __name__ == "__main__":
     unittest.main()

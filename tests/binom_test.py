@@ -349,7 +349,9 @@ class BinomTest(unittest.TestCase):
         proof = goal04.proof_by_rewrite_goal(begin=goal03)
         calc = proof.begin
         s1 = "16 * k ^ 3 - 4 * k ^ 2 - 2 * k + 1"
+        s1 = parser.parse_expr(s1)
         s2 = "(4 * k + 1) * (2 * k - 1) ^ 2 + 2 * k * (4 * k - 1)"
+        s2 = parser.parse_expr(s2)
         calc.perform_rule(rules.OnLocation(rules.Equation(s1, s2), "0.0.0"))
         self.checkAndOutput(file)
 

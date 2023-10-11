@@ -347,7 +347,8 @@ class Context:
     def add_condition(self, cond: Union[Expr, str]):
         if isinstance(cond, str):
             cond = parser.parse_expr(cond)
-        self.conds.add_condition(cond)
+        if cond not in self.conds.data:
+            self.conds.add_condition(cond)
 
     def extend_condition(self, conds: Conditions):
         for cond in conds.data:
@@ -496,11 +497,22 @@ class Context:
         return f
 
     def check_all_condtions(self, goal:Expr, conds:Conditions):
-        goal_vars = goal.get_vars()
+        goal_vars = goal.get_vars(with_bd=True)
+        ctx = Context(self)
+        def rec(e):
+            if expr.is_limit(e) and e.lim == expr.POS_INF:
+                b = e.body
+                if expr.is_summation(b) and expr.is_var(b.upper) and b.upper.name == e.var:
+                    cond = Op('>', b.upper, b.lower)
+                    ctx.add_condition(cond)
+            elif expr.is_op(e):
+                for arg in e.args:
+                    rec(arg)
+        rec(goal)
         for e in conds.data:
             if e.get_vars().intersection(goal_vars) == set():
                 continue
-            if not self.check_condition(e):
+            if not ctx.check_condition(e):
                 return False
         return True
 

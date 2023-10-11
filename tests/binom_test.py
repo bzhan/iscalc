@@ -324,11 +324,11 @@ class BinomTest(unittest.TestCase):
         fixes['k'] = parser.parse_expr('$int')
         goal02 = file.add_goal(
             "(LIM {n->oo}. SUM(k, 0, n, (((8 - m / 8) * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 2 * m ^ k))) = LIM {n->oo}. (2 * n + 1) / m ^ n * binom(2 * n, n) ^ 3",
-            conds=['m != 0', 'n >= 0'], fixes=fixes)
+            conds=['m != 0'], fixes=fixes)
         proof = goal02.proof_by_rewrite_goal(begin=goal01)
         calc = proof.begin
         calc.perform_rule(rules.LimitEquation('n', expr.POS_INF))
-
+        assert goal02.is_finished()
         s = "SUM(k, 0, oo, (16*k^3 - 4*k^2-2*k+1) * binom(2*k, k)^3 / ((2*k-1)^2*(-64)^k)) = 0"
         fixes = dict()
         fixes['k'] = expr.IntType

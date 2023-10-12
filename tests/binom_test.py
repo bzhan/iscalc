@@ -389,11 +389,9 @@ class BinomTest(unittest.TestCase):
         s20 = "(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
         s20 = calc.parse_expr(s20)
         calc.perform_rule(rules.Equation(s19, s20))
-        s21 = "(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) = 1"
-        s21 = calc.parse_expr(s21)
         s22 = "LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))"
         s22 = calc.parse_expr(s22)
-        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s21, s22), "1.0"))
+        calc.perform_rule(rules.ApplyEquation(goal02.goal, s22))
 
 
         goal04 = file.add_goal("SUM(k, 0, oo, (k * (4 * k - 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 2 * (-64) ^ k)) = -1 / pi")

@@ -384,6 +384,11 @@ class BinomTest(unittest.TestCase):
         s18 = calc.parse_expr(s18)
         calc.perform_rule(rules.ApplyIdentity(s17, s18))
         calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0"))
+        s19 = "LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
+        s19 = calc.parse_expr(s19)
+        s20 = "(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
+        s20 = calc.parse_expr(s20)
+        calc.perform_rule(rules.Equation(s19, s20))
 
         goal04 = file.add_goal("SUM(k, 0, oo, (k * (4 * k - 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 2 * (-64) ^ k)) = -1 / pi")
         proof = goal04.proof_by_rewrite_goal(begin=goal03)

@@ -413,11 +413,7 @@ class BinomTest(unittest.TestCase):
         s8 = "SUM(k, 0, oo, (4 * k + 1) * binom(2 * k,k) ^ 3 / (-64) ^ k) + SUM(k, 0, oo, 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))"
         s8 = calc.parse_expr(s8)
         calc.perform_rule(rules.Equation(s7, s8))
-        s9 = "SUM(k, 0, oo, (4 * k + 1) * binom(2 * k,k) ^ 3 / (-64) ^ k)"
-        s9 = calc.parse_expr(s9)
-        s10 = "2 / pi"
-        s10 = calc.parse_expr(s10)
-        calc.perform_rule(rules.ApplyIdentity(s9, s10))
+        calc.perform_rule(rules.OnLocation(rules.SeriesEvaluationIdentity(),'0.0'))
         self.checkAndOutput(file)
 
 

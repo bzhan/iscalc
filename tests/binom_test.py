@@ -349,10 +349,41 @@ class BinomTest(unittest.TestCase):
         s4 = "(4 ^ n / sqrt(n * pi)) *binom(2 * n,n) / (4 ^ n / sqrt(n * pi))"
         s4 = calc.parse_expr(s4)
         calc.perform_rule(rules.Equation(s3, s4))
-        s1 = calc.parse_expr("(4 ^ n / sqrt(n * pi) * binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3")
-        s2 = calc.parse_expr("(4 ^ n / sqrt(n * pi))^3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3")
-        calc.perform_rule(rules.ApplyIdentity(s1, s2))
-
+        s5 = calc.parse_expr("(4 ^ n / sqrt(n * pi) * binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3")
+        s6 = calc.parse_expr("(4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3")
+        calc.perform_rule(rules.ApplyIdentity(s5, s6))
+        s7 = "(2 * n + 1) / (-64) ^ n * ((4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)"
+        s7 = calc.parse_expr(s7)
+        s8 = "((2 * n + 1) / (-64) ^ n * ((4 ^ n / sqrt(n * pi)) ^ 3) * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)"
+        s8 = calc.parse_expr(s8)
+        calc.perform_rule(rules.Equation(s7, s8))
+        s9 = "LIM {n -> oo}. (2 * n + 1) / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
+        s9 = calc.parse_expr(s9)
+        s10 = "(LIM {n -> oo}. (2 * n + 1) / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3) * (LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)"
+        s10 = calc.parse_expr(s10)
+        calc.perform_rule(rules.Equation(s9, s10))
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0.0"))
+        s11 = "n ^ (3/2) * pi ^ (3/2)"
+        s11 = calc.parse_expr(s11)
+        s12 = "(n * pi) ^ (3/2)"
+        s12 = calc.parse_expr(s12)
+        calc.perform_rule(rules.ApplyIdentity(s11, s12))
+        s13 = "4 ^ (3 * n)"
+        s13 = calc.parse_expr(s13)
+        s14 = "64 ^ n"
+        s14 = calc.parse_expr(s14)
+        calc.perform_rule(rules.ApplyIdentity(s13, s14))
+        s15 = "(-64) ^ -n"
+        s15 = calc.parse_expr(s15)
+        s16 = "(1 / -64) ^ n"
+        s16 = calc.parse_expr(s16)
+        calc.perform_rule(rules.ApplyIdentity(s15, s16))
+        s17 = "(1 / -64) ^ n * 64 ^ n"
+        s17 = calc.parse_expr(s17)
+        s18 = "(-1) ^ n"
+        s18 = calc.parse_expr(s18)
+        calc.perform_rule(rules.ApplyIdentity(s17, s18))
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0"))
 
         goal04 = file.add_goal("SUM(k, 0, oo, (k * (4 * k - 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 2 * (-64) ^ k)) = -1 / pi")
         proof = goal04.proof_by_rewrite_goal(begin=goal03)

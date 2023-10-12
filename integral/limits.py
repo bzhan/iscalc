@@ -365,7 +365,12 @@ def limit_mult(a: Limit, b: Limit, ctx: Context) -> Limit:
     elif a.e == NEG_INF and b.e == NEG_INF:
         return Limit(POS_INF, asymp=asymp_mult(a.asymp, b.asymp, ctx))
     elif a.e == POS_INF:
-        if ctx.is_positive(b.e):
+        if b.e == None:
+            if b.is_bounded:
+                return Limit(POS_INF, asymp=a.asymp)
+            else:
+                return Limit(None)
+        elif ctx.is_positive(b.e):
             return Limit(POS_INF, asymp=a.asymp)
         elif ctx.is_negative(b.e):
             return Limit(NEG_INF, asymp=a.asymp)
@@ -582,6 +587,10 @@ def limit_of_expr(e: Expr, var_name: str, ctx: Context) -> Limit:
         if e.args[1] == Const(-1):
             l1 = limit_of_expr(e.args[0], var_name, ctx)
             return limit_inverse(l1, ctx)
+        elif e.args[0] == Const(-1):
+            res = Limit(None)
+            res.is_bounded = True
+            return res
         else:
             l1 = limit_of_expr(e.args[0], var_name, ctx)
             l2 = limit_of_expr(e.args[1], var_name, ctx)

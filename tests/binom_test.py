@@ -318,6 +318,7 @@ class BinomTest(unittest.TestCase):
         s12 = calc.parse_expr(s12)
         calc.perform_rule(rules.Equation(s11, s12))
         calc.perform_rule(rules.FullSimplify())
+
         fixes = dict()
         fixes['m'] = parser.parse_expr('$int')
         fixes['n'] = parser.parse_expr('$int')
@@ -389,12 +390,15 @@ class BinomTest(unittest.TestCase):
         s20 = "(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
         s20 = calc.parse_expr(s20)
         calc.perform_rule(rules.Equation(s19, s20))
-        s22 = "LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))"
-        s22 = calc.parse_expr(s22)
-        calc.perform_rule(rules.ApplyEquation(goal02.goal, s22))
+        # s21 = "(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) = 1"
+        # s21 = calc.parse_expr(s21)
+        # s22 = "LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))"
+        # s22 = calc.parse_expr(s22)
+        # calc.perform_rule(rules.ApplyEquation(s21, s22))
 
-
-        goal04 = file.add_goal("SUM(k, 0, oo, (k * (4 * k - 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 2 * (-64) ^ k)) = -1 / pi")
+        fixes = dict()
+        fixes['k'] = expr.IntType
+        goal04 = file.add_goal("SUM(k, 0, oo, (k * (4 * k - 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 2 * (-64) ^ k)) = -1 / pi", fixes=fixes)
         proof = goal04.proof_by_rewrite_goal(begin=goal03)
         calc = proof.begin
         s1 = "16 * k ^ 3 - 4 * k ^ 2 - 2 * k + 1"
@@ -418,6 +422,141 @@ class BinomTest(unittest.TestCase):
         s8 = calc.parse_expr(s8)
         calc.perform_rule(rules.Equation(s7, s8))
         calc.perform_rule(rules.OnLocation(rules.SeriesEvaluationIdentity(), '0.0'))
+        s9 = "SUM(k, 0, oo, 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))"
+        s9 = calc.parse_expr(s9)
+        s10 = "2 * SUM(k, 0, oo, k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))"
+        s10 = calc.parse_expr(s10)
+        calc.perform_rule(rules.Equation(s9, s10))
+        s11 = "SUM(k, 0, oo, k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))"
+        s11 = calc.parse_expr(s11)
+        calc.perform_rule(rules.SolveEquation(s11))
+
+        fixes = dict()
+        fixes['m'] = expr.IntType
+        fixes['n'] = expr.IntType
+        fixes['k'] = expr.IntType
+        goal05 = file.add_goal("SUM(k, 0, n, (((8 - m / 8) * k ^ 3 - 12 * k ^ 2 + 6 * k - 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 3 * m ^ k)) = 1 / m ^ n * binom(2 * n, n) ^ 3", conds=['m != 0', 'n>=0'], fixes=fixes)
+        proof = goal05.proof_by_induction("n", 0)
+        proof_base = proof.base_case.proof_by_calculation()
+        proof_induct = proof.induct_case.proof_by_calculation()
+        calc = proof_base.lhs_calc
+        calc = proof_induct.lhs_calc
+        cond = calc.parse_expr("k <= n")
+        calc.perform_rule(rules.SplitSummation(cond))
+        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "1"))
+        s1 = "m ^ -i / (2 * i - 1) ^ 3 * binom(2 * i,i) ^ 3 * (i ^ 3 * (-(m / 8) + 8) - 12 * i ^ 2 + 6 * i - 1)"
+        s1 = calc.parse_expr(s1)
+        s2 = "(((8 - m / 8) * i ^ 3 - 12 * i ^ 2 + 6 * i - 1) * binom(2 * i, i) ^ 3) / ((2 * i - 1) ^ 3 * m ^ i)"
+        s2 = calc.parse_expr(s2)
+        calc.perform_rule(rules.Equation(s1, s2))
+        calc.perform_rule(rules.OnLocation(rules.ApplyInductHyp(), "0"))
+        s3 = "binom(2 * k, k) = (k + 1) / (2 * (2 * k + 1)) * binom(2 * k + 2, k + 1)"
+        s3 = calc.parse_expr(s3)
+        s4 = "binom(2 * n,n)"
+        s4 = calc.parse_expr(s4)
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s3, s4), "0.1.0"))
+        s5 = "1 / m ^ n * ((n + 1) / (2 * (2 * n + 1)) * binom(2 * n + 2,n + 1)) ^ 3"
+        s5 = calc.parse_expr(s5)
+        s6 = "((m / 8) * (n + 1) ^ 3) / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2, n + 1) ^ 3"
+        s6 = calc.parse_expr(s6)
+        calc.perform_rule(rules.Equation(s5, s6))
+        s7 = "m ^ (-n - 1) / (2 * n + 1) ^ 3 * binom(2 * n + 2,n + 1) ^ 3 * ((n + 1) ^ 3 * (-(m / 8) + 8) - 12 * (n + 1) ^ 2 + 6 * n + 5)"
+        s7 = calc.parse_expr(s7)
+        s8 = "((8 - m / 8) * (n + 1) ^ 3 - 12 * (n + 1) ^ 2 + 6 * n + 5) / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2, n + 1) ^ 3"
+        s8 = calc.parse_expr(s8)
+        calc.perform_rule(rules.Equation(s7, s8))
+        s9 = "m / 8 * (n + 1) ^ 3 / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3 + ((8 - m / 8) * (n + 1) ^ 3 - 12 * (n + 1) ^ 2 + 6 * n + 5) / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3"
+        s9 = calc.parse_expr(s9)
+        s10 = "(8 * (n + 1) ^ 3 - 12 * (n + 1) ^ 2 + 6 * n + 5) / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3"
+        s10 = calc.parse_expr(s10)
+        calc.perform_rule(rules.Equation(s9, s10))
+        s11 = "8 * (n + 1) ^ 3 - 12 * (n + 1) ^ 2 + 6 * n + 5"
+        s11 = calc.parse_expr(s11)
+        s12 = "(2 * n + 1) ^ 3"
+        s12 = calc.parse_expr(s12)
+        calc.perform_rule(rules.Equation(s11, s12))
+        calc.perform_rule(rules.FullSimplify())
+
+        fixes = dict()
+        fixes['m'] = parser.parse_expr('$int')
+        fixes['n'] = parser.parse_expr('$int')
+        fixes['k'] = parser.parse_expr('$int')
+        goal06 = file.add_goal(
+            "(LIM {n->oo}. SUM(k, 0, n, (((8 - m / 8) * k ^ 3 - 12 * k ^ 2 + 6 * k - 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 3 * m ^ k))) = LIM {n->oo}. 1 / m ^ n * binom(2 * n, n) ^ 3",
+            conds=['m != 0'], fixes=fixes)
+        proof = goal06.proof_by_rewrite_goal(begin=goal05)
+        calc = proof.begin
+        calc.perform_rule(rules.LimitEquation('n', expr.POS_INF))
+
+        s = "SUM(k, 0, oo, (16*k^3 - 12*k^2+6*k-1) * binom(2*k, k)^3 / ((2*k-1)^3*(-64)^k)) = 0"
+        fixes = dict()
+        fixes['k'] = expr.IntType
+        goal07 = file.add_goal(s, fixes=fixes, conds=["k>=0"])
+        proof = goal07.proof_by_calculation()
+        calc = proof.lhs_calc
+        s1 = calc.parse_expr("16")
+        s2 = calc.parse_expr("8-((-64) / 8)")
+        calc.perform_rule(rules.Equation(s1, s2))
+        s1 = calc.parse_expr(
+            "SUM(k, 0, oo, ((8 - -64/8) * k ^ 3 - 12 * k ^ 2 + 6 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k))")
+        new_v = {'n': expr.IntType}
+        s2 = calc.parse_expr(
+            "LIM {n->oo}. SUM(k, 0, n, ((8 - -64//8) * k ^ 3 - 12 * k ^ 2 + 6 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k))",
+            fixes=new_v)
+        calc.perform_rule(rules.Equation(s1, s2))
+        source = calc.parse_expr(
+            "LIM {n->oo}. SUM(k, 0, n, ((8 - (-64)//8) * k ^ 3 - 12 * k ^ 2 + 6 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k))")
+        calc.perform_rule(rules.ApplyEquation(goal06.goal, source))
+        s3 = "binom(2 * n,n)"
+        s3 = calc.parse_expr(s3)
+        s4 = "(4 ^ n / sqrt(n * pi)) *binom(2 * n,n) / (4 ^ n / sqrt(n * pi))"
+        s4 = calc.parse_expr(s4)
+        calc.perform_rule(rules.Equation(s3, s4))
+        s5 = calc.parse_expr("(4 ^ n / sqrt(n * pi) * binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3")
+        s6 = calc.parse_expr("(4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3")
+        calc.perform_rule(rules.ApplyIdentity(s5, s6))
+        s7 = "1 / (-64) ^ n * ((4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)"
+        s7 = calc.parse_expr(s7)
+        s8 = "(1 / (-64) ^ n * ((4 ^ n / sqrt(n * pi)) ^ 3) * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)"
+        s8 = calc.parse_expr(s8)
+        calc.perform_rule(rules.Equation(s7, s8))
+        s9 = "LIM {n -> oo}. 1 / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
+        s9 = calc.parse_expr(s9)
+        s10 = "(LIM {n -> oo}. 1 / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3) * (LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)"
+        s10 = calc.parse_expr(s10)
+        #calc.perform_rule(rules.Equation(s9, s10))
+
+        fixes = dict()
+        fixes['k'] = expr.IntType
+        goal08 = file.add_goal("SUM(k, 0, oo, ((4 * k - 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 3 * (-64) ^ k)) = 2 / pi", fixes=fixes)
+        proof = goal08.proof_by_rewrite_goal(begin=goal07)
+        calc = proof.begin
+        s1 = "16 * k ^ 3 - 12 * k ^ 2 + 6 * k - 1"
+        s1 = calc.parse_expr(s1)
+        s2 = "2 * k * (2 * k - 1) * (4 * k - 1) + 4 * k - 1"
+        s2 = calc.parse_expr(s2)
+        calc.perform_rule(rules.Equation(s1, s2))
+        s3 = "(2 * k * (2 * k - 1) * (4 * k - 1) + 4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k)"
+        s3 = calc.parse_expr(s3)
+        s4 = "(2 * k * (4 * k - 1)) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k) + (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k)"
+        s4 = calc.parse_expr(s4)
+        calc.perform_rule(rules.Equation(s3, s4))
+        s5 = "SUM(k, 0, oo, (2 * k * (4 * k - 1)) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k) + (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k))"
+        s5 = calc.parse_expr(s5)
+        s6 = "SUM(k, 0, oo, (2 * k * (4 * k - 1)) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) + SUM(k, 0, oo, ((4 * k - 1) * binom(2 * k,k) ^ 3) / ((2 * k - 1) ^ 3 * (-64) ^ k))"
+        s6 = calc.parse_expr(s6)
+        calc.perform_rule(rules.Equation(s5, s6))
+        s7 = "SUM(k, 0, oo, 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))"
+        s7 = calc.parse_expr(s7)
+        s8 = "2 * SUM(k, 0, oo, (k * (4 * k - 1) * binom(2 * k,k) ^ 3) / ((2 * k - 1) ^ 2 * (-64) ^ k))"
+        s8 = calc.parse_expr(s8)
+        calc.perform_rule(rules.Equation(s7, s8))
+        s9 = "SUM(k, 0, oo, (k * (4 * k - 1) * binom(2 * k,k) ^ 3) / ((2 * k - 1) ^ 2 * (-64) ^ k))"
+        s9 = calc.parse_expr(s9)
+        calc.perform_rule(rules.ApplyEquation(goal04.goal, s9))
+        s10 = "SUM(k, 0, oo, (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k))"
+        s10 = calc.parse_expr(s10)
+        calc.perform_rule(rules.SolveEquation(s10))
         self.checkAndOutput(file)
 
 

@@ -174,7 +174,7 @@ class BinomTest(unittest.TestCase):
         fixes = dict()
         fixes['n'] = parser.parse_expr('$int')
         file = compstate.CompFile("base", "binom_example02")
-        goal01 = file.add_goal("(LIM {n -> oo}. (binom(2 * n, n) / (4 ^ n / sqrt(n * pi)))) = 1")
+        goal01 = file.add_goal("(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) = 1")
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("binom")))
@@ -384,11 +384,17 @@ class BinomTest(unittest.TestCase):
         s18 = calc.parse_expr(s18)
         calc.perform_rule(rules.ApplyIdentity(s17, s18))
         calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0"))
-        # s19 = "LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
-        # s19 = calc.parse_expr(s19)
-        # s20 = "(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
-        # s20 = calc.parse_expr(s20)
-        # calc.perform_rule(rules.Equation(s19, s20))
+        s19 = "LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
+        s19 = calc.parse_expr(s19)
+        s20 = "(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
+        s20 = calc.parse_expr(s20)
+        calc.perform_rule(rules.Equation(s19, s20))
+        s21 = "LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))"
+        s21 = calc.parse_expr(s21)
+        s22 = "1"
+        s22 = calc.parse_expr(s22)
+        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s21, s22), "1.0"))
+
 
         goal04 = file.add_goal("SUM(k, 0, oo, (k * (4 * k - 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 2 * (-64) ^ k)) = -1 / pi")
         proof = goal04.proof_by_rewrite_goal(begin=goal03)

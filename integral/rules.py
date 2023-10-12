@@ -2547,6 +2547,9 @@ class LimRewrite(Rule):
                     if b.op in "+-*/":
                         res = Op(b.op, Limit(e.var, e.lim, b.args[0], e.drt),
                                         Limit(e.var, e.lim, b.args[1], e.drt))
+                    if b.op == '^':
+                        if not b.args[1].contains_var(e.var):
+                            res = Op(b.op, Limit(e.var, e.lim, b.args[0], e.drt), b.args[1])
                 elif len(b.args) == 1:
                     if b.op == '-':
                         res = -Limit(e.var, e.lim, b.args[0], e.drt)

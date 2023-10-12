@@ -344,11 +344,14 @@ class BinomTest(unittest.TestCase):
         calc.perform_rule(rules.Equation(s1, s2))
         source = calc.parse_expr("LIM {n->oo}. SUM(k, 0, n, ((8 - (-64)//8) * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))")
         calc.perform_rule(rules.ApplyEquation(goal02.goal, source))
-        s3 = "(2 * n + 1) / (-64) ^ n * binom(2 * n,n) ^ 3"
+        s3 = "binom(2 * n,n)"
         s3 = calc.parse_expr(s3)
-        s4 = "(((2 * n + 1) / (-64) ^ n) * (4 ^ n / sqrt(n * pi) ^ 3)) * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
+        s4 = "(4 ^ n / sqrt(n * pi)) *binom(2 * n,n) / (4 ^ n / sqrt(n * pi))"
         s4 = calc.parse_expr(s4)
-        calc.perform_rule(rules.OnLocation(rules.Equation(s3, s4), "0.0"))
+        calc.perform_rule(rules.Equation(s3, s4))
+        s1 = calc.parse_expr("(4 ^ n / sqrt(n * pi) * binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3")
+        s2 = calc.parse_expr("(4 ^ n / sqrt(n * pi))^3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3")
+        calc.perform_rule(rules.ApplyIdentity(s1, s2))
 
 
         goal04 = file.add_goal("SUM(k, 0, oo, (k * (4 * k - 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 2 * (-64) ^ k)) = -1 / pi")

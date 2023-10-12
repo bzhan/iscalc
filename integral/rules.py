@@ -1540,6 +1540,11 @@ class Equation(Rule):
                     ctx.add_fix(self.new_expr.var, expr.IntType)
                     return self.new_expr
 
+            if expr.is_op(e.body) and e.body.op in '+-':
+                v, l, u = e.index_var, e.lower, e.upper
+                tmp = Op(e.body.op, Summation(v, l, u, e.body.args[0]), Summation(v, l, u, e.body.args[1]))
+                if normalize(tmp, ctx) == normalize(self.new_expr, ctx):
+                    return self.new_expr
 
         # rewrite limit expression
         r = LimRewrite(self.old_expr, self.new_expr)
@@ -1553,7 +1558,6 @@ class Equation(Rule):
                 if ctx.check_condition(Op('=', Fun('norm', e), Const(0))) and \
                     normalize(self.new_expr, ctx) == Fun('zero_matrix', t.args[1], t.args[2]):
                     return self.new_expr
-
         raise AssertionError("Equation: rewriting %s to %s failed" % (e, self.new_expr))
 
 

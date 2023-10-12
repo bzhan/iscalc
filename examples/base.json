@@ -259,6 +259,14 @@
         },
         {
             "attributes": [
+                "bidirectional"
+            ],
+            "category": "power",
+            "expr": "a^x^y = a^y^x",
+            "type": "axiom"
+        },
+        {
+            "attributes": [
                 "bidirectional",
                 "simplify"
             ],
@@ -333,6 +341,15 @@
             "expr": "x^a * x^b = x^(a+b)",
             "type": "axiom",
             "conds": ["x!=0", "a>=0", "b>=0"]
+        },
+        {
+            "attributes": [
+                "bidirectional"
+            ],
+            "category": "power",
+            "expr": "x^n = (-1)^n * (-x)^n",
+            "type": "axiom",
+            "conds": ["x<0"]
         },
         {
             "attributes": [

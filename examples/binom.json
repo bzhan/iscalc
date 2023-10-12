@@ -1,5 +1,10 @@
 {
     "content": [
+        {
+            "expr": "(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) = 1",
+            "path": "binom_example02",
+            "type": "problem"
+        },
          {
             "expr": "binom(2 * k, k) = (k + 1) / (2 * (2 * k + 1)) * binom(2 * k + 2, k + 1)",
             "path": "binom_example03",

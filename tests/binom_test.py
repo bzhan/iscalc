@@ -293,10 +293,10 @@ class BinomTest(unittest.TestCase):
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.ApplyInductHyp(), "0"))
         s3 = "binom(2 * k, k) = (k + 1) / (2 * (2 * k + 1)) * binom(2 * k + 2, k + 1)"
-        s3 = calc.parse_expr(s3)
+        s3 = parser.parse_expr(s3)
         s4 = "binom(2 * n,n)"
         s4 = calc.parse_expr(s4)
-        calc.perform_rule(rules.OnLocation(rules.ApplyEquation(s3, s4), "0.1.0"))
+        calc.perform_rule(rules.ApplyEquation(s3, s4))
         s5 = "(2 * n + 1) / m ^ n * ((n + 1) / (2 * (2 * n + 1)) * binom(2 * n + 2,n + 1)) ^ 3"
         s5 = calc.parse_expr(s5)
         s6 = "((m / 8) * (n + 1) ^ 3) / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2, n + 1) ^ 3"
@@ -390,12 +390,13 @@ class BinomTest(unittest.TestCase):
         s20 = "(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
         s20 = calc.parse_expr(s20)
         calc.perform_rule(rules.Equation(s19, s20))
-        # s21 = "(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) = 1"
-        # s21 = calc.parse_expr(s21)
-        # s22 = "LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))"
-        # s22 = calc.parse_expr(s22)
-        # calc.perform_rule(rules.ApplyEquation(s21, s22))
-
+        s21 = "(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) = 1"
+        s21 = parser.parse_expr(s21)
+        s22 = "LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))"
+        s22 = calc.parse_expr(s22)
+        calc.perform_rule(rules.ApplyEquation(s21, s22))
+        calc.perform_rule(rules.FullSimplify())
+        assert goal03.is_finished()
         fixes = dict()
         fixes['k'] = expr.IntType
         goal04 = file.add_goal("SUM(k, 0, oo, (k * (4 * k - 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 2 * (-64) ^ k)) = -1 / pi", fixes=fixes)
@@ -524,8 +525,23 @@ class BinomTest(unittest.TestCase):
         s9 = calc.parse_expr(s9)
         s10 = "(LIM {n -> oo}. 1 / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3) * (LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)"
         s10 = calc.parse_expr(s10)
-        #calc.perform_rule(rules.Equation(s9, s10))
-
+        calc.perform_rule(rules.Equation(s9, s10))
+        s = calc.parse_expr("(LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)")
+        t = calc.parse_expr("(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3")
+        calc.perform_rule(rules.Equation(s,t))
+        eq = parser.parse_expr("(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) = 1")
+        s = calc.parse_expr("LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))")
+        calc.perform_rule(rules.ApplyEquation(eq, s))
+        s = calc.parse_expr("(4 ^ n / sqrt(n * pi)) ^ 3")
+        t = calc.parse_expr("4^n^3 / (n*pi)^(3/2)")
+        calc.perform_rule(rules.Equation(s,t))
+        s = calc.parse_expr("4^n^3")
+        t = calc.parse_expr("4^3^n")
+        calc.perform_rule(rules.ApplyIdentity(s, t))
+        s = calc.parse_expr("(-64) ^ n")
+        t = calc.parse_expr("(-1)^n * (64)^n")
+        calc.perform_rule(rules.ApplyIdentity(s, t))
+        calc.perform_rule(rules.FullSimplify())
         fixes = dict()
         fixes['k'] = expr.IntType
         goal08 = file.add_goal("SUM(k, 0, oo, ((4 * k - 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 3 * (-64) ^ k)) = 2 / pi", fixes=fixes)
@@ -557,6 +573,7 @@ class BinomTest(unittest.TestCase):
         s10 = "SUM(k, 0, oo, (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k))"
         s10 = calc.parse_expr(s10)
         calc.perform_rule(rules.SolveEquation(s10))
+        # print(file)
         self.checkAndOutput(file)
 
 

@@ -350,9 +350,9 @@ class Expr:
                    (other.body, other.lower, other.upper, other.index_var)
         elif is_skolem_func(self):
             return (self.name, self.dependent_vars) <= (other.name, other.dependent_vars)
-        elif self.is_limit():
+        elif is_limit(self):
             return (self.var, self.lim, self.body, self.drt) <= (other.var, other.lim, other.body, other.drt)
-        elif self.is_matrix():
+        elif is_matrix(self):
             return ([[item for item in r] for r in self.data]) <= ([[item for item in r] for r in other.data])
         else:
             print(type(self))
@@ -1305,6 +1305,10 @@ class Fun(Expr):
                     self.type = t
                 else:
                     raise NotImplementedError(str(self) + "-" + str(t))
+            elif self.func_name == 'MUL':
+                t = args[3].type
+                if is_matrix_type(t) and num_row(t) == num_col(t):
+                    self.type = t
         else:
             self.func_name, self.type = func_name
 

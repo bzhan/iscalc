@@ -1122,8 +1122,10 @@ class ApplyEquation(Rule):
         func_type = ctx.get_fixes()
         if inst_lhs is not None:
             tmp = pat.rhs.inst_pat(inst_lhs, func_type)
+            tmp = parser.parse_expr(str(tmp), fixes=func_type)
             tmp_conds = [cond_pattern.inst_pat(inst_lhs, func_type) for cond_pattern in conds_pattern]
-            if tmp != None and pat.lhs.inst_pat(inst_lhs, func_type) == self.source:
+            left = parser.parse_expr(str(pat.lhs.inst_pat(inst_lhs, func_type)), fixes=func_type)
+            if tmp != None and normalize(left, ctx) == normalize(self.source, ctx):
                 if tmp_conds == []:
                     return tmp
                 flag = True
@@ -1134,8 +1136,10 @@ class ApplyEquation(Rule):
                     return tmp
         if inst_rhs is not None:
             tmp = pat.lhs.inst_pat(inst_rhs, func_type)
+            tmp = parser.parse_expr(str(tmp), fixes=func_type)
             tmp_conds = [cond_pattern.inst_pat(inst_rhs, func_type) for cond_pattern in conds_pattern]
-            if tmp != None and pat.rhs.inst_pat(inst_rhs, func_type) == self.source:
+            right = parser.parse_expr(str(pat.rhs.inst_pat(inst_rhs, func_type)), fixes=func_type)
+            if tmp != None and normalize(right, ctx) == normalize(self.source, ctx):
                 if tmp_conds == []:
                     return tmp
                 flag = True

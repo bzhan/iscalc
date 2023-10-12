@@ -1262,8 +1262,9 @@
             "type": "header"
         },
         {
-            "expr": "SUM(n, 0, oo, (4 * n + 1) * binom(2*n, n) / (-64) ^ n) = 2 / pi",
-            "type": "axiom"
+            "expr": "SUM(n, 0, oo, (4 * n + 1) * binom(2 * n, n) ^ 3 / (-64) ^ n) = 2 / pi",
+            "type": "axiom",
+            "category": "ramanujan"
         },
         {
             "level": 1,

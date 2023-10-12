@@ -502,12 +502,14 @@ class Context:
         def rec(e):
             if expr.is_limit(e) and e.lim == expr.POS_INF:
                 b = e.body
+                # LIM {n->oo}. SUM(i, 0, n, body)
                 if expr.is_summation(b) and expr.is_var(b.upper) and b.upper.name == e.var:
                     cond = Op('>', b.upper, b.lower)
                     ctx.add_condition(cond)
             elif expr.is_op(e):
                 for arg in e.args:
                     rec(arg)
+        # expand conditions from goal
         rec(goal)
         for e in conds.data:
             if e.get_vars().intersection(goal_vars) == set():

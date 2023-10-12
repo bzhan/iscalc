@@ -393,7 +393,21 @@ class BinomTest(unittest.TestCase):
         s2 = "(4 * k + 1) * (2 * k - 1) ^ 2 + 2 * k * (4 * k - 1)"
         s2 = calc.parse_expr(s2)
         calc.perform_rule(rules.Equation(s1, s2))
-
+        s3 = "((4 * k + 1) * (2 * k - 1) ^ 2 + 2 * k * (4 * k - 1)) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)"
+        s3 = calc.parse_expr(s3)
+        s4 = "((4 * k + 1) * (2 * k - 1) ^ 2) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k) + (2 * k * (4 * k - 1)) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)"
+        s4 = calc.parse_expr(s4)
+        calc.perform_rule(rules.Equation(s3, s4))
+        s5 = "(4 * k + 1) * (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)"
+        s5 = calc.parse_expr(s5)
+        s6 = "(4 * k + 1) * binom(2 * k,k) ^ 3 / (-64) ^ k"
+        s6 = calc.parse_expr(s6)
+        calc.perform_rule(rules.Equation(s5, s6))
+        s7 = "SUM(k, 0, oo, (4 * k + 1) * binom(2 * k,k) ^ 3 / (-64) ^ k + 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))"
+        s7 = calc.parse_expr(s7)
+        s8 = "SUM(k, 0, oo, (4 * k + 1) * binom(2 * k,k) ^ 3 / (-64) ^ k) + SUM(k, 0, oo, 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))"
+        s8 = calc.parse_expr(s8)
+        calc.perform_rule(rules.Equation(s7, s8))
         self.checkAndOutput(file)
 
 

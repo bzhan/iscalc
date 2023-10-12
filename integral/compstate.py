@@ -207,7 +207,7 @@ class Goal(StateItem):
                     cond:Expr
                     proof_cond_vars = proof_cond_vars.union(cond.get_vars())
                 goal_vars = self.goal.get_vars()
-                return goal_vars.intersection(proof_cond_vars) == set()
+                return self.proof.is_finished() and goal_vars.intersection(proof_cond_vars) == set()
             elif not goal_has_conds and not proof_has_conds:
                 return self.proof.is_finished()
             elif goal_has_conds and proof_has_conds:

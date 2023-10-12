@@ -352,7 +352,10 @@ class BinomTest(unittest.TestCase):
         s1 = parser.parse_expr(s1)
         s2 = "(4 * k + 1) * (2 * k - 1) ^ 2 + 2 * k * (4 * k - 1)"
         s2 = parser.parse_expr(s2)
+        goal04.is_finished()
+        print(file)
         calc.perform_rule(rules.OnLocation(rules.Equation(s1, s2), "0.0.0"))
+
         self.checkAndOutput(file)
 
 

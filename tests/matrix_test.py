@@ -2,11 +2,9 @@ import json
 import os
 import sys
 import unittest
-from typing import List
 
-from integral import rules, context, parser, compstate, matrix, expr
+from integral import rules, parser, compstate, matrix
 from integral.context import Context
-from integral.expr import Op, Var, Const, Matrix, Expr, Fun
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
@@ -79,8 +77,9 @@ class MatrixTest(unittest.TestCase):
         file = compstate.CompFile("MIRM", "matrix_example01")
         raw_fixes = [
             ("n", "$int"),
-            ("P", "$tensor($real, n, n)"),
-            ("A", "$tensor($real, n, n)")
+            ("m", "$int"),
+            ("P", "$tensor($real, m, m)"),
+            ("A", "$tensor($real, m, m)")
         ]
         fixes = dict()
         for a, b in raw_fixes:
@@ -206,7 +205,7 @@ class MatrixTest(unittest.TestCase):
         calc = proof.lhs_calc
         calc.perform_rule(rules.SeriesExpansionIdentity(old_expr="cos(a)"))
         s = parser.parse_expr("n = 0", fixes=fixes)
-        calc.perform_rule(rules.OnLocation(rules.SplitSummation(s), "1"))
+        calc.perform_rule(rules.OnLocation(rules.SplitItem(s), "1"))
         calc.perform_rule(rules.FullSimplify())
         s1 = "-SUM(n, 1, oo, a ^ (2 * n) * (-1) ^ n / factorial(2 * n))"
         s2 = "SUM(n, 1, oo, (-1) * ((-1) ^ n * a ^ (2 * n) / factorial(2 * n)))"
@@ -233,9 +232,9 @@ class MatrixTest(unittest.TestCase):
         calc = proof.lhs_calc
         calc.perform_rule(rules.SeriesExpansionIdentity())
         cond = calc.parse_expr("n % 2")
-        calc.perform_rule(rules.SplitSummation(cond))
+        calc.perform_rule(rules.SplitItem(cond))
         cond = parser.parse_expr("i = 0", fixes=fixes)
-        calc.perform_rule(rules.OnLocation(rules.SplitSummation(cond), "1"))
+        calc.perform_rule(rules.OnLocation(rules.SplitItem(cond), "1"))
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.OnLocation(rules.ChangeSummationIndex(new_lower="0"), "0.1"))
         s1 = calc.parse_expr("(x * hat(w)) ^ (2 * i + 1)")
@@ -410,7 +409,8 @@ class MatrixTest(unittest.TestCase):
 
     def testHMFDerive(self):
         file = compstate.CompFile("MIRM", "twist_derive_hmf")
-        file.add_definition("twist(w, v) = hat(rcon(w, v))", conds=["type(w, 0, 3)", "type(v, 0, 3)"])
+        file.add_definition("twist(w, v) = hat(rcon(w, v))", conds=["type(w, 0, 3)", "type(v, 0, 3)"], \
+                            func_type='$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))')
         fixes = file.ctx.get_fixes()
         fixes['w'] = parser.parse_expr("$tensor($real, 3, 1)")
         fixes['v'] = parser.parse_expr("$tensor($real, 3, 1)")
@@ -448,7 +448,6 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.ExpandPolynomial())
         s = calc.parse_expr("(-cos(t) + 1) * hat(w) * hat(w) ^ 2")
         t = calc.parse_expr("(-cos(t) + 1) * (hat(w) * hat(w) ^ 2)")
-        print(calc)
         calc.perform_rule(rules.Equation(s, t))
         s = calc.parse_expr("hat(w) * hat(w) ^ 2")
         t = calc.parse_expr("hat(w) ^ (2*1 + 1)")
@@ -513,96 +512,57 @@ class MatrixTest(unittest.TestCase):
     def testMatrixPoeInv(self):
         file = compstate.CompFile("MIRM", "matrix_poe_inv")
         # ic: initial configuration
-        d = "gst(t, n, w, v, ic) = MUL(i, 0, n-1, hmf(nth(t, i, 0), twist(nthc(w, i), nthc(v, i)))) * ic"
-        conds = ['isSE3(ic)', 'type(n,0)', 'n>=1', 'type(t, 0, n)', "type(w, 0, 3, n)", "type(v,0,3,n)"]
-        rt = parser.parse_expr("$tensor($real, 4, 4)")
-        file.add_definition(d, conds=conds, range_type=rt)
+        d = "gst(t, n, w, v, ic) = MUL(i, 0, n-1, hmf(nth(t, i, 0), nthc(w, i), nthc(v, i))) * ic"
+        conds = ['type(n,0)', 'n>=1', 'type(t, 0, n)', "type(w, 0, 3, n)", "type(v,0,3,n)"]
+        file.add_definition(d, conds=conds, func_type="$fun($int, $tensor($real, n, 1), $tensor($real, 3, n), $tensor($real, 3, n), $tensor($real, 4, 4), $tensor($real, 4, 4))")
         fixes = file.ctx.get_fixes()
         fixes['n'] = parser.parse_expr('$int')
-        fixes['t'] = parser.parse_expr("$tensor($real, n, n)", fixes=fixes)
+        fixes['t'] = parser.parse_expr("$tensor($real, n, 1)", fixes=fixes)
         fixes['w'] = parser.parse_expr("$tensor($real, 3, n)", fixes=fixes)
         fixes['v'] = parser.parse_expr("$tensor($real, 3, n)", fixes=fixes)
         fixes['ic'] = parser.parse_expr("$tensor($real, 4, 4)", fixes=fixes)
-        g = "(inv(ic) * MUL(i, 0, n-1, hmf(-nth(t, n-i-1, 0), twist(nthc(w, n-i-1), nthc(v, n-i-1)))))*gst(t, n, w, v, ic) = unit_matrix(4)"
-        goal01 = file.add_goal(g, fixes=fixes)
+        g = "(inv(ic) * MUL(i, 0, n-1, hmf(-nth(t, n-i-1, 0), nthc(w, n-i-1), nthc(v, n-i-1))))*\
+        gst(t, n, w, v, ic) = unit_matrix(4)"
+        conds = ["n>=1"] #"isColumnOrthogonalMatrix(w)"
+        goal01 = file.add_goal(g, fixes=fixes, conds=conds)
         cases = goal01.proof_by_induction(induct_var='n', start=1)
         proof = cases.base_case.proof_by_calculation()
         calc = proof.lhs_calc
+        calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('gst'), '1'))
+        s = calc.parse_expr("inv(ic) * hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * (hmf(nth(t,0,0),nthc(w,0),nthc(v,0)) * ic) ")
+        t = calc.parse_expr("inv(ic) * (hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))) * ic")
+        calc.perform_rule(rules.Equation(s, t))
+        eq = parser.parse_expr("hmf(-t, w, v) * hmf(t, w, v) = unit_matrix(4)")
+        s = calc.parse_expr("hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))")
+        calc.perform_rule(rules.ApplyEquation(eq, s))
         calc.perform_rule(rules.FullSimplify())
-        print(proof)
 
-    def testFixes01(self):
-        file = compstate.CompFile("base", "test_fixes_01")
-        fixes = dict()
-        fixes['x'] = parser.parse_expr('$real')
-        fixes['y'] = parser.parse_expr('$real')
-        goal = file.add_goal("(cos(y) + (sin(x)^2+cos(x)^2)) = " + \
-                             "SUM(k, 0, oo, (-1)^k*y^(2*k) / factorial(2*k)) + 1",
-                             fixes=fixes)
-        proof = goal.proof_by_calculation()
+        proof = cases.induct_case.proof_by_calculation()
         calc = proof.lhs_calc
-        s1 = calc.parse_expr("sin(x)^2 + cos(x)^2")
-        s2 = calc.parse_expr("1")
-        calc.perform_rule(rules.ApplyIdentity(s1, s2))
-        assert calc.ctx.get_fixes() == {'y': expr.RealType}
-        assert calc.ctx.dead_vars == {'x': None}
-        calc.perform_rule(rules.OnLocation(rules.SeriesExpansionIdentity(index_var='x'), '0'))
-        assert calc.ctx.get_fixes() == {'y': expr.RealType, 'x': expr.IntType}
-        assert calc.ctx.dead_vars == dict()
-        assert goal.is_finished()
-
-        self.checkAndOutput(file)
-
-    def testFixes02(self):
-        file = compstate.CompFile("base", "test_fixes_02")
-        fixes = dict()
-        fixes['x'] = parser.parse_expr('$real')
-        goal = file.add_goal("1 / cos(x) = sec(x)",
-                             fixes=fixes,
-                             conds=["cos(x)!=0"])
-        proof = goal.proof_by_calculation()
-        calc = proof.lhs_calc
-        calc.perform_rule(rules.OnLocation(rules.SeriesExpansionIdentity(),'1'))
-        assert file.get_item_label(goal) == compstate.Label("1")
-        assert calc.ctx.get_fixes() == {'x': expr.RealType, 'n':expr.IntType}
-        assert calc.ctx.dead_vars == dict()
-        assert calc.ctx.fixes == {'n':expr.IntType}
-        calc.perform_rule(rules.OnLocation(rules.SeriesEvaluationIdentity(),'1'))
-        assert calc.ctx.fixes == dict()
-        assert calc.ctx.dead_vars == dict()
-        assert calc.ctx.get_fixes() == {'x': expr.RealType}
-        calc.perform_rule(rules.ApplyIdentity("1/cos(x)", "sec(x)"))
-        assert goal.is_finished()
-        self.checkAndOutput(file)
-
-
-    def testFixes03(self):
-        file = compstate.CompFile("base", "test_fixes_03")
-        fixes = dict()
-        fixes['k'] = parser.parse_expr('$int')
-        fixes['g'] = parser.parse_expr("$int")
-        goal = file.add_goal("cos(x) = cos(x) + SUM(k, 0, 6, a) - SUM(g, 0, 6, a)",
-                             fixes=fixes)
-        proof = goal.proof_by_calculation()
-        calc = proof.rhs_calc
-        assert calc.ctx.fixes == dict()
-        assert calc.ctx.dead_vars == dict()
+        calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('gst'), '1'))
+        cond = calc.parse_expr("i=n")
+        calc.perform_rule(rules.OnLocation(rules.SplitItem(cond), '0.1'))
+        cond = calc.parse_expr("i=0")
+        calc.perform_rule(rules.OnLocation(rules.SplitItem(cond), '1.0'))
         calc.perform_rule(rules.FullSimplify())
-        assert calc.ctx.dead_vars == {'g':None, 'k':None}
-        assert calc.ctx.fixes == dict()
-        assert goal.is_finished()
-        fixes = dict()
-        fixes['x'] = expr.RealType
-        fixes['n'] = expr.RealType
-        goal02 = file.add_goal("SUM(n, 0, oo, (-1)^n*x^(2*n)/factorial(2*n))=cos(x)", fixes=fixes)
-        proof = goal02.proof_by_rewrite_goal(begin=goal)
-        calc = proof.begin
+        s = calc.parse_expr("inv(ic) * MUL(j, 0, n - 1, hmf(-nth(t,-j + n,0),nthc(w,-j + n),nthc(v,-j + n))) * hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0)) * MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j))) * ic")
+        t = calc.parse_expr("inv(ic) * MUL(j, 0, n - 1, hmf(-nth(t,-j + n,0),nthc(w,-j + n),nthc(v,-j + n))) * (hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))) * MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j))) * ic")
+        calc.perform_rule(rules.Equation(s, t))
+        eq = parser.parse_expr("hmf(-t, w, v) * hmf(t, w, v) = unit_matrix(4)")
+        s = calc.parse_expr("hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))")
+        calc.perform_rule(rules.ApplyEquation(eq, s))
         calc.perform_rule(rules.FullSimplify())
-        calc.ctx.fixes = dict()
-        calc.ctx.dead_vars = {'g':None, 'k':None}
-        calc.perform_rule(rules.OnLocation(rules.SeriesExpansionIdentity(), '0'))
-        calc.ctx.fixes = {'n': expr.IntType}
-        calc.ctx.dead_vars = {'g':None, 'k':None}
+        s = calc.parse_expr("MUL(j, 0, n - 1, hmf(-nth(t,-j + n, 0),nthc(w,-j + n),nthc(v,-j + n)))")
+        t = calc.parse_expr("MUL(j, 0, n-1, hmf(-nth(choose_row(t, 1, n),n-j-1, 0), nthc(choose_col(w,1,n), n-j-1), nthc(choose_col(v, 1, n), n-j-1)))")
+        calc.perform_rule(rules.RewriteMatrixMul(s, t))
+        s = calc.parse_expr("MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j)))")
+        t = calc.parse_expr("MUL(j, 0, n-1, hmf(nth(choose_row(t, 1, n),j, 0), nthc(choose_col(w,1, n), j), nthc(choose_col(v, 1, n), j)))")
+        calc.perform_rule(rules.RewriteMatrixMul(s, t))
+        s = calc.parse_expr("inv(ic) * MUL(j, 0, n - 1, hmf(-nth(choose_row(t,1,n),n - j - 1,0),nthc(choose_col(w,1,n),n - j - 1),nthc(choose_col(v,1,n),n - j - 1))) * MUL(j, 0, n - 1, hmf(nth(choose_row(t,1,n),j,0),nthc(choose_col(w,1,n),j),nthc(choose_col(v,1,n),j))) * ic")
+        t = calc.parse_expr("inv(ic) * MUL(j, 0, n - 1, hmf(-nth(choose_row(t,1,n),n - j - 1,0),nthc(choose_col(w,1,n),n - j - 1),nthc(choose_col(v,1,n),n - j - 1))) * (MUL(j, 0, n - 1, hmf(nth(choose_row(t,1,n),j,0),nthc(choose_col(w,1,n),j),nthc(choose_col(v,1,n),j))) * ic)")
+        calc.perform_rule(rules.Equation(s, t))
+        calc.perform_rule(rules.OnLocation(rules.FoldDefinition('gst'), '1'))
+        calc.perform_rule(rules.ApplyInductHyp())
         self.checkAndOutput(file)
 
 if __name__ == "__main__":

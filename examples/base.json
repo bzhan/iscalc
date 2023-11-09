@@ -285,6 +285,33 @@
             "category": "power",
             "conds": [
                 "a = 0",
+                "x * y != 0"
+            ],
+            "expr": "a ^ x ^ y = a ^ (x * y)",
+            "type": "axiom"
+        },
+        {
+            "attributes": [
+                "bidirectional",
+                "simplify"
+            ],
+            "category": "power",
+            "conds": [
+                "a < 0",
+                "isInt(y)",
+                "isInt(x)"
+            ],
+            "expr": "a ^ x ^ y = a ^ (x * y)",
+            "type": "axiom"
+        },
+        {
+            "attributes": [
+                "bidirectional",
+                "simplify"
+            ],
+            "category": "power",
+            "conds": [
+                "a = 0",
                 "x * y > 0"
             ],
             "expr": "a ^ x ^ y = a ^ (x * y)",
@@ -1273,6 +1300,32 @@
             "expr": "SUM(n, 0, oo, f(n)) = SUM(n, 0, oo, f(2*n+1)) + SUM(n, 0, oo, f(2*n))",
             "type": "axiom"
         },
+        {
+            "level": 1,
+            "name": "product split",
+            "type": "header"
+        },
+        {
+            "category": "summation-split",
+            "split-cond": "n = a",
+            "conds": [
+                "a = u",
+                "a > l"
+            ],
+            "expr": "MUL(n, l, u, f(n)) = MUL(n, l, u-1, f(n)) * f(u)",
+            "type": "axiom"
+        },
+        {
+            "category": "summation-split",
+            "split-cond": "n = a",
+            "conds": [
+                "a = l",
+                "a < u"
+            ],
+            "expr": "MUL(n, l, u, f(n)) = f(l) * MUL(n, l+1, u, f(n))",
+            "type": "axiom"
+        },
+
         {
             "level": 1,
             "name": "Ramanujan series",

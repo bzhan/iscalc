@@ -543,7 +543,7 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
 
     elif expr.is_fun(e):
         args_norm = [normalize(arg, ctx) for arg in e.args]
-        return singleton(expr.Fun((e.func_name, e.type), *args_norm))
+        return singleton(expr.Fun((e.func_name, e.func_type), *args_norm))
 
     elif expr.is_evalat(e):
         if e.upper == expr.POS_INF:
@@ -601,6 +601,12 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
         ctx2 = context.body_conds(e, ctx)
         return singleton(expr.Summation(e.index_var, normalize(e.lower, ctx),
                                         normalize(e.upper, ctx), normalize(e.body, ctx2)))
+    elif expr.is_product(e):
+        l, u = normalize(e.lower, ctx), normalize(e.upper, ctx)
+        if l == u:
+            return to_poly(e.body.subst(e.index_var, l), ctx)
+        ctx2 = context.body_conds(e, ctx)
+        return singleton(expr.Product(e.index_var, l, u, normalize(e.body, ctx2)))
     elif expr.is_matrix(e):
         res_data = [[normalize(item, ctx) for item in rv] for rv in e.data]
         return singleton(expr.Matrix(res_data, e.type))
@@ -1052,6 +1058,25 @@ def simplify_inf(e: expr.Expr, ctx: Context) -> expr.Expr:
             if expr.eval_expr(e) != 0:
                 return e.args[0]
     return e
+def normal_const(e:expr.Expr, ctx:Context):
+    if e.is_constant():
+        return normalize(e, ctx)
+    elif expr.is_var(e) or expr.is_inf(e) or expr.is_skolem_func(e):
+        return e
+    elif expr.is_op(e):
+        return expr.Op(e.op, *[normal_const(arg, ctx) for arg in e.args])
+    elif expr.is_fun(e):
+        return expr.Fun((e.func_name, e.func_type), *[normal_const(arg, ctx) for arg in e.args])
+    elif expr.is_summation(e):
+        return expr.Summation(e.index_var, normal_const(e.lower,ctx), \
+                              normal_const(e.upper,ctx), normal_const(e.body,ctx))
+    elif expr.is_limit(e):
+        return expr.Limit(e.var, normal_const(e.lim, ctx), normal_const(e.body, ctx), var_type=e.var_type)
+    elif expr.is_integral(e):
+        e:expr.Integral
+        return expr.Integral(e.var, normal_const(e.lower,ctx), normal_const(e.upper,ctx),\
+                             normal_const(e.body,ctx))
+    raise NotImplementedError(str(e))
 
 def normalize(e: expr.Expr, ctx: Context) -> expr.Expr:
     if e.is_equals():

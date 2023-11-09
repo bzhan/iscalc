@@ -201,10 +201,28 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
                 return "\\operatorname{%s}(%s,%s)" % (e.func_name, sx, sy)
             elif e.func_name == 'zero_matrix':
                 return "\\mathbf{0}_{%s \\times %s}"%(sx, sy)
+            elif e.func_name == 'nthc':
+                return "%s_{:, %s}" % (sx, sy)
+            elif e.func_name == 'nthr':
+                return "%s_{%s, :}" % (sx, sy)
             else:
                 return "%s(%s,%s)" % (e.func_name, sx, sy)
-        elif len(e.args) == 3 and e.func_name == 'nth':
-            return "%s_{%s%s}" % (e.args[0], e.args[1], e.args[2])
+        elif len(e.args) == 3:
+            x, y, z = e.args
+            sx, sy, sz = convert_expr(x, mode), convert_expr(y, mode), convert_expr(z, mode)
+            if e.func_name == 'nth':
+                return "%s_{%s,%s}" % (sx, sy, sz)
+            elif e.func_name == 'hmf':
+                twist = "hat(\\begin{bmatrix}"
+                twist += "%s\\\\%s"%(sy, sz)
+                twist += "\\end{bmatrix})"
+                return "e^{%s%s}" % (sx, twist)
+            elif e.func_name == 'choose_col':
+                return "%s[:,%s:%s]" % (sx, sy, sz)
+            elif e.func_name == 'choose_row':
+                return "%s[%s:%s,:]" % (sx, sy, sz)
+            else:
+                return "%s(%s,%s,%s)" % (e.func_name, sx, sy, sz)
         elif len(e.args) > 2:
             s = "%s{(" % (e.func_name)
             for x in e.args:
@@ -248,6 +266,11 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
         upper = convert_expr(e.upper, mode)
         body = convert_expr(e.body, mode)
         return "\\sum_{%s=%s}^{%s}{%s}" % (e.index_var, lower, upper, body)
+    elif expr.is_product(e):
+        lower = convert_expr(e.lower, mode)
+        upper = convert_expr(e.upper, mode)
+        body = convert_expr(e.body, mode)
+        return "\\prod_{%s=%s}^{%s}{%s}" % (e.index_var, lower, upper, body)
     elif expr.is_matrix(e):
         res = "\\begin{bmatrix}"
         res += "\\\\".join(["&".join([convert_expr(item) for item in rv]) for rv in e.data])

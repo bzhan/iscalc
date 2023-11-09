@@ -25,6 +25,10 @@ class Type:
         return "Type(%s, %s)" % (self.name, ", ".join(str(arg) for arg in self.args))
 
     def __str__(self):
+        if len(self.args) == 0:
+            return "$%s" % self.name
+        else:
+            return "$%s(%s)" % (self.name, ", ".join(str(arg) for arg in self.args))
         if self.name == "fun":
             assert len(self.args) >= 2
             if len(self.args) == 2:
@@ -90,7 +94,7 @@ def num_col(type: Type) -> "Expr":
     return type.args[2]
 
 VAR, CONST, OP, FUN, DERIV, INTEGRAL, EVAL_AT, SYMBOL, LIMIT, INF, INDEFINITEINTEGRAL, \
-SKOLEMFUNC, SUMMATION, LAZYSERIES, VECTOR, MATRIX = range(16)
+SKOLEMFUNC, SUMMATION, LAZYSERIES, VECTOR, MATRIX, PRODUCT = range(17)
 
 op_priority = {
     "+": 65, "-": 65, "*": 70, "/": 70, "%": 70, "^": 75, "=": 50, "<": 50, ">": 50, "<=": 50, ">=": 50, "!=": 50
@@ -234,6 +238,8 @@ class Expr:
         elif is_skolem_func(self):
             return 1 + len(self.dependent_vars)
         elif is_summation(self):
+            return 1 + self.lower.size() + self.upper.size() + self.body.size()
+        elif is_product(self):
             return 1 + self.lower.size() + self.upper.size() + self.body.size()
         elif is_matrix(self):
             return 1 + sum([sum([item.size() for item in row]) for row in self.data])
@@ -385,7 +391,7 @@ class Expr:
                 return op_priority[self.op]
             else:
                 raise NotImplementedError
-        elif self.ty in (FUN, SUMMATION):
+        elif self.ty in (FUN, SUMMATION, PRODUCT):
             return 95
         elif self.ty in (DERIV, INTEGRAL, EVAL_AT, INDEFINITEINTEGRAL):
             return 10
@@ -576,7 +582,7 @@ class Expr:
         elif is_op(self):
             return Op(self.op, *[arg.subst(var, e) for arg in self.args])
         elif is_fun(self):
-            return Fun((self.func_name,self.type), *[arg.subst(var, e) for arg in self.args])
+            return Fun((self.func_name,self.func_type), *[arg.subst(var, e) for arg in self.args])
         elif is_deriv(self):
             return Deriv(self.var, self.body.subst(var, e))
         elif is_limit(self):
@@ -591,6 +597,9 @@ class Expr:
             return EvalAt(self.var, self.lower.subst(var, e), self.upper.subst(var, e), self.body.subst(var, e))
         elif is_summation(self):
             return Summation(self.index_var, self.lower.subst(var, e), self.upper.subst(var, e),
+                             self.body.subst(var, e))
+        elif is_product(self):
+            return Product(self.index_var, self.lower.subst(var, e), self.upper.subst(var, e),
                              self.body.subst(var, e))
         elif is_matrix(self):
             return Matrix([[item.subst(var,e) for item in rv] for rv in self.data])
@@ -618,6 +627,59 @@ class Expr:
 
     def is_evaluable(self):
         return self.is_constant() or is_inf(self)
+    def get_bounded_vars(self) -> dict[str, Type]:
+        """Obtain the set of variables in self."""
+        def rec(t, bd_vars):
+            if is_var(t):
+                return
+            elif t.ty in (CONST, INF, SYMBOL):
+                return
+            elif is_op(t) or is_fun(t):
+                for arg in t.args:
+                    rec(arg, bd_vars)
+            elif is_deriv(t):
+                bd_vars[t.var] = t.var_type
+                rec(t.body, bd_vars)
+            elif is_limit(t):
+                bd_vars[t.var] = t.var_type
+                rec(t.lim, bd_vars)
+                rec(t.body, bd_vars)
+            elif is_integral(t) or is_evalat(t):
+                bd_vars[t.var] = t.var_type
+                rec(t.lower, bd_vars)
+                rec(t.upper, bd_vars)
+                rec(t.body, bd_vars)
+            elif is_indefinite_integral(t):
+                bd_vars[t.var] = t.var_type
+                rec(t.body, bd_vars)
+            elif is_summation(t):
+                bd_vars[t.index_var] = t.index_var_type
+                rec(t.lower, bd_vars)
+                rec(t.upper, bd_vars)
+                rec(t.body, bd_vars)
+            elif is_product(t):
+                bd_vars[t.index_var] = t.index_var_type
+                rec(t.lower, bd_vars)
+                rec(t.upper, bd_vars)
+                rec(t.body, bd_vars)
+            elif t.is_equals():
+                rec(t.lhs, bd_vars)
+                rec(t.rhs, bd_vars)
+            elif is_matrix(t):
+                for rv in t.data:
+                    for d in rv:
+                        rec(d, bd_vars)
+            elif is_skolem_func(t):
+                t: SkolemFunc
+                for var in t.dependent_vars:
+                    rec(var, bd_vars)
+            else:
+                print(t, type(t))
+                raise NotImplementedError
+
+        bd = dict()
+        rec(self, bd)
+        return bd
 
     def get_vars(self, with_bd = False, with_type = False) -> Set[str]:
         """Obtain the set of variables in self."""
@@ -660,6 +722,11 @@ class Expr:
                 add(res, with_bd, with_type, t.var, RealType)
                 rec(t.body, bd_vars + [t.var])
             elif is_summation(t):
+                add(res, with_bd, with_type, t.index_var, IntType)
+                rec(t.lower, bd_vars + [t.index_var])
+                rec(t.upper, bd_vars + [t.index_var])
+                rec(t.body, bd_vars + [t.index_var])
+            elif is_product(t):
                 add(res, with_bd, with_type, t.index_var, IntType)
                 rec(t.lower, bd_vars + [t.index_var])
                 rec(t.upper, bd_vars + [t.index_var])
@@ -825,6 +892,9 @@ class Expr:
         elif is_summation(self):
             return Summation(self.index_var, self.lower.inst_pat(mapping, func_type), self.upper.inst_pat(mapping, func_type), \
                              self.body.inst_pat(mapping, func_type))
+        elif is_product(self):
+            return Product(self.index_var, self.lower.inst_pat(mapping, func_type), self.upper.inst_pat(mapping, func_type), \
+                             self.body.inst_pat(mapping, func_type))
         elif is_limit(self):
             return Limit(self.var, self.lim.inst_pat(mapping, func_type), self.body.inst_pat(mapping, func_type), self.drt)
         elif is_matrix(self):
@@ -890,6 +960,9 @@ def is_limit(e: Expr) -> TypeGuard["Limit"]:
 
 def is_summation(e: Expr) -> TypeGuard["Summation"]:
     return e.ty == SUMMATION
+
+def is_product(e: Expr) -> TypeGuard["Product"]:
+    return e.ty == PRODUCT
 
 def is_inf(e: Expr) -> TypeGuard["Inf"]:
     return e.ty == INF and (e.t == Decimal("inf") or e.t == Decimal("-inf"))
@@ -970,6 +1043,13 @@ def match(exp: Expr, pattern: Expr) -> Optional[Dict]:
             del bd_vars[pattern.var]
             return res1 and res2 and res3
         elif is_summation(exp):
+            bd_vars[pattern.index_var] = exp.index_var
+            res1 = rec(exp.upper, pattern.upper, bd_vars)
+            res2 = rec(exp.lower, pattern.lower, bd_vars)
+            res3 = rec(exp.body, pattern.body, bd_vars)
+            del bd_vars[pattern.index_var]
+            return res1 and res2 and res3
+        elif is_product(exp):
             bd_vars[pattern.index_var] = exp.index_var
             res1 = rec(exp.upper, pattern.upper, bd_vars)
             res2 = rec(exp.lower, pattern.lower, bd_vars)
@@ -1238,6 +1318,8 @@ class Fun(Expr):
 
         self.ty = FUN
         self.args: Tuple[Expr] = tuple(args)
+        self.func_type = FunType(*[RealType for i in range(len(args)+1)])
+        self.type = RealType
         if isinstance(func_name, str):
             self.func_name = func_name
 
@@ -1245,24 +1327,32 @@ class Fun(Expr):
             # TODO: add more type inference
             if self.func_name == 'unit_matrix':
                 self.type = MatrixType(RealType, self.args[0], self.args[0])
+                self.func_type = FunType(IntType, self.type)
             elif self.func_name == 'zero_matrix':
                 self.type = MatrixType(RealType, self.args[0], self.args[1])
+                self.func_type = FunType(IntType, IntType, self.type)
             elif self.func_name == 'inv':
                 self.type = self.args[0].type
+                self.func_type = FunType(self.type, self.type)
             elif self.func_name == 'T':
                 if self.args[0].type == Type('unknown'):
                     self.type = self.args[0].type
                 elif is_matrix_type(self.args[0].type):
-                    self.type = MatrixType(self.args[0].type.args[0], num_col(self.args[0].type), num_row(self.args[0].type))
+                    c, r = num_col(self.args[0].type), num_row(self.args[0].type)
+                    self.type = MatrixType(self.args[0].type.args[0], c, r)
+                    self.func_type = FunType(MatrixType(self.args[0].type.args[0], r, c), self.type)
                 else:
                     self.type = Type('unknown')
             elif self.func_name == 'hat':
                 if is_matrix_type(self.args[0].type):
                     t = self.args[0].type
+                    elem_ty = t.args[0]
                     if eval_expr(num_col(t)) == 1 and eval_expr(num_row(t)) == 3:
                         self.type = MatrixType(t.args[0],  Const(3), Const(3))
+                        self.func_type = FunType(TensorType(elem_ty, Const(3), Const(1)), self.type)
                     elif eval_expr(num_col(t)) == 1 and eval_expr(num_row(t)) == 6:
                         self.type = MatrixType(t.args[0], Const(4), Const(4))
+                        self.func_type = FunType(TensorType(elem_ty, Const(6), Const(1)), self.type)
                     else:
                         raise NotImplementedError(str(self.args[0])+": "+str(num_row(t))+","+str(num_col(t)))
                 elif self.args[0].type == Type('unknown'):
@@ -1297,20 +1387,31 @@ class Fun(Expr):
                 if is_matrix_type(t):
                     if eval_expr(num_row(t)) == 3 and eval_expr(num_col(t)) == 3:
                         self.type = MatrixType(t.args[0], Const(3), Const(3))
+                        self.func_type = FunType(self.type, self.type)
                     else:
                         raise NotImplementedError(str(self)+"-"+str(t))
             elif self.func_name == 'inv':
                 t = self.args[0].type
                 if is_matrix_type(t):
+                    self.func_type = FunType(t, t)
                     self.type = t
                 else:
                     raise NotImplementedError(str(self) + "-" + str(t))
-            elif self.func_name == 'MUL':
-                t = args[3].type
-                if is_matrix_type(t) and num_row(t) == num_col(t):
-                    self.type = t
+            elif self.func_name == 'nth':
+                a, b, c = self.args
+                self.func_type = FunType(a.type, IntType, IntType, RealType)
+            elif self.func_name == 'nthc':
+                try:
+                    m, mt = self.args[0], self.args[0].type
+                    cth = self.args[1]
+                    self.type = TensorType(mt.args[0], num_row(mt), Const(1))
+                    self.func_type = FunType(mt, cth.type, self.type)
+                except:
+                    pass
+
         else:
-            self.func_name, self.type = func_name
+            self.func_name, self.func_type = func_name
+            self.type = self.func_type.args[-1]
 
     def __hash__(self):
         return hash((FUN, self.func_name, self.args))
@@ -1341,15 +1442,18 @@ class Limit(Expr):
 
     """
 
-    def __init__(self, var: str, lim: Expr, body: Expr, drt=None):
+    def __init__(self, var: str, lim: Expr, body: Expr, drt=None, var_type=None):
         assert isinstance(var, str) and isinstance(lim, Expr) and isinstance(body, Expr), \
             "Illegal expression: %s %s %s" % (type(var), type(lim), type(body))
+        if var_type == None:
+            var_type = RealType
         self.ty = LIMIT
         self.var = var
         self.lim = lim
-        self.body = body
+        self.body = body.subst(var, Var(var, type=var_type))
         self.drt = drt
         self.type = RealType
+        self.var_type = var_type
 
     def alpha_convert(self, new_name: str):
         """Change the variable of limit expression to new_name."""
@@ -1388,11 +1492,11 @@ class Limit(Expr):
 class Inf(Expr):
     """The infinity."""
 
-    def __init__(self, t):
+    def __init__(self, t, type=RealType):
         assert t in (Decimal("inf"), Decimal("-inf"))
         self.ty = INF
         self.t = t
-        self.type = RealType
+        self.type = type
 
     def __str__(self):
         if self.t == Decimal("inf"):
@@ -1575,8 +1679,9 @@ class Deriv(Expr):
         assert isinstance(var, str) and isinstance(body, Expr)
         self.ty = DERIV
         self.var: str = var
-        self.body: Expr = body
+        self.body: Expr = body.subst(var, Var(var, type=RealType))
         self.type = RealType
+        self.var_type = RealType
         if is_matrix_type(body.type):
             self.type = body.type
 
@@ -1600,9 +1705,10 @@ class IndefiniteIntegral(Expr):
         assert isinstance(var, str) and isinstance(body, Expr)
         self.ty = INDEFINITEINTEGRAL
         self.var = var
-        self.body = body
+        self.body = body.subst(var, Var(var, type=RealType))
         self.skolem_args = tuple(skolem_args)
         self.type = RealType
+        self.var_type = RealType
 
     def __hash__(self):
         return hash((INDEFINITEINTEGRAL, self.var, self.body, self.skolem_args))
@@ -1636,8 +1742,9 @@ class Integral(Expr):
         self.var = var
         self.lower = lower
         self.upper = upper
-        self.body = body
+        self.body = body.subst(var, Var(var, type=RealType))
         self.type = RealType
+        self.var_type = RealType
 
     def __hash__(self):
         return hash((INTEGRAL, self.var, self.lower, self.upper, self.body))
@@ -1668,8 +1775,9 @@ class EvalAt(Expr):
         self.var = var
         self.lower = lower
         self.upper = upper
-        self.body = body
+        self.body = body.subst(var, Var(var, type=RealType))
         self.type = RealType
+        self.var_type = RealType
 
     def __hash__(self):
         return hash((EVAL_AT, self.var, self.lower, self.upper, self.body))
@@ -1717,8 +1825,9 @@ class Summation(Expr):
         self.index_var: str = index_var
         self.lower: Expr = lower
         self.upper: Expr = upper
-        self.body: Expr = body
+        self.body: Expr = body.subst(index_var, Var(index_var, type=IntType))
         self.type = RealType
+        self.index_var_type = IntType
 
     def __str__(self):
         return "SUM(" + self.index_var + ", " + str(self.lower) + ", " + str(self.upper) + ", " + str(self.body) + ")"
@@ -1740,7 +1849,48 @@ class Summation(Expr):
     def alpha_convert(self, new_var: str):
         """Rename the bound variable of a summation."""
         assert isinstance(new_var, str), "alpha_convert"
-        return Summation(new_var, self.lower, self.upper, self.body.subst(self.index_var, Var(new_var, type=IntType)))
+        return Summation(new_var, self.lower, self.upper, self.body.subst(self.index_var, Var(new_var)))
+
+
+class Product(Expr):
+    """Summation of integers over some range."""
+    def __init__(self, index_var: str, lower: Expr, upper: Expr, body: Expr):
+        self.ty = PRODUCT
+        self.index_var: str = index_var
+        self.lower: Expr = lower
+        self.upper: Expr = upper
+        self.body: Expr = body.subst(index_var, Var(index_var, type=IntType))
+        self.type = RealType
+        self.index_var_type = IntType
+        b = self.body
+        if is_matrix_type(b.type):
+            r, c = num_row(b.type), num_col(b.type)
+            from integral import poly
+            from integral import context
+            ctx = context.Context
+            r, c = poly.normalize(r, ctx), poly.normalize(c, ctx)
+            if r == c:
+                self.type = TensorType(b.type.args[0], r, c)
+    def __str__(self):
+        return "MUL(" + self.index_var + ", " + str(self.lower) + ", " + str(self.upper) + ", " + str(self.body) + ")"
+
+    def __eq__(self, other):
+        if isinstance(other, Product):
+            if self.index_var == other.index_var:
+                return self.lower == other.lower and \
+                self.upper == other.upper and \
+                self.body == other.body
+            else:
+                return other.alpha_convert(self.index_var) == self
+        return False
+
+    def __hash__(self):
+        return hash((PRODUCT, self.index_var, self.ty, self.lower, self.upper, self.body))
+
+    def alpha_convert(self, new_var: str):
+        """Rename the bound variable of a product."""
+        assert isinstance(new_var, str), "alpha_convert"
+        return Product(new_var, self.lower, self.upper, self.body.subst(self.index_var, Var(new_var)))
 
 
 def eval_expr(e: Expr):

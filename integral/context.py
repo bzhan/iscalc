@@ -68,8 +68,7 @@ class Context:
     - List of variable substitutions.
 
     """
-    def __init__(self, parent: Optional["Context"] = None, d:int = 0):
-        self.d = d
+    def __init__(self, parent: Optional["Context"] = None):
 
         # Parent context
         self.parent = parent
@@ -115,7 +114,6 @@ class Context:
 
         # List of fixes
         self.fixes: Dict[str, expr.Type] = dict()
-        self.dead_vars: Dict[str, None] = dict()
 
         # List of identities of summation split
         self.summation_split_identities: List[Identity] = list()
@@ -229,10 +227,14 @@ class Context:
         return res
 
     def get_fixes(self) -> Dict[str, expr.Type]:
-        res = self.parent.get_fixes() if self.parent is not None else dict()
-        res.update(self.fixes)
-        for k in self.dead_vars:
-            del res[k]
+        res = dict()
+        p = self
+        while p != None:
+            d = p.fixes
+            for k,v in d.items():
+                if k not in res:
+                    res[k] = v
+            p = p.parent
         return res
 
     def get_eq_conds(self) -> Conditions:
@@ -355,23 +357,7 @@ class Context:
             self.add_condition(cond)
 
     def add_fix(self, k: str, v: expr.Type):
-        parent_fixes = self.parent.get_fixes()
-        if k in self.dead_vars:
-            del self.dead_vars[k]
-        if k in parent_fixes:
-            if k in self.dead_vars:
-                del self.dead_vars[k]
-                if parent_fixes[k] != v:
-                    self.fixes[k] = v
-            else:
-                if parent_fixes[k] != v:
-                    self.fixes[k] = v
-        else:
-            if k in self.dead_vars:
-                del self.dead_vars[k]
-                self.fixes[k] = v
-            else:
-                self.fixes[k] = v
+        self.fixes[k] = v
 
     def extend_fixes(self, fixes: Dict[str, expr.Type]):
         for k, v in fixes.items():
@@ -452,8 +438,8 @@ class Context:
                 for cond in item['conds']:
                     conds.add_condition(parser.parse_expr(cond))
             self.add_definition(e, conds)
-            if 'range' in item and expr.is_fun(e.lhs):
-                self.fixes[e.lhs.func_name] = parser.parse_expr(item['range'])
+            if 'func_type' in item and expr.is_fun(e.lhs):
+                self.fixes[e.lhs.func_name] = parser.parse_expr(item['func_type'])
         if item['type'] == 'table':
             self.add_function_table(item['name'], item['table'])
 
@@ -504,7 +490,7 @@ class Context:
                 b = e.body
                 # LIM {n->oo}. SUM(i, 0, n, body)
                 if expr.is_summation(b) and expr.is_var(b.upper) and b.upper.name == e.var:
-                    cond = Op('>', b.upper, b.lower)
+                    cond = Op('>=', b.upper, b.lower)
                     ctx.add_condition(cond)
             elif expr.is_op(e):
                 for arg in e.args:
@@ -551,23 +537,23 @@ class Context:
 
 def body_conds(e: Expr, ctx: Context) -> Context:
     """Return the conditions in the body."""
-    ctx2 = Context(ctx,ctx.d+1)
+    ctx2 = Context(ctx)
     if expr.is_integral(e):
         if e.lower != expr.NEG_INF:
-            ctx2.add_condition(Op(">", expr.Var(e.var), e.lower))
+            ctx2.add_condition(Op(">", expr.Var(e.var, type=e.var_type), e.lower))
         if e.upper != expr.POS_INF:
-            ctx2.add_condition(Op("<", expr.Var(e.var), e.upper))
+            ctx2.add_condition(Op("<", expr.Var(e.var, type=e.var_type), e.upper))
     elif expr.is_indefinite_integral(e):
         pass
     elif expr.is_limit(e):
         if e.lim == expr.POS_INF:
-            ctx2.add_condition(expr.Op(">", expr.Var(e.var), Const(0)))
-    elif expr.is_summation(e):
-        ctx2.add_condition(expr.Op(">=", expr.Var(e.index_var, type=expr.IntType), e.lower))
+            ctx2.add_condition(expr.Op(">", expr.Var(e.var, type=e.var_type), Const(0)))
+    elif expr.is_summation(e) or expr.is_product(e):
+        ctx2.add_condition(expr.Op(">=", expr.Var(e.index_var, type=e.index_var_type), e.lower))
         if e.upper != expr.POS_INF:
-            ctx2.add_condition(expr.Op("<=", expr.Var(e.index_var, type=expr.IntType), e.upper))
-            ctx2.add_condition(expr.Op(">=", e.upper - expr.Var(e.index_var, type=expr.IntType), Const(0)))
-        ctx2.add_condition(expr.Fun("isInt", expr.Var(e.index_var, type=expr.IntType)))
+            ctx2.add_condition(expr.Op("<=", expr.Var(e.index_var, type=e.index_var_type), e.upper))
+            ctx2.add_condition(expr.Op(">=", e.upper - expr.Var(e.index_var, type=e.index_var_type), Const(0)))
+        ctx2.add_condition(expr.Fun("isInt", expr.Var(e.index_var, type=e.index_var_type)))
     else:
         raise TypeError
     return ctx2
@@ -581,7 +567,7 @@ def apply_subterm(e: Expr, f: Callable[[Expr, Context], Expr], ctx: Context) -> 
             return f(expr.Op(e.op, *args), ctx)
         elif expr.is_fun(e):
             args = [rec(arg, ctx) for arg in e.args]
-            return f(expr.Fun((e.func_name, e.type), *args), ctx)
+            return f(expr.Fun((e.func_name, e.func_type), *args), ctx)
         elif expr.is_deriv(e):
             return f(expr.Deriv(e.var, rec(e.body, ctx)), ctx)
         elif expr.is_integral(e):
@@ -603,6 +589,11 @@ def apply_subterm(e: Expr, f: Callable[[Expr, Context], Expr], ctx: Context) -> 
             upper = rec(e.upper, ctx)
             body = rec(e.body, body_conds(e, ctx))
             return f(expr.Summation(e.index_var, lower, upper, body), ctx)
+        elif expr.is_product(e):
+            lower = rec(e.lower, ctx)
+            upper = rec(e.upper, ctx)
+            body = rec(e.body, body_conds(e, ctx))
+            return f(expr.Product(e.index_var, lower, upper, body), ctx)
         elif expr.is_matrix(e):
             return f(Matrix([[rec(item, ctx) for item in row] for row in e.data], e.type), ctx)
         elif expr.is_symbol(e):

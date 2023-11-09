@@ -162,7 +162,10 @@ class ExprTransformer(Transformer):
             return expr.SkolemFunc(str(args[0].func_name), tuple(arg for arg in args[0].args))
         elif func_name == 'SUM':
             e = expr.Summation(str(args[0]), *args[1:])
-            return e.replace(expr.Var(e.index_var), expr.Var(e.index_var, type=expr.IntType))
+            return e
+        elif func_name == 'MUL':
+            e = expr.Product(str(args[0]), *args[1:])
+            return e
         s = str(func_name)
         if self.fixes is not None and s in self.fixes:
             return expr.Fun((s, self.fixes[s]), *args)
@@ -191,7 +194,10 @@ class ExprTransformer(Transformer):
         return expr.EvalAt(var, lower, upper, body)
 
     def limit_inf_expr(self, var, lim, body):
-        return expr.Limit(str(var), lim, body)
+        var_type = expr.RealType
+        if self.fixes != None and str(var) in self.fixes:
+            var_type = self.fixes[str(var)]
+        return expr.Limit(str(var), lim, body, var_type=var_type)
 
     def limit_l_expr(self, var, lim, body):
         return expr.Limit(str(var), lim, body, "-")

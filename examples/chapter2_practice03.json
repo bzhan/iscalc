@@ -17,13 +17,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} (x ^ {4} + 1) ^ {-m} \\,dx",
                         "start": "INT x:[0,oo]. (x ^ 4 + 1) ^ -m",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "(\\left. x (x ^ {4} + 1) ^ {-m} \\right\\vert_{x=0}^{\\infty}) - (\\int_{0}^{\\infty} -4 m x ^ {4} (x ^ {4} + 1) ^ {-m - 1} \\,dx)",
                                 "res": "([x * (x ^ 4 + 1) ^ -m]_x=0,oo) - (INT x:[0,oo]. -(4 * m * x ^ 4 * (x ^ 4 + 1) ^ (-m - 1)))",
@@ -37,7 +35,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "4 m (\\int_{0}^{\\infty} x ^ {4} (x ^ {4} + 1) ^ {-m - 1} \\,dx)",
                                 "res": "4 * m * (INT x:[0,oo]. x ^ 4 * (x ^ 4 + 1) ^ (-m - 1))",
@@ -48,7 +45,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "4 m (\\int_{0}^{\\infty} \\frac{x ^ {4} + 1}{(x ^ {4} + 1) ^ {m + 1}} - \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx)",
                                 "res": "4 * m * (INT x:[0,oo]. (x ^ 4 + 1) / (x ^ 4 + 1) ^ (m + 1) - 1 / (x ^ 4 + 1) ^ (m + 1))",
@@ -62,7 +58,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "4 m ((\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx))",
                                 "res": "4 * m * ((INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m) - (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1)))",
@@ -79,7 +74,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "4 m ((\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx))",
                         "start": "4 * m * ((INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m) - (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1)))",
@@ -114,13 +108,11 @@
                 "goal": "(INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1)) = (4 * m - 1) / (4 * m) * (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m)",
                 "latex_goal": "\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx = \\frac{4 m - 1}{4 m} (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx)",
                 "start": {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_start": "\\int_{0}^{\\infty} (x ^ {4} + 1) ^ {-m} \\,dx = 4 m ((\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx))",
                     "start": "(INT x:[0,oo]. (x ^ 4 + 1) ^ -m) = 4 * m * ((INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m) - (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1)))",
                     "steps": [
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx = -\\frac{1}{4 m} (\\int_{0}^{\\infty} (x ^ {4} + 1) ^ {-m} \\,dx) + (\\int_{0}^{\\infty} (x ^ {4} + 1) ^ {-m} \\,dx)",
                             "res": "(INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1)) = -(1 / (4 * m) * (INT x:[0,oo]. (x ^ 4 + 1) ^ -m)) + (INT x:[0,oo]. (x ^ 4 + 1) ^ -m)",
@@ -133,7 +125,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx = \\frac{4 m - 1}{4 m} (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx)",
                             "res": "(INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1)) = (4 * m - 1) / (4 * m) * (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m)",

@@ -7,13 +7,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\int_{-\\infty}^{\\infty} \\frac{1}{\\cosh{x}} \\,dx",
                         "start": "INT x:[-oo,oo]. 1 / cosh(x)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{-\\infty}^{\\infty} \\frac{1}{\\frac{e^{-x} + e^{x}}{2}} \\,dx",
                                 "res": "INT x:[-oo,oo]. 1 / ((exp(-x) + exp(x)) / 2)",
@@ -26,7 +24,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{2}{t (e^{-\\log{t}} + t)} \\,dt",
                                 "res": "INT t:[0,oo]. 2 / (t * (exp(-log(t)) + t))",
@@ -40,7 +37,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{2}{t (e^{\\log{(1/t)}} + t)} \\,dt",
                                 "res": "INT t:[0,oo]. 2 / (t * (exp(log(1 / t)) + t))",
@@ -54,7 +50,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{\\infty} \\frac{1}{t (\\frac{1}{t} + t)} \\,dt)",
                                 "res": "2 * (INT t:[0,oo]. 1 / (t * (1 / t + t)))",
@@ -65,7 +60,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{\\infty} \\frac{1}{1 + t ^ {2}} \\,dt)",
                                 "res": "2 * (INT t:[0,oo]. 1 / (1 + t ^ 2))",
@@ -79,7 +73,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{\\infty} \\frac{1}{t ^ {2} + 1} \\,dt)",
                                 "res": "2 * (INT t:[0,oo]. 1 / (t ^ 2 + 1))",
@@ -90,7 +83,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "2 (\\left. \\tan^{-1}{t} \\right\\vert_{t=0}^{\\infty})",
                                 "res": "2 * ([atan(t)]_t=0,oo)",
@@ -101,7 +93,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\pi",
                                 "res": "pi",
@@ -115,7 +106,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\pi",
                         "start": "pi",

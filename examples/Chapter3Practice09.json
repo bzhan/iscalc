@@ -21,13 +21,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\int_{0}^{1} \\frac{1}{(a x + b (1 - x)) ^ {2}} \\,dx",
                         "start": "INT x:[0,1]. 1 / (a * x + b * (1 - x)) ^ 2",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{b}^{a} \\frac{1}{(a - b) (b (-\\frac{-b + u}{a - b} + 1) + \\frac{a (-b + u)}{a - b}) ^ {2}} \\,du",
                                 "res": "INT u:[b,a]. 1 / ((a - b) * (b * (-((-b + u) / (a - b)) + 1) + a * (-b + u) / (a - b)) ^ 2)",
@@ -41,7 +39,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{b}^{a} \\frac{1}{u ^ {2} (a - b)} \\,du",
                                 "res": "INT u:[b,a]. 1 / (u ^ 2 * (a - b))",
@@ -55,7 +52,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{a - b} (\\left. -\\frac{1}{u} \\right\\vert_{u=b}^{a})",
                                 "res": "1 / (a - b) * ([-(1 / u)]_u=b,a)",
@@ -66,7 +62,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{a - b} (-\\frac{1}{a} + \\frac{1}{b})",
                                 "res": "1 / (a - b) * (-(1 / a) + 1 / b)",
@@ -77,7 +72,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{a b}",
                                 "res": "1 / (a * b)",
@@ -94,7 +88,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\frac{1}{a b}",
                         "start": "1 / (a * b)",
@@ -133,13 +126,11 @@
                 "goal": "(INT x:[0,1]. x / (a * x + b * (1 - x)) ^ 3) = 1 / (2 * a ^ 2 * b)",
                 "latex_goal": "\\int_{0}^{1} \\frac{x}{(a x + b (1 - x)) ^ {3}} \\,dx = \\frac{1}{2 a ^ {2} b}",
                 "start": {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_start": "\\int_{0}^{1} \\frac{1}{(a x + b (1 - x)) ^ {2}} \\,dx = \\frac{1}{a b}",
                     "start": "(INT x:[0,1]. 1 / (a * x + b * (1 - x)) ^ 2) = 1 / (a * b)",
                     "steps": [
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\frac{d}{da} \\int_{0}^{1} \\frac{1}{(a x + b (1 - x)) ^ {2}} \\,dx = \\frac{d}{da} \\frac{1}{a b}",
                             "res": "(D a. INT x:[0,1]. 1 / (a * x + b * (1 - x)) ^ 2) = (D a. 1 / (a * b))",
@@ -151,7 +142,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{1} \\frac{d}{da} \\frac{1}{(a x + b (1 - x)) ^ {2}} \\,dx = \\frac{d}{da} \\frac{1}{a b}",
                             "res": "(INT x:[0,1]. D a. 1 / (a * x + b * (1 - x)) ^ 2) = (D a. 1 / (a * b))",
@@ -163,7 +153,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "-2 (\\int_{0}^{1} \\frac{x}{(b (-x + 1) + a x) ^ {3}} \\,dx) = -\\frac{1}{a ^ {2} b}",
                             "res": "-(2 * (INT x:[0,1]. x / (b * (-x + 1) + a * x) ^ 3)) = -(1 / (a ^ 2 * b))",
@@ -174,7 +163,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "-2 (\\int_{0}^{1} \\frac{x}{(a x + b (1 - x)) ^ {3}} \\,dx) = -\\frac{1}{a ^ {2} b}",
                             "res": "-(2 * (INT x:[0,1]. x / (a * x + b * (1 - x)) ^ 3)) = -(1 / (a ^ 2 * b))",
@@ -188,7 +176,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{1} \\frac{x}{(a x + b (1 - x)) ^ {3}} \\,dx = \\frac{1}{2 a ^ {2} b}",
                             "res": "(INT x:[0,1]. x / (a * x + b * (1 - x)) ^ 3) = 1 / (2 * a ^ 2 * b)",

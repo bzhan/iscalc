@@ -113,6 +113,7 @@
         <Goal v-bind:item="content[cur_id]" v-bind:label="''"
           @select="selectItem"
           @select_fact="selectFact"
+          :start_point="expr_query1"
           v-bind:selected_item="selected_item"
           v-bind:selected_facts="selected_facts"/>
       </div>
@@ -1120,7 +1121,7 @@ export default {
         expr: this.selected_expr
       }
       const response = await axios.post("http://127.0.0.1:5000/api/query-identities", JSON.stringify(data))
-      console.log(response.data)
+      //console.log(response.data)
       if (response.data.status === 'ok') {
         this.latex_selected_expr = response.data.latex_expr
         this.identity_rewrites = response.data.results

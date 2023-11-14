@@ -33,13 +33,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\frac{d}{da} I(a,b)",
                         "start": "D a. I(a,b)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{d}{da} \\int_{0}^{\\infty} \\frac{\\log{(a ^ {2} x ^ {2} + 1)}}{b ^ {2} + x ^ {2}} \\,dx",
                                 "res": "D a. INT x:[0,oo]. log(a ^ 2 * x ^ 2 + 1) / (b ^ 2 + x ^ 2)",
@@ -52,7 +50,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{d}{da} \\frac{\\log{(a ^ {2} x ^ {2} + 1)}}{b ^ {2} + x ^ {2}} \\,dx",
                                 "res": "INT x:[0,oo]. D a. log(a ^ 2 * x ^ 2 + 1) / (b ^ 2 + x ^ 2)",
@@ -63,7 +60,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "2 a (\\int_{0}^{\\infty} \\frac{x ^ {2}}{(b ^ {2} + x ^ {2}) (a ^ {2} x ^ {2} + 1)} \\,dx)",
                                 "res": "2 * a * (INT x:[0,oo]. x ^ 2 / ((b ^ 2 + x ^ 2) * (a ^ 2 * x ^ 2 + 1)))",
@@ -74,7 +70,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "2 a (\\int_{0}^{\\infty} \\frac{1}{1 - a ^ {2} b ^ {2}} (\\frac{1}{1 + a ^ {2} x ^ {2}} - \\frac{b ^ {2}}{b ^ {2} + x ^ {2}}) \\,dx)",
                                 "res": "2 * a * (INT x:[0,oo]. 1 / (1 - a ^ 2 * b ^ 2) * (1 / (1 + a ^ 2 * x ^ 2) - b ^ 2 / (b ^ 2 + x ^ 2)))",
@@ -88,7 +83,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{2 a}{-a ^ {2} b ^ {2} + 1} (-b ^ {2} (\\int_{0}^{\\infty} \\frac{1}{b ^ {2} + x ^ {2}} \\,dx) + (\\int_{0}^{\\infty} \\frac{1}{a ^ {2} x ^ {2} + 1} \\,dx))",
                                 "res": "2 * a / (-(a ^ 2 * b ^ 2) + 1) * (-(b ^ 2 * (INT x:[0,oo]. 1 / (b ^ 2 + x ^ 2))) + (INT x:[0,oo]. 1 / (a ^ 2 * x ^ 2 + 1)))",
@@ -99,7 +93,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{2 a}{-a ^ {2} b ^ {2} + 1} (-b ^ {2} (\\left. \\frac{1}{b} \\tan^{-1}{(\\frac{x}{b})} \\right\\vert_{x=0}^{\\infty}) + (\\int_{0}^{\\infty} \\frac{1}{a ^ {2} x ^ {2} + 1} \\,dx))",
                                 "res": "2 * a / (-(a ^ 2 * b ^ 2) + 1) * (-(b ^ 2 * ([1 / b * atan(x / b)]_x=0,oo)) + (INT x:[0,oo]. 1 / (a ^ 2 * x ^ 2 + 1)))",
@@ -110,7 +103,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{2 a}{-a ^ {2} b ^ {2} + 1} (-b ^ {2} (\\left. \\frac{1}{b} \\tan^{-1}{(\\frac{x}{b})} \\right\\vert_{x=0}^{\\infty}) + (\\int_{0}^{\\infty} \\frac{1}{a (t ^ {2} + 1)} \\,dt))",
                                 "res": "2 * a / (-(a ^ 2 * b ^ 2) + 1) * (-(b ^ 2 * ([1 / b * atan(x / b)]_x=0,oo)) + (INT t:[0,oo]. 1 / (a * (t ^ 2 + 1))))",
@@ -124,7 +116,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{2 a}{-a ^ {2} b ^ {2} + 1} (-b ^ {2} (\\left. \\frac{1}{b} \\tan^{-1}{(\\frac{x}{b})} \\right\\vert_{x=0}^{\\infty}) + \\frac{1}{a} (\\left. \\tan^{-1}{t} \\right\\vert_{t=0}^{\\infty}))",
                                 "res": "2 * a / (-(a ^ 2 * b ^ 2) + 1) * (-(b ^ 2 * ([1 / b * atan(x / b)]_x=0,oo)) + 1 / a * ([atan(t)]_t=0,oo))",
@@ -135,7 +126,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{2 a}{-a ^ {2} b ^ {2} + 1} (\\frac{\\pi}{2 a} - \\frac{b\\cdot \\pi}{2})",
                                 "res": "2 * a / (-(a ^ 2 * b ^ 2) + 1) * (pi / (2 * a) - b * pi / 2)",
@@ -146,7 +136,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{\\pi}{1 + a b}",
                                 "res": "pi / (1 + a * b)",
@@ -162,7 +151,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\frac{\\pi}{1 + a b}",
                         "start": "pi / (1 + a * b)",
@@ -197,13 +185,11 @@
                 "goal": "I(a,b) = pi / b * log(1 + a * b) + SKOLEM_FUNC(C(b))",
                 "latex_goal": "I(a,b) = \\frac{\\pi}{b} \\log{(1 + a b)} + C(b)",
                 "start": {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_start": "\\frac{d}{da} I(a,b) = \\frac{\\pi}{1 + a b}",
                     "start": "(D a. I(a,b)) = pi / (1 + a * b)",
                     "steps": [
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "I(a,b) = \\int \\frac{\\pi}{1 + a b} \\,da",
                             "res": "I(a,b) = (INT a [b]. pi / (1 + a * b))",
@@ -214,7 +200,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "I(a,b) = \\int \\frac{\\pi}{b u} \\,du",
                             "res": "I(a,b) = (INT u [b]. pi / (b * u))",
@@ -228,7 +213,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "I(a,b) = \\frac{\\pi}{b} (\\int \\frac{1}{u} \\,du)",
                             "res": "I(a,b) = pi / b * (INT u [b]. 1 / u)",
@@ -239,7 +223,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "I(a,b) = \\frac{\\pi}{b} \\log{(\\left| u \\right|)} + C(b)",
                             "res": "I(a,b) = pi / b * log(abs(u)) + SKOLEM_FUNC(C(b))",
@@ -250,7 +233,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "I(a,b) = \\frac{\\pi}{b} \\log{(\\left| 1 + a b \\right|)} + C(b)",
                             "res": "I(a,b) = pi / b * log(abs(1 + a * b)) + SKOLEM_FUNC(C(b))",
@@ -261,7 +243,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "I(a,b) = \\frac{\\pi}{b} \\log{(1 + a b)} + C(b)",
                             "res": "I(a,b) = pi / b * log(1 + a * b) + SKOLEM_FUNC(C(b))",
@@ -294,13 +275,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "I(0,b)",
                         "start": "I(0,b)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} 0 \\,dx",
                                 "res": "INT x:[0,oo]. 0",
@@ -312,7 +291,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "0",
                                 "res": "0",
@@ -326,7 +304,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "0",
                         "start": "0",
@@ -357,13 +334,11 @@
                 "goal": "SKOLEM_FUNC(C(b)) = 0",
                 "latex_goal": "C(b) = 0",
                 "start": {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_start": "I(a,b) = \\frac{\\pi}{b} \\log{(1 + a b)} + C(b)",
                     "start": "I(a,b) = pi / b * log(1 + a * b) + SKOLEM_FUNC(C(b))",
                     "steps": [
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\lim\\limits_{a\\to 0} I(a,b) = \\lim\\limits_{a\\to 0} (\\,\\frac{\\pi}{b} \\log{(1 + a b)} + C(b)\\,)",
                             "res": "(LIM {a -> 0 }. I(a,b)) = (LIM {a -> 0 }. pi / b * log(1 + a * b) + SKOLEM_FUNC(C(b)))",
@@ -377,7 +352,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "I(0,b) = C(b)",
                             "res": "I(0,b) = SKOLEM_FUNC(C(b))",
@@ -388,7 +362,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "0 = C(b)",
                             "res": "0 = SKOLEM_FUNC(C(b))",
@@ -402,7 +375,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "C(b) = 0",
                             "res": "SKOLEM_FUNC(C(b)) = 0",
@@ -441,13 +413,11 @@
                 "goal": "I(a,b) = pi / b * log(1 + a * b)",
                 "latex_goal": "I(a,b) = \\frac{\\pi}{b} \\log{(1 + a b)}",
                 "start": {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_start": "I(a,b) = \\frac{\\pi}{b} \\log{(1 + a b)} + C(b)",
                     "start": "I(a,b) = pi / b * log(1 + a * b) + SKOLEM_FUNC(C(b))",
                     "steps": [
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "I(a,b) = \\frac{\\pi}{b} \\log{(1 + a b)} + 0",
                             "res": "I(a,b) = pi / b * log(1 + a * b) + 0",
@@ -461,7 +431,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "I(a,b) = \\frac{\\pi \\log{(a b + 1)}}{b}",
                             "res": "I(a,b) = pi * log(a * b + 1) / b",

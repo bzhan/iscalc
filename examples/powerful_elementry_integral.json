@@ -13,13 +13,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\int_{0}^{1} \\frac{1}{(1 + y x) \\sqrt{1 - x ^ {2}}} \\,dx",
                         "start": "INT x:[0,1]. 1 / ((1 + y * x) * sqrt(1 - x ^ 2))",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{(1 + y \\sin{t}) \\sqrt{1 - \\sin^{2}(t)}} \\cos{t} \\,dt",
                                 "res": "INT t:[0,pi / 2]. 1 / ((1 + y * sin(t)) * sqrt(1 - sin(t) ^ 2)) * cos(t)",
@@ -33,7 +31,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{(1 + y \\sin{t}) \\sqrt{\\sin^{2}(t) + \\cos^{2}(t) - \\sin^{2}(t)}} \\cos{t} \\,dt",
                                 "res": "INT t:[0,pi / 2]. 1 / ((1 + y * sin(t)) * sqrt(sin(t) ^ 2 + cos(t) ^ 2 - sin(t) ^ 2)) * cos(t)",
@@ -48,7 +45,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{y \\sin{t} + 1} \\,dt",
                                 "res": "INT t:[0,pi / 2]. 1 / (y * sin(t) + 1)",
@@ -59,7 +55,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{y \\sin{t} + (\\sin^{2}(\\frac{t}{2}) + \\cos^{2}(\\frac{t}{2}))} \\,dt",
                                 "res": "INT t:[0,pi / 2]. 1 / (y * sin(t) + (sin(t / 2) ^ 2 + cos(t / 2) ^ 2))",
@@ -74,7 +69,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{y \\sin{(2 (\\frac{t}{2}))} + (\\sin^{2}(\\frac{t}{2}) + \\cos^{2}(\\frac{t}{2}))} \\,dt",
                                 "res": "INT t:[0,pi / 2]. 1 / (y * sin(2 * (t / 2)) + (sin(t / 2) ^ 2 + cos(t / 2) ^ 2))",
@@ -89,7 +83,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{y (2 \\sin{(\\frac{t}{2})} \\cos{(\\frac{t}{2})}) + (\\sin^{2}(\\frac{t}{2}) + \\cos^{2}(\\frac{t}{2}))} \\,dt",
                                 "res": "INT t:[0,pi / 2]. 1 / (y * (2 * sin(t / 2) * cos(t / 2)) + (sin(t / 2) ^ 2 + cos(t / 2) ^ 2))",
@@ -104,7 +97,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\frac{1}{\\cos^{2}(\\frac{t}{2})}}{\\frac{y (2 \\sin{(\\frac{t}{2})} \\cos{(\\frac{t}{2})}) + (\\sin^{2}(\\frac{t}{2}) + \\cos^{2}(\\frac{t}{2}))}{\\cos^{2}(\\frac{t}{2})}} \\,dt",
                                 "res": "INT t:[0,pi / 2]. 1 / cos(t / 2) ^ 2 / ((y * (2 * sin(t / 2) * cos(t / 2)) + (sin(t / 2) ^ 2 + cos(t / 2) ^ 2)) / cos(t / 2) ^ 2)",
@@ -118,7 +110,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{(\\cos{(\\frac{t}{2})} ^ {-1}) ^ {2}}{\\frac{y (2 \\sin{(\\frac{t}{2})} \\cos{(\\frac{t}{2})}) + (\\sin^{2}(\\frac{t}{2}) + \\cos^{2}(\\frac{t}{2}))}{\\cos^{2}(\\frac{t}{2})}} \\,dt",
                                 "res": "INT t:[0,pi / 2]. cos(t / 2) ^ (-1) ^ 2 / ((y * (2 * sin(t / 2) * cos(t / 2)) + (sin(t / 2) ^ 2 + cos(t / 2) ^ 2)) / cos(t / 2) ^ 2)",
@@ -132,7 +123,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\sec^{2}(\\frac{t}{2})}{\\frac{y (2 \\sin{(\\frac{t}{2})} \\cos{(\\frac{t}{2})}) + (\\sin^{2}(\\frac{t}{2}) + \\cos^{2}(\\frac{t}{2}))}{\\cos^{2}(\\frac{t}{2})}} \\,dt",
                                 "res": "INT t:[0,pi / 2]. sec(t / 2) ^ 2 / ((y * (2 * sin(t / 2) * cos(t / 2)) + (sin(t / 2) ^ 2 + cos(t / 2) ^ 2)) / cos(t / 2) ^ 2)",
@@ -147,7 +137,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\sec^{2}(\\frac{t}{2})}{\\frac{1}{\\cos^{2}(\\frac{t}{2})} \\sin^{2}(\\frac{t}{2}) + \\frac{2 y}{\\cos{(\\frac{t}{2})}} \\sin{(\\frac{t}{2})} + 1} \\,dt",
                                 "res": "INT t:[0,pi / 2]. sec(t / 2) ^ 2 / (1 / cos(t / 2) ^ 2 * sin(t / 2) ^ 2 + 2 * y / cos(t / 2) * sin(t / 2) + 1)",
@@ -159,7 +148,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\sec^{2}(\\frac{t}{2})}{(\\frac{\\sin{(\\frac{1}{2} t)}}{\\cos{(\\frac{1}{2} t)}}) ^ {2} + \\frac{2 y}{\\cos{(\\frac{t}{2})}} \\sin{(\\frac{t}{2})} + 1} \\,dt",
                                 "res": "INT t:[0,pi / 2]. sec(t / 2) ^ 2 / ((sin(1/2 * t) / cos(1/2 * t)) ^ 2 + 2 * y / cos(t / 2) * sin(t / 2) + 1)",
@@ -173,7 +161,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\sec^{2}(\\frac{t}{2})}{\\tan^{2}(\\frac{1}{2} t) + \\frac{2 y}{\\cos{(\\frac{t}{2})}} \\sin{(\\frac{t}{2})} + 1} \\,dt",
                                 "res": "INT t:[0,pi / 2]. sec(t / 2) ^ 2 / (tan(1/2 * t) ^ 2 + 2 * y / cos(t / 2) * sin(t / 2) + 1)",
@@ -187,7 +174,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\sec^{2}(\\frac{t}{2})}{\\tan^{2}(\\frac{1}{2} t) + 2 y (\\frac{\\sin{(\\frac{1}{2} t)}}{\\cos{(\\frac{1}{2} t)}}) + 1} \\,dt",
                                 "res": "INT t:[0,pi / 2]. sec(t / 2) ^ 2 / (tan(1/2 * t) ^ 2 + 2 * y * (sin(1/2 * t) / cos(1/2 * t)) + 1)",
@@ -201,7 +187,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\sec^{2}(\\frac{t}{2})}{\\tan^{2}(\\frac{1}{2} t) + 2 y \\tan{(\\frac{1}{2} t)} + 1} \\,dt",
                                 "res": "INT t:[0,pi / 2]. sec(t / 2) ^ 2 / (tan(1/2 * t) ^ 2 + 2 * y * tan(1/2 * t) + 1)",
@@ -215,7 +200,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{2}{2 u y + u ^ {2} + 1} \\,du",
                                 "res": "INT u:[0,1]. 2 / (2 * u * y + u ^ 2 + 1)",
@@ -229,7 +213,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{1} \\frac{1}{2 u y + u ^ {2} + 1} \\,du)",
                                 "res": "2 * (INT u:[0,1]. 1 / (2 * u * y + u ^ 2 + 1))",
@@ -240,7 +223,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{1} \\frac{1}{(u + y) ^ {2} + \\sqrt{1 - y ^ {2}} ^ {2}} \\,du)",
                                 "res": "2 * (INT u:[0,1]. 1 / ((u + y) ^ 2 + sqrt(1 - y ^ 2) ^ 2))",
@@ -254,7 +236,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "2 (\\int_{y}^{y + 1} \\frac{1}{s ^ {2} - y ^ {2} + 1} \\,ds)",
                                 "res": "2 * (INT s:[y,y + 1]. 1 / (s ^ 2 - y ^ 2 + 1))",
@@ -268,7 +249,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "2 (\\int_{y}^{y + 1} \\frac{1}{s ^ {2} + \\sqrt{1 - y ^ {2}} ^ {2}} \\,ds)",
                                 "res": "2 * (INT s:[y,y + 1]. 1 / (s ^ 2 + sqrt(1 - y ^ 2) ^ 2))",
@@ -282,7 +262,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "2 (\\int_{y/\\sqrt{-y ^ {2} + 1}}^{(y + 1)/\\sqrt{-y ^ {2} + 1}} \\frac{\\sqrt{-y ^ {2} + 1}}{v ^ {2} (-y ^ {2} + 1) - y ^ {2} + 1} \\,dv)",
                                 "res": "2 * (INT v:[y / sqrt(-(y ^ 2) + 1),(y + 1) / sqrt(-(y ^ 2) + 1)]. sqrt(-(y ^ 2) + 1) / (v ^ 2 * (-(y ^ 2) + 1) - y ^ 2 + 1))",
@@ -296,7 +275,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "2 \\sqrt{-y ^ {2} + 1} (\\int_{y/\\sqrt{-y ^ {2} + 1}}^{(y + 1)/\\sqrt{-y ^ {2} + 1}} \\frac{1}{v ^ {2} (-y ^ {2} + 1) - y ^ {2} + 1} \\,dv)",
                                 "res": "2 * sqrt(-(y ^ 2) + 1) * (INT v:[y / sqrt(-(y ^ 2) + 1),(y + 1) / sqrt(-(y ^ 2) + 1)]. 1 / (v ^ 2 * (-(y ^ 2) + 1) - y ^ 2 + 1))",
@@ -307,7 +285,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "2 \\sqrt{-y ^ {2} + 1} (\\int_{y/\\sqrt{-y ^ {2} + 1}}^{(y + 1)/\\sqrt{-y ^ {2} + 1}} \\frac{1}{(v ^ {2} + 1) (1 - y ^ {2})} \\,dv)",
                                 "res": "2 * sqrt(-(y ^ 2) + 1) * (INT v:[y / sqrt(-(y ^ 2) + 1),(y + 1) / sqrt(-(y ^ 2) + 1)]. 1 / ((v ^ 2 + 1) * (1 - y ^ 2)))",
@@ -321,7 +298,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "2 \\sqrt{-y ^ {2} + 1} (\\int_{y/\\sqrt{-y ^ {2} + 1}}^{(y + 1)/\\sqrt{-y ^ {2} + 1}} \\frac{1}{v ^ {2} + 1} (1 - y ^ {2}) ^ {-1} \\,dv)",
                                 "res": "2 * sqrt(-(y ^ 2) + 1) * (INT v:[y / sqrt(-(y ^ 2) + 1),(y + 1) / sqrt(-(y ^ 2) + 1)]. 1 / (v ^ 2 + 1) * (1 - y ^ 2) ^ (-1))",
@@ -335,7 +311,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{2}{\\sqrt{-y ^ {2} + 1}} (\\int_{y/\\sqrt{-y ^ {2} + 1}}^{(y + 1)/\\sqrt{-y ^ {2} + 1}} \\frac{1}{v ^ {2} + 1} \\,dv)",
                                 "res": "2 / sqrt(-(y ^ 2) + 1) * (INT v:[y / sqrt(-(y ^ 2) + 1),(y + 1) / sqrt(-(y ^ 2) + 1)]. 1 / (v ^ 2 + 1))",
@@ -346,7 +321,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{2}{\\sqrt{-y ^ {2} + 1}} (\\left. \\tan^{-1}{v} \\right\\vert_{v=y/\\sqrt{-y ^ {2} + 1}}^{(y + 1)/\\sqrt{-y ^ {2} + 1}})",
                                 "res": "2 / sqrt(-(y ^ 2) + 1) * ([atan(v)]_v=y / sqrt(-(y ^ 2) + 1),(y + 1) / sqrt(-(y ^ 2) + 1))",
@@ -357,7 +331,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{2}{\\sqrt{-y ^ {2} + 1}} (\\tan^{-1}{(\\frac{y + 1}{\\sqrt{-y ^ {2} + 1}})} - \\tan^{-1}{(\\frac{y}{\\sqrt{-y ^ {2} + 1}})})",
                                 "res": "2 / sqrt(-(y ^ 2) + 1) * (atan((y + 1) / sqrt(-(y ^ 2) + 1)) - atan(y / sqrt(-(y ^ 2) + 1)))",
@@ -371,7 +344,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\frac{2}{\\sqrt{-y ^ {2} + 1}} (\\tan^{-1}{(\\frac{y + 1}{\\sqrt{-y ^ {2} + 1}})} - \\tan^{-1}{(\\frac{y}{\\sqrt{-y ^ {2} + 1}})})",
                         "start": "2 / sqrt(-(y ^ 2) + 1) * (atan((y + 1) / sqrt(-(y ^ 2) + 1)) - atan(y / sqrt(-(y ^ 2) + 1)))",
@@ -393,13 +365,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\int_{-1}^{1} \\int_{0}^{1} \\frac{1}{(1 + y x) \\sqrt{1 - x ^ {2}}} \\,dx \\,dy",
                         "start": "INT y:[-1,1]. INT x:[0,1]. 1 / ((1 + y * x) * sqrt(1 - x ^ 2))",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{-1}^{1} \\frac{2}{\\sqrt{-y ^ {2} + 1}} (\\tan^{-1}{(\\frac{y + 1}{\\sqrt{-y ^ {2} + 1}})} - \\tan^{-1}{(\\frac{y}{\\sqrt{-y ^ {2} + 1}})}) \\,dy",
                                 "res": "INT y:[-1,1]. 2 / sqrt(-(y ^ 2) + 1) * (atan((y + 1) / sqrt(-(y ^ 2) + 1)) - atan(y / sqrt(-(y ^ 2) + 1)))",
@@ -413,7 +383,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{-1}^{1} \\frac{2}{\\sqrt{-y ^ {2} + 1}} \\tan^{-1}{(\\frac{\\frac{y + 1}{\\sqrt{-y ^ {2} + 1}} - \\frac{y}{\\sqrt{-y ^ {2} + 1}}}{1 + \\frac{y + 1}{\\sqrt{-y ^ {2} + 1}} (\\frac{y}{\\sqrt{-y ^ {2} + 1}})})} \\,dy",
                                 "res": "INT y:[-1,1]. 2 / sqrt(-(y ^ 2) + 1) * atan(((y + 1) / sqrt(-(y ^ 2) + 1) - y / sqrt(-(y ^ 2) + 1)) / (1 + (y + 1) / sqrt(-(y ^ 2) + 1) * (y / sqrt(-(y ^ 2) + 1))))",
@@ -427,7 +396,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{-1}^{1} \\frac{2}{\\sqrt{-y ^ {2} + 1}} \\tan^{-1}{(\\frac{\\frac{1}{\\sqrt{-y ^ {2} + 1}}}{1 + \\frac{y + 1}{\\sqrt{-y ^ {2} + 1}} (\\frac{y}{\\sqrt{-y ^ {2} + 1}})})} \\,dy",
                                 "res": "INT y:[-1,1]. 2 / sqrt(-(y ^ 2) + 1) * atan(1 / sqrt(-(y ^ 2) + 1) / (1 + (y + 1) / sqrt(-(y ^ 2) + 1) * (y / sqrt(-(y ^ 2) + 1))))",
@@ -441,7 +409,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{-1}^{1} \\frac{2}{\\sqrt{-y ^ {2} + 1}} \\tan^{-1}{(\\frac{\\frac{1}{\\sqrt{-y ^ {2} + 1}}}{1 + \\frac{y (y + 1)}{1 - y ^ {2}}})} \\,dy",
                                 "res": "INT y:[-1,1]. 2 / sqrt(-(y ^ 2) + 1) * atan(1 / sqrt(-(y ^ 2) + 1) / (1 + y * (y + 1) / (1 - y ^ 2)))",
@@ -455,7 +422,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{-1}^{1} \\frac{2}{\\sqrt{-y ^ {2} + 1}} \\tan^{-1}{(\\frac{\\frac{1}{\\sqrt{-y ^ {2} + 1}}}{1 + \\frac{y}{1 - y}})} \\,dy",
                                 "res": "INT y:[-1,1]. 2 / sqrt(-(y ^ 2) + 1) * atan(1 / sqrt(-(y ^ 2) + 1) / (1 + y / (1 - y)))",
@@ -469,7 +435,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{-1}^{1} \\frac{2}{\\sqrt{-y ^ {2} + 1}} \\tan^{-1}{(\\frac{\\frac{1}{\\sqrt{-y ^ {2} + 1}}}{\\frac{1}{1 - y}})} \\,dy",
                                 "res": "INT y:[-1,1]. 2 / sqrt(-(y ^ 2) + 1) * atan(1 / sqrt(-(y ^ 2) + 1) / (1 / (1 - y)))",
@@ -483,7 +448,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{-1}^{1} \\frac{2}{\\sqrt{-y ^ {2} + 1}} \\tan^{-1}{(\\frac{1 - y}{\\sqrt{(1 - y) (1 + y)}})} \\,dy",
                                 "res": "INT y:[-1,1]. 2 / sqrt(-(y ^ 2) + 1) * atan((1 - y) / sqrt((1 - y) * (1 + y)))",
@@ -497,7 +461,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{-1}^{1} \\frac{2}{\\sqrt{-y ^ {2} + 1}} \\tan^{-1}{(\\sqrt{\\frac{(1 - y) ^ {2}}{(1 - y) (1 + y)}})} \\,dy",
                                 "res": "INT y:[-1,1]. 2 / sqrt(-(y ^ 2) + 1) * atan(sqrt((1 - y) ^ 2 / ((1 - y) * (1 + y))))",
@@ -511,7 +474,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{-1}^{1} \\frac{2}{\\sqrt{-y ^ {2} + 1}} \\tan^{-1}{(\\sqrt{\\frac{1 - y}{1 + y}})} \\,dy",
                                 "res": "INT y:[-1,1]. 2 / sqrt(-(y ^ 2) + 1) * atan(sqrt((1 - y) / (1 + y)))",
@@ -525,7 +487,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{-1}^{1} \\frac{2}{\\sqrt{-y ^ {2} + 1}} (\\frac{\\cos^{-1}{y}}{2}) \\,dy",
                                 "res": "INT y:[-1,1]. 2 / sqrt(-(y ^ 2) + 1) * (acos(y) / 2)",
@@ -539,7 +500,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{-1}^{1} \\frac{\\cos^{-1}{y}}{\\sqrt{-y ^ {2} + 1}} \\,dy",
                                 "res": "INT y:[-1,1]. acos(y) / sqrt(-(y ^ 2) + 1)",
@@ -550,7 +510,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi} x \\,dx",
                                 "res": "INT x:[0,pi]. x",
@@ -564,7 +523,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi} x \\,dx",
                                 "res": "INT x:[0,pi]. x",
@@ -575,7 +533,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\left. \\frac{x ^ {2}}{2} \\right\\vert_{x=0}^{\\pi}",
                                 "res": "[x ^ 2 / 2]_x=0,pi",
@@ -586,7 +543,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{\\pi ^ {2}}{2}",
                                 "res": "pi ^ 2 / 2",
@@ -600,7 +556,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\frac{\\pi ^ {2}}{2}",
                         "start": "pi ^ 2 / 2",

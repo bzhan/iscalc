@@ -1,7 +1,10 @@
 <template>
   <div>
     <span class="math-text">by induction on </span>
-    <MathEquation v-bind:data="'\\(' + item.induct_var + '\\)'"/><br/>
+    <MathEquation v-bind:data="'\\(' + item.induct_var + '\\)'"/>
+    <span class="math-text" v-if="start_point !== undefined"> from </span>
+    <MathEquation v-if="start_point !== undefined" v-bind:data="'\\(' + start_point + '\\)'"/>
+    <br/>
     <span class="math-text">{{label}}1. Base case: </span>
     <span @click="$emit('select', label + '1.')"
           :class="{selected: selected_item == label + '1.'}">
@@ -41,6 +44,7 @@ export default {
     "label",
     "selected_item",
     "selected_facts",
+    "start_point"
   ]
 }
 

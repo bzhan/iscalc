@@ -51,21 +51,21 @@
             "path": "twist_matrix_exp_inv",
             "type": "definition",
             "conds": ["type(R, 0, 3, 3)","type(p, 0 ,3)"],
-            "range": "$tensor($real, 4, 4)"
+            "range": "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
         },
         {
             "expr": "hmf(t, w, v) = hm(unit_matrix(3), t*v)",
             "path": "twist_matrix_exp_inv",
             "type": "definition",
             "conds": ["type(v, 0, 3)","type(w, 0 ,3)", "norm(w) = 0"],
-            "range": "$tensor($real, 4, 4)"
+            "func_type": "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
         },
         {
             "expr": "hmf(t, w, v) = hm(exp(t*hat(w)), (unit_matrix(3)-exp(t*hat(w)))*(hat(w)*v)+(w*T(w)*v*t))",
             "path": "twist_matrix_exp_inv",
             "type": "definition",
             "conds": ["type(v, 0, 3)","type(w, 0 ,3)", "norm(w) = 1"],
-            "range": "$tensor($real, 4, 4)"
+            "func_type": "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
         },
         {
             "expr": "hat(w) ^ n * w = zero_matrix(3,1)",
@@ -86,11 +86,17 @@
             "conds": ["type(w, 0, 3)","type(v, 0, 3)", "norm(w) = 1"]
         },
         {
+            "expr": "hmf(-t, w, v) * hmf(t, w, v) = unit_matrix(4)",
+            "path": "twist_matrix_exp_inv",
+            "type": "problem",
+            "conds": ["type(w, 0, 3)","type(v, 0, 3)"]
+        },
+        {
             "expr": "twist(w, v) = hat(rcon(w, v))",
             "path": "twist_derive_hmf",
             "type": "definition",
             "conds": ["type(v, 0, 3)","type(w, 0 ,3)"],
-            "range": "$tensor($real, 4, 4)"
+            "func_type": "$fun($tensor($real,3,1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
         },
         {
             "expr": "(D t. hmf(t, w, v)) = twist(w, v) * hmf(t, w, v)",
@@ -103,6 +109,17 @@
             "path": "twist_derive_hmf",
             "type": "problem",
             "conds": ["type(w, 0, 3)","type(v, 0, 3)", "norm(w) = 1"]
+        },
+        {
+            "expr": "gst(t, n, w, v, ic) = MUL(i, 0, n-1, hmf(nth(t, i, 0), nthc(w, i), nthc(v, i))) * ic",
+            "path": "matrix_poe_inv",
+            "type": "definition",
+            "func_type": "$fun($int, $tensor($real, n, 1), $tensor($real, 3, n), $tensor($real, 3, n), $tensor($real, 4, 4), $tensor($real, 4, 4))"
+        },
+        {
+            "expr": "(inv(ic) * MUL(i, 0, n-1, hmf(-nth(t, n-i-1, 0), nthc(w, n-i-1), nthc(v, n-i-1))))*gst(t, n, w, v, ic) = unit_matrix(4)",
+            "path": "matrix_poe_inv",
+            "type": "problem"
         }
     ],
     "imports": [

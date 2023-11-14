@@ -21,13 +21,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{x ^ {2} - b ^ {2}} \\,dx",
                         "start": "INT x:[0,oo]. x * sin(a * x) / (x ^ 2 - b ^ 2)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx",
                                 "res": "INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)",
@@ -41,13 +39,11 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\frac{1}{2} (\\int_{-\\infty}^{\\infty} \\frac{x \\sin{(a x)}}{x ^ {2} - b ^ {2}} \\,dx)",
                         "start": "1/2 * (INT x:[-oo,oo]. x * sin(a * x) / (x ^ 2 - b ^ 2))",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{2} ((\\int_{-\\infty}^{0} \\frac{x \\sin{(a x)}}{x ^ {2} - b ^ {2}} \\,dx) + (\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{x ^ {2} - b ^ {2}} \\,dx))",
                                 "res": "1/2 * ((INT x:[-oo,0]. x * sin(a * x) / (x ^ 2 - b ^ 2)) + (INT x:[0,oo]. x * sin(a * x) / (x ^ 2 - b ^ 2)))",
@@ -59,7 +55,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{2} ((\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx) + (\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{x ^ {2} - b ^ {2}} \\,dx))",
                                 "res": "1/2 * ((INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) + (INT x:[0,oo]. x * sin(a * x) / (x ^ 2 - b ^ 2)))",
@@ -74,7 +69,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx",
                                 "res": "INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)",
@@ -119,13 +113,11 @@
                 "goal": "(INT x:[0,oo]. x * sin(a * x) / (x ^ 2 - b ^ 2)) = pi / 2 * cos(a * b)",
                 "latex_goal": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{x ^ {2} - b ^ {2}} \\,dx = \\frac{\\pi}{2} \\cos{(a b)}",
                 "start": {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_start": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{x ^ {2} - b ^ {2}} \\,dx = \\frac{1}{2} (\\int_{-\\infty}^{\\infty} \\frac{x \\sin{(a x)}}{x ^ {2} - b ^ {2}} \\,dx)",
                     "start": "(INT x:[0,oo]. x * sin(a * x) / (x ^ 2 - b ^ 2)) = 1/2 * (INT x:[-oo,oo]. x * sin(a * x) / (x ^ 2 - b ^ 2))",
                     "steps": [
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{x ^ {2} - b ^ {2}} \\,dx = \\frac{1}{2} (\\int_{-\\infty}^{\\infty} \\frac{x \\sin{(a x)}}{(x + b) (x - b)} \\,dx)",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (x ^ 2 - b ^ 2)) = 1/2 * (INT x:[-oo,oo]. x * sin(a * x) / ((x + b) * (x - b)))",
@@ -140,7 +132,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{x ^ {2} - b ^ {2}} \\,dx = \\frac{1}{2} (\\int_{-\\infty}^{\\infty} \\frac{(-x) \\sin{(a x)}}{(b - x) (b + x)} \\,dx)",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (x ^ 2 - b ^ 2)) = 1/2 * (INT x:[-oo,oo]. -x * sin(a * x) / ((b - x) * (b + x)))",
@@ -154,7 +145,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{x ^ {2} - b ^ {2}} \\,dx = \\frac{1}{2} (\\int_{-\\infty}^{\\infty} \\frac{-1}{2 b} (\\frac{x \\sin{(a x)}}{b + x} + \\frac{x \\sin{(a x)}}{b - x}) \\,dx)",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (x ^ 2 - b ^ 2)) = 1/2 * (INT x:[-oo,oo]. -1 / (2 * b) * (x * sin(a * x) / (b + x) + x * sin(a * x) / (b - x)))",
@@ -168,7 +158,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{4 b} ((\\int_{-\\infty}^{\\infty} \\frac{x \\sin{(a x)}}{b + x} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{x \\sin{(a x)}}{b - x} \\,dx))",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (4 * b) * ((INT x:[-oo,oo]. x * sin(a * x) / (b + x)) + (INT x:[-oo,oo]. x * sin(a * x) / (b - x))))",
@@ -179,7 +168,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{4 b} ((\\int_{-\\infty}^{\\infty} \\frac{(-b + u) \\sin{(a (-b + u))}}{u} \\,du) + (\\int_{-\\infty}^{\\infty} \\frac{x \\sin{(a x)}}{b - x} \\,dx))",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (4 * b) * ((INT u:[-oo,oo]. (-b + u) * sin(a * (-b + u)) / u) + (INT x:[-oo,oo]. x * sin(a * x) / (b - x))))",
@@ -194,7 +182,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{4 b} ((\\int_{-\\infty}^{\\infty} \\frac{(-b + u) \\sin{(a (-b + u))}}{u} \\,du) + (\\int_{-\\infty}^{\\infty} \\frac{(b - u) \\sin{(a (b - u))}}{u} \\,du))",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (4 * b) * ((INT u:[-oo,oo]. (-b + u) * sin(a * (-b + u)) / u) + (INT u:[-oo,oo]. (b - u) * sin(a * (b - u)) / u)))",
@@ -209,7 +196,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{4 b} ((\\int_{-\\infty}^{\\infty} \\frac{(-b + u) \\sin{(-a (b - u))}}{u} \\,du) + (\\int_{-\\infty}^{\\infty} \\frac{(b - u) \\sin{(a (b - u))}}{u} \\,du))",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (4 * b) * ((INT u:[-oo,oo]. (-b + u) * sin(-(a * (b - u))) / u) + (INT u:[-oo,oo]. (b - u) * sin(a * (b - u)) / u)))",
@@ -223,7 +209,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{4 b} ((\\int_{-\\infty}^{\\infty} \\frac{(-b + u) (-\\sin{(a (b - u))})}{u} \\,du) + (\\int_{-\\infty}^{\\infty} \\frac{(b - u) \\sin{(a (b - u))}}{u} \\,du))",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (4 * b) * ((INT u:[-oo,oo]. (-b + u) * -sin(a * (b - u)) / u) + (INT u:[-oo,oo]. (b - u) * sin(a * (b - u)) / u)))",
@@ -237,7 +222,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{4 b} ((\\int_{-\\infty}^{\\infty} \\frac{(b - u) \\sin{(a (b - u))}}{u} \\,du) + (\\int_{-\\infty}^{\\infty} \\frac{(b - u) \\sin{(a (b - u))}}{u} \\,du))",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (4 * b) * ((INT u:[-oo,oo]. (b - u) * sin(a * (b - u)) / u) + (INT u:[-oo,oo]. (b - u) * sin(a * (b - u)) / u)))",
@@ -251,7 +235,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{2 b} (\\int_{-\\infty}^{\\infty} \\frac{(b - u) \\sin{(a (b - u))}}{u} \\,du)",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (2 * b) * (INT u:[-oo,oo]. (b - u) * sin(a * (b - u)) / u))",
@@ -262,7 +245,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{2 b} (\\int_{-\\infty}^{\\infty} \\frac{b - u}{u} \\sin{(a (b - u))} \\,du)",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (2 * b) * (INT u:[-oo,oo]. (b - u) / u * sin(a * (b - u))))",
@@ -276,7 +258,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{2 b} (\\int_{-\\infty}^{\\infty} (\\frac{b}{u} - 1) \\sin{(a b - a u)} \\,du)",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (2 * b) * (INT u:[-oo,oo]. (b / u - 1) * sin(a * b - a * u)))",
@@ -290,7 +271,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{2 b} (\\int_{-\\infty}^{\\infty} \\frac{b}{u} \\sin{(a b - a u)} - \\sin{(a b - a u)} \\,du)",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (2 * b) * (INT u:[-oo,oo]. b / u * sin(a * b - a * u) - sin(a * b - a * u)))",
@@ -304,7 +284,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{2 b} (b (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a b - a u)}}{u} \\,du) - (\\int_{-\\infty}^{\\infty} \\sin{(a b - a u)} \\,du))",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (2 * b) * (b * (INT u:[-oo,oo]. sin(a * b - a * u) / u) - (INT u:[-oo,oo]. sin(a * b - a * u))))",
@@ -315,7 +294,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{2 b} (b (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a b - a u)}}{u} \\,du) - (\\int_{-\\infty}^{\\infty} \\frac{\\sin{s}}{a} \\,ds))",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (2 * b) * (b * (INT u:[-oo,oo]. sin(a * b - a * u) / u) - (INT s:[-oo,oo]. sin(s) / a)))",
@@ -330,7 +308,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{2 b} (b (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a b - a u)}}{u} \\,du) - ((\\int_{-\\infty}^{0} \\frac{\\sin{s}}{a} \\,ds) + (\\int_{0}^{\\infty} \\frac{\\sin{s}}{a} \\,ds)))",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (2 * b) * (b * (INT u:[-oo,oo]. sin(a * b - a * u) / u) - ((INT s:[-oo,0]. sin(s) / a) + (INT s:[0,oo]. sin(s) / a))))",
@@ -343,7 +320,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{2 b} (b (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a b - a u)}}{u} \\,du) - ((\\int_{0}^{\\infty} -\\frac{\\sin{s}}{a} \\,ds) + (\\int_{0}^{\\infty} \\frac{\\sin{s}}{a} \\,ds)))",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (2 * b) * (b * (INT u:[-oo,oo]. sin(a * b - a * u) / u) - ((INT s:[0,oo]. -(sin(s) / a)) + (INT s:[0,oo]. sin(s) / a))))",
@@ -358,7 +334,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{2} (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a b - a u)}}{u} \\,du)",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1/2 * (INT u:[-oo,oo]. sin(a * b - a * u) / u))",
@@ -369,7 +344,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{2} (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a b)} \\cos{(a u)} - \\cos{(a b)} \\sin{(a u)}}{u} \\,du)",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1/2 * (INT u:[-oo,oo]. (sin(a * b) * cos(a * u) - cos(a * b) * sin(a * u)) / u))",
@@ -383,7 +357,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{2} (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a b)} \\cos{(a u)}}{u} - \\frac{\\cos{(a b)} \\sin{(a u)}}{u} \\,du)",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1/2 * (INT u:[-oo,oo]. sin(a * b) * cos(a * u) / u - cos(a * b) * sin(a * u) / u))",
@@ -397,7 +370,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = \\frac{\\cos{(a b)}}{2} (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du) - \\frac{\\sin{(a b)}}{2} (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a u)}}{u} \\,du)",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = cos(a * b) / 2 * (INT u:[-oo,oo]. sin(a * u) / u) - sin(a * b) / 2 * (INT u:[-oo,oo]. cos(a * u) / u)",
@@ -408,7 +380,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = \\frac{\\cos{(a b)}}{2} (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du) - \\frac{\\sin{(a b)}}{2} (\\lim\\limits_{c\\to \\infty} (\\,(\\int_{-\\infty}^{-1/c} \\frac{\\cos{(a u)}}{u} \\,du) + (\\int_{1/c}^{\\infty} \\frac{\\cos{(a u)}}{u} \\,du)\\,))",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = cos(a * b) / 2 * (INT u:[-oo,oo]. sin(a * u) / u) - sin(a * b) / 2 * (LIM {c -> oo}. (INT u:[-oo,-(1 / c)]. cos(a * u) / u) + (INT u:[1 / c,oo]. cos(a * u) / u))",
@@ -421,7 +392,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = \\frac{\\cos{(a b)}}{2} (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du) - \\frac{\\sin{(a b)}}{2} (\\lim\\limits_{c\\to \\infty} (\\,(\\int_{\\infty}^{1/c} \\frac{\\cos{(a u)}}{u} \\,du) + (\\int_{1/c}^{\\infty} \\frac{\\cos{(a u)}}{u} \\,du)\\,))",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = cos(a * b) / 2 * (INT u:[-oo,oo]. sin(a * u) / u) - sin(a * b) / 2 * (LIM {c -> oo}. (INT u:[oo,1 / c]. cos(a * u) / u) + (INT u:[1 / c,oo]. cos(a * u) / u))",
@@ -436,7 +406,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = \\frac{\\cos{(a b)}}{2} ((\\int_{-\\infty}^{0} \\frac{\\sin{(a u)}}{u} \\,du) + (\\int_{0}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du)) - \\frac{\\sin{(a b)}}{2} (\\lim\\limits_{c\\to \\infty} (\\,(\\int_{\\infty}^{1/c} \\frac{\\cos{(a u)}}{u} \\,du) + (\\int_{1/c}^{\\infty} \\frac{\\cos{(a u)}}{u} \\,du)\\,))",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = cos(a * b) / 2 * ((INT u:[-oo,0]. sin(a * u) / u) + (INT u:[0,oo]. sin(a * u) / u)) - sin(a * b) / 2 * (LIM {c -> oo}. (INT u:[oo,1 / c]. cos(a * u) / u) + (INT u:[1 / c,oo]. cos(a * u) / u))",
@@ -449,7 +418,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = \\frac{\\cos{(a b)}}{2} ((\\int_{0}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du) + (\\int_{0}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du)) - \\frac{\\sin{(a b)}}{2} (\\lim\\limits_{c\\to \\infty} (\\,(\\int_{\\infty}^{1/c} \\frac{\\cos{(a u)}}{u} \\,du) + (\\int_{1/c}^{\\infty} \\frac{\\cos{(a u)}}{u} \\,du)\\,))",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = cos(a * b) / 2 * ((INT u:[0,oo]. sin(a * u) / u) + (INT u:[0,oo]. sin(a * u) / u)) - sin(a * b) / 2 * (LIM {c -> oo}. (INT u:[oo,1 / c]. cos(a * u) / u) + (INT u:[1 / c,oo]. cos(a * u) / u))",
@@ -464,7 +432,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = \\cos{(a b)} (\\int_{0}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du)",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = cos(a * b) * (INT u:[0,oo]. sin(a * u) / u)",
@@ -475,7 +442,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = \\cos{(a b)}\\cdot (\\frac{\\pi}{2})",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = cos(a * b) * (pi / 2)",

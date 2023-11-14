@@ -21,13 +21,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a x)}}{b ^ {2} - x ^ {2}} \\,dx",
                         "start": "INT x:[-oo,oo]. cos(a * x) / (b ^ 2 - x ^ 2)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a x)}}{(b + x) (b - x)} \\,dx",
                                 "res": "INT x:[-oo,oo]. cos(a * x) / ((b + x) * (b - x))",
@@ -41,7 +39,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{-\\infty}^{\\infty} \\frac{1}{2 b} (\\frac{\\cos{(a x)}}{b + x} + \\frac{\\cos{(a x)}}{b - x}) \\,dx",
                                 "res": "INT x:[-oo,oo]. 1 / (2 * b) * (cos(a * x) / (b + x) + cos(a * x) / (b - x))",
@@ -55,7 +52,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{2 b} ((\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a x)}}{b + x} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a x)}}{b - x} \\,dx))",
                                 "res": "1 / (2 * b) * ((INT x:[-oo,oo]. cos(a * x) / (b + x)) + (INT x:[-oo,oo]. cos(a * x) / (b - x)))",
@@ -66,7 +62,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{2 b} ((\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a (-b + u))}}{u} \\,du) + (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a x)}}{b - x} \\,dx))",
                                 "res": "1 / (2 * b) * ((INT u:[-oo,oo]. cos(a * (-b + u)) / u) + (INT x:[-oo,oo]. cos(a * x) / (b - x)))",
@@ -81,7 +76,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{2 b} ((\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a (-b + u))}}{u} \\,du) + (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a (b - u))}}{u} \\,du))",
                                 "res": "1 / (2 * b) * ((INT u:[-oo,oo]. cos(a * (-b + u)) / u) + (INT u:[-oo,oo]. cos(a * (b - u)) / u))",
@@ -96,7 +90,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{2 b} ((\\int_{-\\infty}^{\\infty} \\frac{\\cos{(-a (b - u))}}{u} \\,du) + (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a (b - u))}}{u} \\,du))",
                                 "res": "1 / (2 * b) * ((INT u:[-oo,oo]. cos(-(a * (b - u))) / u) + (INT u:[-oo,oo]. cos(a * (b - u)) / u))",
@@ -110,7 +103,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{2 b} ((\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a (b - u))}}{u} \\,du) + (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a (b - u))}}{u} \\,du))",
                                 "res": "1 / (2 * b) * ((INT u:[-oo,oo]. cos(a * (b - u)) / u) + (INT u:[-oo,oo]. cos(a * (b - u)) / u))",
@@ -124,7 +116,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{b} (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a (b - u))}}{u} \\,du)",
                                 "res": "1 / b * (INT u:[-oo,oo]. cos(a * (b - u)) / u)",
@@ -135,7 +126,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{b} (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a b - a u)}}{u} \\,du)",
                                 "res": "1 / b * (INT u:[-oo,oo]. cos(a * b - a * u) / u)",
@@ -149,7 +139,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{b} (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a b)} \\cos{(a u)} + \\sin{(a b)} \\sin{(a u)}}{u} \\,du)",
                                 "res": "1 / b * (INT u:[-oo,oo]. (cos(a * b) * cos(a * u) + sin(a * b) * sin(a * u)) / u)",
@@ -163,7 +152,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{b} (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a b)} \\cos{(a u)}}{u} + \\frac{\\sin{(a b)} \\sin{(a u)}}{u} \\,du)",
                                 "res": "1 / b * (INT u:[-oo,oo]. cos(a * b) * cos(a * u) / u + sin(a * b) * sin(a * u) / u)",
@@ -177,7 +165,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{b} (\\cos{(a b)} (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a u)}}{u} \\,du) + \\sin{(a b)} (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du))",
                                 "res": "1 / b * (cos(a * b) * (INT u:[-oo,oo]. cos(a * u) / u) + sin(a * b) * (INT u:[-oo,oo]. sin(a * u) / u))",
@@ -188,7 +175,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{b} (\\cos{(a b)}\\cdot 0 + \\sin{(a b)} (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du))",
                                 "res": "1 / b * (cos(a * b) * 0 + sin(a * b) * (INT u:[-oo,oo]. sin(a * u) / u))",
@@ -202,7 +188,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{\\sin{(a b)}}{b} (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du)",
                                 "res": "sin(a * b) / b * (INT u:[-oo,oo]. sin(a * u) / u)",
@@ -213,7 +198,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{\\sin{(a b)}}{b} ((\\int_{-\\infty}^{0} \\frac{\\sin{(a u)}}{u} \\,du) + (\\int_{0}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du))",
                                 "res": "sin(a * b) / b * ((INT u:[-oo,0]. sin(a * u) / u) + (INT u:[0,oo]. sin(a * u) / u))",
@@ -225,7 +209,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{\\sin{(a b)}}{b} ((\\int_{0}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du) + (\\int_{0}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du))",
                                 "res": "sin(a * b) / b * ((INT u:[0,oo]. sin(a * u) / u) + (INT u:[0,oo]. sin(a * u) / u))",
@@ -240,7 +223,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{2 \\sin{(a b)}}{b} (\\int_{0}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du)",
                                 "res": "2 * sin(a * b) / b * (INT u:[0,oo]. sin(a * u) / u)",
@@ -251,7 +233,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{2 \\sin{(a b)}}{b}\\cdot (\\frac{\\pi}{2})",
                                 "res": "2 * sin(a * b) / b * (pi / 2)",
@@ -262,7 +243,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{\\pi \\sin{(a b)}}{b}",
                                 "res": "pi * sin(a * b) / b",
@@ -276,7 +256,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\frac{\\pi \\sin{(a b)}}{b}",
                         "start": "pi * sin(a * b) / b",

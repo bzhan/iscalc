@@ -29,13 +29,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "I{(n)}",
                         "start": "I(n)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{1} x ^ {n - 1} \\log{(-x + 1)} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (n - 1) * log(-x + 1)",
@@ -47,7 +45,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "(\\left. \\frac{(x ^ {n} - 1) \\log{(-x + 1)}}{n} \\right\\vert_{x=0}^{1}) - (\\int_{0}^{1} -\\frac{x ^ {n} - 1}{n (-x + 1)} \\,dx)",
                                 "res": "([(x ^ n - 1) * log(-x + 1) / n]_x=0,1) - (INT x:[0,1]. -((x ^ n - 1) / (n * (-x + 1))))",
@@ -61,7 +58,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{n} (\\int_{0}^{1} \\frac{x ^ {n} - 1}{-x + 1} \\,dx)",
                                 "res": "1 / n * (INT x:[0,1]. (x ^ n - 1) / (-x + 1))",
@@ -72,7 +68,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{n} (\\int_{0}^{1} -\\frac{1 - x ^ {n}}{1 - x} \\,dx)",
                                 "res": "1 / n * (INT x:[0,1]. -((1 - x ^ n) / (1 - x)))",
@@ -86,13 +81,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
-                                "fixes": [
-                                    [
-                                        "k",
-                                        "$int"
-                                    ]
-                                ],
+                                "fixes": [],
                                 "latex_res": "\\frac{1}{n} (\\int_{0}^{1} -\\sum_{k=1}^{n}{x ^ {k - 1}} \\,dx)",
                                 "res": "1 / n * (INT x:[0,1]. -SUM(k, 1, n, x ^ (k - 1)))",
                                 "rule": {
@@ -104,13 +93,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
-                                "fixes": [
-                                    [
-                                        "k",
-                                        "$int"
-                                    ]
-                                ],
+                                "fixes": [],
                                 "latex_res": "-\\frac{1}{n} (\\int_{0}^{1} \\sum_{k=1}^{n}{x ^ {k - 1}} \\,dx)",
                                 "res": "-(1 / n * (INT x:[0,1]. SUM(k, 1, n, x ^ (k - 1))))",
                                 "rule": {
@@ -120,13 +103,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
-                                "fixes": [
-                                    [
-                                        "k",
-                                        "$int"
-                                    ]
-                                ],
+                                "fixes": [],
                                 "latex_res": "-\\frac{1}{n} \\sum_{k=1}^{n}{\\int_{0}^{1} x ^ {k - 1} \\,dx}",
                                 "res": "-(1 / n * SUM(k, 1, n, INT x:[0,1]. x ^ (k - 1)))",
                                 "rule": {
@@ -137,13 +114,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
-                                "fixes": [
-                                    [
-                                        "k",
-                                        "$int"
-                                    ]
-                                ],
+                                "fixes": [],
                                 "latex_res": "-\\frac{1}{n} \\sum_{k=1}^{n}{\\left. \\frac{x ^ {k}}{k} \\right\\vert_{x=0}^{1}}",
                                 "res": "-(1 / n * SUM(k, 1, n, [x ^ k / k]_x=0,1))",
                                 "rule": {
@@ -153,13 +124,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
-                                "fixes": [
-                                    [
-                                        "k",
-                                        "$int"
-                                    ]
-                                ],
+                                "fixes": [],
                                 "latex_res": "-\\frac{1}{n} \\sum_{k=1}^{n}{\\frac{1}{k}}",
                                 "res": "-(1 / n * SUM(k, 1, n, 1 / k))",
                                 "rule": {
@@ -169,7 +134,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "-\\frac{1}{n} H{(n)}",
                                 "res": "-(1 / n * H(n))",
@@ -182,7 +146,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "-\\frac{H{(n)}}{n}",
                                 "res": "-(H(n) / n)",
@@ -196,7 +159,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "-\\frac{H{(n)}}{n}",
                         "start": "-(H(n) / n)",

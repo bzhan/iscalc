@@ -20,6 +20,7 @@
           ⚠
         </span>
       </div>
+      <!-- Proof content -->
       <div v-if="'proof' in item">
         <div v-if="item.proof.type === 'CalculationProof'">
           <CalculationProof v-bind:item="item.proof" v-bind:label="label"
@@ -31,6 +32,7 @@
           <InductionProof v-bind:item="item.proof" v-bind:label="label"
                           v-bind:selected_item="selected_item"
                           v-bind:selected_facts="selected_facts"
+                          v-bind:start_point = "start_point"
                           @select="(lbl) => $emit('select', lbl)"/>
         </div>
         <div v-if="item.proof.type === 'RewriteGoalProof'">
@@ -72,12 +74,19 @@ export default {
     "label",
     "selected_item",
     "selected_facts",
+    "start_point"
   ],
 
   emits: [
     "select",
     "select_fact"
   ],
+
+  mounted() {
+    console.log("Goal module mounted")
+    console.log("item:",this.item)
+    console.log("start_point", this.start_point)
+  }
 }
 
 </script>

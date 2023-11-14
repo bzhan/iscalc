@@ -13,13 +13,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\frac{d}{da} \\frac{d}{da} \\int_{0}^{1} x ^ {a} \\,dx",
                         "start": "D a. D a. INT x:[0,1]. x ^ a",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{d}{da} \\frac{d}{da} \\left. \\frac{x ^ {a + 1}}{a + 1} \\right\\vert_{x=0}^{1}",
                                 "res": "D a. D a. [x ^ (a + 1) / (a + 1)]_x=0,1",
@@ -31,7 +29,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{2}{(a + 1) ^ {3}}",
                                 "res": "2 / (a + 1) ^ 3",
@@ -46,7 +43,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\frac{2}{(a + 1) ^ {3}}",
                         "start": "2 / (a + 1) ^ 3",
@@ -77,13 +73,11 @@
                 "goal": "(INT x:[0,1]. x ^ a * log(x) ^ 2) = 2 / (a + 1) ^ 3",
                 "latex_goal": "\\int_{0}^{1} x ^ {a} \\log^{2}(x) \\,dx = \\frac{2}{(a + 1) ^ {3}}",
                 "start": {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_start": "\\frac{d}{da} \\frac{d}{da} \\int_{0}^{1} x ^ {a} \\,dx = \\frac{2}{(a + 1) ^ {3}}",
                     "start": "(D a. D a. INT x:[0,1]. x ^ a) = 2 / (a + 1) ^ 3",
                     "steps": [
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{1} x ^ {a} \\log^{2}(x) \\,dx = \\frac{2}{(a + 1) ^ {3}}",
                             "res": "(INT x:[0,1]. x ^ a * log(x) ^ 2) = 2 / (a + 1) ^ 3",

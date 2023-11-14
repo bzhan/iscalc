@@ -25,13 +25,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\frac{d}{da} I{(a)}",
                         "start": "D a. I(a)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{d}{da} \\int_{0}^{1} \\frac{x ^ {a} - 1}{\\log{x}} \\,dx",
                                 "res": "D a. INT x:[0,1]. (x ^ a - 1) / log(x)",
@@ -44,7 +42,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{d}{da} \\frac{x ^ {a} - 1}{\\log{x}} \\,dx",
                                 "res": "INT x:[0,1]. D a. (x ^ a - 1) / log(x)",
@@ -55,7 +52,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{1} x ^ {a} \\,dx",
                                 "res": "INT x:[0,1]. x ^ a",
@@ -66,7 +62,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\left. \\frac{x ^ {a + 1}}{a + 1} \\right\\vert_{x=0}^{1}",
                                 "res": "[x ^ (a + 1) / (a + 1)]_x=0,1",
@@ -77,7 +72,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{a + 1}",
                                 "res": "1 / (a + 1)",
@@ -91,7 +85,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\frac{1}{a + 1}",
                         "start": "1 / (a + 1)",
@@ -122,13 +115,11 @@
                 "goal": "I(a) = log(a + 1) + SKOLEM_CONST(C)",
                 "latex_goal": "I{(a)} = \\log{(a + 1)} + C",
                 "start": {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_start": "\\frac{d}{da} I{(a)} = \\frac{1}{a + 1}",
                     "start": "(D a. I(a)) = 1 / (a + 1)",
                     "steps": [
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "I{(a)} = \\int \\frac{1}{a + 1} \\,da",
                             "res": "I(a) = (INT a. 1 / (a + 1))",
@@ -139,7 +130,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "I{(a)} = \\log{(\\left| a + 1 \\right|)} + C",
                             "res": "I(a) = log(abs(a + 1)) + SKOLEM_CONST(C)",
@@ -150,7 +140,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "I{(a)} = \\log{(a + 1)} + C",
                             "res": "I(a) = log(a + 1) + SKOLEM_CONST(C)",
@@ -177,16 +166,14 @@
                 "goal": "SKOLEM_CONST(C) = 0",
                 "latex_goal": "C = 0",
                 "start": {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_start": "I{(a)} = \\log{(a + 1)} + C",
                     "start": "I(a) = log(a + 1) + SKOLEM_CONST(C)",
                     "steps": [
                         {
-                            "dead_vars": [],
                             "fixes": [],
-                            "latex_res": "I{(0)} = \\log{(0 + 1)} + C",
-                            "res": "I(0) = log(0 + 1) + SKOLEM_CONST(C)",
+                            "latex_res": "I{(0)} = 0 + C",
+                            "res": "I(0) = 0 + SKOLEM_CONST(C)",
                             "rule": {
                                 "latex_str": "substitute \\(a\\) for \\(0\\) in equation",
                                 "name": "VarSubsOfEquation",
@@ -201,10 +188,9 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
-                            "latex_res": "\\int_{0}^{1} 0 \\,dx = \\log{(0 + 1)} + C",
-                            "res": "(INT x:[0,1]. 0) = log(0 + 1) + SKOLEM_CONST(C)",
+                            "latex_res": "\\int_{0}^{1} 0 \\,dx = 0 + C",
+                            "res": "(INT x:[0,1]. 0) = 0 + SKOLEM_CONST(C)",
                             "rule": {
                                 "func_name": "I",
                                 "loc": "subterms",
@@ -214,7 +200,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "0 = C",
                             "res": "0 = SKOLEM_CONST(C)",
@@ -225,7 +210,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "C = 0",
                             "res": "SKOLEM_CONST(C) = 0",
@@ -257,13 +241,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "I{(a)}",
                         "start": "I(a)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\log{(a + 1)} + C",
                                 "res": "log(a + 1) + SKOLEM_CONST(C)",
@@ -277,7 +259,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\log{(a + 1)} + 0",
                                 "res": "log(a + 1) + 0",
@@ -291,7 +272,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\log{(a + 1)}",
                                 "res": "log(a + 1)",
@@ -305,7 +285,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\log{(a + 1)}",
                         "start": "log(a + 1)",

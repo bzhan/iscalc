@@ -8,24 +8,16 @@
         },
         {
             "finished": true,
-            "fixes": [
-                [
-                    "n",
-                    "$int"
-                ]
-            ],
             "goal": "converges(SUM(n, 0, oo, INT x:[0,1]. x ^ (2 * n) / (2 * n + 1)))",
             "latex_goal": "\\sum_{n=0}^{\\infty}{\\int_{0}^{1} \\frac{x ^ {2 n}}{2 n + 1} \\,dx}\\quad\\mathrm{converges}",
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\sum_{n=0}^{\\infty}{\\int_{0}^{1} \\frac{x ^ {2 n}}{2 n + 1} \\,dx}",
                         "start": "SUM(n, 0, oo, INT x:[0,1]. x ^ (2 * n) / (2 * n + 1))",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{2 n + 1} (\\int_{0}^{1} x ^ {2 n} \\,dx)}",
                                 "res": "SUM(n, 0, oo, 1 / (2 * n + 1) * (INT x:[0,1]. x ^ (2 * n)))",
@@ -36,7 +28,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{2 n + 1} (\\left. \\frac{x ^ {2 n + 1}}{2 n + 1} \\right\\vert_{x=0}^{1})}",
                                 "res": "SUM(n, 0, oo, 1 / (2 * n + 1) * ([x ^ (2 * n + 1) / (2 * n + 1)]_x=0,1))",
@@ -47,7 +38,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{(2 n + 1) ^ {2}}}",
                                 "res": "SUM(n, 0, oo, 1 / (2 * n + 1) ^ 2)",
@@ -70,24 +60,16 @@
         },
         {
             "finished": true,
-            "fixes": [
-                [
-                    "n",
-                    "$int"
-                ]
-            ],
             "goal": "(INT x:[0,1]. atan(x) / x) = G",
             "latex_goal": "\\int_{0}^{1} \\frac{\\tan^{-1}{x}}{x} \\,dx = G",
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\int_{0}^{1} \\frac{\\tan^{-1}{x}}{x} \\,dx",
                         "start": "INT x:[0,1]. atan(x) / x",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {2 n + 1}}{2 n + 1}}}{x} \\,dx",
                                 "res": "INT x:[0,1]. SUM(n, 0, oo, (-1) ^ n * x ^ (2 * n + 1) / (2 * n + 1)) / x",
@@ -100,7 +82,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (x ^ {2 n} x)}{2 n + 1}}}{x} \\,dx",
                                 "res": "INT x:[0,1]. SUM(n, 0, oo, (-1) ^ n * (x ^ (2 * n) * x) / (2 * n + 1)) / x",
@@ -114,7 +95,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 n} (-1) ^ {n}}{2 n + 1}} \\,dx",
                                 "res": "INT x:[0,1]. SUM(n, 0, oo, x ^ (2 * n) * (-1) ^ n / (2 * n + 1))",
@@ -125,7 +105,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\int_{0}^{1} \\frac{x ^ {2 n} (-1) ^ {n}}{2 n + 1} \\,dx}",
                                 "res": "SUM(n, 0, oo, INT x:[0,1]. x ^ (2 * n) * (-1) ^ n / (2 * n + 1))",
@@ -136,7 +115,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n}}{2 n + 1} (\\left. \\frac{x ^ {2 n + 1}}{2 n + 1} \\right\\vert_{x=0}^{1})}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n / (2 * n + 1) * ([x ^ (2 * n + 1) / (2 * n + 1)]_x=0,1))",
@@ -147,7 +125,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n}}{(2 n + 1) ^ {2}}}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n / (2 * n + 1) ^ 2)",
@@ -161,13 +138,11 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "G",
                         "start": "G",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n}}{(2 n + 1) ^ {2}}}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n / (2 * n + 1) ^ 2)",

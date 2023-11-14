@@ -7,13 +7,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\int_{0}^{\\pi/3} \\frac{1}{\\cos{x}} \\,dx",
                         "start": "INT x:[0,pi / 3]. 1 / cos(x)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/3} \\frac{\\cos{x}}{\\cos^{2}(x)} \\,dx",
                                 "res": "INT x:[0,pi / 3]. cos(x) / cos(x) ^ 2",
@@ -27,7 +25,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/3} \\frac{\\cos{x}}{1 - \\sin^{2}(x)} \\,dx",
                                 "res": "INT x:[0,pi / 3]. cos(x) / (1 - sin(x) ^ 2)",
@@ -41,7 +38,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\sqrt{3}/2} \\frac{1}{-u ^ {2} + 1} \\,du",
                                 "res": "INT u:[0,sqrt(3) / 2]. 1 / (-(u ^ 2) + 1)",
@@ -55,7 +51,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\sqrt{3}/2} \\frac{1}{2} (\\frac{1}{1 - u} + \\frac{1}{1 + u}) \\,du",
                                 "res": "INT u:[0,sqrt(3) / 2]. 1/2 * (1 / (1 - u) + 1 / (1 + u))",
@@ -69,7 +64,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\sqrt{3}/2} \\frac{1}{-u + 1} \\,du) + \\frac{1}{2} (\\int_{0}^{\\sqrt{3}/2} \\frac{1}{u + 1} \\,du)",
                                 "res": "1/2 * (INT u:[0,sqrt(3) / 2]. 1 / (-u + 1)) + 1/2 * (INT u:[0,sqrt(3) / 2]. 1 / (u + 1))",
@@ -80,7 +74,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\sqrt{3}/2} \\frac{1}{-u + 1} \\,du) + \\frac{1}{2} (\\left. \\log{(\\left| u + 1 \\right|)} \\right\\vert_{u=0}^{\\sqrt{3}/2})",
                                 "res": "1/2 * (INT u:[0,sqrt(3) / 2]. 1 / (-u + 1)) + 1/2 * ([log(abs(u + 1))]_u=0,sqrt(3) / 2)",
@@ -91,7 +84,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\sqrt{3}/2} \\frac{1}{-u + 1} \\,du) + \\frac{1}{2} \\log{(\\frac{\\sqrt{3}}{2} + 1)}",
                                 "res": "1/2 * (INT u:[0,sqrt(3) / 2]. 1 / (-u + 1)) + 1/2 * log(sqrt(3) / 2 + 1)",
@@ -102,7 +94,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{-\\sqrt{3}/2 + 1}^{1} \\frac{1}{t} \\,dt) + \\frac{1}{2} \\log{(\\frac{\\sqrt{3}}{2} + 1)}",
                                 "res": "1/2 * (INT t:[-(sqrt(3) / 2) + 1,1]. 1 / t) + 1/2 * log(sqrt(3) / 2 + 1)",
@@ -117,7 +108,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\left. \\log{(\\left| t \\right|)} \\right\\vert_{t=-\\sqrt{3}/2 + 1}^{1}) + \\frac{1}{2} \\log{(\\frac{\\sqrt{3}}{2} + 1)}",
                                 "res": "1/2 * ([log(abs(t))]_t=-(sqrt(3) / 2) + 1,1) + 1/2 * log(sqrt(3) / 2 + 1)",
@@ -128,7 +118,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "-\\frac{1}{2} \\log{(-\\frac{\\sqrt{3}}{2} + 1)} + \\frac{1}{2} \\log{(\\frac{\\sqrt{3}}{2} + 1)}",
                                 "res": "-(1/2 * log(-(sqrt(3) / 2) + 1)) + 1/2 * log(sqrt(3) / 2 + 1)",
@@ -139,7 +128,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{2}\\cdot (\\log{(\\frac{\\sqrt{3}}{2} + 1)} - \\log{(-\\frac{\\sqrt{3}}{2} + 1)})",
                                 "res": "1/2 * (log(sqrt(3) / 2 + 1) - log(-(sqrt(3) / 2) + 1))",
@@ -153,7 +141,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{2} \\log{(\\frac{\\frac{\\sqrt{3}}{2} + 1}{-\\frac{\\sqrt{3}}{2} + 1})}",
                                 "res": "1/2 * log((sqrt(3) / 2 + 1) / (-(sqrt(3) / 2) + 1))",
@@ -167,7 +154,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{2} \\log{((2 + \\sqrt{3}) ^ {2})}",
                                 "res": "1/2 * log((2 + sqrt(3)) ^ 2)",
@@ -181,7 +167,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\log{(\\sqrt{3} + 2)}",
                                 "res": "log(sqrt(3) + 2)",
@@ -192,7 +177,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\log{(2 + \\sqrt{3})}",
                                 "res": "log(2 + sqrt(3))",
@@ -209,7 +193,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\log{(2 + \\sqrt{3})}",
                         "start": "log(2 + sqrt(3))",

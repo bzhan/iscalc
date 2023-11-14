@@ -7,13 +7,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\int_{0}^{1} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx",
                         "start": "INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/4} \\frac{\\log{(\\tan{u} + 1)}}{\\tan^{2}(u) + 1} \\sec^{2}(u) \\,du",
                                 "res": "INT u:[0,pi / 4]. log(tan(u) + 1) / (tan(u) ^ 2 + 1) * sec(u) ^ 2",
@@ -27,7 +25,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/4} \\frac{\\log{(\\tan{u} + 1)}}{\\tan^{2}(u) + 1} (\\tan^{2}(u) + 1) \\,du",
                                 "res": "INT u:[0,pi / 4]. log(tan(u) + 1) / (tan(u) ^ 2 + 1) * (tan(u) ^ 2 + 1)",
@@ -41,7 +38,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/4} \\log{(\\tan{u} + 1)} \\,du",
                                 "res": "INT u:[0,pi / 4]. log(tan(u) + 1)",
@@ -55,7 +51,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\int_{0}^{\\pi/4} \\log{(\\tan{x} + 1)} \\,dx",
                         "start": "INT x:[0,pi / 4]. log(tan(x) + 1)",
@@ -77,13 +72,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\int_{0}^{1} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx",
                         "start": "INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/4} \\log{(\\tan{x} + 1)} \\,dx",
                                 "res": "INT x:[0,pi / 4]. log(tan(x) + 1)",
@@ -97,7 +90,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "-(\\int_{0}^{\\pi/4} \\log{(\\tan{(\\frac{\\pi}{4} - x)} + 1)}\\cdot -1 \\,dx)",
                                 "res": "-(INT x:[0,pi / 4]. log(tan(pi / 4 - x) + 1) * -1)",
@@ -111,7 +103,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/4} \\log{(\\tan{(\\frac{\\pi}{4} - x)} + 1)} \\,dx",
                                 "res": "INT x:[0,pi / 4]. log(tan(pi / 4 - x) + 1)",
@@ -122,7 +113,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/4} \\log{(\\frac{\\tan{(\\frac{\\pi}{4})} - \\tan{x}}{1 + \\tan{(\\frac{\\pi}{4})} \\tan{x}} + 1)} \\,dx",
                                 "res": "INT x:[0,pi / 4]. log((tan(pi / 4) - tan(x)) / (1 + tan(pi / 4) * tan(x)) + 1)",
@@ -136,7 +126,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/4} \\log{(\\frac{-\\tan{x} + 1}{\\tan{x} + 1} + 1)} \\,dx",
                                 "res": "INT x:[0,pi / 4]. log((-tan(x) + 1) / (tan(x) + 1) + 1)",
@@ -147,7 +136,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/4} \\log{(\\frac{2}{1 + \\tan{x}})} \\,dx",
                                 "res": "INT x:[0,pi / 4]. log(2 / (1 + tan(x)))",
@@ -161,7 +149,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi/4} \\log{(2)} - \\log{(1 + \\tan{x})} \\,dx",
                                 "res": "INT x:[0,pi / 4]. log(2) - log(1 + tan(x))",
@@ -175,7 +162,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\log{(2)} (\\left. x \\right\\vert_{x=0}^{\\pi/4}) - (\\int_{0}^{\\pi/4} \\log{(1 + \\tan{x})} \\,dx)",
                                 "res": "log(2) * ([x]_x=0,pi / 4) - (INT x:[0,pi / 4]. log(1 + tan(x)))",
@@ -186,7 +172,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "-(\\int_{0}^{\\pi/4} \\log{(\\tan{x} + 1)} \\,dx) + \\frac{\\pi \\log{(2)}}{4}",
                                 "res": "-(INT x:[0,pi / 4]. log(tan(x) + 1)) + pi * log(2) / 4",
@@ -197,7 +182,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "-(\\int_{0}^{1} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx) + \\frac{\\pi \\log{(2)}}{4}",
                                 "res": "-(INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)) + pi * log(2) / 4",
@@ -214,13 +198,11 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\frac{\\pi}{4} \\log{(2)} - (\\int_{0}^{1} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx)",
                         "start": "pi / 4 * log(2) - (INT x:[0,1]. log(x + 1) / (x ^ 2 + 1))",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "-(\\int_{0}^{1} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx) + \\frac{\\pi \\log{(2)}}{4}",
                                 "res": "-(INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)) + pi * log(2) / 4",
@@ -251,13 +233,11 @@
                 "goal": "(INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)) = pi / 8 * log(2)",
                 "latex_goal": "\\int_{0}^{1} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx = \\frac{\\pi}{8} \\log{(2)}",
                 "start": {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_start": "\\int_{0}^{1} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx = \\frac{\\pi}{4} \\log{(2)} - (\\int_{0}^{1} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx)",
                     "start": "(INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)) = pi / 4 * log(2) - (INT x:[0,1]. log(x + 1) / (x ^ 2 + 1))",
                     "steps": [
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{1} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx = \\frac{\\pi \\log{(2)}}{8}",
                             "res": "(INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)) = pi * log(2) / 8",

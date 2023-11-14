@@ -39,13 +39,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\frac{d}{db} I(m,b)",
                         "start": "D b. I(m,b)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{d}{db} \\int_{0}^{\\infty} (x ^ {2} + b) ^ {-m - 1} \\,dx",
                                 "res": "D b. INT x:[0,oo]. (x ^ 2 + b) ^ (-m - 1)",
@@ -58,7 +56,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{d}{db} (x ^ {2} + b) ^ {-m - 1} \\,dx",
                                 "res": "INT x:[0,oo]. D b. (x ^ 2 + b) ^ (-m - 1)",
@@ -69,7 +66,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "(-m - 1) (\\int_{0}^{\\infty} (x ^ {2} + b) ^ {-m - 2} \\,dx)",
                                 "res": "(-m - 1) * (INT x:[0,oo]. (x ^ 2 + b) ^ (-m - 2))",
@@ -83,13 +79,11 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "(-(m + 1)) I(m + 1,b)",
                         "start": "-(m + 1) * I(m + 1,b)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "(-(m + 1)) (\\int_{0}^{\\infty} (x ^ {2} + b) ^ {-m - 2} \\,dx)",
                                 "res": "-(m + 1) * (INT x:[0,oo]. (x ^ 2 + b) ^ (-m - 2))",
@@ -102,7 +96,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "(-m - 1) (\\int_{0}^{\\infty} (x ^ {2} + b) ^ {-m - 2} \\,dx)",
                                 "res": "(-m - 1) * (INT x:[0,oo]. (x ^ 2 + b) ^ (-m - 2))",
@@ -146,18 +139,22 @@
             "proof": {
                 "base_case": {
                     "finished": true,
+                    "fixes": [
+                        [
+                            "m",
+                            "$int"
+                        ]
+                    ],
                     "goal": "I(0,b) = pi / (2 * sqrt(b))",
                     "latex_goal": "I(0,b) = \\frac{\\pi}{2 \\sqrt{b}}",
                     "proof": {
                         "calcs": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_start": "I(0,b)",
                                 "start": "I(0,b)",
                                 "steps": [
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\int_{0}^{\\infty} \\frac{1}{x ^ {2} + b} \\,dx",
                                         "res": "INT x:[0,oo]. 1 / (x ^ 2 + b)",
@@ -169,7 +166,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\lim\\limits_{t\\to \\infty} \\int_{0}^{t} \\frac{1}{x ^ {2} + b} \\,dx",
                                         "res": "LIM {t -> oo}. INT x:[0,t]. 1 / (x ^ 2 + b)",
@@ -181,7 +177,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\lim\\limits_{t\\to \\infty} \\int_{0}^{t/\\sqrt{b}} \\frac{1}{(\\sqrt{b} u) ^ {2} + b} \\sqrt{b} \\,du",
                                         "res": "LIM {t -> oo}. INT u:[0,t / sqrt(b)]. 1 / ((sqrt(b) * u) ^ 2 + b) * sqrt(b)",
@@ -195,7 +190,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\sqrt{b} (\\int_{0}^{\\infty} \\frac{1}{b u ^ {2} + b} \\,du)",
                                         "res": "sqrt(b) * (INT u:[0,oo]. 1 / (b * u ^ 2 + b))",
@@ -206,7 +200,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\sqrt{b} (\\int_{0}^{\\infty} \\frac{1}{b} (\\frac{1}{1 ^ {2} + u ^ {2}}) \\,du)",
                                         "res": "sqrt(b) * (INT u:[0,oo]. 1 / b * (1 / (1 ^ 2 + u ^ 2)))",
@@ -220,7 +213,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\sqrt{b} (\\frac{1\\cdot 1}{b} (\\left. \\tan^{-1}{u} \\right\\vert_{u=0}^{\\infty}))",
                                         "res": "sqrt(b) * (1 * 1 / b * ([atan(u)]_u=0,oo))",
@@ -231,7 +223,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\frac{\\pi}{2 \\sqrt{b}}",
                                         "res": "pi / (2 * sqrt(b))",
@@ -245,7 +236,6 @@
                                 "type": "Calculation"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_start": "\\frac{\\pi}{2 \\sqrt{b}}",
                                 "start": "pi / (2 * sqrt(b))",
@@ -264,18 +254,22 @@
                 "goal": "I(m,b) = pi / 2 ^ (2 * m + 1) * binom(2 * m,m) * (1 / b ^ ((2 * m + 1) / 2))",
                 "induct_case": {
                     "finished": true,
+                    "fixes": [
+                        [
+                            "m",
+                            "$int"
+                        ]
+                    ],
                     "goal": "I(m + 1,b) = 2 ^ -(2 * m) * pi / 8 * b ^ -((2 * m + 3) / 2) * binom(2 * m + 2,m + 1)",
                     "latex_goal": "I(m + 1,b) = \\frac{2 ^ {-2 m}\\cdot \\pi}{8} b ^ {-(2 m + 3)/2} \\binom{2 m + 2}{m + 1}",
                     "proof": {
                         "calcs": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_start": "I(m + 1,b)",
                                 "start": "I(m + 1,b)",
                                 "steps": [
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\frac{\\frac{d}{db} I(m,b)}{-(m + 1)}",
                                         "res": "(D b. I(m,b)) / -(m + 1)",
@@ -289,7 +283,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\frac{\\frac{d}{db} \\frac{\\pi}{2 ^ {2 m + 1}} \\binom{2 m}{m} (\\frac{1}{b ^ {(2 m + 1)/2}})}{-(m + 1)}",
                                         "res": "(D b. pi / 2 ^ (2 * m + 1) * binom(2 * m,m) * (1 / b ^ ((2 * m + 1) / 2))) / -(m + 1)",
@@ -301,7 +294,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "-\\frac{2 ^ {-2 m}\\cdot \\pi (2 m + 1)}{-4 m - 4} b ^ {-(2 m + 1)/2 - 1} \\binom{2 m}{m}",
                                         "res": "-(2 ^ -(2 * m) * pi * (2 * m + 1) / (-(4 * m) - 4) * b ^ (-((2 * m + 1) / 2) - 1) * binom(2 * m,m))",
@@ -312,7 +304,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "-\\frac{2 ^ {-2 m}\\cdot \\pi (2 m + 1)}{-4 m - 4} b ^ {-m - 3/2} \\binom{2 m}{m}",
                                         "res": "-(2 ^ -(2 * m) * pi * (2 * m + 1) / (-(4 * m) - 4) * b ^ (-m - 3/2) * binom(2 * m,m))",
@@ -326,7 +317,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\frac{b ^ {-m - 3/2} 2 ^ {-2 m}\\cdot \\pi (2 m + 1)}{4 m + 4} \\binom{2 m}{m}",
                                         "res": "b ^ (-m - 3/2) * 2 ^ -(2 * m) * pi * (2 * m + 1) / (4 * m + 4) * binom(2 * m,m)",
@@ -342,13 +332,11 @@
                                 "type": "Calculation"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_start": "\\frac{2 ^ {-2 m}\\cdot \\pi}{8} b ^ {-(2 m + 3)/2} \\binom{2 m + 2}{m + 1}",
                                 "start": "2 ^ -(2 * m) * pi / 8 * b ^ -((2 * m + 3) / 2) * binom(2 * m + 2,m + 1)",
                                 "steps": [
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\frac{2 ^ {-2 m}\\cdot \\pi}{8} b ^ {-(2 m + 3)/2} (2 \\binom{2 m}{m} (\\frac{2 m + 1}{m + 1}))",
                                         "res": "2 ^ -(2 * m) * pi / 8 * b ^ -((2 * m + 3) / 2) * (2 * binom(2 * m,m) * ((2 * m + 1) / (m + 1)))",
@@ -362,7 +350,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\frac{2 ^ {-2 m}\\cdot \\pi}{8} b ^ {-m - 3/2} (2 \\binom{2 m}{m} (\\frac{2 m + 1}{m + 1}))",
                                         "res": "2 ^ -(2 * m) * pi / 8 * b ^ (-m - 3/2) * (2 * binom(2 * m,m) * ((2 * m + 1) / (m + 1)))",
@@ -376,7 +363,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\frac{b ^ {-m - 3/2} 2 ^ {-2 m}\\cdot \\pi (2 m + 1)}{4 m + 4} \\binom{2 m}{m}",
                                         "res": "b ^ (-m - 3/2) * 2 ^ -(2 * m) * pi * (2 * m + 1) / (4 * m + 4) * binom(2 * m,m)",

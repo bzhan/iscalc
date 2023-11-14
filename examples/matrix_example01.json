@@ -18,12 +18,16 @@
                     "$int"
                 ],
                 [
+                    "m",
+                    "$int"
+                ],
+                [
                     "P",
-                    "$tensor($real, n, n)"
+                    "$tensor($real, m, m)"
                 ],
                 [
                     "A",
-                    "$tensor($real, n, n)"
+                    "$tensor($real, m, m)"
                 ]
             ],
             "goal": "(inv(P) * A * P) ^ n = inv(P) * A ^ n * P",
@@ -147,30 +151,46 @@
             "proof": {
                 "base_case": {
                     "finished": true,
-                    "goal": "unit_matrix(n) = unit_matrix(n)",
-                    "latex_goal": "\\mathbf{1}_{n \\times n} = \\mathbf{1}_{n \\times n}",
+                    "fixes": [
+                        [
+                            "n",
+                            "$int"
+                        ],
+                        [
+                            "m",
+                            "$int"
+                        ],
+                        [
+                            "P",
+                            "$tensor($real, m, m)"
+                        ],
+                        [
+                            "A",
+                            "$tensor($real, m, m)"
+                        ]
+                    ],
+                    "goal": "unit_matrix(m) = unit_matrix(m)",
+                    "latex_goal": "\\mathbf{1}_{m \\times m} = \\mathbf{1}_{m \\times m}",
                     "proof": {
                         "calcs": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
-                                "latex_start": "\\mathbf{1}_{n \\times n}",
-                                "start": "unit_matrix(n)",
+                                "latex_start": "\\mathbf{1}_{m \\times m}",
+                                "start": "unit_matrix(m)",
                                 "steps": [],
                                 "type": "Calculation"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
-                                "latex_start": "\\mathbf{1}_{n \\times n}",
-                                "start": "unit_matrix(n)",
+                                "latex_start": "\\mathbf{1}_{m \\times m}",
+                                "start": "unit_matrix(m)",
                                 "steps": [],
                                 "type": "Calculation"
                             }
                         ],
                         "finished": true,
-                        "goal": "unit_matrix(n) = unit_matrix(n)",
-                        "latex_goal": "\\mathbf{1}_{n \\times n} = \\mathbf{1}_{n \\times n}",
+                        "goal": "unit_matrix(m) = unit_matrix(m)",
+                        "latex_goal": "\\mathbf{1}_{m \\times m} = \\mathbf{1}_{m \\times m}",
                         "type": "CalculationProof"
                     },
                     "type": "Goal"
@@ -179,6 +199,24 @@
                 "goal": "(inv(P) * A * P) ^ n = inv(P) * A ^ n * P",
                 "induct_case": {
                     "finished": true,
+                    "fixes": [
+                        [
+                            "n",
+                            "$int"
+                        ],
+                        [
+                            "m",
+                            "$int"
+                        ],
+                        [
+                            "P",
+                            "$tensor($real, m, m)"
+                        ],
+                        [
+                            "A",
+                            "$tensor($real, m, m)"
+                        ]
+                    ],
                     "goal": "(inv(P) * A * P) ^ (n + 1) = inv(P) * A ^ (n + 1) * P",
                     "latex_goal": "(P ^ {-1} A P) ^ {n + 1} = P ^ {-1} A ^ {n + 1} P",
                     "obligations": [
@@ -300,13 +338,11 @@
                     "proof": {
                         "calcs": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_start": "(P ^ {-1} A P) ^ {n + 1}",
                                 "start": "(inv(P) * A * P) ^ (n + 1)",
                                 "steps": [
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "(P ^ {-1} A P) ^ {n} (P ^ {-1} A P)",
                                         "res": "(inv(P) * A * P) ^ n * (inv(P) * A * P)",
@@ -320,7 +356,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "P ^ {-1} A ^ {n} P (P ^ {-1} A P)",
                                         "res": "inv(P) * A ^ n * P * (inv(P) * A * P)",
@@ -332,7 +367,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "P ^ {-1} A ^ {n} A P",
                                         "res": "inv(P) * A ^ n * A * P",
@@ -343,7 +377,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "P ^ {-1} (A ^ {n} A) P",
                                         "res": "inv(P) * (A ^ n * A) * P",
@@ -357,7 +390,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "P ^ {-1} A ^ {n + 1} P",
                                         "res": "inv(P) * A ^ (n + 1) * P",
@@ -374,7 +406,6 @@
                                 "type": "Calculation"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_start": "P ^ {-1} A ^ {n + 1} P",
                                 "start": "inv(P) * A ^ (n + 1) * P",

@@ -1,13 +1,11 @@
 {
     "content": [
         {
-            "dead_vars": [],
             "fixes": [],
             "latex_start": "\\int_{0}^{\\pi} \\frac{x \\sin{x}}{1 + \\cos^{2}(x)} \\,dx",
             "start": "INT x:[0,pi]. x * sin(x) / (1 + cos(x) ^ 2)",
             "steps": [
                 {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_res": "\\int_{0}^{\\pi} \\frac{\\sin{y} (-y + \\pi)}{\\cos^{2}(y) + 1} \\,dy",
                     "res": "INT y:[0,pi]. sin(y) * (-y + pi) / (cos(y) ^ 2 + 1)",
@@ -21,7 +19,6 @@
                     "type": "CalculationStep"
                 },
                 {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_res": "\\int_{0}^{\\pi} -\\frac{y \\sin{y}}{\\cos^{2}(y) + 1} + \\frac{\\pi \\sin{y}}{\\cos^{2}(y) + 1} \\,dy",
                     "res": "INT y:[0,pi]. -(y * sin(y) / (cos(y) ^ 2 + 1)) + pi * sin(y) / (cos(y) ^ 2 + 1)",
@@ -32,7 +29,6 @@
                     "type": "CalculationStep"
                 },
                 {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_res": "\\pi (\\int_{0}^{\\pi} \\frac{\\sin{y}}{\\cos^{2}(y) + 1} \\,dy) - (\\int_{0}^{\\pi} \\frac{y \\sin{y}}{\\cos^{2}(y) + 1} \\,dy)",
                     "res": "pi * (INT y:[0,pi]. sin(y) / (cos(y) ^ 2 + 1)) - (INT y:[0,pi]. y * sin(y) / (cos(y) ^ 2 + 1))",
@@ -43,7 +39,6 @@
                     "type": "CalculationStep"
                 },
                 {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_res": "\\frac{\\pi}{2} (\\int_{0}^{\\pi} \\frac{\\sin{y}}{\\cos^{2}(y) + 1} \\,dy)",
                     "res": "pi / 2 * (INT y:[0,pi]. sin(y) / (cos(y) ^ 2 + 1))",
@@ -55,7 +50,6 @@
                     "type": "CalculationStep"
                 },
                 {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_res": "\\frac{\\pi}{2} (\\int_{-1}^{1} \\frac{1}{u ^ {2} + 1} \\,du)",
                     "res": "pi / 2 * (INT u:[-1,1]. 1 / (u ^ 2 + 1))",
@@ -69,7 +63,6 @@
                     "type": "CalculationStep"
                 },
                 {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_res": "\\frac{\\pi}{2} (\\left. \\tan^{-1}{u} \\right\\vert_{u=-1}^{1})",
                     "res": "pi / 2 * ([atan(u)]_u=-1,1)",
@@ -80,7 +73,6 @@
                     "type": "CalculationStep"
                 },
                 {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_res": "\\frac{\\pi ^ {2}}{4}",
                     "res": "pi ^ 2 / 4",

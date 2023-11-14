@@ -39,17 +39,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [
-                            "n"
-                        ],
                         "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx",
                         "start": "INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))",
                         "steps": [
                             {
-                                "dead_vars": [
-                                    "n"
-                                ],
                                 "fixes": [],
                                 "latex_res": "0",
                                 "res": "0",
@@ -63,7 +57,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "0",
                         "start": "0",
@@ -101,13 +94,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx",
                         "start": "INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx",
                                 "res": "INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))",
@@ -120,7 +111,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} x ^ {2 n - 2} e^{-x ^ {2}} (2 n - 1) - 2 x ^ {2 n} e^{-x ^ {2}} \\,dx",
                                 "res": "INT x:[0,oo]. x ^ (2 * n - 2) * exp(-(x ^ 2)) * (2 * n - 1) - 2 * x ^ (2 * n) * exp(-(x ^ 2))",
@@ -132,7 +122,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "(2 n - 1) (\\int_{0}^{\\infty} x ^ {2 n - 2} e^{-x ^ {2}} \\,dx) - 2 (\\int_{0}^{\\infty} x ^ {2 n} e^{-x ^ {2}} \\,dx)",
                                 "res": "(2 * n - 1) * (INT x:[0,oo]. x ^ (2 * n - 2) * exp(-(x ^ 2))) - 2 * (INT x:[0,oo]. x ^ (2 * n) * exp(-(x ^ 2)))",
@@ -143,7 +132,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "(2 n - 1) (\\int_{0}^{\\infty} x ^ {2 (n - 1)} e^{-x ^ {2}} \\,dx) - 2 (\\int_{0}^{\\infty} x ^ {2 n} e^{-x ^ {2}} \\,dx)",
                                 "res": "(2 * n - 1) * (INT x:[0,oo]. x ^ (2 * (n - 1)) * exp(-(x ^ 2))) - 2 * (INT x:[0,oo]. x ^ (2 * n) * exp(-(x ^ 2)))",
@@ -157,7 +145,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "(2 n - 1) I{(n - 1)} - 2 I{(n)}",
                                 "res": "(2 * n - 1) * I(n - 1) - 2 * I(n)",
@@ -173,7 +160,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "(2 n - 1) I{(n - 1)} - 2 I{(n)}",
                         "start": "(2 * n - 1) * I(n - 1) - 2 * I(n)",
@@ -214,13 +200,11 @@
                 "goal": "I(n) = (2 * n - 1) / 2 * I(n - 1)",
                 "latex_goal": "I{(n)} = \\frac{2 n - 1}{2} I{(n - 1)}",
                 "start": {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_start": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx = 0",
                     "start": "(INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = 0",
                     "steps": [
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "(2 n - 1) I{(n - 1)} - 2 I{(n)} = 0",
                             "res": "(2 * n - 1) * I(n - 1) - 2 * I(n) = 0",
@@ -234,7 +218,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "I{(n)} = \\frac{I{(n - 1)} (2 n - 1)}{2}",
                             "res": "I(n) = I(n - 1) * (2 * n - 1) / 2",
@@ -247,7 +230,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "I{(n)} = \\frac{2 n - 1}{2} I{(n - 1)}",
                             "res": "I(n) = (2 * n - 1) / 2 * I(n - 1)",
@@ -290,18 +272,22 @@
             "proof": {
                 "base_case": {
                     "finished": true,
+                    "fixes": [
+                        [
+                            "n",
+                            "$int"
+                        ]
+                    ],
                     "goal": "I(0) = sqrt(pi) / 2",
                     "latex_goal": "I{(0)} = \\frac{\\sqrt{\\pi}}{2}",
                     "proof": {
                         "calcs": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_start": "I{(0)}",
                                 "start": "I(0)",
                                 "steps": [
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\int_{0}^{\\infty} e^{-x ^ {2}} \\,dx",
                                         "res": "INT x:[0,oo]. exp(-(x ^ 2))",
@@ -313,7 +299,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\int_{0}^{\\infty} \\frac{\\sqrt{2}}{2} e^{-x ^ {2}/2} \\,dx",
                                         "res": "INT x:[0,oo]. sqrt(2) / 2 * exp(-(x ^ 2 / 2))",
@@ -327,7 +312,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\int_{0}^{\\infty} \\frac{\\sqrt{2}}{2} e^{-x ^ {2}/2} \\,dx",
                                         "res": "INT x:[0,oo]. sqrt(2) / 2 * exp(-(x ^ 2) / 2)",
@@ -341,7 +325,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\frac{\\sqrt{2}}{2}\\cdot (\\frac{\\sqrt{2} \\sqrt{\\pi}}{2})",
                                         "res": "sqrt(2) / 2 * (sqrt(2) * sqrt(pi) / 2)",
@@ -352,7 +335,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\frac{\\sqrt{\\pi}}{2}",
                                         "res": "sqrt(pi) / 2",
@@ -366,7 +348,6 @@
                                 "type": "Calculation"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_start": "\\frac{\\sqrt{\\pi}}{2}",
                                 "start": "sqrt(pi) / 2",
@@ -385,18 +366,22 @@
                 "goal": "I(n) = factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi)",
                 "induct_case": {
                     "finished": true,
+                    "fixes": [
+                        [
+                            "n",
+                            "$int"
+                        ]
+                    ],
                     "goal": "I(n + 1) = 4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))",
                     "latex_goal": "I{(n + 1)} = \\frac{4 ^ {-n}\\cdot \\sqrt{\\pi} (2 n + 2)!}{8 (n + 1)!}",
                     "proof": {
                         "calcs": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_start": "I{(n + 1)}",
                                 "start": "I(n + 1)",
                                 "steps": [
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\frac{2 (n + 1) - 1}{2} I{(n + 1 - 1)}",
                                         "res": "(2 * (n + 1) - 1) / 2 * I(n + 1 - 1)",
@@ -410,7 +395,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\frac{I{(n)} (2 n + 1)}{2}",
                                         "res": "I(n) * (2 * n + 1) / 2",
@@ -421,7 +405,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\frac{\\frac{(2 n)!}{4 ^ {n} n!}\\cdot (\\frac{1}{2})\\cdot \\sqrt{\\pi} (2 n + 1)}{2}",
                                         "res": "factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi) * (2 * n + 1) / 2",
@@ -433,7 +416,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "4 ^ {-n}\\cdot \\sqrt{\\pi} (\\frac{(2 n + 1) (2 n)!}{4 n!})",
                                         "res": "4 ^ -n * sqrt(pi) * ((2 * n + 1) * factorial(2 * n) / (4 * factorial(n)))",
@@ -447,7 +429,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "4 ^ {-n}\\cdot \\sqrt{\\pi} (\\frac{(2 n + 1)!}{4 n!})",
                                         "res": "4 ^ -n * sqrt(pi) * (factorial(2 * n + 1) / (4 * factorial(n)))",
@@ -461,7 +442,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "4 ^ {-n}\\cdot \\sqrt{\\pi} (\\frac{(2 n + 1 + 1) (2 n + 1)!}{8 ((n + 1) n!)})",
                                         "res": "4 ^ -n * sqrt(pi) * ((2 * n + 1 + 1) * factorial(2 * n + 1) / (8 * ((n + 1) * factorial(n))))",
@@ -475,7 +455,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "4 ^ {-n}\\cdot \\sqrt{\\pi} (\\frac{(2 n + 2)!}{8 ((n + 1) n!)})",
                                         "res": "4 ^ -n * sqrt(pi) * (factorial(2 * n + 2) / (8 * ((n + 1) * factorial(n))))",
@@ -489,7 +468,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "4 ^ {-n}\\cdot \\sqrt{\\pi} (\\frac{(2 n + 2)!}{8 (n + 1)!})",
                                         "res": "4 ^ -n * sqrt(pi) * (factorial(2 * n + 2) / (8 * factorial(n + 1)))",
@@ -503,7 +481,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\frac{4 ^ {-n}\\cdot \\sqrt{\\pi} (2 n + 2)!}{8 (n + 1)!}",
                                         "res": "4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))",
@@ -520,7 +497,6 @@
                                 "type": "Calculation"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_start": "\\frac{4 ^ {-n}\\cdot \\sqrt{\\pi} (2 n + 2)!}{8 (n + 1)!}",
                                 "start": "4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))",

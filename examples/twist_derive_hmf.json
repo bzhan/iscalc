@@ -4,11 +4,11 @@
             "conds": [
                 {
                     "cond": "type(w,0,3)",
-                    "latex_cond": "type{(w,0,3)}"
+                    "latex_cond": "type(w,0,3)"
                 },
                 {
                     "cond": "type(v,0,3)",
-                    "latex_cond": "type{(v,0,3)}"
+                    "latex_cond": "type(v,0,3)"
                 }
             ],
             "eq": "twist(w,v) = hat(rcon(w,v))",
@@ -26,16 +26,12 @@
             "finished": true,
             "fixes": [
                 [
-                    "hm",
-                    "$tensor($real, 4, 4)"
-                ],
-                [
                     "hmf",
-                    "$tensor($real, 4, 4)"
+                    "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
                 ],
                 [
                     "twist",
-                    "$real"
+                    "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
                 ],
                 [
                     "w",
@@ -47,21 +43,15 @@
                 ]
             ],
             "goal": "(D t. hmf(t,w,v)) = twist(w,v) * hmf(t,w,v)",
-            "latex_goal": "\\frac{d}{dt} hmf{(t,w,v)} = twist(w,v) hmf{(t,w,v)}",
+            "latex_goal": "\\frac{d}{dt} e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})} = twist(w,v) e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [
-                            "w"
-                        ],
                         "fixes": [],
-                        "latex_start": "\\frac{d}{dt} hmf{(t,w,v)}",
+                        "latex_start": "\\frac{d}{dt} e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
                         "start": "D t. hmf(t,w,v)",
                         "steps": [
                             {
-                                "dead_vars": [
-                                    "w"
-                                ],
                                 "fixes": [],
                                 "latex_res": "\\frac{d}{dt} hm(\\mathbf{1}_{3 \\times 3},t v)",
                                 "res": "D t. hm(unit_matrix(3),t * v)",
@@ -74,9 +64,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [
-                                    "w"
-                                ],
                                 "fixes": [],
                                 "latex_res": "\\frac{d}{dt} \\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&t v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "D t. [[unit_matrix(3), t * v], [zero_matrix(1,3), unit_matrix(1)]]",
@@ -89,9 +76,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [
-                                    "w"
-                                ],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\mathbf{0}_{3 \\times 3}&v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[zero_matrix(3,3), v], [zero_matrix(1,3), zero_matrix(1,1)]]",
@@ -105,17 +89,13 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [
-                            "w"
-                        ],
                         "fixes": [],
-                        "latex_start": "twist(w,v) hmf{(t,w,v)}",
+                        "latex_start": "twist(w,v) e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
                         "start": "twist(w,v) * hmf(t,w,v)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
-                                "latex_res": "hat({\\begin{bmatrix}w\\\\v\\end{bmatrix}}) hmf{(t,w,v)}",
+                                "latex_res": "hat({\\begin{bmatrix}w\\\\v\\end{bmatrix}}) e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
                                 "res": "hat([[w], [v]]) * hmf(t,w,v)",
                                 "rule": {
                                     "func_name": "twist",
@@ -126,7 +106,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "hat({\\begin{bmatrix}w\\\\v\\end{bmatrix}}) hm(\\mathbf{1}_{3 \\times 3},t v)",
                                 "res": "hat([[w], [v]]) * hm(unit_matrix(3),t * v)",
@@ -139,7 +118,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "hat({\\begin{bmatrix}w\\\\v\\end{bmatrix}}) \\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&t v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "hat([[w], [v]]) * [[unit_matrix(3), t * v], [zero_matrix(1,3), unit_matrix(1)]]",
@@ -152,7 +130,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\hat{w}&v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix} \\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&t v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(w), v], [zero_matrix(1,3), zero_matrix(1,1)]] * [[unit_matrix(3), t * v], [zero_matrix(1,3), unit_matrix(1)]]",
@@ -164,9 +141,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [
-                                    "w"
-                                ],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}hat({\\mathbf{0}_{3 \\times 1}})&v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix} \\begin{bmatrix}\\mathbf{1}_{3 \\times 3}&t v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(zero_matrix(3,1)), v], [zero_matrix(1,3), zero_matrix(1,1)]] * [[unit_matrix(3), t * v], [zero_matrix(1,3), unit_matrix(1)]]",
@@ -180,9 +154,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [
-                                    "w"
-                                ],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\mathbf{0}_{3 \\times 3}&v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[zero_matrix(3,3), v], [zero_matrix(1,3), zero_matrix(1,1)]]",
@@ -198,7 +169,7 @@
                 ],
                 "finished": true,
                 "goal": "(D t. hmf(t,w,v)) = twist(w,v) * hmf(t,w,v)",
-                "latex_goal": "\\frac{d}{dt} hmf{(t,w,v)} = twist(w,v) hmf{(t,w,v)}",
+                "latex_goal": "\\frac{d}{dt} e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})} = twist(w,v) e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
                 "type": "CalculationProof"
             },
             "type": "Goal"
@@ -213,16 +184,12 @@
             "finished": true,
             "fixes": [
                 [
-                    "hm",
-                    "$tensor($real, 4, 4)"
-                ],
-                [
                     "hmf",
-                    "$tensor($real, 4, 4)"
+                    "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
                 ],
                 [
                     "twist",
-                    "$real"
+                    "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
                 ],
                 [
                     "w",
@@ -234,13 +201,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\frac{d}{dt} e^{t \\hat{w}}",
                         "start": "D t. exp(t * hat(w))",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{d}{dt} (\\mathbf{1}_{3 \\times 3} + \\sin{t} \\hat{w} + (1 - \\cos{t}) \\hat{w} ^ {2})",
                                 "res": "D t. unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2",
@@ -254,7 +219,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\sin{t} \\hat{w} ^ {2} + \\cos{t} \\hat{w}",
                                 "res": "sin(t) * hat(w) ^ 2 + cos(t) * hat(w)",
@@ -268,13 +232,11 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\hat{w} e^{t \\hat{w}}",
                         "start": "hat(w) * exp(t * hat(w))",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\hat{w} (\\mathbf{1}_{3 \\times 3} + \\sin{t} \\hat{w} + (1 - \\cos{t}) \\hat{w} ^ {2})",
                                 "res": "hat(w) * (unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2)",
@@ -288,7 +250,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "(-\\cos{t} + 1) \\hat{w} \\hat{w} ^ {2} + \\sin{t} \\hat{w} \\hat{w} + \\hat{w} \\mathbf{1}_{3 \\times 3}",
                                 "res": "(-cos(t) + 1) * hat(w) * hat(w) ^ 2 + sin(t) * hat(w) * hat(w) + hat(w) * unit_matrix(3)",
@@ -299,7 +260,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "(-\\cos{t} + 1) (\\hat{w} \\hat{w} ^ {2}) + \\sin{t} \\hat{w} \\hat{w} + \\hat{w} \\mathbf{1}_{3 \\times 3}",
                                 "res": "(-cos(t) + 1) * (hat(w) * hat(w) ^ 2) + sin(t) * hat(w) * hat(w) + hat(w) * unit_matrix(3)",
@@ -313,7 +273,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "(-\\cos{t} + 1) \\hat{w} ^ {2\\cdot 1 + 1} + \\sin{t} \\hat{w} \\hat{w} + \\hat{w} \\mathbf{1}_{3 \\times 3}",
                                 "res": "(-cos(t) + 1) * hat(w) ^ (2 * 1 + 1) + sin(t) * hat(w) * hat(w) + hat(w) * unit_matrix(3)",
@@ -327,7 +286,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "(-\\cos{t} + 1) ((-1) ^ {1} \\hat{w}) + \\sin{t} \\hat{w} \\hat{w} + \\hat{w} \\mathbf{1}_{3 \\times 3}",
                                 "res": "(-cos(t) + 1) * ((-1) ^ 1 * hat(w)) + sin(t) * hat(w) * hat(w) + hat(w) * unit_matrix(3)",
@@ -341,7 +299,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\cos{t} \\hat{w} - \\hat{w} + \\sin{t} \\hat{w} \\hat{w} + \\hat{w} \\mathbf{1}_{3 \\times 3}",
                                 "res": "cos(t) * hat(w) - hat(w) + sin(t) * hat(w) * hat(w) + hat(w) * unit_matrix(3)",
@@ -353,7 +310,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\sin{t} \\hat{w} \\hat{w} + \\cos{t} \\hat{w}",
                                 "res": "sin(t) * hat(w) * hat(w) + cos(t) * hat(w)",
@@ -364,7 +320,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\sin{t} (\\hat{w} \\hat{w}) + \\cos{t} \\hat{w}",
                                 "res": "sin(t) * (hat(w) * hat(w)) + cos(t) * hat(w)",
@@ -378,7 +333,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\sin{t} \\hat{w} ^ {2} + \\cos{t} \\hat{w}",
                                 "res": "sin(t) * hat(w) ^ 2 + cos(t) * hat(w)",
@@ -412,16 +366,12 @@
             "finished": true,
             "fixes": [
                 [
-                    "hm",
-                    "$tensor($real, 4, 4)"
-                ],
-                [
                     "hmf",
-                    "$tensor($real, 4, 4)"
+                    "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
                 ],
                 [
                     "twist",
-                    "$real"
+                    "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
                 ],
                 [
                     "w",
@@ -433,17 +383,15 @@
                 ]
             ],
             "goal": "(D t. hmf(t,w,v)) = twist(w,v) * hmf(t,w,v)",
-            "latex_goal": "\\frac{d}{dt} hmf{(t,w,v)} = twist(w,v) hmf{(t,w,v)}",
+            "latex_goal": "\\frac{d}{dt} e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})} = twist(w,v) e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
-                        "latex_start": "\\frac{d}{dt} hmf{(t,w,v)}",
+                        "latex_start": "\\frac{d}{dt} e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
                         "start": "D t. hmf(t,w,v)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{d}{dt} hm(e^{t \\hat{w}},(-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v)",
                                 "res": "D t. hm(exp(t * hat(w)),(-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v)",
@@ -456,7 +404,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{d}{dt} \\begin{bmatrix}e^{t \\hat{w}}&(-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "D t. [[exp(t * hat(w)), (-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
@@ -469,7 +416,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\frac{d}{dt} e^{t \\hat{w}}&-(\\frac{d}{dt} e^{t \\hat{w}}) \\hat{w} v + w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[D t. exp(t * hat(w)), -((D t. exp(t * hat(w))) * hat(w) * v) + w * T(w) * v], [zero_matrix(1,3), zero_matrix(1,1)]]",
@@ -480,7 +426,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-(\\frac{d}{dt} e^{t \\hat{w}}) \\hat{w} v + w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(w) * exp(t * hat(w)), -((D t. exp(t * hat(w))) * hat(w) * v) + w * T(w) * v], [zero_matrix(1,3), zero_matrix(1,1)]]",
@@ -494,7 +439,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + w * T(w) * v], [zero_matrix(1,3), zero_matrix(1,1)]]",
@@ -511,15 +455,13 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
-                        "latex_start": "twist(w,v) hmf{(t,w,v)}",
+                        "latex_start": "twist(w,v) e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
                         "start": "twist(w,v) * hmf(t,w,v)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
-                                "latex_res": "hat({\\begin{bmatrix}w\\\\v\\end{bmatrix}}) hmf{(t,w,v)}",
+                                "latex_res": "hat({\\begin{bmatrix}w\\\\v\\end{bmatrix}}) e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
                                 "res": "hat([[w], [v]]) * hmf(t,w,v)",
                                 "rule": {
                                     "func_name": "twist",
@@ -530,7 +472,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "hat({\\begin{bmatrix}w\\\\v\\end{bmatrix}}) hm(e^{t \\hat{w}},(-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v)",
                                 "res": "hat([[w], [v]]) * hm(exp(t * hat(w)),(-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v)",
@@ -543,7 +484,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\hat{w}&v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix} hm(e^{t \\hat{w}},(-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v)",
                                 "res": "[[hat(w), v], [zero_matrix(1,3), zero_matrix(1,1)]] * hm(exp(t * hat(w)),(-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v)",
@@ -555,7 +495,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\hat{w}&v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix} \\begin{bmatrix}e^{t \\hat{w}}&(-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(w), v], [zero_matrix(1,3), zero_matrix(1,1)]] * [[exp(t * hat(w)), (-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
@@ -568,7 +507,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&\\hat{w} ((-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v) + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(w) * exp(t * hat(w)), hat(w) * ((-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v) + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
@@ -579,7 +517,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&\\hat{w} (-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t \\hat{w} w w^{\\text{T}} v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(w) * exp(t * hat(w)), hat(w) * (-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * hat(w) * w * T(w) * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
@@ -591,7 +528,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&(-\\hat{w} e^{t \\hat{w}} \\hat{w} + \\hat{w} \\mathbf{1}_{3 \\times 3} \\hat{w}) v + t \\hat{w} w w^{\\text{T}} v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(w) * exp(t * hat(w)), (-(hat(w) * exp(t * hat(w)) * hat(w)) + hat(w) * unit_matrix(3) * hat(w)) * v + t * hat(w) * w * T(w) * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
@@ -603,7 +539,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&(-\\hat{w} e^{t \\hat{w}} \\hat{w} + \\hat{w} \\hat{w}) v + t \\hat{w} w w^{\\text{T}} v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(w) * exp(t * hat(w)), (-(hat(w) * exp(t * hat(w)) * hat(w)) + hat(w) * hat(w)) * v + t * hat(w) * w * T(w) * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
@@ -614,7 +549,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + \\hat{w} \\hat{w} v + t \\hat{w} w w^{\\text{T}} v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + hat(w) * hat(w) * v + t * hat(w) * w * T(w) * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
@@ -626,7 +560,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + \\hat{w} ^ {2} v + t \\hat{w} w w^{\\text{T}} v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + hat(w) ^ 2 * v + t * hat(w) * w * T(w) * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
@@ -640,7 +573,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + (w w^{\\text{T}} - \\|w\\| ^ {2} \\mathbf{1}_{3 \\times 3}) v + t \\hat{w} w w^{\\text{T}} v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + (w * T(w) - norm(w) ^ 2 * unit_matrix(3)) * v + t * hat(w) * w * T(w) * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
@@ -654,7 +586,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + (w w^{\\text{T}} - 1 ^ {2} \\mathbf{1}_{3 \\times 3}) v + t \\hat{w} w w^{\\text{T}} v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + (w * T(w) - 1 ^ 2 * unit_matrix(3)) * v + t * hat(w) * w * T(w) * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
@@ -668,7 +599,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + (w w^{\\text{T}} v - \\mathbf{1}_{3 \\times 3} v) + t \\hat{w} w w^{\\text{T}} v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + (w * T(w) * v - unit_matrix(3) * v) + t * hat(w) * w * T(w) * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
@@ -680,7 +610,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + t \\hat{w} w w^{\\text{T}} v + w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + t * hat(w) * w * T(w) * v + w * T(w) * v], [zero_matrix(1,3), zero_matrix(1,1)]]",
@@ -691,7 +620,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + t (\\hat{w} w) w^{\\text{T}} v + w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + t * (hat(w) * w) * T(w) * v + w * T(w) * v], [zero_matrix(1,3), zero_matrix(1,1)]]",
@@ -705,7 +633,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + t \\mathbf{0}_{3 \\times 1} w^{\\text{T}} v + w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + t * zero_matrix(3,1) * T(w) * v + w * T(w) * v], [zero_matrix(1,3), zero_matrix(1,1)]]",
@@ -719,7 +646,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + w w^{\\text{T}} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
                                 "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + w * T(w) * v], [zero_matrix(1,3), zero_matrix(1,1)]]",
@@ -735,7 +661,7 @@
                 ],
                 "finished": true,
                 "goal": "(D t. hmf(t,w,v)) = twist(w,v) * hmf(t,w,v)",
-                "latex_goal": "\\frac{d}{dt} hmf{(t,w,v)} = twist(w,v) hmf{(t,w,v)}",
+                "latex_goal": "\\frac{d}{dt} e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})} = twist(w,v) e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
                 "type": "CalculationProof"
             },
             "type": "Goal"

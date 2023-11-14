@@ -13,13 +13,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{1}{1 + e^{a x}} \\,dx",
                         "start": "INT x:[0,oo]. 1 / (1 + exp(a * x))",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{1}^{\\infty} \\frac{1}{a u (u + 1)} \\,du",
                                 "res": "INT u:[1,oo]. 1 / (a * u * (u + 1))",
@@ -33,7 +31,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{a} (\\int_{1}^{\\infty} \\frac{1}{u (u + 1)} \\,du)",
                                 "res": "1 / a * (INT u:[1,oo]. 1 / (u * (u + 1)))",
@@ -44,7 +41,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{a} (\\int_{1}^{\\infty} \\frac{1}{u} - \\frac{1}{u + 1} \\,du)",
                                 "res": "1 / a * (INT u:[1,oo]. 1 / u - 1 / (u + 1))",
@@ -58,7 +54,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{a} (-(\\int_{1}^{\\infty} \\frac{1}{u + 1} \\,du) + (\\int_{1}^{\\infty} \\frac{1}{u} \\,du))",
                                 "res": "1 / a * (-(INT u:[1,oo]. 1 / (u + 1)) + (INT u:[1,oo]. 1 / u))",
@@ -69,7 +64,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{a} (-(\\int_{2}^{\\infty} \\frac{1}{y} \\,dy) + (\\int_{1}^{\\infty} \\frac{1}{u} \\,du))",
                                 "res": "1 / a * (-(INT y:[2,oo]. 1 / y) + (INT u:[1,oo]. 1 / u))",
@@ -83,7 +77,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{1}{a} (-(\\left. \\log{y} \\right\\vert_{y=2}^{\\infty}) + (\\left. \\log{u} \\right\\vert_{u=1}^{\\infty}))",
                                 "res": "1 / a * (-([log(y)]_y=2,oo) + ([log(u)]_u=1,oo))",
@@ -94,7 +87,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{\\log{(2)}}{a}",
                                 "res": "log(2) / a",
@@ -108,7 +100,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\frac{\\log{(2)}}{a}",
                         "start": "log(2) / a",
@@ -139,13 +130,11 @@
                 "goal": "(INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2)) = log(2) / a ^ 2",
                 "latex_goal": "\\int_{1}^{\\infty} \\frac{\\log{x}}{a ^ {2} (x + 1) ^ {2}} \\,dx = \\frac{\\log{(2)}}{a ^ {2}}",
                 "start": {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_start": "\\int_{0}^{\\infty} \\frac{1}{1 + e^{a x}} \\,dx = \\frac{\\log{(2)}}{a}",
                     "start": "(INT x:[0,oo]. 1 / (1 + exp(a * x))) = log(2) / a",
                     "steps": [
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\frac{d}{da} \\int_{0}^{\\infty} \\frac{1}{1 + e^{a x}} \\,dx = \\frac{d}{da} \\frac{\\log{(2)}}{a}",
                             "res": "(D a. INT x:[0,oo]. 1 / (1 + exp(a * x))) = (D a. log(2) / a)",
@@ -157,7 +146,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "-(\\int_{0}^{\\infty} \\frac{x e^{a x}}{(e^{a x} + 1) ^ {2}} \\,dx) = -\\frac{\\log{(2)}}{a ^ {2}}",
                             "res": "-(INT x:[0,oo]. x * exp(a * x) / (exp(a * x) + 1) ^ 2) = -(log(2) / a ^ 2)",
@@ -168,7 +156,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "-(\\int_{1}^{\\infty} \\frac{\\log{x}}{a ^ {2} (x + 1) ^ {2}} \\,dx) = -\\frac{\\log{(2)}}{a ^ {2}}",
                             "res": "-(INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2)) = -(log(2) / a ^ 2)",
@@ -183,7 +170,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{1}^{\\infty} \\frac{\\log{x}}{a ^ {2} (x + 1) ^ {2}} \\,dx = \\frac{\\log{(2)}}{a ^ {2}}",
                             "res": "(INT x:[1,oo]. log(x) / (a ^ 2 * (x + 1) ^ 2)) = log(2) / a ^ 2",
@@ -209,13 +195,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\int_{1}^{\\infty} \\frac{\\log{x}}{(x + 1) ^ {2}} \\,dx",
                         "start": "INT x:[1,oo]. log(x) / (x + 1) ^ 2",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{1}^{\\infty} \\frac{\\log{x}}{1 ^ {2} (x + 1) ^ {2}} \\,dx",
                                 "res": "INT x:[1,oo]. log(x) / (1 ^ 2 * (x + 1) ^ 2)",
@@ -229,7 +213,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\frac{\\log{(2)}}{1 ^ {2}}",
                                 "res": "log(2) / 1 ^ 2",
@@ -243,7 +226,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\log{(2)}",
                                 "res": "log(2)",
@@ -257,7 +239,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\log{(2)}",
                         "start": "log(2)",

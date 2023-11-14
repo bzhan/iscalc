@@ -17,13 +17,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "x ^ {2} - b x + 1",
                         "start": "x ^ 2 - b * x + 1",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "(x - \\frac{1}{2} b) ^ {2} + 1 - \\frac{1}{4} b ^ {2}",
                                 "res": "(x - 1/2 * b) ^ 2 + 1 - 1/4 * b ^ 2",
@@ -40,7 +38,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "0",
                         "start": "0",
@@ -76,13 +73,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{\\log{(x ^ {a} + 1)}}{x ^ {2} - b x + 1} \\,dx",
                         "start": "INT x:[0,oo]. log(x ^ a + 1) / (x ^ 2 - b * x + 1)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "-(\\int_{0}^{\\infty} \\frac{\\log{((\\frac{1}{u}) ^ {a} + 1)}}{(\\frac{1}{u}) ^ {2} - b (\\frac{1}{u}) + 1} (-\\frac{1}{u ^ {2}}) \\,du)",
                                 "res": "-(INT u:[0,oo]. log((1 / u) ^ a + 1) / ((1 / u) ^ 2 - b * (1 / u) + 1) * -(1 / u ^ 2))",
@@ -96,7 +91,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{u ^ {2} (\\frac{1}{u ^ {2}} - \\frac{b}{u} + 1)} \\log{((\\frac{1}{u}) ^ {a} + 1)} \\,du",
                                 "res": "INT u:[0,oo]. 1 / (u ^ 2 * (1 / u ^ 2 - b / u + 1)) * log((1 / u) ^ a + 1)",
@@ -107,7 +101,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{-b u + u ^ {2} + 1} \\log{((\\frac{1}{u}) ^ {a} + 1)} \\,du",
                                 "res": "INT u:[0,oo]. 1 / (-(b * u) + u ^ 2 + 1) * log((1 / u) ^ a + 1)",
@@ -119,7 +112,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{-b u + u ^ {2} + 1} \\log{(\\frac{1 ^ {a}}{u ^ {a}} + 1)} \\,du",
                                 "res": "INT u:[0,oo]. 1 / (-(b * u) + u ^ 2 + 1) * log(1 ^ a / u ^ a + 1)",
@@ -133,7 +125,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{-b u + u ^ {2} + 1} \\log{(\\frac{1 + u ^ {a}}{u ^ {a}})} \\,du",
                                 "res": "INT u:[0,oo]. 1 / (-(b * u) + u ^ 2 + 1) * log((1 + u ^ a) / u ^ a)",
@@ -147,7 +138,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{-b u + u ^ {2} + 1} (\\log{(1 + u ^ {a})} - \\log{(u ^ {a})}) \\,du",
                                 "res": "INT u:[0,oo]. 1 / (-(b * u) + u ^ 2 + 1) * (log(1 + u ^ a) - log(u ^ a))",
@@ -161,7 +151,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{\\log{(u ^ {a} + 1)}}{-b u + u ^ {2} + 1} - \\frac{\\log{(u ^ {a})}}{-b u + u ^ {2} + 1} \\,du",
                                 "res": "INT u:[0,oo]. log(u ^ a + 1) / (-(b * u) + u ^ 2 + 1) - log(u ^ a) / (-(b * u) + u ^ 2 + 1)",
@@ -173,7 +162,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "(\\int_{0}^{\\infty} \\frac{\\log{(u ^ {a} + 1)}}{-b u + u ^ {2} + 1} \\,du) - a (\\int_{0}^{\\infty} \\frac{\\log{u}}{-b u + u ^ {2} + 1} \\,du)",
                                 "res": "(INT u:[0,oo]. log(u ^ a + 1) / (-(b * u) + u ^ 2 + 1)) - a * (INT u:[0,oo]. log(u) / (-(b * u) + u ^ 2 + 1))",
@@ -187,13 +175,11 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "(\\int_{0}^{\\infty} \\frac{\\log{(x ^ {a} + 1)}}{x ^ {2} - b x + 1} \\,dx) - a (\\int_{0}^{\\infty} \\frac{\\log{x}}{x ^ {2} - b x + 1} \\,dx)",
                         "start": "(INT x:[0,oo]. log(x ^ a + 1) / (x ^ 2 - b * x + 1)) - a * (INT x:[0,oo]. log(x) / (x ^ 2 - b * x + 1))",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "(\\int_{0}^{\\infty} \\frac{\\log{(x ^ {a} + 1)}}{-b x + x ^ {2} + 1} \\,dx) - a (\\int_{0}^{\\infty} \\frac{\\log{x}}{-b x + x ^ {2} + 1} \\,dx)",
                                 "res": "(INT x:[0,oo]. log(x ^ a + 1) / (-(b * x) + x ^ 2 + 1)) - a * (INT x:[0,oo]. log(x) / (-(b * x) + x ^ 2 + 1))",
@@ -234,13 +220,11 @@
                 "goal": "(INT x:[0,oo]. log(x) / (x ^ 2 - b * x + 1)) = 0",
                 "latex_goal": "\\int_{0}^{\\infty} \\frac{\\log{x}}{x ^ {2} - b x + 1} \\,dx = 0",
                 "start": {
-                    "dead_vars": [],
                     "fixes": [],
                     "latex_start": "\\int_{0}^{\\infty} \\frac{\\log{(x ^ {a} + 1)}}{x ^ {2} - b x + 1} \\,dx = (\\int_{0}^{\\infty} \\frac{\\log{(x ^ {a} + 1)}}{x ^ {2} - b x + 1} \\,dx) - a (\\int_{0}^{\\infty} \\frac{\\log{x}}{x ^ {2} - b x + 1} \\,dx)",
                     "start": "(INT x:[0,oo]. log(x ^ a + 1) / (x ^ 2 - b * x + 1)) = (INT x:[0,oo]. log(x ^ a + 1) / (x ^ 2 - b * x + 1)) - a * (INT x:[0,oo]. log(x) / (x ^ 2 - b * x + 1))",
                     "steps": [
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{\\log{x}}{x ^ {2} - b x + 1} \\,dx = 0",
                             "res": "(INT x:[0,oo]. log(x) / (x ^ 2 - b * x + 1)) = 0",

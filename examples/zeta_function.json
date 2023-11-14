@@ -20,29 +20,16 @@
                 }
             ],
             "finished": true,
-            "fixes": [
-                [
-                    "n",
-                    "$int"
-                ]
-            ],
             "goal": "(INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a / (1 - x * y)) = SUM(n, 0, oo, 1 / (n + 1 + a) ^ 2)",
             "latex_goal": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a}}{1 - x y} \\,dx \\,dy = \\sum_{n=0}^{\\infty}{\\frac{1}{(n + 1 + a) ^ {2}}}",
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
-                        "fixes": [
-                            [
-                                "k",
-                                "$int"
-                            ]
-                        ],
+                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a}}{1 - x y} \\,dx \\,dy",
                         "start": "INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a / (1 - x * y)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{1} y ^ {a} (\\int_{0}^{1} \\frac{x ^ {a}}{-x y + 1} \\,dx) \\,dy",
                                 "res": "INT y:[0,1]. y ^ a * (INT x:[0,1]. x ^ a / (-(x * y) + 1))",
@@ -53,7 +40,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{1} y ^ {a} (\\int_{0}^{1} x ^ {a} (1 - x y) ^ {-1} \\,dx) \\,dy",
                                 "res": "INT y:[0,1]. y ^ a * (INT x:[0,1]. x ^ a * (1 - x * y) ^ (-1))",
@@ -67,13 +53,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
-                                "fixes": [
-                                    [
-                                        "k",
-                                        "$int"
-                                    ]
-                                ],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} y ^ {a} (\\int_{0}^{1} x ^ {a} \\sum_{k=0}^{\\infty}{(x y) ^ {k}} \\,dx) \\,dy",
                                 "res": "INT y:[0,1]. y ^ a * (INT x:[0,1]. x ^ a * SUM(k, 0, oo, (x * y) ^ k))",
                                 "rule": {
@@ -85,13 +65,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
-                                "fixes": [
-                                    [
-                                        "k",
-                                        "$int"
-                                    ]
-                                ],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} y ^ {a} (\\int_{0}^{1} \\sum_{k=0}^{\\infty}{x ^ {a} (x y) ^ {k}} \\,dx) \\,dy",
                                 "res": "INT y:[0,1]. y ^ a * (INT x:[0,1]. SUM(k, 0, oo, x ^ a * (x * y) ^ k))",
                                 "rule": {
@@ -104,13 +78,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
-                                "fixes": [
-                                    [
-                                        "k",
-                                        "$int"
-                                    ]
-                                ],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} y ^ {a} \\sum_{k=0}^{\\infty}{\\int_{0}^{1} x ^ {a} (x y) ^ {k} \\,dx} \\,dy",
                                 "res": "INT y:[0,1]. y ^ a * SUM(k, 0, oo, INT x:[0,1]. x ^ a * (x * y) ^ k)",
                                 "rule": {
@@ -121,13 +89,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
-                                "fixes": [
-                                    [
-                                        "k",
-                                        "$int"
-                                    ]
-                                ],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} y ^ {a} \\sum_{k=0}^{\\infty}{\\int_{0}^{1} x ^ {a} (x ^ {k} y ^ {k}) \\,dx} \\,dy",
                                 "res": "INT y:[0,1]. y ^ a * SUM(k, 0, oo, INT x:[0,1]. x ^ a * (x ^ k * y ^ k))",
                                 "rule": {
@@ -141,13 +103,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
-                                "fixes": [
-                                    [
-                                        "k",
-                                        "$int"
-                                    ]
-                                ],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} y ^ {a} \\sum_{k=0}^{\\infty}{y ^ {k} (\\int_{0}^{1} x ^ {a + k} \\,dx)} \\,dy",
                                 "res": "INT y:[0,1]. y ^ a * SUM(k, 0, oo, y ^ k * (INT x:[0,1]. x ^ (a + k)))",
                                 "rule": {
@@ -157,13 +113,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
-                                "fixes": [
-                                    [
-                                        "k",
-                                        "$int"
-                                    ]
-                                ],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} y ^ {a} \\sum_{k=0}^{\\infty}{y ^ {k} (\\left. \\frac{x ^ {a + k + 1}}{a + k + 1} \\right\\vert_{x=0}^{1})} \\,dy",
                                 "res": "INT y:[0,1]. y ^ a * SUM(k, 0, oo, y ^ k * ([x ^ (a + k + 1) / (a + k + 1)]_x=0,1))",
                                 "rule": {
@@ -174,13 +124,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
-                                "fixes": [
-                                    [
-                                        "k",
-                                        "$int"
-                                    ]
-                                ],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} y ^ {a} \\sum_{k=0}^{\\infty}{\\frac{y ^ {k}}{a + k + 1}} \\,dy",
                                 "res": "INT y:[0,1]. y ^ a * SUM(k, 0, oo, y ^ k / (a + k + 1))",
                                 "rule": {
@@ -190,13 +134,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
-                                "fixes": [
-                                    [
-                                        "k",
-                                        "$int"
-                                    ]
-                                ],
+                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\sum_{k=0}^{\\infty}{y ^ {a} (\\frac{y ^ {k}}{a + k + 1})} \\,dy",
                                 "res": "INT y:[0,1]. SUM(k, 0, oo, y ^ a * (y ^ k / (a + k + 1)))",
                                 "rule": {
@@ -209,13 +147,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
-                                "fixes": [
-                                    [
-                                        "k",
-                                        "$int"
-                                    ]
-                                ],
+                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\int_{0}^{1} y ^ {a} (\\frac{y ^ {k}}{a + k + 1}) \\,dy}",
                                 "res": "SUM(k, 0, oo, INT y:[0,1]. y ^ a * (y ^ k / (a + k + 1)))",
                                 "rule": {
@@ -225,13 +157,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
-                                "fixes": [
-                                    [
-                                        "k",
-                                        "$int"
-                                    ]
-                                ],
+                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{1}{a + k + 1} (\\int_{0}^{1} y ^ {a + k} \\,dy)}",
                                 "res": "SUM(k, 0, oo, 1 / (a + k + 1) * (INT y:[0,1]. y ^ (a + k)))",
                                 "rule": {
@@ -241,13 +167,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
-                                "fixes": [
-                                    [
-                                        "k",
-                                        "$int"
-                                    ]
-                                ],
+                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{1}{a + k + 1} (\\left. \\frac{y ^ {a + k + 1}}{a + k + 1} \\right\\vert_{y=0}^{1})}",
                                 "res": "SUM(k, 0, oo, 1 / (a + k + 1) * ([y ^ (a + k + 1) / (a + k + 1)]_y=0,1))",
                                 "rule": {
@@ -257,13 +177,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
-                                "fixes": [
-                                    [
-                                        "k",
-                                        "$int"
-                                    ]
-                                ],
+                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{1}{(a + k + 1) ^ {2}}}",
                                 "res": "SUM(k, 0, oo, 1 / (a + k + 1) ^ 2)",
                                 "rule": {
@@ -276,13 +190,11 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\sum_{n=0}^{\\infty}{\\frac{1}{(n + 1 + a) ^ {2}}}",
                         "start": "SUM(n, 0, oo, 1 / (n + 1 + a) ^ 2)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{(a + n + 1) ^ {2}}}",
                                 "res": "SUM(n, 0, oo, 1 / (a + n + 1) ^ 2)",
@@ -313,15 +225,11 @@
                 "goal": "(INT y:[0,1]. INT x:[0,1]. 1 / (1 - x * y)) = zeta(2)",
                 "latex_goal": "\\int_{0}^{1} \\int_{0}^{1} \\frac{1}{1 - x y} \\,dx \\,dy = \\zeta{(2)}",
                 "start": {
-                    "dead_vars": [
-                        "n"
-                    ],
                     "fixes": [],
                     "latex_start": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a}}{1 - x y} \\,dx \\,dy = \\sum_{n=0}^{\\infty}{\\frac{1}{(n + 1 + a) ^ {2}}}",
                     "start": "(INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a / (1 - x * y)) = SUM(n, 0, oo, 1 / (n + 1 + a) ^ 2)",
                     "steps": [
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {0} y ^ {0}}{1 - x y} \\,dx \\,dy = \\sum_{n=0}^{\\infty}{\\frac{1}{(n + 1 + 0) ^ {2}}}",
                             "res": "(INT y:[0,1]. INT x:[0,1]. x ^ 0 * y ^ 0 / (1 - x * y)) = SUM(n, 0, oo, 1 / (n + 1 + 0) ^ 2)",
@@ -339,7 +247,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{1}{-x y + 1} \\,dx \\,dy = \\sum_{n=0}^{\\infty}{\\frac{1}{(n + 1) ^ {2}}}",
                             "res": "(INT y:[0,1]. INT x:[0,1]. 1 / (-(x * y) + 1)) = SUM(n, 0, oo, 1 / (n + 1) ^ 2)",
@@ -350,7 +257,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{1}{1 - x y} \\,dx \\,dy = \\sum_{n=0}^{\\infty}{\\frac{1}{(n + 1) ^ {2}}}",
                             "res": "(INT y:[0,1]. INT x:[0,1]. 1 / (1 - x * y)) = SUM(n, 0, oo, 1 / (n + 1) ^ 2)",
@@ -364,9 +270,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [
-                                "n"
-                            ],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{1}{1 - x y} \\,dx \\,dy = \\zeta{(2)}",
                             "res": "(INT y:[0,1]. INT x:[0,1]. 1 / (1 - x * y)) = zeta(2)",
@@ -416,18 +319,34 @@
             "proof": {
                 "base_case": {
                     "finished": true,
+                    "fixes": [
+                        [
+                            "s",
+                            "$int"
+                        ],
+                        [
+                            "n",
+                            "$int"
+                        ],
+                        [
+                            "y",
+                            "$real"
+                        ],
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "goal": "(INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a / (-(x * y) + 1)) = SUM(n, 0, oo, 1 / (a + n + 1) ^ 2)",
                     "latex_goal": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a}}{-x y + 1} \\,dx \\,dy = \\sum_{n=0}^{\\infty}{\\frac{1}{(a + n + 1) ^ {2}}}",
                     "proof": {
                         "calcs": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_start": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a}}{-x y + 1} \\,dx \\,dy",
                                 "start": "INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a / (-(x * y) + 1)",
                                 "steps": [
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a}}{1 - x y} \\,dx \\,dy",
                                         "res": "INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a / (1 - x * y)",
@@ -441,7 +360,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{(n + 1 + a) ^ {2}}}",
                                         "res": "SUM(n, 0, oo, 1 / (n + 1 + a) ^ 2)",
@@ -455,7 +373,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "dead_vars": [],
                                         "fixes": [],
                                         "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{(a + n + 1) ^ {2}}}",
                                         "res": "SUM(n, 0, oo, 1 / (a + n + 1) ^ 2)",
@@ -469,7 +386,6 @@
                                 "type": "Calculation"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_start": "\\sum_{n=0}^{\\infty}{\\frac{1}{(a + n + 1) ^ {2}}}",
                                 "start": "SUM(n, 0, oo, 1 / (a + n + 1) ^ 2)",
@@ -488,6 +404,24 @@
                 "goal": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a) / (1 - x * y)) = (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + a + 1) ^ s)",
                 "induct_case": {
                     "finished": true,
+                    "fixes": [
+                        [
+                            "s",
+                            "$int"
+                        ],
+                        [
+                            "n",
+                            "$int"
+                        ],
+                        [
+                            "y",
+                            "$real"
+                        ],
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "goal": "(INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a * log(x * y) ^ (s - 1) / (-(x * y) + 1)) = -((-1) ^ s * factorial(s) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1)))",
                     "latex_goal": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a} \\log^{s - 1}(x y)}{-x y + 1} \\,dx \\,dy = -(-1) ^ {s} s! \\sum_{n=0}^{\\infty}{(a + n + 1) ^ {-s - 1}}",
                     "proof": {
@@ -496,13 +430,11 @@
                         "goal": "(INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a * log(x * y) ^ (s - 1) / (-(x * y) + 1)) = -((-1) ^ s * factorial(s) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1)))",
                         "latex_goal": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a} \\log^{s - 1}(x y)}{-x y + 1} \\,dx \\,dy = -(-1) ^ {s} s! \\sum_{n=0}^{\\infty}{(a + n + 1) ^ {-s - 1}}",
                         "start": {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_start": "\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y) (x ^ {a} y ^ {a})}{1 - x y} \\,dx \\,dy = (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{\\frac{1}{(n + a + 1) ^ {s}}}",
                             "start": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a) / (1 - x * y)) = (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + a + 1) ^ s)",
                             "steps": [
                                 {
-                                    "dead_vars": [],
                                     "fixes": [],
                                     "latex_res": "\\frac{d}{da} \\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y) (x ^ {a} y ^ {a})}{1 - x y} \\,dx \\,dy = \\frac{d}{da} (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{\\frac{1}{(n + a + 1) ^ {s}}}",
                                     "res": "(D a. INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a) / (1 - x * y)) = (D a. (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + a + 1) ^ s))",
@@ -514,7 +446,6 @@
                                     "type": "CalculationStep"
                                 },
                                 {
-                                    "dead_vars": [],
                                     "fixes": [],
                                     "latex_res": "\\int_{0}^{1} \\frac{d}{da} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y) (x ^ {a} y ^ {a})}{1 - x y} \\,dx \\,dy = \\frac{d}{da} (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{\\frac{1}{(n + a + 1) ^ {s}}}",
                                     "res": "(INT y:[0,1]. D a. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a) / (1 - x * y)) = (D a. (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + a + 1) ^ s))",
@@ -526,7 +457,6 @@
                                     "type": "CalculationStep"
                                 },
                                 {
-                                    "dead_vars": [],
                                     "fixes": [],
                                     "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{d}{da} \\frac{\\log^{s - 2}(x y) (x ^ {a} y ^ {a})}{1 - x y} \\,dx \\,dy = \\frac{d}{da} (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{\\frac{1}{(n + a + 1) ^ {s}}}",
                                     "res": "(INT y:[0,1]. INT x:[0,1]. D a. log(x * y) ^ (s - 2) * (x ^ a * y ^ a) / (1 - x * y)) = (D a. (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + a + 1) ^ s))",
@@ -538,7 +468,6 @@
                                     "type": "CalculationStep"
                                 },
                                 {
-                                    "dead_vars": [],
                                     "fixes": [],
                                     "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y) (x ^ {a} y ^ {a} \\log{x} + x ^ {a} y ^ {a} \\log{y})}{-x y + 1} \\,dx \\,dy = -s (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{(a + n + 1) ^ {-s - 1}}",
                                     "res": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a * log(x) + x ^ a * y ^ a * log(y)) / (-(x * y) + 1)) = -(s * (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1)))",
@@ -549,7 +478,6 @@
                                     "type": "CalculationStep"
                                 },
                                 {
-                                    "dead_vars": [],
                                     "fixes": [],
                                     "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y) (x ^ {a} y ^ {a} (\\log{x} + \\log{y}))}{-x y + 1} \\,dx \\,dy = -s (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{(a + n + 1) ^ {-s - 1}}",
                                     "res": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a * (log(x) + log(y))) / (-(x * y) + 1)) = -(s * (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1)))",
@@ -563,7 +491,6 @@
                                     "type": "CalculationStep"
                                 },
                                 {
-                                    "dead_vars": [],
                                     "fixes": [],
                                     "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y) (x ^ {a} y ^ {a} (\\log{x} + \\log{y}))}{1 - x y} \\,dx \\,dy = -s (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{(a + n + 1) ^ {-s - 1}}",
                                     "res": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a * (log(x) + log(y))) / (1 - x * y)) = -(s * (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1)))",
@@ -577,7 +504,6 @@
                                     "type": "CalculationStep"
                                 },
                                 {
-                                    "dead_vars": [],
                                     "fixes": [],
                                     "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y) (x ^ {a} y ^ {a} \\log{(x y)})}{1 - x y} \\,dx \\,dy = -s (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{(a + n + 1) ^ {-s - 1}}",
                                     "res": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a * log(x * y)) / (1 - x * y)) = -(s * (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1)))",
@@ -591,7 +517,6 @@
                                     "type": "CalculationStep"
                                 },
                                 {
-                                    "dead_vars": [],
                                     "fixes": [],
                                     "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a} \\log^{s - 1}(x y)}{1 - x y} \\,dx \\,dy = -s (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{(a + n + 1) ^ {-s - 1}}",
                                     "res": "(INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a * log(x * y) ^ (s - 1) / (1 - x * y)) = -(s * (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1)))",
@@ -605,7 +530,6 @@
                                     "type": "CalculationStep"
                                 },
                                 {
-                                    "dead_vars": [],
                                     "fixes": [],
                                     "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a} \\log^{s - 1}(x y)}{1 - x y} \\,dx \\,dy = (-1) ^ {s + 1} (s (s - 1)!) \\sum_{n=0}^{\\infty}{(a + n + 1) ^ {-s - 1}}",
                                     "res": "(INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a * log(x * y) ^ (s - 1) / (1 - x * y)) = (-1) ^ (s + 1) * (s * factorial(s - 1)) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1))",
@@ -619,7 +543,6 @@
                                     "type": "CalculationStep"
                                 },
                                 {
-                                    "dead_vars": [],
                                     "fixes": [],
                                     "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a} \\log^{s - 1}(x y)}{1 - x y} \\,dx \\,dy = (-1) ^ {s + 1} s! \\sum_{n=0}^{\\infty}{(a + n + 1) ^ {-s - 1}}",
                                     "res": "(INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a * log(x * y) ^ (s - 1) / (1 - x * y)) = (-1) ^ (s + 1) * factorial(s) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1))",
@@ -672,15 +595,11 @@
                 "goal": "zeta(s) = (-1) ^ s / factorial(s - 1) * (INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) / (1 - x * y))",
                 "latex_goal": "\\zeta{(s)} = \\frac{(-1) ^ {s}}{(s - 1)!} (\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y)}{1 - x y} \\,dx \\,dy)",
                 "start": {
-                    "dead_vars": [
-                        "n"
-                    ],
                     "fixes": [],
                     "latex_start": "\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y) (x ^ {a} y ^ {a})}{1 - x y} \\,dx \\,dy = (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{\\frac{1}{(n + a + 1) ^ {s}}}",
                     "start": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a) / (1 - x * y)) = (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + a + 1) ^ s)",
                     "steps": [
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y) (x ^ {0} y ^ {0})}{1 - x y} \\,dx \\,dy = (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{\\frac{1}{(n + 0 + 1) ^ {s}}}",
                             "res": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ 0 * y ^ 0) / (1 - x * y)) = (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + 0 + 1) ^ s)",
@@ -698,7 +617,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y)}{-x y + 1} \\,dx \\,dy = (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{(n + 1) ^ {-s}}",
                             "res": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) / (-(x * y) + 1)) = (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, (n + 1) ^ -s)",
@@ -709,7 +627,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y)}{-x y + 1} \\,dx \\,dy = (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{\\frac{1}{(n + 1) ^ {s}}}",
                             "res": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) / (-(x * y) + 1)) = (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + 1) ^ s)",
@@ -723,9 +640,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [
-                                "n"
-                            ],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y)}{-x y + 1} \\,dx \\,dy = (-1) ^ {s} (s - 1)! \\zeta{(s)}",
                             "res": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) / (-(x * y) + 1)) = (-1) ^ s * factorial(s - 1) * zeta(s)",
@@ -738,9 +652,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [
-                                "n"
-                            ],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y)}{1 - x y} \\,dx \\,dy = (-1) ^ {s} (s - 1)! \\zeta{(s)}",
                             "res": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) / (1 - x * y)) = (-1) ^ s * factorial(s - 1) * zeta(s)",
@@ -754,9 +665,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [
-                                "n"
-                            ],
                             "fixes": [],
                             "latex_res": "\\zeta{(s)} = \\frac{(-1) ^ {-s}}{(s - 1)!} (\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y)}{-x y + 1} \\,dx \\,dy)",
                             "res": "zeta(s) = (-1) ^ -s / factorial(s - 1) * (INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) / (-(x * y) + 1))",
@@ -769,9 +677,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [
-                                "n"
-                            ],
                             "fixes": [],
                             "latex_res": "\\zeta{(s)} = \\frac{(-1) ^ {-1 s}}{(s - 1)!} (\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y)}{-x y + 1} \\,dx \\,dy)",
                             "res": "zeta(s) = (-1) ^ (-1 * s) / factorial(s - 1) * (INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) / (-(x * y) + 1))",
@@ -785,9 +690,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [
-                                "n"
-                            ],
                             "fixes": [],
                             "latex_res": "\\zeta{(s)} = \\frac{((-1) ^ {-1}) ^ {s}}{(s - 1)!} (\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y)}{-x y + 1} \\,dx \\,dy)",
                             "res": "zeta(s) = (-1) ^ (-1) ^ s / factorial(s - 1) * (INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) / (-(x * y) + 1))",
@@ -801,9 +703,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [
-                                "n"
-                            ],
                             "fixes": [],
                             "latex_res": "\\zeta{(s)} = \\frac{(-1) ^ {s}}{(s - 1)!} (\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y)}{-x y + 1} \\,dx \\,dy)",
                             "res": "zeta(s) = (-1) ^ s / factorial(s - 1) * (INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) / (-(x * y) + 1))",
@@ -817,9 +716,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [
-                                "n"
-                            ],
                             "fixes": [],
                             "latex_res": "\\zeta{(s)} = \\frac{(-1) ^ {s}}{(s - 1)!} (\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y)}{1 - x y} \\,dx \\,dy)",
                             "res": "zeta(s) = (-1) ^ s / factorial(s - 1) * (INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) / (1 - x * y))",
@@ -862,13 +758,11 @@
             "proof": {
                 "calcs": [
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} e^{(-k) x} x ^ {s - 1} \\,dx",
                         "start": "INT x:[0,oo]. exp(-k * x) * x ^ (s - 1)",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{e^{-u}}{k} (\\frac{u}{k}) ^ {s - 1} \\,du",
                                 "res": "INT u:[0,oo]. exp(-u) / k * (u / k) ^ (s - 1)",
@@ -882,7 +776,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{e^{-u}}{k} (\\frac{u ^ {s - 1}}{k ^ {s - 1}}) \\,du",
                                 "res": "INT u:[0,oo]. exp(-u) / k * (u ^ (s - 1) / k ^ (s - 1))",
@@ -896,7 +789,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "k ^ {-s} (\\int_{0}^{\\infty} u ^ {s - 1} e^{-u} \\,du)",
                                 "res": "k ^ -s * (INT u:[0,oo]. u ^ (s - 1) * exp(-u))",
@@ -907,7 +799,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "k ^ {-s} (\\int_{0}^{\\infty} e^{-u} u ^ {s - 1} \\,du)",
                                 "res": "k ^ -s * (INT u:[0,oo]. exp(-u) * u ^ (s - 1))",
@@ -921,7 +812,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "k ^ {-s} \\Gamma{(s)}",
                                 "res": "k ^ -s * Gamma(s)",
@@ -937,13 +827,11 @@
                         "type": "Calculation"
                     },
                     {
-                        "dead_vars": [],
                         "fixes": [],
                         "latex_start": "\\frac{\\Gamma{(s)}}{k ^ {s}}",
                         "start": "Gamma(s) / k ^ s",
                         "steps": [
                             {
-                                "dead_vars": [],
                                 "fixes": [],
                                 "latex_res": "k ^ {-s} \\Gamma{(s)}",
                                 "res": "k ^ -s * Gamma(s)",
@@ -984,15 +872,11 @@
                 "goal": "(INT x:[0,oo]. x ^ (s - 1) / (exp(x) - 1)) = Gamma(s) * zeta(s)",
                 "latex_goal": "\\int_{0}^{\\infty} \\frac{x ^ {s - 1}}{e^{x} - 1} \\,dx = \\Gamma{(s)} \\zeta{(s)}",
                 "start": {
-                    "dead_vars": [
-                        "k"
-                    ],
                     "fixes": [],
                     "latex_start": "\\int_{0}^{\\infty} e^{(-k) x} x ^ {s - 1} \\,dx = \\frac{\\Gamma{(s)}}{k ^ {s}}",
                     "start": "(INT x:[0,oo]. exp(-k * x) * x ^ (s - 1)) = Gamma(s) / k ^ s",
                     "steps": [
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\sum_{k=1}^{\\infty}{\\int_{0}^{\\infty} e^{(-k) x} x ^ {s - 1} \\,dx} = \\sum_{k=1}^{\\infty}{\\frac{\\Gamma{(s)}}{k ^ {s}}}",
                             "res": "SUM(k, 1, oo, INT x:[0,oo]. exp(-k * x) * x ^ (s - 1)) = SUM(k, 1, oo, Gamma(s) / k ^ s)",
@@ -1006,7 +890,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\sum_{k=1}^{\\infty}{\\int_{0}^{\\infty} x ^ {s - 1} e^{-k x} \\,dx} = \\Gamma{(s)} \\sum_{k=1}^{\\infty}{k ^ {-s}}",
                             "res": "SUM(k, 1, oo, INT x:[0,oo]. x ^ (s - 1) * exp(-(k * x))) = Gamma(s) * SUM(k, 1, oo, k ^ -s)",
@@ -1017,7 +900,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\sum_{k=1}^{\\infty}{\\int_{0}^{\\infty} x ^ {s - 1} e^{-k x} \\,dx} = \\Gamma{(s)} \\sum_{k=0}^{\\infty}{(k + 1) ^ {-s}}",
                             "res": "SUM(k, 1, oo, INT x:[0,oo]. x ^ (s - 1) * exp(-(k * x))) = Gamma(s) * SUM(k, 0, oo, (k + 1) ^ -s)",
@@ -1030,7 +912,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\sum_{k=1}^{\\infty}{\\int_{0}^{\\infty} x ^ {s - 1} e^{-k x} \\,dx} = \\Gamma{(s)} \\sum_{k=0}^{\\infty}{\\frac{1}{(k + 1) ^ {s}}}",
                             "res": "SUM(k, 1, oo, INT x:[0,oo]. x ^ (s - 1) * exp(-(k * x))) = Gamma(s) * SUM(k, 0, oo, 1 / (k + 1) ^ s)",
@@ -1044,7 +925,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\sum_{k=1}^{\\infty}{\\int_{0}^{\\infty} x ^ {s - 1} e^{-k x} \\,dx} = \\Gamma{(s)} \\zeta{(s)}",
                             "res": "SUM(k, 1, oo, INT x:[0,oo]. x ^ (s - 1) * exp(-(k * x))) = Gamma(s) * zeta(s)",
@@ -1057,7 +937,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\sum_{k=1}^{\\infty}{x ^ {s - 1} e^{-k x}} \\,dx = \\Gamma{(s)} \\zeta{(s)}",
                             "res": "(INT x:[0,oo]. SUM(k, 1, oo, x ^ (s - 1) * exp(-(k * x)))) = Gamma(s) * zeta(s)",
@@ -1069,7 +948,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} x ^ {s - 1} \\sum_{k=1}^{\\infty}{e^{-k x}} \\,dx = \\Gamma{(s)} \\zeta{(s)}",
                             "res": "(INT x:[0,oo]. x ^ (s - 1) * SUM(k, 1, oo, exp(-(k * x)))) = Gamma(s) * zeta(s)",
@@ -1080,7 +958,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} x ^ {s - 1} \\sum_{k=1}^{\\infty}{e^{(-x) k}} \\,dx = \\Gamma{(s)} \\zeta{(s)}",
                             "res": "(INT x:[0,oo]. x ^ (s - 1) * SUM(k, 1, oo, exp(-x * k))) = Gamma(s) * zeta(s)",
@@ -1094,7 +971,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} x ^ {s - 1} \\sum_{k=1}^{\\infty}{(e^{-x}) ^ {k}} \\,dx = \\Gamma{(s)} \\zeta{(s)}",
                             "res": "(INT x:[0,oo]. x ^ (s - 1) * SUM(k, 1, oo, exp(-x) ^ k)) = Gamma(s) * zeta(s)",
@@ -1108,9 +984,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [
-                                "k"
-                            ],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} x ^ {s - 1} (\\frac{(e^{-x}) ^ {1}}{1 - e^{-x}}) \\,dx = \\Gamma{(s)} \\zeta{(s)}",
                             "res": "(INT x:[0,oo]. x ^ (s - 1) * (exp(-x) ^ 1 / (1 - exp(-x)))) = Gamma(s) * zeta(s)",
@@ -1122,9 +995,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "dead_vars": [
-                                "k"
-                            ],
                             "fixes": [],
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x ^ {s - 1}}{e^{x} - 1} \\,dx = \\Gamma{(s)} \\zeta{(s)}",
                             "res": "(INT x:[0,oo]. x ^ (s - 1) / (exp(x) - 1)) = Gamma(s) * zeta(s)",

@@ -255,7 +255,8 @@
             ],
             "category": "power",
             "expr": "(a * b) ^ k = a ^ k * b ^ k",
-            "type": "axiom"
+            "type": "axiom",
+            "conds": ["type(a,0)", "type(b,0)", "type(k,0)"]
         },
         {
             "attributes": [

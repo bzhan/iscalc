@@ -617,8 +617,14 @@ class ApplyIdentity(Rule):
         for identity in ctx.get_other_identities():
             inst = expr.match(e, identity.lhs)
             if inst is not None:
-                expected_rhs = identity.rhs.inst_pat(inst, func_type)
-                res.append(normalize(expected_rhs, ctx))
+                # check identity's condition
+                flag = True
+                tmp_conds = [cond.inst_pat(inst, func_type) for cond in identity.conds.data]
+                for cond in tmp_conds:
+                    flag = flag and ctx.check_condition(cond)
+                if flag:
+                    expected_rhs = identity.rhs.inst_pat(inst, func_type)
+                    res.append(normalize(expected_rhs, ctx))
         return res
 
     def eval(self, e: Expr, ctx: Context) -> Expr:

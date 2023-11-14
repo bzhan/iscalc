@@ -341,8 +341,9 @@ def query_identities():
     book_name = data['book']
     filename = data['file']
     cur_id = data['cur_id']
+    file_content = data['content']
     file = compstate.CompFile(book_name, filename)
-    for item in data['content']:
+    for item in file_content:
         file.add_item(compstate.parse_item(file, item))
     label = compstate.Label(data['selected_item'])
     st: compstate.StateItem = file.content[cur_id]

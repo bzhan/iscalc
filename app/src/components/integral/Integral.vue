@@ -1120,8 +1120,16 @@ export default {
         selected_item: this.selected_item,
         expr: this.selected_expr
       }
+
+      const debug = false
+      if(debug){
+        console.log("debug selectExprIdentity Start-----------")
+        console.log("file_content:", this.content)
+        console.log("content_id:", this.cur_id)
+        console.log("selected_id of content[id]:", this.selected_item)
+        console.log("debug selectExprIdentity End-----------")
+      }
       const response = await axios.post("http://127.0.0.1:5000/api/query-identities", JSON.stringify(data))
-      //console.log(response.data)
       if (response.data.status === 'ok') {
         this.latex_selected_expr = response.data.latex_expr
         this.identity_rewrites = response.data.results

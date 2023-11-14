@@ -83,9 +83,9 @@ export default {
   ],
 
   mounted() {
-    console.log("Goal module mounted")
-    console.log("item:",this.item)
-    console.log("start_point", this.start_point)
+    //console.log("Goal module mounted")
+    //console.log("item:",this.item)
+    //console.log("start_point", this.start_point)
   }
 }
 

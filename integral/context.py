@@ -238,7 +238,11 @@ class Context:
         return res
 
     def get_eq_conds(self) -> Conditions:
-        res = self.parent.get_conds() if self.parent is not None else Conditions()
+        parent_conds = self.parent.get_conds() if self.parent is not None else Conditions()
+        res = Conditions()
+        for cond in parent_conds.data:
+            if cond.is_equals():
+                res.add_condition(cond)
         for cond in self.conds.data:
             if cond.is_equals():
                 res.add_condition(cond)

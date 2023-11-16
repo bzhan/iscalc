@@ -326,6 +326,7 @@ def query_latex_expr():
         return jsonify({
             "status": "ok",
             "latex_expr": integral.latex.convert_expr(selected),
+            "expr": str(selected),
             "loc": str(loc)
         })
     except Exception as e:
@@ -639,9 +640,9 @@ def integral_perform_step():
     subitem = st.get_by_label(label)
     rule = compstate.parse_rule(data['rule'], subitem)
     if isinstance(rule, (integral.rules.ApplyInductHyp, integral.rules.DerivIntExchange,
-                         integral.rules.IntSumExchange, integral.rules.SeriesEvaluationIdentity)):
+                         integral.rules.IntSumExchange, integral.rules.SeriesEvaluationIdentity,
+                         integral.rules.ExpandMatFunc)):
         rule = integral.rules.OnSubterm(rule)
-
     if isinstance(subitem, (compstate.CalculationStep, compstate.Calculation)):
         subitem.perform_rule(rule)
     elif isinstance(subitem, compstate.RewriteGoalProof):
@@ -699,6 +700,18 @@ def integral_query_theorems():
                 'eq': str(eq),
                 'latex_eq': integral.latex.convert_expr(eq)
             })
+    label = compstate.Label(data['selected_item'])
+    st: compstate.StateItem = file.content[cur_id]
+    subitem = st.get_by_label(label)
+    # print(type(subitem), flush=True)
+    # print(subitem.ctx.get_conds(), flush=True)
+    for cond in subitem.ctx.get_conds().data:
+        if cond.is_equals():
+            eqs.append({
+                'eq': str(cond),
+                'latex_eq': integral.latex.convert_expr(cond)
+            })
+    # print(eqs, flush=True)
     return jsonify({
         "status": "ok",
         "theorems": eqs

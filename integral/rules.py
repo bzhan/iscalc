@@ -1065,12 +1065,13 @@ class FullSimplify(Rule):
 class ApplyEquation(Rule):
     """Apply the given equation for rewriting."""
 
-    def __init__(self, eq: Union[Expr, str], source:Expr):
+    def __init__(self, eq: Union[Expr, str], source:Expr, eq_fixes:dict = None):
         self.name = "ApplyEquation"
         if isinstance(eq, str):
             eq = parser.parse_expr(eq)
         self.eq = eq
         self.source = source
+        self.eq_fixes = eq_fixes if eq_fixes != None else dict()
 
     def __str__(self):
         return "apply equation: " + str(self.eq)
@@ -1082,6 +1083,7 @@ class ApplyEquation(Rule):
         res = {
             "name": self.name,
             "eq": str(self.eq),
+            "eq_fixes": [[a, str(b)] for a, b in self.eq_fixes.items()],
             "source": str(self.source),
             "str": str(self),
             "latex_str": self.latex_str()

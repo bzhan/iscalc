@@ -147,17 +147,17 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.OnSubterm(rules.ApplyInductHyp()))
         eq = calc.parse_expr("hat(w)^2 = w * T(w) - norm(w)^2 * unit_matrix(3)")
         source = calc.parse_expr("hat(w)^2")
-        calc.perform_rule(rules.ApplyEquation(eq, source))
+        calc.perform_rule(rules.ApplyEquation(eq, source, calc.get_fixes()))
         # cond in self context
         eq = calc.parse_expr("norm(w) = 1")
         source = calc.parse_expr("norm(w)")
-        calc.perform_rule(rules.ApplyEquation(eq, source))
+        calc.perform_rule(rules.ApplyEquation(eq, source, calc.get_fixes()))
         calc.perform_rule(rules.ExpandPolynomial())
         old_e = calc.parse_expr("(-1) ^  n *  w * T(w) * hat(w)")
         new_e = calc.parse_expr("(-1) ^  n * (w * T(w) * hat(w))")
         calc.perform_rule(rules.Equation(old_e, new_e))
         source = calc.parse_expr("w * T(w) * hat(w)")
-        calc.perform_rule(rules.ApplyEquation(goal02.goal, source))
+        calc.perform_rule(rules.ApplyEquation(goal02.goal, source, calc.get_fixes()))
         calc.perform_rule(rules.FullSimplify())
         calc = induct_proof.rhs_calc
         assert goal03.is_finished()
@@ -176,16 +176,16 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.OnSubterm(rules.ApplyInductHyp()))
         eq = calc.parse_expr("hat(w)^2 = w * T(w) - norm(w)^2 * unit_matrix(3)")
         source = calc.parse_expr("hat(w) ^ 2")
-        calc.perform_rule(rules.ApplyEquation(goal01.goal, source))
+        calc.perform_rule(rules.ApplyEquation(goal01.goal, source, calc.get_fixes()))
         eq = calc.parse_expr("norm(w) = 1")
         source = calc.parse_expr("norm(w)")
-        calc.perform_rule(rules.ApplyEquation(eq, source))
+        calc.perform_rule(rules.ApplyEquation(eq, source, calc.get_fixes()))
         calc.perform_rule(rules.ExpandPolynomial())
         old_e = calc.parse_expr("(-1) ^ n *  w * T(w) * hat(w)")
         new_e = calc.parse_expr("(-1) ^ n * (w * T(w) * hat(w))")
         calc.perform_rule(rules.Equation(old_e, new_e))
         source = calc.parse_expr("w * T(w) * hat(w)")
-        calc.perform_rule(rules.ApplyEquation(goal02.goal, source))
+        calc.perform_rule(rules.ApplyEquation(goal02.goal, source, calc.get_fixes()))
         calc.perform_rule(rules.FullSimplify())
         calc = induct_proof.rhs_calc
         old_e = calc.parse_expr("hat(w) ^ 2")
@@ -195,6 +195,19 @@ class MatrixTest(unittest.TestCase):
         assert goal04.is_finished()
         self.checkAndOutput(file)
 
+    def testExample05Input(self):
+        dirname = os.path.dirname(__file__)
+        file_path = os.path.join(dirname, "../examples/matrix_example02.json")
+        with open(file_path, 'r', encoding='utf-8') as f:
+            f_data = json.load(f)
+        book_name = "matrix"
+        file_name = 'matrix_example02'
+        file = compstate.CompFile(book_name, file_name)
+
+        for idx, item in enumerate(f_data['content']):
+            st = compstate.parse_item(file, item)
+            file.add_item(st)
+        # print(file)
 
     def testExample06(self):
         file = compstate.CompFile("base", "matrix_example06")

@@ -2278,7 +2278,7 @@ class IntegralTest(unittest.TestCase):
         assert goal2.is_finished()
 
         # Integrate the previous equation on both sides
-        goal3 = file.add_goal("g(y, a) = -atan(y / a) + SKOLEM_FUNC(C(a))", conds=["y > 0", "a != 0"])
+        goal3 = file.add_goal("g(y, a) = -atan(y / a) + SKOLEM_FUNC(C(a))", conds=["y > 0", "a > 0"])
         proof = goal3.proof_by_rewrite_goal(begin = goal2)
         calc = proof.begin
         calc.perform_rule(rules.IntegralEquation())
@@ -2286,6 +2286,16 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.IndefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
         assert goal3.is_finished()
+
+        goal3_1 = file.add_goal("g(y, a) = -atan(y / a) + SKOLEM_FUNC(C(a))", conds=["y > 0", "a < 0"])
+        proof = goal3_1.proof_by_rewrite_goal(begin=goal2)
+        calc = proof.begin
+        calc.perform_rule(rules.IntegralEquation())
+        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.IndefiniteIntegralIdentity())
+        calc.perform_rule(rules.FullSimplify())
+        assert goal3_1.is_finished()
+
         # Evaluate the case y = oo
         goal4 = file.add_goal("(LIM {y -> oo}. g(y, a)) = 0", conds=["y > 0"])
         proof = goal4.proof_by_calculation()
@@ -2305,7 +2315,7 @@ class IntegralTest(unittest.TestCase):
         assert goal5.is_finished()
         # Evaluate C(a) for a < 0
         goal6 = file.add_goal("SKOLEM_FUNC(C(a)) = -(pi / 2)", conds=["a < 0"])
-        proof = goal6.proof_by_rewrite_goal(begin = goal3)
+        proof = goal6.proof_by_rewrite_goal(begin = goal3_1)
         calc = proof.begin
         calc.perform_rule(rules.LimitEquation("y", parser.parse_expr("oo")))
         s = calc.parse_expr("LIM {y -> oo}. g(y,a)")
@@ -2313,6 +2323,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.SolveEquation(parser.parse_expr("SKOLEM_FUNC(C(a))")))
         assert goal6.is_finished()
+
         goal11 = file.add_goal("g(y,a) = pi / 2 -atan(y / a)", conds=["a>0", "y>0"])
         proof = goal11.proof_by_rewrite_goal(begin = goal3)
         calc = proof.begin
@@ -2321,7 +2332,7 @@ class IntegralTest(unittest.TestCase):
         assert goal11.is_finished()
 
         goal12 = file.add_goal("g(y,a) = -pi / 2 -atan(y / a)", conds=["a<0", "y>0"])
-        proof = goal12.proof_by_rewrite_goal(begin=goal3)
+        proof = goal12.proof_by_rewrite_goal(begin=goal3_1)
         calc = proof.begin
         s = calc.parse_expr("SKOLEM_FUNC(C(a))")
         calc.perform_rule(rules.ApplyEquation(goal6.goal, s))
@@ -2658,11 +2669,10 @@ class IntegralTest(unittest.TestCase):
         # Reference:
         # Inside interesting integrals, Section 5.1, example #1
         file = compstate.CompFile("interesting", 'CatalanConstant01')
-        fixes = dict()
         # Define Catalan's constant
-        file.add_definition("G = SUM(n, 0, oo, (-1)^n / (2*n+1)^2)", fixes=fixes)
+        file.add_definition("G = SUM(n, 0, oo, (-1)^n / (2*n+1)^2)")
 
-        goal = file.add_goal("converges(SUM(n, 0, oo, INT x:[0,1]. x ^ (2 * n) / (2 * n + 1)))", fixes=fixes)
+        goal = file.add_goal("converges(SUM(n, 0, oo, INT x:[0,1]. x ^ (2 * n) / (2 * n + 1)))")
         proof = goal.proof_by_calculation()
         calc = proof.arg_calc
         calc.perform_rule(rules.FullSimplify())
@@ -2671,7 +2681,7 @@ class IntegralTest(unittest.TestCase):
         self.assertTrue(proof.is_finished())
 
         # Evaluate integral of atan(x) / x
-        goal = file.add_goal("(INT x:[0, 1]. atan(x) / x) = G", fixes=fixes)
+        goal = file.add_goal("(INT x:[0, 1]. atan(x) / x) = G")
         proof_of_goal = goal.proof_by_calculation()
         calc = proof_of_goal.lhs_calc
         calc.perform_rule(rules.SeriesExpansionIdentity(old_expr="atan(x)"))

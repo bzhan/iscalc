@@ -1226,12 +1226,36 @@
             "type": "header"
         },
         {
+          "category": "summation-split",
+          "split-cond": "n = a",
+          "conds": [
+              "a = l",
+              "a < u"
+          ],
+          "fixes": [
+            ["n", "$int"],
+            ["a", "$int"],
+            ["l", "$int"],
+            ["u", "$real"],
+            ["f", "$fun($int, $real)"]
+          ],
+          "expr": "SUM(n, l, u, f(n)) = f(a) + SUM(n, a+1, u, f(n))",
+          "type": "axiom"
+        },
+        {
             "category": "summation-split",
             "split-cond": "n >= a",
             "conds": [
                 "a > l",
                 "a <= u"
             ],
+            "fixes": [
+            ["n", "$int"],
+            ["a", "$int"],
+            ["l", "$int"],
+            ["u", "$real"],
+            ["f", "$fun($int, $real)"]
+          ],
             "expr": "SUM(n, l, u, f(n)) = SUM(n, l, a-1, f(n)) + SUM(n, a, u, f(n))",
             "type": "axiom"
         },
@@ -1241,6 +1265,13 @@
             "conds": [
                 "a >= l",
                 "a < u"
+            ],
+            "fixes": [
+              ["n", "$int"],
+              ["a", "$int"],
+              ["l", "$int"],
+              ["u", "$real"],
+              ["f", "$fun($int, $real)"]
             ],
             "expr": "SUM(n, l, u, f(n)) = SUM(n, l, a, f(n)) + SUM(n, a+1, u, f(n))",
             "type": "axiom"
@@ -1252,6 +1283,13 @@
                 "a >= l",
                 "a < u"
             ],
+            "fixes": [
+              ["n", "$int"],
+              ["a", "$int"],
+              ["l", "$int"],
+              ["u", "$real"],
+              ["f", "$fun($int, $real)"]
+            ],
             "expr": "SUM(n, l, u, f(n)) = SUM(n, l, a, f(n)) + SUM(n, a+1, u, f(n))",
             "type": "axiom"
         },
@@ -1261,6 +1299,13 @@
             "conds": [
                 "a > l",
                 "a <= u"
+            ],
+            "fixes": [
+              ["n", "$int"],
+              ["a", "$int"],
+              ["l", "$int"],
+              ["u", "$real"],
+              ["f", "$fun($int, $real)"]
             ],
             "expr": "SUM(n, l, u, f(n)) = SUM(n, l, a-1, f(n)) + SUM(n, a, u, f(n))",
             "type": "axiom"
@@ -1272,18 +1317,32 @@
                 "a > l",
                 "a < u"
             ],
+            "fixes": [
+              ["n", "$int"],
+              ["a", "$int"],
+              ["l", "$int"],
+              ["u", "$real"],
+              ["f", "$fun($int, $real)"]
+            ],
             "expr": "SUM(n, l, u, f(n)) = SUM(n, l, a-1, f(n)) + f(a) + SUM(n, a+1, u, f(n))",
             "type": "axiom"
         },
         {
-            "category": "summation-split",
-            "split-cond": "n = a",
-            "conds": [
-                "a = l",
-                "a < u"
-            ],
-            "expr": "SUM(n, l, u, f(n)) = f(a) + SUM(n, a+1, u, f(n))",
-            "type": "axiom"
+          "category": "summation-split",
+          "split-cond": "n = a",
+          "conds": [
+              "a = l",
+              "a < u"
+          ],
+          "fixes": [
+            ["n", "$int"],
+            ["a", "$int"],
+            ["l", "$int"],
+            ["u", "$real"],
+            ["f", "$fun($int, $real)"]
+          ],
+          "expr": "SUM(n, l, u, f(n)) = f(a) + SUM(n, a+1, u, f(n))",
+          "type": "axiom"
         },
         {
             "category": "summation-split",
@@ -1292,12 +1351,26 @@
                 "a = u",
                 "a > l"
             ],
+            "fixes": [
+              ["n", "$int"],
+              ["a", "$int"],
+              ["l", "$int"],
+              ["u", "$real"],
+              ["f", "$fun($int, $real)"]
+            ],
             "expr": "SUM(n, l, u, f(n)) = SUM(n, l, a-1, f(n)) + f(u)",
             "type": "axiom"
         },
         {
             "category": "summation-split",
             "split-cond": "n % 2",
+            "fixes": [
+              ["n", "$int"],
+              ["l", "$int"],
+              ["u", "$real"],
+              ["m", "$int"],
+              ["f", "$fun($int, $tensor($real, 3, 3))"]
+            ],
             "expr": "SUM(n, 0, oo, f(n)) = SUM(n, 0, oo, f(2*n+1)) + SUM(n, 0, oo, f(2*n))",
             "type": "axiom"
         },

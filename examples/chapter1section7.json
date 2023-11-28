@@ -12,7 +12,6 @@
                         "start": "INT x:[0,1]. x ^ 4 * (1 - x) ^ 4 / (1 + x ^ 2)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} x ^ {6} - 4 x ^ {5} + 5 x ^ {4} - 4 x ^ {2} + 4 - \\frac{4}{1 + x ^ {2}} \\,dx",
                                 "res": "INT x:[0,1]. x ^ 6 - 4 * x ^ 5 + 5 * x ^ 4 - 4 * x ^ 2 + 4 - 4 / (1 + x ^ 2)",
                                 "rule": {
@@ -25,7 +24,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-4 (\\int_{0}^{1} \\frac{1}{x ^ {2} + 1} \\,dx) - 4 (\\int_{0}^{1} x ^ {2} \\,dx) + 5 (\\int_{0}^{1} x ^ {4} \\,dx) - 4 (\\int_{0}^{1} x ^ {5} \\,dx) + (\\int_{0}^{1} x ^ {6} \\,dx) + 4 (\\int_{0}^{1} 1 \\,dx)",
                                 "res": "-(4 * (INT x:[0,1]. 1 / (x ^ 2 + 1))) - 4 * (INT x:[0,1]. x ^ 2) + 5 * (INT x:[0,1]. x ^ 4) - 4 * (INT x:[0,1]. x ^ 5) + (INT x:[0,1]. x ^ 6) + 4 * (INT x:[0,1]. 1)",
                                 "rule": {
@@ -35,7 +33,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-4 (\\left. \\tan^{-1}{x} \\right\\vert_{x=0}^{1}) - 4 (\\left. \\frac{x ^ {3}}{3} \\right\\vert_{x=0}^{1}) + 5 (\\left. \\frac{x ^ {5}}{5} \\right\\vert_{x=0}^{1}) - 4 (\\left. \\frac{x ^ {6}}{6} \\right\\vert_{x=0}^{1}) + (\\left. \\frac{x ^ {7}}{7} \\right\\vert_{x=0}^{1}) + 4 (\\left. x \\right\\vert_{x=0}^{1})",
                                 "res": "-(4 * ([atan(x)]_x=0,1)) - 4 * ([x ^ 3 / 3]_x=0,1) + 5 * ([x ^ 5 / 5]_x=0,1) - 4 * ([x ^ 6 / 6]_x=0,1) + ([x ^ 7 / 7]_x=0,1) + 4 * ([x]_x=0,1)",
                                 "rule": {
@@ -45,7 +42,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-\\pi + \\frac{22}{7}",
                                 "res": "-pi + 22/7",
                                 "rule": {
@@ -55,7 +51,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{22}{7} - \\pi",
                                 "res": "22/7 - pi",
                                 "rule": {

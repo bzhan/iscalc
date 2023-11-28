@@ -12,7 +12,6 @@
                         "start": "SUM(n, 0, oo, INT x:[0,1]. x ^ n / (n + 1))",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{n + 1} (\\int_{0}^{1} x ^ {n} \\,dx)}",
                                 "res": "SUM(n, 0, oo, 1 / (n + 1) * (INT x:[0,1]. x ^ n))",
                                 "rule": {
@@ -22,7 +21,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{n + 1} (\\left. \\frac{x ^ {n + 1}}{n + 1} \\right\\vert_{x=0}^{1})}",
                                 "res": "SUM(n, 0, oo, 1 / (n + 1) * ([x ^ (n + 1) / (n + 1)]_x=0,1))",
                                 "rule": {
@@ -32,7 +30,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{(n + 1) ^ {2}}}",
                                 "res": "SUM(n, 0, oo, 1 / (n + 1) ^ 2)",
                                 "rule": {
@@ -64,7 +61,6 @@
                         "start": "INT x:[0,1]. log(1 + x) / x",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {n + 1}}{n + 1}}}{x} \\,dx",
                                 "res": "INT x:[0,1]. SUM(n, 0, oo, (-1) ^ n * x ^ (n + 1) / (n + 1)) / x",
                                 "rule": {
@@ -76,7 +72,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {n + 1}}{n + 1} (\\frac{1}{x})} \\,dx",
                                 "res": "INT x:[0,1]. SUM(n, 0, oo, (-1) ^ n * x ^ (n + 1) / (n + 1) * (1 / x))",
                                 "rule": {
@@ -89,7 +84,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\int_{0}^{1} \\frac{(-1) ^ {n} x ^ {n + 1}}{n + 1} (\\frac{1}{x}) \\,dx}",
                                 "res": "SUM(n, 0, oo, INT x:[0,1]. (-1) ^ n * x ^ (n + 1) / (n + 1) * (1 / x))",
                                 "rule": {
@@ -99,7 +93,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n}}{n + 1} (\\int_{0}^{1} x ^ {n} \\,dx)}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n / (n + 1) * (INT x:[0,1]. x ^ n))",
                                 "rule": {
@@ -109,7 +102,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n}}{n + 1} (\\left. \\frac{x ^ {n + 1}}{n + 1} \\right\\vert_{x=0}^{1})}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n / (n + 1) * ([x ^ (n + 1) / (n + 1)]_x=0,1))",
                                 "rule": {
@@ -119,7 +111,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n}}{(n + 1) ^ {2}}}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n / (n + 1) ^ 2)",
                                 "rule": {
@@ -129,7 +120,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi ^ {2}}{12}",
                                 "res": "pi ^ 2 / 12",
                                 "rule": {

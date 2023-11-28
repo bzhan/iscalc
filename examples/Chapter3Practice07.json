@@ -8,6 +8,7 @@
                 }
             ],
             "eq": "I(a,b) = (INT x:[-oo,oo]. exp(-a * x ^ 2 + b * x))",
+            "fixes": [],
             "latex_eq": "I(a,b) = \\int_{-\\infty}^{\\infty} e^{(-a) x ^ {2} + b x} \\,dx",
             "latex_lhs": "I(a,b)",
             "type": "FuncDef"
@@ -30,7 +31,6 @@
                         "start": "I(a,b)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{-\\infty}^{\\infty} e^{-a x ^ {2} + b x} \\,dx",
                                 "res": "INT x:[-oo,oo]. exp(-(a * x ^ 2) + b * x)",
                                 "rule": {
@@ -41,7 +41,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{-\\infty}^{\\infty} e^{b ^ {2}/(4 a) - a (x - b/(2 a)) ^ {2}} \\,dx",
                                 "res": "INT x:[-oo,oo]. exp(b ^ 2 / (4 * a) - a * (x - b / (2 * a)) ^ 2)",
                                 "rule": {
@@ -54,7 +53,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{-\\infty}^{\\infty} e^{b ^ {2}/(4 a)} e^{(-a) (x - b/(2 a)) ^ {2}} \\,dx",
                                 "res": "INT x:[-oo,oo]. exp(b ^ 2 / (4 * a)) * exp(-a * (x - b / (2 * a)) ^ 2)",
                                 "rule": {
@@ -67,7 +65,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "e^{b ^ {2}/(4 a)} (\\int_{-\\infty}^{\\infty} e^{-a (-b/(2 a) + x) ^ {2}} \\,dx)",
                                 "res": "exp(b ^ 2 / (4 * a)) * (INT x:[-oo,oo]. exp(-(a * (-(b / (2 * a)) + x) ^ 2)))",
                                 "rule": {
@@ -77,7 +74,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "e^{b ^ {2}/(4 a)} (\\int_{-\\infty}^{\\infty} e^{-a y ^ {2}} \\,dy)",
                                 "res": "exp(b ^ 2 / (4 * a)) * (INT y:[-oo,oo]. exp(-(a * y ^ 2)))",
                                 "rule": {
@@ -90,7 +86,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "e^{b ^ {2}/(4 a)} (\\frac{\\sqrt{\\pi}}{\\sqrt{a}})",
                                 "res": "exp(b ^ 2 / (4 * a)) * (sqrt(pi) / sqrt(a))",
                                 "rule": {
@@ -100,7 +95,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{\\pi}}{\\sqrt{a}} e^{b ^ {2}/(4 a)}",
                                 "res": "sqrt(pi) / sqrt(a) * exp(b ^ 2 / (4 * a))",
                                 "rule": {
@@ -118,7 +112,6 @@
                         "start": "exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{\\pi}}{\\sqrt{a}} e^{b ^ {2}/(4 a)}",
                                 "res": "sqrt(pi) / sqrt(a) * exp(b ^ 2 / (4 * a))",
                                 "rule": {
@@ -156,11 +149,11 @@
                         "start": "D a. I(a,b)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{d}{da} e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}",
                                 "res": "D a. exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
                                 "rule": {
                                     "eq": "I(a,b) = exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(I(a,b) = e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(a,b)",
@@ -169,7 +162,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-\\frac{b ^ {2}\\cdot \\sqrt{\\pi}}{4 a ^ {5/2}} e^{b ^ {2}/(4 a)} - \\frac{\\sqrt{\\pi}}{2 a ^ {3/2}} e^{b ^ {2}/(4 a)}",
                                 "res": "-(b ^ 2 * sqrt(pi) / (4 * a ^ (5/2)) * exp(b ^ 2 / (4 * a))) - sqrt(pi) / (2 * a ^ (3/2)) * exp(b ^ 2 / (4 * a))",
                                 "rule": {
@@ -187,7 +179,6 @@
                         "start": "-(b ^ 2 / (4 * a ^ 2)) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a) - 1 / (2 * a) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "-\\frac{b ^ {2}\\cdot \\sqrt{\\pi}}{4 a ^ {5/2}} e^{b ^ {2}/(4 a)} - \\frac{\\sqrt{\\pi}}{2 a ^ {3/2}} e^{b ^ {2}/(4 a)}",
                                 "res": "-(b ^ 2 * sqrt(pi) / (4 * a ^ (5/2)) * exp(b ^ 2 / (4 * a))) - sqrt(pi) / (2 * a ^ (3/2)) * exp(b ^ 2 / (4 * a))",
                                 "rule": {
@@ -225,11 +216,11 @@
                         "start": "D b. I(a,b)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{d}{db} e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}",
                                 "res": "D b. exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
                                 "rule": {
                                     "eq": "I(a,b) = exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(I(a,b) = e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(a,b)",
@@ -238,7 +229,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{b\\cdot \\sqrt{\\pi}}{2 a ^ {3/2}} e^{b ^ {2}/(4 a)}",
                                 "res": "b * sqrt(pi) / (2 * a ^ (3/2)) * exp(b ^ 2 / (4 * a))",
                                 "rule": {
@@ -256,7 +246,6 @@
                         "start": "b / (2 * a) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{b\\cdot \\sqrt{\\pi}}{2 a ^ {3/2}} e^{b ^ {2}/(4 a)}",
                                 "res": "b * sqrt(pi) / (2 * a ^ (3/2)) * exp(b ^ 2 / (4 * a))",
                                 "rule": {
@@ -292,12 +281,17 @@
                 "goal": "(INT x:[-oo,oo]. x * exp(-(a * x ^ 2) + b * x)) = b / (2 * a) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
                 "latex_goal": "\\int_{-\\infty}^{\\infty} x e^{-a x ^ {2} + b x} \\,dx = \\frac{b}{2 a} e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}",
                 "start": {
+                    "conds": [
+                        {
+                            "cond": "a > 0",
+                            "latex_cond": "a > 0"
+                        }
+                    ],
                     "fixes": [],
                     "latex_start": "\\frac{d}{db} I(a,b) = \\frac{b}{2 a} e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}",
                     "start": "(D b. I(a,b)) = b / (2 * a) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
                     "steps": [
                         {
-                            "fixes": [],
                             "latex_res": "\\frac{d}{db} \\int_{-\\infty}^{\\infty} e^{-a x ^ {2} + b x} \\,dx = \\frac{b}{2 a} e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}",
                             "res": "(D b. INT x:[-oo,oo]. exp(-(a * x ^ 2) + b * x)) = b / (2 * a) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
                             "rule": {
@@ -309,7 +303,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "\\int_{-\\infty}^{\\infty} x e^{-a x ^ {2} + b x} \\,dx = \\frac{b\\cdot \\sqrt{\\pi}}{2 a ^ {3/2}} e^{b ^ {2}/(4 a)}",
                             "res": "(INT x:[-oo,oo]. x * exp(-(a * x ^ 2) + b * x)) = b * sqrt(pi) / (2 * a ^ (3/2)) * exp(b ^ 2 / (4 * a))",
                             "rule": {
@@ -341,12 +334,17 @@
                 "goal": "(INT x:[-oo,oo]. x ^ 2 * exp(-(a * x ^ 2) + b * x)) = b ^ 2 / (4 * a ^ 2) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a) + 1 / (2 * a) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
                 "latex_goal": "\\int_{-\\infty}^{\\infty} x ^ {2} e^{-a x ^ {2} + b x} \\,dx = \\frac{b ^ {2}}{4 a ^ {2}} e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}} + \\frac{1}{2 a} e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}",
                 "start": {
+                    "conds": [
+                        {
+                            "cond": "a > 0",
+                            "latex_cond": "a > 0"
+                        }
+                    ],
                     "fixes": [],
                     "latex_start": "\\frac{d}{da} I(a,b) = (-\\frac{b ^ {2}}{4 a ^ {2}}) e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}} - \\frac{1}{2 a} e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}",
                     "start": "(D a. I(a,b)) = -(b ^ 2 / (4 * a ^ 2)) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a) - 1 / (2 * a) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
                     "steps": [
                         {
-                            "fixes": [],
                             "latex_res": "\\frac{d}{da} \\int_{-\\infty}^{\\infty} e^{-a x ^ {2} + b x} \\,dx = (-\\frac{b ^ {2}}{4 a ^ {2}}) e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}} - \\frac{1}{2 a} e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}",
                             "res": "(D a. INT x:[-oo,oo]. exp(-(a * x ^ 2) + b * x)) = -(b ^ 2 / (4 * a ^ 2)) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a) - 1 / (2 * a) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
                             "rule": {
@@ -358,7 +356,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "-(\\int_{-\\infty}^{\\infty} x ^ {2} e^{-a x ^ {2} + b x} \\,dx) = -\\frac{b ^ {2}\\cdot \\sqrt{\\pi}}{4 a ^ {5/2}} e^{b ^ {2}/(4 a)} - \\frac{\\sqrt{\\pi}}{2 a ^ {3/2}} e^{b ^ {2}/(4 a)}",
                             "res": "-(INT x:[-oo,oo]. x ^ 2 * exp(-(a * x ^ 2) + b * x)) = -(b ^ 2 * sqrt(pi) / (4 * a ^ (5/2)) * exp(b ^ 2 / (4 * a))) - sqrt(pi) / (2 * a ^ (3/2)) * exp(b ^ 2 / (4 * a))",
                             "rule": {
@@ -368,7 +365,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "\\int_{-\\infty}^{\\infty} x ^ {2} e^{-a x ^ {2} + b x} \\,dx = \\frac{b ^ {2}\\cdot \\sqrt{\\pi}}{4 a ^ {5/2}} e^{b ^ {2}/(4 a)} + \\frac{\\sqrt{\\pi}}{2 a ^ {3/2}} e^{b ^ {2}/(4 a)}",
                             "res": "(INT x:[-oo,oo]. x ^ 2 * exp(-(a * x ^ 2) + b * x)) = b ^ 2 * sqrt(pi) / (4 * a ^ (5/2)) * exp(b ^ 2 / (4 * a)) + sqrt(pi) / (2 * a ^ (3/2)) * exp(b ^ 2 / (4 * a))",
                             "rule": {
@@ -398,7 +394,6 @@
                         "start": "INT x:[-oo,oo]. x * exp(-(x ^ 2) - x)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{-\\infty}^{\\infty} x e^{-1 x ^ {2} + -1 x} \\,dx",
                                 "res": "INT x:[-oo,oo]. x * exp(-(1 * x ^ 2) + -1 * x)",
                                 "rule": {
@@ -411,11 +406,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{-1}{2\\cdot 1} e^{(-1) ^ {2}/(4\\cdot 1)} \\sqrt{\\frac{\\pi}{1}}",
                                 "res": "-1 / (2 * 1) * exp((-1) ^ 2 / (4 * 1)) * sqrt(pi / 1)",
                                 "rule": {
                                     "eq": "(INT x:[-oo,oo]. x * exp(-(a * x ^ 2) + b * x)) = b / (2 * a) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(\\int_{-\\infty}^{\\infty} x e^{-a x ^ {2} + b x} \\,dx = \\frac{b}{2 a} e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[-oo,oo]. x * exp(-(1 * x ^ 2) + -1 * x)",
@@ -424,7 +419,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-\\frac{1}{2} \\sqrt{\\pi \\sqrt{e}}",
                                 "res": "-1/2 * sqrt(pi * sqrt(exp(1)))",
                                 "rule": {
@@ -465,7 +459,6 @@
                         "start": "INT x:[-oo,oo]. x ^ 2 * exp(-(x ^ 2) - x)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{-\\infty}^{\\infty} x ^ {2} e^{-1 x ^ {2} + -1 x} \\,dx",
                                 "res": "INT x:[-oo,oo]. x ^ 2 * exp(-(1 * x ^ 2) + -1 * x)",
                                 "rule": {
@@ -478,11 +471,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{(-1) ^ {2}}{4\\cdot 1 ^ {2}} e^{(-1) ^ {2}/(4\\cdot 1)} \\sqrt{\\frac{\\pi}{1}} + \\frac{1}{2\\cdot 1} e^{(-1) ^ {2}/(4\\cdot 1)} \\sqrt{\\frac{\\pi}{1}}",
                                 "res": "(-1) ^ 2 / (4 * 1 ^ 2) * exp((-1) ^ 2 / (4 * 1)) * sqrt(pi / 1) + 1 / (2 * 1) * exp((-1) ^ 2 / (4 * 1)) * sqrt(pi / 1)",
                                 "rule": {
                                     "eq": "(INT x:[-oo,oo]. x ^ 2 * exp(-(a * x ^ 2) + b * x)) = b ^ 2 / (4 * a ^ 2) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a) + 1 / (2 * a) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(\\int_{-\\infty}^{\\infty} x ^ {2} e^{-a x ^ {2} + b x} \\,dx = \\frac{b ^ {2}}{4 a ^ {2}} e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}} + \\frac{1}{2 a} e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[-oo,oo]. x ^ 2 * exp(-(1 * x ^ 2) + -1 * x)",
@@ -491,7 +484,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{3}{4} \\sqrt{\\pi \\sqrt{e}}",
                                 "res": "3/4 * sqrt(pi * sqrt(exp(1)))",
                                 "rule": {

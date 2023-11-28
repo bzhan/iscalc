@@ -12,7 +12,6 @@
                         "start": "INT x:[0,oo]. log(x + 1) / x ^ (3/2)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "(\\left. -\\frac{2 \\log{(x + 1)}}{\\sqrt{x}} \\right\\vert_{x=0}^{\\infty}) - (\\int_{0}^{\\infty} -\\frac{2}{\\sqrt{x} (x + 1)} \\,dx)",
                                 "res": "([-(2 * log(x + 1) / sqrt(x))]_x=0,oo) - (INT x:[0,oo]. -(2 / (sqrt(x) * (x + 1))))",
                                 "rule": {
@@ -25,7 +24,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{\\infty} \\frac{1}{\\sqrt{x} (x + 1)} \\,dx)",
                                 "res": "2 * (INT x:[0,oo]. 1 / (sqrt(x) * (x + 1)))",
                                 "rule": {
@@ -35,7 +33,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{\\infty} \\frac{2}{t ^ {2} + 1} \\,dt)",
                                 "res": "2 * (INT t:[0,oo]. 2 / (t ^ 2 + 1))",
                                 "rule": {
@@ -48,7 +45,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "4 (\\int_{0}^{\\infty} \\frac{1}{t ^ {2} + 1} \\,dt)",
                                 "res": "4 * (INT t:[0,oo]. 1 / (t ^ 2 + 1))",
                                 "rule": {
@@ -58,7 +54,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "4 (\\left. \\tan^{-1}{t} \\right\\vert_{t=0}^{\\infty})",
                                 "res": "4 * ([atan(t)]_t=0,oo)",
                                 "rule": {
@@ -68,7 +63,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "2 \\pi",
                                 "res": "2 * pi",
                                 "rule": {

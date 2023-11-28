@@ -18,7 +18,6 @@
                         "start": "1 - cos(a)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "1 - \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} a ^ {2 n}}{(2 n)!}}",
                                 "res": "1 - SUM(n, 0, oo, (-1) ^ n * a ^ (2 * n) / factorial(2 * n))",
                                 "rule": {
@@ -30,7 +29,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "1 - (\\frac{(-1) ^ {0} a ^ {2\\cdot 0}}{(2\\cdot 0)!} + \\sum_{i=0 + 1}^{\\infty}{\\frac{(-1) ^ {i} a ^ {2 i}}{(2 i)!}})",
                                 "res": "1 - ((-1) ^ 0 * a ^ (2 * 0) / factorial(2 * 0) + SUM(i, 0 + 1, oo, (-1) ^ i * a ^ (2 * i) / factorial(2 * i)))",
                                 "rule": {
@@ -43,7 +41,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-\\sum_{i=1}^{\\infty}{\\frac{a ^ {2 i} (-1) ^ {i}}{(2 i)!}}",
                                 "res": "-SUM(i, 1, oo, a ^ (2 * i) * (-1) ^ i / factorial(2 * i))",
                                 "rule": {
@@ -53,22 +50,20 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
-                                "latex_res": "\\sum_{n=1}^{\\infty}{-1 (\\frac{(-1) ^ {n} a ^ {2 n}}{(2 n)!})}",
-                                "res": "SUM(n, 1, oo, -1 * ((-1) ^ n * a ^ (2 * n) / factorial(2 * n)))",
+                                "latex_res": "\\sum_{i=1}^{\\infty}{-1 (\\frac{(-1) ^ {i} a ^ {2 i}}{(2 i)!})}",
+                                "res": "SUM(i, 1, oo, -1 * ((-1) ^ i * a ^ (2 * i) / factorial(2 * i)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(-\\sum_{n=1}^{\\infty}{\\frac{a ^ {2 n} (-1) ^ {n}}{(2 n)!}}\\) to \\(\\sum_{n=1}^{\\infty}{-1 (\\frac{(-1) ^ {n} a ^ {2 n}}{(2 n)!})}\\)",
+                                    "latex_str": "rewriting \\(-\\sum_{i=1}^{\\infty}{\\frac{a ^ {2 i} (-1) ^ {i}}{(2 i)!}}\\) to \\(\\sum_{i=1}^{\\infty}{-1 (\\frac{(-1) ^ {i} a ^ {2 i}}{(2 i)!})}\\)",
                                     "name": "Equation",
-                                    "new_expr": "SUM(n, 1, oo, -1 * ((-1) ^ n * a ^ (2 * n) / factorial(2 * n)))",
-                                    "old_expr": "-SUM(n, 1, oo, a ^ (2 * n) * (-1) ^ n / factorial(2 * n))",
-                                    "str": "rewriting -SUM(n, 1, oo, a ^ (2 * n) * (-1) ^ n / factorial(2 * n)) to SUM(n, 1, oo, -1 * ((-1) ^ n * a ^ (2 * n) / factorial(2 * n)))"
+                                    "new_expr": "SUM(i, 1, oo, -1 * ((-1) ^ i * a ^ (2 * i) / factorial(2 * i)))",
+                                    "old_expr": "-SUM(i, 1, oo, a ^ (2 * i) * (-1) ^ i / factorial(2 * i))",
+                                    "str": "rewriting -SUM(i, 1, oo, a ^ (2 * i) * (-1) ^ i / factorial(2 * i)) to SUM(i, 1, oo, -1 * ((-1) ^ i * a ^ (2 * i) / factorial(2 * i)))"
                                 },
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
-                                "latex_res": "\\sum_{n=0}^{\\infty}{-1 (\\frac{(-1) ^ {n + 1} a ^ {2 (n + 1)}}{(2 (n + 1))!})}",
-                                "res": "SUM(n, 0, oo, -1 * ((-1) ^ (n + 1) * a ^ (2 * (n + 1)) / factorial(2 * (n + 1))))",
+                                "latex_res": "\\sum_{i=0}^{\\infty}{-1 (\\frac{(-1) ^ {i + 1} a ^ {2 (i + 1)}}{(2 (i + 1))!})}",
+                                "res": "SUM(i, 0, oo, -1 * ((-1) ^ (i + 1) * a ^ (2 * (i + 1)) / factorial(2 * (i + 1))))",
                                 "rule": {
                                     "name": "ChangeSummationIndex",
                                     "new_lower": "0",
@@ -77,9 +72,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
-                                "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{a ^ {2 n + 2} (-1) ^ {n}}{(2 n + 2)!}}",
-                                "res": "SUM(n, 0, oo, a ^ (2 * n + 2) * (-1) ^ n / factorial(2 * n + 2))",
+                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{a ^ {2 i + 2} (-1) ^ {i}}{(2 i + 2)!}}",
+                                "res": "SUM(i, 0, oo, a ^ (2 * i + 2) * (-1) ^ i / factorial(2 * i + 2))",
                                 "rule": {
                                     "name": "FullSimplify",
                                     "str": "full simplify"
@@ -87,15 +81,14 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
-                                "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} a ^ {2 (n + 1)}}{(2 (n + 1))!}}",
-                                "res": "SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))",
+                                "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{(-1) ^ {i} a ^ {2 (i + 1)}}{(2 (i + 1))!}}",
+                                "res": "SUM(i, 0, oo, (-1) ^ i * a ^ (2 * (i + 1)) / factorial(2 * (i + 1)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{a ^ {2 n + 2} (-1) ^ {n}}{(2 n + 2)!}\\) to \\(\\frac{(-1) ^ {n} a ^ {2 (n + 1)}}{(2 (n + 1))!}\\)",
+                                    "latex_str": "rewriting \\(\\frac{a ^ {2 i + 2} (-1) ^ {i}}{(2 i + 2)!}\\) to \\(\\frac{(-1) ^ {i} a ^ {2 (i + 1)}}{(2 (i + 1))!}\\)",
                                     "name": "Equation",
-                                    "new_expr": "(-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1))",
-                                    "old_expr": "a ^ (2 * n + 2) * (-1) ^ n / factorial(2 * n + 2)",
-                                    "str": "rewriting a ^ (2 * n + 2) * (-1) ^ n / factorial(2 * n + 2) to (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1))"
+                                    "new_expr": "(-1) ^ i * a ^ (2 * (i + 1)) / factorial(2 * (i + 1))",
+                                    "old_expr": "a ^ (2 * i + 2) * (-1) ^ i / factorial(2 * i + 2)",
+                                    "str": "rewriting a ^ (2 * i + 2) * (-1) ^ i / factorial(2 * i + 2) to (-1) ^ i * a ^ (2 * (i + 1)) / factorial(2 * (i + 1))"
                                 },
                                 "type": "CalculationStep"
                             }

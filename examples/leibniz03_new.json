@@ -2,6 +2,7 @@
     "content": [
         {
             "eq": "I(t) = (INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2) / 2))",
+            "fixes": [],
             "latex_eq": "I{(t)} = \\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx",
             "latex_lhs": "I{(t)}",
             "type": "FuncDef"
@@ -33,6 +34,38 @@
                         [
                             "n",
                             "$int"
+                        ],
+                        [
+                            "cosh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "sinh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "binom",
+                            "$fun($real, $real, $real)"
+                        ],
+                        [
+                            "Gamma",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "B",
+                            "$fun($real, $real, $real)"
+                        ],
+                        [
+                            "G",
+                            "$fun($real)"
+                        ],
+                        [
+                            "zeta",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "I",
+                            "$fun($real, $real)"
                         ]
                     ],
                     "goal": "Gamma(1/2) = sqrt(pi)",
@@ -45,11 +78,11 @@
                                 "start": "Gamma(1/2)",
                                 "steps": [
                                     {
-                                        "fixes": [],
                                         "latex_res": "\\sqrt{\\pi}",
                                         "res": "sqrt(pi)",
                                         "rule": {
                                             "eq": "Gamma(1/2) = sqrt(pi)",
+                                            "eq_fixes": [],
                                             "latex_str": "apply equation \\(\\Gamma{(\\frac{1}{2})} = \\sqrt{\\pi}\\)",
                                             "name": "ApplyEquation",
                                             "source": "Gamma(1/2)",
@@ -83,6 +116,38 @@
                         [
                             "n",
                             "$int"
+                        ],
+                        [
+                            "cosh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "sinh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "binom",
+                            "$fun($real, $real, $real)"
+                        ],
+                        [
+                            "Gamma",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "B",
+                            "$fun($real, $real, $real)"
+                        ],
+                        [
+                            "G",
+                            "$fun($real)"
+                        ],
+                        [
+                            "zeta",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "I",
+                            "$fun($real, $real)"
                         ]
                     ],
                     "goal": "Gamma(n + 3/2) = 4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (4 * factorial(n + 1))",
@@ -95,7 +160,6 @@
                                 "start": "Gamma(n + 3/2)",
                                 "steps": [
                                     {
-                                        "fixes": [],
                                         "latex_res": "\\Gamma{(n + \\frac{1}{2} + 1)}",
                                         "res": "Gamma(n + 1/2 + 1)",
                                         "rule": {
@@ -108,7 +172,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "(n + \\frac{1}{2}) \\Gamma{(n + \\frac{1}{2})}",
                                         "res": "(n + 1/2) * Gamma(n + 1/2)",
                                         "rule": {
@@ -121,7 +184,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "(n + \\frac{1}{2}) (\\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!})",
                                         "res": "(n + 1/2) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n)))",
                                         "rule": {
@@ -132,7 +194,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "\\frac{(2 n + 1) (2 n + 2)}{4 (n + 1)} (\\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!})",
                                         "res": "(2 * n + 1) * (2 * n + 2) / (4 * (n + 1)) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n)))",
                                         "rule": {
@@ -145,7 +206,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "\\frac{\\sqrt{\\pi} ((2 n + 1 + 1) ((2 n + 1) (2 n)!))}{4 ^ {1} 4 ^ {n} ((n + 1) n!)}",
                                         "res": "sqrt(pi) * ((2 * n + 1 + 1) * ((2 * n + 1) * factorial(2 * n))) / (4 ^ 1 * 4 ^ n * ((n + 1) * factorial(n)))",
                                         "rule": {
@@ -158,7 +218,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "\\frac{\\sqrt{\\pi} ((2 n + 1 + 1) ((2 n + 1) (2 n)!))}{4 ^ {1 + n} ((n + 1) n!)}",
                                         "res": "sqrt(pi) * ((2 * n + 1 + 1) * ((2 * n + 1) * factorial(2 * n))) / (4 ^ (1 + n) * ((n + 1) * factorial(n)))",
                                         "rule": {
@@ -171,7 +230,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "\\frac{\\sqrt{\\pi} ((2 n + 1 + 1) (2 n + 1)!)}{4 ^ {1 + n} ((n + 1) n!)}",
                                         "res": "sqrt(pi) * ((2 * n + 1 + 1) * factorial(2 * n + 1)) / (4 ^ (1 + n) * ((n + 1) * factorial(n)))",
                                         "rule": {
@@ -184,7 +242,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "\\frac{\\sqrt{\\pi} (2 n + 2)!}{4 ^ {1 + n} ((n + 1) n!)}",
                                         "res": "sqrt(pi) * factorial(2 * n + 2) / (4 ^ (1 + n) * ((n + 1) * factorial(n)))",
                                         "rule": {
@@ -197,7 +254,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "\\frac{\\sqrt{\\pi} (2 n + 2)!}{4 ^ {1 + n} (n + 1)!}",
                                         "res": "sqrt(pi) * factorial(2 * n + 2) / (4 ^ (1 + n) * factorial(n + 1))",
                                         "rule": {
@@ -210,7 +266,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "\\frac{4 ^ {-n}\\cdot \\sqrt{\\pi} (2 n + 2)!}{4 (n + 1)!}",
                                         "res": "4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (4 * factorial(n + 1))",
                                         "rule": {
@@ -268,7 +323,6 @@
                                     "start": "SUM(n, 0, oo, INT x:[0,oo]. (-(-1)) ^ n * (abs(t) * abs(x)) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
                                     "steps": [
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{(2 n)!} (\\int_{0}^{\\infty} (t x) ^ {2 n} e^{-x ^ {2}/2} \\,dx)}",
                                             "res": "SUM(n, 0, oo, 1 / factorial(2 * n) * (INT x:[0,oo]. (t * x) ^ (2 * n) * exp(-(x ^ 2 / 2))))",
                                             "rule": {
@@ -278,7 +332,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{(2 n)!} (\\int_{0}^{\\infty} t ^ {2 n} x ^ {2 n} e^{-x ^ {2}/2} \\,dx)}",
                                             "res": "SUM(n, 0, oo, 1 / factorial(2 * n) * (INT x:[0,oo]. t ^ (2 * n) * x ^ (2 * n) * exp(-(x ^ 2 / 2))))",
                                             "rule": {
@@ -291,7 +344,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n}}{(2 n)!} (\\int_{0}^{\\infty} x ^ {2 n} e^{-x ^ {2}/2} \\,dx)}",
                                             "res": "SUM(n, 0, oo, t ^ (2 * n) / factorial(2 * n) * (INT x:[0,oo]. x ^ (2 * n) * exp(-(x ^ 2 / 2))))",
                                             "rule": {
@@ -301,7 +353,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{\\sqrt{2} e^{-u} (\\sqrt{u}\\cdot \\sqrt{2}) ^ {2 n}}{2 \\sqrt{u}} \\,du)}",
                                             "res": "SUM(n, 0, oo, t ^ (2 * n) / factorial(2 * n) * (INT u:[0,oo]. sqrt(2) * exp(-u) * (sqrt(u) * sqrt(2)) ^ (2 * n) / (2 * sqrt(u))))",
                                             "rule": {
@@ -315,7 +366,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (\\sqrt{u}\\cdot \\sqrt{2}) ^ {2 n}}{\\sqrt{u}} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (sqrt(u) * sqrt(2)) ^ (2 * n) / sqrt(u)))",
                                             "rule": {
@@ -325,7 +375,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} ((\\sqrt{u}\\cdot \\sqrt{2}) ^ {2}) ^ {n}}{\\sqrt{u}} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (sqrt(u) * sqrt(2)) ^ 2 ^ n / sqrt(u)))",
                                             "rule": {
@@ -338,7 +387,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (2 u) ^ {n}}{\\sqrt{u}} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (2 * u) ^ n / sqrt(u)))",
                                             "rule": {
@@ -348,7 +396,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (2 ^ {n} u ^ {n})}{\\sqrt{u}} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (2 ^ n * u ^ n) / sqrt(u)))",
                                             "rule": {
@@ -361,7 +408,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} 2 ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} u ^ {n - 1/2} e^{-u} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n / factorial(2 * n) * (INT u:[0,oo]. u ^ (n - 1/2) * exp(-u)))",
                                             "rule": {
@@ -371,7 +417,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} 2 ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} e^{-u} u ^ {n + 1/2 - 1} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * u ^ (n + 1/2 - 1)))",
                                             "rule": {
@@ -384,7 +429,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} 2 ^ {n}}{(2 n)!} \\Gamma{(n + \\frac{1}{2})}}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n / factorial(2 * n) * Gamma(n + 1/2))",
                                             "rule": {
@@ -396,11 +440,11 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} 2 ^ {n}}{(2 n)!} (\\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!})}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n / factorial(2 * n) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))))",
                                             "rule": {
                                                 "eq": "Gamma(n + 1/2) = sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))",
+                                                "eq_fixes": [],
                                                 "latex_str": "apply equation \\(\\Gamma{(n + \\frac{1}{2})} = \\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!}\\)",
                                                 "name": "ApplyEquation",
                                                 "source": "Gamma(n + 1/2)",
@@ -409,7 +453,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} 2 ^ {n} 4 ^ {-n}}{n!}}",
                                             "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n * 4 ^ -n / factorial(n))",
                                             "rule": {
@@ -419,7 +462,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{(t ^ {2}) ^ {n} 2 ^ {n} 4 ^ {-n}}{n!}}",
                                             "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, t ^ 2 ^ n * 2 ^ n * 4 ^ -n / factorial(n))",
                                             "rule": {
@@ -432,7 +474,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{(t ^ {2}\\cdot 2) ^ {n} 4 ^ {-n}}{n!}}",
                                             "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, (t ^ 2 * 2) ^ n * 4 ^ -n / factorial(n))",
                                             "rule": {
@@ -445,7 +486,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{(t ^ {2}\\cdot 2) ^ {n} (\\frac{1}{4}) ^ {n}}{n!}}",
                                             "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, (t ^ 2 * 2) ^ n * (1/4) ^ n / factorial(n))",
                                             "rule": {
@@ -458,7 +498,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{(\\frac{t ^ {2}}{2}) ^ {n}}{n!}}",
                                             "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, (t ^ 2 / 2) ^ n / factorial(n))",
                                             "rule": {
@@ -471,7 +510,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} e^{t ^ {2}/2}",
                                             "res": "sqrt(2) * sqrt(pi) / 2 * exp(t ^ 2 / 2)",
                                             "rule": {
@@ -510,7 +548,6 @@
                                     "start": "SUM(n, 0, oo, INT x:[0,oo]. (-(-1)) ^ n * (abs(t) * abs(x)) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
                                     "steps": [
                                         {
-                                            "fixes": [],
                                             "latex_res": "0",
                                             "res": "0",
                                             "rule": {
@@ -548,7 +585,6 @@
                                     "start": "SUM(n, 0, oo, INT x:[0,oo]. (-(-1)) ^ n * (abs(t) * abs(x)) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
                                     "steps": [
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{(2 n)!} (\\int_{0}^{\\infty} (t x) ^ {2 n} e^{-x ^ {2}/2} \\,dx)}",
                                             "res": "SUM(n, 0, oo, 1 / factorial(2 * n) * (INT x:[0,oo]. (t * x) ^ (2 * n) * exp(-(x ^ 2 / 2))))",
                                             "rule": {
@@ -558,7 +594,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{(2 n)!} (\\int_{0}^{\\infty} t ^ {2 n} x ^ {2 n} e^{-x ^ {2}/2} \\,dx)}",
                                             "res": "SUM(n, 0, oo, 1 / factorial(2 * n) * (INT x:[0,oo]. t ^ (2 * n) * x ^ (2 * n) * exp(-(x ^ 2 / 2))))",
                                             "rule": {
@@ -571,7 +606,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n}}{(2 n)!} (\\int_{0}^{\\infty} x ^ {2 n} e^{-x ^ {2}/2} \\,dx)}",
                                             "res": "SUM(n, 0, oo, t ^ (2 * n) / factorial(2 * n) * (INT x:[0,oo]. x ^ (2 * n) * exp(-(x ^ 2 / 2))))",
                                             "rule": {
@@ -581,7 +615,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{\\sqrt{2} e^{-u} (\\sqrt{u}\\cdot \\sqrt{2}) ^ {2 n}}{2 \\sqrt{u}} \\,du)}",
                                             "res": "SUM(n, 0, oo, t ^ (2 * n) / factorial(2 * n) * (INT u:[0,oo]. sqrt(2) * exp(-u) * (sqrt(u) * sqrt(2)) ^ (2 * n) / (2 * sqrt(u))))",
                                             "rule": {
@@ -595,7 +628,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (\\sqrt{u}\\cdot \\sqrt{2}) ^ {2 n}}{\\sqrt{u}} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (sqrt(u) * sqrt(2)) ^ (2 * n) / sqrt(u)))",
                                             "rule": {
@@ -605,7 +637,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} ((\\sqrt{u}\\cdot \\sqrt{2}) ^ {2}) ^ {n}}{\\sqrt{u}} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (sqrt(u) * sqrt(2)) ^ 2 ^ n / sqrt(u)))",
                                             "rule": {
@@ -618,7 +649,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (2 u) ^ {n}}{\\sqrt{u}} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (2 * u) ^ n / sqrt(u)))",
                                             "rule": {
@@ -628,7 +658,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (2 ^ {n} u ^ {n})}{\\sqrt{u}} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (2 ^ n * u ^ n) / sqrt(u)))",
                                             "rule": {
@@ -641,7 +670,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} 2 ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} u ^ {n - 1/2} e^{-u} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n / factorial(2 * n) * (INT u:[0,oo]. u ^ (n - 1/2) * exp(-u)))",
                                             "rule": {
@@ -651,7 +679,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} 2 ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} e^{-u} u ^ {n + 1/2 - 1} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * u ^ (n + 1/2 - 1)))",
                                             "rule": {
@@ -664,7 +691,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} 2 ^ {n}}{(2 n)!} \\Gamma{(n + \\frac{1}{2})}}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n / factorial(2 * n) * Gamma(n + 1/2))",
                                             "rule": {
@@ -676,11 +702,11 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} 2 ^ {n}}{(2 n)!} (\\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!})}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n / factorial(2 * n) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))))",
                                             "rule": {
                                                 "eq": "Gamma(n + 1/2) = sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))",
+                                                "eq_fixes": [],
                                                 "latex_str": "apply equation \\(\\Gamma{(n + \\frac{1}{2})} = \\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!}\\)",
                                                 "name": "ApplyEquation",
                                                 "source": "Gamma(n + 1/2)",
@@ -689,7 +715,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} 2 ^ {n} 4 ^ {-n}}{n!}}",
                                             "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n * 4 ^ -n / factorial(n))",
                                             "rule": {
@@ -699,7 +724,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{(t ^ {2}) ^ {n} 2 ^ {n} 4 ^ {-n}}{n!}}",
                                             "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, t ^ 2 ^ n * 2 ^ n * 4 ^ -n / factorial(n))",
                                             "rule": {
@@ -712,7 +736,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{(t ^ {2}\\cdot 2) ^ {n} 4 ^ {-n}}{n!}}",
                                             "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, (t ^ 2 * 2) ^ n * 4 ^ -n / factorial(n))",
                                             "rule": {
@@ -725,7 +748,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{(t ^ {2}\\cdot 2) ^ {n} (\\frac{1}{4}) ^ {n}}{n!}}",
                                             "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, (t ^ 2 * 2) ^ n * (1/4) ^ n / factorial(n))",
                                             "rule": {
@@ -738,7 +760,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{(\\frac{t ^ {2}}{2}) ^ {n}}{n!}}",
                                             "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, (t ^ 2 / 2) ^ n / factorial(n))",
                                             "rule": {
@@ -751,7 +772,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} e^{t ^ {2}/2}",
                                             "res": "sqrt(2) * sqrt(pi) / 2 * exp(t ^ 2 / 2)",
                                             "rule": {
@@ -800,7 +820,6 @@
                         "start": "I(t)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx",
                                 "res": "INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2 / 2))",
                                 "rule": {
@@ -811,7 +830,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!}} e^{-x ^ {2}/2} \\,dx",
                                 "res": "INT x:[0,oo]. SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n)) * exp(-(x ^ 2 / 2))",
                                 "rule": {
@@ -823,7 +841,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2}} \\,dx",
                                 "res": "INT x:[0,oo]. SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
                                 "rule": {
@@ -836,7 +853,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\int_{0}^{\\infty} \\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2} \\,dx}",
                                 "res": "SUM(n, 0, oo, INT x:[0,oo]. (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
                                 "rule": {
@@ -846,7 +862,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\int_{0}^{\\infty} \\frac{(-1) ^ {n} (t ^ {2 n} x ^ {2 n})}{(2 n)!} e^{-x ^ {2}/2} \\,dx}",
                                 "res": "SUM(n, 0, oo, INT x:[0,oo]. (-1) ^ n * (t ^ (2 * n) * x ^ (2 * n)) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
                                 "rule": {
@@ -859,7 +874,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} x ^ {2 n} e^{-x ^ {2}/2} \\,dx)}",
                                 "res": "SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n / factorial(2 * n) * (INT x:[0,oo]. x ^ (2 * n) * exp(-(x ^ 2 / 2))))",
                                 "rule": {
@@ -869,7 +883,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{\\sqrt{2} e^{-u} (\\sqrt{u}\\cdot \\sqrt{2}) ^ {2 n}}{2 \\sqrt{u}} \\,du)}",
                                 "res": "SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n / factorial(2 * n) * (INT u:[0,oo]. sqrt(2) * exp(-u) * (sqrt(u) * sqrt(2)) ^ (2 * n) / (2 * sqrt(u))))",
                                 "rule": {
@@ -883,7 +896,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (\\sqrt{u}\\cdot \\sqrt{2}) ^ {2 n}}{\\sqrt{u}} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (sqrt(u) * sqrt(2)) ^ (2 * n) / sqrt(u)))",
                                 "rule": {
@@ -893,7 +905,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} ((\\sqrt{u}\\cdot \\sqrt{2}) ^ {2}) ^ {n}}{\\sqrt{u}} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (sqrt(u) * sqrt(2)) ^ 2 ^ n / sqrt(u)))",
                                 "rule": {
@@ -906,7 +917,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (2 u) ^ {n}}{\\sqrt{u}} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (2 * u) ^ n / sqrt(u)))",
                                 "rule": {
@@ -916,7 +926,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (2 ^ {n} u ^ {n})}{\\sqrt{u}} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (2 ^ n * u ^ n) / sqrt(u)))",
                                 "rule": {
@@ -929,7 +938,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n} 2 ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} u ^ {n - 1/2} e^{-u} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n / factorial(2 * n) * (INT u:[0,oo]. u ^ (n - 1/2) * exp(-u)))",
                                 "rule": {
@@ -939,7 +947,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n} 2 ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} e^{-u} u ^ {n + 1/2 - 1} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * u ^ (n + 1/2 - 1)))",
                                 "rule": {
@@ -952,7 +959,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n} 2 ^ {n}}{(2 n)!} \\Gamma{(n + \\frac{1}{2})}}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n / factorial(2 * n) * Gamma(n + 1/2))",
                                 "rule": {
@@ -964,11 +970,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n} 2 ^ {n}}{(2 n)!} (\\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!})}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n / factorial(2 * n) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))))",
                                 "rule": {
                                     "eq": "Gamma(n + 1/2) = sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(\\Gamma{(n + \\frac{1}{2})} = \\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!}\\)",
                                     "name": "ApplyEquation",
                                     "source": "Gamma(n + 1/2)",
@@ -977,7 +983,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n} 2 ^ {n} 4 ^ {-n}}{n!}}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n * 4 ^ -n / factorial(n))",
                                 "rule": {
@@ -987,7 +992,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{(t ^ {2}) ^ {n} (-1) ^ {n} 2 ^ {n} 4 ^ {-n}}{n!}}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, t ^ 2 ^ n * (-1) ^ n * 2 ^ n * 4 ^ -n / factorial(n))",
                                 "rule": {
@@ -1000,7 +1004,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{(t ^ {2}\\cdot -1) ^ {n} 2 ^ {n} 4 ^ {-n}}{n!}}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, (t ^ 2 * -1) ^ n * 2 ^ n * 4 ^ -n / factorial(n))",
                                 "rule": {
@@ -1013,7 +1016,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{(t ^ {2}\\cdot -2) ^ {n} 4 ^ {-n}}{n!}}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, (t ^ 2 * -2) ^ n * 4 ^ -n / factorial(n))",
                                 "rule": {
@@ -1026,7 +1028,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{(t ^ {2}\\cdot -2) ^ {n} (\\frac{1}{4}) ^ {n}}{n!}}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, (t ^ 2 * -2) ^ n * (1/4) ^ n / factorial(n))",
                                 "rule": {
@@ -1039,7 +1040,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{(\\frac{-t ^ {2}}{2}) ^ {n}}{n!}}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, (-(t ^ 2) / 2) ^ n / factorial(n))",
                                 "rule": {
@@ -1052,7 +1052,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} e^{-t ^ {2}/2}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * exp(-(t ^ 2) / 2)",
                                 "rule": {
@@ -1063,7 +1062,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} e^{-t ^ {2}/2}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * exp(-(t ^ 2 / 2))",
                                 "rule": {
@@ -1081,7 +1079,6 @@
                         "start": "sqrt(pi / 2) * exp(-(t ^ 2) / 2)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} e^{-t ^ {2}/2}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * exp(-(t ^ 2 / 2))",
                                 "rule": {
@@ -1119,7 +1116,6 @@
                         "start": "I(t)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx",
                                 "res": "INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2 / 2))",
                                 "rule": {
@@ -1130,7 +1126,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!}} e^{-x ^ {2}/2} \\,dx",
                                 "res": "INT x:[0,oo]. SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n)) * exp(-(x ^ 2 / 2))",
                                 "rule": {
@@ -1142,7 +1137,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2}} \\,dx",
                                 "res": "INT x:[0,oo]. SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
                                 "rule": {
@@ -1155,7 +1149,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\int_{0}^{\\infty} \\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2} \\,dx}",
                                 "res": "SUM(n, 0, oo, INT x:[0,oo]. (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
                                 "rule": {
@@ -1165,7 +1158,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\int_{0}^{\\infty} \\frac{(-1) ^ {n} (t ^ {2 n} x ^ {2 n})}{(2 n)!} e^{-x ^ {2}/2} \\,dx}",
                                 "res": "SUM(n, 0, oo, INT x:[0,oo]. (-1) ^ n * (t ^ (2 * n) * x ^ (2 * n)) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
                                 "rule": {
@@ -1178,7 +1170,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} x ^ {2 n} e^{-x ^ {2}/2} \\,dx)}",
                                 "res": "SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n / factorial(2 * n) * (INT x:[0,oo]. x ^ (2 * n) * exp(-(x ^ 2 / 2))))",
                                 "rule": {
@@ -1188,7 +1179,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{\\sqrt{2} e^{-u} (\\sqrt{u}\\cdot \\sqrt{2}) ^ {2 n}}{2 \\sqrt{u}} \\,du)}",
                                 "res": "SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n / factorial(2 * n) * (INT u:[0,oo]. sqrt(2) * exp(-u) * (sqrt(u) * sqrt(2)) ^ (2 * n) / (2 * sqrt(u))))",
                                 "rule": {
@@ -1202,7 +1192,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (\\sqrt{u}\\cdot \\sqrt{2}) ^ {2 n}}{\\sqrt{u}} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (sqrt(u) * sqrt(2)) ^ (2 * n) / sqrt(u)))",
                                 "rule": {
@@ -1212,7 +1201,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} ((\\sqrt{u}\\cdot \\sqrt{2}) ^ {2}) ^ {n}}{\\sqrt{u}} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (sqrt(u) * sqrt(2)) ^ 2 ^ n / sqrt(u)))",
                                 "rule": {
@@ -1225,7 +1213,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (2 u) ^ {n}}{\\sqrt{u}} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (2 * u) ^ n / sqrt(u)))",
                                 "rule": {
@@ -1235,7 +1222,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (2 ^ {n} u ^ {n})}{\\sqrt{u}} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (2 ^ n * u ^ n) / sqrt(u)))",
                                 "rule": {
@@ -1248,7 +1234,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n} 2 ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} u ^ {n - 1/2} e^{-u} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n / factorial(2 * n) * (INT u:[0,oo]. u ^ (n - 1/2) * exp(-u)))",
                                 "rule": {
@@ -1258,7 +1243,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n} 2 ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} e^{-u} u ^ {n + 1/2 - 1} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * u ^ (n + 1/2 - 1)))",
                                 "rule": {
@@ -1271,7 +1255,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n} 2 ^ {n}}{(2 n)!} \\Gamma{(n + \\frac{1}{2})}}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n / factorial(2 * n) * Gamma(n + 1/2))",
                                 "rule": {
@@ -1283,11 +1266,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n} 2 ^ {n}}{(2 n)!} (\\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!})}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n / factorial(2 * n) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))))",
                                 "rule": {
                                     "eq": "Gamma(n + 1/2) = sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(\\Gamma{(n + \\frac{1}{2})} = \\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!}\\)",
                                     "name": "ApplyEquation",
                                     "source": "Gamma(n + 1/2)",
@@ -1296,7 +1279,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n} 2 ^ {n} 4 ^ {-n}}{n!}}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n * 4 ^ -n / factorial(n))",
                                 "rule": {
@@ -1306,7 +1288,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{(t ^ {2}) ^ {n} (-1) ^ {n} 2 ^ {n} 4 ^ {-n}}{n!}}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, t ^ 2 ^ n * (-1) ^ n * 2 ^ n * 4 ^ -n / factorial(n))",
                                 "rule": {
@@ -1319,7 +1300,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{(t ^ {2}\\cdot -1) ^ {n} 2 ^ {n} 4 ^ {-n}}{n!}}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, (t ^ 2 * -1) ^ n * 2 ^ n * 4 ^ -n / factorial(n))",
                                 "rule": {
@@ -1332,7 +1312,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{(t ^ {2}\\cdot -2) ^ {n} 4 ^ {-n}}{n!}}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, (t ^ 2 * -2) ^ n * 4 ^ -n / factorial(n))",
                                 "rule": {
@@ -1345,7 +1324,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{(t ^ {2}\\cdot -2) ^ {n} (\\frac{1}{4}) ^ {n}}{n!}}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, (t ^ 2 * -2) ^ n * (1/4) ^ n / factorial(n))",
                                 "rule": {
@@ -1358,7 +1336,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{(\\frac{-t ^ {2}}{2}) ^ {n}}{n!}}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, (-(t ^ 2) / 2) ^ n / factorial(n))",
                                 "rule": {
@@ -1371,7 +1348,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} e^{-t ^ {2}/2}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * exp(-(t ^ 2) / 2)",
                                 "rule": {
@@ -1382,7 +1358,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} e^{-t ^ {2}/2}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * exp(-(t ^ 2 / 2))",
                                 "rule": {
@@ -1400,7 +1375,6 @@
                         "start": "sqrt(pi / 2) * exp(-(t ^ 2) / 2)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} e^{-t ^ {2}/2}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * exp(-(t ^ 2 / 2))",
                                 "rule": {

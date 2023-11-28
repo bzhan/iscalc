@@ -22,7 +22,6 @@
                         "start": "SUM(k, 0, oo, abs(INT x:[0,1]. (c * x ^ a * log(x)) ^ k / factorial(k)))",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{1}{k!} \\left| \\int_{0}^{1} (c x ^ {a} \\log{x}) ^ {k} \\,dx \\right|}",
                                 "res": "SUM(k, 0, oo, 1 / factorial(k) * abs(INT x:[0,1]. (c * x ^ a * log(x)) ^ k))",
                                 "rule": {
@@ -32,7 +31,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{1}{k!} \\left| \\int_{0}^{1} (c x ^ {a}) ^ {k} \\log^{k}(x) \\,dx \\right|}",
                                 "res": "SUM(k, 0, oo, 1 / factorial(k) * abs(INT x:[0,1]. (c * x ^ a) ^ k * log(x) ^ k))",
                                 "rule": {
@@ -45,7 +43,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{1}{k!} \\left| \\int_{0}^{1} c ^ {k} (x ^ {a}) ^ {k} \\log^{k}(x) \\,dx \\right|}",
                                 "res": "SUM(k, 0, oo, 1 / factorial(k) * abs(INT x:[0,1]. c ^ k * x ^ a ^ k * log(x) ^ k))",
                                 "rule": {
@@ -58,7 +55,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{\\left| c \\right| ^ {k}}{k!} \\left| \\int_{0}^{1} x ^ {a k} \\log^{k}(x) \\,dx \\right|}",
                                 "res": "SUM(k, 0, oo, abs(c) ^ k / factorial(k) * abs(INT x:[0,1]. x ^ (a * k) * log(x) ^ k))",
                                 "rule": {
@@ -68,7 +64,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{\\left| c \\right| ^ {k}}{k!} \\left| (-1) ^ {k} k! (a k + 1) ^ {-k - 1} \\right|}",
                                 "res": "SUM(k, 0, oo, abs(c) ^ k / factorial(k) * abs((-1) ^ k * factorial(k) * (a * k + 1) ^ (-k - 1)))",
                                 "rule": {
@@ -78,7 +73,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\left| c \\right| ^ {k} (a k + 1) ^ {-k - 1}}",
                                 "res": "SUM(k, 0, oo, abs(c) ^ k * (a * k + 1) ^ (-k - 1))",
                                 "rule": {
@@ -120,7 +114,6 @@
                         "start": "INT x:[0,1]. x ^ (c * x ^ a)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} e^{\\log{(x ^ {c x ^ {a}})}} \\,dx",
                                 "res": "INT x:[0,1]. exp(log(x ^ (c * x ^ a)))",
                                 "rule": {
@@ -133,7 +126,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} \\sum_{k=0}^{\\infty}{\\frac{\\log^{k}(x ^ {c x ^ {a}})}{k!}} \\,dx",
                                 "res": "INT x:[0,1]. SUM(k, 0, oo, log(x ^ (c * x ^ a)) ^ k / factorial(k))",
                                 "rule": {
@@ -145,7 +137,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\int_{0}^{1} \\frac{\\log^{k}(x ^ {c x ^ {a}})}{k!} \\,dx}",
                                 "res": "SUM(k, 0, oo, INT x:[0,1]. log(x ^ (c * x ^ a)) ^ k / factorial(k))",
                                 "rule": {
@@ -155,7 +146,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\int_{0}^{1} \\frac{(c x ^ {a} \\log{x}) ^ {k}}{k!} \\,dx}",
                                 "res": "SUM(k, 0, oo, INT x:[0,1]. (c * x ^ a * log(x)) ^ k / factorial(k))",
                                 "rule": {
@@ -168,7 +158,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\int_{0}^{1} \\frac{(c x ^ {a}) ^ {k} \\log^{k}(x)}{k!} \\,dx}",
                                 "res": "SUM(k, 0, oo, INT x:[0,1]. (c * x ^ a) ^ k * log(x) ^ k / factorial(k))",
                                 "rule": {
@@ -181,7 +170,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\int_{0}^{1} \\frac{c ^ {k} (x ^ {a}) ^ {k} \\log^{k}(x)}{k!} \\,dx}",
                                 "res": "SUM(k, 0, oo, INT x:[0,1]. c ^ k * x ^ a ^ k * log(x) ^ k / factorial(k))",
                                 "rule": {
@@ -194,7 +182,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{c ^ {k}}{k!} (\\int_{0}^{1} x ^ {a k} \\log^{k}(x) \\,dx)}",
                                 "res": "SUM(k, 0, oo, c ^ k / factorial(k) * (INT x:[0,1]. x ^ (a * k) * log(x) ^ k))",
                                 "rule": {
@@ -204,7 +191,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{c ^ {k}}{k!} ((-1) ^ {k} k! (a k + 1) ^ {-k - 1})}",
                                 "res": "SUM(k, 0, oo, c ^ k / factorial(k) * ((-1) ^ k * factorial(k) * (a * k + 1) ^ (-k - 1)))",
                                 "rule": {
@@ -214,7 +200,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{c ^ {k} (-1) ^ {k} (a k + 1) ^ {-k - 1}}",
                                 "res": "SUM(k, 0, oo, c ^ k * (-1) ^ k * (a * k + 1) ^ (-k - 1))",
                                 "rule": {
@@ -224,7 +209,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{(-c) ^ {k} (a k + 1) ^ {-k - 1}}",
                                 "res": "SUM(k, 0, oo, (-c) ^ k * (a * k + 1) ^ (-k - 1))",
                                 "rule": {
@@ -245,7 +229,6 @@
                         "start": "SUM(k, 0, oo, (-c) ^ k / (k * a + 1) ^ (k + 1))",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{(-c) ^ {k} (a k + 1) ^ {-k - 1}}",
                                 "res": "SUM(k, 0, oo, (-c) ^ k * (a * k + 1) ^ (-k - 1))",
                                 "rule": {
@@ -277,7 +260,6 @@
                         "start": "INT x:[0,1]. x ^ x",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} x ^ {1 x ^ {1}} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (1 * x ^ 1)",
                                 "rule": {
@@ -290,11 +272,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{(-1) ^ {k}}{(k\\cdot 1 + 1) ^ {k + 1}}}",
                                 "res": "SUM(k, 0, oo, (-1) ^ k / (k * 1 + 1) ^ (k + 1))",
                                 "rule": {
                                     "eq": "(INT x:[0,1]. x ^ (c * x ^ a)) = SUM(k, 0, oo, (-c) ^ k / (k * a + 1) ^ (k + 1))",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(\\int_{0}^{1} x ^ {c x ^ {a}} \\,dx = \\sum_{k=0}^{\\infty}{\\frac{(-c) ^ {k}}{(k a + 1) ^ {k + 1}}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[0,1]. x ^ (1 * x ^ 1)",
@@ -303,7 +285,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{(-1) ^ {k} (k + 1) ^ {-k - 1}}",
                                 "res": "SUM(k, 0, oo, (-1) ^ k * (k + 1) ^ (-k - 1))",
                                 "rule": {
@@ -342,7 +323,6 @@
                         "start": "INT x:[0,1]. x ^ -x",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} x ^ {-1 x ^ {1}} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (-1 * x ^ 1)",
                                 "rule": {
@@ -355,11 +335,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{(--1) ^ {k}}{(k\\cdot 1 + 1) ^ {k + 1}}}",
                                 "res": "SUM(k, 0, oo, (-(-1)) ^ k / (k * 1 + 1) ^ (k + 1))",
                                 "rule": {
                                     "eq": "(INT x:[0,1]. x ^ (c * x ^ a)) = SUM(k, 0, oo, (-c) ^ k / (k * a + 1) ^ (k + 1))",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(\\int_{0}^{1} x ^ {c x ^ {a}} \\,dx = \\sum_{k=0}^{\\infty}{\\frac{(-c) ^ {k}}{(k a + 1) ^ {k + 1}}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[0,1]. x ^ (-1 * x ^ 1)",
@@ -368,7 +348,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{(k + 1) ^ {-k - 1}}",
                                 "res": "SUM(k, 0, oo, (k + 1) ^ (-k - 1))",
                                 "rule": {
@@ -407,7 +386,6 @@
                         "start": "INT x:[0,1]. x ^ (x ^ 2)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} x ^ {1 x ^ {2}} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (1 * x ^ 2)",
                                 "rule": {
@@ -420,11 +398,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{(-1) ^ {k}}{(k\\cdot 2 + 1) ^ {k + 1}}}",
                                 "res": "SUM(k, 0, oo, (-1) ^ k / (k * 2 + 1) ^ (k + 1))",
                                 "rule": {
                                     "eq": "(INT x:[0,1]. x ^ (c * x ^ a)) = SUM(k, 0, oo, (-c) ^ k / (k * a + 1) ^ (k + 1))",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(\\int_{0}^{1} x ^ {c x ^ {a}} \\,dx = \\sum_{k=0}^{\\infty}{\\frac{(-c) ^ {k}}{(k a + 1) ^ {k + 1}}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[0,1]. x ^ (1 * x ^ 2)",
@@ -433,7 +411,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{(-1) ^ {k} (2 k + 1) ^ {-k - 1}}",
                                 "res": "SUM(k, 0, oo, (-1) ^ k * (2 * k + 1) ^ (-k - 1))",
                                 "rule": {
@@ -472,7 +449,6 @@
                         "start": "INT x:[0,1]. x ^ sqrt(x)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} x ^ {1 x ^ {1/2}} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (1 * x ^ (1/2))",
                                 "rule": {
@@ -485,11 +461,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{(-1) ^ {k}}{(k\\cdot (\\frac{1}{2}) + 1) ^ {k + 1}}}",
                                 "res": "SUM(k, 0, oo, (-1) ^ k / (k * (1/2) + 1) ^ (k + 1))",
                                 "rule": {
                                     "eq": "(INT x:[0,1]. x ^ (c * x ^ a)) = SUM(k, 0, oo, (-c) ^ k / (k * a + 1) ^ (k + 1))",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(\\int_{0}^{1} x ^ {c x ^ {a}} \\,dx = \\sum_{k=0}^{\\infty}{\\frac{(-c) ^ {k}}{(k a + 1) ^ {k + 1}}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[0,1]. x ^ (1 * x ^ (1/2))",
@@ -498,7 +474,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{(-1) ^ {k} (\\frac{k}{2} + 1) ^ {-k - 1}}",
                                 "res": "SUM(k, 0, oo, (-1) ^ k * (k / 2 + 1) ^ (-k - 1))",
                                 "rule": {
@@ -508,7 +483,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{(-1) ^ {k} ((\\frac{2}{k + 2}) ^ {-1}) ^ {-k - 1}}",
                                 "res": "SUM(k, 0, oo, (-1) ^ k * (2 / (k + 2)) ^ (-1) ^ (-k - 1))",
                                 "rule": {
@@ -521,7 +495,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\sum_{k=0}^{\\infty}{(-1) ^ {k} (\\frac{2}{k + 2}) ^ {k + 1}}",
                                 "res": "SUM(k, 0, oo, (-1) ^ k * (2 / (k + 2)) ^ (k + 1))",
                                 "rule": {

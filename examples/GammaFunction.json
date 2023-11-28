@@ -8,6 +8,7 @@
                 }
             ],
             "eq": "Gamma(n) = (INT x:[0,oo]. exp(-x) * x ^ (n - 1))",
+            "fixes": [],
             "latex_eq": "\\Gamma{(n)} = \\int_{0}^{\\infty} e^{-x} x ^ {n - 1} \\,dx",
             "latex_lhs": "\\Gamma{(n)}",
             "type": "FuncDef"
@@ -48,7 +49,6 @@
                                     "start": "LIM {x -> oo}. x ^ (n - 1) * exp(-x)",
                                     "steps": [
                                         {
-                                            "fixes": [],
                                             "latex_res": "0",
                                             "res": "0",
                                             "rule": {
@@ -93,7 +93,6 @@
                                     "start": "LIM {x -> oo}. x ^ (n - 1) * exp(-x)",
                                     "steps": [
                                         {
-                                            "fixes": [],
                                             "latex_res": "0",
                                             "res": "0",
                                             "rule": {
@@ -154,7 +153,6 @@
                         "start": "Gamma(n)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} x ^ {n - 1} e^{-x} \\,dx",
                                 "res": "INT x:[0,oo]. x ^ (n - 1) * exp(-x)",
                                 "rule": {
@@ -165,7 +163,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "(\\left. -x ^ {n - 1} e^{-x} \\right\\vert_{x=0}^{\\infty}) - (\\int_{0}^{\\infty} -x ^ {n - 2} e^{-x} (n - 1) \\,dx)",
                                 "res": "([-(x ^ (n - 1) * exp(-x))]_x=0,oo) - (INT x:[0,oo]. -(x ^ (n - 2) * exp(-x) * (n - 1)))",
                                 "rule": {
@@ -178,7 +175,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "(n - 1) (\\int_{0}^{\\infty} x ^ {n - 2} e^{-x} \\,dx)",
                                 "res": "(n - 1) * (INT x:[0,oo]. x ^ (n - 2) * exp(-x))",
                                 "rule": {
@@ -188,11 +184,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "(n - 1) (\\int_{0}^{\\infty} x ^ {n - 2} e^{-x} \\,dx)",
                                 "res": "(n - 1) * (INT x:[0,oo]. x ^ (n - 2) * exp(-x))",
                                 "rule": {
                                     "eq": "(LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,) = 0\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[0,oo]. x ^ (n - 2) * exp(-x)",
@@ -201,7 +197,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "(n - 1) (\\int_{0}^{\\infty} x ^ {n - 2} e^{-x} \\,dx)",
                                 "res": "(n - 1) * (INT x:[0,oo]. x ^ (n - 2) * exp(-x))",
                                 "rule": {
@@ -219,7 +214,6 @@
                         "start": "(n - 1) * Gamma(n - 1)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "(n - 1) (\\int_{0}^{\\infty} x ^ {n - 2} e^{-x} \\,dx)",
                                 "res": "(n - 1) * (INT x:[0,oo]. x ^ (n - 2) * exp(-x))",
                                 "rule": {
@@ -264,6 +258,22 @@
                         [
                             "n",
                             "$int"
+                        ],
+                        [
+                            "cosh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "sinh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "binom",
+                            "$fun($real, $real, $real)"
+                        ],
+                        [
+                            "Gamma",
+                            "$fun($real, $real)"
                         ]
                     ],
                     "goal": "Gamma(1) = 1",
@@ -276,7 +286,6 @@
                                 "start": "Gamma(1)",
                                 "steps": [
                                     {
-                                        "fixes": [],
                                         "latex_res": "\\int_{0}^{\\infty} e^{-x} \\,dx",
                                         "res": "INT x:[0,oo]. exp(-x)",
                                         "rule": {
@@ -287,7 +296,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "\\left. -e^{-x} \\right\\vert_{x=0}^{\\infty}",
                                         "res": "[-exp(-x)]_x=0,oo",
                                         "rule": {
@@ -297,7 +305,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "1",
                                         "res": "1",
                                         "rule": {
@@ -332,6 +339,22 @@
                         [
                             "n",
                             "$int"
+                        ],
+                        [
+                            "cosh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "sinh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "binom",
+                            "$fun($real, $real, $real)"
+                        ],
+                        [
+                            "Gamma",
+                            "$fun($real, $real)"
                         ]
                     ],
                     "goal": "Gamma(n + 1) = factorial(n)",
@@ -344,11 +367,11 @@
                                 "start": "Gamma(n + 1)",
                                 "steps": [
                                     {
-                                        "fixes": [],
                                         "latex_res": "(n + 1 - 1) \\Gamma{(n + 1 - 1)}",
                                         "res": "(n + 1 - 1) * Gamma(n + 1 - 1)",
                                         "rule": {
                                             "eq": "Gamma(n) = (n - 1) * Gamma(n - 1)",
+                                            "eq_fixes": [],
                                             "latex_str": "apply equation \\(\\Gamma{(n)} = (n - 1) \\Gamma{(n - 1)}\\)",
                                             "name": "ApplyEquation",
                                             "source": "Gamma(n + 1)",
@@ -357,7 +380,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "n \\Gamma{(n)}",
                                         "res": "n * Gamma(n)",
                                         "rule": {
@@ -367,7 +389,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "n (n - 1)!",
                                         "res": "n * factorial(n - 1)",
                                         "rule": {
@@ -378,7 +399,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "n!",
                                         "res": "factorial(n)",
                                         "rule": {
@@ -421,7 +441,6 @@
             "start": "INT x:[0,oo]. exp(-(x ^ 3))",
             "steps": [
                 {
-                    "fixes": [],
                     "latex_res": "\\int_{0}^{\\infty} \\frac{e^{-y}}{3 y ^ {2/3}} \\,dy",
                     "res": "INT y:[0,oo]. exp(-y) / (3 * y ^ (2/3))",
                     "rule": {
@@ -434,7 +453,6 @@
                     "type": "CalculationStep"
                 },
                 {
-                    "fixes": [],
                     "latex_res": "\\frac{1}{3} (\\int_{0}^{\\infty} \\frac{e^{-y}}{y ^ {2/3}} \\,dy)",
                     "res": "1/3 * (INT y:[0,oo]. exp(-y) / y ^ (2/3))",
                     "rule": {
@@ -444,7 +462,6 @@
                     "type": "CalculationStep"
                 },
                 {
-                    "fixes": [],
                     "latex_res": "\\frac{1}{3} (\\int_{0}^{\\infty} e^{-y} y ^ {1/3 - 1} \\,dy)",
                     "res": "1/3 * (INT y:[0,oo]. exp(-y) * y ^ (1/3 - 1))",
                     "rule": {
@@ -457,7 +474,6 @@
                     "type": "CalculationStep"
                 },
                 {
-                    "fixes": [],
                     "latex_res": "\\frac{1}{3} \\Gamma{(\\frac{1}{3})}",
                     "res": "1/3 * Gamma(1/3)",
                     "rule": {
@@ -469,7 +485,6 @@
                     "type": "CalculationStep"
                 },
                 {
-                    "fixes": [],
                     "latex_res": "(\\frac{4}{3} - 1) \\Gamma{(\\frac{4}{3} - 1)}",
                     "res": "(4/3 - 1) * Gamma(4/3 - 1)",
                     "rule": {
@@ -481,11 +496,11 @@
                     "type": "CalculationStep"
                 },
                 {
-                    "fixes": [],
-                    "latex_res": "\\Gamma{(\\frac{4}{3})}",
-                    "res": "Gamma(4/3)",
+                    "latex_res": "(\\frac{4}{3} - 1) \\Gamma{(\\frac{4}{3} - 1)}",
+                    "res": "(4/3 - 1) * Gamma(4/3 - 1)",
                     "rule": {
                         "eq": "Gamma(n) = (n - 1) * Gamma(n - 1)",
+                        "eq_fixes": [],
                         "latex_str": "apply equation \\(\\Gamma{(n)} = (n - 1) \\Gamma{(n - 1)}\\)",
                         "name": "ApplyEquation",
                         "source": "(4/3 - 1) * Gamma(4/3 - 1)",

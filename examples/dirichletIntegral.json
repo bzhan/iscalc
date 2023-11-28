@@ -8,6 +8,7 @@
                 }
             ],
             "eq": "g(y,a) = (INT x:[0,oo]. exp(-x * y) * sin(a * x) / x)",
+            "fixes": [],
             "latex_eq": "g(y,a) = \\int_{0}^{\\infty} \\frac{e^{(-x) y} \\sin{(a x)}}{x} \\,dx",
             "latex_lhs": "g(y,a)",
             "type": "FuncDef"
@@ -34,7 +35,6 @@
                         "start": "D y. g(y,a)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{d}{dy} \\int_{0}^{\\infty} \\frac{e^{-x y} \\sin{(a x)}}{x} \\,dx",
                                 "res": "D y. INT x:[0,oo]. exp(-(x * y)) * sin(a * x) / x",
                                 "rule": {
@@ -46,7 +46,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{d}{dy} \\frac{e^{-x y} \\sin{(a x)}}{x} \\,dx",
                                 "res": "INT x:[0,oo]. D y. exp(-(x * y)) * sin(a * x) / x",
                                 "rule": {
@@ -56,7 +55,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{\\infty} e^{-x y} \\sin{(a x)} \\,dx)",
                                 "res": "-(INT x:[0,oo]. exp(-(x * y)) * sin(a * x))",
                                 "rule": {
@@ -66,7 +64,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-\\frac{a}{a ^ {2} + y ^ {2}}",
                                 "res": "-(a / (a ^ 2 + y ^ 2))",
                                 "rule": {
@@ -84,7 +81,6 @@
                         "start": "-a / (a ^ 2 + y ^ 2)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "-\\frac{a}{a ^ {2} + y ^ {2}}",
                                 "res": "-(a / (a ^ 2 + y ^ 2))",
                                 "rule": {
@@ -111,8 +107,8 @@
                     "latex_cond": "y > 0"
                 },
                 {
-                    "cond": "a != 0",
-                    "latex_cond": "a \\neq 0"
+                    "cond": "a > 0",
+                    "latex_cond": "a > 0"
                 }
             ],
             "finished": true,
@@ -124,12 +120,21 @@
                 "goal": "g(y,a) = -atan(y / a) + SKOLEM_FUNC(C(a))",
                 "latex_goal": "g(y,a) = -\\tan^{-1}{(\\frac{y}{a})} + C(a)",
                 "start": {
+                    "conds": [
+                        {
+                            "cond": "y > 0",
+                            "latex_cond": "y > 0"
+                        },
+                        {
+                            "cond": "a != 0",
+                            "latex_cond": "a \\neq 0"
+                        }
+                    ],
                     "fixes": [],
                     "latex_start": "\\frac{d}{dy} g(y,a) = \\frac{-a}{a ^ {2} + y ^ {2}}",
                     "start": "(D y. g(y,a)) = -a / (a ^ 2 + y ^ 2)",
                     "steps": [
                         {
-                            "fixes": [],
                             "latex_res": "g(y,a) = \\int \\frac{-a}{a ^ {2} + y ^ {2}} \\,dy",
                             "res": "g(y,a) = (INT y [a]. -a / (a ^ 2 + y ^ 2))",
                             "rule": {
@@ -139,7 +144,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "g(y,a) = -a (\\int \\frac{1}{a ^ {2} + y ^ {2}} \\,dy)",
                             "res": "g(y,a) = -(a * (INT y [a]. 1 / (a ^ 2 + y ^ 2)))",
                             "rule": {
@@ -149,7 +153,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "g(y,a) = -a (\\frac{1}{a} \\tan^{-1}{(\\frac{y}{a})}) + C(a)",
                             "res": "g(y,a) = -(a * (1 / a * atan(y / a))) + SKOLEM_FUNC(C(a))",
                             "rule": {
@@ -159,7 +162,83 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
+                            "latex_res": "g(y,a) = -\\tan^{-1}{(\\frac{y}{a})} + C(a)",
+                            "res": "g(y,a) = -atan(y / a) + SKOLEM_FUNC(C(a))",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "y > 0",
+                    "latex_cond": "y > 0"
+                },
+                {
+                    "cond": "a < 0",
+                    "latex_cond": "a < 0"
+                }
+            ],
+            "finished": true,
+            "goal": "g(y,a) = -atan(y / a) + SKOLEM_FUNC(C(a))",
+            "latex_goal": "g(y,a) = -\\tan^{-1}{(\\frac{y}{a})} + C(a)",
+            "proof": {
+                "begin_label": "2.",
+                "finished": true,
+                "goal": "g(y,a) = -atan(y / a) + SKOLEM_FUNC(C(a))",
+                "latex_goal": "g(y,a) = -\\tan^{-1}{(\\frac{y}{a})} + C(a)",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "y > 0",
+                            "latex_cond": "y > 0"
+                        },
+                        {
+                            "cond": "a != 0",
+                            "latex_cond": "a \\neq 0"
+                        }
+                    ],
+                    "fixes": [],
+                    "latex_start": "\\frac{d}{dy} g(y,a) = \\frac{-a}{a ^ {2} + y ^ {2}}",
+                    "start": "(D y. g(y,a)) = -a / (a ^ 2 + y ^ 2)",
+                    "steps": [
+                        {
+                            "latex_res": "g(y,a) = \\int \\frac{-a}{a ^ {2} + y ^ {2}} \\,dy",
+                            "res": "g(y,a) = (INT y [a]. -a / (a ^ 2 + y ^ 2))",
+                            "rule": {
+                                "name": "IntegrateBothSide",
+                                "str": "integrate both side"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "g(y,a) = -a (\\int \\frac{1}{a ^ {2} + y ^ {2}} \\,dy)",
+                            "res": "g(y,a) = -(a * (INT y [a]. 1 / (a ^ 2 + y ^ 2)))",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "latex_res": "g(y,a) = -a (\\frac{1}{a} \\tan^{-1}{(\\frac{y}{a})}) + C(a)",
+                            "res": "g(y,a) = -(a * (1 / a * atan(y / a))) + SKOLEM_FUNC(C(a))",
+                            "rule": {
+                                "name": "IndefiniteIntegralIdentity",
+                                "str": "apply indefinite integral"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
                             "latex_res": "g(y,a) = -\\tan^{-1}{(\\frac{y}{a})} + C(a)",
                             "res": "g(y,a) = -atan(y / a) + SKOLEM_FUNC(C(a))",
                             "rule": {
@@ -193,7 +272,6 @@
                         "start": "LIM {y -> oo}. g(y,a)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\lim\\limits_{y\\to \\infty} \\int_{0}^{\\infty} \\frac{e^{-x y} \\sin{(a x)}}{x} \\,dx",
                                 "res": "LIM {y -> oo}. INT x:[0,oo]. exp(-(x * y)) * sin(a * x) / x",
                                 "rule": {
@@ -205,7 +283,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "0",
                                 "res": "0",
                                 "rule": {
@@ -248,12 +325,21 @@
                 "goal": "SKOLEM_FUNC(C(a)) = pi / 2",
                 "latex_goal": "C(a) = \\frac{\\pi}{2}",
                 "start": {
+                    "conds": [
+                        {
+                            "cond": "y > 0",
+                            "latex_cond": "y > 0"
+                        },
+                        {
+                            "cond": "a > 0",
+                            "latex_cond": "a > 0"
+                        }
+                    ],
                     "fixes": [],
                     "latex_start": "g(y,a) = -\\tan^{-1}{(\\frac{y}{a})} + C(a)",
                     "start": "g(y,a) = -atan(y / a) + SKOLEM_FUNC(C(a))",
                     "steps": [
                         {
-                            "fixes": [],
                             "latex_res": "\\lim\\limits_{y\\to \\infty} g(y,a) = \\lim\\limits_{y\\to \\infty} (\\,-\\tan^{-1}{(\\frac{y}{a})} + C(a)\\,)",
                             "res": "(LIM {y -> oo}. g(y,a)) = (LIM {y -> oo}. -atan(y / a) + SKOLEM_FUNC(C(a)))",
                             "rule": {
@@ -266,11 +352,11 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "0 = \\lim\\limits_{y\\to \\infty} (\\,-\\tan^{-1}{(\\frac{y}{a})} + C(a)\\,)",
                             "res": "0 = (LIM {y -> oo}. -atan(y / a) + SKOLEM_FUNC(C(a)))",
                             "rule": {
                                 "eq": "(LIM {y -> oo}. g(y,a)) = 0",
+                                "eq_fixes": [],
                                 "latex_str": "apply equation \\(\\lim\\limits_{y\\to \\infty} g(y,a) = 0\\)",
                                 "name": "ApplyEquation",
                                 "source": "LIM {y -> oo}. g(y,a)",
@@ -279,7 +365,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "0 = -\\frac{\\pi}{2} + C(a)",
                             "res": "0 = -(pi / 2) + SKOLEM_FUNC(C(a))",
                             "rule": {
@@ -289,7 +374,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "C(a) = \\frac{\\pi}{2}",
                             "res": "SKOLEM_FUNC(C(a)) = pi / 2",
                             "rule": {
@@ -323,12 +407,21 @@
                 "goal": "SKOLEM_FUNC(C(a)) = -(pi / 2)",
                 "latex_goal": "C(a) = -\\frac{\\pi}{2}",
                 "start": {
+                    "conds": [
+                        {
+                            "cond": "y > 0",
+                            "latex_cond": "y > 0"
+                        },
+                        {
+                            "cond": "a < 0",
+                            "latex_cond": "a < 0"
+                        }
+                    ],
                     "fixes": [],
                     "latex_start": "g(y,a) = -\\tan^{-1}{(\\frac{y}{a})} + C(a)",
                     "start": "g(y,a) = -atan(y / a) + SKOLEM_FUNC(C(a))",
                     "steps": [
                         {
-                            "fixes": [],
                             "latex_res": "\\lim\\limits_{y\\to \\infty} g(y,a) = \\lim\\limits_{y\\to \\infty} (\\,-\\tan^{-1}{(\\frac{y}{a})} + C(a)\\,)",
                             "res": "(LIM {y -> oo}. g(y,a)) = (LIM {y -> oo}. -atan(y / a) + SKOLEM_FUNC(C(a)))",
                             "rule": {
@@ -341,11 +434,11 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "0 = \\lim\\limits_{y\\to \\infty} (\\,-\\tan^{-1}{(\\frac{y}{a})} + C(a)\\,)",
                             "res": "0 = (LIM {y -> oo}. -atan(y / a) + SKOLEM_FUNC(C(a)))",
                             "rule": {
                                 "eq": "(LIM {y -> oo}. g(y,a)) = 0",
+                                "eq_fixes": [],
                                 "latex_str": "apply equation \\(\\lim\\limits_{y\\to \\infty} g(y,a) = 0\\)",
                                 "name": "ApplyEquation",
                                 "source": "LIM {y -> oo}. g(y,a)",
@@ -354,7 +447,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "0 = \\frac{\\pi}{2} + C(a)",
                             "res": "0 = pi / 2 + SKOLEM_FUNC(C(a))",
                             "rule": {
@@ -364,7 +456,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "C(a) = -\\frac{\\pi}{2}",
                             "res": "SKOLEM_FUNC(C(a)) = -(pi / 2)",
                             "rule": {
@@ -402,16 +493,26 @@
                 "goal": "g(y,a) = pi / 2 - atan(y / a)",
                 "latex_goal": "g(y,a) = \\frac{\\pi}{2} - \\tan^{-1}{(\\frac{y}{a})}",
                 "start": {
+                    "conds": [
+                        {
+                            "cond": "y > 0",
+                            "latex_cond": "y > 0"
+                        },
+                        {
+                            "cond": "a > 0",
+                            "latex_cond": "a > 0"
+                        }
+                    ],
                     "fixes": [],
                     "latex_start": "g(y,a) = -\\tan^{-1}{(\\frac{y}{a})} + C(a)",
                     "start": "g(y,a) = -atan(y / a) + SKOLEM_FUNC(C(a))",
                     "steps": [
                         {
-                            "fixes": [],
                             "latex_res": "g(y,a) = -\\tan^{-1}{(\\frac{y}{a})} + \\frac{\\pi}{2}",
                             "res": "g(y,a) = -atan(y / a) + pi / 2",
                             "rule": {
                                 "eq": "SKOLEM_FUNC(C(a)) = pi / 2",
+                                "eq_fixes": [],
                                 "latex_str": "apply equation \\(C(a) = \\frac{\\pi}{2}\\)",
                                 "name": "ApplyEquation",
                                 "source": "SKOLEM_FUNC(C(a))",
@@ -446,16 +547,26 @@
                 "goal": "g(y,a) = -pi / 2 - atan(y / a)",
                 "latex_goal": "g(y,a) = \\frac{-\\pi}{2} - \\tan^{-1}{(\\frac{y}{a})}",
                 "start": {
+                    "conds": [
+                        {
+                            "cond": "y > 0",
+                            "latex_cond": "y > 0"
+                        },
+                        {
+                            "cond": "a < 0",
+                            "latex_cond": "a < 0"
+                        }
+                    ],
                     "fixes": [],
                     "latex_start": "g(y,a) = -\\tan^{-1}{(\\frac{y}{a})} + C(a)",
                     "start": "g(y,a) = -atan(y / a) + SKOLEM_FUNC(C(a))",
                     "steps": [
                         {
-                            "fixes": [],
                             "latex_res": "g(y,a) = -\\tan^{-1}{(\\frac{y}{a})} + -\\frac{\\pi}{2}",
                             "res": "g(y,a) = -atan(y / a) + -(pi / 2)",
                             "rule": {
                                 "eq": "SKOLEM_FUNC(C(a)) = -(pi / 2)",
+                                "eq_fixes": [],
                                 "latex_str": "apply equation \\(C(a) = -\\frac{\\pi}{2}\\)",
                                 "name": "ApplyEquation",
                                 "source": "SKOLEM_FUNC(C(a))",

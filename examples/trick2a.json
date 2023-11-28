@@ -6,7 +6,6 @@
             "start": "INT x:[0,pi / 2]. sqrt(sin(x)) / (sqrt(sin(x)) + sqrt(cos(x)))",
             "steps": [
                 {
-                    "fixes": [],
                     "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\sqrt{\\cos{y}}}{\\sqrt{\\cos{y}} + \\sqrt{\\sin{y}}} \\,dy",
                     "res": "INT y:[0,pi / 2]. sqrt(cos(y)) / (sqrt(cos(y)) + sqrt(sin(y)))",
                     "rule": {
@@ -19,7 +18,6 @@
                     "type": "CalculationStep"
                 },
                 {
-                    "fixes": [],
                     "latex_res": "\\int_{0}^{\\pi/2} 1 - \\frac{\\sqrt{\\sin{y}}}{\\sqrt{\\cos{y}} + \\sqrt{\\sin{y}}} \\,dy",
                     "res": "INT y:[0,pi / 2]. 1 - sqrt(sin(y)) / (sqrt(cos(y)) + sqrt(sin(y)))",
                     "rule": {
@@ -32,7 +30,6 @@
                     "type": "CalculationStep"
                 },
                 {
-                    "fixes": [],
                     "latex_res": "(\\left. y \\right\\vert_{y=0}^{\\pi/2}) - (\\int_{0}^{\\pi/2} \\frac{\\sqrt{\\sin{y}}}{\\sqrt{\\cos{y}} + \\sqrt{\\sin{y}}} \\,dy)",
                     "res": "([y]_y=0,pi / 2) - (INT y:[0,pi / 2]. sqrt(sin(y)) / (sqrt(cos(y)) + sqrt(sin(y))))",
                     "rule": {
@@ -42,7 +39,6 @@
                     "type": "CalculationStep"
                 },
                 {
-                    "fixes": [],
                     "latex_res": "\\frac{\\pi}{4}",
                     "res": "pi / 4",
                     "rule": {

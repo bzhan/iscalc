@@ -22,7 +22,6 @@
                         "start": "B(a + 1,b + 2)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} x ^ {a} (-x + 1) ^ {b + 1} \\,dx",
                                 "res": "INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1)",
                                 "rule": {
@@ -72,7 +71,6 @@
                         "start": "INT x:[0,1]. x ^ a * (INT y:[0,1 - x]. y ^ b)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} x ^ {a} (\\left. \\frac{y ^ {b + 1}}{b + 1} \\right\\vert_{y=0}^{1 - x}) \\,dx",
                                 "res": "INT x:[0,1]. x ^ a * ([y ^ (b + 1) / (b + 1)]_y=0,1 - x)",
                                 "rule": {
@@ -83,7 +81,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{b + 1} (\\int_{0}^{1} x ^ {a} (-x + 1) ^ {b + 1} \\,dx)",
                                 "res": "1 / (b + 1) * (INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1))",
                                 "rule": {
@@ -93,11 +90,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{b + 1} B(a + 1,b + 2)",
                                 "res": "1 / (b + 1) * B(a + 1,b + 2)",
                                 "rule": {
                                     "eq": "B(a + 1,b + 2) = (INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1))",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(B(a + 1,b + 2) = \\int_{0}^{1} x ^ {a} (-x + 1) ^ {b + 1} \\,dx\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1)",
@@ -106,7 +103,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{b + 1} (\\frac{\\Gamma{(a + 1)} \\Gamma{(b + 2)}}{\\Gamma{(a + b + 3)}})",
                                 "res": "1 / (b + 1) * (Gamma(a + 1) * Gamma(b + 2) / Gamma(a + b + 3))",
                                 "rule": {
@@ -119,7 +115,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{b + 1} (\\frac{a! \\Gamma{(b + 2)}}{\\Gamma{(a + b + 3)}})",
                                 "res": "1 / (b + 1) * (factorial(a) * Gamma(b + 2) / Gamma(a + b + 3))",
                                 "rule": {
@@ -132,7 +127,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{b + 1} (\\frac{a! (b + 1)!}{\\Gamma{(a + b + 3)}})",
                                 "res": "1 / (b + 1) * (factorial(a) * factorial(b + 1) / Gamma(a + b + 3))",
                                 "rule": {
@@ -145,7 +139,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{b + 1} (\\frac{a! (b + 1)!}{(a + b + 2)!})",
                                 "res": "1 / (b + 1) * (factorial(a) * factorial(b + 1) / factorial(a + b + 2))",
                                 "rule": {
@@ -158,7 +151,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{b + 1} (\\frac{a! ((b + 1) b!)}{(a + b + 2)!})",
                                 "res": "1 / (b + 1) * (factorial(a) * ((b + 1) * factorial(b)) / factorial(a + b + 2))",
                                 "rule": {
@@ -171,7 +163,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{a! b!}{(a + b + 2)!}",
                                 "res": "factorial(a) * factorial(b) / factorial(a + b + 2)",
                                 "rule": {

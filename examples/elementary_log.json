@@ -2,6 +2,7 @@
     "content": [
         {
             "eq": "I(m,n) = (INT x:[0,1]. x ^ m * log(x) ^ n)",
+            "fixes": [],
             "latex_eq": "I(m,n) = \\int_{0}^{1} x ^ {m} \\log^{n}(x) \\,dx",
             "latex_lhs": "I(m,n)",
             "type": "FuncDef"
@@ -36,7 +37,6 @@
                         "start": "I(m,n)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} x ^ {m} \\log^{n}(x) \\,dx",
                                 "res": "INT x:[0,1]. x ^ m * log(x) ^ n",
                                 "rule": {
@@ -47,7 +47,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "(\\left. \\frac{x ^ {m + 1} \\log^{n}(x)}{m + 1} \\right\\vert_{x=0}^{1}) - (\\int_{0}^{1} \\frac{n x ^ {m} \\log^{n - 1}(x)}{m + 1} \\,dx)",
                                 "res": "([x ^ (m + 1) * log(x) ^ n / (m + 1)]_x=0,1) - (INT x:[0,1]. n * x ^ m * log(x) ^ (n - 1) / (m + 1))",
                                 "rule": {
@@ -60,7 +59,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-\\frac{n}{m + 1} (\\int_{0}^{1} x ^ {m} \\log^{n - 1}(x) \\,dx)",
                                 "res": "-(n / (m + 1) * (INT x:[0,1]. x ^ m * log(x) ^ (n - 1)))",
                                 "rule": {
@@ -70,7 +68,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-\\frac{n}{m + 1} I(m,n - 1)",
                                 "res": "-(n / (m + 1) * I(m,n - 1))",
                                 "rule": {
@@ -82,7 +79,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "(-\\frac{n}{m + 1}) I(m,n - 1)",
                                 "res": "-(n / (m + 1)) * I(m,n - 1)",
                                 "rule": {
@@ -155,6 +151,38 @@
                         [
                             "n",
                             "$int"
+                        ],
+                        [
+                            "cosh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "sinh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "binom",
+                            "$fun($real, $real, $real)"
+                        ],
+                        [
+                            "Gamma",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "B",
+                            "$fun($real, $real, $real)"
+                        ],
+                        [
+                            "G",
+                            "$fun($real)"
+                        ],
+                        [
+                            "zeta",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "I",
+                            "$fun($real, $real, $real)"
                         ]
                     ],
                     "goal": "I(m,0) = 1 / (m + 1)",
@@ -167,7 +195,6 @@
                                 "start": "I(m,0)",
                                 "steps": [
                                     {
-                                        "fixes": [],
                                         "latex_res": "\\int_{0}^{1} x ^ {m} \\,dx",
                                         "res": "INT x:[0,1]. x ^ m",
                                         "rule": {
@@ -178,7 +205,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "\\left. \\frac{x ^ {m + 1}}{m + 1} \\right\\vert_{x=0}^{1}",
                                         "res": "[x ^ (m + 1) / (m + 1)]_x=0,1",
                                         "rule": {
@@ -188,7 +214,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "\\frac{1}{m + 1}",
                                         "res": "1 / (m + 1)",
                                         "rule": {
@@ -227,6 +252,38 @@
                         [
                             "n",
                             "$int"
+                        ],
+                        [
+                            "cosh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "sinh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "binom",
+                            "$fun($real, $real, $real)"
+                        ],
+                        [
+                            "Gamma",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "B",
+                            "$fun($real, $real, $real)"
+                        ],
+                        [
+                            "G",
+                            "$fun($real)"
+                        ],
+                        [
+                            "zeta",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "I",
+                            "$fun($real, $real, $real)"
                         ]
                     ],
                     "goal": "I(m,n + 1) = -((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
@@ -239,11 +296,11 @@
                                 "start": "I(m,n + 1)",
                                 "steps": [
                                     {
-                                        "fixes": [],
                                         "latex_res": "(-\\frac{n + 1}{m + 1}) I(m,n + 1 - 1)",
                                         "res": "-((n + 1) / (m + 1)) * I(m,n + 1 - 1)",
                                         "rule": {
                                             "eq": "I(m,n) = -(n / (m + 1)) * I(m,n - 1)",
+                                            "eq_fixes": [],
                                             "latex_str": "apply equation \\(I(m,n) = (-\\frac{n}{m + 1}) I(m,n - 1)\\)",
                                             "name": "ApplyEquation",
                                             "source": "I(m,n + 1)",
@@ -252,7 +309,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "-\\frac{(n + 1) I(m,n)}{m + 1}",
                                         "res": "-((n + 1) * I(m,n) / (m + 1))",
                                         "rule": {
@@ -262,7 +318,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "-\\frac{(n + 1) ((-1) ^ {n} (\\frac{n!}{(m + 1) ^ {n + 1}}))}{m + 1}",
                                         "res": "-((n + 1) * ((-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1))) / (m + 1))",
                                         "rule": {
@@ -273,7 +328,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "-(-1) ^ {n} n! (m + 1) ^ {-n - 2} (n + 1)",
                                         "res": "-((-1) ^ n * factorial(n) * (m + 1) ^ (-n - 2) * (n + 1))",
                                         "rule": {
@@ -283,7 +337,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "\\frac{(-1) ^ {n + 1} ((n + 1) n!)}{(m + 1) ^ {n + 2}}",
                                         "res": "(-1) ^ (n + 1) * ((n + 1) * factorial(n)) / (m + 1) ^ (n + 2)",
                                         "rule": {
@@ -296,7 +349,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "\\frac{(-1) ^ {n + 1} (n + 1)!}{(m + 1) ^ {n + 2}}",
                                         "res": "(-1) ^ (n + 1) * factorial(n + 1) / (m + 1) ^ (n + 2)",
                                         "rule": {
@@ -310,7 +362,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "-(-1) ^ {n} (m + 1) ^ {-n - 2} (n + 1)!",
                                         "res": "-((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
                                         "rule": {
@@ -388,7 +439,6 @@
                         "start": "INT x:[0,a]. x ^ m * log(x) ^ n",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} (a y) ^ {m} \\log^{n}(a y) a \\,dy",
                                 "res": "INT y:[0,1]. (a * y) ^ m * log(a * y) ^ n * a",
                                 "rule": {
@@ -401,7 +451,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{1} a ^ {m} y ^ {m} \\log^{n}(a y) a \\,dy",
                                 "res": "INT y:[0,1]. a ^ m * y ^ m * log(a * y) ^ n * a",
                                 "rule": {
@@ -414,7 +463,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "a ^ {m + 1} (\\int_{0}^{1} y ^ {m} \\log^{n}(a y) \\,dy)",
                                 "res": "a ^ (m + 1) * (INT y:[0,1]. y ^ m * log(a * y) ^ n)",
                                 "rule": {
@@ -424,7 +472,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "a ^ {m + 1} (\\int_{0}^{1} y ^ {m} \\log^{n}(y a) \\,dy)",
                                 "res": "a ^ (m + 1) * (INT y:[0,1]. y ^ m * log(y * a) ^ n)",
                                 "rule": {
@@ -437,7 +484,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "a ^ {m + 1} (\\int_{0}^{1} y ^ {m} (\\log{y} + \\log{a}) ^ {n} \\,dy)",
                                 "res": "a ^ (m + 1) * (INT y:[0,1]. y ^ m * (log(y) + log(a)) ^ n)",
                                 "rule": {
@@ -450,7 +496,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "a ^ {m + 1} (\\int_{0}^{1} y ^ {m} \\sum_{k=0}^{n}{\\binom{n}{k} \\log^{k}(y) \\log^{n - k}(a)} \\,dy)",
                                 "res": "a ^ (m + 1) * (INT y:[0,1]. y ^ m * SUM(k, 0, n, binom(n,k) * log(y) ^ k * log(a) ^ (n - k)))",
                                 "rule": {
@@ -462,7 +507,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "a ^ {m + 1} (\\int_{0}^{1} \\sum_{k=0}^{n}{y ^ {m} \\binom{n}{k} \\log^{k}(y) \\log^{n - k}(a)} \\,dy)",
                                 "res": "a ^ (m + 1) * (INT y:[0,1]. SUM(k, 0, n, y ^ m * binom(n,k) * log(y) ^ k * log(a) ^ (n - k)))",
                                 "rule": {
@@ -475,7 +519,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{\\int_{0}^{1} y ^ {m} \\binom{n}{k} \\log^{k}(y) \\log^{n - k}(a) \\,dy}",
                                 "res": "a ^ (m + 1) * SUM(k, 0, n, INT y:[0,1]. y ^ m * binom(n,k) * log(y) ^ k * log(a) ^ (n - k))",
                                 "rule": {
@@ -486,7 +529,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{\\log^{-k + n}(a) \\binom{n}{k} (\\int_{0}^{1} y ^ {m} \\log^{k}(y) \\,dy)}",
                                 "res": "a ^ (m + 1) * SUM(k, 0, n, log(a) ^ (-k + n) * binom(n,k) * (INT y:[0,1]. y ^ m * log(y) ^ k))",
                                 "rule": {
@@ -496,7 +538,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{\\log^{-k + n}(a) \\binom{n}{k} I(m,k)}",
                                 "res": "a ^ (m + 1) * SUM(k, 0, n, log(a) ^ (-k + n) * binom(n,k) * I(m,k))",
                                 "rule": {
@@ -508,11 +549,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{\\log^{-k + n}(a) \\binom{n}{k} ((-1) ^ {k} (\\frac{k!}{(m + 1) ^ {k + 1}}))}",
                                 "res": "a ^ (m + 1) * SUM(k, 0, n, log(a) ^ (-k + n) * binom(n,k) * ((-1) ^ k * (factorial(k) / (m + 1) ^ (k + 1))))",
                                 "rule": {
                                     "eq": "I(m,n) = (-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1))",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(I(m,n) = (-1) ^ {n} (\\frac{n!}{(m + 1) ^ {n + 1}})\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(m,k)",
@@ -521,7 +562,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{(-1) ^ {k} k! \\log^{-k + n}(a) (m + 1) ^ {-k - 1} \\binom{n}{k}}",
                                 "res": "a ^ (m + 1) * SUM(k, 0, n, (-1) ^ k * factorial(k) * log(a) ^ (-k + n) * (m + 1) ^ (-k - 1) * binom(n,k))",
                                 "rule": {
@@ -539,7 +579,6 @@
                         "start": "a ^ (m + 1) * SUM(k, 0, n, (-1) ^ k * binom(n,k) * factorial(k) * log(a) ^ (n - k) / (m + 1) ^ (k + 1))",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{(-1) ^ {k} k! \\log^{-k + n}(a) (m + 1) ^ {-k - 1} \\binom{n}{k}}",
                                 "res": "a ^ (m + 1) * SUM(k, 0, n, (-1) ^ k * factorial(k) * log(a) ^ (-k + n) * (m + 1) ^ (-k - 1) * binom(n,k))",
                                 "rule": {

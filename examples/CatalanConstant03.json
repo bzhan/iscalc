@@ -12,6 +12,7 @@
                 }
             ],
             "eq": "I(a,b) = (INT x:[0,pi]. x * sin(x) / (a + b * cos(x) ^ 2))",
+            "fixes": [],
             "latex_eq": "I(a,b) = \\int_{0}^{\\pi} \\frac{x \\sin{x}}{a + b \\cos^{2}(x)} \\,dx",
             "latex_lhs": "I(a,b)",
             "type": "FuncDef"
@@ -38,7 +39,6 @@
                         "start": "I(a,b)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi} \\frac{x \\sin{x}}{b \\cos^{2}(x) + a} \\,dx",
                                 "res": "INT x:[0,pi]. x * sin(x) / (b * cos(x) ^ 2 + a)",
                                 "rule": {
@@ -49,7 +49,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi} \\frac{\\sin{x} (-x + \\pi)}{b \\cos^{2}(x) + a} \\,dx",
                                 "res": "INT x:[0,pi]. sin(x) * (-x + pi) / (b * cos(x) ^ 2 + a)",
                                 "rule": {
@@ -62,7 +61,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\pi} \\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)} \\,dx",
                                 "res": "INT x:[0,pi]. (pi - x) * sin(x) / (a + b * cos(x) ^ 2)",
                                 "rule": {
@@ -114,7 +112,6 @@
                         "start": "I(a,b)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (I(a,b) + I(a,b))",
                                 "res": "1/2 * (I(a,b) + I(a,b))",
                                 "rule": {
@@ -127,7 +124,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} ((\\int_{0}^{\\pi} \\frac{x \\sin{x}}{b \\cos^{2}(x) + a} \\,dx) + I(a,b))",
                                 "res": "1/2 * ((INT x:[0,pi]. x * sin(x) / (b * cos(x) ^ 2 + a)) + I(a,b))",
                                 "rule": {
@@ -139,11 +135,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} ((\\int_{0}^{\\pi} \\frac{x \\sin{x}}{b \\cos^{2}(x) + a} \\,dx) + (\\int_{0}^{\\pi} \\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)} \\,dx))",
                                 "res": "1/2 * ((INT x:[0,pi]. x * sin(x) / (b * cos(x) ^ 2 + a)) + (INT x:[0,pi]. (pi - x) * sin(x) / (a + b * cos(x) ^ 2)))",
                                 "rule": {
                                     "eq": "I(a,b) = (INT x:[0,pi]. (pi - x) * sin(x) / (a + b * cos(x) ^ 2))",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(I(a,b) = \\int_{0}^{\\pi} \\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)} \\,dx\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(a,b)",
@@ -152,7 +148,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi} \\frac{x \\sin{x}}{a + b \\cos^{2}(x)} + \\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)} \\,dx)",
                                 "res": "1/2 * (INT x:[0,pi]. x * sin(x) / (a + b * cos(x) ^ 2) + (pi - x) * sin(x) / (a + b * cos(x) ^ 2))",
                                 "rule": {
@@ -165,7 +160,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi} \\frac{\\pi \\sin{x}}{a + b \\cos^{2}(x)} \\,dx)",
                                 "res": "1/2 * (INT x:[0,pi]. pi * sin(x) / (a + b * cos(x) ^ 2))",
                                 "rule": {
@@ -178,7 +172,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{-1}^{1} \\frac{\\pi}{b u ^ {2} + a} \\,du)",
                                 "res": "1/2 * (INT u:[-1,1]. pi / (b * u ^ 2 + a))",
                                 "rule": {
@@ -191,7 +184,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{-\\sqrt{b}/\\sqrt{a}}^{\\sqrt{b}/\\sqrt{a}} \\frac{\\sqrt{a}\\cdot \\pi}{\\sqrt{b} (a x ^ {2} + a)} \\,dx)",
                                 "res": "1/2 * (INT x:[-(sqrt(b) / sqrt(a)),sqrt(b) / sqrt(a)]. sqrt(a) * pi / (sqrt(b) * (a * x ^ 2 + a)))",
                                 "rule": {
@@ -204,7 +196,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{2} (\\int_{-\\sqrt{b}/\\sqrt{a}}^{\\sqrt{b}/\\sqrt{a}} \\frac{\\sqrt{a}\\cdot \\pi}{\\sqrt{b} (a (x ^ {2} + 1))} \\,dx)",
                                 "res": "1/2 * (INT x:[-(sqrt(b) / sqrt(a)),sqrt(b) / sqrt(a)]. sqrt(a) * pi / (sqrt(b) * (a * (x ^ 2 + 1))))",
                                 "rule": {
@@ -217,7 +208,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{2 \\sqrt{a} \\sqrt{b}} (\\int_{-\\sqrt{b}/\\sqrt{a}}^{\\sqrt{b}/\\sqrt{a}} \\frac{1}{x ^ {2} + 1} \\,dx)",
                                 "res": "pi / (2 * sqrt(a) * sqrt(b)) * (INT x:[-(sqrt(b) / sqrt(a)),sqrt(b) / sqrt(a)]. 1 / (x ^ 2 + 1))",
                                 "rule": {
@@ -227,7 +217,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{2 \\sqrt{a} \\sqrt{b}} (\\left. \\tan^{-1}{x} \\right\\vert_{x=-\\sqrt{b}/\\sqrt{a}}^{\\sqrt{b}/\\sqrt{a}})",
                                 "res": "pi / (2 * sqrt(a) * sqrt(b)) * ([atan(x)]_x=-(sqrt(b) / sqrt(a)),sqrt(b) / sqrt(a))",
                                 "rule": {
@@ -237,7 +226,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{2 \\sqrt{a} \\sqrt{b}} (-\\tan^{-1}{(-\\frac{\\sqrt{b}}{\\sqrt{a}})} + \\tan^{-1}{(\\frac{\\sqrt{b}}{\\sqrt{a}})})",
                                 "res": "pi / (2 * sqrt(a) * sqrt(b)) * (-atan(-(sqrt(b) / sqrt(a))) + atan(sqrt(b) / sqrt(a)))",
                                 "rule": {
@@ -247,7 +235,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{2 \\sqrt{a} \\sqrt{b}} (--\\tan^{-1}{(\\frac{\\sqrt{b}}{\\sqrt{a}})} + \\tan^{-1}{(\\frac{\\sqrt{b}}{\\sqrt{a}})})",
                                 "res": "pi / (2 * sqrt(a) * sqrt(b)) * (--atan(sqrt(b) / sqrt(a)) + atan(sqrt(b) / sqrt(a)))",
                                 "rule": {
@@ -260,7 +247,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{\\sqrt{a} \\sqrt{b}} \\tan^{-1}{(\\frac{\\sqrt{b}}{\\sqrt{a}})}",
                                 "res": "pi / (sqrt(a) * sqrt(b)) * atan(sqrt(b) / sqrt(a))",
                                 "rule": {
@@ -270,7 +256,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{\\sqrt{a b}} \\tan^{-1}{(\\frac{\\sqrt{b}}{\\sqrt{a}})}",
                                 "res": "pi / sqrt(a * b) * atan(sqrt(b) / sqrt(a))",
                                 "rule": {
@@ -283,7 +268,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{\\sqrt{a b}} \\tan^{-1}{(\\sqrt{\\frac{b}{a}})}",
                                 "res": "pi / sqrt(a * b) * atan(sqrt(b / a))",
                                 "rule": {

@@ -12,7 +12,6 @@
                         "start": "INT x:[-1,1]. ((1 + x) / (1 - x)) ^ (1/2)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{\\pi/2} (\\frac{1 + \\cos{(2 u)}}{1 - \\cos{(2 u)}}) ^ {1/2} (-2 \\sin{(2 u)}) \\,du)",
                                 "res": "-(INT u:[0,pi / 2]. ((1 + cos(2 * u)) / (1 - cos(2 * u))) ^ (1/2) * -(2 * sin(2 * u)))",
                                 "rule": {
@@ -25,7 +24,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{\\pi/2} (\\frac{1 + (2 \\cos^{2}(u) - 1)}{1 - \\cos{(2 u)}}) ^ {1/2} (-2 \\sin{(2 u)}) \\,du)",
                                 "res": "-(INT u:[0,pi / 2]. ((1 + (2 * cos(u) ^ 2 - 1)) / (1 - cos(2 * u))) ^ (1/2) * -(2 * sin(2 * u)))",
                                 "rule": {
@@ -39,7 +37,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{\\pi/2} (\\frac{1 + (2 \\cos^{2}(u) - 1)}{1 - (1 - 2 \\sin^{2}(u))}) ^ {1/2} (-2 \\sin{(2 u)}) \\,du)",
                                 "res": "-(INT u:[0,pi / 2]. ((1 + (2 * cos(u) ^ 2 - 1)) / (1 - (1 - 2 * sin(u) ^ 2))) ^ (1/2) * -(2 * sin(2 * u)))",
                                 "rule": {
@@ -53,7 +50,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{\\pi/2} \\frac{\\cos{u} \\sin{(2 u)}}{\\sin{u}} \\,du)",
                                 "res": "2 * (INT u:[0,pi / 2]. cos(u) * sin(2 * u) / sin(u))",
                                 "rule": {
@@ -63,7 +59,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{\\pi/2} \\frac{\\cos{u} (2 \\sin{u} \\cos{u})}{\\sin{u}} \\,du)",
                                 "res": "2 * (INT u:[0,pi / 2]. cos(u) * (2 * sin(u) * cos(u)) / sin(u))",
                                 "rule": {
@@ -76,7 +71,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "4 (\\int_{0}^{\\pi/2} \\cos^{2}(u) \\,du)",
                                 "res": "4 * (INT u:[0,pi / 2]. cos(u) ^ 2)",
                                 "rule": {
@@ -86,7 +80,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "4 (\\left. \\frac{\\sin{(2 u)}}{4} + \\frac{u}{2} \\right\\vert_{u=0}^{\\pi/2})",
                                 "res": "4 * ([sin(2 * u) / 4 + u / 2]_u=0,pi / 2)",
                                 "rule": {
@@ -96,7 +89,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\pi",
                                 "res": "pi",
                                 "rule": {

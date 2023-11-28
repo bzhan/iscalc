@@ -12,7 +12,6 @@
                         "start": "INT x:[sqrt(2),oo]. 1 / (x + x ^ sqrt(2))",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{\\sqrt{2}}^{\\infty} \\frac{x ^ {-\\sqrt{2}}}{x ^ {1 - \\sqrt{2}} + 1} \\,dx",
                                 "res": "INT x:[sqrt(2),oo]. x ^ -sqrt(2) / (x ^ (1 - sqrt(2)) + 1)",
                                 "rule": {
@@ -25,7 +24,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\log{(\\sqrt{2} ^ {-\\sqrt{2} + 1} + 1)}} -\\frac{1}{-\\sqrt{2} + 1} \\,du",
                                 "res": "INT u:[0,log(sqrt(2) ^ (-sqrt(2) + 1) + 1)]. -(1 / (-sqrt(2) + 1))",
                                 "rule": {
@@ -38,7 +36,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-\\frac{1}{-\\sqrt{2} + 1} (\\left. u \\right\\vert_{u=0}^{\\log{(\\sqrt{2} ^ {-\\sqrt{2} + 1} + 1)}})",
                                 "res": "-(1 / (-sqrt(2) + 1) * ([u]_u=0,log(sqrt(2) ^ (-sqrt(2) + 1) + 1)))",
                                 "rule": {
@@ -48,7 +45,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-\\frac{\\log{(\\sqrt{2} ^ {-\\sqrt{2} + 1} + 1)}}{-\\sqrt{2} + 1}",
                                 "res": "-(log(sqrt(2) ^ (-sqrt(2) + 1) + 1) / (-sqrt(2) + 1))",
                                 "rule": {
@@ -58,7 +54,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-\\frac{\\log{(\\sqrt{2} ^ {-\\sqrt{2} + 1} + 1)}}{\\frac{-1}{1 + \\sqrt{2}}}",
                                 "res": "-(log(sqrt(2) ^ (-sqrt(2) + 1) + 1) / (-1 / (1 + sqrt(2))))",
                                 "rule": {
@@ -72,7 +67,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "(\\sqrt{2} + 1) \\log{(\\sqrt{2} ^ {-\\sqrt{2} + 1} + 1)}",
                                 "res": "(sqrt(2) + 1) * log(sqrt(2) ^ (-sqrt(2) + 1) + 1)",
                                 "rule": {
@@ -82,7 +76,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "(\\sqrt{2} + 1) \\log{((2 ^ {1/2}) ^ {-\\sqrt{2} + 1} + 1)}",
                                 "res": "(sqrt(2) + 1) * log(2 ^ (1/2) ^ (-sqrt(2) + 1) + 1)",
                                 "rule": {
@@ -96,7 +89,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "(\\sqrt{2} + 1) \\log{(2 ^ {1/2\\cdot (-\\sqrt{2} + 1)} + 1)}",
                                 "res": "(sqrt(2) + 1) * log(2 ^ (1/2 * (-sqrt(2) + 1)) + 1)",
                                 "rule": {
@@ -109,7 +101,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "(1 + \\sqrt{2}) \\log{(1 + 2 ^ {1/2\\cdot (1 - \\sqrt{2})})}",
                                 "res": "(1 + sqrt(2)) * log(1 + 2 ^ (1/2 * (1 - sqrt(2))))",
                                 "rule": {

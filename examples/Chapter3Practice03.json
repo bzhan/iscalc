@@ -26,7 +26,6 @@
                         "start": "INT x:[-oo,oo]. cos(a * x) / (b ^ 4 - x ^ 4)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a x)}}{(b ^ {2} + x ^ {2}) (b ^ {2} - x ^ {2})} \\,dx",
                                 "res": "INT x:[-oo,oo]. cos(a * x) / ((b ^ 2 + x ^ 2) * (b ^ 2 - x ^ 2))",
                                 "rule": {
@@ -39,7 +38,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{-\\infty}^{\\infty} \\frac{1}{2 b ^ {2}} (\\frac{\\cos{(a x)}}{b ^ {2} + x ^ {2}} + \\frac{\\cos{(a x)}}{b ^ {2} - x ^ {2}}) \\,dx",
                                 "res": "INT x:[-oo,oo]. 1 / (2 * b ^ 2) * (cos(a * x) / (b ^ 2 + x ^ 2) + cos(a * x) / (b ^ 2 - x ^ 2))",
                                 "rule": {
@@ -52,7 +50,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{2 b ^ {2}} ((\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a x)}}{b ^ {2} + x ^ {2}} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a x)}}{b ^ {2} - x ^ {2}} \\,dx))",
                                 "res": "1 / (2 * b ^ 2) * ((INT x:[-oo,oo]. cos(a * x) / (b ^ 2 + x ^ 2)) + (INT x:[-oo,oo]. cos(a * x) / (b ^ 2 - x ^ 2)))",
                                 "rule": {
@@ -62,7 +59,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{2 b ^ {2}} ((\\int_{-\\infty}^{0} \\frac{\\cos{(a x)}}{b ^ {2} + x ^ {2}} \\,dx) + (\\int_{0}^{\\infty} \\frac{\\cos{(a x)}}{b ^ {2} + x ^ {2}} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a x)}}{b ^ {2} - x ^ {2}} \\,dx))",
                                 "res": "1 / (2 * b ^ 2) * ((INT x:[-oo,0]. cos(a * x) / (b ^ 2 + x ^ 2)) + (INT x:[0,oo]. cos(a * x) / (b ^ 2 + x ^ 2)) + (INT x:[-oo,oo]. cos(a * x) / (b ^ 2 - x ^ 2)))",
                                 "rule": {
@@ -74,7 +70,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{2 b ^ {2}} ((\\int_{0}^{\\infty} \\frac{\\cos{(a x)}}{b ^ {2} + x ^ {2}} \\,dx) + (\\int_{0}^{\\infty} \\frac{\\cos{(a x)}}{b ^ {2} + x ^ {2}} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a x)}}{b ^ {2} - x ^ {2}} \\,dx))",
                                 "res": "1 / (2 * b ^ 2) * ((INT x:[0,oo]. cos(a * x) / (b ^ 2 + x ^ 2)) + (INT x:[0,oo]. cos(a * x) / (b ^ 2 + x ^ 2)) + (INT x:[-oo,oo]. cos(a * x) / (b ^ 2 - x ^ 2)))",
                                 "rule": {
@@ -88,7 +83,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{2 b ^ {2}} (2 (\\int_{0}^{\\infty} \\frac{\\cos{(a x)}}{b ^ {2} + x ^ {2}} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a x)}}{b ^ {2} - x ^ {2}} \\,dx))",
                                 "res": "1 / (2 * b ^ 2) * (2 * (INT x:[0,oo]. cos(a * x) / (b ^ 2 + x ^ 2)) + (INT x:[-oo,oo]. cos(a * x) / (b ^ 2 - x ^ 2)))",
                                 "rule": {
@@ -98,7 +92,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{2 b ^ {2}} (2 (\\int_{0}^{\\infty} \\frac{\\cos{(a x)}}{x ^ {2} + b ^ {2}} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a x)}}{b ^ {2} - x ^ {2}} \\,dx))",
                                 "res": "1 / (2 * b ^ 2) * (2 * (INT x:[0,oo]. cos(a * x) / (x ^ 2 + b ^ 2)) + (INT x:[-oo,oo]. cos(a * x) / (b ^ 2 - x ^ 2)))",
                                 "rule": {
@@ -111,7 +104,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{2 b ^ {2}} (2 (\\frac{\\pi e^{-a b}}{2 b}) + \\frac{\\pi \\sin{(a b)}}{b})",
                                 "res": "1 / (2 * b ^ 2) * (2 * (pi * exp(-(a * b)) / (2 * b)) + pi * sin(a * b) / b)",
                                 "rule": {
@@ -121,7 +113,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{2 b ^ {2}} (\\frac{\\pi e^{-a b}}{b} + \\frac{\\pi \\sin{(a b)}}{b})",
                                 "res": "1 / (2 * b ^ 2) * (pi * exp(-(a * b)) / b + pi * sin(a * b) / b)",
                                 "rule": {
@@ -131,7 +122,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi (e^{-a b} + \\sin{(a b)})}{2 b ^ {3}}",
                                 "res": "pi * (exp(-(a * b)) + sin(a * b)) / (2 * b ^ 3)",
                                 "rule": {

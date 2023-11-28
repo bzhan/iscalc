@@ -2,6 +2,7 @@
     "content": [
         {
             "eq": "I(a) = (INT x:[0,oo]. 1 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1))",
+            "fixes": [],
             "latex_eq": "I{(a)} = \\int_{0}^{\\infty} \\frac{1}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1} \\,dx",
             "latex_lhs": "I{(a)}",
             "type": "FuncDef"
@@ -36,7 +37,6 @@
                                     "start": "2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1",
                                     "steps": [
                                         {
-                                            "fixes": [],
                                             "latex_res": "(x ^ {2} - 1) ^ {2} + 2 x ^ {2} (1 + \\cos{(2 a)})",
                                             "res": "(x ^ 2 - 1) ^ 2 + 2 * x ^ 2 * (1 + cos(2 * a))",
                                             "rule": {
@@ -48,7 +48,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "(x ^ {2} - 1) ^ {2} + 2 x ^ {2} (1 + (2 \\cos^{2}(a) - 1))",
                                             "res": "(x ^ 2 - 1) ^ 2 + 2 * x ^ 2 * (1 + (2 * cos(a) ^ 2 - 1))",
                                             "rule": {
@@ -61,7 +60,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "4 x ^ {2} \\cos^{2}(a) + (x ^ {2} - 1) ^ {2}",
                                             "res": "4 * x ^ 2 * cos(a) ^ 2 + (x ^ 2 - 1) ^ 2",
                                             "rule": {
@@ -106,7 +104,6 @@
                                     "start": "2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1",
                                     "steps": [
                                         {
-                                            "fixes": [],
                                             "latex_res": "1",
                                             "res": "1",
                                             "rule": {
@@ -161,7 +158,6 @@
                         "start": "x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1",
                                 "res": "2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1",
                                 "rule": {
@@ -218,7 +214,6 @@
                                     "start": "(x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)",
                                     "steps": [
                                         {
-                                            "fixes": [],
                                             "latex_res": "-4 x ^ {2} \\sin^{2}(a) + 2 x ^ {2} + x ^ {4} + 1",
                                             "res": "-(4 * x ^ 2 * sin(a) ^ 2) + 2 * x ^ 2 + x ^ 4 + 1",
                                             "rule": {
@@ -228,7 +223,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "-4 x ^ {2} (1 - \\cos^{2}(a)) + 2 x ^ {2} + x ^ {4} + 1",
                                             "res": "-(4 * x ^ 2 * (1 - cos(a) ^ 2)) + 2 * x ^ 2 + x ^ 4 + 1",
                                             "rule": {
@@ -241,7 +235,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "-4 x ^ {2} (-\\cos^{2}(a) + 1) + 2 x ^ {2} + x ^ {4} + 1",
                                             "res": "-(4 * x ^ 2 * (-(cos(a) ^ 2) + 1)) + 2 * x ^ 2 + x ^ 4 + 1",
                                             "rule": {
@@ -251,7 +244,6 @@
                                             "type": "CalculationStep"
                                         },
                                         {
-                                            "fixes": [],
                                             "latex_res": "(x ^ {2} - 1) ^ {2} + 4 x ^ {2} \\cos^{2}(a)",
                                             "res": "(x ^ 2 - 1) ^ 2 + 4 * x ^ 2 * cos(a) ^ 2",
                                             "rule": {
@@ -298,7 +290,6 @@
                                     "start": "(x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)",
                                     "steps": [
                                         {
-                                            "fixes": [],
                                             "latex_res": "1",
                                             "res": "1",
                                             "rule": {
@@ -365,7 +356,6 @@
                                     "start": "-(2 * x * sin(a)) + x ^ 2 + 1",
                                     "steps": [
                                         {
-                                            "fixes": [],
                                             "latex_res": "(x + 1) ^ {2} - 2 x (1 + \\sin{a})",
                                             "res": "(x + 1) ^ 2 - 2 * x * (1 + sin(a))",
                                             "rule": {
@@ -412,7 +402,6 @@
                                     "start": "-(2 * x * sin(a)) + x ^ 2 + 1",
                                     "steps": [
                                         {
-                                            "fixes": [],
                                             "latex_res": "1",
                                             "res": "1",
                                             "rule": {
@@ -457,7 +446,6 @@
                                     "start": "-(2 * x * sin(a)) + x ^ 2 + 1",
                                     "steps": [
                                         {
-                                            "fixes": [],
                                             "latex_res": "(x - 1) ^ {2} + 2 x (1 - \\sin{a})",
                                             "res": "(x - 1) ^ 2 + 2 * x * (1 - sin(a))",
                                             "rule": {
@@ -514,7 +502,6 @@
                         "start": "I(a)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. 1 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)",
                                 "rule": {
@@ -525,7 +512,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{\\infty} \\frac{1}{2 (\\frac{1}{y}) ^ {2} \\cos{(2 a)} + (\\frac{1}{y}) ^ {4} + 1} (-\\frac{1}{y ^ {2}}) \\,dy)",
                                 "res": "-(INT y:[0,oo]. 1 / (2 * (1 / y) ^ 2 * cos(2 * a) + (1 / y) ^ 4 + 1) * -(1 / y ^ 2))",
                                 "rule": {
@@ -538,7 +524,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{\\infty} \\frac{-y ^ {2}}{y ^ {4} + 2 y ^ {2} \\cos{(2 a)} + 1} \\,dy)",
                                 "res": "-(INT y:[0,oo]. -(y ^ 2) / (y ^ 4 + 2 * y ^ 2 * cos(2 * a) + 1))",
                                 "rule": {
@@ -551,7 +536,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{y ^ {2}}{2 y ^ {2} \\cos{(2 a)} + y ^ {4} + 1} \\,dy",
                                 "res": "INT y:[0,oo]. y ^ 2 / (2 * y ^ 2 * cos(2 * a) + y ^ 4 + 1)",
                                 "rule": {
@@ -569,7 +553,6 @@
                         "start": "INT x:[0,oo]. x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{x ^ {2}}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. x ^ 2 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)",
                                 "rule": {
@@ -607,7 +590,6 @@
                         "start": "2 * I(a)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "I{(a)} + I{(a)}",
                                 "res": "I(a) + I(a)",
                                 "rule": {
@@ -620,7 +602,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{\\infty} \\frac{1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx) + I{(a)}",
                                 "res": "(INT x:[0,oo]. 1 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)) + I(a)",
                                 "rule": {
@@ -632,11 +613,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{\\infty} \\frac{1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx) + (\\int_{0}^{\\infty} \\frac{x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1} \\,dx)",
                                 "res": "(INT x:[0,oo]. 1 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)) + (INT x:[0,oo]. x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1))",
                                 "rule": {
                                     "eq": "I(a) = (INT x:[0,oo]. x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1))",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(I{(a)} = \\int_{0}^{\\infty} \\frac{x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1} \\,dx\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(a)",
@@ -645,7 +626,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} + \\frac{x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. 1 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1) + x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1)",
                                 "rule": {
@@ -658,7 +638,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1 + x ^ {2}}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. (1 + x ^ 2) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)",
                                 "rule": {
@@ -671,7 +650,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)",
                                 "rule": {
@@ -689,7 +667,6 @@
                         "start": "INT x:[0,oo]. (1 + x ^ 2) / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)",
                                 "rule": {
@@ -727,7 +704,6 @@
                         "start": "INT x:[-oo,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "(\\int_{-\\infty}^{0} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx) + (\\int_{0}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx)",
                                 "res": "(INT x:[-oo,0]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)) + (INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1))",
                                 "rule": {
@@ -738,7 +714,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx) + (\\int_{0}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx)",
                                 "res": "(INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)) + (INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1))",
                                 "rule": {
@@ -751,7 +726,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "2 (\\int_{0}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx)",
                                 "res": "2 * (INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1))",
                                 "rule": {
@@ -796,7 +770,6 @@
                         "start": "INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "(\\int_{-\\infty}^{0} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + (\\int_{0}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)",
                                 "res": "(INT x:[-oo,0]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + (INT x:[0,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)))",
                                 "rule": {
@@ -807,7 +780,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "(\\int_{0}^{\\infty} \\frac{2 x \\sin{a}}{(2 x \\sin{a} + x ^ {2} + 1) (-2 x \\sin{a} + x ^ {2} + 1)} \\,dx) + (\\int_{0}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)",
                                 "res": "(INT x:[0,oo]. 2 * x * sin(a) / ((2 * x * sin(a) + x ^ 2 + 1) * (-(2 * x * sin(a)) + x ^ 2 + 1))) + (INT x:[0,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)))",
                                 "rule": {
@@ -820,7 +792,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "0",
                                 "res": "0",
                                 "rule": {
@@ -863,12 +834,17 @@
                 "goal": "I(a) = 1/4 * (INT x:[-oo,oo]. 1 / (cos(a) ^ 2 + x ^ 2))",
                 "latex_goal": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{1}{\\cos^{2}(a) + x ^ {2}} \\,dx)",
                 "start": {
+                    "conds": [
+                        {
+                            "cond": "cos(a) != 0",
+                            "latex_cond": "\\cos{a} \\neq 0"
+                        }
+                    ],
                     "fixes": [],
                     "latex_start": "2 I{(a)} = \\int_{0}^{\\infty} \\frac{1 + x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1} \\,dx",
                     "start": "2 * I(a) = (INT x:[0,oo]. (1 + x ^ 2) / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1))",
                     "steps": [
                         {
-                            "fixes": [],
                             "latex_res": "I{(a)} = \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx)",
                             "res": "I(a) = 1/2 * (INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1))",
                             "rule": {
@@ -880,11 +856,11 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "I{(a)} = \\frac{1}{2} (\\frac{\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx}{2})",
                             "res": "I(a) = 1/2 * ((INT x:[-oo,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)) / 2)",
                             "rule": {
                                 "eq": "(INT x:[-oo,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)) = 2 * (INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1))",
+                                "eq_fixes": [],
                                 "latex_str": "apply equation \\(\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx = 2 (\\int_{0}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx)\\)",
                                 "name": "ApplyEquation",
                                 "source": "INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)",
@@ -893,7 +869,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx)",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1))",
                             "rule": {
@@ -903,7 +878,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} (1 - 2 \\sin^{2}(a)) + x ^ {4} + 1} \\,dx)",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * (1 - 2 * sin(a) ^ 2) + x ^ 4 + 1))",
                             "rule": {
@@ -916,7 +890,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)))",
                             "rule": {
@@ -929,7 +902,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + \\frac{1}{4}\\cdot 0",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + 1/4 * 0",
                             "rule": {
@@ -942,11 +914,11 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + 1/4 * (INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)))",
                             "rule": {
                                 "eq": "(INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) = 0",
+                                "eq_fixes": [],
                                 "latex_str": "apply equation \\(\\int_{-\\infty}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx = 0\\)",
                                 "name": "ApplyEquation",
                                 "source": "0",
@@ -955,7 +927,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "I{(a)} = \\frac{1}{4} ((\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx))",
                             "res": "I(a) = 1/4 * ((INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + (INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))))",
                             "rule": {
@@ -968,7 +939,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} - \\frac{2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)) - 2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)))",
                             "rule": {
@@ -981,7 +951,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1 - 2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1 - 2 * x * sin(a)) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)))",
                             "rule": {
@@ -994,7 +963,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{1}{2 x \\sin{a} + x ^ {2} + 1} \\,dx)",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. 1 / (2 * x * sin(a) + x ^ 2 + 1))",
                             "rule": {
@@ -1004,7 +972,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{1}{2 x \\sin{a} + x ^ {2} + (\\sin^{2}(a) + \\cos^{2}(a))} \\,dx)",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. 1 / (2 * x * sin(a) + x ^ 2 + (sin(a) ^ 2 + cos(a) ^ 2)))",
                             "rule": {
@@ -1018,7 +985,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{1}{(x + \\sin{a}) ^ {2} + \\cos^{2}(a)} \\,dx)",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. 1 / ((x + sin(a)) ^ 2 + cos(a) ^ 2))",
                             "rule": {
@@ -1031,7 +997,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{1}{\\cos^{2}(a) + u ^ {2}} \\,du)",
                             "res": "I(a) = 1/4 * (INT u:[-oo,oo]. 1 / (cos(a) ^ 2 + u ^ 2))",
                             "rule": {
@@ -1068,11 +1033,11 @@
                         "start": "I(a)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{1}{\\cos^{2}(a) + x ^ {2}} \\,dx)",
                                 "res": "1/4 * (INT x:[-oo,oo]. 1 / (cos(a) ^ 2 + x ^ 2))",
                                 "rule": {
                                     "eq": "I(a) = 1/4 * (INT x:[-oo,oo]. 1 / (cos(a) ^ 2 + x ^ 2))",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{1}{\\cos^{2}(a) + x ^ {2}} \\,dx)\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(a)",
@@ -1081,7 +1046,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{4} (\\left. \\frac{1}{\\cos{a}} \\tan^{-1}{(\\frac{x}{\\cos{a}})} \\right\\vert_{x=-\\infty}^{\\infty})",
                                 "res": "1/4 * ([1 / cos(a) * atan(x / cos(a))]_x=-oo,oo)",
                                 "rule": {
@@ -1091,7 +1055,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{4 \\cos{a}}",
                                 "res": "pi / (4 * cos(a))",
                                 "rule": {
@@ -1136,11 +1099,11 @@
                         "start": "I(a)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{1}{\\cos^{2}(a) + x ^ {2}} \\,dx)",
                                 "res": "1/4 * (INT x:[-oo,oo]. 1 / (cos(a) ^ 2 + x ^ 2))",
                                 "rule": {
                                     "eq": "I(a) = 1/4 * (INT x:[-oo,oo]. 1 / (cos(a) ^ 2 + x ^ 2))",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{1}{\\cos^{2}(a) + x ^ {2}} \\,dx)\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(a)",
@@ -1149,7 +1112,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{4} (\\left. \\frac{1}{\\cos{a}} \\tan^{-1}{(\\frac{x}{\\cos{a}})} \\right\\vert_{x=-\\infty}^{\\infty})",
                                 "res": "1/4 * ([1 / cos(a) * atan(x / cos(a))]_x=-oo,oo)",
                                 "rule": {
@@ -1159,7 +1121,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-\\frac{\\pi}{4 \\cos{a}}",
                                 "res": "-(pi / (4 * cos(a)))",
                                 "rule": {
@@ -1198,7 +1159,6 @@
                         "start": "INT x:[0,oo]. 1 / (x ^ 4 + 1)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{x ^ {4} + 2 x ^ {2}\\cdot \\cos{(2\\cdot (\\frac{\\pi}{4}))} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. 1 / (x ^ 4 + 2 * x ^ 2 * cos(2 * (pi / 4)) + 1)",
                                 "rule": {
@@ -1211,7 +1171,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "I{(\\frac{\\pi}{4})}",
                                 "res": "I(pi / 4)",
                                 "rule": {
@@ -1222,11 +1181,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{4 \\cos{(\\frac{\\pi}{4})}}",
                                 "res": "pi / (4 * cos(pi / 4))",
                                 "rule": {
                                     "eq": "I(a) = pi / (4 * cos(a))",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(I{(a)} = \\frac{\\pi}{4 \\cos{a}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(pi / 4)",
@@ -1235,7 +1194,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{2} \\pi}{4}",
                                 "res": "sqrt(2) * pi / 4",
                                 "rule": {
@@ -1245,7 +1203,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi \\sqrt{2}}{4}",
                                 "res": "pi * sqrt(2) / 4",
                                 "rule": {
@@ -1287,7 +1244,6 @@
                         "start": "INT x:[0,oo]. 1 / (x ^ 4 + 1)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{u ^ {2} (\\frac{1}{u ^ {4}} + 1)} \\,du",
                                 "res": "INT u:[0,oo]. 1 / (u ^ 2 * (1 / u ^ 4 + 1))",
                                 "rule": {
@@ -1300,7 +1256,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{u ^ {2}}{u ^ {4} + 1} \\,du",
                                 "res": "INT u:[0,oo]. u ^ 2 / (u ^ 4 + 1)",
                                 "rule": {
@@ -1342,7 +1297,6 @@
                         "start": "INT x:[0,oo]. 1 / (x ^ 4 + x ^ 2 + 1)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{x ^ {4} + 2 x ^ {2}\\cdot \\cos{(2\\cdot (\\frac{\\pi}{6}))} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. 1 / (x ^ 4 + 2 * x ^ 2 * cos(2 * (pi / 6)) + 1)",
                                 "rule": {
@@ -1355,7 +1309,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "I{(\\frac{\\pi}{6})}",
                                 "res": "I(pi / 6)",
                                 "rule": {
@@ -1366,11 +1319,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{4 \\cos{(\\frac{\\pi}{6})}}",
                                 "res": "pi / (4 * cos(pi / 6))",
                                 "rule": {
                                     "eq": "I(a) = pi / (4 * cos(a))",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(I{(a)} = \\frac{\\pi}{4 \\cos{a}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(pi / 6)",
@@ -1379,7 +1332,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\sqrt{3} \\pi}{6}",
                                 "res": "sqrt(3) * pi / 6",
                                 "rule": {
@@ -1389,7 +1341,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{2 \\sqrt{3}}",
                                 "res": "pi / (2 * sqrt(3))",
                                 "rule": {
@@ -1448,7 +1399,6 @@
                         "start": "INT x:[0,oo]. 1 / (x ^ 4 - x ^ 2 + 1)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{x ^ {4} + 2 x ^ {2}\\cdot \\cos{(2\\cdot (\\frac{\\pi}{3}))} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. 1 / (x ^ 4 + 2 * x ^ 2 * cos(2 * (pi / 3)) + 1)",
                                 "rule": {
@@ -1461,7 +1411,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "I{(\\frac{\\pi}{3})}",
                                 "res": "I(pi / 3)",
                                 "rule": {
@@ -1472,11 +1421,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{4 \\cos{(\\frac{\\pi}{3})}}",
                                 "res": "pi / (4 * cos(pi / 3))",
                                 "rule": {
                                     "eq": "I(a) = pi / (4 * cos(a))",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(I{(a)} = \\frac{\\pi}{4 \\cos{a}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(pi / 3)",
@@ -1485,7 +1434,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{2}",
                                 "res": "pi / 2",
                                 "rule": {
@@ -1525,7 +1473,6 @@
                         "start": "INT x:[0,oo]. 1 / (x ^ 4 + 2 * x ^ 2 + 1)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{x ^ {4} + 2 x ^ {2}\\cdot \\cos{(2\\cdot 0)} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. 1 / (x ^ 4 + 2 * x ^ 2 * cos(2 * 0) + 1)",
                                 "rule": {
@@ -1538,7 +1485,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "I{(0)}",
                                 "res": "I(0)",
                                 "rule": {
@@ -1549,11 +1495,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{4 \\cos{(0)}}",
                                 "res": "pi / (4 * cos(0))",
                                 "rule": {
                                     "eq": "I(a) = pi / (4 * cos(a))",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(I{(a)} = \\frac{\\pi}{4 \\cos{a}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(0)",
@@ -1562,7 +1508,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{4}",
                                 "res": "pi / 4",
                                 "rule": {

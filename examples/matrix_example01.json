@@ -9,6 +9,10 @@
                 {
                     "cond": "n >= 0",
                     "latex_cond": "n \\ge 0"
+                },
+                {
+                    "cond": "m >= 1",
+                    "latex_cond": "m \\ge 1"
                 }
             ],
             "finished": true,
@@ -49,6 +53,10 @@
                         {
                             "cond": "n >= 0",
                             "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "m >= 1",
+                            "latex_cond": "m \\ge 1"
                         }
                     ]
                 },
@@ -68,6 +76,10 @@
                         {
                             "cond": "n >= 0",
                             "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "m >= 1",
+                            "latex_cond": "m \\ge 1"
                         }
                     ]
                 },
@@ -87,6 +99,10 @@
                         {
                             "cond": "n >= 0",
                             "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "m >= 1",
+                            "latex_cond": "m \\ge 1"
                         }
                     ]
                 },
@@ -106,6 +122,10 @@
                         {
                             "cond": "n >= 0",
                             "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "m >= 1",
+                            "latex_cond": "m \\ge 1"
                         }
                     ]
                 },
@@ -125,6 +145,10 @@
                         {
                             "cond": "n >= 0",
                             "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "m >= 1",
+                            "latex_cond": "m \\ge 1"
                         }
                     ]
                 },
@@ -144,6 +168,10 @@
                         {
                             "cond": "n >= 0",
                             "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "m >= 1",
+                            "latex_cond": "m \\ge 1"
                         }
                     ]
                 }
@@ -167,6 +195,18 @@
                         [
                             "A",
                             "$tensor($real, m, m)"
+                        ],
+                        [
+                            "cosh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "sinh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "binom",
+                            "$fun($real, $real, $real)"
                         ]
                     ],
                     "goal": "unit_matrix(m) = unit_matrix(m)",
@@ -215,6 +255,18 @@
                         [
                             "A",
                             "$tensor($real, m, m)"
+                        ],
+                        [
+                            "cosh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "sinh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "binom",
+                            "$fun($real, $real, $real)"
                         ]
                     ],
                     "goal": "(inv(P) * A * P) ^ (n + 1) = inv(P) * A ^ (n + 1) * P",
@@ -236,6 +288,10 @@
                                 {
                                     "cond": "n >= 0",
                                     "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "m >= 1",
+                                    "latex_cond": "m \\ge 1"
                                 }
                             ]
                         },
@@ -255,6 +311,10 @@
                                 {
                                     "cond": "n >= 0",
                                     "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "m >= 1",
+                                    "latex_cond": "m \\ge 1"
                                 }
                             ]
                         },
@@ -274,6 +334,10 @@
                                 {
                                     "cond": "n >= 0",
                                     "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "m >= 1",
+                                    "latex_cond": "m \\ge 1"
                                 }
                             ]
                         },
@@ -293,6 +357,10 @@
                                 {
                                     "cond": "n >= 0",
                                     "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "m >= 1",
+                                    "latex_cond": "m \\ge 1"
                                 }
                             ]
                         },
@@ -312,6 +380,10 @@
                                 {
                                     "cond": "n >= 0",
                                     "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "m >= 1",
+                                    "latex_cond": "m \\ge 1"
                                 }
                             ]
                         },
@@ -331,6 +403,10 @@
                                 {
                                     "cond": "n >= 0",
                                     "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "m >= 1",
+                                    "latex_cond": "m \\ge 1"
                                 }
                             ]
                         }
@@ -343,7 +419,6 @@
                                 "start": "(inv(P) * A * P) ^ (n + 1)",
                                 "steps": [
                                     {
-                                        "fixes": [],
                                         "latex_res": "(P ^ {-1} A P) ^ {n} (P ^ {-1} A P)",
                                         "res": "(inv(P) * A * P) ^ n * (inv(P) * A * P)",
                                         "rule": {
@@ -356,7 +431,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "P ^ {-1} A ^ {n} P (P ^ {-1} A P)",
                                         "res": "inv(P) * A ^ n * P * (inv(P) * A * P)",
                                         "rule": {
@@ -367,7 +441,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "P ^ {-1} A ^ {n} A P",
                                         "res": "inv(P) * A ^ n * A * P",
                                         "rule": {
@@ -377,7 +450,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "P ^ {-1} (A ^ {n} A) P",
                                         "res": "inv(P) * (A ^ n * A) * P",
                                         "rule": {
@@ -390,7 +462,6 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "fixes": [],
                                         "latex_res": "P ^ {-1} A ^ {n + 1} P",
                                         "res": "inv(P) * A ^ (n + 1) * P",
                                         "rule": {
@@ -428,6 +499,42 @@
             },
             "type": "Goal",
             "wellformed": false
+        },
+        {
+            "conds": [
+                {
+                    "cond": "invertible(B)",
+                    "latex_cond": "invertible{(B)}"
+                }
+            ],
+            "fixes": [
+                [
+                    "A",
+                    "$tensor($real, 3, 3)"
+                ],
+                [
+                    "B",
+                    "$tensor($real, 3, 3)"
+                ]
+            ],
+            "latex_start": "(B ^ {-1} A B) ^ {4}",
+            "start": "(inv(B) * A * B) ^ 4",
+            "steps": [
+                {
+                    "latex_res": "B ^ {-1} A ^ {4} B",
+                    "res": "inv(B) * A ^ 4 * B",
+                    "rule": {
+                        "eq": "(inv(P) * A * P) ^ n = inv(P) * A ^ n * P",
+                        "eq_fixes": [],
+                        "latex_str": "apply equation \\((P ^ {-1} A P) ^ {n} = P ^ {-1} A ^ {n} P\\)",
+                        "name": "ApplyEquation",
+                        "source": "None",
+                        "str": "apply equation: (inv(P) * A * P) ^ n = inv(P) * A ^ n * P"
+                    },
+                    "type": "CalculationStep"
+                }
+            ],
+            "type": "Calculation"
         }
     ],
     "name": "matrix_example01"

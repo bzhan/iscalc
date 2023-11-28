@@ -12,6 +12,7 @@
                 }
             ],
             "eq": "I(a,b) = (INT x:[0,oo]. (atan(a * x) - atan(b * x)) / x)",
+            "fixes": [],
             "latex_eq": "I(a,b) = \\int_{0}^{\\infty} \\frac{\\tan^{-1}{(a x)} - \\tan^{-1}{(b x)}}{x} \\,dx",
             "latex_lhs": "I(a,b)",
             "type": "FuncDef"
@@ -38,7 +39,6 @@
                         "start": "D a. I(a,b)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{d}{da} \\int_{0}^{\\infty} \\frac{\\tan^{-1}{(a x)} - \\tan^{-1}{(b x)}}{x} \\,dx",
                                 "res": "D a. INT x:[0,oo]. (atan(a * x) - atan(b * x)) / x",
                                 "rule": {
@@ -50,7 +50,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{d}{da} \\frac{\\tan^{-1}{(a x)} - \\tan^{-1}{(b x)}}{x} \\,dx",
                                 "res": "INT x:[0,oo]. D a. (atan(a * x) - atan(b * x)) / x",
                                 "rule": {
@@ -60,7 +59,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{a ^ {2} x ^ {2} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. 1 / (a ^ 2 * x ^ 2 + 1)",
                                 "rule": {
@@ -70,7 +68,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{a (u ^ {2} + 1)} \\,du",
                                 "res": "INT u:[0,oo]. 1 / (a * (u ^ 2 + 1))",
                                 "rule": {
@@ -83,7 +80,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{1}{a} (\\left. \\tan^{-1}{u} \\right\\vert_{u=0}^{\\infty})",
                                 "res": "1 / a * ([atan(u)]_u=0,oo)",
                                 "rule": {
@@ -93,7 +89,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi}{2 a}",
                                 "res": "pi / (2 * a)",
                                 "rule": {
@@ -140,12 +135,21 @@
                 "goal": "I(a,b) = pi * log(a) / 2 + SKOLEM_FUNC(C(b))",
                 "latex_goal": "I(a,b) = \\frac{\\pi \\log{a}}{2} + C(b)",
                 "start": {
+                    "conds": [
+                        {
+                            "cond": "a > 0",
+                            "latex_cond": "a > 0"
+                        },
+                        {
+                            "cond": "b > 0",
+                            "latex_cond": "b > 0"
+                        }
+                    ],
                     "fixes": [],
                     "latex_start": "\\frac{d}{da} I(a,b) = \\frac{\\pi}{2 a}",
                     "start": "(D a. I(a,b)) = pi / (2 * a)",
                     "steps": [
                         {
-                            "fixes": [],
                             "latex_res": "I(a,b) = \\int \\frac{\\pi}{2 a} \\,da",
                             "res": "I(a,b) = (INT a [b]. pi / (2 * a))",
                             "rule": {
@@ -155,7 +159,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "I(a,b) = \\frac{\\pi}{2} (\\int \\frac{1}{a} \\,da)",
                             "res": "I(a,b) = pi / 2 * (INT a [b]. 1 / a)",
                             "rule": {
@@ -165,7 +168,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "I(a,b) = \\frac{\\pi}{2} \\log{(\\left| a \\right|)} + C(b)",
                             "res": "I(a,b) = pi / 2 * log(abs(a)) + SKOLEM_FUNC(C(b))",
                             "rule": {
@@ -175,7 +177,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "I(a,b) = \\frac{\\pi \\log{a}}{2} + C(b)",
                             "res": "I(a,b) = pi * log(a) / 2 + SKOLEM_FUNC(C(b))",
                             "rule": {
@@ -207,12 +208,21 @@
                 "goal": "SKOLEM_FUNC(C(a)) = -(pi * log(a) / 2)",
                 "latex_goal": "C(a) = -\\frac{\\pi \\log{a}}{2}",
                 "start": {
+                    "conds": [
+                        {
+                            "cond": "a > 0",
+                            "latex_cond": "a > 0"
+                        },
+                        {
+                            "cond": "b > 0",
+                            "latex_cond": "b > 0"
+                        }
+                    ],
                     "fixes": [],
                     "latex_start": "I(a,b) = \\frac{\\pi \\log{a}}{2} + C(b)",
                     "start": "I(a,b) = pi * log(a) / 2 + SKOLEM_FUNC(C(b))",
                     "steps": [
                         {
-                            "fixes": [],
                             "latex_res": "I(a,a) = \\frac{\\pi \\log{a}}{2} + C(a)",
                             "res": "I(a,a) = pi * log(a) / 2 + SKOLEM_FUNC(C(a))",
                             "rule": {
@@ -229,7 +239,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "C(a) = -\\frac{\\pi \\log{a}}{2} + I(a,a)",
                             "res": "SKOLEM_FUNC(C(a)) = -(pi * log(a) / 2) + I(a,a)",
                             "rule": {
@@ -241,7 +250,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "C(a) = -\\frac{\\pi \\log{a}}{2} + (\\int_{0}^{\\infty} 0 \\,dx)",
                             "res": "SKOLEM_FUNC(C(a)) = -(pi * log(a) / 2) + (INT x:[0,oo]. 0)",
                             "rule": {
@@ -253,7 +261,6 @@
                             "type": "CalculationStep"
                         },
                         {
-                            "fixes": [],
                             "latex_res": "C(a) = -\\frac{\\pi \\log{a}}{2}",
                             "res": "SKOLEM_FUNC(C(a)) = -(pi * log(a) / 2)",
                             "rule": {
@@ -291,11 +298,11 @@
                         "start": "I(a,b)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi \\log{a}}{2} + C(b)",
                                 "res": "pi * log(a) / 2 + SKOLEM_FUNC(C(b))",
                                 "rule": {
                                     "eq": "I(a,b) = pi * log(a) / 2 + SKOLEM_FUNC(C(b))",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(I(a,b) = \\frac{\\pi \\log{a}}{2} + C(b)\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(a,b)",
@@ -304,11 +311,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi \\log{a}}{2} + -\\frac{\\pi \\log{b}}{2}",
                                 "res": "pi * log(a) / 2 + -(pi * log(b) / 2)",
                                 "rule": {
                                     "eq": "SKOLEM_FUNC(C(a)) = -(pi * log(a) / 2)",
+                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(C(a) = -\\frac{\\pi \\log{a}}{2}\\)",
                                     "name": "ApplyEquation",
                                     "source": "SKOLEM_FUNC(C(b))",
@@ -317,7 +324,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi \\log{a}}{2} - \\frac{\\pi \\log{b}}{2}",
                                 "res": "pi * log(a) / 2 - pi * log(b) / 2",
                                 "rule": {

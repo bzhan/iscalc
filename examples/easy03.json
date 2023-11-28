@@ -18,7 +18,6 @@
                         "start": "INT x:[0,oo]. log(x) / (x ^ 2 + b ^ 2)",
                         "steps": [
                             {
-                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{\\infty} \\frac{\\log{(\\frac{1}{t})}}{(\\frac{1}{t}) ^ {2} + b ^ {2}} (-\\frac{1}{t ^ {2}}) \\,dt)",
                                 "res": "-(INT t:[0,oo]. log(1 / t) / ((1 / t) ^ 2 + b ^ 2) * -(1 / t ^ 2))",
                                 "rule": {
@@ -31,7 +30,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{\\infty} \\frac{-\\log{t}}{(\\frac{1}{t}) ^ {2} + b ^ {2}} (-\\frac{1}{t ^ {2}}) \\,dt)",
                                 "res": "-(INT t:[0,oo]. -log(t) / ((1 / t) ^ 2 + b ^ 2) * -(1 / t ^ 2))",
                                 "rule": {
@@ -44,7 +42,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{\\infty} \\frac{\\log{t}}{1 + b ^ {2} t ^ {2}} \\,dt)",
                                 "res": "-(INT t:[0,oo]. log(t) / (1 + b ^ 2 * t ^ 2))",
                                 "rule": {
@@ -57,7 +54,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-(\\int_{0}^{\\infty} \\frac{\\log{(\\frac{s}{b})}}{1 + b ^ {2} (\\frac{s}{b}) ^ {2}} (\\frac{1}{b}) \\,ds)",
                                 "res": "-(INT s:[0,oo]. log(s / b) / (1 + b ^ 2 * (s / b) ^ 2) * (1 / b))",
                                 "rule": {
@@ -70,7 +66,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-\\frac{1}{b} (\\int_{0}^{\\infty} \\frac{1}{s ^ {2} + 1} \\log{(\\frac{s}{b})} \\,ds)",
                                 "res": "-(1 / b * (INT s:[0,oo]. 1 / (s ^ 2 + 1) * log(s / b)))",
                                 "rule": {
@@ -80,7 +75,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-\\frac{1}{b} (\\int_{0}^{\\infty} \\frac{1}{s ^ {2} + 1} (\\log{s} - \\log{b}) \\,ds)",
                                 "res": "-(1 / b * (INT s:[0,oo]. 1 / (s ^ 2 + 1) * (log(s) - log(b))))",
                                 "rule": {
@@ -93,7 +87,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-\\frac{1}{b} (\\int_{0}^{\\infty} \\frac{\\log{s}}{s ^ {2} + 1} - \\frac{\\log{b}}{s ^ {2} + 1} \\,ds)",
                                 "res": "-(1 / b * (INT s:[0,oo]. log(s) / (s ^ 2 + 1) - log(b) / (s ^ 2 + 1)))",
                                 "rule": {
@@ -106,7 +99,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "-\\frac{1}{b} (0 - \\log{b} (\\left. \\tan^{-1}{s} \\right\\vert_{s=0}^{\\infty}))",
                                 "res": "-(1 / b * (0 - log(b) * ([atan(s)]_s=0,oo)))",
                                 "rule": {
@@ -116,7 +108,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [],
                                 "latex_res": "\\frac{\\pi \\log{b}}{2 b}",
                                 "res": "pi * log(b) / (2 * b)",
                                 "rule": {

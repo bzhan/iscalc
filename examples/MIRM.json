@@ -9,24 +9,39 @@
             "expr": "(inv(P)*A*P)^n = inv(P)*A^n*P",
             "path": "matrix_example01",
             "type": "problem",
-            "conds": ["invertible(P)", "isSquare(A)", "type(n,1)", "n>=0"]
+            "fixes": [
+                ["n", "$int"],
+                ["m", "$int"],
+                ["P", "$tensor($real, m, m)"],
+                ["A", "$tensor($real, m, m)"]
+            ],
+            "conds": ["invertible(P)", "isSquare(A)", "type(n,1)", "n>=0", "m>=0"]
         },
         {
             "expr": "hat(w)^2 =  w * T(w) - norm(w)^2 * unit_matrix(3)",
             "path": "matrix_example02",
             "type": "problem",
-            "conds": ["type(w,0,3)"]
+            "fixes": [
+                ["w", "$tensor($real, 3, 1)"]
+            ]
         },
         {
             "expr": "w*T(w)*hat(w) = zero_matrix(3,3)",
             "path": "matrix_example02",
             "type": "problem",
+            "fixes": [
+                ["w", "$tensor($real, 3, 1)"]
+            ],
             "conds": ["type(w,0,3)"]
         },
         {
             "expr": "hat(w)^(2*n+1) = (-1)^n * hat(w)",
             "path": "matrix_example02",
-            "conds": ["type(w, 0, 3)", "n>=0", "type(n, 1)", "norm(w) = 1"],
+            "fixes": [
+                ["w", "$tensor($real, 3, 1)"],
+                ["n", "$int"]
+            ],
+            "conds": ["n>=0", "norm(w) = 1"],
             "type": "problem"
         },
         {
@@ -36,7 +51,11 @@
         },
         {
             "expr": "hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2",
-            "conds": ["type(w, 0, 3)", "n>=0", "type(n, 1)", "norm(w) = 1"],
+            "conds": ["n>=0", "norm(w) = 1"],
+            "fixes": [
+                ["w", "$tensor($real, 3, 1)"],
+                ["n", "$int"]
+            ],
             "path": "matrix_example02",
             "type": "problem"
         },
@@ -44,32 +63,56 @@
             "expr": "exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * (hat(w)) ^ 2",
             "path": "matrix_rodrigues",
             "type": "problem",
-            "conds": ["type(w, 0, 3)", "norm(w) = 1"]
+            "fixes": [
+                ["w", "$tensor($real, 3, 1)"],
+                ["t", "$real"]
+            ],
+            "conds": ["norm(w) = 1"]
         },
         {
             "expr": "hm(R, p) = rcon(ccon(R,p), ccon(zero_matrix(1,3),unit_matrix(1)))",
             "path": "twist_matrix_exp_inv",
             "type": "definition",
-            "conds": ["type(R, 0, 3, 3)","type(p, 0 ,3)"],
-            "range": "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+            "fixes": [
+                ["R", "$tensor($real, 3, 3)"],
+                ["p", "$tensor($real, 3, 1)"],
+                ["hm", "$fun($tensor($real, 3,3), $tensor($real, 3,1), $tensor($real, 4, 4))"]
+            ]
         },
         {
             "expr": "hmf(t, w, v) = hm(unit_matrix(3), t*v)",
+            "fixes": [
+                ["t", "$real"],
+                ["w", "$tensor($real, 3, 1)"],
+                ["v", "$tensor($real, 3, 1)"],
+                ["hmf", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"],
+                ["hm", "$fun($tensor($real, 3,3), $tensor($real, 3,1), $tensor($real, 4, 4))"]
+            ],
             "path": "twist_matrix_exp_inv",
             "type": "definition",
-            "conds": ["type(v, 0, 3)","type(w, 0 ,3)", "norm(w) = 0"],
-            "func_type": "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+            "conds": ["norm(w) = 0"]
         },
         {
             "expr": "hmf(t, w, v) = hm(exp(t*hat(w)), (unit_matrix(3)-exp(t*hat(w)))*(hat(w)*v)+(w*T(w)*v*t))",
             "path": "twist_matrix_exp_inv",
             "type": "definition",
-            "conds": ["type(v, 0, 3)","type(w, 0 ,3)", "norm(w) = 1"],
+            "fixes": [
+                ["t", "$real"],
+                ["w", "$tensor($real, 3, 1)"],
+                ["v", "$tensor($real, 3, 1)"],
+                ["hmf", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"],
+                ["hm", "$fun($tensor($real, 3,3), $tensor($real, 3,1), $tensor($real, 4, 4))"]
+            ],
+            "conds": ["norm(w) = 1"],
             "func_type": "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
         },
         {
             "expr": "hat(w) ^ n * w = zero_matrix(3,1)",
             "path": "twist_matrix_exp_inv",
+            "fixes": [
+                ["w", "$tensor($real, 3, 1)"],
+                ["n", "$int"]
+            ],
             "type": "problem",
             "conds": ["type(n, 1)","type(w, 0 ,3)", "n>=1"]
         },
@@ -77,38 +120,69 @@
             "expr": "hat(w) * w = zero_matrix(3,1)",
             "path": "twist_matrix_exp_inv",
             "type": "problem",
+            "fixes": [
+                ["w", "$tensor($real, 3, 1)"]
+            ],
             "conds": ["type(w, 0 ,3)"]
         },
         {
             "expr": "hmf(t, w, v) * hmf(-t, w, v) = unit_matrix(4)",
             "path": "twist_matrix_exp_inv",
             "type": "problem",
-            "conds": ["type(w, 0, 3)","type(v, 0, 3)", "norm(w) = 1"]
+            "fixes": [
+                ["t", "$real"],
+                ["w", "$tensor($real, 3, 1)"],
+                ["v", "$tensor($real, 3, 1)"],
+                ["hmf", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"]
+            ],
+            "conds": ["norm(w) = 1"]
         },
         {
             "expr": "hmf(-t, w, v) * hmf(t, w, v) = unit_matrix(4)",
             "path": "twist_matrix_exp_inv",
             "type": "problem",
-            "conds": ["type(w, 0, 3)","type(v, 0, 3)"]
+            "fixes": [
+                ["t", "$real"],
+                ["w", "$tensor($real, 3, 1)"],
+                ["v", "$tensor($real, 3, 1)"],
+                ["hmf", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"]
+            ]
         },
         {
             "expr": "twist(w, v) = hat(rcon(w, v))",
             "path": "twist_derive_hmf",
             "type": "definition",
-            "conds": ["type(v, 0, 3)","type(w, 0 ,3)"],
-            "func_type": "$fun($tensor($real,3,1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+            "fixes": [
+                ["w", "$tensor($real, 3, 1)"],
+                ["v", "$tensor($real, 3, 1)"],
+                ["twist", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"]
+            ]
         },
         {
             "expr": "(D t. hmf(t, w, v)) = twist(w, v) * hmf(t, w, v)",
             "path": "twist_derive_hmf",
             "type": "problem",
-            "conds": ["type(w, 0, 3)","type(v, 0, 3)", "norm(w) = 0"]
+            "fixes": [
+                ["t", "$real"],
+                ["w", "$tensor($real, 3, 1)"],
+                ["v", "$tensor($real, 3, 1)"],
+                ["hmf", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"],
+                ["twist", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"]
+            ],
+            "conds": ["norm(w) = 0"]
         },
         {
             "expr": "(D t. hmf(t, w, v)) = twist(w, v) * hmf(t, w, v)",
             "path": "twist_derive_hmf",
             "type": "problem",
-            "conds": ["type(w, 0, 3)","type(v, 0, 3)", "norm(w) = 1"]
+            "fixes": [
+                ["t", "$real"],
+                ["w", "$tensor($real, 3, 1)"],
+                ["v", "$tensor($real, 3, 1)"],
+                ["hmf", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"],
+                ["twist", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"]
+            ],
+            "conds": ["norm(w) = 1"]
         },
         {
             "expr": "gst(t, n, w, v, ic) = MUL(i, 0, n-1, hmf(nth(t, i, 0), nthc(w, i), nthc(v, i))) * ic",

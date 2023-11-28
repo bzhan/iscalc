@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="content.content[0] === undefined">
+    <div v-if=" content.content !== undefined && content.content[0] === undefined">
       <a v-if="add_pos === undefined" href="#" v-on:click="add_pos = 0" title="add item" style="margin-left:10px">
         <v-icon name="plus"/>
       </a>
@@ -20,9 +20,21 @@
               <lable>level:</lable>
               <input v-model="header_level"/><br>
             </div>
+            <!-- goal of problem -->
             <div v-if="item_type === 'problem'">
               <ExprQuery :label="'expr_latex: '" v-model="problem_expr"></ExprQuery>
             </div>
+            <!-- fixes of problem -->
+            <div v-if="item_type === 'problem'">
+              <div v-for="(item, index) in problem_fixes" :key="index">
+                <ExprQuery :label="'var_'+index+': '" v-bind:value="item.var"
+                          @input="setProblemFixes(index, {'type':item.type, 'var':$event})"/><br/>
+                <ExprQuery :label="'type_'+index+': '" v-bind:value="item.type" 
+                          @input="setProblemFixes(index, {'type':$event, 'var':item.var})"/><br/>
+              </div>
+              <button v-on:click="problem_fixes.push({'type': undefined, 'var':undefined})">Add fixes</button>
+            </div>
+            <!-- conds of problem -->
             <div v-if="item_type === 'problem'">
               <div v-for="(cond, index) in problem_conds" :key="index">
                 <ExprQuery :label="'cond_'+index+': '" v-bind:value="cond" 
@@ -54,7 +66,7 @@
           <button v-if="item_type === 'definition'" style="margin:5px" v-on:click="add_definition(0)">Add</button>
           <button v-if="item_type === 'axiom'" style="margin:5px" v-on:click="add_axiom(0)">Add</button>
           <button style="margin:5px" v-on:click="add_pos = undefined">Cancel</button>
-        </div>
+      </div>
     </div>
     <div v-else>
       <div v-for="(item, idx) in content.content" :key="idx">
@@ -80,7 +92,7 @@
           </div>
         </div>
         <div v-else>
-          <div v-if="item.type == 'definition'" @click="selectItem(idx)">
+          <div v-if="item.type == 'definition'">
             <MathEquation v-bind:data="'\\(' + item.latex_str + '\\)'" class="indented-text"
               style="cursor:pointer"/>
             <a href="#" v-on:click="edit_header = true" title="edit" style="margin-left:10px">
@@ -90,7 +102,7 @@
               <v-icon name="plus"/>
             </a>
           </div>
-          <div v-if="item.type == 'problem'" @click="selectItem(idx)">
+          <div v-if="item.type == 'problem'">
             <MathEquation v-bind:data="'\\(' + item.latex_str + '\\)'" class="indented-text"
               v-on:click.native="openFile(item.path)"
               style="cursor:pointer"/>
@@ -108,7 +120,7 @@
               <v-icon name="plus"/>
             </a>
           </div>
-          <div v-if="item.type == 'axiom' || item.type == 'inequality'" @click="selectItem(idx)">
+          <div v-if="item.type == 'axiom' || item.type == 'inequality'">
             <MathEquation v-bind:data="'\\(' + item.latex_str + '\\)'" class="indented-text"/>
             <span v-if="'latex_conds' in item && item.latex_conds.length > 0">
               <span class="math-text indented-text">for &nbsp;</span>
@@ -124,7 +136,7 @@
               <v-icon name="plus"/>
             </a>
           </div>
-          <div v-if="item.type == 'table'" style="margin: 5px" @click="selectItem(idx)">
+          <div v-if="item.type == 'table'" style="margin: 5px">
             <table style="border-collapse: collapse">
               <tr>
                 <td style="border-style: solid; padding: 3px">
@@ -179,6 +191,16 @@
             <div v-if="item_type === 'problem'">
               <ExprQuery :label="'expr_latex: '" v-model="problem_expr"></ExprQuery>
             </div>
+            <!-- fixes of problem -->
+            <div v-if="item_type === 'problem'">
+              <div v-for="(item, index) in problem_fixes" :key="index">
+                <ExprQuery :label="'var_'+index+': '" v-bind:value="item.var"
+                          @input="setProblemFixes(index, {'type':item.type, 'var':$event})"/><br/>
+                <ExprQuery :label="'type_'+index+': '" v-bind:value="item.type" 
+                          @input="setProblemFixes(index, {'type':$event, 'var':item.var})"/><br/>
+              </div>
+              <button v-on:click="problem_fixes.push({'type': undefined, 'var':undefined})">Add fixes</button>
+            </div>
             <div v-if="item_type === 'problem'">
               <div v-for="(cond, index) in problem_conds" :key="index">
                 <ExprQuery :label="'cond_'+index+': '" v-bind:value="cond" 
@@ -186,6 +208,7 @@
               </div>
               <button v-on:click="problem_conds.push('')">Add condition</button>
             </div>
+
             <div v-if = "item_type === 'problem'">
               <label>path:</label>
               <input v-model="problem_path"/><br/>
@@ -229,6 +252,8 @@ export default {
   },
   data: function(){
     return {
+      axiom_category: undefined,
+      axiom_expr: undefined,
       edit_pos:undefined,
       selected_item:undefined,
       add_pos:undefined,
@@ -240,6 +265,7 @@ export default {
       is_next: undefined,
       problem_expr: undefined,
       problem_conds: [],
+      problem_fixes: [],
       problem_path: undefined,
       definition_expr: undefined,
     }
@@ -252,9 +278,11 @@ export default {
     openFile: function(name){
       this.$emit('open_file', name)
     },
+    /*
     selectItem: function(index) {
       this.$emit('select_book_item', index)
     },
+    */
     save_book: async function() {
       
       const data = {
@@ -293,6 +321,7 @@ export default {
     init_var: function() {
       this.add_pos = undefined
       this.problem_conds = []
+      this.problem_fixes = []
       this.problem_expr = undefined
       this.item_type = undefined
       this.definition_expr = undefined
@@ -328,7 +357,8 @@ export default {
             'expr': this.problem_expr,
             'conds': this.problem_conds,
             'path': this.problem_path,
-            'type': this.item_type
+            'type': this.item_type,
+            'fixes': this.problem_fixes
           },
           'filename': this.book_name,
           'index': pos
@@ -364,6 +394,9 @@ export default {
     },
     setProblemConds: function(index, value){
       this.$set(this.problem_conds, index, value)
+    },
+    setProblemFixes: function(index, item){
+      this.$set(this.problem_fixes, index, item)
     }
   },
   mounted() {

@@ -39,6 +39,9 @@
           <b-dropdown-item href="#" v-on:click="solveEquation">Solve equation</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="slagleAlgo">Try Slagle</b-dropdown-item>
         </b-nav-item-dropdown>
+        <b-nav-item-dropdown text="Matrix" left>
+          <b-dropdown-item href="#" v-on:click="applyRule('ExpandMatFunc')">Expand matrix functions</b-dropdown-item>
+        </b-nav-item-dropdown>
         <b-nav-item-dropdown text="Rewrite" left>
           <b-dropdown-item href="#" v-on:click="rewriteEquation" id="rewriteEquation">Rewriting</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="expandDefinition">Expand definition</b-dropdown-item>
@@ -127,8 +130,7 @@
     </div>
     <!-- Main panel for showing book content-->
     <div v-if="content.length == 0" id="problem">
-      <BookContent v-bind:content="book_content" :book_name="book_name" @open_file='openFile'
-       @select_book_item='selectBookItem'>
+      <BookContent v-bind:content="book_content" :book_name="book_name" @open_file='openFile' >
       </BookContent>
     </div>
     <div id="dialog">
@@ -253,6 +255,15 @@
              style="width:500px" disabled="disabled"
           @select="selectExpr"><br />
         &nbsp;<MathEquation v-bind:data="'\\(' + latex_selected_expr + '\\)'" class="indented-text"/><br/>
+
+        <div v-for="(item, idx) in fixes" :key="idx">
+          <ExprQuery :label="'var_'+idx+': '" v-bind:value="item.var"
+                    @input="setFixes(idx, {'type':item.type, 'var':$event})"/><br/>
+          <ExprQuery :label="'type_'+idx+': '" v-bind:value="item.type" 
+                    @input="setFixes(idx, {'type':$event, 'var':item.var})"/><br/>
+        </div>
+        <button v-on:click="fixes.push({'type': undefined, 'var':undefined})">Add fixes</button>
+
         <div class="math-text">Select theorem to apply:</div>
         <div v-for="(item, index) in theorems" :key="index"
              v-on:click="doApplyTheorem(index)" style="cursor:pointer">
@@ -420,6 +431,7 @@ export default {
       // Selected latex expression
       selected_expr: undefined,
       latex_selected_expr: undefined,
+      selected_subexpr: undefined,
       selected_loc: undefined,
 
       // List of identity rewrites for selected expression
@@ -443,6 +455,9 @@ export default {
 
       // add book
       new_book_name: "",
+      
+      //fixes of goal or theorem
+      fixes: [],
     }
   },
 
@@ -1073,7 +1088,8 @@ export default {
       const response = await axios.post("http://127.0.0.1:5000/api/query-latex-expr", JSON.stringify(data))
       if (response.data.status === 'ok') {
         this.latex_selected_expr = response.data.latex_expr,
-          this.selected_loc = response.data.loc
+        this.selected_loc = response.data.loc
+        this.selected_subexpr = response.data.expr
       }
     },
 
@@ -1190,7 +1206,8 @@ export default {
         book: this.book_name,
         file: this.filename,
         content: this.content,
-        cur_id: this.cur_id
+        cur_id: this.cur_id,
+        selected_item: this.selected_item
       }
       const response = await axios.post("http://127.0.0.1:5000/api/query-theorems", JSON.stringify(data))
       if (response.data.status == 'ok') {
@@ -1198,6 +1215,7 @@ export default {
         this.selected_expr = undefined
         this.latex_selected_expr = undefined
         this.r_query_mode = 'select theorem'
+        this.fixes = []
       }
     },
 
@@ -1212,7 +1230,9 @@ export default {
         rule: {
           name: "ApplyEquation",
           eq: this.theorems[index].eq,
-          loc: this.selected_loc
+          loc: this.selected_loc,
+          source: this.selected_subexpr,
+          eq_fixes: this.fixes
         }
       }
       const response = await axios.post("http://127.0.0.1:5000/api/perform-step", JSON.stringify(data))
@@ -1220,6 +1240,7 @@ export default {
         this.$set(this.content, this.cur_id, response.data.item)
         this.selected_item = response.data.selected_item
         this.r_query_mode = undefined
+        this.fixes = []
       }
     },
 
@@ -1411,6 +1432,10 @@ export default {
         this.selected_item = response.data.selected_item
         this.r_query_mode = undefined
       }
+    },
+
+    setFixes: function(index, item){
+      this.$set(this.fixes, index, item)
     }
   },
 

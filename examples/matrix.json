@@ -6,9 +6,14 @@
       ],
       "category": "matrix-power",
       "conds": [
-        "isSquare(A)",
         "a >= 0",
         "b >= 0"
+      ],
+      "fixes": [
+        ["n", "$int"],
+        ["A","$tensor($real, n, n)"],
+        ["a", "$int"],
+        ["b", "$int"]
       ],
       "expr": "A^(a+b) = A^a * A^b",
       "type": "axiom"
@@ -19,8 +24,12 @@
       ],
       "category": "matrix-power",
       "conds": [
-        "isSquare(A)",
         "a >= 0"
+      ],
+      "fixes":[
+        ["n", "$int"],
+        ["A", "$tensor($real, n, n)"],
+        ["a", "$int"]
       ],
       "expr": "A^(a+1) = A^a * A",
       "type": "axiom"
@@ -31,8 +40,12 @@
       ],
       "category": "matrix-power",
       "conds": [
-        "isSquare(A)",
         "a >= 0"
+      ],
+      "fixes":[
+        ["n", "$int"],
+        ["A", "$tensor($real, n, n)"],
+        ["a", "$int"]
       ],
       "expr": "A^(a+1) = A * A^a",
       "type": "axiom"
@@ -43,8 +56,12 @@
       ],
       "category": "matrix-power",
       "conds": [
-        "isSquare(A)",
         "a >= 0"
+      ],
+      "fixes":[
+        ["n", "$int"],
+        ["A", "$tensor($real, n, n)"],
+        ["a", "$int"]
       ],
       "expr": "A^a = A^(a-1) * A",
       "type": "axiom"
@@ -56,8 +73,12 @@
 
       "category": "matrix-power",
       "conds": [
-        "isSquare(A)",
         "a >= 0"
+      ],
+      "fixes":[
+        ["n", "$int"],
+        ["A", "$tensor($real, n, n)"],
+        ["a", "$int"]
       ],
       "expr": "A^a = A * A^(a-1)",
       "type": "axiom"
@@ -68,8 +89,9 @@
       ],
 
       "category": "matrix-power",
-      "conds": [
-        "isSquare(A)"
+      "fixes":[
+        ["n", "$int"],
+        ["A", "$tensor($real, n, n)"]
       ],
       "expr": "A^2 = A * A",
       "type": "axiom"
@@ -79,8 +101,10 @@
           "bidirectional"
       ],
       "category": "matrix-arith",
-      "conds": [
-        "type(A, 2)"
+      "fixes":[
+        ["n", "$int"],
+        ["m", "$int"],
+        ["A", "$tensor($real, m, n)"]
       ],
       "expr": "(x+y)*A = x * A + y * A",
       "type": "axiom"
@@ -90,10 +114,37 @@
           "bidirectional"
       ],
       "category": "matrix-arith",
-      "conds": [
-        "type(A, 2)"
+      "fixes":[
+        ["n", "$int"],
+        ["m", "$int"],
+        ["A", "$tensor($real, m, n)"]
       ],
       "expr": "(x-y)*A = x * A - y * A",
+      "type": "axiom"
+    },
+    {
+      "attributes": [
+          "bidirectional"
+      ],
+      "category": "matrix-arith",
+      "fixes":[
+        ["n", "$int"],
+        ["A", "$tensor($real, n, n)"],
+        ["y", "$int"]
+      ],
+      "expr": "(x*A)^y = x^y * A^y",
+      "type": "axiom"
+    },
+    {
+      "attributes": [
+          "bidirectional"
+      ],
+      "category": "matrix-arith",
+      "fixes":[
+        ["m", "$int"],
+        ["A", "$tensor($real, m, m)"]
+      ],
+      "expr": "exp(A) = SUM(n, 0, oo, A ^ n / factorial(n))",
       "type": "axiom"
     }
   ],

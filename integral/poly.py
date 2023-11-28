@@ -811,12 +811,12 @@ def simplify_scalar_multiply(e: expr.Expr, ctx:Context) -> expr.Expr:
     if e.is_times():
         a, b = e.args
         if not expr.is_matrix_type(a.type) and expr.is_matrix(b):
-            res_type = expr.MatrixType(expr.type_mapping[(b.type.args[0], a.type)],
+            res_type = expr.MatrixType(expr.type_mapping[(b.type.eleType, a.type)],
                                        expr.num_row(b.type),
                                        expr.num_col(b.type))
             return expr.Matrix([[from_poly(to_poly(a*item, ctx)) for item in r] for r in b.data], res_type)
         elif not expr.is_matrix_type(b.type) and expr.is_matrix(a):
-            res_type = expr.MatrixType(expr.type_mapping[(a.type.args[0], b.type)],
+            res_type = expr.MatrixType(expr.type_mapping[(a.type.eleType, b.type)],
                                        expr.num_row(a.type),
                                        expr.num_col(a.type))
             return expr.Matrix([[from_poly(to_poly(b * item, ctx)) for item in r] for r in a.data], res_type)
@@ -931,8 +931,8 @@ def simplify_trig(e: expr.Expr, ctx: Context) -> expr.Expr:
         return e
 
     a = e.args[0]
-    c = expr.Symbol('c', [expr.CONST])
-    d = expr.Symbol('d', [expr.CONST])
+    c = expr.Symbol('c', [expr.CONST], type=expr.RealType)
+    d = expr.Symbol('d', [expr.CONST], type=expr.RealType)
 
     # Find constant coefficient of a
     coeff = None

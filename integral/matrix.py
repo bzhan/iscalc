@@ -3,7 +3,6 @@ from typing import TypeGuard, Union
 from integral import expr, condprover
 from integral.context import Context
 from integral.expr import Matrix, Const, Expr
-from integral.poly import normalize
 
 
 """
@@ -226,20 +225,20 @@ def multiply(a: Matrix, b: Matrix, ctx: Context):
         for j in range(len(b.data[0])):
             for k in range(len(a.data[0])):
                 if k == 0:
-                    sum = normalize(expr.Op('*', a.data[i][k], b.data[k][j]), ctx)
+                    sum = expr.Op('*', a.data[i][k], b.data[k][j])
                 else:
-                    sum = normalize(expr.Op('+', sum, a.data[i][k] * b.data[k][j]), ctx)
+                    sum = expr.Op('+', sum, a.data[i][k] * b.data[k][j])
             tmp.append(sum)
         res.append(tmp)
     if all(all(not expr.is_matrix_type(ele.type) for ele in rv) for rv in res):
         return Matrix(res)
     elif all(all(expr.is_matrix_type(ele.type) for ele in rv) for rv in res):
         for idx, item in enumerate(res[0]):
-            col = normalize(expr.num_col(res[0][idx].type), ctx) if idx==0 \
-                else normalize(col + expr.num_col(res[0][idx].type), ctx)
+            col = expr.num_col(res[0][idx].type) if idx==0 \
+                else col + expr.num_col(res[0][idx].type)
         for idx, item in enumerate(res):
-            row = normalize(expr.num_row(res[idx][0].type), ctx) if idx==0 \
-                else normalize(row + expr.num_row(res[idx][0].type), ctx)
+            row = expr.num_row(res[idx][0].type) if idx==0 \
+                else row + expr.num_row(res[idx][0].type)
         type = expr.MatrixType(expr.RealType, row, col)
         return Matrix(res, type)
     else:
@@ -254,7 +253,7 @@ def add(a: Expr, b: Expr, ctx: Context):
     res = [[Const(0) for j in range(len(a.data[0]))] for i in range(len(a.data))]
     for i in range(len(a.data)):
         for j in range(len(a.data[0])):
-            res[i][j] = normalize(res[i][j]+a.data[i][j]+b.data[i][j],ctx)
+            res[i][j] = res[i][j]+a.data[i][j]+b.data[i][j]
     return Matrix(res)
 
 def minus(a: Expr, b: Expr, ctx: Context):
@@ -266,7 +265,7 @@ def minus(a: Expr, b: Expr, ctx: Context):
     res = [[Const(0) for j in range(len(a.data[0]))] for i in range(len(a.data))]
     for i in range(len(a.data)):
         for j in range(len(a.data[0])):
-            res[i][j] = normalize(res[i][j] + a.data[i][j] - b.data[i][j], ctx)
+            res[i][j] = res[i][j] + a.data[i][j] - b.data[i][j]
     return Matrix(res)
 
 def unit_matrix(dim: int) -> Matrix:
@@ -321,61 +320,3 @@ def hat(e: Expr) -> Expr:
 
 def unfold_matrix(e: Expr, r: int, c: int) -> Expr:
     return Matrix([[expr.Fun("nth", e, Const(i), Const(j)) for j in range(c)] for i in range(r)], e.type)
-
-
-# def is_skew(m:Matrix, ctx:Context):
-#     if not isinstance(m, Matrix):
-#         return False
-#     # a.transpose == -a
-#     return normalize(m, ctx) == normalize(Matrix.scalar_mul(Const(-1), m.transpose()), ctx)
-#
-# def matrix_exp(m:Matrix, t:Expr, ctx:Context):
-#     # t is a scalar
-#     # determine whether self is an instance of se(3) or skew-matrices
-#     # assert m.is_se3() or m.is_skew()
-#     dim = m.shape[0]
-#     m = normalize(m, ctx)
-#     if m.is_se3():
-#         twist = m.vee
-#         v = twist.get_line_velocity()
-#         w = twist.get_angle_velocity()
-#         part2 = Matrix([Const(0), Const(0), Const(0), Const(1)], is_column=False)
-#         if w != Matrix.zero(3, is_column=True):
-#             # formula 2.36 at page 42
-#             left_top = matrix_exp(w.hat, t, ctx)
-#             right_top = (Matrix.unit_matrix(3) - left_top) * (w.hat * v) + \
-#                          Matrix.scalar_mul(t, w * w.t * v)
-#             part1 = left_top.concatenate(right_top)
-#         else:
-#             # formula 2.32 at page 41
-#             part1 = Matrix.unit_matrix(3).concatenate(Matrix.scalar_mul(t, v))
-#         return normalize(part1.concatenate(part2, col_concatenate=False), ctx)
-#     elif is_skew(m, ctx):
-#         # Rodrigues Formula
-#         # Derivation: https://zhuanlan.zhihu.com/p/369659467
-#         # exp(self * t) = I + sin(t) * self + (1-cos(t)) * self * self
-#         res = Matrix.unit_matrix(dim) + Matrix.scalar_mul(Fun('sin', t), m) + \
-#                Matrix.scalar_mul((Const(1) - Fun('cos', t)), m * m)
-#         return normalize(res, ctx)
-#     else:
-#         raise NotImplementedError
-#
-# def compute_jacobian(t:List[Matrix], gsl:List[Matrix], theta:List[Expr], n:int, ctx:Context) -> Matrix:
-#     r = FullSimplify()
-#     jsl = [0 for i in range(n)]
-#     for i in range(n):
-#         jsl[i] = []
-#         tmp = None
-#         for j in range(n):
-#             if j > i:
-#                 tmp = Matrix.zero(6)
-#             else:  # j<=i
-#                 tmp = Matrix.unit_matrix(4)
-#                 for k in range(j, i + 1):
-#                     tmp = tmp * matrix_exp(t[k].hat, theta[k], ctx)
-#                 tmp = tmp * gsl[i]
-#                 tmp = tmp.adjoint(inverse=True)
-#                 tmp = tmp * t[j]
-#             jsl[i].append(tmp.data)
-#         jsl[i] = normalize(Matrix((n, 6), jsl[i]).t,ctx)
-#     return jsl

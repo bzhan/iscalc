@@ -376,21 +376,25 @@ class Context:
 
     def extend_by_item(self, item):
         if item['type'] == 'axiom' or item['type'] == 'problem':
-            e = parser.parse_expr(item['expr'])
+            fixes = dict()
+            if 'fixes' in item:
+                for name, type in item['fixes']:
+                    fixes[name] = parser.parse_expr(type, fixes=fixes)
+            e = parser.parse_expr(item['expr'], fixes=fixes)
             if e.is_equals() and expr.is_indefinite_integral(e.lhs):
                 self.add_indefinite_integral(e)
             elif e.is_equals() and expr.is_integral(e.lhs):
                 conds = Conditions()
                 if 'conds' in item:
                     for cond in item['conds']:
-                        conds.add_condition(parser.parse_expr(cond))
+                        conds.add_condition(parser.parse_expr(cond, fixes=fixes))
                 self.add_definite_integral(e, conds)
             elif 'category' in item and item['category'] == 'summation-split':
                 conds = Conditions()
                 if 'conds' in item:
                     for c in item['conds']:
-                        conds.add_condition(parser.parse_expr(c))
-                split_cond = parser.parse_expr(item['split-cond'])
+                        conds.add_condition(parser.parse_expr(c, fixes=fixes))
+                split_cond = parser.parse_expr(item['split-cond'], fixes=fixes)
                 self.add_summation_split_identities(e, conds, split_cond)
             elif e.is_equals() and not expr.is_summation(e.lhs) and expr.is_summation(e.rhs):
                 self.add_series_expansion(e)
@@ -398,14 +402,14 @@ class Context:
                     conds = Conditions()
                     if 'conds' in item:
                         for c in item['conds']:
-                            conds.add_condition(parser.parse_expr(c))
+                            conds.add_condition(parser.parse_expr(c, fixes=fixes))
                     self.add_lemma(e, conds)
             elif e.is_equals() and expr.is_summation(e.lhs) and not expr.is_summation(e.rhs):
                 if item['type'] == 'problem':
                     conds = Conditions()
                     if 'conds' in item:
                         for c in item['conds']:
-                            conds.add_condition(parser.parse_expr(c))
+                            conds.add_condition(parser.parse_expr(c, fixes=fixes))
                     self.add_lemma(e, conds)
                 else:
                     self.add_series_evaluation(e)
@@ -413,13 +417,13 @@ class Context:
                 conds = Conditions()
                 if 'conds' in item:
                     for c in item['conds']:
-                        conds.add_condition(parser.parse_expr(c))
+                        conds.add_condition(parser.parse_expr(c, fixes=fixes))
                 self.add_other_identities(e, item['category'], item.get('attributes'), conds)
             elif e.is_equals() and item['type'] == 'problem':
                 conds = Conditions()
                 if 'conds' in item:
                     for c in item['conds']:
-                        conds.add_condition(parser.parse_expr(c))
+                        conds.add_condition(parser.parse_expr(c, fixes=fixes))
                 self.add_lemma(e, conds)
         if 'attributes' in item and 'simplify' in item['attributes']:
             e = parser.parse_expr(item['expr'])
@@ -436,14 +440,18 @@ class Context:
                     conds.add_condition(parser.parse_expr(cond))
             self.add_inequality(e, conds)
         if item['type'] == 'definition':
-            e = parser.parse_expr(item['expr'])
+            fixes = dict()
+            if 'fixes' in item:
+                for name, type in item['fixes']:
+                    fixes[name] = parser.parse_expr(type, fixes=fixes)
+            e = parser.parse_expr(item['expr'], fixes=fixes)
             conds = Conditions()
             if 'conds' in item:
                 for cond in item['conds']:
-                    conds.add_condition(parser.parse_expr(cond))
+                    conds.add_condition(parser.parse_expr(cond, fixes=fixes))
             self.add_definition(e, conds)
-            if 'func_type' in item and expr.is_fun(e.lhs):
-                self.fixes[e.lhs.func_name] = parser.parse_expr(item['func_type'])
+            if expr.is_fun(e.lhs):
+                self.fixes[e.lhs.func_name] = e.lhs.func_type
         if item['type'] == 'table':
             self.add_function_table(item['name'], item['table'])
 

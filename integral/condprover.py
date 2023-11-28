@@ -8,6 +8,7 @@ from integral.expr import Expr, eval_expr, match, expr_to_pattern, Op, Const, Va
 from integral.conditions import Conditions
 from integral.context import Context, Identity
 from integral.parser import parse_expr
+from integral.poly import normalize
 
 
 def subject_of(cond: Expr) -> Expr:
@@ -276,17 +277,17 @@ def saturate_expr(e: Expr, ineq: Identity, all_conds: Dict[Expr, List[Expr]], ct
                 res = check_cond(cond.inst_pat(inst), all_conds, inst)
                 new_list.extend(res)
             old_list = new_list
-        for inst in old_list:
-            res = ineq.expr.inst_pat(inst)
-            if res.is_compare():
-                from integral.poly import normalize
-                res = Op(res.op, res.args[0], normalize(res.args[1], ctx))
-            if check_cond(res, all_conds, inst) == [inst]:
-                continue  # already exists
+        for mapping in old_list:
+            res = ineq.expr.inst_pat(mapping)
+            res_norm = Op(res.op ,res.args[0], normalize(res.args[1], ctx)) if res.is_compare() else res
+            # if check_cond(res, all_conds, mapping) == [mapping]:
+            #     continue
             if e not in all_conds:
                 all_conds[e] = list()
             if res not in all_conds[e]:
                 all_conds[e].append(res)
+            if res_norm not in all_conds[e]:
+                all_conds[e].append(res_norm)
     return
 
 def saturate_once(e: Expr, ineqs: List[Identity], all_conds: Dict[Expr, List[Expr]], ctx: Context):
@@ -331,6 +332,7 @@ def get_standard_inequalities() -> List[Identity]:
     data = [
         # Addition
         (["c > 0"], "a + c > a"),
+        (["a > 0"], "a + c > c"),
         (["a > b"], "a + c > b + c"),
         (["a > b"], "c + a > c + b"),
         (["a < b"], "a + c < b + c"),
@@ -347,6 +349,7 @@ def get_standard_inequalities() -> List[Identity]:
         (["a < b", "c <= d"], "a + c < b + d"),
         (["a >= b", "c >= d"], "a + c >= b + d"),
         (["a <= b", "c <= d"], "a + c <= b + d"),
+        ([], "a + b = b + a"),
 
         # Unary minus
         (["x > a"], "-x < -a"),
@@ -480,10 +483,12 @@ def get_standard_inequalities() -> List[Identity]:
         (["isInt(a)", "isInt(b)"], "isInt(a + b)"),
         (["isInt(a)", "isInt(b)"], "isInt(a - b)"),
         (["isInt(a)", "isInt(b)"], "isInt(a * b)"),
-        (["type(a, 1)", "a > b"], "a >= b+1"),
 
-        (["a>=b", "a!=b"], "a>b"),
-        (["a<=b", "a!=b"], "a<b")
+        (["a > 0"], "a != 0"),
+        (["a < 0"], "a != 0"),
+        (["a >= b", "a != b"], "a > b"),
+        (["a <= b", "a != b"], "a < b"),
+        (["a = b", "a > c"], "b > c"),
     ]
 
     ineqs = []

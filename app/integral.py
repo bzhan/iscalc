@@ -121,7 +121,6 @@ def integral_load_book_content():
 @app.route("/api/save-func-table", methods=['POST'])
 def save_func_table():
     data = json.loads(request.get_data().decode('utf-8'))
-    print(data, flush=True)
     label, table, book_name = data['label'], data['table'], data['book']
     book_path = os.path.join(dirname, "../examples/" + book_name + '.json')
     with open(book_path, 'r', encoding='utf-8') as f:
@@ -156,7 +155,6 @@ def save_func_table():
 def delete_func_table_item():
     data = json.loads(request.get_data().decode('utf-8'))
     label, selected_items, book_name = data['label'], data['selected_items'], data['book']
-    print(label, selected_items, book_name, flush=True)
     book_path = os.path.join(dirname, "../examples/" + book_name + '.json')
     with open(book_path, 'r', encoding='utf-8') as f:
         book_content = json.load(f)
@@ -185,7 +183,6 @@ def delete_func_table_item():
 @app.route("/api/integral-book-add-item", methods=['POST'])
 def book_add_item():
     data = json.loads(request.get_data().decode('utf-8'))
-    print(data, flush=True)
     book_path = os.path.join(dirname, "../examples/" + data['filename'] + '.json')
     index = data['index']
     item = data['item']
@@ -201,9 +198,13 @@ def book_add_item():
                 problem = json.load(f)
             for i in problem['content']:
                 problem_file.add_item(compstate.parse_item(problem_file, i))
-
-        problem_file.add_goal(integral.parser.parse_expr(item['expr']), \
-                            conds=[integral.parser.parse_expr(cond) for cond in item['conds']])
+        raw_fixes = item['fixes']
+        fixes = dict()
+        for fix in raw_fixes:
+            fixes[fix['var']] = parser.parse_expr(fix['type'], fixes=fixes)
+        goal = integral.parser.parse_expr(item['expr'], fixes=fixes)
+        conds = [integral.parser.parse_expr(cond, fixes=fixes) for cond in item['conds']]
+        problem_file.add_goal(goal,conds=conds, fixes = fixes)
         with open(problem_path, 'w', encoding='utf-8') as f:
             json.dump(problem_file.export(), f, indent=4, ensure_ascii=False, sort_keys=True)
     with open(book_path, 'w', encoding='utf-8') as f:
@@ -228,7 +229,6 @@ def integral_open_file():
 @app.route("/api/integral-save-book-item", methods=['POST'])
 def integral_save_book_item():
     data = json.loads(request.get_data().decode('utf-8'))
-    print(data, flush=True)
     book_path = os.path.join(dirname, "../examples/" + data['filename'] + '.json')
     index = data['index']
     item = data['item']
@@ -703,15 +703,12 @@ def integral_query_theorems():
     label = compstate.Label(data['selected_item'])
     st: compstate.StateItem = file.content[cur_id]
     subitem = st.get_by_label(label)
-    # print(type(subitem), flush=True)
-    # print(subitem.ctx.get_conds(), flush=True)
     for cond in subitem.ctx.get_conds().data:
         if cond.is_equals():
             eqs.append({
                 'eq': str(cond),
                 'latex_eq': integral.latex.convert_expr(cond)
             })
-    # print(eqs, flush=True)
     return jsonify({
         "status": "ok",
         "theorems": eqs

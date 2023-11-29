@@ -126,8 +126,10 @@ class FuncDef(StateItem):
         }
         if self.conds.data:
             res["conds"] = self.conds.export()
+
         if self.fixes.items() is not []:
             res["fixes"] = [[a, str(b)] for a, b in self.fixes.items()]
+
         return res
 
     def export_book(self):
@@ -1177,9 +1179,13 @@ def parse_goal(parent, item, ih=None) -> Goal:
 
 def parse_item(parent, item) -> StateItem:
     if item['type'] == 'FuncDef':
-        conds = parse_conds(item)
-        eq = parser.parse_expr(item['eq'])
-        return FuncDef(parent, parent.ctx, eq, conds=conds)
+        fixes = dict()
+        if 'fixes' in item:
+            for name, type_s in item['fixes']:
+                fixes[name] = parser.parse_expr(type_s, fixes=fixes)
+        conds = parse_conds(item, fixes=fixes)
+        eq = parser.parse_expr(item['eq'], fixes=fixes)
+        return FuncDef(parent, parent.ctx, eq, conds=conds, fixes=fixes)
     elif item['type'] == 'CalculationProof':
         fixes = parent.ctx.get_fixes()
         goal = parser.parse_expr(item['goal'], fixes=fixes)

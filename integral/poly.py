@@ -795,8 +795,8 @@ def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
                 return res
 
     if expr.is_matrix(e):
-        a = expr.Symbol('a', [expr.VAR, expr.CONST, expr.OP, expr.FUN])
-        b = expr.Symbol('b', [expr.VAR, expr.CONST, expr.OP, expr.FUN])
+        a = expr.Symbol('a', [expr.VAR, expr.CONST, expr.OP, expr.FUN], type=expr.IntType)
+        b = expr.Symbol('b', [expr.VAR, expr.CONST, expr.OP, expr.FUN], type=expr.IntType)
         pat_data = [[expr.Fun('unit_matrix', a), expr.Fun('zero_matrix', a, b)],
                     [expr.Fun('zero_matrix', b, a), expr.Fun('unit_matrix', b)]]
         pat = expr.Matrix(pat_data)

@@ -294,20 +294,23 @@ class MatrixTest(unittest.TestCase):
 
     def testTwistMatrixExpInv(self):
         file = compstate.CompFile("MIRM", "twist_matrix_exp_inv")
-        fixes = file.ctx.get_fixes()
+        fixes = dict()
         fixes['R'] = parser.parse_expr('$tensor($real, 3, 3)')
         fixes['p'] = parser.parse_expr('$tensor($real, 3, 1)')
+        fixes['hm'] = parser.parse_expr("$fun($tensor($real, 3, 3), $tensor($real,3, 1), $tensor($real,4,4))")
         file.add_definition("hm(R, p) = rcon(ccon(R,p), ccon(zero_matrix(1,3),unit_matrix(1)))", fixes=fixes)
-        fixes = file.ctx.get_fixes()
+        fixes = dict()
         fixes['t'] = parser.parse_expr('$real')
         fixes['w'] = parser.parse_expr("$tensor($real, 3, 1)")
         fixes['v'] = parser.parse_expr("$tensor($real, 3, 1)")
+        fixes['hm'] = parser.parse_expr("$fun($tensor($real, 3, 3), $tensor($real,3, 1), $tensor($real,4,4))")
         file.add_definition("hmf(t, w, v) = hm(unit_matrix(3), t*v)",
                             conds=['norm(w)=0'], fixes=fixes)
-        fixes = file.ctx.get_fixes()
+        fixes = dict()
         fixes['t'] = parser.parse_expr('$real')
         fixes['w'] = parser.parse_expr("$tensor($real, 3, 1)")
         fixes['v'] = parser.parse_expr("$tensor($real, 3, 1)")
+        fixes['hm'] = parser.parse_expr("$fun($tensor($real, 3, 3), $tensor($real,3, 1), $tensor($real,4,4))")
         file.add_definition("hmf(t, w, v) = hm(exp(t*hat(w)), (unit_matrix(3)-exp(t*hat(w)))*(hat(w)*v)+(w*T(w)*v*t))",
                             conds=['norm(w)=1'], fixes=fixes)
         goal01 = file.add_goal("exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3)", fixes=fixes, conds=["norm(w)=1"])
@@ -359,7 +362,7 @@ class MatrixTest(unittest.TestCase):
         s2 = calc.parse_expr("1")
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         calc.perform_rule(rules.FullSimplify())
-
+        assert goal01.is_finished()
         fixes = dict()
         fixes['w'] = parser.parse_expr('$tensor($real, 3, 1)')
         fixes['n'] = parser.parse_expr("$int")
@@ -432,6 +435,7 @@ class MatrixTest(unittest.TestCase):
         source = calc.parse_expr("exp(t * hat(w)) * w")
         calc.perform_rule(rules.ApplyEquation(goal03.goal, source))
         calc.perform_rule(rules.FullSimplify())
+        assert goal04.is_finished()
         fixes = dict()
         fixes['w'] = parser.parse_expr('$tensor($real, 3, 1)')
         fixes['v'] = parser.parse_expr('$tensor($real, 3, 1)')
@@ -444,6 +448,7 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '0'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '1'))
         calc.perform_rule(rules.FullSimplify())
+        assert goal05.is_finished()
         self.checkAndOutput(file)
 
 
@@ -454,7 +459,7 @@ class MatrixTest(unittest.TestCase):
         fixes['v'] = parser.parse_expr("$tensor($real, 3, 1)")
         fixes['twist'] = parser.parse_expr("$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))")
         file.add_definition("twist(w, v) = hat(rcon(w, v))", fixes = fixes)
-        fixes = file.ctx.get_fixes()
+        fixes = dict()
         fixes['w'] = parser.parse_expr("$tensor($real, 3, 1)")
         fixes['v'] = parser.parse_expr("$tensor($real, 3, 1)")
         fixes['hmf'] = parser.parse_expr("$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))")
@@ -476,7 +481,8 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.Equation(s, t))
         calc.perform_rule(rules.FullSimplify())
         assert goal01.is_finished()
-        fixes = file.ctx.get_fixes()
+        fixes = dict()
+        fixes['t'] = parser.parse_expr("$real")
         fixes['w'] = parser.parse_expr("$tensor($real, 3, 1)")
         lemma = file.add_goal("(D t. exp(t * hat(w))) = hat(w)*exp(t*hat(w))",
                              conds=["norm(w)=1"], fixes=fixes)
@@ -511,7 +517,7 @@ class MatrixTest(unittest.TestCase):
         t = calc.parse_expr("hat(w)^2")
         calc.perform_rule(rules.ApplyIdentity(s, t))
         assert lemma.is_finished()
-        fixes = file.ctx.get_fixes()
+        fixes = dict()
         fixes['w'] = parser.parse_expr("$tensor($real, 3, 1)")
         fixes['v'] = parser.parse_expr("$tensor($real, 3, 1)")
         fixes['hmf'] = parser.parse_expr(
@@ -573,29 +579,33 @@ class MatrixTest(unittest.TestCase):
         fixes['hmf'] = parser.parse_expr(
             "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))", fixes=fixes)
 
-        s = "$fun($tensor($real, n, 1),$int, $tensor($real, 3, n),$tensor($real, 3, n),$tensor($real, 4, 4),$tensor($real, 4, 4))"
+        s = "$fun($tensor($real, n, 1),$int, $tensor($real, 3, n),$tensor($real, 3, n),$tensor($real, 4, 4)," \
+            "$tensor($real, 4, 4)) "
         fixes['gst'] = parser.parse_expr(s, fixes=fixes)
-        file.add_definition(d, conds=conds, fixes = fixes)
-        fixes = file.ctx.get_fixes()
+        file.add_definition(d, conds=conds, fixes=fixes)
+        fixes = dict()
         fixes['n'] = parser.parse_expr('$int')
         fixes['t'] = parser.parse_expr("$tensor($real, n, 1)", fixes=fixes)
         fixes['w'] = parser.parse_expr("$tensor($real, 3, n)", fixes=fixes)
         fixes['v'] = parser.parse_expr("$tensor($real, 3, n)", fixes=fixes)
         fixes['ic'] = parser.parse_expr("$tensor($real, 4, 4)", fixes=fixes)
-        fixes['hmf'] = parser.parse_expr("$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))", fixes=fixes)
+        fixes['hmf'] = parser.parse_expr(
+            "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))", fixes=fixes)
 
         g = "(inv(ic) * MUL(i, 0, n-1, hmf(-nth(t, n-i-1, 0), nthc(w, n-i-1), nthc(v, n-i-1))))*\
-        gst(t, n, w, v, ic) = unit_matrix(4)"
-        conds = ["n>=1"] #"isColumnOrthogonalMatrix(w)"
+                gst(t, n, w, v, ic) = unit_matrix(4)"
+        conds = ["n>=1"]  # "isColumnOrthogonalMatrix(w)"
         goal01 = file.add_goal(g, fixes=fixes, conds=conds)
         cases = goal01.proof_by_induction(induct_var='n', start=1)
         proof = cases.base_case.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('gst'), '1'))
-        s = calc.parse_expr("inv(ic) * hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * (hmf(nth(t,0,0),nthc(w,0),nthc(v,0)) * ic) ")
-        t = calc.parse_expr("inv(ic) * (hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))) * ic")
+        s = calc.parse_expr(
+            "inv(ic) * hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * (hmf(nth(t,0,0),nthc(w,0),nthc(v,0)) * ic) ")
+        t = calc.parse_expr(
+            "inv(ic) * (hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))) * ic")
         calc.perform_rule(rules.Equation(s, t))
-        eq = calc.parse_expr("hmf(-t, w, v) * hmf(t, w, v) = unit_matrix(4)", fixes={'t':expr.RealType})
+        eq = calc.parse_expr("hmf(-t, w, v) * hmf(t, w, v) = unit_matrix(4)", fixes={'t': expr.RealType})
         s = calc.parse_expr("hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))")
         calc.perform_rule(rules.ApplyEquation(eq, s))
         calc.perform_rule(rules.FullSimplify())
@@ -608,29 +618,38 @@ class MatrixTest(unittest.TestCase):
         cond = calc.parse_expr("i=0")
         calc.perform_rule(rules.OnLocation(rules.SplitItem(cond), '1.0'))
         calc.perform_rule(rules.FullSimplify())
-        s = calc.parse_expr("inv(ic) * MUL(j, 0, n - 1, hmf(-nth(t,-j + n,0),nthc(w,-j + n),nthc(v,-j + n))) * hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0)) * MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j))) * ic")
-        t = calc.parse_expr("inv(ic) * MUL(j, 0, n - 1, hmf(-nth(t,-j + n,0),nthc(w,-j + n),nthc(v,-j + n))) * (hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))) * MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j))) * ic")
+        s = calc.parse_expr(
+            "inv(ic) * MUL(j, 0, n - 1, hmf(-nth(t,-j + n,0),nthc(w,-j + n),nthc(v,-j + n))) * hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0)) * MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j))) * ic")
+        t = calc.parse_expr(
+            "inv(ic) * MUL(j, 0, n - 1, hmf(-nth(t,-j + n,0),nthc(w,-j + n),nthc(v,-j + n))) * (hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))) * MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j))) * ic")
         calc.perform_rule(rules.Equation(s, t))
-        fixes=dict()
+        fixes = dict()
         fixes['t'] = expr.RealType
         fixes['w'] = parser.parse_expr("$tensor($real, 3, 1)")
         fixes['v'] = parser.parse_expr("$tensor($real, 3, 1)")
-        eq = calc.parse_expr("hmf(-t, w, v) * hmf(t, w, v) = unit_matrix(4)", fixes = fixes)
+        eq = calc.parse_expr("hmf(-t, w, v) * hmf(t, w, v) = unit_matrix(4)", fixes=fixes)
         s = calc.parse_expr("hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))")
         calc.perform_rule(rules.ApplyEquation(eq, s))
 
         calc.perform_rule(rules.FullSimplify())
         s = calc.parse_expr("MUL(j, 0, n - 1, hmf(-nth(t,-j + n, 0),nthc(w,-j + n),nthc(v,-j + n)))")
-        t = calc.parse_expr("MUL(j, 0, n-1, hmf(-nth(choose_row(t, 1, n),n-j-1, 0), nthc(choose_col(w,1,n), n-j-1), nthc(choose_col(v, 1, n), n-j-1)))")
+        t = calc.parse_expr(
+            "MUL(j, 0, n-1, hmf(-nth(choose_row(t, 1, n),n-j-1, 0), nthc(choose_col(w,1,n), n-j-1), nthc(choose_col(v, 1, n), n-j-1)))")
         calc.perform_rule(rules.RewriteMatrixMul(s, t))
         s = calc.parse_expr("MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j)))")
-        t = calc.parse_expr("MUL(j, 0, n-1, hmf(nth(choose_row(t, 1, n),j, 0), nthc(choose_col(w,1, n), j), nthc(choose_col(v, 1, n), j)))")
+        # choose_row: choose row from 1 to n of t to make a new matrix
+        t = calc.parse_expr(
+            "MUL(j, 0, n-1, hmf(nth(choose_row(t, 1, n),j, 0), nthc(choose_col(w,1, n), j), nthc(choose_col(v, 1, n), j)))")
         calc.perform_rule(rules.RewriteMatrixMul(s, t))
-        s = calc.parse_expr("inv(ic) * MUL(j, 0, n - 1, hmf(-nth(choose_row(t,1,n),n - j - 1,0),nthc(choose_col(w,1,n),n - j - 1),nthc(choose_col(v,1,n),n - j - 1))) * MUL(j, 0, n - 1, hmf(nth(choose_row(t,1,n),j,0),nthc(choose_col(w,1,n),j),nthc(choose_col(v,1,n),j))) * ic")
-        t = calc.parse_expr("inv(ic) * MUL(j, 0, n - 1, hmf(-nth(choose_row(t,1,n),n - j - 1,0),nthc(choose_col(w,1,n),n - j - 1),nthc(choose_col(v,1,n),n - j - 1))) * (MUL(j, 0, n - 1, hmf(nth(choose_row(t,1,n),j,0),nthc(choose_col(w,1,n),j),nthc(choose_col(v,1,n),j))) * ic)")
+        s = calc.parse_expr(
+            "inv(ic) * MUL(j, 0, n - 1, hmf(-nth(choose_row(t,1,n),n - j - 1,0),nthc(choose_col(w,1,n),n - j - 1),nthc(choose_col(v,1,n),n - j - 1))) * MUL(j, 0, n - 1, hmf(nth(choose_row(t,1,n),j,0),nthc(choose_col(w,1,n),j),nthc(choose_col(v,1,n),j))) * ic")
+        t = calc.parse_expr(
+            "inv(ic) * MUL(j, 0, n - 1, hmf(-nth(choose_row(t,1,n),n - j - 1,0),nthc(choose_col(w,1,n),n - j - 1),nthc(choose_col(v,1,n),n - j - 1))) * (MUL(j, 0, n - 1, hmf(nth(choose_row(t,1,n),j,0),nthc(choose_col(w,1,n),j),nthc(choose_col(v,1,n),j))) * ic)")
         calc.perform_rule(rules.Equation(s, t))
         calc.perform_rule(rules.OnLocation(rules.FoldDefinition('gst'), '1'))
         calc.perform_rule(rules.ApplyInductHyp())
+        print(goal01)
+        assert goal01.is_finished()
         self.checkAndOutput(file)
 
 if __name__ == "__main__":

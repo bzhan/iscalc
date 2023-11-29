@@ -1,17 +1,21 @@
 {
     "content": [
         {
-            "conds": [
-                {
-                    "cond": "type(w,0,3)",
-                    "latex_cond": "type(w,0,3)"
-                },
-                {
-                    "cond": "type(v,0,3)",
-                    "latex_cond": "type(v,0,3)"
-                }
-            ],
             "eq": "twist(w,v) = hat(rcon(w,v))",
+            "fixes": [
+                [
+                    "w",
+                    "$tensor($real, 3, 1)"
+                ],
+                [
+                    "v",
+                    "$tensor($real, 3, 1)"
+                ],
+                [
+                    "twist",
+                    "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"
+                ]
+            ],
             "latex_eq": "twist(w,v) = hat({rcon(w,v)})",
             "latex_lhs": "twist(w,v)",
             "type": "FuncDef"
@@ -26,20 +30,20 @@
             "finished": true,
             "fixes": [
                 [
-                    "hmf",
-                    "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
-                ],
-                [
-                    "twist",
-                    "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
-                ],
-                [
                     "w",
                     "$tensor($real, 3, 1)"
                 ],
                 [
                     "v",
                     "$tensor($real, 3, 1)"
+                ],
+                [
+                    "hmf",
+                    "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                ],
+                [
+                    "twist",
+                    "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"
                 ]
             ],
             "goal": "(D t. hmf(t,w,v)) = twist(w,v) * hmf(t,w,v)",
@@ -175,12 +179,8 @@
             "finished": true,
             "fixes": [
                 [
-                    "hmf",
-                    "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
-                ],
-                [
-                    "twist",
-                    "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                    "t",
+                    "$real"
                 ],
                 [
                     "w",
@@ -349,20 +349,20 @@
             "finished": true,
             "fixes": [
                 [
-                    "hmf",
-                    "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
-                ],
-                [
-                    "twist",
-                    "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
-                ],
-                [
                     "w",
                     "$tensor($real, 3, 1)"
                 ],
                 [
                     "v",
                     "$tensor($real, 3, 1)"
+                ],
+                [
+                    "hmf",
+                    "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                ],
+                [
+                    "twist",
+                    "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"
                 ]
             ],
             "goal": "(D t. hmf(t,w,v)) = twist(w,v) * hmf(t,w,v)",

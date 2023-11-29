@@ -1522,13 +1522,23 @@ class Fun(Expr):
                 a, b, c = self.args
                 self.func_type = FunType(a.type, IntType, IntType, RealType)
             elif self.func_name == 'nthc':
-                try:
-                    m, mt = self.args[0], self.args[0].type
-                    cth = self.args[1]
-                    self.type = TensorType(mt.args[0], num_row(mt), Const(1))
-                    self.func_type = FunType(mt, cth.type, self.type)
-                except:
-                    pass
+                m, t = self.args[0], self.args[0].type
+                assert m.type.name == 'tensor', str(m)
+                ct = self.args[1].type
+                self.type = TensorType(t.eleType, t.row, Const(1))
+                self.func_type = FunType(t, ct, self.type)
+            elif self.func_name == 'choose_col':
+                m, start, end = self.args
+                t = m.type
+                assert is_matrix_type(t)
+                self.type = TensorType(t.eleType, t.row, end-start+1)
+                self.func_type = FunType(m.type, start.type, end.type, self.type)
+            elif self.func_name == 'choose_row':
+                m, start, end = self.args
+                t = m.type
+                assert is_matrix_type(t)
+                self.type = TensorType(t.eleType, end-start+1, t.col)
+                self.func_type = FunType(m.type, start.type, end.type, self.type)
 
         else:
             self.func_name, self.func_type = func_name

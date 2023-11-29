@@ -1,17 +1,21 @@
 {
     "content": [
         {
-            "conds": [
-                {
-                    "cond": "type(R,0,3,3)",
-                    "latex_cond": "type{(R,0,3,3)}"
-                },
-                {
-                    "cond": "type(p,0,3)",
-                    "latex_cond": "type(p,0,3)"
-                }
-            ],
             "eq": "hm(R,p) = rcon(ccon(R,p),ccon(zero_matrix(1,3),unit_matrix(1)))",
+            "fixes": [
+                [
+                    "R",
+                    "$tensor($real, 3, 3)"
+                ],
+                [
+                    "p",
+                    "$tensor($real, 3, 1)"
+                ],
+                [
+                    "hm",
+                    "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                ]
+            ],
             "latex_eq": "hm(R,p) = rcon(ccon(R,p),ccon(\\mathbf{0}_{1 \\times 3},\\mathbf{1}_{1 \\times 1}))",
             "latex_lhs": "hm(R,p)",
             "type": "FuncDef"
@@ -19,19 +23,29 @@
         {
             "conds": [
                 {
-                    "cond": "type(w,0,3)",
-                    "latex_cond": "type(w,0,3)"
-                },
-                {
-                    "cond": "type(v,0,3)",
-                    "latex_cond": "type(v,0,3)"
-                },
-                {
                     "cond": "norm(w) = 0",
                     "latex_cond": "\\|w\\| = 0"
                 }
             ],
             "eq": "hmf(t,w,v) = hm(unit_matrix(3),t * v)",
+            "fixes": [
+                [
+                    "t",
+                    "$real"
+                ],
+                [
+                    "w",
+                    "$tensor($real, 3, 1)"
+                ],
+                [
+                    "v",
+                    "$tensor($real, 3, 1)"
+                ],
+                [
+                    "hm",
+                    "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                ]
+            ],
             "latex_eq": "e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})} = hm(\\mathbf{1}_{3 \\times 3},t v)",
             "latex_lhs": "e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
             "type": "FuncDef"
@@ -39,19 +53,29 @@
         {
             "conds": [
                 {
-                    "cond": "type(w,0,3)",
-                    "latex_cond": "type(w,0,3)"
-                },
-                {
-                    "cond": "type(v,0,3)",
-                    "latex_cond": "type(v,0,3)"
-                },
-                {
                     "cond": "norm(w) = 1",
                     "latex_cond": "\\|w\\| = 1"
                 }
             ],
             "eq": "hmf(t,w,v) = hm(exp(t * hat(w)),(unit_matrix(3) - exp(t * hat(w))) * (hat(w) * v) + w * T(w) * v * t)",
+            "fixes": [
+                [
+                    "t",
+                    "$real"
+                ],
+                [
+                    "w",
+                    "$tensor($real, 3, 1)"
+                ],
+                [
+                    "v",
+                    "$tensor($real, 3, 1)"
+                ],
+                [
+                    "hm",
+                    "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                ]
+            ],
             "latex_eq": "e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})} = hm(e^{t \\hat{w}},(\\mathbf{1}_{3 \\times 3} - e^{t \\hat{w}}) (\\hat{w} v) + w w^{\\text{T}} v t)",
             "latex_lhs": "e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
             "type": "FuncDef"
@@ -66,8 +90,20 @@
             "finished": true,
             "fixes": [
                 [
+                    "t",
+                    "$real"
+                ],
+                [
                     "w",
                     "$tensor($real, 3, 1)"
+                ],
+                [
+                    "v",
+                    "$tensor($real, 3, 1)"
+                ],
+                [
+                    "hm",
+                    "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
                 ]
             ],
             "goal": "exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3)",
@@ -379,6 +415,26 @@
                         [
                             "n",
                             "$int"
+                        ],
+                        [
+                            "cosh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "sinh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "binom",
+                            "$fun($real, $real, $real)"
+                        ],
+                        [
+                            "hm",
+                            "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                        ],
+                        [
+                            "hmf",
+                            "$fun($real, $real, $real, $real)"
                         ]
                     ],
                     "goal": "hat(w) * w = zero_matrix(3,1)",
@@ -449,6 +505,26 @@
                         [
                             "n",
                             "$int"
+                        ],
+                        [
+                            "cosh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "sinh",
+                            "$fun($real, $real)"
+                        ],
+                        [
+                            "binom",
+                            "$fun($real, $real, $real)"
+                        ],
+                        [
+                            "hm",
+                            "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                        ],
+                        [
+                            "hmf",
+                            "$fun($real, $real, $real, $real)"
                         ]
                     ],
                     "goal": "hat(w) ^ (n + 1) * w = zero_matrix(3,1)",

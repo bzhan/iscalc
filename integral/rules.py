@@ -1177,13 +1177,15 @@ class ApplyInductHyp(Rule):
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
+        e = poly.simp_type(e, ctx)
         for eq in ctx.get_induct_hyps():
+            eq = poly.simp_type(eq.expr, ctx)
             if e == eq.lhs:
                 return eq.rhs
             if e == eq.rhs:
                 return eq.lhs
             # pattern match
-            eq_pat = expr.expr_to_pattern(eq.expr)
+            eq_pat = expr.expr_to_pattern(eq)
             lhs_inst = expr.match(e, eq_pat.lhs)
             if lhs_inst != None:
                 return eq_pat.rhs.inst_pat(lhs_inst)
@@ -1988,15 +1990,8 @@ class ExpandDefinition(Rule):
                         res.append((sube, loc))
         return res
 
-    def simp_type(e: Expr, ctx: Context):
-        if expr.is_fun(e):
-            if e.func_name == 'rcon':
-                t = e.type
-                e.type = expr.Matrix(t.args[0], normalize(t.args[0], ctx), normalize(t.args[1], ctx))
-        return e
-
     def eval(self, e: Expr, ctx: Context) -> Expr:
-        e = ExpandDefinition.simp_type(e, ctx)
+        e = poly.simp_type(e, ctx)
         func_type = ctx.get_fixes()
         if expr.is_fun(e) and e.func_name == self.func_name:
             for identity in ctx.get_definitions():
@@ -2055,6 +2050,7 @@ class FoldDefinition(Rule):
         return res
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
+        e = poly.simp_type(e, ctx)
         func_type = ctx.get_fixes()
         for identity in ctx.get_definitions():
             if expr.is_fun(identity.lhs) and identity.lhs.func_name == self.func_name:

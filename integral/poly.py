@@ -1228,3 +1228,48 @@ def from_poly(p: Polynomial) -> expr.Expr:
             else:
                 res = res + mono
         return res
+def type_normalize(t: expr.Type, ctx:Context):
+    assert isinstance(t, expr.Type)
+    if t in (expr.RealType, expr.BoolType, expr.Unknown, expr.IntType):
+        return t
+    elif t.name == 'tensor':
+        return expr.TensorType(t.eleType, normalize(t.row, ctx), normalize(t.col, ctx))
+    elif t.name == 'fun':
+        return expr.FunType(*[type_normalize(arg, ctx) for arg in t.args])
+    else:
+        raise NotImplementedError
+
+def simp_type(e: expr.Expr, ctx: Context):
+    if expr.is_var(e):
+        return expr.Var(e.name, type=type_normalize(e.type, ctx))
+    elif expr.is_const(e) or expr.is_skolem_func(e) or expr.is_inf(e):
+        return e
+    elif expr.is_symbol(e):
+        return expr.Symbol(e.name, pat=e.pat, type=type_normalize(e.type, ctx))
+    elif expr.is_op(e):
+        return expr.Op(e.op, *[simp_type(arg, ctx) for arg in e.args])
+    elif expr.is_fun(e):
+        return expr.Fun((e.func_name, type_normalize(e.func_type,ctx)), \
+                        *[simp_type(arg, ctx) for arg in e.args])
+    elif expr.is_deriv(e):
+        return expr.Deriv(e.var, simp_type(e.body, ctx))
+    elif expr.is_limit(e):
+        return expr.Limit(e.var, simp_type(e.lim, ctx), simp_type(e.body, ctx))
+    elif expr.is_integral(e):
+        return expr.Integral(e.var, simp_type(e.lower, ctx), \
+                        simp_type(e.upper, ctx), simp_type(e.body, ctx))
+    elif expr.is_indefinite_integral(e):
+        return expr.IndefiniteIntegral(e.var, simp_type(e.body, ctx), e.skolem_args)
+    elif expr.is_evalat(e):
+        return expr.EvalAt(e.var, simp_type(e.lower, ctx), \
+                        simp_type(e.upper, ctx), simp_type(e.body, ctx))
+    elif expr.is_summation(e):
+        return expr.Summation(e.index_var, simp_type(e.lower, ctx), \
+                        simp_type(e.upper, ctx), simp_type(e.body, ctx))
+    elif expr.is_product(e):
+        return expr.Product(e.index_var, simp_type(e.lower, ctx), \
+                        simp_type(e.upper, ctx), simp_type(e.body, ctx))
+    elif expr.is_matrix(e):
+        return expr.Matrix([[simp_type(item, ctx) for item in rv] for rv in e.data])
+    else:
+        raise NotImplementedError

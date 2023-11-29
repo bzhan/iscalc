@@ -3682,7 +3682,6 @@ class IntegralTest(unittest.TestCase):
         calc = proof_of_goal04.lhs_calc
         source = calc.parse_expr("INT x:[0,1]. (x - x ^ 2) ^ (1/2)")
         calc.perform_rule(rules.ApplyEquation(goal02.goal, source))
-        print(calc)
         calc.perform_rule(rules.Equation("2 * (1/2) + 1", "2"))
         calc.perform_rule(rules.FullSimplify())
         assert goal04.is_finished()

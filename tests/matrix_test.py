@@ -591,7 +591,9 @@ class MatrixTest(unittest.TestCase):
         fixes['ic'] = parser.parse_expr("$tensor($real, 4, 4)", fixes=fixes)
         fixes['hmf'] = parser.parse_expr(
             "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))", fixes=fixes)
-
+        s = "$fun($tensor($real, n, 1),$int, $tensor($real, 3, n),$tensor($real, 3, n),$tensor($real, 4, 4)," \
+            "$tensor($real, 4, 4)) "
+        fixes['gst'] = parser.parse_expr(s, fixes=fixes)
         g = "(inv(ic) * MUL(i, 0, n-1, hmf(-nth(t, n-i-1, 0), nthc(w, n-i-1), nthc(v, n-i-1))))*\
                 gst(t, n, w, v, ic) = unit_matrix(4)"
         conds = ["n>=1"]  # "isColumnOrthogonalMatrix(w)"
@@ -648,7 +650,6 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.Equation(s, t))
         calc.perform_rule(rules.OnLocation(rules.FoldDefinition('gst'), '1'))
         calc.perform_rule(rules.ApplyInductHyp())
-        print(goal01)
         assert goal01.is_finished()
         self.checkAndOutput(file)
 

@@ -205,6 +205,27 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
                 return "%s_{:, %s}" % (sx, sy)
             elif e.func_name == 'nthr':
                 return "%s_{%s, :}" % (sx, sy)
+            elif e.func_name == 'rcon':
+                m1, m2 = e.args
+                if expr.is_fun(m1) and expr.is_fun(m2) and m1.func_name == 'ccon'\
+                        and m1.func_name == m2.func_name:
+                    a, b = convert_expr(m1.args[0], mode), convert_expr(m1.args[1], mode)
+                    c, d = convert_expr(m2.args[0], mode), convert_expr(m2.args[1], mode)
+                    s = "\\left[\\begin{array}{c:c}"
+                    s += a + " & " + b + "\\\\"
+                    s += " \\hdashline "
+                    s += c + " & " + d + "\\\\"
+                    s += "\\end{array}\\right]"
+                    return s
+                elif expr.is_var(m1) and expr.is_var(m2):
+                    s = "\\left[\\begin{array}{c}"
+                    s += m1.name + "\\\\"
+                    s += " \\hdashline "
+                    s += m2.name + "\\\\"
+                    s += "\\end{array}\\right]"
+                    return s
+                else:
+                    raise NotImplementedError(str(e))
             else:
                 return "%s(%s,%s)" % (e.func_name, sx, sy)
         elif len(e.args) == 3:
@@ -212,11 +233,6 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
             sx, sy, sz = convert_expr(x, mode), convert_expr(y, mode), convert_expr(z, mode)
             if e.func_name == 'nth':
                 return "%s_{%s,%s}" % (sx, sy, sz)
-            elif e.func_name == 'hmf':
-                twist = "hat(\\begin{bmatrix}"
-                twist += "%s\\\\%s"%(sy, sz)
-                twist += "\\end{bmatrix})"
-                return "e^{%s%s}" % (sx, twist)
             elif e.func_name == 'choose_col':
                 return "%s[:,%s:%s]" % (sx, sy, sz)
             elif e.func_name == 'choose_row':

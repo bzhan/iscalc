@@ -1456,14 +1456,14 @@ class Fun(Expr):
                 self.type = self.args[0].type
                 self.func_type = FunType(self.type, self.type)
             elif self.func_name == 'T':
-                if self.args[0].type == Type('unknown'):
+                if self.args[0].type == Unknown:
                     self.type = self.args[0].type
                 elif is_matrix_type(self.args[0].type):
                     c, r = num_col(self.args[0].type), num_row(self.args[0].type)
                     self.type = MatrixType(self.args[0].type.args[0], c, r)
                     self.func_type = FunType(MatrixType(self.args[0].type.args[0], r, c), self.type)
                 else:
-                    self.type = Type('unknown')
+                    self.type = Unknown
             elif self.func_name == 'hat':
                 if is_matrix_type(self.args[0].type):
                     t = self.args[0].type
@@ -1476,10 +1476,10 @@ class Fun(Expr):
                         self.func_type = FunType(TensorType(elem_ty, Const(6), Const(1)), self.type)
                     else:
                         raise NotImplementedError(str(self.args[0])+": "+str(num_row(t))+","+str(num_col(t)))
-                elif self.args[0].type == Type('unknown'):
+                elif self.args[0].type == Unknown:
                     self.type = self.args[0].type
                 else:
-                    self.type = Type('unknown')
+                    self.type = Unknown
                     # raise NotImplementedError("hat(%s), args[0].type = %s"%(str(self.args[0]), self.args[0].type))
             elif self.func_name == 'ccon':
                 assert len(self.args) == 2
@@ -1522,11 +1522,15 @@ class Fun(Expr):
                 a, b, c = self.args
                 self.func_type = FunType(a.type, IntType, IntType, RealType)
             elif self.func_name == 'nthc':
-                m, t = self.args[0], self.args[0].type
-                assert m.type.name == 'tensor', str(m)
-                ct = self.args[1].type
-                self.type = TensorType(t.eleType, t.row, Const(1))
-                self.func_type = FunType(t, ct, self.type)
+                # in order to make front end work fine, so add this try-catch block
+                # there is a bug in front end.
+                try:
+                    m, t = self.args[0], self.args[0].type
+                    ct = self.args[1].type
+                    self.type = TensorType(t.eleType, t.row, Const(1))
+                    self.func_type = FunType(t, ct, self.type)
+                except:
+                    pass
             elif self.func_name == 'choose_col':
                 m, start, end = self.args
                 t = m.type

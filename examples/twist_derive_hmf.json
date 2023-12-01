@@ -16,7 +16,7 @@
                     "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"
                 ]
             ],
-            "latex_eq": "twist(w,v) = hat({rcon(w,v)})",
+            "latex_eq": "twist(w,v) = hat({\\left[\\begin{array}{c}w\\\\ \\hdashline v\\\\\\end{array}\\right]})",
             "latex_lhs": "twist(w,v)",
             "type": "FuncDef"
         },
@@ -47,12 +47,12 @@
                 ]
             ],
             "goal": "(D t. hmf(t,w,v)) = twist(w,v) * hmf(t,w,v)",
-            "latex_goal": "\\frac{d}{dt} e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})} = twist(w,v) e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
+            "latex_goal": "\\frac{d}{dt} hmf(t,w,v) = twist(w,v) hmf(t,w,v)",
             "proof": {
                 "calcs": [
                     {
                         "fixes": [],
-                        "latex_start": "\\frac{d}{dt} e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
+                        "latex_start": "\\frac{d}{dt} hmf(t,w,v)",
                         "start": "D t. hmf(t,w,v)",
                         "steps": [
                             {
@@ -91,11 +91,11 @@
                     },
                     {
                         "fixes": [],
-                        "latex_start": "twist(w,v) e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
+                        "latex_start": "twist(w,v) hmf(t,w,v)",
                         "start": "twist(w,v) * hmf(t,w,v)",
                         "steps": [
                             {
-                                "latex_res": "hat({\\begin{bmatrix}w\\\\v\\end{bmatrix}}) e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
+                                "latex_res": "hat({\\begin{bmatrix}w\\\\v\\end{bmatrix}}) hmf(t,w,v)",
                                 "res": "hat([[w], [v]]) * hmf(t,w,v)",
                                 "rule": {
                                     "func_name": "twist",
@@ -164,7 +164,7 @@
                 ],
                 "finished": true,
                 "goal": "(D t. hmf(t,w,v)) = twist(w,v) * hmf(t,w,v)",
-                "latex_goal": "\\frac{d}{dt} e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})} = twist(w,v) e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
+                "latex_goal": "\\frac{d}{dt} hmf(t,w,v) = twist(w,v) hmf(t,w,v)",
                 "type": "CalculationProof"
             },
             "type": "Goal"
@@ -240,8 +240,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "(-\\cos{t} + 1) \\hat{w} \\hat{w} ^ {2} + \\sin{t} \\hat{w} \\hat{w} + \\hat{w} \\mathbf{1}_{3 \\times 3}",
-                                "res": "(-cos(t) + 1) * hat(w) * hat(w) ^ 2 + sin(t) * hat(w) * hat(w) + hat(w) * unit_matrix(3)",
+                                "latex_res": "(-\\cos{t} + 1) \\hat{w} ^ {3} + \\sin{t} \\hat{w} ^ {2} + \\hat{w} \\mathbf{1}_{3 \\times 3}",
+                                "res": "(-cos(t) + 1) * hat(w) ^ 3 + sin(t) * hat(w) ^ 2 + hat(w) * unit_matrix(3)",
                                 "rule": {
                                     "name": "ExpandPolynomial",
                                     "str": "expand polynomial"
@@ -249,32 +249,20 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "(-\\cos{t} + 1) (\\hat{w} \\hat{w} ^ {2}) + \\sin{t} \\hat{w} \\hat{w} + \\hat{w} \\mathbf{1}_{3 \\times 3}",
-                                "res": "(-cos(t) + 1) * (hat(w) * hat(w) ^ 2) + sin(t) * hat(w) * hat(w) + hat(w) * unit_matrix(3)",
+                                "latex_res": "(-\\cos{t} + 1) \\hat{w} ^ {2\\cdot 1 + 1} + \\sin{t} \\hat{w} ^ {2} + \\hat{w} \\mathbf{1}_{3 \\times 3}",
+                                "res": "(-cos(t) + 1) * hat(w) ^ (2 * 1 + 1) + sin(t) * hat(w) ^ 2 + hat(w) * unit_matrix(3)",
                                 "rule": {
-                                    "latex_str": "rewriting \\((-\\cos{t} + 1) \\hat{w} \\hat{w} ^ {2}\\) to \\((-\\cos{t} + 1) (\\hat{w} \\hat{w} ^ {2})\\)",
+                                    "latex_str": "rewriting \\(\\hat{w} ^ {3}\\) to \\(\\hat{w} ^ {2\\cdot 1 + 1}\\)",
                                     "name": "Equation",
-                                    "new_expr": "(-cos(t) + 1) * (hat(w) * hat(w) ^ 2)",
-                                    "old_expr": "(-cos(t) + 1) * hat(w) * hat(w) ^ 2",
-                                    "str": "rewriting (-cos(t) + 1) * hat(w) * hat(w) ^ 2 to (-cos(t) + 1) * (hat(w) * hat(w) ^ 2)"
+                                    "new_expr": "hat(w) ^ (2 * 1 + 1)",
+                                    "old_expr": "hat(w) ^ 3",
+                                    "str": "rewriting hat(w) ^ 3 to hat(w) ^ (2 * 1 + 1)"
                                 },
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "(-\\cos{t} + 1) \\hat{w} ^ {2\\cdot 1 + 1} + \\sin{t} \\hat{w} \\hat{w} + \\hat{w} \\mathbf{1}_{3 \\times 3}",
-                                "res": "(-cos(t) + 1) * hat(w) ^ (2 * 1 + 1) + sin(t) * hat(w) * hat(w) + hat(w) * unit_matrix(3)",
-                                "rule": {
-                                    "latex_str": "rewrite \\(\\hat{w} \\hat{w} ^ {2}\\) to \\(\\hat{w} ^ {2\\cdot 1 + 1}\\) using identity",
-                                    "name": "ApplyIdentity",
-                                    "source": "hat(w) * hat(w) ^ 2",
-                                    "str": "rewrite hat(w) * hat(w) ^ 2 to hat(w) ^ (2 * 1 + 1) using identity",
-                                    "target": "hat(w) ^ (2 * 1 + 1)"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "(-\\cos{t} + 1) ((-1) ^ {1} \\hat{w}) + \\sin{t} \\hat{w} \\hat{w} + \\hat{w} \\mathbf{1}_{3 \\times 3}",
-                                "res": "(-cos(t) + 1) * ((-1) ^ 1 * hat(w)) + sin(t) * hat(w) * hat(w) + hat(w) * unit_matrix(3)",
+                                "latex_res": "(-\\cos{t} + 1) ((-1) ^ {1} \\hat{w}) + \\sin{t} \\hat{w} ^ {2} + \\hat{w} \\mathbf{1}_{3 \\times 3}",
+                                "res": "(-cos(t) + 1) * ((-1) ^ 1 * hat(w)) + sin(t) * hat(w) ^ 2 + hat(w) * unit_matrix(3)",
                                 "rule": {
                                     "eq": "hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)",
                                     "eq_fixes": [],
@@ -286,8 +274,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\cos{t} \\hat{w} - \\hat{w} + \\sin{t} \\hat{w} \\hat{w} + \\hat{w} \\mathbf{1}_{3 \\times 3}",
-                                "res": "cos(t) * hat(w) - hat(w) + sin(t) * hat(w) * hat(w) + hat(w) * unit_matrix(3)",
+                                "latex_res": "\\cos{t} \\hat{w} - \\hat{w} + \\sin{t} \\hat{w} ^ {2} + \\hat{w} \\mathbf{1}_{3 \\times 3}",
+                                "res": "cos(t) * hat(w) - hat(w) + sin(t) * hat(w) ^ 2 + hat(w) * unit_matrix(3)",
                                 "rule": {
                                     "loc": "0.0",
                                     "name": "ExpandPolynomial",
@@ -296,35 +284,11 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\sin{t} \\hat{w} \\hat{w} + \\cos{t} \\hat{w}",
-                                "res": "sin(t) * hat(w) * hat(w) + cos(t) * hat(w)",
-                                "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\sin{t} (\\hat{w} \\hat{w}) + \\cos{t} \\hat{w}",
-                                "res": "sin(t) * (hat(w) * hat(w)) + cos(t) * hat(w)",
-                                "rule": {
-                                    "latex_str": "rewriting \\(\\sin{t} \\hat{w} \\hat{w}\\) to \\(\\sin{t} (\\hat{w} \\hat{w})\\)",
-                                    "name": "Equation",
-                                    "new_expr": "sin(t) * (hat(w) * hat(w))",
-                                    "old_expr": "sin(t) * hat(w) * hat(w)",
-                                    "str": "rewriting sin(t) * hat(w) * hat(w) to sin(t) * (hat(w) * hat(w))"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
                                 "latex_res": "\\sin{t} \\hat{w} ^ {2} + \\cos{t} \\hat{w}",
                                 "res": "sin(t) * hat(w) ^ 2 + cos(t) * hat(w)",
                                 "rule": {
-                                    "latex_str": "rewrite \\(\\hat{w} \\hat{w}\\) to \\(\\hat{w} ^ {2}\\) using identity",
-                                    "name": "ApplyIdentity",
-                                    "source": "hat(w) * hat(w)",
-                                    "str": "rewrite hat(w) * hat(w) to hat(w) ^ 2 using identity",
-                                    "target": "hat(w) ^ 2"
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -366,12 +330,12 @@
                 ]
             ],
             "goal": "(D t. hmf(t,w,v)) = twist(w,v) * hmf(t,w,v)",
-            "latex_goal": "\\frac{d}{dt} e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})} = twist(w,v) e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
+            "latex_goal": "\\frac{d}{dt} hmf(t,w,v) = twist(w,v) hmf(t,w,v)",
             "proof": {
                 "calcs": [
                     {
                         "fixes": [],
-                        "latex_start": "\\frac{d}{dt} e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
+                        "latex_start": "\\frac{d}{dt} hmf(t,w,v)",
                         "start": "D t. hmf(t,w,v)",
                         "steps": [
                             {
@@ -436,11 +400,11 @@
                     },
                     {
                         "fixes": [],
-                        "latex_start": "twist(w,v) e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
+                        "latex_start": "twist(w,v) hmf(t,w,v)",
                         "start": "twist(w,v) * hmf(t,w,v)",
                         "steps": [
                             {
-                                "latex_res": "hat({\\begin{bmatrix}w\\\\v\\end{bmatrix}}) e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
+                                "latex_res": "hat({\\begin{bmatrix}w\\\\v\\end{bmatrix}}) hmf(t,w,v)",
                                 "res": "hat([[w], [v]]) * hmf(t,w,v)",
                                 "rule": {
                                     "func_name": "twist",
@@ -483,8 +447,18 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&\\hat{w} ((-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t w w^{\\text{T}} v) + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
-                                "res": "[[hat(w) * exp(t * hat(w)), hat(w) * ((-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v) + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
+                                "latex_res": "\\begin{bmatrix}\\hat{w}&v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix} \\begin{bmatrix}e^{t \\hat{w}}&-e^{t \\hat{w}} \\hat{w} v + t w w^{\\text{T}} v + \\hat{w} v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{1}_{1 \\times 1}\\end{bmatrix}",
+                                "res": "[[hat(w), v], [zero_matrix(1,3), zero_matrix(1,1)]] * [[exp(t * hat(w)), -(exp(t * hat(w)) * hat(w) * v) + t * w * T(w) * v + hat(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
+                                "rule": {
+                                    "loc": "subterms",
+                                    "name": "ExpandPolynomial",
+                                    "str": "expand polynomial on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&\\hat{w} (-e^{t \\hat{w}} \\hat{w} v + t w w^{\\text{T}} v + \\hat{w} v) + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
+                                "res": "[[hat(w) * exp(t * hat(w)), hat(w) * (-(exp(t * hat(w)) * hat(w) * v) + t * w * T(w) * v + hat(w) * v) + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
                                 "rule": {
                                     "name": "FullSimplify",
                                     "str": "full simplify"
@@ -492,59 +466,18 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&\\hat{w} (-e^{t \\hat{w}} + \\mathbf{1}_{3 \\times 3}) \\hat{w} v + t \\hat{w} w w^{\\text{T}} v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
-                                "res": "[[hat(w) * exp(t * hat(w)), hat(w) * (-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * hat(w) * w * T(w) * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
+                                "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + t \\hat{w} w w^{\\text{T}} v + \\hat{w} ^ {2} v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
+                                "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + t * hat(w) * w * T(w) * v + hat(w) ^ 2 * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
                                 "rule": {
-                                    "loc": "0.1.0",
+                                    "loc": "subterms",
                                     "name": "ExpandPolynomial",
-                                    "str": "expand polynomial at 0.1.0"
+                                    "str": "expand polynomial on subterms"
                                 },
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&(-\\hat{w} e^{t \\hat{w}} \\hat{w} + \\hat{w} \\mathbf{1}_{3 \\times 3} \\hat{w}) v + t \\hat{w} w w^{\\text{T}} v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
-                                "res": "[[hat(w) * exp(t * hat(w)), (-(hat(w) * exp(t * hat(w)) * hat(w)) + hat(w) * unit_matrix(3) * hat(w)) * v + t * hat(w) * w * T(w) * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
-                                "rule": {
-                                    "loc": "0.1.0.0.0",
-                                    "name": "ExpandPolynomial",
-                                    "str": "expand polynomial at 0.1.0.0.0"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&(-\\hat{w} e^{t \\hat{w}} \\hat{w} + \\hat{w} \\hat{w}) v + t \\hat{w} w w^{\\text{T}} v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
-                                "res": "[[hat(w) * exp(t * hat(w)), (-(hat(w) * exp(t * hat(w)) * hat(w)) + hat(w) * hat(w)) * v + t * hat(w) * w * T(w) * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
-                                "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + \\hat{w} \\hat{w} v + t \\hat{w} w w^{\\text{T}} v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
-                                "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + hat(w) * hat(w) * v + t * hat(w) * w * T(w) * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
-                                "rule": {
-                                    "loc": "0.1.0.0",
-                                    "name": "ExpandPolynomial",
-                                    "str": "expand polynomial at 0.1.0.0"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + \\hat{w} ^ {2} v + t \\hat{w} w w^{\\text{T}} v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
-                                "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + hat(w) ^ 2 * v + t * hat(w) * w * T(w) * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
-                                "rule": {
-                                    "latex_str": "rewrite \\(\\hat{w} \\hat{w}\\) to \\(\\hat{w} ^ {2}\\) using identity",
-                                    "name": "ApplyIdentity",
-                                    "source": "hat(w) * hat(w)",
-                                    "str": "rewrite hat(w) * hat(w) to hat(w) ^ 2 using identity",
-                                    "target": "hat(w) ^ 2"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
-                                "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + (w w^{\\text{T}} - \\|w\\| ^ {2} \\mathbf{1}_{3 \\times 3}) v + t \\hat{w} w w^{\\text{T}} v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
-                                "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + (w * T(w) - norm(w) ^ 2 * unit_matrix(3)) * v + t * hat(w) * w * T(w) * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
+                                "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + t \\hat{w} w w^{\\text{T}} v + (w w^{\\text{T}} - \\|w\\| ^ {2} \\mathbf{1}_{3 \\times 3}) v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
+                                "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + t * hat(w) * w * T(w) * v + (w * T(w) - norm(w) ^ 2 * unit_matrix(3)) * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
                                 "rule": {
                                     "eq": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
                                     "eq_fixes": [],
@@ -556,8 +489,8 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + (w w^{\\text{T}} - 1 ^ {2} \\mathbf{1}_{3 \\times 3}) v + t \\hat{w} w w^{\\text{T}} v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
-                                "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + (w * T(w) - 1 ^ 2 * unit_matrix(3)) * v + t * hat(w) * w * T(w) * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
+                                "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + t \\hat{w} w w^{\\text{T}} v + (w w^{\\text{T}} - 1 ^ {2} \\mathbf{1}_{3 \\times 3}) v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
+                                "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + t * hat(w) * w * T(w) * v + (w * T(w) - 1 ^ 2 * unit_matrix(3)) * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
                                 "rule": {
                                     "eq": "norm(w) = 1",
                                     "eq_fixes": [],
@@ -569,12 +502,12 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + (w w^{\\text{T}} v - \\mathbf{1}_{3 \\times 3} v) + t \\hat{w} w w^{\\text{T}} v + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
-                                "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + (w * T(w) * v - unit_matrix(3) * v) + t * hat(w) * w * T(w) * v + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
+                                "latex_res": "\\begin{bmatrix}\\hat{w} e^{t \\hat{w}}&-\\hat{w} e^{t \\hat{w}} \\hat{w} v + t \\hat{w} w w^{\\text{T}} v + (w w^{\\text{T}} v - \\mathbf{1}_{3 \\times 3} v) + v\\\\\\mathbf{0}_{1 \\times 3}&\\mathbf{0}_{1 \\times 1}\\end{bmatrix}",
+                                "res": "[[hat(w) * exp(t * hat(w)), -(hat(w) * exp(t * hat(w)) * hat(w) * v) + t * hat(w) * w * T(w) * v + (w * T(w) * v - unit_matrix(3) * v) + v], [zero_matrix(1,3), zero_matrix(1,1)]]",
                                 "rule": {
-                                    "loc": "0.1.0.0.1",
+                                    "loc": "subterms",
                                     "name": "ExpandPolynomial",
-                                    "str": "expand polynomial at 0.1.0.0.1"
+                                    "str": "expand polynomial on subterms"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -627,7 +560,7 @@
                 ],
                 "finished": true,
                 "goal": "(D t. hmf(t,w,v)) = twist(w,v) * hmf(t,w,v)",
-                "latex_goal": "\\frac{d}{dt} e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})} = twist(w,v) e^{that(\\begin{bmatrix}w\\\\v\\end{bmatrix})}",
+                "latex_goal": "\\frac{d}{dt} hmf(t,w,v) = twist(w,v) hmf(t,w,v)",
                 "type": "CalculationProof"
             },
             "type": "Goal"

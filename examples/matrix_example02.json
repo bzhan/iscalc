@@ -1016,26 +1016,13 @@
                                 "start": "hat(w) ^ (2 * n + 4)",
                                 "steps": [
                                     {
-                                        "latex_res": "\\hat{w} ^ {2 + 2 (n + 1)}",
-                                        "res": "hat(w) ^ (2 + 2 * (n + 1))",
-                                        "rule": {
-                                            "latex_str": "rewriting \\(2 n + 4\\) to \\(2 + 2 (n + 1)\\)",
-                                            "name": "Equation",
-                                            "new_expr": "2 + 2 * (n + 1)",
-                                            "old_expr": "2 * n + 4",
-                                            "str": "rewriting 2 * n + 4 to 2 + 2 * (n + 1)"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
                                         "latex_res": "\\hat{w} ^ {2} \\hat{w} ^ {2 (n + 1)}",
                                         "res": "hat(w) ^ 2 * hat(w) ^ (2 * (n + 1))",
                                         "rule": {
-                                            "latex_str": "rewrite \\(\\hat{w} ^ {2 + 2 (n + 1)}\\) to \\(\\hat{w} ^ {2} \\hat{w} ^ {2 (n + 1)}\\) using identity",
-                                            "name": "ApplyIdentity",
-                                            "source": "hat(w) ^ (2 + 2 * (n + 1))",
-                                            "str": "rewrite hat(w) ^ (2 + 2 * (n + 1)) to hat(w) ^ 2 * hat(w) ^ (2 * (n + 1)) using identity",
-                                            "target": "hat(w) ^ 2 * hat(w) ^ (2 * (n + 1))"
+                                            "latex_str": "rewriting to \\(\\hat{w} ^ {2} \\hat{w} ^ {2 (n + 1)}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "hat(w) ^ 2 * hat(w) ^ (2 * (n + 1))",
+                                            "str": "rewriting to hat(w) ^ 2 * hat(w) ^ (2 * (n + 1))"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -1118,8 +1105,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "(-1) ^ {n} w w^{\\text{T}} \\hat{w} \\hat{w} - (-1) ^ {n} \\mathbf{1}_{3 \\times 3} \\hat{w} \\hat{w}",
-                                        "res": "(-1) ^ n * w * T(w) * hat(w) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w) * hat(w)",
+                                        "latex_res": "(-1) ^ {n} w w^{\\text{T}} \\hat{w} ^ {2} - (-1) ^ {n} \\mathbf{1}_{3 \\times 3} \\hat{w} ^ {2}",
+                                        "res": "(-1) ^ n * w * T(w) * hat(w) ^ 2 - (-1) ^ n * unit_matrix(3) * hat(w) ^ 2",
                                         "rule": {
                                             "name": "ExpandPolynomial",
                                             "str": "expand polynomial"
@@ -1127,20 +1114,20 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "(-1) ^ {n} (w w^{\\text{T}} \\hat{w}) \\hat{w} - (-1) ^ {n} \\mathbf{1}_{3 \\times 3} \\hat{w} \\hat{w}",
-                                        "res": "(-1) ^ n * (w * T(w) * hat(w)) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w) * hat(w)",
+                                        "latex_res": "(-1) ^ {n} (w w^{\\text{T}} \\hat{w}) \\hat{w} - (-1) ^ {n} \\mathbf{1}_{3 \\times 3} \\hat{w} ^ {2}",
+                                        "res": "(-1) ^ n * (w * T(w) * hat(w)) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w) ^ 2",
                                         "rule": {
-                                            "latex_str": "rewriting \\((-1) ^ {n} w w^{\\text{T}} \\hat{w}\\) to \\((-1) ^ {n} (w w^{\\text{T}} \\hat{w})\\)",
+                                            "latex_str": "rewriting \\((-1) ^ {n} w w^{\\text{T}} \\hat{w} ^ {2}\\) to \\((-1) ^ {n} (w w^{\\text{T}} \\hat{w}) \\hat{w}\\)",
                                             "name": "Equation",
-                                            "new_expr": "(-1) ^ n * (w * T(w) * hat(w))",
-                                            "old_expr": "(-1) ^ n * w * T(w) * hat(w)",
-                                            "str": "rewriting (-1) ^ n * w * T(w) * hat(w) to (-1) ^ n * (w * T(w) * hat(w))"
+                                            "new_expr": "(-1) ^ n * (w * T(w) * hat(w)) * hat(w)",
+                                            "old_expr": "(-1) ^ n * w * T(w) * hat(w) ^ 2",
+                                            "str": "rewriting (-1) ^ n * w * T(w) * hat(w) ^ 2 to (-1) ^ n * (w * T(w) * hat(w)) * hat(w)"
                                         },
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "(-1) ^ {n} \\mathbf{0}_{3 \\times 3} \\hat{w} - (-1) ^ {n} \\mathbf{1}_{3 \\times 3} \\hat{w} \\hat{w}",
-                                        "res": "(-1) ^ n * zero_matrix(3,3) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w) * hat(w)",
+                                        "latex_res": "(-1) ^ {n} \\mathbf{0}_{3 \\times 3} \\hat{w} - (-1) ^ {n} \\mathbf{1}_{3 \\times 3} \\hat{w} ^ {2}",
+                                        "res": "(-1) ^ n * zero_matrix(3,3) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w) ^ 2",
                                         "rule": {
                                             "eq": "w * T(w) * hat(w) = zero_matrix(3,3)",
                                             "eq_fixes": [
@@ -1173,8 +1160,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "-(-1) ^ {n} \\hat{w} \\hat{w}",
-                                        "res": "-((-1) ^ n * hat(w) * hat(w))",
+                                        "latex_res": "-(-1) ^ {n} \\hat{w} ^ {2}",
+                                        "res": "-((-1) ^ n * hat(w) ^ 2)",
                                         "rule": {
                                             "name": "FullSimplify",
                                             "str": "full simplify"
@@ -1202,8 +1189,8 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "-(-1) ^ {n} \\hat{w} \\hat{w}",
-                                        "res": "-((-1) ^ n * hat(w) * hat(w))",
+                                        "latex_res": "-(-1) ^ {n} \\hat{w} ^ {2}",
+                                        "res": "-((-1) ^ n * hat(w) ^ 2)",
                                         "rule": {
                                             "name": "FullSimplify",
                                             "str": "full simplify"

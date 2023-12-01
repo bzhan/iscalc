@@ -441,35 +441,11 @@
                                         "type": "CalculationStep"
                                     },
                                     {
-                                        "latex_res": "P ^ {-1} A ^ {n} A P",
-                                        "res": "inv(P) * A ^ n * A * P",
-                                        "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
-                                        "latex_res": "P ^ {-1} (A ^ {n} A) P",
-                                        "res": "inv(P) * (A ^ n * A) * P",
-                                        "rule": {
-                                            "latex_str": "rewriting \\(P ^ {-1} A ^ {n} A P\\) to \\(P ^ {-1} (A ^ {n} A) P\\)",
-                                            "name": "Equation",
-                                            "new_expr": "inv(P) * (A ^ n * A) * P",
-                                            "old_expr": "inv(P) * A ^ n * A * P",
-                                            "str": "rewriting inv(P) * A ^ n * A * P to inv(P) * (A ^ n * A) * P"
-                                        },
-                                        "type": "CalculationStep"
-                                    },
-                                    {
                                         "latex_res": "P ^ {-1} A ^ {n + 1} P",
                                         "res": "inv(P) * A ^ (n + 1) * P",
                                         "rule": {
-                                            "latex_str": "rewrite \\(A ^ {n} A\\) to \\(A ^ {n + 1}\\) using identity",
-                                            "name": "ApplyIdentity",
-                                            "source": "A ^ n * A",
-                                            "str": "rewrite A ^ n * A to A ^ (n + 1) using identity",
-                                            "target": "A ^ (n + 1)"
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
                                         },
                                         "type": "CalculationStep"
                                     }

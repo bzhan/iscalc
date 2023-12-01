@@ -1111,6 +1111,16 @@ class ApplyEquation(Rule):
                 conds = identity.conds.data
         for item in ctx.get_eq_conds().data:
             if self.eq == item:
+                if self.source is None:
+                    if e == item.lhs:
+                        return item.rhs
+                    if e == item.rhs:
+                        return item.lhs
+                else:
+                    if self.source == item.lhs:
+                        return item.rhs
+                    if self.source == item.rhs:
+                        return item.lhs
                 found = True
                 conds = []
         assert found, "ApplyEquation: lemma %s not found" % self.eq
@@ -2010,7 +2020,7 @@ class ExpandDefinition(Rule):
                             return identity.rhs.inst_pat(inst, func_type)
         if expr.is_var(e) and e.name == self.func_name:
             for identity in ctx.get_definitions():
-                if identity.lhs.is_symbol() and identity.lhs.name == self.func_name:
+                if expr.is_symbol(identity.lhs) and identity.lhs.name == self.func_name:
                     return identity.rhs
 
         # Not found

@@ -57,7 +57,10 @@ def collect_pairs(ps):
         res = tuple(sorted(res_list))
     except:
         print(res_list)
+        raise NotImplementedError
     return res
+
+
 def collect_pairs_power(ps: Dict[expr.Expr, "Polynomial"], ctx: Context):
     res = {}
     res_list = []
@@ -72,7 +75,12 @@ def collect_pairs_power(ps: Dict[expr.Expr, "Polynomial"], ctx: Context):
     mat_list = []
     for v, c in ps:
         if expr.is_matrix_type(v.type):
-            mat_list.append((v, c))
+            if mat_list != [] and mat_list[-1][0] == v:
+                tmp = mat_list[-1]
+                mat_list.pop()
+                mat_list.append((tmp[0], (tmp[1] + c).reduce(ctx)))
+            else:
+                mat_list.append((v, c.reduce(ctx)))
         else:
             if v in res:
                 if is_non_negative(c) and is_non_negative(res[v]):
@@ -89,7 +97,6 @@ def collect_pairs_power(ps: Dict[expr.Expr, "Polynomial"], ctx: Context):
     for v, c in res.items():
         if c != Polynomial(tuple()):
             res_list.append((v, c))
-
     return tuple(sorted(res_list) + mat_list)
 
 def reduce_power(n: expr.Expr, e: "Polynomial") -> Tuple[Tuple[expr.Expr, "Polynomial"]]:
@@ -729,6 +736,9 @@ def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
                 if nb == expr.Const(0):
                     return expr.Fun("unit_matrix", expr.num_row(a.type))
                 elif nb == expr.Const(1):
+                    return a
+                elif expr.is_fun(a) and a.func_name == 'unit_matrix' and \
+                    b.type == expr.IntType and ctx.check_condition(expr.Op('>=', b, expr.Const(0))):
                     return a
         elif e.is_plus() and expr.is_fun(e.args[1]) and e.args[1].func_name == 'zero_matrix':
             return e.args[0]

@@ -2326,57 +2326,6 @@ class MergeSummation(Rule):
         return Summation(a.index_var, a.lower, a.upper, Op(e.op, a.body, b.body))
 
 
-alphabet = "ijkmnabcdefuvwxyz"
-
-
-def change_index(e: Expr, bd: List):
-    ''' using new index variable for summation '''
-    if expr.is_summation(e):
-        if e.index_var in bd:
-            for var in alphabet:
-                if var not in bd:
-                    e = e.alpha_convert(var)
-                    bd.append(var)
-                    break
-        else:
-            bd.append(e.index_var)
-
-        new_v = None
-        for var in alphabet:
-            if var not in bd:
-                new_v = var
-                bd.append(var)
-                break
-        assert new_v is not None, "alphabeta is used up"
-        new_lower = Symbol(new_v, pat=[VAR, CONST, OP, FUN, INTEGRAL, MATRIX, INF], type=e.lower.type)
-        for var in alphabet:
-            if var not in bd:
-                new_v = var
-                bd.append(var)
-                break
-        assert new_v is not None, "alphabeta is used up"
-        new_upper = Symbol(new_v, pat=[VAR, CONST, OP, FUN, INTEGRAL, MATRIX, INF], type=e.upper.type)
-        res = Summation(e.index_var, new_lower, new_upper, change_index(e.body, bd))
-        return res
-    elif expr.is_product(e):
-        if e.index_var in bd:
-            for var in alphabet:
-                if var not in bd:
-                    e = e.alpha_convert(var)
-                    bd.append(var)
-                    break
-        else:
-            bd.append(e.index_var)
-        res = expr.Product(e.index_var, e.lower, e.upper, change_index(e.body, bd))
-        bd.pop()
-        return res
-    elif expr.is_op(e):
-        args = [change_index(arg, bd) for arg in e.args]
-        return Op(e.op, *args)
-    else:
-        return e
-
-
 class SplitItem(Rule):
     """
     Split a summation into several summations.
@@ -2414,6 +2363,7 @@ class SplitItem(Rule):
         if v in subst:
             return
         var = None
+        alphabet = "ijkmnabcdefuvwxyz"
         for c in alphabet:
             if c not in exclude_vars:
                 var = c

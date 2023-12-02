@@ -22,7 +22,7 @@
                         "start": "hat(w) ^ 2",
                         "steps": [
                             {
-                                "latex_res": "\\begin{bmatrix}0\\cdot 0 + (-w_{2,0}) w_{2,0} + w_{1,0} (-w_{1,0})&0 (-w_{2,0}) + (-w_{2,0})\\cdot 0 + w_{1,0} w_{0,0}&0 w_{1,0} + (-w_{2,0}) (-w_{0,0}) + w_{1,0}\\cdot 0\\\\w_{2,0}\\cdot 0 + 0 w_{2,0} + (-w_{0,0}) (-w_{1,0})&w_{2,0} (-w_{2,0}) + 0\\cdot 0 + (-w_{0,0}) w_{0,0}&w_{2,0} w_{1,0} + 0 (-w_{0,0}) + (-w_{0,0})\\cdot 0\\\\(-w_{1,0})\\cdot 0 + w_{0,0} w_{2,0} + 0 (-w_{1,0})&(-w_{1,0}) (-w_{2,0}) + w_{0,0}\\cdot 0 + 0 w_{0,0}&(-w_{1,0}) w_{1,0} + w_{0,0} (-w_{0,0}) + 0\\cdot 0\\end{bmatrix}",
+                                "latex_res": "\\begin{bmatrix}0\\cdot 0 + (-w_{2}) w_{2} + w_{1} (-w_{1})&0 (-w_{2}) + (-w_{2})\\cdot 0 + w_{1} w_{0}&0 w_{1} + (-w_{2}) (-w_{0}) + w_{1}\\cdot 0\\\\w_{2}\\cdot 0 + 0 w_{2} + (-w_{0}) (-w_{1})&w_{2} (-w_{2}) + 0\\cdot 0 + (-w_{0}) w_{0}&w_{2} w_{1} + 0 (-w_{0}) + (-w_{0})\\cdot 0\\\\(-w_{1})\\cdot 0 + w_{0} w_{2} + 0 (-w_{1})&(-w_{1}) (-w_{2}) + w_{0}\\cdot 0 + 0 w_{0}&(-w_{1}) w_{1} + w_{0} (-w_{0}) + 0\\cdot 0\\end{bmatrix}",
                                 "res": "[[0 * 0 + -nth(w,2,0) * nth(w,2,0) + nth(w,1,0) * -nth(w,1,0), 0 * -nth(w,2,0) + -nth(w,2,0) * 0 + nth(w,1,0) * nth(w,0,0), 0 * nth(w,1,0) + -nth(w,2,0) * -nth(w,0,0) + nth(w,1,0) * 0], [nth(w,2,0) * 0 + 0 * nth(w,2,0) + -nth(w,0,0) * -nth(w,1,0), nth(w,2,0) * -nth(w,2,0) + 0 * 0 + -nth(w,0,0) * nth(w,0,0), nth(w,2,0) * nth(w,1,0) + 0 * -nth(w,0,0) + -nth(w,0,0) * 0], [-nth(w,1,0) * 0 + nth(w,0,0) * nth(w,2,0) + 0 * -nth(w,1,0), -nth(w,1,0) * -nth(w,2,0) + nth(w,0,0) * 0 + 0 * nth(w,0,0), -nth(w,1,0) * nth(w,1,0) + nth(w,0,0) * -nth(w,0,0) + 0 * 0]]",
                                 "rule": {
                                     "loc": "subterms",
@@ -40,7 +40,7 @@
                         "start": "w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
                         "steps": [
                             {
-                                "latex_res": "\\begin{bmatrix}w_{0,0}\\\\w_{1,0}\\\\w_{2,0}\\end{bmatrix} \\begin{bmatrix}w_{0,0}&w_{1,0}&w_{2,0}\\end{bmatrix} - \\sqrt{w_{0,0} ^ {2} + w_{1,0} ^ {2} + w_{2,0} ^ {2}} ^ {2} \\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&1\\end{bmatrix}",
+                                "latex_res": "\\begin{bmatrix}w_{0}\\\\w_{1}\\\\w_{2}\\end{bmatrix} \\begin{bmatrix}w_{0}&w_{1}&w_{2}\\end{bmatrix} - \\sqrt{w_{0} ^ {2} + w_{1} ^ {2} + w_{2} ^ {2}} ^ {2} \\begin{bmatrix}1&0&0\\\\0&1&0\\\\0&0&1\\end{bmatrix}",
                                 "res": "[[nth(w,0,0)], [nth(w,1,0)], [nth(w,2,0)]] * [[nth(w,0,0), nth(w,1,0), nth(w,2,0)]] - sqrt(nth(w,0,0) ^ 2 + nth(w,1,0) ^ 2 + nth(w,2,0) ^ 2) ^ 2 * [[1, 0, 0], [0, 1, 0], [0, 0, 1]]",
                                 "rule": {
                                     "loc": "subterms",
@@ -50,7 +50,7 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "latex_res": "\\begin{bmatrix}-w_{1,0} ^ {2} - w_{2,0} ^ {2}&w_{0,0} w_{1,0}&w_{0,0} w_{2,0}\\\\w_{0,0} w_{1,0}&-w_{0,0} ^ {2} - w_{2,0} ^ {2}&w_{1,0} w_{2,0}\\\\w_{0,0} w_{2,0}&w_{1,0} w_{2,0}&-w_{0,0} ^ {2} - w_{1,0} ^ {2}\\end{bmatrix}",
+                                "latex_res": "\\begin{bmatrix}-w_{1} ^ {2} - w_{2} ^ {2}&w_{0} w_{1}&w_{0} w_{2}\\\\w_{0} w_{1}&-w_{0} ^ {2} - w_{2} ^ {2}&w_{1} w_{2}\\\\w_{0} w_{2}&w_{1} w_{2}&-w_{0} ^ {2} - w_{1} ^ {2}\\end{bmatrix}",
                                 "res": "[[-(nth(w,1,0) ^ 2) - nth(w,2,0) ^ 2, nth(w,0,0) * nth(w,1,0), nth(w,0,0) * nth(w,2,0)], [nth(w,0,0) * nth(w,1,0), -(nth(w,0,0) ^ 2) - nth(w,2,0) ^ 2, nth(w,1,0) * nth(w,2,0)], [nth(w,0,0) * nth(w,2,0), nth(w,1,0) * nth(w,2,0), -(nth(w,0,0) ^ 2) - nth(w,1,0) ^ 2]]",
                                 "rule": {
                                     "name": "FullSimplify",
@@ -91,7 +91,7 @@
                         "start": "w * T(w) * hat(w)",
                         "steps": [
                             {
-                                "latex_res": "\\begin{bmatrix}w_{0,0}\\\\w_{1,0}\\\\w_{2,0}\\end{bmatrix} \\begin{bmatrix}w_{0,0}&w_{1,0}&w_{2,0}\\end{bmatrix} \\begin{bmatrix}0&-w_{2,0}&w_{1,0}\\\\w_{2,0}&0&-w_{0,0}\\\\-w_{1,0}&w_{0,0}&0\\end{bmatrix}",
+                                "latex_res": "\\begin{bmatrix}w_{0}\\\\w_{1}\\\\w_{2}\\end{bmatrix} \\begin{bmatrix}w_{0}&w_{1}&w_{2}\\end{bmatrix} \\begin{bmatrix}0&-w_{2}&w_{1}\\\\w_{2}&0&-w_{0}\\\\-w_{1}&w_{0}&0\\end{bmatrix}",
                                 "res": "[[nth(w,0,0)], [nth(w,1,0)], [nth(w,2,0)]] * [[nth(w,0,0), nth(w,1,0), nth(w,2,0)]] * [[0, -nth(w,2,0), nth(w,1,0)], [nth(w,2,0), 0, -nth(w,0,0)], [-nth(w,1,0), nth(w,0,0), 0]]",
                                 "rule": {
                                     "loc": "subterms",

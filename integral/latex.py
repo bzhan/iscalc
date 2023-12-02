@@ -202,9 +202,9 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
             elif e.func_name == 'zero_matrix':
                 return "\\mathbf{0}_{%s \\times %s}"%(sx, sy)
             elif e.func_name == 'nthc':
-                return "%s_{:, %s}" % (sx, sy)
+                return "%s_{%s}" % (sx, sy)
             elif e.func_name == 'nthr':
-                return "%s_{%s, :}" % (sx, sy)
+                return "%s_{%s}" % (sx, sy)
             elif e.func_name == 'rcon':
                 m1, m2 = e.args
                 if expr.is_fun(m1) and expr.is_fun(m2) and m1.func_name == 'ccon'\
@@ -232,6 +232,8 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
             x, y, z = e.args
             sx, sy, sz = convert_expr(x, mode), convert_expr(y, mode), convert_expr(z, mode)
             if e.func_name == 'nth':
+                if z == expr.Const(0):
+                    return "%s_{%s}" % (sx, sy)
                 return "%s_{%s,%s}" % (sx, sy, sz)
             elif e.func_name == 'choose_col':
                 return "%s[:,%s:%s]" % (sx, sy, sz)

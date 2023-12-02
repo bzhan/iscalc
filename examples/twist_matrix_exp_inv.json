@@ -402,7 +402,7 @@
                                 "start": "hat(w) * w",
                                 "steps": [
                                     {
-                                        "latex_res": "\\begin{bmatrix}0&-w_{2,0}&w_{1,0}\\\\w_{2,0}&0&-w_{0,0}\\\\-w_{1,0}&w_{0,0}&0\\end{bmatrix} \\begin{bmatrix}w_{0,0}\\\\w_{1,0}\\\\w_{2,0}\\end{bmatrix}",
+                                        "latex_res": "\\begin{bmatrix}0&-w_{2}&w_{1}\\\\w_{2}&0&-w_{0}\\\\-w_{1}&w_{0}&0\\end{bmatrix} \\begin{bmatrix}w_{0}\\\\w_{1}\\\\w_{2}\\end{bmatrix}",
                                         "res": "[[0, -nth(w,2,0), nth(w,1,0)], [nth(w,2,0), 0, -nth(w,0,0)], [-nth(w,1,0), nth(w,0,0), 0]] * [[nth(w,0,0)], [nth(w,1,0)], [nth(w,2,0)]]",
                                         "rule": {
                                             "loc": "subterms",

@@ -304,7 +304,7 @@ class MatrixTest(unittest.TestCase):
         fixes['hm'] = parser.parse_expr("$fun($tensor($real, 3, 3), $tensor($real,3, 1), $tensor($real,4,4))")
         fixes['hmf'] = parser.parse_expr("$fun($real, $tensor($real, 3, 1), $tensor($real,3,1), $tensor($real, 4, 4))")
         file.add_definition("hmf(t, w, v) = hm(exp(t*hat(w)), (unit_matrix(3)-exp(t*hat(w)))*(hat(w)*v)+(w*T(w)*v*t))",
-                            conds=['norm(w)!=0'], fixes=fixes)
+                            conds=['norm(w)=1'], fixes=fixes)
         goal01 = file.add_goal("exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3)", fixes=fixes, conds=["norm(w)=1"])
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc

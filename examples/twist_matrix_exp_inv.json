@@ -57,8 +57,8 @@
         {
             "conds": [
                 {
-                    "cond": "norm(w) != 0",
-                    "latex_cond": "\\|w\\| \\neq 0"
+                    "cond": "norm(w) = 1",
+                    "latex_cond": "\\|w\\| = 1"
                 }
             ],
             "eq": "hmf(t,w,v) = hm(exp(t * hat(w)),(unit_matrix(3) - exp(t * hat(w))) * (hat(w) * v) + w * T(w) * v * t)",

@@ -123,7 +123,7 @@
                 ["hmf", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"],
                 ["hm", "$fun($tensor($real, 3,3), $tensor($real, 3,1), $tensor($real, 4, 4))"]
             ],
-            "conds": ["norm(w) = 1"],
+            "conds": ["norm(w) != 0"],
             "func_type": "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
         },
         {

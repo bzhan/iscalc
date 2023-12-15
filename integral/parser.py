@@ -1,6 +1,6 @@
 """Parsing"""
 
-from typing import Dict, Optional, Tuple
+from typing import Dict, Optional, Tuple, List
 from lark import Lark, Transformer, v_args, exceptions
 from decimal import Decimal
 from fractions import Fraction
@@ -71,12 +71,12 @@ grammar = r"""
 @v_args(inline=True)
 class ExprTransformer(Transformer):
     def __init__(self):
-        self.fixes: Optional[Dict[str, expr.Type]] = None
+        self.fixes: Optional[Dict[str, List[expr.Type]]] = None
 
     def var_expr(self, s):
         s = str(s)
         if self.fixes is not None and s in self.fixes:
-            return expr.Var(s, type=self.fixes[s])
+            return expr.Var(s, type=self.fixes[s][0])
         else:
             return expr.Var(s)
 
@@ -164,7 +164,20 @@ class ExprTransformer(Transformer):
             return e
         s = str(func_name)
         if self.fixes is not None and s in self.fixes:
-            return expr.Fun((s, self.fixes[s]), *args)
+            for t in self.fixes[s]:
+                if expr.is_fun_type(t) and len(t.args) == len(args) + 1:
+                    if all(a.type == b for a, b in zip(args, t.args[:-1])):
+                        return expr.Fun((s, t), *args)
+            for t in self.fixes[s]:
+                if expr.is_fun_type(t) and len(t.args) == len(args) + 1:
+                    # pattern match
+                    t_pat = expr.type_to_pattern(t)
+                    tmp = expr.FunType(*[arg.type for arg in args])
+                    tmp_pat = expr.FunType(*[arg for arg in t_pat.args[:-1]])
+                    inst = expr.type_match(tmp, tmp_pat)
+                    if inst is not None:
+                        return expr.Fun((s, t_pat.inst_pat(inst)), *args)
+            raise NotImplementedError
         else:
             return expr.Fun(s, *args)
 
@@ -192,7 +205,7 @@ class ExprTransformer(Transformer):
     def limit_inf_expr(self, var, lim, body):
         var_type = expr.RealType
         if self.fixes != None and str(var) in self.fixes:
-            var_type = self.fixes[str(var)]
+            var_type = self.fixes[str(var)][0]
         return expr.Limit(str(var), lim, body, var_type=var_type)
 
     def limit_l_expr(self, var, lim, body):
@@ -230,3 +243,23 @@ def parse_expr(s: str, *, fixes: Optional[Dict[str, expr.Type]] = None) -> Expr:
     except (exceptions.UnexpectedCharacters, exceptions.UnexpectedToken) as e:
         print("When parsing:", s)
         raise e
+
+def parse_fixes(item):
+    fixes = dict()
+    if 'fixes' not in item:
+        return fixes
+    for name, type_list in item['fixes']:
+        if isinstance(type_list, list):
+            for type in type_list:
+                t = parse_expr(type, fixes=fixes)
+                if name not in fixes:
+                    fixes[name] = [t]
+                elif t not in fixes[name]:
+                    fixes[name].append(t)
+        else:
+            t = parse_expr(type_list, fixes=fixes)
+            if name not in fixes:
+                fixes[name] = [t]
+            elif t not in fixes[name]:
+                fixes[name].append(t)
+    return fixes

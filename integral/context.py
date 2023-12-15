@@ -113,7 +113,7 @@ class Context:
         self.substs: Dict[str, Expr] = dict()
 
         # List of fixes
-        self.fixes: Dict[str, expr.Type] = dict()
+        self.fixes: Dict[str, List[expr.Type]] = dict()
 
         # List of identities of summation split
         self.summation_split_identities: List[Identity] = list()
@@ -231,9 +231,13 @@ class Context:
         p = self
         while p != None:
             d = p.fixes
-            for k,v in d.items():
+            for k, l in d.items():
                 if k not in res:
-                    res[k] = v
+                    res[k] = l
+                else:
+                    for t in l:
+                        if t not in res[k]:
+                            res[k].append(t)
             p = p.parent
         return res
 
@@ -360,12 +364,23 @@ class Context:
         for cond in conds.data:
             self.add_condition(cond)
 
-    def add_fix(self, k: str, v: expr.Type):
-        self.fixes[k] = v
+    def add_fix(self, k: str, l: List[expr.Type]):
+        if isinstance(l, list):
+            if k not in self.fixes:
+                self.fixes[k] = l
+            else:
+                for t in l:
+                    if t not in self.fixes[k]:
+                        self.fixes[k].append(t)
+        elif isinstance(l, expr.Type):
+            if k not in self.fixes:
+                self.fixes[k] = [l]
+            elif l not in self.fixes[k]:
+                self.fixes[k].append(l)
 
-    def extend_fixes(self, fixes: Dict[str, expr.Type]):
-        for k, v in fixes.items():
-            self.add_fix(k, v)
+    def extend_fixes(self, fixes: Dict[str, List[expr.Type]]):
+        for k, l in fixes.items():
+            self.add_fix(k, l)
 
     def add_subst(self, var: str, expr: Expr):
         self.substs[var] = expr
@@ -376,10 +391,7 @@ class Context:
 
     def extend_by_item(self, item):
         if item['type'] == 'axiom' or item['type'] == 'problem':
-            fixes = dict()
-            if 'fixes' in item:
-                for name, type in item['fixes']:
-                    fixes[name] = parser.parse_expr(type, fixes=fixes)
+            fixes = parser.parse_fixes(item)
             e = parser.parse_expr(item['expr'], fixes=fixes)
             if e.is_equals() and expr.is_indefinite_integral(e.lhs):
                 self.add_indefinite_integral(e)
@@ -440,10 +452,15 @@ class Context:
                     conds.add_condition(parser.parse_expr(cond))
             self.add_inequality(e, conds)
         if item['type'] == 'definition':
-            fixes = dict()
-            if 'fixes' in item:
-                for name, type in item['fixes']:
-                    fixes[name] = parser.parse_expr(type, fixes=fixes)
+            fixes = self.get_fixes()
+            tmp = parser.parse_fixes(item)
+            for name in tmp:
+                if name not in fixes:
+                    fixes[name] = tmp[name]
+                else:
+                    for t in tmp[name]:
+                        if t not in fixes[name]:
+                            fixes[name] = [t] + fixes[name]
             e = parser.parse_expr(item['expr'], fixes=fixes)
             conds = Conditions()
             if 'conds' in item:
@@ -451,7 +468,10 @@ class Context:
                     conds.add_condition(parser.parse_expr(cond, fixes=fixes))
             self.add_definition(e, conds)
             if expr.is_fun(e.lhs):
-                self.fixes[e.lhs.func_name] = e.lhs.func_type
+                if e.lhs.func_name not in self.fixes:
+                    self.fixes[e.lhs.func_name] = [e.lhs.func_type]
+                elif e.lhs.func_type not in self.fixes[e.lhs.func_name]:
+                    self.fixes[e.lhs.func_name].append(e.lhs.func_type)
         if item['type'] == 'table':
             self.add_function_table(item['name'], item['table'])
 

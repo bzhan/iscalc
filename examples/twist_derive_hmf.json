@@ -5,15 +5,21 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ],
                 [
                     "v",
-                    "$tensor($real, 3, 1)"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ],
                 [
                     "twist",
-                    "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"
+                    [
+                        "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"
+                    ]
                 ]
             ],
             "latex_eq": "twist(w,v) = hat({\\left[\\begin{array}{c}w\\\\ \\hdashline v\\\\\\end{array}\\right]})",
@@ -31,19 +37,15 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ],
                 [
                     "v",
-                    "$tensor($real, 3, 1)"
-                ],
-                [
-                    "hmf",
-                    "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
-                ],
-                [
-                    "twist",
-                    "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ]
             ],
             "goal": "(D t. hmf(t,w,v)) = twist(w,v) * hmf(t,w,v)",
@@ -180,11 +182,15 @@
             "fixes": [
                 [
                     "t",
-                    "$real"
+                    [
+                        "$real"
+                    ]
                 ],
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ]
             ],
             "goal": "(D t. exp(t * hat(w))) = hat(w) * exp(t * hat(w))",
@@ -314,19 +320,15 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ],
                 [
                     "v",
-                    "$tensor($real, 3, 1)"
-                ],
-                [
-                    "hmf",
-                    "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
-                ],
-                [
-                    "twist",
-                    "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ]
             ],
             "goal": "(D t. hmf(t,w,v)) = twist(w,v) * hmf(t,w,v)",

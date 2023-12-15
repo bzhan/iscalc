@@ -131,11 +131,15 @@
             "fixes": [
                 [
                     "m",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ],
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "I(m,n) = (-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1))",
@@ -146,43 +150,63 @@
                     "fixes": [
                         [
                             "m",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "Gamma",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "B",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "G",
-                            "$fun($real)"
+                            [
+                                "$fun($real)"
+                            ]
                         ],
                         [
                             "zeta",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "I",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "I(m,0) = 1 / (m + 1)",
@@ -247,43 +271,63 @@
                     "fixes": [
                         [
                             "m",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "Gamma",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "B",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "G",
-                            "$fun($real)"
+                            [
+                                "$fun($real)"
+                            ]
                         ],
                         [
                             "zeta",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "I",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "I(m,n + 1) = -((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
@@ -422,11 +466,15 @@
             "fixes": [
                 [
                     "m",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ],
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "(INT x:[0,a]. x ^ m * log(x) ^ n) = a ^ (m + 1) * SUM(k, 0, n, (-1) ^ k * binom(n,k) * factorial(k) * log(a) ^ (n - k) / (m + 1) ^ (k + 1))",

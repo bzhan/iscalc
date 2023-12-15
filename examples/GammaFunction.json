@@ -24,7 +24,9 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "(LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0",
@@ -140,7 +142,9 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "Gamma(n) = (n - 1) * Gamma(n - 1)",
@@ -246,7 +250,9 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "Gamma(n) = factorial(n - 1)",
@@ -257,23 +263,33 @@
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "Gamma",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "Gamma(1) = 1",
@@ -338,23 +354,33 @@
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "Gamma",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "Gamma(n + 1) = factorial(n)",

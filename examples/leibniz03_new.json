@@ -22,7 +22,9 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "Gamma(n + 1/2) = sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))",
@@ -33,39 +35,57 @@
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "Gamma",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "B",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "G",
-                            "$fun($real)"
+                            [
+                                "$fun($real)"
+                            ]
                         ],
                         [
                             "zeta",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "I",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "Gamma(1/2) = sqrt(pi)",
@@ -115,39 +135,57 @@
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "Gamma",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "B",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "G",
-                            "$fun($real)"
+                            [
+                                "$fun($real)"
+                            ]
                         ],
                         [
                             "zeta",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "I",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "Gamma(n + 3/2) = 4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (4 * factorial(n + 1))",

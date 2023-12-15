@@ -11,7 +11,9 @@
             "fixes": [
                 [
                     "k",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "(INT x:[1,oo]. log(x) / x ^ k) = 1 / (k - 1) ^ 2",
@@ -108,7 +110,9 @@
             "fixes": [
                 [
                     "k",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "converges(SUM(n, 0, oo, INT x:[1,oo]. x ^ (-(2 * n) - 2) * log(x)))",
@@ -170,7 +174,9 @@
             "fixes": [
                 [
                     "k",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "(INT x:[1,oo]. log(x) / (x ^ 2 + 1)) = G",
@@ -303,7 +309,9 @@
             "fixes": [
                 [
                     "k",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "(INT x:[0,oo]. log(x + 1) / (x ^ 2 + 1)) = pi / 4 * log(2) + G",

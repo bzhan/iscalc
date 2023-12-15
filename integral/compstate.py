@@ -128,7 +128,7 @@ class FuncDef(StateItem):
             res["conds"] = self.conds.export()
 
         if self.fixes.items() is not []:
-            res["fixes"] = [[a, str(b)] for a, b in self.fixes.items()]
+            res["fixes"] = [[a, [str(t) for t in b]] for a, b in self.fixes.items()]
 
         return res
 
@@ -242,7 +242,7 @@ class Goal(StateItem):
         if len(self.fixes.items()) > 0:
             d = list()
             for a, b in self.fixes.items():
-                d.append((a, str(b)))
+                d.append((a, [str(t) for t in b]))
             res['fixes'] = d
         return res
 
@@ -260,7 +260,7 @@ class Goal(StateItem):
         if len(self.fixes.items()) > 0:
             d = list()
             for a, b in self.fixes.items():
-                d.append((a, str(b)))
+                d.append((a, [str(t) for t in b]))
             res['fixes'] = d
         return res
 
@@ -373,7 +373,8 @@ class Calculation(StateItem):
         if self.conds.data:
             res["conds"] = self.conds.export()
         if self.fixes.items() != []:
-            res['fixes'] = [[name, str(type)] for name, type in self.fixes.items()]
+            res['fixes'] = [[name, [str(type) for type in type_list]] \
+                            for name, type_list in self.fixes.items()]
         return res
 
     def clear(self, id: int = 0):
@@ -424,14 +425,29 @@ class Calculation(StateItem):
     def get_fixes(self) -> dict:
         res = self.ctx.get_fixes()
         bd_ty = self.last_expr.get_bounded_vars()
-        res.update(bd_ty)
+        for name in bd_ty:
+            t = bd_ty[name]
+            if name not in res:
+                res[name] = [t]
+            elif t not in res[name]:
+                res[name].append(t)
         return res
 
-    def parse_expr(self, s: str, fixes = dict()) -> Expr:
+    def parse_expr(self, s: str, fixes:Dict[str, List[expr.Type]] = dict()) -> Expr:
         res = self.ctx.get_fixes()
-        res.update(fixes)
+        for name in fixes:
+            t = fixes[name]
+            if name not in res:
+                res[name] = t
+            elif t not in res[name]:
+                res[name] = t + res[name]
         bd_ty = self.last_expr.get_bounded_vars()
-        res.update(bd_ty)
+        for name in bd_ty:
+            t = bd_ty[name]
+            if name not in res:
+                res[name] = [t]
+            elif t not in res[name]:
+                res[name] = [t] + res[name]
         return parser.parse_expr(s, fixes=res)
 
 
@@ -552,7 +568,13 @@ class InductionProof(StateItem):
         base_goal_ctx = Context(self.ctx)
         eq0 = normalize(goal.subst(induct_var, self.start), self.ctx)
         base_fixes = self.ctx.get_fixes()
-        base_fixes.update(eq0.get_bounded_vars())
+        eq0_bd = eq0.get_bounded_vars()
+        for name in eq0_bd:
+            t = eq0_bd[name]
+            if name not in base_fixes:
+                base_fixes[name] = [t]
+            elif t not in base_fixes[name]:
+                base_fixes[name] = [t] + base_fixes[name]
         def rec(t: Type, s: Expr):
             if t.name == 'tensor':
                 args = [t.args[0]]
@@ -566,8 +588,9 @@ class InductionProof(StateItem):
                 return expr.FunType(*args)
             else:
                 return t
-        for v in base_fixes:
-            base_fixes[v] = rec(base_fixes[v], self.start)
+        for name in base_fixes:
+            base_fixes[name] = [rec(type, self.start) for type in base_fixes[name]]
+
         eq0 = parser.parse_expr(str(eq0), fixes=base_fixes)
         self.base_case = Goal(self, base_goal_ctx, eq0, fixes=base_fixes)
 
@@ -576,9 +599,16 @@ class InductionProof(StateItem):
         eqI = normalize(goal.subst(induct_var, Var(induct_var, type=expr.IntType) + Const(1)), self.ctx)
         # type
         induct_fixes = self.ctx.get_fixes()
-        induct_fixes.update(eqI.get_bounded_vars())
-        for v in induct_fixes:
-            induct_fixes[v] = rec(induct_fixes[v], Var(induct_var, type=expr.IntType) + Const(1))
+        eqI_bd = eqI.get_bounded_vars()
+        for name in eqI_bd:
+            t = eqI_bd[name]
+            if name not in induct_fixes:
+                induct_fixes[name] = [t]
+            elif t not in induct_fixes[name]:
+                induct_fixes[name] = [t] + induct_fixes[name]
+        for name in induct_fixes:
+            induct_fixes[name] = [rec(type, Var(induct_var, type=expr.IntType) + Const(1)) \
+                                  for type in induct_fixes[name]]
         eqI = parser.parse_expr(str(eqI), fixes=induct_fixes)
         self.induct_case = Goal(self, induct_goal_ctx, eqI, fixes=induct_fixes)
         induct_goal_ctx.add_induct_hyp(self.goal)
@@ -837,6 +867,17 @@ class CompFile:
                is already of type FuncDef.
         
         """
+        tmp = fixes
+        fixes = self.ctx.get_fixes()
+        # Process fixes
+        if tmp is not None:
+            for name in tmp:
+                if name not in fixes:
+                    fixes[name] = tmp[name]
+                else:
+                    for t in tmp[name]:
+                        if t not in fixes[name]:
+                            fixes[name].append(t)
         if conds is not None:
             for i in range(len(conds)):
                 if isinstance(conds[i], str):
@@ -847,7 +888,7 @@ class CompFile:
             funcdef = parser.parse_expr(funcdef, fixes=fixes)
         if isinstance(funcdef, Expr):
             if funcdef.is_equals():
-                self.content.append(FuncDef(self, self.ctx, funcdef, Conditions(conds), fixes=fixes))
+                self.content.append(FuncDef(self, self.ctx, funcdef, Conditions(conds), fixes=tmp))
                 if expr.is_fun(funcdef.lhs):
                     self.ctx.add_fix(funcdef.lhs.func_name, funcdef.lhs.func_type)
             else:
@@ -891,9 +932,17 @@ class CompFile:
         if isinstance(goal, Goal):
             self.content.append(goal)
             return self.content[-1]
+        tmp = fixes
+        fixes = self.ctx.get_fixes()
         # Process fixes
-        if fixes is None:
-            fixes = dict()
+        if tmp is not None:
+            for name in tmp:
+                if name not in fixes:
+                    fixes[name] = tmp[name]
+                else:
+                    for t in tmp[name]:
+                        if t not in fixes[name]:
+                            fixes[name].append(t)
         # Parse goal statement
         if isinstance(goal, str):
             goal = parser.parse_expr(goal, fixes=fixes)
@@ -908,7 +957,7 @@ class CompFile:
 
         conds = Conditions(conds)
         ctx = self.get_context()
-        self.content.append(Goal(self, ctx, goal, fixes=fixes, conds=conds))
+        self.content.append(Goal(self, ctx, goal, fixes=tmp, conds=conds))
         return self.content[-1]
 
     def add_item(self, item: StateItem):
@@ -1016,9 +1065,13 @@ def parse_rule(item, parent) -> Rule:
         eq_fixes = dict()
         if 'eq_fixes' in item:
             raw_fixes = item['eq_fixes']
-
             for fix in raw_fixes:
-                eq_fixes[fix['var']] = parser.parse_expr(fix['type'], fixes=eq_fixes)
+                for type in fix['type']:
+                    t = parser.parse_expr(type, fixes=eq_fixes)
+                    if fix['var'] not in eq_fixes:
+                        eq_fixes[fix['var']] = [t]
+                    else:
+                        eq_fixes[fix['var']].append(t)
         eq = parser.parse_expr(item['eq'], fixes=eq_fixes)
         source = parser.parse_expr(item['source'], fixes=fixes)
         return rules.ApplyEquation(eq, source, eq_fixes)
@@ -1118,10 +1171,7 @@ def parse_conds(item, fixes:Optional[Dict[str, Type]]=None) -> Conditions:
 def parse_calculatioin(parent, item, fixes=dict()) -> Calculation:
     assert item['type'] == 'Calculation'
     if isinstance(parent, CompFile):
-        fixes = dict()
-        if 'fixes' in item:
-            for name, type in item["fixes"]:
-                fixes[name] = parser.parse_expr(type, fixes=fixes)
+        fixes = parser.parse_fixes(item)
         start = parser.parse_expr(item['start'], fixes=fixes)
         conds = parse_conds(item, fixes=fixes)
         conn_symbol = "=" if not isinstance(parent, RewriteGoalProof) else "==>"
@@ -1142,7 +1192,7 @@ def parse_calculatioin(parent, item, fixes=dict()) -> Calculation:
         conn_symbol = "=" if not isinstance(parent, RewriteGoalProof) else "==>"
         res = Calculation(parent, ctx, start, conds=conds, connection_symbol=conn_symbol)
     for i, step in enumerate(item['steps']):
-        res.add_step(parse_step(res, step, i))
+            res.add_step(parse_step(res, step, i))
     return res
 
 def parse_goal(parent, item, ih=None) -> Goal:
@@ -1153,10 +1203,7 @@ def parse_goal(parent, item, ih=None) -> Goal:
         ctx = Context(parent.ctx)
         if ih != None:
             ctx.add_induct_hyp(ih)
-    fixes = dict()
-    if 'fixes' in item:
-        for s, t in item['fixes']:
-            fixes[s] = parser.parse_expr(t, fixes=fixes)
+    fixes = parser.parse_fixes(item)
     goal = parser.parse_expr(item['goal'], fixes=fixes)
     conds = parse_conds(item, fixes=fixes)
     res = Goal(parent, ctx, goal, conds=conds, fixes=fixes)
@@ -1179,10 +1226,7 @@ def parse_goal(parent, item, ih=None) -> Goal:
 
 def parse_item(parent, item) -> StateItem:
     if item['type'] == 'FuncDef':
-        fixes = dict()
-        if 'fixes' in item:
-            for name, type_s in item['fixes']:
-                fixes[name] = parser.parse_expr(type_s, fixes=fixes)
+        fixes = parser.parse_fixes(item)
         conds = parse_conds(item, fixes=fixes)
         eq = parser.parse_expr(item['eq'], fixes=fixes)
         return FuncDef(parent, parent.ctx, eq, conds=conds, fixes=fixes)
@@ -1191,7 +1235,7 @@ def parse_item(parent, item) -> StateItem:
         goal = parser.parse_expr(item['goal'], fixes=fixes)
         res = CalculationProof(parent, goal)
         for i, calc_item in enumerate(item['calcs']):
-            res.calcs[i] = parse_calculatioin(res, calc_item)
+                res.calcs[i] = parse_calculatioin(res, calc_item)
         return res
     elif item['type'] == 'Goal':
         return parse_goal(parent, item)

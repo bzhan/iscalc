@@ -10,7 +10,7 @@ from integral import expr, matrix, context
 from integral.expr import Var, Const, Fun, EvalAt, Op, Integral, Symbol, Expr, \
     OP, CONST, VAR, sin, cos, FUN, decompose_expr_factor, \
     Deriv, Inf, Limit, NEG_INF, POS_INF, IndefiniteIntegral, Summation, SUMMATION, Matrix, INTEGRAL, MATRIX, INF, \
-    Product
+    Product, SYMBOL
 from integral import parser
 from integral.solve import solve_equation, solve_for_term
 from integral import latex
@@ -1086,7 +1086,7 @@ class ApplyEquation(Rule):
         res = {
             "name": self.name,
             "eq": str(self.eq),
-            "eq_fixes": [{'var': a, 'type': str(b)} for a, b in self.eq_fixes.items()],
+            "eq_fixes": [{'var': a, 'type': [str(t) for t in b]} for a, b in self.eq_fixes.items()],
             "source": str(self.source),
             "str": str(self),
             "latex_str": self.latex_str()
@@ -2188,6 +2188,7 @@ class LimitEquation(Rule):
     def __str__(self):
         return "apply limit %s -> %s to equation" % (self.var, self.lim)
 
+
     def eval(self, e: Expr, ctx: Context):
         v, lim = self.var, self.lim
         fixes = e.lhs.get_bounded_vars()
@@ -2448,7 +2449,7 @@ class SplitItem(Rule):
                 fn = Fun((func_name, ft), Var(e.index_var, type=expr.IntType))
                 eq = expr.Eq(fn, e.body)
                 eq_pat = eq.subst(e.index_var,
-                                  Symbol(e.index_var, pat=[VAR, CONST, OP, FUN, INTEGRAL, MATRIX, INF], type=expr.IntType))
+                                  Symbol(e.index_var, pat=[VAR, CONST, OP, FUN, INTEGRAL, MATRIX, INF, SYMBOL], type=expr.IntType))
                 r = OnSubterm(ExpandDefinition(func_name, simp=False))
                 tmp_ctx = Context(ctx)
                 tmp_ctx.definitions.append(context.Identity(eq_pat))

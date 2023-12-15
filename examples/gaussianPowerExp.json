@@ -32,7 +32,9 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "(INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = 0",
@@ -86,7 +88,9 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "(INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = (2 * n - 1) * I(n - 1) - 2 * I(n)",
@@ -184,7 +188,9 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "I(n) = (2 * n - 1) / 2 * I(n - 1)",
@@ -267,7 +273,9 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "I(n) = factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi)",
@@ -278,39 +286,57 @@
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "Gamma",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "B",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "G",
-                            "$fun($real)"
+                            [
+                                "$fun($real)"
+                            ]
                         ],
                         [
                             "zeta",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "I",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "I(0) = sqrt(pi) / 2",
@@ -399,39 +425,57 @@
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "Gamma",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "B",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "G",
-                            "$fun($real)"
+                            [
+                                "$fun($real)"
+                            ]
                         ],
                         [
                             "zeta",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "I",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "I(n + 1) = 4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))",

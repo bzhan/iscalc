@@ -5,7 +5,9 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "1 - cos(a) = SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))",

@@ -5,15 +5,21 @@
             "fixes": [
                 [
                     "R",
-                    "$tensor($real, 3, 3)"
+                    [
+                        "$tensor($real, 3, 3)"
+                    ]
                 ],
                 [
                     "p",
-                    "$tensor($real, 3, 1)"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ],
                 [
                     "hm",
-                    "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                    [
+                        "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                    ]
                 ]
             ],
             "latex_eq": "hm(R,p) = \\left[\\begin{array}{c:c}R & p\\\\ \\hdashline \\mathbf{0}_{1 \\times 3} & \\mathbf{1}_{1 \\times 1}\\\\\\end{array}\\right]",
@@ -31,23 +37,27 @@
             "fixes": [
                 [
                     "t",
-                    "$real"
+                    [
+                        "$real"
+                    ]
                 ],
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ],
                 [
                     "v",
-                    "$tensor($real, 3, 1)"
-                ],
-                [
-                    "hm",
-                    "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ],
                 [
                     "hmf",
-                    "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                    [
+                        "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                    ]
                 ]
             ],
             "latex_eq": "hmf(t,w,v) = hm(\\mathbf{1}_{3 \\times 3},t v)",
@@ -65,23 +75,27 @@
             "fixes": [
                 [
                     "t",
-                    "$real"
+                    [
+                        "$real"
+                    ]
                 ],
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ],
                 [
                     "v",
-                    "$tensor($real, 3, 1)"
-                ],
-                [
-                    "hm",
-                    "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ],
                 [
                     "hmf",
-                    "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                    [
+                        "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                    ]
                 ]
             ],
             "latex_eq": "hmf(t,w,v) = hm(e^{t \\hat{w}},(\\mathbf{1}_{3 \\times 3} - e^{t \\hat{w}}) (\\hat{w} v) + w w^{\\text{T}} v t)",
@@ -99,23 +113,15 @@
             "fixes": [
                 [
                     "t",
-                    "$real"
+                    [
+                        "$real"
+                    ]
                 ],
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
-                ],
-                [
-                    "v",
-                    "$tensor($real, 3, 1)"
-                ],
-                [
-                    "hm",
-                    "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
-                ],
-                [
-                    "hmf",
-                    "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ]
             ],
             "goal": "exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3)",
@@ -303,11 +309,15 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ],
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "hat(w) ^ n * w = zero_matrix(3,1)",
@@ -365,31 +375,45 @@
                     "fixes": [
                         [
                             "w",
-                            "$tensor($real, 3, 1)"
+                            [
+                                "$tensor($real, 3, 1)"
+                            ]
                         ],
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "hm",
-                            "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                            [
+                                "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                            ]
                         ],
                         [
                             "hmf",
-                            "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                            [
+                                "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                            ]
                         ]
                     ],
                     "goal": "hat(w) * w = zero_matrix(3,1)",
@@ -455,31 +479,45 @@
                     "fixes": [
                         [
                             "w",
-                            "$tensor($real, 3, 1)"
+                            [
+                                "$tensor($real, 3, 1)"
+                            ]
                         ],
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "hm",
-                            "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                            [
+                                "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                            ]
                         ],
                         [
                             "hmf",
-                            "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                            [
+                                "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                            ]
                         ]
                     ],
                     "goal": "hat(w) ^ (n + 1) * w = zero_matrix(3,1)",
@@ -619,7 +657,9 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ]
             ],
             "goal": "exp(t * hat(w)) * w = w",
@@ -741,15 +781,15 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ],
                 [
                     "v",
-                    "$tensor($real, 3, 1)"
-                ],
-                [
-                    "hmf",
-                    "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ]
             ],
             "goal": "hmf(t,w,v) * hmf(-t,w,v) = unit_matrix(4)",
@@ -931,15 +971,15 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ],
                 [
                     "v",
-                    "$tensor($real, 3, 1)"
-                ],
-                [
-                    "hmf",
-                    "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ]
             ],
             "goal": "hmf(t,w,v) * hmf(-t,w,v) = unit_matrix(4)",

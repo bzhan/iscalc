@@ -18,11 +18,9 @@
             "fixes": [
                 [
                     "k",
-                    "$int"
-                ],
-                [
-                    "s",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "x / (1 - x) = SUM(k, 1, oo, x ^ k)",
@@ -282,12 +280,10 @@
             "finished": true,
             "fixes": [
                 [
-                    "k",
-                    "$int"
-                ],
-                [
                     "s",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "Li(s + 1,x) = (INT t:[0,x]. Li(s,t) / t)",
@@ -297,48 +293,64 @@
                     "finished": true,
                     "fixes": [
                         [
-                            "k",
-                            "$int"
-                        ],
-                        [
                             "s",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "Gamma",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "B",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "G",
-                            "$fun($real)"
+                            [
+                                "$fun($real)"
+                            ]
                         ],
                         [
                             "zeta",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "Li",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "t",
-                            "$real"
+                            [
+                                "$real"
+                            ]
                         ]
                     ],
                     "goal": "Li(1,x) = (INT t:[0,x]. Li(0,t) / t)",
@@ -487,48 +499,64 @@
                     "finished": true,
                     "fixes": [
                         [
-                            "k",
-                            "$int"
-                        ],
-                        [
                             "s",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "Gamma",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "B",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "G",
-                            "$fun($real)"
+                            [
+                                "$fun($real)"
+                            ]
                         ],
                         [
                             "zeta",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "Li",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "t",
-                            "$real"
+                            [
+                                "$real"
+                            ]
                         ]
                     ],
                     "goal": "Li(s + 2,x) = (INT t:[0,x]. Li(s + 1,t) / t)",
@@ -677,12 +705,10 @@
             "finished": true,
             "fixes": [
                 [
-                    "k",
-                    "$int"
-                ],
-                [
                     "s",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "(D x. Li(2,1 - x)) = log(x) / (1 - x)",
@@ -871,12 +897,10 @@
             "finished": true,
             "fixes": [
                 [
-                    "k",
-                    "$int"
-                ],
-                [
                     "s",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "(D x. -Li(3,1 - x)) = Li(2,-x + 1) / (-x + 1)",
@@ -954,12 +978,10 @@
             "finished": true,
             "fixes": [
                 [
-                    "k",
-                    "$int"
-                ],
-                [
                     "s",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "Li(s,1) = zeta(s)",
@@ -1043,12 +1065,10 @@
             "finished": true,
             "fixes": [
                 [
-                    "k",
-                    "$int"
-                ],
-                [
                     "s",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "(INT t:[0,x]. log(-t + 1) ^ 2 / t) = log(x) * log(1 - x) ^ 2 + 2 * log(1 - x) * Li(2,1 - x) - 2 * Li(3,1 - x) + 2 * zeta(3)",
@@ -1206,12 +1226,10 @@
             "finished": true,
             "fixes": [
                 [
-                    "k",
-                    "$int"
-                ],
-                [
                     "s",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "(D x. Li(2,1 / (1 + x))) = log(x / (1 + x)) / (1 + x)",
@@ -1387,12 +1405,10 @@
             "finished": true,
             "fixes": [
                 [
-                    "k",
-                    "$int"
-                ],
-                [
                     "s",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "1 / (x + 1) * Li(2,1 / (x + 1)) = (D x. -Li(3,1 / (x + 1)))",
@@ -1502,12 +1518,10 @@
             "finished": true,
             "fixes": [
                 [
-                    "k",
-                    "$int"
-                ],
-                [
                     "s",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "(INT t:[0,x]. log(t + 1) ^ 2 / t) = log(x) * log(1 + x) ^ 2 - 2/3 * log(1 + x) ^ 3 - 2 * log(1 + x) * Li(2,1 / (1 + x)) - 2 * Li(3,1 / (1 + x)) + 2 * zeta(3)",

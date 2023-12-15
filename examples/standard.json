@@ -488,11 +488,15 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ],
                 [
                     "m",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "(INT x:[0,1]. x ^ m * log(x) ^ n) = (-1) ^ n * factorial(n) / (m + 1) ^ (n + 1)",
@@ -503,27 +507,39 @@
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "m",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "x",
-                            "$real"
+                            [
+                                "$real"
+                            ]
                         ]
                     ],
                     "goal": "(INT x:[0,1]. x ^ m) = 1 / (m + 1)",
@@ -578,27 +594,39 @@
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "m",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "x",
-                            "$real"
+                            [
+                                "$real"
+                            ]
                         ]
                     ],
                     "goal": "(INT x:[0,1]. x ^ m * log(x) ^ (n + 1)) = -((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",

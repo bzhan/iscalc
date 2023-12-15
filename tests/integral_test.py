@@ -37,6 +37,24 @@ class IntegralTest(unittest.TestCase):
             for content in file.content:
                 self.assertTrue(content.is_finished())
 
+    def parse_raw_fixes(self, raw_fixes):
+        fixes = dict()
+        for name, type_list in raw_fixes:
+            if isinstance(type_list, list):
+                for type in type_list:
+                    t = parser.parse_expr(type, fixes= fixes)
+                    if name not in fixes:
+                        fixes[name] = [t]
+                    elif t not in fixes[name]:
+                        fixes[name].append(t)
+            else:
+                t = parser.parse_expr(type_list, fixes=fixes)
+                if name not in fixes:
+                    fixes[name] = [t]
+                elif t not in fixes[name]:
+                    fixes[name].append(t)
+        return fixes
+
     def testStandard(self):
         file = compstate.CompFile("base", "standard")
 
@@ -92,9 +110,8 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         calc.perform_rule(rules.IndefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
-        fixes = dict()
-        fixes['n'] = parser.parse_expr('$int')
-        fixes['m'] = parser.parse_expr('$int')
+        raw_fixes = [('n', '$int'), ('m', '$int')]
+        fixes = self.parse_raw_fixes(raw_fixes)
         goal7 = file.add_goal("(INT x:[0,1]. x ^ m * log(x) ^ n) = (-1)^n * factorial(n) / (m+1) ^ (n+1)", conds=["m >= 0", "n >= 0", "isInt(n)"], fixes=fixes)
         proof = goal7.proof_by_induction("n")
         proof_base = proof.base_case.proof_by_calculation()
@@ -812,8 +829,8 @@ class IntegralTest(unittest.TestCase):
         # Reference:
         # Irresistable Integrals, Section 2.3
         file = compstate.CompFile("base", 'wallis')
-        fixes = dict()
-        fixes['m'] = parser.parse_expr('$int')
+        raw_fixes = [('m', '$int')]
+        fixes = self.parse_raw_fixes(raw_fixes)
         # Make definition
         file.add_definition("I(m,b) = (INT x:[0,oo]. 1/(x^2+b)^(m+1))", conds=["b > 0", "m >= 0"])
 
@@ -876,8 +893,8 @@ class IntegralTest(unittest.TestCase):
         # Reference:
         # Inside interesting integrals, Section 4.1
         file = compstate.CompFile("interesting", "GammaFunction")
-        fixes = dict()
-        fixes['n'] = parser.parse_expr("$int")
+        raw_fixes = [('n', '$int')]
+        fixes = self.parse_raw_fixes(raw_fixes)
         # Definition of Gamma function
         file.add_definition("Gamma(n) = (INT x:[0,oo]. exp(-x) * x^(n-1))", conds=["n > 0"])
 
@@ -1766,9 +1783,8 @@ class IntegralTest(unittest.TestCase):
 
         # Initial state
         file = compstate.CompFile("interesting", 'leibniz03_new')
-
-        fixes = dict()
-        fixes['n'] = parser.parse_expr('$int')
+        raw_fixes = [('n', '$int')]
+        fixes = self.parse_raw_fixes(raw_fixes)
         # Make definition
         file.add_definition("I(t) = INT x:[0,oo]. cos(t*x)*exp(-(x^2)/2)")
         goal = file.add_goal("Gamma(n+1/2) = sqrt(pi) * factorial(2*n) / (4^n * factorial(n))", conds=["n>=0", 'isInt(n)'], fixes=fixes)
@@ -2001,8 +2017,8 @@ class IntegralTest(unittest.TestCase):
         # Reference:
         # Inside interesting integrals, Section 2.3
         file = compstate.CompFile("interesting", 'gaussianPowerExp')
-        fixes = dict()
-        fixes['n'] = parser.parse_expr('$int')
+        raw_fixes = [('n', '$int')]
+        fixes = self.parse_raw_fixes(raw_fixes)
         file.add_definition("I(n) = (INT x:[0, oo]. x^(2*n) * exp(-x^2))", conds=["n>=0", "isInt(n)"])
 
         goal01 = file.add_goal("(INT x:[0, oo]. (D x. x^(2*n-1)*exp(-x^2))) = 0", fixes=fixes, conds=["n>=1", "isInt(n)"])
@@ -2702,8 +2718,8 @@ class IntegralTest(unittest.TestCase):
         # Inside interesting integrals, Section 5.1, example #2 and example #3
         file = compstate.CompFile("interesting", 'CatalanConstant02')
 
-        fixes = dict()
-        fixes['k'] = parser.parse_expr('$int')
+        raw_fixes = [('k', '$int')]
+        fixes = self.parse_raw_fixes(raw_fixes)
         # Evaluate I(k)
         goal1 = file.add_goal("(INT x:[1,oo]. log(x) / (x^k)) = 1/(k-1)^2", conds=["k > 1"], fixes=fixes)
         proof_of_goal1 = goal1.proof_by_calculation()
@@ -4238,9 +4254,8 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.Equation("-(x * y) + 1", "1-x*y"))
         calc.perform_rule(rules.OnLocation(rules.FoldDefinition('zeta'), '1'))
         assert goal02.is_finished()
-        fixes = dict()
-        fixes['s'] = expr.IntType
-        fixes['n'] = expr.IntType
+        raw_fixes = [('s', '$int'), ('n', '$int')]
+        fixes = self.parse_raw_fixes(raw_fixes)
         s1 = "(INT y:[0,1]. (INT x:[0,1]. log(x*y)^(s-2)*(x^a * y^a) / (1-x*y)))"
         s2 = "(-1)^s * factorial(s-1) * SUM(n, 0, oo, 1/(n+a+1)^s)"
         goal03 = file.add_goal(s1 + "=" + s2, conds=["a > -1", "s >= 2", "isInt(s)"], fixes=fixes)
@@ -4277,8 +4292,8 @@ class IntegralTest(unittest.TestCase):
         s2 = calc.parse_expr("factorial(s)")
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         assert goal03.is_finished()
-        fixes = dict()
-        fixes['s'] = expr.IntType
+        raw_fixes = [('s', '$int')]
+        fixes = self.parse_raw_fixes(raw_fixes)
         s1 = 'zeta(s)'
         s2 = "(-1)^s / factorial(s-1) * \
             (INT y:[0,1]. (INT x:[0,1]. log(x*y)^(s-2)/ (1-x*y)))"
@@ -4311,9 +4326,8 @@ class IntegralTest(unittest.TestCase):
 
         s1 = "(INT x:[0, oo]. exp(-k*x) * x^(s-1))"
         s2 = "Gamma(s) / k^s"
-        fixes = dict()
-        fixes['s'] = expr.IntType
-        fixes['k'] = expr.IntType
+        raw_fixes = [('s', '$int'),('k', '$int')]
+        fixes = self.parse_raw_fixes(raw_fixes)
         goal05 = file.add_goal(s1+'='+s2, conds=["k>0"], fixes=fixes)
         proof = goal05.proof_by_calculation()
         calc = proof.lhs_calc
@@ -4510,9 +4524,7 @@ class IntegralTest(unittest.TestCase):
         s1 = "I(m,n)"
         s2 = "(-1)^n * (factorial(n) / (m+1)^(n+1))"
         raw_fixes = [('m', '$int'), ('n', '$int')]
-        fixes = dict()
-        for a, b in raw_fixes:
-            fixes[a] = parser.parse_expr(b, fixes=fixes)
+        fixes = self.parse_raw_fixes(raw_fixes)
         goal02 = file.add_goal(s1 + "=" + s2, conds=["m >= 0", "n >= 0", "isInt(n)", "isInt(m)"], fixes = fixes)
         proof = goal02.proof_by_induction("n")
         base_proof = proof.base_case.proof_by_calculation()
@@ -4601,8 +4613,8 @@ class IntegralTest(unittest.TestCase):
         file = compstate.CompFile("impossible", "useful_log")
 
         file.add_definition("Li(s, x) = SUM(k, 1, oo, x^k /k^s)")
-        fixes = dict()
-        fixes['k'] = parser.parse_expr('$int')
+        raw_fixes = [('k', '$int')]
+        fixes = self.parse_raw_fixes(raw_fixes)
         goal = file.add_goal("x/(1-x) = SUM(k, 1, oo, x^k)", conds=["abs(x) < 1"], fixes=fixes)
         split_cond = parser.parse_expr("x != 0", fixes=fixes)
         proof = goal.proof_by_case(split_cond)
@@ -4635,7 +4647,8 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyEquation("x/(1-x) = SUM(k, 1, oo, x^k)", s))
         self.assertTrue(goal.is_finished())
 
-        fixes['s'] = parser.parse_expr('$int')
+        raw_fixes = [('s', '$int')]
+        fixes = self.parse_raw_fixes(raw_fixes)
         goal = file.add_goal("Li(s+1, x) = (INT t:[0, x]. Li(s, t) / t)", conds=["abs(x)<1", "s>=0", "isInt(s)"], fixes = fixes)
         proof = goal.proof_by_induction("s")
         proof_base = proof.base_case.proof_by_calculation()
@@ -4651,14 +4664,14 @@ class IntegralTest(unittest.TestCase):
         s1 = calc.parse_expr("SUM(k, 1, oo, t ^ k) / t")
         s2 = calc.parse_expr("1/t * SUM(k, 1, oo, t ^ k)")
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = parser.parse_expr("1/t * SUM(k, 1, oo, t ^ k)", fixes = fixes)
-        s2 = parser.parse_expr("SUM(k, 1, oo, 1/t * t ^ k)", fixes = fixes)
+        s1 = calc.parse_expr("1/t * SUM(k, 1, oo, t ^ k)")
+        s2 = calc.parse_expr("SUM(k, 1, oo, 1/t * t ^ k)")
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = parser.parse_expr("1/t * t ^ k", fixes = fixes)
-        s2 = parser.parse_expr("t^(-1) * t^k", fixes = fixes)
+        s1 = calc.parse_expr("1/t * t ^ k")
+        s2 = calc.parse_expr("t^(-1) * t^k")
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = parser.parse_expr("t^(-1)*t^k", fixes = fixes)
-        s2 = parser.parse_expr("t^(-1+k)", fixes = fixes)
+        s1 = calc.parse_expr("t^(-1)*t^k")
+        s2 = calc.parse_expr("t^(-1+k)")
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2),"0.0"))
         calc.perform_rule(rules.IntSumExchange())
         calc.perform_rule(rules.DefiniteIntegralIdentity())
@@ -4669,17 +4682,17 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ExpandDefinition("Li"))
         calc = proof_induct.rhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition("Li"), "0.0"))
-        s1 = parser.parse_expr("SUM(k, 1, oo, k ^ (-s - 1) * t ^ k) / t", fixes = fixes)
-        s2 = parser.parse_expr("t^-1 * SUM(k, 1, oo, k ^ (-s - 1) * t ^ k)", fixes = fixes)
+        s1 = calc.parse_expr("SUM(k, 1, oo, k ^ (-s - 1) * t ^ k) / t")
+        s2 = calc.parse_expr("t^-1 * SUM(k, 1, oo, k ^ (-s - 1) * t ^ k)")
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = parser.parse_expr("t^-1 * SUM(k, 1, oo, k ^ (-s - 1) * t ^ k)", fixes = fixes)
-        s2 = parser.parse_expr("SUM(k, 1, oo, t^-1 * (k ^ (-s - 1) * t ^ k))", fixes = fixes)
+        s1 = calc.parse_expr("t^-1 * SUM(k, 1, oo, k ^ (-s - 1) * t ^ k)")
+        s2 = calc.parse_expr("SUM(k, 1, oo, t^-1 * (k ^ (-s - 1) * t ^ k))")
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = parser.parse_expr("t^-1 * (k ^ (-s - 1) * t ^ k)", fixes = fixes)
-        s2 = parser.parse_expr("t^-1 * t^k * k^(-s-1)", fixes = fixes)
+        s1 = calc.parse_expr("t^-1 * (k ^ (-s - 1) * t ^ k)")
+        s2 = calc.parse_expr("t^-1 * t^k * k^(-s-1)")
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = parser.parse_expr("t^-1 * t^k", fixes = fixes)
-        s2 = parser.parse_expr("t^(-1 + k)", fixes = fixes)
+        s1 = calc.parse_expr("t^-1 * t^k")
+        s2 = calc.parse_expr("t^(-1 + k)")
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2),"0.0.0"))
         calc.perform_rule(rules.IntSumExchange())
         calc.perform_rule(rules.DefiniteIntegralIdentity())
@@ -4808,11 +4821,11 @@ class IntegralTest(unittest.TestCase):
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition("Li"), "1"))
-        s1 = parser.parse_expr("(1 / (x + 1)) ^ k", fixes = fixes)
-        s2 = parser.parse_expr("(1 / (x + 1)) ^ (k-1 + 1)", fixes = fixes)
+        s1 = calc.parse_expr("(1 / (x + 1)) ^ k")
+        s2 = calc.parse_expr("(1 / (x + 1)) ^ (k-1 + 1)")
         calc.perform_rule(rules.Equation(s1, s2))
-        s1 = parser.parse_expr("(1 / (x + 1)) ^ (k-1 + 1)", fixes = fixes)
-        s2 = parser.parse_expr("(1 / (x + 1)) ^ (k-1) * (1/(x+1))^1", fixes = fixes)
+        s1 = calc.parse_expr("(1 / (x + 1)) ^ (k-1 + 1)")
+        s2 = calc.parse_expr("(1 / (x + 1)) ^ (k-1) * (1/(x+1))^1")
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2), "1.0.1"))
         calc.perform_rule(rules.FullSimplify())
         calc = proof.rhs_calc

@@ -124,6 +124,9 @@ def is_row_type(type: Type) -> bool:
 def is_matrix_type(type: Type) -> bool:
     return isinstance(type, Type) and type.name == "tensor" and len(type.args) == 3
 
+def is_fun_type(type:Type) -> bool:
+    return isinstance(type, Type) and type.name == 'fun'
+
 def num_row(type: Type) -> "Expr":
     if not is_matrix_type(type):
         raise AssertionError("num_row: input must be a matrix type, got %s" % type)
@@ -1231,7 +1234,7 @@ def expr_to_pattern(e: Expr) -> Expr:
     e = rec(e)
     for var in vars:
         type = type_to_pattern(var[1])
-        sym = Symbol(var[0], [VAR, CONST, OP, FUN, INTEGRAL, MATRIX, INF], type)
+        sym = Symbol(var[0], [VAR, CONST, OP, FUN, INTEGRAL, MATRIX, INF, SYMBOL], type)
         e = e.subst(var[0], sym)
     return e
 

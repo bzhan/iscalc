@@ -19,19 +19,27 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ],
                 [
                     "m",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ],
                 [
                     "P",
-                    "$tensor($real, m, m)"
+                    [
+                        "$tensor($real, m, m)"
+                    ]
                 ],
                 [
                     "A",
-                    "$tensor($real, m, m)"
+                    [
+                        "$tensor($real, m, m)"
+                    ]
                 ]
             ],
             "goal": "(inv(P) * A * P) ^ n = inv(P) * A ^ n * P",
@@ -182,31 +190,45 @@
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "m",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "P",
-                            "$tensor($real, m, m)"
+                            [
+                                "$tensor($real, m, m)"
+                            ]
                         ],
                         [
                             "A",
-                            "$tensor($real, m, m)"
+                            [
+                                "$tensor($real, m, m)"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "unit_matrix(m) = unit_matrix(m)",
@@ -242,31 +264,45 @@
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "m",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "P",
-                            "$tensor($real, m, m)"
+                            [
+                                "$tensor($real, m, m)"
+                            ]
                         ],
                         [
                             "A",
-                            "$tensor($real, m, m)"
+                            [
+                                "$tensor($real, m, m)"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "(inv(P) * A * P) ^ (n + 1) = inv(P) * A ^ (n + 1) * P",
@@ -486,11 +522,15 @@
             "fixes": [
                 [
                     "A",
-                    "$tensor($real, 3, 3)"
+                    [
+                        "$tensor($real, 3, 3)"
+                    ]
                 ],
                 [
                     "B",
-                    "$tensor($real, 3, 3)"
+                    [
+                        "$tensor($real, 3, 3)"
+                    ]
                 ]
             ],
             "latex_start": "(B ^ {-1} A B) ^ {4}",

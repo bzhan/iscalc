@@ -11,7 +11,9 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ]
             ],
             "goal": "exp(hat(w) * x) = unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * hat(w) ^ 2",

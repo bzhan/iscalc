@@ -271,15 +271,21 @@
             "fixes": [
                 [
                     "m",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ],
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ],
                 [
                     "i",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "binom(m + n + 1,m) = SUM(i, 0, m, binom(n + i,i))",
@@ -290,27 +296,39 @@
                     "fixes": [
                         [
                             "m",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "i",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "binom(n + 1,0) = binom(n,0)",
@@ -368,27 +386,39 @@
                     "fixes": [
                         [
                             "m",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "i",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "binom(m + n + 2,m + 1) = SUM(i, 0, m + 1, binom(i + n,i))",
@@ -519,12 +549,22 @@
             "finished": true,
             "fixes": [
                 [
+                    "m",
+                    [
+                        "$int"
+                    ]
+                ],
+                [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ],
                 [
                     "k",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "(x + y) ^ n = SUM(k, 0, n, binom(n,k) * x ^ k * y ^ (n - k))",
@@ -722,24 +762,40 @@
                     "finished": true,
                     "fixes": [
                         [
+                            "m",
+                            [
+                                "$int"
+                            ]
+                        ],
+                        [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "k",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "x + y = SUM(k, 0, 1, x ^ k * y ^ (-k + 1) * binom(1,k))",
@@ -935,24 +991,40 @@
                     "finished": true,
                     "fixes": [
                         [
+                            "m",
+                            [
+                                "$int"
+                            ]
+                        ],
+                        [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "k",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "(x + y) ^ (n + 1) = SUM(k, 0, n + 1, x ^ k * y ^ (-k + n + 1) * binom(n + 1,k))",

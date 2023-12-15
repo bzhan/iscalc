@@ -32,7 +32,9 @@
             "fixes": [
                 [
                     "m",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "(D b. I(m,b)) = -(m + 1) * I(m + 1,b)",
@@ -127,7 +129,9 @@
             "fixes": [
                 [
                     "m",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "I(m,b) = pi / 2 ^ (2 * m + 1) * binom(2 * m,m) * (1 / b ^ ((2 * m + 1) / 2))",
@@ -138,23 +142,33 @@
                     "fixes": [
                         [
                             "m",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "I",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "I(0,b) = pi / (2 * sqrt(b))",
@@ -262,23 +276,33 @@
                     "fixes": [
                         [
                             "m",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "I",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "I(m + 1,b) = 2 ^ -(2 * m) * pi / 8 * b ^ -((2 * m + 3) / 2) * binom(2 * m + 2,m + 1)",

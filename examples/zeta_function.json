@@ -295,11 +295,15 @@
             "fixes": [
                 [
                     "s",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ],
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a) / (1 - x * y)) = (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + a + 1) ^ s)",
@@ -310,47 +314,69 @@
                     "fixes": [
                         [
                             "s",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "Gamma",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "B",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "G",
-                            "$fun($real)"
+                            [
+                                "$fun($real)"
+                            ]
                         ],
                         [
                             "zeta",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "y",
-                            "$real"
+                            [
+                                "$real"
+                            ]
                         ],
                         [
                             "x",
-                            "$real"
+                            [
+                                "$real"
+                            ]
                         ]
                     ],
                     "goal": "(INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a / (-(x * y) + 1)) = SUM(n, 0, oo, 1 / (a + n + 1) ^ 2)",
@@ -421,47 +447,69 @@
                     "fixes": [
                         [
                             "s",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "Gamma",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "B",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ],
                         [
                             "G",
-                            "$fun($real)"
+                            [
+                                "$fun($real)"
+                            ]
                         ],
                         [
                             "zeta",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "y",
-                            "$real"
+                            [
+                                "$real"
+                            ]
                         ],
                         [
                             "x",
-                            "$real"
+                            [
+                                "$real"
+                            ]
                         ]
                     ],
                     "goal": "(INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a * log(x * y) ^ (s - 1) / (-(x * y) + 1)) = -((-1) ^ s * factorial(s) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1)))",
@@ -630,7 +678,9 @@
             "fixes": [
                 [
                     "s",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "zeta(s) = (-1) ^ s / factorial(s - 1) * (INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) / (1 - x * y))",
@@ -796,11 +846,15 @@
             "fixes": [
                 [
                     "s",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ],
                 [
                     "k",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "(INT x:[0,oo]. exp(-k * x) * x ^ (s - 1)) = Gamma(s) / k ^ s",
@@ -901,11 +955,15 @@
             "fixes": [
                 [
                     "s",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ],
                 [
                     "k",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "(INT x:[0,oo]. x ^ (s - 1) / (exp(x) - 1)) = Gamma(s) * zeta(s)",

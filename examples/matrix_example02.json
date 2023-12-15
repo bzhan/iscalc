@@ -5,11 +5,15 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ],
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
@@ -74,11 +78,15 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ],
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "w * T(w) * hat(w) = zero_matrix(3,3)",
@@ -153,11 +161,15 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ],
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)",
@@ -284,23 +296,33 @@
                     "fixes": [
                         [
                             "w",
-                            "$tensor($real, 3, 1)"
+                            [
+                                "$tensor($real, 3, 1)"
+                            ]
                         ],
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "hat(w) = hat(w)",
@@ -336,23 +358,33 @@
                     "fixes": [
                         [
                             "w",
-                            "$tensor($real, 3, 1)"
+                            [
+                                "$tensor($real, 3, 1)"
+                            ]
                         ],
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "hat(w) ^ (2 * n + 3) = -((-1) ^ n * hat(w))",
@@ -521,23 +553,33 @@
                                             "eq": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
                                             "eq_fixes": [
                                                 {
-                                                    "type": "$tensor($real, 3, 1)",
+                                                    "type": [
+                                                        "$tensor($real, 3, 1)"
+                                                    ],
                                                     "var": "w"
                                                 },
                                                 {
-                                                    "type": "$int",
+                                                    "type": [
+                                                        "$int"
+                                                    ],
                                                     "var": "n"
                                                 },
                                                 {
-                                                    "type": "$fun($real, $real)",
+                                                    "type": [
+                                                        "$fun($real, $real)"
+                                                    ],
                                                     "var": "cosh"
                                                 },
                                                 {
-                                                    "type": "$fun($real, $real)",
+                                                    "type": [
+                                                        "$fun($real, $real)"
+                                                    ],
                                                     "var": "sinh"
                                                 },
                                                 {
-                                                    "type": "$fun($real, $real, $real)",
+                                                    "type": [
+                                                        "$fun($real, $real, $real)"
+                                                    ],
                                                     "var": "binom"
                                                 }
                                             ],
@@ -555,23 +597,33 @@
                                             "eq": "norm(w) = 1",
                                             "eq_fixes": [
                                                 {
-                                                    "type": "$tensor($real, 3, 1)",
+                                                    "type": [
+                                                        "$tensor($real, 3, 1)"
+                                                    ],
                                                     "var": "w"
                                                 },
                                                 {
-                                                    "type": "$int",
+                                                    "type": [
+                                                        "$int"
+                                                    ],
                                                     "var": "n"
                                                 },
                                                 {
-                                                    "type": "$fun($real, $real)",
+                                                    "type": [
+                                                        "$fun($real, $real)"
+                                                    ],
                                                     "var": "cosh"
                                                 },
                                                 {
-                                                    "type": "$fun($real, $real)",
+                                                    "type": [
+                                                        "$fun($real, $real)"
+                                                    ],
                                                     "var": "sinh"
                                                 },
                                                 {
-                                                    "type": "$fun($real, $real, $real)",
+                                                    "type": [
+                                                        "$fun($real, $real, $real)"
+                                                    ],
                                                     "var": "binom"
                                                 }
                                             ],
@@ -610,23 +662,33 @@
                                             "eq": "w * T(w) * hat(w) = zero_matrix(3,3)",
                                             "eq_fixes": [
                                                 {
-                                                    "type": "$tensor($real, 3, 1)",
+                                                    "type": [
+                                                        "$tensor($real, 3, 1)"
+                                                    ],
                                                     "var": "w"
                                                 },
                                                 {
-                                                    "type": "$int",
+                                                    "type": [
+                                                        "$int"
+                                                    ],
                                                     "var": "n"
                                                 },
                                                 {
-                                                    "type": "$fun($real, $real)",
+                                                    "type": [
+                                                        "$fun($real, $real)"
+                                                    ],
                                                     "var": "cosh"
                                                 },
                                                 {
-                                                    "type": "$fun($real, $real)",
+                                                    "type": [
+                                                        "$fun($real, $real)"
+                                                    ],
                                                     "var": "sinh"
                                                 },
                                                 {
-                                                    "type": "$fun($real, $real, $real)",
+                                                    "type": [
+                                                        "$fun($real, $real, $real)"
+                                                    ],
                                                     "var": "binom"
                                                 }
                                             ],
@@ -688,11 +750,15 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    [
+                        "$tensor($real, 3, 1)"
+                    ]
                 ],
                 [
                     "n",
-                    "$int"
+                    [
+                        "$int"
+                    ]
                 ]
             ],
             "goal": "hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2",
@@ -819,23 +885,33 @@
                     "fixes": [
                         [
                             "w",
-                            "$tensor($real, 3, 1)"
+                            [
+                                "$tensor($real, 3, 1)"
+                            ]
                         ],
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "hat(w) ^ 2 = hat(w) ^ 2",
@@ -871,23 +947,33 @@
                     "fixes": [
                         [
                             "w",
-                            "$tensor($real, 3, 1)"
+                            [
+                                "$tensor($real, 3, 1)"
+                            ]
                         ],
                         [
                             "n",
-                            "$int"
+                            [
+                                "$int"
+                            ]
                         ],
                         [
                             "cosh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "sinh",
-                            "$fun($real, $real)"
+                            [
+                                "$fun($real, $real)"
+                            ]
                         ],
                         [
                             "binom",
-                            "$fun($real, $real, $real)"
+                            [
+                                "$fun($real, $real, $real)"
+                            ]
                         ]
                     ],
                     "goal": "hat(w) ^ (2 * n + 4) = -((-1) ^ n * hat(w) ^ 2)",
@@ -1043,23 +1129,33 @@
                                             "eq": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
                                             "eq_fixes": [
                                                 {
-                                                    "type": "$tensor($real, 3, 1)",
+                                                    "type": [
+                                                        "$tensor($real, 3, 1)"
+                                                    ],
                                                     "var": "w"
                                                 },
                                                 {
-                                                    "type": "$int",
+                                                    "type": [
+                                                        "$int"
+                                                    ],
                                                     "var": "n"
                                                 },
                                                 {
-                                                    "type": "$fun($real, $real)",
+                                                    "type": [
+                                                        "$fun($real, $real)"
+                                                    ],
                                                     "var": "cosh"
                                                 },
                                                 {
-                                                    "type": "$fun($real, $real)",
+                                                    "type": [
+                                                        "$fun($real, $real)"
+                                                    ],
                                                     "var": "sinh"
                                                 },
                                                 {
-                                                    "type": "$fun($real, $real, $real)",
+                                                    "type": [
+                                                        "$fun($real, $real, $real)"
+                                                    ],
                                                     "var": "binom"
                                                 }
                                             ],
@@ -1077,23 +1173,33 @@
                                             "eq": "norm(w) = 1",
                                             "eq_fixes": [
                                                 {
-                                                    "type": "$tensor($real, 3, 1)",
+                                                    "type": [
+                                                        "$tensor($real, 3, 1)"
+                                                    ],
                                                     "var": "w"
                                                 },
                                                 {
-                                                    "type": "$int",
+                                                    "type": [
+                                                        "$int"
+                                                    ],
                                                     "var": "n"
                                                 },
                                                 {
-                                                    "type": "$fun($real, $real)",
+                                                    "type": [
+                                                        "$fun($real, $real)"
+                                                    ],
                                                     "var": "cosh"
                                                 },
                                                 {
-                                                    "type": "$fun($real, $real)",
+                                                    "type": [
+                                                        "$fun($real, $real)"
+                                                    ],
                                                     "var": "sinh"
                                                 },
                                                 {
-                                                    "type": "$fun($real, $real, $real)",
+                                                    "type": [
+                                                        "$fun($real, $real, $real)"
+                                                    ],
                                                     "var": "binom"
                                                 }
                                             ],
@@ -1132,23 +1238,33 @@
                                             "eq": "w * T(w) * hat(w) = zero_matrix(3,3)",
                                             "eq_fixes": [
                                                 {
-                                                    "type": "$tensor($real, 3, 1)",
+                                                    "type": [
+                                                        "$tensor($real, 3, 1)"
+                                                    ],
                                                     "var": "w"
                                                 },
                                                 {
-                                                    "type": "$int",
+                                                    "type": [
+                                                        "$int"
+                                                    ],
                                                     "var": "n"
                                                 },
                                                 {
-                                                    "type": "$fun($real, $real)",
+                                                    "type": [
+                                                        "$fun($real, $real)"
+                                                    ],
                                                     "var": "cosh"
                                                 },
                                                 {
-                                                    "type": "$fun($real, $real)",
+                                                    "type": [
+                                                        "$fun($real, $real)"
+                                                    ],
                                                     "var": "sinh"
                                                 },
                                                 {
-                                                    "type": "$fun($real, $real, $real)",
+                                                    "type": [
+                                                        "$fun($real, $real, $real)"
+                                                    ],
                                                     "var": "binom"
                                                 }
                                             ],

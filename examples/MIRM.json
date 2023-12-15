@@ -105,8 +105,7 @@
                 ["t", "$real"],
                 ["w", "$tensor($real, 3, 1)"],
                 ["v", "$tensor($real, 3, 1)"],
-                ["hmf", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"],
-                ["hm", "$fun($tensor($real, 3,3), $tensor($real, 3,1), $tensor($real, 4, 4))"]
+                ["hmf", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"]
             ],
             "path": "twist_matrix_exp_inv",
             "type": "definition",
@@ -120,8 +119,7 @@
                 ["t", "$real"],
                 ["w", "$tensor($real, 3, 1)"],
                 ["v", "$tensor($real, 3, 1)"],
-                ["hmf", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"],
-                ["hm", "$fun($tensor($real, 3,3), $tensor($real, 3,1), $tensor($real, 4, 4))"]
+                ["hmf", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"]
             ],
             "conds": ["norm(w) = 1"],
             "func_type": "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
@@ -152,8 +150,7 @@
             "fixes": [
                 ["t", "$real"],
                 ["w", "$tensor($real, 3, 1)"],
-                ["v", "$tensor($real, 3, 1)"],
-                ["hmf", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"]
+                ["v", "$tensor($real, 3, 1)"]
             ],
             "conds": ["norm(w) = 1"]
         },
@@ -164,8 +161,7 @@
             "fixes": [
                 ["t", "$real"],
                 ["w", "$tensor($real, 3, 1)"],
-                ["v", "$tensor($real, 3, 1)"],
-                ["hmf", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"]
+                ["v", "$tensor($real, 3, 1)"]
             ]
         },
         {
@@ -180,7 +176,7 @@
             "fixes": [
                 ["w", "$tensor($real, 3, 1)"],
                 ["v", "$tensor($real, 3, 1)"],
-                ["twist", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"]
+                ["twist", "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"]
             ]
         },
         {
@@ -190,9 +186,7 @@
             "fixes": [
                 ["t", "$real"],
                 ["w", "$tensor($real, 3, 1)"],
-                ["v", "$tensor($real, 3, 1)"],
-                ["hmf", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"],
-                ["twist", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"]
+                ["v", "$tensor($real, 3, 1)"]
             ],
             "conds": ["norm(w) = 0"]
         },
@@ -203,9 +197,7 @@
             "fixes": [
                 ["t", "$real"],
                 ["w", "$tensor($real, 3, 1)"],
-                ["v", "$tensor($real, 3, 1)"],
-                ["hmf", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"],
-                ["twist", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"]
+                ["v", "$tensor($real, 3, 1)"]
             ],
             "conds": ["norm(w) = 1"]
         },
@@ -218,7 +210,14 @@
             "expr": "gst(t, n, w, v, ic) = MUL(i, 0, n-1, hmf(nth(t, i, 0), nthc(w, i), nthc(v, i))) * ic",
             "path": "matrix_poe_inv",
             "type": "definition",
-            "func_type": "$fun($int, $tensor($real, n, 1), $tensor($real, 3, n), $tensor($real, 3, n), $tensor($real, 4, 4), $tensor($real, 4, 4))"
+            "fixes": [
+                ["n", "$int"],
+                ["t", "$tensor($real, n, 1)"],
+                ["w", "$tensor($real, 3, n)"],
+                ["v", "$tensor($real, 3, n)"],
+                ["ic", "$tensor($real, 4, 4)"],
+                ["gst", "$fun($tensor($real, n, 1), $int, $tensor($real, 3, n), $tensor($real, 3, n), $tensor($real, 4, 4), $tensor($real, 4, 4))"]
+            ]
         },
         {
             "expr": "(inv(ic) * MUL(i, 0, n-1, hmf(-nth(t, n-i-1, 0), nthc(w, n-i-1), nthc(v, n-i-1))))*gst(t, n, w, v, ic) = unit_matrix(4)",

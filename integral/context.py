@@ -8,7 +8,7 @@ from integral import expr
 from integral.expr import Expr, Eq, Op, Const, expr_to_pattern, Matrix
 from integral import parser
 from integral.conditions import Conditions
-
+from integral.sympywrapper import type_le
 dirname = os.path.dirname(__file__)
 
 class Identity:
@@ -113,7 +113,7 @@ class Context:
         self.substs: Dict[str, Expr] = dict()
 
         # List of fixes
-        self.fixes: Dict[str, List[expr.Type]] = dict()
+        self.fixes: Dict[str, Union[expr.Type, Dict]] = dict()
 
         # List of identities of summation split
         self.summation_split_identities: List[Identity] = list()
@@ -231,15 +231,50 @@ class Context:
         p = self
         while p != None:
             d = p.fixes
-            for k, l in d.items():
-                if k not in res:
-                    res[k] = l
+            for name, info in d.items():
+                if name not in res:
+                    res[name] = info
                 else:
-                    for t in l:
-                        if t not in res[k]:
-                            res[k].append(t)
+                    if isinstance(info, list):
+                        for item in info:
+                            if item not in res[name]:
+                                res[name].append(item)
             p = p.parent
         return res
+
+    def get_func_type(self, func_name, *args):
+        fixes = self.get_fixes()
+        if func_name in fixes:
+            assert isinstance(fixes[func_name], list)
+            for info in fixes[func_name]:
+                t = info['func_type']
+                inst = dict()
+                flag = True
+                if len(args) + 1 == len(t.args):
+                    for a, b in zip(args, t.args[:-1]):
+                        if not type_le(a.type, b):
+                            flag = False
+                            break
+                if flag:
+                    for i, param_name in enumerate(info['params_name']):
+                        inst[param_name] = args[i]
+                    t_pat = expr.type_to_pattern(t.args[-1])
+                    func_type_args = list(t.args[:-1])
+                    func_type_args.append(t_pat.inst_pat(inst))
+                    return [(func_name, expr.FunType(*func_type_args))] + list(args)
+                for i, param_name in enumerate(info['params_name']):
+                    inst[param_name] = args[i]
+                if expr.is_fun_type(t) and len(t.args) == len(args) + 1:
+                    # pattern match
+                    t_pat = expr.type_to_pattern(t)
+                    tmp = expr.FunType(*[arg.type for arg in args])
+                    tmp_pat = expr.FunType(*[arg for arg in t_pat.args[:-1]])
+                    tmp_inst = expr.type_match(tmp, tmp_pat)
+                    if tmp_inst is not None:
+                        inst.update(tmp_inst)
+                        return [(func_name, t_pat.inst_pat(inst))] + list(args)
+        return [(func_name, expr.FunType(*[expr.RealType for i in range(len(args) + 1)]))] + list(args)
+
 
     def get_eq_conds(self) -> Conditions:
         parent_conds = self.parent.get_conds() if self.parent is not None else Conditions()
@@ -364,23 +399,19 @@ class Context:
         for cond in conds.data:
             self.add_condition(cond)
 
-    def add_fix(self, k: str, l: List[expr.Type]):
-        if isinstance(l, list):
-            if k not in self.fixes:
-                self.fixes[k] = l
+    def add_fix(self, key: str, value: Union[expr.Type, Dict]):
+        if isinstance(value, expr.Type):
+            self.fixes[key] = value
+        elif isinstance(value, dict):
+            if key not in self.fixes:
+                self.fixes[key] = [value]
             else:
-                for t in l:
-                    if t not in self.fixes[k]:
-                        self.fixes[k].append(t)
-        elif isinstance(l, expr.Type):
-            if k not in self.fixes:
-                self.fixes[k] = [l]
-            elif l not in self.fixes[k]:
-                self.fixes[k].append(l)
+                if value not in self.fixes[key]:
+                    self.fixes[key].append(value)
 
-    def extend_fixes(self, fixes: Dict[str, List[expr.Type]]):
-        for k, l in fixes.items():
-            self.add_fix(k, l)
+    def extend_fixes(self, fixes: Dict[str, Union[expr.Type, List[Dict]]]):
+        for key, value in fixes.items():
+            self.add_fix(key, value)
 
     def add_subst(self, var: str, expr: Expr):
         self.substs[var] = expr
@@ -392,6 +423,7 @@ class Context:
     def extend_by_item(self, item):
         if item['type'] == 'axiom' or item['type'] == 'problem':
             fixes = parser.parse_fixes(item)
+            update(fixes, self.fixes)
             e = parser.parse_expr(item['expr'], fixes=fixes)
             if e.is_equals() and expr.is_indefinite_integral(e.lhs):
                 self.add_indefinite_integral(e)
@@ -455,12 +487,15 @@ class Context:
             fixes = self.get_fixes()
             tmp = parser.parse_fixes(item)
             for name in tmp:
-                if name not in fixes:
+                if isinstance(tmp[name], expr.Type):
                     fixes[name] = tmp[name]
-                else:
-                    for t in tmp[name]:
-                        if t not in fixes[name]:
-                            fixes[name] = [t] + fixes[name]
+                elif isinstance(tmp[name], list):
+                    if name not in fixes:
+                        fixes[name] = tmp[name]
+                    else:
+                        for i in tmp[name]:
+                            if i not in fixes[name]:
+                                fixes[name].append(i)
             e = parser.parse_expr(item['expr'], fixes=fixes)
             conds = Conditions()
             if 'conds' in item:
@@ -468,12 +503,26 @@ class Context:
                     conds.add_condition(parser.parse_expr(cond, fixes=fixes))
             self.add_definition(e, conds)
             if expr.is_fun(e.lhs):
+                tmp = dict()
+                tmp['params_name'] = [str(arg) for arg in e.lhs.args]
+                tmp['func_type'] = e.lhs.func_type
                 if e.lhs.func_name not in self.fixes:
-                    self.fixes[e.lhs.func_name] = [e.lhs.func_type]
+                    self.fixes[e.lhs.func_name] = [tmp]
                 elif e.lhs.func_type not in self.fixes[e.lhs.func_name]:
-                    self.fixes[e.lhs.func_name].append(e.lhs.func_type)
+                    self.fixes[e.lhs.func_name].append(tmp)
         if item['type'] == 'table':
             self.add_function_table(item['name'], item['table'])
+        if item['type'] == 'func_type':
+            fixes = parser.parse_fixes(item)
+            func_name = item['func_name']
+            tmp = dict()
+            tmp['func_type'] = parser.parse_expr(item['func_type'], fixes=fixes)
+            tmp['params_name'] = item['params_name']
+            if func_name not in self.fixes:
+                self.fixes[func_name] = [tmp]
+            else:
+                if tmp not in self.fixes[func_name]:
+                    self.fixes[func_name].append(tmp)
 
     def load_book(self, book_name: str, *, upto: Optional[str] = None):
         assert isinstance(book_name, str)
@@ -613,7 +662,7 @@ def apply_subterm(e: Expr, f: Callable[[Expr, Context], Expr], ctx: Context) -> 
             body = rec(e.body, ctx)
             return f(expr.EvalAt(e.var, lower, upper, body), ctx)
         elif expr.is_limit(e):
-            return f(expr.Limit(e.var, rec(e.lim, ctx), rec(e.body, body_conds(e, ctx))), ctx)
+            return f(expr.Limit(e.var, rec(e.lim, ctx), rec(e.body, body_conds(e, ctx)), var_type=e.var_type), ctx)
         elif expr.is_indefinite_integral(e):
             return f(expr.IndefiniteIntegral(e.var, rec(e.body, ctx), e.skolem_args), ctx)
         elif expr.is_summation(e):
@@ -633,3 +682,14 @@ def apply_subterm(e: Expr, f: Callable[[Expr, Context], Expr], ctx: Context) -> 
         else:
             raise NotImplementedError
     return rec(e, ctx)
+
+def update(fixes, d):
+    for name, info in d.items():
+        if isinstance(info, expr.Type):
+            fixes[name] = info
+        elif isinstance(info, list):
+            if name not in fixes:
+                fixes[name] = []
+            for item in info:
+                if item not in fixes[name]:
+                    fixes[name].append(item)

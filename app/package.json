@@ -6,6 +6,8 @@
     "serve": "concurrently -c green,blue -n pythonserver,vueserver \"npx nodemon --watch \\\"..\\\" --exec \\\"python\\\" ../app.py\" \"vue-cli-service serve\"",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "serve:vue": "vue-cli-service serve",
+    "serve:flask": "\"npx nodemon --watch \\\"..\\\" --exec \\\"python\\\" ../app.py\"",
     "test": "vitest",
     "test:ui": "vitest --ui"
   },

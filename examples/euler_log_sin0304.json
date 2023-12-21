@@ -7,11 +7,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{\\log{(x ^ {2} + 1)}}{x ^ {2} + 1} \\,dx",
                         "start": "INT x:[0,oo]. log(x ^ 2 + 1) / (x ^ 2 + 1)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\log{(\\tan^{2}(u) + 1)}}{\\tan^{2}(u) + 1} \\sec^{2}(u) \\,du",
                                 "res": "INT u:[0,pi / 2]. log(tan(u) ^ 2 + 1) / (tan(u) ^ 2 + 1) * sec(u) ^ 2",
                                 "rule": {
@@ -24,6 +29,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\log{(\\tan^{2}(u) + 1)}}{\\tan^{2}(u) + 1} (\\tan^{2}(u) + 1) \\,du",
                                 "res": "INT u:[0,pi / 2]. log(tan(u) ^ 2 + 1) / (tan(u) ^ 2 + 1) * (tan(u) ^ 2 + 1)",
                                 "rule": {
@@ -36,6 +47,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\log{(\\tan^{2}(u) + 1)} \\,du",
                                 "res": "INT u:[0,pi / 2]. log(tan(u) ^ 2 + 1)",
                                 "rule": {
@@ -45,6 +62,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\log{(\\sec^{2}(u))} \\,du",
                                 "res": "INT u:[0,pi / 2]. log(sec(u) ^ 2)",
                                 "rule": {
@@ -57,6 +80,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{\\pi/2} \\log{((\\cos{u} ^ {-1}) ^ {2})} \\,du",
                                 "res": "INT u:[0,pi / 2]. log(cos(u) ^ (-1) ^ 2)",
                                 "rule": {
@@ -69,6 +98,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-2 (\\int_{0}^{\\pi/2} \\log{(\\cos{u})} \\,du)",
                                 "res": "-(2 * (INT u:[0,pi / 2]. log(cos(u))))",
                                 "rule": {
@@ -78,6 +113,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-2 (\\int_{0}^{\\pi/2} \\log{(\\sin{x})} \\,dx)",
                                 "res": "-(2 * (INT x:[0,pi / 2]. log(sin(x))))",
                                 "rule": {
@@ -90,6 +131,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-2 (\\int_{0}^{\\pi/2} \\log{(1 \\sin{x})} \\,dx)",
                                 "res": "-(2 * (INT x:[0,pi / 2]. log(1 * sin(x))))",
                                 "rule": {
@@ -123,7 +170,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\pi \\log{(2)}",
                         "start": "pi * log(2)",
                         "steps": [],
@@ -147,11 +193,16 @@
                 "goal": "(INT x:[0,1]. log(x + 1 / x) / (x ^ 2 + 1)) = pi / 2 * log(2)",
                 "latex_goal": "\\int_{0}^{1} \\frac{\\log{(x + \\frac{1}{x})}}{x ^ {2} + 1} \\,dx = \\frac{\\pi}{2} \\log{(2)}",
                 "start": {
-                    "fixes": [],
                     "latex_start": "\\int_{0}^{\\infty} \\frac{\\log{(x ^ {2} + 1)}}{x ^ {2} + 1} \\,dx = \\pi \\log{(2)}",
                     "start": "(INT x:[0,oo]. log(x ^ 2 + 1) / (x ^ 2 + 1)) = pi * log(2)",
                     "steps": [
                         {
+                            "fixes": [
+                                [
+                                    "x",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "(\\int_{0}^{1} \\frac{\\log{(x ^ {2} + 1)}}{x ^ {2} + 1} \\,dx) + (\\int_{1}^{\\infty} \\frac{\\log{(x ^ {2} + 1)}}{x ^ {2} + 1} \\,dx) = \\pi \\log{(2)}",
                             "res": "(INT x:[0,1]. log(x ^ 2 + 1) / (x ^ 2 + 1)) + (INT x:[1,oo]. log(x ^ 2 + 1) / (x ^ 2 + 1)) = pi * log(2)",
                             "rule": {
@@ -162,6 +213,16 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "x",
+                                    "$real"
+                                ],
+                                [
+                                    "y",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "(\\int_{0}^{1} \\frac{\\log{(x ^ {2} + 1)}}{x ^ {2} + 1} \\,dx) + (\\int_{0}^{1} \\frac{1}{y ^ {2} (\\frac{1}{y ^ {2}} + 1)} \\log{(\\frac{1}{y ^ {2}} + 1)} \\,dy) = \\pi \\log{(2)}",
                             "res": "(INT x:[0,1]. log(x ^ 2 + 1) / (x ^ 2 + 1)) + (INT y:[0,1]. 1 / (y ^ 2 * (1 / y ^ 2 + 1)) * log(1 / y ^ 2 + 1)) = pi * log(2)",
                             "rule": {
@@ -175,6 +236,16 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "x",
+                                    "$real"
+                                ],
+                                [
+                                    "y",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "(\\int_{0}^{1} \\frac{\\log{(x ^ {2} + 1)}}{x ^ {2} + 1} \\,dx) + (\\int_{0}^{1} \\frac{1}{y ^ {2} + 1} \\log{(\\frac{1}{y ^ {2}} + 1)} \\,dy) = \\pi \\log{(2)}",
                             "res": "(INT x:[0,1]. log(x ^ 2 + 1) / (x ^ 2 + 1)) + (INT y:[0,1]. 1 / (y ^ 2 + 1) * log(1 / y ^ 2 + 1)) = pi * log(2)",
                             "rule": {
@@ -187,6 +258,16 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "x",
+                                    "$real"
+                                ],
+                                [
+                                    "y",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "(\\int_{0}^{1} \\frac{\\log{(x ^ {2} + 1)}}{x ^ {2} + 1} \\,dx) + (\\int_{0}^{1} \\frac{\\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1} \\,dy) = \\pi \\log{(2)}",
                             "res": "(INT x:[0,1]. log(x ^ 2 + 1) / (x ^ 2 + 1)) + (INT y:[0,1]. log(1 / y ^ 2 + 1) / (y ^ 2 + 1)) = pi * log(2)",
                             "rule": {
@@ -199,9 +280,21 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "y",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "\\int_{0}^{1} \\frac{\\log{(y ^ {2} + 1)}}{y ^ {2} + 1} + \\frac{\\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1} \\,dy = \\pi \\log{(2)}",
                             "res": "(INT y:[0,1]. log(y ^ 2 + 1) / (y ^ 2 + 1) + log(1 / y ^ 2 + 1) / (y ^ 2 + 1)) = pi * log(2)",
                             "rule": {
+                                "fixes": [
+                                    [
+                                        "y",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_str": "rewriting \\((\\int_{0}^{1} \\frac{\\log{(y ^ {2} + 1)}}{y ^ {2} + 1} \\,dy) + (\\int_{0}^{1} \\frac{\\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1} \\,dy)\\) to \\(\\int_{0}^{1} \\frac{\\log{(y ^ {2} + 1)}}{y ^ {2} + 1} + \\frac{\\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1} \\,dy\\)",
                                 "name": "Equation",
                                 "new_expr": "INT y:[0,1]. log(y ^ 2 + 1) / (y ^ 2 + 1) + log(1 / y ^ 2 + 1) / (y ^ 2 + 1)",
@@ -211,6 +304,12 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "y",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "\\int_{0}^{1} \\frac{\\log{(y ^ {2} + 1)} + \\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1} \\,dy = \\pi \\log{(2)}",
                             "res": "(INT y:[0,1]. (log(y ^ 2 + 1) + log(1 / y ^ 2 + 1)) / (y ^ 2 + 1)) = pi * log(2)",
                             "rule": {
@@ -223,6 +322,12 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "y",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "\\int_{0}^{1} \\frac{\\log{((y ^ {2} + 1) (\\frac{1}{y ^ {2}} + 1))}}{y ^ {2} + 1} \\,dy = \\pi \\log{(2)}",
                             "res": "(INT y:[0,1]. log((y ^ 2 + 1) * (1 / y ^ 2 + 1)) / (y ^ 2 + 1)) = pi * log(2)",
                             "rule": {
@@ -235,6 +340,12 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "y",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "\\int_{0}^{1} \\frac{\\log{((y + \\frac{1}{y}) ^ {2})}}{y ^ {2} + 1} \\,dy = \\pi \\log{(2)}",
                             "res": "(INT y:[0,1]. log((y + 1 / y) ^ 2) / (y ^ 2 + 1)) = pi * log(2)",
                             "rule": {
@@ -247,6 +358,12 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "y",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "\\int_{0}^{1} \\frac{2 \\log{(y + \\frac{1}{y})}}{y ^ {2} + 1} \\,dy = \\pi \\log{(2)}",
                             "res": "(INT y:[0,1]. 2 * log(y + 1 / y) / (y ^ 2 + 1)) = pi * log(2)",
                             "rule": {
@@ -259,6 +376,12 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "y",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "2 (\\int_{0}^{1} \\frac{1}{y ^ {2} + 1} \\log{(\\frac{1}{y} + y)} \\,dy) = \\pi \\log{(2)}",
                             "res": "2 * (INT y:[0,1]. 1 / (y ^ 2 + 1) * log(1 / y + y)) = pi * log(2)",
                             "rule": {
@@ -268,6 +391,12 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "y",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "2 (\\int_{0}^{1} \\frac{\\log{(y + \\frac{1}{y})}}{y ^ {2} + 1} \\,dy) = \\pi \\log{(2)}",
                             "res": "2 * (INT y:[0,1]. log(y + 1 / y) / (y ^ 2 + 1)) = pi * log(2)",
                             "rule": {
@@ -280,6 +409,12 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "y",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "\\int_{0}^{1} \\frac{\\log{(y + \\frac{1}{y})}}{y ^ {2} + 1} \\,dy = \\frac{\\pi \\log{(2)}}{2}",
                             "res": "(INT y:[0,1]. log(y + 1 / y) / (y ^ 2 + 1)) = pi * log(2) / 2",
                             "rule": {

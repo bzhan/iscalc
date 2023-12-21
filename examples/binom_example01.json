@@ -7,7 +7,6 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\binom{n}{m}",
                         "start": "binom(n,m)",
                         "steps": [
@@ -25,7 +24,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\binom{n}{n - m}",
                         "start": "binom(n,n - m)",
                         "steps": [
@@ -57,7 +55,6 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\binom{n}{m} \\binom{m}{r}",
                         "start": "binom(n,m) * binom(m,r)",
                         "steps": [
@@ -85,7 +82,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\binom{n}{r} \\binom{n - r}{m - r}",
                         "start": "binom(n,r) * binom(n - r,m - r)",
                         "steps": [
@@ -127,7 +123,6 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\binom{n}{m - 1} + \\binom{n}{m}",
                         "start": "binom(n,m - 1) + binom(n,m)",
                         "steps": [
@@ -230,7 +225,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\binom{n + 1}{m}",
                         "start": "binom(n + 1,m)",
                         "steps": [
@@ -271,21 +265,15 @@
             "fixes": [
                 [
                     "m",
-                    [
-                        "$int"
-                    ]
+                    "$int"
                 ],
                 [
                     "n",
-                    [
-                        "$int"
-                    ]
+                    "$int"
                 ],
                 [
                     "i",
-                    [
-                        "$int"
-                    ]
+                    "$int"
                 ]
             ],
             "goal": "binom(m + n + 1,m) = SUM(i, 0, m, binom(n + i,i))",
@@ -296,39 +284,15 @@
                     "fixes": [
                         [
                             "m",
-                            [
-                                "$int"
-                            ]
+                            "$int"
                         ],
                         [
                             "n",
-                            [
-                                "$int"
-                            ]
+                            "$int"
                         ],
                         [
                             "i",
-                            [
-                                "$int"
-                            ]
-                        ],
-                        [
-                            "cosh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "sinh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "binom",
-                            [
-                                "$fun($real, $real, $real)"
-                            ]
+                            "$int"
                         ]
                     ],
                     "goal": "binom(n + 1,0) = binom(n,0)",
@@ -336,7 +300,6 @@
                     "proof": {
                         "calcs": [
                             {
-                                "fixes": [],
                                 "latex_start": "\\binom{n + 1}{0}",
                                 "start": "binom(n + 1,0)",
                                 "steps": [
@@ -354,7 +317,6 @@
                                 "type": "Calculation"
                             },
                             {
-                                "fixes": [],
                                 "latex_start": "\\binom{n}{0}",
                                 "start": "binom(n,0)",
                                 "steps": [
@@ -386,39 +348,15 @@
                     "fixes": [
                         [
                             "m",
-                            [
-                                "$int"
-                            ]
+                            "$int"
                         ],
                         [
                             "n",
-                            [
-                                "$int"
-                            ]
+                            "$int"
                         ],
                         [
                             "i",
-                            [
-                                "$int"
-                            ]
-                        ],
-                        [
-                            "cosh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "sinh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "binom",
-                            [
-                                "$fun($real, $real, $real)"
-                            ]
+                            "$int"
                         ]
                     ],
                     "goal": "binom(m + n + 2,m + 1) = SUM(i, 0, m + 1, binom(i + n,i))",
@@ -426,18 +364,22 @@
                     "proof": {
                         "calcs": [
                             {
-                                "fixes": [],
                                 "latex_start": "\\binom{m + n + 2}{m + 1}",
                                 "start": "binom(m + n + 2,m + 1)",
                                 "steps": [],
                                 "type": "Calculation"
                             },
                             {
-                                "fixes": [],
                                 "latex_start": "\\sum_{i=0}^{m + 1}{\\binom{i + n}{i}}",
                                 "start": "SUM(i, 0, m + 1, binom(i + n,i))",
                                 "steps": [
                                     {
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "\\sum_{j=0}^{m + 1 - 1}{\\binom{j + n}{j}} + \\binom{m + 1 + n}{m + 1}",
                                         "res": "SUM(j, 0, m + 1 - 1, binom(j + n,j)) + binom(m + 1 + n,m + 1)",
                                         "rule": {
@@ -449,6 +391,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "\\binom{m + n + 1}{m + 1} + \\sum_{j=0}^{m}{\\binom{j + n}{j}}",
                                         "res": "binom(m + n + 1,m + 1) + SUM(j, 0, m, binom(j + n,j))",
                                         "rule": {
@@ -458,6 +406,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "\\binom{m + n + 1}{m + 1} + \\sum_{j=0}^{m}{\\binom{n + j}{j}}",
                                         "res": "binom(m + n + 1,m + 1) + SUM(j, 0, m, binom(n + j,j))",
                                         "rule": {
@@ -496,7 +450,6 @@
                                         "res": "binom(m + n + 1 + 1,m + 1)",
                                         "rule": {
                                             "eq": "binom(n,m - 1) + binom(n,m) = binom(n + 1,m)",
-                                            "eq_fixes": [],
                                             "latex_str": "apply equation \\(\\binom{n}{m - 1} + \\binom{n}{m} = \\binom{n + 1}{m}\\)",
                                             "name": "ApplyEquation",
                                             "source": "binom(m + n + 1,m + 1 - 1) + binom(m + n + 1,m + 1)",
@@ -550,21 +503,15 @@
             "fixes": [
                 [
                     "m",
-                    [
-                        "$int"
-                    ]
+                    "$int"
                 ],
                 [
                     "n",
-                    [
-                        "$int"
-                    ]
+                    "$int"
                 ],
                 [
                     "k",
-                    [
-                        "$int"
-                    ]
+                    "$int"
                 ]
             ],
             "goal": "(x + y) ^ n = SUM(k, 0, n, binom(n,k) * x ^ k * y ^ (n - k))",
@@ -763,39 +710,15 @@
                     "fixes": [
                         [
                             "m",
-                            [
-                                "$int"
-                            ]
+                            "$int"
                         ],
                         [
                             "n",
-                            [
-                                "$int"
-                            ]
+                            "$int"
                         ],
                         [
                             "k",
-                            [
-                                "$int"
-                            ]
-                        ],
-                        [
-                            "cosh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "sinh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "binom",
-                            [
-                                "$fun($real, $real, $real)"
-                            ]
+                            "$int"
                         ]
                     ],
                     "goal": "x + y = SUM(k, 0, 1, x ^ k * y ^ (-k + 1) * binom(1,k))",
@@ -922,18 +845,22 @@
                     "proof": {
                         "calcs": [
                             {
-                                "fixes": [],
                                 "latex_start": "x + y",
                                 "start": "x + y",
                                 "steps": [],
                                 "type": "Calculation"
                             },
                             {
-                                "fixes": [],
                                 "latex_start": "\\sum_{k=0}^{1}{x ^ {k} y ^ {-k + 1} \\binom{1}{k}}",
                                 "start": "SUM(k, 0, 1, x ^ k * y ^ (-k + 1) * binom(1,k))",
                                 "steps": [
                                     {
+                                        "fixes": [
+                                            [
+                                                "n",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "x ^ {0} y ^ {-0 + 1}\\cdot \\binom{1}{0} + \\sum_{n=0 + 1}^{1}{x ^ {n} y ^ {-n + 1} \\binom{1}{n}}",
                                         "res": "x ^ 0 * y ^ (-0 + 1) * binom(1,0) + SUM(n, 0 + 1, 1, x ^ n * y ^ (-n + 1) * binom(1,n))",
                                         "rule": {
@@ -992,39 +919,15 @@
                     "fixes": [
                         [
                             "m",
-                            [
-                                "$int"
-                            ]
+                            "$int"
                         ],
                         [
                             "n",
-                            [
-                                "$int"
-                            ]
+                            "$int"
                         ],
                         [
                             "k",
-                            [
-                                "$int"
-                            ]
-                        ],
-                        [
-                            "cosh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "sinh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "binom",
-                            [
-                                "$fun($real, $real, $real)"
-                            ]
+                            "$int"
                         ]
                     ],
                     "goal": "(x + y) ^ (n + 1) = SUM(k, 0, n + 1, x ^ k * y ^ (-k + n + 1) * binom(n + 1,k))",
@@ -1220,7 +1123,6 @@
                     "proof": {
                         "calcs": [
                             {
-                                "fixes": [],
                                 "latex_start": "(x + y) ^ {n + 1}",
                                 "start": "(x + y) ^ (n + 1)",
                                 "steps": [
@@ -1237,6 +1139,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "k",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "(x + y) \\sum_{k=0}^{n}{\\binom{n}{k} x ^ {k} y ^ {n - k}}",
                                         "res": "(x + y) * SUM(k, 0, n, binom(n,k) * x ^ k * y ^ (n - k))",
                                         "rule": {
@@ -1247,6 +1155,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "k",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "x \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} \\binom{n}{k}} + y \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} \\binom{n}{k}}",
                                         "res": "x * SUM(k, 0, n, x ^ k * y ^ (-k + n) * binom(n,k)) + y * SUM(k, 0, n, x ^ k * y ^ (-k + n) * binom(n,k))",
                                         "rule": {
@@ -1256,9 +1170,21 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "k",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "\\sum_{k=0}^{n}{x (x ^ {k} y ^ {-k + n} \\binom{n}{k})} + y \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} \\binom{n}{k}}",
                                         "res": "SUM(k, 0, n, x * (x ^ k * y ^ (-k + n) * binom(n,k))) + y * SUM(k, 0, n, x ^ k * y ^ (-k + n) * binom(n,k))",
                                         "rule": {
+                                            "fixes": [
+                                                [
+                                                    "k",
+                                                    "$int"
+                                                ]
+                                            ],
                                             "latex_str": "rewriting \\(x \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} \\binom{n}{k}}\\) to \\(\\sum_{k=0}^{n}{x (x ^ {k} y ^ {-k + n} \\binom{n}{k})}\\)",
                                             "name": "Equation",
                                             "new_expr": "SUM(k, 0, n, x * (x ^ k * y ^ (-k + n) * binom(n,k)))",
@@ -1268,9 +1194,21 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "k",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "\\sum_{k=0}^{n}{x (x ^ {k} y ^ {-k + n} \\binom{n}{k})} + \\sum_{k=0}^{n}{y (x ^ {k} y ^ {-k + n} \\binom{n}{k})}",
                                         "res": "SUM(k, 0, n, x * (x ^ k * y ^ (-k + n) * binom(n,k))) + SUM(k, 0, n, y * (x ^ k * y ^ (-k + n) * binom(n,k)))",
                                         "rule": {
+                                            "fixes": [
+                                                [
+                                                    "k",
+                                                    "$int"
+                                                ]
+                                            ],
                                             "latex_str": "rewriting \\(y \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} \\binom{n}{k}}\\) to \\(\\sum_{k=0}^{n}{y (x ^ {k} y ^ {-k + n} \\binom{n}{k})}\\)",
                                             "name": "Equation",
                                             "new_expr": "SUM(k, 0, n, y * (x ^ k * y ^ (-k + n) * binom(n,k)))",
@@ -1280,6 +1218,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "k",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "\\sum_{k=0}^{n}{\\binom{n}{k} x ^ {k + 1} y ^ {n - k}} + \\sum_{k=0}^{n}{y (x ^ {k} y ^ {-k + n} \\binom{n}{k})}",
                                         "res": "SUM(k, 0, n, binom(n,k) * x ^ (k + 1) * y ^ (n - k)) + SUM(k, 0, n, y * (x ^ k * y ^ (-k + n) * binom(n,k)))",
                                         "rule": {
@@ -1292,6 +1236,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "k",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "\\sum_{k=0}^{n}{\\binom{n}{k} x ^ {k + 1} y ^ {n - k}} + \\sum_{k=0}^{n}{\\binom{n}{k} x ^ {k} y ^ {n - k + 1}}",
                                         "res": "SUM(k, 0, n, binom(n,k) * x ^ (k + 1) * y ^ (n - k)) + SUM(k, 0, n, binom(n,k) * x ^ k * y ^ (n - k + 1))",
                                         "rule": {
@@ -1304,6 +1254,16 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ],
+                                            [
+                                                "k",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "\\sum_{i=0}^{n - 1}{\\binom{n}{i} x ^ {i + 1} y ^ {n - i}} + \\binom{n}{n} x ^ {n + 1} y ^ {n - n} + \\sum_{k=0}^{n}{\\binom{n}{k} x ^ {k} y ^ {n - k + 1}}",
                                         "res": "SUM(i, 0, n - 1, binom(n,i) * x ^ (i + 1) * y ^ (n - i)) + binom(n,n) * x ^ (n + 1) * y ^ (n - n) + SUM(k, 0, n, binom(n,k) * x ^ k * y ^ (n - k + 1))",
                                         "rule": {
@@ -1316,6 +1276,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "\\sum_{i=0}^{n - 1}{\\binom{n}{i} x ^ {i + 1} y ^ {n - i}} + \\binom{n}{n} x ^ {n + 1} y ^ {n - n} + (\\binom{n}{0} x ^ {0} y ^ {n - 0 + 1} + \\sum_{i=0 + 1}^{n}{\\binom{n}{i} x ^ {i} y ^ {n - i + 1}})",
                                         "res": "SUM(i, 0, n - 1, binom(n,i) * x ^ (i + 1) * y ^ (n - i)) + binom(n,n) * x ^ (n + 1) * y ^ (n - n) + (binom(n,0) * x ^ 0 * y ^ (n - 0 + 1) + SUM(i, 0 + 1, n, binom(n,i) * x ^ i * y ^ (n - i + 1)))",
                                         "rule": {
@@ -1328,6 +1294,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "\\sum_{i=0}^{n - 1}{x ^ {i + 1} y ^ {-i + n} \\binom{n}{i}} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}} + x ^ {n + 1} \\binom{n}{n} + y ^ {n + 1} \\binom{n}{0}",
                                         "res": "SUM(i, 0, n - 1, x ^ (i + 1) * y ^ (-i + n) * binom(n,i)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i)) + x ^ (n + 1) * binom(n,n) + y ^ (n + 1) * binom(n,0)",
                                         "rule": {
@@ -1337,6 +1309,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "\\sum_{i=0}^{n - 1}{x ^ {i + 1} y ^ {-i + n} \\binom{n}{i}} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}} + x ^ {n + 1}\\cdot 1 + y ^ {n + 1} \\binom{n}{0}",
                                         "res": "SUM(i, 0, n - 1, x ^ (i + 1) * y ^ (-i + n) * binom(n,i)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i)) + x ^ (n + 1) * 1 + y ^ (n + 1) * binom(n,0)",
                                         "rule": {
@@ -1348,6 +1326,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "\\sum_{i=0}^{n - 1}{x ^ {i + 1} y ^ {-i + n} \\binom{n}{i}} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}} + x ^ {n + 1}\\cdot 1 + y ^ {n + 1}\\cdot 1",
                                         "res": "SUM(i, 0, n - 1, x ^ (i + 1) * y ^ (-i + n) * binom(n,i)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i)) + x ^ (n + 1) * 1 + y ^ (n + 1) * 1",
                                         "rule": {
@@ -1359,6 +1343,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "\\sum_{i=1}^{n}{x ^ {i - 1 + 1} y ^ {-(i - 1) + n} \\binom{n}{i - 1}} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}} + x ^ {n + 1}\\cdot 1 + y ^ {n + 1}\\cdot 1",
                                         "res": "SUM(i, 1, n, x ^ (i - 1 + 1) * y ^ (-(i - 1) + n) * binom(n,i - 1)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i)) + x ^ (n + 1) * 1 + y ^ (n + 1) * 1",
                                         "rule": {
@@ -1370,6 +1360,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i - 1}} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}} + x ^ {n + 1} + y ^ {n + 1}",
                                         "res": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i - 1)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i)) + x ^ (n + 1) + y ^ (n + 1)",
                                         "rule": {
@@ -1379,9 +1375,21 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i - 1} + x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}} + x ^ {n + 1} + y ^ {n + 1}",
                                         "res": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i - 1) + x ^ i * y ^ (-i + n + 1) * binom(n,i)) + x ^ (n + 1) + y ^ (n + 1)",
                                         "rule": {
+                                            "fixes": [
+                                                [
+                                                    "i",
+                                                    "$int"
+                                                ]
+                                            ],
                                             "latex_str": "rewriting \\(\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i - 1}} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}}\\) to \\(\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i - 1} + x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}}\\)",
                                             "name": "Equation",
                                             "new_expr": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i - 1) + x ^ i * y ^ (-i + n + 1) * binom(n,i))",
@@ -1391,6 +1399,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} (\\binom{n}{i - 1} + \\binom{n}{i})} + x ^ {n + 1} + y ^ {n + 1}",
                                         "res": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * (binom(n,i - 1) + binom(n,i))) + x ^ (n + 1) + y ^ (n + 1)",
                                         "rule": {
@@ -1403,11 +1417,16 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n + 1}{i}} + x ^ {n + 1} + y ^ {n + 1}",
                                         "res": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n + 1,i)) + x ^ (n + 1) + y ^ (n + 1)",
                                         "rule": {
                                             "eq": "binom(n,m - 1) + binom(n,m) = binom(n + 1,m)",
-                                            "eq_fixes": [],
                                             "latex_str": "apply equation \\(\\binom{n}{m - 1} + \\binom{n}{m} = \\binom{n + 1}{m}\\)",
                                             "name": "ApplyEquation",
                                             "source": "binom(n,i - 1) + binom(n,i)",
@@ -1419,11 +1438,16 @@
                                 "type": "Calculation"
                             },
                             {
-                                "fixes": [],
                                 "latex_start": "\\sum_{k=0}^{n + 1}{x ^ {k} y ^ {-k + n + 1} \\binom{n + 1}{k}}",
                                 "start": "SUM(k, 0, n + 1, x ^ k * y ^ (-k + n + 1) * binom(n + 1,k))",
                                 "steps": [
                                     {
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "x ^ {0} y ^ {-0 + n + 1} \\binom{n + 1}{0} + \\sum_{i=0 + 1}^{n + 1}{x ^ {i} y ^ {-i + n + 1} \\binom{n + 1}{i}}",
                                         "res": "x ^ 0 * y ^ (-0 + n + 1) * binom(n + 1,0) + SUM(i, 0 + 1, n + 1, x ^ i * y ^ (-i + n + 1) * binom(n + 1,i))",
                                         "rule": {
@@ -1435,6 +1459,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "x ^ {0} y ^ {-0 + n + 1} \\binom{n + 1}{0} + (\\sum_{j=0 + 1}^{n + 1 - 1}{x ^ {j} y ^ {-j + n + 1} \\binom{n + 1}{j}} + x ^ {n + 1} y ^ {-(n + 1) + n + 1} \\binom{n + 1}{n + 1})",
                                         "res": "x ^ 0 * y ^ (-0 + n + 1) * binom(n + 1,0) + (SUM(j, 0 + 1, n + 1 - 1, x ^ j * y ^ (-j + n + 1) * binom(n + 1,j)) + x ^ (n + 1) * y ^ (-(n + 1) + n + 1) * binom(n + 1,n + 1))",
                                         "rule": {
@@ -1447,6 +1477,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "x ^ {0} y ^ {-0 + n + 1}\\cdot 1 + (\\sum_{j=0 + 1}^{n + 1 - 1}{x ^ {j} y ^ {-j + n + 1} \\binom{n + 1}{j}} + x ^ {n + 1} y ^ {-(n + 1) + n + 1} \\binom{n + 1}{n + 1})",
                                         "res": "x ^ 0 * y ^ (-0 + n + 1) * 1 + (SUM(j, 0 + 1, n + 1 - 1, x ^ j * y ^ (-j + n + 1) * binom(n + 1,j)) + x ^ (n + 1) * y ^ (-(n + 1) + n + 1) * binom(n + 1,n + 1))",
                                         "rule": {
@@ -1458,6 +1494,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "x ^ {0} y ^ {-0 + n + 1}\\cdot 1 + (\\sum_{j=0 + 1}^{n + 1 - 1}{x ^ {j} y ^ {-j + n + 1} \\binom{n + 1}{j}} + x ^ {n + 1} y ^ {-(n + 1) + n + 1}\\cdot 1)",
                                         "res": "x ^ 0 * y ^ (-0 + n + 1) * 1 + (SUM(j, 0 + 1, n + 1 - 1, x ^ j * y ^ (-j + n + 1) * binom(n + 1,j)) + x ^ (n + 1) * y ^ (-(n + 1) + n + 1) * 1)",
                                         "rule": {
@@ -1469,6 +1511,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
                                         "latex_res": "\\sum_{j=1}^{n}{x ^ {j} y ^ {-j + n + 1} \\binom{n + 1}{j}} + x ^ {n + 1} + y ^ {n + 1}",
                                         "res": "SUM(j, 1, n, x ^ j * y ^ (-j + n + 1) * binom(n + 1,j)) + x ^ (n + 1) + y ^ (n + 1)",
                                         "rule": {

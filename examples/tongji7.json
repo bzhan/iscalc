@@ -1,11 +1,16 @@
 {
     "content": [
         {
-            "fixes": [],
             "latex_start": "\\int_{2}^{3} 2 x + x ^ {2} \\,dx",
             "start": "INT x:[2,3]. 2 * x + x ^ 2",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "2 (\\left. \\frac{x ^ {2}}{2} \\right\\vert_{x=2}^{3}) + (\\left. \\frac{x ^ {3}}{3} \\right\\vert_{x=2}^{3})",
                     "res": "2 * ([x ^ 2 / 2]_x=2,3) + ([x ^ 3 / 3]_x=2,3)",
                     "rule": {
@@ -27,11 +32,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{0}^{1} (3 x + 1) ^ {-2} \\,dx",
             "start": "INT x:[0,1]. (3 * x + 1) ^ (-2)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{1}^{4} \\frac{1}{3 u ^ {2}} \\,du",
                     "res": "INT u:[1,4]. 1 / (3 * u ^ 2)",
                     "rule": {
@@ -44,6 +54,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\frac{1}{3} (\\left. -\\frac{1}{u} \\right\\vert_{u=1}^{4})",
                     "res": "1/3 * ([-(1 / u)]_u=1,4)",
                     "rule": {
@@ -65,11 +81,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{0}^{1} e^{6 x} \\,dx",
             "start": "INT x:[0,1]. exp(6 * x)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\left. \\frac{e^{6 x}}{6} \\right\\vert_{x=0}^{1}",
                     "res": "[exp(6 * x) / 6]_x=0,1",
                     "rule": {
@@ -91,11 +112,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{-1}^{2} x e^{x} \\,dx",
             "start": "INT x:[-1,2]. x * exp(x)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. x e^{x} \\right\\vert_{x=-1}^{2}) - (\\int_{-1}^{2} e^{x} \\,dx)",
                     "res": "([x * exp(x)]_x=-1,2) - (INT x:[-1,2]. exp(x))",
                     "rule": {
@@ -108,6 +134,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. x e^{x} \\right\\vert_{x=-1}^{2}) - (\\left. e^{x} \\right\\vert_{x=-1}^{2})",
                     "res": "([x * exp(x)]_x=-1,2) - ([exp(x)]_x=-1,2)",
                     "rule": {
@@ -129,11 +161,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{0}^{\\pi/4} \\sin{x} \\,dx",
             "start": "INT x:[0,pi / 4]. sin(x)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\left. -\\cos{x} \\right\\vert_{x=0}^{\\pi/4}",
                     "res": "[-cos(x)]_x=0,pi / 4",
                     "rule": {
@@ -155,11 +192,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{0}^{1} 3 x ^ {2} - x + 1 \\,dx",
             "start": "INT x:[0,1]. 3 * x ^ 2 - x + 1",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "3 (\\left. \\frac{x ^ {3}}{3} \\right\\vert_{x=0}^{1}) - (\\left. \\frac{x ^ {2}}{2} \\right\\vert_{x=0}^{1}) + (\\left. x \\right\\vert_{x=0}^{1})",
                     "res": "3 * ([x ^ 3 / 3]_x=0,1) - ([x ^ 2 / 2]_x=0,1) + ([x]_x=0,1)",
                     "rule": {
@@ -181,11 +223,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{1}^{2} x ^ {2} + \\frac{1}{x ^ {4}} \\,dx",
             "start": "INT x:[1,2]. x ^ 2 + 1 / x ^ 4",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. \\frac{x ^ {3}}{3} \\right\\vert_{x=1}^{2}) + (\\left. -\\frac{1}{3 x ^ {3}} \\right\\vert_{x=1}^{2})",
                     "res": "([x ^ 3 / 3]_x=1,2) + ([-(1 / (3 * x ^ 3))]_x=1,2)",
                     "rule": {
@@ -207,11 +254,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{\\pi/3}^{\\pi} \\sin{(2 x + \\frac{\\pi}{3})} \\,dx",
             "start": "INT x:[pi / 3,pi]. sin(2 * x + pi / 3)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{\\pi}^{7 \\pi/3} \\frac{\\sin{u}}{2} \\,du",
                     "res": "INT u:[pi,7 * pi / 3]. sin(u) / 2",
                     "rule": {
@@ -224,6 +276,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\frac{1}{2} (\\left. -\\cos{u} \\right\\vert_{u=\\pi}^{7 \\pi/3})",
                     "res": "1/2 * ([-cos(u)]_u=pi,7 * pi / 3)",
                     "rule": {
@@ -245,11 +303,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{4}^{9} x ^ {1/3} (x ^ {1/2} + 1) \\,dx",
             "start": "INT x:[4,9]. x ^ (1/3) * (x ^ (1/2) + 1)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{4}^{9} x ^ {1/3} + x ^ {5/6} \\,dx",
                     "res": "INT x:[4,9]. x ^ (1/3) + x ^ (5/6)",
                     "rule": {
@@ -259,6 +322,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. \\frac{3 x ^ {4/3}}{4} \\right\\vert_{x=4}^{9}) + (\\left. \\frac{6 x ^ {11/6}}{11} \\right\\vert_{x=4}^{9})",
                     "res": "([3 * x ^ (4/3) / 4]_x=4,9) + ([6 * x ^ (11/6) / 11]_x=4,9)",
                     "rule": {
@@ -280,11 +349,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{-1}^{0} \\frac{3 x ^ {4} + 3 x ^ {2} + 1}{x ^ {2} + 1} \\,dx",
             "start": "INT x:[-1,0]. (3 * x ^ 4 + 3 * x ^ 2 + 1) / (x ^ 2 + 1)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{-1}^{0} \\frac{1}{x ^ {2} + 1} + 3 x ^ {2} \\,dx",
                     "res": "INT x:[-1,0]. 1 / (x ^ 2 + 1) + 3 * x ^ 2",
                     "rule": {
@@ -295,6 +369,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. \\tan^{-1}{x} \\right\\vert_{x=-1}^{0}) + 3 (\\left. \\frac{x ^ {3}}{3} \\right\\vert_{x=-1}^{0})",
                     "res": "([atan(x)]_x=-1,0) + 3 * ([x ^ 3 / 3]_x=-1,0)",
                     "rule": {
@@ -316,11 +396,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{4}^{e + 3} \\frac{x ^ {3} - 12 x ^ {2} - 42}{x - 3} \\,dx",
             "start": "INT x:[4,exp(1) + 3]. (x ^ 3 - 12 * x ^ 2 - 42) / (x - 3)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{4}^{e + 3} -\\frac{123}{x - 3} + x ^ {2} - 9 x - 27 \\,dx",
                     "res": "INT x:[4,exp(1) + 3]. -(123 / (x - 3)) + x ^ 2 - 9 * x - 27",
                     "rule": {
@@ -331,6 +416,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-123 (\\int_{4}^{e + 3} \\frac{1}{x - 3} \\,dx) + (\\left. \\frac{x ^ {3}}{3} \\right\\vert_{x=4}^{e + 3}) - 9 (\\left. \\frac{x ^ {2}}{2} \\right\\vert_{x=4}^{e + 3}) - 27 (\\left. x \\right\\vert_{x=4}^{e + 3})",
                     "res": "-(123 * (INT x:[4,exp(1) + 3]. 1 / (x - 3))) + ([x ^ 3 / 3]_x=4,exp(1) + 3) - 9 * ([x ^ 2 / 2]_x=4,exp(1) + 3) - 27 * ([x]_x=4,exp(1) + 3)",
                     "rule": {
@@ -340,6 +431,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-123 (\\int_{4}^{e + 3} \\frac{1}{x - 3} \\,dx) - \\frac{9\\cdot (e + 3) ^ {2}}{2} + \\frac{(e + 3) ^ {3}}{3} - 27 e + \\frac{233}{3}",
                     "res": "-(123 * (INT x:[4,exp(1) + 3]. 1 / (x - 3))) - 9 * (exp(1) + 3) ^ 2 / 2 + (exp(1) + 3) ^ 3 / 3 - 27 * exp(1) + 233/3",
                     "rule": {
@@ -349,6 +446,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-123 (\\int_{1}^{e} \\frac{1}{u} \\,du) - \\frac{9\\cdot (e + 3) ^ {2}}{2} + \\frac{(e + 3) ^ {3}}{3} - 27 e + \\frac{233}{3}",
                     "res": "-(123 * (INT u:[1,exp(1)]. 1 / u)) - 9 * (exp(1) + 3) ^ 2 / 2 + (exp(1) + 3) ^ 3 / 3 - 27 * exp(1) + 233/3",
                     "rule": {
@@ -361,6 +464,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-123 (\\left. \\log{(\\left| u \\right|)} \\right\\vert_{u=1}^{e}) - \\frac{9\\cdot (e + 3) ^ {2}}{2} + \\frac{(e + 3) ^ {3}}{3} - 27 e + \\frac{233}{3}",
                     "res": "-(123 * ([log(abs(u))]_u=1,exp(1))) - 9 * (exp(1) + 3) ^ 2 / 2 + (exp(1) + 3) ^ 3 / 3 - 27 * exp(1) + 233/3",
                     "rule": {
@@ -392,11 +501,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{0}^{\\pi/2} \\sin{x} \\cos^{3}(x) \\,dx",
             "start": "INT x:[0,pi / 2]. sin(x) * cos(x) ^ 3",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{0}^{1} u ^ {3} \\,du",
                     "res": "INT u:[0,1]. u ^ 3",
                     "rule": {
@@ -409,6 +523,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\left. \\frac{u ^ {4}}{4} \\right\\vert_{u=0}^{1}",
                     "res": "[u ^ 4 / 4]_u=0,1",
                     "rule": {
@@ -430,11 +550,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{0}^{\\pi} 1 - \\sin^{3}(x) \\,dx",
             "start": "INT x:[0,pi]. 1 - sin(x) ^ 3",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-(\\int_{0}^{\\pi} \\sin^{3}(x) \\,dx) + (\\int_{0}^{\\pi} 1 \\,dx)",
                     "res": "-(INT x:[0,pi]. sin(x) ^ 3) + (INT x:[0,pi]. 1)",
                     "rule": {
@@ -444,6 +569,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-(\\int_{0}^{\\pi} \\sin{x} \\sin^{2}(x) \\,dx) + (\\int_{0}^{\\pi} 1 \\,dx)",
                     "res": "-(INT x:[0,pi]. sin(x) * sin(x) ^ 2) + (INT x:[0,pi]. 1)",
                     "rule": {
@@ -456,6 +587,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-(\\int_{0}^{\\pi} \\sin{x} (1 - \\cos^{2}(x)) \\,dx) + (\\int_{0}^{\\pi} 1 \\,dx)",
                     "res": "-(INT x:[0,pi]. sin(x) * (1 - cos(x) ^ 2)) + (INT x:[0,pi]. 1)",
                     "rule": {
@@ -468,6 +605,16 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ],
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-(\\int_{-1}^{1} -u ^ {2} + 1 \\,du) + (\\int_{0}^{\\pi} 1 \\,dx)",
                     "res": "-(INT u:[-1,1]. -(u ^ 2) + 1) + (INT x:[0,pi]. 1)",
                     "rule": {
@@ -480,6 +627,16 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ],
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-(-(\\left. \\frac{u ^ {3}}{3} \\right\\vert_{u=-1}^{1}) + (\\left. u \\right\\vert_{u=-1}^{1})) + (\\left. x \\right\\vert_{x=0}^{\\pi})",
                     "res": "-(-([u ^ 3 / 3]_u=-1,1) + ([u]_u=-1,1)) + ([x]_x=0,pi)",
                     "rule": {
@@ -501,11 +658,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{\\pi/6}^{\\pi/2} \\cos^{2}(x) \\,dx",
             "start": "INT x:[pi / 6,pi / 2]. cos(x) ^ 2",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\left. \\frac{\\sin{(2 x)}}{4} + \\frac{x}{2} \\right\\vert_{x=\\pi/6}^{\\pi/2}",
                     "res": "[sin(2 * x) / 4 + x / 2]_x=pi / 6,pi / 2",
                     "rule": {
@@ -527,11 +689,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{0}^{1} (1 - x ^ {2}) ^ {1/2} \\,dx",
             "start": "INT x:[0,1]. (1 - x ^ 2) ^ (1/2)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{0}^{\\pi/2} (1 - \\sin^{2}(u)) ^ {1/2} \\cos{u} \\,du",
                     "res": "INT u:[0,pi / 2]. (1 - sin(u) ^ 2) ^ (1/2) * cos(u)",
                     "rule": {
@@ -544,6 +711,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{0}^{\\pi/2} (\\cos^{2}(u)) ^ {1/2} \\cos{u} \\,du",
                     "res": "INT u:[0,pi / 2]. cos(u) ^ 2 ^ (1/2) * cos(u)",
                     "rule": {
@@ -556,6 +729,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{0}^{\\pi/2} \\cos^{2}(u) \\,du",
                     "res": "INT u:[0,pi / 2]. cos(u) ^ 2",
                     "rule": {
@@ -565,6 +744,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\left. \\frac{\\sin{(2 u)}}{4} + \\frac{u}{2} \\right\\vert_{u=0}^{\\pi/2}",
                     "res": "[sin(2 * u) / 4 + u / 2]_u=0,pi / 2",
                     "rule": {
@@ -586,11 +771,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{0}^{\\sqrt{2}} \\sqrt{2 - x ^ {2}} \\,dx",
             "start": "INT x:[0,sqrt(2)]. sqrt(2 - x ^ 2)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{0}^{\\pi/2} \\sqrt{2 - (\\sqrt{2} \\sin{u}) ^ {2}} (\\sqrt{2} \\cos{u}) \\,du",
                     "res": "INT u:[0,pi / 2]. sqrt(2 - (sqrt(2) * sin(u)) ^ 2) * (sqrt(2) * cos(u))",
                     "rule": {
@@ -603,6 +793,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\sqrt{2} (\\int_{0}^{\\pi/2} \\cos{u} \\sqrt{-2 \\sin^{2}(u) + 2} \\,du)",
                     "res": "sqrt(2) * (INT u:[0,pi / 2]. cos(u) * sqrt(-(2 * sin(u) ^ 2) + 2))",
                     "rule": {
@@ -612,6 +808,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\sqrt{2} (\\int_{0}^{\\pi/2} \\cos{u} \\sqrt{-2 (1 - \\cos^{2}(u)) + 2} \\,du)",
                     "res": "sqrt(2) * (INT u:[0,pi / 2]. cos(u) * sqrt(-(2 * (1 - cos(u) ^ 2)) + 2))",
                     "rule": {
@@ -624,6 +826,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "2 (\\int_{0}^{\\pi/2} \\cos^{2}(u) \\,du)",
                     "res": "2 * (INT u:[0,pi / 2]. cos(u) ^ 2)",
                     "rule": {
@@ -633,6 +841,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "2 (\\left. \\frac{\\sin{(2 u)}}{4} + \\frac{u}{2} \\right\\vert_{u=0}^{\\pi/2})",
                     "res": "2 * ([sin(2 * u) / 4 + u / 2]_u=0,pi / 2)",
                     "rule": {
@@ -654,11 +868,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{-\\sqrt{2}}^{\\sqrt{2}} \\sqrt{8 - 2 y ^ {2}} \\,dy",
             "start": "INT y:[-sqrt(2),sqrt(2)]. sqrt(8 - 2 * y ^ 2)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{-\\pi/4}^{\\pi/4} \\sqrt{8 - 2 (2 \\sin{u}) ^ {2}} (2 \\cos{u}) \\,du",
                     "res": "INT u:[-(pi / 4),pi / 4]. sqrt(8 - 2 * (2 * sin(u)) ^ 2) * (2 * cos(u))",
                     "rule": {
@@ -671,6 +890,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "2 (\\int_{-\\pi/4}^{\\pi/4} \\cos{u} \\sqrt{-8 \\sin^{2}(u) + 8} \\,du)",
                     "res": "2 * (INT u:[-(pi / 4),pi / 4]. cos(u) * sqrt(-(8 * sin(u) ^ 2) + 8))",
                     "rule": {
@@ -680,6 +905,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "2 (\\int_{-\\pi/4}^{\\pi/4} \\cos{u} \\sqrt{-8 (1 - \\cos^{2}(u)) + 8} \\,du)",
                     "res": "2 * (INT u:[-(pi / 4),pi / 4]. cos(u) * sqrt(-(8 * (1 - cos(u) ^ 2)) + 8))",
                     "rule": {
@@ -692,6 +923,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "4 \\sqrt{2} (\\int_{-\\pi/4}^{\\pi/4} \\cos^{2}(u) \\,du)",
                     "res": "4 * sqrt(2) * (INT u:[-(pi / 4),pi / 4]. cos(u) ^ 2)",
                     "rule": {
@@ -701,6 +938,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "4 \\sqrt{2} (\\left. \\frac{\\sin{(2 u)}}{4} + \\frac{u}{2} \\right\\vert_{u=-\\pi/4}^{\\pi/4})",
                     "res": "4 * sqrt(2) * ([sin(2 * u) / 4 + u / 2]_u=-(pi / 4),pi / 4)",
                     "rule": {
@@ -722,11 +965,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{1/\\sqrt{2}}^{1} \\frac{\\sqrt{1 - x ^ {2}}}{x ^ {2}} \\,dx",
             "start": "INT x:[1 / sqrt(2),1]. sqrt(1 - x ^ 2) / x ^ 2",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{\\pi/4}^{\\pi/2} \\frac{\\sqrt{1 - \\sin^{2}(u)}}{\\sin^{2}(u)} \\cos{u} \\,du",
                     "res": "INT u:[pi / 4,pi / 2]. sqrt(1 - sin(u) ^ 2) / sin(u) ^ 2 * cos(u)",
                     "rule": {
@@ -739,6 +987,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{\\pi/4}^{\\pi/2} \\frac{\\cos{u} \\sqrt{-\\sin^{2}(u) + 1}}{\\sin^{2}(u)} \\,du",
                     "res": "INT u:[pi / 4,pi / 2]. cos(u) * sqrt(-(sin(u) ^ 2) + 1) / sin(u) ^ 2",
                     "rule": {
@@ -748,6 +1002,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{\\pi/4}^{\\pi/2} \\frac{\\cos{u} \\sqrt{-(1 - \\cos^{2}(u)) + 1}}{\\sin^{2}(u)} \\,du",
                     "res": "INT u:[pi / 4,pi / 2]. cos(u) * sqrt(-(1 - cos(u) ^ 2) + 1) / sin(u) ^ 2",
                     "rule": {
@@ -760,6 +1020,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{\\pi/4}^{\\pi/2} \\frac{\\cos^{2}(u)}{\\sin^{2}(u)} \\,du",
                     "res": "INT u:[pi / 4,pi / 2]. cos(u) ^ 2 / sin(u) ^ 2",
                     "rule": {
@@ -769,6 +1035,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{\\pi/4}^{\\pi/2} \\frac{1 - \\sin^{2}(u)}{\\sin^{2}(u)} \\,du",
                     "res": "INT u:[pi / 4,pi / 2]. (1 - sin(u) ^ 2) / sin(u) ^ 2",
                     "rule": {
@@ -781,6 +1053,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{\\pi/4}^{\\pi/2} \\frac{1}{\\sin^{2}(u)} - 1 \\,du",
                     "res": "INT u:[pi / 4,pi / 2]. 1 / sin(u) ^ 2 - 1",
                     "rule": {
@@ -790,6 +1068,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\int_{\\pi/4}^{\\pi/2} \\frac{1}{\\sin^{2}(u)} \\,du) - (\\int_{\\pi/4}^{\\pi/2} 1 \\,du)",
                     "res": "(INT u:[pi / 4,pi / 2]. 1 / sin(u) ^ 2) - (INT u:[pi / 4,pi / 2]. 1)",
                     "rule": {
@@ -799,6 +1083,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\int_{\\pi/4}^{\\pi/2} \\csc^{2}(u) \\,du) - (\\int_{\\pi/4}^{\\pi/2} 1 \\,du)",
                     "res": "(INT u:[pi / 4,pi / 2]. csc(u) ^ 2) - (INT u:[pi / 4,pi / 2]. 1)",
                     "rule": {
@@ -811,6 +1101,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. -\\cot{u} \\right\\vert_{u=\\pi/4}^{\\pi/2}) - (\\left. u \\right\\vert_{u=\\pi/4}^{\\pi/2})",
                     "res": "([-cot(u)]_u=pi / 4,pi / 2) - ([u]_u=pi / 4,pi / 2)",
                     "rule": {
@@ -832,11 +1128,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{-1}^{1} \\frac{x}{\\sqrt{5 - 4 x}} \\,dx",
             "start": "INT x:[-1,1]. x / sqrt(5 - 4 * x)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{1}^{9} \\frac{-u + 5}{16 \\sqrt{u}} \\,du",
                     "res": "INT u:[1,9]. (-u + 5) / (16 * sqrt(u))",
                     "rule": {
@@ -849,6 +1150,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{1}^{9} \\frac{5}{16 \\sqrt{u}} - \\frac{\\sqrt{u}}{16} \\,du",
                     "res": "INT u:[1,9]. 5 / (16 * sqrt(u)) - sqrt(u) / 16",
                     "rule": {
@@ -858,6 +1165,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\frac{5}{16} (\\int_{1}^{9} \\frac{1}{\\sqrt{u}} \\,du) - \\frac{1}{16} (\\int_{1}^{9} \\sqrt{u} \\,du)",
                     "res": "5/16 * (INT u:[1,9]. 1 / sqrt(u)) - 1/16 * (INT u:[1,9]. sqrt(u))",
                     "rule": {
@@ -867,6 +1180,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\frac{5}{16} (\\left. 2 \\sqrt{u} \\right\\vert_{u=1}^{9}) - \\frac{1}{16} (\\left. \\frac{2 u ^ {3/2}}{3} \\right\\vert_{u=1}^{9})",
                     "res": "5/16 * ([2 * sqrt(u)]_u=1,9) - 1/16 * ([2 * u ^ (3/2) / 3]_u=1,9)",
                     "rule": {
@@ -888,11 +1207,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{1}^{4} \\frac{1}{1 + \\sqrt{x}} \\,dx",
             "start": "INT x:[1,4]. 1 / (1 + sqrt(x))",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{1}^{2} \\frac{2 u}{u + 1} \\,du",
                     "res": "INT u:[1,2]. 2 * u / (u + 1)",
                     "rule": {
@@ -905,6 +1229,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "v",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{2}^{3} \\frac{2 v - 2}{v} \\,dv",
                     "res": "INT v:[2,3]. (2 * v - 2) / v",
                     "rule": {
@@ -917,6 +1247,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "v",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{2}^{3} -\\frac{2}{v} + 2 \\,dv",
                     "res": "INT v:[2,3]. -(2 / v) + 2",
                     "rule": {
@@ -926,6 +1262,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "v",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-2 (\\int_{2}^{3} \\frac{1}{v} \\,dv) + 2 (\\int_{2}^{3} 1 \\,dv)",
                     "res": "-(2 * (INT v:[2,3]. 1 / v)) + 2 * (INT v:[2,3]. 1)",
                     "rule": {
@@ -935,6 +1277,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "v",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-2 (\\left. \\log{(\\left| v \\right|)} \\right\\vert_{v=2}^{3}) + 2 (\\left. v \\right\\vert_{v=2}^{3})",
                     "res": "-(2 * ([log(abs(v))]_v=2,3)) + 2 * ([v]_v=2,3)",
                     "rule": {
@@ -956,11 +1304,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{3/4}^{1} \\frac{1}{\\sqrt{1 - x} - 1} \\,dx",
             "start": "INT x:[3/4,1]. 1 / (sqrt(1 - x) - 1)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{0}^{1/2} \\frac{2 u}{u - 1} \\,du",
                     "res": "INT u:[0,1/2]. 2 * u / (u - 1)",
                     "rule": {
@@ -973,6 +1326,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "v",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{-1}^{-1/2} \\frac{2 v + 2}{v} \\,dv",
                     "res": "INT v:[-1,-1/2]. (2 * v + 2) / v",
                     "rule": {
@@ -985,6 +1344,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "v",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{-1}^{-1/2} \\frac{2}{v} + 2 \\,dv",
                     "res": "INT v:[-1,-1/2]. 2 / v + 2",
                     "rule": {
@@ -994,6 +1359,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "v",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "2 (\\int_{-1}^{-1/2} \\frac{1}{v} \\,dv) + 2 (\\int_{-1}^{-1/2} 1 \\,dv)",
                     "res": "2 * (INT v:[-1,-1/2]. 1 / v) + 2 * (INT v:[-1,-1/2]. 1)",
                     "rule": {
@@ -1003,6 +1374,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "v",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "2 (\\left. \\log{(\\left| v \\right|)} \\right\\vert_{v=-1}^{-1/2}) + 2 (\\left. v \\right\\vert_{v=-1}^{-1/2})",
                     "res": "2 * ([log(abs(v))]_v=-1,-1/2) + 2 * ([v]_v=-1,-1/2)",
                     "rule": {
@@ -1024,11 +1401,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{0}^{1} t e^{-t ^ {2}/2} \\,dt",
             "start": "INT t:[0,1]. t * exp(-(t ^ 2) / 2)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{0}^{1/2} e^{-u} \\,du",
                     "res": "INT u:[0,1/2]. exp(-u)",
                     "rule": {
@@ -1041,6 +1423,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\left. -e^{-u} \\right\\vert_{u=0}^{1/2}",
                     "res": "[-exp(-u)]_u=0,1/2",
                     "rule": {
@@ -1062,11 +1450,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{1}^{e^{2}} \\frac{1}{x \\sqrt{1 + \\log{x}}} \\,dx",
             "start": "INT x:[1,exp(2)]. 1 / (x * sqrt(1 + log(x)))",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{1}^{3} \\frac{1}{\\sqrt{u}} \\,du",
                     "res": "INT u:[1,3]. 1 / sqrt(u)",
                     "rule": {
@@ -1079,6 +1472,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\left. 2 \\sqrt{u} \\right\\vert_{u=1}^{3}",
                     "res": "[2 * sqrt(u)]_u=1,3",
                     "rule": {
@@ -1100,11 +1499,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{-2}^{0} \\frac{x + 2}{x ^ {2} + 2 x + 2} \\,dx",
             "start": "INT x:[-2,0]. (x + 2) / (x ^ 2 + 2 * x + 2)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{-2}^{0} \\frac{x + 2}{(x + 1) ^ {2} + 1} \\,dx",
                     "res": "INT x:[-2,0]. (x + 2) / ((x + 1) ^ 2 + 1)",
                     "rule": {
@@ -1117,6 +1521,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{-1}^{1} \\frac{u + 1}{u ^ {2} + 1} \\,du",
                     "res": "INT u:[-1,1]. (u + 1) / (u ^ 2 + 1)",
                     "rule": {
@@ -1129,6 +1539,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{-1}^{1} \\frac{u}{u ^ {2} + 1} + \\frac{1}{u ^ {2} + 1} \\,du",
                     "res": "INT u:[-1,1]. u / (u ^ 2 + 1) + 1 / (u ^ 2 + 1)",
                     "rule": {
@@ -1138,6 +1554,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\int_{-1}^{1} \\frac{u}{u ^ {2} + 1} \\,du) + (\\int_{-1}^{1} \\frac{1}{u ^ {2} + 1} \\,du)",
                     "res": "(INT u:[-1,1]. u / (u ^ 2 + 1)) + (INT u:[-1,1]. 1 / (u ^ 2 + 1))",
                     "rule": {
@@ -1147,6 +1569,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\int_{-1}^{0} \\frac{u}{u ^ {2} + 1} \\,du) + (\\int_{0}^{1} \\frac{u}{u ^ {2} + 1} \\,du) + (\\int_{-1}^{1} \\frac{1}{u ^ {2} + 1} \\,du)",
                     "res": "(INT u:[-1,0]. u / (u ^ 2 + 1)) + (INT u:[0,1]. u / (u ^ 2 + 1)) + (INT u:[-1,1]. 1 / (u ^ 2 + 1))",
                     "rule": {
@@ -1157,6 +1585,16 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "v",
+                            "$real"
+                        ],
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\int_{1}^{2} -\\frac{1}{2 v} \\,dv) + (\\int_{0}^{1} \\frac{u}{u ^ {2} + 1} \\,du) + (\\int_{-1}^{1} \\frac{1}{u ^ {2} + 1} \\,du)",
                     "res": "(INT v:[1,2]. -(1 / (2 * v))) + (INT u:[0,1]. u / (u ^ 2 + 1)) + (INT u:[-1,1]. 1 / (u ^ 2 + 1))",
                     "rule": {
@@ -1169,6 +1607,16 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "v",
+                            "$real"
+                        ],
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-\\frac{1}{2} (\\left. \\log{v} \\right\\vert_{v=1}^{2}) + (\\int_{0}^{1} \\frac{u}{u ^ {2} + 1} \\,du) + (\\left. \\tan^{-1}{u} \\right\\vert_{u=-1}^{1})",
                     "res": "-(1/2 * ([log(v)]_v=1,2)) + (INT u:[0,1]. u / (u ^ 2 + 1)) + ([atan(u)]_u=-1,1)",
                     "rule": {
@@ -1178,6 +1626,16 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "v",
+                            "$real"
+                        ],
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-\\frac{1}{2} (\\left. \\log{v} \\right\\vert_{v=1}^{2}) + (\\int_{1}^{2} \\frac{1}{2 v} \\,dv) + (\\left. \\tan^{-1}{u} \\right\\vert_{u=-1}^{1})",
                     "res": "-(1/2 * ([log(v)]_v=1,2)) + (INT v:[1,2]. 1 / (2 * v)) + ([atan(u)]_u=-1,1)",
                     "rule": {
@@ -1190,6 +1648,16 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "v",
+                            "$real"
+                        ],
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-\\frac{1}{2} (\\left. \\log{v} \\right\\vert_{v=1}^{2}) + \\frac{1}{2} (\\left. \\log{v} \\right\\vert_{v=1}^{2}) + (\\left. \\tan^{-1}{u} \\right\\vert_{u=-1}^{1})",
                     "res": "-(1/2 * ([log(v)]_v=1,2)) + 1/2 * ([log(v)]_v=1,2) + ([atan(u)]_u=-1,1)",
                     "rule": {
@@ -1211,11 +1679,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{-\\pi/2}^{\\pi/2} \\cos^{4}(x) \\,dx",
             "start": "INT x:[-pi / 2,pi / 2]. cos(x) ^ 4",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{-\\pi/2}^{\\pi/2} (\\cos^{2}(x)) ^ {2} \\,dx",
                     "res": "INT x:[-pi / 2,pi / 2]. cos(x) ^ 2 ^ 2",
                     "rule": {
@@ -1228,6 +1701,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{-\\pi/2}^{\\pi/2} (\\frac{1 + \\cos{(2 x)}}{2}) ^ {2} \\,dx",
                     "res": "INT x:[-pi / 2,pi / 2]. ((1 + cos(2 * x)) / 2) ^ 2",
                     "rule": {
@@ -1240,6 +1719,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{-\\pi/2}^{\\pi/2} \\frac{\\cos^{2}(2 x)}{4} + \\frac{\\cos{(2 x)}}{2} + \\frac{1}{4} \\,dx",
                     "res": "INT x:[-pi / 2,pi / 2]. cos(2 * x) ^ 2 / 4 + cos(2 * x) / 2 + 1/4",
                     "rule": {
@@ -1249,6 +1734,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{-\\pi}^{\\pi} \\frac{\\cos^{2}(u)}{8} + \\frac{\\cos{u}}{4} + \\frac{1}{8} \\,du",
                     "res": "INT u:[-pi,pi]. cos(u) ^ 2 / 8 + cos(u) / 4 + 1/8",
                     "rule": {
@@ -1261,6 +1752,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\frac{1}{8} (\\int_{-\\pi}^{\\pi} \\cos^{2}(u) \\,du) + \\frac{1}{4} (\\int_{-\\pi}^{\\pi} \\cos{u} \\,du) + \\frac{1}{8} (\\int_{-\\pi}^{\\pi} 1 \\,du)",
                     "res": "1/8 * (INT u:[-pi,pi]. cos(u) ^ 2) + 1/4 * (INT u:[-pi,pi]. cos(u)) + 1/8 * (INT u:[-pi,pi]. 1)",
                     "rule": {
@@ -1270,6 +1767,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\frac{1}{8} (\\left. \\frac{\\sin{(2 u)}}{4} + \\frac{u}{2} \\right\\vert_{u=-\\pi}^{\\pi}) + \\frac{1}{4} (\\left. \\sin{u} \\right\\vert_{u=-\\pi}^{\\pi}) + \\frac{1}{8} (\\left. u \\right\\vert_{u=-\\pi}^{\\pi})",
                     "res": "1/8 * ([sin(2 * u) / 4 + u / 2]_u=-pi,pi) + 1/4 * ([sin(u)]_u=-pi,pi) + 1/8 * ([u]_u=-pi,pi)",
                     "rule": {
@@ -1291,11 +1794,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{-\\pi/2}^{\\pi/2} \\sqrt{\\cos{x} - \\cos^{3}(x)} \\,dx",
             "start": "INT x:[-pi / 2,pi / 2]. sqrt(cos(x) - cos(x) ^ 3)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{-\\pi/2}^{\\pi/2} \\sqrt{\\cos{x} (1 - \\cos^{2}(x))} \\,dx",
                     "res": "INT x:[-pi / 2,pi / 2]. sqrt(cos(x) * (1 - cos(x) ^ 2))",
                     "rule": {
@@ -1308,6 +1816,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{-\\pi/2}^{\\pi/2} \\sqrt{\\cos{x} \\sin^{2}(x)} \\,dx",
                     "res": "INT x:[-pi / 2,pi / 2]. sqrt(cos(x) * sin(x) ^ 2)",
                     "rule": {
@@ -1320,6 +1834,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{-\\pi/2}^{\\pi/2} \\sqrt{\\cos{x}} \\left| \\sin{x} \\right| \\,dx",
                     "res": "INT x:[-(pi / 2),pi / 2]. sqrt(cos(x)) * abs(sin(x))",
                     "rule": {
@@ -1329,6 +1849,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\int_{-\\pi/2}^{0} \\sqrt{\\cos{x}} \\left| \\sin{x} \\right| \\,dx) + (\\int_{0}^{\\pi/2} \\sqrt{\\cos{x}} \\left| \\sin{x} \\right| \\,dx)",
                     "res": "(INT x:[-(pi / 2),0]. sqrt(cos(x)) * abs(sin(x))) + (INT x:[0,pi / 2]. sqrt(cos(x)) * abs(sin(x)))",
                     "rule": {
@@ -1339,6 +1865,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-(\\int_{-\\pi/2}^{0} \\sqrt{\\cos{x}} \\sin{x} \\,dx) + (\\int_{0}^{\\pi/2} \\sqrt{\\cos{x}} \\sin{x} \\,dx)",
                     "res": "-(INT x:[-(pi / 2),0]. sqrt(cos(x)) * sin(x)) + (INT x:[0,pi / 2]. sqrt(cos(x)) * sin(x))",
                     "rule": {
@@ -1348,6 +1880,16 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ],
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-(\\int_{0}^{1} -\\sqrt{u} \\,du) + (\\int_{0}^{\\pi/2} \\sqrt{\\cos{x}} \\sin{x} \\,dx)",
                     "res": "-(INT u:[0,1]. -sqrt(u)) + (INT x:[0,pi / 2]. sqrt(cos(x)) * sin(x))",
                     "rule": {
@@ -1360,6 +1902,16 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ],
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "--(\\left. \\frac{2 u ^ {3/2}}{3} \\right\\vert_{u=0}^{1}) + (\\int_{0}^{\\pi/2} \\sqrt{\\cos{x}} \\sin{x} \\,dx)",
                     "res": "--([2 * u ^ (3/2) / 3]_u=0,1) + (INT x:[0,pi / 2]. sqrt(cos(x)) * sin(x))",
                     "rule": {
@@ -1369,6 +1921,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "--(\\left. \\frac{2 u ^ {3/2}}{3} \\right\\vert_{u=0}^{1}) + (\\int_{0}^{1} \\sqrt{u} \\,du)",
                     "res": "--([2 * u ^ (3/2) / 3]_u=0,1) + (INT u:[0,1]. sqrt(u))",
                     "rule": {
@@ -1381,6 +1939,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "--(\\left. \\frac{2 u ^ {3/2}}{3} \\right\\vert_{u=0}^{1}) + (\\left. \\frac{2 u ^ {3/2}}{3} \\right\\vert_{u=0}^{1})",
                     "res": "--([2 * u ^ (3/2) / 3]_u=0,1) + ([2 * u ^ (3/2) / 3]_u=0,1)",
                     "rule": {
@@ -1402,11 +1966,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{0}^{\\pi} \\sqrt{1 + \\cos{(2 x)}} \\,dx",
             "start": "INT x:[0,pi]. sqrt(1 + cos(2 * x))",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{0}^{\\pi} \\sqrt{1 + (2 \\cos^{2}(x) - 1)} \\,dx",
                     "res": "INT x:[0,pi]. sqrt(1 + (2 * cos(x) ^ 2 - 1))",
                     "rule": {
@@ -1419,6 +1988,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\sqrt{2} (\\int_{0}^{\\pi} \\left| \\cos{x} \\right| \\,dx)",
                     "res": "sqrt(2) * (INT x:[0,pi]. abs(cos(x)))",
                     "rule": {
@@ -1428,6 +2003,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\sqrt{2} ((\\int_{0}^{\\pi/2} \\left| \\cos{x} \\right| \\,dx) + (\\int_{\\pi/2}^{\\pi} \\left| \\cos{x} \\right| \\,dx))",
                     "res": "sqrt(2) * ((INT x:[0,pi / 2]. abs(cos(x))) + (INT x:[pi / 2,pi]. abs(cos(x))))",
                     "rule": {
@@ -1438,6 +2019,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\sqrt{2} ((\\int_{0}^{\\pi/2} \\cos{x} \\,dx) - (\\int_{\\pi/2}^{\\pi} \\cos{x} \\,dx))",
                     "res": "sqrt(2) * ((INT x:[0,pi / 2]. cos(x)) - (INT x:[pi / 2,pi]. cos(x)))",
                     "rule": {
@@ -1447,6 +2034,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\sqrt{2} ((\\left. \\sin{x} \\right\\vert_{x=0}^{\\pi/2}) - (\\left. \\sin{x} \\right\\vert_{x=\\pi/2}^{\\pi}))",
                     "res": "sqrt(2) * (([sin(x)]_x=0,pi / 2) - ([sin(x)]_x=pi / 2,pi))",
                     "rule": {
@@ -1468,11 +2061,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{0}^{1} x e^{-x} \\,dx",
             "start": "INT x:[0,1]. x * exp(-x)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. -x e^{-x} \\right\\vert_{x=0}^{1}) - (\\int_{0}^{1} -e^{-x} \\,dx)",
                     "res": "([-(x * exp(-x))]_x=0,1) - (INT x:[0,1]. -exp(-x))",
                     "rule": {
@@ -1485,6 +2083,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\int_{0}^{1} e^{-x} \\,dx) - e^{-1}",
                     "res": "(INT x:[0,1]. exp(-x)) - exp(-1)",
                     "rule": {
@@ -1494,6 +2098,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. -e^{-x} \\right\\vert_{x=0}^{1}) - e^{-1}",
                     "res": "([-exp(-x)]_x=0,1) - exp(-1)",
                     "rule": {
@@ -1515,11 +2125,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{1}^{e} x \\log{x} \\,dx",
             "start": "INT x:[1,exp(1)]. x * log(x)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. \\frac{x ^ {2} \\log{x}}{2} \\right\\vert_{x=1}^{e}) - (\\int_{1}^{e} \\frac{x}{2} \\,dx)",
                     "res": "([x ^ 2 * log(x) / 2]_x=1,exp(1)) - (INT x:[1,exp(1)]. x / 2)",
                     "rule": {
@@ -1532,6 +2147,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. \\frac{x ^ {2} \\log{x}}{2} \\right\\vert_{x=1}^{e}) - \\frac{1}{2} (\\left. \\frac{x ^ {2}}{2} \\right\\vert_{x=1}^{e})",
                     "res": "([x ^ 2 * log(x) / 2]_x=1,exp(1)) - 1/2 * ([x ^ 2 / 2]_x=1,exp(1))",
                     "rule": {
@@ -1553,11 +2174,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{\\pi/4}^{\\pi/3} \\frac{x}{\\sin^{2}(x)} \\,dx",
             "start": "INT x:[pi / 4,pi / 3]. x / sin(x) ^ 2",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{\\pi/4}^{\\pi/3} x \\csc^{2}(x) \\,dx",
                     "res": "INT x:[pi / 4,pi / 3]. x * csc(x) ^ 2",
                     "rule": {
@@ -1570,6 +2196,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. -x \\cot{x} \\right\\vert_{x=\\pi/4}^{\\pi/3}) - (\\int_{\\pi/4}^{\\pi/3} -\\cot{x} \\,dx)",
                     "res": "([-(x * cot(x))]_x=pi / 4,pi / 3) - (INT x:[pi / 4,pi / 3]. -cot(x))",
                     "rule": {
@@ -1582,6 +2214,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\int_{\\pi/4}^{\\pi/3} \\cot{x} \\,dx) - \\frac{\\sqrt{3} \\pi}{9} + \\frac{\\pi}{4}",
                     "res": "(INT x:[pi / 4,pi / 3]. cot(x)) - sqrt(3) * pi / 9 + pi / 4",
                     "rule": {
@@ -1591,6 +2229,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\int_{\\pi/4}^{\\pi/3} \\frac{\\cos{x}}{\\sin{x}} \\,dx) - \\frac{\\sqrt{3} \\pi}{9} + \\frac{\\pi}{4}",
                     "res": "(INT x:[pi / 4,pi / 3]. cos(x) / sin(x)) - sqrt(3) * pi / 9 + pi / 4",
                     "rule": {
@@ -1603,6 +2247,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\int_{\\sqrt{2}/2}^{\\sqrt{3}/2} \\frac{1}{u} \\,du) - \\frac{\\sqrt{3} \\pi}{9} + \\frac{\\pi}{4}",
                     "res": "(INT u:[sqrt(2) / 2,sqrt(3) / 2]. 1 / u) - sqrt(3) * pi / 9 + pi / 4",
                     "rule": {
@@ -1615,6 +2265,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. \\log{(\\left| u \\right|)} \\right\\vert_{u=\\sqrt{2}/2}^{\\sqrt{3}/2}) - \\frac{\\sqrt{3} \\pi}{9} + \\frac{\\pi}{4}",
                     "res": "([log(abs(u))]_u=sqrt(2) / 2,sqrt(3) / 2) - sqrt(3) * pi / 9 + pi / 4",
                     "rule": {
@@ -1636,11 +2292,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{1}^{4} \\frac{\\log{x}}{\\sqrt{x}} \\,dx",
             "start": "INT x:[1,4]. log(x) / sqrt(x)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. 2 \\sqrt{x} \\log{x} \\right\\vert_{x=1}^{4}) - (\\int_{1}^{4} \\frac{2}{\\sqrt{x}} \\,dx)",
                     "res": "([2 * sqrt(x) * log(x)]_x=1,4) - (INT x:[1,4]. 2 / sqrt(x))",
                     "rule": {
@@ -1653,6 +2314,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. 2 \\sqrt{x} \\log{x} \\right\\vert_{x=1}^{4}) - 2 (\\left. 2 \\sqrt{x} \\right\\vert_{x=1}^{4})",
                     "res": "([2 * sqrt(x) * log(x)]_x=1,4) - 2 * ([2 * sqrt(x)]_x=1,4)",
                     "rule": {
@@ -1674,11 +2341,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{0}^{1} x \\tan^{-1}{x} \\,dx",
             "start": "INT x:[0,1]. x * atan(x)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. \\frac{x ^ {2} \\tan^{-1}{x}}{2} \\right\\vert_{x=0}^{1}) - (\\int_{0}^{1} \\frac{x ^ {2}}{2 x ^ {2} + 2} \\,dx)",
                     "res": "([x ^ 2 * atan(x) / 2]_x=0,1) - (INT x:[0,1]. x ^ 2 / (2 * x ^ 2 + 2))",
                     "rule": {
@@ -1691,6 +2363,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-(\\int_{0}^{1} \\frac{x ^ {2}}{2 x ^ {2} + 2} \\,dx) + \\frac{\\pi}{8}",
                     "res": "-(INT x:[0,1]. x ^ 2 / (2 * x ^ 2 + 2)) + pi / 8",
                     "rule": {
@@ -1700,6 +2378,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-(\\int_{0}^{1} \\frac{1 - \\frac{1}{x ^ {2} + 1}}{2} \\,dx) + \\frac{\\pi}{8}",
                     "res": "-(INT x:[0,1]. (1 - 1 / (x ^ 2 + 1)) / 2) + pi / 8",
                     "rule": {
@@ -1712,6 +2396,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-\\frac{1}{2} ((\\left. x \\right\\vert_{x=0}^{1}) - (\\left. \\tan^{-1}{x} \\right\\vert_{x=0}^{1})) + \\frac{\\pi}{8}",
                     "res": "-(1/2 * (([x]_x=0,1) - ([atan(x)]_x=0,1))) + pi / 8",
                     "rule": {
@@ -1733,11 +2423,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{0}^{\\pi/2} \\cos{x} e^{2 x} \\,dx",
             "start": "INT x:[0,pi / 2]. cos(x) * exp(2 * x)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. e^{2 x} \\sin{x} \\right\\vert_{x=0}^{\\pi/2}) - (\\int_{0}^{\\pi/2} 2 e^{2 x} \\sin{x} \\,dx)",
                     "res": "([exp(2 * x) * sin(x)]_x=0,pi / 2) - (INT x:[0,pi / 2]. 2 * exp(2 * x) * sin(x))",
                     "rule": {
@@ -1750,6 +2445,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-2 (\\int_{0}^{\\pi/2} e^{2 x} \\sin{x} \\,dx) + e^{\\pi}",
                     "res": "-(2 * (INT x:[0,pi / 2]. exp(2 * x) * sin(x))) + exp(pi)",
                     "rule": {
@@ -1759,6 +2460,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-2 ((\\left. -\\cos{x} e^{2 x} \\right\\vert_{x=0}^{\\pi/2}) - (\\int_{0}^{\\pi/2} -2 \\cos{x} e^{2 x} \\,dx)) + e^{\\pi}",
                     "res": "-(2 * (([-(cos(x) * exp(2 * x))]_x=0,pi / 2) - (INT x:[0,pi / 2]. -(2 * cos(x) * exp(2 * x))))) + exp(pi)",
                     "rule": {
@@ -1771,6 +2478,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-4 (\\int_{0}^{\\pi/2} \\cos{x} e^{2 x} \\,dx) + e^{\\pi} - 2",
                     "res": "-(4 * (INT x:[0,pi / 2]. cos(x) * exp(2 * x))) + exp(pi) - 2",
                     "rule": {
@@ -1793,11 +2506,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{0}^{\\pi} (x \\sin{x}) ^ {2} \\,dx",
             "start": "INT x:[0,pi]. (x * sin(x)) ^ 2",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{0}^{\\pi} x ^ {2} \\sin^{2}(x) \\,dx",
                     "res": "INT x:[0,pi]. x ^ 2 * sin(x) ^ 2",
                     "rule": {
@@ -1807,6 +2525,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{0}^{\\pi} x ^ {2} (\\frac{1 - \\cos{(2 x)}}{2}) \\,dx",
                     "res": "INT x:[0,pi]. x ^ 2 * ((1 - cos(2 * x)) / 2)",
                     "rule": {
@@ -1819,6 +2543,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{0}^{\\pi} -\\frac{x ^ {2} \\cos{(2 x)}}{2} + \\frac{x ^ {2}}{2} \\,dx",
                     "res": "INT x:[0,pi]. -(x ^ 2 * cos(2 * x) / 2) + x ^ 2 / 2",
                     "rule": {
@@ -1828,6 +2558,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-\\frac{1}{2} (\\int_{0}^{\\pi} x ^ {2} \\cos{(2 x)} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\pi} x ^ {2} \\,dx)",
                     "res": "-(1/2 * (INT x:[0,pi]. x ^ 2 * cos(2 * x))) + 1/2 * (INT x:[0,pi]. x ^ 2)",
                     "rule": {
@@ -1837,6 +2573,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-\\frac{1}{2} ((\\left. \\frac{x ^ {2} \\sin{(2 x)}}{2} \\right\\vert_{x=0}^{\\pi}) - (\\int_{0}^{\\pi} x \\sin{(2 x)} \\,dx)) + \\frac{1}{2} (\\int_{0}^{\\pi} x ^ {2} \\,dx)",
                     "res": "-(1/2 * (([x ^ 2 * sin(2 * x) / 2]_x=0,pi) - (INT x:[0,pi]. x * sin(2 * x)))) + 1/2 * (INT x:[0,pi]. x ^ 2)",
                     "rule": {
@@ -1849,6 +2591,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi} x \\sin{(2 x)} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\pi} x ^ {2} \\,dx)",
                     "res": "1/2 * (INT x:[0,pi]. x * sin(2 * x)) + 1/2 * (INT x:[0,pi]. x ^ 2)",
                     "rule": {
@@ -1858,6 +2606,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\frac{1}{2} ((\\left. -\\frac{x \\cos{(2 x)}}{2} \\right\\vert_{x=0}^{\\pi}) - (\\int_{0}^{\\pi} -\\frac{\\cos{(2 x)}}{2} \\,dx)) + \\frac{1}{2} (\\int_{0}^{\\pi} x ^ {2} \\,dx)",
                     "res": "1/2 * (([-(x * cos(2 * x) / 2)]_x=0,pi) - (INT x:[0,pi]. -(cos(2 * x) / 2))) + 1/2 * (INT x:[0,pi]. x ^ 2)",
                     "rule": {
@@ -1870,6 +2624,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\frac{1}{4} (\\int_{0}^{\\pi} \\cos{(2 x)} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\pi} x ^ {2} \\,dx) - \\frac{\\pi}{4}",
                     "res": "1/4 * (INT x:[0,pi]. cos(2 * x)) + 1/2 * (INT x:[0,pi]. x ^ 2) - pi / 4",
                     "rule": {
@@ -1879,6 +2639,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\frac{1}{4} (\\left. \\frac{\\sin{(2 x)}}{2} \\right\\vert_{x=0}^{\\pi}) + \\frac{1}{2} (\\left. \\frac{x ^ {3}}{3} \\right\\vert_{x=0}^{\\pi}) - \\frac{\\pi}{4}",
                     "res": "1/4 * ([sin(2 * x) / 2]_x=0,pi) + 1/2 * ([x ^ 3 / 3]_x=0,pi) - pi / 4",
                     "rule": {
@@ -1900,11 +2666,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{1}^{e} \\sin{(\\log{x})} \\,dx",
             "start": "INT x:[1,exp(1)]. sin(log(x))",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int_{0}^{1} e^{u} \\sin{u} \\,du",
                     "res": "INT u:[0,1]. exp(u) * sin(u)",
                     "rule": {
@@ -1917,6 +2688,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. -\\cos{u} e^{u} \\right\\vert_{u=0}^{1}) - (\\int_{0}^{1} -\\cos{u} e^{u} \\,du)",
                     "res": "([-(cos(u) * exp(u))]_u=0,1) - (INT u:[0,1]. -(cos(u) * exp(u)))",
                     "rule": {
@@ -1929,6 +2706,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\int_{0}^{1} \\cos{u} e^{u} \\,du) - \\cos{(1)} e + 1",
                     "res": "(INT u:[0,1]. cos(u) * exp(u)) - cos(1) * exp(1) + 1",
                     "rule": {
@@ -1938,6 +2721,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. e^{u} \\sin{u} \\right\\vert_{u=0}^{1}) - (\\int_{0}^{1} e^{u} \\sin{u} \\,du) - \\cos{(1)} e + 1",
                     "res": "([exp(u) * sin(u)]_u=0,1) - (INT u:[0,1]. exp(u) * sin(u)) - cos(1) * exp(1) + 1",
                     "rule": {
@@ -1950,6 +2739,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-(\\int_{0}^{1} e^{u} \\sin{u} \\,du) - \\cos{(1)} e + e \\sin{(1)} + 1",
                     "res": "-(INT u:[0,1]. exp(u) * sin(u)) - cos(1) * exp(1) + exp(1) * sin(1) + 1",
                     "rule": {
@@ -1972,11 +2767,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{1/e}^{e} \\left| \\log{x} \\right| \\,dx",
             "start": "INT x:[1 / exp(1),exp(1)]. abs(log(x))",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\int_{1/e}^{1} \\left| \\log{x} \\right| \\,dx) + (\\int_{1}^{e} \\left| \\log{x} \\right| \\,dx)",
                     "res": "(INT x:[1 / exp(1),1]. abs(log(x))) + (INT x:[1,exp(1)]. abs(log(x)))",
                     "rule": {
@@ -1987,6 +2787,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\int_{1}^{e} \\log{x} \\,dx) - (\\int_{e^{-1}}^{1} \\log{x} \\,dx)",
                     "res": "(INT x:[1,exp(1)]. log(x)) - (INT x:[exp(-1),1]. log(x))",
                     "rule": {
@@ -1996,6 +2802,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "(\\left. x \\log{x} \\right\\vert_{x=1}^{e}) - (\\int_{1}^{e} 1 \\,dx) - (\\int_{e^{-1}}^{1} \\log{x} \\,dx)",
                     "res": "([x * log(x)]_x=1,exp(1)) - (INT x:[1,exp(1)]. 1) - (INT x:[exp(-1),1]. log(x))",
                     "rule": {
@@ -2008,6 +2820,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-(\\int_{e^{-1}}^{1} \\log{x} \\,dx) - (\\int_{1}^{e} 1 \\,dx) + e",
                     "res": "-(INT x:[exp(-1),1]. log(x)) - (INT x:[1,exp(1)]. 1) + exp(1)",
                     "rule": {
@@ -2017,6 +2835,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-((\\left. x \\log{x} \\right\\vert_{x=e^{-1}}^{1}) - (\\int_{e^{-1}}^{1} 1 \\,dx)) - (\\int_{1}^{e} 1 \\,dx) + e",
                     "res": "-(([x * log(x)]_x=exp(-1),1) - (INT x:[exp(-1),1]. 1)) - (INT x:[1,exp(1)]. 1) + exp(1)",
                     "rule": {
@@ -2029,6 +2853,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "-((\\left. x \\log{x} \\right\\vert_{x=e^{-1}}^{1}) - (\\left. x \\right\\vert_{x=e^{-1}}^{1})) - (\\left. x \\right\\vert_{x=1}^{e}) + e",
                     "res": "-(([x * log(x)]_x=exp(-1),1) - ([x]_x=exp(-1),1)) - ([x]_x=1,exp(1)) + exp(1)",
                     "rule": {

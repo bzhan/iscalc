@@ -45,7 +45,7 @@ def deriv(var: str, e: Expr, ctx: Context) -> Expr:
                     return Const(0)
             else:
                 if e.name != var:
-                    return Fun('zero_matrix', e.type.args[1], e.type.args[2])
+                    return Fun(*ctx.get_func_type('zero_matrix', e.type.args[1], e.type.args[2]))
                 else:
                     raise NotImplementedError
         elif expr.is_const(e):
@@ -148,9 +148,9 @@ def deriv(var: str, e: Expr, ctx: Context) -> Expr:
                 assert not e.contains_var(var), "deriv: binom applied to real variables"
                 return Const(0)
             elif e.func_name == 'unit_matrix':
-                return Fun('zero_matrix', e.args[0], e.args[0])
+                return Fun(*ctx.get_func_type('zero_matrix', e.args[0], e.args[0]))
             elif e.func_name == 'zero_matrix':
-                return Fun('zero_matrix', e.args[0], e.args[1])
+                return Fun(*ctx.get_func_type('zero_matrix', e.args[0], e.args[1]))
             else:
                 return Deriv(var, e)
         elif expr.is_integral(e):
@@ -161,7 +161,7 @@ def deriv(var: str, e: Expr, ctx: Context) -> Expr:
                           + e.body.subst(e.var, e.upper) * rec(e.upper)
                           - e.body.subst(e.var, e.lower) * rec(e.lower))
         elif expr.is_limit(e):
-            return Limit(e.var, e.lim, rec(e.body))
+            return Limit(e.var, e.lim, rec(e.body), var_type=e.var_type)
         elif expr.is_summation(e):
             return Summation(e.index_var, e.lower, e.upper, rec(e.body))
         elif expr.is_inf(e):
@@ -513,7 +513,7 @@ class Linearity(Rule):
                     return e
             elif expr.is_limit(e):
                 if expr.is_uminus(e.body):
-                    return -Limit(e.var, e.lim, e.body.args[0])
+                    return -Limit(e.var, e.lim, e.body.args[0], var_type=e.var_type)
                 elif e.body.is_times() or e.body.is_divides():
                     num_factors, denom_factors = decompose_expr_factor(e.body)
                     b, c = Const(1), Const(1)
@@ -527,7 +527,7 @@ class Linearity(Rule):
                             c = c / f
                         else:
                             b = b / f
-                    return c * Limit(e.var, e.lim, b)
+                    return c * Limit(e.var, e.lim, b, var_type=e.var_type)
                 else:
                     return e
             elif expr.is_summation(e):
@@ -577,7 +577,7 @@ class PartialFractionDecomposition(Rule):
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
         if sympywrapper.is_rational(e):
-            return sympywrapper.partial_fraction(e, ctx)
+            return normalize(sympywrapper.partial_fraction(e), ctx)
         else:
             return e
 
@@ -745,7 +745,6 @@ class SeriesExpansionIdentity(Rule):
 
         # Now e is the old expression
         assert self.old_expr is None or self.old_expr == e
-
         for identity in ctx.get_series_expansions():
             inst = expr.match(e, identity.lhs)
             if inst is None:
@@ -996,9 +995,9 @@ class OnLocation(Rule):
                         elif v == float('-inf'):
                             cond = Op('<', var, Const(0))
                             ctx.add_condition(cond)
-                    return Limit(cur_e.var, cur_e.lim, rec(cur_e.body, loc.rest, ctx), drt=cur_e.drt)
+                    return Limit(cur_e.var, cur_e.lim, rec(cur_e.body, loc.rest, ctx), drt=cur_e.drt, var_type=cur_e.var_type)
                 elif loc.head == 1:
-                    return Limit(cur_e.var, rec(cur_e.lim, loc.rest, ctx), cur_e.body, drt=cur_e.drt)
+                    return Limit(cur_e.var, rec(cur_e.lim, loc.rest, ctx), cur_e.body, drt=cur_e.drt, var_type=cur_e.var_type)
                 else:
                     raise AssertionError("OnLocation: invalid location")
             elif expr.is_indefinite_integral(cur_e):
@@ -1086,11 +1085,20 @@ class ApplyEquation(Rule):
         res = {
             "name": self.name,
             "eq": str(self.eq),
-            "eq_fixes": [{'var': a, 'type': [str(t) for t in b]} for a, b in self.eq_fixes.items()],
             "source": str(self.source),
             "str": str(self),
             "latex_str": self.latex_str()
         }
+        if len(self.eq_fixes.items()) > 0:
+            res['eq_fixes'] = list()
+            for a, b in self.eq_fixes.items():
+                if isinstance(b, expr.Type):
+                    res['eq_fixes'].append((a, str(b)))
+                elif isinstance(b, dict):
+                    tmp = dict()
+                    tmp['params_name'] = b['params_name']
+                    tmp['func_type'] = str(b['func_type'])
+                    res['eq_fixes'].append(tmp)
         return res
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
@@ -1130,8 +1138,6 @@ class ApplyEquation(Rule):
         conds_pattern = [expr.expr_to_pattern(cond) for cond in conds]
         inst_lhs = expr.match(e, pat.lhs)
         inst_rhs = expr.match(e, pat.rhs)
-        tmp = None
-        tmp_conds = []
         func_type = ctx.get_fixes()
         if inst_lhs is not None:
             tmp = pat.rhs.inst_pat(inst_lhs, func_type)
@@ -1477,6 +1483,21 @@ class Equation(Rule):
         }
         if self.old_expr:
             res['old_expr'] = str(self.old_expr)
+        if self.old_expr is not None:
+            bd = self.old_expr.get_bounded_vars()
+            bd.update(self.new_expr.get_bounded_vars())
+        else:
+            bd = self.new_expr.get_bounded_vars()
+        if len(bd.items()) > 0:
+            res['fixes'] = list()
+            for a, b in bd.items():
+                if isinstance(b, expr.Type):
+                    res['fixes'].append((a, str(b)))
+                elif isinstance(b, dict):
+                    tmp = dict()
+                    tmp['params_name'] = b['params_name']
+                    tmp['func_type'] = str(b['func_type'])
+                    res['fixes'].append(tmp)
         return res
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
@@ -1550,7 +1571,7 @@ class Equation(Rule):
                 flag = False
                 for v in all_index_vars:
                     if v not in vars:
-                        tmp = Limit(v, expr.POS_INF, Summation(e.index_var, e.lower, Var(v), e.body))
+                        tmp = Limit(v, expr.POS_INF, Summation(e.index_var, e.lower, Var(v), e.body), var_type=expr.IntType)
                         flag = True
                         break
                 if not flag:
@@ -1574,7 +1595,7 @@ class Equation(Rule):
         if expr.is_matrix_type(t):
             if expr.is_vector_type(t):
                 if ctx.check_condition(Op('=', Fun('norm', e), Const(0))) and \
-                        normalize(self.new_expr, ctx) == Fun('zero_matrix', t.args[1], t.args[2]):
+                        normalize(self.new_expr, ctx) == Fun(*ctx.get_func_type('zero_matrix', t.args[1], t.args[2])):
                     return self.new_expr
         raise AssertionError("Equation: rewriting %s to %s failed" % (e, self.new_expr))
 
@@ -1765,7 +1786,7 @@ class ElimInfInterval(Rule):
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
         def gen_lim_expr(new_var, lim, lower, upper, drt=None):
-            return expr.Limit(new_var, lim, expr.Integral(e.var, lower, upper, e.body), drt)
+            return expr.Limit(new_var, lim, expr.Integral(e.var, lower, upper, e.body), drt, var_type=e.var_type)
 
         if not expr.is_integral(e):
             sep_ints = e.separate_integral()
@@ -1834,7 +1855,8 @@ class LHopital(Rule):
         numerator, denominator = e.body.args
         rule = DerivativeSimplify()
         return expr.Limit(e.var, e.lim, Op('/', rule.eval(Deriv(e.var, numerator), ctx),
-                                           rule.eval(Deriv(e.var, denominator), ctx)), e.drt)
+                                           rule.eval(Deriv(e.var, denominator), ctx)), e.drt,
+                                            var_type = e.var_type)
 
 
 def check_item(item, target=None, *, debug=False):
@@ -2194,7 +2216,7 @@ class LimitEquation(Rule):
         fixes = e.lhs.get_bounded_vars()
         fixes.update(e.rhs.get_bounded_vars())
         fixes.update(ctx.get_fixes())
-        vt = None
+        vt = expr.RealType
         if v in fixes:
             vt = fixes[v]
         lim1 = Limit(v, lim, e.lhs, var_type=vt)
@@ -2572,14 +2594,14 @@ class ExpandMatFunc(Rule):
                 r, c = expr.num_row(e.type), expr.num_col(e.type)
                 if expr.is_const(r) and expr.is_const(c):
                     # Expand into matrix form
-                    return matrix.unfold_matrix(e, r.val, c.val)
+                    return matrix.unfold_matrix(e, r.val, c.val, ctx)
             # All other cases: leave unchanged
             return e
         elif e.is_power() and expr.is_matrix(e.args[0]) and e.args[1] == Const(2):
             return matrix.multiply(e.args[0], e.args[0], ctx)
         elif expr.is_fun(e):
             if e.func_name == 'hat' and len(e.args) == 1 and expr.is_matrix_type(e.args[0].type):
-                return matrix.hat(e.args[0])
+                return matrix.hat(e.args[0], ctx)
             elif e.func_name == 'unit_matrix' and len(e.args) == 1 and expr.is_const(e.args[0]):
                 return matrix.unit_matrix(e.args[0].val)
             elif e.func_name == 'T' and len(e.args) == 1:
@@ -2624,14 +2646,14 @@ class LimRewrite(Rule):
             if expr.is_op(b):
                 if len(b.args) == 2:
                     if b.op in "+-*/":
-                        res = Op(b.op, Limit(e.var, e.lim, b.args[0], e.drt),
-                                 Limit(e.var, e.lim, b.args[1], e.drt))
+                        res = Op(b.op, Limit(e.var, e.lim, b.args[0], e.drt, var_type=e.var_type),
+                                 Limit(e.var, e.lim, b.args[1], e.drt, var_type=e.var_type))
                     if b.op == '^':
                         if not b.args[1].contains_var(e.var):
-                            res = Op(b.op, Limit(e.var, e.lim, b.args[0], e.drt), b.args[1])
+                            res = Op(b.op, Limit(e.var, e.lim, b.args[0], e.drt, var_type=e.var_type), b.args[1])
                 elif len(b.args) == 1:
                     if b.op == '-':
-                        res = -Limit(e.var, e.lim, b.args[0], e.drt)
+                        res = -Limit(e.var, e.lim, b.args[0], e.drt, var_type=e.var_type)
             if res != None and normalize(res, ctx) == normalize(self.target, ctx):
                 return self.target
         return e
@@ -2649,13 +2671,25 @@ class RewriteMatrixMul(Rule):
         return "rewrite product of matrix"
 
     def export(self):
-        return {
+        res = {
             "name": self.name,
             "str": str(self),
             "source": str(self.source),
             "target": str(self.target)
         }
-
+        bd = self.source.get_bounded_vars()
+        bd.update(self.target.get_bounded_vars())
+        if len(bd.items()) > 0:
+            res['fixes'] = list()
+            for a, b in bd.items():
+                if isinstance(b, expr.Type):
+                    res['fixes'].append((a, str(b)))
+                elif isinstance(b, dict):
+                    tmp = dict()
+                    tmp['params_name'] = b['params_name']
+                    tmp['func_type'] = str(b['func_type'])
+                    res['fixes'].append(tmp)
+        return res
     def eval(self, e: Expr, ctx: Context) -> Expr:
         if self.source != e:
             find_res = e.find_subexpr(self.source)

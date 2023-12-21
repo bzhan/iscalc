@@ -1,180 +1,8 @@
-from typing import TypeGuard, Union
+from typing import Union
 
-from integral import expr, condprover
+from integral import expr
 from integral.context import Context
 from integral.expr import Matrix, Const, Expr
-
-
-"""
-def get_type(e, ctx=None) -> str:
-    # print(e)
-    if e.is_constant() or e.is_inf():
-        if e.is_const():
-            if type(e.val) == int:
-                return 'int'
-        return 'real'
-    elif e.is_matrix():
-        return 'matrix'
-    elif expr.is_var(e):
-        return e.ty2
-    elif e.is_op():
-        if e.is_plus():
-            a, b = e.args
-            if get_type(a, ctx) == 'real' and get_type(b, ctx) == 'real':
-                return 'real'
-            elif get_type(a, ctx) == 'matrix' and get_type(b, ctx) == 'matrix':
-                # check shapes of a and b
-                return 'matrix'
-            elif get_type(a, ctx) == 'int' and get_type(b, ctx) == 'real':
-                return 'real'
-            elif get_type(a, ctx) == 'real' and get_type(b, ctx) == 'int':
-                return 'real'
-            elif get_type(a, ctx) == 'int' and get_type(b, ctx) == 'int':
-                return 'int'
-            else:
-                print(a, b)
-                print(get_type(a, ctx), get_type(b, ctx))
-                raise TypeError
-        elif e.is_times():
-            a, b = e.args
-            if get_type(a, ctx) == 'real' and get_type(b, ctx) == 'real':
-                return 'real'
-            elif get_type(a, ctx) == 'real' and get_type(b, ctx) == 'matrix':
-                return 'matrix'
-            elif get_type(a, ctx) == 'matrix' and get_type(b, ctx) == 'real':
-                return 'matrix'
-            elif get_type(a, ctx) == 'matrix' and get_type(b, ctx) == 'matrix':
-                # check shapes of a and b
-                return 'matrix'
-            elif get_type(a, ctx) == 'int' and get_type(b, ctx) == 'real':
-                return 'real'
-            elif get_type(a, ctx) == 'real' and get_type(b, ctx) == 'int':
-                return 'real'
-            elif get_type(a, ctx) == 'int' and get_type(b, ctx) == 'int':
-                return 'int'
-            else:
-                print(a,b)
-                print(get_type(a, ctx), get_type(b, ctx))
-                raise TypeError
-        elif e.is_divides():
-            a, b = e.args
-            if get_type(a, ctx) == 'real' and get_type(b, ctx) == 'real':
-                return 'real'
-            elif get_type(a, ctx) == 'int' and get_type(b, ctx) == 'real':
-                return 'real'
-            elif get_type(a, ctx) == 'real' and get_type(b, ctx) == 'int':
-                return 'real'
-            print(a,b,get_type(a, ctx), get_type(b, ctx))
-            raise NotImplementedError
-        elif e.is_uminus() or e.is_minus():
-            a = e.args[0]
-            if get_type(a, ctx) == 'real':
-                return 'real'
-            elif get_type(a, ctx) == 'matrix':
-                return 'matrix'
-            else:
-                raise NotImplementedError
-        elif e.is_power():
-            a, b = e.args
-            if get_type(a, ctx) == 'matrix' and get_type(b, ctx) == 'int':
-                return 'matrix'
-            elif get_type(a, ctx) == 'real' and get_type(b, ctx) == 'real':
-                return 'real'
-            elif get_type(a, ctx) == 'real' and get_type(b, ctx) == 'int':
-                return 'real'
-            elif get_type(a, ctx) == 'int' and get_type(b, ctx) == 'real':
-                return 'real'
-            elif get_type(a, ctx) == 'matrix' and get_type(b,ctx) == 'int':
-                # TODO: check whether a is a squre matrix and b > 0
-                return 'matrix'
-            elif get_type(a, ctx) == 'int' and get_type(b,ctx) == 'int':
-                if condprover.check_condition(expr.Op(">=", b, Const(0)), ctx):
-                    return 'int'
-            print(a, b)
-            print(get_type(a, ctx), get_type(b, ctx))
-            raise NotImplementedError
-    elif e.is_fun():
-        a = e.args[0]
-        if e.func_name in ('hat', 'T', 'inv', 'exp') and get_type(a, ctx) == 'matrix':
-            return 'matrix'
-        elif e.func_name in ('unit_matrix', 'zero_matrix'):
-            return 'matrix'
-        else:
-            return 'real'
-    elif e.is_integral():
-        if get_type(e.body, ctx) in ('int', 'real'):
-            return 'real'
-        print(e.body, get_type(e.body, ctx))
-        raise NotImplementedError
-    elif e.is_indefinite_integral():
-        return 'real'
-    elif e.is_summation():
-        return 'real'
-    elif e.is_evalat():
-        return 'real'
-    elif e.is_equals():
-        return 'equation'
-    elif e.is_greater():
-        return 'greater'
-    elif e.is_deriv():
-        return 'real'
-    elif e.is_limit():
-        return 'real'
-    elif e.is_skolem_func():
-        return 'real'
-    elif e.is_symbol():
-        return 'real'
-    elif e.is_skolem_term():
-        return 'real'
-    else:
-        print(e)
-        raise NotImplementedError
-
-
-def get_shape(e: Expr, ctx: Context):
-    if e.is_const():
-        return (Const(1), Const(1))
-    elif expr.is_var(e):
-        return e.shape
-    elif e.is_fun():
-        if e.func_name == 'inv':
-            return e.args[0].shape
-        raise NotImplementedError
-    elif e.is_op() and len(e.args) == 2:
-        a, b = e.args
-        if e.is_times():
-            shape1 = get_shape(a, ctx)
-            shape2 = get_shape(b, ctx)
-            # check shape1[1] = shape2[0]
-            return (shape1[0], shape2[1])
-        elif e.is_plus() or e.is_minus():
-            shape1 = get_shape(a, ctx)
-            shape2 = get_shape(b, ctx)
-            if shape1 != shape2:
-                raise ValueError
-            return shape1
-        elif e.is_power():
-            if e.type == 'tensor':
-                shape = get_shape(a, ctx)
-                if shape[0] != shape[1]:
-                    raise ValueError(f'{a} is not a square matrix')
-                if b.type != 'int':
-                    raise ValueError(f'{b} is not int')
-                return shape
-            else:
-                return (Const(1), Const(1))
-        print(e)
-        raise NotImplementedError
-    elif e.is_op() and len(e.args)==1:
-        a = e.args[0]
-        if e.is_uminus():
-            return get_shape(a, ctx)
-    elif e.is_matrix():
-        return (e.type.args[0], e.type.args[1])
-    else:
-        print(e)
-        raise NotImplementedError
-"""
 
 def has_vector(e: Expr):
     if expr.is_matrix(e):
@@ -277,7 +105,7 @@ def zero_matrix(r: int, c: int):
     assert r > 0 and c > 0
     return Matrix([[Const(0) for j in range(c)] for i in range(r)])
 
-def hat(e: Expr) -> Expr:
+def hat(e: Expr, ctx:Context) -> Expr:
     if not expr.is_matrix(e) and not expr.is_matrix_type(e.type):
         raise AssertionError("hat: type mismatch")
     r = expr.eval_expr(expr.num_row(e.type))
@@ -309,8 +137,8 @@ def hat(e: Expr) -> Expr:
             tvr = expr.eval_expr(expr.num_row(tv))
             tvc = expr.eval_expr(expr.num_col(tv))
             assert twr == 3 and twc == 1 and tvr == 3 and tvc == 1
-            res = [[expr.Fun('hat', w), v],
-                   [expr.Fun('zero_matrix', Const(1), Const(3)), expr.Fun('zero_matrix', Const(1), Const(1))]]
+            res = [[expr.Fun(*ctx.get_func_type('hat', w)), v],
+                   [expr.Fun(*ctx.get_func_type('zero_matrix', Const(1), Const(3))), expr.Fun(*ctx.get_func_type('zero_matrix', Const(1), Const(1)))]]
             te = expr.TensorType(te.args[0], Const(4), Const(4))
         else:
             raise NotImplementedError
@@ -318,5 +146,5 @@ def hat(e: Expr) -> Expr:
     else:
         raise AssertionError(f"{e} should be a 3 or 6-dimensional vector")
 
-def unfold_matrix(e: Expr, r: int, c: int) -> Expr:
-    return Matrix([[expr.Fun("nth", e, Const(i), Const(j)) for j in range(c)] for i in range(r)], e.type)
+def unfold_matrix(e: Expr, r: int, c: int, ctx: Context) -> Expr:
+    return Matrix([[expr.Fun(*ctx.get_func_type("nth", e, Const(i), Const(j))) for j in range(c)] for i in range(r)], e.type)

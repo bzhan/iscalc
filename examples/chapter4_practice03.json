@@ -17,11 +17,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "B(a + 1,b + 2)",
                         "start": "B(a + 1,b + 2)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{1} x ^ {a} (-x + 1) ^ {b + 1} \\,dx",
                                 "res": "INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1)",
                                 "rule": {
@@ -35,7 +40,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} x ^ {a} (-x + 1) ^ {b + 1} \\,dx",
                         "start": "INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1)",
                         "steps": [],
@@ -66,11 +70,20 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} x ^ {a} (\\int_{0}^{1 - x} y ^ {b} \\,dy) \\,dx",
                         "start": "INT x:[0,1]. x ^ a * (INT y:[0,1 - x]. y ^ b)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ],
+                                    [
+                                        "y",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{1} x ^ {a} (\\left. \\frac{y ^ {b + 1}}{b + 1} \\right\\vert_{y=0}^{1 - x}) \\,dx",
                                 "res": "INT x:[0,1]. x ^ a * ([y ^ (b + 1) / (b + 1)]_y=0,1 - x)",
                                 "rule": {
@@ -81,6 +94,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{1}{b + 1} (\\int_{0}^{1} x ^ {a} (-x + 1) ^ {b + 1} \\,dx)",
                                 "res": "1 / (b + 1) * (INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1))",
                                 "rule": {
@@ -94,7 +113,6 @@
                                 "res": "1 / (b + 1) * B(a + 1,b + 2)",
                                 "rule": {
                                     "eq": "B(a + 1,b + 2) = (INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1))",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(B(a + 1,b + 2) = \\int_{0}^{1} x ^ {a} (-x + 1) ^ {b + 1} \\,dx\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1)",
@@ -175,7 +193,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\frac{a! b!}{(a + b + 2)!}",
                         "start": "factorial(a) * factorial(b) / factorial(a + b + 2)",
                         "steps": [],

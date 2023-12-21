@@ -8,7 +8,6 @@
                 }
             ],
             "eq": "I(a) = (INT x:[0,1]. (x ^ a - 1) / log(x))",
-            "fixes": [],
             "latex_eq": "I{(a)} = \\int_{0}^{1} \\frac{x ^ {a} - 1}{\\log{x}} \\,dx",
             "latex_lhs": "I{(a)}",
             "type": "FuncDef"
@@ -26,11 +25,20 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\frac{d}{da} I{(a)}",
                         "start": "D a. I(a)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "a",
+                                        "$real"
+                                    ],
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{d}{da} \\int_{0}^{1} \\frac{x ^ {a} - 1}{\\log{x}} \\,dx",
                                 "res": "D a. INT x:[0,1]. (x ^ a - 1) / log(x)",
                                 "rule": {
@@ -42,6 +50,16 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ],
+                                    [
+                                        "a",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{1} \\frac{d}{da} \\frac{x ^ {a} - 1}{\\log{x}} \\,dx",
                                 "res": "INT x:[0,1]. D a. (x ^ a - 1) / log(x)",
                                 "rule": {
@@ -51,6 +69,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{1} x ^ {a} \\,dx",
                                 "res": "INT x:[0,1]. x ^ a",
                                 "rule": {
@@ -60,6 +84,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\left. \\frac{x ^ {a + 1}}{a + 1} \\right\\vert_{x=0}^{1}",
                                 "res": "[x ^ (a + 1) / (a + 1)]_x=0,1",
                                 "rule": {
@@ -81,7 +111,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\frac{1}{a + 1}",
                         "start": "1 / (a + 1)",
                         "steps": [],
@@ -117,11 +146,16 @@
                             "latex_cond": "a > -1"
                         }
                     ],
-                    "fixes": [],
                     "latex_start": "\\frac{d}{da} I{(a)} = \\frac{1}{a + 1}",
                     "start": "(D a. I(a)) = 1 / (a + 1)",
                     "steps": [
                         {
+                            "fixes": [
+                                [
+                                    "a",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "I{(a)} = \\int \\frac{1}{a + 1} \\,da",
                             "res": "I(a) = (INT a. 1 / (a + 1))",
                             "rule": {
@@ -171,7 +205,6 @@
                             "latex_cond": "a > -1"
                         }
                     ],
-                    "fixes": [],
                     "latex_start": "I{(a)} = \\log{(a + 1)} + C",
                     "start": "I(a) = log(a + 1) + SKOLEM_CONST(C)",
                     "steps": [
@@ -192,6 +225,12 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "x",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "\\int_{0}^{1} 0 \\,dx = 0 + C",
                             "res": "(INT x:[0,1]. 0) = 0 + SKOLEM_CONST(C)",
                             "rule": {
@@ -242,7 +281,6 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "I{(a)}",
                         "start": "I(a)",
                         "steps": [
@@ -251,7 +289,6 @@
                                 "res": "log(a + 1) + SKOLEM_CONST(C)",
                                 "rule": {
                                     "eq": "I(a) = log(a + 1) + SKOLEM_CONST(C)",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(I{(a)} = \\log{(a + 1)} + C\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(a)",
@@ -264,7 +301,6 @@
                                 "res": "log(a + 1) + 0",
                                 "rule": {
                                     "eq": "SKOLEM_CONST(C) = 0",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(C = 0\\)",
                                     "name": "ApplyEquation",
                                     "source": "SKOLEM_CONST(C)",
@@ -285,7 +321,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\log{(a + 1)}",
                         "start": "log(a + 1)",
                         "steps": [],

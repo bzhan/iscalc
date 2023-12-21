@@ -7,11 +7,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx",
                         "start": "INT x:[0,oo]. log(x) / (x ^ 2 + 1)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "(\\int_{0}^{1} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx) + (\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx)",
                                 "res": "(INT x:[0,1]. log(x) / (x ^ 2 + 1)) + (INT x:[1,oo]. log(x) / (x ^ 2 + 1))",
                                 "rule": {
@@ -22,6 +27,16 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ],
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-(\\int_{1}^{\\infty} \\frac{\\log{(\\frac{1}{u})}}{(\\frac{1}{u}) ^ {2} + 1} (-\\frac{1}{u ^ {2}}) \\,du) + (\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx)",
                                 "res": "-(INT u:[1,oo]. log(1 / u) / ((1 / u) ^ 2 + 1) * -(1 / u ^ 2)) + (INT x:[1,oo]. log(x) / (x ^ 2 + 1))",
                                 "rule": {
@@ -34,6 +49,16 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ],
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-(\\int_{1}^{\\infty} \\frac{\\log{u}}{u ^ {2} (\\frac{1}{u ^ {2}} + 1)} \\,du) + (\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx)",
                                 "res": "-(INT u:[1,oo]. log(u) / (u ^ 2 * (1 / u ^ 2 + 1))) + (INT x:[1,oo]. log(x) / (x ^ 2 + 1))",
                                 "rule": {
@@ -43,6 +68,16 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ],
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-(\\int_{1}^{\\infty} \\frac{\\log{u}}{u ^ {2} + 1} \\,du) + (\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx)",
                                 "res": "-(INT u:[1,oo]. log(u) / (u ^ 2 + 1)) + (INT x:[1,oo]. log(x) / (x ^ 2 + 1))",
                                 "rule": {
@@ -55,6 +90,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-(\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx) + (\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx)",
                                 "res": "-(INT x:[1,oo]. log(x) / (x ^ 2 + 1)) + (INT x:[1,oo]. log(x) / (x ^ 2 + 1))",
                                 "rule": {
@@ -79,7 +120,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "0",
                         "start": "0",
                         "steps": [],

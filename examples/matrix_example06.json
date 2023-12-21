@@ -5,9 +5,7 @@
             "fixes": [
                 [
                     "n",
-                    [
-                        "$int"
-                    ]
+                    "$int"
                 ]
             ],
             "goal": "1 - cos(a) = SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))",
@@ -15,11 +13,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "1 - \\cos{a}",
                         "start": "1 - cos(a)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "1 - \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} a ^ {2 n}}{(2 n)!}}",
                                 "res": "1 - SUM(n, 0, oo, (-1) ^ n * a ^ (2 * n) / factorial(2 * n))",
                                 "rule": {
@@ -31,6 +34,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "i",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "1 - (\\frac{(-1) ^ {0} a ^ {2\\cdot 0}}{(2\\cdot 0)!} + \\sum_{i=0 + 1}^{\\infty}{\\frac{(-1) ^ {i} a ^ {2 i}}{(2 i)!}})",
                                 "res": "1 - ((-1) ^ 0 * a ^ (2 * 0) / factorial(2 * 0) + SUM(i, 0 + 1, oo, (-1) ^ i * a ^ (2 * i) / factorial(2 * i)))",
                                 "rule": {
@@ -43,6 +52,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "i",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "-\\sum_{i=1}^{\\infty}{\\frac{a ^ {2 i} (-1) ^ {i}}{(2 i)!}}",
                                 "res": "-SUM(i, 1, oo, a ^ (2 * i) * (-1) ^ i / factorial(2 * i))",
                                 "rule": {
@@ -52,9 +67,21 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "i",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\sum_{i=1}^{\\infty}{-1 (\\frac{(-1) ^ {i} a ^ {2 i}}{(2 i)!})}",
                                 "res": "SUM(i, 1, oo, -1 * ((-1) ^ i * a ^ (2 * i) / factorial(2 * i)))",
                                 "rule": {
+                                    "fixes": [
+                                        [
+                                            "i",
+                                            "$int"
+                                        ]
+                                    ],
                                     "latex_str": "rewriting \\(-\\sum_{i=1}^{\\infty}{\\frac{a ^ {2 i} (-1) ^ {i}}{(2 i)!}}\\) to \\(\\sum_{i=1}^{\\infty}{-1 (\\frac{(-1) ^ {i} a ^ {2 i}}{(2 i)!})}\\)",
                                     "name": "Equation",
                                     "new_expr": "SUM(i, 1, oo, -1 * ((-1) ^ i * a ^ (2 * i) / factorial(2 * i)))",
@@ -64,6 +91,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "i",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\sum_{i=0}^{\\infty}{-1 (\\frac{(-1) ^ {i + 1} a ^ {2 (i + 1)}}{(2 (i + 1))!})}",
                                 "res": "SUM(i, 0, oo, -1 * ((-1) ^ (i + 1) * a ^ (2 * (i + 1)) / factorial(2 * (i + 1))))",
                                 "rule": {
@@ -74,6 +107,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "i",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{a ^ {2 i + 2} (-1) ^ {i}}{(2 i + 2)!}}",
                                 "res": "SUM(i, 0, oo, a ^ (2 * i + 2) * (-1) ^ i / factorial(2 * i + 2))",
                                 "rule": {
@@ -83,6 +122,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "i",
+                                        "$int"
+                                    ]
+                                ],
                                 "latex_res": "\\sum_{i=0}^{\\infty}{\\frac{(-1) ^ {i} a ^ {2 (i + 1)}}{(2 (i + 1))!}}",
                                 "res": "SUM(i, 0, oo, (-1) ^ i * a ^ (2 * (i + 1)) / factorial(2 * (i + 1)))",
                                 "rule": {
@@ -98,7 +143,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} a ^ {2 (n + 1)}}{(2 (n + 1))!}}",
                         "start": "SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))",
                         "steps": [],

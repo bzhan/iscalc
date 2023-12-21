@@ -37,24 +37,6 @@ class IntegralTest(unittest.TestCase):
             for content in file.content:
                 self.assertTrue(content.is_finished())
 
-    def parse_raw_fixes(self, raw_fixes):
-        fixes = dict()
-        for name, type_list in raw_fixes:
-            if isinstance(type_list, list):
-                for type in type_list:
-                    t = parser.parse_expr(type, fixes= fixes)
-                    if name not in fixes:
-                        fixes[name] = [t]
-                    elif t not in fixes[name]:
-                        fixes[name].append(t)
-            else:
-                t = parser.parse_expr(type_list, fixes=fixes)
-                if name not in fixes:
-                    fixes[name] = [t]
-                elif t not in fixes[name]:
-                    fixes[name].append(t)
-        return fixes
-
     def testStandard(self):
         file = compstate.CompFile("base", "standard")
 
@@ -111,7 +93,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.IndefiniteIntegralIdentity())
         calc.perform_rule(rules.FullSimplify())
         raw_fixes = [('n', '$int'), ('m', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         goal7 = file.add_goal("(INT x:[0,1]. x ^ m * log(x) ^ n) = (-1)^n * factorial(n) / (m+1) ^ (n+1)", conds=["m >= 0", "n >= 0", "isInt(n)"], fixes=fixes)
         proof = goal7.proof_by_induction("n")
         proof_base = proof.base_case.proof_by_calculation()
@@ -830,7 +812,7 @@ class IntegralTest(unittest.TestCase):
         # Irresistable Integrals, Section 2.3
         file = compstate.CompFile("base", 'wallis')
         raw_fixes = [('m', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         # Make definition
         file.add_definition("I(m,b) = (INT x:[0,oo]. 1/(x^2+b)^(m+1))", conds=["b > 0", "m >= 0"])
 
@@ -894,7 +876,7 @@ class IntegralTest(unittest.TestCase):
         # Inside interesting integrals, Section 4.1
         file = compstate.CompFile("interesting", "GammaFunction")
         raw_fixes = [('n', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         # Definition of Gamma function
         file.add_definition("Gamma(n) = (INT x:[0,oo]. exp(-x) * x^(n-1))", conds=["n > 0"])
 
@@ -1784,7 +1766,7 @@ class IntegralTest(unittest.TestCase):
         # Initial state
         file = compstate.CompFile("interesting", 'leibniz03_new')
         raw_fixes = [('n', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         # Make definition
         file.add_definition("I(t) = INT x:[0,oo]. cos(t*x)*exp(-(x^2)/2)")
         goal = file.add_goal("Gamma(n+1/2) = sqrt(pi) * factorial(2*n) / (4^n * factorial(n))", conds=["n>=0", 'isInt(n)'], fixes=fixes)
@@ -2018,7 +2000,7 @@ class IntegralTest(unittest.TestCase):
         # Inside interesting integrals, Section 2.3
         file = compstate.CompFile("interesting", 'gaussianPowerExp')
         raw_fixes = [('n', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         file.add_definition("I(n) = (INT x:[0, oo]. x^(2*n) * exp(-x^2))", conds=["n>=0", "isInt(n)"])
 
         goal01 = file.add_goal("(INT x:[0, oo]. (D x. x^(2*n-1)*exp(-x^2))) = 0", fixes=fixes, conds=["n>=1", "isInt(n)"])
@@ -2719,7 +2701,7 @@ class IntegralTest(unittest.TestCase):
         file = compstate.CompFile("interesting", 'CatalanConstant02')
 
         raw_fixes = [('k', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         # Evaluate I(k)
         goal1 = file.add_goal("(INT x:[1,oo]. log(x) / (x^k)) = 1/(k-1)^2", conds=["k > 1"], fixes=fixes)
         proof_of_goal1 = goal1.proof_by_calculation()
@@ -4255,7 +4237,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.FoldDefinition('zeta'), '1'))
         assert goal02.is_finished()
         raw_fixes = [('s', '$int'), ('n', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         s1 = "(INT y:[0,1]. (INT x:[0,1]. log(x*y)^(s-2)*(x^a * y^a) / (1-x*y)))"
         s2 = "(-1)^s * factorial(s-1) * SUM(n, 0, oo, 1/(n+a+1)^s)"
         goal03 = file.add_goal(s1 + "=" + s2, conds=["a > -1", "s >= 2", "isInt(s)"], fixes=fixes)
@@ -4293,7 +4275,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
         assert goal03.is_finished()
         raw_fixes = [('s', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         s1 = 'zeta(s)'
         s2 = "(-1)^s / factorial(s-1) * \
             (INT y:[0,1]. (INT x:[0,1]. log(x*y)^(s-2)/ (1-x*y)))"
@@ -4327,7 +4309,7 @@ class IntegralTest(unittest.TestCase):
         s1 = "(INT x:[0, oo]. exp(-k*x) * x^(s-1))"
         s2 = "Gamma(s) / k^s"
         raw_fixes = [('s', '$int'),('k', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         goal05 = file.add_goal(s1+'='+s2, conds=["k>0"], fixes=fixes)
         proof = goal05.proof_by_calculation()
         calc = proof.lhs_calc
@@ -4524,7 +4506,7 @@ class IntegralTest(unittest.TestCase):
         s1 = "I(m,n)"
         s2 = "(-1)^n * (factorial(n) / (m+1)^(n+1))"
         raw_fixes = [('m', '$int'), ('n', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         goal02 = file.add_goal(s1 + "=" + s2, conds=["m >= 0", "n >= 0", "isInt(n)", "isInt(m)"], fixes = fixes)
         proof = goal02.proof_by_induction("n")
         base_proof = proof.base_case.proof_by_calculation()
@@ -4614,7 +4596,7 @@ class IntegralTest(unittest.TestCase):
 
         file.add_definition("Li(s, x) = SUM(k, 1, oo, x^k /k^s)")
         raw_fixes = [('k', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         goal = file.add_goal("x/(1-x) = SUM(k, 1, oo, x^k)", conds=["abs(x) < 1"], fixes=fixes)
         split_cond = parser.parse_expr("x != 0", fixes=fixes)
         proof = goal.proof_by_case(split_cond)
@@ -4648,7 +4630,7 @@ class IntegralTest(unittest.TestCase):
         self.assertTrue(goal.is_finished())
 
         raw_fixes = [('s', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         goal = file.add_goal("Li(s+1, x) = (INT t:[0, x]. Li(s, t) / t)", conds=["abs(x)<1", "s>=0", "isInt(s)"], fixes = fixes)
         proof = goal.proof_by_induction("s")
         proof_base = proof.base_case.proof_by_calculation()

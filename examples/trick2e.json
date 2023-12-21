@@ -13,11 +13,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx",
                         "start": "INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "t",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{a} \\frac{\\log{(\\frac{t}{a} + 1)}}{(\\frac{t}{a}) ^ {2} + 1} (\\frac{1}{a}) \\,dt",
                                 "res": "INT t:[0,a]. log(t / a + 1) / ((t / a) ^ 2 + 1) * (1 / a)",
                                 "rule": {
@@ -30,6 +35,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "t",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{1}{a} (\\int_{0}^{a} \\frac{1}{\\frac{t ^ {2}}{a ^ {2}} + 1} \\log{(\\frac{t}{a} + 1)} \\,dt)",
                                 "res": "1 / a * (INT t:[0,a]. 1 / (t ^ 2 / a ^ 2 + 1) * log(t / a + 1))",
                                 "rule": {
@@ -39,6 +50,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "t",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{1}{a} (\\int_{0}^{a} \\frac{\\log{(\\frac{t}{a} + 1)} a ^ {2}}{t ^ {2} + a ^ {2}} \\,dt)",
                                 "res": "1 / a * (INT t:[0,a]. log(t / a + 1) * a ^ 2 / (t ^ 2 + a ^ 2))",
                                 "rule": {
@@ -51,6 +68,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "t",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{1}{a} (\\int_{0}^{a} \\frac{\\log{(\\frac{t + a}{a})} a ^ {2}}{t ^ {2} + a ^ {2}} \\,dt)",
                                 "res": "1 / a * (INT t:[0,a]. log((t + a) / a) * a ^ 2 / (t ^ 2 + a ^ 2))",
                                 "rule": {
@@ -63,6 +86,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "t",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "a (\\int_{0}^{a} \\frac{1}{a ^ {2} + t ^ {2}} \\log{(\\frac{a + t}{a})} \\,dt)",
                                 "res": "a * (INT t:[0,a]. 1 / (a ^ 2 + t ^ 2) * log((a + t) / a))",
                                 "rule": {
@@ -72,6 +101,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "t",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "a (\\int_{0}^{a} \\frac{1}{a ^ {2} + t ^ {2}} (\\log{(a + t)} - \\log{a}) \\,dt)",
                                 "res": "a * (INT t:[0,a]. 1 / (a ^ 2 + t ^ 2) * (log(a + t) - log(a)))",
                                 "rule": {
@@ -84,6 +119,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "t",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "a (\\int_{0}^{a} \\frac{\\log{(a + t)}}{a ^ {2} + t ^ {2}} - \\frac{\\log{a}}{a ^ {2} + t ^ {2}} \\,dt)",
                                 "res": "a * (INT t:[0,a]. log(a + t) / (a ^ 2 + t ^ 2) - log(a) / (a ^ 2 + t ^ 2))",
                                 "rule": {
@@ -96,6 +137,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "t",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "a (-\\log{a} (\\int_{0}^{a} \\frac{1}{a ^ {2} + t ^ {2}} \\,dt) + (\\int_{0}^{a} \\frac{\\log{(a + t)}}{a ^ {2} + t ^ {2}} \\,dt))",
                                 "res": "a * (-(log(a) * (INT t:[0,a]. 1 / (a ^ 2 + t ^ 2))) + (INT t:[0,a]. log(a + t) / (a ^ 2 + t ^ 2)))",
                                 "rule": {
@@ -105,6 +152,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "t",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "a (-\\log{a} (\\left. \\frac{1}{a} \\tan^{-1}{(\\frac{t}{a})} \\right\\vert_{t=0}^{a}) + (\\int_{0}^{a} \\frac{\\log{(a + t)}}{a ^ {2} + t ^ {2}} \\,dt))",
                                 "res": "a * (-(log(a) * ([1 / a * atan(t / a)]_t=0,a)) + (INT t:[0,a]. log(a + t) / (a ^ 2 + t ^ 2)))",
                                 "rule": {
@@ -114,6 +167,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "t",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "a ((\\int_{0}^{a} \\frac{\\log{(a + t)}}{a ^ {2} + t ^ {2}} \\,dt) - \\frac{\\pi \\log{a}}{4 a})",
                                 "res": "a * ((INT t:[0,a]. log(a + t) / (a ^ 2 + t ^ 2)) - pi * log(a) / (4 * a))",
                                 "rule": {
@@ -123,6 +182,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "t",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "a (\\int_{0}^{a} \\frac{\\log{(a + t)}}{a ^ {2} + t ^ {2}} \\,dt) - \\frac{\\pi \\log{a}}{4}",
                                 "res": "a * (INT t:[0,a]. log(a + t) / (a ^ 2 + t ^ 2)) - pi * log(a) / 4",
                                 "rule": {
@@ -135,11 +200,16 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "a (\\int_{0}^{a} \\frac{\\log{(t + a)}}{t ^ {2} + a ^ {2}} \\,dt) - \\frac{\\pi}{4} \\log{a}",
                         "start": "a * (INT t:[0,a]. log(t + a) / (t ^ 2 + a ^ 2)) - pi / 4 * log(a)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "t",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "a (\\int_{0}^{a} \\frac{\\log{(a + t)}}{a ^ {2} + t ^ {2}} \\,dt) - \\frac{\\pi \\log{a}}{4}",
                                 "res": "a * (INT t:[0,a]. log(a + t) / (a ^ 2 + t ^ 2)) - pi * log(a) / 4",
                                 "rule": {
@@ -172,16 +242,20 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "a (\\int_{0}^{a} \\frac{\\log{(t + a)}}{t ^ {2} + a ^ {2}} \\,dt) - \\frac{\\pi}{4} \\log{a}",
                         "start": "a * (INT t:[0,a]. log(t + a) / (t ^ 2 + a ^ 2)) - pi / 4 * log(a)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{1} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx",
                                 "res": "INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)",
                                 "rule": {
                                     "eq": "(INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)) = a * (INT t:[0,a]. log(t + a) / (t ^ 2 + a ^ 2)) - pi / 4 * log(a)",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(\\int_{0}^{1} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx = a (\\int_{0}^{a} \\frac{\\log{(t + a)}}{t ^ {2} + a ^ {2}} \\,dt) - \\frac{\\pi}{4} \\log{a}\\)",
                                     "name": "ApplyEquation",
                                     "source": "a * (INT t:[0,a]. log(t + a) / (t ^ 2 + a ^ 2)) - pi / 4 * log(a)",
@@ -202,7 +276,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\frac{\\pi \\log{(2)}}{8}",
                         "start": "pi * log(2) / 8",
                         "steps": [],
@@ -238,11 +311,16 @@
                             "latex_cond": "a > 0"
                         }
                     ],
-                    "fixes": [],
                     "latex_start": "a (\\int_{0}^{a} \\frac{\\log{(t + a)}}{t ^ {2} + a ^ {2}} \\,dt) - \\frac{\\pi}{4} \\log{a} = \\frac{\\pi \\log{(2)}}{8}",
                     "start": "a * (INT t:[0,a]. log(t + a) / (t ^ 2 + a ^ 2)) - pi / 4 * log(a) = pi * log(2) / 8",
                     "steps": [
                         {
+                            "fixes": [
+                                [
+                                    "t",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "\\int_{0}^{a} \\frac{\\log{(t + a)}}{t ^ {2} + a ^ {2}} \\,dt = \\frac{1}{a} (\\frac{\\pi \\log{a}}{4} + \\frac{\\pi \\log{(2)}}{8})",
                             "res": "(INT t:[0,a]. log(t + a) / (t ^ 2 + a ^ 2)) = 1 / a * (pi * log(a) / 4 + pi * log(2) / 8)",
                             "rule": {
@@ -254,6 +332,12 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "t",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "\\int_{0}^{a} \\frac{\\log{(t + a)}}{t ^ {2} + a ^ {2}} \\,dt = \\frac{1}{a} (\\frac{1}{8} \\pi (2 \\log{a}) + \\frac{\\pi \\log{(2)}}{8})",
                             "res": "(INT t:[0,a]. log(t + a) / (t ^ 2 + a ^ 2)) = 1 / a * (1/8 * pi * (2 * log(a)) + pi * log(2) / 8)",
                             "rule": {
@@ -266,6 +350,12 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "t",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "\\int_{0}^{a} \\frac{\\log{(t + a)}}{t ^ {2} + a ^ {2}} \\,dt = \\frac{1}{a} (\\frac{1}{8} \\pi \\log{(a ^ {2})} + \\frac{\\pi \\log{(2)}}{8})",
                             "res": "(INT t:[0,a]. log(t + a) / (t ^ 2 + a ^ 2)) = 1 / a * (1/8 * pi * log(a ^ 2) + pi * log(2) / 8)",
                             "rule": {
@@ -278,6 +368,12 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "t",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "\\int_{0}^{a} \\frac{\\log{(t + a)}}{t ^ {2} + a ^ {2}} \\,dt = \\frac{1}{a} (\\frac{1}{8} \\pi (\\log{(2)} + \\log{(a ^ {2})}))",
                             "res": "(INT t:[0,a]. log(t + a) / (t ^ 2 + a ^ 2)) = 1 / a * (1/8 * pi * (log(2) + log(a ^ 2)))",
                             "rule": {
@@ -290,6 +386,12 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "t",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "\\int_{0}^{a} \\frac{\\log{(t + a)}}{t ^ {2} + a ^ {2}} \\,dt = \\frac{1}{a} (\\frac{1}{8} \\pi \\log{(2 a ^ {2})})",
                             "res": "(INT t:[0,a]. log(t + a) / (t ^ 2 + a ^ 2)) = 1 / a * (1/8 * pi * log(2 * a ^ 2))",
                             "rule": {
@@ -302,6 +404,12 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "t",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "\\int_{0}^{a} \\frac{\\log{(t + a)}}{t ^ {2} + a ^ {2}} \\,dt = \\frac{\\pi}{8 a} \\log{(2 a ^ {2})}",
                             "res": "(INT t:[0,a]. log(t + a) / (t ^ 2 + a ^ 2)) = pi / (8 * a) * log(2 * a ^ 2)",
                             "rule": {

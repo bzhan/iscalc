@@ -7,11 +7,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} \\frac{x - 2}{x ^ {2} - x + 1} \\,dx",
                         "start": "INT x:[0,1]. (x - 2) / (x ^ 2 - x + 1)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{1} \\frac{x - 2}{(x - \\frac{1}{2}) ^ {2} + \\frac{3}{4}} \\,dx",
                                 "res": "INT x:[0,1]. (x - 2) / ((x - 1/2) ^ 2 + 3/4)",
                                 "rule": {
@@ -24,6 +29,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{-1/2}^{1/2} \\frac{u - \\frac{3}{2}}{u ^ {2} + \\frac{3}{4}} \\,du",
                                 "res": "INT u:[-1/2,1/2]. (u - 3/2) / (u ^ 2 + 3/4)",
                                 "rule": {
@@ -36,6 +47,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{-1/2}^{1/2} -\\frac{3}{2 (u ^ {2} + \\frac{3}{4})} + \\frac{u}{u ^ {2} + \\frac{3}{4}} \\,du",
                                 "res": "INT u:[-1/2,1/2]. -(3 / (2 * (u ^ 2 + 3/4))) + u / (u ^ 2 + 3/4)",
                                 "rule": {
@@ -46,6 +63,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-\\frac{3}{2} (\\int_{-1/2}^{1/2} \\frac{1}{u ^ {2} + \\frac{3}{4}} \\,du) + (\\int_{-1/2}^{1/2} \\frac{u}{u ^ {2} + \\frac{3}{4}} \\,du)",
                                 "res": "-(3/2 * (INT u:[-1/2,1/2]. 1 / (u ^ 2 + 3/4))) + (INT u:[-1/2,1/2]. u / (u ^ 2 + 3/4))",
                                 "rule": {
@@ -55,9 +78,21 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-\\frac{3}{2} (\\int_{-1/2}^{1/2} \\frac{1}{u ^ {2} + \\frac{3}{4}} \\,du) + 0",
                                 "res": "-(3/2 * (INT u:[-1/2,1/2]. 1 / (u ^ 2 + 3/4))) + 0",
                                 "rule": {
+                                    "fixes": [
+                                        [
+                                            "u",
+                                            "$real"
+                                        ]
+                                    ],
                                     "latex_str": "rewriting \\(\\int_{-1/2}^{1/2} \\frac{u}{u ^ {2} + \\frac{3}{4}} \\,du\\) to \\(0\\)",
                                     "name": "Equation",
                                     "new_expr": "0",
@@ -67,6 +102,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-\\frac{3}{2} (\\int_{-1/2}^{1/2} \\frac{1}{u ^ {2} + \\frac{3}{4}} \\,du)",
                                 "res": "-(3/2 * (INT u:[-1/2,1/2]. 1 / (u ^ 2 + 3/4)))",
                                 "rule": {
@@ -76,6 +117,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-\\frac{3}{2} (\\int_{-\\sqrt{3}/3}^{\\sqrt{3}/3} \\frac{\\sqrt{3}}{\\frac{3 x ^ {2}}{2} + \\frac{3}{2}} \\,dx)",
                                 "res": "-(3/2 * (INT x:[-(sqrt(3) / 3),sqrt(3) / 3]. sqrt(3) / (3 * x ^ 2 / 2 + 3/2)))",
                                 "rule": {
@@ -88,6 +135,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-\\frac{3}{2} (\\int_{-\\sqrt{3}/3}^{\\sqrt{3}/3} \\frac{\\sqrt{3}}{\\frac{3}{2} (x ^ {2} + 1)} \\,dx)",
                                 "res": "-(3/2 * (INT x:[-(sqrt(3) / 3),sqrt(3) / 3]. sqrt(3) / (3/2 * (x ^ 2 + 1))))",
                                 "rule": {
@@ -100,6 +153,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-\\sqrt{3} (\\int_{-\\sqrt{3}/3}^{\\sqrt{3}/3} \\frac{1}{x ^ {2} + 1} \\,dx)",
                                 "res": "-(sqrt(3) * (INT x:[-(sqrt(3) / 3),sqrt(3) / 3]. 1 / (x ^ 2 + 1)))",
                                 "rule": {
@@ -109,6 +168,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-\\sqrt{3} (\\left. \\tan^{-1}{x} \\right\\vert_{x=-\\sqrt{3}/3}^{\\sqrt{3}/3})",
                                 "res": "-(sqrt(3) * ([atan(x)]_x=-(sqrt(3) / 3),sqrt(3) / 3))",
                                 "rule": {
@@ -130,7 +195,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\frac{-\\pi}{\\sqrt{3}}",
                         "start": "-pi / sqrt(3)",
                         "steps": [
@@ -161,11 +225,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} \\frac{1}{x ^ {3} + 1} \\,dx",
                         "start": "INT x:[0,1]. 1 / (x ^ 3 + 1)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{1} \\frac{1}{(x + 1) (x ^ {2} - x + 1)} \\,dx",
                                 "res": "INT x:[0,1]. 1 / ((x + 1) * (x ^ 2 - x + 1))",
                                 "rule": {
@@ -178,6 +247,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{1} \\frac{1}{3} (\\frac{1}{x + 1} - \\frac{x - 2}{x ^ {2} - x + 1}) \\,dx",
                                 "res": "INT x:[0,1]. 1/3 * (1 / (x + 1) - (x - 2) / (x ^ 2 - x + 1))",
                                 "rule": {
@@ -190,6 +265,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{1} -\\frac{x - 2}{3 (x ^ {2} - x + 1)} + \\frac{1}{3 (x + 1)} \\,dx",
                                 "res": "INT x:[0,1]. -((x - 2) / (3 * (x ^ 2 - x + 1))) + 1 / (3 * (x + 1))",
                                 "rule": {
@@ -200,6 +281,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-\\frac{1}{3}\\cdot (-\\frac{\\sqrt{3} \\pi}{3}) + \\frac{1}{3} (\\left. \\log{(\\left| x + 1 \\right|)} \\right\\vert_{x=0}^{1})",
                                 "res": "-(1/3 * -(sqrt(3) * pi / 3)) + 1/3 * ([log(abs(x + 1))]_x=0,1)",
                                 "rule": {
@@ -221,7 +308,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\frac{1}{3} \\log{(2)} + \\frac{\\pi}{3 \\sqrt{3}}",
                         "start": "1/3 * log(2) + pi / (3 * sqrt(3))",
                         "steps": [

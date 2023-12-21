@@ -2,7 +2,6 @@
     "content": [
         {
             "eq": "G = -(INT x:[0,oo]. exp(-x) * log(x))",
-            "fixes": [],
             "latex_eq": "G = -(\\int_{0}^{\\infty} e^{-x} \\log{x} \\,dx)",
             "latex_lhs": "G",
             "type": "FuncDef"
@@ -14,11 +13,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "(\\int_{0}^{1} \\frac{-e^{-x} + 1}{x} \\,dx) - (\\int_{1}^{\\infty} \\frac{e^{-x}}{x} \\,dx)",
                         "start": "(INT x:[0,1]. (-exp(-x) + 1) / x) - (INT x:[1,oo]. exp(-x) / x)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "(\\int_{0}^{1} \\frac{-e^{-x} + 1}{x} \\,dx) - ((\\left. e^{-x} \\log{x} \\right\\vert_{x=1}^{\\infty}) - (\\int_{1}^{\\infty} -e^{-x} \\log{x} \\,dx))",
                                 "res": "(INT x:[0,1]. (-exp(-x) + 1) / x) - (([exp(-x) * log(x)]_x=1,oo) - (INT x:[1,oo]. -(exp(-x) * log(x))))",
                                 "rule": {
@@ -32,6 +36,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "(\\left. \\log{x} (-e^{-x} + 1) \\right\\vert_{x=0}^{1}) - (\\int_{0}^{1} e^{-x} \\log{x} \\,dx) - ((\\left. e^{-x} \\log{x} \\right\\vert_{x=1}^{\\infty}) - (\\int_{1}^{\\infty} -e^{-x} \\log{x} \\,dx))",
                                 "res": "([log(x) * (-exp(-x) + 1)]_x=0,1) - (INT x:[0,1]. exp(-x) * log(x)) - (([exp(-x) * log(x)]_x=1,oo) - (INT x:[1,oo]. -(exp(-x) * log(x))))",
                                 "rule": {
@@ -45,6 +55,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-(\\int_{0}^{1} e^{-x} \\log{x} \\,dx) - (\\int_{1}^{\\infty} e^{-x} \\log{x} \\,dx)",
                                 "res": "-(INT x:[0,1]. exp(-x) * log(x)) - (INT x:[1,oo]. exp(-x) * log(x))",
                                 "rule": {
@@ -57,11 +73,16 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "G",
                         "start": "G",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-(\\int_{0}^{\\infty} e^{-x} \\log{x} \\,dx)",
                                 "res": "-(INT x:[0,oo]. exp(-x) * log(x))",
                                 "rule": {
@@ -72,6 +93,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-((\\int_{0}^{1} e^{-x} \\log{x} \\,dx) + (\\int_{1}^{\\infty} e^{-x} \\log{x} \\,dx))",
                                 "res": "-((INT x:[0,1]. exp(-x) * log(x)) + (INT x:[1,oo]. exp(-x) * log(x)))",
                                 "rule": {
@@ -82,6 +109,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-(\\int_{0}^{1} e^{-x} \\log{x} \\,dx) - (\\int_{1}^{\\infty} e^{-x} \\log{x} \\,dx)",
                                 "res": "-(INT x:[0,1]. exp(-x) * log(x)) - (INT x:[1,oo]. exp(-x) * log(x))",
                                 "rule": {

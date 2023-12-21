@@ -2,7 +2,6 @@
     "content": [
         {
             "eq": "I(t) = (INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2) / 2))",
-            "fixes": [],
             "latex_eq": "I{(t)} = \\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx",
             "latex_lhs": "I{(t)}",
             "type": "FuncDef"
@@ -14,11 +13,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "I{(0)}",
                         "start": "I(0)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{\\infty} e^{-x ^ {2}/2} \\,dx",
                                 "res": "INT x:[0,oo]. exp(-(x ^ 2 / 2))",
                                 "rule": {
@@ -29,6 +33,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{\\infty} e^{-x ^ {2}/2} \\,dx",
                                 "res": "INT x:[0,oo]. exp(-(x ^ 2) / 2)",
                                 "rule": {
@@ -53,7 +63,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\sqrt{\\frac{\\pi}{2}}",
                         "start": "sqrt(pi / 2)",
                         "steps": [
@@ -84,11 +93,20 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\frac{d}{dt} I{(t)}",
                         "start": "D t. I(t)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "t",
+                                        "$real"
+                                    ],
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{d}{dt} \\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx",
                                 "res": "D t. INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2 / 2))",
                                 "rule": {
@@ -100,6 +118,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-(\\int_{0}^{\\infty} x \\sin{(t x)} e^{-x ^ {2}/2} \\,dx)",
                                 "res": "-(INT x:[0,oo]. x * sin(t * x) * exp(-(x ^ 2 / 2)))",
                                 "rule": {
@@ -109,6 +133,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-((\\left. -\\sin{(t x)} e^{-x ^ {2}/2} \\right\\vert_{x=0}^{\\infty}) - (\\int_{0}^{\\infty} -t \\cos{(t x)} e^{-x ^ {2}/2} \\,dx))",
                                 "res": "-(([-(sin(t * x) * exp(-(x ^ 2 / 2)))]_x=0,oo) - (INT x:[0,oo]. -(t * cos(t * x) * exp(-(x ^ 2 / 2)))))",
                                 "rule": {
@@ -121,6 +151,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-t (\\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx)",
                                 "res": "-(t * (INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2 / 2))))",
                                 "rule": {
@@ -133,11 +169,16 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "(-t) I{(t)}",
                         "start": "-t * I(t)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "(-t) (\\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx)",
                                 "res": "-t * (INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2 / 2)))",
                                 "rule": {
@@ -149,6 +190,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-t (\\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx)",
                                 "res": "-(t * (INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2 / 2))))",
                                 "rule": {
@@ -181,11 +228,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\frac{d}{dt} (\\log{(I{(t)})} + \\frac{t ^ {2}}{2})",
                         "start": "D t. log(I(t)) + t ^ 2 / 2",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "t",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{\\frac{d}{dt} I{(t)}}{I{(t)}} + t",
                                 "res": "(D t. I(t)) / I(t) + t",
                                 "rule": {
@@ -199,7 +251,6 @@
                                 "res": "-t * I(t) / I(t) + t",
                                 "rule": {
                                     "eq": "(D t. I(t)) = -t * I(t)",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(\\frac{d}{dt} I{(t)} = (-t) I{(t)}\\)",
                                     "name": "ApplyEquation",
                                     "source": "D t. I(t)",
@@ -220,7 +271,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "0",
                         "start": "0",
                         "steps": [],
@@ -256,11 +306,16 @@
                             "latex_cond": "I{(t)} > 0"
                         }
                     ],
-                    "fixes": [],
                     "latex_start": "\\frac{d}{dt} (\\log{(I{(t)})} + \\frac{t ^ {2}}{2}) = 0",
                     "start": "(D t. log(I(t)) + t ^ 2 / 2) = 0",
                     "steps": [
                         {
+                            "fixes": [
+                                [
+                                    "t",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "\\log{(I{(t)})} + \\frac{t ^ {2}}{2} = \\int 0 \\,dt",
                             "res": "log(I(t)) + t ^ 2 / 2 = (INT t. 0)",
                             "rule": {
@@ -301,11 +356,16 @@
                             "latex_cond": "I{(t)} > 0"
                         }
                     ],
-                    "fixes": [],
                     "latex_start": "\\frac{1}{2} t ^ {2} + \\log{(I{(t)})} = C",
                     "start": "1/2 * t ^ 2 + log(I(t)) = SKOLEM_CONST(C)",
                     "steps": [
                         {
+                            "fixes": [
+                                [
+                                    "t",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "\\lim\\limits_{t\\to 0} (\\,\\frac{1}{2} t ^ {2} + \\log{(I{(t)})}\\,) = \\lim\\limits_{t\\to 0} C",
                             "res": "(LIM {t -> 0 }. 1/2 * t ^ 2 + log(I(t))) = (LIM {t -> 0 }. SKOLEM_CONST(C))",
                             "rule": {
@@ -331,7 +391,6 @@
                             "res": "log(sqrt(pi / 2)) = SKOLEM_CONST(C)",
                             "rule": {
                                 "eq": "I(0) = sqrt(pi / 2)",
-                                "eq_fixes": [],
                                 "latex_str": "apply equation \\(I{(0)} = \\sqrt{\\frac{\\pi}{2}}\\)",
                                 "name": "ApplyEquation",
                                 "source": "I(0)",
@@ -359,7 +418,6 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\log{(I{(t)})}",
                         "start": "log(I(t))",
                         "steps": [
@@ -368,7 +426,6 @@
                                 "res": "SKOLEM_CONST(C) - 1/2 * t ^ 2",
                                 "rule": {
                                     "eq": "1/2 * t ^ 2 + log(I(t)) = SKOLEM_CONST(C)",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(\\frac{1}{2} t ^ {2} + \\log{(I{(t)})} = C\\)",
                                     "name": "ApplyEquation",
                                     "source": "log(I(t))",
@@ -381,7 +438,6 @@
                                 "res": "log(sqrt(pi / 2)) - 1/2 * t ^ 2",
                                 "rule": {
                                     "eq": "log(sqrt(pi / 2)) = SKOLEM_CONST(C)",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(\\log{(\\sqrt{\\frac{\\pi}{2}})} = C\\)",
                                     "name": "ApplyEquation",
                                     "source": "SKOLEM_CONST(C)",
@@ -402,7 +458,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\frac{-t ^ {2}}{2} + \\log{(\\sqrt{\\frac{\\pi}{2}})}",
                         "start": "-(t ^ 2) / 2 + log(sqrt(pi / 2))",
                         "steps": [
@@ -448,7 +503,6 @@
                             "latex_cond": "I{(t)} > 0"
                         }
                     ],
-                    "fixes": [],
                     "latex_start": "\\log{(I{(t)})} = \\frac{-t ^ {2}}{2} + \\log{(\\sqrt{\\frac{\\pi}{2}})}",
                     "start": "log(I(t)) = -(t ^ 2) / 2 + log(sqrt(pi / 2))",
                     "steps": [
@@ -504,11 +558,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\int_{-\\infty}^{\\infty} e^{-x ^ {2}/2} \\cos{(s + t x)} \\,dx",
                         "start": "INT x:[-oo,oo]. exp(-(x ^ 2) / 2) * cos(s + t * x)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{-\\infty}^{\\infty} e^{-x ^ {2}/2} (\\cos{s} \\cos{(t x)} - \\sin{s} \\sin{(t x)}) \\,dx",
                                 "res": "INT x:[-oo,oo]. exp(-(x ^ 2) / 2) * (cos(s) * cos(t * x) - sin(s) * sin(t * x))",
                                 "rule": {
@@ -521,6 +580,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{-\\infty}^{\\infty} e^{-x ^ {2}/2} \\cos{s} \\cos{(t x)} - e^{-x ^ {2}/2} \\sin{s} \\sin{(t x)} \\,dx",
                                 "res": "INT x:[-oo,oo]. exp(-(x ^ 2) / 2) * cos(s) * cos(t * x) - exp(-(x ^ 2) / 2) * sin(s) * sin(t * x)",
                                 "rule": {
@@ -533,6 +598,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\cos{s} (\\int_{-\\infty}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx) - \\sin{s} (\\int_{-\\infty}^{\\infty} \\sin{(t x)} e^{-x ^ {2}/2} \\,dx)",
                                 "res": "cos(s) * (INT x:[-oo,oo]. cos(t * x) * exp(-(x ^ 2 / 2))) - sin(s) * (INT x:[-oo,oo]. sin(t * x) * exp(-(x ^ 2 / 2)))",
                                 "rule": {
@@ -542,6 +613,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\cos{s} (\\int_{-\\infty}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx) - \\sin{s} ((\\int_{-\\infty}^{0} \\sin{(t x)} e^{-x ^ {2}/2} \\,dx) + (\\int_{0}^{\\infty} \\sin{(t x)} e^{-x ^ {2}/2} \\,dx))",
                                 "res": "cos(s) * (INT x:[-oo,oo]. cos(t * x) * exp(-(x ^ 2 / 2))) - sin(s) * ((INT x:[-oo,0]. sin(t * x) * exp(-(x ^ 2 / 2))) + (INT x:[0,oo]. sin(t * x) * exp(-(x ^ 2 / 2))))",
                                 "rule": {
@@ -553,6 +630,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\cos{s} (\\int_{-\\infty}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx) - \\sin{s} ((\\int_{0}^{\\infty} -\\sin{(t x)} e^{-x ^ {2}/2} \\,dx) + (\\int_{0}^{\\infty} \\sin{(t x)} e^{-x ^ {2}/2} \\,dx))",
                                 "res": "cos(s) * (INT x:[-oo,oo]. cos(t * x) * exp(-(x ^ 2 / 2))) - sin(s) * ((INT x:[0,oo]. -(sin(t * x) * exp(-(x ^ 2 / 2)))) + (INT x:[0,oo]. sin(t * x) * exp(-(x ^ 2 / 2))))",
                                 "rule": {
@@ -566,6 +649,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\cos{s} (\\int_{-\\infty}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx)",
                                 "res": "cos(s) * (INT x:[-oo,oo]. cos(t * x) * exp(-(x ^ 2 / 2)))",
                                 "rule": {
@@ -575,6 +664,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\cos{s} ((\\int_{-\\infty}^{0} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx) + (\\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx))",
                                 "res": "cos(s) * ((INT x:[-oo,0]. cos(t * x) * exp(-(x ^ 2 / 2))) + (INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2 / 2))))",
                                 "rule": {
@@ -585,6 +680,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\cos{s} ((\\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx) + (\\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx))",
                                 "res": "cos(s) * ((INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2 / 2))) + (INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2 / 2))))",
                                 "rule": {
@@ -598,6 +699,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "2 \\cos{s} (\\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx)",
                                 "res": "2 * cos(s) * (INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2 / 2)))",
                                 "rule": {
@@ -607,6 +714,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "2 \\cos{s} (\\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx)",
                                 "res": "2 * cos(s) * (INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2) / 2))",
                                 "rule": {
@@ -634,7 +747,6 @@
                                 "res": "2 * cos(s) * (sqrt(pi / 2) * exp(-(t ^ 2) / 2))",
                                 "rule": {
                                     "eq": "I(t) = sqrt(pi / 2) * exp(-(t ^ 2) / 2)",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(I{(t)} = \\sqrt{\\frac{\\pi}{2}} e^{-t ^ {2}/2}\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(t)",
@@ -658,7 +770,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\sqrt{2 \\pi} e^{-t ^ {2}/2} \\cos{s}",
                         "start": "sqrt(2 * pi) * exp(-(t ^ 2) / 2) * cos(s)",
                         "steps": [],

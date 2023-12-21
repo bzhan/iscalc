@@ -13,11 +13,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} \\log{(\\frac{a ^ {2}}{x ^ {2}} + 1)} \\,dx",
                         "start": "INT x:[0,oo]. log(a ^ 2 / x ^ 2 + 1)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "(\\left. x \\log{(\\frac{a ^ {2}}{x ^ {2}} + 1)} \\right\\vert_{x=0}^{\\infty}) - (\\int_{0}^{\\infty} -\\frac{2 a ^ {2}}{x ^ {2} (\\frac{a ^ {2}}{x ^ {2}} + 1)} \\,dx)",
                                 "res": "([x * log(a ^ 2 / x ^ 2 + 1)]_x=0,oo) - (INT x:[0,oo]. -(2 * a ^ 2 / (x ^ 2 * (a ^ 2 / x ^ 2 + 1))))",
                                 "rule": {
@@ -30,6 +35,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "2 a ^ {2} (\\int_{0}^{\\infty} \\frac{1}{x ^ {2} (\\frac{a ^ {2}}{x ^ {2}} + 1)} \\,dx)",
                                 "res": "2 * a ^ 2 * (INT x:[0,oo]. 1 / (x ^ 2 * (a ^ 2 / x ^ 2 + 1)))",
                                 "rule": {
@@ -39,6 +50,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "2 a ^ {2} (\\int_{0}^{\\infty} \\frac{1}{a ^ {2} + x ^ {2}} \\,dx)",
                                 "res": "2 * a ^ 2 * (INT x:[0,oo]. 1 / (a ^ 2 + x ^ 2))",
                                 "rule": {
@@ -51,6 +68,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "2 a ^ {2} (\\left. \\frac{1}{a} \\tan^{-1}{(\\frac{x}{a})} \\right\\vert_{x=0}^{\\infty})",
                                 "res": "2 * a ^ 2 * ([1 / a * atan(x / a)]_x=0,oo)",
                                 "rule": {
@@ -73,7 +96,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "a\\cdot \\pi",
                         "start": "a * pi",
                         "steps": [],

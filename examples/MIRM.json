@@ -6,6 +6,121 @@
             "type": "header"
         },
         {
+            "func_name" : "nth",
+            "params_name" : ["_w", "_i", "_j"],
+            "func_type" : "$fun($tensor($real, _n, _m), $int, $int, $real)",
+            "fixes": [["_n", "$int"], ["_m", "$int"]],
+            "type": "func_type"
+        },
+        {
+            "func_name": "hat",
+            "params_name": ["_w"],
+            "func_type": "$fun($tensor($real, 3, 1), $tensor($real, 3, 3))",
+            "type": "func_type"
+        },
+        {
+            "func_name": "hat",
+            "params_name": ["_w"],
+            "func_type": "$fun($tensor($real, 6, 1), $tensor($real, 4, 4))",
+            "type": "func_type"
+        },
+        {
+            "func_name": "zero_matrix",
+            "params_name": ["_n", "_m"],
+            "func_type": "$fun($int, $int, $tensor($int, _n, _m))",
+            "fixes": [["_n", "$int"], ["_m", "$int"]],
+            "type": "func_type"
+        },
+        {
+            "func_name": "inv",
+            "params_name": ["_A"],
+            "func_type": "$fun($tensor($real, _n, _n), $tensor($real, _n, _n))",
+            "fixes": [["_n", "$int"]],
+            "type": "func_type"
+        },
+        {
+            "func_name": "unit_matrix",
+            "params_name": ["_n"],
+            "func_type": "$fun($int, $tensor($int, _n, _n))",
+            "fixes": [["_n", "$int"]],
+            "type": "func_type"
+        },
+        {
+            "func_name": "T",
+            "params_name": ["_A"],
+            "func_type": "$fun($tensor($real, _n, _m), $tensor($int, _m, _n))",
+            "fixes": [["_n", "$int"], ["_m", "$int"]],
+            "type": "func_type"
+        },
+        {
+            "func_name": "ccon",
+            "params_name": ["_A", "_B"],
+            "func_type": "$fun($tensor($real, _r, _c1), $tensor($real, _r, _c2), $tensor($real, _r, _c2))",
+            "fixes": [["_r", "$int"], ["_c1", "$int"], ["_c2", "$int"]],
+            "type": "func_type"
+        },
+        {
+            "func_name": "rcon",
+            "params_name": ["_A", "_B"],
+            "func_type": "$fun($tensor($real, _r1, _c), $tensor($real, _r2, _c), $tensor($real, _r1+_r2, _c))",
+            "fixes": [["_c", "$int"], ["_r1", "$int"], ["_r2", "$int"]],
+            "type": "func_type"
+        },
+        {
+            "func_name": "norm",
+            "params_name": ["_w"],
+            "func_type": "$fun($tensor($real, _n, 1), $real)",
+            "fixes": [["_n", "$int"]],
+            "type": "func_type"
+        },
+        {
+            "func_name": "exp",
+            "params_name": ["_A"],
+            "func_type": "$fun($tensor($real, _n, _n), $tensor($real, _n, _n))",
+            "fixes": [["_n", "$int"]],
+            "type": "func_type"
+        },
+        {
+            "func_name": "nthc",
+            "params_name": ["_A", "_i"],
+            "func_type": "$fun($tensor($real, _n, _m), $int, $tensor($real, _n, 1))",
+            "fixes": [["_n", "$int"],["_m", "$int"]],
+            "type": "func_type"
+        },
+        {
+            "func_name": "nthr",
+            "params_name": ["_A", "_i"],
+            "func_type": "$fun($tensor($real, _n, _m), $int, $tensor($real, 1, _m))",
+            "fixes": [["_n", "$int"],["_m", "$int"]],
+            "type": "func_type"
+        },
+        {
+            "func_name": "choose_col",
+            "params_name": ["_A", "_i", "_j"],
+            "func_type": "$fun($tensor($real, _n, _m), $int, $int, $tensor($real, _n, _j - _i + 1))",
+            "fixes": [["_n", "$int"],["_m", "$int"], ["_i", "$int"], ["_j", "$int"]],
+            "type": "func_type"
+        },
+        {
+            "func_name": "choose_row",
+            "params_name": ["_A", "_i", "_j"],
+            "func_type": "$fun($tensor($real, _n, _m), $int, $int, $tensor($real, _j - _i + 1, _m))",
+            "fixes": [["_n", "$int"],["_m", "$int"], ["_i", "$int"], ["_j", "$int"]],
+            "type": "func_type"
+        },
+        {
+            "attributes": [
+                "bidirectional"
+            ],
+            "category": "matrix-arith",
+            "fixes":[
+                ["m", "$int"],
+                ["A", "$tensor($real, m, m)"]
+            ],
+            "expr": "exp(A) = SUM(n, 0, oo, A ^ n / factorial(n))",
+            "type": "axiom"
+        },
+        {
             "level": 2,
             "name": "Example01",
             "type": "header"
@@ -96,7 +211,10 @@
             "fixes": [
                 ["R", "$tensor($real, 3, 3)"],
                 ["p", "$tensor($real, 3, 1)"],
-                ["hm", "$fun($tensor($real, 3,3), $tensor($real, 3,1), $tensor($real, 4, 4))"]
+                ["hm", {
+                    "params_name": ["R", "p"],
+                    "func_type": "$fun($tensor($real, 3,3), $tensor($real, 3,1), $tensor($real, 4, 4))"
+                }]
             ]
         },
         {
@@ -105,7 +223,10 @@
                 ["t", "$real"],
                 ["w", "$tensor($real, 3, 1)"],
                 ["v", "$tensor($real, 3, 1)"],
-                ["hmf", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"]
+                ["hmf", {
+                    "params_name": ["t", "w", "v"],
+                    "func_type": "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                }]
             ],
             "path": "twist_matrix_exp_inv",
             "type": "definition",
@@ -119,7 +240,10 @@
                 ["t", "$real"],
                 ["w", "$tensor($real, 3, 1)"],
                 ["v", "$tensor($real, 3, 1)"],
-                ["hmf", "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"]
+                ["hmf", {
+                    "params_name": ["t", "w", "v"],
+                    "func_type": "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                }]
             ],
             "conds": ["norm(w) = 1"],
             "func_type": "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
@@ -176,7 +300,10 @@
             "fixes": [
                 ["w", "$tensor($real, 3, 1)"],
                 ["v", "$tensor($real, 3, 1)"],
-                ["twist", "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"]
+                ["twist", {
+                    "params_name": ["w", "v"],
+                    "func_type": "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"}
+                ]
             ]
         },
         {
@@ -211,18 +338,30 @@
             "path": "matrix_poe_inv",
             "type": "definition",
             "fixes": [
+                ["i", "$int"],
                 ["n", "$int"],
                 ["t", "$tensor($real, n, 1)"],
                 ["w", "$tensor($real, 3, n)"],
                 ["v", "$tensor($real, 3, n)"],
                 ["ic", "$tensor($real, 4, 4)"],
-                ["gst", "$fun($tensor($real, n, 1), $int, $tensor($real, 3, n), $tensor($real, 3, n), $tensor($real, 4, 4), $tensor($real, 4, 4))"]
+                ["gst", {
+                    "params_name": ["t", "n", "w", "v", "ic"],
+                    "func_type": "$fun($tensor($real, n, 1), $int, $tensor($real, 3, n), $tensor($real, 3, n), $tensor($real, 4, 4), $tensor($real, 4, 4))"
+                }]
             ]
         },
         {
             "expr": "(inv(ic) * MUL(i, 0, n-1, hmf(-nth(t, n-i-1, 0), nthc(w, n-i-1), nthc(v, n-i-1))))*gst(t, n, w, v, ic) = unit_matrix(4)",
             "path": "matrix_poe_inv",
-            "type": "problem"
+            "type": "problem",
+            "fixes": [
+                ["i", "$int"],
+                ["n", "$int"],
+                ["t", "$tensor($real, n, 1)"],
+                ["w", "$tensor($real, 3, n)"],
+                ["v", "$tensor($real, 3, n)"],
+                ["ic", "$tensor($real, 4, 4)"]
+            ]
         }
     ],
     "imports": [

@@ -12,7 +12,6 @@
                 }
             ],
             "eq": "I(a,b) = (INT x:[0,oo]. cos(a * x) * sin(b * x) / x)",
-            "fixes": [],
             "latex_eq": "I(a,b) = \\int_{0}^{\\infty} \\frac{\\cos{(a x)} \\sin{(b x)}}{x} \\,dx",
             "latex_lhs": "I(a,b)",
             "type": "FuncDef"
@@ -34,11 +33,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "I(a,b)",
                         "start": "I(a,b)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{\\cos{(a x)} \\sin{(b x)}}{x} \\,dx",
                                 "res": "INT x:[0,oo]. cos(a * x) * sin(b * x) / x",
                                 "rule": {
@@ -49,6 +53,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{\\frac{1}{2} (\\sin{(b x + a x)} - \\sin{(a x - b x)})}{x} \\,dx",
                                 "res": "INT x:[0,oo]. 1/2 * (sin(b * x + a * x) - sin(a * x - b * x)) / x",
                                 "rule": {
@@ -61,6 +71,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{\\frac{1}{2} \\sin{((b + a) x)}}{x} - \\frac{\\frac{1}{2} \\sin{(-(b - a) x)}}{x} \\,dx",
                                 "res": "INT x:[0,oo]. 1/2 * sin((b + a) * x) / x - 1/2 * sin(-((b - a) * x)) / x",
                                 "rule": {
@@ -73,6 +89,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{\\frac{1}{2} \\sin{((b + a) x)}}{x} - \\frac{\\frac{1}{2} (-\\sin{((b - a) x)})}{x} \\,dx",
                                 "res": "INT x:[0,oo]. 1/2 * sin((b + a) * x) / x - 1/2 * -sin((b - a) * x) / x",
                                 "rule": {
@@ -85,6 +107,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{(x (-a + b))}}{x} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{(x (a + b))}}{x} \\,dx)",
                                 "res": "1/2 * (INT x:[0,oo]. sin(x * (-a + b)) / x) + 1/2 * (INT x:[0,oo]. sin(x * (a + b)) / x)",
                                 "rule": {
@@ -97,11 +125,16 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b + a) x)}}{x} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b - a) x)}}{x} \\,dx)",
                         "start": "1/2 * (INT x:[0,oo]. sin((b + a) * x) / x) + 1/2 * (INT x:[0,oo]. sin((b - a) * x) / x)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{(x (-a + b))}}{x} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{(x (a + b))}}{x} \\,dx)",
                                 "res": "1/2 * (INT x:[0,oo]. sin(x * (-a + b)) / x) + 1/2 * (INT x:[0,oo]. sin(x * (a + b)) / x)",
                                 "rule": {
@@ -142,16 +175,20 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "I(a,b)",
                         "start": "I(a,b)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b + a) x)}}{x} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b - a) x)}}{x} \\,dx)",
                                 "res": "1/2 * (INT x:[0,oo]. sin((b + a) * x) / x) + 1/2 * (INT x:[0,oo]. sin((b - a) * x) / x)",
                                 "rule": {
                                     "eq": "I(a,b) = 1/2 * (INT x:[0,oo]. sin((b + a) * x) / x) + 1/2 * (INT x:[0,oo]. sin((b - a) * x) / x)",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(I(a,b) = \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b + a) x)}}{x} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b - a) x)}}{x} \\,dx)\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(a,b)",
@@ -181,7 +218,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\frac{\\pi}{2}",
                         "start": "pi / 2",
                         "steps": [],
@@ -216,16 +252,20 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "I(a,b)",
                         "start": "I(a,b)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b + a) x)}}{x} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b - a) x)}}{x} \\,dx)",
                                 "res": "1/2 * (INT x:[0,oo]. sin((b + a) * x) / x) + 1/2 * (INT x:[0,oo]. sin((b - a) * x) / x)",
                                 "rule": {
                                     "eq": "I(a,b) = 1/2 * (INT x:[0,oo]. sin((b + a) * x) / x) + 1/2 * (INT x:[0,oo]. sin((b - a) * x) / x)",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(I(a,b) = \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b + a) x)}}{x} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b - a) x)}}{x} \\,dx)\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(a,b)",
@@ -255,7 +295,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "0",
                         "start": "0",
                         "steps": [],
@@ -290,16 +329,20 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "I(a,b)",
                         "start": "I(a,b)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b + a) x)}}{x} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b - a) x)}}{x} \\,dx)",
                                 "res": "1/2 * (INT x:[0,oo]. sin((b + a) * x) / x) + 1/2 * (INT x:[0,oo]. sin((b - a) * x) / x)",
                                 "rule": {
                                     "eq": "I(a,b) = 1/2 * (INT x:[0,oo]. sin((b + a) * x) / x) + 1/2 * (INT x:[0,oo]. sin((b - a) * x) / x)",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(I(a,b) = \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b + a) x)}}{x} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b - a) x)}}{x} \\,dx)\\)",
                                     "name": "ApplyEquation",
                                     "source": "I(a,b)",
@@ -329,7 +372,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\frac{\\pi}{4}",
                         "start": "pi / 4",
                         "steps": [],

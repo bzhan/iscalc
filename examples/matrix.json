@@ -134,18 +134,6 @@
       ],
       "expr": "(x*A)^y = x^y * A^y",
       "type": "axiom"
-    },
-    {
-      "attributes": [
-          "bidirectional"
-      ],
-      "category": "matrix-arith",
-      "fixes":[
-        ["m", "$int"],
-        ["A", "$tensor($real, m, m)"]
-      ],
-      "expr": "exp(A) = SUM(n, 0, oo, A ^ n / factorial(n))",
-      "type": "axiom"
     }
   ],
   "imports": ["base"],

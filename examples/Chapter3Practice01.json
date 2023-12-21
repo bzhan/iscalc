@@ -12,7 +12,6 @@
                 }
             ],
             "eq": "I(a,b) = (INT x:[0,oo]. log(1 + a ^ 2 * x ^ 2) / (b ^ 2 + x ^ 2))",
-            "fixes": [],
             "latex_eq": "I(a,b) = \\int_{0}^{\\infty} \\frac{\\log{(1 + a ^ {2} x ^ {2})}}{b ^ {2} + x ^ {2}} \\,dx",
             "latex_lhs": "I(a,b)",
             "type": "FuncDef"
@@ -34,11 +33,20 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\frac{d}{da} I(a,b)",
                         "start": "D a. I(a,b)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "a",
+                                        "$real"
+                                    ],
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{d}{da} \\int_{0}^{\\infty} \\frac{\\log{(a ^ {2} x ^ {2} + 1)}}{b ^ {2} + x ^ {2}} \\,dx",
                                 "res": "D a. INT x:[0,oo]. log(a ^ 2 * x ^ 2 + 1) / (b ^ 2 + x ^ 2)",
                                 "rule": {
@@ -50,6 +58,16 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ],
+                                    [
+                                        "a",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{d}{da} \\frac{\\log{(a ^ {2} x ^ {2} + 1)}}{b ^ {2} + x ^ {2}} \\,dx",
                                 "res": "INT x:[0,oo]. D a. log(a ^ 2 * x ^ 2 + 1) / (b ^ 2 + x ^ 2)",
                                 "rule": {
@@ -59,6 +77,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "2 a (\\int_{0}^{\\infty} \\frac{x ^ {2}}{(b ^ {2} + x ^ {2}) (a ^ {2} x ^ {2} + 1)} \\,dx)",
                                 "res": "2 * a * (INT x:[0,oo]. x ^ 2 / ((b ^ 2 + x ^ 2) * (a ^ 2 * x ^ 2 + 1)))",
                                 "rule": {
@@ -68,6 +92,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "2 a (\\int_{0}^{\\infty} \\frac{1}{1 - a ^ {2} b ^ {2}} (\\frac{1}{1 + a ^ {2} x ^ {2}} - \\frac{b ^ {2}}{b ^ {2} + x ^ {2}}) \\,dx)",
                                 "res": "2 * a * (INT x:[0,oo]. 1 / (1 - a ^ 2 * b ^ 2) * (1 / (1 + a ^ 2 * x ^ 2) - b ^ 2 / (b ^ 2 + x ^ 2)))",
                                 "rule": {
@@ -80,6 +110,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{2 a}{-a ^ {2} b ^ {2} + 1} (-b ^ {2} (\\int_{0}^{\\infty} \\frac{1}{b ^ {2} + x ^ {2}} \\,dx) + (\\int_{0}^{\\infty} \\frac{1}{a ^ {2} x ^ {2} + 1} \\,dx))",
                                 "res": "2 * a / (-(a ^ 2 * b ^ 2) + 1) * (-(b ^ 2 * (INT x:[0,oo]. 1 / (b ^ 2 + x ^ 2))) + (INT x:[0,oo]. 1 / (a ^ 2 * x ^ 2 + 1)))",
                                 "rule": {
@@ -89,6 +125,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{2 a}{-a ^ {2} b ^ {2} + 1} (-b ^ {2} (\\left. \\frac{1}{b} \\tan^{-1}{(\\frac{x}{b})} \\right\\vert_{x=0}^{\\infty}) + (\\int_{0}^{\\infty} \\frac{1}{a ^ {2} x ^ {2} + 1} \\,dx))",
                                 "res": "2 * a / (-(a ^ 2 * b ^ 2) + 1) * (-(b ^ 2 * ([1 / b * atan(x / b)]_x=0,oo)) + (INT x:[0,oo]. 1 / (a ^ 2 * x ^ 2 + 1)))",
                                 "rule": {
@@ -98,6 +140,16 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ],
+                                    [
+                                        "t",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{2 a}{-a ^ {2} b ^ {2} + 1} (-b ^ {2} (\\left. \\frac{1}{b} \\tan^{-1}{(\\frac{x}{b})} \\right\\vert_{x=0}^{\\infty}) + (\\int_{0}^{\\infty} \\frac{1}{a (t ^ {2} + 1)} \\,dt))",
                                 "res": "2 * a / (-(a ^ 2 * b ^ 2) + 1) * (-(b ^ 2 * ([1 / b * atan(x / b)]_x=0,oo)) + (INT t:[0,oo]. 1 / (a * (t ^ 2 + 1))))",
                                 "rule": {
@@ -110,6 +162,16 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ],
+                                    [
+                                        "t",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{2 a}{-a ^ {2} b ^ {2} + 1} (-b ^ {2} (\\left. \\frac{1}{b} \\tan^{-1}{(\\frac{x}{b})} \\right\\vert_{x=0}^{\\infty}) + \\frac{1}{a} (\\left. \\tan^{-1}{t} \\right\\vert_{t=0}^{\\infty}))",
                                 "res": "2 * a / (-(a ^ 2 * b ^ 2) + 1) * (-(b ^ 2 * ([1 / b * atan(x / b)]_x=0,oo)) + 1 / a * ([atan(t)]_t=0,oo))",
                                 "rule": {
@@ -142,7 +204,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\frac{\\pi}{1 + a b}",
                         "start": "pi / (1 + a * b)",
                         "steps": [],
@@ -186,11 +247,16 @@
                             "latex_cond": "b > 0"
                         }
                     ],
-                    "fixes": [],
                     "latex_start": "\\frac{d}{da} I(a,b) = \\frac{\\pi}{1 + a b}",
                     "start": "(D a. I(a,b)) = pi / (1 + a * b)",
                     "steps": [
                         {
+                            "fixes": [
+                                [
+                                    "a",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "I(a,b) = \\int \\frac{\\pi}{1 + a b} \\,da",
                             "res": "I(a,b) = (INT a [b]. pi / (1 + a * b))",
                             "rule": {
@@ -200,6 +266,12 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "u",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "I(a,b) = \\int \\frac{\\pi}{b u} \\,du",
                             "res": "I(a,b) = (INT u [b]. pi / (b * u))",
                             "rule": {
@@ -212,6 +284,12 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "u",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "I(a,b) = \\frac{\\pi}{b} (\\int \\frac{1}{u} \\,du)",
                             "res": "I(a,b) = pi / b * (INT u [b]. 1 / u)",
                             "rule": {
@@ -270,11 +348,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "I(0,b)",
                         "start": "I(0,b)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{\\infty} 0 \\,dx",
                                 "res": "INT x:[0,oo]. 0",
                                 "rule": {
@@ -297,7 +380,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "0",
                         "start": "0",
                         "steps": [],
@@ -337,11 +419,16 @@
                             "latex_cond": "b > 0"
                         }
                     ],
-                    "fixes": [],
                     "latex_start": "I(a,b) = \\frac{\\pi}{b} \\log{(1 + a b)} + C(b)",
                     "start": "I(a,b) = pi / b * log(1 + a * b) + SKOLEM_FUNC(C(b))",
                     "steps": [
                         {
+                            "fixes": [
+                                [
+                                    "a",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "\\lim\\limits_{a\\to 0} I(a,b) = \\lim\\limits_{a\\to 0} (\\,\\frac{\\pi}{b} \\log{(1 + a b)} + C(b)\\,)",
                             "res": "(LIM {a -> 0 }. I(a,b)) = (LIM {a -> 0 }. pi / b * log(1 + a * b) + SKOLEM_FUNC(C(b)))",
                             "rule": {
@@ -367,7 +454,6 @@
                             "res": "0 = SKOLEM_FUNC(C(b))",
                             "rule": {
                                 "eq": "I(0,b) = 0",
-                                "eq_fixes": [],
                                 "latex_str": "apply equation \\(I(0,b) = 0\\)",
                                 "name": "ApplyEquation",
                                 "source": "I(0,b)",
@@ -423,7 +509,6 @@
                             "latex_cond": "b > 0"
                         }
                     ],
-                    "fixes": [],
                     "latex_start": "I(a,b) = \\frac{\\pi}{b} \\log{(1 + a b)} + C(b)",
                     "start": "I(a,b) = pi / b * log(1 + a * b) + SKOLEM_FUNC(C(b))",
                     "steps": [
@@ -432,7 +517,6 @@
                             "res": "I(a,b) = pi / b * log(1 + a * b) + 0",
                             "rule": {
                                 "eq": "SKOLEM_FUNC(C(b)) = 0",
-                                "eq_fixes": [],
                                 "latex_str": "apply equation \\(C(b) = 0\\)",
                                 "name": "ApplyEquation",
                                 "source": "SKOLEM_FUNC(C(b))",

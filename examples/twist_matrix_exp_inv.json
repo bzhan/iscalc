@@ -5,21 +5,11 @@
             "fixes": [
                 [
                     "R",
-                    [
-                        "$tensor($real, 3, 3)"
-                    ]
+                    "$tensor($real, 3, 3)"
                 ],
                 [
                     "p",
-                    [
-                        "$tensor($real, 3, 1)"
-                    ]
-                ],
-                [
-                    "hm",
-                    [
-                        "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
-                    ]
+                    "$tensor($real, 3, 1)"
                 ]
             ],
             "latex_eq": "hm(R,p) = \\left[\\begin{array}{c:c}R & p\\\\ \\hdashline \\mathbf{0}_{1 \\times 3} & \\mathbf{1}_{1 \\times 1}\\\\\\end{array}\\right]",
@@ -37,27 +27,15 @@
             "fixes": [
                 [
                     "t",
-                    [
-                        "$real"
-                    ]
+                    "$real"
                 ],
                 [
                     "w",
-                    [
-                        "$tensor($real, 3, 1)"
-                    ]
+                    "$tensor($real, 3, 1)"
                 ],
                 [
                     "v",
-                    [
-                        "$tensor($real, 3, 1)"
-                    ]
-                ],
-                [
-                    "hmf",
-                    [
-                        "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
-                    ]
+                    "$tensor($real, 3, 1)"
                 ]
             ],
             "latex_eq": "hmf(t,w,v) = hm(\\mathbf{1}_{3 \\times 3},t v)",
@@ -75,27 +53,15 @@
             "fixes": [
                 [
                     "t",
-                    [
-                        "$real"
-                    ]
+                    "$real"
                 ],
                 [
                     "w",
-                    [
-                        "$tensor($real, 3, 1)"
-                    ]
+                    "$tensor($real, 3, 1)"
                 ],
                 [
                     "v",
-                    [
-                        "$tensor($real, 3, 1)"
-                    ]
-                ],
-                [
-                    "hmf",
-                    [
-                        "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
-                    ]
+                    "$tensor($real, 3, 1)"
                 ]
             ],
             "latex_eq": "hmf(t,w,v) = hm(e^{t \\hat{w}},(\\mathbf{1}_{3 \\times 3} - e^{t \\hat{w}}) (\\hat{w} v) + w w^{\\text{T}} v t)",
@@ -113,15 +79,11 @@
             "fixes": [
                 [
                     "t",
-                    [
-                        "$real"
-                    ]
+                    "$real"
                 ],
                 [
                     "w",
-                    [
-                        "$tensor($real, 3, 1)"
-                    ]
+                    "$tensor($real, 3, 1)"
                 ]
             ],
             "goal": "exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3)",
@@ -129,7 +91,6 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "e^{t \\hat{w}} e^{-t \\hat{w}}",
                         "start": "exp(t * hat(w)) * exp(-(t * hat(w)))",
                         "steps": [
@@ -138,7 +99,6 @@
                                 "res": "(unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2) * exp(-(t * hat(w)))",
                                 "rule": {
                                     "eq": "exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(e^{t \\hat{w}} = \\mathbf{1}_{3 \\times 3} + \\sin{t} \\hat{w} + (1 - \\cos{t}) \\hat{w} ^ {2}\\)",
                                     "name": "ApplyEquation",
                                     "source": "exp(t * hat(w))",
@@ -163,7 +123,6 @@
                                 "res": "(unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2) * (unit_matrix(3) + sin(-t) * hat(w) + (1 - cos(-t)) * hat(w) ^ 2)",
                                 "rule": {
                                     "eq": "exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(e^{t \\hat{w}} = \\mathbf{1}_{3 \\times 3} + \\sin{t} \\hat{w} + (1 - \\cos{t}) \\hat{w} ^ {2}\\)",
                                     "name": "ApplyEquation",
                                     "source": "exp(-t * hat(w))",
@@ -206,7 +165,6 @@
                                 "res": "(-cos(t) + 1) ^ 2 * ((-1) ^ 1 * hat(w) ^ 2) + (-(2 * cos(t)) + 2) * hat(w) ^ 2 - sin(t) ^ 2 * hat(w) ^ 2 + unit_matrix(3)",
                                 "rule": {
                                     "eq": "hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(\\hat{w} ^ {2 (n + 1)} = (-1) ^ {n} \\hat{w} ^ {2}\\)",
                                     "name": "ApplyEquation",
                                     "source": "hat(w) ^ (2 * (1 + 1))",
@@ -284,7 +242,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\mathbf{1}_{3 \\times 3}",
                         "start": "unit_matrix(3)",
                         "steps": [],
@@ -309,15 +266,11 @@
             "fixes": [
                 [
                     "w",
-                    [
-                        "$tensor($real, 3, 1)"
-                    ]
+                    "$tensor($real, 3, 1)"
                 ],
                 [
                     "n",
-                    [
-                        "$int"
-                    ]
+                    "$int"
                 ]
             ],
             "goal": "hat(w) ^ n * w = zero_matrix(3,1)",
@@ -375,45 +328,11 @@
                     "fixes": [
                         [
                             "w",
-                            [
-                                "$tensor($real, 3, 1)"
-                            ]
+                            "$tensor($real, 3, 1)"
                         ],
                         [
                             "n",
-                            [
-                                "$int"
-                            ]
-                        ],
-                        [
-                            "cosh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "sinh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "binom",
-                            [
-                                "$fun($real, $real, $real)"
-                            ]
-                        ],
-                        [
-                            "hm",
-                            [
-                                "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
-                            ]
-                        ],
-                        [
-                            "hmf",
-                            [
-                                "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
-                            ]
+                            "$int"
                         ]
                     ],
                     "goal": "hat(w) * w = zero_matrix(3,1)",
@@ -421,7 +340,6 @@
                     "proof": {
                         "calcs": [
                             {
-                                "fixes": [],
                                 "latex_start": "\\hat{w} w",
                                 "start": "hat(w) * w",
                                 "steps": [
@@ -448,7 +366,6 @@
                                 "type": "Calculation"
                             },
                             {
-                                "fixes": [],
                                 "latex_start": "\\mathbf{0}_{3 \\times 1}",
                                 "start": "zero_matrix(3,1)",
                                 "steps": [
@@ -479,45 +396,11 @@
                     "fixes": [
                         [
                             "w",
-                            [
-                                "$tensor($real, 3, 1)"
-                            ]
+                            "$tensor($real, 3, 1)"
                         ],
                         [
                             "n",
-                            [
-                                "$int"
-                            ]
-                        ],
-                        [
-                            "cosh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "sinh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "binom",
-                            [
-                                "$fun($real, $real, $real)"
-                            ]
-                        ],
-                        [
-                            "hm",
-                            [
-                                "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
-                            ]
-                        ],
-                        [
-                            "hmf",
-                            [
-                                "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
-                            ]
+                            "$int"
                         ]
                     ],
                     "goal": "hat(w) ^ (n + 1) * w = zero_matrix(3,1)",
@@ -572,7 +455,6 @@
                     "proof": {
                         "calcs": [
                             {
-                                "fixes": [],
                                 "latex_start": "\\hat{w} ^ {n + 1} w",
                                 "start": "hat(w) ^ (n + 1) * w",
                                 "steps": [
@@ -623,7 +505,6 @@
                                 "type": "Calculation"
                             },
                             {
-                                "fixes": [],
                                 "latex_start": "\\mathbf{0}_{3 \\times 1}",
                                 "start": "zero_matrix(3,1)",
                                 "steps": [],
@@ -657,9 +538,7 @@
             "fixes": [
                 [
                     "w",
-                    [
-                        "$tensor($real, 3, 1)"
-                    ]
+                    "$tensor($real, 3, 1)"
                 ]
             ],
             "goal": "exp(t * hat(w)) * w = w",
@@ -667,7 +546,6 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "e^{t \\hat{w}} w",
                         "start": "exp(t * hat(w)) * w",
                         "steps": [
@@ -676,7 +554,6 @@
                                 "res": "(unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2) * w",
                                 "rule": {
                                     "eq": "exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(e^{t \\hat{w}} = \\mathbf{1}_{3 \\times 3} + \\sin{t} \\hat{w} + (1 - \\cos{t}) \\hat{w} ^ {2}\\)",
                                     "name": "ApplyEquation",
                                     "source": "exp(t * hat(w))",
@@ -722,7 +599,6 @@
                                 "res": "(-cos(t) + 1) * zero_matrix(3,1) + sin(t) * (hat(w) ^ 1 * w) + unit_matrix(3) * w",
                                 "rule": {
                                     "eq": "hat(w) ^ n * w = zero_matrix(3,1)",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(\\hat{w} ^ {n} w = \\mathbf{0}_{3 \\times 1}\\)",
                                     "name": "ApplyEquation",
                                     "source": "hat(w) ^ 2 * w",
@@ -735,7 +611,6 @@
                                 "res": "(-cos(t) + 1) * zero_matrix(3,1) + sin(t) * zero_matrix(3,1) + unit_matrix(3) * w",
                                 "rule": {
                                     "eq": "hat(w) ^ n * w = zero_matrix(3,1)",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(\\hat{w} ^ {n} w = \\mathbf{0}_{3 \\times 1}\\)",
                                     "name": "ApplyEquation",
                                     "source": "hat(w) ^ 1 * w",
@@ -756,7 +631,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "w",
                         "start": "w",
                         "steps": [],
@@ -781,15 +655,11 @@
             "fixes": [
                 [
                     "w",
-                    [
-                        "$tensor($real, 3, 1)"
-                    ]
+                    "$tensor($real, 3, 1)"
                 ],
                 [
                     "v",
-                    [
-                        "$tensor($real, 3, 1)"
-                    ]
+                    "$tensor($real, 3, 1)"
                 ]
             ],
             "goal": "hmf(t,w,v) * hmf(-t,w,v) = unit_matrix(4)",
@@ -797,7 +667,6 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "hmf(t,w,v) hmf(-t,w,v)",
                         "start": "hmf(t,w,v) * hmf(-t,w,v)",
                         "steps": [
@@ -859,7 +728,6 @@
                                 "res": "[[unit_matrix(3), exp(t * hat(w)) * ((-exp(-(t * hat(w))) + unit_matrix(3)) * hat(w) * v - t * w * T(w) * v) + (-exp(t * hat(w)) + unit_matrix(3)) * hat(w) * v + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
                                 "rule": {
                                     "eq": "exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3)",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(e^{t \\hat{w}} e^{-t \\hat{w}} = \\mathbf{1}_{3 \\times 3}\\)",
                                     "name": "ApplyEquation",
                                     "source": "exp(t * hat(w)) * exp(-(t * hat(w)))",
@@ -891,7 +759,6 @@
                                 "res": "[[unit_matrix(3), -(unit_matrix(3) * hat(w) * v) - t * exp(t * hat(w)) * w * T(w) * v + t * w * T(w) * v + hat(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
                                 "rule": {
                                     "eq": "exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3)",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(e^{t \\hat{w}} e^{-t \\hat{w}} = \\mathbf{1}_{3 \\times 3}\\)",
                                     "name": "ApplyEquation",
                                     "source": "exp(t * hat(w)) * exp(-(t * hat(w)))",
@@ -925,7 +792,6 @@
                                 "res": "[[unit_matrix(3), -(t * w * T(w) * v) + t * w * T(w) * v], [zero_matrix(1,3), unit_matrix(1)]]",
                                 "rule": {
                                     "eq": "exp(t * hat(w)) * w = w",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(e^{t \\hat{w}} w = w\\)",
                                     "name": "ApplyEquation",
                                     "source": "exp(t * hat(w)) * w",
@@ -946,7 +812,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\mathbf{1}_{4 \\times 4}",
                         "start": "unit_matrix(4)",
                         "steps": [],
@@ -971,15 +836,11 @@
             "fixes": [
                 [
                     "w",
-                    [
-                        "$tensor($real, 3, 1)"
-                    ]
+                    "$tensor($real, 3, 1)"
                 ],
                 [
                     "v",
-                    [
-                        "$tensor($real, 3, 1)"
-                    ]
+                    "$tensor($real, 3, 1)"
                 ]
             ],
             "goal": "hmf(t,w,v) * hmf(-t,w,v) = unit_matrix(4)",
@@ -987,7 +848,6 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "hmf(t,w,v) hmf(-t,w,v)",
                         "start": "hmf(t,w,v) * hmf(-t,w,v)",
                         "steps": [
@@ -1048,7 +908,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\mathbf{1}_{4 \\times 4}",
                         "start": "unit_matrix(4)",
                         "steps": [],

@@ -12,7 +12,6 @@
                 }
             ],
             "eq": "I(n) = (INT x:[0,oo]. x ^ (2 * n) * exp(-(x ^ 2)))",
-            "fixes": [],
             "latex_eq": "I{(n)} = \\int_{0}^{\\infty} x ^ {2 n} e^{-x ^ {2}} \\,dx",
             "latex_lhs": "I{(n)}",
             "type": "FuncDef"
@@ -32,9 +31,7 @@
             "fixes": [
                 [
                     "n",
-                    [
-                        "$int"
-                    ]
+                    "$int"
                 ]
             ],
             "goal": "(INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = 0",
@@ -42,7 +39,6 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx",
                         "start": "INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))",
                         "steps": [
@@ -59,7 +55,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "0",
                         "start": "0",
                         "steps": [],
@@ -88,9 +83,7 @@
             "fixes": [
                 [
                     "n",
-                    [
-                        "$int"
-                    ]
+                    "$int"
                 ]
             ],
             "goal": "(INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = (2 * n - 1) * I(n - 1) - 2 * I(n)",
@@ -98,11 +91,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx",
                         "start": "INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx",
                                 "res": "INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))",
                                 "rule": {
@@ -114,6 +112,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{\\infty} x ^ {2 n - 2} e^{-x ^ {2}} (2 n - 1) - 2 x ^ {2 n} e^{-x ^ {2}} \\,dx",
                                 "res": "INT x:[0,oo]. x ^ (2 * n - 2) * exp(-(x ^ 2)) * (2 * n - 1) - 2 * x ^ (2 * n) * exp(-(x ^ 2))",
                                 "rule": {
@@ -124,6 +128,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "(2 n - 1) (\\int_{0}^{\\infty} x ^ {2 n - 2} e^{-x ^ {2}} \\,dx) - 2 (\\int_{0}^{\\infty} x ^ {2 n} e^{-x ^ {2}} \\,dx)",
                                 "res": "(2 * n - 1) * (INT x:[0,oo]. x ^ (2 * n - 2) * exp(-(x ^ 2))) - 2 * (INT x:[0,oo]. x ^ (2 * n) * exp(-(x ^ 2)))",
                                 "rule": {
@@ -133,6 +143,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "(2 n - 1) (\\int_{0}^{\\infty} x ^ {2 (n - 1)} e^{-x ^ {2}} \\,dx) - 2 (\\int_{0}^{\\infty} x ^ {2 n} e^{-x ^ {2}} \\,dx)",
                                 "res": "(2 * n - 1) * (INT x:[0,oo]. x ^ (2 * (n - 1)) * exp(-(x ^ 2))) - 2 * (INT x:[0,oo]. x ^ (2 * n) * exp(-(x ^ 2)))",
                                 "rule": {
@@ -159,7 +175,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "(2 n - 1) I{(n - 1)} - 2 I{(n)}",
                         "start": "(2 * n - 1) * I(n - 1) - 2 * I(n)",
                         "steps": [],
@@ -188,9 +203,7 @@
             "fixes": [
                 [
                     "n",
-                    [
-                        "$int"
-                    ]
+                    "$int"
                 ]
             ],
             "goal": "I(n) = (2 * n - 1) / 2 * I(n - 1)",
@@ -211,7 +224,6 @@
                             "latex_cond": "n \\in\\mathbb{Z}"
                         }
                     ],
-                    "fixes": [],
                     "latex_start": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx = 0",
                     "start": "(INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = 0",
                     "steps": [
@@ -220,7 +232,6 @@
                             "res": "(2 * n - 1) * I(n - 1) - 2 * I(n) = 0",
                             "rule": {
                                 "eq": "(INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = (2 * n - 1) * I(n - 1) - 2 * I(n)",
-                                "eq_fixes": [],
                                 "latex_str": "apply equation \\(\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx = (2 n - 1) I{(n - 1)} - 2 I{(n)}\\)",
                                 "name": "ApplyEquation",
                                 "source": "INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))",
@@ -273,9 +284,7 @@
             "fixes": [
                 [
                     "n",
-                    [
-                        "$int"
-                    ]
+                    "$int"
                 ]
             ],
             "goal": "I(n) = factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi)",
@@ -286,57 +295,7 @@
                     "fixes": [
                         [
                             "n",
-                            [
-                                "$int"
-                            ]
-                        ],
-                        [
-                            "cosh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "sinh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "binom",
-                            [
-                                "$fun($real, $real, $real)"
-                            ]
-                        ],
-                        [
-                            "Gamma",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "B",
-                            [
-                                "$fun($real, $real, $real)"
-                            ]
-                        ],
-                        [
-                            "G",
-                            [
-                                "$fun($real)"
-                            ]
-                        ],
-                        [
-                            "zeta",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "I",
-                            [
-                                "$fun($real, $real)"
-                            ]
+                            "$int"
                         ]
                     ],
                     "goal": "I(0) = sqrt(pi) / 2",
@@ -344,11 +303,16 @@
                     "proof": {
                         "calcs": [
                             {
-                                "fixes": [],
                                 "latex_start": "I{(0)}",
                                 "start": "I(0)",
                                 "steps": [
                                     {
+                                        "fixes": [
+                                            [
+                                                "x",
+                                                "$real"
+                                            ]
+                                        ],
                                         "latex_res": "\\int_{0}^{\\infty} e^{-x ^ {2}} \\,dx",
                                         "res": "INT x:[0,oo]. exp(-(x ^ 2))",
                                         "rule": {
@@ -359,6 +323,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "x",
+                                                "$real"
+                                            ]
+                                        ],
                                         "latex_res": "\\int_{0}^{\\infty} \\frac{\\sqrt{2}}{2} e^{-x ^ {2}/2} \\,dx",
                                         "res": "INT x:[0,oo]. sqrt(2) / 2 * exp(-(x ^ 2 / 2))",
                                         "rule": {
@@ -371,6 +341,12 @@
                                         "type": "CalculationStep"
                                     },
                                     {
+                                        "fixes": [
+                                            [
+                                                "x",
+                                                "$real"
+                                            ]
+                                        ],
                                         "latex_res": "\\int_{0}^{\\infty} \\frac{\\sqrt{2}}{2} e^{-x ^ {2}/2} \\,dx",
                                         "res": "INT x:[0,oo]. sqrt(2) / 2 * exp(-(x ^ 2) / 2)",
                                         "rule": {
@@ -404,7 +380,6 @@
                                 "type": "Calculation"
                             },
                             {
-                                "fixes": [],
                                 "latex_start": "\\frac{\\sqrt{\\pi}}{2}",
                                 "start": "sqrt(pi) / 2",
                                 "steps": [],
@@ -425,57 +400,7 @@
                     "fixes": [
                         [
                             "n",
-                            [
-                                "$int"
-                            ]
-                        ],
-                        [
-                            "cosh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "sinh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "binom",
-                            [
-                                "$fun($real, $real, $real)"
-                            ]
-                        ],
-                        [
-                            "Gamma",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "B",
-                            [
-                                "$fun($real, $real, $real)"
-                            ]
-                        ],
-                        [
-                            "G",
-                            [
-                                "$fun($real)"
-                            ]
-                        ],
-                        [
-                            "zeta",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "I",
-                            [
-                                "$fun($real, $real)"
-                            ]
+                            "$int"
                         ]
                     ],
                     "goal": "I(n + 1) = 4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))",
@@ -483,7 +408,6 @@
                     "proof": {
                         "calcs": [
                             {
-                                "fixes": [],
                                 "latex_start": "I{(n + 1)}",
                                 "start": "I(n + 1)",
                                 "steps": [
@@ -492,7 +416,6 @@
                                         "res": "(2 * (n + 1) - 1) / 2 * I(n + 1 - 1)",
                                         "rule": {
                                             "eq": "I(n) = (2 * n - 1) / 2 * I(n - 1)",
-                                            "eq_fixes": [],
                                             "latex_str": "apply equation \\(I{(n)} = \\frac{2 n - 1}{2} I{(n - 1)}\\)",
                                             "name": "ApplyEquation",
                                             "source": "I(n + 1)",
@@ -595,7 +518,6 @@
                                 "type": "Calculation"
                             },
                             {
-                                "fixes": [],
                                 "latex_start": "\\frac{4 ^ {-n}\\cdot \\sqrt{\\pi} (2 n + 2)!}{8 (n + 1)!}",
                                 "start": "4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))",
                                 "steps": [],

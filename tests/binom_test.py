@@ -2,11 +2,7 @@ import json
 import os
 import sys
 import unittest
-from typing import List
-
-from integral import rules, context, parser, compstate, matrix, expr
-from integral.context import Context
-from integral.expr import Op, Var, Const, Matrix, Expr, Fun
+from integral import rules, parser, compstate, expr
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
@@ -29,29 +25,12 @@ class BinomTest(unittest.TestCase):
         if not omit_finish:
             for content in file.content:
                 self.assertTrue(content.is_finished())
-    def parse_raw_fixes(self, raw_fixes):
-        fixes = dict()
-        for name, type_list in raw_fixes:
-            if isinstance(type_list, list):
-                for type in type_list:
-                    t = parser.parse_expr(type, fixes= fixes)
-                    if name not in fixes:
-                        fixes[name] = [t]
-                    elif t not in fixes[name]:
-                        fixes[name].append(t)
-            else:
-                t = parser.parse_expr(type_list, fixes=fixes)
-                if name not in fixes:
-                    fixes[name] = [t]
-                elif t not in fixes[name]:
-                    fixes[name].append(t)
-        return fixes
 
     def testExample01(self):
         raw_fixes = [('m', '$int'),
                      ('n', '$int'),
                      ('i', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         file = compstate.CompFile("base", "binom_example01")
         goal01 = file.add_goal("binom(n,m) = binom(n,n-m)")
         proof = goal01.proof_by_calculation()
@@ -121,7 +100,7 @@ class BinomTest(unittest.TestCase):
         raw_fixes = [('m', '$int'),
                      ('n', '$int'),
                      ('k', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         goal05 = file.add_goal("(x+y)^n = SUM(k,0,n,binom(n, k)*x^k*y^(n-k))", conds=['x!=0', 'y!=0', 'n>0'], fixes=fixes)
         proof = goal05.proof_by_induction('n', 1)
         base_proof = proof.base_case.proof_by_calculation()
@@ -287,7 +266,7 @@ class BinomTest(unittest.TestCase):
         raw_fixes = [('m', '$int'),
                      ('n', '$int'),
                      ('k', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         file = compstate.CompFile("binom", "binom_example04")
         goal01 = file.add_goal("SUM(k, 0, n, (((8 - m / 8) * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 2 * m ^ k)) = (2 * n + 1) / m ^ n * binom(2 * n, n) ^ 3", conds=['m != 0', 'n>=0'], fixes=fixes)
         proof = goal01.proof_by_induction("n", 0)
@@ -333,7 +312,7 @@ class BinomTest(unittest.TestCase):
         raw_fixes = [('m', '$int'),
                      ('n', '$int'),
                      ('k', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         goal02 = file.add_goal(
             "(LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(4 * k ^ 2) + 16 * k ^ 3 - 2 * k + 1) / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3)) = (LIM {n -> oo}. (-64) ^ -n * (2 * n + 1) * binom(2 * n,n) ^ 3)"
             , fixes=fixes)
@@ -345,7 +324,7 @@ class BinomTest(unittest.TestCase):
         assert goal02.is_finished()
         s = "SUM(k, 0, oo, (16*k^3 - 4*k^2-2*k+1) * binom(2*k, k)^3 / ((2*k-1)^2*(-64)^k)) = 0"
         raw_fixes = [('k', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         goal03 = file.add_goal(s, fixes=fixes, conds=["k>=0"])
         proof = goal03.proof_by_calculation()
         calc = proof.lhs_calc
@@ -353,7 +332,7 @@ class BinomTest(unittest.TestCase):
 
         s1 = calc.parse_expr("SUM(k, 0, oo, (-64) ^ -k * (-(4 * k ^ 2) + 16 * k ^ 3 - 2 * k + 1) / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3)")
         raw_fixes = [('n', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         s2 = calc.parse_expr("LIM {n->oo}.SUM(k, 0, n, (-64) ^ -k * (-(4 * k ^ 2) + 16 * k ^ 3 - 2 * k + 1) / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3)", fixes=fixes)
 
         calc.perform_rule(rules.Equation(s1, s2))
@@ -414,7 +393,7 @@ class BinomTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         assert goal03.is_finished()
         raw_fixes = [('k', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         goal04 = file.add_goal("SUM(k, 0, oo, (k * (4 * k - 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 2 * (-64) ^ k)) = -1 / pi", fixes=fixes)
         proof = goal04.proof_by_rewrite_goal(begin=goal03)
         calc = proof.begin
@@ -451,7 +430,7 @@ class BinomTest(unittest.TestCase):
         raw_fixes = [('m', '$int'),
                      ('n', '$int'),
                      ('k', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         goal05 = file.add_goal("SUM(k, 0, n, (((8 - m / 8) * k ^ 3 - 12 * k ^ 2 + 6 * k - 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 3 * m ^ k)) = 1 / m ^ n * binom(2 * n, n) ^ 3", conds=['m != 0', 'n>=0'], fixes=fixes)
         proof = goal05.proof_by_induction("n", 0)
         proof_base = proof.base_case.proof_by_calculation()
@@ -497,7 +476,7 @@ class BinomTest(unittest.TestCase):
         raw_fixes = [('m', '$int'),
                      ('n', '$int'),
                      ('k', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         goal06 = file.add_goal(
             "(LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(12 * k ^ 2) + 16 * k ^ 3 + 6 * k - 1) / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3)) = (LIM {n -> oo}. (-64) ^ -n * binom(2 * n,n) ^ 3)",
             fixes=fixes)
@@ -509,7 +488,7 @@ class BinomTest(unittest.TestCase):
         assert goal06.is_finished()
         s = "SUM(k, 0, oo, (16*k^3 - 12*k^2+6*k-1) * binom(2*k, k)^3 / ((2*k-1)^3*(-64)^k)) = 0"
         raw_fixes = [('k', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         goal07 = file.add_goal(s, fixes=fixes, conds=["k>=0"])
         proof = goal07.proof_by_calculation()
         calc = proof.lhs_calc
@@ -518,7 +497,7 @@ class BinomTest(unittest.TestCase):
         s1 = calc.parse_expr(
             "SUM(k, 0, oo, (-64) ^ -k * (-(12 * k ^ 2) + 16 * k ^ 3 + 6 * k - 1) / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3)")
         raw_fixes = [('n', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         s2 = calc.parse_expr(
             "LIM {n->oo}. SUM(k, 0, n, (-64) ^ -k * (-(12 * k ^ 2) + 16 * k ^ 3 + 6 * k - 1) / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3)",
             fixes=fixes)
@@ -565,7 +544,7 @@ class BinomTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyIdentity(s, t))
         calc.perform_rule(rules.FullSimplify())
         raw_fixes = [('k', '$int')]
-        fixes = self.parse_raw_fixes(raw_fixes)
+        fixes = parser.parse_raw_fixes(raw_fixes)
         goal08 = file.add_goal("SUM(k, 0, oo, ((4 * k - 1) * binom(2 * k, k) ^ 3) / ((2 * k - 1) ^ 3 * (-64) ^ k)) = 2 / pi", fixes=fixes)
         proof = goal08.proof_by_rewrite_goal(begin=goal07)
         calc = proof.begin

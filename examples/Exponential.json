@@ -1,7 +1,6 @@
 {
     "content": [
         {
-            "fixes": [],
             "latex_start": "\\int 5 e^{x} \\,dx",
             "start": "INT x. 5 * exp(x)",
             "steps": [
@@ -18,7 +17,6 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int 2 - 3 e^{x} \\,dx",
             "start": "INT x. 2 - 3 * exp(x)",
             "steps": [
@@ -35,11 +33,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int_{0}^{\\log{(2)}/7} 14 e^{7 x} \\,dx",
             "start": "INT x:[0,log(2) / 7]. 14 * exp(7 * x)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "14 (\\left. \\frac{e^{7 x}}{7} \\right\\vert_{x=0}^{\\log{(2)}/7})",
                     "res": "14 * ([exp(7 * x) / 7]_x=0,log(2) / 7)",
                     "rule": {
@@ -61,11 +64,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int 7 ^ {2 x + 3} \\,dx",
             "start": "INT x. 7 ^ (2 * x + 3)",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int \\frac{343 7 ^ {u}}{2} \\,du",
                     "res": "INT u. 343 * 7 ^ u / 2",
                     "rule": {
@@ -108,11 +116,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int e^{5 x} (\\frac{e^{2 x}}{7} + \\frac{3}{e^{3 x}}) \\,dx",
             "start": "INT x. exp(5 * x) * (exp(2 * x) / 7 + 3 / exp(3 * x))",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int \\frac{e^{7 x}}{7} + 3 e^{2 x} \\,dx",
                     "res": "INT x. exp(7 * x) / 7 + 3 * exp(2 * x)",
                     "rule": {
@@ -143,11 +156,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int e^{x} (1 + 2 e^{x}) ^ {4} \\,dx",
             "start": "INT x. exp(x) * (1 + 2 * exp(x)) ^ 4",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int \\frac{u ^ {4}}{2} \\,du",
                     "res": "INT u. u ^ 4 / 2",
                     "rule": {
@@ -190,11 +208,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int (e^{4 x} - e^{-4 x}) ^ {2} \\,dx",
             "start": "INT x. (exp(4 * x) - exp(-4 * x)) ^ 2",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "x",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int e^{-8 x} + e^{8 x} - 2 \\,dx",
                     "res": "INT x. exp(-(8 * x)) + exp(8 * x) - 2",
                     "rule": {
@@ -225,11 +248,16 @@
             "type": "Calculation"
         },
         {
-            "fixes": [],
             "latex_start": "\\int e^{x} (1 - e^{x}) (1 + e^{x}) ^ {10} \\,dx",
             "start": "INT x. exp(x) * (1 - exp(x)) * (1 + exp(x)) ^ 10",
             "steps": [
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int \\frac{u ^ {10} (u - 1) (-u + 2)}{u - 1} \\,du",
                     "res": "INT u. u ^ 10 * (u - 1) * (-u + 2) / (u - 1)",
                     "rule": {
@@ -242,6 +270,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int u ^ {10} (-u + 2) \\,du",
                     "res": "INT u. u ^ 10 * (-u + 2)",
                     "rule": {
@@ -251,6 +285,12 @@
                     "type": "CalculationStep"
                 },
                 {
+                    "fixes": [
+                        [
+                            "u",
+                            "$real"
+                        ]
+                    ],
                     "latex_res": "\\int 2 u ^ {10} - u ^ {11} \\,du",
                     "res": "INT u. 2 * u ^ 10 - u ^ 11",
                     "rule": {
@@ -287,11 +327,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} \\frac{3 ^ {x} + 4 ^ {x}}{5 ^ {x}} \\,dx",
                         "start": "INT x:[0,1]. (3 ^ x + 4 ^ x) / 5 ^ x",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{1} \\frac{3 ^ {x}}{5 ^ {x}} + \\frac{4 ^ {x}}{5 ^ {x}} \\,dx",
                                 "res": "INT x:[0,1]. 3 ^ x / 5 ^ x + 4 ^ x / 5 ^ x",
                                 "rule": {
@@ -304,6 +349,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{1} (\\frac{3}{5}) ^ {x} + \\frac{4 ^ {x}}{5 ^ {x}} \\,dx",
                                 "res": "INT x:[0,1]. (3/5) ^ x + 4 ^ x / 5 ^ x",
                                 "rule": {
@@ -316,6 +367,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{1} (\\frac{3}{5}) ^ {x} + (\\frac{4}{5}) ^ {x} \\,dx",
                                 "res": "INT x:[0,1]. (3/5) ^ x + (4/5) ^ x",
                                 "rule": {
@@ -328,6 +385,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "(\\int_{0}^{1} (\\frac{3}{5}) ^ {x} \\,dx) + (\\int_{0}^{1} (\\frac{4}{5}) ^ {x} \\,dx)",
                                 "res": "(INT x:[0,1]. (3/5) ^ x) + (INT x:[0,1]. (4/5) ^ x)",
                                 "rule": {
@@ -337,6 +400,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "(\\left. \\frac{(\\frac{3}{5}) ^ {x}}{\\log{(3)} - \\log{(5)}} \\right\\vert_{x=0}^{1}) + (\\left. \\frac{(\\frac{4}{5}) ^ {x}}{2 \\log{(2)} - \\log{(5)}} \\right\\vert_{x=0}^{1})",
                                 "res": "([(3/5) ^ x / (log(3) - log(5))]_x=0,1) + ([(4/5) ^ x / (2 * log(2) - log(5))]_x=0,1)",
                                 "rule": {
@@ -369,7 +438,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\frac{-\\frac{2}{5}}{\\log{(3)} - \\log{(5)}} - \\frac{\\frac{1}{5}}{2 \\log{(2)} - \\log{(5)}}",
                         "start": "-2/5 / (log(3) - log(5)) - 1/5 / (2 * log(2) - log(5))",
                         "steps": [],
@@ -390,11 +458,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\int 30 e^{-3 x} (1 + 3 e^{-x}) ^ {5} \\,dx",
                         "start": "INT x. 30 * exp(-3 * x) * (1 + 3 * exp(-x)) ^ 5",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int -\\frac{30 u ^ {5}}{u - 1} e^{3 \\log{((u - 1)/3)}} \\,du",
                                 "res": "INT u. -(30 * u ^ 5 / (u - 1) * exp(3 * log((u - 1) / 3)))",
                                 "rule": {
@@ -407,6 +480,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-\\frac{10 (\\int u ^ {5} (u - 1) ^ {2} \\,du)}{9}",
                                 "res": "-(10 * (INT u. u ^ 5 * (u - 1) ^ 2) / 9)",
                                 "rule": {
@@ -416,6 +495,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-\\frac{10 (\\int -2 u ^ {6} + u ^ {5} + u ^ {7} \\,du)}{9}",
                                 "res": "-(10 * (INT u. -(2 * u ^ 6) + u ^ 5 + u ^ 7) / 9)",
                                 "rule": {
@@ -426,6 +511,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "-\\frac{10 (\\int u ^ {5} \\,du) - 20 (\\int u ^ {6} \\,du) + 10 (\\int u ^ {7} \\,du)}{9}",
                                 "res": "-((10 * (INT u. u ^ 5) - 20 * (INT u. u ^ 6) + 10 * (INT u. u ^ 7)) / 9)",
                                 "rule": {
@@ -465,7 +556,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "-\\frac{5}{36} (3 e^{-x} + 1) ^ {8} + \\frac{20}{63} (3 e^{-x} + 1) ^ {7} + -\\frac{5}{27} (3 e^{-x} + 1) ^ {6} + C",
                         "start": "-5/36 * (3 * exp(-x) + 1) ^ 8 + 20/63 * (3 * exp(-x) + 1) ^ 7 + -5/27 * (3 * exp(-x) + 1) ^ 6 + SKOLEM_CONST(C)",
                         "steps": [
@@ -496,11 +586,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\int \\frac{8 e^{x} (3 + e^{x})}{\\sqrt{e^{2 x} + 6 e^{x} + 1}} \\,dx",
                         "start": "INT x. 8 * exp(x) * (3 + exp(x)) / sqrt(exp(2 * x) + 6 * exp(x) + 1)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int \\frac{4 (2 e^{2 x} + 6 e^{x})}{\\sqrt{e^{2 x} + 6 e^{x} + 1}} \\,dx",
                                 "res": "INT x. 4 * (2 * exp(2 * x) + 6 * exp(x)) / sqrt(exp(2 * x) + 6 * exp(x) + 1)",
                                 "rule": {
@@ -513,6 +608,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "4 (\\int \\frac{2 e^{2 x} + 6 e^{x}}{\\sqrt{e^{2 x} + 6 e^{x} + 1}} \\,dx)",
                                 "res": "4 * (INT x. (2 * exp(2 * x) + 6 * exp(x)) / sqrt(exp(2 * x) + 6 * exp(x) + 1))",
                                 "rule": {
@@ -522,6 +623,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "4 (\\int \\frac{1}{\\sqrt{u}} \\,du)",
                                 "res": "4 * (INT u. 1 / sqrt(u))",
                                 "rule": {
@@ -564,7 +671,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "8 \\sqrt{e^{2 x} + 6 e^{x} + 1} + C",
                         "start": "8 * sqrt(exp(2 * x) + 6 * exp(x) + 1) + SKOLEM_CONST(C)",
                         "steps": [],
@@ -585,11 +691,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\int (27 e^{9 x} + e^{12 x}) ^ {1/3} \\,dx",
                         "start": "INT x. (27 * exp(9 * x) + exp(12 * x)) ^ (1/3)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int (e^{9 x} (27 + e^{3 x})) ^ {1/3} \\,dx",
                                 "res": "INT x. (exp(9 * x) * (27 + exp(3 * x))) ^ (1/3)",
                                 "rule": {
@@ -602,6 +713,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int (e^{9 x}) ^ {1/3} (27 + e^{3 x}) ^ {1/3} \\,dx",
                                 "res": "INT x. exp(9 * x) ^ (1/3) * (27 + exp(3 * x)) ^ (1/3)",
                                 "rule": {
@@ -614,6 +731,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int e^{3 x} (27 + e^{3 x}) ^ {1/3} \\,dx",
                                 "res": "INT x. exp(3 * x) * (27 + exp(3 * x)) ^ (1/3)",
                                 "rule": {
@@ -626,6 +749,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int \\frac{u ^ {1/3}}{3} \\,du",
                                 "res": "INT u. u ^ (1/3) / 3",
                                 "rule": {
@@ -638,6 +767,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\frac{\\int u ^ {1/3} \\,du}{3}",
                                 "res": "(INT u. u ^ (1/3)) / 3",
                                 "rule": {
@@ -677,7 +812,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\frac{(e^{3 x} + 27) ^ {4/3}}{4} + C",
                         "start": "(exp(3 * x) + 27) ^ (4/3) / 4 + SKOLEM_CONST(C)",
                         "steps": [],

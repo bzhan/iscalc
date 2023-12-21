@@ -12,7 +12,7 @@ from integral.context import Context, apply_subterm
 
 
 
-def collect_pairs(ps):
+def collect_pairs(ps, ctx:Context):
     """
     Reduce a list of pairs by collecting into groups according to
     first components, and adding the second component for each group.
@@ -52,7 +52,7 @@ def collect_pairs(ps):
             # ([(v, 1)], 0) -> zero_matrix
             e = from_poly(Polynomial([Monomial(1, k)]))
             if expr.is_matrix_type(e.type):
-                res_list.append((((expr.Fun('zero_matrix', expr.num_row(e.type), expr.num_col(e.type)), 1),), 1))
+                res_list.append((((expr.Fun(*ctx.get_func_type('zero_matrix', expr.num_row(e.type), expr.num_col(e.type))), 1),), 1))
     try:
         res = tuple(sorted(res_list))
     except:
@@ -320,7 +320,7 @@ class Polynomial:
         for mono in self.monomials:
             mono.reduce(ctx)
         assert all(isinstance(mono.coeff, (int, Fraction)) for mono in self.monomials)
-        ts = collect_pairs((mono.factors, mono.coeff) for mono in self.monomials)
+        ts = collect_pairs([(mono.factors, mono.coeff) for mono in self.monomials], ctx)
         self.monomials = tuple(Monomial(coeff, factor) for factor, coeff in ts if coeff != 0)
         return self
 
@@ -518,7 +518,7 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
         a = e.args[0]
         # exp(matrix)
         if expr.is_matrix_type(a.type):
-            return singleton(expr.Fun('exp', from_poly(to_poly(a, ctx))))
+            return singleton(expr.Fun(*ctx.get_func_type('exp', from_poly(to_poly(a, ctx)))))
         elif expr.is_fun(a) and a.func_name == "log":
             return to_poly(a.args[0], ctx)
         else:
@@ -554,30 +554,30 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
 
     elif expr.is_evalat(e):
         if e.upper == expr.POS_INF:
-            upper = expr.Limit(e.var, expr.POS_INF, e.body)
+            upper = expr.Limit(e.var, expr.POS_INF, e.body, var_type=e.var_type)
         elif e.upper == expr.NEG_INF:
             x = expr.Var(e.var)
-            upper = expr.Limit(e.var, expr.POS_INF, e.body.subst(e.var, -x))
+            upper = expr.Limit(e.var, expr.POS_INF, e.body.subst(e.var, -x), var_type=e.var_type)
         else:
             try:
                 upper = normalize(e.body.subst(e.var, e.upper), ctx)
             except:
                 x = expr.Var(e.var)
                 a = e.upper
-                upper = expr.Limit(e.var, expr.POS_INF, e.body.subst(e.var, a - 1 / x))
+                upper = expr.Limit(e.var, expr.POS_INF, e.body.subst(e.var, a - 1 / x), var_type=e.var_type)
 
         if e.lower == expr.POS_INF:
-            lower = expr.Limit(e.var, expr.POS_INF, e.body)
+            lower = expr.Limit(e.var, expr.POS_INF, e.body, var_type=e.var_type)
         elif e.lower == expr.NEG_INF:
             x = expr.Var(e.var)
-            lower = expr.Limit(e.var, expr.POS_INF, e.body.subst(e.var, -x))
+            lower = expr.Limit(e.var, expr.POS_INF, e.body.subst(e.var, -x), var_type=e.var_type)
         else:
             try:
                 lower = normalize(e.body.subst(e.var, e.lower), ctx)
             except:
                 x = expr.Var(e.var)
                 a = e.lower
-                lower = expr.Limit(e.var, expr.POS_INF, e.body.subst(e.var, a + 1 / x))
+                lower = expr.Limit(e.var, expr.POS_INF, e.body.subst(e.var, a + 1 / x), var_type=e.var_type)
         return to_poly(normalize(upper, ctx) - normalize(lower, ctx), ctx)
 
     elif expr.is_integral(e):
@@ -592,7 +592,7 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
         return singleton(expr.Integral(e.var, normalize(e.lower, ctx), normalize(e.upper, ctx), body))
     elif expr.is_limit(e):
         ctx2 = context.body_conds(e,ctx)
-        return singleton(expr.Limit(e.var, normalize(e.lim, ctx), normalize(e.body, ctx2)))
+        return singleton(expr.Limit(e.var, normalize(e.lim, ctx), normalize(e.body, ctx2), var_type=e.var_type))
     elif expr.is_inf(e):
         if e == expr.POS_INF:
             return singleton(e)
@@ -688,7 +688,7 @@ def function_eval(e: expr.Expr, ctx: Context) -> expr.Expr:
         t = a.type
         if expr.is_fun(a) and a.func_name == 'zero_matrix' and expr.eval_expr(t.args[1]) == 3 \
             and expr.eval_expr(t.args[2]) == 1:
-            return expr.Fun('zero_matrix', expr.Const(3), expr.Const(3))
+            return expr.Fun(*ctx.get_func_type('zero_matrix', expr.Const(3), expr.Const(3)))
     return e
 
 def function_table(e: expr.Expr, ctx: Context) -> expr.Expr:
@@ -734,7 +734,7 @@ def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
             if expr.is_matrix_type(a.type):
                 nb = normalize(b, ctx)
                 if nb == expr.Const(0):
-                    return expr.Fun("unit_matrix", expr.num_row(a.type))
+                    return expr.Fun(*ctx.get_func_type("unit_matrix", expr.num_row(a.type)))
                 elif nb == expr.Const(1):
                     return a
                 elif expr.is_fun(a) and a.func_name == 'unit_matrix' and \
@@ -768,10 +768,10 @@ def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
                     b = factors[i-1]
                     if expr.is_fun(a) and a.func_name == 'inv' and a.args[0] == b:
                         tmp.pop()
-                        tmp.append(expr.Fun('unit_matrix', expr.num_row(b.type)))
+                        tmp.append(expr.Fun(*ctx.get_func_type('unit_matrix', expr.num_row(b.type))))
                     elif expr.is_fun(b) and b.func_name == 'inv' and b.args[0] == a:
                         tmp.pop()
-                        tmp.append(expr.Fun('unit_matrix', expr.num_row(a.type)))
+                        tmp.append(expr.Fun(*ctx.get_func_type('unit_matrix', expr.num_row(a.type))))
                     else:
                         tmp.append(a)
 
@@ -793,12 +793,12 @@ def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
 
             if has_zero_matrix:
                 row, col = expr.num_row(all_mat_factors[0].type), expr.num_col(all_mat_factors[-1].type)
-                return expr.Fun("zero_matrix", row, col)
+                return expr.Fun(*ctx.get_func_type("zero_matrix", row, col))
             else:
                 all_factors = scalar_factors + nonunit_mat_factors
                 if len(nonunit_mat_factors) == 0 and len(all_mat_factors) != 0:
                     row, col = expr.num_row(all_mat_factors[0].type), expr.num_col(all_mat_factors[-1].type)
-                    all_factors.append(expr.Fun("unit_matrix", row))
+                    all_factors.append(expr.Fun(*ctx.get_func_type("unit_matrix", row)))
                 res = all_factors[0]
                 for factor in all_factors[1:]:
                     res = expr.Op('*', res, factor)
@@ -807,13 +807,13 @@ def simp_matrix(e: expr.Expr, ctx: Context) -> expr.Expr:
     if expr.is_matrix(e):
         a = expr.Symbol('a', [expr.VAR, expr.CONST, expr.OP, expr.FUN], type=expr.IntType)
         b = expr.Symbol('b', [expr.VAR, expr.CONST, expr.OP, expr.FUN], type=expr.IntType)
-        pat_data = [[expr.Fun('unit_matrix', a), expr.Fun('zero_matrix', a, b)],
-                    [expr.Fun('zero_matrix', b, a), expr.Fun('unit_matrix', b)]]
+        pat_data = [[expr.Fun(*ctx.get_func_type('unit_matrix', a)), expr.Fun(*ctx.get_func_type('zero_matrix', a, b))],
+                    [expr.Fun(*ctx.get_func_type('zero_matrix', b, a)), expr.Fun(*ctx.get_func_type('unit_matrix', b))]]
         pat = expr.Matrix(pat_data)
         inst = expr.match(e, pat)
         if inst != None:
             dim = normalize(expr.Op('+', a, b).inst_pat(inst), ctx)
-            return expr.Fun('unit_matrix', dim)
+            return expr.Fun(*ctx.get_func_type('unit_matrix', dim))
 
     return e
 
@@ -1193,7 +1193,8 @@ def from_mono(m: Monomial) -> expr.Expr:
                 num_factors.append(base ** from_poly(power))
             elif expr.is_matrix_type(base.type) and power == 0:
                 # TODO: check whether base is a square matrix or not
-                num_factors.append(expr.Fun('unit_matrix', expr.num_row(base.type)))
+                r = expr.num_row(base.type)
+                num_factors.append(expr.Fun(('unit_matrix', expr.FunType(expr.IntType, expr.TensorType(expr.IntType, r, r))), r))
             else:
                 raise TypeError("from_mono: unexpected type %s for power" % type(power))
 
@@ -1264,7 +1265,7 @@ def simp_type(e: expr.Expr, ctx: Context):
     elif expr.is_deriv(e):
         return expr.Deriv(e.var, simp_type(e.body, ctx))
     elif expr.is_limit(e):
-        return expr.Limit(e.var, simp_type(e.lim, ctx), simp_type(e.body, ctx))
+        return expr.Limit(e.var, simp_type(e.lim, ctx), simp_type(e.body, ctx), var_type=e.var_type)
     elif expr.is_integral(e):
         return expr.Integral(e.var, simp_type(e.lower, ctx), \
                         simp_type(e.upper, ctx), simp_type(e.body, ctx))

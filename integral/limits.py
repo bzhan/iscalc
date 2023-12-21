@@ -703,6 +703,11 @@ def reduce_inf_limit(e: Expr, var_name: str, ctx: Context) -> Expr:
     the expression LIM {x->oo}. e.
 
     """
+    fixes = ctx.get_fixes()
+    if var_name in fixes:
+        var_type = fixes[var_name]
+    else:
+        var_type = expr.RealType
     l = limit_of_expr(e, var_name, ctx)
     if l.e is not None:
         return l.e
@@ -712,28 +717,28 @@ def reduce_inf_limit(e: Expr, var_name: str, ctx: Context) -> Expr:
         if l1 not in (POS_INF, NEG_INF) and l2 not in (POS_INF, NEG_INF):
             return normalize(l1 + l2, ctx)
         else:
-            return expr.Limit(var_name, POS_INF, e)
+            return expr.Limit(var_name, POS_INF, e, var_type=var_type)
     elif e.is_minus():
         l1 = reduce_inf_limit(e.args[0], var_name, ctx)
         l2 = reduce_inf_limit(e.args[1], var_name, ctx)
         if l1 not in (POS_INF, NEG_INF) and l2 not in (POS_INF, NEG_INF):
             return normalize(l1 - l2, ctx)
         else:
-            return expr.Limit(var_name, POS_INF, e)
+            return expr.Limit(var_name, POS_INF, e, var_type=var_type)
     elif e.is_times():
         if not e.args[0].contains_var(var_name):
             return normalize(e.args[0] * reduce_inf_limit(e.args[1], var_name, ctx), ctx)
         elif not e.args[1].contains_var(var_name):
             return normalize(e.args[1] * reduce_inf_limit(e.args[0], var_name, ctx), ctx)
         else:
-            return expr.Limit(var_name, POS_INF, e)
+            return expr.Limit(var_name, POS_INF, e, var_type=var_type)
     elif expr.is_integral(e):
         ctx2 = Context(ctx)
         ctx2.add_condition(expr.Op('>', expr.Var(e.var), e.lower))
         ctx2.add_condition(expr.Op('<', expr.Var(e.var), e.upper))
-        return expr.Integral(e.var, e.lower, e.upper, expr.Limit(var_name, POS_INF, e.body))
+        return expr.Integral(e.var, e.lower, e.upper, expr.Limit(var_name, POS_INF, e.body, var_type=var_type))
     else:
-        return expr.Limit(var_name, POS_INF, e)
+        return expr.Limit(var_name, POS_INF, e, var_type=var_type)
 
 def reduce_neg_inf_limit(e: Expr, var_name: str, ctx: Context) -> Expr:
     return reduce_inf_limit(e.subst(var_name, -expr.Var(var_name)), var_name, ctx)

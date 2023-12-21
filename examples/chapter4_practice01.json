@@ -13,11 +13,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "B(2,n + 1)",
                         "start": "B(2,n + 1)",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "x",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{1} x (-x + 1) ^ {n} \\,dx",
                                 "res": "INT x:[0,1]. x * (-x + 1) ^ n",
                                 "rule": {
@@ -31,11 +36,16 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} u (1 - u) ^ {n} \\,du",
                         "start": "INT u:[0,1]. u * (1 - u) ^ n",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{1} u (-u + 1) ^ {n} \\,du",
                                 "res": "INT u:[0,1]. u * (-u + 1) ^ n",
                                 "rule": {
@@ -68,11 +78,16 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\int_{0}^{1} (1 - \\sqrt{x}) ^ {n} \\,dx",
                         "start": "INT x:[0,1]. (1 - sqrt(x)) ^ n",
                         "steps": [
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "\\int_{0}^{1} 2 u (-u + 1) ^ {n} \\,du",
                                 "res": "INT u:[0,1]. 2 * u * (-u + 1) ^ n",
                                 "rule": {
@@ -85,6 +100,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "2 (\\int_{0}^{1} u (-u + 1) ^ {n} \\,du)",
                                 "res": "2 * (INT u:[0,1]. u * (-u + 1) ^ n)",
                                 "rule": {
@@ -94,6 +115,12 @@
                                 "type": "CalculationStep"
                             },
                             {
+                                "fixes": [
+                                    [
+                                        "u",
+                                        "$real"
+                                    ]
+                                ],
                                 "latex_res": "2 (\\int_{0}^{1} u (1 - u) ^ {n} \\,du)",
                                 "res": "2 * (INT u:[0,1]. u * (1 - u) ^ n)",
                                 "rule": {
@@ -110,7 +137,6 @@
                                 "res": "2 * B(2,n + 1)",
                                 "rule": {
                                     "eq": "B(2,n + 1) = (INT u:[0,1]. u * (1 - u) ^ n)",
-                                    "eq_fixes": [],
                                     "latex_str": "apply equation \\(B(2,n + 1) = \\int_{0}^{1} u (1 - u) ^ {n} \\,du\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT u:[0,1]. u * (1 - u) ^ n",
@@ -212,7 +238,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\frac{2}{(n + 1) (n + 2)}",
                         "start": "2 / ((n + 1) * (n + 2))",
                         "steps": [],
@@ -242,11 +267,16 @@
                             "latex_cond": "n > -1"
                         }
                     ],
-                    "fixes": [],
                     "latex_start": "\\int_{0}^{1} (1 - \\sqrt{x}) ^ {n} \\,dx = \\frac{2}{(n + 1) (n + 2)}",
                     "start": "(INT x:[0,1]. (1 - sqrt(x)) ^ n) = 2 / ((n + 1) * (n + 2))",
                     "steps": [
                         {
+                            "fixes": [
+                                [
+                                    "x",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "\\int_{0}^{1} (1 - \\sqrt{x}) ^ {9} \\,dx = \\frac{1}{55}",
                             "res": "(INT x:[0,1]. (1 - sqrt(x)) ^ 9) = 1/55",
                             "rule": {
@@ -263,6 +293,12 @@
                             "type": "CalculationStep"
                         },
                         {
+                            "fixes": [
+                                [
+                                    "x",
+                                    "$real"
+                                ]
+                            ],
                             "latex_res": "\\int_{0}^{1} (-\\sqrt{x} + 1) ^ {9} \\,dx = \\frac{1}{55}",
                             "res": "(INT x:[0,1]. (-sqrt(x) + 1) ^ 9) = 1/55",
                             "rule": {

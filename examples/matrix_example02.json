@@ -5,15 +5,11 @@
             "fixes": [
                 [
                     "w",
-                    [
-                        "$tensor($real, 3, 1)"
-                    ]
+                    "$tensor($real, 3, 1)"
                 ],
                 [
                     "n",
-                    [
-                        "$int"
-                    ]
+                    "$int"
                 ]
             ],
             "goal": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
@@ -21,7 +17,6 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "\\hat{w} ^ {2}",
                         "start": "hat(w) ^ 2",
                         "steps": [
@@ -39,7 +34,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "w w^{\\text{T}} - \\|w\\| ^ {2} \\mathbf{1}_{3 \\times 3}",
                         "start": "w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
                         "steps": [
@@ -78,15 +72,11 @@
             "fixes": [
                 [
                     "w",
-                    [
-                        "$tensor($real, 3, 1)"
-                    ]
+                    "$tensor($real, 3, 1)"
                 ],
                 [
                     "n",
-                    [
-                        "$int"
-                    ]
+                    "$int"
                 ]
             ],
             "goal": "w * T(w) * hat(w) = zero_matrix(3,3)",
@@ -94,7 +84,6 @@
             "proof": {
                 "calcs": [
                     {
-                        "fixes": [],
                         "latex_start": "w w^{\\text{T}} \\hat{w}",
                         "start": "w * T(w) * hat(w)",
                         "steps": [
@@ -121,7 +110,6 @@
                         "type": "Calculation"
                     },
                     {
-                        "fixes": [],
                         "latex_start": "\\mathbf{0}_{3 \\times 3}",
                         "start": "zero_matrix(3,3)",
                         "steps": [
@@ -161,15 +149,11 @@
             "fixes": [
                 [
                     "w",
-                    [
-                        "$tensor($real, 3, 1)"
-                    ]
+                    "$tensor($real, 3, 1)"
                 ],
                 [
                     "n",
-                    [
-                        "$int"
-                    ]
+                    "$int"
                 ]
             ],
             "goal": "hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)",
@@ -296,33 +280,11 @@
                     "fixes": [
                         [
                             "w",
-                            [
-                                "$tensor($real, 3, 1)"
-                            ]
+                            "$tensor($real, 3, 1)"
                         ],
                         [
                             "n",
-                            [
-                                "$int"
-                            ]
-                        ],
-                        [
-                            "cosh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "sinh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "binom",
-                            [
-                                "$fun($real, $real, $real)"
-                            ]
+                            "$int"
                         ]
                     ],
                     "goal": "hat(w) = hat(w)",
@@ -330,14 +292,12 @@
                     "proof": {
                         "calcs": [
                             {
-                                "fixes": [],
                                 "latex_start": "\\hat{w}",
                                 "start": "hat(w)",
                                 "steps": [],
                                 "type": "Calculation"
                             },
                             {
-                                "fixes": [],
                                 "latex_start": "\\hat{w}",
                                 "start": "hat(w)",
                                 "steps": [],
@@ -358,33 +318,11 @@
                     "fixes": [
                         [
                             "w",
-                            [
-                                "$tensor($real, 3, 1)"
-                            ]
+                            "$tensor($real, 3, 1)"
                         ],
                         [
                             "n",
-                            [
-                                "$int"
-                            ]
-                        ],
-                        [
-                            "cosh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "sinh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "binom",
-                            [
-                                "$fun($real, $real, $real)"
-                            ]
+                            "$int"
                         ]
                     ],
                     "goal": "hat(w) ^ (2 * n + 3) = -((-1) ^ n * hat(w))",
@@ -508,7 +446,6 @@
                     "proof": {
                         "calcs": [
                             {
-                                "fixes": [],
                                 "latex_start": "\\hat{w} ^ {2 n + 3}",
                                 "start": "hat(w) ^ (2 * n + 3)",
                                 "steps": [
@@ -552,36 +489,14 @@
                                         "rule": {
                                             "eq": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
                                             "eq_fixes": [
-                                                {
-                                                    "type": [
-                                                        "$tensor($real, 3, 1)"
-                                                    ],
-                                                    "var": "w"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$int"
-                                                    ],
-                                                    "var": "n"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$fun($real, $real)"
-                                                    ],
-                                                    "var": "cosh"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$fun($real, $real)"
-                                                    ],
-                                                    "var": "sinh"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$fun($real, $real, $real)"
-                                                    ],
-                                                    "var": "binom"
-                                                }
+                                                [
+                                                    "w",
+                                                    "$tensor($real, 3, 1)"
+                                                ],
+                                                [
+                                                    "n",
+                                                    "$int"
+                                                ]
                                             ],
                                             "latex_str": "apply equation \\(\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2} \\mathbf{1}_{3 \\times 3}\\)",
                                             "name": "ApplyEquation",
@@ -596,36 +511,14 @@
                                         "rule": {
                                             "eq": "norm(w) = 1",
                                             "eq_fixes": [
-                                                {
-                                                    "type": [
-                                                        "$tensor($real, 3, 1)"
-                                                    ],
-                                                    "var": "w"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$int"
-                                                    ],
-                                                    "var": "n"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$fun($real, $real)"
-                                                    ],
-                                                    "var": "cosh"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$fun($real, $real)"
-                                                    ],
-                                                    "var": "sinh"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$fun($real, $real, $real)"
-                                                    ],
-                                                    "var": "binom"
-                                                }
+                                                [
+                                                    "w",
+                                                    "$tensor($real, 3, 1)"
+                                                ],
+                                                [
+                                                    "n",
+                                                    "$int"
+                                                ]
                                             ],
                                             "latex_str": "apply equation \\(\\|w\\| = 1\\)",
                                             "name": "ApplyEquation",
@@ -661,36 +554,14 @@
                                         "rule": {
                                             "eq": "w * T(w) * hat(w) = zero_matrix(3,3)",
                                             "eq_fixes": [
-                                                {
-                                                    "type": [
-                                                        "$tensor($real, 3, 1)"
-                                                    ],
-                                                    "var": "w"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$int"
-                                                    ],
-                                                    "var": "n"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$fun($real, $real)"
-                                                    ],
-                                                    "var": "cosh"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$fun($real, $real)"
-                                                    ],
-                                                    "var": "sinh"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$fun($real, $real, $real)"
-                                                    ],
-                                                    "var": "binom"
-                                                }
+                                                [
+                                                    "w",
+                                                    "$tensor($real, 3, 1)"
+                                                ],
+                                                [
+                                                    "n",
+                                                    "$int"
+                                                ]
                                             ],
                                             "latex_str": "apply equation \\(w w^{\\text{T}} \\hat{w} = \\mathbf{0}_{3 \\times 3}\\)",
                                             "name": "ApplyEquation",
@@ -712,7 +583,6 @@
                                 "type": "Calculation"
                             },
                             {
-                                "fixes": [],
                                 "latex_start": "-(-1) ^ {n} \\hat{w}",
                                 "start": "-((-1) ^ n * hat(w))",
                                 "steps": [],
@@ -750,15 +620,11 @@
             "fixes": [
                 [
                     "w",
-                    [
-                        "$tensor($real, 3, 1)"
-                    ]
+                    "$tensor($real, 3, 1)"
                 ],
                 [
                     "n",
-                    [
-                        "$int"
-                    ]
+                    "$int"
                 ]
             ],
             "goal": "hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2",
@@ -885,33 +751,11 @@
                     "fixes": [
                         [
                             "w",
-                            [
-                                "$tensor($real, 3, 1)"
-                            ]
+                            "$tensor($real, 3, 1)"
                         ],
                         [
                             "n",
-                            [
-                                "$int"
-                            ]
-                        ],
-                        [
-                            "cosh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "sinh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "binom",
-                            [
-                                "$fun($real, $real, $real)"
-                            ]
+                            "$int"
                         ]
                     ],
                     "goal": "hat(w) ^ 2 = hat(w) ^ 2",
@@ -919,14 +763,12 @@
                     "proof": {
                         "calcs": [
                             {
-                                "fixes": [],
                                 "latex_start": "\\hat{w} ^ {2}",
                                 "start": "hat(w) ^ 2",
                                 "steps": [],
                                 "type": "Calculation"
                             },
                             {
-                                "fixes": [],
                                 "latex_start": "\\hat{w} ^ {2}",
                                 "start": "hat(w) ^ 2",
                                 "steps": [],
@@ -947,33 +789,11 @@
                     "fixes": [
                         [
                             "w",
-                            [
-                                "$tensor($real, 3, 1)"
-                            ]
+                            "$tensor($real, 3, 1)"
                         ],
                         [
                             "n",
-                            [
-                                "$int"
-                            ]
-                        ],
-                        [
-                            "cosh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "sinh",
-                            [
-                                "$fun($real, $real)"
-                            ]
-                        ],
-                        [
-                            "binom",
-                            [
-                                "$fun($real, $real, $real)"
-                            ]
+                            "$int"
                         ]
                     ],
                     "goal": "hat(w) ^ (2 * n + 4) = -((-1) ^ n * hat(w) ^ 2)",
@@ -1097,7 +917,6 @@
                     "proof": {
                         "calcs": [
                             {
-                                "fixes": [],
                                 "latex_start": "\\hat{w} ^ {2 n + 4}",
                                 "start": "hat(w) ^ (2 * n + 4)",
                                 "steps": [
@@ -1128,36 +947,14 @@
                                         "rule": {
                                             "eq": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
                                             "eq_fixes": [
-                                                {
-                                                    "type": [
-                                                        "$tensor($real, 3, 1)"
-                                                    ],
-                                                    "var": "w"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$int"
-                                                    ],
-                                                    "var": "n"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$fun($real, $real)"
-                                                    ],
-                                                    "var": "cosh"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$fun($real, $real)"
-                                                    ],
-                                                    "var": "sinh"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$fun($real, $real, $real)"
-                                                    ],
-                                                    "var": "binom"
-                                                }
+                                                [
+                                                    "w",
+                                                    "$tensor($real, 3, 1)"
+                                                ],
+                                                [
+                                                    "n",
+                                                    "$int"
+                                                ]
                                             ],
                                             "latex_str": "apply equation \\(\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2} \\mathbf{1}_{3 \\times 3}\\)",
                                             "name": "ApplyEquation",
@@ -1172,36 +969,14 @@
                                         "rule": {
                                             "eq": "norm(w) = 1",
                                             "eq_fixes": [
-                                                {
-                                                    "type": [
-                                                        "$tensor($real, 3, 1)"
-                                                    ],
-                                                    "var": "w"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$int"
-                                                    ],
-                                                    "var": "n"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$fun($real, $real)"
-                                                    ],
-                                                    "var": "cosh"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$fun($real, $real)"
-                                                    ],
-                                                    "var": "sinh"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$fun($real, $real, $real)"
-                                                    ],
-                                                    "var": "binom"
-                                                }
+                                                [
+                                                    "w",
+                                                    "$tensor($real, 3, 1)"
+                                                ],
+                                                [
+                                                    "n",
+                                                    "$int"
+                                                ]
                                             ],
                                             "latex_str": "apply equation \\(\\|w\\| = 1\\)",
                                             "name": "ApplyEquation",
@@ -1237,36 +1012,14 @@
                                         "rule": {
                                             "eq": "w * T(w) * hat(w) = zero_matrix(3,3)",
                                             "eq_fixes": [
-                                                {
-                                                    "type": [
-                                                        "$tensor($real, 3, 1)"
-                                                    ],
-                                                    "var": "w"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$int"
-                                                    ],
-                                                    "var": "n"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$fun($real, $real)"
-                                                    ],
-                                                    "var": "cosh"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$fun($real, $real)"
-                                                    ],
-                                                    "var": "sinh"
-                                                },
-                                                {
-                                                    "type": [
-                                                        "$fun($real, $real, $real)"
-                                                    ],
-                                                    "var": "binom"
-                                                }
+                                                [
+                                                    "w",
+                                                    "$tensor($real, 3, 1)"
+                                                ],
+                                                [
+                                                    "n",
+                                                    "$int"
+                                                ]
                                             ],
                                             "latex_str": "apply equation \\(w w^{\\text{T}} \\hat{w} = \\mathbf{0}_{3 \\times 3}\\)",
                                             "name": "ApplyEquation",
@@ -1288,7 +1041,6 @@
                                 "type": "Calculation"
                             },
                             {
-                                "fixes": [],
                                 "latex_start": "-(-1) ^ {n} \\hat{w} ^ {2}",
                                 "start": "-((-1) ^ n * hat(w) ^ 2)",
                                 "steps": [

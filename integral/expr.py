@@ -526,7 +526,7 @@ class Expr:
             return Deriv(self.var, self.body.replace_expr(loc.rest, new_expr))
         elif is_limit(self):
             assert loc.head == 0, "replace_expr: invalid location"
-            return Limit(self.var, self.limit, self.body.replace_expr(loc.rest, new_expr))
+            return Limit(self.var, self.limit, self.body.replace_expr(loc.rest, new_expr), self.drt, self.var_type)
         else:
             raise NotImplementedError
 
@@ -637,7 +637,7 @@ class Expr:
         elif is_deriv(self):
             return Deriv(self.var, self.body.subst(var, e))
         elif is_limit(self):
-            return Limit(self.var, self.lim.subst(var, e), self.body.subst(var, e))
+            return Limit(self.var, self.lim.subst(var, e), self.body.subst(var, e), var_type=self.var_type)
         elif is_inf(self):
             return self
         elif is_integral(self):
@@ -694,6 +694,8 @@ class Expr:
                 rec(t.body, bd_vars)
             elif is_limit(t):
                 bd_vars[t.var] = t.var_type
+                if t.var_type is None:
+                    raise NotImplementedError
                 rec(t.lim, bd_vars)
                 rec(t.body, bd_vars)
             elif is_integral(t) or is_evalat(t):
@@ -816,7 +818,7 @@ class Expr:
         elif is_op(self):
             return Op(self.op, *[arg.replace(e, repl_e) for arg in self.args])
         elif is_fun(self):
-            return Fun(self.func_name, *[arg.replace(e, repl_e) for arg in self.args])
+            return Fun((self.func_name, self.func_type), *[arg.replace(e, repl_e) for arg in self.args])
         elif is_deriv(self):
             return Deriv(self.var, self.body.replace(e, repl_e))
         elif is_integral(self):
@@ -838,7 +840,7 @@ class Expr:
             nbody = self.body.replace(e, repl_e)
             return Product(self.index_var, nl, nu, nbody)
         elif is_limit(self):
-            return Limit(self.var, self.lim.replace(e, repl_e), self.body.replace(e, repl_e), self.drt)
+            return Limit(self.var, self.lim.replace(e, repl_e), self.body.replace(e, repl_e), self.drt, var_type=self.var_type)
         elif is_matrix(self):
             return Matrix([[item.replace(e, repl_e) for item in rv] for rv in self.data])
         else:
@@ -956,7 +958,7 @@ class Expr:
             return Product(self.index_var, self.lower.inst_pat(mapping, func_type), self.upper.inst_pat(mapping, func_type), \
                              self.body.inst_pat(mapping, func_type))
         elif is_limit(self):
-            return Limit(self.var, self.lim.inst_pat(mapping, func_type), self.body.inst_pat(mapping, func_type), self.drt)
+            return Limit(self.var, self.lim.inst_pat(mapping, func_type), self.body.inst_pat(mapping, func_type), self.drt, var_type=self.var_type)
         elif is_matrix(self):
             return Matrix([[item.inst_pat(mapping, func_type) for item in rv] for rv in self.data])
         else:
@@ -1299,6 +1301,7 @@ class Var(Expr):
         assert isinstance(name, str)
         self.ty = VAR
         self.name = name
+        assert isinstance(type, Type) or type is None, str(type)
         if type is None:
             self.type = RealType  # default
         else:
@@ -1438,115 +1441,20 @@ class Fun(Expr):
 
     def __init__(self, func_name: Union[str, Tuple[str, Type]], *args):
         assert (isinstance(func_name, str) or isinstance(func_name,tuple)) and \
-               all(isinstance(arg, Expr) for arg in args)
+               all(isinstance(arg, Expr) for arg in args), func_name
 
         self.ty = FUN
         self.args: Tuple[Expr] = tuple(args)
-        self.func_type = FunType(*[RealType for i in range(len(args)+1)])
-        self.type = RealType
         if isinstance(func_name, str):
             self.func_name = func_name
             self.type = RealType
+            self.func_type = FunType(*[RealType for i in range(len(args) + 1)])
             args_type = [arg.type for arg in self.args]
             # TODO: add more type inference
-            if self.func_name == 'unit_matrix':
-                self.type = MatrixType(RealType, self.args[0], self.args[0])
-                self.func_type = FunType(IntType, self.type)
-            elif self.func_name == 'zero_matrix':
-                self.type = MatrixType(RealType, self.args[0], self.args[1])
-                self.func_type = FunType(IntType, IntType, self.type)
-            elif self.func_name == 'inv':
-                self.type = self.args[0].type
-                self.func_type = FunType(self.type, self.type)
-            elif self.func_name == 'T':
-                if self.args[0].type == Unknown:
-                    self.type = self.args[0].type
-                elif is_matrix_type(self.args[0].type):
-                    c, r = num_col(self.args[0].type), num_row(self.args[0].type)
-                    self.type = MatrixType(self.args[0].type.args[0], c, r)
-                    self.func_type = FunType(MatrixType(self.args[0].type.args[0], r, c), self.type)
-                else:
-                    self.type = Unknown
-            elif self.func_name == 'hat':
-                if is_matrix_type(self.args[0].type):
-                    t = self.args[0].type
-                    elem_ty = t.args[0]
-                    if eval_expr(num_col(t)) == 1 and eval_expr(num_row(t)) == 3:
-                        self.type = MatrixType(t.args[0],  Const(3), Const(3))
-                        self.func_type = FunType(TensorType(elem_ty, Const(3), Const(1)), self.type)
-                    elif eval_expr(num_col(t)) == 1 and eval_expr(num_row(t)) == 6:
-                        self.type = MatrixType(t.args[0], Const(4), Const(4))
-                        self.func_type = FunType(TensorType(elem_ty, Const(6), Const(1)), self.type)
-                    else:
-                        raise NotImplementedError(str(self.args[0])+": "+str(num_row(t))+","+str(num_col(t)))
-                elif self.args[0].type == Unknown:
-                    self.type = self.args[0].type
-                else:
-                    self.type = Unknown
-                    # raise NotImplementedError("hat(%s), args[0].type = %s"%(str(self.args[0]), self.args[0].type))
-            elif self.func_name == 'ccon':
-                assert len(self.args) == 2
-                a, b = self.args
-                # assert is_matrix_type(a.type) and is_matrix_type(b.type)
-                f1 = is_matrix_type(a.type) and is_matrix_type(b.type)
-                # assert num_row(a.type) == num_row(b.type)
-                f2 = True if f1 and num_row(a.type) == num_row(b.type) else False
-                if f1 and f2:
-                    self.type = MatrixType(type_mapping[(a.type.args[0], b.type.args[0])],
-                                           num_row(a.type),
-                                           num_col(b.type) + num_col(a.type))
-            elif self.func_name == 'rcon':
-                assert len(self.args) == 2
-                a, b = self.args
-                # assert is_matrix_type(a.type) and is_matrix_type(b.type)
-                f1 = is_matrix_type(a.type) and is_matrix_type(b.type)
-                # assert num_col(a.type) == num_col(b.type)
-                f2 = True if f1 and num_col(a.type) == num_col(b.type) else False
-                if f1 and f2:
-                    self.type = MatrixType(type_mapping[(a.type.args[0], b.type.args[0])],
-                                           num_row(b.type) + num_row(a.type),
-                                           num_col(a.type))
-            elif self.func_name == 'exp':
-                t = self.args[0].type
-                if is_matrix_type(t):
-                    if t.eleType in (IntType, RealType) and t.row == Const(3) and t.col == Const(3):
-                        self.type = MatrixType(t.args[0], Const(3), Const(3))
-                        self.func_type = FunType(self.type, self.type)
-                    elif t.row == t.col:
-                        self.type = MatrixType(t.args[0], t.row, t.col)
-                        self.func_type = FunType(self.type, self.type)
-            elif self.func_name == 'inv':
-                t = self.args[0].type
-                if is_matrix_type(t):
-                    self.type = t
-                else:
-                    raise NotImplementedError(str(self) + "-" + str(t))
-            elif self.func_name == 'nth':
-                a, b, c = self.args
-                self.func_type = FunType(a.type, IntType, IntType, RealType)
-            elif self.func_name == 'nthc':
-                # in order to make front end work fine, so add this try-catch block
-                # there is a bug in front end.
-                try:
-                    m, t = self.args[0], self.args[0].type
-                    ct = self.args[1].type
-                    self.type = TensorType(t.eleType, t.row, Const(1))
-                    self.func_type = FunType(t, ct, self.type)
-                except:
-                    pass
-            elif self.func_name == 'choose_col':
-                m, start, end = self.args
-                t = m.type
-                assert is_matrix_type(t)
-                self.type = TensorType(t.eleType, t.row, end-start+1)
-                self.func_type = FunType(m.type, start.type, end.type, self.type)
-            elif self.func_name == 'choose_row':
-                m, start, end = self.args
-                t = m.type
-                assert is_matrix_type(t)
-                self.type = TensorType(t.eleType, end-start+1, t.col)
-                self.func_type = FunType(m.type, start.type, end.type, self.type)
-
+        elif func_name[1] is None:
+            self.func_name = func_name[0]
+            self.func_type = FunType(*[RealType for i in range(len(args) + 1)])
+            self.type = RealType
         else:
             self.func_name, self.func_type = func_name
             self.type = self.func_type.args[-1]
@@ -1580,7 +1488,7 @@ class Limit(Expr):
 
     """
 
-    def __init__(self, var: str, lim: Expr, body: Expr, drt=None, var_type:Type=RealType):
+    def __init__(self, var: str, lim: Expr, body: Expr, drt=None, var_type:Type = RealType):
         assert isinstance(var, str) and isinstance(lim, Expr) and isinstance(body, Expr), \
             "Illegal expression: %s %s %s" % (type(var), type(lim), type(body))
         self.ty = LIMIT
@@ -1594,7 +1502,7 @@ class Limit(Expr):
     def alpha_convert(self, new_name: str):
         """Change the variable of limit expression to new_name."""
         assert isinstance(new_name, str), "alpha_convert"
-        return Limit(new_name, self.lim, self.body.subst(self.var, Var(new_name)), self.drt)
+        return Limit(new_name, self.lim, self.body.subst(self.var, Var(new_name)), self.drt, var_type=self.var_type)
 
     def __eq__(self, other):
 
@@ -1702,7 +1610,8 @@ class Matrix(Expr):
                 if data[0][0].type in (RealType, IntType):
                     self.type = MatrixType(data[0][0].type, Const(len(data)), Const(len(data[0])))
                 elif is_matrix_type(data[0][0].type):
-                    assert all(all(is_matrix_type(ele.type) for ele in rv) for rv in data)
+                    if not all(all(is_matrix_type(ele.type) for ele in rv) for rv in data):
+                        raise NotImplementedError
                     for idx, item in enumerate(data[0]):
                         col = num_col(data[0][idx].type) if idx == 0 \
                             else col + num_col(data[0][idx].type)

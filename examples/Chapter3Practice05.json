@@ -33,6 +33,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "I(a,b)",
                         "start": "I(a,b)",
                         "steps": [
@@ -125,6 +135,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b + a) x)}}{x} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{((b - a) x)}}{x} \\,dx)",
                         "start": "1/2 * (INT x:[0,oo]. sin((b + a) * x) / x) + 1/2 * (INT x:[0,oo]. sin((b - a) * x) / x)",
                         "steps": [
@@ -175,6 +195,20 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "b - a > 0",
+                                "latex_cond": "b - a > 0"
+                            },
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "I(a,b)",
                         "start": "I(a,b)",
                         "steps": [
@@ -218,6 +252,20 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "b - a > 0",
+                                "latex_cond": "b - a > 0"
+                            },
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{\\pi}{2}",
                         "start": "pi / 2",
                         "steps": [],
@@ -252,6 +300,20 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "b - a < 0",
+                                "latex_cond": "b - a < 0"
+                            },
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "I(a,b)",
                         "start": "I(a,b)",
                         "steps": [
@@ -295,6 +357,20 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "b - a < 0",
+                                "latex_cond": "b - a < 0"
+                            },
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "0",
                         "start": "0",
                         "steps": [],
@@ -329,6 +405,20 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "b - a = 0",
+                                "latex_cond": "b - a = 0"
+                            },
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "I(a,b)",
                         "start": "I(a,b)",
                         "steps": [
@@ -372,6 +462,20 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "b - a = 0",
+                                "latex_cond": "b - a = 0"
+                            },
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{\\pi}{4}",
                         "start": "pi / 4",
                         "steps": [],

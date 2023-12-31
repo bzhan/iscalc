@@ -13,6 +13,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "n > -1",
+                                "latex_cond": "n > -1"
+                            }
+                        ],
                         "latex_start": "B(2,n + 1)",
                         "start": "B(2,n + 1)",
                         "steps": [
@@ -36,6 +42,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "n > -1",
+                                "latex_cond": "n > -1"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{1} u (1 - u) ^ {n} \\,du",
                         "start": "INT u:[0,1]. u * (1 - u) ^ n",
                         "steps": [
@@ -78,6 +90,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "n > -1",
+                                "latex_cond": "n > -1"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{1} (1 - \\sqrt{x}) ^ {n} \\,dx",
                         "start": "INT x:[0,1]. (1 - sqrt(x)) ^ n",
                         "steps": [
@@ -238,6 +256,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "n > -1",
+                                "latex_cond": "n > -1"
+                            }
+                        ],
                         "latex_start": "\\frac{2}{(n + 1) (n + 2)}",
                         "start": "2 / ((n + 1) * (n + 2))",
                         "steps": [],

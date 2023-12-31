@@ -11,7 +11,10 @@
             "fixes": [
                 [
                     "k",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "(INT x:[1,oo]. log(x) / x ^ k) = 1 / (k - 1) ^ 2",
@@ -19,6 +22,21 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "k > 1",
+                                "latex_cond": "k > 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {k}} \\,dx",
                         "start": "INT x:[1,oo]. log(x) / x ^ k",
                         "steps": [
@@ -107,6 +125,21 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "k > 1",
+                                "latex_cond": "k > 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\frac{1}{(k - 1) ^ {2}}",
                         "start": "1 / (k - 1) ^ 2",
                         "steps": [
@@ -137,8 +170,11 @@
             "finished": true,
             "fixes": [
                 [
-                    "k",
-                    "$int"
+                    "n",
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "converges(SUM(n, 0, oo, INT x:[1,oo]. x ^ (-(2 * n) - 2) * log(x)))",
@@ -146,6 +182,15 @@
             "proof": {
                 "calcs": [
                     {
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\sum_{n=0}^{\\infty}{\\int_{1}^{\\infty} x ^ {-2 n - 2} \\log{x} \\,dx}",
                         "start": "SUM(n, 0, oo, INT x:[1,oo]. x ^ (-(2 * n) - 2) * log(x))",
                         "steps": [
@@ -182,6 +227,22 @@
                                 "res": "SUM(n, 0, oo, 1 / (2 * n + 2 - 1) ^ 2)",
                                 "rule": {
                                     "eq": "(INT x:[1,oo]. log(x) / x ^ k) = 1 / (k - 1) ^ 2",
+                                    "eq_fixes": [
+                                        [
+                                            "x",
+                                            {
+                                                "symbol_type": "binding",
+                                                "type": "$real"
+                                            }
+                                        ],
+                                        [
+                                            "k",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {k}} \\,dx = \\frac{1}{(k - 1) ^ {2}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[1,oo]. log(x) / x ^ (2 * n + 2)",
@@ -219,8 +280,11 @@
             "finished": true,
             "fixes": [
                 [
-                    "k",
-                    "$int"
+                    "n",
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "(INT x:[1,oo]. log(x) / (x ^ 2 + 1)) = G",
@@ -228,6 +292,15 @@
             "proof": {
                 "calcs": [
                     {
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx",
                         "start": "INT x:[1,oo]. log(x) / (x ^ 2 + 1)",
                         "steps": [
@@ -284,12 +357,6 @@
                                 "latex_res": "\\int_{1}^{\\infty} \\sum_{n=0}^{\\infty}{(-1) ^ {n} (\\frac{1}{x ^ {2}}) ^ {n} \\log{x} x ^ {-2}} \\,dx",
                                 "res": "INT x:[1,oo]. SUM(n, 0, oo, (-1) ^ n * (1 / x ^ 2) ^ n * log(x) * x ^ (-2))",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "n",
-                                            "$int"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\(\\log{x} x ^ {-2} \\sum_{n=0}^{\\infty}{(-1) ^ {n} (\\frac{1}{x ^ {2}}) ^ {n}}\\) to \\(\\sum_{n=0}^{\\infty}{(-1) ^ {n} (\\frac{1}{x ^ {2}}) ^ {n} \\log{x} x ^ {-2}}\\)",
                                     "name": "Equation",
                                     "new_expr": "SUM(n, 0, oo, (-1) ^ n * (1 / x ^ 2) ^ n * log(x) * x ^ (-2))",
@@ -369,6 +436,15 @@
                                 "res": "SUM(n, 0, oo, (-1) ^ n * (1 / (2 * n + 2 - 1) ^ 2))",
                                 "rule": {
                                     "eq": "(INT x:[1,oo]. log(x) / x ^ k) = 1 / (k - 1) ^ 2",
+                                    "eq_fixes": [
+                                        [
+                                            "k",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {k}} \\,dx = \\frac{1}{(k - 1) ^ {2}}\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[1,oo]. log(x) / x ^ (2 * n + 2)",
@@ -395,6 +471,15 @@
                         "type": "Calculation"
                     },
                     {
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "G",
                         "start": "G",
                         "steps": [
@@ -429,8 +514,11 @@
             "finished": true,
             "fixes": [
                 [
-                    "k",
-                    "$int"
+                    "n",
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "(INT x:[0,oo]. log(x + 1) / (x ^ 2 + 1)) = pi / 4 * log(2) + G",
@@ -438,6 +526,15 @@
             "proof": {
                 "calcs": [
                     {
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx",
                         "start": "INT x:[0,oo]. log(x + 1) / (x ^ 2 + 1)",
                         "steps": [
@@ -629,6 +726,15 @@
                         "type": "Calculation"
                     },
                     {
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\frac{\\pi}{4} \\log{(2)} + G",
                         "start": "pi / 4 * log(2) + G",
                         "steps": [],

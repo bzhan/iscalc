@@ -17,6 +17,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "b > -2",
+                                "latex_cond": "b > -2"
+                            },
+                            {
+                                "cond": "b < 2",
+                                "latex_cond": "b < 2"
+                            }
+                        ],
                         "latex_start": "x ^ {2} - b x + 1",
                         "start": "x ^ 2 - b * x + 1",
                         "steps": [
@@ -36,6 +46,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "b > -2",
+                                "latex_cond": "b > -2"
+                            },
+                            {
+                                "cond": "b < 2",
+                                "latex_cond": "b < 2"
+                            }
+                        ],
                         "latex_start": "0",
                         "start": "0",
                         "steps": [],
@@ -70,6 +90,20 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > -2",
+                                "latex_cond": "b > -2"
+                            },
+                            {
+                                "cond": "b < 2",
+                                "latex_cond": "b < 2"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{\\log{(x ^ {a} + 1)}}{x ^ {2} - b x + 1} \\,dx",
                         "start": "INT x:[0,oo]. log(x ^ a + 1) / (x ^ 2 - b * x + 1)",
                         "steps": [
@@ -211,6 +245,20 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > -2",
+                                "latex_cond": "b > -2"
+                            },
+                            {
+                                "cond": "b < 2",
+                                "latex_cond": "b < 2"
+                            }
+                        ],
                         "latex_start": "(\\int_{0}^{\\infty} \\frac{\\log{(x ^ {a} + 1)}}{x ^ {2} - b x + 1} \\,dx) - a (\\int_{0}^{\\infty} \\frac{\\log{x}}{x ^ {2} - b x + 1} \\,dx)",
                         "start": "(INT x:[0,oo]. log(x ^ a + 1) / (x ^ 2 - b * x + 1)) - a * (INT x:[0,oo]. log(x) / (x ^ 2 - b * x + 1))",
                         "steps": [

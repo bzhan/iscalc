@@ -154,6 +154,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "t > 0",
+                                "latex_cond": "t > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{d}{dt} (g{(t)} + 2 (\\int_{0}^{1} \\frac{e^{(-(1 + y ^ {2})) t ^ {2}/2}}{1 + y ^ {2}} \\,dy))",
                         "start": "D t. g(t) + 2 * (INT y:[0,1]. exp(-(1 + y ^ 2) * t ^ 2 / 2) / (1 + y ^ 2))",
                         "steps": [
@@ -335,6 +341,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "t > 0",
+                                "latex_cond": "t > 0"
+                            }
+                        ],
                         "latex_start": "0",
                         "start": "0",
                         "steps": [],
@@ -546,6 +558,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "t > 0",
+                                "latex_cond": "t > 0"
+                            }
+                        ],
                         "latex_start": "g{(t)}",
                         "start": "g(t)",
                         "steps": [
@@ -604,6 +622,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "t > 0",
+                                "latex_cond": "t > 0"
+                            }
+                        ],
                         "latex_start": "-2 (\\int_{0}^{1} \\frac{1}{y ^ {2} + 1} e^{t ^ {2} (-y ^ {2} - 1)/2} \\,dy) + \\frac{\\pi}{2}",
                         "start": "-(2 * (INT y:[0,1]. 1 / (y ^ 2 + 1) * exp(t ^ 2 * (-(y ^ 2) - 1) / 2))) + pi / 2",
                         "steps": [],
@@ -827,6 +851,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "\\int_{-\\infty}^{\\infty} e^{-a x ^ {2}} \\,dx",
                         "start": "INT x:[-oo,oo]. exp(-(a * x ^ 2))",
                         "steps": [
@@ -924,6 +954,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "\\sqrt{\\frac{\\pi}{a}}",
                         "start": "sqrt(pi / a)",
                         "steps": [

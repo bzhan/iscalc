@@ -23,7 +23,10 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "(LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0",
@@ -35,14 +38,46 @@
                             {
                                 "cond": "n = 1",
                                 "latex_cond": "n = 1"
+                            },
+                            {
+                                "cond": "n >= 1",
+                                "latex_cond": "n \\ge 1"
                             }
                         ],
                         "finished": true,
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "goal": "(LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0",
                         "latex_goal": "\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,) = 0",
                         "proof": {
                             "calcs": [
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "n = 1",
+                                            "latex_cond": "n = 1"
+                                        },
+                                        {
+                                            "cond": "n >= 1",
+                                            "latex_cond": "n \\ge 1"
+                                        }
+                                    ],
+                                    "fixes": [
+                                        [
+                                            "n",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_start": "\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,)",
                                     "start": "LIM {x -> oo}. x ^ (n - 1) * exp(-x)",
                                     "steps": [
@@ -59,6 +94,25 @@
                                     "type": "Calculation"
                                 },
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "n = 1",
+                                            "latex_cond": "n = 1"
+                                        },
+                                        {
+                                            "cond": "n >= 1",
+                                            "latex_cond": "n \\ge 1"
+                                        }
+                                    ],
+                                    "fixes": [
+                                        [
+                                            "n",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_start": "0",
                                     "start": "0",
                                     "steps": [],
@@ -77,14 +131,46 @@
                             {
                                 "cond": "n != 1",
                                 "latex_cond": "n \\neq 1"
+                            },
+                            {
+                                "cond": "n >= 1",
+                                "latex_cond": "n \\ge 1"
                             }
                         ],
                         "finished": true,
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "goal": "(LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0",
                         "latex_goal": "\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,) = 0",
                         "proof": {
                             "calcs": [
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "n != 1",
+                                            "latex_cond": "n \\neq 1"
+                                        },
+                                        {
+                                            "cond": "n >= 1",
+                                            "latex_cond": "n \\ge 1"
+                                        }
+                                    ],
+                                    "fixes": [
+                                        [
+                                            "n",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_start": "\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,)",
                                     "start": "LIM {x -> oo}. x ^ (n - 1) * exp(-x)",
                                     "steps": [
@@ -101,6 +187,25 @@
                                     "type": "Calculation"
                                 },
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "n != 1",
+                                            "latex_cond": "n \\neq 1"
+                                        },
+                                        {
+                                            "cond": "n >= 1",
+                                            "latex_cond": "n \\ge 1"
+                                        }
+                                    ],
+                                    "fixes": [
+                                        [
+                                            "n",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_start": "0",
                                     "start": "0",
                                     "steps": [],
@@ -135,7 +240,10 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "Gamma(n) = (n - 1) * Gamma(n - 1)",
@@ -143,6 +251,21 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "n > 1",
+                                "latex_cond": "n > 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\Gamma{(n)}",
                         "start": "Gamma(n)",
                         "steps": [
@@ -206,6 +329,15 @@
                                 "res": "(n - 1) * (INT x:[0,oo]. x ^ (n - 2) * exp(-x))",
                                 "rule": {
                                     "eq": "(LIM {x -> oo}. x ^ (n - 1) * exp(-x)) = 0",
+                                    "eq_fixes": [
+                                        [
+                                            "n",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(\\lim\\limits_{x\\to \\infty} (\\,x ^ {n - 1} e^{-x}\\,) = 0\\)",
                                     "name": "ApplyEquation",
                                     "source": "INT x:[0,oo]. x ^ (n - 2) * exp(-x)",
@@ -232,6 +364,21 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "n > 1",
+                                "latex_cond": "n > 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "(n - 1) \\Gamma{(n - 1)}",
                         "start": "(n - 1) * Gamma(n - 1)",
                         "steps": [
@@ -274,18 +421,30 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "Gamma(n) = factorial(n - 1)",
             "latex_goal": "\\Gamma{(n)} = (n - 1)!",
             "proof": {
                 "base_case": {
+                    "conds": [
+                        {
+                            "cond": "1 >= 1",
+                            "latex_cond": "1 \\ge 1"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "Gamma(1) = 1",
@@ -293,6 +452,21 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "1 >= 1",
+                                        "latex_cond": "1 \\ge 1"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\Gamma{(1)}",
                                 "start": "Gamma(1)",
                                 "steps": [
@@ -340,6 +514,21 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "1 >= 1",
+                                        "latex_cond": "1 \\ge 1"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "1",
                                 "start": "1",
                                 "steps": [],
@@ -356,11 +545,20 @@
                 "finished": true,
                 "goal": "Gamma(n) = factorial(n - 1)",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "n >= 1",
+                            "latex_cond": "n \\ge 1"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "Gamma(n + 1) = factorial(n)",
@@ -368,6 +566,21 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "n >= 1",
+                                        "latex_cond": "n \\ge 1"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\Gamma{(n + 1)}",
                                 "start": "Gamma(n + 1)",
                                 "steps": [
@@ -376,6 +589,15 @@
                                         "res": "(n + 1 - 1) * Gamma(n + 1 - 1)",
                                         "rule": {
                                             "eq": "Gamma(n) = (n - 1) * Gamma(n - 1)",
+                                            "eq_fixes": [
+                                                [
+                                                    "n",
+                                                    {
+                                                        "symbol_type": "var",
+                                                        "type": "$int"
+                                                    }
+                                                ]
+                                            ],
                                             "latex_str": "apply equation \\(\\Gamma{(n)} = (n - 1) \\Gamma{(n - 1)}\\)",
                                             "name": "ApplyEquation",
                                             "source": "Gamma(n + 1)",
@@ -418,6 +640,21 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "n >= 1",
+                                        "latex_cond": "n \\ge 1"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "n!",
                                 "start": "factorial(n)",
                                 "steps": [],
@@ -520,6 +757,15 @@
                     "res": "(4/3 - 1) * Gamma(4/3 - 1)",
                     "rule": {
                         "eq": "Gamma(n) = (n - 1) * Gamma(n - 1)",
+                        "eq_fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_str": "apply equation \\(\\Gamma{(n)} = (n - 1) \\Gamma{(n - 1)}\\)",
                         "name": "ApplyEquation",
                         "source": "(4/3 - 1) * Gamma(4/3 - 1)",

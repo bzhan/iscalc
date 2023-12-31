@@ -21,18 +21,34 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "Gamma(n + 1/2) = sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))",
             "latex_goal": "\\Gamma{(n + \\frac{1}{2})} = \\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!}",
             "proof": {
                 "base_case": {
+                    "conds": [
+                        {
+                            "cond": "0 >= 0",
+                            "latex_cond": "0 \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(0)",
+                            "latex_cond": "0 \\in\\mathbb{Z}"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "Gamma(1/2) = sqrt(pi)",
@@ -40,6 +56,25 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(0)",
+                                        "latex_cond": "0 \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\Gamma{(\\frac{1}{2})}",
                                 "start": "Gamma(1/2)",
                                 "steps": [
@@ -59,6 +94,25 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(0)",
+                                        "latex_cond": "0 \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\sqrt{\\pi}",
                                 "start": "sqrt(pi)",
                                 "steps": [],
@@ -75,11 +129,24 @@
                 "finished": true,
                 "goal": "Gamma(n + 1/2) = sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(n)",
+                            "latex_cond": "n \\in\\mathbb{Z}"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "Gamma(n + 3/2) = 4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (4 * factorial(n + 1))",
@@ -87,9 +154,37 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(n)",
+                                        "latex_cond": "n \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\Gamma{(n + \\frac{3}{2})}",
                                 "start": "Gamma(n + 3/2)",
                                 "steps": [
+                                    {
+                                        "latex_res": "\\Gamma{(n + \\frac{3}{2})}",
+                                        "res": "Gamma(n + 3/2)",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
                                     {
                                         "latex_res": "\\Gamma{(n + \\frac{1}{2} + 1)}",
                                         "res": "Gamma(n + 1/2 + 1)",
@@ -209,6 +304,25 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(n)",
+                                        "latex_cond": "n \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\frac{4 ^ {-n}\\cdot \\sqrt{\\pi} (2 n + 2)!}{4 (n + 1)!}",
                                 "start": "4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (4 * factorial(n + 1))",
                                 "steps": [],
@@ -231,6 +345,15 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "n",
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
             "goal": "converges(SUM(n, 0, oo, INT x:[0,oo]. (-(-1)) ^ n * (abs(t) * abs(x)) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2))))",
             "latex_goal": "\\sum_{n=0}^{\\infty}{\\int_{0}^{\\infty} \\frac{(--1) ^ {n} (\\left| t \\right| \\left| x \\right|) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2} \\,dx}\\quad\\mathrm{converges}",
             "proof": {
@@ -243,11 +366,35 @@
                             }
                         ],
                         "finished": true,
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "goal": "converges(SUM(n, 0, oo, INT x:[0,oo]. (-(-1)) ^ n * (abs(t) * abs(x)) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2))))",
                         "latex_goal": "\\sum_{n=0}^{\\infty}{\\int_{0}^{\\infty} \\frac{(--1) ^ {n} (\\left| t \\right| \\left| x \\right|) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2} \\,dx}\\quad\\mathrm{converges}",
                         "proof": {
                             "calcs": [
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "t < 0",
+                                            "latex_cond": "t < 0"
+                                        }
+                                    ],
+                                    "fixes": [
+                                        [
+                                            "n",
+                                            {
+                                                "symbol_type": "binding",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_start": "\\sum_{n=0}^{\\infty}{\\int_{0}^{\\infty} \\frac{(--1) ^ {n} (\\left| t \\right| \\left| x \\right|) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2} \\,dx}",
                                     "start": "SUM(n, 0, oo, INT x:[0,oo]. (-(-1)) ^ n * (abs(t) * abs(x)) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
                                     "steps": [
@@ -485,6 +632,15 @@
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n / factorial(2 * n) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))))",
                                             "rule": {
                                                 "eq": "Gamma(n + 1/2) = sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))",
+                                                "eq_fixes": [
+                                                    [
+                                                        "n",
+                                                        {
+                                                            "symbol_type": "var",
+                                                            "type": "$int"
+                                                        }
+                                                    ]
+                                                ],
                                                 "latex_str": "apply equation \\(\\Gamma{(n + \\frac{1}{2})} = \\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!}\\)",
                                                 "name": "ApplyEquation",
                                                 "source": "Gamma(n + 1/2)",
@@ -608,11 +764,35 @@
                             }
                         ],
                         "finished": true,
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "goal": "converges(SUM(n, 0, oo, INT x:[0,oo]. (-(-1)) ^ n * (abs(t) * abs(x)) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2))))",
                         "latex_goal": "\\sum_{n=0}^{\\infty}{\\int_{0}^{\\infty} \\frac{(--1) ^ {n} (\\left| t \\right| \\left| x \\right|) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2} \\,dx}\\quad\\mathrm{converges}",
                         "proof": {
                             "calcs": [
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "t = 0",
+                                            "latex_cond": "t = 0"
+                                        }
+                                    ],
+                                    "fixes": [
+                                        [
+                                            "n",
+                                            {
+                                                "symbol_type": "binding",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_start": "\\sum_{n=0}^{\\infty}{\\int_{0}^{\\infty} \\frac{(--1) ^ {n} (\\left| t \\right| \\left| x \\right|) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2} \\,dx}",
                                     "start": "SUM(n, 0, oo, INT x:[0,oo]. (-(-1)) ^ n * (abs(t) * abs(x)) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
                                     "steps": [
@@ -644,11 +824,35 @@
                             }
                         ],
                         "finished": true,
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "goal": "converges(SUM(n, 0, oo, INT x:[0,oo]. (-(-1)) ^ n * (abs(t) * abs(x)) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2))))",
                         "latex_goal": "\\sum_{n=0}^{\\infty}{\\int_{0}^{\\infty} \\frac{(--1) ^ {n} (\\left| t \\right| \\left| x \\right|) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2} \\,dx}\\quad\\mathrm{converges}",
                         "proof": {
                             "calcs": [
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "t > 0",
+                                            "latex_cond": "t > 0"
+                                        }
+                                    ],
+                                    "fixes": [
+                                        [
+                                            "n",
+                                            {
+                                                "symbol_type": "binding",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_start": "\\sum_{n=0}^{\\infty}{\\int_{0}^{\\infty} \\frac{(--1) ^ {n} (\\left| t \\right| \\left| x \\right|) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2} \\,dx}",
                                     "start": "SUM(n, 0, oo, INT x:[0,oo]. (-(-1)) ^ n * (abs(t) * abs(x)) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
                                     "steps": [
@@ -886,6 +1090,15 @@
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n / factorial(2 * n) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))))",
                                             "rule": {
                                                 "eq": "Gamma(n + 1/2) = sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))",
+                                                "eq_fixes": [
+                                                    [
+                                                        "n",
+                                                        {
+                                                            "symbol_type": "var",
+                                                            "type": "$int"
+                                                        }
+                                                    ]
+                                                ],
                                                 "latex_str": "apply equation \\(\\Gamma{(n + \\frac{1}{2})} = \\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!}\\)",
                                                 "name": "ApplyEquation",
                                                 "source": "Gamma(n + 1/2)",
@@ -1019,11 +1232,35 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "n",
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
             "goal": "I(t) = sqrt(pi / 2) * exp(-(t ^ 2) / 2)",
             "latex_goal": "I{(t)} = \\sqrt{\\frac{\\pi}{2}} e^{-t ^ {2}/2}",
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "t < 0",
+                                "latex_cond": "t < 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "I{(t)}",
                         "start": "I(t)",
                         "steps": [
@@ -1078,12 +1315,6 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2}} \\,dx",
                                 "res": "INT x:[0,oo]. SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "n",
-                                            "$int"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\(\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!}} e^{-x ^ {2}/2}\\) to \\(\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2}}\\)",
                                     "name": "Equation",
                                     "new_expr": "SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
@@ -1326,6 +1557,15 @@
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n / factorial(2 * n) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))))",
                                 "rule": {
                                     "eq": "Gamma(n + 1/2) = sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))",
+                                    "eq_fixes": [
+                                        [
+                                            "n",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(\\Gamma{(n + \\frac{1}{2})} = \\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!}\\)",
                                     "name": "ApplyEquation",
                                     "source": "Gamma(n + 1/2)",
@@ -1461,6 +1701,21 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "t < 0",
+                                "latex_cond": "t < 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\sqrt{\\frac{\\pi}{2}} e^{-t ^ {2}/2}",
                         "start": "sqrt(pi / 2) * exp(-(t ^ 2) / 2)",
                         "steps": [
@@ -1492,11 +1747,35 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "n",
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
             "goal": "I(t) = sqrt(pi / 2) * exp(-(t ^ 2) / 2)",
             "latex_goal": "I{(t)} = \\sqrt{\\frac{\\pi}{2}} e^{-t ^ {2}/2}",
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "t > 0",
+                                "latex_cond": "t > 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "I{(t)}",
                         "start": "I(t)",
                         "steps": [
@@ -1551,12 +1830,6 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2}} \\,dx",
                                 "res": "INT x:[0,oo]. SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "n",
-                                            "$int"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\(\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!}} e^{-x ^ {2}/2}\\) to \\(\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2}}\\)",
                                     "name": "Equation",
                                     "new_expr": "SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
@@ -1799,6 +2072,15 @@
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n / factorial(2 * n) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))))",
                                 "rule": {
                                     "eq": "Gamma(n + 1/2) = sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))",
+                                    "eq_fixes": [
+                                        [
+                                            "n",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(\\Gamma{(n + \\frac{1}{2})} = \\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!}\\)",
                                     "name": "ApplyEquation",
                                     "source": "Gamma(n + 1/2)",
@@ -1934,6 +2216,21 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "t > 0",
+                                "latex_cond": "t > 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\sqrt{\\frac{\\pi}{2}} e^{-t ^ {2}/2}",
                         "start": "sqrt(pi / 2) * exp(-(t ^ 2) / 2)",
                         "steps": [

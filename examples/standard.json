@@ -13,6 +13,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "x + a != 0",
+                                "latex_cond": "x + a \\neq 0"
+                            }
+                        ],
                         "latex_start": "\\int \\frac{1}{x + a} \\,dx",
                         "start": "INT x. 1 / (x + a)",
                         "steps": [
@@ -56,6 +62,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "x + a != 0",
+                                "latex_cond": "x + a \\neq 0"
+                            }
+                        ],
                         "latex_start": "\\log{(\\left| x + a \\right|)} + C",
                         "start": "log(abs(x + a)) + SKOLEM_CONST(C)",
                         "steps": [],
@@ -82,6 +94,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a != 0",
+                                "latex_cond": "a \\neq 0"
+                            }
+                        ],
                         "latex_start": "\\int e^{a x} \\,dx",
                         "start": "INT x. exp(a * x)",
                         "steps": [
@@ -140,6 +158,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a != 0",
+                                "latex_cond": "a \\neq 0"
+                            }
+                        ],
                         "latex_start": "\\frac{e^{a x}}{a} + C",
                         "start": "exp(a * x) / a + SKOLEM_CONST(C)",
                         "steps": [],
@@ -166,6 +190,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a != 0",
+                                "latex_cond": "a \\neq 0"
+                            }
+                        ],
                         "latex_start": "\\int \\sin{(a x)} \\,dx",
                         "start": "INT x. sin(a * x)",
                         "steps": [
@@ -233,6 +263,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a != 0",
+                                "latex_cond": "a \\neq 0"
+                            }
+                        ],
                         "latex_start": "-\\frac{\\cos{(a x)}}{a} + C",
                         "start": "-(cos(a * x) / a) + SKOLEM_CONST(C)",
                         "steps": [],
@@ -259,6 +295,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a != 0",
+                                "latex_cond": "a \\neq 0"
+                            }
+                        ],
                         "latex_start": "\\int \\cos{(a x)} \\,dx",
                         "start": "INT x. cos(a * x)",
                         "steps": [
@@ -317,6 +359,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a != 0",
+                                "latex_cond": "a \\neq 0"
+                            }
+                        ],
                         "latex_start": "\\frac{\\sin{(a x)}}{a} + C",
                         "start": "sin(a * x) / a + SKOLEM_CONST(C)",
                         "steps": [],
@@ -343,6 +391,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a != 0",
+                                "latex_cond": "a \\neq 0"
+                            }
+                        ],
                         "latex_start": "\\int \\frac{1}{a ^ {2} + x ^ {2}} \\,dx",
                         "start": "INT x. 1 / (a ^ 2 + x ^ 2)",
                         "steps": [
@@ -428,6 +482,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a != 0",
+                                "latex_cond": "a \\neq 0"
+                            }
+                        ],
                         "latex_start": "\\frac{1}{a} \\tan^{-1}{(\\frac{x}{a})} + C",
                         "start": "1 / a * atan(x / a) + SKOLEM_CONST(C)",
                         "steps": [],
@@ -458,6 +518,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "x > 0",
+                                "latex_cond": "x > 0"
+                            },
+                            {
+                                "cond": "k != -1",
+                                "latex_cond": "k \\neq -1"
+                            }
+                        ],
                         "latex_start": "\\int x ^ {k} \\log{x} \\,dx",
                         "start": "INT x. x ^ k * log(x)",
                         "steps": [
@@ -516,6 +586,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "x > 0",
+                                "latex_cond": "x > 0"
+                            },
+                            {
+                                "cond": "k != -1",
+                                "latex_cond": "k \\neq -1"
+                            }
+                        ],
                         "latex_start": "\\frac{x ^ {k + 1} \\log{x}}{k + 1} - \\frac{x ^ {k + 1}}{(k + 1) ^ {2}} + C",
                         "start": "x ^ (k + 1) * log(x) / (k + 1) - x ^ (k + 1) / (k + 1) ^ 2 + SKOLEM_CONST(C)",
                         "steps": [],
@@ -548,30 +628,52 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ],
                 [
                     "m",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "(INT x:[0,1]. x ^ m * log(x) ^ n) = (-1) ^ n * factorial(n) / (m + 1) ^ (n + 1)",
             "latex_goal": "\\int_{0}^{1} x ^ {m} \\log^{n}(x) \\,dx = \\frac{(-1) ^ {n} n!}{(m + 1) ^ {n + 1}}",
             "proof": {
                 "base_case": {
+                    "conds": [
+                        {
+                            "cond": "m >= 0",
+                            "latex_cond": "m \\ge 0"
+                        },
+                        {
+                            "cond": "0 >= 0",
+                            "latex_cond": "0 \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(0)",
+                            "latex_cond": "0 \\in\\mathbb{Z}"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ],
                         [
                             "m",
-                            "$int"
-                        ],
-                        [
-                            "x",
-                            "$real"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "(INT x:[0,1]. x ^ m) = 1 / (m + 1)",
@@ -579,6 +681,36 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "m >= 0",
+                                        "latex_cond": "m \\ge 0"
+                                    },
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(0)",
+                                        "latex_cond": "0 \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\int_{0}^{1} x ^ {m} \\,dx",
                                 "start": "INT x:[0,1]. x ^ m",
                                 "steps": [
@@ -610,9 +742,49 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "m >= 0",
+                                        "latex_cond": "m \\ge 0"
+                                    },
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(0)",
+                                        "latex_cond": "0 \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\frac{1}{m + 1}",
                                 "start": "1 / (m + 1)",
-                                "steps": [],
+                                "steps": [
+                                    {
+                                        "latex_res": "\\frac{1}{m + 1}",
+                                        "res": "1 / (m + 1)",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
                                 "type": "Calculation"
                             }
                         ],
@@ -626,19 +798,35 @@
                 "finished": true,
                 "goal": "(INT x:[0,1]. x ^ m * log(x) ^ n) = (-1) ^ n * factorial(n) / (m + 1) ^ (n + 1)",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "m >= 0",
+                            "latex_cond": "m \\ge 0"
+                        },
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(n)",
+                            "latex_cond": "n \\in\\mathbb{Z}"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ],
                         [
                             "m",
-                            "$int"
-                        ],
-                        [
-                            "x",
-                            "$real"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "(INT x:[0,1]. x ^ m * log(x) ^ (n + 1)) = -((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
@@ -646,6 +834,36 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "m >= 0",
+                                        "latex_cond": "m \\ge 0"
+                                    },
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(n)",
+                                        "latex_cond": "n \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\int_{0}^{1} x ^ {m} \\log^{n + 1}(x) \\,dx",
                                 "start": "INT x:[0,1]. x ^ m * log(x) ^ (n + 1)",
                                 "steps": [
@@ -737,9 +955,49 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "m >= 0",
+                                        "latex_cond": "m \\ge 0"
+                                    },
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(n)",
+                                        "latex_cond": "n \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "-(-1) ^ {n} (m + 1) ^ {-n - 2} (n + 1)!",
                                 "start": "-((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
-                                "steps": [],
+                                "steps": [
+                                    {
+                                        "latex_res": "-(-1) ^ {n} (m + 1) ^ {-n - 2} (n + 1)!",
+                                        "res": "-((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
                                 "type": "Calculation"
                             }
                         ],
@@ -770,6 +1028,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "y > 0",
+                                "latex_cond": "y > 0"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{\\infty} e^{-x y} \\sin{(a x)} \\,dx",
                         "start": "INT x:[0,oo]. exp(-(x * y)) * sin(a * x)",
                         "steps": [
@@ -864,6 +1128,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "y > 0",
+                                "latex_cond": "y > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{a}{a ^ {2} + y ^ {2}}",
                         "start": "a / (a ^ 2 + y ^ 2)",
                         "steps": [],
@@ -894,6 +1164,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "a != 1",
+                                "latex_cond": "a \\neq 1"
+                            }
+                        ],
                         "latex_start": "\\int a ^ {x} \\,dx",
                         "start": "INT x. a ^ x",
                         "steps": [
@@ -937,6 +1217,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "a != 1",
+                                "latex_cond": "a \\neq 1"
+                            }
+                        ],
                         "latex_start": "\\frac{a ^ {x}}{\\log{a}} + C",
                         "start": "a ^ x / log(a) + SKOLEM_CONST(C)",
                         "steps": [],

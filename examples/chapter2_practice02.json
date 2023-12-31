@@ -87,12 +87,6 @@
                                 "latex_res": "-\\frac{3}{2} (\\int_{-1/2}^{1/2} \\frac{1}{u ^ {2} + \\frac{3}{4}} \\,du) + 0",
                                 "res": "-(3/2 * (INT u:[-1/2,1/2]. 1 / (u ^ 2 + 3/4))) + 0",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "u",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\(\\int_{-1/2}^{1/2} \\frac{u}{u ^ {2} + \\frac{3}{4}} \\,du\\) to \\(0\\)",
                                     "name": "Equation",
                                     "new_expr": "0",

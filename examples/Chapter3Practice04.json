@@ -21,6 +21,20 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "x != b",
+                                "latex_cond": "x \\neq b"
+                            },
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{x ^ {2} - b ^ {2}} \\,dx",
                         "start": "INT x:[0,oo]. x * sin(a * x) / (x ^ 2 - b ^ 2)",
                         "steps": [
@@ -43,6 +57,20 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "x != b",
+                                "latex_cond": "x \\neq b"
+                            },
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{1}{2} (\\int_{-\\infty}^{\\infty} \\frac{x \\sin{(a x)}}{x ^ {2} - b ^ {2}} \\,dx)",
                         "start": "1/2 * (INT x:[-oo,oo]. x * sin(a * x) / (x ^ 2 - b ^ 2))",
                         "steps": [
@@ -363,12 +391,6 @@
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{2 b} (\\int_{-\\infty}^{\\infty} \\frac{b - u}{u} \\sin{(a (b - u))} \\,du)",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (2 * b) * (INT u:[-oo,oo]. (b - u) / u * sin(a * (b - u))))",
                             "rule": {
-                                "fixes": [
-                                    [
-                                        "u",
-                                        "$real"
-                                    ]
-                                ],
                                 "latex_str": "rewriting \\(\\int_{-\\infty}^{\\infty} \\frac{(b - u) \\sin{(a (b - u))}}{u} \\,du\\) to \\(\\int_{-\\infty}^{\\infty} \\frac{b - u}{u} \\sin{(a (b - u))} \\,du\\)",
                                 "name": "Equation",
                                 "new_expr": "INT u:[-oo,oo]. (b - u) / u * sin(a * (b - u))",

@@ -253,6 +253,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "x > 0",
+                                "latex_cond": "x > 0"
+                            },
+                            {
+                                "cond": "x < 4",
+                                "latex_cond": "x < 4"
+                            }
+                        ],
                         "latex_start": "4 x - x ^ {2}",
                         "start": "4 * x - x ^ 2",
                         "steps": [
@@ -272,6 +282,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "x > 0",
+                                "latex_cond": "x > 0"
+                            },
+                            {
+                                "cond": "x < 4",
+                                "latex_cond": "x < 4"
+                            }
+                        ],
                         "latex_start": "0",
                         "start": "0",
                         "steps": [],

@@ -13,6 +13,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > -1",
+                                "latex_cond": "a > -1"
+                            }
+                        ],
                         "latex_start": "\\int_{1}^{\\infty} \\frac{1}{(x + a) \\sqrt{x - 1}} \\,dx",
                         "start": "INT x:[1,oo]. 1 / ((x + a) * sqrt(x - 1))",
                         "steps": [
@@ -113,6 +119,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > -1",
+                                "latex_cond": "a > -1"
+                            }
+                        ],
                         "latex_start": "\\frac{\\pi}{\\sqrt{a + 1}}",
                         "start": "pi / sqrt(a + 1)",
                         "steps": [],

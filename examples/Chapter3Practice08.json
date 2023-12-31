@@ -17,6 +17,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "m > 0",
+                                "latex_cond": "m > 0"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{\\sin{(m x)}}{x (a ^ {2} + x ^ {2})} \\,dx",
                         "start": "INT x:[0,oo]. sin(m * x) / (x * (a ^ 2 + x ^ 2))",
                         "steps": [
@@ -33,6 +43,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "m > 0",
+                                "latex_cond": "m > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{\\pi (1 - e^{(-a) m})}{2 a ^ {2}}",
                         "start": "pi * (1 - exp(-a * m)) / (2 * a ^ 2)",
                         "steps": [

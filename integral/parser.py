@@ -8,6 +8,7 @@ from fractions import Fraction
 from integral import expr
 from integral.expr import Expr
 from integral.sympywrapper import type_le
+from integral.fixes import Fixes, Info
 
 grammar = r"""
     ?atom: CNAME -> var_expr
@@ -68,17 +69,20 @@ grammar = r"""
     %ignore WS
 """
 
+
 @v_args(inline=True)
 class ExprTransformer(Transformer):
     def __init__(self):
-        self.fixes: Optional[Dict[str, List[expr.Type]]] = None
+        self.fixes: Fixes = None
 
     def var_expr(self, s):
+        fixes = self.fixes
         s = str(s)
-        if self.fixes is not None and s in self.fixes:
-            return expr.Var(s, type=self.fixes[s])
-        else:
-            return expr.Var(s)
+        if fixes is not None and s in fixes:
+            for info in fixes[s]:
+                if info.is_var() or info.is_binding_var():
+                    return expr.Var(s, type=info.get_type())
+        return expr.Var(s)
 
     def symbol_expr(self, s):
         return expr.Symbol(str(s), [expr.VAR, expr.CONST, expr.OP, expr.FUN])
@@ -148,6 +152,7 @@ class ExprTransformer(Transformer):
 
     def pos_inf_expr(self):
         return expr.Inf(Decimal("inf"))
+
     def neg_inf_expr(self):
         return expr.Inf(Decimal("-inf"))
 
@@ -163,37 +168,40 @@ class ExprTransformer(Transformer):
             e = expr.Product(str(args[0]), *args[1:])
             return e
         s = str(func_name)
-        if self.fixes is not None and s in self.fixes:
-            assert isinstance(self.fixes[s], list), s + ":" + str(self.fixes[s])
+        fixes = self.fixes
+        if fixes is not None and s in fixes:
             for info in self.fixes[s]:
-                t = info['func_type']
+                if not info.is_func():
+                    continue
+                t = info.get_type()
                 inst = dict()
                 flag = True
-                if len(args)+1 == len(t.args):
-                    for a, b in zip(args, t.args[:-1]):
-                        if not type_le(a.type, b):
+                if t.args_num == len(args):
+                    for a, b in zip([arg.type for arg in args], t.get_args_type()):
+                        if not type_le(a, b):
                             flag = False
                             break
                 if flag:
-                    for i, param_name in enumerate(info['params_name']):
+                    for i, param_name in enumerate(info.get_args_name()):
                         inst[param_name] = args[i]
-                    t_pat = expr.type_to_pattern(t.args[-1])
-                    func_type_args = list(t.args[:-1])
+                    t_pat = expr.type_to_pattern(t.get_return_type())
+                    func_type_args = t.get_args_type()
                     func_type_args.append(t_pat.inst_pat(inst))
                     res = expr.FunType(*func_type_args)
                     return expr.Fun((s, res), *args)
-                for i, param_name in enumerate(info['params_name']):
+                for i, param_name in enumerate(info.get_args_name()):
                     inst[param_name] = args[i]
-                if expr.is_fun_type(t) and len(t.args) == len(args) + 1:
+                if expr.is_fun_type(t) and t.args_num == len(args):
                     # pattern match
                     t_pat = expr.type_to_pattern(t)
                     tmp = expr.FunType(*[arg.type for arg in args])
-                    tmp_pat = expr.FunType(*[arg for arg in t_pat.args[:-1]])
+                    tmp_pat = expr.FunType(*[arg for arg in t_pat.get_args_type()])
                     tmp_inst = expr.type_match(tmp, tmp_pat)
                     if tmp_inst is not None:
                         inst.update(tmp_inst)
                         return expr.Fun((s, t_pat.inst_pat(inst)), *args)
-            raise NotImplementedError(s + ":" + ",".join(str(arg.type) for arg in args) + ":" + ",".join(str(arg) for arg in args))
+            raise NotImplementedError(
+                s + ":" + ",".join(str(arg.type) for arg in args) + ":" + ",".join(str(arg) for arg in args))
         else:
             return expr.Fun(s, *args)
 
@@ -222,9 +230,9 @@ class ExprTransformer(Transformer):
         var_type = expr.RealType
         var = str(var)
         if self.fixes != None and var in self.fixes:
-            var_type = self.fixes[var]
-            if var_type is None:
-                raise NotImplementedError
+            for info in self.fixes[var]:
+                if info.is_binding_var():
+                    var_type = info.get_type()
         return expr.Limit(var, lim, body, var_type=var_type)
 
     def limit_l_expr(self, var, lim, body):
@@ -252,7 +260,7 @@ class ExprTransformer(Transformer):
 transformer = ExprTransformer()
 expr_parser = Lark(grammar, start="expr", parser="lalr", transformer=transformer)
 
-def parse_expr(s: str, *, fixes: Optional[Dict[str, expr.Type]] = None) -> Expr:
+def parse_expr(s: str, *, fixes: Fixes = None) -> Expr:
     """Parse an integral expression."""
     try:
         transformer.fixes = fixes
@@ -263,23 +271,19 @@ def parse_expr(s: str, *, fixes: Optional[Dict[str, expr.Type]] = None) -> Expr:
         print("When parsing:", s)
         raise e
 
+
 def parse_raw_fixes(raw_fixes):
-    fixes = dict()
+    fixes = Fixes()
     for name, info in raw_fixes:
-        if isinstance(info, dict):
-            if name not in fixes:
-                fixes[name] = list()
-            res = dict()
-            res['func_type'] = list()
-            res['params_name'] = info['params_name']
-            t = parse_expr(info['func_type'], fixes=fixes)
-            res['func_type'] = t
-            fixes[name].append(res)
-        elif isinstance(info, str):
-            fixes[name] = parse_expr(info, fixes=fixes)
+        symbol_type = info['symbol_type']
+        type = parse_expr(info['type'], fixes=fixes)
+        args_name = info['args_name'] if 'args_name' in info else None
+        info = Info.get_instance(symbol_type, type, args_name)
+        fixes[name] = info
     return fixes
 
-def parse_fixes(item, key = 'fixes'):
+
+def parse_fixes(item, key='fixes'):
     if key not in item:
-        return dict()
+        return Fixes()
     return parse_raw_fixes(item[key])

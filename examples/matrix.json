@@ -10,10 +10,10 @@
         "b >= 0"
       ],
       "fixes": [
-        ["n", "$int"],
-        ["A","$tensor($real, n, n)"],
-        ["a", "$int"],
-        ["b", "$int"]
+        ["n", {"symbol_type":"var", "type":"$int"}],
+        ["A",{"symbol_type":"var", "type":"$tensor($real, n, n)"}],
+        ["a", {"symbol_type":"var", "type":"$int"}],
+        ["b", {"symbol_type":"var", "type":"$int"}]
       ],
       "expr": "A^(a+b) = A^a * A^b",
       "type": "axiom"
@@ -27,9 +27,9 @@
         "a >= 0"
       ],
       "fixes":[
-        ["n", "$int"],
-        ["A", "$tensor($real, n, n)"],
-        ["a", "$int"]
+        ["n", {"symbol_type":"var", "type":"$int"}],
+        ["A", {"symbol_type":"var", "type":"$tensor($real, n, n)"}],
+        ["a", {"symbol_type":"var", "type":"$int"}]
       ],
       "expr": "A^(a+1) = A^a * A",
       "type": "axiom"
@@ -43,9 +43,9 @@
         "a >= 0"
       ],
       "fixes":[
-        ["n", "$int"],
-        ["A", "$tensor($real, n, n)"],
-        ["a", "$int"]
+        ["n", {"symbol_type":"var", "type":"$int"}],
+        ["A", {"symbol_type":"var", "type":"$tensor($real, n, n)"}],
+        ["a", {"symbol_type":"var", "type":"$int"}]
       ],
       "expr": "A^(a+1) = A * A^a",
       "type": "axiom"
@@ -59,9 +59,9 @@
         "a >= 0"
       ],
       "fixes":[
-        ["n", "$int"],
-        ["A", "$tensor($real, n, n)"],
-        ["a", "$int"]
+        ["n", {"symbol_type":"var", "type":"$int"}],
+        ["A", {"symbol_type":"var", "type":"$tensor($real, n, n)"}],
+        ["a", {"symbol_type":"var", "type":"$int"}]
       ],
       "expr": "A^a = A^(a-1) * A",
       "type": "axiom"
@@ -76,9 +76,9 @@
         "a >= 0"
       ],
       "fixes":[
-        ["n", "$int"],
-        ["A", "$tensor($real, n, n)"],
-        ["a", "$int"]
+        ["n", {"symbol_type":"var", "type":"$int"}],
+        ["A", {"symbol_type":"var", "type":"$tensor($real, n, n)"}],
+        ["a", {"symbol_type":"var", "type":"$int"}]
       ],
       "expr": "A^a = A * A^(a-1)",
       "type": "axiom"
@@ -90,8 +90,8 @@
 
       "category": "matrix-power",
       "fixes":[
-        ["n", "$int"],
-        ["A", "$tensor($real, n, n)"]
+        ["n", {"symbol_type":"var", "type":"$int"}],
+        ["A", {"symbol_type":"var", "type":"$tensor($real, n, n)"}]
       ],
       "expr": "A^2 = A * A",
       "type": "axiom"
@@ -102,9 +102,9 @@
       ],
       "category": "matrix-arith",
       "fixes":[
-        ["n", "$int"],
-        ["m", "$int"],
-        ["A", "$tensor($real, m, n)"]
+        ["n", {"symbol_type":"var", "type":"$int"}],
+        ["m", {"symbol_type":"var", "type":"$int"}],
+        ["A", {"symbol_type":"var", "type":"$tensor($real, m, n)"}]
       ],
       "expr": "(x+y)*A = x * A + y * A",
       "type": "axiom"
@@ -115,9 +115,9 @@
       ],
       "category": "matrix-arith",
       "fixes":[
-        ["n", "$int"],
-        ["m", "$int"],
-        ["A", "$tensor($real, m, n)"]
+        ["n", {"symbol_type":"var", "type":"$int"}],
+        ["m", {"symbol_type":"var", "type":"$int"}],
+        ["A", {"symbol_type":"var", "type":"$tensor($real, m, n)"}]
       ],
       "expr": "(x-y)*A = x * A - y * A",
       "type": "axiom"
@@ -128,9 +128,9 @@
       ],
       "category": "matrix-arith",
       "fixes":[
-        ["n", "$int"],
-        ["A", "$tensor($real, n, n)"],
-        ["y", "$int"]
+        ["n", {"symbol_type":"var", "type":"$int"}],
+        ["A", {"symbol_type":"var", "type":"$tensor($real, n, n)"}],
+        ["y", {"symbol_type":"var", "type":"$int"}]
       ],
       "expr": "(x*A)^y = x^y * A^y",
       "type": "axiom"

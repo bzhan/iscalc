@@ -17,6 +17,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > -1",
+                                "latex_cond": "a > -1"
+                            },
+                            {
+                                "cond": "b > -2",
+                                "latex_cond": "b > -2"
+                            }
+                        ],
                         "latex_start": "B(a + 1,b + 2)",
                         "start": "B(a + 1,b + 2)",
                         "steps": [
@@ -40,6 +50,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > -1",
+                                "latex_cond": "a > -1"
+                            },
+                            {
+                                "cond": "b > -2",
+                                "latex_cond": "b > -2"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{1} x ^ {a} (-x + 1) ^ {b + 1} \\,dx",
                         "start": "INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1)",
                         "steps": [],
@@ -70,6 +90,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "b >= 0",
+                                "latex_cond": "b \\ge 0"
+                            },
+                            {
+                                "cond": "a >= 0",
+                                "latex_cond": "a \\ge 0"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{1} x ^ {a} (\\int_{0}^{1 - x} y ^ {b} \\,dy) \\,dx",
                         "start": "INT x:[0,1]. x ^ a * (INT y:[0,1 - x]. y ^ b)",
                         "steps": [
@@ -193,6 +223,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "b >= 0",
+                                "latex_cond": "b \\ge 0"
+                            },
+                            {
+                                "cond": "a >= 0",
+                                "latex_cond": "a \\ge 0"
+                            }
+                        ],
                         "latex_start": "\\frac{a! b!}{(a + b + 2)!}",
                         "start": "factorial(a) * factorial(b) / factorial(a + b + 2)",
                         "steps": [],

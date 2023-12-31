@@ -12,6 +12,7 @@ from integral.expr import Var, Const, Fun, EvalAt, Op, Integral, Symbol, Expr, \
     Deriv, Inf, Limit, NEG_INF, POS_INF, IndefiniteIntegral, Summation, SUMMATION, Matrix, INTEGRAL, MATRIX, INF, \
     Product, SYMBOL
 from integral import parser
+from integral.fixes import Fixes, fixes_from_expr
 from integral.solve import solve_equation, solve_for_term
 from integral import latex
 from integral import limits
@@ -639,7 +640,6 @@ class ApplyIdentity(Rule):
             return OnLocation(self, loc).eval(e, ctx)
 
         assert self.source == e
-        cnt = 0
         for identity in ctx.get_other_identities():
             inst = expr.match(e, identity.lhs)
             if inst is not None:
@@ -1067,13 +1067,13 @@ class FullSimplify(Rule):
 class ApplyEquation(Rule):
     """Apply the given equation for rewriting."""
 
-    def __init__(self, eq: Union[Expr, str], source: Expr, eq_fixes: dict = None):
+    def __init__(self, eq: Union[Expr, str], source: Expr, eq_fixes: Fixes = None):
         self.name = "ApplyEquation"
         if isinstance(eq, str):
             eq = parser.parse_expr(eq)
         self.eq = eq
         self.source = source
-        self.eq_fixes = eq_fixes if eq_fixes is not None else dict()
+        self.eq_fixes = eq_fixes if eq_fixes is not None else Fixes()
 
     def __str__(self):
         return "apply equation: " + str(self.eq)
@@ -1085,20 +1085,14 @@ class ApplyEquation(Rule):
         res = {
             "name": self.name,
             "eq": str(self.eq),
-            "source": str(self.source),
             "str": str(self),
             "latex_str": self.latex_str()
         }
-        if len(self.eq_fixes.items()) > 0:
-            res['eq_fixes'] = list()
-            for a, b in self.eq_fixes.items():
-                if isinstance(b, expr.Type):
-                    res['eq_fixes'].append((a, str(b)))
-                elif isinstance(b, dict):
-                    tmp = dict()
-                    tmp['params_name'] = b['params_name']
-                    tmp['func_type'] = str(b['func_type'])
-                    res['eq_fixes'].append(tmp)
+        if self.source:
+            res['source'] = str(self.source)
+        if not self.eq_fixes.empty():
+            res['eq_fixes'] = self.eq_fixes.export()
+
         return res
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
@@ -1454,7 +1448,7 @@ class ExpandPolynomial(Rule):
 class Equation(Rule):
     """Apply substitution for equal expressions"""
 
-    def __init__(self, old_expr: Optional[Union[str, Expr]], new_expr: Union[str, Expr]):
+    def __init__(self, old_expr: Optional[Union[str, Expr]], new_expr: Union[str, Expr], new_expr_fixes = Fixes()):
         self.name = "Equation"
         if isinstance(old_expr, str):
             old_expr = parser.parse_expr(old_expr)
@@ -1462,6 +1456,7 @@ class Equation(Rule):
             new_expr = parser.parse_expr(new_expr)
         self.old_expr = old_expr
         self.new_expr = new_expr
+        self.new_expr_fixes = new_expr_fixes
 
     def __str__(self):
         if self.old_expr is None:
@@ -1483,21 +1478,8 @@ class Equation(Rule):
         }
         if self.old_expr:
             res['old_expr'] = str(self.old_expr)
-        if self.old_expr is not None:
-            bd = self.old_expr.get_bounded_vars()
-            bd.update(self.new_expr.get_bounded_vars())
-        else:
-            bd = self.new_expr.get_bounded_vars()
-        if len(bd.items()) > 0:
-            res['fixes'] = list()
-            for a, b in bd.items():
-                if isinstance(b, expr.Type):
-                    res['fixes'].append((a, str(b)))
-                elif isinstance(b, dict):
-                    tmp = dict()
-                    tmp['params_name'] = b['params_name']
-                    tmp['func_type'] = str(b['func_type'])
-                    res['fixes'].append(tmp)
+        if not self.new_expr_fixes.empty():
+            res['new_expr_fixes'] = self.new_expr_fixes.export()
         return res
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
@@ -2218,7 +2200,9 @@ class LimitEquation(Rule):
         fixes.update(ctx.get_fixes())
         vt = expr.RealType
         if v in fixes:
-            vt = fixes[v]
+            for info in fixes[v]:
+                if info.is_binding_var():
+                    vt = info.get_type()
         lim1 = Limit(v, lim, e.lhs, var_type=vt)
         lim2 = Limit(v, lim, e.rhs, var_type=vt)
         return Op('=', lim1, lim2)
@@ -2677,18 +2661,6 @@ class RewriteMatrixMul(Rule):
             "source": str(self.source),
             "target": str(self.target)
         }
-        bd = self.source.get_bounded_vars()
-        bd.update(self.target.get_bounded_vars())
-        if len(bd.items()) > 0:
-            res['fixes'] = list()
-            for a, b in bd.items():
-                if isinstance(b, expr.Type):
-                    res['fixes'].append((a, str(b)))
-                elif isinstance(b, dict):
-                    tmp = dict()
-                    tmp['params_name'] = b['params_name']
-                    tmp['func_type'] = str(b['func_type'])
-                    res['fixes'].append(tmp)
         return res
     def eval(self, e: Expr, ctx: Context) -> Expr:
         if self.source != e:

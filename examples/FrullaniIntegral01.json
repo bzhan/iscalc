@@ -33,6 +33,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{d}{da} I(a,b)",
                         "start": "D a. I(a,b)",
                         "steps": [
@@ -137,6 +147,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{\\pi}{2 a}",
                         "start": "pi / (2 * a)",
                         "steps": [],
@@ -344,6 +364,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "I(a,b)",
                         "start": "I(a,b)",
                         "steps": [
@@ -384,6 +414,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{\\pi \\log{a}}{2} - \\frac{\\pi \\log{b}}{2}",
                         "start": "pi * log(a) / 2 - pi * log(b) / 2",
                         "steps": [],

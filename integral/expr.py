@@ -58,6 +58,19 @@ class Type:
         assert is_matrix_type(self)
         return self.args[2]
 
+    @property
+    def args_num(self):
+        assert is_fun_type(self)
+        return len(self.args) - 1
+
+    def get_args_type(self) -> List['Type']:
+        assert is_fun_type(self)
+        return list(self.args[:-1])
+
+    def get_return_type(self):
+        assert is_fun_type(self)
+        return self.args[-1]
+
     def subst(self, var:str, e:"Expr"):
         if self in (RealType, IntType, BoolType, Unknown):
             return self

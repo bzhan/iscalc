@@ -17,6 +17,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > -1",
+                                "latex_cond": "a > -1"
+                            },
+                            {
+                                "cond": "b > -1",
+                                "latex_cond": "b > -1"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{1} \\frac{x ^ {a} - x ^ {b}}{\\log{x}} \\,dx",
                         "start": "INT x:[0,1]. (x ^ a - x ^ b) / log(x)",
                         "steps": [
@@ -96,6 +106,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > -1",
+                                "latex_cond": "a > -1"
+                            },
+                            {
+                                "cond": "b > -1",
+                                "latex_cond": "b > -1"
+                            }
+                        ],
                         "latex_start": "\\log{(\\frac{a + 1}{b + 1})}",
                         "start": "log((a + 1) / (b + 1))",
                         "steps": [],

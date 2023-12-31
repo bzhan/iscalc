@@ -21,6 +21,20 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            },
+                            {
+                                "cond": "b != x",
+                                "latex_cond": "b \\neq x"
+                            }
+                        ],
                         "latex_start": "\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a x)}}{b ^ {4} - x ^ {4}} \\,dx",
                         "start": "INT x:[-oo,oo]. cos(a * x) / (b ^ 4 - x ^ 4)",
                         "steps": [
@@ -177,6 +191,20 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            },
+                            {
+                                "cond": "b != x",
+                                "latex_cond": "b \\neq x"
+                            }
+                        ],
                         "latex_start": "\\frac{\\pi (e^{-a b} + \\sin{(a b)})}{2 b ^ {3}}",
                         "start": "pi * (exp(-(a * b)) + sin(a * b)) / (2 * b ^ 3)",
                         "steps": [],

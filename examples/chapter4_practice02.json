@@ -64,6 +64,20 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "m > -1",
+                                "latex_cond": "m > -1"
+                            },
+                            {
+                                "cond": "n >= 0",
+                                "latex_cond": "n \\ge 0"
+                            },
+                            {
+                                "cond": "isInt(n)",
+                                "latex_cond": "n \\in\\mathbb{Z}"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{1} x ^ {m} \\log^{n}(x) \\,dx",
                         "start": "INT x:[0,1]. x ^ m * log(x) ^ n",
                         "steps": [
@@ -313,6 +327,20 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "m > -1",
+                                "latex_cond": "m > -1"
+                            },
+                            {
+                                "cond": "n >= 0",
+                                "latex_cond": "n \\ge 0"
+                            },
+                            {
+                                "cond": "isInt(n)",
+                                "latex_cond": "n \\in\\mathbb{Z}"
+                            }
+                        ],
                         "latex_start": "\\frac{(-1) ^ {n} n!}{(m + 1) ^ {n + 1}}",
                         "start": "(-1) ^ n * factorial(n) / (m + 1) ^ (n + 1)",
                         "steps": [

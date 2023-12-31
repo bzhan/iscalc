@@ -2,11 +2,43 @@
     "content": [
         {
             "finished": true,
+            "fixes": [
+                [
+                    "m",
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
+                ],
+                [
+                    "n",
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
+                ]
+            ],
             "goal": "binom(n,m) = binom(n,n - m)",
             "latex_goal": "\\binom{n}{m} = \\binom{n}{n - m}",
             "proof": {
                 "calcs": [
                     {
+                        "fixes": [
+                            [
+                                "m",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ],
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\binom{n}{m}",
                         "start": "binom(n,m)",
                         "steps": [
@@ -24,6 +56,22 @@
                         "type": "Calculation"
                     },
                     {
+                        "fixes": [
+                            [
+                                "m",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ],
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\binom{n}{n - m}",
                         "start": "binom(n,n - m)",
                         "steps": [
@@ -118,11 +166,43 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "m",
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
+                ],
+                [
+                    "n",
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
+                ]
+            ],
             "goal": "binom(n,m - 1) + binom(n,m) = binom(n + 1,m)",
             "latex_goal": "\\binom{n}{m - 1} + \\binom{n}{m} = \\binom{n + 1}{m}",
             "proof": {
                 "calcs": [
                     {
+                        "fixes": [
+                            [
+                                "m",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ],
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\binom{n}{m - 1} + \\binom{n}{m}",
                         "start": "binom(n,m - 1) + binom(n,m)",
                         "steps": [
@@ -225,6 +305,22 @@
                         "type": "Calculation"
                     },
                     {
+                        "fixes": [
+                            [
+                                "m",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ],
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\binom{n + 1}{m}",
                         "start": "binom(n + 1,m)",
                         "steps": [
@@ -265,34 +361,62 @@
             "fixes": [
                 [
                     "m",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ],
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ],
                 [
                     "i",
-                    "$int"
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "binom(m + n + 1,m) = SUM(i, 0, m, binom(n + i,i))",
             "latex_goal": "\\binom{m + n + 1}{m} = \\sum_{i=0}^{m}{\\binom{n + i}{i}}",
             "proof": {
                 "base_case": {
+                    "conds": [
+                        {
+                            "cond": "0 >= 0",
+                            "latex_cond": "0 \\ge 0"
+                        },
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "m",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ],
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ],
                         [
                             "i",
-                            "$int"
+                            {
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "binom(n + 1,0) = binom(n,0)",
@@ -300,6 +424,39 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    },
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "i",
+                                        {
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\binom{n + 1}{0}",
                                 "start": "binom(n + 1,0)",
                                 "steps": [
@@ -317,9 +474,51 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    },
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "i",
+                                        {
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\binom{n}{0}",
                                 "start": "binom(n,0)",
                                 "steps": [
+                                    {
+                                        "latex_res": "\\binom{n}{0}",
+                                        "res": "binom(n,0)",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
                                     {
                                         "latex_res": "1",
                                         "res": "1",
@@ -344,19 +543,38 @@
                 "finished": true,
                 "goal": "binom(m + n + 1,m) = SUM(i, 0, m, binom(n + i,i))",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "m >= 0",
+                            "latex_cond": "m \\ge 0"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "m",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ],
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ],
                         [
                             "i",
-                            "$int"
+                            {
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "binom(m + n + 2,m + 1) = SUM(i, 0, m + 1, binom(i + n,i))",
@@ -364,12 +582,78 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    },
+                                    {
+                                        "cond": "m >= 0",
+                                        "latex_cond": "m \\ge 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "i",
+                                        {
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\binom{m + n + 2}{m + 1}",
                                 "start": "binom(m + n + 2,m + 1)",
                                 "steps": [],
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    },
+                                    {
+                                        "cond": "m >= 0",
+                                        "latex_cond": "m \\ge 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "i",
+                                        {
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\sum_{i=0}^{m + 1}{\\binom{i + n}{i}}",
                                 "start": "SUM(i, 0, m + 1, binom(i + n,i))",
                                 "steps": [
@@ -450,6 +734,22 @@
                                         "res": "binom(m + n + 1 + 1,m + 1)",
                                         "rule": {
                                             "eq": "binom(n,m - 1) + binom(n,m) = binom(n + 1,m)",
+                                            "eq_fixes": [
+                                                [
+                                                    "m",
+                                                    {
+                                                        "symbol_type": "var",
+                                                        "type": "$int"
+                                                    }
+                                                ],
+                                                [
+                                                    "n",
+                                                    {
+                                                        "symbol_type": "var",
+                                                        "type": "$int"
+                                                    }
+                                                ]
+                                            ],
                                             "latex_str": "apply equation \\(\\binom{n}{m - 1} + \\binom{n}{m} = \\binom{n + 1}{m}\\)",
                                             "name": "ApplyEquation",
                                             "source": "binom(m + n + 1,m + 1 - 1) + binom(m + n + 1,m + 1)",
@@ -503,15 +803,24 @@
             "fixes": [
                 [
                     "m",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ],
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ],
                 [
                     "k",
-                    "$int"
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "(x + y) ^ n = SUM(k, 0, n, binom(n,k) * x ^ k * y ^ (n - k))",
@@ -706,19 +1015,42 @@
             ],
             "proof": {
                 "base_case": {
+                    "conds": [
+                        {
+                            "cond": "x != 0",
+                            "latex_cond": "x \\neq 0"
+                        },
+                        {
+                            "cond": "y != 0",
+                            "latex_cond": "y \\neq 0"
+                        },
+                        {
+                            "cond": "1 > 0",
+                            "latex_cond": "1 > 0"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "m",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ],
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ],
                         [
                             "k",
-                            "$int"
+                            {
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "x + y = SUM(k, 0, 1, x ^ k * y ^ (-k + 1) * binom(1,k))",
@@ -742,8 +1074,8 @@
                                     "latex_cond": "y \\neq 0"
                                 },
                                 {
-                                    "cond": "n > 0",
-                                    "latex_cond": "n > 0"
+                                    "cond": "1 > 0",
+                                    "latex_cond": "1 > 0"
                                 },
                                 {
                                     "cond": "k >= 0",
@@ -781,8 +1113,8 @@
                                     "latex_cond": "y \\neq 0"
                                 },
                                 {
-                                    "cond": "n > 0",
-                                    "latex_cond": "n > 0"
+                                    "cond": "1 > 0",
+                                    "latex_cond": "1 > 0"
                                 },
                                 {
                                     "cond": "k >= 0",
@@ -820,8 +1152,8 @@
                                     "latex_cond": "y \\neq 0"
                                 },
                                 {
-                                    "cond": "n > 0",
-                                    "latex_cond": "n > 0"
+                                    "cond": "1 > 0",
+                                    "latex_cond": "1 > 0"
                                 },
                                 {
                                     "cond": "k >= 0",
@@ -845,12 +1177,86 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "x != 0",
+                                        "latex_cond": "x \\neq 0"
+                                    },
+                                    {
+                                        "cond": "y != 0",
+                                        "latex_cond": "y \\neq 0"
+                                    },
+                                    {
+                                        "cond": "1 > 0",
+                                        "latex_cond": "1 > 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "k",
+                                        {
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "x + y",
                                 "start": "x + y",
                                 "steps": [],
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "x != 0",
+                                        "latex_cond": "x \\neq 0"
+                                    },
+                                    {
+                                        "cond": "y != 0",
+                                        "latex_cond": "y \\neq 0"
+                                    },
+                                    {
+                                        "cond": "1 > 0",
+                                        "latex_cond": "1 > 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "k",
+                                        {
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\sum_{k=0}^{1}{x ^ {k} y ^ {-k + 1} \\binom{1}{k}}",
                                 "start": "SUM(k, 0, 1, x ^ k * y ^ (-k + 1) * binom(1,k))",
                                 "steps": [
@@ -915,19 +1321,42 @@
                 "finished": true,
                 "goal": "(x + y) ^ n = SUM(k, 0, n, binom(n,k) * x ^ k * y ^ (n - k))",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "x != 0",
+                            "latex_cond": "x \\neq 0"
+                        },
+                        {
+                            "cond": "y != 0",
+                            "latex_cond": "y \\neq 0"
+                        },
+                        {
+                            "cond": "n > 0",
+                            "latex_cond": "n > 0"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "m",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ],
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ],
                         [
                             "k",
-                            "$int"
+                            {
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "(x + y) ^ (n + 1) = SUM(k, 0, n + 1, x ^ k * y ^ (-k + n + 1) * binom(n + 1,k))",
@@ -1123,6 +1552,43 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "x != 0",
+                                        "latex_cond": "x \\neq 0"
+                                    },
+                                    {
+                                        "cond": "y != 0",
+                                        "latex_cond": "y \\neq 0"
+                                    },
+                                    {
+                                        "cond": "n > 0",
+                                        "latex_cond": "n > 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "k",
+                                        {
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "(x + y) ^ {n + 1}",
                                 "start": "(x + y) ^ (n + 1)",
                                 "steps": [
@@ -1179,12 +1645,6 @@
                                         "latex_res": "\\sum_{k=0}^{n}{x (x ^ {k} y ^ {-k + n} \\binom{n}{k})} + y \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} \\binom{n}{k}}",
                                         "res": "SUM(k, 0, n, x * (x ^ k * y ^ (-k + n) * binom(n,k))) + y * SUM(k, 0, n, x ^ k * y ^ (-k + n) * binom(n,k))",
                                         "rule": {
-                                            "fixes": [
-                                                [
-                                                    "k",
-                                                    "$int"
-                                                ]
-                                            ],
                                             "latex_str": "rewriting \\(x \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} \\binom{n}{k}}\\) to \\(\\sum_{k=0}^{n}{x (x ^ {k} y ^ {-k + n} \\binom{n}{k})}\\)",
                                             "name": "Equation",
                                             "new_expr": "SUM(k, 0, n, x * (x ^ k * y ^ (-k + n) * binom(n,k)))",
@@ -1203,12 +1663,6 @@
                                         "latex_res": "\\sum_{k=0}^{n}{x (x ^ {k} y ^ {-k + n} \\binom{n}{k})} + \\sum_{k=0}^{n}{y (x ^ {k} y ^ {-k + n} \\binom{n}{k})}",
                                         "res": "SUM(k, 0, n, x * (x ^ k * y ^ (-k + n) * binom(n,k))) + SUM(k, 0, n, y * (x ^ k * y ^ (-k + n) * binom(n,k)))",
                                         "rule": {
-                                            "fixes": [
-                                                [
-                                                    "k",
-                                                    "$int"
-                                                ]
-                                            ],
                                             "latex_str": "rewriting \\(y \\sum_{k=0}^{n}{x ^ {k} y ^ {-k + n} \\binom{n}{k}}\\) to \\(\\sum_{k=0}^{n}{y (x ^ {k} y ^ {-k + n} \\binom{n}{k})}\\)",
                                             "name": "Equation",
                                             "new_expr": "SUM(k, 0, n, y * (x ^ k * y ^ (-k + n) * binom(n,k)))",
@@ -1384,12 +1838,6 @@
                                         "latex_res": "\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i - 1} + x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}} + x ^ {n + 1} + y ^ {n + 1}",
                                         "res": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i - 1) + x ^ i * y ^ (-i + n + 1) * binom(n,i)) + x ^ (n + 1) + y ^ (n + 1)",
                                         "rule": {
-                                            "fixes": [
-                                                [
-                                                    "i",
-                                                    "$int"
-                                                ]
-                                            ],
                                             "latex_str": "rewriting \\(\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i - 1}} + \\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}}\\) to \\(\\sum_{i=1}^{n}{x ^ {i} y ^ {-i + n + 1} \\binom{n}{i - 1} + x ^ {i} y ^ {-i + n + 1} \\binom{n}{i}}\\)",
                                             "name": "Equation",
                                             "new_expr": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i - 1) + x ^ i * y ^ (-i + n + 1) * binom(n,i))",
@@ -1427,6 +1875,22 @@
                                         "res": "SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n + 1,i)) + x ^ (n + 1) + y ^ (n + 1)",
                                         "rule": {
                                             "eq": "binom(n,m - 1) + binom(n,m) = binom(n + 1,m)",
+                                            "eq_fixes": [
+                                                [
+                                                    "m",
+                                                    {
+                                                        "symbol_type": "var",
+                                                        "type": "$int"
+                                                    }
+                                                ],
+                                                [
+                                                    "n",
+                                                    {
+                                                        "symbol_type": "var",
+                                                        "type": "$int"
+                                                    }
+                                                ]
+                                            ],
                                             "latex_str": "apply equation \\(\\binom{n}{m - 1} + \\binom{n}{m} = \\binom{n + 1}{m}\\)",
                                             "name": "ApplyEquation",
                                             "source": "binom(n,i - 1) + binom(n,i)",
@@ -1438,6 +1902,43 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "x != 0",
+                                        "latex_cond": "x \\neq 0"
+                                    },
+                                    {
+                                        "cond": "y != 0",
+                                        "latex_cond": "y \\neq 0"
+                                    },
+                                    {
+                                        "cond": "n > 0",
+                                        "latex_cond": "n > 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "k",
+                                        {
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\sum_{k=0}^{n + 1}{x ^ {k} y ^ {-k + n + 1} \\binom{n + 1}{k}}",
                                 "start": "SUM(k, 0, n + 1, x ^ k * y ^ (-k + n + 1) * binom(n + 1,k))",
                                 "steps": [

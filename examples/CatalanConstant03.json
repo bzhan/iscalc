@@ -33,6 +33,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "I(a,b)",
                         "start": "I(a,b)",
                         "steps": [
@@ -92,6 +102,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{\\pi} \\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)} \\,dx",
                         "start": "INT x:[0,pi]. (pi - x) * sin(x) / (a + b * cos(x) ^ 2)",
                         "steps": [],
@@ -122,6 +142,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "I(a,b)",
                         "start": "I(a,b)",
                         "steps": [
@@ -182,12 +212,6 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi} \\frac{x \\sin{x}}{a + b \\cos^{2}(x)} + \\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)} \\,dx)",
                                 "res": "1/2 * (INT x:[0,pi]. x * sin(x) / (a + b * cos(x) ^ 2) + (pi - x) * sin(x) / (a + b * cos(x) ^ 2))",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\((\\int_{0}^{\\pi} \\frac{x \\sin{x}}{b \\cos^{2}(x) + a} \\,dx) + (\\int_{0}^{\\pi} \\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)} \\,dx)\\) to \\(\\int_{0}^{\\pi} \\frac{x \\sin{x}}{a + b \\cos^{2}(x)} + \\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)} \\,dx\\)",
                                     "name": "Equation",
                                     "new_expr": "INT x:[0,pi]. x * sin(x) / (a + b * cos(x) ^ 2) + (pi - x) * sin(x) / (a + b * cos(x) ^ 2)",
@@ -356,6 +380,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{\\pi}{\\sqrt{a b}} \\tan^{-1}{(\\sqrt{\\frac{b}{a}})}",
                         "start": "pi / sqrt(a * b) * atan(sqrt(b / a))",
                         "steps": [],

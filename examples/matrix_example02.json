@@ -5,11 +5,17 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ],
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
@@ -17,6 +23,22 @@
             "proof": {
                 "calcs": [
                     {
+                        "fixes": [
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ],
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\hat{w} ^ {2}",
                         "start": "hat(w) ^ 2",
                         "steps": [
@@ -34,6 +56,22 @@
                         "type": "Calculation"
                     },
                     {
+                        "fixes": [
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ],
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "w w^{\\text{T}} - \\|w\\| ^ {2} \\mathbf{1}_{3 \\times 3}",
                         "start": "w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
                         "steps": [
@@ -72,11 +110,17 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ],
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "w * T(w) * hat(w) = zero_matrix(3,3)",
@@ -84,6 +128,22 @@
             "proof": {
                 "calcs": [
                     {
+                        "fixes": [
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ],
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "w w^{\\text{T}} \\hat{w}",
                         "start": "w * T(w) * hat(w)",
                         "steps": [
@@ -110,6 +170,22 @@
                         "type": "Calculation"
                     },
                     {
+                        "fixes": [
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ],
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\mathbf{0}_{3 \\times 3}",
                         "start": "zero_matrix(3,3)",
                         "steps": [
@@ -149,11 +225,17 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ],
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)",
@@ -276,15 +358,31 @@
             ],
             "proof": {
                 "base_case": {
+                    "conds": [
+                        {
+                            "cond": "0 >= 0",
+                            "latex_cond": "0 \\ge 0"
+                        },
+                        {
+                            "cond": "norm(w) = 1",
+                            "latex_cond": "\\|w\\| = 1"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "w",
-                            "$tensor($real, 3, 1)"
+                            {
+                                "symbol_type": "var",
+                                "type": "$tensor($real, 3, 1)"
+                            }
                         ],
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "hat(w) = hat(w)",
@@ -292,12 +390,64 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    },
+                                    {
+                                        "cond": "norm(w) = 1",
+                                        "latex_cond": "\\|w\\| = 1"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "w",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\hat{w}",
                                 "start": "hat(w)",
                                 "steps": [],
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    },
+                                    {
+                                        "cond": "norm(w) = 1",
+                                        "latex_cond": "\\|w\\| = 1"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "w",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\hat{w}",
                                 "start": "hat(w)",
                                 "steps": [],
@@ -314,15 +464,31 @@
                 "finished": true,
                 "goal": "hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "norm(w) = 1",
+                            "latex_cond": "\\|w\\| = 1"
+                        },
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "w",
-                            "$tensor($real, 3, 1)"
+                            {
+                                "symbol_type": "var",
+                                "type": "$tensor($real, 3, 1)"
+                            }
                         ],
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "hat(w) ^ (2 * n + 3) = -((-1) ^ n * hat(w))",
@@ -338,12 +504,12 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n >= 0",
-                                    "latex_cond": "n \\ge 0"
-                                },
-                                {
                                     "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -357,12 +523,12 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n >= 0",
-                                    "latex_cond": "n \\ge 0"
-                                },
-                                {
                                     "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -376,12 +542,12 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n >= 0",
-                                    "latex_cond": "n \\ge 0"
-                                },
-                                {
                                     "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -395,12 +561,12 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n >= 0",
-                                    "latex_cond": "n \\ge 0"
-                                },
-                                {
                                     "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -414,12 +580,12 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n >= 0",
-                                    "latex_cond": "n \\ge 0"
-                                },
-                                {
                                     "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -433,12 +599,12 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n >= 0",
-                                    "latex_cond": "n \\ge 0"
-                                },
-                                {
                                     "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         }
@@ -446,6 +612,32 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "norm(w) = 1",
+                                        "latex_cond": "\\|w\\| = 1"
+                                    },
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "w",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\hat{w} ^ {2 n + 3}",
                                 "start": "hat(w) ^ (2 * n + 3)",
                                 "steps": [
@@ -488,16 +680,6 @@
                                         "res": "(w * T(w) - norm(w) ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w))",
                                         "rule": {
                                             "eq": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
-                                            "eq_fixes": [
-                                                [
-                                                    "w",
-                                                    "$tensor($real, 3, 1)"
-                                                ],
-                                                [
-                                                    "n",
-                                                    "$int"
-                                                ]
-                                            ],
                                             "latex_str": "apply equation \\(\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2} \\mathbf{1}_{3 \\times 3}\\)",
                                             "name": "ApplyEquation",
                                             "source": "hat(w) ^ 2",
@@ -510,16 +692,6 @@
                                         "res": "(w * T(w) - 1 ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w))",
                                         "rule": {
                                             "eq": "norm(w) = 1",
-                                            "eq_fixes": [
-                                                [
-                                                    "w",
-                                                    "$tensor($real, 3, 1)"
-                                                ],
-                                                [
-                                                    "n",
-                                                    "$int"
-                                                ]
-                                            ],
                                             "latex_str": "apply equation \\(\\|w\\| = 1\\)",
                                             "name": "ApplyEquation",
                                             "source": "norm(w)",
@@ -553,16 +725,6 @@
                                         "res": "(-1) ^ n * zero_matrix(3,3) - (-1) ^ n * unit_matrix(3) * hat(w)",
                                         "rule": {
                                             "eq": "w * T(w) * hat(w) = zero_matrix(3,3)",
-                                            "eq_fixes": [
-                                                [
-                                                    "w",
-                                                    "$tensor($real, 3, 1)"
-                                                ],
-                                                [
-                                                    "n",
-                                                    "$int"
-                                                ]
-                                            ],
                                             "latex_str": "apply equation \\(w w^{\\text{T}} \\hat{w} = \\mathbf{0}_{3 \\times 3}\\)",
                                             "name": "ApplyEquation",
                                             "source": "w * T(w) * hat(w)",
@@ -583,6 +745,32 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "norm(w) = 1",
+                                        "latex_cond": "\\|w\\| = 1"
+                                    },
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "w",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "-(-1) ^ {n} \\hat{w}",
                                 "start": "-((-1) ^ n * hat(w))",
                                 "steps": [],
@@ -620,11 +808,17 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ],
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2",
@@ -747,15 +941,31 @@
             ],
             "proof": {
                 "base_case": {
+                    "conds": [
+                        {
+                            "cond": "0 >= 0",
+                            "latex_cond": "0 \\ge 0"
+                        },
+                        {
+                            "cond": "norm(w) = 1",
+                            "latex_cond": "\\|w\\| = 1"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "w",
-                            "$tensor($real, 3, 1)"
+                            {
+                                "symbol_type": "var",
+                                "type": "$tensor($real, 3, 1)"
+                            }
                         ],
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "hat(w) ^ 2 = hat(w) ^ 2",
@@ -763,12 +973,64 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    },
+                                    {
+                                        "cond": "norm(w) = 1",
+                                        "latex_cond": "\\|w\\| = 1"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "w",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\hat{w} ^ {2}",
                                 "start": "hat(w) ^ 2",
                                 "steps": [],
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    },
+                                    {
+                                        "cond": "norm(w) = 1",
+                                        "latex_cond": "\\|w\\| = 1"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "w",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\hat{w} ^ {2}",
                                 "start": "hat(w) ^ 2",
                                 "steps": [],
@@ -785,15 +1047,31 @@
                 "finished": true,
                 "goal": "hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "norm(w) = 1",
+                            "latex_cond": "\\|w\\| = 1"
+                        },
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "w",
-                            "$tensor($real, 3, 1)"
+                            {
+                                "symbol_type": "var",
+                                "type": "$tensor($real, 3, 1)"
+                            }
                         ],
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "hat(w) ^ (2 * n + 4) = -((-1) ^ n * hat(w) ^ 2)",
@@ -809,12 +1087,12 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n >= 0",
-                                    "latex_cond": "n \\ge 0"
-                                },
-                                {
                                     "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -828,12 +1106,12 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n >= 0",
-                                    "latex_cond": "n \\ge 0"
-                                },
-                                {
                                     "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -847,12 +1125,12 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n >= 0",
-                                    "latex_cond": "n \\ge 0"
-                                },
-                                {
                                     "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -866,12 +1144,12 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n >= 0",
-                                    "latex_cond": "n \\ge 0"
-                                },
-                                {
                                     "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -885,12 +1163,12 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n >= 0",
-                                    "latex_cond": "n \\ge 0"
-                                },
-                                {
                                     "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -904,12 +1182,12 @@
                             ],
                             "conds": [
                                 {
-                                    "cond": "n >= 0",
-                                    "latex_cond": "n \\ge 0"
-                                },
-                                {
                                     "cond": "norm(w) = 1",
                                     "latex_cond": "\\|w\\| = 1"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         }
@@ -917,6 +1195,32 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "norm(w) = 1",
+                                        "latex_cond": "\\|w\\| = 1"
+                                    },
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "w",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\hat{w} ^ {2 n + 4}",
                                 "start": "hat(w) ^ (2 * n + 4)",
                                 "steps": [
@@ -946,16 +1250,6 @@
                                         "res": "(w * T(w) - norm(w) ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w) ^ 2)",
                                         "rule": {
                                             "eq": "hat(w) ^ 2 = w * T(w) - norm(w) ^ 2 * unit_matrix(3)",
-                                            "eq_fixes": [
-                                                [
-                                                    "w",
-                                                    "$tensor($real, 3, 1)"
-                                                ],
-                                                [
-                                                    "n",
-                                                    "$int"
-                                                ]
-                                            ],
                                             "latex_str": "apply equation \\(\\hat{w} ^ {2} = w w^{\\text{T}} - \\|w\\| ^ {2} \\mathbf{1}_{3 \\times 3}\\)",
                                             "name": "ApplyEquation",
                                             "source": "hat(w) ^ 2",
@@ -968,16 +1262,6 @@
                                         "res": "(w * T(w) - 1 ^ 2 * unit_matrix(3)) * ((-1) ^ n * hat(w) ^ 2)",
                                         "rule": {
                                             "eq": "norm(w) = 1",
-                                            "eq_fixes": [
-                                                [
-                                                    "w",
-                                                    "$tensor($real, 3, 1)"
-                                                ],
-                                                [
-                                                    "n",
-                                                    "$int"
-                                                ]
-                                            ],
                                             "latex_str": "apply equation \\(\\|w\\| = 1\\)",
                                             "name": "ApplyEquation",
                                             "source": "norm(w)",
@@ -1011,16 +1295,6 @@
                                         "res": "(-1) ^ n * zero_matrix(3,3) * hat(w) - (-1) ^ n * unit_matrix(3) * hat(w) ^ 2",
                                         "rule": {
                                             "eq": "w * T(w) * hat(w) = zero_matrix(3,3)",
-                                            "eq_fixes": [
-                                                [
-                                                    "w",
-                                                    "$tensor($real, 3, 1)"
-                                                ],
-                                                [
-                                                    "n",
-                                                    "$int"
-                                                ]
-                                            ],
                                             "latex_str": "apply equation \\(w w^{\\text{T}} \\hat{w} = \\mathbf{0}_{3 \\times 3}\\)",
                                             "name": "ApplyEquation",
                                             "source": "w * T(w) * hat(w)",
@@ -1041,6 +1315,32 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "norm(w) = 1",
+                                        "latex_cond": "\\|w\\| = 1"
+                                    },
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "w",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "-(-1) ^ {n} \\hat{w} ^ {2}",
                                 "start": "-((-1) ^ n * hat(w) ^ 2)",
                                 "steps": [

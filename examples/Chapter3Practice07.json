@@ -25,6 +25,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "I(a,b)",
                         "start": "I(a,b)",
                         "steps": [
@@ -135,6 +141,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}",
                         "start": "exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
                         "steps": [
@@ -171,6 +183,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{d}{da} I(a,b)",
                         "start": "D a. I(a,b)",
                         "steps": [
@@ -205,6 +223,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "(-\\frac{b ^ {2}}{4 a ^ {2}}) e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}} - \\frac{1}{2 a} e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}",
                         "start": "-(b ^ 2 / (4 * a ^ 2)) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a) - 1 / (2 * a) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
                         "steps": [
@@ -241,6 +265,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{d}{db} I(a,b)",
                         "start": "D b. I(a,b)",
                         "steps": [
@@ -275,6 +305,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{b}{2 a} e^{b ^ {2}/(4 a)} \\sqrt{\\frac{\\pi}{a}}",
                         "start": "b / (2 * a) * exp(b ^ 2 / (4 * a)) * sqrt(pi / a)",
                         "steps": [

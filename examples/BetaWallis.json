@@ -33,6 +33,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "m > 0",
+                                "latex_cond": "m > 0"
+                            },
+                            {
+                                "cond": "n > 0",
+                                "latex_cond": "n > 0"
+                            }
+                        ],
                         "latex_start": "B(m,n)",
                         "start": "B(m,n)",
                         "steps": [
@@ -108,6 +118,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "m > 0",
+                                "latex_cond": "m > 0"
+                            },
+                            {
+                                "cond": "n > 0",
+                                "latex_cond": "n > 0"
+                            }
+                        ],
                         "latex_start": "2 (\\int_{0}^{\\pi/2} \\cos^{2 m - 1}(x) \\sin^{2 n - 1}(x) \\,dx)",
                         "start": "2 * (INT x:[0,pi / 2]. cos(x) ^ (2 * m - 1) * sin(x) ^ (2 * n - 1))",
                         "steps": [],
@@ -138,6 +158,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "x > 0",
+                                "latex_cond": "x > 0"
+                            },
+                            {
+                                "cond": "x < 1",
+                                "latex_cond": "x < 1"
+                            }
+                        ],
                         "latex_start": "x - x ^ {2}",
                         "start": "x - x ^ 2",
                         "steps": [
@@ -156,6 +186,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "x > 0",
+                                "latex_cond": "x > 0"
+                            },
+                            {
+                                "cond": "x < 1",
+                                "latex_cond": "x < 1"
+                            }
+                        ],
                         "latex_start": "0",
                         "start": "0",
                         "steps": [],
@@ -182,6 +222,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "n > -1",
+                                "latex_cond": "n > -1"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{1} (x - x ^ {2}) ^ {n} \\,dx",
                         "start": "INT x:[0,1]. (x - x ^ 2) ^ n",
                         "steps": [
@@ -318,6 +364,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "n > -1",
+                                "latex_cond": "n > -1"
+                            }
+                        ],
                         "latex_start": "\\frac{(n!)^{2}}{(2 n + 1)!}",
                         "start": "factorial(n) ^ 2 / factorial(2 * n + 1)",
                         "steps": [],
@@ -794,12 +846,6 @@
                                 "latex_res": "(\\int_{0}^{\\infty} e^{-y ^ {2}} \\,dy) + (\\int_{0}^{\\infty} e^{-y ^ {2}} \\,dy)",
                                 "res": "(INT y:[0,oo]. exp(-(y ^ 2))) + (INT y:[0,oo]. exp(-(y ^ 2)))",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "y",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\(2 (\\int_{0}^{\\infty} e^{-y ^ {2}} \\,dy)\\) to \\((\\int_{0}^{\\infty} e^{-y ^ {2}} \\,dy) + (\\int_{0}^{\\infty} e^{-y ^ {2}} \\,dy)\\)",
                                     "name": "Equation",
                                     "new_expr": "(INT y:[0,oo]. exp(-(y ^ 2))) + (INT y:[0,oo]. exp(-(y ^ 2)))",
@@ -1595,6 +1641,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "m > 0",
+                                "latex_cond": "m > 0"
+                            },
+                            {
+                                "cond": "n > 0",
+                                "latex_cond": "n > 0"
+                            }
+                        ],
                         "latex_start": "B(m,n)",
                         "start": "B(m,n)",
                         "steps": [
@@ -1708,6 +1764,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "m > 0",
+                                "latex_cond": "m > 0"
+                            },
+                            {
+                                "cond": "n > 0",
+                                "latex_cond": "n > 0"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{x ^ {m - 1}}{(x + 1) ^ {m + n}} \\,dx",
                         "start": "INT x:[0,oo]. x ^ (m - 1) / (x + 1) ^ (m + n)",
                         "steps": [],
@@ -1738,12 +1804,32 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "m > 0",
+                                "latex_cond": "m > 0"
+                            },
+                            {
+                                "cond": "m < 1",
+                                "latex_cond": "m < 1"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{x ^ {m - 1}}{x + 1} \\,dx",
                         "start": "INT x:[0,oo]. x ^ (m - 1) / (x + 1)",
                         "steps": [],
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "m > 0",
+                                "latex_cond": "m > 0"
+                            },
+                            {
+                                "cond": "m < 1",
+                                "latex_cond": "m < 1"
+                            }
+                        ],
                         "latex_start": "B(m,1 - m)",
                         "start": "B(m,1 - m)",
                         "steps": [
@@ -1808,6 +1894,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "m > 0",
+                                "latex_cond": "m > 0"
+                            },
+                            {
+                                "cond": "m < 1",
+                                "latex_cond": "m < 1"
+                            }
+                        ],
                         "latex_start": "B(m,1 - m)",
                         "start": "B(m,1 - m)",
                         "steps": [
@@ -1851,6 +1947,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "m > 0",
+                                "latex_cond": "m > 0"
+                            },
+                            {
+                                "cond": "m < 1",
+                                "latex_cond": "m < 1"
+                            }
+                        ],
                         "latex_start": "\\Gamma{(m)} \\Gamma{(1 - m)}",
                         "start": "Gamma(m) * Gamma(1 - m)",
                         "steps": [],
@@ -1956,12 +2062,24 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "z > -1",
+                                "latex_cond": "z > -1"
+                            }
+                        ],
                         "latex_start": "\\frac{z! z!}{(2 z + 1)!}",
                         "start": "factorial(z) * factorial(z) / factorial(2 * z + 1)",
                         "steps": [],
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "z > -1",
+                                "latex_cond": "z > -1"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{1} x ^ {z} (1 - x) ^ {z} \\,dx",
                         "start": "INT x:[0,1]. x ^ z * (1 - x) ^ z",
                         "steps": [

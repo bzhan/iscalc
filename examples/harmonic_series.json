@@ -29,6 +29,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "n > 0",
+                                "latex_cond": "n > 0"
+                            },
+                            {
+                                "cond": "isInt(n)",
+                                "latex_cond": "n \\in\\mathbb{Z}"
+                            }
+                        ],
                         "latex_start": "I{(n)}",
                         "start": "I(n)",
                         "steps": [
@@ -217,6 +227,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "n > 0",
+                                "latex_cond": "n > 0"
+                            },
+                            {
+                                "cond": "isInt(n)",
+                                "latex_cond": "n \\in\\mathbb{Z}"
+                            }
+                        ],
                         "latex_start": "-\\frac{H{(n)}}{n}",
                         "start": "-(H(n) / n)",
                         "steps": [],

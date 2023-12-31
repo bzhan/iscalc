@@ -8,11 +8,35 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
             "goal": "-log(1 - x) - log(1 + x) = -SUM(k, 0, oo, (-1) ^ k * (-x) ^ (k + 1) / (k + 1)) - SUM(k, 0, oo, (-1) ^ k * x ^ (k + 1) / (k + 1))",
             "latex_goal": "-\\log{(1 - x)} - \\log{(1 + x)} = -\\sum_{k=0}^{\\infty}{\\frac{(-1) ^ {k} (-x) ^ {k + 1}}{k + 1}} - \\sum_{k=0}^{\\infty}{\\frac{(-1) ^ {k} x ^ {k + 1}}{k + 1}}",
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "abs(x) < 1",
+                                "latex_cond": "\\left| x \\right| < 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "-\\log{(1 - x)} - \\log{(1 + x)}",
                         "start": "-log(1 - x) - log(1 + x)",
                         "steps": [
@@ -54,6 +78,21 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "abs(x) < 1",
+                                "latex_cond": "\\left| x \\right| < 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "-\\sum_{k=0}^{\\infty}{\\frac{(-1) ^ {k} (-x) ^ {k + 1}}{k + 1}} - \\sum_{k=0}^{\\infty}{\\frac{(-1) ^ {k} x ^ {k + 1}}{k + 1}}",
                         "start": "-SUM(k, 0, oo, (-1) ^ k * (-x) ^ (k + 1) / (k + 1)) - SUM(k, 0, oo, (-1) ^ k * x ^ (k + 1) / (k + 1))",
                         "steps": [],
@@ -75,6 +114,15 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
             "goal": "x / (-(x ^ 2) + 1) = 1/2 * SUM(k, 0, oo, x ^ k) - 1/2 * SUM(k, 0, oo, x ^ k * (-1) ^ k)",
             "latex_goal": "\\frac{x}{-x ^ {2} + 1} = \\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k}} - \\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k} (-1) ^ {k}}",
             "proof": {
@@ -88,6 +136,15 @@
                             "cond": "abs(x) < 1",
                             "latex_cond": "\\left| x \\right| < 1"
                         }
+                    ],
+                    "fixes": [
+                        [
+                            "k",
+                            {
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
+                        ]
                     ],
                     "latex_start": "-\\log{(1 - x)} - \\log{(1 + x)} = -\\sum_{k=0}^{\\infty}{\\frac{(-1) ^ {k} (-x) ^ {k + 1}}{k + 1}} - \\sum_{k=0}^{\\infty}{\\frac{(-1) ^ {k} x ^ {k + 1}}{k + 1}}",
                     "start": "-log(1 - x) - log(1 + x) = -SUM(k, 0, oo, (-1) ^ k * (-x) ^ (k + 1) / (k + 1)) - SUM(k, 0, oo, (-1) ^ k * x ^ (k + 1) / (k + 1))",
@@ -206,12 +263,6 @@
                             "latex_res": "\\frac{x}{1 - x ^ {2}} = \\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k}} - \\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k} (-1) ^ {k}}",
                             "res": "x / (1 - x ^ 2) = 1/2 * SUM(k, 0, oo, x ^ k) - 1/2 * SUM(k, 0, oo, x ^ k * (-1) ^ k)",
                             "rule": {
-                                "fixes": [
-                                    [
-                                        "k",
-                                        "$int"
-                                    ]
-                                ],
                                 "latex_str": "rewriting \\(-\\frac{\\sum_{k=0}^{\\infty}{x ^ {k} (-1) ^ {k}}}{2} + \\frac{\\sum_{k=0}^{\\infty}{x ^ {k}}}{2}\\) to \\(\\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k}} - \\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k} (-1) ^ {k}}\\)",
                                 "name": "Equation",
                                 "new_expr": "1/2 * SUM(k, 0, oo, x ^ k) - 1/2 * SUM(k, 0, oo, x ^ k * (-1) ^ k)",
@@ -229,11 +280,29 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
             "goal": "converges(SUM(k, 0, oo, INT y:[0,1]. -(y ^ k * log(y))))",
             "latex_goal": "\\sum_{k=0}^{\\infty}{\\int_{0}^{1} -y ^ {k} \\log{y} \\,dy}\\quad\\mathrm{converges}",
             "proof": {
                 "calcs": [
                     {
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\sum_{k=0}^{\\infty}{\\int_{0}^{1} -y ^ {k} \\log{y} \\,dy}",
                         "start": "SUM(k, 0, oo, INT y:[0,1]. -(y ^ k * log(y)))",
                         "steps": [
@@ -455,12 +524,6 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{1} \\log{y} \\sum_{k=0}^{\\infty}{y ^ {k} (-1) ^ {k}} \\,dy) - \\frac{1}{2} (\\int_{0}^{1} \\sum_{k=0}^{\\infty}{\\log{y} y ^ {k}} \\,dy)",
                                 "res": "1/2 * (INT y:[0,1]. log(y) * SUM(k, 0, oo, y ^ k * (-1) ^ k)) - 1/2 * (INT y:[0,1]. SUM(k, 0, oo, log(y) * y ^ k))",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "k",
-                                            "$int"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\(\\log{y} \\sum_{k=0}^{\\infty}{y ^ {k}}\\) to \\(\\sum_{k=0}^{\\infty}{\\log{y} y ^ {k}}\\)",
                                     "name": "Equation",
                                     "new_expr": "SUM(k, 0, oo, log(y) * y ^ k)",
@@ -483,12 +546,6 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{1} \\sum_{k=0}^{\\infty}{\\log{y} y ^ {k} (-1) ^ {k}} \\,dy) - \\frac{1}{2} (\\int_{0}^{1} \\sum_{k=0}^{\\infty}{\\log{y} y ^ {k}} \\,dy)",
                                 "res": "1/2 * (INT y:[0,1]. SUM(k, 0, oo, log(y) * y ^ k * (-1) ^ k)) - 1/2 * (INT y:[0,1]. SUM(k, 0, oo, log(y) * y ^ k))",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "k",
-                                            "$int"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\(\\log{y} \\sum_{k=0}^{\\infty}{y ^ {k} (-1) ^ {k}}\\) to \\(\\sum_{k=0}^{\\infty}{\\log{y} y ^ {k} (-1) ^ {k}}\\)",
                                     "name": "Equation",
                                     "new_expr": "SUM(k, 0, oo, log(y) * y ^ k * (-1) ^ k)",

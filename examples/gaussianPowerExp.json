@@ -31,7 +31,10 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "(INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = 0",
@@ -39,6 +42,25 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "n >= 1",
+                                "latex_cond": "n \\ge 1"
+                            },
+                            {
+                                "cond": "isInt(n)",
+                                "latex_cond": "n \\in\\mathbb{Z}"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx",
                         "start": "INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))",
                         "steps": [
@@ -55,6 +77,25 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "n >= 1",
+                                "latex_cond": "n \\ge 1"
+                            },
+                            {
+                                "cond": "isInt(n)",
+                                "latex_cond": "n \\in\\mathbb{Z}"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "0",
                         "start": "0",
                         "steps": [],
@@ -83,7 +124,10 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "(INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = (2 * n - 1) * I(n - 1) - 2 * I(n)",
@@ -91,6 +135,25 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "n >= 1",
+                                "latex_cond": "n \\ge 1"
+                            },
+                            {
+                                "cond": "isInt(n)",
+                                "latex_cond": "n \\in\\mathbb{Z}"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx",
                         "start": "INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))",
                         "steps": [
@@ -175,6 +238,25 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "n >= 1",
+                                "latex_cond": "n \\ge 1"
+                            },
+                            {
+                                "cond": "isInt(n)",
+                                "latex_cond": "n \\in\\mathbb{Z}"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "(2 n - 1) I{(n - 1)} - 2 I{(n)}",
                         "start": "(2 * n - 1) * I(n - 1) - 2 * I(n)",
                         "steps": [],
@@ -203,7 +285,10 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "I(n) = (2 * n - 1) / 2 * I(n - 1)",
@@ -223,6 +308,15 @@
                             "cond": "isInt(n)",
                             "latex_cond": "n \\in\\mathbb{Z}"
                         }
+                    ],
+                    "fixes": [
+                        [
+                            "n",
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
+                        ]
                     ],
                     "latex_start": "\\int_{0}^{\\infty} \\frac{d}{dx} x ^ {2 n - 1} e^{-x ^ {2}} \\,dx = 0",
                     "start": "(INT x:[0,oo]. D x. x ^ (2 * n - 1) * exp(-(x ^ 2))) = 0",
@@ -284,18 +378,34 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "I(n) = factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi)",
             "latex_goal": "I{(n)} = \\frac{(2 n)!}{4 ^ {n} n!}\\cdot (\\frac{1}{2})\\cdot \\sqrt{\\pi}",
             "proof": {
                 "base_case": {
+                    "conds": [
+                        {
+                            "cond": "0 >= 0",
+                            "latex_cond": "0 \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(0)",
+                            "latex_cond": "0 \\in\\mathbb{Z}"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "I(0) = sqrt(pi) / 2",
@@ -303,6 +413,25 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(0)",
+                                        "latex_cond": "0 \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "I{(0)}",
                                 "start": "I(0)",
                                 "steps": [
@@ -380,6 +509,25 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(0)",
+                                        "latex_cond": "0 \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\frac{\\sqrt{\\pi}}{2}",
                                 "start": "sqrt(pi) / 2",
                                 "steps": [],
@@ -396,11 +544,24 @@
                 "finished": true,
                 "goal": "I(n) = factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi)",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(n)",
+                            "latex_cond": "n \\in\\mathbb{Z}"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "I(n + 1) = 4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))",
@@ -408,6 +569,25 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(n)",
+                                        "latex_cond": "n \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "I{(n + 1)}",
                                 "start": "I(n + 1)",
                                 "steps": [
@@ -518,6 +698,25 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(n)",
+                                        "latex_cond": "n \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\frac{4 ^ {-n}\\cdot \\sqrt{\\pi} (2 n + 2)!}{8 (n + 1)!}",
                                 "start": "4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))",
                                 "steps": [],

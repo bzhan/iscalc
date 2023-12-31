@@ -11,7 +11,10 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ]
             ],
             "goal": "exp(hat(w) * x) = unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * hat(w) ^ 2",
@@ -19,6 +22,21 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "norm(w) = 1",
+                                "latex_cond": "\\|w\\| = 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ]
+                        ],
                         "latex_start": "e^{\\hat{w} x}",
                         "start": "exp(hat(w) * x)",
                         "steps": [
@@ -215,12 +233,6 @@
                                 "latex_res": "\\hat{w} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {2 n + 1}}{(2 n + 1)!}} + \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} ((-1) ^ {n} \\hat{w} ^ {2})}{(2 (n + 1))!}} + \\mathbf{1}_{3 \\times 3}",
                                 "res": "hat(w) * SUM(n, 0, oo, (-1) ^ n * x ^ (2 * n + 1) / factorial(2 * n + 1)) + SUM(n, 0, oo, x ^ (2 * (n + 1)) * ((-1) ^ n * hat(w) ^ 2) / factorial(2 * (n + 1))) + unit_matrix(3)",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "n",
-                                            "$int"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\(\\sum_{n=0}^{\\infty}{\\frac{x ^ {2 n + 1} ((-1) ^ {n} \\hat{w})}{(2 n + 1)!}}\\) to \\(\\hat{w} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {2 n + 1}}{(2 n + 1)!}}\\)",
                                     "name": "Equation",
                                     "new_expr": "hat(w) * SUM(n, 0, oo, (-1) ^ n * x ^ (2 * n + 1) / factorial(2 * n + 1))",
@@ -255,12 +267,6 @@
                                 "latex_res": "\\hat{w} \\sin{x} + \\hat{w} ^ {2} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {2 (n + 1)}}{(2 (n + 1))!}} + \\mathbf{1}_{3 \\times 3}",
                                 "res": "hat(w) * sin(x) + hat(w) ^ 2 * SUM(n, 0, oo, (-1) ^ n * x ^ (2 * (n + 1)) / factorial(2 * (n + 1))) + unit_matrix(3)",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "n",
-                                            "$int"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\(\\sum_{n=0}^{\\infty}{\\frac{x ^ {2 (n + 1)} ((-1) ^ {n} \\hat{w} ^ {2})}{(2 (n + 1))!}}\\) to \\(\\hat{w} ^ {2} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {2 (n + 1)}}{(2 (n + 1))!}}\\)",
                                     "name": "Equation",
                                     "new_expr": "hat(w) ^ 2 * SUM(n, 0, oo, (-1) ^ n * x ^ (2 * (n + 1)) / factorial(2 * (n + 1)))",
@@ -294,6 +300,21 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "norm(w) = 1",
+                                "latex_cond": "\\|w\\| = 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\mathbf{1}_{3 \\times 3} + \\sin{x} \\hat{w} + (1 - \\cos{x}) \\hat{w} ^ {2}",
                         "start": "unit_matrix(3) + sin(x) * hat(w) + (1 - cos(x)) * hat(w) ^ 2",
                         "steps": [

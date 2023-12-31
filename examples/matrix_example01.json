@@ -19,19 +19,31 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ],
                 [
                     "m",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ],
                 [
                     "P",
-                    "$tensor($real, m, m)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, m, m)"
+                    }
                 ],
                 [
                     "A",
-                    "$tensor($real, m, m)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, m, m)"
+                    }
                 ]
             ],
             "goal": "(inv(P) * A * P) ^ n = inv(P) * A ^ n * P",
@@ -178,23 +190,49 @@
             ],
             "proof": {
                 "base_case": {
+                    "conds": [
+                        {
+                            "cond": "invertible(P)",
+                            "latex_cond": "invertible{(P)}"
+                        },
+                        {
+                            "cond": "0 >= 0",
+                            "latex_cond": "0 \\ge 0"
+                        },
+                        {
+                            "cond": "m >= 1",
+                            "latex_cond": "m \\ge 1"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ],
                         [
                             "m",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ],
                         [
                             "P",
-                            "$tensor($real, m, m)"
+                            {
+                                "symbol_type": "var",
+                                "type": "$tensor($real, m, m)"
+                            }
                         ],
                         [
                             "A",
-                            "$tensor($real, m, m)"
+                            {
+                                "symbol_type": "var",
+                                "type": "$tensor($real, m, m)"
+                            }
                         ]
                     ],
                     "goal": "unit_matrix(m) = unit_matrix(m)",
@@ -202,12 +240,100 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "invertible(P)",
+                                        "latex_cond": "invertible{(P)}"
+                                    },
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    },
+                                    {
+                                        "cond": "m >= 1",
+                                        "latex_cond": "m \\ge 1"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "P",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, m, m)"
+                                        }
+                                    ],
+                                    [
+                                        "A",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, m, m)"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\mathbf{1}_{m \\times m}",
                                 "start": "unit_matrix(m)",
                                 "steps": [],
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "invertible(P)",
+                                        "latex_cond": "invertible{(P)}"
+                                    },
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    },
+                                    {
+                                        "cond": "m >= 1",
+                                        "latex_cond": "m \\ge 1"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "P",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, m, m)"
+                                        }
+                                    ],
+                                    [
+                                        "A",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, m, m)"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\mathbf{1}_{m \\times m}",
                                 "start": "unit_matrix(m)",
                                 "steps": [],
@@ -224,23 +350,49 @@
                 "finished": true,
                 "goal": "(inv(P) * A * P) ^ n = inv(P) * A ^ n * P",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "invertible(P)",
+                            "latex_cond": "invertible{(P)}"
+                        },
+                        {
+                            "cond": "m >= 1",
+                            "latex_cond": "m \\ge 1"
+                        },
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ],
                         [
                             "m",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ],
                         [
                             "P",
-                            "$tensor($real, m, m)"
+                            {
+                                "symbol_type": "var",
+                                "type": "$tensor($real, m, m)"
+                            }
                         ],
                         [
                             "A",
-                            "$tensor($real, m, m)"
+                            {
+                                "symbol_type": "var",
+                                "type": "$tensor($real, m, m)"
+                            }
                         ]
                     ],
                     "goal": "(inv(P) * A * P) ^ (n + 1) = inv(P) * A ^ (n + 1) * P",
@@ -260,12 +412,12 @@
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n >= 0",
-                                    "latex_cond": "n \\ge 0"
-                                },
-                                {
                                     "cond": "m >= 1",
                                     "latex_cond": "m \\ge 1"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -283,12 +435,12 @@
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n >= 0",
-                                    "latex_cond": "n \\ge 0"
-                                },
-                                {
                                     "cond": "m >= 1",
                                     "latex_cond": "m \\ge 1"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -306,12 +458,12 @@
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n >= 0",
-                                    "latex_cond": "n \\ge 0"
-                                },
-                                {
                                     "cond": "m >= 1",
                                     "latex_cond": "m \\ge 1"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -329,12 +481,12 @@
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n >= 0",
-                                    "latex_cond": "n \\ge 0"
-                                },
-                                {
                                     "cond": "m >= 1",
                                     "latex_cond": "m \\ge 1"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -352,12 +504,12 @@
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n >= 0",
-                                    "latex_cond": "n \\ge 0"
-                                },
-                                {
                                     "cond": "m >= 1",
                                     "latex_cond": "m \\ge 1"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         },
@@ -375,12 +527,12 @@
                                     "latex_cond": "invertible{(P)}"
                                 },
                                 {
-                                    "cond": "n >= 0",
-                                    "latex_cond": "n \\ge 0"
-                                },
-                                {
                                     "cond": "m >= 1",
                                     "latex_cond": "m \\ge 1"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
                                 }
                             ]
                         }
@@ -388,6 +540,50 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "invertible(P)",
+                                        "latex_cond": "invertible{(P)}"
+                                    },
+                                    {
+                                        "cond": "m >= 1",
+                                        "latex_cond": "m \\ge 1"
+                                    },
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "P",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, m, m)"
+                                        }
+                                    ],
+                                    [
+                                        "A",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, m, m)"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "(P ^ {-1} A P) ^ {n + 1}",
                                 "start": "(inv(P) * A * P) ^ (n + 1)",
                                 "steps": [
@@ -407,9 +603,9 @@
                                         "latex_res": "P ^ {-1} A ^ {n} P (P ^ {-1} A P)",
                                         "res": "inv(P) * A ^ n * P * (inv(P) * A * P)",
                                         "rule": {
-                                            "loc": "subterms",
+                                            "loc": "0",
                                             "name": "ApplyInductHyp",
-                                            "str": "apply induction hypothesis on subterms"
+                                            "str": "apply induction hypothesis at 0"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -426,6 +622,50 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "invertible(P)",
+                                        "latex_cond": "invertible{(P)}"
+                                    },
+                                    {
+                                        "cond": "m >= 1",
+                                        "latex_cond": "m \\ge 1"
+                                    },
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "P",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, m, m)"
+                                        }
+                                    ],
+                                    [
+                                        "A",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, m, m)"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "P ^ {-1} A ^ {n + 1} P",
                                 "start": "inv(P) * A ^ (n + 1) * P",
                                 "steps": [],
@@ -458,11 +698,17 @@
             "fixes": [
                 [
                     "A",
-                    "$tensor($real, 3, 3)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 3)"
+                    }
                 ],
                 [
                     "B",
-                    "$tensor($real, 3, 3)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 3)"
+                    }
                 ]
             ],
             "latex_start": "(B ^ {-1} A B) ^ {4}",
@@ -475,25 +721,36 @@
                         "eq": "(inv(P) * A * P) ^ n = inv(P) * A ^ n * P",
                         "eq_fixes": [
                             [
-                                "n",
-                                "$int"
-                            ],
-                            [
                                 "m",
-                                "$int"
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
                             ],
                             [
                                 "P",
-                                "$tensor($real, m, m)"
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, m, m)"
+                                }
                             ],
                             [
                                 "A",
-                                "$tensor($real, m, m)"
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, m, m)"
+                                }
+                            ],
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
                             ]
                         ],
                         "latex_str": "apply equation \\((P ^ {-1} A P) ^ {n} = P ^ {-1} A ^ {n} P\\)",
                         "name": "ApplyEquation",
-                        "source": "None",
                         "str": "apply equation: (inv(P) * A * P) ^ n = inv(P) * A ^ n * P"
                     },
                     "type": "CalculationStep"

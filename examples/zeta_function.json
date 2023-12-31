@@ -25,6 +25,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > -1",
+                                "latex_cond": "a > -1"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a}}{1 - x y} \\,dx \\,dy",
                         "start": "INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a / (1 - x * y)",
                         "steps": [
@@ -112,12 +118,6 @@
                                 "latex_res": "\\int_{0}^{1} y ^ {a} (\\int_{0}^{1} \\sum_{k=0}^{\\infty}{x ^ {a} (x y) ^ {k}} \\,dx) \\,dy",
                                 "res": "INT y:[0,1]. y ^ a * (INT x:[0,1]. SUM(k, 0, oo, x ^ a * (x * y) ^ k))",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "k",
-                                            "$int"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\(x ^ {a} \\sum_{k=0}^{\\infty}{(x y) ^ {k}}\\) to \\(\\sum_{k=0}^{\\infty}{x ^ {a} (x y) ^ {k}}\\)",
                                     "name": "Equation",
                                     "new_expr": "SUM(k, 0, oo, x ^ a * (x * y) ^ k)",
@@ -257,12 +257,6 @@
                                 "latex_res": "\\int_{0}^{1} \\sum_{k=0}^{\\infty}{y ^ {a} (\\frac{y ^ {k}}{a + k + 1})} \\,dy",
                                 "res": "INT y:[0,1]. SUM(k, 0, oo, y ^ a * (y ^ k / (a + k + 1)))",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "k",
-                                            "$int"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\(y ^ {a} \\sum_{k=0}^{\\infty}{\\frac{y ^ {k}}{a + k + 1}}\\) to \\(\\sum_{k=0}^{\\infty}{y ^ {a} (\\frac{y ^ {k}}{a + k + 1})}\\)",
                                     "name": "Equation",
                                     "new_expr": "SUM(k, 0, oo, y ^ a * (y ^ k / (a + k + 1)))",
@@ -347,6 +341,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > -1",
+                                "latex_cond": "a > -1"
+                            }
+                        ],
                         "latex_start": "\\sum_{n=0}^{\\infty}{\\frac{1}{(n + 1 + a) ^ {2}}}",
                         "start": "SUM(n, 0, oo, 1 / (n + 1 + a) ^ 2)",
                         "steps": [
@@ -521,34 +521,52 @@
             "fixes": [
                 [
                     "s",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ],
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a) / (1 - x * y)) = (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + a + 1) ^ s)",
             "latex_goal": "\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y) (x ^ {a} y ^ {a})}{1 - x y} \\,dx \\,dy = (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{\\frac{1}{(n + a + 1) ^ {s}}}",
             "proof": {
                 "base_case": {
+                    "conds": [
+                        {
+                            "cond": "a > -1",
+                            "latex_cond": "a > -1"
+                        },
+                        {
+                            "cond": "2 >= 2",
+                            "latex_cond": "2 \\ge 2"
+                        },
+                        {
+                            "cond": "isInt(2)",
+                            "latex_cond": "2 \\in\\mathbb{Z}"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "s",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ],
                         [
                             "n",
-                            "$int"
-                        ],
-                        [
-                            "y",
-                            "$real"
-                        ],
-                        [
-                            "x",
-                            "$real"
+                            {
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "(INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a / (-(x * y) + 1)) = SUM(n, 0, oo, 1 / (a + n + 1) ^ 2)",
@@ -556,9 +574,59 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "a > -1",
+                                        "latex_cond": "a > -1"
+                                    },
+                                    {
+                                        "cond": "2 >= 2",
+                                        "latex_cond": "2 \\ge 2"
+                                    },
+                                    {
+                                        "cond": "isInt(2)",
+                                        "latex_cond": "2 \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "s",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a}}{-x y + 1} \\,dx \\,dy",
                                 "start": "INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a / (-(x * y) + 1)",
                                 "steps": [
+                                    {
+                                        "fixes": [
+                                            [
+                                                "y",
+                                                "$real"
+                                            ],
+                                            [
+                                                "x",
+                                                "$real"
+                                            ]
+                                        ],
+                                        "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a}}{-x y + 1} \\,dx \\,dy",
+                                        "res": "INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a / (-(x * y) + 1)",
+                                        "rule": {
+                                            "loc": "0.0",
+                                            "name": "FullSimplify",
+                                            "str": "full simplify at 0.0"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
                                     {
                                         "fixes": [
                                             [
@@ -618,6 +686,36 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "a > -1",
+                                        "latex_cond": "a > -1"
+                                    },
+                                    {
+                                        "cond": "2 >= 2",
+                                        "latex_cond": "2 \\ge 2"
+                                    },
+                                    {
+                                        "cond": "isInt(2)",
+                                        "latex_cond": "2 \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "s",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\sum_{n=0}^{\\infty}{\\frac{1}{(a + n + 1) ^ {2}}}",
                                 "start": "SUM(n, 0, oo, 1 / (a + n + 1) ^ 2)",
                                 "steps": [],
@@ -634,23 +732,35 @@
                 "finished": true,
                 "goal": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a) / (1 - x * y)) = (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + a + 1) ^ s)",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "a > -1",
+                            "latex_cond": "a > -1"
+                        },
+                        {
+                            "cond": "s >= 2",
+                            "latex_cond": "s \\ge 2"
+                        },
+                        {
+                            "cond": "isInt(s)",
+                            "latex_cond": "s \\in\\mathbb{Z}"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "s",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ],
                         [
                             "n",
-                            "$int"
-                        ],
-                        [
-                            "y",
-                            "$real"
-                        ],
-                        [
-                            "x",
-                            "$real"
+                            {
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "(INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a * log(x * y) ^ (s - 1) / (-(x * y) + 1)) = -((-1) ^ s * factorial(s) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1)))",
@@ -674,6 +784,22 @@
                                     "cond": "isInt(s)",
                                     "latex_cond": "s \\in\\mathbb{Z}"
                                 }
+                            ],
+                            "fixes": [
+                                [
+                                    "s",
+                                    {
+                                        "symbol_type": "var",
+                                        "type": "$int"
+                                    }
+                                ],
+                                [
+                                    "n",
+                                    {
+                                        "symbol_type": "binding",
+                                        "type": "$int"
+                                    }
+                                ]
                             ],
                             "latex_start": "\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y) (x ^ {a} y ^ {a})}{1 - x y} \\,dx \\,dy = (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{\\frac{1}{(n + a + 1) ^ {s}}}",
                             "start": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a) / (1 - x * y)) = (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + a + 1) ^ s)",
@@ -907,12 +1033,6 @@
                                     "latex_res": "\\int_{0}^{1} \\int_{0}^{1} \\frac{x ^ {a} y ^ {a} \\log^{s - 1}(x y)}{1 - x y} \\,dx \\,dy = (-1) ^ {s + 1} (s (s - 1)!) \\sum_{n=0}^{\\infty}{(a + n + 1) ^ {-s - 1}}",
                                     "res": "(INT y:[0,1]. INT x:[0,1]. x ^ a * y ^ a * log(x * y) ^ (s - 1) / (1 - x * y)) = (-1) ^ (s + 1) * (s * factorial(s - 1)) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1))",
                                     "rule": {
-                                        "fixes": [
-                                            [
-                                                "n",
-                                                "$int"
-                                            ]
-                                        ],
                                         "latex_str": "rewriting \\(-s (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{(a + n + 1) ^ {-s - 1}}\\) to \\((-1) ^ {s + 1} (s (s - 1)!) \\sum_{n=0}^{\\infty}{(a + n + 1) ^ {-s - 1}}\\)",
                                         "name": "Equation",
                                         "new_expr": "(-1) ^ (s + 1) * (s * factorial(s - 1)) * SUM(n, 0, oo, (a + n + 1) ^ (-s - 1))",
@@ -976,7 +1096,10 @@
             "fixes": [
                 [
                     "s",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "zeta(s) = (-1) ^ s / factorial(s - 1) * (INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) / (1 - x * y))",
@@ -1000,6 +1123,22 @@
                             "cond": "isInt(s)",
                             "latex_cond": "s \\in\\mathbb{Z}"
                         }
+                    ],
+                    "fixes": [
+                        [
+                            "s",
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
+                        ],
+                        [
+                            "n",
+                            {
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
+                        ]
                     ],
                     "latex_start": "\\int_{0}^{1} \\int_{0}^{1} \\frac{\\log^{s - 2}(x y) (x ^ {a} y ^ {a})}{1 - x y} \\,dx \\,dy = (-1) ^ {s} (s - 1)! \\sum_{n=0}^{\\infty}{\\frac{1}{(n + a + 1) ^ {s}}}",
                     "start": "(INT y:[0,1]. INT x:[0,1]. log(x * y) ^ (s - 2) * (x ^ a * y ^ a) / (1 - x * y)) = (-1) ^ s * factorial(s - 1) * SUM(n, 0, oo, 1 / (n + a + 1) ^ s)",
@@ -1253,11 +1392,17 @@
             "fixes": [
                 [
                     "s",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ],
                 [
                     "k",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "(INT x:[0,oo]. exp(-k * x) * x ^ (s - 1)) = Gamma(s) / k ^ s",
@@ -1265,6 +1410,28 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "k > 0",
+                                "latex_cond": "k > 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "s",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ],
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\int_{0}^{\\infty} e^{(-k) x} x ^ {s - 1} \\,dx",
                         "start": "INT x:[0,oo]. exp(-k * x) * x ^ (s - 1)",
                         "steps": [
@@ -1352,6 +1519,28 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "k > 0",
+                                "latex_cond": "k > 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "s",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ],
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\frac{\\Gamma{(s)}}{k ^ {s}}",
                         "start": "Gamma(s) / k ^ s",
                         "steps": [
@@ -1380,11 +1569,17 @@
             "fixes": [
                 [
                     "s",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ],
                 [
                     "k",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "(INT x:[0,oo]. x ^ (s - 1) / (exp(x) - 1)) = Gamma(s) * zeta(s)",
@@ -1400,6 +1595,22 @@
                             "cond": "k > 0",
                             "latex_cond": "k > 0"
                         }
+                    ],
+                    "fixes": [
+                        [
+                            "s",
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
+                        ],
+                        [
+                            "k",
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
+                        ]
                     ],
                     "latex_start": "\\int_{0}^{\\infty} e^{(-k) x} x ^ {s - 1} \\,dx = \\frac{\\Gamma{(s)}}{k ^ {s}}",
                     "start": "(INT x:[0,oo]. exp(-k * x) * x ^ (s - 1)) = Gamma(s) / k ^ s",

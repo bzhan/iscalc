@@ -23,6 +23,10 @@
                             {
                                 "cond": "x != 0",
                                 "latex_cond": "x \\neq 0"
+                            },
+                            {
+                                "cond": "cos(a) != 0",
+                                "latex_cond": "\\cos{a} \\neq 0"
                             }
                         ],
                         "finished": true,
@@ -31,6 +35,16 @@
                         "proof": {
                             "calcs": [
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "x != 0",
+                                            "latex_cond": "x \\neq 0"
+                                        },
+                                        {
+                                            "cond": "cos(a) != 0",
+                                            "latex_cond": "\\cos{a} \\neq 0"
+                                        }
+                                    ],
                                     "latex_start": "2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1",
                                     "start": "2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1",
                                     "steps": [
@@ -70,6 +84,16 @@
                                     "type": "Calculation"
                                 },
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "x != 0",
+                                            "latex_cond": "x \\neq 0"
+                                        },
+                                        {
+                                            "cond": "cos(a) != 0",
+                                            "latex_cond": "\\cos{a} \\neq 0"
+                                        }
+                                    ],
                                     "latex_start": "0",
                                     "start": "0",
                                     "steps": [],
@@ -88,6 +112,10 @@
                             {
                                 "cond": "x = 0",
                                 "latex_cond": "x = 0"
+                            },
+                            {
+                                "cond": "cos(a) != 0",
+                                "latex_cond": "\\cos{a} \\neq 0"
                             }
                         ],
                         "finished": true,
@@ -96,6 +124,16 @@
                         "proof": {
                             "calcs": [
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "x = 0",
+                                            "latex_cond": "x = 0"
+                                        },
+                                        {
+                                            "cond": "cos(a) != 0",
+                                            "latex_cond": "\\cos{a} \\neq 0"
+                                        }
+                                    ],
                                     "latex_start": "2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1",
                                     "start": "2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1",
                                     "steps": [
@@ -112,6 +150,16 @@
                                     "type": "Calculation"
                                 },
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "x = 0",
+                                            "latex_cond": "x = 0"
+                                        },
+                                        {
+                                            "cond": "cos(a) != 0",
+                                            "latex_cond": "\\cos{a} \\neq 0"
+                                        }
+                                    ],
                                     "latex_start": "0",
                                     "start": "0",
                                     "steps": [],
@@ -148,6 +196,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "cos(a) != 0",
+                                "latex_cond": "\\cos{a} \\neq 0"
+                            }
+                        ],
                         "latex_start": "x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1",
                         "start": "x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1",
                         "steps": [
@@ -164,6 +218,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "cos(a) != 0",
+                                "latex_cond": "\\cos{a} \\neq 0"
+                            }
+                        ],
                         "latex_start": "0",
                         "start": "0",
                         "steps": [],
@@ -194,6 +254,10 @@
                             {
                                 "cond": "x != 0",
                                 "latex_cond": "x \\neq 0"
+                            },
+                            {
+                                "cond": "cos(a) != 0",
+                                "latex_cond": "\\cos{a} \\neq 0"
                             }
                         ],
                         "finished": true,
@@ -202,6 +266,16 @@
                         "proof": {
                             "calcs": [
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "x != 0",
+                                            "latex_cond": "x \\neq 0"
+                                        },
+                                        {
+                                            "cond": "cos(a) != 0",
+                                            "latex_cond": "\\cos{a} \\neq 0"
+                                        }
+                                    ],
                                     "latex_start": "(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)",
                                     "start": "(x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)",
                                     "steps": [
@@ -250,6 +324,16 @@
                                     "type": "Calculation"
                                 },
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "x != 0",
+                                            "latex_cond": "x \\neq 0"
+                                        },
+                                        {
+                                            "cond": "cos(a) != 0",
+                                            "latex_cond": "\\cos{a} \\neq 0"
+                                        }
+                                    ],
                                     "latex_start": "0",
                                     "start": "0",
                                     "steps": [],
@@ -268,6 +352,10 @@
                             {
                                 "cond": "x = 0",
                                 "latex_cond": "x = 0"
+                            },
+                            {
+                                "cond": "cos(a) != 0",
+                                "latex_cond": "\\cos{a} \\neq 0"
                             }
                         ],
                         "finished": true,
@@ -276,6 +364,16 @@
                         "proof": {
                             "calcs": [
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "x = 0",
+                                            "latex_cond": "x = 0"
+                                        },
+                                        {
+                                            "cond": "cos(a) != 0",
+                                            "latex_cond": "\\cos{a} \\neq 0"
+                                        }
+                                    ],
                                     "latex_start": "(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)",
                                     "start": "(x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)",
                                     "steps": [
@@ -292,6 +390,16 @@
                                     "type": "Calculation"
                                 },
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "x = 0",
+                                            "latex_cond": "x = 0"
+                                        },
+                                        {
+                                            "cond": "cos(a) != 0",
+                                            "latex_cond": "\\cos{a} \\neq 0"
+                                        }
+                                    ],
                                     "latex_start": "0",
                                     "start": "0",
                                     "steps": [],
@@ -332,6 +440,10 @@
                             {
                                 "cond": "x < 0",
                                 "latex_cond": "x < 0"
+                            },
+                            {
+                                "cond": "cos(a) != 0",
+                                "latex_cond": "\\cos{a} \\neq 0"
                             }
                         ],
                         "finished": true,
@@ -340,6 +452,16 @@
                         "proof": {
                             "calcs": [
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "x < 0",
+                                            "latex_cond": "x < 0"
+                                        },
+                                        {
+                                            "cond": "cos(a) != 0",
+                                            "latex_cond": "\\cos{a} \\neq 0"
+                                        }
+                                    ],
                                     "latex_start": "-2 x \\sin{a} + x ^ {2} + 1",
                                     "start": "-(2 * x * sin(a)) + x ^ 2 + 1",
                                     "steps": [
@@ -358,6 +480,16 @@
                                     "type": "Calculation"
                                 },
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "x < 0",
+                                            "latex_cond": "x < 0"
+                                        },
+                                        {
+                                            "cond": "cos(a) != 0",
+                                            "latex_cond": "\\cos{a} \\neq 0"
+                                        }
+                                    ],
                                     "latex_start": "0",
                                     "start": "0",
                                     "steps": [],
@@ -376,6 +508,10 @@
                             {
                                 "cond": "x = 0",
                                 "latex_cond": "x = 0"
+                            },
+                            {
+                                "cond": "cos(a) != 0",
+                                "latex_cond": "\\cos{a} \\neq 0"
                             }
                         ],
                         "finished": true,
@@ -384,6 +520,16 @@
                         "proof": {
                             "calcs": [
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "x = 0",
+                                            "latex_cond": "x = 0"
+                                        },
+                                        {
+                                            "cond": "cos(a) != 0",
+                                            "latex_cond": "\\cos{a} \\neq 0"
+                                        }
+                                    ],
                                     "latex_start": "-2 x \\sin{a} + x ^ {2} + 1",
                                     "start": "-(2 * x * sin(a)) + x ^ 2 + 1",
                                     "steps": [
@@ -400,6 +546,16 @@
                                     "type": "Calculation"
                                 },
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "x = 0",
+                                            "latex_cond": "x = 0"
+                                        },
+                                        {
+                                            "cond": "cos(a) != 0",
+                                            "latex_cond": "\\cos{a} \\neq 0"
+                                        }
+                                    ],
                                     "latex_start": "0",
                                     "start": "0",
                                     "steps": [],
@@ -418,6 +574,10 @@
                             {
                                 "cond": "x > 0",
                                 "latex_cond": "x > 0"
+                            },
+                            {
+                                "cond": "cos(a) != 0",
+                                "latex_cond": "\\cos{a} \\neq 0"
                             }
                         ],
                         "finished": true,
@@ -426,6 +586,16 @@
                         "proof": {
                             "calcs": [
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "x > 0",
+                                            "latex_cond": "x > 0"
+                                        },
+                                        {
+                                            "cond": "cos(a) != 0",
+                                            "latex_cond": "\\cos{a} \\neq 0"
+                                        }
+                                    ],
                                     "latex_start": "-2 x \\sin{a} + x ^ {2} + 1",
                                     "start": "-(2 * x * sin(a)) + x ^ 2 + 1",
                                     "steps": [
@@ -444,6 +614,16 @@
                                     "type": "Calculation"
                                 },
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "x > 0",
+                                            "latex_cond": "x > 0"
+                                        },
+                                        {
+                                            "cond": "cos(a) != 0",
+                                            "latex_cond": "\\cos{a} \\neq 0"
+                                        }
+                                    ],
                                     "latex_start": "0",
                                     "start": "0",
                                     "steps": [],
@@ -480,6 +660,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "cos(a) != 0",
+                                "latex_cond": "\\cos{a} \\neq 0"
+                            }
+                        ],
                         "latex_start": "I{(a)}",
                         "start": "I(a)",
                         "steps": [
@@ -554,6 +740,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "cos(a) != 0",
+                                "latex_cond": "\\cos{a} \\neq 0"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1} \\,dx",
                         "start": "INT x:[0,oo]. x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1)",
                         "steps": [
@@ -596,6 +788,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "cos(a) != 0",
+                                "latex_cond": "\\cos{a} \\neq 0"
+                            }
+                        ],
                         "latex_start": "2 I{(a)}",
                         "start": "2 * I(a)",
                         "steps": [
@@ -656,12 +854,6 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} + \\frac{x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. 1 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1) + x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1)",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\((\\int_{0}^{\\infty} \\frac{1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx) + (\\int_{0}^{\\infty} \\frac{x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1} \\,dx)\\) to \\(\\int_{0}^{\\infty} \\frac{1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} + \\frac{x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1} \\,dx\\)",
                                     "name": "Equation",
                                     "new_expr": "INT x:[0,oo]. 1 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1) + x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1)",
@@ -707,6 +899,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "cos(a) != 0",
+                                "latex_cond": "\\cos{a} \\neq 0"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{1 + x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1} \\,dx",
                         "start": "INT x:[0,oo]. (1 + x ^ 2) / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1)",
                         "steps": [
@@ -749,6 +947,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "cos(a) != 0",
+                                "latex_cond": "\\cos{a} \\neq 0"
+                            }
+                        ],
                         "latex_start": "\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx",
                         "start": "INT x:[-oo,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)",
                         "steps": [
@@ -805,6 +1009,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "cos(a) != 0",
+                                "latex_cond": "\\cos{a} \\neq 0"
+                            }
+                        ],
                         "latex_start": "2 (\\int_{0}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx)",
                         "start": "2 * (INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1))",
                         "steps": [],
@@ -831,6 +1041,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "cos(a) != 0",
+                                "latex_cond": "\\cos{a} \\neq 0"
+                            }
+                        ],
                         "latex_start": "\\int_{-\\infty}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx",
                         "start": "INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))",
                         "steps": [
@@ -881,6 +1097,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "cos(a) != 0",
+                                "latex_cond": "\\cos{a} \\neq 0"
+                            }
+                        ],
                         "latex_start": "0",
                         "start": "0",
                         "steps": [],
@@ -1015,12 +1237,6 @@
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + \\frac{1}{4}\\cdot 0",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + 1/4 * 0",
                             "rule": {
-                                "fixes": [
-                                    [
-                                        "x",
-                                        "$real"
-                                    ]
-                                ],
                                 "latex_str": "rewriting \\(\\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)\\) to \\(\\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + \\frac{1}{4}\\cdot 0\\)",
                                 "name": "Equation",
                                 "new_expr": "1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + 1/4 * 0",
@@ -1057,12 +1273,6 @@
                             "latex_res": "I{(a)} = \\frac{1}{4} ((\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx))",
                             "res": "I(a) = 1/4 * ((INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + (INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))))",
                             "rule": {
-                                "fixes": [
-                                    [
-                                        "x",
-                                        "$real"
-                                    ]
-                                ],
                                 "latex_str": "rewriting \\(\\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)\\) to \\(\\frac{1}{4} ((\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx))\\)",
                                 "name": "Equation",
                                 "new_expr": "1/4 * ((INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + (INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))))",
@@ -1081,12 +1291,6 @@
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} - \\frac{2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)) - 2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)))",
                             "rule": {
-                                "fixes": [
-                                    [
-                                        "x",
-                                        "$real"
-                                    ]
-                                ],
                                 "latex_str": "rewriting \\((\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)\\) to \\(\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} - \\frac{2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx\\)",
                                 "name": "Equation",
                                 "new_expr": "INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)) - 2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))",
@@ -1203,6 +1407,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "cos(a) > 0",
+                                "latex_cond": "\\cos{a} > 0"
+                            }
+                        ],
                         "latex_start": "I{(a)}",
                         "start": "I(a)",
                         "steps": [
@@ -1252,6 +1462,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "cos(a) > 0",
+                                "latex_cond": "\\cos{a} > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{\\pi}{4 \\cos{a}}",
                         "start": "pi / (4 * cos(a))",
                         "steps": [],
@@ -1278,6 +1494,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "cos(a) < 0",
+                                "latex_cond": "\\cos{a} < 0"
+                            }
+                        ],
                         "latex_start": "I{(a)}",
                         "start": "I(a)",
                         "steps": [
@@ -1327,6 +1549,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "cos(a) < 0",
+                                "latex_cond": "\\cos{a} < 0"
+                            }
+                        ],
                         "latex_start": "-\\frac{\\pi}{4 \\cos{a}}",
                         "start": "-(pi / (4 * cos(a)))",
                         "steps": [],

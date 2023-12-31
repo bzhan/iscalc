@@ -17,7 +17,10 @@
             "fixes": [
                 [
                     "k",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "x / (1 - x) = SUM(k, 1, oo, x ^ k)",
@@ -29,14 +32,46 @@
                             {
                                 "cond": "x != 0",
                                 "latex_cond": "x \\neq 0"
+                            },
+                            {
+                                "cond": "abs(x) < 1",
+                                "latex_cond": "\\left| x \\right| < 1"
                             }
                         ],
                         "finished": true,
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "goal": "x / (1 - x) = SUM(k, 1, oo, x ^ k)",
                         "latex_goal": "\\frac{x}{1 - x} = \\sum_{k=1}^{\\infty}{x ^ {k}}",
                         "proof": {
                             "calcs": [
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "x != 0",
+                                            "latex_cond": "x \\neq 0"
+                                        },
+                                        {
+                                            "cond": "abs(x) < 1",
+                                            "latex_cond": "\\left| x \\right| < 1"
+                                        }
+                                    ],
+                                    "fixes": [
+                                        [
+                                            "k",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_start": "\\frac{x}{1 - x}",
                                     "start": "x / (1 - x)",
                                     "steps": [
@@ -79,12 +114,6 @@
                                             "latex_res": "\\sum_{n=0}^{\\infty}{x x ^ {n}}",
                                             "res": "SUM(n, 0, oo, x * x ^ n)",
                                             "rule": {
-                                                "fixes": [
-                                                    [
-                                                        "n",
-                                                        "$int"
-                                                    ]
-                                                ],
                                                 "latex_str": "rewriting \\(x \\sum_{n=0}^{\\infty}{x ^ {n}}\\) to \\(\\sum_{n=0}^{\\infty}{x x ^ {n}}\\)",
                                                 "name": "Equation",
                                                 "new_expr": "SUM(n, 0, oo, x * x ^ n)",
@@ -164,6 +193,25 @@
                                     "type": "Calculation"
                                 },
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "x != 0",
+                                            "latex_cond": "x \\neq 0"
+                                        },
+                                        {
+                                            "cond": "abs(x) < 1",
+                                            "latex_cond": "\\left| x \\right| < 1"
+                                        }
+                                    ],
+                                    "fixes": [
+                                        [
+                                            "k",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_start": "\\sum_{k=1}^{\\infty}{x ^ {k}}",
                                     "start": "SUM(k, 1, oo, x ^ k)",
                                     "steps": [],
@@ -182,14 +230,46 @@
                             {
                                 "cond": "x = 0",
                                 "latex_cond": "x = 0"
+                            },
+                            {
+                                "cond": "abs(x) < 1",
+                                "latex_cond": "\\left| x \\right| < 1"
                             }
                         ],
                         "finished": true,
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "goal": "x / (1 - x) = SUM(k, 1, oo, x ^ k)",
                         "latex_goal": "\\frac{x}{1 - x} = \\sum_{k=1}^{\\infty}{x ^ {k}}",
                         "proof": {
                             "calcs": [
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "x = 0",
+                                            "latex_cond": "x = 0"
+                                        },
+                                        {
+                                            "cond": "abs(x) < 1",
+                                            "latex_cond": "\\left| x \\right| < 1"
+                                        }
+                                    ],
+                                    "fixes": [
+                                        [
+                                            "k",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_start": "\\frac{x}{1 - x}",
                                     "start": "x / (1 - x)",
                                     "steps": [
@@ -206,6 +286,25 @@
                                     "type": "Calculation"
                                 },
                                 {
+                                    "conds": [
+                                        {
+                                            "cond": "x = 0",
+                                            "latex_cond": "x = 0"
+                                        },
+                                        {
+                                            "cond": "abs(x) < 1",
+                                            "latex_cond": "\\left| x \\right| < 1"
+                                        }
+                                    ],
+                                    "fixes": [
+                                        [
+                                            "k",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_start": "\\sum_{k=1}^{\\infty}{x ^ {k}}",
                                     "start": "SUM(k, 1, oo, x ^ k)",
                                     "steps": [
@@ -252,6 +351,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "abs(x) < 1",
+                                "latex_cond": "\\left| x \\right| < 1"
+                            }
+                        ],
                         "latex_start": "\\operatorname{Li}(0,x)",
                         "start": "Li(0,x)",
                         "steps": [
@@ -287,6 +392,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "abs(x) < 1",
+                                "latex_cond": "\\left| x \\right| < 1"
+                            }
+                        ],
                         "latex_start": "\\frac{x}{1 - x}",
                         "start": "x / (1 - x)",
                         "steps": [],
@@ -319,22 +430,38 @@
             "fixes": [
                 [
                     "s",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "Li(s + 1,x) = (INT t:[0,x]. Li(s,t) / t)",
             "latex_goal": "\\operatorname{Li}(s + 1,x) = \\int_{0}^{x} \\frac{\\operatorname{Li}(s,t)}{t} \\,dt",
             "proof": {
                 "base_case": {
+                    "conds": [
+                        {
+                            "cond": "abs(x) < 1",
+                            "latex_cond": "\\left| x \\right| < 1"
+                        },
+                        {
+                            "cond": "0 >= 0",
+                            "latex_cond": "0 \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(0)",
+                            "latex_cond": "0 \\in\\mathbb{Z}"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "s",
-                            "$int"
-                        ],
-                        [
-                            "t",
-                            "$real"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "Li(1,x) = (INT t:[0,x]. Li(0,t) / t)",
@@ -342,6 +469,29 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "abs(x) < 1",
+                                        "latex_cond": "\\left| x \\right| < 1"
+                                    },
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(0)",
+                                        "latex_cond": "0 \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "s",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\operatorname{Li}(1,x)",
                                 "start": "Li(1,x)",
                                 "steps": [
@@ -365,6 +515,29 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "abs(x) < 1",
+                                        "latex_cond": "\\left| x \\right| < 1"
+                                    },
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(0)",
+                                        "latex_cond": "0 \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "s",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\int_{0}^{x} \\frac{\\operatorname{Li}(0,t)}{t} \\,dt",
                                 "start": "INT t:[0,x]. Li(0,t) / t",
                                 "steps": [
@@ -422,12 +595,6 @@
                                         "latex_res": "\\int_{0}^{x} \\frac{1}{t} \\sum_{k=1}^{\\infty}{t ^ {k}} \\,dt",
                                         "res": "INT t:[0,x]. 1 / t * SUM(k, 1, oo, t ^ k)",
                                         "rule": {
-                                            "fixes": [
-                                                [
-                                                    "k",
-                                                    "$int"
-                                                ]
-                                            ],
                                             "latex_str": "rewriting \\(\\frac{\\sum_{k=1}^{\\infty}{t ^ {k}}}{t}\\) to \\(\\frac{1}{t} \\sum_{k=1}^{\\infty}{t ^ {k}}\\)",
                                             "name": "Equation",
                                             "new_expr": "1 / t * SUM(k, 1, oo, t ^ k)",
@@ -450,12 +617,6 @@
                                         "latex_res": "\\int_{0}^{x} \\sum_{k=1}^{\\infty}{\\frac{1}{t} t ^ {k}} \\,dt",
                                         "res": "INT t:[0,x]. SUM(k, 1, oo, 1 / t * t ^ k)",
                                         "rule": {
-                                            "fixes": [
-                                                [
-                                                    "k",
-                                                    "$int"
-                                                ]
-                                            ],
                                             "latex_str": "rewriting \\(\\frac{1}{t} \\sum_{k=1}^{\\infty}{t ^ {k}}\\) to \\(\\sum_{k=1}^{\\infty}{\\frac{1}{t} t ^ {k}}\\)",
                                             "name": "Equation",
                                             "new_expr": "SUM(k, 1, oo, 1 / t * t ^ k)",
@@ -576,15 +737,28 @@
                 "finished": true,
                 "goal": "Li(s + 1,x) = (INT t:[0,x]. Li(s,t) / t)",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "abs(x) < 1",
+                            "latex_cond": "\\left| x \\right| < 1"
+                        },
+                        {
+                            "cond": "s >= 0",
+                            "latex_cond": "s \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(s)",
+                            "latex_cond": "s \\in\\mathbb{Z}"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "s",
-                            "$int"
-                        ],
-                        [
-                            "t",
-                            "$real"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "Li(s + 2,x) = (INT t:[0,x]. Li(s + 1,t) / t)",
@@ -592,6 +766,29 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "abs(x) < 1",
+                                        "latex_cond": "\\left| x \\right| < 1"
+                                    },
+                                    {
+                                        "cond": "s >= 0",
+                                        "latex_cond": "s \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(s)",
+                                        "latex_cond": "s \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "s",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\operatorname{Li}(s + 2,x)",
                                 "start": "Li(s + 2,x)",
                                 "steps": [
@@ -615,6 +812,29 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "abs(x) < 1",
+                                        "latex_cond": "\\left| x \\right| < 1"
+                                    },
+                                    {
+                                        "cond": "s >= 0",
+                                        "latex_cond": "s \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(s)",
+                                        "latex_cond": "s \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "s",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\int_{0}^{x} \\frac{\\operatorname{Li}(s + 1,t)}{t} \\,dt",
                                 "start": "INT t:[0,x]. Li(s + 1,t) / t",
                                 "steps": [
@@ -653,12 +873,6 @@
                                         "latex_res": "\\int_{0}^{x} t ^ {-1} \\sum_{k=1}^{\\infty}{k ^ {-s - 1} t ^ {k}} \\,dt",
                                         "res": "INT t:[0,x]. t ^ (-1) * SUM(k, 1, oo, k ^ (-s - 1) * t ^ k)",
                                         "rule": {
-                                            "fixes": [
-                                                [
-                                                    "k",
-                                                    "$int"
-                                                ]
-                                            ],
                                             "latex_str": "rewriting \\(\\frac{\\sum_{k=1}^{\\infty}{k ^ {-s - 1} t ^ {k}}}{t}\\) to \\(t ^ {-1} \\sum_{k=1}^{\\infty}{k ^ {-s - 1} t ^ {k}}\\)",
                                             "name": "Equation",
                                             "new_expr": "t ^ (-1) * SUM(k, 1, oo, k ^ (-s - 1) * t ^ k)",
@@ -681,12 +895,6 @@
                                         "latex_res": "\\int_{0}^{x} \\sum_{k=1}^{\\infty}{t ^ {-1} (k ^ {-s - 1} t ^ {k})} \\,dt",
                                         "res": "INT t:[0,x]. SUM(k, 1, oo, t ^ (-1) * (k ^ (-s - 1) * t ^ k))",
                                         "rule": {
-                                            "fixes": [
-                                                [
-                                                    "k",
-                                                    "$int"
-                                                ]
-                                            ],
                                             "latex_str": "rewriting \\(t ^ {-1} \\sum_{k=1}^{\\infty}{k ^ {-s - 1} t ^ {k}}\\) to \\(\\sum_{k=1}^{\\infty}{t ^ {-1} (k ^ {-s - 1} t ^ {k})}\\)",
                                             "name": "Equation",
                                             "new_expr": "SUM(k, 1, oo, t ^ (-1) * (k ^ (-s - 1) * t ^ k))",
@@ -826,7 +1034,10 @@
             "fixes": [
                 [
                     "s",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "(D x. Li(2,1 - x)) = log(x) / (1 - x)",
@@ -834,6 +1045,25 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "x < 1",
+                                "latex_cond": "x < 1"
+                            },
+                            {
+                                "cond": "x > 0",
+                                "latex_cond": "x > 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "s",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\frac{d}{dx} \\operatorname{Li}(2,1 - x)",
                         "start": "D x. Li(2,1 - x)",
                         "steps": [
@@ -877,6 +1107,25 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "x < 1",
+                                "latex_cond": "x < 1"
+                            },
+                            {
+                                "cond": "x > 0",
+                                "latex_cond": "x > 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "s",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\frac{\\log{x}}{1 - x}",
                         "start": "log(x) / (1 - x)",
                         "steps": [
@@ -919,12 +1168,6 @@
                                 "latex_res": "(-(-(1 - x)) ^ {-1}) \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (-(1 - x)) ^ {n + 1}}{n + 1}}",
                                 "res": "-((-(1 - x)) ^ (-1)) * SUM(n, 0, oo, (-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1))",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "n",
-                                            "$int"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\(\\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (-(1 - x)) ^ {n + 1}}{n + 1}}}{1 - x}\\) to \\((-(-(1 - x)) ^ {-1}) \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (-(1 - x)) ^ {n + 1}}{n + 1}}\\)",
                                     "name": "Equation",
                                     "new_expr": "-((-(1 - x)) ^ (-1)) * SUM(n, 0, oo, (-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1))",
@@ -943,12 +1186,6 @@
                                 "latex_res": "\\sum_{n=0}^{\\infty}{(-(-(1 - x)) ^ {-1}) (\\frac{(-1) ^ {n} (-(1 - x)) ^ {n + 1}}{n + 1})}",
                                 "res": "SUM(n, 0, oo, -((-(1 - x)) ^ (-1)) * ((-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1)))",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "n",
-                                            "$int"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\((-(-(1 - x)) ^ {-1}) \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (-(1 - x)) ^ {n + 1}}{n + 1}}\\) to \\(\\sum_{n=0}^{\\infty}{(-(-(1 - x)) ^ {-1}) (\\frac{(-1) ^ {n} (-(1 - x)) ^ {n + 1}}{n + 1})}\\)",
                                     "name": "Equation",
                                     "new_expr": "SUM(n, 0, oo, -((-(1 - x)) ^ (-1)) * ((-1) ^ n * (-(1 - x)) ^ (n + 1) / (n + 1)))",
@@ -1102,7 +1339,10 @@
             "fixes": [
                 [
                     "s",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "(D x. -Li(3,1 - x)) = Li(2,-x + 1) / (-x + 1)",
@@ -1110,6 +1350,25 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "x > 0",
+                                "latex_cond": "x > 0"
+                            },
+                            {
+                                "cond": "x < 1",
+                                "latex_cond": "x < 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "s",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\frac{d}{dx} (-\\operatorname{Li}(3,1 - x))",
                         "start": "D x. -Li(3,1 - x)",
                         "steps": [
@@ -1166,6 +1425,25 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "x > 0",
+                                "latex_cond": "x > 0"
+                            },
+                            {
+                                "cond": "x < 1",
+                                "latex_cond": "x < 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "s",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\frac{\\operatorname{Li}(2,-x + 1)}{-x + 1}",
                         "start": "Li(2,-x + 1) / (-x + 1)",
                         "steps": [],
@@ -1194,7 +1472,10 @@
             "fixes": [
                 [
                     "s",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "Li(s,1) = zeta(s)",
@@ -1202,6 +1483,25 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "isInt(s)",
+                                "latex_cond": "s \\in\\mathbb{Z}"
+                            },
+                            {
+                                "cond": "s > 1",
+                                "latex_cond": "s > 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "s",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\operatorname{Li}(s,1)",
                         "start": "Li(s,1)",
                         "steps": [
@@ -1225,6 +1525,25 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "isInt(s)",
+                                "latex_cond": "s \\in\\mathbb{Z}"
+                            },
+                            {
+                                "cond": "s > 1",
+                                "latex_cond": "s > 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "s",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\zeta{(s)}",
                         "start": "zeta(s)",
                         "steps": [
@@ -1301,7 +1620,10 @@
             "fixes": [
                 [
                     "s",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "(INT t:[0,x]. log(-t + 1) ^ 2 / t) = log(x) * log(1 - x) ^ 2 + 2 * log(1 - x) * Li(2,1 - x) - 2 * Li(3,1 - x) + 2 * zeta(3)",
@@ -1309,6 +1631,25 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "x > 0",
+                                "latex_cond": "x > 0"
+                            },
+                            {
+                                "cond": "x < 1",
+                                "latex_cond": "x < 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "s",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\int_{0}^{x} \\frac{\\log^{2}(-t + 1)}{t} \\,dt",
                         "start": "INT t:[0,x]. log(-t + 1) ^ 2 / t",
                         "steps": [
@@ -1459,6 +1800,25 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "x > 0",
+                                "latex_cond": "x > 0"
+                            },
+                            {
+                                "cond": "x < 1",
+                                "latex_cond": "x < 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "s",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\log{x} \\log^{2}(1 - x) + 2 \\log{(1 - x)} \\operatorname{Li}(2,1 - x) - 2 \\operatorname{Li}(3,1 - x) + 2 \\zeta{(3)}",
                         "start": "log(x) * log(1 - x) ^ 2 + 2 * log(1 - x) * Li(2,1 - x) - 2 * Li(3,1 - x) + 2 * zeta(3)",
                         "steps": [
@@ -1497,7 +1857,10 @@
             "fixes": [
                 [
                     "s",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "(D x. Li(2,1 / (1 + x))) = log(x / (1 + x)) / (1 + x)",
@@ -1505,6 +1868,25 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "x > 0",
+                                "latex_cond": "x > 0"
+                            },
+                            {
+                                "cond": "x < 1",
+                                "latex_cond": "x < 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "s",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\frac{d}{dx} \\operatorname{Li}(2,\\frac{1}{1 + x})",
                         "start": "D x. Li(2,1 / (1 + x))",
                         "steps": [
@@ -1548,6 +1930,25 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "x > 0",
+                                "latex_cond": "x > 0"
+                            },
+                            {
+                                "cond": "x < 1",
+                                "latex_cond": "x < 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "s",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\frac{\\log{(\\frac{x}{1 + x})}}{1 + x}",
                         "start": "log(x / (1 + x)) / (1 + x)",
                         "steps": [
@@ -1742,7 +2143,10 @@
             "fixes": [
                 [
                     "s",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "1 / (x + 1) * Li(2,1 / (x + 1)) = (D x. -Li(3,1 / (x + 1)))",
@@ -1750,6 +2154,25 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "x > 0",
+                                "latex_cond": "x > 0"
+                            },
+                            {
+                                "cond": "x < 1",
+                                "latex_cond": "x < 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "s",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\frac{1}{x + 1} \\operatorname{Li}(2,\\frac{1}{x + 1})",
                         "start": "1 / (x + 1) * Li(2,1 / (x + 1))",
                         "steps": [
@@ -1826,6 +2249,25 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "x > 0",
+                                "latex_cond": "x > 0"
+                            },
+                            {
+                                "cond": "x < 1",
+                                "latex_cond": "x < 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "s",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\frac{d}{dx} (-\\operatorname{Li}(3,\\frac{1}{x + 1}))",
                         "start": "D x. -Li(3,1 / (x + 1))",
                         "steps": [
@@ -1891,7 +2333,10 @@
             "fixes": [
                 [
                     "s",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "(INT t:[0,x]. log(t + 1) ^ 2 / t) = log(x) * log(1 + x) ^ 2 - 2/3 * log(1 + x) ^ 3 - 2 * log(1 + x) * Li(2,1 / (1 + x)) - 2 * Li(3,1 / (1 + x)) + 2 * zeta(3)",
@@ -1899,6 +2344,25 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "x > 0",
+                                "latex_cond": "x > 0"
+                            },
+                            {
+                                "cond": "x < 1",
+                                "latex_cond": "x < 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "s",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\int_{0}^{x} \\frac{\\log^{2}(t + 1)}{t} \\,dt",
                         "start": "INT t:[0,x]. log(t + 1) ^ 2 / t",
                         "steps": [
@@ -2189,6 +2653,25 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "x > 0",
+                                "latex_cond": "x > 0"
+                            },
+                            {
+                                "cond": "x < 1",
+                                "latex_cond": "x < 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "s",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\log{x} \\log^{2}(1 + x) - \\frac{2}{3} \\log^{3}(1 + x) - 2 \\log{(1 + x)} \\operatorname{Li}(2,\\frac{1}{1 + x}) - 2 \\operatorname{Li}(3,\\frac{1}{1 + x}) + 2 \\zeta{(3)}",
                         "start": "log(x) * log(1 + x) ^ 2 - 2/3 * log(1 + x) ^ 3 - 2 * log(1 + x) * Li(2,1 / (1 + x)) - 2 * Li(3,1 / (1 + x)) + 2 * zeta(3)",
                         "steps": [

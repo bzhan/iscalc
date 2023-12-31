@@ -13,6 +13,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{1}{x ^ {2} + a ^ {2}} \\,dx",
                         "start": "INT x:[0,oo]. 1 / (x ^ 2 + a ^ 2)",
                         "steps": [
@@ -134,6 +140,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{\\pi}{2 a}",
                         "start": "pi / (2 * a)",
                         "steps": [],

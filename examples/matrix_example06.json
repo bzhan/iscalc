@@ -5,7 +5,10 @@
             "fixes": [
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "1 - cos(a) = SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))",
@@ -13,6 +16,15 @@
             "proof": {
                 "calcs": [
                     {
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "1 - \\cos{a}",
                         "start": "1 - cos(a)",
                         "steps": [
@@ -76,12 +88,6 @@
                                 "latex_res": "\\sum_{i=1}^{\\infty}{-1 (\\frac{(-1) ^ {i} a ^ {2 i}}{(2 i)!})}",
                                 "res": "SUM(i, 1, oo, -1 * ((-1) ^ i * a ^ (2 * i) / factorial(2 * i)))",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "i",
-                                            "$int"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\(-\\sum_{i=1}^{\\infty}{\\frac{a ^ {2 i} (-1) ^ {i}}{(2 i)!}}\\) to \\(\\sum_{i=1}^{\\infty}{-1 (\\frac{(-1) ^ {i} a ^ {2 i}}{(2 i)!})}\\)",
                                     "name": "Equation",
                                     "new_expr": "SUM(i, 1, oo, -1 * ((-1) ^ i * a ^ (2 * i) / factorial(2 * i)))",
@@ -143,6 +149,15 @@
                         "type": "Calculation"
                     },
                     {
+                        "fixes": [
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} a ^ {2 (n + 1)}}{(2 (n + 1))!}}",
                         "start": "SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))",
                         "steps": [],

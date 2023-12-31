@@ -13,6 +13,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{\\infty} \\log{(\\frac{a ^ {2}}{x ^ {2}} + 1)} \\,dx",
                         "start": "INT x:[0,oo]. log(a ^ 2 / x ^ 2 + 1)",
                         "steps": [
@@ -96,6 +102,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "a\\cdot \\pi",
                         "start": "a * pi",
                         "steps": [],

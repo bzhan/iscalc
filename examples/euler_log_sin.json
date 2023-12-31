@@ -37,6 +37,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "J{(a)}",
                         "start": "J(a)",
                         "steps": [
@@ -170,6 +176,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "I{(a)}",
                         "start": "I(a)",
                         "steps": [
@@ -213,6 +225,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "J{(a)}",
                         "start": "J(a)",
                         "steps": [
@@ -393,6 +411,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{\\pi}{2} \\log{(\\frac{2}{a})} + 2 I{(a)}",
                         "start": "pi / 2 * log(2 / a) + 2 * I(a)",
                         "steps": [
@@ -452,6 +476,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "I{(a)}",
                         "start": "I(a)",
                         "steps": [
@@ -524,6 +554,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{\\pi}{2} \\log{(\\frac{a}{2})}",
                         "start": "pi / 2 * log(a / 2)",
                         "steps": [

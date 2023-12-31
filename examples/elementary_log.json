@@ -31,6 +31,24 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "m >= 0",
+                                "latex_cond": "m \\ge 0"
+                            },
+                            {
+                                "cond": "n >= 0",
+                                "latex_cond": "n \\ge 0"
+                            },
+                            {
+                                "cond": "isInt(n)",
+                                "latex_cond": "n \\in\\mathbb{Z}"
+                            },
+                            {
+                                "cond": "isInt(m)",
+                                "latex_cond": "m \\in\\mathbb{Z}"
+                            }
+                        ],
                         "latex_start": "I(m,n)",
                         "start": "I(m,n)",
                         "steps": [
@@ -110,6 +128,24 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "m >= 0",
+                                "latex_cond": "m \\ge 0"
+                            },
+                            {
+                                "cond": "n >= 0",
+                                "latex_cond": "n \\ge 0"
+                            },
+                            {
+                                "cond": "isInt(n)",
+                                "latex_cond": "n \\in\\mathbb{Z}"
+                            },
+                            {
+                                "cond": "isInt(m)",
+                                "latex_cond": "m \\in\\mathbb{Z}"
+                            }
+                        ],
                         "latex_start": "(-\\frac{n}{m + 1}) I(m,n - 1)",
                         "start": "-(n / (m + 1)) * I(m,n - 1)",
                         "steps": [],
@@ -146,26 +182,56 @@
             "fixes": [
                 [
                     "m",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ],
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "I(m,n) = (-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1))",
             "latex_goal": "I(m,n) = (-1) ^ {n} (\\frac{n!}{(m + 1) ^ {n + 1}})",
             "proof": {
                 "base_case": {
+                    "conds": [
+                        {
+                            "cond": "m >= 0",
+                            "latex_cond": "m \\ge 0"
+                        },
+                        {
+                            "cond": "0 >= 0",
+                            "latex_cond": "0 \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(0)",
+                            "latex_cond": "0 \\in\\mathbb{Z}"
+                        },
+                        {
+                            "cond": "isInt(m)",
+                            "latex_cond": "m \\in\\mathbb{Z}"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "m",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ],
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "I(m,0) = 1 / (m + 1)",
@@ -173,6 +239,40 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "m >= 0",
+                                        "latex_cond": "m \\ge 0"
+                                    },
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(0)",
+                                        "latex_cond": "0 \\in\\mathbb{Z}"
+                                    },
+                                    {
+                                        "cond": "isInt(m)",
+                                        "latex_cond": "m \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "I(m,0)",
                                 "start": "I(m,0)",
                                 "steps": [
@@ -220,6 +320,40 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "m >= 0",
+                                        "latex_cond": "m \\ge 0"
+                                    },
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(0)",
+                                        "latex_cond": "0 \\in\\mathbb{Z}"
+                                    },
+                                    {
+                                        "cond": "isInt(m)",
+                                        "latex_cond": "m \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\frac{1}{m + 1}",
                                 "start": "1 / (m + 1)",
                                 "steps": [],
@@ -236,15 +370,39 @@
                 "finished": true,
                 "goal": "I(m,n) = (-1) ^ n * (factorial(n) / (m + 1) ^ (n + 1))",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "m >= 0",
+                            "latex_cond": "m \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(m)",
+                            "latex_cond": "m \\in\\mathbb{Z}"
+                        },
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(n)",
+                            "latex_cond": "n \\in\\mathbb{Z}"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "m",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ],
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "I(m,n + 1) = -((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
@@ -252,6 +410,40 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "m >= 0",
+                                        "latex_cond": "m \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(m)",
+                                        "latex_cond": "m \\in\\mathbb{Z}"
+                                    },
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(n)",
+                                        "latex_cond": "n \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "I(m,n + 1)",
                                 "start": "I(m,n + 1)",
                                 "steps": [
@@ -260,6 +452,22 @@
                                         "res": "-((n + 1) / (m + 1)) * I(m,n + 1 - 1)",
                                         "rule": {
                                             "eq": "I(m,n) = -(n / (m + 1)) * I(m,n - 1)",
+                                            "eq_fixes": [
+                                                [
+                                                    "m",
+                                                    {
+                                                        "symbol_type": "var",
+                                                        "type": "$real"
+                                                    }
+                                                ],
+                                                [
+                                                    "n",
+                                                    {
+                                                        "symbol_type": "var",
+                                                        "type": "$real"
+                                                    }
+                                                ]
+                                            ],
                                             "latex_str": "apply equation \\(I(m,n) = (-\\frac{n}{m + 1}) I(m,n - 1)\\)",
                                             "name": "ApplyEquation",
                                             "source": "I(m,n + 1)",
@@ -333,6 +541,40 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "m >= 0",
+                                        "latex_cond": "m \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(m)",
+                                        "latex_cond": "m \\in\\mathbb{Z}"
+                                    },
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    },
+                                    {
+                                        "cond": "isInt(n)",
+                                        "latex_cond": "n \\in\\mathbb{Z}"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "-(-1) ^ {n} (m + 1) ^ {-n - 2} (n + 1)!",
                                 "start": "-((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
                                 "steps": [],
@@ -380,11 +622,17 @@
             "fixes": [
                 [
                     "m",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ],
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "(INT x:[0,a]. x ^ m * log(x) ^ n) = a ^ (m + 1) * SUM(k, 0, n, (-1) ^ k * binom(n,k) * factorial(k) * log(a) ^ (n - k) / (m + 1) ^ (k + 1))",
@@ -392,6 +640,44 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "m >= 0",
+                                "latex_cond": "m \\ge 0"
+                            },
+                            {
+                                "cond": "n >= 0",
+                                "latex_cond": "n \\ge 0"
+                            },
+                            {
+                                "cond": "isInt(n)",
+                                "latex_cond": "n \\in\\mathbb{Z}"
+                            },
+                            {
+                                "cond": "isInt(m)",
+                                "latex_cond": "m \\in\\mathbb{Z}"
+                            },
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "m",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ],
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\int_{0}^{a} x ^ {m} \\log^{n}(x) \\,dx",
                         "start": "INT x:[0,a]. x ^ m * log(x) ^ n",
                         "steps": [
@@ -517,12 +803,6 @@
                                 "latex_res": "a ^ {m + 1} (\\int_{0}^{1} \\sum_{k=0}^{n}{y ^ {m} \\binom{n}{k} \\log^{k}(y) \\log^{n - k}(a)} \\,dy)",
                                 "res": "a ^ (m + 1) * (INT y:[0,1]. SUM(k, 0, n, y ^ m * binom(n,k) * log(y) ^ k * log(a) ^ (n - k)))",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "k",
-                                            "$int"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\(y ^ {m} \\sum_{k=0}^{n}{\\binom{n}{k} \\log^{k}(y) \\log^{n - k}(a)}\\) to \\(\\sum_{k=0}^{n}{y ^ {m} \\binom{n}{k} \\log^{k}(y) \\log^{n - k}(a)}\\)",
                                     "name": "Equation",
                                     "new_expr": "SUM(k, 0, n, y ^ m * binom(n,k) * log(y) ^ k * log(a) ^ (n - k))",
@@ -624,6 +904,44 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "m >= 0",
+                                "latex_cond": "m \\ge 0"
+                            },
+                            {
+                                "cond": "n >= 0",
+                                "latex_cond": "n \\ge 0"
+                            },
+                            {
+                                "cond": "isInt(n)",
+                                "latex_cond": "n \\in\\mathbb{Z}"
+                            },
+                            {
+                                "cond": "isInt(m)",
+                                "latex_cond": "m \\in\\mathbb{Z}"
+                            },
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "m",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ],
+                            [
+                                "n",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "a ^ {m + 1} \\sum_{k=0}^{n}{\\frac{(-1) ^ {k} \\binom{n}{k} k! \\log^{n - k}(a)}{(m + 1) ^ {k + 1}}}",
                         "start": "a ^ (m + 1) * SUM(k, 0, n, (-1) ^ k * binom(n,k) * factorial(k) * log(a) ^ (n - k) / (m + 1) ^ (k + 1))",
                         "steps": [

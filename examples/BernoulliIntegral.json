@@ -12,11 +12,39 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
             "goal": "converges(SUM(k, 0, oo, abs(INT x:[0,1]. (c * x ^ a * log(x)) ^ k / factorial(k))))",
             "latex_goal": "\\sum_{k=0}^{\\infty}{\\left| \\int_{0}^{1} \\frac{(c x ^ {a} \\log{x}) ^ {k}}{k!} \\,dx \\right|}\\quad\\mathrm{converges}",
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "c != 0",
+                                "latex_cond": "c \\neq 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\sum_{k=0}^{\\infty}{\\left| \\int_{0}^{1} \\frac{(c x ^ {a} \\log{x}) ^ {k}}{k!} \\,dx \\right|}",
                         "start": "SUM(k, 0, oo, abs(INT x:[0,1]. (c * x ^ a * log(x)) ^ k / factorial(k)))",
                         "steps": [
@@ -155,11 +183,39 @@
                 }
             ],
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
             "goal": "(INT x:[0,1]. x ^ (c * x ^ a)) = SUM(k, 0, oo, (-c) ^ k / (k * a + 1) ^ (k + 1))",
             "latex_goal": "\\int_{0}^{1} x ^ {c x ^ {a}} \\,dx = \\sum_{k=0}^{\\infty}{\\frac{(-c) ^ {k}}{(k a + 1) ^ {k + 1}}}",
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "c != 0",
+                                "latex_cond": "c \\neq 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\int_{0}^{1} x ^ {c x ^ {a}} \\,dx",
                         "start": "INT x:[0,1]. x ^ (c * x ^ a)",
                         "steps": [
@@ -358,6 +414,25 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "c != 0",
+                                "latex_cond": "c \\neq 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\sum_{k=0}^{\\infty}{\\frac{(-c) ^ {k}}{(k a + 1) ^ {k + 1}}}",
                         "start": "SUM(k, 0, oo, (-c) ^ k / (k * a + 1) ^ (k + 1))",
                         "steps": [
@@ -389,11 +464,29 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
             "goal": "(INT x:[0,1]. x ^ x) = SUM(k, 0, oo, (-1) ^ k * (k + 1) ^ (-k - 1))",
             "latex_goal": "\\int_{0}^{1} x ^ {x} \\,dx = \\sum_{k=0}^{\\infty}{(-1) ^ {k} (k + 1) ^ {-k - 1}}",
             "proof": {
                 "calcs": [
                     {
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\int_{0}^{1} x ^ {x} \\,dx",
                         "start": "INT x:[0,1]. x ^ x",
                         "steps": [
@@ -452,6 +545,15 @@
                         "type": "Calculation"
                     },
                     {
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\sum_{k=0}^{\\infty}{(-1) ^ {k} (k + 1) ^ {-k - 1}}",
                         "start": "SUM(k, 0, oo, (-1) ^ k * (k + 1) ^ (-k - 1))",
                         "steps": [],
@@ -467,11 +569,29 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
             "goal": "(INT x:[0,1]. x ^ -x) = SUM(k, 0, oo, (k + 1) ^ (-k - 1))",
             "latex_goal": "\\int_{0}^{1} x ^ {-x} \\,dx = \\sum_{k=0}^{\\infty}{(k + 1) ^ {-k - 1}}",
             "proof": {
                 "calcs": [
                     {
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\int_{0}^{1} x ^ {-x} \\,dx",
                         "start": "INT x:[0,1]. x ^ -x",
                         "steps": [
@@ -530,6 +650,15 @@
                         "type": "Calculation"
                     },
                     {
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\sum_{k=0}^{\\infty}{(k + 1) ^ {-k - 1}}",
                         "start": "SUM(k, 0, oo, (k + 1) ^ (-k - 1))",
                         "steps": [],
@@ -545,11 +674,29 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
             "goal": "(INT x:[0,1]. x ^ (x ^ 2)) = SUM(k, 0, oo, (-1) ^ k * (2 * k + 1) ^ (-k - 1))",
             "latex_goal": "\\int_{0}^{1} x ^ {x ^ {2}} \\,dx = \\sum_{k=0}^{\\infty}{(-1) ^ {k} (2 k + 1) ^ {-k - 1}}",
             "proof": {
                 "calcs": [
                     {
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\int_{0}^{1} x ^ {x ^ {2}} \\,dx",
                         "start": "INT x:[0,1]. x ^ (x ^ 2)",
                         "steps": [
@@ -608,6 +755,15 @@
                         "type": "Calculation"
                     },
                     {
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\sum_{k=0}^{\\infty}{(-1) ^ {k} (2 k + 1) ^ {-k - 1}}",
                         "start": "SUM(k, 0, oo, (-1) ^ k * (2 * k + 1) ^ (-k - 1))",
                         "steps": [],
@@ -623,11 +779,29 @@
         },
         {
             "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    {
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
             "goal": "(INT x:[0,1]. x ^ sqrt(x)) = SUM(k, 0, oo, (-1) ^ k * (2 / (k + 2)) ^ (k + 1))",
             "latex_goal": "\\int_{0}^{1} x ^ {\\sqrt{x}} \\,dx = \\sum_{k=0}^{\\infty}{(-1) ^ {k} (\\frac{2}{k + 2}) ^ {k + 1}}",
             "proof": {
                 "calcs": [
                     {
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\int_{0}^{1} x ^ {\\sqrt{x}} \\,dx",
                         "start": "INT x:[0,1]. x ^ sqrt(x)",
                         "steps": [
@@ -723,6 +897,15 @@
                         "type": "Calculation"
                     },
                     {
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\sum_{k=0}^{\\infty}{(-1) ^ {k} (\\frac{2}{k + 2}) ^ {k + 1}}",
                         "start": "SUM(k, 0, oo, (-1) ^ k * (2 / (k + 2)) ^ (k + 1))",
                         "steps": [],

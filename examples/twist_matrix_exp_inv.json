@@ -5,11 +5,28 @@
             "fixes": [
                 [
                     "R",
-                    "$tensor($real, 3, 3)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 3)"
+                    }
                 ],
                 [
                     "p",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
+                ],
+                [
+                    "hm",
+                    {
+                        "args_name": [
+                            "R",
+                            "p"
+                        ],
+                        "symbol_type": "fun",
+                        "type": "$fun($tensor($real, 3, 3), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                    }
                 ]
             ],
             "latex_eq": "hm(R,p) = \\left[\\begin{array}{c:c}R & p\\\\ \\hdashline \\mathbf{0}_{1 \\times 3} & \\mathbf{1}_{1 \\times 1}\\\\\\end{array}\\right]",
@@ -27,15 +44,36 @@
             "fixes": [
                 [
                     "t",
-                    "$real"
+                    {
+                        "symbol_type": "var",
+                        "type": "$real"
+                    }
                 ],
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ],
                 [
                     "v",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
+                ],
+                [
+                    "hmf",
+                    {
+                        "args_name": [
+                            "t",
+                            "w",
+                            "v"
+                        ],
+                        "symbol_type": "fun",
+                        "type": "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                    }
                 ]
             ],
             "latex_eq": "hmf(t,w,v) = hm(\\mathbf{1}_{3 \\times 3},t v)",
@@ -53,15 +91,36 @@
             "fixes": [
                 [
                     "t",
-                    "$real"
+                    {
+                        "symbol_type": "var",
+                        "type": "$real"
+                    }
                 ],
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ],
                 [
                     "v",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
+                ],
+                [
+                    "hmf",
+                    {
+                        "args_name": [
+                            "t",
+                            "w",
+                            "v"
+                        ],
+                        "symbol_type": "fun",
+                        "type": "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                    }
                 ]
             ],
             "latex_eq": "hmf(t,w,v) = hm(e^{t \\hat{w}},(\\mathbf{1}_{3 \\times 3} - e^{t \\hat{w}}) (\\hat{w} v) + w w^{\\text{T}} v t)",
@@ -79,11 +138,17 @@
             "fixes": [
                 [
                     "t",
-                    "$real"
+                    {
+                        "symbol_type": "var",
+                        "type": "$real"
+                    }
                 ],
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ]
             ],
             "goal": "exp(t * hat(w)) * exp(-(t * hat(w))) = unit_matrix(3)",
@@ -91,6 +156,28 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "norm(w) = 1",
+                                "latex_cond": "\\|w\\| = 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "t",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$real"
+                                }
+                            ],
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ]
+                        ],
                         "latex_start": "e^{t \\hat{w}} e^{-t \\hat{w}}",
                         "start": "exp(t * hat(w)) * exp(-(t * hat(w)))",
                         "steps": [
@@ -165,6 +252,22 @@
                                 "res": "(-cos(t) + 1) ^ 2 * ((-1) ^ 1 * hat(w) ^ 2) + (-(2 * cos(t)) + 2) * hat(w) ^ 2 - sin(t) ^ 2 * hat(w) ^ 2 + unit_matrix(3)",
                                 "rule": {
                                     "eq": "hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2",
+                                    "eq_fixes": [
+                                        [
+                                            "w",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$tensor($real, 3, 1)"
+                                            }
+                                        ],
+                                        [
+                                            "n",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(\\hat{w} ^ {2 (n + 1)} = (-1) ^ {n} \\hat{w} ^ {2}\\)",
                                     "name": "ApplyEquation",
                                     "source": "hat(w) ^ (2 * (1 + 1))",
@@ -242,6 +345,28 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "norm(w) = 1",
+                                "latex_cond": "\\|w\\| = 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "t",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$real"
+                                }
+                            ],
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\mathbf{1}_{3 \\times 3}",
                         "start": "unit_matrix(3)",
                         "steps": [],
@@ -266,11 +391,17 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ],
                 [
                     "n",
-                    "$int"
+                    {
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
                 ]
             ],
             "goal": "hat(w) ^ n * w = zero_matrix(3,1)",
@@ -324,15 +455,27 @@
             ],
             "proof": {
                 "base_case": {
+                    "conds": [
+                        {
+                            "cond": "1 >= 1",
+                            "latex_cond": "1 \\ge 1"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "w",
-                            "$tensor($real, 3, 1)"
+                            {
+                                "symbol_type": "var",
+                                "type": "$tensor($real, 3, 1)"
+                            }
                         ],
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "hat(w) * w = zero_matrix(3,1)",
@@ -340,6 +483,28 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "1 >= 1",
+                                        "latex_cond": "1 \\ge 1"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "w",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\hat{w} w",
                                 "start": "hat(w) * w",
                                 "steps": [
@@ -366,6 +531,28 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "1 >= 1",
+                                        "latex_cond": "1 \\ge 1"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "w",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\mathbf{0}_{3 \\times 1}",
                                 "start": "zero_matrix(3,1)",
                                 "steps": [
@@ -392,15 +579,27 @@
                 "finished": true,
                 "goal": "hat(w) ^ n * w = zero_matrix(3,1)",
                 "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "n >= 1",
+                            "latex_cond": "n \\ge 1"
+                        }
+                    ],
                     "finished": true,
                     "fixes": [
                         [
                             "w",
-                            "$tensor($real, 3, 1)"
+                            {
+                                "symbol_type": "var",
+                                "type": "$tensor($real, 3, 1)"
+                            }
                         ],
                         [
                             "n",
-                            "$int"
+                            {
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
                         ]
                     ],
                     "goal": "hat(w) ^ (n + 1) * w = zero_matrix(3,1)",
@@ -455,6 +654,28 @@
                     "proof": {
                         "calcs": [
                             {
+                                "conds": [
+                                    {
+                                        "cond": "n >= 1",
+                                        "latex_cond": "n \\ge 1"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "w",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\hat{w} ^ {n + 1} w",
                                 "start": "hat(w) ^ (n + 1) * w",
                                 "steps": [
@@ -505,6 +726,28 @@
                                 "type": "Calculation"
                             },
                             {
+                                "conds": [
+                                    {
+                                        "cond": "n >= 1",
+                                        "latex_cond": "n \\ge 1"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "w",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
                                 "latex_start": "\\mathbf{0}_{3 \\times 1}",
                                 "start": "zero_matrix(3,1)",
                                 "steps": [],
@@ -538,7 +781,10 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ]
             ],
             "goal": "exp(t * hat(w)) * w = w",
@@ -546,6 +792,21 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "norm(w) = 1",
+                                "latex_cond": "\\|w\\| = 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ]
+                        ],
                         "latex_start": "e^{t \\hat{w}} w",
                         "start": "exp(t * hat(w)) * w",
                         "steps": [
@@ -554,6 +815,29 @@
                                 "res": "(unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2) * w",
                                 "rule": {
                                     "eq": "exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * hat(w) ^ 2",
+                                    "eq_fixes": [
+                                        [
+                                            "w",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$tensor($real, 3, 1)"
+                                            }
+                                        ],
+                                        [
+                                            "n",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ],
+                                        [
+                                            "t",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$real"
+                                            }
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(e^{t \\hat{w}} = \\mathbf{1}_{3 \\times 3} + \\sin{t} \\hat{w} + (1 - \\cos{t}) \\hat{w} ^ {2}\\)",
                                     "name": "ApplyEquation",
                                     "source": "exp(t * hat(w))",
@@ -599,6 +883,22 @@
                                 "res": "(-cos(t) + 1) * zero_matrix(3,1) + sin(t) * (hat(w) ^ 1 * w) + unit_matrix(3) * w",
                                 "rule": {
                                     "eq": "hat(w) ^ n * w = zero_matrix(3,1)",
+                                    "eq_fixes": [
+                                        [
+                                            "w",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$tensor($real, 3, 1)"
+                                            }
+                                        ],
+                                        [
+                                            "n",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(\\hat{w} ^ {n} w = \\mathbf{0}_{3 \\times 1}\\)",
                                     "name": "ApplyEquation",
                                     "source": "hat(w) ^ 2 * w",
@@ -611,6 +911,22 @@
                                 "res": "(-cos(t) + 1) * zero_matrix(3,1) + sin(t) * zero_matrix(3,1) + unit_matrix(3) * w",
                                 "rule": {
                                     "eq": "hat(w) ^ n * w = zero_matrix(3,1)",
+                                    "eq_fixes": [
+                                        [
+                                            "w",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$tensor($real, 3, 1)"
+                                            }
+                                        ],
+                                        [
+                                            "n",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(\\hat{w} ^ {n} w = \\mathbf{0}_{3 \\times 1}\\)",
                                     "name": "ApplyEquation",
                                     "source": "hat(w) ^ 1 * w",
@@ -631,6 +947,21 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "norm(w) = 1",
+                                "latex_cond": "\\|w\\| = 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ]
+                        ],
                         "latex_start": "w",
                         "start": "w",
                         "steps": [],
@@ -655,11 +986,17 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ],
                 [
                     "v",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ]
             ],
             "goal": "hmf(t,w,v) * hmf(-t,w,v) = unit_matrix(4)",
@@ -667,6 +1004,28 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "norm(w) = 1",
+                                "latex_cond": "\\|w\\| = 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ],
+                            [
+                                "v",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ]
+                        ],
                         "latex_start": "hmf(t,w,v) hmf(-t,w,v)",
                         "start": "hmf(t,w,v) * hmf(-t,w,v)",
                         "steps": [
@@ -812,6 +1171,28 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "norm(w) = 1",
+                                "latex_cond": "\\|w\\| = 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ],
+                            [
+                                "v",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\mathbf{1}_{4 \\times 4}",
                         "start": "unit_matrix(4)",
                         "steps": [],
@@ -836,11 +1217,17 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ],
                 [
                     "v",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ]
             ],
             "goal": "hmf(t,w,v) * hmf(-t,w,v) = unit_matrix(4)",
@@ -848,6 +1235,28 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "norm(w) = 0",
+                                "latex_cond": "\\|w\\| = 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ],
+                            [
+                                "v",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ]
+                        ],
                         "latex_start": "hmf(t,w,v) hmf(-t,w,v)",
                         "start": "hmf(t,w,v) * hmf(-t,w,v)",
                         "steps": [
@@ -908,6 +1317,28 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "norm(w) = 0",
+                                "latex_cond": "\\|w\\| = 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ],
+                            [
+                                "v",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\mathbf{1}_{4 \\times 4}",
                         "start": "unit_matrix(4)",
                         "steps": [],

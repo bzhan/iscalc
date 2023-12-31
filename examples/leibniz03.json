@@ -228,6 +228,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "I(t) > 0",
+                                "latex_cond": "I{(t)} > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{d}{dt} (\\log{(I{(t)})} + \\frac{t ^ {2}}{2})",
                         "start": "D t. log(I(t)) + t ^ 2 / 2",
                         "steps": [
@@ -271,6 +277,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "I(t) > 0",
+                                "latex_cond": "I{(t)} > 0"
+                            }
+                        ],
                         "latex_start": "0",
                         "start": "0",
                         "steps": [],
@@ -418,6 +430,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "I(t) > 0",
+                                "latex_cond": "I{(t)} > 0"
+                            }
+                        ],
                         "latex_start": "\\log{(I{(t)})}",
                         "start": "log(I(t))",
                         "steps": [
@@ -458,6 +476,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "I(t) > 0",
+                                "latex_cond": "I{(t)} > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{-t ^ {2}}{2} + \\log{(\\sqrt{\\frac{\\pi}{2}})}",
                         "start": "-(t ^ 2) / 2 + log(sqrt(pi / 2))",
                         "steps": [
@@ -558,6 +582,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "I(t) > 0",
+                                "latex_cond": "I{(t)} > 0"
+                            }
+                        ],
                         "latex_start": "\\int_{-\\infty}^{\\infty} e^{-x ^ {2}/2} \\cos{(s + t x)} \\,dx",
                         "start": "INT x:[-oo,oo]. exp(-(x ^ 2) / 2) * cos(s + t * x)",
                         "steps": [
@@ -770,6 +800,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "I(t) > 0",
+                                "latex_cond": "I{(t)} > 0"
+                            }
+                        ],
                         "latex_start": "\\sqrt{2 \\pi} e^{-t ^ {2}/2} \\cos{s}",
                         "start": "sqrt(2 * pi) * exp(-(t ^ 2) / 2) * cos(s)",
                         "steps": [],

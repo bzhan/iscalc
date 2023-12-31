@@ -68,6 +68,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "u > 0",
+                                "latex_cond": "u > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{d}{du} I{(u)}",
                         "start": "D u. I(u)",
                         "steps": [
@@ -288,6 +294,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "u > 0",
+                                "latex_cond": "u > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{1}{1 + u ^ {2}} (\\frac{\\pi}{4} - \\frac{u}{\\sqrt{1 + 2 u ^ {2}}} \\tan^{-1}{(\\frac{u}{\\sqrt{1 + 2 u ^ {2}}})})",
                         "start": "1 / (1 + u ^ 2) * (pi / 4 - u / sqrt(1 + 2 * u ^ 2) * atan(u / sqrt(1 + 2 * u ^ 2)))",
                         "steps": [

@@ -13,6 +13,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "abs(y) < 1",
+                                "latex_cond": "\\left| y \\right| < 1"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{1} \\frac{1}{(1 + y x) \\sqrt{1 - x ^ {2}}} \\,dx",
                         "start": "INT x:[0,1]. 1 / ((1 + y * x) * sqrt(1 - x ^ 2))",
                         "steps": [
@@ -467,6 +473,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "abs(y) < 1",
+                                "latex_cond": "\\left| y \\right| < 1"
+                            }
+                        ],
                         "latex_start": "\\frac{2}{\\sqrt{-y ^ {2} + 1}} (\\tan^{-1}{(\\frac{y + 1}{\\sqrt{-y ^ {2} + 1}})} - \\tan^{-1}{(\\frac{y}{\\sqrt{-y ^ {2} + 1}})})",
                         "start": "2 / sqrt(-(y ^ 2) + 1) * (atan((y + 1) / sqrt(-(y ^ 2) + 1)) - atan(y / sqrt(-(y ^ 2) + 1)))",
                         "steps": [],

@@ -704,10 +704,11 @@ def reduce_inf_limit(e: Expr, var_name: str, ctx: Context) -> Expr:
 
     """
     fixes = ctx.get_fixes()
+    var_type = expr.RealType
     if var_name in fixes:
-        var_type = fixes[var_name]
-    else:
-        var_type = expr.RealType
+        for info in fixes[var_name]:
+            if info.is_binding_var():
+                var_type = info.get_type()
     l = limit_of_expr(e, var_name, ctx)
     if l.e is not None:
         return l.e

@@ -13,6 +13,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{1}{1 + e^{a x}} \\,dx",
                         "start": "INT x:[0,oo]. 1 / (1 + exp(a * x))",
                         "steps": [
@@ -136,6 +142,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{\\log{(2)}}{a}",
                         "start": "log(2) / a",
                         "steps": [],

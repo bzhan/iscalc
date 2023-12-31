@@ -17,6 +17,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "m >= 1",
+                                "latex_cond": "m \\ge 1"
+                            },
+                            {
+                                "cond": "isInt(m)",
+                                "latex_cond": "m \\in\\mathbb{Z}"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{\\infty} (x ^ {4} + 1) ^ {-m} \\,dx",
                         "start": "INT x:[0,oo]. (x ^ 4 + 1) ^ -m",
                         "steps": [
@@ -81,12 +91,6 @@
                                 "latex_res": "4 m ((\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx))",
                                 "res": "4 * m * ((INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m) - (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1)))",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\(\\int_{0}^{\\infty} \\frac{x ^ {4} + 1}{(x ^ {4} + 1) ^ {m + 1}} - \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx\\) to \\((\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx)\\)",
                                     "name": "Equation",
                                     "new_expr": "(INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m) - (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1))",
@@ -99,6 +103,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "m >= 1",
+                                "latex_cond": "m \\ge 1"
+                            },
+                            {
+                                "cond": "isInt(m)",
+                                "latex_cond": "m \\in\\mathbb{Z}"
+                            }
+                        ],
                         "latex_start": "4 m ((\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx))",
                         "start": "4 * m * ((INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m) - (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1)))",
                         "steps": [],
@@ -172,12 +186,6 @@
                             "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx = \\frac{4 m - 1}{4 m} (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx)",
                             "res": "(INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1)) = (4 * m - 1) / (4 * m) * (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m)",
                             "rule": {
-                                "fixes": [
-                                    [
-                                        "x",
-                                        "$real"
-                                    ]
-                                ],
                                 "latex_str": "rewriting \\(-\\frac{1}{4 m} (\\int_{0}^{\\infty} (x ^ {4} + 1) ^ {-m} \\,dx) + (\\int_{0}^{\\infty} (x ^ {4} + 1) ^ {-m} \\,dx)\\) to \\(\\frac{4 m - 1}{4 m} (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx)\\)",
                                 "name": "Equation",
                                 "new_expr": "(4 * m - 1) / (4 * m) * (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m)",

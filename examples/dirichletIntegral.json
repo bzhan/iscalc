@@ -29,6 +29,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "y > 0",
+                                "latex_cond": "y > 0"
+                            },
+                            {
+                                "cond": "a != 0",
+                                "latex_cond": "a \\neq 0"
+                            }
+                        ],
                         "latex_start": "\\frac{d}{dy} g(y,a)",
                         "start": "D y. g(y,a)",
                         "steps": [
@@ -100,6 +110,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "y > 0",
+                                "latex_cond": "y > 0"
+                            },
+                            {
+                                "cond": "a != 0",
+                                "latex_cond": "a \\neq 0"
+                            }
+                        ],
                         "latex_start": "\\frac{-a}{a ^ {2} + y ^ {2}}",
                         "start": "-a / (a ^ 2 + y ^ 2)",
                         "steps": [
@@ -312,6 +332,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "y > 0",
+                                "latex_cond": "y > 0"
+                            }
+                        ],
                         "latex_start": "\\lim\\limits_{y\\to \\infty} g(y,a)",
                         "start": "LIM {y -> oo}. g(y,a)",
                         "steps": [
@@ -349,6 +375,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "y > 0",
+                                "latex_cond": "y > 0"
+                            }
+                        ],
                         "latex_start": "0",
                         "start": "0",
                         "steps": [],

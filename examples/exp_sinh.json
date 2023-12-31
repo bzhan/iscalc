@@ -13,6 +13,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "p > 3",
+                                "latex_cond": "p > 3"
+                            }
+                        ],
                         "latex_start": "9 - 10 p ^ {2} + p ^ {4}",
                         "start": "9 - 10 * p ^ 2 + p ^ 4",
                         "steps": [
@@ -32,6 +38,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "p > 3",
+                                "latex_cond": "p > 3"
+                            }
+                        ],
                         "latex_start": "0",
                         "start": "0",
                         "steps": [],
@@ -58,6 +70,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "p > 3",
+                                "latex_cond": "p > 3"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{\\infty} e^{(-p) t} \\sinh{t} ^ {3} \\,dt",
                         "start": "INT t:[0,oo]. exp(-p * t) * sinh(t) ^ 3",
                         "steps": [
@@ -205,6 +223,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "p > 3",
+                                "latex_cond": "p > 3"
+                            }
+                        ],
                         "latex_start": "\\frac{6}{9 - 10 p ^ {2} + p ^ {4}}",
                         "start": "6 / (9 - 10 * p ^ 2 + p ^ 4)",
                         "steps": [],

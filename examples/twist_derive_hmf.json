@@ -5,11 +5,28 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ],
                 [
                     "v",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
+                ],
+                [
+                    "twist",
+                    {
+                        "args_name": [
+                            "w",
+                            "v"
+                        ],
+                        "symbol_type": "fun",
+                        "type": "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"
+                    }
                 ]
             ],
             "latex_eq": "twist(w,v) = hat({\\left[\\begin{array}{c}w\\\\ \\hdashline v\\\\\\end{array}\\right]})",
@@ -27,11 +44,17 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ],
                 [
                     "v",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ]
             ],
             "goal": "(D t. hmf(t,w,v)) = twist(w,v) * hmf(t,w,v)",
@@ -39,6 +62,28 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "norm(w) = 0",
+                                "latex_cond": "\\|w\\| = 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ],
+                            [
+                                "v",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\frac{d}{dt} hmf(t,w,v)",
                         "start": "D t. hmf(t,w,v)",
                         "steps": [
@@ -89,6 +134,28 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "norm(w) = 0",
+                                "latex_cond": "\\|w\\| = 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ],
+                            [
+                                "v",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ]
+                        ],
                         "latex_start": "twist(w,v) hmf(t,w,v)",
                         "start": "twist(w,v) * hmf(t,w,v)",
                         "steps": [
@@ -178,11 +245,17 @@
             "fixes": [
                 [
                     "t",
-                    "$real"
+                    {
+                        "symbol_type": "var",
+                        "type": "$real"
+                    }
                 ],
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ]
             ],
             "goal": "(D t. exp(t * hat(w))) = hat(w) * exp(t * hat(w))",
@@ -190,6 +263,28 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "norm(w) = 1",
+                                "latex_cond": "\\|w\\| = 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "t",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$real"
+                                }
+                            ],
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\frac{d}{dt} e^{t \\hat{w}}",
                         "start": "D t. exp(t * hat(w))",
                         "steps": [
@@ -224,6 +319,28 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "norm(w) = 1",
+                                "latex_cond": "\\|w\\| = 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "t",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$real"
+                                }
+                            ],
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\hat{w} e^{t \\hat{w}}",
                         "start": "hat(w) * exp(t * hat(w))",
                         "steps": [
@@ -265,6 +382,22 @@
                                 "res": "(-cos(t) + 1) * ((-1) ^ 1 * hat(w)) + sin(t) * hat(w) ^ 2 + hat(w) * unit_matrix(3)",
                                 "rule": {
                                     "eq": "hat(w) ^ (2 * n + 1) = (-1) ^ n * hat(w)",
+                                    "eq_fixes": [
+                                        [
+                                            "w",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$tensor($real, 3, 1)"
+                                            }
+                                        ],
+                                        [
+                                            "n",
+                                            {
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
                                     "latex_str": "apply equation \\(\\hat{w} ^ {2 n + 1} = (-1) ^ {n} \\hat{w}\\)",
                                     "name": "ApplyEquation",
                                     "source": "hat(w) ^ (2 * 1 + 1)",
@@ -313,11 +446,17 @@
             "fixes": [
                 [
                     "w",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ],
                 [
                     "v",
-                    "$tensor($real, 3, 1)"
+                    {
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, 1)"
+                    }
                 ]
             ],
             "goal": "(D t. hmf(t,w,v)) = twist(w,v) * hmf(t,w,v)",
@@ -325,6 +464,28 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "norm(w) = 1",
+                                "latex_cond": "\\|w\\| = 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ],
+                            [
+                                "v",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ]
+                        ],
                         "latex_start": "\\frac{d}{dt} hmf(t,w,v)",
                         "start": "D t. hmf(t,w,v)",
                         "steps": [
@@ -411,6 +572,28 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "norm(w) = 1",
+                                "latex_cond": "\\|w\\| = 1"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "w",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ],
+                            [
+                                "v",
+                                {
+                                    "symbol_type": "var",
+                                    "type": "$tensor($real, 3, 1)"
+                                }
+                            ]
+                        ],
                         "latex_start": "twist(w,v) hmf(t,w,v)",
                         "start": "twist(w,v) * hmf(t,w,v)",
                         "steps": [

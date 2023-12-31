@@ -13,6 +13,12 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "\\int_{0}^{\\infty} \\frac{\\log{x}}{x ^ {2} + b ^ {2}} \\,dx",
                         "start": "INT x:[0,oo]. log(x) / (x ^ 2 + b ^ 2)",
                         "steps": [
@@ -167,6 +173,12 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{\\pi \\log{b}}{2 b}",
                         "start": "pi * log(b) / (2 * b)",
                         "steps": [],

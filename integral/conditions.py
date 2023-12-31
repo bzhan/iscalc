@@ -2,7 +2,7 @@
 
 from typing import List, Union
 
-from integral.expr import Expr
+from integral.expr import Expr, Var, IntType
 from integral import latex
 from integral import parser
 
@@ -30,7 +30,8 @@ class Conditions:
 
     def add_condition(self, cond: Expr):
         assert isinstance(cond, Expr)
-        self.data.append(cond)
+        if cond not in self.data:
+            self.data.append(cond)
 
     def __eq__(self, other):
         return isinstance(other, Conditions) and self.data == other.data
@@ -43,3 +44,19 @@ class Conditions:
                 "latex_cond": latex.convert_expr(cond)
             })
         return res
+
+    def update(self, other:'Conditions'):
+        for e in other.data:
+            self.add_condition(e)
+
+    def exclude_induct_var_conds(self, induct_var:str):
+        induct_conds = Conditions()
+        other_conds = Conditions()
+        induct_var = Var(induct_var, type=IntType)
+        for e in self.data:
+            if len(e.find_subexpr(induct_var)) > 0:
+                induct_conds.add_condition(e)
+            else:
+                other_conds.add_condition(e)
+        return other_conds, induct_conds
+

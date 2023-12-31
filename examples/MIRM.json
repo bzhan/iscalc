@@ -6,106 +6,140 @@
             "type": "header"
         },
         {
-            "func_name" : "nth",
-            "params_name" : ["_w", "_i", "_j"],
+            "name" : "nth",
+            "args_name" : ["_w", "_i", "_j"],
             "func_type" : "$fun($tensor($real, _n, _m), $int, $int, $real)",
-            "fixes": [["_n", "$int"], ["_m", "$int"]],
+            "fixes": [
+                ["_n", {"type": "$int", "symbol_type": "var"}],
+                ["_m", {"type": "$int", "symbol_type": "var"}]
+            ],
+            "symbol_type": "fun",
             "type": "func_type"
         },
         {
-            "func_name": "hat",
-            "params_name": ["_w"],
+            "name": "hat",
+            "args_name": ["_w"],
             "func_type": "$fun($tensor($real, 3, 1), $tensor($real, 3, 3))",
+            "symbol_type": "fun",
             "type": "func_type"
         },
         {
-            "func_name": "hat",
-            "params_name": ["_w"],
+            "name": "hat",
+            "args_name": ["_w"],
             "func_type": "$fun($tensor($real, 6, 1), $tensor($real, 4, 4))",
+            "symbol_type": "fun",
             "type": "func_type"
         },
         {
-            "func_name": "zero_matrix",
-            "params_name": ["_n", "_m"],
+            "name": "zero_matrix",
+            "args_name": ["_n", "_m"],
             "func_type": "$fun($int, $int, $tensor($int, _n, _m))",
-            "fixes": [["_n", "$int"], ["_m", "$int"]],
+            "fixes": [
+                ["_n", {"symbol_type":"var","type":"$int"}],
+                ["_m", {"symbol_type":"var","type":"$int"}]],
+            "symbol_type": "fun",
             "type": "func_type"
         },
         {
-            "func_name": "inv",
-            "params_name": ["_A"],
+            "name": "inv",
+            "args_name": ["_A"],
             "func_type": "$fun($tensor($real, _n, _n), $tensor($real, _n, _n))",
-            "fixes": [["_n", "$int"]],
+            "fixes": [["_n", {"symbol_type":"var", "type": "$int"}]],
+            "symbol_type": "fun",
             "type": "func_type"
         },
         {
-            "func_name": "unit_matrix",
-            "params_name": ["_n"],
+            "name": "unit_matrix",
+            "args_name": ["_n"],
             "func_type": "$fun($int, $tensor($int, _n, _n))",
-            "fixes": [["_n", "$int"]],
+            "fixes": [["_n", {"symbol_type":"var", "type":"$int"}]],
+            "symbol_type": "fun",
             "type": "func_type"
         },
         {
-            "func_name": "T",
-            "params_name": ["_A"],
+            "name": "T",
+            "args_name": ["_A"],
             "func_type": "$fun($tensor($real, _n, _m), $tensor($int, _m, _n))",
-            "fixes": [["_n", "$int"], ["_m", "$int"]],
+            "fixes": [["_n", {"symbol_type":"var", "type":"$int"}],
+                ["_m", {"symbol_type":"var", "type":"$int"}]],
+            "symbol_type": "fun",
             "type": "func_type"
         },
         {
-            "func_name": "ccon",
-            "params_name": ["_A", "_B"],
-            "func_type": "$fun($tensor($real, _r, _c1), $tensor($real, _r, _c2), $tensor($real, _r, _c2))",
-            "fixes": [["_r", "$int"], ["_c1", "$int"], ["_c2", "$int"]],
+            "name": "ccon",
+            "args_name": ["_A", "_B"],
+            "func_type": "$fun($tensor($real, _r, _c1), $tensor($real, _r, _c2), $tensor($real, _r, _c1 + _c2))",
+            "fixes": [["_r", {"symbol_type":"var", "type":"$int"}],
+                ["_c1", {"symbol_type":"var", "type":"$int"}],
+                ["_c2", {"symbol_type":"var", "type":"$int"}]],
+            "symbol_type": "fun",
             "type": "func_type"
         },
         {
-            "func_name": "rcon",
-            "params_name": ["_A", "_B"],
+            "name": "rcon",
+            "args_name": ["_A", "_B"],
             "func_type": "$fun($tensor($real, _r1, _c), $tensor($real, _r2, _c), $tensor($real, _r1+_r2, _c))",
-            "fixes": [["_c", "$int"], ["_r1", "$int"], ["_r2", "$int"]],
+            "fixes": [["_c", {"symbol_type":"var", "type":"$int"}],
+                ["_r1", {"symbol_type":"var", "type":"$int"}],
+                ["_r2", {"symbol_type":"var", "type":"$int"}]
+            ],
+            "symbol_type": "fun",
             "type": "func_type"
         },
         {
-            "func_name": "norm",
-            "params_name": ["_w"],
+            "name": "norm",
+            "args_name": ["_w"],
             "func_type": "$fun($tensor($real, _n, 1), $real)",
-            "fixes": [["_n", "$int"]],
+            "fixes": [["_n", {"symbol_type":"var", "type":"$int"}]],
+            "symbol_type": "fun",
             "type": "func_type"
         },
         {
-            "func_name": "exp",
-            "params_name": ["_A"],
+            "name": "exp",
+            "args_name": ["_A"],
             "func_type": "$fun($tensor($real, _n, _n), $tensor($real, _n, _n))",
-            "fixes": [["_n", "$int"]],
+            "fixes": [["_n", {"symbol_type":"var", "type":"$int"}]],
+            "symbol_type": "fun",
             "type": "func_type"
         },
         {
-            "func_name": "nthc",
-            "params_name": ["_A", "_i"],
+            "name": "nthc",
+            "args_name": ["_A", "_i"],
             "func_type": "$fun($tensor($real, _n, _m), $int, $tensor($real, _n, 1))",
-            "fixes": [["_n", "$int"],["_m", "$int"]],
+            "fixes": [["_n", {"symbol_type":"var", "type":"$int"}],
+                ["_m", {"symbol_type":"var", "type":"$int"}]],
+            "symbol_type": "fun",
             "type": "func_type"
         },
         {
-            "func_name": "nthr",
-            "params_name": ["_A", "_i"],
+            "name": "nthr",
+            "args_name": ["_A", "_i"],
             "func_type": "$fun($tensor($real, _n, _m), $int, $tensor($real, 1, _m))",
-            "fixes": [["_n", "$int"],["_m", "$int"]],
+            "fixes": [["_n", {"symbol_type":"var", "type":"$int"}],
+                ["_m", {"symbol_type":"var", "type":"$int"}]],
+            "symbol_type": "fun",
             "type": "func_type"
         },
         {
-            "func_name": "choose_col",
-            "params_name": ["_A", "_i", "_j"],
+            "name": "choose_col",
+            "args_name": ["_A", "_i", "_j"],
             "func_type": "$fun($tensor($real, _n, _m), $int, $int, $tensor($real, _n, _j - _i + 1))",
-            "fixes": [["_n", "$int"],["_m", "$int"], ["_i", "$int"], ["_j", "$int"]],
+            "fixes": [["_n", {"symbol_type":"var", "type":"$int"}],
+                ["_m", {"symbol_type":"var", "type":"$int"}],
+                ["_i", {"symbol_type":"var", "type":"$int"}],
+                ["_j", {"symbol_type":"var", "type":"$int"}]],
+            "symbol_type": "fun",
             "type": "func_type"
         },
         {
-            "func_name": "choose_row",
-            "params_name": ["_A", "_i", "_j"],
+            "name": "choose_row",
+            "args_name": ["_A", "_i", "_j"],
             "func_type": "$fun($tensor($real, _n, _m), $int, $int, $tensor($real, _j - _i + 1, _m))",
-            "fixes": [["_n", "$int"],["_m", "$int"], ["_i", "$int"], ["_j", "$int"]],
+            "fixes": [["_n", {"symbol_type":"var", "type":"$int"}],
+                ["_m", {"symbol_type":"var", "type":"$int"}],
+                ["_i", {"symbol_type":"var", "type":"$int"}],
+                ["_j", {"symbol_type":"var", "type":"$int"}]],
+            "symbol_type": "fun",
             "type": "func_type"
         },
         {
@@ -114,8 +148,8 @@
             ],
             "category": "matrix-arith",
             "fixes":[
-                ["m", "$int"],
-                ["A", "$tensor($real, m, m)"]
+                ["m", {"symbol_type":"var", "type":"$int"}],
+                ["A", {"symbol_type":"var", "type":"$tensor($real, m, m)"}]
             ],
             "expr": "exp(A) = SUM(n, 0, oo, A ^ n / factorial(n))",
             "type": "axiom"
@@ -130,10 +164,10 @@
             "path": "matrix_example01",
             "type": "problem",
             "fixes": [
-                ["n", "$int"],
-                ["m", "$int"],
-                ["P", "$tensor($real, m, m)"],
-                ["A", "$tensor($real, m, m)"]
+                ["n", {"symbol_type":"var", "type":"$int"}],
+                ["m", {"symbol_type":"var", "type":"$int"}],
+                ["P", {"symbol_type":"var", "type":"$tensor($real, m, m)"}],
+                ["A", {"symbol_type":"var", "type":"$tensor($real, m, m)"}]
             ],
             "conds": ["invertible(P)","n>=0", "m>=0"]
         },
@@ -147,7 +181,7 @@
             "path": "matrix_example02",
             "type": "problem",
             "fixes": [
-                ["w", "$tensor($real, 3, 1)"]
+                ["w", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}]
             ]
         },
         {
@@ -155,7 +189,7 @@
             "path": "matrix_example02",
             "type": "problem",
             "fixes": [
-                ["w", "$tensor($real, 3, 1)"]
+                ["w", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}]
             ],
             "conds": ["type(w,0,3)"]
         },
@@ -163,8 +197,8 @@
             "expr": "hat(w)^(2*n+1) = (-1)^n * hat(w)",
             "path": "matrix_example02",
             "fixes": [
-                ["w", "$tensor($real, 3, 1)"],
-                ["n", "$int"]
+                ["w", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}],
+                ["n", {"symbol_type":"var", "type":"$int"}]
             ],
             "conds": ["n>=0", "norm(w) = 1"],
             "type": "problem"
@@ -173,8 +207,8 @@
             "expr": "hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2",
             "conds": ["n>=0", "norm(w) = 1"],
             "fixes": [
-                ["w", "$tensor($real, 3, 1)"],
-                ["n", "$int"]
+                ["w", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}],
+                ["n", {"symbol_type":"var", "type":"$int"}]
             ],
             "path": "matrix_example02",
             "type": "problem"
@@ -194,8 +228,8 @@
             "path": "matrix_rodrigues",
             "type": "problem",
             "fixes": [
-                ["w", "$tensor($real, 3, 1)"],
-                ["t", "$real"]
+                ["w", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}],
+                ["t", {"symbol_type":"var", "type":"$real"}]
             ],
             "conds": ["norm(w) = 1"]
         },
@@ -209,23 +243,25 @@
             "path": "twist_matrix_exp_inv",
             "type": "definition",
             "fixes": [
-                ["R", "$tensor($real, 3, 3)"],
-                ["p", "$tensor($real, 3, 1)"],
+                ["R", {"symbol_type":"var", "type":"$tensor($real, 3, 3)"}],
+                ["p", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}],
                 ["hm", {
-                    "params_name": ["R", "p"],
-                    "func_type": "$fun($tensor($real, 3,3), $tensor($real, 3,1), $tensor($real, 4, 4))"
+                    "symbol_type": "fun",
+                    "args_name": ["R", "p"],
+                    "type": "$fun($tensor($real, 3,3), $tensor($real, 3,1), $tensor($real, 4, 4))"
                 }]
             ]
         },
         {
             "expr": "hmf(t, w, v) = hm(unit_matrix(3), t*v)",
             "fixes": [
-                ["t", "$real"],
-                ["w", "$tensor($real, 3, 1)"],
-                ["v", "$tensor($real, 3, 1)"],
+                ["t", {"symbol_type":"var", "type":"$real"}],
+                ["w", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}],
+                ["v", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}],
                 ["hmf", {
-                    "params_name": ["t", "w", "v"],
-                    "func_type": "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                    "symbol_type":"fun",
+                    "args_name": ["t", "w", "v"],
+                    "type": "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
                 }]
             ],
             "path": "twist_matrix_exp_inv",
@@ -237,23 +273,23 @@
             "path": "twist_matrix_exp_inv",
             "type": "definition",
             "fixes": [
-                ["t", "$real"],
-                ["w", "$tensor($real, 3, 1)"],
-                ["v", "$tensor($real, 3, 1)"],
+                ["t", {"symbol_type":"var", "type":"$real"}],
+                ["w", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}],
+                ["v", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}],
                 ["hmf", {
-                    "params_name": ["t", "w", "v"],
-                    "func_type": "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+                    "symbol_type": "fun",
+                    "args_name": ["t", "w", "v"],
+                    "type": "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
                 }]
             ],
-            "conds": ["norm(w) = 1"],
-            "func_type": "$fun($real, $tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 4, 4))"
+            "conds": ["norm(w) = 1"]
         },
         {
             "expr": "hat(w) ^ n * w = zero_matrix(3,1)",
             "path": "twist_matrix_exp_inv",
             "fixes": [
-                ["w", "$tensor($real, 3, 1)"],
-                ["n", "$int"]
+                ["w", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}],
+                ["n", {"symbol_type":"var", "type":"$int"}]
             ],
             "type": "problem",
             "conds": ["type(n, 1)","type(w, 0 ,3)", "n>=1"]
@@ -263,7 +299,7 @@
             "path": "twist_matrix_exp_inv",
             "type": "problem",
             "fixes": [
-                ["w", "$tensor($real, 3, 1)"]
+                ["w", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}]
             ],
             "conds": ["type(w, 0 ,3)"]
         },
@@ -272,9 +308,9 @@
             "path": "twist_matrix_exp_inv",
             "type": "problem",
             "fixes": [
-                ["t", "$real"],
-                ["w", "$tensor($real, 3, 1)"],
-                ["v", "$tensor($real, 3, 1)"]
+                ["t", {"symbol_type":"var", "type":"$real"}],
+                ["w", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}],
+                ["v", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}]
             ],
             "conds": ["norm(w) = 1"]
         },
@@ -283,9 +319,9 @@
             "path": "twist_matrix_exp_inv",
             "type": "problem",
             "fixes": [
-                ["t", "$real"],
-                ["w", "$tensor($real, 3, 1)"],
-                ["v", "$tensor($real, 3, 1)"]
+                ["t", {"symbol_type":"var", "type":"$real"}],
+                ["w", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}],
+                ["v", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}]
             ]
         },
         {
@@ -298,11 +334,12 @@
             "path": "twist_derive_hmf",
             "type": "definition",
             "fixes": [
-                ["w", "$tensor($real, 3, 1)"],
-                ["v", "$tensor($real, 3, 1)"],
+                ["w", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}],
+                ["v", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}],
                 ["twist", {
-                    "params_name": ["w", "v"],
-                    "func_type": "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"}
+                    "symbol_type": "fun",
+                    "args_name": ["w", "v"],
+                    "type": "$fun($tensor($real, 3, 1), $tensor($real, 3, 1), $tensor($real, 6, 1))"}
                 ]
             ]
         },
@@ -311,9 +348,9 @@
             "path": "twist_derive_hmf",
             "type": "problem",
             "fixes": [
-                ["t", "$real"],
-                ["w", "$tensor($real, 3, 1)"],
-                ["v", "$tensor($real, 3, 1)"]
+                ["t", {"symbol_type":"var", "type":"$real"}],
+                ["w", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}],
+                ["v", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}]
             ],
             "conds": ["norm(w) = 0"]
         },
@@ -322,9 +359,9 @@
             "path": "twist_derive_hmf",
             "type": "problem",
             "fixes": [
-                ["t", "$real"],
-                ["w", "$tensor($real, 3, 1)"],
-                ["v", "$tensor($real, 3, 1)"]
+                ["t", {"symbol_type":"var", "type":"$real"}],
+                ["w", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}],
+                ["v", {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}]
             ],
             "conds": ["norm(w) = 1"]
         },
@@ -338,15 +375,16 @@
             "path": "matrix_poe_inv",
             "type": "definition",
             "fixes": [
-                ["i", "$int"],
-                ["n", "$int"],
-                ["t", "$tensor($real, n, 1)"],
-                ["w", "$tensor($real, 3, n)"],
-                ["v", "$tensor($real, 3, n)"],
-                ["ic", "$tensor($real, 4, 4)"],
+                ["i", {"symbol_type":"var", "type":"$int"}],
+                ["n", {"symbol_type":"var", "type":"$int"}],
+                ["t", {"symbol_type":"var", "type":"$tensor($real, n, 1)"}],
+                ["w", {"symbol_type":"var", "type":"$tensor($real, 3, n)"}],
+                ["v", {"symbol_type":"var", "type":"$tensor($real, 3, n)"}],
+                ["ic", {"symbol_type":"var", "type":"$tensor($real, 4, 4)"}],
                 ["gst", {
-                    "params_name": ["t", "n", "w", "v", "ic"],
-                    "func_type": "$fun($tensor($real, n, 1), $int, $tensor($real, 3, n), $tensor($real, 3, n), $tensor($real, 4, 4), $tensor($real, 4, 4))"
+                    "symbol_type": "fun",
+                    "args_name": ["t", "n", "w", "v", "ic"],
+                    "type": "$fun($tensor($real, n, 1), $int, $tensor($real, 3, n), $tensor($real, 3, n), $tensor($real, 4, 4), $tensor($real, 4, 4))"
                 }]
             ]
         },
@@ -355,12 +393,12 @@
             "path": "matrix_poe_inv",
             "type": "problem",
             "fixes": [
-                ["i", "$int"],
-                ["n", "$int"],
-                ["t", "$tensor($real, n, 1)"],
-                ["w", "$tensor($real, 3, n)"],
-                ["v", "$tensor($real, 3, n)"],
-                ["ic", "$tensor($real, 4, 4)"]
+                ["i", {"symbol_type":"var", "type":"$int"}],
+                ["n", {"symbol_type":"var", "type":"$int"}],
+                ["t", {"symbol_type":"var", "type":"$tensor($real, n, 1)"}],
+                ["w", {"symbol_type":"var", "type":"$tensor($real, 3, n)"}],
+                ["v", {"symbol_type":"var", "type":"$tensor($real, 3, n)"}],
+                ["ic", {"symbol_type":"var", "type":"$tensor($real, 4, 4)"}]
             ]
         }
     ],

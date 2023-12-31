@@ -73,12 +73,48 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            },
+                            {
+                                "cond": "n >= 2",
+                                "latex_cond": "n \\ge 2"
+                            },
+                            {
+                                "cond": "isInt(n)",
+                                "latex_cond": "n \\in\\mathbb{Z}"
+                            }
+                        ],
                         "latex_start": "I(a,b,n)",
                         "start": "I(a,b,n)",
                         "steps": [],
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            },
+                            {
+                                "cond": "n >= 2",
+                                "latex_cond": "n \\ge 2"
+                            },
+                            {
+                                "cond": "isInt(n)",
+                                "latex_cond": "n \\in\\mathbb{Z}"
+                            }
+                        ],
                         "latex_start": "\\frac{-1}{n - 1} ((\\frac{d}{da} I(a,b,n - 1)) + (\\frac{d}{db} I(a,b,n - 1)))",
                         "start": "-1 / (n - 1) * ((D a. I(a,b,n - 1)) + (D b. I(a,b,n - 1)))",
                         "steps": [
@@ -132,12 +168,6 @@
                                 "latex_res": "-\\frac{1}{n - 1} ((-n + 1) ((\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx)))",
                                 "res": "-(1 / (n - 1) * ((-n + 1) * ((INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n))))",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\((-n + 1) (\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (-n + 1) (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx)\\) to \\((-n + 1) ((\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx))\\)",
                                     "name": "Equation",
                                     "new_expr": "(-n + 1) * ((INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n))",
@@ -204,12 +234,6 @@
                                 "latex_res": "\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} + \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx",
                                 "res": "INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n + sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\((\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx)\\) to \\(\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} + \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx\\)",
                                     "name": "Equation",
                                     "new_expr": "INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n + sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n",
@@ -310,6 +334,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "I(a,b,1)",
                         "start": "I(a,b,1)",
                         "steps": [
@@ -492,6 +526,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{\\pi}{2 \\sqrt{a b}}",
                         "start": "pi / (2 * sqrt(a * b))",
                         "steps": [],
@@ -522,6 +566,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "I(a,b,2)",
                         "start": "I(a,b,2)",
                         "steps": [
@@ -635,6 +689,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{\\pi}{4 \\sqrt{a b}} (\\frac{1}{a} + \\frac{1}{b})",
                         "start": "pi / (4 * sqrt(a * b)) * (1 / a + 1 / b)",
                         "steps": [],
@@ -665,6 +729,16 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "I(a,b,3)",
                         "start": "I(a,b,3)",
                         "steps": [
@@ -778,6 +852,16 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "b > 0",
+                                "latex_cond": "b > 0"
+                            }
+                        ],
                         "latex_start": "\\frac{\\pi}{16 \\sqrt{a b}} (\\frac{3}{a ^ {2}} + \\frac{3}{b ^ {2}} + \\frac{2}{a b})",
                         "start": "pi / (16 * sqrt(a * b)) * (3 / a ^ 2 + 3 / b ^ 2 + 2 / (a * b))",
                         "steps": [],
@@ -816,6 +900,24 @@
             "proof": {
                 "calcs": [
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "y >= 0",
+                                "latex_cond": "y \\ge 0"
+                            },
+                            {
+                                "cond": "n > 0",
+                                "latex_cond": "n > 0"
+                            },
+                            {
+                                "cond": "isInt(n)",
+                                "latex_cond": "n \\in\\mathbb{Z}"
+                            }
+                        ],
                         "latex_start": "J(a,y,n)",
                         "start": "J(a,y,n)",
                         "steps": [
@@ -878,12 +980,6 @@
                                 "latex_res": "n (\\int_{0}^{y} \\frac{2 x ^ {2}}{(a ^ {2} + x ^ {2}) ^ {n + 1}} \\,dx) + y (a ^ {2} + y ^ {2}) ^ {-n}",
                                 "res": "n * (INT x:[0,y]. 2 * x ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1)) + y * (a ^ 2 + y ^ 2) ^ -n",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\(2 n (\\int_{0}^{y} x ^ {2} (a ^ {2} + x ^ {2}) ^ {-n - 1} \\,dx)\\) to \\(n (\\int_{0}^{y} \\frac{2 x ^ {2}}{(a ^ {2} + x ^ {2}) ^ {n + 1}} \\,dx)\\)",
                                     "name": "Equation",
                                     "new_expr": "n * (INT x:[0,y]. 2 * x ^ 2 / (a ^ 2 + x ^ 2) ^ (n + 1))",
@@ -920,12 +1016,6 @@
                                 "latex_res": "n (2 (\\int_{0}^{y} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {n}} \\,dx) - 2 a ^ {2} (\\int_{0}^{y} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {n + 1}} \\,dx)) + y (a ^ {2} + y ^ {2}) ^ {-n}",
                                 "res": "n * (2 * (INT x:[0,y]. 1 / (x ^ 2 + a ^ 2) ^ n) - 2 * a ^ 2 * (INT x:[0,y]. 1 / (x ^ 2 + a ^ 2) ^ (n + 1))) + y * (a ^ 2 + y ^ 2) ^ -n",
                                 "rule": {
-                                    "fixes": [
-                                        [
-                                            "x",
-                                            "$real"
-                                        ]
-                                    ],
                                     "latex_str": "rewriting \\(\\int_{0}^{y} \\frac{2 (x ^ {2} + a ^ {2})}{(a ^ {2} + x ^ {2}) ^ {n + 1}} - \\frac{2 a ^ {2}}{(a ^ {2} + x ^ {2}) ^ {n + 1}} \\,dx\\) to \\(2 (\\int_{0}^{y} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {n}} \\,dx) - 2 a ^ {2} (\\int_{0}^{y} \\frac{1}{(x ^ {2} + a ^ {2}) ^ {n + 1}} \\,dx)\\)",
                                     "name": "Equation",
                                     "new_expr": "2 * (INT x:[0,y]. 1 / (x ^ 2 + a ^ 2) ^ n) - 2 * a ^ 2 * (INT x:[0,y]. 1 / (x ^ 2 + a ^ 2) ^ (n + 1))",
@@ -961,6 +1051,24 @@
                         "type": "Calculation"
                     },
                     {
+                        "conds": [
+                            {
+                                "cond": "a > 0",
+                                "latex_cond": "a > 0"
+                            },
+                            {
+                                "cond": "y >= 0",
+                                "latex_cond": "y \\ge 0"
+                            },
+                            {
+                                "cond": "n > 0",
+                                "latex_cond": "n > 0"
+                            },
+                            {
+                                "cond": "isInt(n)",
+                                "latex_cond": "n \\in\\mathbb{Z}"
+                            }
+                        ],
                         "latex_start": "\\frac{y}{(y ^ {2} + a ^ {2}) ^ {n}} + 2 n J(a,y,n) - 2 n a ^ {2} J(a,y,n + 1)",
                         "start": "y / (y ^ 2 + a ^ 2) ^ n + 2 * n * J(a,y,n) - 2 * n * a ^ 2 * J(a,y,n + 1)",
                         "steps": [],

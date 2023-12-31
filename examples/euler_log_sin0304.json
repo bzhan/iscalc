@@ -289,12 +289,6 @@
                             "latex_res": "\\int_{0}^{1} \\frac{\\log{(y ^ {2} + 1)}}{y ^ {2} + 1} + \\frac{\\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1} \\,dy = \\pi \\log{(2)}",
                             "res": "(INT y:[0,1]. log(y ^ 2 + 1) / (y ^ 2 + 1) + log(1 / y ^ 2 + 1) / (y ^ 2 + 1)) = pi * log(2)",
                             "rule": {
-                                "fixes": [
-                                    [
-                                        "y",
-                                        "$real"
-                                    ]
-                                ],
                                 "latex_str": "rewriting \\((\\int_{0}^{1} \\frac{\\log{(y ^ {2} + 1)}}{y ^ {2} + 1} \\,dy) + (\\int_{0}^{1} \\frac{\\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1} \\,dy)\\) to \\(\\int_{0}^{1} \\frac{\\log{(y ^ {2} + 1)}}{y ^ {2} + 1} + \\frac{\\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1} \\,dy\\)",
                                 "name": "Equation",
                                 "new_expr": "INT y:[0,1]. log(y ^ 2 + 1) / (y ^ 2 + 1) + log(1 / y ^ 2 + 1) / (y ^ 2 + 1)",

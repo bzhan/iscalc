@@ -5,11 +5,10 @@ import os
 import json
 
 from integral import expr
-from integral.expr import Expr, Eq, Op, Const, expr_to_pattern, Matrix
+from integral.expr import Expr, Eq, Op, Const, expr_to_pattern, Matrix, type_le
 from integral import parser
 from integral.conditions import Conditions
 from integral.fixes import Fixes, Info, FUN_INFO
-from integral.sympywrapper import type_le
 dirname = os.path.dirname(__file__)
 
 class Identity:
@@ -653,13 +652,3 @@ def apply_subterm(e: Expr, f: Callable[[Expr, Context], Expr], ctx: Context) -> 
             raise NotImplementedError
     return rec(e, ctx)
 
-def update(fixes, d):
-    for name, info in d.items():
-        if isinstance(info, expr.Type):
-            fixes[name] = info
-        elif isinstance(info, list):
-            if name not in fixes:
-                fixes[name] = []
-            for item in info:
-                if item not in fixes[name]:
-                    fixes[name].append(item)

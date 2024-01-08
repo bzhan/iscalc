@@ -6,8 +6,7 @@ from decimal import Decimal
 from fractions import Fraction
 
 from integral import expr
-from integral.expr import Expr
-from integral.sympywrapper import type_le
+from integral.expr import Expr, type_le
 from integral.fixes import Fixes, Info
 
 grammar = r"""

@@ -2035,3 +2035,29 @@ def neg_expr(ex: Expr):
             raise NotImplementedError
     else:
         raise NotImplementedError
+
+def type_le(t1:Type, t2:Type):
+    import integral.poly
+    import integral.context
+    ctx = integral.context.Context()
+    if t1 == IntType and t2 in (IntType, RealType):
+        return True
+    elif t1 in (RealType, BoolType) and t2 == t1:
+        return True
+    elif is_matrix_type(t1) and is_matrix_type(t2):
+        if not type_le(t1.eleType, t2.eleType):
+            return False
+        if not integral.poly.normalize(t1.row, ctx) == integral.poly.normalize(t2.row, ctx):
+            return False
+        if not integral.poly.normalize(t1.col, ctx) == integral.poly.normalize(t2.col, ctx):
+            return False
+        return True
+    elif is_fun_type(t1) and is_fun_type(t2):
+        n, m = len(t1.args), len(t2.args)
+        if n != m:
+            return False
+        for i in range(n):
+            if not type_le(t1.args[i], t2.args[i]):
+                return False
+        return True
+    return False

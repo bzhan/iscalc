@@ -70,25 +70,3 @@ def convert_from_sympy(e) -> Expr:
 def partial_fraction(e: Expr) -> Expr:
     return convert_from_sympy(sympy.apart(convert_to_sympy(e)))
 
-def type_le(t1:Type, t2:Type):
-    if t1 == expr.IntType and t2 in (expr.IntType, expr.RealType):
-        return True
-    elif t1 in (expr.RealType, expr.BoolType) and t2 == t1:
-        return True
-    elif expr.is_matrix_type(t1) and expr.is_matrix_type(t2):
-        if not type_le(t1.eleType, t2.eleType):
-            return False
-        if not convert_to_sympy(t1.row) == convert_to_sympy(t2.row):
-            return False
-        if not convert_to_sympy(t1.col) == convert_to_sympy(t2.col):
-            return False
-        return True
-    elif expr.is_fun_type(t1) and expr.is_fun_type(t2):
-        n, m = len(t1.args), len(t2.args)
-        if n != m:
-            return False
-        for i in range(n):
-            if not type_le(t1.args[i], t2.args[i]):
-                return False
-        return True
-    return False

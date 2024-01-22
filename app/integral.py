@@ -14,17 +14,18 @@ from integral import parser
 from integral import expr
 from app.app import app
 
-dirname = os.path.dirname(__file__)
+example_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "examples")
+
 
 @app.route("/api/integral-load-book-list", methods=['POST'])
 def integral_load_book_list():
     # Load book list from index.json
-    file_name = os.path.join(dirname, "../examples/index.json")
-
-    with open(file_name, 'r', encoding='utf-8') as f:
+    index_file_path = os.path.join(example_dir, "index.json")
+    with open(index_file_path, 'r', encoding='utf-8') as f:
         f_data = json.load(f)
 
     return jsonify(f_data)
+
 
 @app.route("/api/add-new-book", methods=['POST'])
 def add_new_book():
@@ -33,8 +34,8 @@ def add_new_book():
     new_book_name = data['new_book_name']
     imports = data['imports']
     # load all books
-    file_name = os.path.join(dirname, "../examples/index.json")
-    with open(file_name, 'r', encoding='utf-8') as f:
+    index_file_path = os.path.join(example_dir, "index.json")
+    with open(index_file_path, 'r', encoding='utf-8') as f:
         f_data = json.load(f)
     if new_book_name in f_data['book_list']:
         res = {
@@ -44,20 +45,22 @@ def add_new_book():
         return res
     # add book to book list
     tmp = {
-        "content":[],
+        "content": [],
         "name": new_book_name,
         "imports": imports,
     }
-    with open('../examples/'+new_book_name+'.json', 'w', encoding='utf-8') as f:
+    new_book_path = os.path.join(example_dir, new_book_name + '.json')
+    with open(new_book_path, 'w', encoding='utf-8') as f:
         json.dump(tmp, f, indent=4, ensure_ascii=False, sort_keys=True)
     f_data['book_list'].append(new_book_name)
-    with open('../examples/index.json', 'w', encoding='utf-8') as f:
-        json.dump({'book_list':f_data['book_list']}, f, indent=4, ensure_ascii=False, sort_keys=True)
+    with open(index_file_path, 'w', encoding='utf-8') as f:
+        json.dump({'book_list': f_data['book_list']}, f, indent=4, ensure_ascii=False, sort_keys=True)
     res = {
         'status': "ok",
         'book_list': f_data['book_list']
     }
     return jsonify(res)
+
 
 @app.route("/api/delete-books", methods=['POST'])
 def delete_books():
@@ -65,25 +68,26 @@ def delete_books():
     data = json.loads(request.get_data().decode('utf-8'))
     books = data['books']
     # load all books
-    file_name = os.path.join(dirname, "../examples/index.json")
-    with open(file_name, 'r', encoding='utf-8') as f:
+    index_file_path = os.path.join(example_dir, "index.json")
+    with open(index_file_path, 'r', encoding='utf-8') as f:
         f_data = json.load(f)
-    for b in books:
+    for book_name in books:
         # delete book
-        f_data['book_list'].remove(b)
-        os.remove("../examples/"+b+'.json')
-    with open('../examples/index.json', 'w', encoding='utf-8') as f:
-        json.dump({'book_list':f_data['book_list']}, f, indent=4, ensure_ascii=False, sort_keys=True)
+        f_data['book_list'].remove(book_name)
+        os.remove(os.path.join(example_dir, book_name + '.json'))
+    with open(index_file_path, 'w', encoding='utf-8') as f:
+        json.dump({'book_list': f_data['book_list']}, f, indent=4, ensure_ascii=False, sort_keys=True)
     res = {
         'status': 'ok',
         'book_list': f_data['book_list']
     }
     return jsonify(res)
 
+
 @app.route("/api/integral-load-book-content", methods=['POST'])
 def integral_load_book_content():
     data = json.loads(request.get_data().decode('utf-8'))
-    file_name = os.path.join(dirname, "../examples/" + data['bookname'] + '.json')
+    file_name = os.path.join(example_dir, data['bookname'] + '.json')
 
     # Load raw data
     with open(file_name, 'r', encoding='utf-8') as f:
@@ -118,11 +122,12 @@ def integral_load_book_content():
             item['latex_table'] = new_table
     return jsonify(f_data)
 
+
 @app.route("/api/save-func-table", methods=['POST'])
 def save_func_table():
     data = json.loads(request.get_data().decode('utf-8'))
     label, table, book_name = data['label'], data['table'], data['book']
-    book_path = os.path.join(dirname, "../examples/" + book_name + '.json')
+    book_path = os.path.join(example_dir, book_name + '.json')
     with open(book_path, 'r', encoding='utf-8') as f:
         book_content = json.load(f)
     pos = label.split(".")[:-1]
@@ -151,16 +156,18 @@ def save_func_table():
         'status': 'ok'
     })
 
+
 @app.route("/api/delete-func-table-item", methods=['POST'])
 def delete_func_table_item():
     data = json.loads(request.get_data().decode('utf-8'))
     label, selected_items, book_name = data['label'], data['selected_items'], data['book']
-    book_path = os.path.join(dirname, "../examples/" + book_name + '.json')
+    book_path = os.path.join(example_dir, book_name + '.json')
     with open(book_path, 'r', encoding='utf-8') as f:
         book_content = json.load(f)
     pos = label.split(".")[:-1]
-    pos = [int(i)-1 for i in pos]
+    pos = [int(i) - 1 for i in pos]
     pos.reverse()
+
     def rec(content, locs, remove_items):
         res = content
         if len(locs) == 0:
@@ -173,6 +180,7 @@ def delete_func_table_item():
             p = locs.pop()
             res[p]['content'] = rec(content[p]['content'], locs, remove_items)
         return res
+
     book_content['content'] = rec(book_content['content'], pos, selected_items)
     with open(book_path, 'w', encoding='utf-8') as f:
         json.dump(book_content, f, indent=4, ensure_ascii=False, sort_keys=True)
@@ -180,10 +188,11 @@ def delete_func_table_item():
         'status': 'ok'
     })
 
+
 @app.route("/api/integral-book-add-item", methods=['POST'])
 def book_add_item():
     data = json.loads(request.get_data().decode('utf-8'))
-    book_path = os.path.join(dirname, "../examples/" + data['filename'] + '.json')
+    book_path = os.path.join(example_dir, data['filename'] + '.json')
     index = data['index']
     item = data['item']
     with open(book_path, 'r', encoding='utf-8') as f:
@@ -191,7 +200,7 @@ def book_add_item():
     book['content'].insert(index, item)
     if item['type'] == 'problem':
         # check the existance of this problem
-        problem_path = os.path.join(dirname, "../examples/" + item['path'] + '.json')
+        problem_path = os.path.join(example_dir, item['path'] + '.json')
         problem_file = compstate.CompFile(data['filename'], item['path'])
         if os.path.exists(problem_path):
             with open(problem_path, 'r', encoding='utf-8') as f:
@@ -204,7 +213,7 @@ def book_add_item():
             fixes[fix['var']] = parser.parse_expr(fix['type'], fixes=fixes)
         goal = integral.parser.parse_expr(item['expr'], fixes=fixes)
         conds = [integral.parser.parse_expr(cond, fixes=fixes) for cond in item['conds']]
-        problem_file.add_goal(goal,conds=conds, fixes = fixes)
+        problem_file.add_goal(goal, conds=conds, fixes=fixes)
         with open(problem_path, 'w', encoding='utf-8') as f:
             json.dump(problem_file.export(), f, indent=4, ensure_ascii=False, sort_keys=True)
     with open(book_path, 'w', encoding='utf-8') as f:
@@ -215,7 +224,7 @@ def book_add_item():
 @app.route("/api/integral-open-file", methods=['POST'])
 def integral_open_file():
     data = json.loads(request.get_data().decode('utf-8'))
-    file_name = os.path.join(dirname, "../examples/" + data['filename'] + '.json')
+    file_name = os.path.join(example_dir, data['filename'] + '.json')
     with open(file_name, 'r', encoding='utf-8') as f:
         f_data = json.load(f)
 
@@ -223,13 +232,14 @@ def integral_open_file():
         if 'problem' in item:
             problem = integral.parser.parse_expr(item['problem'])
             item['_problem_latex'] = integral.latex.convert_expr(problem)
-        
+
     return jsonify(f_data)
+
 
 @app.route("/api/integral-save-book-item", methods=['POST'])
 def integral_save_book_item():
     data = json.loads(request.get_data().decode('utf-8'))
-    book_path = os.path.join(dirname, "../examples/" + data['filename'] + '.json')
+    book_path = os.path.join(example_dir, data['filename'] + '.json')
     index = data['index']
     item = data['item']
     with open(book_path, 'r', encoding='utf-8') as f:
@@ -237,17 +247,20 @@ def integral_save_book_item():
     book['content'][index] = item
     with open(book_path, 'w', encoding='utf-8') as f:
         json.dump(book, f, indent=4, ensure_ascii=False, sort_keys=True)
-    return jsonify({'status':'ok'})
+    return jsonify({'status': 'ok'})
+
 
 @app.route("/api/integral-save-file", methods=['POST'])
 def integral_save_file():
     data = json.loads(request.get_data().decode('utf-8'))
-    file_name = os.path.join(dirname, "../examples/" + data['filename'] + '.json')
+    file_name = os.path.join(example_dir, data['filename'] + '.json')
     with open(file_name, 'w', encoding='utf-8') as f:
-        json.dump({"content": data['content'], "name":data['filename']}, f, indent=4, ensure_ascii=False, sort_keys=True)
+        json.dump({"content": data['content'], "name": data['filename']}, f, indent=4, ensure_ascii=False,
+                  sort_keys=True)
     return jsonify({
         'status': 'ok'
     })
+
 
 @app.route("/api/clear-item", methods=['POST'])
 def clear_item():
@@ -272,6 +285,7 @@ def clear_item():
             res['selected_item'] = str(compstate.Label([len(st.steps) - 1]))
     return jsonify(res)
 
+
 @app.route("/api/query-integral", methods=['POST'])
 def query_integral():
     data = json.loads(request.get_data().decode('UTF-8'))
@@ -295,7 +309,7 @@ def query_integral():
             "status": "error",
             "msg": "Selected item is not part of a calculation."
         })
-    
+
     res = []
     for e, loc in integrals:
         res.append({
@@ -310,6 +324,7 @@ def query_integral():
         "status": "ok",
         "integrals": res
     })
+
 
 @app.route("/api/query-latex-expr", methods=['POST'])
 def query_latex_expr():
@@ -334,6 +349,7 @@ def query_latex_expr():
             "status": "fail",
             "exception": str(e)
         })
+
 
 @app.route("/api/query-identities", methods=['POST'])
 def query_identities():
@@ -371,6 +387,7 @@ def query_identities():
             "exception": str(e)
         })
 
+
 @app.route("/api/add-function-definition", methods=['POST'])
 def add_function_definition():
     data = json.loads(request.get_data().decode('UTF-8'))
@@ -388,6 +405,7 @@ def add_function_definition():
         "selected_item": str(compstate.Label(""))
     })
 
+
 @app.route("/api/add-goal", methods=["POST"])
 def add_goal():
     data = json.loads(request.get_data().decode('UTF-8'))
@@ -404,6 +422,7 @@ def add_goal():
         "state": file.export()['content'],
         "selected_item": str(compstate.Label(""))
     })
+
 
 @app.route("/api/proof-by-calculation", methods=["POST"])
 def proof_by_calculation():
@@ -429,6 +448,7 @@ def proof_by_calculation():
             "status": "error",
             "msg": "Selected item is not a goal."
         })
+
 
 @app.route("/api/proof-by-induction", methods=["POST"])
 def proof_by_induction():
@@ -459,6 +479,7 @@ def proof_by_induction():
             "msg": "Selected item is not a goal."
         })
 
+
 @app.route("/api/proof-by-rewrite-goal", methods=["POST"])
 def proof_by_rewrite_goal():
     data = json.loads(request.get_data().decode('UTF-8'))
@@ -486,6 +507,7 @@ def proof_by_rewrite_goal():
             "item": st.export(),
             "selected_item": str(compstate.Label(label.data + [0]))
         })
+
 
 @app.route("/api/expand-definition", methods=["POST"])
 def expand_definition():
@@ -540,6 +562,7 @@ def expand_definition():
             "msg": "Selected item is not part of a calculation."
         })
 
+
 @app.route("/api/fold-definition", methods=["POST"])
 def fold_definition():
     data = json.loads(request.get_data().decode('UTF-8'))
@@ -581,6 +604,7 @@ def fold_definition():
             "msg": "Selected item is not part of a calculation."
         })
 
+
 @app.route("/api/solve-equation", methods=["POST"])
 def integral_solve_equation():
     data = json.loads(request.get_data().decode('UTF-8'))
@@ -611,7 +635,7 @@ def integral_solve_equation():
                 "status": "error",
                 "msg": "Selected fact is not part of a calculation."
             })
-    
+
     if isinstance(subitem, (compstate.CalculationStep, compstate.Calculation)):
         rule = integral.rules.IntegrateByEquation(lhs)
         subitem.perform_rule(rule)
@@ -625,6 +649,7 @@ def integral_solve_equation():
             "status": "error",
             "msg": "Selected item is not part of a calculation."
         })
+
 
 @app.route("/api/perform-step", methods=["POST"])
 def integral_perform_step():
@@ -658,6 +683,7 @@ def integral_perform_step():
         "selected_item": str(compstate.get_next_step_label(subitem, label))
     })
 
+
 @app.route("/api/perform-slagle", methods=["POST"])
 def integral_perform_slagle():
     data = json.loads(request.get_data().decode('UTF-8'))
@@ -683,6 +709,7 @@ def integral_perform_slagle():
         "item": st.export(),
         "selected_item": str(compstate.get_next_step_label(subitem, label))
     })
+
 
 @app.route("/api/query-theorems", methods=["POST"])
 def integral_query_theorems():
@@ -714,6 +741,7 @@ def integral_query_theorems():
         "theorems": eqs
     })
 
+
 @app.route("/api/query-vars", methods=["POST"])
 def integral_query_vars():
     data = json.loads(request.get_data().decode('UTF-8'))
@@ -743,6 +771,7 @@ def integral_query_vars():
         "query_vars": query_vars
     })
 
+
 @app.route("/api/query-expr", methods=['POST'])
 def integral_query_expr():
     data = json.loads(request.get_data().decode('UTF-8'))
@@ -757,6 +786,7 @@ def integral_query_expr():
             "status": "fail",
             "exception": str(e)
         })
+
 
 @app.route("/api/query-last-expr", methods=["POST"])
 def integral_query_last_expr():

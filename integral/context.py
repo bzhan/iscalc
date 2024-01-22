@@ -48,23 +48,23 @@ class Identity:
                 return "%s  [%s]" % (self.expr, self.conds)
             else:
                 return "%s [%s] {%s}" % (self.expr, self.conds, self.split_cond)
-        
+
     def __repr__(self):
         return str(self)
 
 
 class Context:
     """Maintains the current context of calculation.
-    
+
     Information kept in context include the following:
-    
+
     - List of function definitions
 
     - List of existing identities (for indefinite integrals, definite integrals,
       trigonometric identities, etc).
-      
+
     - Assumptions for the current computation.
-    
+
     - List of variable substitutions.
 
     """
@@ -159,7 +159,7 @@ class Context:
 
 
         return res
-    
+
     def get_definitions(self) -> List[Identity]:
         res = self.parent.get_definitions() if self.parent is not None else []
         res.extend(self.definitions)
@@ -174,7 +174,7 @@ class Context:
         res = self.parent.get_indefinite_integrals() if self.parent is not None else []
         res.extend(self.indefinite_integrals)
         return res
-    
+
     def get_definite_integrals(self) -> List[Identity]:
         res = self.parent.get_definite_integrals() if self.parent is not None else []
         res.extend(self.definite_integrals)
@@ -194,7 +194,7 @@ class Context:
         res = self.parent.get_other_identities() if self.parent is not None else []
         res.extend(self.other_identities)
         return res
-    
+
     def get_simp_identities(self) -> List[Identity]:
         res = self.parent.get_simp_identities() if self.parent is not None else []
         res.extend(self.simp_identities)
@@ -204,7 +204,7 @@ class Context:
         res = self.parent.get_function_tables() if self.parent is not None else dict()
         res.update(self.function_tables)
         return res
-    
+
     def get_inequalities(self) -> List[Identity]:
         res = self.parent.get_inequalities() if self.parent is not None else []
         res.extend(self.inequalities)
@@ -297,7 +297,7 @@ class Context:
     def add_indefinite_integral(self, eq: Expr):
         if not (eq.is_equals() and expr.is_indefinite_integral(eq.lhs)):
             raise TypeError
-        
+
         symb_lhs = expr_to_pattern(eq.lhs)
         symb_rhs = expr_to_pattern(eq.rhs)
         self.indefinite_integrals.append(Identity(Eq(symb_lhs, symb_rhs)))
@@ -305,7 +305,7 @@ class Context:
     def add_definite_integral(self, eq: Expr, conds: Conditions):
         if not (eq.is_equals() and expr.is_integral(eq.lhs)):
             raise TypeError
-        
+
         symb_lhs = expr_to_pattern(eq.lhs)
         symb_rhs = expr_to_pattern(eq.rhs)
         self.definite_integrals.append(Identity(Eq(symb_lhs, symb_rhs), conds=conds))
@@ -313,7 +313,7 @@ class Context:
     def add_series_expansion(self, eq: Expr):
         if not (eq.is_equals() and not expr.is_summation(eq.lhs) and expr.is_summation(eq.rhs)):
             raise TypeError
-        
+
         symb_lhs = expr_to_pattern(eq.lhs)
         symb_rhs = expr_to_pattern(eq.rhs)
         self.series_expansions.append(Identity(Eq(symb_lhs, symb_rhs)))
@@ -321,7 +321,7 @@ class Context:
     def add_series_evaluation(self, eq: Expr):
         if not (eq.is_equals() and expr.is_summation(eq.lhs) and not expr.is_summation(eq.rhs)):
             raise TypeError
-        
+
         symb_lhs = expr_to_pattern(eq.lhs)
         symb_rhs = expr_to_pattern(eq.rhs)
         self.series_evaluations.append(Identity(Eq(symb_lhs, symb_rhs)))
@@ -330,7 +330,7 @@ class Context:
                              attributes: Optional[List[str]] = None, conds: Conditions = None):
         if not eq.is_equals():
             raise TypeError
-        
+
         symb_lhs = expr_to_pattern(eq.lhs)
         symb_rhs = expr_to_pattern(eq.rhs)
         symb_conds = [expr_to_pattern(cond) for cond in conds.data] if conds != None else []
@@ -341,7 +341,7 @@ class Context:
     def add_simp_identity(self, eq: Expr, conds: Conditions):
         if not eq.is_equals():
             raise TypeError
-        
+
         symb_lhs = expr_to_pattern(eq.lhs)
         symb_rhs = expr_to_pattern(eq.rhs)
         symb_conds = [expr_to_pattern(cond) for cond in conds.data]
@@ -379,7 +379,7 @@ class Context:
         if isinstance(e, str):
             e = parser.parse_expr(e)
 
-        # Note: no conversion to symbols for inductive hypothesis        
+        # Note: no conversion to symbols for inductive hypothesis
         self.induct_hyps.append(Identity(e))
 
     def add_condition(self, cond: Union[Expr, str]):
@@ -495,8 +495,9 @@ class Context:
 
     def load_book(self, book_name: str, *, upto: Optional[str] = None):
         assert isinstance(book_name, str)
-
-        filename = os.path.join(dirname, "../examples/" + book_name + '.json')
+        root_dir = os.path.dirname(dirname)
+        examples_dir = os.path.join(root_dir, 'examples')
+        filename = os.path.join(examples_dir, book_name + '.json')
         with open(filename, 'r', encoding='utf-8') as f:
             info = json.load(f)
 

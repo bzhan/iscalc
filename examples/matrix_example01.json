@@ -20,6 +20,7 @@
                 [
                     "n",
                     {
+                        "latex_type": "\\text{n} \\in \\mathbb{Z}",
                         "symbol_type": "var",
                         "type": "$int"
                     }
@@ -27,6 +28,7 @@
                 [
                     "m",
                     {
+                        "latex_type": "\\text{m} \\in \\mathbb{Z}",
                         "symbol_type": "var",
                         "type": "$int"
                     }
@@ -34,6 +36,7 @@
                 [
                     "P",
                     {
+                        "latex_type": "\\text{P} \\in \\mathbb{R}^{m \\times m}",
                         "symbol_type": "var",
                         "type": "$tensor($real, m, m)"
                     }
@@ -41,6 +44,7 @@
                 [
                     "A",
                     {
+                        "latex_type": "\\text{A} \\in \\mathbb{R}^{m \\times m}",
                         "symbol_type": "var",
                         "type": "$tensor($real, m, m)"
                     }
@@ -209,6 +213,7 @@
                         [
                             "n",
                             {
+                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                 "symbol_type": "var",
                                 "type": "$int"
                             }
@@ -216,6 +221,7 @@
                         [
                             "m",
                             {
+                                "latex_type": "\\text{m} \\in \\mathbb{Z}",
                                 "symbol_type": "var",
                                 "type": "$int"
                             }
@@ -223,6 +229,7 @@
                         [
                             "P",
                             {
+                                "latex_type": "\\text{P} \\in \\mathbb{R}^{m \\times m}",
                                 "symbol_type": "var",
                                 "type": "$tensor($real, m, m)"
                             }
@@ -230,6 +237,7 @@
                         [
                             "A",
                             {
+                                "latex_type": "\\text{A} \\in \\mathbb{R}^{m \\times m}",
                                 "symbol_type": "var",
                                 "type": "$tensor($real, m, m)"
                             }
@@ -258,6 +266,7 @@
                                     [
                                         "n",
                                         {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -265,6 +274,7 @@
                                     [
                                         "m",
                                         {
+                                            "latex_type": "\\text{m} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -272,6 +282,7 @@
                                     [
                                         "P",
                                         {
+                                            "latex_type": "\\text{P} \\in \\mathbb{R}^{m \\times m}",
                                             "symbol_type": "var",
                                             "type": "$tensor($real, m, m)"
                                         }
@@ -279,6 +290,7 @@
                                     [
                                         "A",
                                         {
+                                            "latex_type": "\\text{A} \\in \\mathbb{R}^{m \\times m}",
                                             "symbol_type": "var",
                                             "type": "$tensor($real, m, m)"
                                         }
@@ -308,6 +320,7 @@
                                     [
                                         "n",
                                         {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -315,6 +328,7 @@
                                     [
                                         "m",
                                         {
+                                            "latex_type": "\\text{m} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -322,6 +336,7 @@
                                     [
                                         "P",
                                         {
+                                            "latex_type": "\\text{P} \\in \\mathbb{R}^{m \\times m}",
                                             "symbol_type": "var",
                                             "type": "$tensor($real, m, m)"
                                         }
@@ -329,6 +344,7 @@
                                     [
                                         "A",
                                         {
+                                            "latex_type": "\\text{A} \\in \\mathbb{R}^{m \\times m}",
                                             "symbol_type": "var",
                                             "type": "$tensor($real, m, m)"
                                         }
@@ -369,6 +385,7 @@
                         [
                             "n",
                             {
+                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                 "symbol_type": "var",
                                 "type": "$int"
                             }
@@ -376,6 +393,7 @@
                         [
                             "m",
                             {
+                                "latex_type": "\\text{m} \\in \\mathbb{Z}",
                                 "symbol_type": "var",
                                 "type": "$int"
                             }
@@ -383,6 +401,7 @@
                         [
                             "P",
                             {
+                                "latex_type": "\\text{P} \\in \\mathbb{R}^{m \\times m}",
                                 "symbol_type": "var",
                                 "type": "$tensor($real, m, m)"
                             }
@@ -390,6 +409,7 @@
                         [
                             "A",
                             {
+                                "latex_type": "\\text{A} \\in \\mathbb{R}^{m \\times m}",
                                 "symbol_type": "var",
                                 "type": "$tensor($real, m, m)"
                             }
@@ -558,6 +578,7 @@
                                     [
                                         "n",
                                         {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -565,6 +586,7 @@
                                     [
                                         "m",
                                         {
+                                            "latex_type": "\\text{m} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -572,6 +594,7 @@
                                     [
                                         "P",
                                         {
+                                            "latex_type": "\\text{P} \\in \\mathbb{R}^{m \\times m}",
                                             "symbol_type": "var",
                                             "type": "$tensor($real, m, m)"
                                         }
@@ -579,6 +602,7 @@
                                     [
                                         "A",
                                         {
+                                            "latex_type": "\\text{A} \\in \\mathbb{R}^{m \\times m}",
                                             "symbol_type": "var",
                                             "type": "$tensor($real, m, m)"
                                         }
@@ -640,6 +664,7 @@
                                     [
                                         "n",
                                         {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -647,6 +672,7 @@
                                     [
                                         "m",
                                         {
+                                            "latex_type": "\\text{m} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -654,6 +680,7 @@
                                     [
                                         "P",
                                         {
+                                            "latex_type": "\\text{P} \\in \\mathbb{R}^{m \\times m}",
                                             "symbol_type": "var",
                                             "type": "$tensor($real, m, m)"
                                         }
@@ -661,6 +688,7 @@
                                     [
                                         "A",
                                         {
+                                            "latex_type": "\\text{A} \\in \\mathbb{R}^{m \\times m}",
                                             "symbol_type": "var",
                                             "type": "$tensor($real, m, m)"
                                         }
@@ -699,6 +727,7 @@
                 [
                     "A",
                     {
+                        "latex_type": "\\text{A} \\in \\mathbb{R}^{3 \\times 3}",
                         "symbol_type": "var",
                         "type": "$tensor($real, 3, 3)"
                     }
@@ -706,6 +735,7 @@
                 [
                     "B",
                     {
+                        "latex_type": "\\text{B} \\in \\mathbb{R}^{3 \\times 3}",
                         "symbol_type": "var",
                         "type": "$tensor($real, 3, 3)"
                     }
@@ -723,6 +753,7 @@
                             [
                                 "m",
                                 {
+                                    "latex_type": "\\text{m} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }
@@ -730,6 +761,7 @@
                             [
                                 "P",
                                 {
+                                    "latex_type": "\\text{P} \\in \\mathbb{R}^{m \\times m}",
                                     "symbol_type": "var",
                                     "type": "$tensor($real, m, m)"
                                 }
@@ -737,6 +769,7 @@
                             [
                                 "A",
                                 {
+                                    "latex_type": "\\text{A} \\in \\mathbb{R}^{m \\times m}",
                                     "symbol_type": "var",
                                     "type": "$tensor($real, m, m)"
                                 }
@@ -744,6 +777,7 @@
                             [
                                 "n",
                                 {
+                                    "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }

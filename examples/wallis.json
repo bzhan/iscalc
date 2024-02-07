@@ -32,6 +32,7 @@
                 [
                     "m",
                     {
+                        "latex_type": "\\text{m} \\in \\mathbb{Z}",
                         "symbol_type": "var",
                         "type": "$int"
                     }
@@ -56,6 +57,7 @@
                             [
                                 "m",
                                 {
+                                    "latex_type": "\\text{m} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }
@@ -137,6 +139,7 @@
                             [
                                 "m",
                                 {
+                                    "latex_type": "\\text{m} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }
@@ -204,6 +207,7 @@
                 [
                     "m",
                     {
+                        "latex_type": "\\text{m} \\in \\mathbb{Z}",
                         "symbol_type": "var",
                         "type": "$int"
                     }
@@ -228,6 +232,7 @@
                         [
                             "m",
                             {
+                                "latex_type": "\\text{m} \\in \\mathbb{Z}",
                                 "symbol_type": "var",
                                 "type": "$int"
                             }
@@ -252,6 +257,7 @@
                                     [
                                         "m",
                                         {
+                                            "latex_type": "\\text{m} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -393,6 +399,7 @@
                                     [
                                         "m",
                                         {
+                                            "latex_type": "\\text{m} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -429,6 +436,7 @@
                         [
                             "m",
                             {
+                                "latex_type": "\\text{m} \\in \\mathbb{Z}",
                                 "symbol_type": "var",
                                 "type": "$int"
                             }
@@ -453,6 +461,7 @@
                                     [
                                         "m",
                                         {
+                                            "latex_type": "\\text{m} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -545,6 +554,7 @@
                                     [
                                         "m",
                                         {
+                                            "latex_type": "\\text{m} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }

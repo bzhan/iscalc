@@ -15,6 +15,15 @@
             <MathEquation v-bind:data="'\\(' + cond.latex_cond + '\\)'"/>
           </span>
         </span>
+        <span v-if="'fixes' in item && item.fixes.length > 0">
+          <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          <span class="math-text indented-text">where &nbsp;</span>
+          <span v-for="(info, index) in item.fixes" :key="index">
+            <span v-if="index > 0">, &nbsp;</span>
+            <MathEquation v-bind:data="'\\(' + info[1].latex_type + '\\)'"/>
+          </span>
+        </span>
+
         <span v-if="'wellformed' in item && item.wellformed == false"
               title="Unable to show wellformed">
           ⚠

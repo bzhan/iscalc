@@ -118,8 +118,7 @@ class MatrixTest(unittest.TestCase):
     def testExample02(self):
         file = compstate.CompFile("MIRM", "matrix_example02")
         raw_fixes = [
-            ("w", {"symbol_type":"var", "type": "$tensor($real, 3, 1)"}),
-            ("n", {"symbol_type":"var", "type": "$int"})
+            ("w", {"symbol_type":"var", "type": "$tensor($real, 3, 1)"})
         ]
         fixes = parser.parse_raw_fixes(raw_fixes)
         goal01 = file.add_goal('hat(w)^2 = w * T(w) - norm(w)^2 * unit_matrix(3)', fixes = fixes)
@@ -131,6 +130,10 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.FullSimplify())
         assert goal01.is_finished()
 
+        raw_fixes = [
+            ("w", {"symbol_type": "var", "type": "$tensor($real, 3, 1)"})
+        ]
+        fixes = parser.parse_raw_fixes(raw_fixes)
         goal02 = file.add_goal("w*T(w)*hat(w) = zero_matrix(3,3)", fixes=fixes)
         proof = goal02.proof_by_calculation()
         calc = proof.lhs_calc
@@ -140,6 +143,11 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
         assert goal02.is_finished()
 
+        raw_fixes = [
+            ("w", {"symbol_type": "var", "type": "$tensor($real, 3, 1)"}),
+            ("n", {"symbol_type": "var", "type": "$int"})
+        ]
+        fixes = parser.parse_raw_fixes(raw_fixes)
         goal03 = file.add_goal("hat(w)^(2*n+1) = (-1)^n * hat(w)", conds = ["n>=0", "norm(w)=1"], fixes=fixes)
         proof = goal03.proof_by_induction('n', 0)
         _ = proof.base_case.proof_by_calculation()
@@ -169,6 +177,11 @@ class MatrixTest(unittest.TestCase):
         calc = induct_proof.rhs_calc
         assert goal03.is_finished()
 
+        raw_fixes = [
+            ("w", {"symbol_type": "var", "type": "$tensor($real, 3, 1)"}),
+            ("n", {"symbol_type": "var", "type": "$int"})
+        ]
+        fixes = parser.parse_raw_fixes(raw_fixes)
         goal04 = file.add_goal("hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2", conds=["n>=0", "norm(w)=1"], fixes=fixes)
         proof = goal04.proof_by_induction('n', 0)
         _ = proof.base_case.proof_by_calculation()
@@ -550,7 +563,7 @@ class MatrixTest(unittest.TestCase):
             ('ic', {"symbol_type": "var","type":'$tensor($real, 4, 4)'}),
             ('gst', s)]
         fixes = parser.parse_raw_fixes(raw_fixes)
-        f = file.add_definition(d, conds=conds, fixes=fixes)
+        file.add_definition(d, conds=conds, fixes=fixes)
         raw_fixes = [
             ('i', {"symbol_type": "var", "type":'$int'}),
             ('n', {"symbol_type": "var", "type":'$int'}),
@@ -576,7 +589,7 @@ class MatrixTest(unittest.TestCase):
         fixes = parser.parse_raw_fixes(raw_fixes)
         eq = calc.parse_expr("hmf(-t, w, v) * hmf(t, w, v) = unit_matrix(4)", fixes=fixes)
         s = calc.parse_expr("hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))")
-        calc.perform_rule(rules.ApplyEquation(eq, s, eq_fixes=fixes))
+        calc.perform_rule(rules.ApplyEquation(eq, s, eq_fixes=fixes_from_expr(eq)))
         calc.perform_rule(rules.FullSimplify())
 
         proof = cases.induct_case.proof_by_calculation()
@@ -598,7 +611,7 @@ class MatrixTest(unittest.TestCase):
         fixes = parser.parse_raw_fixes(raw_fixes)
         eq = calc.parse_expr("hmf(-t, w, v) * hmf(t, w, v) = unit_matrix(4)", fixes=fixes)
         s = calc.parse_expr("hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))")
-        calc.perform_rule(rules.ApplyEquation(eq, s, eq_fixes=fixes))
+        calc.perform_rule(rules.ApplyEquation(eq, s, eq_fixes=fixes_from_expr(eq)))
 
         calc.perform_rule(rules.FullSimplify())
         s = calc.parse_expr("MUL(j, 0, n - 1, hmf(-nth(t,-j + n, 0),nthc(w,-j + n),nthc(v,-j + n)))")

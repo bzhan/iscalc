@@ -18,6 +18,7 @@
                 [
                     "k",
                     {
+                        "latex_type": "\\text{k} \\in \\mathbb{Z}",
                         "symbol_type": "var",
                         "type": "$int"
                     }
@@ -43,6 +44,7 @@
                             [
                                 "k",
                                 {
+                                    "latex_type": "\\text{k} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }
@@ -67,6 +69,7 @@
                                         [
                                             "k",
                                             {
+                                                "latex_type": "\\text{k} \\in \\mathbb{Z}",
                                                 "symbol_type": "var",
                                                 "type": "$int"
                                             }
@@ -207,6 +210,7 @@
                                         [
                                             "k",
                                             {
+                                                "latex_type": "\\text{k} \\in \\mathbb{Z}",
                                                 "symbol_type": "var",
                                                 "type": "$int"
                                             }
@@ -241,6 +245,7 @@
                             [
                                 "k",
                                 {
+                                    "latex_type": "\\text{k} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }
@@ -265,6 +270,7 @@
                                         [
                                             "k",
                                             {
+                                                "latex_type": "\\text{k} \\in \\mathbb{Z}",
                                                 "symbol_type": "var",
                                                 "type": "$int"
                                             }
@@ -300,6 +306,7 @@
                                         [
                                             "k",
                                             {
+                                                "latex_type": "\\text{k} \\in \\mathbb{Z}",
                                                 "symbol_type": "var",
                                                 "type": "$int"
                                             }
@@ -431,6 +438,7 @@
                 [
                     "s",
                     {
+                        "latex_type": "\\text{s} \\in \\mathbb{Z}",
                         "symbol_type": "var",
                         "type": "$int"
                     }
@@ -459,6 +467,7 @@
                         [
                             "s",
                             {
+                                "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                 "symbol_type": "var",
                                 "type": "$int"
                             }
@@ -487,6 +496,7 @@
                                     [
                                         "s",
                                         {
+                                            "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -533,6 +543,7 @@
                                     [
                                         "s",
                                         {
+                                            "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -756,6 +767,7 @@
                         [
                             "s",
                             {
+                                "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                 "symbol_type": "var",
                                 "type": "$int"
                             }
@@ -784,6 +796,7 @@
                                     [
                                         "s",
                                         {
+                                            "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -830,6 +843,7 @@
                                     [
                                         "s",
                                         {
+                                            "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -1035,6 +1049,7 @@
                 [
                     "s",
                     {
+                        "latex_type": "\\text{s} \\in \\mathbb{Z}",
                         "symbol_type": "var",
                         "type": "$int"
                     }
@@ -1059,6 +1074,7 @@
                             [
                                 "s",
                                 {
+                                    "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }
@@ -1121,6 +1137,7 @@
                             [
                                 "s",
                                 {
+                                    "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }
@@ -1340,6 +1357,7 @@
                 [
                     "s",
                     {
+                        "latex_type": "\\text{s} \\in \\mathbb{Z}",
                         "symbol_type": "var",
                         "type": "$int"
                     }
@@ -1364,6 +1382,7 @@
                             [
                                 "s",
                                 {
+                                    "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }
@@ -1439,6 +1458,7 @@
                             [
                                 "s",
                                 {
+                                    "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }
@@ -1473,6 +1493,7 @@
                 [
                     "s",
                     {
+                        "latex_type": "\\text{s} \\in \\mathbb{Z}",
                         "symbol_type": "var",
                         "type": "$int"
                     }
@@ -1497,6 +1518,7 @@
                             [
                                 "s",
                                 {
+                                    "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }
@@ -1539,6 +1561,7 @@
                             [
                                 "s",
                                 {
+                                    "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }
@@ -1621,6 +1644,7 @@
                 [
                     "s",
                     {
+                        "latex_type": "\\text{s} \\in \\mathbb{Z}",
                         "symbol_type": "var",
                         "type": "$int"
                     }
@@ -1645,6 +1669,7 @@
                             [
                                 "s",
                                 {
+                                    "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }
@@ -1814,6 +1839,7 @@
                             [
                                 "s",
                                 {
+                                    "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }
@@ -1858,6 +1884,7 @@
                 [
                     "s",
                     {
+                        "latex_type": "\\text{s} \\in \\mathbb{Z}",
                         "symbol_type": "var",
                         "type": "$int"
                     }
@@ -1882,6 +1909,7 @@
                             [
                                 "s",
                                 {
+                                    "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }
@@ -1944,6 +1972,7 @@
                             [
                                 "s",
                                 {
+                                    "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }
@@ -2144,6 +2173,7 @@
                 [
                     "s",
                     {
+                        "latex_type": "\\text{s} \\in \\mathbb{Z}",
                         "symbol_type": "var",
                         "type": "$int"
                     }
@@ -2168,6 +2198,7 @@
                             [
                                 "s",
                                 {
+                                    "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }
@@ -2263,6 +2294,7 @@
                             [
                                 "s",
                                 {
+                                    "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }
@@ -2334,6 +2366,7 @@
                 [
                     "s",
                     {
+                        "latex_type": "\\text{s} \\in \\mathbb{Z}",
                         "symbol_type": "var",
                         "type": "$int"
                     }
@@ -2358,6 +2391,7 @@
                             [
                                 "s",
                                 {
+                                    "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }
@@ -2667,6 +2701,7 @@
                             [
                                 "s",
                                 {
+                                    "latex_type": "\\text{s} \\in \\mathbb{Z}",
                                     "symbol_type": "var",
                                     "type": "$int"
                                 }

@@ -6,15 +6,9 @@
                 [
                     "w",
                     {
+                        "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                         "symbol_type": "var",
                         "type": "$tensor($real, 3, 1)"
-                    }
-                ],
-                [
-                    "n",
-                    {
-                        "symbol_type": "var",
-                        "type": "$int"
                     }
                 ]
             ],
@@ -27,15 +21,9 @@
                             [
                                 "w",
                                 {
+                                    "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                                     "symbol_type": "var",
                                     "type": "$tensor($real, 3, 1)"
-                                }
-                            ],
-                            [
-                                "n",
-                                {
-                                    "symbol_type": "var",
-                                    "type": "$int"
                                 }
                             ]
                         ],
@@ -60,15 +48,9 @@
                             [
                                 "w",
                                 {
+                                    "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                                     "symbol_type": "var",
                                     "type": "$tensor($real, 3, 1)"
-                                }
-                            ],
-                            [
-                                "n",
-                                {
-                                    "symbol_type": "var",
-                                    "type": "$int"
                                 }
                             ]
                         ],
@@ -111,15 +93,9 @@
                 [
                     "w",
                     {
+                        "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                         "symbol_type": "var",
                         "type": "$tensor($real, 3, 1)"
-                    }
-                ],
-                [
-                    "n",
-                    {
-                        "symbol_type": "var",
-                        "type": "$int"
                     }
                 ]
             ],
@@ -132,15 +108,9 @@
                             [
                                 "w",
                                 {
+                                    "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                                     "symbol_type": "var",
                                     "type": "$tensor($real, 3, 1)"
-                                }
-                            ],
-                            [
-                                "n",
-                                {
-                                    "symbol_type": "var",
-                                    "type": "$int"
                                 }
                             ]
                         ],
@@ -174,15 +144,9 @@
                             [
                                 "w",
                                 {
+                                    "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                                     "symbol_type": "var",
                                     "type": "$tensor($real, 3, 1)"
-                                }
-                            ],
-                            [
-                                "n",
-                                {
-                                    "symbol_type": "var",
-                                    "type": "$int"
                                 }
                             ]
                         ],
@@ -226,6 +190,7 @@
                 [
                     "w",
                     {
+                        "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                         "symbol_type": "var",
                         "type": "$tensor($real, 3, 1)"
                     }
@@ -233,6 +198,7 @@
                 [
                     "n",
                     {
+                        "latex_type": "\\text{n} \\in \\mathbb{Z}",
                         "symbol_type": "var",
                         "type": "$int"
                     }
@@ -373,6 +339,7 @@
                         [
                             "w",
                             {
+                                "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                                 "symbol_type": "var",
                                 "type": "$tensor($real, 3, 1)"
                             }
@@ -380,6 +347,7 @@
                         [
                             "n",
                             {
+                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                 "symbol_type": "var",
                                 "type": "$int"
                             }
@@ -404,6 +372,7 @@
                                     [
                                         "w",
                                         {
+                                            "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                                             "symbol_type": "var",
                                             "type": "$tensor($real, 3, 1)"
                                         }
@@ -411,6 +380,7 @@
                                     [
                                         "n",
                                         {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -436,6 +406,7 @@
                                     [
                                         "w",
                                         {
+                                            "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                                             "symbol_type": "var",
                                             "type": "$tensor($real, 3, 1)"
                                         }
@@ -443,6 +414,7 @@
                                     [
                                         "n",
                                         {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -479,6 +451,7 @@
                         [
                             "w",
                             {
+                                "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                                 "symbol_type": "var",
                                 "type": "$tensor($real, 3, 1)"
                             }
@@ -486,6 +459,7 @@
                         [
                             "n",
                             {
+                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                 "symbol_type": "var",
                                 "type": "$int"
                             }
@@ -626,6 +600,7 @@
                                     [
                                         "w",
                                         {
+                                            "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                                             "symbol_type": "var",
                                             "type": "$tensor($real, 3, 1)"
                                         }
@@ -633,6 +608,7 @@
                                     [
                                         "n",
                                         {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -759,6 +735,7 @@
                                     [
                                         "w",
                                         {
+                                            "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                                             "symbol_type": "var",
                                             "type": "$tensor($real, 3, 1)"
                                         }
@@ -766,6 +743,7 @@
                                     [
                                         "n",
                                         {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -809,6 +787,7 @@
                 [
                     "w",
                     {
+                        "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                         "symbol_type": "var",
                         "type": "$tensor($real, 3, 1)"
                     }
@@ -816,6 +795,7 @@
                 [
                     "n",
                     {
+                        "latex_type": "\\text{n} \\in \\mathbb{Z}",
                         "symbol_type": "var",
                         "type": "$int"
                     }
@@ -956,6 +936,7 @@
                         [
                             "w",
                             {
+                                "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                                 "symbol_type": "var",
                                 "type": "$tensor($real, 3, 1)"
                             }
@@ -963,6 +944,7 @@
                         [
                             "n",
                             {
+                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                 "symbol_type": "var",
                                 "type": "$int"
                             }
@@ -987,6 +969,7 @@
                                     [
                                         "w",
                                         {
+                                            "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                                             "symbol_type": "var",
                                             "type": "$tensor($real, 3, 1)"
                                         }
@@ -994,6 +977,7 @@
                                     [
                                         "n",
                                         {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -1019,6 +1003,7 @@
                                     [
                                         "w",
                                         {
+                                            "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                                             "symbol_type": "var",
                                             "type": "$tensor($real, 3, 1)"
                                         }
@@ -1026,6 +1011,7 @@
                                     [
                                         "n",
                                         {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -1062,6 +1048,7 @@
                         [
                             "w",
                             {
+                                "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                                 "symbol_type": "var",
                                 "type": "$tensor($real, 3, 1)"
                             }
@@ -1069,6 +1056,7 @@
                         [
                             "n",
                             {
+                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                 "symbol_type": "var",
                                 "type": "$int"
                             }
@@ -1209,6 +1197,7 @@
                                     [
                                         "w",
                                         {
+                                            "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                                             "symbol_type": "var",
                                             "type": "$tensor($real, 3, 1)"
                                         }
@@ -1216,6 +1205,7 @@
                                     [
                                         "n",
                                         {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }
@@ -1329,6 +1319,7 @@
                                     [
                                         "w",
                                         {
+                                            "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
                                             "symbol_type": "var",
                                             "type": "$tensor($real, 3, 1)"
                                         }
@@ -1336,6 +1327,7 @@
                                     [
                                         "n",
                                         {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
                                             "symbol_type": "var",
                                             "type": "$int"
                                         }

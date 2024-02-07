@@ -1176,6 +1176,8 @@ def parse_conds(item, fixes: Optional[Dict[str, Type]] = None) -> Conditions:
 
 def parse_calculatioin(parent, item) -> Calculation:
     assert item['type'] == 'Calculation'
+    file = get_comp_file(parent)
+    cur_id = len(file.content)
     if isinstance(parent, CompFile):
         calc_fixes = parser.parse_fixes(item)
         ctx = parent.get_context()
@@ -1184,8 +1186,7 @@ def parse_calculatioin(parent, item) -> Calculation:
         conds = parse_conds(item, fixes=fixes)
         res = Calculation(parent, ctx, start, conds=conds, fixes=calc_fixes)
     elif isinstance(parent, CalculationProof):
-        file = get_comp_file(parent)
-        ctx = file.get_context(len(file.content) - 1)
+        ctx = file.get_context(cur_id)
         goal = parent.parent
         assert isinstance(goal, Goal), "this calculation should belong to a Goal"
         if len(goal.ctx.induct_hyps) > 0:
@@ -1196,8 +1197,7 @@ def parse_calculatioin(parent, item) -> Calculation:
         conds = goal.conds
         res = Calculation(parent, ctx, start, conds=conds, fixes=calc_fixes)
     elif isinstance(parent, RewriteGoalProof):
-        file = get_comp_file(parent)
-        ctx = file.get_context(len(file.content) - 1)
+        ctx = file.get_context(cur_id)
         begin_calc_fixes = parser.parse_fixes(item)
         fixes = ctx.get_fixes().update(begin_calc_fixes)
         begin_goal = parser.parse_expr(item['start'], fixes=fixes)

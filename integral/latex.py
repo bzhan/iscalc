@@ -297,3 +297,26 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
     else:
         print(type(e), ":", e, flush=True)
         raise NotImplementedError
+
+def convert_type(name:str, t: expr.Type) -> str:
+    if expr.is_matrix_type(t):
+        ele_type_str = convert_type(None, t.eleType)
+        if t.col == expr.Const(1):
+            shape_str = convert_expr(t.row)
+        else:
+            shape_str = convert_expr(t.row) + " \\times " + convert_expr(t.col)
+        return "\\text{" + name + "} \\in " + ele_type_str + "^{" + shape_str+"}"
+    elif t == expr.RealType:
+        suffix = "\\mathbb{R}"
+        if name is None:
+            return suffix
+        else:
+            return "\\text{" + name + "} \\in " + suffix
+    elif t == expr.IntType:
+        suffix = "\\mathbb{Z}"
+        if name is None:
+            return suffix
+        else:
+            return "\\text{" + name + "} \\in " + suffix
+    else:
+        raise NotImplementedError(f"this type {str(t)} can not be translated into latex format")

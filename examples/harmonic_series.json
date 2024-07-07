@@ -101,11 +101,11 @@
                                 "latex_res": "\\frac{1}{n} (\\int_{0}^{1} -\\frac{1 - x ^ {n}}{1 - x} \\,dx)",
                                 "res": "1 / n * (INT x:[0,1]. -((1 - x ^ n) / (1 - x)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{x ^ {n} - 1}{-x + 1}\\) to \\(-\\frac{1 - x ^ {n}}{1 - x}\\)",
+                                    "latex_str": "rewrite \\(\\frac{x ^ {n} - 1}{-x + 1}\\) to \\(-\\frac{1 - x ^ {n}}{1 - x}\\)",
                                     "name": "Equation",
                                     "new_expr": "-((1 - x ^ n) / (1 - x))",
                                     "old_expr": "(x ^ n - 1) / (-x + 1)",
-                                    "str": "rewriting (x ^ n - 1) / (-x + 1) to -((1 - x ^ n) / (1 - x))"
+                                    "str": "rewrite (x ^ n - 1) / (-x + 1) to -((1 - x ^ n) / (1 - x))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -184,7 +184,7 @@
                                 "res": "-(1 / n * SUM(k, 1, n, [x ^ k / k]_x=0,1))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },

@@ -118,11 +118,11 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi/2} \\frac{\\sin^{2}(x) + \\cos^{2}(x)}{\\cos{x} + \\sin{x}} \\,dx)",
                                 "res": "1/2 * (INT x:[0,pi / 2]. (sin(x) ^ 2 + cos(x) ^ 2) / (cos(x) + sin(x)))",
                                 "rule": {
-                                    "latex_str": "rewriting to \\(\\sin^{2}(x) + \\cos^{2}(x)\\) at 1.0.0",
+                                    "latex_str": "rewrite to \\(\\sin^{2}(x) + \\cos^{2}(x)\\) at 1.0.0",
                                     "loc": "1.0.0",
                                     "name": "Equation",
                                     "new_expr": "sin(x) ^ 2 + cos(x) ^ 2",
-                                    "str": "rewriting to sin(x) ^ 2 + cos(x) ^ 2 at 1.0.0"
+                                    "str": "rewrite to sin(x) ^ 2 + cos(x) ^ 2 at 1.0.0"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -166,12 +166,12 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi/2} \\frac{\\cos^{2}(x)}{\\sin{x} + \\cos{x}} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\pi/2} \\frac{\\sin^{2}(x)}{\\cos{x} + \\sin{x}} \\,dx)",
                                 "res": "1/2 * (INT x:[0,pi / 2]. cos(x) ^ 2 / (sin(x) + cos(x))) + 1/2 * (INT x:[0,pi / 2]. sin(x) ^ 2 / (cos(x) + sin(x)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\cos{x} + \\sin{x}\\) to \\(\\sin{x} + \\cos{x}\\) at 0",
+                                    "latex_str": "rewrite \\(\\cos{x} + \\sin{x}\\) to \\(\\sin{x} + \\cos{x}\\) at 0",
                                     "loc": "0",
                                     "name": "Equation",
                                     "new_expr": "sin(x) + cos(x)",
                                     "old_expr": "cos(x) + sin(x)",
-                                    "str": "rewriting cos(x) + sin(x) to sin(x) + cos(x) at 0"
+                                    "str": "rewrite cos(x) + sin(x) to sin(x) + cos(x) at 0"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -290,11 +290,11 @@
                                 "latex_res": "\\int_{0}^{1} \\frac{1}{(z ^ {2} + 1) (\\frac{2 - (z - 1) ^ {2}}{z ^ {2} + 1})} \\,dz",
                                 "res": "INT z:[0,1]. 1 / ((z ^ 2 + 1) * ((2 - (z - 1) ^ 2) / (z ^ 2 + 1)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{-z ^ {2} + 1}{z ^ {2} + 1} + \\frac{2 z}{z ^ {2} + 1}\\) to \\(\\frac{2 - (z - 1) ^ {2}}{z ^ {2} + 1}\\)",
+                                    "latex_str": "rewrite \\(\\frac{-z ^ {2} + 1}{z ^ {2} + 1} + \\frac{2 z}{z ^ {2} + 1}\\) to \\(\\frac{2 - (z - 1) ^ {2}}{z ^ {2} + 1}\\)",
                                     "name": "Equation",
                                     "new_expr": "(2 - (z - 1) ^ 2) / (z ^ 2 + 1)",
                                     "old_expr": "(-(z ^ 2) + 1) / (z ^ 2 + 1) + 2 * z / (z ^ 2 + 1)",
-                                    "str": "rewriting (-(z ^ 2) + 1) / (z ^ 2 + 1) + 2 * z / (z ^ 2 + 1) to (2 - (z - 1) ^ 2) / (z ^ 2 + 1)"
+                                    "str": "rewrite (-(z ^ 2) + 1) / (z ^ 2 + 1) + 2 * z / (z ^ 2 + 1) to (2 - (z - 1) ^ 2) / (z ^ 2 + 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -308,11 +308,11 @@
                                 "latex_res": "\\int_{0}^{1} \\frac{1}{2 - (z - 1) ^ {2}} \\,dz",
                                 "res": "INT z:[0,1]. 1 / (2 - (z - 1) ^ 2)",
                                 "rule": {
-                                    "latex_str": "rewriting \\((z ^ {2} + 1) (\\frac{2 - (z - 1) ^ {2}}{z ^ {2} + 1})\\) to \\(2 - (z - 1) ^ {2}\\)",
+                                    "latex_str": "rewrite \\((z ^ {2} + 1) (\\frac{2 - (z - 1) ^ {2}}{z ^ {2} + 1})\\) to \\(2 - (z - 1) ^ {2}\\)",
                                     "name": "Equation",
                                     "new_expr": "2 - (z - 1) ^ 2",
                                     "old_expr": "(z ^ 2 + 1) * ((2 - (z - 1) ^ 2) / (z ^ 2 + 1))",
-                                    "str": "rewriting (z ^ 2 + 1) * ((2 - (z - 1) ^ 2) / (z ^ 2 + 1)) to 2 - (z - 1) ^ 2"
+                                    "str": "rewrite (z ^ 2 + 1) * ((2 - (z - 1) ^ 2) / (z ^ 2 + 1)) to 2 - (z - 1) ^ 2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -326,11 +326,11 @@
                                 "latex_res": "\\int_{0}^{1} \\frac{1}{(\\sqrt{2} + (z - 1)) (\\sqrt{2} - (z - 1))} \\,dz",
                                 "res": "INT z:[0,1]. 1 / ((sqrt(2) + (z - 1)) * (sqrt(2) - (z - 1)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(2 - (z - 1) ^ {2}\\) to \\((\\sqrt{2} + (z - 1)) (\\sqrt{2} - (z - 1))\\)",
+                                    "latex_str": "rewrite \\(2 - (z - 1) ^ {2}\\) to \\((\\sqrt{2} + (z - 1)) (\\sqrt{2} - (z - 1))\\)",
                                     "name": "Equation",
                                     "new_expr": "(sqrt(2) + (z - 1)) * (sqrt(2) - (z - 1))",
                                     "old_expr": "2 - (z - 1) ^ 2",
-                                    "str": "rewriting 2 - (z - 1) ^ 2 to (sqrt(2) + (z - 1)) * (sqrt(2) - (z - 1))"
+                                    "str": "rewrite 2 - (z - 1) ^ 2 to (sqrt(2) + (z - 1)) * (sqrt(2) - (z - 1))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -344,11 +344,11 @@
                                 "latex_res": "\\int_{0}^{1} \\frac{\\sqrt{2}}{4} (\\frac{1}{\\sqrt{2} + (z - 1)} + \\frac{1}{\\sqrt{2} - (z - 1)}) \\,dz",
                                 "res": "INT z:[0,1]. sqrt(2) / 4 * (1 / (sqrt(2) + (z - 1)) + 1 / (sqrt(2) - (z - 1)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{(\\sqrt{2} + (z - 1)) (\\sqrt{2} - (z - 1))}\\) to \\(\\frac{\\sqrt{2}}{4} (\\frac{1}{\\sqrt{2} + (z - 1)} + \\frac{1}{\\sqrt{2} - (z - 1)})\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{(\\sqrt{2} + (z - 1)) (\\sqrt{2} - (z - 1))}\\) to \\(\\frac{\\sqrt{2}}{4} (\\frac{1}{\\sqrt{2} + (z - 1)} + \\frac{1}{\\sqrt{2} - (z - 1)})\\)",
                                     "name": "Equation",
                                     "new_expr": "sqrt(2) / 4 * (1 / (sqrt(2) + (z - 1)) + 1 / (sqrt(2) - (z - 1)))",
                                     "old_expr": "1 / ((sqrt(2) + (z - 1)) * (sqrt(2) - (z - 1)))",
-                                    "str": "rewriting 1 / ((sqrt(2) + (z - 1)) * (sqrt(2) - (z - 1))) to sqrt(2) / 4 * (1 / (sqrt(2) + (z - 1)) + 1 / (sqrt(2) - (z - 1)))"
+                                    "str": "rewrite 1 / ((sqrt(2) + (z - 1)) * (sqrt(2) - (z - 1))) to sqrt(2) / 4 * (1 / (sqrt(2) + (z - 1)) + 1 / (sqrt(2) - (z - 1)))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -420,7 +420,7 @@
                                 "res": "sqrt(2) / 4 * (([log(abs(u))]_u=sqrt(2),sqrt(2) + 1) + ([log(abs(u))]_u=sqrt(2) - 1,sqrt(2)))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -437,11 +437,11 @@
                                 "latex_res": "\\frac{1}{4} \\sqrt{2}\\cdot (\\log{(\\sqrt{2} + 1)} - \\log{(\\sqrt{2} - 1)})",
                                 "res": "1/4 * sqrt(2) * (log(sqrt(2) + 1) - log(sqrt(2) - 1))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{\\sqrt{2}\\cdot (\\log{(\\sqrt{2} + 1)} - \\log{(\\sqrt{2} - 1)})}{4}\\) to \\(\\frac{1}{4} \\sqrt{2}\\cdot (\\log{(\\sqrt{2} + 1)} - \\log{(\\sqrt{2} - 1)})\\)",
+                                    "latex_str": "rewrite \\(\\frac{\\sqrt{2}\\cdot (\\log{(\\sqrt{2} + 1)} - \\log{(\\sqrt{2} - 1)})}{4}\\) to \\(\\frac{1}{4} \\sqrt{2}\\cdot (\\log{(\\sqrt{2} + 1)} - \\log{(\\sqrt{2} - 1)})\\)",
                                     "name": "Equation",
                                     "new_expr": "1/4 * sqrt(2) * (log(sqrt(2) + 1) - log(sqrt(2) - 1))",
                                     "old_expr": "sqrt(2) * (log(sqrt(2) + 1) - log(sqrt(2) - 1)) / 4",
-                                    "str": "rewriting sqrt(2) * (log(sqrt(2) + 1) - log(sqrt(2) - 1)) / 4 to 1/4 * sqrt(2) * (log(sqrt(2) + 1) - log(sqrt(2) - 1))"
+                                    "str": "rewrite sqrt(2) * (log(sqrt(2) + 1) - log(sqrt(2) - 1)) / 4 to 1/4 * sqrt(2) * (log(sqrt(2) + 1) - log(sqrt(2) - 1))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -461,11 +461,11 @@
                                 "latex_res": "\\frac{1}{4} \\sqrt{2} \\log{(3 + 2 \\sqrt{2})}",
                                 "res": "1/4 * sqrt(2) * log(3 + 2 * sqrt(2))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{\\sqrt{2} + 1}{\\sqrt{2} - 1}\\) to \\(3 + 2 \\sqrt{2}\\)",
+                                    "latex_str": "rewrite \\(\\frac{\\sqrt{2} + 1}{\\sqrt{2} - 1}\\) to \\(3 + 2 \\sqrt{2}\\)",
                                     "name": "Equation",
                                     "new_expr": "3 + 2 * sqrt(2)",
                                     "old_expr": "(sqrt(2) + 1) / (sqrt(2) - 1)",
-                                    "str": "rewriting (sqrt(2) + 1) / (sqrt(2) - 1) to 3 + 2 * sqrt(2)"
+                                    "str": "rewrite (sqrt(2) + 1) / (sqrt(2) - 1) to 3 + 2 * sqrt(2)"
                                 },
                                 "type": "CalculationStep"
                             },

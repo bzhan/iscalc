@@ -428,11 +428,11 @@
                                 "latex_res": "\\int \\frac{a}{a ^ {2} (u ^ {2} + 1)} \\,du",
                                 "res": "INT u. a / (a ^ 2 * (u ^ 2 + 1))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(a ^ {2} u ^ {2} + a ^ {2}\\) to \\(a ^ {2} (u ^ {2} + 1)\\)",
+                                    "latex_str": "rewrite \\(a ^ {2} u ^ {2} + a ^ {2}\\) to \\(a ^ {2} (u ^ {2} + 1)\\)",
                                     "name": "Equation",
                                     "new_expr": "a ^ 2 * (u ^ 2 + 1)",
                                     "old_expr": "a ^ 2 * u ^ 2 + a ^ 2",
-                                    "str": "rewriting a ^ 2 * u ^ 2 + a ^ 2 to a ^ 2 * (u ^ 2 + 1)"
+                                    "str": "rewrite a ^ 2 * u ^ 2 + a ^ 2 to a ^ 2 * (u ^ 2 + 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -731,7 +731,7 @@
                                         "res": "[x ^ (m + 1) / (m + 1)]_x=0,1",
                                         "rule": {
                                             "name": "DefiniteIntegralIdentity",
-                                            "str": "apply definite integral"
+                                            "str": "apply integral identity"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -935,10 +935,10 @@
                                         "latex_res": "(-1) ^ {n + 1} (m + 1) ^ {-n - 2} ((n + 1) n!)",
                                         "res": "(-1) ^ (n + 1) * (m + 1) ^ (-n - 2) * ((n + 1) * factorial(n))",
                                         "rule": {
-                                            "latex_str": "rewriting to \\((-1) ^ {n + 1} (m + 1) ^ {-n - 2} ((n + 1) n!)\\)",
+                                            "latex_str": "rewrite to \\((-1) ^ {n + 1} (m + 1) ^ {-n - 2} ((n + 1) n!)\\)",
                                             "name": "Equation",
                                             "new_expr": "(-1) ^ (n + 1) * (m + 1) ^ (-n - 2) * ((n + 1) * factorial(n))",
-                                            "str": "rewriting to (-1) ^ (n + 1) * (m + 1) ^ (-n - 2) * ((n + 1) * factorial(n))"
+                                            "str": "rewrite to (-1) ^ (n + 1) * (m + 1) ^ (-n - 2) * ((n + 1) * factorial(n))"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -1131,10 +1131,10 @@
                                 "latex_res": "\\frac{a}{a ^ {2} + y ^ {2}}",
                                 "res": "a / (a ^ 2 + y ^ 2)",
                                 "rule": {
-                                    "latex_str": "rewriting to \\(\\frac{a}{a ^ {2} + y ^ {2}}\\)",
+                                    "latex_str": "rewrite to \\(\\frac{a}{a ^ {2} + y ^ {2}}\\)",
                                     "name": "Equation",
                                     "new_expr": "a / (a ^ 2 + y ^ 2)",
-                                    "str": "rewriting to a / (a ^ 2 + y ^ 2)"
+                                    "str": "rewrite to a / (a ^ 2 + y ^ 2)"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1201,11 +1201,11 @@
                                 "latex_res": "\\int e^{\\log{a} x} \\,dx",
                                 "res": "INT x. exp(log(a) * x)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(a ^ {x}\\) to \\(e^{\\log{a} x}\\)",
+                                    "latex_str": "rewrite \\(a ^ {x}\\) to \\(e^{\\log{a} x}\\)",
                                     "name": "Equation",
                                     "new_expr": "exp(log(a) * x)",
                                     "old_expr": "a ^ x",
-                                    "str": "rewriting a ^ x to exp(log(a) * x)"
+                                    "str": "rewrite a ^ x to exp(log(a) * x)"
                                 },
                                 "type": "CalculationStep"
                             },

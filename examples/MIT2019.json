@@ -84,7 +84,7 @@
                     "res": "2/39 * ([log(abs(u))]_u=cos(39 * pi / 200),1)",
                     "rule": {
                         "name": "DefiniteIntegralIdentity",
-                        "str": "apply definite integral"
+                        "str": "apply integral identity"
                     },
                     "type": "CalculationStep"
                 },

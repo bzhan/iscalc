@@ -111,11 +111,11 @@
                                 "latex_res": "2 a (\\int_{0}^{\\infty} \\frac{1}{1 - a ^ {2} b ^ {2}} (\\frac{1}{1 + a ^ {2} x ^ {2}} - \\frac{b ^ {2}}{b ^ {2} + x ^ {2}}) \\,dx)",
                                 "res": "2 * a * (INT x:[0,oo]. 1 / (1 - a ^ 2 * b ^ 2) * (1 / (1 + a ^ 2 * x ^ 2) - b ^ 2 / (b ^ 2 + x ^ 2)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{x ^ {2}}{(b ^ {2} + x ^ {2}) (a ^ {2} x ^ {2} + 1)}\\) to \\(\\frac{1}{1 - a ^ {2} b ^ {2}} (\\frac{1}{1 + a ^ {2} x ^ {2}} - \\frac{b ^ {2}}{b ^ {2} + x ^ {2}})\\)",
+                                    "latex_str": "rewrite \\(\\frac{x ^ {2}}{(b ^ {2} + x ^ {2}) (a ^ {2} x ^ {2} + 1)}\\) to \\(\\frac{1}{1 - a ^ {2} b ^ {2}} (\\frac{1}{1 + a ^ {2} x ^ {2}} - \\frac{b ^ {2}}{b ^ {2} + x ^ {2}})\\)",
                                     "name": "Equation",
                                     "new_expr": "1 / (1 - a ^ 2 * b ^ 2) * (1 / (1 + a ^ 2 * x ^ 2) - b ^ 2 / (b ^ 2 + x ^ 2))",
                                     "old_expr": "x ^ 2 / ((b ^ 2 + x ^ 2) * (a ^ 2 * x ^ 2 + 1))",
-                                    "str": "rewriting x ^ 2 / ((b ^ 2 + x ^ 2) * (a ^ 2 * x ^ 2 + 1)) to 1 / (1 - a ^ 2 * b ^ 2) * (1 / (1 + a ^ 2 * x ^ 2) - b ^ 2 / (b ^ 2 + x ^ 2))"
+                                    "str": "rewrite x ^ 2 / ((b ^ 2 + x ^ 2) * (a ^ 2 * x ^ 2 + 1)) to 1 / (1 - a ^ 2 * b ^ 2) * (1 / (1 + a ^ 2 * x ^ 2) - b ^ 2 / (b ^ 2 + x ^ 2))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -145,7 +145,7 @@
                                 "res": "2 * a / (-(a ^ 2 * b ^ 2) + 1) * (-(b ^ 2 * ([1 / b * atan(x / b)]_x=0,oo)) + (INT x:[0,oo]. 1 / (a ^ 2 * x ^ 2 + 1)))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -186,7 +186,7 @@
                                 "res": "2 * a / (-(a ^ 2 * b ^ 2) + 1) * (-(b ^ 2 * ([1 / b * atan(x / b)]_x=0,oo)) + 1 / a * ([atan(t)]_t=0,oo))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -203,10 +203,10 @@
                                 "latex_res": "\\frac{\\pi}{1 + a b}",
                                 "res": "pi / (1 + a * b)",
                                 "rule": {
-                                    "latex_str": "rewriting to \\(\\frac{\\pi}{1 + a b}\\)",
+                                    "latex_str": "rewrite to \\(\\frac{\\pi}{1 + a b}\\)",
                                     "name": "Equation",
                                     "new_expr": "pi / (1 + a * b)",
-                                    "str": "rewriting to pi / (1 + a * b)"
+                                    "str": "rewrite to pi / (1 + a * b)"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -340,11 +340,11 @@
                             "latex_res": "I(a,b) = \\frac{\\pi}{b} \\log{(1 + a b)} + C(b)",
                             "res": "I(a,b) = pi / b * log(1 + a * b) + SKOLEM_FUNC(C(b))",
                             "rule": {
-                                "latex_str": "rewriting \\(\\left| 1 + a b \\right|\\) to \\(1 + a b\\)",
+                                "latex_str": "rewrite \\(\\left| 1 + a b \\right|\\) to \\(1 + a b\\)",
                                 "name": "Equation",
                                 "new_expr": "1 + a * b",
                                 "old_expr": "abs(1 + a * b)",
-                                "str": "rewriting abs(1 + a * b) to 1 + a * b"
+                                "str": "rewrite abs(1 + a * b) to 1 + a * b"
                             },
                             "type": "CalculationStep"
                         }

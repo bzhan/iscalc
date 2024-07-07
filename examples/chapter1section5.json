@@ -40,9 +40,9 @@
                                 "latex_res": "-(\\int_{1}^{\\infty} \\frac{\\log{(\\frac{1}{u})}}{(\\frac{1}{u}) ^ {2} + 1} (-\\frac{1}{u ^ {2}}) \\,du) + (\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx)",
                                 "res": "-(INT u:[1,oo]. log(1 / u) / ((1 / u) ^ 2 + 1) * -(1 / u ^ 2)) + (INT x:[1,oo]. log(x) / (x ^ 2 + 1))",
                                 "rule": {
-                                    "latex_str": "inverse substitution \\(\\frac{1}{u}\\) creating \\(u\\)",
+                                    "latex_str": "inverse substitute \\(\\frac{1}{u}\\) creating \\(u\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution 1 / u creating u",
+                                    "str": "inverse substitute 1 / u creating u",
                                     "var_name": "u",
                                     "var_subst": "1 / u"
                                 },
@@ -81,11 +81,11 @@
                                 "latex_res": "-(\\int_{1}^{\\infty} \\frac{\\log{u}}{u ^ {2} + 1} \\,du) + (\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx)",
                                 "res": "-(INT u:[1,oo]. log(u) / (u ^ 2 + 1)) + (INT x:[1,oo]. log(x) / (x ^ 2 + 1))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(u ^ {2} (\\frac{1}{u ^ {2}} + 1)\\) to \\(u ^ {2} + 1\\)",
+                                    "latex_str": "rewrite \\(u ^ {2} (\\frac{1}{u ^ {2}} + 1)\\) to \\(u ^ {2} + 1\\)",
                                     "name": "Equation",
                                     "new_expr": "u ^ 2 + 1",
                                     "old_expr": "u ^ 2 * (1 / u ^ 2 + 1)",
-                                    "str": "rewriting u ^ 2 * (1 / u ^ 2 + 1) to u ^ 2 + 1"
+                                    "str": "rewrite u ^ 2 * (1 / u ^ 2 + 1) to u ^ 2 + 1"
                                 },
                                 "type": "CalculationStep"
                             },

@@ -220,11 +220,11 @@
                                 "latex_res": "(2 n - 1) (\\int_{0}^{\\infty} x ^ {2 (n - 1)} e^{-x ^ {2}} \\,dx) - 2 (\\int_{0}^{\\infty} x ^ {2 n} e^{-x ^ {2}} \\,dx)",
                                 "res": "(2 * n - 1) * (INT x:[0,oo]. x ^ (2 * (n - 1)) * exp(-(x ^ 2))) - 2 * (INT x:[0,oo]. x ^ (2 * n) * exp(-(x ^ 2)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(2 n - 2\\) to \\(2 (n - 1)\\)",
+                                    "latex_str": "rewrite \\(2 n - 2\\) to \\(2 (n - 1)\\)",
                                     "name": "Equation",
                                     "new_expr": "2 * (n - 1)",
                                     "old_expr": "2 * n - 2",
-                                    "str": "rewriting 2 * n - 2 to 2 * (n - 1)"
+                                    "str": "rewrite 2 * n - 2 to 2 * (n - 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -356,11 +356,11 @@
                             "latex_res": "I{(n)} = \\frac{2 n - 1}{2} I{(n - 1)}",
                             "res": "I(n) = (2 * n - 1) / 2 * I(n - 1)",
                             "rule": {
-                                "latex_str": "rewriting \\(\\frac{I{(n - 1)} (2 n - 1)}{2}\\) to \\(\\frac{2 n - 1}{2} I{(n - 1)}\\)",
+                                "latex_str": "rewrite \\(\\frac{I{(n - 1)} (2 n - 1)}{2}\\) to \\(\\frac{2 n - 1}{2} I{(n - 1)}\\)",
                                 "name": "Equation",
                                 "new_expr": "(2 * n - 1) / 2 * I(n - 1)",
                                 "old_expr": "I(n - 1) * (2 * n - 1) / 2",
-                                "str": "rewriting I(n - 1) * (2 * n - 1) / 2 to (2 * n - 1) / 2 * I(n - 1)"
+                                "str": "rewrite I(n - 1) * (2 * n - 1) / 2 to (2 * n - 1) / 2 * I(n - 1)"
                             },
                             "type": "CalculationStep"
                         }
@@ -490,11 +490,11 @@
                                         "latex_res": "\\int_{0}^{\\infty} \\frac{\\sqrt{2}}{2} e^{-x ^ {2}/2} \\,dx",
                                         "res": "INT x:[0,oo]. sqrt(2) / 2 * exp(-(x ^ 2) / 2)",
                                         "rule": {
-                                            "latex_str": "rewriting \\(-\\frac{x ^ {2}}{2}\\) to \\(\\frac{-x ^ {2}}{2}\\)",
+                                            "latex_str": "rewrite \\(-\\frac{x ^ {2}}{2}\\) to \\(\\frac{-x ^ {2}}{2}\\)",
                                             "name": "Equation",
                                             "new_expr": "-(x ^ 2) / 2",
                                             "old_expr": "-(x ^ 2 / 2)",
-                                            "str": "rewriting -(x ^ 2 / 2) to -(x ^ 2) / 2"
+                                            "str": "rewrite -(x ^ 2 / 2) to -(x ^ 2) / 2"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -503,7 +503,7 @@
                                         "res": "sqrt(2) / 2 * (sqrt(2) * sqrt(pi) / 2)",
                                         "rule": {
                                             "name": "DefiniteIntegralIdentity",
-                                            "str": "apply definite integral"
+                                            "str": "apply integral identity"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -640,11 +640,11 @@
                                         "latex_res": "4 ^ {-n}\\cdot \\sqrt{\\pi} (\\frac{(2 n + 1) (2 n)!}{4 n!})",
                                         "res": "4 ^ -n * sqrt(pi) * ((2 * n + 1) * factorial(2 * n) / (4 * factorial(n)))",
                                         "rule": {
-                                            "latex_str": "rewriting \\(\\frac{\\frac{(2 n)!}{4 ^ {n} n!}\\cdot (\\frac{1}{2})\\cdot \\sqrt{\\pi} (2 n + 1)}{2}\\) to \\(4 ^ {-n}\\cdot \\sqrt{\\pi} (\\frac{(2 n + 1) (2 n)!}{4 n!})\\)",
+                                            "latex_str": "rewrite \\(\\frac{\\frac{(2 n)!}{4 ^ {n} n!}\\cdot (\\frac{1}{2})\\cdot \\sqrt{\\pi} (2 n + 1)}{2}\\) to \\(4 ^ {-n}\\cdot \\sqrt{\\pi} (\\frac{(2 n + 1) (2 n)!}{4 n!})\\)",
                                             "name": "Equation",
                                             "new_expr": "4 ^ -n * sqrt(pi) * ((2 * n + 1) * factorial(2 * n) / (4 * factorial(n)))",
                                             "old_expr": "factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi) * (2 * n + 1) / 2",
-                                            "str": "rewriting factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi) * (2 * n + 1) / 2 to 4 ^ -n * sqrt(pi) * ((2 * n + 1) * factorial(2 * n) / (4 * factorial(n)))"
+                                            "str": "rewrite factorial(2 * n) / (4 ^ n * factorial(n)) * (1/2) * sqrt(pi) * (2 * n + 1) / 2 to 4 ^ -n * sqrt(pi) * ((2 * n + 1) * factorial(2 * n) / (4 * factorial(n)))"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -664,11 +664,11 @@
                                         "latex_res": "4 ^ {-n}\\cdot \\sqrt{\\pi} (\\frac{(2 n + 1 + 1) (2 n + 1)!}{8 ((n + 1) n!)})",
                                         "res": "4 ^ -n * sqrt(pi) * ((2 * n + 1 + 1) * factorial(2 * n + 1) / (8 * ((n + 1) * factorial(n))))",
                                         "rule": {
-                                            "latex_str": "rewriting \\(\\frac{(2 n + 1)!}{4 n!}\\) to \\(\\frac{(2 n + 1 + 1) (2 n + 1)!}{8 ((n + 1) n!)}\\)",
+                                            "latex_str": "rewrite \\(\\frac{(2 n + 1)!}{4 n!}\\) to \\(\\frac{(2 n + 1 + 1) (2 n + 1)!}{8 ((n + 1) n!)}\\)",
                                             "name": "Equation",
                                             "new_expr": "(2 * n + 1 + 1) * factorial(2 * n + 1) / (8 * ((n + 1) * factorial(n)))",
                                             "old_expr": "factorial(2 * n + 1) / (4 * factorial(n))",
-                                            "str": "rewriting factorial(2 * n + 1) / (4 * factorial(n)) to (2 * n + 1 + 1) * factorial(2 * n + 1) / (8 * ((n + 1) * factorial(n)))"
+                                            "str": "rewrite factorial(2 * n + 1) / (4 * factorial(n)) to (2 * n + 1 + 1) * factorial(2 * n + 1) / (8 * ((n + 1) * factorial(n)))"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -700,11 +700,11 @@
                                         "latex_res": "\\frac{4 ^ {-n}\\cdot \\sqrt{\\pi} (2 n + 2)!}{8 (n + 1)!}",
                                         "res": "4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))",
                                         "rule": {
-                                            "latex_str": "rewriting \\(4 ^ {-n}\\cdot \\sqrt{\\pi} (\\frac{(2 n + 2)!}{8 (n + 1)!})\\) to \\(\\frac{4 ^ {-n}\\cdot \\sqrt{\\pi} (2 n + 2)!}{8 (n + 1)!}\\)",
+                                            "latex_str": "rewrite \\(4 ^ {-n}\\cdot \\sqrt{\\pi} (\\frac{(2 n + 2)!}{8 (n + 1)!})\\) to \\(\\frac{4 ^ {-n}\\cdot \\sqrt{\\pi} (2 n + 2)!}{8 (n + 1)!}\\)",
                                             "name": "Equation",
                                             "new_expr": "4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))",
                                             "old_expr": "4 ^ -n * sqrt(pi) * (factorial(2 * n + 2) / (8 * factorial(n + 1)))",
-                                            "str": "rewriting 4 ^ -n * sqrt(pi) * (factorial(2 * n + 2) / (8 * factorial(n + 1))) to 4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))"
+                                            "str": "rewrite 4 ^ -n * sqrt(pi) * (factorial(2 * n + 2) / (8 * factorial(n + 1))) to 4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (8 * factorial(n + 1))"
                                         },
                                         "type": "CalculationStep"
                                     }

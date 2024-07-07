@@ -35,7 +35,7 @@
                                 "res": "pi * (-exp(-(a * m)) + 1) / (2 * a ^ 2)",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -191,11 +191,11 @@
                             "latex_res": "\\int_{0}^{\\infty} \\frac{\\sin{(m x)}}{x (a ^ {2} + x ^ {2}) ^ {2}} \\,dx = \\frac{\\pi}{2 a ^ {4}} (1 - \\frac{2 + m a}{2} e^{(-a) m})",
                             "res": "(INT x:[0,oo]. sin(m * x) / (x * (a ^ 2 + x ^ 2) ^ 2)) = pi / (2 * a ^ 4) * (1 - (2 + m * a) / 2 * exp(-a * m))",
                             "rule": {
-                                "latex_str": "rewriting to \\(\\frac{\\pi}{2 a ^ {4}} (1 - \\frac{2 + m a}{2} e^{(-a) m})\\) at 1",
+                                "latex_str": "rewrite to \\(\\frac{\\pi}{2 a ^ {4}} (1 - \\frac{2 + m a}{2} e^{(-a) m})\\) at 1",
                                 "loc": "1",
                                 "name": "Equation",
                                 "new_expr": "pi / (2 * a ^ 4) * (1 - (2 + m * a) / 2 * exp(-a * m))",
-                                "str": "rewriting to pi / (2 * a ^ 4) * (1 - (2 + m * a) / 2 * exp(-a * m)) at 1"
+                                "str": "rewrite to pi / (2 * a ^ 4) * (1 - (2 + m * a) / 2 * exp(-a * m)) at 1"
                             },
                             "type": "CalculationStep"
                         }

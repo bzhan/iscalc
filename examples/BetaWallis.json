@@ -72,9 +72,9 @@
                                 "latex_res": "-(\\int_{0}^{\\pi/2} (\\cos^{2}(x)) ^ {m - 1} (-\\cos^{2}(x) + 1) ^ {n - 1} (-2 \\cos{x} \\sin{x}) \\,dx)",
                                 "res": "-(INT x:[0,pi / 2]. cos(x) ^ 2 ^ (m - 1) * (-(cos(x) ^ 2) + 1) ^ (n - 1) * -(2 * cos(x) * sin(x)))",
                                 "rule": {
-                                    "latex_str": "inverse substitution \\(\\cos^{2}(x)\\) creating \\(x\\)",
+                                    "latex_str": "inverse substitute \\(\\cos^{2}(x)\\) creating \\(x\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution cos(x) ^ 2 creating x",
+                                    "str": "inverse substitute cos(x) ^ 2 creating x",
                                     "var_name": "x",
                                     "var_subst": "cos(x) ^ 2"
                                 },
@@ -175,10 +175,10 @@
                                 "latex_res": "x (1 - x)",
                                 "res": "x * (1 - x)",
                                 "rule": {
-                                    "latex_str": "rewriting to \\(x (1 - x)\\)",
+                                    "latex_str": "rewrite to \\(x (1 - x)\\)",
                                     "name": "Equation",
                                     "new_expr": "x * (1 - x)",
-                                    "str": "rewriting to x * (1 - x)"
+                                    "str": "rewrite to x * (1 - x)"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -241,11 +241,11 @@
                                 "latex_res": "\\int_{0}^{1} (x (1 - x)) ^ {n} \\,dx",
                                 "res": "INT x:[0,1]. (x * (1 - x)) ^ n",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x - x ^ {2}\\) to \\(x (1 - x)\\)",
+                                    "latex_str": "rewrite \\(x - x ^ {2}\\) to \\(x (1 - x)\\)",
                                     "name": "Equation",
                                     "new_expr": "x * (1 - x)",
                                     "old_expr": "x - x ^ 2",
-                                    "str": "rewriting x - x ^ 2 to x * (1 - x)"
+                                    "str": "rewrite x - x ^ 2 to x * (1 - x)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -277,12 +277,12 @@
                                 "latex_res": "\\int_{0}^{1} x ^ {n + 1 - 1} (1 - x) ^ {n} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (n + 1 - 1) * (1 - x) ^ n",
                                 "rule": {
-                                    "latex_str": "rewriting \\(n\\) to \\(n + 1 - 1\\) at 0.0.1",
+                                    "latex_str": "rewrite \\(n\\) to \\(n + 1 - 1\\) at 0.0.1",
                                     "loc": "0.0.1",
                                     "name": "Equation",
                                     "new_expr": "n + 1 - 1",
                                     "old_expr": "n",
-                                    "str": "rewriting n to n + 1 - 1 at 0.0.1"
+                                    "str": "rewrite n to n + 1 - 1 at 0.0.1"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -296,12 +296,12 @@
                                 "latex_res": "\\int_{0}^{1} x ^ {n + 1 - 1} (1 - x) ^ {n + 1 - 1} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (n + 1 - 1) * (1 - x) ^ (n + 1 - 1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(n\\) to \\(n + 1 - 1\\) at 0.1.1",
+                                    "latex_str": "rewrite \\(n\\) to \\(n + 1 - 1\\) at 0.1.1",
                                     "loc": "0.1.1",
                                     "name": "Equation",
                                     "new_expr": "n + 1 - 1",
                                     "old_expr": "n",
-                                    "str": "rewriting n to n + 1 - 1 at 0.1.1"
+                                    "str": "rewrite n to n + 1 - 1 at 0.1.1"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -403,9 +403,9 @@
                                 "latex_res": "\\int_{-\\pi/2}^{\\pi/2} (\\frac{1}{2} + \\frac{1}{2} \\sin{u} - (\\frac{1}{2} + \\frac{1}{2} \\sin{u}) ^ {2}) ^ {1/2} (\\frac{\\cos{u}}{2}) \\,du",
                                 "res": "INT u:[-(pi / 2),pi / 2]. (1/2 + 1/2 * sin(u) - (1/2 + 1/2 * sin(u)) ^ 2) ^ (1/2) * (cos(u) / 2)",
                                 "rule": {
-                                    "latex_str": "inverse substitution \\(\\frac{1}{2} + \\frac{1}{2} \\sin{u}\\) creating \\(u\\)",
+                                    "latex_str": "inverse substitute \\(\\frac{1}{2} + \\frac{1}{2} \\sin{u}\\) creating \\(u\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution 1/2 + 1/2 * sin(u) creating u",
+                                    "str": "inverse substitute 1/2 + 1/2 * sin(u) creating u",
                                     "var_name": "u",
                                     "var_subst": "1/2 + 1/2 * sin(u)"
                                 },
@@ -421,11 +421,11 @@
                                 "latex_res": "\\int_{-\\pi/2}^{\\pi/2} (\\frac{1}{4} (1 - \\sin^{2}(u))) ^ {1/2} (\\frac{\\cos{u}}{2}) \\,du",
                                 "res": "INT u:[-(pi / 2),pi / 2]. (1/4 * (1 - sin(u) ^ 2)) ^ (1/2) * (cos(u) / 2)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{2} + \\frac{1}{2} \\sin{u} - (\\frac{1}{2} + \\frac{1}{2} \\sin{u}) ^ {2}\\) to \\(\\frac{1}{4} (1 - \\sin^{2}(u))\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{2} + \\frac{1}{2} \\sin{u} - (\\frac{1}{2} + \\frac{1}{2} \\sin{u}) ^ {2}\\) to \\(\\frac{1}{4} (1 - \\sin^{2}(u))\\)",
                                     "name": "Equation",
                                     "new_expr": "1/4 * (1 - sin(u) ^ 2)",
                                     "old_expr": "1/2 + 1/2 * sin(u) - (1/2 + 1/2 * sin(u)) ^ 2",
-                                    "str": "rewriting 1/2 + 1/2 * sin(u) - (1/2 + 1/2 * sin(u)) ^ 2 to 1/4 * (1 - sin(u) ^ 2)"
+                                    "str": "rewrite 1/2 + 1/2 * sin(u) - (1/2 + 1/2 * sin(u)) ^ 2 to 1/4 * (1 - sin(u) ^ 2)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -473,7 +473,7 @@
                                 "res": "1/4 * ([sin(2 * u) / 4 + u / 2]_u=-(pi / 2),pi / 2)",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -529,11 +529,11 @@
                                 "latex_res": "\\frac{((\\frac{1}{2})!)^{2}}{(2)!}",
                                 "res": "factorial(1/2) ^ 2 / factorial(2)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(2\\cdot (\\frac{1}{2}) + 1\\) to \\(2\\)",
+                                    "latex_str": "rewrite \\(2\\cdot (\\frac{1}{2}) + 1\\) to \\(2\\)",
                                     "name": "Equation",
                                     "new_expr": "2",
                                     "old_expr": "2 * (1/2) + 1",
-                                    "str": "rewriting 2 * (1/2) + 1 to 2"
+                                    "str": "rewrite 2 * (1/2) + 1 to 2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -626,11 +626,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} e^{-x} x ^ {1/2} \\,dx",
                                 "res": "INT x:[0,oo]. exp(-x) * x ^ (1/2)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\sqrt{x}\\) to \\(x ^ {1/2}\\)",
+                                    "latex_str": "rewrite \\(\\sqrt{x}\\) to \\(x ^ {1/2}\\)",
                                     "name": "Equation",
                                     "new_expr": "x ^ (1/2)",
                                     "old_expr": "sqrt(x)",
-                                    "str": "rewriting sqrt(x) to x ^ (1/2)"
+                                    "str": "rewrite sqrt(x) to x ^ (1/2)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -644,11 +644,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} e^{-x} x ^ {3/2 - 1} \\,dx",
                                 "res": "INT x:[0,oo]. exp(-x) * x ^ (3/2 - 1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{2}\\) to \\(\\frac{3}{2} - 1\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{2}\\) to \\(\\frac{3}{2} - 1\\)",
                                     "name": "Equation",
                                     "new_expr": "3/2 - 1",
                                     "old_expr": "1/2",
-                                    "str": "rewriting 1/2 to 3/2 - 1"
+                                    "str": "rewrite 1/2 to 3/2 - 1"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -723,9 +723,9 @@
                                 "latex_res": "-(\\int_{0}^{\\infty} \\sqrt{-\\log{(e^{-y})}} (-e^{-y}) \\,dy)",
                                 "res": "-(INT y:[0,oo]. sqrt(-log(exp(-y))) * -exp(-y))",
                                 "rule": {
-                                    "latex_str": "inverse substitution \\(e^{-y}\\) creating \\(y\\)",
+                                    "latex_str": "inverse substitute \\(e^{-y}\\) creating \\(y\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution exp(-y) creating y",
+                                    "str": "inverse substitute exp(-y) creating y",
                                     "var_name": "y",
                                     "var_subst": "exp(-y)"
                                 },
@@ -756,11 +756,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} e^{-y} \\sqrt{y} \\,dy",
                                 "res": "INT y:[0,oo]. exp(-y) * sqrt(y)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\sqrt{y} e^{-y}\\) to \\(e^{-y} \\sqrt{y}\\)",
+                                    "latex_str": "rewrite \\(\\sqrt{y} e^{-y}\\) to \\(e^{-y} \\sqrt{y}\\)",
                                     "name": "Equation",
                                     "new_expr": "exp(-y) * sqrt(y)",
                                     "old_expr": "sqrt(y) * exp(-y)",
-                                    "str": "rewriting sqrt(y) * exp(-y) to exp(-y) * sqrt(y)"
+                                    "str": "rewrite sqrt(y) * exp(-y) to exp(-y) * sqrt(y)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -846,11 +846,11 @@
                                 "latex_res": "(\\int_{0}^{\\infty} e^{-y ^ {2}} \\,dy) + (\\int_{0}^{\\infty} e^{-y ^ {2}} \\,dy)",
                                 "res": "(INT y:[0,oo]. exp(-(y ^ 2))) + (INT y:[0,oo]. exp(-(y ^ 2)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(2 (\\int_{0}^{\\infty} e^{-y ^ {2}} \\,dy)\\) to \\((\\int_{0}^{\\infty} e^{-y ^ {2}} \\,dy) + (\\int_{0}^{\\infty} e^{-y ^ {2}} \\,dy)\\)",
+                                    "latex_str": "rewrite \\(2 (\\int_{0}^{\\infty} e^{-y ^ {2}} \\,dy)\\) to \\((\\int_{0}^{\\infty} e^{-y ^ {2}} \\,dy) + (\\int_{0}^{\\infty} e^{-y ^ {2}} \\,dy)\\)",
                                     "name": "Equation",
                                     "new_expr": "(INT y:[0,oo]. exp(-(y ^ 2))) + (INT y:[0,oo]. exp(-(y ^ 2)))",
                                     "old_expr": "2 * (INT y:[0,oo]. exp(-(y ^ 2)))",
-                                    "str": "rewriting 2 * (INT y:[0,oo]. exp(-(y ^ 2))) to (INT y:[0,oo]. exp(-(y ^ 2))) + (INT y:[0,oo]. exp(-(y ^ 2)))"
+                                    "str": "rewrite 2 * (INT y:[0,oo]. exp(-(y ^ 2))) to (INT y:[0,oo]. exp(-(y ^ 2))) + (INT y:[0,oo]. exp(-(y ^ 2)))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -934,11 +934,11 @@
                             "latex_res": "\\int_{0}^{\\infty} \\frac{e^{-x}}{\\sqrt{x}} \\,dx = \\int_{-\\infty}^{\\infty} e^{-1 x ^ {2}} \\,dx",
                             "res": "(INT x:[0,oo]. exp(-x) / sqrt(x)) = (INT x:[-oo,oo]. exp(-(1 * x ^ 2)))",
                             "rule": {
-                                "latex_str": "rewriting \\(x ^ {2}\\) to \\(1 x ^ {2}\\)",
+                                "latex_str": "rewrite \\(x ^ {2}\\) to \\(1 x ^ {2}\\)",
                                 "name": "Equation",
                                 "new_expr": "1 * x ^ 2",
                                 "old_expr": "x ^ 2",
-                                "str": "rewriting x ^ 2 to 1 * x ^ 2"
+                                "str": "rewrite x ^ 2 to 1 * x ^ 2"
                             },
                             "type": "CalculationStep"
                         },
@@ -954,7 +954,7 @@
                             "rule": {
                                 "loc": "1",
                                 "name": "DefiniteIntegralIdentity",
-                                "str": "apply definite integral at 1"
+                                "str": "apply integral identity at 1"
                             },
                             "type": "CalculationStep"
                         }
@@ -1105,11 +1105,11 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{1} u ^ {3/4 - 1} (1 - u) ^ {1/2 - 1} \\,du)",
                                 "res": "1/2 * (INT u:[0,1]. u ^ (3/4 - 1) * (1 - u) ^ (1/2 - 1))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{u ^ {1/4} \\sqrt{-u + 1}}\\) to \\(u ^ {3/4 - 1} (1 - u) ^ {1/2 - 1}\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{u ^ {1/4} \\sqrt{-u + 1}}\\) to \\(u ^ {3/4 - 1} (1 - u) ^ {1/2 - 1}\\)",
                                     "name": "Equation",
                                     "new_expr": "u ^ (3/4 - 1) * (1 - u) ^ (1/2 - 1)",
                                     "old_expr": "1 / (u ^ (1/4) * sqrt(-u + 1))",
-                                    "str": "rewriting 1 / (u ^ (1/4) * sqrt(-u + 1)) to u ^ (3/4 - 1) * (1 - u) ^ (1/2 - 1)"
+                                    "str": "rewrite 1 / (u ^ (1/4) * sqrt(-u + 1)) to u ^ (3/4 - 1) * (1 - u) ^ (1/2 - 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1140,11 +1140,11 @@
                                 "latex_res": "\\frac{\\Gamma{(\\frac{3}{4})} \\Gamma{(\\frac{1}{2})}}{2 \\Gamma{(\\frac{5}{4})}}",
                                 "res": "Gamma(3/4) * Gamma(1/2) / (2 * Gamma(5/4))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{2}\\cdot (\\frac{\\Gamma{(\\frac{3}{4})} \\Gamma{(\\frac{1}{2})}}{\\Gamma{(\\frac{5}{4})}})\\) to \\(\\frac{\\Gamma{(\\frac{3}{4})} \\Gamma{(\\frac{1}{2})}}{2 \\Gamma{(\\frac{5}{4})}}\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{2}\\cdot (\\frac{\\Gamma{(\\frac{3}{4})} \\Gamma{(\\frac{1}{2})}}{\\Gamma{(\\frac{5}{4})}})\\) to \\(\\frac{\\Gamma{(\\frac{3}{4})} \\Gamma{(\\frac{1}{2})}}{2 \\Gamma{(\\frac{5}{4})}}\\)",
                                     "name": "Equation",
                                     "new_expr": "Gamma(3/4) * Gamma(1/2) / (2 * Gamma(5/4))",
                                     "old_expr": "1/2 * (Gamma(3/4) * Gamma(1/2) / Gamma(5/4))",
-                                    "str": "rewriting 1/2 * (Gamma(3/4) * Gamma(1/2) / Gamma(5/4)) to Gamma(3/4) * Gamma(1/2) / (2 * Gamma(5/4))"
+                                    "str": "rewrite 1/2 * (Gamma(3/4) * Gamma(1/2) / Gamma(5/4)) to Gamma(3/4) * Gamma(1/2) / (2 * Gamma(5/4))"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1218,11 +1218,11 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{1} u ^ {3/4 - 1} (1 - u) ^ {1/2 - 1} \\,du)",
                                 "res": "1/2 * (INT u:[0,1]. u ^ (3/4 - 1) * (1 - u) ^ (1/2 - 1))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{u ^ {1/4} \\sqrt{-u + 1}}\\) to \\(u ^ {3/4 - 1} (1 - u) ^ {1/2 - 1}\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{u ^ {1/4} \\sqrt{-u + 1}}\\) to \\(u ^ {3/4 - 1} (1 - u) ^ {1/2 - 1}\\)",
                                     "name": "Equation",
                                     "new_expr": "u ^ (3/4 - 1) * (1 - u) ^ (1/2 - 1)",
                                     "old_expr": "1 / (u ^ (1/4) * sqrt(-u + 1))",
-                                    "str": "rewriting 1 / (u ^ (1/4) * sqrt(-u + 1)) to u ^ (3/4 - 1) * (1 - u) ^ (1/2 - 1)"
+                                    "str": "rewrite 1 / (u ^ (1/4) * sqrt(-u + 1)) to u ^ (3/4 - 1) * (1 - u) ^ (1/2 - 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1253,11 +1253,11 @@
                                 "latex_res": "\\frac{\\Gamma{(\\frac{3}{4})} \\Gamma{(\\frac{1}{2})}}{2 \\Gamma{(\\frac{5}{4})}}",
                                 "res": "Gamma(3/4) * Gamma(1/2) / (2 * Gamma(5/4))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{2}\\cdot (\\frac{\\Gamma{(\\frac{3}{4})} \\Gamma{(\\frac{1}{2})}}{\\Gamma{(\\frac{5}{4})}})\\) to \\(\\frac{\\Gamma{(\\frac{3}{4})} \\Gamma{(\\frac{1}{2})}}{2 \\Gamma{(\\frac{5}{4})}}\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{2}\\cdot (\\frac{\\Gamma{(\\frac{3}{4})} \\Gamma{(\\frac{1}{2})}}{\\Gamma{(\\frac{5}{4})}})\\) to \\(\\frac{\\Gamma{(\\frac{3}{4})} \\Gamma{(\\frac{1}{2})}}{2 \\Gamma{(\\frac{5}{4})}}\\)",
                                     "name": "Equation",
                                     "new_expr": "Gamma(3/4) * Gamma(1/2) / (2 * Gamma(5/4))",
                                     "old_expr": "1/2 * (Gamma(3/4) * Gamma(1/2) / Gamma(5/4))",
-                                    "str": "rewriting 1/2 * (Gamma(3/4) * Gamma(1/2) / Gamma(5/4)) to Gamma(3/4) * Gamma(1/2) / (2 * Gamma(5/4))"
+                                    "str": "rewrite 1/2 * (Gamma(3/4) * Gamma(1/2) / Gamma(5/4)) to Gamma(3/4) * Gamma(1/2) / (2 * Gamma(5/4))"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1337,11 +1337,11 @@
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin{x} \\cos{x}}} \\,dx",
                                 "res": "INT x:[0,pi / 2]. 1 / sqrt(sin(x) * cos(x))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\sqrt{\\cos{x}} \\sqrt{\\sin{x}}\\) to \\(\\sqrt{\\sin{x} \\cos{x}}\\)",
+                                    "latex_str": "rewrite \\(\\sqrt{\\cos{x}} \\sqrt{\\sin{x}}\\) to \\(\\sqrt{\\sin{x} \\cos{x}}\\)",
                                     "name": "Equation",
                                     "new_expr": "sqrt(sin(x) * cos(x))",
                                     "old_expr": "sqrt(cos(x)) * sqrt(sin(x))",
-                                    "str": "rewriting sqrt(cos(x)) * sqrt(sin(x)) to sqrt(sin(x) * cos(x))"
+                                    "str": "rewrite sqrt(cos(x)) * sqrt(sin(x)) to sqrt(sin(x) * cos(x))"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1455,11 +1455,11 @@
                             "latex_res": "\\int_{0}^{\\pi} \\frac{1}{2 \\sqrt{\\sin{(\\frac{1}{2} x)} \\cos{(\\frac{1}{2} x)}}} \\,dx = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{\\pi}}",
                             "res": "(INT x:[0,pi]. 1 / (2 * sqrt(sin(1/2 * x) * cos(1/2 * x)))) = Gamma(1/4) ^ 2 / (2 * sqrt(pi))",
                             "rule": {
-                                "latex_str": "rewriting \\(2 \\sqrt{\\cos{(\\frac{x}{2})}} \\sqrt{\\sin{(\\frac{x}{2})}}\\) to \\(2 \\sqrt{\\sin{(\\frac{1}{2} x)} \\cos{(\\frac{1}{2} x)}}\\)",
+                                "latex_str": "rewrite \\(2 \\sqrt{\\cos{(\\frac{x}{2})}} \\sqrt{\\sin{(\\frac{x}{2})}}\\) to \\(2 \\sqrt{\\sin{(\\frac{1}{2} x)} \\cos{(\\frac{1}{2} x)}}\\)",
                                 "name": "Equation",
                                 "new_expr": "2 * sqrt(sin(1/2 * x) * cos(1/2 * x))",
                                 "old_expr": "2 * sqrt(cos(x / 2)) * sqrt(sin(x / 2))",
-                                "str": "rewriting 2 * sqrt(cos(x / 2)) * sqrt(sin(x / 2)) to 2 * sqrt(sin(1/2 * x) * cos(1/2 * x))"
+                                "str": "rewrite 2 * sqrt(cos(x / 2)) * sqrt(sin(x / 2)) to 2 * sqrt(sin(1/2 * x) * cos(1/2 * x))"
                             },
                             "type": "CalculationStep"
                         },
@@ -1698,11 +1698,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(y + 1) ^ {2}} (\\frac{1}{y + 1}) ^ {n - 1} (\\frac{y}{y + 1}) ^ {m - 1} \\,dy",
                                 "res": "INT y:[0,oo]. 1 / (y + 1) ^ 2 * (1 / (y + 1)) ^ (n - 1) * (y / (y + 1)) ^ (m - 1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(-\\frac{1}{y + 1} + 1\\) to \\(\\frac{y}{y + 1}\\)",
+                                    "latex_str": "rewrite \\(-\\frac{1}{y + 1} + 1\\) to \\(\\frac{y}{y + 1}\\)",
                                     "name": "Equation",
                                     "new_expr": "y / (y + 1)",
                                     "old_expr": "-(1 / (y + 1)) + 1",
-                                    "str": "rewriting -(1 / (y + 1)) + 1 to y / (y + 1)"
+                                    "str": "rewrite -(1 / (y + 1)) + 1 to y / (y + 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1752,11 +1752,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{y ^ {m - 1}}{(y + 1) ^ {m + n}} \\,dy",
                                 "res": "INT y:[0,oo]. y ^ (m - 1) / (y + 1) ^ (m + n)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{(y + 1) ^ {2}} (\\frac{1}{(y + 1) ^ {n - 1}}) (\\frac{y ^ {m - 1}}{(y + 1) ^ {m - 1}})\\) to \\(\\frac{y ^ {m - 1}}{(y + 1) ^ {m + n}}\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{(y + 1) ^ {2}} (\\frac{1}{(y + 1) ^ {n - 1}}) (\\frac{y ^ {m - 1}}{(y + 1) ^ {m - 1}})\\) to \\(\\frac{y ^ {m - 1}}{(y + 1) ^ {m + n}}\\)",
                                     "name": "Equation",
                                     "new_expr": "y ^ (m - 1) / (y + 1) ^ (m + n)",
                                     "old_expr": "1 / (y + 1) ^ 2 * (1 / (y + 1) ^ (n - 1)) * (y ^ (m - 1) / (y + 1) ^ (m - 1))",
-                                    "str": "rewriting 1 / (y + 1) ^ 2 * (1 / (y + 1) ^ (n - 1)) * (y ^ (m - 1) / (y + 1) ^ (m - 1)) to y ^ (m - 1) / (y + 1) ^ (m + n)"
+                                    "str": "rewrite 1 / (y + 1) ^ 2 * (1 / (y + 1) ^ (n - 1)) * (y ^ (m - 1) / (y + 1) ^ (m - 1)) to y ^ (m - 1) / (y + 1) ^ (m + n)"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1935,11 +1935,11 @@
                                 "latex_res": "\\Gamma{(m)} \\Gamma{(1 - m)}",
                                 "res": "Gamma(m) * Gamma(1 - m)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{\\Gamma{(m)} \\Gamma{(1 - m)}}{1}\\) to \\(\\Gamma{(m)} \\Gamma{(1 - m)}\\)",
+                                    "latex_str": "rewrite \\(\\frac{\\Gamma{(m)} \\Gamma{(1 - m)}}{1}\\) to \\(\\Gamma{(m)} \\Gamma{(1 - m)}\\)",
                                     "name": "Equation",
                                     "new_expr": "Gamma(m) * Gamma(1 - m)",
                                     "old_expr": "Gamma(m) * Gamma(1 - m) / 1",
-                                    "str": "rewriting Gamma(m) * Gamma(1 - m) / 1 to Gamma(m) * Gamma(1 - m)"
+                                    "str": "rewrite Gamma(m) * Gamma(1 - m) / 1 to Gamma(m) * Gamma(1 - m)"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -2027,7 +2027,7 @@
                             "rule": {
                                 "loc": "0",
                                 "name": "DefiniteIntegralIdentity",
-                                "str": "apply definite integral at 0"
+                                "str": "apply integral identity at 0"
                             },
                             "type": "CalculationStep"
                         },
@@ -2093,12 +2093,12 @@
                                 "latex_res": "\\int_{0}^{1} x ^ {z + 1 - 1} (1 - x) ^ {z} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (z + 1 - 1) * (1 - x) ^ z",
                                 "rule": {
-                                    "latex_str": "rewriting \\(z\\) to \\(z + 1 - 1\\) at 0.0",
+                                    "latex_str": "rewrite \\(z\\) to \\(z + 1 - 1\\) at 0.0",
                                     "loc": "0.0",
                                     "name": "Equation",
                                     "new_expr": "z + 1 - 1",
                                     "old_expr": "z",
-                                    "str": "rewriting z to z + 1 - 1 at 0.0"
+                                    "str": "rewrite z to z + 1 - 1 at 0.0"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -2112,12 +2112,12 @@
                                 "latex_res": "\\int_{0}^{1} x ^ {z + 1 - 1} (1 - x) ^ {z + 1 - 1} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (z + 1 - 1) * (1 - x) ^ (z + 1 - 1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(z\\) to \\(z + 1 - 1\\) at 0.1",
+                                    "latex_str": "rewrite \\(z\\) to \\(z + 1 - 1\\) at 0.1",
                                     "loc": "0.1",
                                     "name": "Equation",
                                     "new_expr": "z + 1 - 1",
                                     "old_expr": "z",
-                                    "str": "rewriting z to z + 1 - 1 at 0.1"
+                                    "str": "rewrite z to z + 1 - 1 at 0.1"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -2244,11 +2244,11 @@
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\int_{-1}^{1} \\frac{1}{2} (\\frac{s + 1}{2}) ^ {z} (\\frac{1}{2} (1 - s)) ^ {z} \\,ds",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT s:[-1,1]. 1/2 * ((s + 1) / 2) ^ z * (1/2 * (1 - s)) ^ z)",
                             "rule": {
-                                "latex_str": "rewriting \\(-\\frac{s + 1}{2} + 1\\) to \\(\\frac{1}{2} (1 - s)\\)",
+                                "latex_str": "rewrite \\(-\\frac{s + 1}{2} + 1\\) to \\(\\frac{1}{2} (1 - s)\\)",
                                 "name": "Equation",
                                 "new_expr": "1/2 * (1 - s)",
                                 "old_expr": "-((s + 1) / 2) + 1",
-                                "str": "rewriting -((s + 1) / 2) + 1 to 1/2 * (1 - s)"
+                                "str": "rewrite -((s + 1) / 2) + 1 to 1/2 * (1 - s)"
                             },
                             "type": "CalculationStep"
                         },
@@ -2262,11 +2262,11 @@
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\int_{-1}^{1} \\frac{1}{2} (\\frac{1}{2} (1 + s)) ^ {z} (\\frac{1}{2} (1 - s)) ^ {z} \\,ds",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (INT s:[-1,1]. 1/2 * (1/2 * (1 + s)) ^ z * (1/2 * (1 - s)) ^ z)",
                             "rule": {
-                                "latex_str": "rewriting \\(\\frac{s + 1}{2}\\) to \\(\\frac{1}{2} (1 + s)\\)",
+                                "latex_str": "rewrite \\(\\frac{s + 1}{2}\\) to \\(\\frac{1}{2} (1 + s)\\)",
                                 "name": "Equation",
                                 "new_expr": "1/2 * (1 + s)",
                                 "old_expr": "(s + 1) / 2",
-                                "str": "rewriting (s + 1) / 2 to 1/2 * (1 + s)"
+                                "str": "rewrite (s + 1) / 2 to 1/2 * (1 + s)"
                             },
                             "type": "CalculationStep"
                         },
@@ -2350,11 +2350,11 @@
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\frac{(\\frac{1}{2}) ^ {2 z}}{2} (\\int_{-1}^{1} (1 - s ^ {2}) ^ {z} \\,ds)",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) / 2 * (INT s:[-1,1]. (1 - s ^ 2) ^ z)",
                             "rule": {
-                                "latex_str": "rewriting \\((s + 1) (-s + 1)\\) to \\(1 - s ^ {2}\\)",
+                                "latex_str": "rewrite \\((s + 1) (-s + 1)\\) to \\(1 - s ^ {2}\\)",
                                 "name": "Equation",
                                 "new_expr": "1 - s ^ 2",
                                 "old_expr": "(s + 1) * (-s + 1)",
-                                "str": "rewriting (s + 1) * (-s + 1) to 1 - s ^ 2"
+                                "str": "rewrite (s + 1) * (-s + 1) to 1 - s ^ 2"
                             },
                             "type": "CalculationStep"
                         },
@@ -2453,11 +2453,11 @@
                             "latex_res": "\\frac{z! z!}{(2 z + 1)!} = \\frac{(\\frac{1}{2}) ^ {2 z}}{2} (\\int_{0}^{1} u ^ {1/2 - 1} (1 - u) ^ {z + 1 - 1} \\,du)",
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) / 2 * (INT u:[0,1]. u ^ (1/2 - 1) * (1 - u) ^ (z + 1 - 1))",
                             "rule": {
-                                "latex_str": "rewriting \\(\\frac{(-u + 1) ^ {z}}{\\sqrt{u}}\\) to \\(u ^ {1/2 - 1} (1 - u) ^ {z + 1 - 1}\\)",
+                                "latex_str": "rewrite \\(\\frac{(-u + 1) ^ {z}}{\\sqrt{u}}\\) to \\(u ^ {1/2 - 1} (1 - u) ^ {z + 1 - 1}\\)",
                                 "name": "Equation",
                                 "new_expr": "u ^ (1/2 - 1) * (1 - u) ^ (z + 1 - 1)",
                                 "old_expr": "(-u + 1) ^ z / sqrt(u)",
-                                "str": "rewriting (-u + 1) ^ z / sqrt(u) to u ^ (1/2 - 1) * (1 - u) ^ (z + 1 - 1)"
+                                "str": "rewrite (-u + 1) ^ z / sqrt(u) to u ^ (1/2 - 1) * (1 - u) ^ (z + 1 - 1)"
                             },
                             "type": "CalculationStep"
                         },
@@ -2535,11 +2535,11 @@
                             "latex_res": "(2 z + 1)! = \\frac{2}{\\sqrt{\\pi}} (\\frac{1}{2}) ^ {-2 z} (z! (z + \\frac{1}{2})!)",
                             "res": "factorial(2 * z + 1) = 2 / sqrt(pi) * (1/2) ^ (-2 * z) * (factorial(z) * factorial(z + 1/2))",
                             "rule": {
-                                "latex_str": "rewriting \\(\\frac{2 (\\frac{1}{2}) ^ {-2 z} z! (z + \\frac{1}{2})!}{\\sqrt{\\pi}}\\) to \\(\\frac{2}{\\sqrt{\\pi}} (\\frac{1}{2}) ^ {-2 z} (z! (z + \\frac{1}{2})!)\\)",
+                                "latex_str": "rewrite \\(\\frac{2 (\\frac{1}{2}) ^ {-2 z} z! (z + \\frac{1}{2})!}{\\sqrt{\\pi}}\\) to \\(\\frac{2}{\\sqrt{\\pi}} (\\frac{1}{2}) ^ {-2 z} (z! (z + \\frac{1}{2})!)\\)",
                                 "name": "Equation",
                                 "new_expr": "2 / sqrt(pi) * (1/2) ^ (-2 * z) * (factorial(z) * factorial(z + 1/2))",
                                 "old_expr": "2 * (1/2) ^ -(2 * z) * factorial(z) * factorial(z + 1/2) / sqrt(pi)",
-                                "str": "rewriting 2 * (1/2) ^ -(2 * z) * factorial(z) * factorial(z + 1/2) / sqrt(pi) to 2 / sqrt(pi) * (1/2) ^ (-2 * z) * (factorial(z) * factorial(z + 1/2))"
+                                "str": "rewrite 2 * (1/2) ^ -(2 * z) * factorial(z) * factorial(z + 1/2) / sqrt(pi) to 2 / sqrt(pi) * (1/2) ^ (-2 * z) * (factorial(z) * factorial(z + 1/2))"
                             },
                             "type": "CalculationStep"
                         },
@@ -2558,11 +2558,11 @@
                             "latex_res": "z! (z + \\frac{1}{2})! = \\sqrt{\\pi}\\cdot 2 ^ {-1} (2 ^ {-1}) ^ {2 z} (2 z + 1)!",
                             "res": "factorial(z) * factorial(z + 1/2) = sqrt(pi) * 2 ^ (-1) * 2 ^ (-1) ^ (2 * z) * factorial(2 * z + 1)",
                             "rule": {
-                                "latex_str": "rewriting \\(\\frac{(\\frac{1}{2}) ^ {2 z}\\cdot \\sqrt{\\pi} (2 z + 1)!}{2}\\) to \\(\\sqrt{\\pi}\\cdot 2 ^ {-1} (2 ^ {-1}) ^ {2 z} (2 z + 1)!\\)",
+                                "latex_str": "rewrite \\(\\frac{(\\frac{1}{2}) ^ {2 z}\\cdot \\sqrt{\\pi} (2 z + 1)!}{2}\\) to \\(\\sqrt{\\pi}\\cdot 2 ^ {-1} (2 ^ {-1}) ^ {2 z} (2 z + 1)!\\)",
                                 "name": "Equation",
                                 "new_expr": "sqrt(pi) * 2 ^ (-1) * 2 ^ (-1) ^ (2 * z) * factorial(2 * z + 1)",
                                 "old_expr": "(1/2) ^ (2 * z) * sqrt(pi) * factorial(2 * z + 1) / 2",
-                                "str": "rewriting (1/2) ^ (2 * z) * sqrt(pi) * factorial(2 * z + 1) / 2 to sqrt(pi) * 2 ^ (-1) * 2 ^ (-1) ^ (2 * z) * factorial(2 * z + 1)"
+                                "str": "rewrite (1/2) ^ (2 * z) * sqrt(pi) * factorial(2 * z + 1) / 2 to sqrt(pi) * 2 ^ (-1) * 2 ^ (-1) ^ (2 * z) * factorial(2 * z + 1)"
                             },
                             "type": "CalculationStep"
                         },
@@ -2582,11 +2582,11 @@
                             "latex_res": "z! (z + \\frac{1}{2})! = 2 ^ {-2 z - 1}\\cdot \\sqrt{\\pi} (2 z + 1)!",
                             "res": "factorial(z) * factorial(z + 1/2) = 2 ^ (-2 * z - 1) * sqrt(pi) * factorial(2 * z + 1)",
                             "rule": {
-                                "latex_str": "rewriting \\(\\sqrt{\\pi}\\cdot 2 ^ {-1} 2 ^ {-2 z}\\) to \\(2 ^ {-2 z - 1}\\cdot \\sqrt{\\pi}\\)",
+                                "latex_str": "rewrite \\(\\sqrt{\\pi}\\cdot 2 ^ {-1} 2 ^ {-2 z}\\) to \\(2 ^ {-2 z - 1}\\cdot \\sqrt{\\pi}\\)",
                                 "name": "Equation",
                                 "new_expr": "2 ^ (-2 * z - 1) * sqrt(pi)",
                                 "old_expr": "sqrt(pi) * 2 ^ (-1) * 2 ^ (-2 * z)",
-                                "str": "rewriting sqrt(pi) * 2 ^ (-1) * 2 ^ (-2 * z) to 2 ^ (-2 * z - 1) * sqrt(pi)"
+                                "str": "rewrite sqrt(pi) * 2 ^ (-1) * 2 ^ (-2 * z) to 2 ^ (-2 * z - 1) * sqrt(pi)"
                             },
                             "type": "CalculationStep"
                         }

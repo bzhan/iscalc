@@ -56,9 +56,9 @@
                                 "latex_res": "\\lim\\limits_{t\\to \\infty} \\int_{0}^{t/a} \\frac{1}{(a u) ^ {2} + a ^ {2}} a \\,du",
                                 "res": "LIM {t -> oo}. INT u:[0,t / a]. 1 / ((a * u) ^ 2 + a ^ 2) * a",
                                 "rule": {
-                                    "latex_str": "inverse substitution \\(a u\\) creating \\(u\\)",
+                                    "latex_str": "inverse substitute \\(a u\\) creating \\(u\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution a * u creating u",
+                                    "str": "inverse substitute a * u creating u",
                                     "var_name": "u",
                                     "var_subst": "a * u"
                                 },
@@ -89,11 +89,11 @@
                                 "latex_res": "a (\\int_{0}^{\\infty} \\frac{1}{a ^ {2} (u ^ {2} + 1)} \\,du)",
                                 "res": "a * (INT u:[0,oo]. 1 / (a ^ 2 * (u ^ 2 + 1)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{a ^ {2} u ^ {2} + a ^ {2}}\\) to \\(\\frac{1}{a ^ {2} (u ^ {2} + 1)}\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{a ^ {2} u ^ {2} + a ^ {2}}\\) to \\(\\frac{1}{a ^ {2} (u ^ {2} + 1)}\\)",
                                     "name": "Equation",
                                     "new_expr": "1 / (a ^ 2 * (u ^ 2 + 1))",
                                     "old_expr": "1 / (a ^ 2 * u ^ 2 + a ^ 2)",
-                                    "str": "rewriting 1 / (a ^ 2 * u ^ 2 + a ^ 2) to 1 / (a ^ 2 * (u ^ 2 + 1))"
+                                    "str": "rewrite 1 / (a ^ 2 * u ^ 2 + a ^ 2) to 1 / (a ^ 2 * (u ^ 2 + 1))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -123,7 +123,7 @@
                                 "res": "1 / a * ([atan(u)]_u=0,oo)",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },

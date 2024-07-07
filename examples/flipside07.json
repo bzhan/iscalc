@@ -38,7 +38,7 @@
                                 "rule": {
                                     "loc": "subterms",
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral on subterms"
+                                    "str": "apply integral identity on subterms"
                                 },
                                 "type": "CalculationStep"
                             },

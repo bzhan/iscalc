@@ -90,11 +90,11 @@
                                 "latex_res": "\\int_{0}^{\\pi} \\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)} \\,dx",
                                 "res": "INT x:[0,pi]. (pi - x) * sin(x) / (a + b * cos(x) ^ 2)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{\\sin{x} (-x + \\pi)}{b \\cos^{2}(x) + a}\\) to \\(\\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)}\\)",
+                                    "latex_str": "rewrite \\(\\frac{\\sin{x} (-x + \\pi)}{b \\cos^{2}(x) + a}\\) to \\(\\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)}\\)",
                                     "name": "Equation",
                                     "new_expr": "(pi - x) * sin(x) / (a + b * cos(x) ^ 2)",
                                     "old_expr": "sin(x) * (-x + pi) / (b * cos(x) ^ 2 + a)",
-                                    "str": "rewriting sin(x) * (-x + pi) / (b * cos(x) ^ 2 + a) to (pi - x) * sin(x) / (a + b * cos(x) ^ 2)"
+                                    "str": "rewrite sin(x) * (-x + pi) / (b * cos(x) ^ 2 + a) to (pi - x) * sin(x) / (a + b * cos(x) ^ 2)"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -159,11 +159,11 @@
                                 "latex_res": "\\frac{1}{2} (I(a,b) + I(a,b))",
                                 "res": "1/2 * (I(a,b) + I(a,b))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(I(a,b)\\) to \\(\\frac{1}{2} (I(a,b) + I(a,b))\\)",
+                                    "latex_str": "rewrite \\(I(a,b)\\) to \\(\\frac{1}{2} (I(a,b) + I(a,b))\\)",
                                     "name": "Equation",
                                     "new_expr": "1/2 * (I(a,b) + I(a,b))",
                                     "old_expr": "I(a,b)",
-                                    "str": "rewriting I(a,b) to 1/2 * (I(a,b) + I(a,b))"
+                                    "str": "rewrite I(a,b) to 1/2 * (I(a,b) + I(a,b))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -212,11 +212,11 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi} \\frac{x \\sin{x}}{a + b \\cos^{2}(x)} + \\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)} \\,dx)",
                                 "res": "1/2 * (INT x:[0,pi]. x * sin(x) / (a + b * cos(x) ^ 2) + (pi - x) * sin(x) / (a + b * cos(x) ^ 2))",
                                 "rule": {
-                                    "latex_str": "rewriting \\((\\int_{0}^{\\pi} \\frac{x \\sin{x}}{b \\cos^{2}(x) + a} \\,dx) + (\\int_{0}^{\\pi} \\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)} \\,dx)\\) to \\(\\int_{0}^{\\pi} \\frac{x \\sin{x}}{a + b \\cos^{2}(x)} + \\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)} \\,dx\\)",
+                                    "latex_str": "rewrite \\((\\int_{0}^{\\pi} \\frac{x \\sin{x}}{b \\cos^{2}(x) + a} \\,dx) + (\\int_{0}^{\\pi} \\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)} \\,dx)\\) to \\(\\int_{0}^{\\pi} \\frac{x \\sin{x}}{a + b \\cos^{2}(x)} + \\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)} \\,dx\\)",
                                     "name": "Equation",
                                     "new_expr": "INT x:[0,pi]. x * sin(x) / (a + b * cos(x) ^ 2) + (pi - x) * sin(x) / (a + b * cos(x) ^ 2)",
                                     "old_expr": "(INT x:[0,pi]. x * sin(x) / (b * cos(x) ^ 2 + a)) + (INT x:[0,pi]. (pi - x) * sin(x) / (a + b * cos(x) ^ 2))",
-                                    "str": "rewriting (INT x:[0,pi]. x * sin(x) / (b * cos(x) ^ 2 + a)) + (INT x:[0,pi]. (pi - x) * sin(x) / (a + b * cos(x) ^ 2)) to INT x:[0,pi]. x * sin(x) / (a + b * cos(x) ^ 2) + (pi - x) * sin(x) / (a + b * cos(x) ^ 2)"
+                                    "str": "rewrite (INT x:[0,pi]. x * sin(x) / (b * cos(x) ^ 2 + a)) + (INT x:[0,pi]. (pi - x) * sin(x) / (a + b * cos(x) ^ 2)) to INT x:[0,pi]. x * sin(x) / (a + b * cos(x) ^ 2) + (pi - x) * sin(x) / (a + b * cos(x) ^ 2)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -230,11 +230,11 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi} \\frac{\\pi \\sin{x}}{a + b \\cos^{2}(x)} \\,dx)",
                                 "res": "1/2 * (INT x:[0,pi]. pi * sin(x) / (a + b * cos(x) ^ 2))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{x \\sin{x}}{a + b \\cos^{2}(x)} + \\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)}\\) to \\(\\frac{\\pi \\sin{x}}{a + b \\cos^{2}(x)}\\)",
+                                    "latex_str": "rewrite \\(\\frac{x \\sin{x}}{a + b \\cos^{2}(x)} + \\frac{(\\pi - x) \\sin{x}}{a + b \\cos^{2}(x)}\\) to \\(\\frac{\\pi \\sin{x}}{a + b \\cos^{2}(x)}\\)",
                                     "name": "Equation",
                                     "new_expr": "pi * sin(x) / (a + b * cos(x) ^ 2)",
                                     "old_expr": "x * sin(x) / (a + b * cos(x) ^ 2) + (pi - x) * sin(x) / (a + b * cos(x) ^ 2)",
-                                    "str": "rewriting x * sin(x) / (a + b * cos(x) ^ 2) + (pi - x) * sin(x) / (a + b * cos(x) ^ 2) to pi * sin(x) / (a + b * cos(x) ^ 2)"
+                                    "str": "rewrite x * sin(x) / (a + b * cos(x) ^ 2) + (pi - x) * sin(x) / (a + b * cos(x) ^ 2) to pi * sin(x) / (a + b * cos(x) ^ 2)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -284,11 +284,11 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{-\\sqrt{b}/\\sqrt{a}}^{\\sqrt{b}/\\sqrt{a}} \\frac{\\sqrt{a}\\cdot \\pi}{\\sqrt{b} (a (x ^ {2} + 1))} \\,dx)",
                                 "res": "1/2 * (INT x:[-(sqrt(b) / sqrt(a)),sqrt(b) / sqrt(a)]. sqrt(a) * pi / (sqrt(b) * (a * (x ^ 2 + 1))))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(a x ^ {2} + a\\) to \\(a (x ^ {2} + 1)\\)",
+                                    "latex_str": "rewrite \\(a x ^ {2} + a\\) to \\(a (x ^ {2} + 1)\\)",
                                     "name": "Equation",
                                     "new_expr": "a * (x ^ 2 + 1)",
                                     "old_expr": "a * x ^ 2 + a",
-                                    "str": "rewriting a * x ^ 2 + a to a * (x ^ 2 + 1)"
+                                    "str": "rewrite a * x ^ 2 + a to a * (x ^ 2 + 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -318,7 +318,7 @@
                                 "res": "pi / (2 * sqrt(a) * sqrt(b)) * ([atan(x)]_x=-(sqrt(b) / sqrt(a)),sqrt(b) / sqrt(a))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -356,11 +356,11 @@
                                 "latex_res": "\\frac{\\pi}{\\sqrt{a b}} \\tan^{-1}{(\\frac{\\sqrt{b}}{\\sqrt{a}})}",
                                 "res": "pi / sqrt(a * b) * atan(sqrt(b) / sqrt(a))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\sqrt{a} \\sqrt{b}\\) to \\(\\sqrt{a b}\\)",
+                                    "latex_str": "rewrite \\(\\sqrt{a} \\sqrt{b}\\) to \\(\\sqrt{a b}\\)",
                                     "name": "Equation",
                                     "new_expr": "sqrt(a * b)",
                                     "old_expr": "sqrt(a) * sqrt(b)",
-                                    "str": "rewriting sqrt(a) * sqrt(b) to sqrt(a * b)"
+                                    "str": "rewrite sqrt(a) * sqrt(b) to sqrt(a * b)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -368,11 +368,11 @@
                                 "latex_res": "\\frac{\\pi}{\\sqrt{a b}} \\tan^{-1}{(\\sqrt{\\frac{b}{a}})}",
                                 "res": "pi / sqrt(a * b) * atan(sqrt(b / a))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{\\sqrt{b}}{\\sqrt{a}}\\) to \\(\\sqrt{\\frac{b}{a}}\\)",
+                                    "latex_str": "rewrite \\(\\frac{\\sqrt{b}}{\\sqrt{a}}\\) to \\(\\sqrt{\\frac{b}{a}}\\)",
                                     "name": "Equation",
                                     "new_expr": "sqrt(b / a)",
                                     "old_expr": "sqrt(b) / sqrt(a)",
-                                    "str": "rewriting sqrt(b) / sqrt(a) to sqrt(b / a)"
+                                    "str": "rewrite sqrt(b) / sqrt(a) to sqrt(b / a)"
                                 },
                                 "type": "CalculationStep"
                             }

@@ -54,11 +54,11 @@
                                 "latex_res": "(\\int_{0}^{\\pi/2} \\log{(1 \\sin{x})} \\,dx) - (\\int_{0}^{\\pi/2} \\log{x} \\,dx)",
                                 "res": "(INT x:[0,pi / 2]. log(1 * sin(x))) - (INT x:[0,pi / 2]. log(x))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\log{(\\sin{x})}\\) to \\(\\log{(1 \\sin{x})}\\)",
+                                    "latex_str": "rewrite \\(\\log{(\\sin{x})}\\) to \\(\\log{(1 \\sin{x})}\\)",
                                     "name": "Equation",
                                     "new_expr": "log(1 * sin(x))",
                                     "old_expr": "log(sin(x))",
-                                    "str": "rewriting log(sin(x)) to log(1 * sin(x))"
+                                    "str": "rewrite log(sin(x)) to log(1 * sin(x))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -73,7 +73,7 @@
                                 "res": "-(pi * log(2) / 2) - (INT x:[0,pi / 2]. log(x))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -107,7 +107,7 @@
                                 "res": "-(pi * log(2) / 2) - (([x * log(x)]_x=0,pi / 2) - ([x]_x=0,pi / 2))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },

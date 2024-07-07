@@ -26,11 +26,11 @@
                                 "latex_res": "(p ^ {2} - 5) ^ {2} - 16",
                                 "res": "(p ^ 2 - 5) ^ 2 - 16",
                                 "rule": {
-                                    "latex_str": "rewriting \\(9 - 10 p ^ {2} + p ^ {4}\\) to \\((p ^ {2} - 5) ^ {2} - 16\\)",
+                                    "latex_str": "rewrite \\(9 - 10 p ^ {2} + p ^ {4}\\) to \\((p ^ {2} - 5) ^ {2} - 16\\)",
                                     "name": "Equation",
                                     "new_expr": "(p ^ 2 - 5) ^ 2 - 16",
                                     "old_expr": "9 - 10 * p ^ 2 + p ^ 4",
-                                    "str": "rewriting 9 - 10 * p ^ 2 + p ^ 4 to (p ^ 2 - 5) ^ 2 - 16"
+                                    "str": "rewrite 9 - 10 * p ^ 2 + p ^ 4 to (p ^ 2 - 5) ^ 2 - 16"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -121,11 +121,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} -\\frac{e^{(-p - 3) t}}{8} + \\frac{3 e^{-p t - t}}{8} - \\frac{3 e^{-p t + t}}{8} + \\frac{e^{-p t + 3 t}}{8} \\,dt",
                                 "res": "INT t:[0,oo]. -(exp((-p - 3) * t) / 8) + 3 * exp(-(p * t) - t) / 8 - 3 * exp(-(p * t) + t) / 8 + exp(-(p * t) + 3 * t) / 8",
                                 "rule": {
-                                    "latex_str": "rewriting \\(-p t - 3 t\\) to \\((-p - 3) t\\)",
+                                    "latex_str": "rewrite \\(-p t - 3 t\\) to \\((-p - 3) t\\)",
                                     "name": "Equation",
                                     "new_expr": "(-p - 3) * t",
                                     "old_expr": "-(p * t) - 3 * t",
-                                    "str": "rewriting -(p * t) - 3 * t to (-p - 3) * t"
+                                    "str": "rewrite -(p * t) - 3 * t to (-p - 3) * t"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -139,11 +139,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} -\\frac{e^{(-p - 3) t}}{8} + \\frac{3 e^{-p t - t}}{8} - \\frac{3 e^{-p t + t}}{8} + \\frac{e^{(3 - p) t}}{8} \\,dt",
                                 "res": "INT t:[0,oo]. -(exp((-p - 3) * t) / 8) + 3 * exp(-(p * t) - t) / 8 - 3 * exp(-(p * t) + t) / 8 + exp((3 - p) * t) / 8",
                                 "rule": {
-                                    "latex_str": "rewriting \\(-p t + 3 t\\) to \\((3 - p) t\\)",
+                                    "latex_str": "rewrite \\(-p t + 3 t\\) to \\((3 - p) t\\)",
                                     "name": "Equation",
                                     "new_expr": "(3 - p) * t",
                                     "old_expr": "-(p * t) + 3 * t",
-                                    "str": "rewriting -(p * t) + 3 * t to (3 - p) * t"
+                                    "str": "rewrite -(p * t) + 3 * t to (3 - p) * t"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -157,11 +157,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} -\\frac{e^{(-p - 3) t}}{8} + \\frac{3 e^{(-p - 1) t}}{8} - \\frac{3 e^{-p t + t}}{8} + \\frac{e^{(3 - p) t}}{8} \\,dt",
                                 "res": "INT t:[0,oo]. -(exp((-p - 3) * t) / 8) + 3 * exp((-p - 1) * t) / 8 - 3 * exp(-(p * t) + t) / 8 + exp((3 - p) * t) / 8",
                                 "rule": {
-                                    "latex_str": "rewriting \\(-p t - t\\) to \\((-p - 1) t\\)",
+                                    "latex_str": "rewrite \\(-p t - t\\) to \\((-p - 1) t\\)",
                                     "name": "Equation",
                                     "new_expr": "(-p - 1) * t",
                                     "old_expr": "-(p * t) - t",
-                                    "str": "rewriting -(p * t) - t to (-p - 1) * t"
+                                    "str": "rewrite -(p * t) - t to (-p - 1) * t"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -175,11 +175,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} -\\frac{e^{(-p - 3) t}}{8} + \\frac{3 e^{(-p - 1) t}}{8} - \\frac{3 e^{(1 - p) t}}{8} + \\frac{e^{(3 - p) t}}{8} \\,dt",
                                 "res": "INT t:[0,oo]. -(exp((-p - 3) * t) / 8) + 3 * exp((-p - 1) * t) / 8 - 3 * exp((1 - p) * t) / 8 + exp((3 - p) * t) / 8",
                                 "rule": {
-                                    "latex_str": "rewriting \\(-p t + t\\) to \\((1 - p) t\\)",
+                                    "latex_str": "rewrite \\(-p t + t\\) to \\((1 - p) t\\)",
                                     "name": "Equation",
                                     "new_expr": "(1 - p) * t",
                                     "old_expr": "-(p * t) + t",
-                                    "str": "rewriting -(p * t) + t to (1 - p) * t"
+                                    "str": "rewrite -(p * t) + t to (1 - p) * t"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -194,7 +194,7 @@
                                 "res": "-(1/8 * ([exp(t * (-p - 3)) / (-p - 3)]_t=0,oo)) + 3/8 * ([exp(t * (-p - 1)) / (-p - 1)]_t=0,oo) - 3/8 * ([exp(t * (-p + 1)) / (-p + 1)]_t=0,oo) + 1/8 * ([exp(t * (-p + 3)) / (-p + 3)]_t=0,oo)",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -211,11 +211,11 @@
                                 "latex_res": "\\frac{6}{9 - 10 p ^ {2} + p ^ {4}}",
                                 "res": "6 / (9 - 10 * p ^ 2 + p ^ 4)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{3}{-8 p + 8} - \\frac{1}{-8 p + 24} - \\frac{3}{-8 p - 8} + \\frac{1}{-8 p - 24}\\) to \\(\\frac{6}{9 - 10 p ^ {2} + p ^ {4}}\\)",
+                                    "latex_str": "rewrite \\(\\frac{3}{-8 p + 8} - \\frac{1}{-8 p + 24} - \\frac{3}{-8 p - 8} + \\frac{1}{-8 p - 24}\\) to \\(\\frac{6}{9 - 10 p ^ {2} + p ^ {4}}\\)",
                                     "name": "Equation",
                                     "new_expr": "6 / (9 - 10 * p ^ 2 + p ^ 4)",
                                     "old_expr": "3 / (-(8 * p) + 8) - 1 / (-(8 * p) + 24) - 3 / (-(8 * p) - 8) + 1 / (-(8 * p) - 24)",
-                                    "str": "rewriting 3 / (-(8 * p) + 8) - 1 / (-(8 * p) + 24) - 3 / (-(8 * p) - 8) + 1 / (-(8 * p) - 24) to 6 / (9 - 10 * p ^ 2 + p ^ 4)"
+                                    "str": "rewrite 3 / (-(8 * p) + 8) - 1 / (-(8 * p) + 24) - 3 / (-(8 * p) - 8) + 1 / (-(8 * p) - 24) to 6 / (9 - 10 * p ^ 2 + p ^ 4)"
                                 },
                                 "type": "CalculationStep"
                             }

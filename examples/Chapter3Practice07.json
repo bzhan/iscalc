@@ -60,11 +60,11 @@
                                 "latex_res": "\\int_{-\\infty}^{\\infty} e^{b ^ {2}/(4 a) - a (x - b/(2 a)) ^ {2}} \\,dx",
                                 "res": "INT x:[-oo,oo]. exp(b ^ 2 / (4 * a) - a * (x - b / (2 * a)) ^ 2)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(-a x ^ {2} + b x\\) to \\(\\frac{b ^ {2}}{4 a} - a (x - \\frac{b}{2 a}) ^ {2}\\)",
+                                    "latex_str": "rewrite \\(-a x ^ {2} + b x\\) to \\(\\frac{b ^ {2}}{4 a} - a (x - \\frac{b}{2 a}) ^ {2}\\)",
                                     "name": "Equation",
                                     "new_expr": "b ^ 2 / (4 * a) - a * (x - b / (2 * a)) ^ 2",
                                     "old_expr": "-(a * x ^ 2) + b * x",
-                                    "str": "rewriting -(a * x ^ 2) + b * x to b ^ 2 / (4 * a) - a * (x - b / (2 * a)) ^ 2"
+                                    "str": "rewrite -(a * x ^ 2) + b * x to b ^ 2 / (4 * a) - a * (x - b / (2 * a)) ^ 2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -124,7 +124,7 @@
                                 "res": "exp(b ^ 2 / (4 * a)) * (sqrt(pi) / sqrt(a))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -507,11 +507,11 @@
                                 "latex_res": "\\int_{-\\infty}^{\\infty} x e^{-1 x ^ {2} + -1 x} \\,dx",
                                 "res": "INT x:[-oo,oo]. x * exp(-(1 * x ^ 2) + -1 * x)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x e^{-x ^ {2} - x}\\) to \\(x e^{-1 x ^ {2} + -1 x}\\)",
+                                    "latex_str": "rewrite \\(x e^{-x ^ {2} - x}\\) to \\(x e^{-1 x ^ {2} + -1 x}\\)",
                                     "name": "Equation",
                                     "new_expr": "x * exp(-(1 * x ^ 2) + -1 * x)",
                                     "old_expr": "x * exp(-(x ^ 2) - x)",
-                                    "str": "rewriting x * exp(-(x ^ 2) - x) to x * exp(-(1 * x ^ 2) + -1 * x)"
+                                    "str": "rewrite x * exp(-(x ^ 2) - x) to x * exp(-(1 * x ^ 2) + -1 * x)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -531,10 +531,10 @@
                                 "latex_res": "-\\frac{1}{2} \\sqrt{\\pi \\sqrt{e}}",
                                 "res": "-1/2 * sqrt(pi * sqrt(exp(1)))",
                                 "rule": {
-                                    "latex_str": "rewriting to \\(-\\frac{1}{2} \\sqrt{\\pi \\sqrt{e}}\\)",
+                                    "latex_str": "rewrite to \\(-\\frac{1}{2} \\sqrt{\\pi \\sqrt{e}}\\)",
                                     "name": "Equation",
                                     "new_expr": "-1/2 * sqrt(pi * sqrt(exp(1)))",
-                                    "str": "rewriting to -1/2 * sqrt(pi * sqrt(exp(1)))"
+                                    "str": "rewrite to -1/2 * sqrt(pi * sqrt(exp(1)))"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -575,11 +575,11 @@
                                 "latex_res": "\\int_{-\\infty}^{\\infty} x ^ {2} e^{-1 x ^ {2} + -1 x} \\,dx",
                                 "res": "INT x:[-oo,oo]. x ^ 2 * exp(-(1 * x ^ 2) + -1 * x)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {2} e^{-x ^ {2} - x}\\) to \\(x ^ {2} e^{-1 x ^ {2} + -1 x}\\)",
+                                    "latex_str": "rewrite \\(x ^ {2} e^{-x ^ {2} - x}\\) to \\(x ^ {2} e^{-1 x ^ {2} + -1 x}\\)",
                                     "name": "Equation",
                                     "new_expr": "x ^ 2 * exp(-(1 * x ^ 2) + -1 * x)",
                                     "old_expr": "x ^ 2 * exp(-(x ^ 2) - x)",
-                                    "str": "rewriting x ^ 2 * exp(-(x ^ 2) - x) to x ^ 2 * exp(-(1 * x ^ 2) + -1 * x)"
+                                    "str": "rewrite x ^ 2 * exp(-(x ^ 2) - x) to x ^ 2 * exp(-(1 * x ^ 2) + -1 * x)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -599,10 +599,10 @@
                                 "latex_res": "\\frac{3}{4} \\sqrt{\\pi \\sqrt{e}}",
                                 "res": "3/4 * sqrt(pi * sqrt(exp(1)))",
                                 "rule": {
-                                    "latex_str": "rewriting to \\(\\frac{3}{4} \\sqrt{\\pi \\sqrt{e}}\\)",
+                                    "latex_str": "rewrite to \\(\\frac{3}{4} \\sqrt{\\pi \\sqrt{e}}\\)",
                                     "name": "Equation",
                                     "new_expr": "3/4 * sqrt(pi * sqrt(exp(1)))",
-                                    "str": "rewriting to 3/4 * sqrt(pi * sqrt(exp(1)))"
+                                    "str": "rewrite to 3/4 * sqrt(pi * sqrt(exp(1)))"
                                 },
                                 "type": "CalculationStep"
                             }

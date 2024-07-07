@@ -102,7 +102,7 @@
                                 "res": "-(a / (a ^ 2 + y ^ 2))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             }

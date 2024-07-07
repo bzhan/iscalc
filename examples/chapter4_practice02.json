@@ -91,9 +91,9 @@
                                 "latex_res": "-(\\int_{0}^{\\infty} (e^{-u}) ^ {m} \\log^{n}(e^{-u}) (-e^{-u}) \\,du)",
                                 "res": "-(INT u:[0,oo]. exp(-u) ^ m * log(exp(-u)) ^ n * -exp(-u))",
                                 "rule": {
-                                    "latex_str": "inverse substitution \\(e^{-u}\\) creating \\(u\\)",
+                                    "latex_str": "inverse substitute \\(e^{-u}\\) creating \\(u\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution exp(-u) creating u",
+                                    "str": "inverse substitute exp(-u) creating u",
                                     "var_name": "u",
                                     "var_subst": "exp(-u)"
                                 },
@@ -124,11 +124,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} (-u) ^ {n} (e^{-u} (e^{-u}) ^ {m}) \\,du",
                                 "res": "INT u:[0,oo]. (-u) ^ n * (exp(-u) * exp(-u) ^ m)",
                                 "rule": {
-                                    "latex_str": "rewriting \\((-u) ^ {n} e^{-u} (e^{-u}) ^ {m}\\) to \\((-u) ^ {n} (e^{-u} (e^{-u}) ^ {m})\\)",
+                                    "latex_str": "rewrite \\((-u) ^ {n} e^{-u} (e^{-u}) ^ {m}\\) to \\((-u) ^ {n} (e^{-u} (e^{-u}) ^ {m})\\)",
                                     "name": "Equation",
                                     "new_expr": "(-u) ^ n * (exp(-u) * exp(-u) ^ m)",
                                     "old_expr": "(-u) ^ n * exp(-u) * exp(-u) ^ m",
-                                    "str": "rewriting (-u) ^ n * exp(-u) * exp(-u) ^ m to (-u) ^ n * (exp(-u) * exp(-u) ^ m)"
+                                    "str": "rewrite (-u) ^ n * exp(-u) * exp(-u) ^ m to (-u) ^ n * (exp(-u) * exp(-u) ^ m)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -142,11 +142,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} (-u) ^ {n} ((e^{-u}) ^ {1} (e^{-u}) ^ {m}) \\,du",
                                 "res": "INT u:[0,oo]. (-u) ^ n * (exp(-u) ^ 1 * exp(-u) ^ m)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(e^{-u} (e^{-u}) ^ {m}\\) to \\((e^{-u}) ^ {1} (e^{-u}) ^ {m}\\)",
+                                    "latex_str": "rewrite \\(e^{-u} (e^{-u}) ^ {m}\\) to \\((e^{-u}) ^ {1} (e^{-u}) ^ {m}\\)",
                                     "name": "Equation",
                                     "new_expr": "exp(-u) ^ 1 * exp(-u) ^ m",
                                     "old_expr": "exp(-u) * exp(-u) ^ m",
-                                    "str": "rewriting exp(-u) * exp(-u) ^ m to exp(-u) ^ 1 * exp(-u) ^ m"
+                                    "str": "rewrite exp(-u) * exp(-u) ^ m to exp(-u) ^ 1 * exp(-u) ^ m"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -179,11 +179,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} (-1 u) ^ {n} (e^{-u}) ^ {m + 1} \\,du",
                                 "res": "INT u:[0,oo]. (-1 * u) ^ n * exp(-u) ^ (m + 1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(-u\\) to \\(-1 u\\)",
+                                    "latex_str": "rewrite \\(-u\\) to \\(-1 u\\)",
                                     "name": "Equation",
                                     "new_expr": "-1 * u",
                                     "old_expr": "-u",
-                                    "str": "rewriting -u to -1 * u"
+                                    "str": "rewrite -u to -1 * u"
                                 },
                                 "type": "CalculationStep"
                             },

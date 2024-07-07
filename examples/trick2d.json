@@ -20,9 +20,9 @@
                                 "latex_res": "\\int_{0}^{\\pi/4} \\frac{\\log{(\\tan{u} + 1)}}{\\tan^{2}(u) + 1} \\sec^{2}(u) \\,du",
                                 "res": "INT u:[0,pi / 4]. log(tan(u) + 1) / (tan(u) ^ 2 + 1) * sec(u) ^ 2",
                                 "rule": {
-                                    "latex_str": "inverse substitution \\(\\tan{u}\\) creating \\(u\\)",
+                                    "latex_str": "inverse substitute \\(\\tan{u}\\) creating \\(u\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution tan(u) creating u",
+                                    "str": "inverse substitute tan(u) creating u",
                                     "var_name": "u",
                                     "var_subst": "tan(u)"
                                 },
@@ -116,9 +116,9 @@
                                 "latex_res": "-(\\int_{0}^{\\pi/4} \\log{(\\tan{(\\frac{\\pi}{4} - x)} + 1)}\\cdot -1 \\,dx)",
                                 "res": "-(INT x:[0,pi / 4]. log(tan(pi / 4 - x) + 1) * -1)",
                                 "rule": {
-                                    "latex_str": "inverse substitution \\(\\frac{\\pi}{4} - x\\) creating \\(x\\)",
+                                    "latex_str": "inverse substitute \\(\\frac{\\pi}{4} - x\\) creating \\(x\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution pi / 4 - x creating x",
+                                    "str": "inverse substitute pi / 4 - x creating x",
                                     "var_name": "x",
                                     "var_subst": "pi / 4 - x"
                                 },
@@ -182,11 +182,11 @@
                                 "latex_res": "\\int_{0}^{\\pi/4} \\log{(\\frac{2}{1 + \\tan{x}})} \\,dx",
                                 "res": "INT x:[0,pi / 4]. log(2 / (1 + tan(x)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{-\\tan{x} + 1}{\\tan{x} + 1} + 1\\) to \\(\\frac{2}{1 + \\tan{x}}\\)",
+                                    "latex_str": "rewrite \\(\\frac{-\\tan{x} + 1}{\\tan{x} + 1} + 1\\) to \\(\\frac{2}{1 + \\tan{x}}\\)",
                                     "name": "Equation",
                                     "new_expr": "2 / (1 + tan(x))",
                                     "old_expr": "(-tan(x) + 1) / (tan(x) + 1) + 1",
-                                    "str": "rewriting (-tan(x) + 1) / (tan(x) + 1) + 1 to 2 / (1 + tan(x))"
+                                    "str": "rewrite (-tan(x) + 1) / (tan(x) + 1) + 1 to 2 / (1 + tan(x))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -219,7 +219,7 @@
                                 "res": "log(2) * ([x]_x=0,pi / 4) - (INT x:[0,pi / 4]. log(1 + tan(x)))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },

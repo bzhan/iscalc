@@ -20,9 +20,9 @@
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\log{(\\tan^{2}(u) + 1)}}{\\tan^{2}(u) + 1} \\sec^{2}(u) \\,du",
                                 "res": "INT u:[0,pi / 2]. log(tan(u) ^ 2 + 1) / (tan(u) ^ 2 + 1) * sec(u) ^ 2",
                                 "rule": {
-                                    "latex_str": "inverse substitution \\(\\tan{u}\\) creating \\(u\\)",
+                                    "latex_str": "inverse substitute \\(\\tan{u}\\) creating \\(u\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution tan(u) creating u",
+                                    "str": "inverse substitute tan(u) creating u",
                                     "var_name": "u",
                                     "var_subst": "tan(u)"
                                 },
@@ -140,11 +140,11 @@
                                 "latex_res": "-2 (\\int_{0}^{\\pi/2} \\log{(1 \\sin{x})} \\,dx)",
                                 "res": "-(2 * (INT x:[0,pi / 2]. log(1 * sin(x))))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\sin{x}\\) to \\(1 \\sin{x}\\)",
+                                    "latex_str": "rewrite \\(\\sin{x}\\) to \\(1 \\sin{x}\\)",
                                     "name": "Equation",
                                     "new_expr": "1 * sin(x)",
                                     "old_expr": "sin(x)",
-                                    "str": "rewriting sin(x) to 1 * sin(x)"
+                                    "str": "rewrite sin(x) to 1 * sin(x)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -153,7 +153,7 @@
                                 "res": "-(2 * -(pi * log(2) / 2))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -249,11 +249,11 @@
                             "latex_res": "(\\int_{0}^{1} \\frac{\\log{(x ^ {2} + 1)}}{x ^ {2} + 1} \\,dx) + (\\int_{0}^{1} \\frac{1}{y ^ {2} + 1} \\log{(\\frac{1}{y ^ {2}} + 1)} \\,dy) = \\pi \\log{(2)}",
                             "res": "(INT x:[0,1]. log(x ^ 2 + 1) / (x ^ 2 + 1)) + (INT y:[0,1]. 1 / (y ^ 2 + 1) * log(1 / y ^ 2 + 1)) = pi * log(2)",
                             "rule": {
-                                "latex_str": "rewriting \\(y ^ {2} (\\frac{1}{y ^ {2}} + 1)\\) to \\(y ^ {2} + 1\\)",
+                                "latex_str": "rewrite \\(y ^ {2} (\\frac{1}{y ^ {2}} + 1)\\) to \\(y ^ {2} + 1\\)",
                                 "name": "Equation",
                                 "new_expr": "y ^ 2 + 1",
                                 "old_expr": "y ^ 2 * (1 / y ^ 2 + 1)",
-                                "str": "rewriting y ^ 2 * (1 / y ^ 2 + 1) to y ^ 2 + 1"
+                                "str": "rewrite y ^ 2 * (1 / y ^ 2 + 1) to y ^ 2 + 1"
                             },
                             "type": "CalculationStep"
                         },
@@ -271,11 +271,11 @@
                             "latex_res": "(\\int_{0}^{1} \\frac{\\log{(x ^ {2} + 1)}}{x ^ {2} + 1} \\,dx) + (\\int_{0}^{1} \\frac{\\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1} \\,dy) = \\pi \\log{(2)}",
                             "res": "(INT x:[0,1]. log(x ^ 2 + 1) / (x ^ 2 + 1)) + (INT y:[0,1]. log(1 / y ^ 2 + 1) / (y ^ 2 + 1)) = pi * log(2)",
                             "rule": {
-                                "latex_str": "rewriting \\(\\frac{1}{y ^ {2} + 1} \\log{(\\frac{1}{y ^ {2}} + 1)}\\) to \\(\\frac{\\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1}\\)",
+                                "latex_str": "rewrite \\(\\frac{1}{y ^ {2} + 1} \\log{(\\frac{1}{y ^ {2}} + 1)}\\) to \\(\\frac{\\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1}\\)",
                                 "name": "Equation",
                                 "new_expr": "log(1 / y ^ 2 + 1) / (y ^ 2 + 1)",
                                 "old_expr": "1 / (y ^ 2 + 1) * log(1 / y ^ 2 + 1)",
-                                "str": "rewriting 1 / (y ^ 2 + 1) * log(1 / y ^ 2 + 1) to log(1 / y ^ 2 + 1) / (y ^ 2 + 1)"
+                                "str": "rewrite 1 / (y ^ 2 + 1) * log(1 / y ^ 2 + 1) to log(1 / y ^ 2 + 1) / (y ^ 2 + 1)"
                             },
                             "type": "CalculationStep"
                         },
@@ -289,11 +289,11 @@
                             "latex_res": "\\int_{0}^{1} \\frac{\\log{(y ^ {2} + 1)}}{y ^ {2} + 1} + \\frac{\\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1} \\,dy = \\pi \\log{(2)}",
                             "res": "(INT y:[0,1]. log(y ^ 2 + 1) / (y ^ 2 + 1) + log(1 / y ^ 2 + 1) / (y ^ 2 + 1)) = pi * log(2)",
                             "rule": {
-                                "latex_str": "rewriting \\((\\int_{0}^{1} \\frac{\\log{(y ^ {2} + 1)}}{y ^ {2} + 1} \\,dy) + (\\int_{0}^{1} \\frac{\\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1} \\,dy)\\) to \\(\\int_{0}^{1} \\frac{\\log{(y ^ {2} + 1)}}{y ^ {2} + 1} + \\frac{\\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1} \\,dy\\)",
+                                "latex_str": "rewrite \\((\\int_{0}^{1} \\frac{\\log{(y ^ {2} + 1)}}{y ^ {2} + 1} \\,dy) + (\\int_{0}^{1} \\frac{\\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1} \\,dy)\\) to \\(\\int_{0}^{1} \\frac{\\log{(y ^ {2} + 1)}}{y ^ {2} + 1} + \\frac{\\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1} \\,dy\\)",
                                 "name": "Equation",
                                 "new_expr": "INT y:[0,1]. log(y ^ 2 + 1) / (y ^ 2 + 1) + log(1 / y ^ 2 + 1) / (y ^ 2 + 1)",
                                 "old_expr": "(INT y:[0,1]. log(y ^ 2 + 1) / (y ^ 2 + 1)) + (INT y:[0,1]. log(1 / y ^ 2 + 1) / (y ^ 2 + 1))",
-                                "str": "rewriting (INT y:[0,1]. log(y ^ 2 + 1) / (y ^ 2 + 1)) + (INT y:[0,1]. log(1 / y ^ 2 + 1) / (y ^ 2 + 1)) to INT y:[0,1]. log(y ^ 2 + 1) / (y ^ 2 + 1) + log(1 / y ^ 2 + 1) / (y ^ 2 + 1)"
+                                "str": "rewrite (INT y:[0,1]. log(y ^ 2 + 1) / (y ^ 2 + 1)) + (INT y:[0,1]. log(1 / y ^ 2 + 1) / (y ^ 2 + 1)) to INT y:[0,1]. log(y ^ 2 + 1) / (y ^ 2 + 1) + log(1 / y ^ 2 + 1) / (y ^ 2 + 1)"
                             },
                             "type": "CalculationStep"
                         },
@@ -307,11 +307,11 @@
                             "latex_res": "\\int_{0}^{1} \\frac{\\log{(y ^ {2} + 1)} + \\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1} \\,dy = \\pi \\log{(2)}",
                             "res": "(INT y:[0,1]. (log(y ^ 2 + 1) + log(1 / y ^ 2 + 1)) / (y ^ 2 + 1)) = pi * log(2)",
                             "rule": {
-                                "latex_str": "rewriting \\(\\frac{\\log{(y ^ {2} + 1)}}{y ^ {2} + 1} + \\frac{\\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1}\\) to \\(\\frac{\\log{(y ^ {2} + 1)} + \\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1}\\)",
+                                "latex_str": "rewrite \\(\\frac{\\log{(y ^ {2} + 1)}}{y ^ {2} + 1} + \\frac{\\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1}\\) to \\(\\frac{\\log{(y ^ {2} + 1)} + \\log{(\\frac{1}{y ^ {2}} + 1)}}{y ^ {2} + 1}\\)",
                                 "name": "Equation",
                                 "new_expr": "(log(y ^ 2 + 1) + log(1 / y ^ 2 + 1)) / (y ^ 2 + 1)",
                                 "old_expr": "log(y ^ 2 + 1) / (y ^ 2 + 1) + log(1 / y ^ 2 + 1) / (y ^ 2 + 1)",
-                                "str": "rewriting log(y ^ 2 + 1) / (y ^ 2 + 1) + log(1 / y ^ 2 + 1) / (y ^ 2 + 1) to (log(y ^ 2 + 1) + log(1 / y ^ 2 + 1)) / (y ^ 2 + 1)"
+                                "str": "rewrite log(y ^ 2 + 1) / (y ^ 2 + 1) + log(1 / y ^ 2 + 1) / (y ^ 2 + 1) to (log(y ^ 2 + 1) + log(1 / y ^ 2 + 1)) / (y ^ 2 + 1)"
                             },
                             "type": "CalculationStep"
                         },
@@ -325,11 +325,11 @@
                             "latex_res": "\\int_{0}^{1} \\frac{\\log{((y ^ {2} + 1) (\\frac{1}{y ^ {2}} + 1))}}{y ^ {2} + 1} \\,dy = \\pi \\log{(2)}",
                             "res": "(INT y:[0,1]. log((y ^ 2 + 1) * (1 / y ^ 2 + 1)) / (y ^ 2 + 1)) = pi * log(2)",
                             "rule": {
-                                "latex_str": "rewriting \\(\\log{(y ^ {2} + 1)} + \\log{(\\frac{1}{y ^ {2}} + 1)}\\) to \\(\\log{((y ^ {2} + 1) (\\frac{1}{y ^ {2}} + 1))}\\)",
+                                "latex_str": "rewrite \\(\\log{(y ^ {2} + 1)} + \\log{(\\frac{1}{y ^ {2}} + 1)}\\) to \\(\\log{((y ^ {2} + 1) (\\frac{1}{y ^ {2}} + 1))}\\)",
                                 "name": "Equation",
                                 "new_expr": "log((y ^ 2 + 1) * (1 / y ^ 2 + 1))",
                                 "old_expr": "log(y ^ 2 + 1) + log(1 / y ^ 2 + 1)",
-                                "str": "rewriting log(y ^ 2 + 1) + log(1 / y ^ 2 + 1) to log((y ^ 2 + 1) * (1 / y ^ 2 + 1))"
+                                "str": "rewrite log(y ^ 2 + 1) + log(1 / y ^ 2 + 1) to log((y ^ 2 + 1) * (1 / y ^ 2 + 1))"
                             },
                             "type": "CalculationStep"
                         },
@@ -343,11 +343,11 @@
                             "latex_res": "\\int_{0}^{1} \\frac{\\log{((y + \\frac{1}{y}) ^ {2})}}{y ^ {2} + 1} \\,dy = \\pi \\log{(2)}",
                             "res": "(INT y:[0,1]. log((y + 1 / y) ^ 2) / (y ^ 2 + 1)) = pi * log(2)",
                             "rule": {
-                                "latex_str": "rewriting \\((y ^ {2} + 1) (\\frac{1}{y ^ {2}} + 1)\\) to \\((y + \\frac{1}{y}) ^ {2}\\)",
+                                "latex_str": "rewrite \\((y ^ {2} + 1) (\\frac{1}{y ^ {2}} + 1)\\) to \\((y + \\frac{1}{y}) ^ {2}\\)",
                                 "name": "Equation",
                                 "new_expr": "(y + 1 / y) ^ 2",
                                 "old_expr": "(y ^ 2 + 1) * (1 / y ^ 2 + 1)",
-                                "str": "rewriting (y ^ 2 + 1) * (1 / y ^ 2 + 1) to (y + 1 / y) ^ 2"
+                                "str": "rewrite (y ^ 2 + 1) * (1 / y ^ 2 + 1) to (y + 1 / y) ^ 2"
                             },
                             "type": "CalculationStep"
                         },
@@ -394,11 +394,11 @@
                             "latex_res": "2 (\\int_{0}^{1} \\frac{\\log{(y + \\frac{1}{y})}}{y ^ {2} + 1} \\,dy) = \\pi \\log{(2)}",
                             "res": "2 * (INT y:[0,1]. log(y + 1 / y) / (y ^ 2 + 1)) = pi * log(2)",
                             "rule": {
-                                "latex_str": "rewriting \\(\\frac{1}{y ^ {2} + 1} \\log{(\\frac{1}{y} + y)}\\) to \\(\\frac{\\log{(y + \\frac{1}{y})}}{y ^ {2} + 1}\\)",
+                                "latex_str": "rewrite \\(\\frac{1}{y ^ {2} + 1} \\log{(\\frac{1}{y} + y)}\\) to \\(\\frac{\\log{(y + \\frac{1}{y})}}{y ^ {2} + 1}\\)",
                                 "name": "Equation",
                                 "new_expr": "log(y + 1 / y) / (y ^ 2 + 1)",
                                 "old_expr": "1 / (y ^ 2 + 1) * log(1 / y + y)",
-                                "str": "rewriting 1 / (y ^ 2 + 1) * log(1 / y + y) to log(y + 1 / y) / (y ^ 2 + 1)"
+                                "str": "rewrite 1 / (y ^ 2 + 1) * log(1 / y + y) to log(y + 1 / y) / (y ^ 2 + 1)"
                             },
                             "type": "CalculationStep"
                         },

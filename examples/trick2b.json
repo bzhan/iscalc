@@ -97,7 +97,7 @@
                     "res": "pi / 2 * ([atan(u)]_u=-1,1)",
                     "rule": {
                         "name": "DefiniteIntegralIdentity",
-                        "str": "apply definite integral"
+                        "str": "apply integral identity"
                     },
                     "type": "CalculationStep"
                 },

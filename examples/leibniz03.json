@@ -42,11 +42,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} e^{-x ^ {2}/2} \\,dx",
                                 "res": "INT x:[0,oo]. exp(-(x ^ 2) / 2)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(-\\frac{x ^ {2}}{2}\\) to \\(\\frac{-x ^ {2}}{2}\\)",
+                                    "latex_str": "rewrite \\(-\\frac{x ^ {2}}{2}\\) to \\(\\frac{-x ^ {2}}{2}\\)",
                                     "name": "Equation",
                                     "new_expr": "-(x ^ 2) / 2",
                                     "old_expr": "-(x ^ 2 / 2)",
-                                    "str": "rewriting -(x ^ 2 / 2) to -(x ^ 2) / 2"
+                                    "str": "rewrite -(x ^ 2 / 2) to -(x ^ 2) / 2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -55,7 +55,7 @@
                                 "res": "sqrt(2) * sqrt(pi) / 2",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -545,11 +545,11 @@
                             "latex_res": "I{(t)} = \\frac{(2 ^ {1/2}) ^ {-1}\\cdot \\pi ^ {1/2}}{e^{1/2\\cdot t ^ {2}}}",
                             "res": "I(t) = 2 ^ (1/2) ^ (-1) * pi ^ (1/2) / exp(1/2 * t ^ 2)",
                             "rule": {
-                                "latex_str": "rewriting \\(e^{-t ^ {2}/2 - \\log{(2)}/2 + \\log{(\\pi)}/2}\\) to \\(\\frac{(2 ^ {1/2}) ^ {-1}\\cdot \\pi ^ {1/2}}{e^{1/2\\cdot t ^ {2}}}\\)",
+                                "latex_str": "rewrite \\(e^{-t ^ {2}/2 - \\log{(2)}/2 + \\log{(\\pi)}/2}\\) to \\(\\frac{(2 ^ {1/2}) ^ {-1}\\cdot \\pi ^ {1/2}}{e^{1/2\\cdot t ^ {2}}}\\)",
                                 "name": "Equation",
                                 "new_expr": "2 ^ (1/2) ^ (-1) * pi ^ (1/2) / exp(1/2 * t ^ 2)",
                                 "old_expr": "exp(-(t ^ 2 / 2) - log(2) / 2 + log(pi) / 2)",
-                                "str": "rewriting exp(-(t ^ 2 / 2) - log(2) / 2 + log(pi) / 2) to 2 ^ (1/2) ^ (-1) * pi ^ (1/2) / exp(1/2 * t ^ 2)"
+                                "str": "rewrite exp(-(t ^ 2 / 2) - log(2) / 2 + log(pi) / 2) to 2 ^ (1/2) ^ (-1) * pi ^ (1/2) / exp(1/2 * t ^ 2)"
                             },
                             "type": "CalculationStep"
                         },
@@ -619,11 +619,11 @@
                                 "latex_res": "\\int_{-\\infty}^{\\infty} e^{-x ^ {2}/2} \\cos{s} \\cos{(t x)} - e^{-x ^ {2}/2} \\sin{s} \\sin{(t x)} \\,dx",
                                 "res": "INT x:[-oo,oo]. exp(-(x ^ 2) / 2) * cos(s) * cos(t * x) - exp(-(x ^ 2) / 2) * sin(s) * sin(t * x)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(e^{-x ^ {2}/2} (\\cos{s} \\cos{(t x)} - \\sin{s} \\sin{(t x)})\\) to \\(e^{-x ^ {2}/2} \\cos{s} \\cos{(t x)} - e^{-x ^ {2}/2} \\sin{s} \\sin{(t x)}\\)",
+                                    "latex_str": "rewrite \\(e^{-x ^ {2}/2} (\\cos{s} \\cos{(t x)} - \\sin{s} \\sin{(t x)})\\) to \\(e^{-x ^ {2}/2} \\cos{s} \\cos{(t x)} - e^{-x ^ {2}/2} \\sin{s} \\sin{(t x)}\\)",
                                     "name": "Equation",
                                     "new_expr": "exp(-(x ^ 2) / 2) * cos(s) * cos(t * x) - exp(-(x ^ 2) / 2) * sin(s) * sin(t * x)",
                                     "old_expr": "exp(-(x ^ 2) / 2) * (cos(s) * cos(t * x) - sin(s) * sin(t * x))",
-                                    "str": "rewriting exp(-(x ^ 2) / 2) * (cos(s) * cos(t * x) - sin(s) * sin(t * x)) to exp(-(x ^ 2) / 2) * cos(s) * cos(t * x) - exp(-(x ^ 2) / 2) * sin(s) * sin(t * x)"
+                                    "str": "rewrite exp(-(x ^ 2) / 2) * (cos(s) * cos(t * x) - sin(s) * sin(t * x)) to exp(-(x ^ 2) / 2) * cos(s) * cos(t * x) - exp(-(x ^ 2) / 2) * sin(s) * sin(t * x)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -753,11 +753,11 @@
                                 "latex_res": "2 \\cos{s} (\\int_{0}^{\\infty} \\cos{(t x)} e^{-x ^ {2}/2} \\,dx)",
                                 "res": "2 * cos(s) * (INT x:[0,oo]. cos(t * x) * exp(-(x ^ 2) / 2))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(-\\frac{x ^ {2}}{2}\\) to \\(\\frac{-x ^ {2}}{2}\\)",
+                                    "latex_str": "rewrite \\(-\\frac{x ^ {2}}{2}\\) to \\(\\frac{-x ^ {2}}{2}\\)",
                                     "name": "Equation",
                                     "new_expr": "-(x ^ 2) / 2",
                                     "old_expr": "-(x ^ 2 / 2)",
-                                    "str": "rewriting -(x ^ 2 / 2) to -(x ^ 2) / 2"
+                                    "str": "rewrite -(x ^ 2 / 2) to -(x ^ 2) / 2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -788,11 +788,11 @@
                                 "latex_res": "\\sqrt{2 \\pi} e^{-t ^ {2}/2} \\cos{s}",
                                 "res": "sqrt(2 * pi) * exp(-(t ^ 2) / 2) * cos(s)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(2 \\cos{s} (\\sqrt{\\frac{\\pi}{2}} e^{-t ^ {2}/2})\\) to \\(\\sqrt{2 \\pi} e^{-t ^ {2}/2} \\cos{s}\\)",
+                                    "latex_str": "rewrite \\(2 \\cos{s} (\\sqrt{\\frac{\\pi}{2}} e^{-t ^ {2}/2})\\) to \\(\\sqrt{2 \\pi} e^{-t ^ {2}/2} \\cos{s}\\)",
                                     "name": "Equation",
                                     "new_expr": "sqrt(2 * pi) * exp(-(t ^ 2) / 2) * cos(s)",
                                     "old_expr": "2 * cos(s) * (sqrt(pi / 2) * exp(-(t ^ 2) / 2))",
-                                    "str": "rewriting 2 * cos(s) * (sqrt(pi / 2) * exp(-(t ^ 2) / 2)) to sqrt(2 * pi) * exp(-(t ^ 2) / 2) * cos(s)"
+                                    "str": "rewrite 2 * cos(s) * (sqrt(pi / 2) * exp(-(t ^ 2) / 2)) to sqrt(2 * pi) * exp(-(t ^ 2) / 2) * cos(s)"
                                 },
                                 "type": "CalculationStep"
                             }

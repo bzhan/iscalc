@@ -236,11 +236,11 @@
                                 "latex_res": "2 t (\\int_{0}^{1} \\frac{-y ^ {2} - 1}{y ^ {2} + 1} e^{1/2\\cdot t ^ {2} (-y ^ {2} - 1)} \\,dy) + 2 e^{-t ^ {2}/2} (\\int_{0}^{1} t e^{-t ^ {2} y ^ {2}/2} \\,dy)",
                                 "res": "2 * t * (INT y:[0,1]. (-(y ^ 2) - 1) / (y ^ 2 + 1) * exp(1/2 * t ^ 2 * (-(y ^ 2) - 1))) + 2 * exp(-(t ^ 2 / 2)) * (INT y:[0,1]. t * exp(-(t ^ 2 * y ^ 2 / 2)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(e^{t ^ {2} (-y ^ {2} - 1)/2}\\) to \\(e^{1/2\\cdot t ^ {2} (-y ^ {2} - 1)}\\)",
+                                    "latex_str": "rewrite \\(e^{t ^ {2} (-y ^ {2} - 1)/2}\\) to \\(e^{1/2\\cdot t ^ {2} (-y ^ {2} - 1)}\\)",
                                     "name": "Equation",
                                     "new_expr": "exp(1/2 * t ^ 2 * (-(y ^ 2) - 1))",
                                     "old_expr": "exp(t ^ 2 * (-(y ^ 2) - 1) / 2)",
-                                    "str": "rewriting exp(t ^ 2 * (-(y ^ 2) - 1) / 2) to exp(1/2 * t ^ 2 * (-(y ^ 2) - 1))"
+                                    "str": "rewrite exp(t ^ 2 * (-(y ^ 2) - 1) / 2) to exp(1/2 * t ^ 2 * (-(y ^ 2) - 1))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -254,11 +254,11 @@
                                 "latex_res": "2 t (\\int_{0}^{1} \\frac{-y ^ {2} - 1}{y ^ {2} + 1} e^{-1/2\\cdot t ^ {2} y ^ {2} + 1/2\\cdot t ^ {2}\\cdot -1} \\,dy) + 2 e^{-t ^ {2}/2} (\\int_{0}^{1} t e^{-t ^ {2} y ^ {2}/2} \\,dy)",
                                 "res": "2 * t * (INT y:[0,1]. (-(y ^ 2) - 1) / (y ^ 2 + 1) * exp(-1/2 * t ^ 2 * y ^ 2 + 1/2 * t ^ 2 * -1)) + 2 * exp(-(t ^ 2 / 2)) * (INT y:[0,1]. t * exp(-(t ^ 2 * y ^ 2 / 2)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{2} t ^ {2} (-y ^ {2} - 1)\\) to \\(-\\frac{1}{2} t ^ {2} y ^ {2} + \\frac{1}{2} t ^ {2}\\cdot -1\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{2} t ^ {2} (-y ^ {2} - 1)\\) to \\(-\\frac{1}{2} t ^ {2} y ^ {2} + \\frac{1}{2} t ^ {2}\\cdot -1\\)",
                                     "name": "Equation",
                                     "new_expr": "-1/2 * t ^ 2 * y ^ 2 + 1/2 * t ^ 2 * -1",
                                     "old_expr": "1/2 * t ^ 2 * (-(y ^ 2) - 1)",
-                                    "str": "rewriting 1/2 * t ^ 2 * (-(y ^ 2) - 1) to -1/2 * t ^ 2 * y ^ 2 + 1/2 * t ^ 2 * -1"
+                                    "str": "rewrite 1/2 * t ^ 2 * (-(y ^ 2) - 1) to -1/2 * t ^ 2 * y ^ 2 + 1/2 * t ^ 2 * -1"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -320,11 +320,11 @@
                                 "latex_res": "2 t e^{-t ^ {2}/2} (\\int_{0}^{1} -1 e^{-t ^ {2} y ^ {2}/2} \\,dy) + 2 t e^{-t ^ {2}/2} (\\int_{0}^{1} e^{-t ^ {2} y ^ {2}/2} \\,dy)",
                                 "res": "2 * t * exp(-(t ^ 2 / 2)) * (INT y:[0,1]. -1 * exp(-(t ^ 2 * y ^ 2 / 2))) + 2 * t * exp(-(t ^ 2 / 2)) * (INT y:[0,1]. exp(-(t ^ 2 * y ^ 2 / 2)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{-y ^ {2} - 1}{y ^ {2} + 1}\\) to \\(-1\\)",
+                                    "latex_str": "rewrite \\(\\frac{-y ^ {2} - 1}{y ^ {2} + 1}\\) to \\(-1\\)",
                                     "name": "Equation",
                                     "new_expr": "-1",
                                     "old_expr": "(-(y ^ 2) - 1) / (y ^ 2 + 1)",
-                                    "str": "rewriting (-(y ^ 2) - 1) / (y ^ 2 + 1) to -1"
+                                    "str": "rewrite (-(y ^ 2) - 1) / (y ^ 2 + 1) to -1"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -525,7 +525,7 @@
                             "res": "2 * ([atan(y)]_y=0,1) + 0 = SKOLEM_CONST(C)",
                             "rule": {
                                 "name": "DefiniteIntegralIdentity",
-                                "str": "apply definite integral"
+                                "str": "apply integral identity"
                             },
                             "type": "CalculationStep"
                         },
@@ -921,11 +921,11 @@
                                 "latex_res": "\\frac{\\sqrt{2}}{2 \\sqrt{a}} (\\int_{-\\infty}^{\\infty} e^{-x ^ {2}/2} \\,dx)",
                                 "res": "sqrt(2) / (2 * sqrt(a)) * (INT x:[-oo,oo]. exp(-(x ^ 2) / 2))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(-\\frac{x ^ {2}}{2}\\) to \\(\\frac{-x ^ {2}}{2}\\)",
+                                    "latex_str": "rewrite \\(-\\frac{x ^ {2}}{2}\\) to \\(\\frac{-x ^ {2}}{2}\\)",
                                     "name": "Equation",
                                     "new_expr": "-(x ^ 2) / 2",
                                     "old_expr": "-(x ^ 2 / 2)",
-                                    "str": "rewriting -(x ^ 2 / 2) to -(x ^ 2) / 2"
+                                    "str": "rewrite -(x ^ 2 / 2) to -(x ^ 2) / 2"
                                 },
                                 "type": "CalculationStep"
                             },

@@ -278,11 +278,11 @@
                     "latex_res": "\\int 2 \\cos{x} \\sin{x} + (\\sin^{2}(x) + \\cos^{2}(x)) \\,dx",
                     "res": "INT x. 2 * cos(x) * sin(x) + (sin(x) ^ 2 + cos(x) ^ 2)",
                     "rule": {
-                        "latex_str": "rewriting to \\(2 \\cos{x} \\sin{x} + (\\sin^{2}(x) + \\cos^{2}(x))\\) at 0",
+                        "latex_str": "rewrite to \\(2 \\cos{x} \\sin{x} + (\\sin^{2}(x) + \\cos^{2}(x))\\) at 0",
                         "loc": "0",
                         "name": "Equation",
                         "new_expr": "2 * cos(x) * sin(x) + (sin(x) ^ 2 + cos(x) ^ 2)",
-                        "str": "rewriting to 2 * cos(x) * sin(x) + (sin(x) ^ 2 + cos(x) ^ 2) at 0"
+                        "str": "rewrite to 2 * cos(x) * sin(x) + (sin(x) ^ 2 + cos(x) ^ 2) at 0"
                     },
                     "type": "CalculationStep"
                 },
@@ -550,11 +550,11 @@
                     "latex_res": "\\int \\sin{x} \\sin^{2}(x) \\,dx",
                     "res": "INT x. sin(x) * sin(x) ^ 2",
                     "rule": {
-                        "latex_str": "rewriting \\(\\sin^{3}(x)\\) to \\(\\sin{x} \\sin^{2}(x)\\)",
+                        "latex_str": "rewrite \\(\\sin^{3}(x)\\) to \\(\\sin{x} \\sin^{2}(x)\\)",
                         "name": "Equation",
                         "new_expr": "sin(x) * sin(x) ^ 2",
                         "old_expr": "sin(x) ^ 3",
-                        "str": "rewriting sin(x) ^ 3 to sin(x) * sin(x) ^ 2"
+                        "str": "rewrite sin(x) ^ 3 to sin(x) * sin(x) ^ 2"
                     },
                     "type": "CalculationStep"
                 },
@@ -815,11 +815,11 @@
                     "latex_res": "\\int \\frac{(1 + \\sin{x}) (1 - \\sin{x})}{1 + \\sin{x}} \\,dx",
                     "res": "INT x. (1 + sin(x)) * (1 - sin(x)) / (1 + sin(x))",
                     "rule": {
-                        "latex_str": "rewriting \\(1 - \\sin^{2}(x)\\) to \\((1 + \\sin{x}) (1 - \\sin{x})\\)",
+                        "latex_str": "rewrite \\(1 - \\sin^{2}(x)\\) to \\((1 + \\sin{x}) (1 - \\sin{x})\\)",
                         "name": "Equation",
                         "new_expr": "(1 + sin(x)) * (1 - sin(x))",
                         "old_expr": "1 - sin(x) ^ 2",
-                        "str": "rewriting 1 - sin(x) ^ 2 to (1 + sin(x)) * (1 - sin(x))"
+                        "str": "rewrite 1 - sin(x) ^ 2 to (1 + sin(x)) * (1 - sin(x))"
                     },
                     "type": "CalculationStep"
                 },
@@ -883,11 +883,11 @@
                     "latex_res": "\\int \\frac{\\sin{x} (1 - \\sin{x})}{1 - \\sin^{2}(x)} \\,dx",
                     "res": "INT x. sin(x) * (1 - sin(x)) / (1 - sin(x) ^ 2)",
                     "rule": {
-                        "latex_str": "rewriting to \\(\\frac{\\sin{x} (1 - \\sin{x})}{1 - \\sin^{2}(x)}\\) at 0",
+                        "latex_str": "rewrite to \\(\\frac{\\sin{x} (1 - \\sin{x})}{1 - \\sin^{2}(x)}\\) at 0",
                         "loc": "0",
                         "name": "Equation",
                         "new_expr": "sin(x) * (1 - sin(x)) / (1 - sin(x) ^ 2)",
-                        "str": "rewriting to sin(x) * (1 - sin(x)) / (1 - sin(x) ^ 2) at 0"
+                        "str": "rewrite to sin(x) * (1 - sin(x)) / (1 - sin(x) ^ 2) at 0"
                     },
                     "type": "CalculationStep"
                 },
@@ -919,11 +919,11 @@
                     "latex_res": "\\int \\frac{1}{\\cos{x}} (\\frac{\\sin{x}}{\\cos{x}}) - (\\frac{\\sin{x}}{\\cos{x}}) ^ {2} \\,dx",
                     "res": "INT x. 1 / cos(x) * (sin(x) / cos(x)) - (sin(x) / cos(x)) ^ 2",
                     "rule": {
-                        "latex_str": "rewriting to \\(\\frac{1}{\\cos{x}} (\\frac{\\sin{x}}{\\cos{x}}) - (\\frac{\\sin{x}}{\\cos{x}}) ^ {2}\\) at 0",
+                        "latex_str": "rewrite to \\(\\frac{1}{\\cos{x}} (\\frac{\\sin{x}}{\\cos{x}}) - (\\frac{\\sin{x}}{\\cos{x}}) ^ {2}\\) at 0",
                         "loc": "0",
                         "name": "Equation",
                         "new_expr": "1 / cos(x) * (sin(x) / cos(x)) - (sin(x) / cos(x)) ^ 2",
-                        "str": "rewriting to 1 / cos(x) * (sin(x) / cos(x)) - (sin(x) / cos(x)) ^ 2 at 0"
+                        "str": "rewrite to 1 / cos(x) * (sin(x) / cos(x)) - (sin(x) / cos(x)) ^ 2 at 0"
                     },
                     "type": "CalculationStep"
                 },
@@ -1287,11 +1287,11 @@
                     "latex_res": "\\int \\tan^{3}(x) \\tan^{2}(x) \\,dx",
                     "res": "INT x. tan(x) ^ 3 * tan(x) ^ 2",
                     "rule": {
-                        "latex_str": "rewriting \\(\\tan^{5}(x)\\) to \\(\\tan^{3}(x) \\tan^{2}(x)\\)",
+                        "latex_str": "rewrite \\(\\tan^{5}(x)\\) to \\(\\tan^{3}(x) \\tan^{2}(x)\\)",
                         "name": "Equation",
                         "new_expr": "tan(x) ^ 3 * tan(x) ^ 2",
                         "old_expr": "tan(x) ^ 5",
-                        "str": "rewriting tan(x) ^ 5 to tan(x) ^ 3 * tan(x) ^ 2"
+                        "str": "rewrite tan(x) ^ 5 to tan(x) ^ 3 * tan(x) ^ 2"
                     },
                     "type": "CalculationStep"
                 },
@@ -1420,11 +1420,11 @@
                     "latex_res": "\\frac{\\tan^{4}(x)}{4} - (\\int \\tan{x} \\tan^{2}(x) \\,dx) + C",
                     "res": "tan(x) ^ 4 / 4 - (INT x. tan(x) * tan(x) ^ 2) + SKOLEM_CONST(C)",
                     "rule": {
-                        "latex_str": "rewriting \\(\\tan^{3}(x)\\) to \\(\\tan{x} \\tan^{2}(x)\\)",
+                        "latex_str": "rewrite \\(\\tan^{3}(x)\\) to \\(\\tan{x} \\tan^{2}(x)\\)",
                         "name": "Equation",
                         "new_expr": "tan(x) * tan(x) ^ 2",
                         "old_expr": "tan(x) ^ 3",
-                        "str": "rewriting tan(x) ^ 3 to tan(x) * tan(x) ^ 2"
+                        "str": "rewrite tan(x) ^ 3 to tan(x) * tan(x) ^ 2"
                     },
                     "type": "CalculationStep"
                 },
@@ -1543,11 +1543,11 @@
                     "latex_res": "\\int (-(\\sin{x} + \\cos{x}) ^ {5}) (\\cos{x} - \\sin{x}) \\,dx",
                     "res": "INT x. -((sin(x) + cos(x)) ^ 5) * (cos(x) - sin(x))",
                     "rule": {
-                        "latex_str": "rewriting to \\((-(\\sin{x} + \\cos{x}) ^ {5}) (\\cos{x} - \\sin{x})\\) at 0",
+                        "latex_str": "rewrite to \\((-(\\sin{x} + \\cos{x}) ^ {5}) (\\cos{x} - \\sin{x})\\) at 0",
                         "loc": "0",
                         "name": "Equation",
                         "new_expr": "-((sin(x) + cos(x)) ^ 5) * (cos(x) - sin(x))",
-                        "str": "rewriting to -((sin(x) + cos(x)) ^ 5) * (cos(x) - sin(x)) at 0"
+                        "str": "rewrite to -((sin(x) + cos(x)) ^ 5) * (cos(x) - sin(x)) at 0"
                     },
                     "type": "CalculationStep"
                 },
@@ -1613,11 +1613,11 @@
                     "latex_res": "\\int e^{4 + \\sin{x}} \\cos{x} \\,dx",
                     "res": "INT x. exp(4 + sin(x)) * cos(x)",
                     "rule": {
-                        "latex_str": "rewriting \\(\\cos{x} e^{4 + \\sin{x}}\\) to \\(e^{4 + \\sin{x}} \\cos{x}\\)",
+                        "latex_str": "rewrite \\(\\cos{x} e^{4 + \\sin{x}}\\) to \\(e^{4 + \\sin{x}} \\cos{x}\\)",
                         "name": "Equation",
                         "new_expr": "exp(4 + sin(x)) * cos(x)",
                         "old_expr": "cos(x) * exp(4 + sin(x))",
-                        "str": "rewriting cos(x) * exp(4 + sin(x)) to exp(4 + sin(x)) * cos(x)"
+                        "str": "rewrite cos(x) * exp(4 + sin(x)) to exp(4 + sin(x)) * cos(x)"
                     },
                     "type": "CalculationStep"
                 },
@@ -1683,11 +1683,11 @@
                     "latex_res": "\\int \\frac{-\\sin{(\\cos{(3 x)})}}{3} (-3 \\sin{(3 x)}) \\,dx",
                     "res": "INT x. -sin(cos(3 * x)) / 3 * -(3 * sin(3 * x))",
                     "rule": {
-                        "latex_str": "rewriting \\(\\sin{(3 x)} \\sin{(\\cos{(3 x)})}\\) to \\(\\frac{-\\sin{(\\cos{(3 x)})}}{3} (-3 \\sin{(3 x)})\\)",
+                        "latex_str": "rewrite \\(\\sin{(3 x)} \\sin{(\\cos{(3 x)})}\\) to \\(\\frac{-\\sin{(\\cos{(3 x)})}}{3} (-3 \\sin{(3 x)})\\)",
                         "name": "Equation",
                         "new_expr": "-sin(cos(3 * x)) / 3 * -(3 * sin(3 * x))",
                         "old_expr": "sin(3 * x) * sin(cos(3 * x))",
-                        "str": "rewriting sin(3 * x) * sin(cos(3 * x)) to -sin(cos(3 * x)) / 3 * -(3 * sin(3 * x))"
+                        "str": "rewrite sin(3 * x) * sin(cos(3 * x)) to -sin(cos(3 * x)) / 3 * -(3 * sin(3 * x))"
                     },
                     "type": "CalculationStep"
                 },
@@ -1768,11 +1768,11 @@
                     "latex_res": "\\int \\log{(\\sin{x})} (\\frac{\\cos{x}}{\\sin{x}}) \\,dx",
                     "res": "INT x. log(sin(x)) * (cos(x) / sin(x))",
                     "rule": {
-                        "latex_str": "rewriting \\(\\frac{\\cos{x} \\log{(\\sin{x})}}{\\sin{x}}\\) to \\(\\log{(\\sin{x})} (\\frac{\\cos{x}}{\\sin{x}})\\)",
+                        "latex_str": "rewrite \\(\\frac{\\cos{x} \\log{(\\sin{x})}}{\\sin{x}}\\) to \\(\\log{(\\sin{x})} (\\frac{\\cos{x}}{\\sin{x}})\\)",
                         "name": "Equation",
                         "new_expr": "log(sin(x)) * (cos(x) / sin(x))",
                         "old_expr": "cos(x) * log(sin(x)) / sin(x)",
-                        "str": "rewriting cos(x) * log(sin(x)) / sin(x) to log(sin(x)) * (cos(x) / sin(x))"
+                        "str": "rewrite cos(x) * log(sin(x)) / sin(x) to log(sin(x)) * (cos(x) / sin(x))"
                     },
                     "type": "CalculationStep"
                 },
@@ -1838,11 +1838,11 @@
                     "latex_res": "\\int \\frac{\\sqrt{4 + 3 \\sec{x}}}{3} (3 \\sec{x} \\tan{x}) \\,dx",
                     "res": "INT x. sqrt(4 + 3 * sec(x)) / 3 * (3 * sec(x) * tan(x))",
                     "rule": {
-                        "latex_str": "rewriting \\(\\sec{x} \\tan{x} \\sqrt{4 + 3 \\sec{x}}\\) to \\(\\frac{\\sqrt{4 + 3 \\sec{x}}}{3} (3 \\sec{x} \\tan{x})\\)",
+                        "latex_str": "rewrite \\(\\sec{x} \\tan{x} \\sqrt{4 + 3 \\sec{x}}\\) to \\(\\frac{\\sqrt{4 + 3 \\sec{x}}}{3} (3 \\sec{x} \\tan{x})\\)",
                         "name": "Equation",
                         "new_expr": "sqrt(4 + 3 * sec(x)) / 3 * (3 * sec(x) * tan(x))",
                         "old_expr": "sec(x) * tan(x) * sqrt(4 + 3 * sec(x))",
-                        "str": "rewriting sec(x) * tan(x) * sqrt(4 + 3 * sec(x)) to sqrt(4 + 3 * sec(x)) / 3 * (3 * sec(x) * tan(x))"
+                        "str": "rewrite sec(x) * tan(x) * sqrt(4 + 3 * sec(x)) to sqrt(4 + 3 * sec(x)) / 3 * (3 * sec(x) * tan(x))"
                     },
                     "type": "CalculationStep"
                 },
@@ -2109,11 +2109,11 @@
                     "latex_res": "\\int \\sin{x} e^{\\sin{x}} \\cos{x} \\,dx",
                     "res": "INT x. sin(x) * exp(sin(x)) * cos(x)",
                     "rule": {
-                        "latex_str": "rewriting \\(\\sin{x} \\cos{x} e^{\\sin{x}}\\) to \\(\\sin{x} e^{\\sin{x}} \\cos{x}\\)",
+                        "latex_str": "rewrite \\(\\sin{x} \\cos{x} e^{\\sin{x}}\\) to \\(\\sin{x} e^{\\sin{x}} \\cos{x}\\)",
                         "name": "Equation",
                         "new_expr": "sin(x) * exp(sin(x)) * cos(x)",
                         "old_expr": "sin(x) * cos(x) * exp(sin(x))",
-                        "str": "rewriting sin(x) * cos(x) * exp(sin(x)) to sin(x) * exp(sin(x)) * cos(x)"
+                        "str": "rewrite sin(x) * cos(x) * exp(sin(x)) to sin(x) * exp(sin(x)) * cos(x)"
                     },
                     "type": "CalculationStep"
                 },
@@ -2348,11 +2348,11 @@
                     "latex_res": "\\int 2 (\\frac{\\sec{x} \\tan{x} + \\sec^{2}(x)}{2 \\sqrt{\\sec{x} + \\tan{x}}}) \\,dx",
                     "res": "INT x. 2 * ((sec(x) * tan(x) + sec(x) ^ 2) / (2 * sqrt(sec(x) + tan(x))))",
                     "rule": {
-                        "latex_str": "rewriting to \\(2 (\\frac{\\sec{x} \\tan{x} + \\sec^{2}(x)}{2 \\sqrt{\\sec{x} + \\tan{x}}})\\) at 0",
+                        "latex_str": "rewrite to \\(2 (\\frac{\\sec{x} \\tan{x} + \\sec^{2}(x)}{2 \\sqrt{\\sec{x} + \\tan{x}}})\\) at 0",
                         "loc": "0",
                         "name": "Equation",
                         "new_expr": "2 * ((sec(x) * tan(x) + sec(x) ^ 2) / (2 * sqrt(sec(x) + tan(x))))",
-                        "str": "rewriting to 2 * ((sec(x) * tan(x) + sec(x) ^ 2) / (2 * sqrt(sec(x) + tan(x)))) at 0"
+                        "str": "rewrite to 2 * ((sec(x) * tan(x) + sec(x) ^ 2) / (2 * sqrt(sec(x) + tan(x)))) at 0"
                     },
                     "type": "CalculationStep"
                 },
@@ -2409,11 +2409,11 @@
                     "latex_res": "\\int \\frac{-1}{2 (\\sin{(2 x)} + \\cos{(2 x)})} (2 \\cos{(2 x)} - 2 \\sin{(2 x)}) \\,dx",
                     "res": "INT x. -1 / (2 * (sin(2 * x) + cos(2 * x))) * (2 * cos(2 * x) - 2 * sin(2 * x))",
                     "rule": {
-                        "latex_str": "rewriting to \\(\\frac{-1}{2 (\\sin{(2 x)} + \\cos{(2 x)})} (2 \\cos{(2 x)} - 2 \\sin{(2 x)})\\) at 0",
+                        "latex_str": "rewrite to \\(\\frac{-1}{2 (\\sin{(2 x)} + \\cos{(2 x)})} (2 \\cos{(2 x)} - 2 \\sin{(2 x)})\\) at 0",
                         "loc": "0",
                         "name": "Equation",
                         "new_expr": "-1 / (2 * (sin(2 * x) + cos(2 * x))) * (2 * cos(2 * x) - 2 * sin(2 * x))",
-                        "str": "rewriting to -1 / (2 * (sin(2 * x) + cos(2 * x))) * (2 * cos(2 * x) - 2 * sin(2 * x)) at 0"
+                        "str": "rewrite to -1 / (2 * (sin(2 * x) + cos(2 * x))) * (2 * cos(2 * x) - 2 * sin(2 * x)) at 0"
                     },
                     "type": "CalculationStep"
                 },
@@ -2494,11 +2494,11 @@
                     "latex_res": "\\int \\frac{1}{1 + e^{x} \\sin{x}} (\\cos{x} e^{x} + e^{x} \\sin{x}) \\,dx",
                     "res": "INT x. 1 / (1 + exp(x) * sin(x)) * (cos(x) * exp(x) + exp(x) * sin(x))",
                     "rule": {
-                        "latex_str": "rewriting to \\(\\frac{1}{1 + e^{x} \\sin{x}} (\\cos{x} e^{x} + e^{x} \\sin{x})\\) at 0",
+                        "latex_str": "rewrite to \\(\\frac{1}{1 + e^{x} \\sin{x}} (\\cos{x} e^{x} + e^{x} \\sin{x})\\) at 0",
                         "loc": "0",
                         "name": "Equation",
                         "new_expr": "1 / (1 + exp(x) * sin(x)) * (cos(x) * exp(x) + exp(x) * sin(x))",
-                        "str": "rewriting to 1 / (1 + exp(x) * sin(x)) * (cos(x) * exp(x) + exp(x) * sin(x)) at 0"
+                        "str": "rewrite to 1 / (1 + exp(x) * sin(x)) * (cos(x) * exp(x) + exp(x) * sin(x)) at 0"
                     },
                     "type": "CalculationStep"
                 },

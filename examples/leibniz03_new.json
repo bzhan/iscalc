@@ -195,11 +195,11 @@
                                         "latex_res": "\\Gamma{(n + \\frac{1}{2} + 1)}",
                                         "res": "Gamma(n + 1/2 + 1)",
                                         "rule": {
-                                            "latex_str": "rewriting \\(n + \\frac{3}{2}\\) to \\(n + \\frac{1}{2} + 1\\)",
+                                            "latex_str": "rewrite \\(n + \\frac{3}{2}\\) to \\(n + \\frac{1}{2} + 1\\)",
                                             "name": "Equation",
                                             "new_expr": "n + 1/2 + 1",
                                             "old_expr": "n + 3/2",
-                                            "str": "rewriting n + 3/2 to n + 1/2 + 1"
+                                            "str": "rewrite n + 3/2 to n + 1/2 + 1"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -229,11 +229,11 @@
                                         "latex_res": "\\frac{(2 n + 1) (2 n + 2)}{4 (n + 1)} (\\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!})",
                                         "res": "(2 * n + 1) * (2 * n + 2) / (4 * (n + 1)) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n)))",
                                         "rule": {
-                                            "latex_str": "rewriting \\(n + \\frac{1}{2}\\) to \\(\\frac{(2 n + 1) (2 n + 2)}{4 (n + 1)}\\)",
+                                            "latex_str": "rewrite \\(n + \\frac{1}{2}\\) to \\(\\frac{(2 n + 1) (2 n + 2)}{4 (n + 1)}\\)",
                                             "name": "Equation",
                                             "new_expr": "(2 * n + 1) * (2 * n + 2) / (4 * (n + 1))",
                                             "old_expr": "n + 1/2",
-                                            "str": "rewriting n + 1/2 to (2 * n + 1) * (2 * n + 2) / (4 * (n + 1))"
+                                            "str": "rewrite n + 1/2 to (2 * n + 1) * (2 * n + 2) / (4 * (n + 1))"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -241,11 +241,11 @@
                                         "latex_res": "\\frac{\\sqrt{\\pi} ((2 n + 1 + 1) ((2 n + 1) (2 n)!))}{4 ^ {1} 4 ^ {n} ((n + 1) n!)}",
                                         "res": "sqrt(pi) * ((2 * n + 1 + 1) * ((2 * n + 1) * factorial(2 * n))) / (4 ^ 1 * 4 ^ n * ((n + 1) * factorial(n)))",
                                         "rule": {
-                                            "latex_str": "rewriting \\(\\frac{(2 n + 1) (2 n + 2)}{4 (n + 1)} (\\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!})\\) to \\(\\frac{\\sqrt{\\pi} ((2 n + 1 + 1) ((2 n + 1) (2 n)!))}{4 ^ {1} 4 ^ {n} ((n + 1) n!)}\\)",
+                                            "latex_str": "rewrite \\(\\frac{(2 n + 1) (2 n + 2)}{4 (n + 1)} (\\frac{\\sqrt{\\pi} (2 n)!}{4 ^ {n} n!})\\) to \\(\\frac{\\sqrt{\\pi} ((2 n + 1 + 1) ((2 n + 1) (2 n)!))}{4 ^ {1} 4 ^ {n} ((n + 1) n!)}\\)",
                                             "name": "Equation",
                                             "new_expr": "sqrt(pi) * ((2 * n + 1 + 1) * ((2 * n + 1) * factorial(2 * n))) / (4 ^ 1 * 4 ^ n * ((n + 1) * factorial(n)))",
                                             "old_expr": "(2 * n + 1) * (2 * n + 2) / (4 * (n + 1)) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n)))",
-                                            "str": "rewriting (2 * n + 1) * (2 * n + 2) / (4 * (n + 1)) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))) to sqrt(pi) * ((2 * n + 1 + 1) * ((2 * n + 1) * factorial(2 * n))) / (4 ^ 1 * 4 ^ n * ((n + 1) * factorial(n)))"
+                                            "str": "rewrite (2 * n + 1) * (2 * n + 2) / (4 * (n + 1)) * (sqrt(pi) * factorial(2 * n) / (4 ^ n * factorial(n))) to sqrt(pi) * ((2 * n + 1 + 1) * ((2 * n + 1) * factorial(2 * n))) / (4 ^ 1 * 4 ^ n * ((n + 1) * factorial(n)))"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -606,11 +606,11 @@
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} 2 ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} e^{-u} u ^ {n + 1/2 - 1} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * u ^ (n + 1/2 - 1)))",
                                             "rule": {
-                                                "latex_str": "rewriting \\(u ^ {n - 1/2} e^{-u}\\) to \\(e^{-u} u ^ {n + 1/2 - 1}\\)",
+                                                "latex_str": "rewrite \\(u ^ {n - 1/2} e^{-u}\\) to \\(e^{-u} u ^ {n + 1/2 - 1}\\)",
                                                 "name": "Equation",
                                                 "new_expr": "exp(-u) * u ^ (n + 1/2 - 1)",
                                                 "old_expr": "u ^ (n - 1/2) * exp(-u)",
-                                                "str": "rewriting u ^ (n - 1/2) * exp(-u) to exp(-u) * u ^ (n + 1/2 - 1)"
+                                                "str": "rewrite u ^ (n - 1/2) * exp(-u) to exp(-u) * u ^ (n + 1/2 - 1)"
                                             },
                                             "type": "CalculationStep"
                                         },
@@ -1069,11 +1069,11 @@
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} 2 ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} e^{-u} u ^ {n + 1/2 - 1} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * u ^ (n + 1/2 - 1)))",
                                             "rule": {
-                                                "latex_str": "rewriting \\(u ^ {n - 1/2} e^{-u}\\) to \\(e^{-u} u ^ {n + 1/2 - 1}\\)",
+                                                "latex_str": "rewrite \\(u ^ {n - 1/2} e^{-u}\\) to \\(e^{-u} u ^ {n + 1/2 - 1}\\)",
                                                 "name": "Equation",
                                                 "new_expr": "exp(-u) * u ^ (n + 1/2 - 1)",
                                                 "old_expr": "u ^ (n - 1/2) * exp(-u)",
-                                                "str": "rewriting u ^ (n - 1/2) * exp(-u) to exp(-u) * u ^ (n + 1/2 - 1)"
+                                                "str": "rewrite u ^ (n - 1/2) * exp(-u) to exp(-u) * u ^ (n + 1/2 - 1)"
                                             },
                                             "type": "CalculationStep"
                                         },
@@ -1333,11 +1333,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2}} \\,dx",
                                 "res": "INT x:[0,oo]. SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!}} e^{-x ^ {2}/2}\\) to \\(\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2}}\\)",
+                                    "latex_str": "rewrite \\(\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!}} e^{-x ^ {2}/2}\\) to \\(\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2}}\\)",
                                     "name": "Equation",
                                     "new_expr": "SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
                                     "old_expr": "SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n)) * exp(-(x ^ 2 / 2))",
-                                    "str": "rewriting SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n)) * exp(-(x ^ 2 / 2)) to SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))"
+                                    "str": "rewrite SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n)) * exp(-(x ^ 2 / 2)) to SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1539,11 +1539,11 @@
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n} 2 ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} e^{-u} u ^ {n + 1/2 - 1} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * u ^ (n + 1/2 - 1)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(u ^ {n - 1/2} e^{-u}\\) to \\(e^{-u} u ^ {n + 1/2 - 1}\\)",
+                                    "latex_str": "rewrite \\(u ^ {n - 1/2} e^{-u}\\) to \\(e^{-u} u ^ {n + 1/2 - 1}\\)",
                                     "name": "Equation",
                                     "new_expr": "exp(-u) * u ^ (n + 1/2 - 1)",
                                     "old_expr": "u ^ (n - 1/2) * exp(-u)",
-                                    "str": "rewriting u ^ (n - 1/2) * exp(-u) to exp(-u) * u ^ (n + 1/2 - 1)"
+                                    "str": "rewrite u ^ (n - 1/2) * exp(-u) to exp(-u) * u ^ (n + 1/2 - 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1852,11 +1852,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2}} \\,dx",
                                 "res": "INT x:[0,oo]. SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!}} e^{-x ^ {2}/2}\\) to \\(\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2}}\\)",
+                                    "latex_str": "rewrite \\(\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!}} e^{-x ^ {2}/2}\\) to \\(\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (t x) ^ {2 n}}{(2 n)!} e^{-x ^ {2}/2}}\\)",
                                     "name": "Equation",
                                     "new_expr": "SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))",
                                     "old_expr": "SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n)) * exp(-(x ^ 2 / 2))",
-                                    "str": "rewriting SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n)) * exp(-(x ^ 2 / 2)) to SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))"
+                                    "str": "rewrite SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n)) * exp(-(x ^ 2 / 2)) to SUM(n, 0, oo, (-1) ^ n * (t * x) ^ (2 * n) / factorial(2 * n) * exp(-(x ^ 2 / 2)))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -2058,11 +2058,11 @@
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n} 2 ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} e^{-u} u ^ {n + 1/2 - 1} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * u ^ (n + 1/2 - 1)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(u ^ {n - 1/2} e^{-u}\\) to \\(e^{-u} u ^ {n + 1/2 - 1}\\)",
+                                    "latex_str": "rewrite \\(u ^ {n - 1/2} e^{-u}\\) to \\(e^{-u} u ^ {n + 1/2 - 1}\\)",
                                     "name": "Equation",
                                     "new_expr": "exp(-u) * u ^ (n + 1/2 - 1)",
                                     "old_expr": "u ^ (n - 1/2) * exp(-u)",
-                                    "str": "rewriting u ^ (n - 1/2) * exp(-u) to exp(-u) * u ^ (n + 1/2 - 1)"
+                                    "str": "rewrite u ^ (n - 1/2) * exp(-u) to exp(-u) * u ^ (n + 1/2 - 1)"
                                 },
                                 "type": "CalculationStep"
                             },

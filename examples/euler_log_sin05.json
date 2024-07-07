@@ -34,11 +34,11 @@
                                 "latex_res": "(x - \\frac{1}{2} b) ^ {2} + 1 - \\frac{1}{4} b ^ {2}",
                                 "res": "(x - 1/2 * b) ^ 2 + 1 - 1/4 * b ^ 2",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {2} - b x + 1\\) to \\((x - \\frac{1}{2} b) ^ {2} + 1 - \\frac{1}{4} b ^ {2}\\)",
+                                    "latex_str": "rewrite \\(x ^ {2} - b x + 1\\) to \\((x - \\frac{1}{2} b) ^ {2} + 1 - \\frac{1}{4} b ^ {2}\\)",
                                     "name": "Equation",
                                     "new_expr": "(x - 1/2 * b) ^ 2 + 1 - 1/4 * b ^ 2",
                                     "old_expr": "x ^ 2 - b * x + 1",
-                                    "str": "rewriting x ^ 2 - b * x + 1 to (x - 1/2 * b) ^ 2 + 1 - 1/4 * b ^ 2"
+                                    "str": "rewrite x ^ 2 - b * x + 1 to (x - 1/2 * b) ^ 2 + 1 - 1/4 * b ^ 2"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -117,9 +117,9 @@
                                 "latex_res": "-(\\int_{0}^{\\infty} \\frac{\\log{((\\frac{1}{u}) ^ {a} + 1)}}{(\\frac{1}{u}) ^ {2} - b (\\frac{1}{u}) + 1} (-\\frac{1}{u ^ {2}}) \\,du)",
                                 "res": "-(INT u:[0,oo]. log((1 / u) ^ a + 1) / ((1 / u) ^ 2 - b * (1 / u) + 1) * -(1 / u ^ 2))",
                                 "rule": {
-                                    "latex_str": "inverse substitution \\(\\frac{1}{u}\\) creating \\(u\\)",
+                                    "latex_str": "inverse substitute \\(\\frac{1}{u}\\) creating \\(u\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution 1 / u creating u",
+                                    "str": "inverse substitute 1 / u creating u",
                                     "var_name": "u",
                                     "var_subst": "1 / u"
                                 },
@@ -184,11 +184,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{-b u + u ^ {2} + 1} \\log{(\\frac{1 + u ^ {a}}{u ^ {a}})} \\,du",
                                 "res": "INT u:[0,oo]. 1 / (-(b * u) + u ^ 2 + 1) * log((1 + u ^ a) / u ^ a)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1 ^ {a}}{u ^ {a}} + 1\\) to \\(\\frac{1 + u ^ {a}}{u ^ {a}}\\)",
+                                    "latex_str": "rewrite \\(\\frac{1 ^ {a}}{u ^ {a}} + 1\\) to \\(\\frac{1 + u ^ {a}}{u ^ {a}}\\)",
                                     "name": "Equation",
                                     "new_expr": "(1 + u ^ a) / u ^ a",
                                     "old_expr": "1 ^ a / u ^ a + 1",
-                                    "str": "rewriting 1 ^ a / u ^ a + 1 to (1 + u ^ a) / u ^ a"
+                                    "str": "rewrite 1 ^ a / u ^ a + 1 to (1 + u ^ a) / u ^ a"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -202,11 +202,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{-b u + u ^ {2} + 1} (\\log{(1 + u ^ {a})} - \\log{(u ^ {a})}) \\,du",
                                 "res": "INT u:[0,oo]. 1 / (-(b * u) + u ^ 2 + 1) * (log(1 + u ^ a) - log(u ^ a))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\log{(\\frac{1 + u ^ {a}}{u ^ {a}})}\\) to \\(\\log{(1 + u ^ {a})} - \\log{(u ^ {a})}\\)",
+                                    "latex_str": "rewrite \\(\\log{(\\frac{1 + u ^ {a}}{u ^ {a}})}\\) to \\(\\log{(1 + u ^ {a})} - \\log{(u ^ {a})}\\)",
                                     "name": "Equation",
                                     "new_expr": "log(1 + u ^ a) - log(u ^ a)",
                                     "old_expr": "log((1 + u ^ a) / u ^ a)",
-                                    "str": "rewriting log((1 + u ^ a) / u ^ a) to log(1 + u ^ a) - log(u ^ a)"
+                                    "str": "rewrite log((1 + u ^ a) / u ^ a) to log(1 + u ^ a) - log(u ^ a)"
                                 },
                                 "type": "CalculationStep"
                             },

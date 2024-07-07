@@ -50,7 +50,7 @@
                                 "res": "SUM(n, 0, oo, 1 / (2 * n + 1) * ([x ^ (2 * n + 1) / (2 * n + 1)]_x=0,1))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -125,11 +125,11 @@
                                 "latex_res": "\\int_{0}^{1} \\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} (x ^ {2 n} x)}{2 n + 1}}}{x} \\,dx",
                                 "res": "INT x:[0,1]. SUM(n, 0, oo, (-1) ^ n * (x ^ (2 * n) * x) / (2 * n + 1)) / x",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {2 n + 1}\\) to \\(x ^ {2 n} x\\)",
+                                    "latex_str": "rewrite \\(x ^ {2 n + 1}\\) to \\(x ^ {2 n} x\\)",
                                     "name": "Equation",
                                     "new_expr": "x ^ (2 * n) * x",
                                     "old_expr": "x ^ (2 * n + 1)",
-                                    "str": "rewriting x ^ (2 * n + 1) to x ^ (2 * n) * x"
+                                    "str": "rewrite x ^ (2 * n + 1) to x ^ (2 * n) * x"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -186,7 +186,7 @@
                                 "res": "SUM(n, 0, oo, (-1) ^ n / (2 * n + 1) * ([x ^ (2 * n + 1) / (2 * n + 1)]_x=0,1))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },

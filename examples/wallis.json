@@ -316,9 +316,9 @@
                                         "latex_res": "\\lim\\limits_{t\\to \\infty} \\int_{0}^{t/\\sqrt{b}} \\frac{1}{(\\sqrt{b} u) ^ {2} + b} \\sqrt{b} \\,du",
                                         "res": "LIM {t -> oo}. INT u:[0,t / sqrt(b)]. 1 / ((sqrt(b) * u) ^ 2 + b) * sqrt(b)",
                                         "rule": {
-                                            "latex_str": "inverse substitution \\(\\sqrt{b} u\\) creating \\(u\\)",
+                                            "latex_str": "inverse substitute \\(\\sqrt{b} u\\) creating \\(u\\)",
                                             "name": "SubstitutionInverse",
-                                            "str": "inverse substitution sqrt(b) * u creating u",
+                                            "str": "inverse substitute sqrt(b) * u creating u",
                                             "var_name": "u",
                                             "var_subst": "sqrt(b) * u"
                                         },
@@ -349,11 +349,11 @@
                                         "latex_res": "\\sqrt{b} (\\int_{0}^{\\infty} \\frac{1}{b} (\\frac{1}{1 ^ {2} + u ^ {2}}) \\,du)",
                                         "res": "sqrt(b) * (INT u:[0,oo]. 1 / b * (1 / (1 ^ 2 + u ^ 2)))",
                                         "rule": {
-                                            "latex_str": "rewriting \\(\\frac{1}{b u ^ {2} + b}\\) to \\(\\frac{1}{b} (\\frac{1}{1 ^ {2} + u ^ {2}})\\)",
+                                            "latex_str": "rewrite \\(\\frac{1}{b u ^ {2} + b}\\) to \\(\\frac{1}{b} (\\frac{1}{1 ^ {2} + u ^ {2}})\\)",
                                             "name": "Equation",
                                             "new_expr": "1 / b * (1 / (1 ^ 2 + u ^ 2))",
                                             "old_expr": "1 / (b * u ^ 2 + b)",
-                                            "str": "rewriting 1 / (b * u ^ 2 + b) to 1 / b * (1 / (1 ^ 2 + u ^ 2))"
+                                            "str": "rewrite 1 / (b * u ^ 2 + b) to 1 / b * (1 / (1 ^ 2 + u ^ 2))"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -368,7 +368,7 @@
                                         "res": "sqrt(b) * (1 * 1 / b * ([atan(u)]_u=0,oo))",
                                         "rule": {
                                             "name": "DefiniteIntegralIdentity",
-                                            "str": "apply definite integral"
+                                            "str": "apply integral identity"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -517,11 +517,11 @@
                                         "latex_res": "-\\frac{2 ^ {-2 m}\\cdot \\pi (2 m + 1)}{-4 m - 4} b ^ {-m - 3/2} \\binom{2 m}{m}",
                                         "res": "-(2 ^ -(2 * m) * pi * (2 * m + 1) / (-(4 * m) - 4) * b ^ (-m - 3/2) * binom(2 * m,m))",
                                         "rule": {
-                                            "latex_str": "rewriting \\(-\\frac{2 m + 1}{2} - 1\\) to \\(-m - \\frac{3}{2}\\)",
+                                            "latex_str": "rewrite \\(-\\frac{2 m + 1}{2} - 1\\) to \\(-m - \\frac{3}{2}\\)",
                                             "name": "Equation",
                                             "new_expr": "-m - 3/2",
                                             "old_expr": "-((2 * m + 1) / 2) - 1",
-                                            "str": "rewriting -((2 * m + 1) / 2) - 1 to -m - 3/2"
+                                            "str": "rewrite -((2 * m + 1) / 2) - 1 to -m - 3/2"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -529,10 +529,10 @@
                                         "latex_res": "\\frac{b ^ {-m - 3/2} 2 ^ {-2 m}\\cdot \\pi (2 m + 1)}{4 m + 4} \\binom{2 m}{m}",
                                         "res": "b ^ (-m - 3/2) * 2 ^ -(2 * m) * pi * (2 * m + 1) / (4 * m + 4) * binom(2 * m,m)",
                                         "rule": {
-                                            "latex_str": "rewriting to \\(\\frac{b ^ {-m - 3/2} 2 ^ {-2 m}\\cdot \\pi (2 m + 1)}{4 m + 4} \\binom{2 m}{m}\\)",
+                                            "latex_str": "rewrite to \\(\\frac{b ^ {-m - 3/2} 2 ^ {-2 m}\\cdot \\pi (2 m + 1)}{4 m + 4} \\binom{2 m}{m}\\)",
                                             "name": "Equation",
                                             "new_expr": "b ^ (-m - 3/2) * 2 ^ -(2 * m) * pi * (2 * m + 1) / (4 * m + 4) * binom(2 * m,m)",
-                                            "str": "rewriting to b ^ (-m - 3/2) * 2 ^ -(2 * m) * pi * (2 * m + 1) / (4 * m + 4) * binom(2 * m,m)"
+                                            "str": "rewrite to b ^ (-m - 3/2) * 2 ^ -(2 * m) * pi * (2 * m + 1) / (4 * m + 4) * binom(2 * m,m)"
                                         },
                                         "type": "CalculationStep"
                                     }
@@ -579,11 +579,11 @@
                                         "latex_res": "\\frac{2 ^ {-2 m}\\cdot \\pi}{8} b ^ {-m - 3/2} (2 \\binom{2 m}{m} (\\frac{2 m + 1}{m + 1}))",
                                         "res": "2 ^ -(2 * m) * pi / 8 * b ^ (-m - 3/2) * (2 * binom(2 * m,m) * ((2 * m + 1) / (m + 1)))",
                                         "rule": {
-                                            "latex_str": "rewriting \\(-\\frac{2 m + 3}{2}\\) to \\(-m - \\frac{3}{2}\\)",
+                                            "latex_str": "rewrite \\(-\\frac{2 m + 3}{2}\\) to \\(-m - \\frac{3}{2}\\)",
                                             "name": "Equation",
                                             "new_expr": "-m - 3/2",
                                             "old_expr": "-((2 * m + 3) / 2)",
-                                            "str": "rewriting -((2 * m + 3) / 2) to -m - 3/2"
+                                            "str": "rewrite -((2 * m + 3) / 2) to -m - 3/2"
                                         },
                                         "type": "CalculationStep"
                                     },

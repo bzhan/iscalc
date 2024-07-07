@@ -40,11 +40,11 @@
                                 "latex_res": "\\int_{0}^{1} \\frac{x ^ {a} - 1 - (x ^ {b} - 1)}{\\log{x}} \\,dx",
                                 "res": "INT x:[0,1]. (x ^ a - 1 - (x ^ b - 1)) / log(x)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {a} - x ^ {b}\\) to \\(x ^ {a} - 1 - (x ^ {b} - 1)\\)",
+                                    "latex_str": "rewrite \\(x ^ {a} - x ^ {b}\\) to \\(x ^ {a} - 1 - (x ^ {b} - 1)\\)",
                                     "name": "Equation",
                                     "new_expr": "x ^ a - 1 - (x ^ b - 1)",
                                     "old_expr": "x ^ a - x ^ b",
-                                    "str": "rewriting x ^ a - x ^ b to x ^ a - 1 - (x ^ b - 1)"
+                                    "str": "rewrite x ^ a - x ^ b to x ^ a - 1 - (x ^ b - 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -58,11 +58,11 @@
                                 "latex_res": "\\int_{0}^{1} \\frac{x ^ {a} - 1}{\\log{x}} - \\frac{x ^ {b} - 1}{\\log{x}} \\,dx",
                                 "res": "INT x:[0,1]. (x ^ a - 1) / log(x) - (x ^ b - 1) / log(x)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{x ^ {a} - 1 - (x ^ {b} - 1)}{\\log{x}}\\) to \\(\\frac{x ^ {a} - 1}{\\log{x}} - \\frac{x ^ {b} - 1}{\\log{x}}\\)",
+                                    "latex_str": "rewrite \\(\\frac{x ^ {a} - 1 - (x ^ {b} - 1)}{\\log{x}}\\) to \\(\\frac{x ^ {a} - 1}{\\log{x}} - \\frac{x ^ {b} - 1}{\\log{x}}\\)",
                                     "name": "Equation",
                                     "new_expr": "(x ^ a - 1) / log(x) - (x ^ b - 1) / log(x)",
                                     "old_expr": "(x ^ a - 1 - (x ^ b - 1)) / log(x)",
-                                    "str": "rewriting (x ^ a - 1 - (x ^ b - 1)) / log(x) to (x ^ a - 1) / log(x) - (x ^ b - 1) / log(x)"
+                                    "str": "rewrite (x ^ a - 1 - (x ^ b - 1)) / log(x) to (x ^ a - 1) / log(x) - (x ^ b - 1) / log(x)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -86,7 +86,7 @@
                                 "res": "log(a + 1) - log(b + 1)",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },

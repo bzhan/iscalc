@@ -37,11 +37,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(x ^ {2} + e^{2 a}) (x ^ {2} + e^{-2 a})} \\,dx",
                                 "res": "INT x:[0,oo]. 1 / ((x ^ 2 + exp(2 * a)) * (x ^ 2 + exp(-(2 * a))))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {4} + 2 x ^ {2} (\\frac{e^{-2 a} + e^{2 a}}{2}) + 1\\) to \\((x ^ {2} + e^{2 a}) (x ^ {2} + e^{-2 a})\\)",
+                                    "latex_str": "rewrite \\(x ^ {4} + 2 x ^ {2} (\\frac{e^{-2 a} + e^{2 a}}{2}) + 1\\) to \\((x ^ {2} + e^{2 a}) (x ^ {2} + e^{-2 a})\\)",
                                     "name": "Equation",
                                     "new_expr": "(x ^ 2 + exp(2 * a)) * (x ^ 2 + exp(-(2 * a)))",
                                     "old_expr": "x ^ 4 + 2 * x ^ 2 * ((exp(-(2 * a)) + exp(2 * a)) / 2) + 1",
-                                    "str": "rewriting x ^ 4 + 2 * x ^ 2 * ((exp(-(2 * a)) + exp(2 * a)) / 2) + 1 to (x ^ 2 + exp(2 * a)) * (x ^ 2 + exp(-(2 * a)))"
+                                    "str": "rewrite x ^ 4 + 2 * x ^ 2 * ((exp(-(2 * a)) + exp(2 * a)) / 2) + 1 to (x ^ 2 + exp(2 * a)) * (x ^ 2 + exp(-(2 * a)))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -55,11 +55,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{e^{2 a} - e^{-2 a}} (\\frac{1}{x ^ {2} + e^{-2 a}} - \\frac{1}{x ^ {2} + e^{2 a}}) \\,dx",
                                 "res": "INT x:[0,oo]. 1 / (exp(2 * a) - exp(-(2 * a))) * (1 / (x ^ 2 + exp(-(2 * a))) - 1 / (x ^ 2 + exp(2 * a)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{(x ^ {2} + e^{2 a}) (x ^ {2} + e^{-2 a})}\\) to \\(\\frac{1}{e^{2 a} - e^{-2 a}} (\\frac{1}{x ^ {2} + e^{-2 a}} - \\frac{1}{x ^ {2} + e^{2 a}})\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{(x ^ {2} + e^{2 a}) (x ^ {2} + e^{-2 a})}\\) to \\(\\frac{1}{e^{2 a} - e^{-2 a}} (\\frac{1}{x ^ {2} + e^{-2 a}} - \\frac{1}{x ^ {2} + e^{2 a}})\\)",
                                     "name": "Equation",
                                     "new_expr": "1 / (exp(2 * a) - exp(-(2 * a))) * (1 / (x ^ 2 + exp(-(2 * a))) - 1 / (x ^ 2 + exp(2 * a)))",
                                     "old_expr": "1 / ((x ^ 2 + exp(2 * a)) * (x ^ 2 + exp(-(2 * a))))",
-                                    "str": "rewriting 1 / ((x ^ 2 + exp(2 * a)) * (x ^ 2 + exp(-(2 * a)))) to 1 / (exp(2 * a) - exp(-(2 * a))) * (1 / (x ^ 2 + exp(-(2 * a))) - 1 / (x ^ 2 + exp(2 * a)))"
+                                    "str": "rewrite 1 / ((x ^ 2 + exp(2 * a)) * (x ^ 2 + exp(-(2 * a)))) to 1 / (exp(2 * a) - exp(-(2 * a))) * (1 / (x ^ 2 + exp(-(2 * a))) - 1 / (x ^ 2 + exp(2 * a)))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -88,11 +88,11 @@
                                 "latex_res": "\\frac{1}{-(e^{-a}) ^ {2} + e^{2 a}} ((\\int_{0}^{\\infty} \\frac{1}{e^{-2 a} + x ^ {2}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{e^{2 a} + x ^ {2}} \\,dx))",
                                 "res": "1 / (-(exp(-a) ^ 2) + exp(2 * a)) * ((INT x:[0,oo]. 1 / (exp(-(2 * a)) + x ^ 2)) - (INT x:[0,oo]. 1 / (exp(2 * a) + x ^ 2)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(e^{-2 a}\\) to \\((e^{-a}) ^ {2}\\)",
+                                    "latex_str": "rewrite \\(e^{-2 a}\\) to \\((e^{-a}) ^ {2}\\)",
                                     "name": "Equation",
                                     "new_expr": "exp(-a) ^ 2",
                                     "old_expr": "exp(-(2 * a))",
-                                    "str": "rewriting exp(-(2 * a)) to exp(-a) ^ 2"
+                                    "str": "rewrite exp(-(2 * a)) to exp(-a) ^ 2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -106,11 +106,11 @@
                                 "latex_res": "\\frac{1}{-(e^{-a}) ^ {2} + e^{2 a}} ((\\int_{0}^{\\infty} \\frac{1}{(e^{-a}) ^ {2} + x ^ {2}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{e^{2 a} + x ^ {2}} \\,dx))",
                                 "res": "1 / (-(exp(-a) ^ 2) + exp(2 * a)) * ((INT x:[0,oo]. 1 / (exp(-a) ^ 2 + x ^ 2)) - (INT x:[0,oo]. 1 / (exp(2 * a) + x ^ 2)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(e^{-2 a}\\) to \\((e^{-a}) ^ {2}\\)",
+                                    "latex_str": "rewrite \\(e^{-2 a}\\) to \\((e^{-a}) ^ {2}\\)",
                                     "name": "Equation",
                                     "new_expr": "exp(-a) ^ 2",
                                     "old_expr": "exp(-(2 * a))",
-                                    "str": "rewriting exp(-(2 * a)) to exp(-a) ^ 2"
+                                    "str": "rewrite exp(-(2 * a)) to exp(-a) ^ 2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -124,11 +124,11 @@
                                 "latex_res": "\\frac{1}{-(e^{-a}) ^ {2} + (e^{a}) ^ {2}} ((\\int_{0}^{\\infty} \\frac{1}{(e^{-a}) ^ {2} + x ^ {2}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{e^{2 a} + x ^ {2}} \\,dx))",
                                 "res": "1 / (-(exp(-a) ^ 2) + exp(a) ^ 2) * ((INT x:[0,oo]. 1 / (exp(-a) ^ 2 + x ^ 2)) - (INT x:[0,oo]. 1 / (exp(2 * a) + x ^ 2)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(e^{2 a}\\) to \\((e^{a}) ^ {2}\\)",
+                                    "latex_str": "rewrite \\(e^{2 a}\\) to \\((e^{a}) ^ {2}\\)",
                                     "name": "Equation",
                                     "new_expr": "exp(a) ^ 2",
                                     "old_expr": "exp(2 * a)",
-                                    "str": "rewriting exp(2 * a) to exp(a) ^ 2"
+                                    "str": "rewrite exp(2 * a) to exp(a) ^ 2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -142,11 +142,11 @@
                                 "latex_res": "\\frac{1}{-(e^{-a}) ^ {2} + (e^{a}) ^ {2}} ((\\int_{0}^{\\infty} \\frac{1}{(e^{-a}) ^ {2} + x ^ {2}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{(e^{a}) ^ {2} + x ^ {2}} \\,dx))",
                                 "res": "1 / (-(exp(-a) ^ 2) + exp(a) ^ 2) * ((INT x:[0,oo]. 1 / (exp(-a) ^ 2 + x ^ 2)) - (INT x:[0,oo]. 1 / (exp(a) ^ 2 + x ^ 2)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(e^{2 a}\\) to \\((e^{a}) ^ {2}\\)",
+                                    "latex_str": "rewrite \\(e^{2 a}\\) to \\((e^{a}) ^ {2}\\)",
                                     "name": "Equation",
                                     "new_expr": "exp(a) ^ 2",
                                     "old_expr": "exp(2 * a)",
-                                    "str": "rewriting exp(2 * a) to exp(a) ^ 2"
+                                    "str": "rewrite exp(2 * a) to exp(a) ^ 2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -161,7 +161,7 @@
                                 "res": "1 / (-(exp(-a) ^ 2) + exp(a) ^ 2) * (([exp(a) * atan(x * exp(a))]_x=0,oo) - ([exp(-a) * atan(x * exp(-a))]_x=0,oo))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -178,10 +178,10 @@
                                 "latex_res": "\\frac{\\pi}{4 (\\frac{e^{a} + e^{-a}}{2})}",
                                 "res": "pi / (4 * ((exp(a) + exp(-a)) / 2))",
                                 "rule": {
-                                    "latex_str": "rewriting to \\(\\frac{\\pi}{4 (\\frac{e^{a} + e^{-a}}{2})}\\)",
+                                    "latex_str": "rewrite to \\(\\frac{\\pi}{4 (\\frac{e^{a} + e^{-a}}{2})}\\)",
                                     "name": "Equation",
                                     "new_expr": "pi / (4 * ((exp(a) + exp(-a)) / 2))",
-                                    "str": "rewriting to pi / (4 * ((exp(a) + exp(-a)) / 2))"
+                                    "str": "rewrite to pi / (4 * ((exp(a) + exp(-a)) / 2))"
                                 },
                                 "type": "CalculationStep"
                             },

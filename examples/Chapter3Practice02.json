@@ -48,11 +48,11 @@
                                 "latex_res": "\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a x)}}{(b + x) (b - x)} \\,dx",
                                 "res": "INT x:[-oo,oo]. cos(a * x) / ((b + x) * (b - x))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(b ^ {2} - x ^ {2}\\) to \\((b + x) (b - x)\\)",
+                                    "latex_str": "rewrite \\(b ^ {2} - x ^ {2}\\) to \\((b + x) (b - x)\\)",
                                     "name": "Equation",
                                     "new_expr": "(b + x) * (b - x)",
                                     "old_expr": "b ^ 2 - x ^ 2",
-                                    "str": "rewriting b ^ 2 - x ^ 2 to (b + x) * (b - x)"
+                                    "str": "rewrite b ^ 2 - x ^ 2 to (b + x) * (b - x)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -66,11 +66,11 @@
                                 "latex_res": "\\int_{-\\infty}^{\\infty} \\frac{1}{2 b} (\\frac{\\cos{(a x)}}{b + x} + \\frac{\\cos{(a x)}}{b - x}) \\,dx",
                                 "res": "INT x:[-oo,oo]. 1 / (2 * b) * (cos(a * x) / (b + x) + cos(a * x) / (b - x))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{\\cos{(a x)}}{(b + x) (b - x)}\\) to \\(\\frac{1}{2 b} (\\frac{\\cos{(a x)}}{b + x} + \\frac{\\cos{(a x)}}{b - x})\\)",
+                                    "latex_str": "rewrite \\(\\frac{\\cos{(a x)}}{(b + x) (b - x)}\\) to \\(\\frac{1}{2 b} (\\frac{\\cos{(a x)}}{b + x} + \\frac{\\cos{(a x)}}{b - x})\\)",
                                     "name": "Equation",
                                     "new_expr": "1 / (2 * b) * (cos(a * x) / (b + x) + cos(a * x) / (b - x))",
                                     "old_expr": "cos(a * x) / ((b + x) * (b - x))",
-                                    "str": "rewriting cos(a * x) / ((b + x) * (b - x)) to 1 / (2 * b) * (cos(a * x) / (b + x) + cos(a * x) / (b - x))"
+                                    "str": "rewrite cos(a * x) / ((b + x) * (b - x)) to 1 / (2 * b) * (cos(a * x) / (b + x) + cos(a * x) / (b - x))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -141,11 +141,11 @@
                                 "latex_res": "\\frac{1}{2 b} ((\\int_{-\\infty}^{\\infty} \\frac{\\cos{(-a (b - u))}}{u} \\,du) + (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a (b - u))}}{u} \\,du))",
                                 "res": "1 / (2 * b) * ((INT u:[-oo,oo]. cos(-(a * (b - u))) / u) + (INT u:[-oo,oo]. cos(a * (b - u)) / u))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(a (-b + u)\\) to \\(-a (b - u)\\)",
+                                    "latex_str": "rewrite \\(a (-b + u)\\) to \\(-a (b - u)\\)",
                                     "name": "Equation",
                                     "new_expr": "-(a * (b - u))",
                                     "old_expr": "a * (-b + u)",
-                                    "str": "rewriting a * (-b + u) to -(a * (b - u))"
+                                    "str": "rewrite a * (-b + u) to -(a * (b - u))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -192,11 +192,11 @@
                                 "latex_res": "\\frac{1}{b} (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a b - a u)}}{u} \\,du)",
                                 "res": "1 / b * (INT u:[-oo,oo]. cos(a * b - a * u) / u)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\cos{(a (b - u))}\\) to \\(\\cos{(a b - a u)}\\)",
+                                    "latex_str": "rewrite \\(\\cos{(a (b - u))}\\) to \\(\\cos{(a b - a u)}\\)",
                                     "name": "Equation",
                                     "new_expr": "cos(a * b - a * u)",
                                     "old_expr": "cos(a * (b - u))",
-                                    "str": "rewriting cos(a * (b - u)) to cos(a * b - a * u)"
+                                    "str": "rewrite cos(a * (b - u)) to cos(a * b - a * u)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -228,11 +228,11 @@
                                 "latex_res": "\\frac{1}{b} (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a b)} \\cos{(a u)}}{u} + \\frac{\\sin{(a b)} \\sin{(a u)}}{u} \\,du)",
                                 "res": "1 / b * (INT u:[-oo,oo]. cos(a * b) * cos(a * u) / u + sin(a * b) * sin(a * u) / u)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{\\cos{(a b)} \\cos{(a u)} + \\sin{(a b)} \\sin{(a u)}}{u}\\) to \\(\\frac{\\cos{(a b)} \\cos{(a u)}}{u} + \\frac{\\sin{(a b)} \\sin{(a u)}}{u}\\)",
+                                    "latex_str": "rewrite \\(\\frac{\\cos{(a b)} \\cos{(a u)} + \\sin{(a b)} \\sin{(a u)}}{u}\\) to \\(\\frac{\\cos{(a b)} \\cos{(a u)}}{u} + \\frac{\\sin{(a b)} \\sin{(a u)}}{u}\\)",
                                     "name": "Equation",
                                     "new_expr": "cos(a * b) * cos(a * u) / u + sin(a * b) * sin(a * u) / u",
                                     "old_expr": "(cos(a * b) * cos(a * u) + sin(a * b) * sin(a * u)) / u",
-                                    "str": "rewriting (cos(a * b) * cos(a * u) + sin(a * b) * sin(a * u)) / u to cos(a * b) * cos(a * u) / u + sin(a * b) * sin(a * u) / u"
+                                    "str": "rewrite (cos(a * b) * cos(a * u) + sin(a * b) * sin(a * u)) / u to cos(a * b) * cos(a * u) / u + sin(a * b) * sin(a * u) / u"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -261,11 +261,11 @@
                                 "latex_res": "\\frac{1}{b} (\\cos{(a b)}\\cdot 0 + \\sin{(a b)} (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du))",
                                 "res": "1 / b * (cos(a * b) * 0 + sin(a * b) * (INT u:[-oo,oo]. sin(a * u) / u))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a u)}}{u} \\,du\\) to \\(0\\)",
+                                    "latex_str": "rewrite \\(\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a u)}}{u} \\,du\\) to \\(0\\)",
                                     "name": "Equation",
                                     "new_expr": "0",
                                     "old_expr": "INT u:[-oo,oo]. cos(a * u) / u",
-                                    "str": "rewriting INT u:[-oo,oo]. cos(a * u) / u to 0"
+                                    "str": "rewrite INT u:[-oo,oo]. cos(a * u) / u to 0"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -339,7 +339,7 @@
                                 "res": "2 * sin(a * b) / b * (pi / 2)",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },

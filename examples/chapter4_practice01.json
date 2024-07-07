@@ -142,11 +142,11 @@
                                 "latex_res": "2 (\\int_{0}^{1} u (1 - u) ^ {n} \\,du)",
                                 "res": "2 * (INT u:[0,1]. u * (1 - u) ^ n)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(-u + 1\\) to \\(1 - u\\)",
+                                    "latex_str": "rewrite \\(-u + 1\\) to \\(1 - u\\)",
                                     "name": "Equation",
                                     "new_expr": "1 - u",
                                     "old_expr": "-u + 1",
-                                    "str": "rewriting -u + 1 to 1 - u"
+                                    "str": "rewrite -u + 1 to 1 - u"
                                 },
                                 "type": "CalculationStep"
                             },

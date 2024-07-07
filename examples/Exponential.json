@@ -47,7 +47,7 @@
                     "res": "14 * ([exp(7 * x) / 7]_x=0,log(2) / 7)",
                     "rule": {
                         "name": "DefiniteIntegralIdentity",
-                        "str": "apply definite integral"
+                        "str": "apply integral identity"
                     },
                     "type": "CalculationStep"
                 },
@@ -340,11 +340,11 @@
                                 "latex_res": "\\int_{0}^{1} \\frac{3 ^ {x}}{5 ^ {x}} + \\frac{4 ^ {x}}{5 ^ {x}} \\,dx",
                                 "res": "INT x:[0,1]. 3 ^ x / 5 ^ x + 4 ^ x / 5 ^ x",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{3 ^ {x} + 4 ^ {x}}{5 ^ {x}}\\) to \\(\\frac{3 ^ {x}}{5 ^ {x}} + \\frac{4 ^ {x}}{5 ^ {x}}\\)",
+                                    "latex_str": "rewrite \\(\\frac{3 ^ {x} + 4 ^ {x}}{5 ^ {x}}\\) to \\(\\frac{3 ^ {x}}{5 ^ {x}} + \\frac{4 ^ {x}}{5 ^ {x}}\\)",
                                     "name": "Equation",
                                     "new_expr": "3 ^ x / 5 ^ x + 4 ^ x / 5 ^ x",
                                     "old_expr": "(3 ^ x + 4 ^ x) / 5 ^ x",
-                                    "str": "rewriting (3 ^ x + 4 ^ x) / 5 ^ x to 3 ^ x / 5 ^ x + 4 ^ x / 5 ^ x"
+                                    "str": "rewrite (3 ^ x + 4 ^ x) / 5 ^ x to 3 ^ x / 5 ^ x + 4 ^ x / 5 ^ x"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -410,7 +410,7 @@
                                 "res": "([(3/5) ^ x / (log(3) - log(5))]_x=0,1) + ([(4/5) ^ x / (2 * log(2) - log(5))]_x=0,1)",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -427,10 +427,10 @@
                                 "latex_res": "\\frac{-\\frac{2}{5}}{\\log{(3)} - \\log{(5)}} - \\frac{\\frac{1}{5}}{2 \\log{(2)} - \\log{(5)}}",
                                 "res": "-2/5 / (log(3) - log(5)) - 1/5 / (2 * log(2) - log(5))",
                                 "rule": {
-                                    "latex_str": "rewriting to \\(\\frac{-\\frac{2}{5}}{\\log{(3)} - \\log{(5)}} - \\frac{\\frac{1}{5}}{2 \\log{(2)} - \\log{(5)}}\\)",
+                                    "latex_str": "rewrite to \\(\\frac{-\\frac{2}{5}}{\\log{(3)} - \\log{(5)}} - \\frac{\\frac{1}{5}}{2 \\log{(2)} - \\log{(5)}}\\)",
                                     "name": "Equation",
                                     "new_expr": "-2/5 / (log(3) - log(5)) - 1/5 / (2 * log(2) - log(5))",
-                                    "str": "rewriting to -2/5 / (log(3) - log(5)) - 1/5 / (2 * log(2) - log(5))"
+                                    "str": "rewrite to -2/5 / (log(3) - log(5)) - 1/5 / (2 * log(2) - log(5))"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -599,11 +599,11 @@
                                 "latex_res": "\\int \\frac{4 (2 e^{2 x} + 6 e^{x})}{\\sqrt{e^{2 x} + 6 e^{x} + 1}} \\,dx",
                                 "res": "INT x. 4 * (2 * exp(2 * x) + 6 * exp(x)) / sqrt(exp(2 * x) + 6 * exp(x) + 1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(8 e^{x} (3 + e^{x})\\) to \\(4 (2 e^{2 x} + 6 e^{x})\\)",
+                                    "latex_str": "rewrite \\(8 e^{x} (3 + e^{x})\\) to \\(4 (2 e^{2 x} + 6 e^{x})\\)",
                                     "name": "Equation",
                                     "new_expr": "4 * (2 * exp(2 * x) + 6 * exp(x))",
                                     "old_expr": "8 * exp(x) * (3 + exp(x))",
-                                    "str": "rewriting 8 * exp(x) * (3 + exp(x)) to 4 * (2 * exp(2 * x) + 6 * exp(x))"
+                                    "str": "rewrite 8 * exp(x) * (3 + exp(x)) to 4 * (2 * exp(2 * x) + 6 * exp(x))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -704,11 +704,11 @@
                                 "latex_res": "\\int (e^{9 x} (27 + e^{3 x})) ^ {1/3} \\,dx",
                                 "res": "INT x. (exp(9 * x) * (27 + exp(3 * x))) ^ (1/3)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(27 e^{9 x} + e^{12 x}\\) to \\(e^{9 x} (27 + e^{3 x})\\)",
+                                    "latex_str": "rewrite \\(27 e^{9 x} + e^{12 x}\\) to \\(e^{9 x} (27 + e^{3 x})\\)",
                                     "name": "Equation",
                                     "new_expr": "exp(9 * x) * (27 + exp(3 * x))",
                                     "old_expr": "27 * exp(9 * x) + exp(12 * x)",
-                                    "str": "rewriting 27 * exp(9 * x) + exp(12 * x) to exp(9 * x) * (27 + exp(3 * x))"
+                                    "str": "rewrite 27 * exp(9 * x) + exp(12 * x) to exp(9 * x) * (27 + exp(3 * x))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -740,11 +740,11 @@
                                 "latex_res": "\\int e^{3 x} (27 + e^{3 x}) ^ {1/3} \\,dx",
                                 "res": "INT x. exp(3 * x) * (27 + exp(3 * x)) ^ (1/3)",
                                 "rule": {
-                                    "latex_str": "rewriting \\((e^{9 x}) ^ {1/3}\\) to \\(e^{3 x}\\)",
+                                    "latex_str": "rewrite \\((e^{9 x}) ^ {1/3}\\) to \\(e^{3 x}\\)",
                                     "name": "Equation",
                                     "new_expr": "exp(3 * x)",
                                     "old_expr": "exp(9 * x) ^ (1/3)",
-                                    "str": "rewriting exp(9 * x) ^ (1/3) to exp(3 * x)"
+                                    "str": "rewrite exp(9 * x) ^ (1/3) to exp(3 * x)"
                                 },
                                 "type": "CalculationStep"
                             },

@@ -199,11 +199,11 @@
                             "latex_res": "2 (\\frac{x}{1 - x ^ {2}}) = \\sum_{k=0}^{\\infty}{(-1) ^ {k} (-x) ^ {k}} - \\sum_{k=0}^{\\infty}{x ^ {k} (-1) ^ {k}}",
                             "res": "2 * (x / (1 - x ^ 2)) = SUM(k, 0, oo, (-1) ^ k * (-x) ^ k) - SUM(k, 0, oo, x ^ k * (-1) ^ k)",
                             "rule": {
-                                "latex_str": "rewriting \\(\\frac{1}{-x + 1} - \\frac{1}{x + 1}\\) to \\(2 (\\frac{x}{1 - x ^ {2}})\\)",
+                                "latex_str": "rewrite \\(\\frac{1}{-x + 1} - \\frac{1}{x + 1}\\) to \\(2 (\\frac{x}{1 - x ^ {2}})\\)",
                                 "name": "Equation",
                                 "new_expr": "2 * (x / (1 - x ^ 2))",
                                 "old_expr": "1 / (-x + 1) - 1 / (x + 1)",
-                                "str": "rewriting 1 / (-x + 1) - 1 / (x + 1) to 2 * (x / (1 - x ^ 2))"
+                                "str": "rewrite 1 / (-x + 1) - 1 / (x + 1) to 2 * (x / (1 - x ^ 2))"
                             },
                             "type": "CalculationStep"
                         },
@@ -268,11 +268,11 @@
                             "latex_res": "\\frac{x}{1 - x ^ {2}} = \\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k}} - \\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k} (-1) ^ {k}}",
                             "res": "x / (1 - x ^ 2) = 1/2 * SUM(k, 0, oo, x ^ k) - 1/2 * SUM(k, 0, oo, x ^ k * (-1) ^ k)",
                             "rule": {
-                                "latex_str": "rewriting \\(-\\frac{\\sum_{k=0}^{\\infty}{x ^ {k} (-1) ^ {k}}}{2} + \\frac{\\sum_{k=0}^{\\infty}{x ^ {k}}}{2}\\) to \\(\\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k}} - \\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k} (-1) ^ {k}}\\)",
+                                "latex_str": "rewrite \\(-\\frac{\\sum_{k=0}^{\\infty}{x ^ {k} (-1) ^ {k}}}{2} + \\frac{\\sum_{k=0}^{\\infty}{x ^ {k}}}{2}\\) to \\(\\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k}} - \\frac{1}{2} \\sum_{k=0}^{\\infty}{x ^ {k} (-1) ^ {k}}\\)",
                                 "name": "Equation",
                                 "new_expr": "1/2 * SUM(k, 0, oo, x ^ k) - 1/2 * SUM(k, 0, oo, x ^ k * (-1) ^ k)",
                                 "old_expr": "-(SUM(k, 0, oo, x ^ k * (-1) ^ k) / 2) + SUM(k, 0, oo, x ^ k) / 2",
-                                "str": "rewriting -(SUM(k, 0, oo, x ^ k * (-1) ^ k) / 2) + SUM(k, 0, oo, x ^ k) / 2 to 1/2 * SUM(k, 0, oo, x ^ k) - 1/2 * SUM(k, 0, oo, x ^ k * (-1) ^ k)"
+                                "str": "rewrite -(SUM(k, 0, oo, x ^ k * (-1) ^ k) / 2) + SUM(k, 0, oo, x ^ k) / 2 to 1/2 * SUM(k, 0, oo, x ^ k) - 1/2 * SUM(k, 0, oo, x ^ k * (-1) ^ k)"
                             },
                             "type": "CalculationStep"
                         }
@@ -347,7 +347,7 @@
                                 "res": "-SUM(k, 0, oo, [y ^ (k + 1) * log(y) / (k + 1) - y ^ (k + 1) / (k + 1) ^ 2]_y=0,1)",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -448,11 +448,11 @@
                                 "latex_res": "-(\\int_{0}^{1} \\log{y} (\\frac{y}{-y ^ {2} + 1}) \\,dy)",
                                 "res": "-(INT y:[0,1]. log(y) * (y / (-(y ^ 2) + 1)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{y \\log{y}}{-y ^ {2} + 1}\\) to \\(\\log{y} (\\frac{y}{-y ^ {2} + 1})\\)",
+                                    "latex_str": "rewrite \\(\\frac{y \\log{y}}{-y ^ {2} + 1}\\) to \\(\\log{y} (\\frac{y}{-y ^ {2} + 1})\\)",
                                     "name": "Equation",
                                     "new_expr": "log(y) * (y / (-(y ^ 2) + 1))",
                                     "old_expr": "y * log(y) / (-(y ^ 2) + 1)",
-                                    "str": "rewriting y * log(y) / (-(y ^ 2) + 1) to log(y) * (y / (-(y ^ 2) + 1))"
+                                    "str": "rewrite y * log(y) / (-(y ^ 2) + 1) to log(y) * (y / (-(y ^ 2) + 1))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -531,11 +531,11 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{1} \\log{y} \\sum_{k=0}^{\\infty}{y ^ {k} (-1) ^ {k}} \\,dy) - \\frac{1}{2} (\\int_{0}^{1} \\sum_{k=0}^{\\infty}{\\log{y} y ^ {k}} \\,dy)",
                                 "res": "1/2 * (INT y:[0,1]. log(y) * SUM(k, 0, oo, y ^ k * (-1) ^ k)) - 1/2 * (INT y:[0,1]. SUM(k, 0, oo, log(y) * y ^ k))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\log{y} \\sum_{k=0}^{\\infty}{y ^ {k}}\\) to \\(\\sum_{k=0}^{\\infty}{\\log{y} y ^ {k}}\\)",
+                                    "latex_str": "rewrite \\(\\log{y} \\sum_{k=0}^{\\infty}{y ^ {k}}\\) to \\(\\sum_{k=0}^{\\infty}{\\log{y} y ^ {k}}\\)",
                                     "name": "Equation",
                                     "new_expr": "SUM(k, 0, oo, log(y) * y ^ k)",
                                     "old_expr": "log(y) * SUM(k, 0, oo, y ^ k)",
-                                    "str": "rewriting log(y) * SUM(k, 0, oo, y ^ k) to SUM(k, 0, oo, log(y) * y ^ k)"
+                                    "str": "rewrite log(y) * SUM(k, 0, oo, y ^ k) to SUM(k, 0, oo, log(y) * y ^ k)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -553,11 +553,11 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{1} \\sum_{k=0}^{\\infty}{\\log{y} y ^ {k} (-1) ^ {k}} \\,dy) - \\frac{1}{2} (\\int_{0}^{1} \\sum_{k=0}^{\\infty}{\\log{y} y ^ {k}} \\,dy)",
                                 "res": "1/2 * (INT y:[0,1]. SUM(k, 0, oo, log(y) * y ^ k * (-1) ^ k)) - 1/2 * (INT y:[0,1]. SUM(k, 0, oo, log(y) * y ^ k))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\log{y} \\sum_{k=0}^{\\infty}{y ^ {k} (-1) ^ {k}}\\) to \\(\\sum_{k=0}^{\\infty}{\\log{y} y ^ {k} (-1) ^ {k}}\\)",
+                                    "latex_str": "rewrite \\(\\log{y} \\sum_{k=0}^{\\infty}{y ^ {k} (-1) ^ {k}}\\) to \\(\\sum_{k=0}^{\\infty}{\\log{y} y ^ {k} (-1) ^ {k}}\\)",
                                     "name": "Equation",
                                     "new_expr": "SUM(k, 0, oo, log(y) * y ^ k * (-1) ^ k)",
                                     "old_expr": "log(y) * SUM(k, 0, oo, y ^ k * (-1) ^ k)",
-                                    "str": "rewriting log(y) * SUM(k, 0, oo, y ^ k * (-1) ^ k) to SUM(k, 0, oo, log(y) * y ^ k * (-1) ^ k)"
+                                    "str": "rewrite log(y) * SUM(k, 0, oo, y ^ k * (-1) ^ k) to SUM(k, 0, oo, log(y) * y ^ k * (-1) ^ k)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -615,7 +615,7 @@
                                 "res": "1/2 * SUM(k, 0, oo, (-1) ^ k * ([y ^ (k + 1) * log(y) / (k + 1) - y ^ (k + 1) / (k + 1) ^ 2]_y=0,1)) - 1/2 * SUM(k, 0, oo, [y ^ (k + 1) * log(y) / (k + 1) - y ^ (k + 1) / (k + 1) ^ 2]_y=0,1)",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },

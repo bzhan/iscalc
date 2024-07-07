@@ -20,11 +20,11 @@
                                 "latex_res": "\\int_{0}^{1} \\frac{1 - x}{(x + \\frac{1}{2}) ^ {2} + \\frac{3}{4}} \\,dx",
                                 "res": "INT x:[0,1]. (1 - x) / ((x + 1/2) ^ 2 + 3/4)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(1 + x + x ^ {2}\\) to \\((x + \\frac{1}{2}) ^ {2} + \\frac{3}{4}\\)",
+                                    "latex_str": "rewrite \\(1 + x + x ^ {2}\\) to \\((x + \\frac{1}{2}) ^ {2} + \\frac{3}{4}\\)",
                                     "name": "Equation",
                                     "new_expr": "(x + 1/2) ^ 2 + 3/4",
                                     "old_expr": "1 + x + x ^ 2",
-                                    "str": "rewriting 1 + x + x ^ 2 to (x + 1/2) ^ 2 + 3/4"
+                                    "str": "rewrite 1 + x + x ^ 2 to (x + 1/2) ^ 2 + 3/4"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -56,11 +56,11 @@
                                 "latex_res": "\\int_{\\sqrt{3}/3}^{\\sqrt{3}} \\frac{\\sqrt{3}}{\\frac{3}{2} (u ^ {2} + 1)} (-\\frac{u\\cdot \\sqrt{3}}{2} + \\frac{3}{2}) \\,du",
                                 "res": "INT u:[sqrt(3) / 3,sqrt(3)]. sqrt(3) / (3/2 * (u ^ 2 + 1)) * (-(u * sqrt(3) / 2) + 3/2)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{3 u ^ {2}}{2} + \\frac{3}{2}\\) to \\(\\frac{3}{2} (u ^ {2} + 1)\\)",
+                                    "latex_str": "rewrite \\(\\frac{3 u ^ {2}}{2} + \\frac{3}{2}\\) to \\(\\frac{3}{2} (u ^ {2} + 1)\\)",
                                     "name": "Equation",
                                     "new_expr": "3/2 * (u ^ 2 + 1)",
                                     "old_expr": "3 * u ^ 2 / 2 + 3/2",
-                                    "str": "rewriting 3 * u ^ 2 / 2 + 3/2 to 3/2 * (u ^ 2 + 1)"
+                                    "str": "rewrite 3 * u ^ 2 / 2 + 3/2 to 3/2 * (u ^ 2 + 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -136,7 +136,7 @@
                                 "res": "sqrt(3) * ([atan(u)]_u=sqrt(3) / 3,sqrt(3)) - (INT u:[sqrt(3) / 3,sqrt(3)]. u / (u ^ 2 + 1))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -185,7 +185,7 @@
                                 "res": "-(1/2 * ([log(t)]_t=4/3,4)) + sqrt(3) * pi / 6",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },

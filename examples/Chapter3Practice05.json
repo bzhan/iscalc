@@ -90,11 +90,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{\\frac{1}{2} \\sin{((b + a) x)}}{x} - \\frac{\\frac{1}{2} \\sin{(-(b - a) x)}}{x} \\,dx",
                                 "res": "INT x:[0,oo]. 1/2 * sin((b + a) * x) / x - 1/2 * sin(-((b - a) * x)) / x",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{\\frac{1}{2} (\\sin{(b x + a x)} - \\sin{(a x - b x)})}{x}\\) to \\(\\frac{\\frac{1}{2} \\sin{((b + a) x)}}{x} - \\frac{\\frac{1}{2} \\sin{(-(b - a) x)}}{x}\\)",
+                                    "latex_str": "rewrite \\(\\frac{\\frac{1}{2} (\\sin{(b x + a x)} - \\sin{(a x - b x)})}{x}\\) to \\(\\frac{\\frac{1}{2} \\sin{((b + a) x)}}{x} - \\frac{\\frac{1}{2} \\sin{(-(b - a) x)}}{x}\\)",
                                     "name": "Equation",
                                     "new_expr": "1/2 * sin((b + a) * x) / x - 1/2 * sin(-((b - a) * x)) / x",
                                     "old_expr": "1/2 * (sin(b * x + a * x) - sin(a * x - b * x)) / x",
-                                    "str": "rewriting 1/2 * (sin(b * x + a * x) - sin(a * x - b * x)) / x to 1/2 * sin((b + a) * x) / x - 1/2 * sin(-((b - a) * x)) / x"
+                                    "str": "rewrite 1/2 * (sin(b * x + a * x) - sin(a * x - b * x)) / x to 1/2 * sin((b + a) * x) / x - 1/2 * sin(-((b - a) * x)) / x"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -235,7 +235,7 @@
                                 "res": "1/2 * (pi / 2) + 1/2 * (pi / 2)",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -340,7 +340,7 @@
                                 "res": "1/2 * (pi / 2) + 1/2 * -(pi / 2)",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -445,7 +445,7 @@
                                 "res": "1/2 * (pi / 2) + 1/2 * 0",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },

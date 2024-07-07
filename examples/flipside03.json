@@ -100,7 +100,7 @@
                                 "res": "[x ^ (a + 1) / (a + 1)]_x=0,1",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },

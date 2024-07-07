@@ -143,7 +143,7 @@
                                 "res": "SUM(k, 0, oo, abs(c) ^ k / factorial(k) * abs((-1) ^ k * factorial(k) * (a * k + 1) ^ (-k - 1)))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -233,11 +233,11 @@
                                 "latex_res": "\\int_{0}^{1} e^{\\log{(x ^ {c x ^ {a}})}} \\,dx",
                                 "res": "INT x:[0,1]. exp(log(x ^ (c * x ^ a)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {c x ^ {a}}\\) to \\(e^{\\log{(x ^ {c x ^ {a}})}}\\)",
+                                    "latex_str": "rewrite \\(x ^ {c x ^ {a}}\\) to \\(e^{\\log{(x ^ {c x ^ {a}})}}\\)",
                                     "name": "Equation",
                                     "new_expr": "exp(log(x ^ (c * x ^ a)))",
                                     "old_expr": "x ^ (c * x ^ a)",
-                                    "str": "rewriting x ^ (c * x ^ a) to exp(log(x ^ (c * x ^ a)))"
+                                    "str": "rewrite x ^ (c * x ^ a) to exp(log(x ^ (c * x ^ a)))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -377,7 +377,7 @@
                                 "res": "SUM(k, 0, oo, c ^ k / factorial(k) * ((-1) ^ k * factorial(k) * (a * k + 1) ^ (-k - 1)))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -507,11 +507,11 @@
                                 "latex_res": "\\int_{0}^{1} x ^ {1 x ^ {1}} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (1 * x ^ 1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {x}\\) to \\(x ^ {1 x ^ {1}}\\)",
+                                    "latex_str": "rewrite \\(x ^ {x}\\) to \\(x ^ {1 x ^ {1}}\\)",
                                     "name": "Equation",
                                     "new_expr": "x ^ (1 * x ^ 1)",
                                     "old_expr": "x ^ x",
-                                    "str": "rewriting x ^ x to x ^ (1 * x ^ 1)"
+                                    "str": "rewrite x ^ x to x ^ (1 * x ^ 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -615,11 +615,11 @@
                                 "latex_res": "\\int_{0}^{1} x ^ {-1 x ^ {1}} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (-1 * x ^ 1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {-x}\\) to \\(x ^ {-1 x ^ {1}}\\)",
+                                    "latex_str": "rewrite \\(x ^ {-x}\\) to \\(x ^ {-1 x ^ {1}}\\)",
                                     "name": "Equation",
                                     "new_expr": "x ^ (-1 * x ^ 1)",
                                     "old_expr": "x ^ -x",
-                                    "str": "rewriting x ^ -x to x ^ (-1 * x ^ 1)"
+                                    "str": "rewrite x ^ -x to x ^ (-1 * x ^ 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -723,11 +723,11 @@
                                 "latex_res": "\\int_{0}^{1} x ^ {1 x ^ {2}} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (1 * x ^ 2)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {x ^ {2}}\\) to \\(x ^ {1 x ^ {2}}\\)",
+                                    "latex_str": "rewrite \\(x ^ {x ^ {2}}\\) to \\(x ^ {1 x ^ {2}}\\)",
                                     "name": "Equation",
                                     "new_expr": "x ^ (1 * x ^ 2)",
                                     "old_expr": "x ^ (x ^ 2)",
-                                    "str": "rewriting x ^ (x ^ 2) to x ^ (1 * x ^ 2)"
+                                    "str": "rewrite x ^ (x ^ 2) to x ^ (1 * x ^ 2)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -831,11 +831,11 @@
                                 "latex_res": "\\int_{0}^{1} x ^ {1 x ^ {1/2}} \\,dx",
                                 "res": "INT x:[0,1]. x ^ (1 * x ^ (1/2))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {\\sqrt{x}}\\) to \\(x ^ {1 x ^ {1/2}}\\)",
+                                    "latex_str": "rewrite \\(x ^ {\\sqrt{x}}\\) to \\(x ^ {1 x ^ {1/2}}\\)",
                                     "name": "Equation",
                                     "new_expr": "x ^ (1 * x ^ (1/2))",
                                     "old_expr": "x ^ sqrt(x)",
-                                    "str": "rewriting x ^ sqrt(x) to x ^ (1 * x ^ (1/2))"
+                                    "str": "rewrite x ^ sqrt(x) to x ^ (1 * x ^ (1/2))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -882,11 +882,11 @@
                                 "latex_res": "\\sum_{k=0}^{\\infty}{(-1) ^ {k} ((\\frac{2}{k + 2}) ^ {-1}) ^ {-k - 1}}",
                                 "res": "SUM(k, 0, oo, (-1) ^ k * (2 / (k + 2)) ^ (-1) ^ (-k - 1))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{k}{2} + 1\\) to \\((\\frac{2}{k + 2}) ^ {-1}\\)",
+                                    "latex_str": "rewrite \\(\\frac{k}{2} + 1\\) to \\((\\frac{2}{k + 2}) ^ {-1}\\)",
                                     "name": "Equation",
                                     "new_expr": "(2 / (k + 2)) ^ (-1)",
                                     "old_expr": "k / 2 + 1",
-                                    "str": "rewriting k / 2 + 1 to (2 / (k + 2)) ^ (-1)"
+                                    "str": "rewrite k / 2 + 1 to (2 / (k + 2)) ^ (-1)"
                                 },
                                 "type": "CalculationStep"
                             },

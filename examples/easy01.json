@@ -83,11 +83,11 @@
                                 "latex_res": "2 (\\int_{0}^{\\infty} \\frac{\\sqrt{a + 1}}{(a + 1) (y ^ {2} + 1)} \\,dy)",
                                 "res": "2 * (INT y:[0,oo]. sqrt(a + 1) / ((a + 1) * (y ^ 2 + 1)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(y ^ {2} (a + 1) + a + 1\\) to \\((a + 1) (y ^ {2} + 1)\\)",
+                                    "latex_str": "rewrite \\(y ^ {2} (a + 1) + a + 1\\) to \\((a + 1) (y ^ {2} + 1)\\)",
                                     "name": "Equation",
                                     "new_expr": "(a + 1) * (y ^ 2 + 1)",
                                     "old_expr": "y ^ 2 * (a + 1) + a + 1",
-                                    "str": "rewriting y ^ 2 * (a + 1) + a + 1 to (a + 1) * (y ^ 2 + 1)"
+                                    "str": "rewrite y ^ 2 * (a + 1) + a + 1 to (a + 1) * (y ^ 2 + 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -102,7 +102,7 @@
                                 "res": "2 * (sqrt(a + 1) / (a + 1) * ([atan(y)]_y=0,oo))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },

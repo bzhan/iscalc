@@ -511,7 +511,7 @@
                                         "res": "[-exp(-x)]_x=0,oo",
                                         "rule": {
                                             "name": "DefiniteIntegralIdentity",
-                                            "str": "apply definite integral"
+                                            "str": "apply integral identity"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -741,11 +741,11 @@
                     "latex_res": "\\frac{1}{3} (\\int_{0}^{\\infty} e^{-y} y ^ {1/3 - 1} \\,dy)",
                     "res": "1/3 * (INT y:[0,oo]. exp(-y) * y ^ (1/3 - 1))",
                     "rule": {
-                        "latex_str": "rewriting \\(\\frac{e^{-y}}{y ^ {2/3}}\\) to \\(e^{-y} y ^ {1/3 - 1}\\)",
+                        "latex_str": "rewrite \\(\\frac{e^{-y}}{y ^ {2/3}}\\) to \\(e^{-y} y ^ {1/3 - 1}\\)",
                         "name": "Equation",
                         "new_expr": "exp(-y) * y ^ (1/3 - 1)",
                         "old_expr": "exp(-y) / y ^ (2/3)",
-                        "str": "rewriting exp(-y) / y ^ (2/3) to exp(-y) * y ^ (1/3 - 1)"
+                        "str": "rewrite exp(-y) / y ^ (2/3) to exp(-y) * y ^ (1/3 - 1)"
                     },
                     "type": "CalculationStep"
                 },
@@ -764,10 +764,10 @@
                     "latex_res": "(\\frac{4}{3} - 1) \\Gamma{(\\frac{4}{3} - 1)}",
                     "res": "(4/3 - 1) * Gamma(4/3 - 1)",
                     "rule": {
-                        "latex_str": "rewriting to \\((\\frac{4}{3} - 1) \\Gamma{(\\frac{4}{3} - 1)}\\)",
+                        "latex_str": "rewrite to \\((\\frac{4}{3} - 1) \\Gamma{(\\frac{4}{3} - 1)}\\)",
                         "name": "Equation",
                         "new_expr": "(4/3 - 1) * Gamma(4/3 - 1)",
-                        "str": "rewriting to (4/3 - 1) * Gamma(4/3 - 1)"
+                        "str": "rewrite to (4/3 - 1) * Gamma(4/3 - 1)"
                     },
                     "type": "CalculationStep"
                 },

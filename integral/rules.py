@@ -640,7 +640,7 @@ class DefiniteIntegralIdentity(Rule):
         self.name = "DefiniteIntegralIdentity"
 
     def __str__(self):
-        return "apply definite integral"
+        return "apply integral identity"
 
     def export(self):
         return {
@@ -1331,7 +1331,7 @@ class SubstitutionInverse(Rule):
         self.var_subst = var_subst
 
     def __str__(self):
-        return "inverse substitution %s creating %s" % (
+        return "inverse substitute %s creating %s" % (
             self.var_subst, self.var_name)
 
     def export(self):
@@ -1340,7 +1340,7 @@ class SubstitutionInverse(Rule):
             "var_name": self.var_name,
             "var_subst": str(self.var_subst),
             "str": str(self),
-            "latex_str": "inverse substitution \\(%s\\) creating \\(%s\\)" % (
+            "latex_str": "inverse substitute \\(%s\\) creating \\(%s\\)" % (
                 latex.convert_expr(self.var_subst), self.var_name)
         }
 
@@ -1439,15 +1439,15 @@ class Equation(Rule):
 
     def __str__(self):
         if self.old_expr is None:
-            return "rewriting to %s" % self.new_expr
+            return "rewrite to %s" % self.new_expr
         else:
-            return "rewriting %s to %s" % (self.old_expr, self.new_expr)
+            return "rewrite %s to %s" % (self.old_expr, self.new_expr)
 
     def export(self):
         if self.old_expr is None:
-            latex_str = "rewriting to \\(%s\\)" % latex.convert_expr(self.new_expr)
+            latex_str = "rewrite to \\(%s\\)" % latex.convert_expr(self.new_expr)
         else:
-            latex_str = "rewriting \\(%s\\) to \\(%s\\)" % \
+            latex_str = "rewrite \\(%s\\) to \\(%s\\)" % \
                         (latex.convert_expr(self.old_expr), latex.convert_expr(self.new_expr))
         res = {
             "name": self.name,

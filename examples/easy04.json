@@ -65,11 +65,11 @@
                                 "latex_res": "\\frac{1}{a} (\\int_{1}^{\\infty} \\frac{1}{u} - \\frac{1}{u + 1} \\,du)",
                                 "res": "1 / a * (INT u:[1,oo]. 1 / u - 1 / (u + 1))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{u (u + 1)}\\) to \\(\\frac{1}{u} - \\frac{1}{u + 1}\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{u (u + 1)}\\) to \\(\\frac{1}{u} - \\frac{1}{u + 1}\\)",
                                     "name": "Equation",
                                     "new_expr": "1 / u - 1 / (u + 1)",
                                     "old_expr": "1 / (u * (u + 1))",
-                                    "str": "rewriting 1 / (u * (u + 1)) to 1 / u - 1 / (u + 1)"
+                                    "str": "rewrite 1 / (u * (u + 1)) to 1 / u - 1 / (u + 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -125,7 +125,7 @@
                                 "res": "1 / a * (-([log(y)]_y=2,oo) + ([log(u)]_u=1,oo))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -284,11 +284,11 @@
                                 "latex_res": "\\int_{1}^{\\infty} \\frac{\\log{x}}{1 ^ {2} (x + 1) ^ {2}} \\,dx",
                                 "res": "INT x:[1,oo]. log(x) / (1 ^ 2 * (x + 1) ^ 2)",
                                 "rule": {
-                                    "latex_str": "rewriting \\((x + 1) ^ {2}\\) to \\(1 ^ {2} (x + 1) ^ {2}\\)",
+                                    "latex_str": "rewrite \\((x + 1) ^ {2}\\) to \\(1 ^ {2} (x + 1) ^ {2}\\)",
                                     "name": "Equation",
                                     "new_expr": "1 ^ 2 * (x + 1) ^ 2",
                                     "old_expr": "(x + 1) ^ 2",
-                                    "str": "rewriting (x + 1) ^ 2 to 1 ^ 2 * (x + 1) ^ 2"
+                                    "str": "rewrite (x + 1) ^ 2 to 1 ^ 2 * (x + 1) ^ 2"
                                 },
                                 "type": "CalculationStep"
                             },

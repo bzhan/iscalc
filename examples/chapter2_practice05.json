@@ -87,7 +87,7 @@
                                 "res": "4 * ([atan(t)]_t=0,oo)",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },

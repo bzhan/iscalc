@@ -44,7 +44,7 @@
                                 "res": "SUM(n, 0, oo, 1 / (n + 1) * ([x ^ (n + 1) / (n + 1)]_x=0,1))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -119,11 +119,11 @@
                                 "latex_res": "\\int_{0}^{1} \\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {n + 1}}{n + 1} (\\frac{1}{x})} \\,dx",
                                 "res": "INT x:[0,1]. SUM(n, 0, oo, (-1) ^ n * x ^ (n + 1) / (n + 1) * (1 / x))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {n + 1}}{n + 1}}}{x}\\) to \\(\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {n + 1}}{n + 1} (\\frac{1}{x})}\\)",
+                                    "latex_str": "rewrite \\(\\frac{\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {n + 1}}{n + 1}}}{x}\\) to \\(\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n} x ^ {n + 1}}{n + 1} (\\frac{1}{x})}\\)",
                                     "name": "Equation",
                                     "new_expr": "SUM(n, 0, oo, (-1) ^ n * x ^ (n + 1) / (n + 1) * (1 / x))",
                                     "old_expr": "SUM(n, 0, oo, (-1) ^ n * x ^ (n + 1) / (n + 1)) / x",
-                                    "str": "rewriting SUM(n, 0, oo, (-1) ^ n * x ^ (n + 1) / (n + 1)) / x to SUM(n, 0, oo, (-1) ^ n * x ^ (n + 1) / (n + 1) * (1 / x))"
+                                    "str": "rewrite SUM(n, 0, oo, (-1) ^ n * x ^ (n + 1) / (n + 1)) / x to SUM(n, 0, oo, (-1) ^ n * x ^ (n + 1) / (n + 1) * (1 / x))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -180,7 +180,7 @@
                                 "res": "SUM(n, 0, oo, (-1) ^ n / (n + 1) * ([x ^ (n + 1) / (n + 1)]_x=0,1))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },

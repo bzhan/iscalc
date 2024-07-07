@@ -110,7 +110,7 @@
                                 "res": "-(1 / (-k + 1) * ([x ^ (-k + 1) / (-k + 1)]_x=1,oo))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -150,11 +150,11 @@
                                 "latex_res": "\\frac{1}{(-k + 1) ^ {2}}",
                                 "res": "1 / (-k + 1) ^ 2",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{(k - 1) ^ {2}}\\) to \\(\\frac{1}{(-k + 1) ^ {2}}\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{(k - 1) ^ {2}}\\) to \\(\\frac{1}{(-k + 1) ^ {2}}\\)",
                                     "name": "Equation",
                                     "new_expr": "1 / (-k + 1) ^ 2",
                                     "old_expr": "1 / (k - 1) ^ 2",
-                                    "str": "rewriting 1 / (k - 1) ^ 2 to 1 / (-k + 1) ^ 2"
+                                    "str": "rewrite 1 / (k - 1) ^ 2 to 1 / (-k + 1) ^ 2"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -213,11 +213,11 @@
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2 n + 2}} \\,dx}",
                                 "res": "SUM(n, 0, oo, INT x:[1,oo]. log(x) / x ^ (2 * n + 2))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {-2 n - 2} \\log{x}\\) to \\(\\frac{\\log{x}}{x ^ {2 n + 2}}\\)",
+                                    "latex_str": "rewrite \\(x ^ {-2 n - 2} \\log{x}\\) to \\(\\frac{\\log{x}}{x ^ {2 n + 2}}\\)",
                                     "name": "Equation",
                                     "new_expr": "log(x) / x ^ (2 * n + 2)",
                                     "old_expr": "x ^ (-(2 * n) - 2) * log(x)",
-                                    "str": "rewriting x ^ (-(2 * n) - 2) * log(x) to log(x) / x ^ (2 * n + 2)"
+                                    "str": "rewrite x ^ (-(2 * n) - 2) * log(x) to log(x) / x ^ (2 * n + 2)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -323,11 +323,11 @@
                                 "latex_res": "\\int_{1}^{\\infty} \\log{x} x ^ {-2} (1 + \\frac{1}{x ^ {2}}) ^ {-1} \\,dx",
                                 "res": "INT x:[1,oo]. log(x) * x ^ (-2) * (1 + 1 / x ^ 2) ^ (-1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{\\log{x}}{x ^ {2} + 1}\\) to \\(\\log{x} x ^ {-2} (1 + \\frac{1}{x ^ {2}}) ^ {-1}\\)",
+                                    "latex_str": "rewrite \\(\\frac{\\log{x}}{x ^ {2} + 1}\\) to \\(\\log{x} x ^ {-2} (1 + \\frac{1}{x ^ {2}}) ^ {-1}\\)",
                                     "name": "Equation",
                                     "new_expr": "log(x) * x ^ (-2) * (1 + 1 / x ^ 2) ^ (-1)",
                                     "old_expr": "log(x) / (x ^ 2 + 1)",
-                                    "str": "rewriting log(x) / (x ^ 2 + 1) to log(x) * x ^ (-2) * (1 + 1 / x ^ 2) ^ (-1)"
+                                    "str": "rewrite log(x) / (x ^ 2 + 1) to log(x) * x ^ (-2) * (1 + 1 / x ^ 2) ^ (-1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -366,11 +366,11 @@
                                 "latex_res": "\\int_{1}^{\\infty} \\sum_{n=0}^{\\infty}{(-1) ^ {n} (\\frac{1}{x ^ {2}}) ^ {n} \\log{x} x ^ {-2}} \\,dx",
                                 "res": "INT x:[1,oo]. SUM(n, 0, oo, (-1) ^ n * (1 / x ^ 2) ^ n * log(x) * x ^ (-2))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\log{x} x ^ {-2} \\sum_{n=0}^{\\infty}{(-1) ^ {n} (\\frac{1}{x ^ {2}}) ^ {n}}\\) to \\(\\sum_{n=0}^{\\infty}{(-1) ^ {n} (\\frac{1}{x ^ {2}}) ^ {n} \\log{x} x ^ {-2}}\\)",
+                                    "latex_str": "rewrite \\(\\log{x} x ^ {-2} \\sum_{n=0}^{\\infty}{(-1) ^ {n} (\\frac{1}{x ^ {2}}) ^ {n}}\\) to \\(\\sum_{n=0}^{\\infty}{(-1) ^ {n} (\\frac{1}{x ^ {2}}) ^ {n} \\log{x} x ^ {-2}}\\)",
                                     "name": "Equation",
                                     "new_expr": "SUM(n, 0, oo, (-1) ^ n * (1 / x ^ 2) ^ n * log(x) * x ^ (-2))",
                                     "old_expr": "log(x) * x ^ (-2) * SUM(n, 0, oo, (-1) ^ n * (1 / x ^ 2) ^ n)",
-                                    "str": "rewriting log(x) * x ^ (-2) * SUM(n, 0, oo, (-1) ^ n * (1 / x ^ 2) ^ n) to SUM(n, 0, oo, (-1) ^ n * (1 / x ^ 2) ^ n * log(x) * x ^ (-2))"
+                                    "str": "rewrite log(x) * x ^ (-2) * SUM(n, 0, oo, (-1) ^ n * (1 / x ^ 2) ^ n) to SUM(n, 0, oo, (-1) ^ n * (1 / x ^ 2) ^ n * log(x) * x ^ (-2))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -426,11 +426,11 @@
                                 "latex_res": "\\sum_{n=0}^{\\infty}{(-1) ^ {n} (\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2 n + 2}} \\,dx)}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n * (INT x:[1,oo]. log(x) / x ^ (2 * n + 2)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {-2 n - 2} \\log{x}\\) to \\(\\frac{\\log{x}}{x ^ {2 n + 2}}\\)",
+                                    "latex_str": "rewrite \\(x ^ {-2 n - 2} \\log{x}\\) to \\(\\frac{\\log{x}}{x ^ {2 n + 2}}\\)",
                                     "name": "Equation",
                                     "new_expr": "log(x) / x ^ (2 * n + 2)",
                                     "old_expr": "x ^ (-(2 * n) - 2) * log(x)",
-                                    "str": "rewriting x ^ (-(2 * n) - 2) * log(x) to log(x) / x ^ (2 * n + 2)"
+                                    "str": "rewrite x ^ (-(2 * n) - 2) * log(x) to log(x) / x ^ (2 * n + 2)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -578,7 +578,7 @@
                                 "res": "pi * log(2) / 8 + (INT x:[1,oo]. log(x + 1) / (x ^ 2 + 1))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -592,11 +592,11 @@
                                 "latex_res": "\\frac{\\pi \\log{(2)}}{8} + (\\int_{1}^{\\infty} \\frac{\\log{(x (1 + \\frac{1}{x}))}}{x ^ {2} + 1} \\,dx)",
                                 "res": "pi * log(2) / 8 + (INT x:[1,oo]. log(x * (1 + 1 / x)) / (x ^ 2 + 1))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x + 1\\) to \\(x (1 + \\frac{1}{x})\\)",
+                                    "latex_str": "rewrite \\(x + 1\\) to \\(x (1 + \\frac{1}{x})\\)",
                                     "name": "Equation",
                                     "new_expr": "x * (1 + 1 / x)",
                                     "old_expr": "x + 1",
-                                    "str": "rewriting x + 1 to x * (1 + 1 / x)"
+                                    "str": "rewrite x + 1 to x * (1 + 1 / x)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -628,11 +628,11 @@
                                 "latex_res": "\\frac{\\pi \\log{(2)}}{8} + (\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} + \\frac{\\log{(1 + \\frac{1}{x})}}{x ^ {2} + 1} \\,dx)",
                                 "res": "pi * log(2) / 8 + (INT x:[1,oo]. log(x) / (x ^ 2 + 1) + log(1 + 1 / x) / (x ^ 2 + 1))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{\\log{x} + \\log{(1 + \\frac{1}{x})}}{x ^ {2} + 1}\\) to \\(\\frac{\\log{x}}{x ^ {2} + 1} + \\frac{\\log{(1 + \\frac{1}{x})}}{x ^ {2} + 1}\\)",
+                                    "latex_str": "rewrite \\(\\frac{\\log{x} + \\log{(1 + \\frac{1}{x})}}{x ^ {2} + 1}\\) to \\(\\frac{\\log{x}}{x ^ {2} + 1} + \\frac{\\log{(1 + \\frac{1}{x})}}{x ^ {2} + 1}\\)",
                                     "name": "Equation",
                                     "new_expr": "log(x) / (x ^ 2 + 1) + log(1 + 1 / x) / (x ^ 2 + 1)",
                                     "old_expr": "(log(x) + log(1 + 1 / x)) / (x ^ 2 + 1)",
-                                    "str": "rewriting (log(x) + log(1 + 1 / x)) / (x ^ 2 + 1) to log(x) / (x ^ 2 + 1) + log(1 + 1 / x) / (x ^ 2 + 1)"
+                                    "str": "rewrite (log(x) + log(1 + 1 / x)) / (x ^ 2 + 1) to log(x) / (x ^ 2 + 1) + log(1 + 1 / x) / (x ^ 2 + 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -697,11 +697,11 @@
                                 "latex_res": "(\\int_{0}^{1} \\frac{\\log{(u + 1)}}{u ^ {2} + 1} \\,du) + G + \\frac{\\pi \\log{(2)}}{8}",
                                 "res": "(INT u:[0,1]. log(u + 1) / (u ^ 2 + 1)) + G + pi * log(2) / 8",
                                 "rule": {
-                                    "latex_str": "rewriting \\(u ^ {2} (\\frac{1}{u ^ {2}} + 1)\\) to \\(u ^ {2} + 1\\)",
+                                    "latex_str": "rewrite \\(u ^ {2} (\\frac{1}{u ^ {2}} + 1)\\) to \\(u ^ {2} + 1\\)",
                                     "name": "Equation",
                                     "new_expr": "u ^ 2 + 1",
                                     "old_expr": "u ^ 2 * (1 / u ^ 2 + 1)",
-                                    "str": "rewriting u ^ 2 * (1 / u ^ 2 + 1) to u ^ 2 + 1"
+                                    "str": "rewrite u ^ 2 * (1 / u ^ 2 + 1) to u ^ 2 + 1"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -710,7 +710,7 @@
                                 "res": "pi * log(2) / 8 + G + pi * log(2) / 8",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -727,11 +727,11 @@
                                 "latex_res": "\\frac{\\pi}{4} \\log{(2)} + G",
                                 "res": "pi / 4 * log(2) + G",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{\\pi \\log{(2)}}{4}\\) to \\(\\frac{\\pi}{4} \\log{(2)}\\)",
+                                    "latex_str": "rewrite \\(\\frac{\\pi \\log{(2)}}{4}\\) to \\(\\frac{\\pi}{4} \\log{(2)}\\)",
                                     "name": "Equation",
                                     "new_expr": "pi / 4 * log(2)",
                                     "old_expr": "pi * log(2) / 4",
-                                    "str": "rewriting pi * log(2) / 4 to pi / 4 * log(2)"
+                                    "str": "rewrite pi * log(2) / 4 to pi / 4 * log(2)"
                                 },
                                 "type": "CalculationStep"
                             }

@@ -20,11 +20,11 @@
                                 "latex_res": "\\int_{0}^{1} \\frac{x - 2}{(x - \\frac{1}{2}) ^ {2} + \\frac{3}{4}} \\,dx",
                                 "res": "INT x:[0,1]. (x - 2) / ((x - 1/2) ^ 2 + 3/4)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {2} - x + 1\\) to \\((x - \\frac{1}{2}) ^ {2} + \\frac{3}{4}\\)",
+                                    "latex_str": "rewrite \\(x ^ {2} - x + 1\\) to \\((x - \\frac{1}{2}) ^ {2} + \\frac{3}{4}\\)",
                                     "name": "Equation",
                                     "new_expr": "(x - 1/2) ^ 2 + 3/4",
                                     "old_expr": "x ^ 2 - x + 1",
-                                    "str": "rewriting x ^ 2 - x + 1 to (x - 1/2) ^ 2 + 3/4"
+                                    "str": "rewrite x ^ 2 - x + 1 to (x - 1/2) ^ 2 + 3/4"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -87,11 +87,11 @@
                                 "latex_res": "-\\frac{3}{2} (\\int_{-1/2}^{1/2} \\frac{1}{u ^ {2} + \\frac{3}{4}} \\,du) + 0",
                                 "res": "-(3/2 * (INT u:[-1/2,1/2]. 1 / (u ^ 2 + 3/4))) + 0",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\int_{-1/2}^{1/2} \\frac{u}{u ^ {2} + \\frac{3}{4}} \\,du\\) to \\(0\\)",
+                                    "latex_str": "rewrite \\(\\int_{-1/2}^{1/2} \\frac{u}{u ^ {2} + \\frac{3}{4}} \\,du\\) to \\(0\\)",
                                     "name": "Equation",
                                     "new_expr": "0",
                                     "old_expr": "INT u:[-1/2,1/2]. u / (u ^ 2 + 3/4)",
-                                    "str": "rewriting INT u:[-1/2,1/2]. u / (u ^ 2 + 3/4) to 0"
+                                    "str": "rewrite INT u:[-1/2,1/2]. u / (u ^ 2 + 3/4) to 0"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -138,11 +138,11 @@
                                 "latex_res": "-\\frac{3}{2} (\\int_{-\\sqrt{3}/3}^{\\sqrt{3}/3} \\frac{\\sqrt{3}}{\\frac{3}{2} (x ^ {2} + 1)} \\,dx)",
                                 "res": "-(3/2 * (INT x:[-(sqrt(3) / 3),sqrt(3) / 3]. sqrt(3) / (3/2 * (x ^ 2 + 1))))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{3 x ^ {2}}{2} + \\frac{3}{2}\\) to \\(\\frac{3}{2} (x ^ {2} + 1)\\)",
+                                    "latex_str": "rewrite \\(\\frac{3 x ^ {2}}{2} + \\frac{3}{2}\\) to \\(\\frac{3}{2} (x ^ {2} + 1)\\)",
                                     "name": "Equation",
                                     "new_expr": "3/2 * (x ^ 2 + 1)",
                                     "old_expr": "3 * x ^ 2 / 2 + 3/2",
-                                    "str": "rewriting 3 * x ^ 2 / 2 + 3/2 to 3/2 * (x ^ 2 + 1)"
+                                    "str": "rewrite 3 * x ^ 2 / 2 + 3/2 to 3/2 * (x ^ 2 + 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -172,7 +172,7 @@
                                 "res": "-(sqrt(3) * ([atan(x)]_x=-(sqrt(3) / 3),sqrt(3) / 3))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -232,11 +232,11 @@
                                 "latex_res": "\\int_{0}^{1} \\frac{1}{(x + 1) (x ^ {2} - x + 1)} \\,dx",
                                 "res": "INT x:[0,1]. 1 / ((x + 1) * (x ^ 2 - x + 1))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{x ^ {3} + 1}\\) to \\(\\frac{1}{(x + 1) (x ^ {2} - x + 1)}\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{x ^ {3} + 1}\\) to \\(\\frac{1}{(x + 1) (x ^ {2} - x + 1)}\\)",
                                     "name": "Equation",
                                     "new_expr": "1 / ((x + 1) * (x ^ 2 - x + 1))",
                                     "old_expr": "1 / (x ^ 3 + 1)",
-                                    "str": "rewriting 1 / (x ^ 3 + 1) to 1 / ((x + 1) * (x ^ 2 - x + 1))"
+                                    "str": "rewrite 1 / (x ^ 3 + 1) to 1 / ((x + 1) * (x ^ 2 - x + 1))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -250,11 +250,11 @@
                                 "latex_res": "\\int_{0}^{1} \\frac{1}{3} (\\frac{1}{x + 1} - \\frac{x - 2}{x ^ {2} - x + 1}) \\,dx",
                                 "res": "INT x:[0,1]. 1/3 * (1 / (x + 1) - (x - 2) / (x ^ 2 - x + 1))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{(x + 1) (x ^ {2} - x + 1)}\\) to \\(\\frac{1}{3} (\\frac{1}{x + 1} - \\frac{x - 2}{x ^ {2} - x + 1})\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{(x + 1) (x ^ {2} - x + 1)}\\) to \\(\\frac{1}{3} (\\frac{1}{x + 1} - \\frac{x - 2}{x ^ {2} - x + 1})\\)",
                                     "name": "Equation",
                                     "new_expr": "1/3 * (1 / (x + 1) - (x - 2) / (x ^ 2 - x + 1))",
                                     "old_expr": "1 / ((x + 1) * (x ^ 2 - x + 1))",
-                                    "str": "rewriting 1 / ((x + 1) * (x ^ 2 - x + 1)) to 1/3 * (1 / (x + 1) - (x - 2) / (x ^ 2 - x + 1))"
+                                    "str": "rewrite 1 / ((x + 1) * (x ^ 2 - x + 1)) to 1/3 * (1 / (x + 1) - (x - 2) / (x ^ 2 - x + 1))"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -285,7 +285,7 @@
                                 "res": "-(1/3 * -(sqrt(3) * pi / 3)) + 1/3 * ([log(abs(x + 1))]_x=0,1)",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },

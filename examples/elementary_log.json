@@ -116,11 +116,11 @@
                                 "latex_res": "(-\\frac{n}{m + 1}) I(m,n - 1)",
                                 "res": "-(n / (m + 1)) * I(m,n - 1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(-\\frac{n}{m + 1} I(m,n - 1)\\) to \\((-\\frac{n}{m + 1}) I(m,n - 1)\\)",
+                                    "latex_str": "rewrite \\(-\\frac{n}{m + 1} I(m,n - 1)\\) to \\((-\\frac{n}{m + 1}) I(m,n - 1)\\)",
                                     "name": "Equation",
                                     "new_expr": "-(n / (m + 1)) * I(m,n - 1)",
                                     "old_expr": "-(n / (m + 1) * I(m,n - 1))",
-                                    "str": "rewriting -(n / (m + 1) * I(m,n - 1)) to -(n / (m + 1)) * I(m,n - 1)"
+                                    "str": "rewrite -(n / (m + 1) * I(m,n - 1)) to -(n / (m + 1)) * I(m,n - 1)"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -309,7 +309,7 @@
                                         "res": "[x ^ (m + 1) / (m + 1)]_x=0,1",
                                         "rule": {
                                             "name": "DefiniteIntegralIdentity",
-                                            "str": "apply definite integral"
+                                            "str": "apply integral identity"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -521,11 +521,11 @@
                                         "latex_res": "\\frac{(-1) ^ {n + 1} ((n + 1) n!)}{(m + 1) ^ {n + 2}}",
                                         "res": "(-1) ^ (n + 1) * ((n + 1) * factorial(n)) / (m + 1) ^ (n + 2)",
                                         "rule": {
-                                            "latex_str": "rewriting \\(-(-1) ^ {n} n! (m + 1) ^ {-n - 2} (n + 1)\\) to \\(\\frac{(-1) ^ {n + 1} ((n + 1) n!)}{(m + 1) ^ {n + 2}}\\)",
+                                            "latex_str": "rewrite \\(-(-1) ^ {n} n! (m + 1) ^ {-n - 2} (n + 1)\\) to \\(\\frac{(-1) ^ {n + 1} ((n + 1) n!)}{(m + 1) ^ {n + 2}}\\)",
                                             "name": "Equation",
                                             "new_expr": "(-1) ^ (n + 1) * ((n + 1) * factorial(n)) / (m + 1) ^ (n + 2)",
                                             "old_expr": "-((-1) ^ n * factorial(n) * (m + 1) ^ (-n - 2) * (n + 1))",
-                                            "str": "rewriting -((-1) ^ n * factorial(n) * (m + 1) ^ (-n - 2) * (n + 1)) to (-1) ^ (n + 1) * ((n + 1) * factorial(n)) / (m + 1) ^ (n + 2)"
+                                            "str": "rewrite -((-1) ^ n * factorial(n) * (m + 1) ^ (-n - 2) * (n + 1)) to (-1) ^ (n + 1) * ((n + 1) * factorial(n)) / (m + 1) ^ (n + 2)"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -711,9 +711,9 @@
                                 "latex_res": "\\int_{0}^{1} (a y) ^ {m} \\log^{n}(a y) a \\,dy",
                                 "res": "INT y:[0,1]. (a * y) ^ m * log(a * y) ^ n * a",
                                 "rule": {
-                                    "latex_str": "inverse substitution \\(a y\\) creating \\(y\\)",
+                                    "latex_str": "inverse substitute \\(a y\\) creating \\(y\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution a * y creating y",
+                                    "str": "inverse substitute a * y creating y",
                                     "var_name": "y",
                                     "var_subst": "a * y"
                                 },
@@ -762,11 +762,11 @@
                                 "latex_res": "a ^ {m + 1} (\\int_{0}^{1} y ^ {m} \\log^{n}(y a) \\,dy)",
                                 "res": "a ^ (m + 1) * (INT y:[0,1]. y ^ m * log(y * a) ^ n)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(a y\\) to \\(y a\\)",
+                                    "latex_str": "rewrite \\(a y\\) to \\(y a\\)",
                                     "name": "Equation",
                                     "new_expr": "y * a",
                                     "old_expr": "a * y",
-                                    "str": "rewriting a * y to y * a"
+                                    "str": "rewrite a * y to y * a"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -823,11 +823,11 @@
                                 "latex_res": "a ^ {m + 1} (\\int_{0}^{1} \\sum_{k=0}^{n}{y ^ {m} \\binom{n}{k} \\log^{k}(y) \\log^{n - k}(a)} \\,dy)",
                                 "res": "a ^ (m + 1) * (INT y:[0,1]. SUM(k, 0, n, y ^ m * binom(n,k) * log(y) ^ k * log(a) ^ (n - k)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(y ^ {m} \\sum_{k=0}^{n}{\\binom{n}{k} \\log^{k}(y) \\log^{n - k}(a)}\\) to \\(\\sum_{k=0}^{n}{y ^ {m} \\binom{n}{k} \\log^{k}(y) \\log^{n - k}(a)}\\)",
+                                    "latex_str": "rewrite \\(y ^ {m} \\sum_{k=0}^{n}{\\binom{n}{k} \\log^{k}(y) \\log^{n - k}(a)}\\) to \\(\\sum_{k=0}^{n}{y ^ {m} \\binom{n}{k} \\log^{k}(y) \\log^{n - k}(a)}\\)",
                                     "name": "Equation",
                                     "new_expr": "SUM(k, 0, n, y ^ m * binom(n,k) * log(y) ^ k * log(a) ^ (n - k))",
                                     "old_expr": "y ^ m * SUM(k, 0, n, binom(n,k) * log(y) ^ k * log(a) ^ (n - k))",
-                                    "str": "rewriting y ^ m * SUM(k, 0, n, binom(n,k) * log(y) ^ k * log(a) ^ (n - k)) to SUM(k, 0, n, y ^ m * binom(n,k) * log(y) ^ k * log(a) ^ (n - k))"
+                                    "str": "rewrite y ^ m * SUM(k, 0, n, binom(n,k) * log(y) ^ k * log(a) ^ (n - k)) to SUM(k, 0, n, y ^ m * binom(n,k) * log(y) ^ k * log(a) ^ (n - k))"
                                 },
                                 "type": "CalculationStep"
                             },

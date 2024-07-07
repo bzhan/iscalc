@@ -20,11 +20,11 @@
                                 "latex_res": "\\int_{\\sqrt{2}}^{\\infty} \\frac{x ^ {-\\sqrt{2}}}{x ^ {1 - \\sqrt{2}} + 1} \\,dx",
                                 "res": "INT x:[sqrt(2),oo]. x ^ -sqrt(2) / (x ^ (1 - sqrt(2)) + 1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{x + x ^ {\\sqrt{2}}}\\) to \\(\\frac{x ^ {-\\sqrt{2}}}{x ^ {1 - \\sqrt{2}} + 1}\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{x + x ^ {\\sqrt{2}}}\\) to \\(\\frac{x ^ {-\\sqrt{2}}}{x ^ {1 - \\sqrt{2}} + 1}\\)",
                                     "name": "Equation",
                                     "new_expr": "x ^ -sqrt(2) / (x ^ (1 - sqrt(2)) + 1)",
                                     "old_expr": "1 / (x + x ^ sqrt(2))",
-                                    "str": "rewriting 1 / (x + x ^ sqrt(2)) to x ^ -sqrt(2) / (x ^ (1 - sqrt(2)) + 1)"
+                                    "str": "rewrite 1 / (x + x ^ sqrt(2)) to x ^ -sqrt(2) / (x ^ (1 - sqrt(2)) + 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -57,7 +57,7 @@
                                 "res": "-(1 / (-sqrt(2) + 1) * ([u]_u=0,log(sqrt(2) ^ (-sqrt(2) + 1) + 1)))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -74,12 +74,12 @@
                                 "latex_res": "-\\frac{\\log{(\\sqrt{2} ^ {-\\sqrt{2} + 1} + 1)}}{\\frac{-1}{1 + \\sqrt{2}}}",
                                 "res": "-(log(sqrt(2) ^ (-sqrt(2) + 1) + 1) / (-1 / (1 + sqrt(2))))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(-\\sqrt{2} + 1\\) to \\(\\frac{-1}{1 + \\sqrt{2}}\\) at 0.1",
+                                    "latex_str": "rewrite \\(-\\sqrt{2} + 1\\) to \\(\\frac{-1}{1 + \\sqrt{2}}\\) at 0.1",
                                     "loc": "0.1",
                                     "name": "Equation",
                                     "new_expr": "-1 / (1 + sqrt(2))",
                                     "old_expr": "-sqrt(2) + 1",
-                                    "str": "rewriting -sqrt(2) + 1 to -1 / (1 + sqrt(2)) at 0.1"
+                                    "str": "rewrite -sqrt(2) + 1 to -1 / (1 + sqrt(2)) at 0.1"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -96,12 +96,12 @@
                                 "latex_res": "(\\sqrt{2} + 1) \\log{((2 ^ {1/2}) ^ {-\\sqrt{2} + 1} + 1)}",
                                 "res": "(sqrt(2) + 1) * log(2 ^ (1/2) ^ (-sqrt(2) + 1) + 1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\sqrt{2}\\) to \\(2 ^ {1/2}\\) at 1.0.0.0",
+                                    "latex_str": "rewrite \\(\\sqrt{2}\\) to \\(2 ^ {1/2}\\) at 1.0.0.0",
                                     "loc": "1.0.0.0",
                                     "name": "Equation",
                                     "new_expr": "2 ^ (1/2)",
                                     "old_expr": "sqrt(2)",
-                                    "str": "rewriting sqrt(2) to 2 ^ (1/2) at 1.0.0.0"
+                                    "str": "rewrite sqrt(2) to 2 ^ (1/2) at 1.0.0.0"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -121,11 +121,11 @@
                                 "latex_res": "(1 + \\sqrt{2}) \\log{(1 + 2 ^ {1/2\\cdot (1 - \\sqrt{2})})}",
                                 "res": "(1 + sqrt(2)) * log(1 + 2 ^ (1/2 * (1 - sqrt(2))))",
                                 "rule": {
-                                    "latex_str": "rewriting \\((\\sqrt{2} + 1) \\log{(2 ^ {1/2\\cdot (-\\sqrt{2} + 1)} + 1)}\\) to \\((1 + \\sqrt{2}) \\log{(1 + 2 ^ {1/2\\cdot (1 - \\sqrt{2})})}\\)",
+                                    "latex_str": "rewrite \\((\\sqrt{2} + 1) \\log{(2 ^ {1/2\\cdot (-\\sqrt{2} + 1)} + 1)}\\) to \\((1 + \\sqrt{2}) \\log{(1 + 2 ^ {1/2\\cdot (1 - \\sqrt{2})})}\\)",
                                     "name": "Equation",
                                     "new_expr": "(1 + sqrt(2)) * log(1 + 2 ^ (1/2 * (1 - sqrt(2))))",
                                     "old_expr": "(sqrt(2) + 1) * log(2 ^ (1/2 * (-sqrt(2) + 1)) + 1)",
-                                    "str": "rewriting (sqrt(2) + 1) * log(2 ^ (1/2 * (-sqrt(2) + 1)) + 1) to (1 + sqrt(2)) * log(1 + 2 ^ (1/2 * (1 - sqrt(2))))"
+                                    "str": "rewrite (sqrt(2) + 1) * log(2 ^ (1/2 * (-sqrt(2) + 1)) + 1) to (1 + sqrt(2)) * log(1 + 2 ^ (1/2 * (1 - sqrt(2))))"
                                 },
                                 "type": "CalculationStep"
                             }

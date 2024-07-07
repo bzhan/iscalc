@@ -52,10 +52,10 @@
                                             "latex_res": "(x ^ {2} - 1) ^ {2} + 2 x ^ {2} (1 + \\cos{(2 a)})",
                                             "res": "(x ^ 2 - 1) ^ 2 + 2 * x ^ 2 * (1 + cos(2 * a))",
                                             "rule": {
-                                                "latex_str": "rewriting to \\((x ^ {2} - 1) ^ {2} + 2 x ^ {2} (1 + \\cos{(2 a)})\\)",
+                                                "latex_str": "rewrite to \\((x ^ {2} - 1) ^ {2} + 2 x ^ {2} (1 + \\cos{(2 a)})\\)",
                                                 "name": "Equation",
                                                 "new_expr": "(x ^ 2 - 1) ^ 2 + 2 * x ^ 2 * (1 + cos(2 * a))",
-                                                "str": "rewriting to (x ^ 2 - 1) ^ 2 + 2 * x ^ 2 * (1 + cos(2 * a))"
+                                                "str": "rewrite to (x ^ 2 - 1) ^ 2 + 2 * x ^ 2 * (1 + cos(2 * a))"
                                             },
                                             "type": "CalculationStep"
                                         },
@@ -313,10 +313,10 @@
                                             "latex_res": "(x ^ {2} - 1) ^ {2} + 4 x ^ {2} \\cos^{2}(a)",
                                             "res": "(x ^ 2 - 1) ^ 2 + 4 * x ^ 2 * cos(a) ^ 2",
                                             "rule": {
-                                                "latex_str": "rewriting to \\((x ^ {2} - 1) ^ {2} + 4 x ^ {2} \\cos^{2}(a)\\)",
+                                                "latex_str": "rewrite to \\((x ^ {2} - 1) ^ {2} + 4 x ^ {2} \\cos^{2}(a)\\)",
                                                 "name": "Equation",
                                                 "new_expr": "(x ^ 2 - 1) ^ 2 + 4 * x ^ 2 * cos(a) ^ 2",
-                                                "str": "rewriting to (x ^ 2 - 1) ^ 2 + 4 * x ^ 2 * cos(a) ^ 2"
+                                                "str": "rewrite to (x ^ 2 - 1) ^ 2 + 4 * x ^ 2 * cos(a) ^ 2"
                                             },
                                             "type": "CalculationStep"
                                         }
@@ -469,10 +469,10 @@
                                             "latex_res": "(x + 1) ^ {2} - 2 x (1 + \\sin{a})",
                                             "res": "(x + 1) ^ 2 - 2 * x * (1 + sin(a))",
                                             "rule": {
-                                                "latex_str": "rewriting to \\((x + 1) ^ {2} - 2 x (1 + \\sin{a})\\)",
+                                                "latex_str": "rewrite to \\((x + 1) ^ {2} - 2 x (1 + \\sin{a})\\)",
                                                 "name": "Equation",
                                                 "new_expr": "(x + 1) ^ 2 - 2 * x * (1 + sin(a))",
-                                                "str": "rewriting to (x + 1) ^ 2 - 2 * x * (1 + sin(a))"
+                                                "str": "rewrite to (x + 1) ^ 2 - 2 * x * (1 + sin(a))"
                                             },
                                             "type": "CalculationStep"
                                         }
@@ -603,10 +603,10 @@
                                             "latex_res": "(x - 1) ^ {2} + 2 x (1 - \\sin{a})",
                                             "res": "(x - 1) ^ 2 + 2 * x * (1 - sin(a))",
                                             "rule": {
-                                                "latex_str": "rewriting to \\((x - 1) ^ {2} + 2 x (1 - \\sin{a})\\)",
+                                                "latex_str": "rewrite to \\((x - 1) ^ {2} + 2 x (1 - \\sin{a})\\)",
                                                 "name": "Equation",
                                                 "new_expr": "(x - 1) ^ 2 + 2 * x * (1 - sin(a))",
-                                                "str": "rewriting to (x - 1) ^ 2 + 2 * x * (1 - sin(a))"
+                                                "str": "rewrite to (x - 1) ^ 2 + 2 * x * (1 - sin(a))"
                                             },
                                             "type": "CalculationStep"
                                         }
@@ -695,9 +695,9 @@
                                 "latex_res": "-(\\int_{0}^{\\infty} \\frac{1}{2 (\\frac{1}{y}) ^ {2} \\cos{(2 a)} + (\\frac{1}{y}) ^ {4} + 1} (-\\frac{1}{y ^ {2}}) \\,dy)",
                                 "res": "-(INT y:[0,oo]. 1 / (2 * (1 / y) ^ 2 * cos(2 * a) + (1 / y) ^ 4 + 1) * -(1 / y ^ 2))",
                                 "rule": {
-                                    "latex_str": "inverse substitution \\(\\frac{1}{y}\\) creating \\(y\\)",
+                                    "latex_str": "inverse substitute \\(\\frac{1}{y}\\) creating \\(y\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution 1 / y creating y",
+                                    "str": "inverse substitute 1 / y creating y",
                                     "var_name": "y",
                                     "var_subst": "1 / y"
                                 },
@@ -713,11 +713,11 @@
                                 "latex_res": "-(\\int_{0}^{\\infty} \\frac{-y ^ {2}}{y ^ {4} + 2 y ^ {2} \\cos{(2 a)} + 1} \\,dy)",
                                 "res": "-(INT y:[0,oo]. -(y ^ 2) / (y ^ 4 + 2 * y ^ 2 * cos(2 * a) + 1))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{2 (\\frac{1}{y}) ^ {2} \\cos{(2 a)} + (\\frac{1}{y}) ^ {4} + 1} (-\\frac{1}{y ^ {2}})\\) to \\(\\frac{-y ^ {2}}{y ^ {4} + 2 y ^ {2} \\cos{(2 a)} + 1}\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{2 (\\frac{1}{y}) ^ {2} \\cos{(2 a)} + (\\frac{1}{y}) ^ {4} + 1} (-\\frac{1}{y ^ {2}})\\) to \\(\\frac{-y ^ {2}}{y ^ {4} + 2 y ^ {2} \\cos{(2 a)} + 1}\\)",
                                     "name": "Equation",
                                     "new_expr": "-(y ^ 2) / (y ^ 4 + 2 * y ^ 2 * cos(2 * a) + 1)",
                                     "old_expr": "1 / (2 * (1 / y) ^ 2 * cos(2 * a) + (1 / y) ^ 4 + 1) * -(1 / y ^ 2)",
-                                    "str": "rewriting 1 / (2 * (1 / y) ^ 2 * cos(2 * a) + (1 / y) ^ 4 + 1) * -(1 / y ^ 2) to -(y ^ 2) / (y ^ 4 + 2 * y ^ 2 * cos(2 * a) + 1)"
+                                    "str": "rewrite 1 / (2 * (1 / y) ^ 2 * cos(2 * a) + (1 / y) ^ 4 + 1) * -(1 / y ^ 2) to -(y ^ 2) / (y ^ 4 + 2 * y ^ 2 * cos(2 * a) + 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -801,11 +801,11 @@
                                 "latex_res": "I{(a)} + I{(a)}",
                                 "res": "I(a) + I(a)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(2 I{(a)}\\) to \\(I{(a)} + I{(a)}\\)",
+                                    "latex_str": "rewrite \\(2 I{(a)}\\) to \\(I{(a)} + I{(a)}\\)",
                                     "name": "Equation",
                                     "new_expr": "I(a) + I(a)",
                                     "old_expr": "2 * I(a)",
-                                    "str": "rewriting 2 * I(a) to I(a) + I(a)"
+                                    "str": "rewrite 2 * I(a) to I(a) + I(a)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -854,11 +854,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} + \\frac{x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. 1 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1) + x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\((\\int_{0}^{\\infty} \\frac{1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx) + (\\int_{0}^{\\infty} \\frac{x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1} \\,dx)\\) to \\(\\int_{0}^{\\infty} \\frac{1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} + \\frac{x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1} \\,dx\\)",
+                                    "latex_str": "rewrite \\((\\int_{0}^{\\infty} \\frac{1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx) + (\\int_{0}^{\\infty} \\frac{x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1} \\,dx)\\) to \\(\\int_{0}^{\\infty} \\frac{1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} + \\frac{x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1} \\,dx\\)",
                                     "name": "Equation",
                                     "new_expr": "INT x:[0,oo]. 1 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1) + x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1)",
                                     "old_expr": "(INT x:[0,oo]. 1 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)) + (INT x:[0,oo]. x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1))",
-                                    "str": "rewriting (INT x:[0,oo]. 1 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)) + (INT x:[0,oo]. x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1)) to INT x:[0,oo]. 1 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1) + x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1)"
+                                    "str": "rewrite (INT x:[0,oo]. 1 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)) + (INT x:[0,oo]. x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1)) to INT x:[0,oo]. 1 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1) + x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -872,11 +872,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1 + x ^ {2}}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. (1 + x ^ 2) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} + \\frac{x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1}\\) to \\(\\frac{1 + x ^ {2}}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1}\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} + \\frac{x ^ {2}}{x ^ {4} + 2 x ^ {2} \\cos{(2 a)} + 1}\\) to \\(\\frac{1 + x ^ {2}}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1}\\)",
                                     "name": "Equation",
                                     "new_expr": "(1 + x ^ 2) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)",
                                     "old_expr": "1 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1) + x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1)",
-                                    "str": "rewriting 1 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1) + x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1) to (1 + x ^ 2) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)"
+                                    "str": "rewrite 1 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1) + x ^ 2 / (x ^ 4 + 2 * x ^ 2 * cos(2 * a) + 1) to (1 + x ^ 2) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1219,11 +1219,11 @@
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)))",
                             "rule": {
-                                "latex_str": "rewriting \\(2 x ^ {2} (1 - 2 \\sin^{2}(a)) + x ^ {4} + 1\\) to \\((x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)\\)",
+                                "latex_str": "rewrite \\(2 x ^ {2} (1 - 2 \\sin^{2}(a)) + x ^ {4} + 1\\) to \\((x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)\\)",
                                 "name": "Equation",
                                 "new_expr": "(x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)",
                                 "old_expr": "2 * x ^ 2 * (1 - 2 * sin(a) ^ 2) + x ^ 4 + 1",
-                                "str": "rewriting 2 * x ^ 2 * (1 - 2 * sin(a) ^ 2) + x ^ 4 + 1 to (x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)"
+                                "str": "rewrite 2 * x ^ 2 * (1 - 2 * sin(a) ^ 2) + x ^ 4 + 1 to (x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)"
                             },
                             "type": "CalculationStep"
                         },
@@ -1237,11 +1237,11 @@
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + \\frac{1}{4}\\cdot 0",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + 1/4 * 0",
                             "rule": {
-                                "latex_str": "rewriting \\(\\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)\\) to \\(\\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + \\frac{1}{4}\\cdot 0\\)",
+                                "latex_str": "rewrite \\(\\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)\\) to \\(\\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + \\frac{1}{4}\\cdot 0\\)",
                                 "name": "Equation",
                                 "new_expr": "1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + 1/4 * 0",
                                 "old_expr": "1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)))",
-                                "str": "rewriting 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) to 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + 1/4 * 0"
+                                "str": "rewrite 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) to 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + 1/4 * 0"
                             },
                             "type": "CalculationStep"
                         },
@@ -1273,11 +1273,11 @@
                             "latex_res": "I{(a)} = \\frac{1}{4} ((\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx))",
                             "res": "I(a) = 1/4 * ((INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + (INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))))",
                             "rule": {
-                                "latex_str": "rewriting \\(\\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)\\) to \\(\\frac{1}{4} ((\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx))\\)",
+                                "latex_str": "rewrite \\(\\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)\\) to \\(\\frac{1}{4} ((\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx))\\)",
                                 "name": "Equation",
                                 "new_expr": "1/4 * ((INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + (INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))))",
                                 "old_expr": "1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + 1/4 * (INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)))",
-                                "str": "rewriting 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + 1/4 * (INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) to 1/4 * ((INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + (INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))))"
+                                "str": "rewrite 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + 1/4 * (INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) to 1/4 * ((INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + (INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))))"
                             },
                             "type": "CalculationStep"
                         },
@@ -1291,11 +1291,11 @@
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} - \\frac{2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)) - 2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)))",
                             "rule": {
-                                "latex_str": "rewriting \\((\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)\\) to \\(\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} - \\frac{2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx\\)",
+                                "latex_str": "rewrite \\((\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{-2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)\\) to \\(\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} - \\frac{2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx\\)",
                                 "name": "Equation",
                                 "new_expr": "INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)) - 2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))",
                                 "old_expr": "(INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + (INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)))",
-                                "str": "rewriting (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + (INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) to INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)) - 2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))"
+                                "str": "rewrite (INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) + (INT x:[-oo,oo]. -2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))) to INT x:[-oo,oo]. (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)) - 2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))"
                             },
                             "type": "CalculationStep"
                         },
@@ -1309,11 +1309,11 @@
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1 - 2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} \\,dx)",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1 - 2 * x * sin(a)) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)))",
                             "rule": {
-                                "latex_str": "rewriting \\(\\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} - \\frac{2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)}\\) to \\(\\frac{x ^ {2} + 1 - 2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)}\\)",
+                                "latex_str": "rewrite \\(\\frac{x ^ {2} + 1}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)} - \\frac{2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)}\\) to \\(\\frac{x ^ {2} + 1 - 2 x \\sin{a}}{(x ^ {2} - 2 x \\sin{a} + 1) (x ^ {2} + 2 x \\sin{a} + 1)}\\)",
                                 "name": "Equation",
                                 "new_expr": "(x ^ 2 + 1 - 2 * x * sin(a)) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))",
                                 "old_expr": "(x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)) - 2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))",
-                                "str": "rewriting (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)) - 2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)) to (x ^ 2 + 1 - 2 * x * sin(a)) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))"
+                                "str": "rewrite (x ^ 2 + 1) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)) - 2 * x * sin(a) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1)) to (x ^ 2 + 1 - 2 * x * sin(a)) / ((x ^ 2 - 2 * x * sin(a) + 1) * (x ^ 2 + 2 * x * sin(a) + 1))"
                             },
                             "type": "CalculationStep"
                         },
@@ -1342,12 +1342,12 @@
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{1}{2 x \\sin{a} + x ^ {2} + (\\sin^{2}(a) + \\cos^{2}(a))} \\,dx)",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. 1 / (2 * x * sin(a) + x ^ 2 + (sin(a) ^ 2 + cos(a) ^ 2)))",
                             "rule": {
-                                "latex_str": "rewriting \\(1\\) to \\(\\sin^{2}(a) + \\cos^{2}(a)\\) at 1.1.0.1.1",
+                                "latex_str": "rewrite \\(1\\) to \\(\\sin^{2}(a) + \\cos^{2}(a)\\) at 1.1.0.1.1",
                                 "loc": "1.1.0.1.1",
                                 "name": "Equation",
                                 "new_expr": "sin(a) ^ 2 + cos(a) ^ 2",
                                 "old_expr": "1",
-                                "str": "rewriting 1 to sin(a) ^ 2 + cos(a) ^ 2 at 1.1.0.1.1"
+                                "str": "rewrite 1 to sin(a) ^ 2 + cos(a) ^ 2 at 1.1.0.1.1"
                             },
                             "type": "CalculationStep"
                         },
@@ -1361,11 +1361,11 @@
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{1}{(x + \\sin{a}) ^ {2} + \\cos^{2}(a)} \\,dx)",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. 1 / ((x + sin(a)) ^ 2 + cos(a) ^ 2))",
                             "rule": {
-                                "latex_str": "rewriting \\(2 x \\sin{a} + x ^ {2} + (\\sin^{2}(a) + \\cos^{2}(a))\\) to \\((x + \\sin{a}) ^ {2} + \\cos^{2}(a)\\)",
+                                "latex_str": "rewrite \\(2 x \\sin{a} + x ^ {2} + (\\sin^{2}(a) + \\cos^{2}(a))\\) to \\((x + \\sin{a}) ^ {2} + \\cos^{2}(a)\\)",
                                 "name": "Equation",
                                 "new_expr": "(x + sin(a)) ^ 2 + cos(a) ^ 2",
                                 "old_expr": "2 * x * sin(a) + x ^ 2 + (sin(a) ^ 2 + cos(a) ^ 2)",
-                                "str": "rewriting 2 * x * sin(a) + x ^ 2 + (sin(a) ^ 2 + cos(a) ^ 2) to (x + sin(a)) ^ 2 + cos(a) ^ 2"
+                                "str": "rewrite 2 * x * sin(a) + x ^ 2 + (sin(a) ^ 2 + cos(a) ^ 2) to (x + sin(a)) ^ 2 + cos(a) ^ 2"
                             },
                             "type": "CalculationStep"
                         },
@@ -1445,7 +1445,7 @@
                                 "res": "1/4 * ([1 / cos(a) * atan(x / cos(a))]_x=-oo,oo)",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1532,7 +1532,7 @@
                                 "res": "1/4 * ([1 / cos(a) * atan(x / cos(a))]_x=-oo,oo)",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral"
+                                    "str": "apply integral identity"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1588,11 +1588,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{x ^ {4} + 2 x ^ {2}\\cdot \\cos{(2\\cdot (\\frac{\\pi}{4}))} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. 1 / (x ^ 4 + 2 * x ^ 2 * cos(2 * (pi / 4)) + 1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {4} + 1\\) to \\(x ^ {4} + 2 x ^ {2}\\cdot \\cos{(2\\cdot (\\frac{\\pi}{4}))} + 1\\)",
+                                    "latex_str": "rewrite \\(x ^ {4} + 1\\) to \\(x ^ {4} + 2 x ^ {2}\\cdot \\cos{(2\\cdot (\\frac{\\pi}{4}))} + 1\\)",
                                     "name": "Equation",
                                     "new_expr": "x ^ 4 + 2 * x ^ 2 * cos(2 * (pi / 4)) + 1",
                                     "old_expr": "x ^ 4 + 1",
-                                    "str": "rewriting x ^ 4 + 1 to x ^ 4 + 2 * x ^ 2 * cos(2 * (pi / 4)) + 1"
+                                    "str": "rewrite x ^ 4 + 1 to x ^ 4 + 2 * x ^ 2 * cos(2 * (pi / 4)) + 1"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1631,11 +1631,11 @@
                                 "latex_res": "\\frac{\\pi \\sqrt{2}}{4}",
                                 "res": "pi * sqrt(2) / 4",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{\\sqrt{2} \\pi}{4}\\) to \\(\\frac{\\pi \\sqrt{2}}{4}\\)",
+                                    "latex_str": "rewrite \\(\\frac{\\sqrt{2} \\pi}{4}\\) to \\(\\frac{\\pi \\sqrt{2}}{4}\\)",
                                     "name": "Equation",
                                     "new_expr": "pi * sqrt(2) / 4",
                                     "old_expr": "sqrt(2) * pi / 4",
-                                    "str": "rewriting sqrt(2) * pi / 4 to pi * sqrt(2) / 4"
+                                    "str": "rewrite sqrt(2) * pi / 4 to pi * sqrt(2) / 4"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1694,11 +1694,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{u ^ {2}}{u ^ {4} + 1} \\,du",
                                 "res": "INT u:[0,oo]. u ^ 2 / (u ^ 4 + 1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{1}{u ^ {2} (\\frac{1}{u ^ {4}} + 1)}\\) to \\(\\frac{u ^ {2}}{u ^ {4} + 1}\\)",
+                                    "latex_str": "rewrite \\(\\frac{1}{u ^ {2} (\\frac{1}{u ^ {4}} + 1)}\\) to \\(\\frac{u ^ {2}}{u ^ {4} + 1}\\)",
                                     "name": "Equation",
                                     "new_expr": "u ^ 2 / (u ^ 4 + 1)",
                                     "old_expr": "1 / (u ^ 2 * (1 / u ^ 4 + 1))",
-                                    "str": "rewriting 1 / (u ^ 2 * (1 / u ^ 4 + 1)) to u ^ 2 / (u ^ 4 + 1)"
+                                    "str": "rewrite 1 / (u ^ 2 * (1 / u ^ 4 + 1)) to u ^ 2 / (u ^ 4 + 1)"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1739,11 +1739,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{x ^ {4} + 2 x ^ {2}\\cdot \\cos{(2\\cdot (\\frac{\\pi}{6}))} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. 1 / (x ^ 4 + 2 * x ^ 2 * cos(2 * (pi / 6)) + 1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {4} + x ^ {2} + 1\\) to \\(x ^ {4} + 2 x ^ {2}\\cdot \\cos{(2\\cdot (\\frac{\\pi}{6}))} + 1\\)",
+                                    "latex_str": "rewrite \\(x ^ {4} + x ^ {2} + 1\\) to \\(x ^ {4} + 2 x ^ {2}\\cdot \\cos{(2\\cdot (\\frac{\\pi}{6}))} + 1\\)",
                                     "name": "Equation",
                                     "new_expr": "x ^ 4 + 2 * x ^ 2 * cos(2 * (pi / 6)) + 1",
                                     "old_expr": "x ^ 4 + x ^ 2 + 1",
-                                    "str": "rewriting x ^ 4 + x ^ 2 + 1 to x ^ 4 + 2 * x ^ 2 * cos(2 * (pi / 6)) + 1"
+                                    "str": "rewrite x ^ 4 + x ^ 2 + 1 to x ^ 4 + 2 * x ^ 2 * cos(2 * (pi / 6)) + 1"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1782,11 +1782,11 @@
                                 "latex_res": "\\frac{\\pi}{2 \\sqrt{3}}",
                                 "res": "pi / (2 * sqrt(3))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\frac{\\sqrt{3} \\pi}{6}\\) to \\(\\frac{\\pi}{2 \\sqrt{3}}\\)",
+                                    "latex_str": "rewrite \\(\\frac{\\sqrt{3} \\pi}{6}\\) to \\(\\frac{\\pi}{2 \\sqrt{3}}\\)",
                                     "name": "Equation",
                                     "new_expr": "pi / (2 * sqrt(3))",
                                     "old_expr": "sqrt(3) * pi / 6",
-                                    "str": "rewriting sqrt(3) * pi / 6 to pi / (2 * sqrt(3))"
+                                    "str": "rewrite sqrt(3) * pi / 6 to pi / (2 * sqrt(3))"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1844,11 +1844,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{x ^ {4} + 2 x ^ {2}\\cdot \\cos{(2\\cdot (\\frac{\\pi}{3}))} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. 1 / (x ^ 4 + 2 * x ^ 2 * cos(2 * (pi / 3)) + 1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {4} - x ^ {2} + 1\\) to \\(x ^ {4} + 2 x ^ {2}\\cdot \\cos{(2\\cdot (\\frac{\\pi}{3}))} + 1\\)",
+                                    "latex_str": "rewrite \\(x ^ {4} - x ^ {2} + 1\\) to \\(x ^ {4} + 2 x ^ {2}\\cdot \\cos{(2\\cdot (\\frac{\\pi}{3}))} + 1\\)",
                                     "name": "Equation",
                                     "new_expr": "x ^ 4 + 2 * x ^ 2 * cos(2 * (pi / 3)) + 1",
                                     "old_expr": "x ^ 4 - x ^ 2 + 1",
-                                    "str": "rewriting x ^ 4 - x ^ 2 + 1 to x ^ 4 + 2 * x ^ 2 * cos(2 * (pi / 3)) + 1"
+                                    "str": "rewrite x ^ 4 - x ^ 2 + 1 to x ^ 4 + 2 * x ^ 2 * cos(2 * (pi / 3)) + 1"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1921,11 +1921,11 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{x ^ {4} + 2 x ^ {2}\\cdot \\cos{(2\\cdot 0)} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. 1 / (x ^ 4 + 2 * x ^ 2 * cos(2 * 0) + 1)",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {4} + 2 x ^ {2} + 1\\) to \\(x ^ {4} + 2 x ^ {2}\\cdot \\cos{(2\\cdot 0)} + 1\\)",
+                                    "latex_str": "rewrite \\(x ^ {4} + 2 x ^ {2} + 1\\) to \\(x ^ {4} + 2 x ^ {2}\\cdot \\cos{(2\\cdot 0)} + 1\\)",
                                     "name": "Equation",
                                     "new_expr": "x ^ 4 + 2 * x ^ 2 * cos(2 * 0) + 1",
                                     "old_expr": "x ^ 4 + 2 * x ^ 2 + 1",
-                                    "str": "rewriting x ^ 4 + 2 * x ^ 2 + 1 to x ^ 4 + 2 * x ^ 2 * cos(2 * 0) + 1"
+                                    "str": "rewrite x ^ 4 + 2 * x ^ 2 + 1 to x ^ 4 + 2 * x ^ 2 * cos(2 * 0) + 1"
                                 },
                                 "type": "CalculationStep"
                             },

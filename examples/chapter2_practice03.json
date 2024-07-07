@@ -73,11 +73,11 @@
                                 "latex_res": "4 m (\\int_{0}^{\\infty} \\frac{x ^ {4} + 1}{(x ^ {4} + 1) ^ {m + 1}} - \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx)",
                                 "res": "4 * m * (INT x:[0,oo]. (x ^ 4 + 1) / (x ^ 4 + 1) ^ (m + 1) - 1 / (x ^ 4 + 1) ^ (m + 1))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {4} (x ^ {4} + 1) ^ {-m - 1}\\) to \\(\\frac{x ^ {4} + 1}{(x ^ {4} + 1) ^ {m + 1}} - \\frac{1}{(x ^ {4} + 1) ^ {m + 1}}\\)",
+                                    "latex_str": "rewrite \\(x ^ {4} (x ^ {4} + 1) ^ {-m - 1}\\) to \\(\\frac{x ^ {4} + 1}{(x ^ {4} + 1) ^ {m + 1}} - \\frac{1}{(x ^ {4} + 1) ^ {m + 1}}\\)",
                                     "name": "Equation",
                                     "new_expr": "(x ^ 4 + 1) / (x ^ 4 + 1) ^ (m + 1) - 1 / (x ^ 4 + 1) ^ (m + 1)",
                                     "old_expr": "x ^ 4 * (x ^ 4 + 1) ^ (-m - 1)",
-                                    "str": "rewriting x ^ 4 * (x ^ 4 + 1) ^ (-m - 1) to (x ^ 4 + 1) / (x ^ 4 + 1) ^ (m + 1) - 1 / (x ^ 4 + 1) ^ (m + 1)"
+                                    "str": "rewrite x ^ 4 * (x ^ 4 + 1) ^ (-m - 1) to (x ^ 4 + 1) / (x ^ 4 + 1) ^ (m + 1) - 1 / (x ^ 4 + 1) ^ (m + 1)"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -91,11 +91,11 @@
                                 "latex_res": "4 m ((\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx))",
                                 "res": "4 * m * ((INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m) - (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1)))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(\\int_{0}^{\\infty} \\frac{x ^ {4} + 1}{(x ^ {4} + 1) ^ {m + 1}} - \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx\\) to \\((\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx)\\)",
+                                    "latex_str": "rewrite \\(\\int_{0}^{\\infty} \\frac{x ^ {4} + 1}{(x ^ {4} + 1) ^ {m + 1}} - \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx\\) to \\((\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx) - (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx)\\)",
                                     "name": "Equation",
                                     "new_expr": "(INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m) - (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1))",
                                     "old_expr": "INT x:[0,oo]. (x ^ 4 + 1) / (x ^ 4 + 1) ^ (m + 1) - 1 / (x ^ 4 + 1) ^ (m + 1)",
-                                    "str": "rewriting INT x:[0,oo]. (x ^ 4 + 1) / (x ^ 4 + 1) ^ (m + 1) - 1 / (x ^ 4 + 1) ^ (m + 1) to (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m) - (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1))"
+                                    "str": "rewrite INT x:[0,oo]. (x ^ 4 + 1) / (x ^ 4 + 1) ^ (m + 1) - 1 / (x ^ 4 + 1) ^ (m + 1) to (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m) - (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1))"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -186,11 +186,11 @@
                             "latex_res": "\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m + 1}} \\,dx = \\frac{4 m - 1}{4 m} (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx)",
                             "res": "(INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ (m + 1)) = (4 * m - 1) / (4 * m) * (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m)",
                             "rule": {
-                                "latex_str": "rewriting \\(-\\frac{1}{4 m} (\\int_{0}^{\\infty} (x ^ {4} + 1) ^ {-m} \\,dx) + (\\int_{0}^{\\infty} (x ^ {4} + 1) ^ {-m} \\,dx)\\) to \\(\\frac{4 m - 1}{4 m} (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx)\\)",
+                                "latex_str": "rewrite \\(-\\frac{1}{4 m} (\\int_{0}^{\\infty} (x ^ {4} + 1) ^ {-m} \\,dx) + (\\int_{0}^{\\infty} (x ^ {4} + 1) ^ {-m} \\,dx)\\) to \\(\\frac{4 m - 1}{4 m} (\\int_{0}^{\\infty} \\frac{1}{(x ^ {4} + 1) ^ {m}} \\,dx)\\)",
                                 "name": "Equation",
                                 "new_expr": "(4 * m - 1) / (4 * m) * (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m)",
                                 "old_expr": "-(1 / (4 * m) * (INT x:[0,oo]. (x ^ 4 + 1) ^ -m)) + (INT x:[0,oo]. (x ^ 4 + 1) ^ -m)",
-                                "str": "rewriting -(1 / (4 * m) * (INT x:[0,oo]. (x ^ 4 + 1) ^ -m)) + (INT x:[0,oo]. (x ^ 4 + 1) ^ -m) to (4 * m - 1) / (4 * m) * (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m)"
+                                "str": "rewrite -(1 / (4 * m) * (INT x:[0,oo]. (x ^ 4 + 1) ^ -m)) + (INT x:[0,oo]. (x ^ 4 + 1) ^ -m) to (4 * m - 1) / (4 * m) * (INT x:[0,oo]. 1 / (x ^ 4 + 1) ^ m)"
                             },
                             "type": "CalculationStep"
                         }

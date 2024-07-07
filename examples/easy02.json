@@ -65,11 +65,11 @@
                                 "latex_res": "2 a ^ {2} (\\int_{0}^{\\infty} \\frac{1}{a ^ {2} + x ^ {2}} \\,dx)",
                                 "res": "2 * a ^ 2 * (INT x:[0,oo]. 1 / (a ^ 2 + x ^ 2))",
                                 "rule": {
-                                    "latex_str": "rewriting \\(x ^ {2} (\\frac{a ^ {2}}{x ^ {2}} + 1)\\) to \\(a ^ {2} + x ^ {2}\\)",
+                                    "latex_str": "rewrite \\(x ^ {2} (\\frac{a ^ {2}}{x ^ {2}} + 1)\\) to \\(a ^ {2} + x ^ {2}\\)",
                                     "name": "Equation",
                                     "new_expr": "a ^ 2 + x ^ 2",
                                     "old_expr": "x ^ 2 * (a ^ 2 / x ^ 2 + 1)",
-                                    "str": "rewriting x ^ 2 * (a ^ 2 / x ^ 2 + 1) to a ^ 2 + x ^ 2"
+                                    "str": "rewrite x ^ 2 * (a ^ 2 / x ^ 2 + 1) to a ^ 2 + x ^ 2"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -85,7 +85,7 @@
                                 "rule": {
                                     "loc": "subterms",
                                     "name": "DefiniteIntegralIdentity",
-                                    "str": "apply definite integral on subterms"
+                                    "str": "apply integral identity on subterms"
                                 },
                                 "type": "CalculationStep"
                             },

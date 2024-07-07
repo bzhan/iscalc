@@ -87,10 +87,10 @@
                                 "latex_res": "-\\frac{\\pi \\log{(2)}}{2} - ((\\left. x \\log{x} \\right\\vert_{x=0}^{\\pi/2}) - (\\int_{0}^{\\pi/2} 1 \\,dx))",
                                 "res": "-(pi * log(2) / 2) - (([x * log(x)]_x=0,pi / 2) - (INT x:[0,pi / 2]. 1))",
                                 "rule": {
-                                    "latex_str": "integrate by parts \\(u \\to \\log{x}, v \\to x\\) at 1",
+                                    "latex_str": "integrate by parts with \\(u = \\log{x}, v = x\\) at 1",
                                     "loc": "1",
                                     "name": "IntegrationByParts",
-                                    "str": "integrate by parts u -> log(x), v -> x at 1",
+                                    "str": "integrate by parts with u = log(x), v = x at 1",
                                     "u": "log(x)",
                                     "v": "x"
                                 },

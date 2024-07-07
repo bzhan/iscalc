@@ -1688,9 +1688,9 @@
                                 "latex_res": "(\\left. \\log{t} \\log^{2}(-t + 1) \\right\\vert_{t=0}^{x}) - (\\int_{0}^{x} -\\frac{2 \\log{t} \\log{(-t + 1)}}{-t + 1} \\,dt)",
                                 "res": "([log(t) * log(-t + 1) ^ 2]_t=0,x) - (INT t:[0,x]. -(2 * log(t) * log(-t + 1) / (-t + 1)))",
                                 "rule": {
-                                    "latex_str": "integrate by parts \\(u \\to \\log^{2}(1 - t), v \\to \\log{t}\\)",
+                                    "latex_str": "integrate by parts with \\(u = \\log^{2}(1 - t), v = \\log{t}\\)",
                                     "name": "IntegrationByParts",
-                                    "str": "integrate by parts u -> log(1 - t) ^ 2, v -> log(t)",
+                                    "str": "integrate by parts with u = log(1 - t) ^ 2, v = log(t)",
                                     "u": "log(1 - t) ^ 2",
                                     "v": "log(t)"
                                 },
@@ -1757,10 +1757,10 @@
                                 "latex_res": "2 ((\\left. \\log{(-t + 1)} \\operatorname{Li}(2,-t + 1) \\right\\vert_{t=0}^{x}) - (\\int_{0}^{x} -\\frac{\\operatorname{Li}(2,-t + 1)}{-t + 1} \\,dt)) + \\log{x} \\log^{2}(-x + 1)",
                                 "res": "2 * (([log(-t + 1) * Li(2,-t + 1)]_t=0,x) - (INT t:[0,x]. -(Li(2,-t + 1) / (-t + 1)))) + log(x) * log(-x + 1) ^ 2",
                                 "rule": {
-                                    "latex_str": "integrate by parts \\(u \\to \\log{(-t + 1)}, v \\to \\operatorname{Li}(2,1 - t)\\) at 0.1",
+                                    "latex_str": "integrate by parts with \\(u = \\log{(-t + 1)}, v = \\operatorname{Li}(2,1 - t)\\) at 0.1",
                                     "loc": "0.1",
                                     "name": "IntegrationByParts",
-                                    "str": "integrate by parts u -> log(-t + 1), v -> Li(2,1 - t) at 0.1",
+                                    "str": "integrate by parts with u = log(-t + 1), v = Li(2,1 - t) at 0.1",
                                     "u": "log(-t + 1)",
                                     "v": "Li(2,1 - t)"
                                 },
@@ -2410,9 +2410,9 @@
                                 "latex_res": "(\\left. \\log{t} \\log^{2}(t + 1) \\right\\vert_{t=0}^{x}) - (\\int_{0}^{x} \\frac{2 \\log{t} \\log{(t + 1)}}{t + 1} \\,dt)",
                                 "res": "([log(t) * log(t + 1) ^ 2]_t=0,x) - (INT t:[0,x]. 2 * log(t) * log(t + 1) / (t + 1))",
                                 "rule": {
-                                    "latex_str": "integrate by parts \\(u \\to \\log^{2}(1 + t), v \\to \\log{t}\\)",
+                                    "latex_str": "integrate by parts with \\(u = \\log^{2}(1 + t), v = \\log{t}\\)",
                                     "name": "IntegrationByParts",
-                                    "str": "integrate by parts u -> log(1 + t) ^ 2, v -> log(t)",
+                                    "str": "integrate by parts with u = log(1 + t) ^ 2, v = log(t)",
                                     "u": "log(1 + t) ^ 2",
                                     "v": "log(t)"
                                 },
@@ -2620,10 +2620,10 @@
                                 "latex_res": "-2 ((\\left. \\log{(t + 1)} \\operatorname{Li}(2,\\frac{1}{t + 1}) \\right\\vert_{t=0}^{x}) - (\\int_{0}^{x} \\frac{1}{t + 1} \\operatorname{Li}(2,\\frac{1}{t + 1}) \\,dt)) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1)",
                                 "res": "-(2 * (([log(t + 1) * Li(2,1 / (t + 1))]_t=0,x) - (INT t:[0,x]. 1 / (t + 1) * Li(2,1 / (t + 1))))) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2",
                                 "rule": {
-                                    "latex_str": "integrate by parts \\(u \\to \\log{(t + 1)}, v \\to \\operatorname{Li}(2,\\frac{1}{1 + t})\\) at 0.0.0.1",
+                                    "latex_str": "integrate by parts with \\(u = \\log{(t + 1)}, v = \\operatorname{Li}(2,\\frac{1}{1 + t})\\) at 0.0.0.1",
                                     "loc": "0.0.0.1",
                                     "name": "IntegrationByParts",
-                                    "str": "integrate by parts u -> log(t + 1), v -> Li(2,1 / (1 + t)) at 0.0.0.1",
+                                    "str": "integrate by parts with u = log(t + 1), v = Li(2,1 / (1 + t)) at 0.0.0.1",
                                     "u": "log(t + 1)",
                                     "v": "Li(2,1 / (1 + t))"
                                 },

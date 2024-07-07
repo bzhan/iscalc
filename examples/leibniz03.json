@@ -142,9 +142,9 @@
                                 "latex_res": "-((\\left. -\\sin{(t x)} e^{-x ^ {2}/2} \\right\\vert_{x=0}^{\\infty}) - (\\int_{0}^{\\infty} -t \\cos{(t x)} e^{-x ^ {2}/2} \\,dx))",
                                 "res": "-(([-(sin(t * x) * exp(-(x ^ 2 / 2)))]_x=0,oo) - (INT x:[0,oo]. -(t * cos(t * x) * exp(-(x ^ 2 / 2)))))",
                                 "rule": {
-                                    "latex_str": "integrate by parts \\(u \\to \\sin{(t x)}, v \\to -e^{-x ^ {2}/2}\\)",
+                                    "latex_str": "integrate by parts with \\(u = \\sin{(t x)}, v = -e^{-x ^ {2}/2}\\)",
                                     "name": "IntegrationByParts",
-                                    "str": "integrate by parts u -> sin(t * x), v -> -exp(-(x ^ 2) / 2)",
+                                    "str": "integrate by parts with u = sin(t * x), v = -exp(-(x ^ 2) / 2)",
                                     "u": "sin(t * x)",
                                     "v": "-exp(-(x ^ 2) / 2)"
                                 },

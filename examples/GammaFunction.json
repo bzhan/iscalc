@@ -304,9 +304,9 @@
                                 "latex_res": "(\\left. -x ^ {n - 1} e^{-x} \\right\\vert_{x=0}^{\\infty}) - (\\int_{0}^{\\infty} -x ^ {n - 2} e^{-x} (n - 1) \\,dx)",
                                 "res": "([-(x ^ (n - 1) * exp(-x))]_x=0,oo) - (INT x:[0,oo]. -(x ^ (n - 2) * exp(-x) * (n - 1)))",
                                 "rule": {
-                                    "latex_str": "integrate by parts \\(u \\to x ^ {n - 1}, v \\to -e^{-x}\\)",
+                                    "latex_str": "integrate by parts with \\(u = x ^ {n - 1}, v = -e^{-x}\\)",
                                     "name": "IntegrationByParts",
-                                    "str": "integrate by parts u -> x ^ (n - 1), v -> -exp(-x)",
+                                    "str": "integrate by parts with u = x ^ (n - 1), v = -exp(-x)",
                                     "u": "x ^ (n - 1)",
                                     "v": "-exp(-x)"
                                 },

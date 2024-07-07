@@ -1960,9 +1960,9 @@
                     "latex_res": "-\\frac{x \\cos{(3 x)}}{3} - (\\int -\\frac{\\cos{(3 x)}}{3} \\,dx)",
                     "res": "-(x * cos(3 * x) / 3) - (INT x. -(cos(3 * x) / 3))",
                     "rule": {
-                        "latex_str": "integrate by parts \\(u \\to x, v \\to -\\frac{1}{3} \\cos{(3 x)}\\)",
+                        "latex_str": "integrate by parts with \\(u = x, v = -\\frac{1}{3} \\cos{(3 x)}\\)",
                         "name": "IntegrationByParts",
-                        "str": "integrate by parts u -> x, v -> -1/3 * cos(3 * x)",
+                        "str": "integrate by parts with u = x, v = -1/3 * cos(3 * x)",
                         "u": "x",
                         "v": "-1/3 * cos(3 * x)"
                     },
@@ -2018,9 +2018,9 @@
                     "latex_res": "x ^ {2} \\sin{x} - (\\int 2 x \\sin{x} \\,dx)",
                     "res": "x ^ 2 * sin(x) - (INT x. 2 * x * sin(x))",
                     "rule": {
-                        "latex_str": "integrate by parts \\(u \\to x ^ {2}, v \\to \\sin{x}\\)",
+                        "latex_str": "integrate by parts with \\(u = x ^ {2}, v = \\sin{x}\\)",
                         "name": "IntegrationByParts",
-                        "str": "integrate by parts u -> x ^ 2, v -> sin(x)",
+                        "str": "integrate by parts with u = x ^ 2, v = sin(x)",
                         "u": "x ^ 2",
                         "v": "sin(x)"
                     },
@@ -2051,9 +2051,9 @@
                     "latex_res": "x ^ {2} \\sin{x} - 2 (-x \\cos{x} - (\\int -\\cos{x} \\,dx))",
                     "res": "x ^ 2 * sin(x) - 2 * (-(x * cos(x)) - (INT x. -cos(x)))",
                     "rule": {
-                        "latex_str": "integrate by parts \\(u \\to x, v \\to -\\cos{x}\\)",
+                        "latex_str": "integrate by parts with \\(u = x, v = -\\cos{x}\\)",
                         "name": "IntegrationByParts",
-                        "str": "integrate by parts u -> x, v -> -cos(x)",
+                        "str": "integrate by parts with u = x, v = -cos(x)",
                         "u": "x",
                         "v": "-cos(x)"
                     },
@@ -2145,9 +2145,9 @@
                     "latex_res": "u e^{u} - (\\int e^{u} \\,du)",
                     "res": "u * exp(u) - (INT u. exp(u))",
                     "rule": {
-                        "latex_str": "integrate by parts \\(u \\to u, v \\to e^{u}\\)",
+                        "latex_str": "integrate by parts with \\(u = u, v = e^{u}\\)",
                         "name": "IntegrationByParts",
-                        "str": "integrate by parts u -> u, v -> exp(u)",
+                        "str": "integrate by parts with u = u, v = exp(u)",
                         "u": "u",
                         "v": "exp(u)"
                     },
@@ -2197,9 +2197,9 @@
                     "latex_res": "-\\cos{x} e^{x} - (\\int -\\cos{x} e^{x} \\,dx)",
                     "res": "-(cos(x) * exp(x)) - (INT x. -(cos(x) * exp(x)))",
                     "rule": {
-                        "latex_str": "integrate by parts \\(u \\to e^{x}, v \\to -\\cos{x}\\)",
+                        "latex_str": "integrate by parts with \\(u = e^{x}, v = -\\cos{x}\\)",
                         "name": "IntegrationByParts",
-                        "str": "integrate by parts u -> exp(x), v -> -cos(x)",
+                        "str": "integrate by parts with u = exp(x), v = -cos(x)",
                         "u": "exp(x)",
                         "v": "-cos(x)"
                     },
@@ -2230,9 +2230,9 @@
                     "latex_res": "e^{x} \\sin{x} - (\\int e^{x} \\sin{x} \\,dx) - \\cos{x} e^{x}",
                     "res": "exp(x) * sin(x) - (INT x. exp(x) * sin(x)) - cos(x) * exp(x)",
                     "rule": {
-                        "latex_str": "integrate by parts \\(u \\to e^{x}, v \\to \\sin{x}\\)",
+                        "latex_str": "integrate by parts with \\(u = e^{x}, v = \\sin{x}\\)",
                         "name": "IntegrationByParts",
-                        "str": "integrate by parts u -> exp(x), v -> sin(x)",
+                        "str": "integrate by parts with u = exp(x), v = sin(x)",
                         "u": "exp(x)",
                         "v": "sin(x)"
                     },
@@ -2265,9 +2265,9 @@
                     "latex_res": "\\frac{\\sin{(3 x)} \\sin{(4 x)}}{4} - (\\int \\frac{3 \\cos{(3 x)} \\sin{(4 x)}}{4} \\,dx)",
                     "res": "sin(3 * x) * sin(4 * x) / 4 - (INT x. 3 * cos(3 * x) * sin(4 * x) / 4)",
                     "rule": {
-                        "latex_str": "integrate by parts \\(u \\to \\sin{(3 x)}, v \\to \\frac{\\sin{(4 x)}}{4}\\)",
+                        "latex_str": "integrate by parts with \\(u = \\sin{(3 x)}, v = \\frac{\\sin{(4 x)}}{4}\\)",
                         "name": "IntegrationByParts",
-                        "str": "integrate by parts u -> sin(3 * x), v -> sin(4 * x) / 4",
+                        "str": "integrate by parts with u = sin(3 * x), v = sin(4 * x) / 4",
                         "u": "sin(3 * x)",
                         "v": "sin(4 * x) / 4"
                     },
@@ -2298,9 +2298,9 @@
                     "latex_res": "-\\frac{3 (-\\frac{\\cos{(3 x)} \\cos{(4 x)}}{4} - (\\int \\frac{3 \\cos{(4 x)} \\sin{(3 x)}}{4} \\,dx))}{4} + \\frac{\\sin{(3 x)} \\sin{(4 x)}}{4}",
                     "res": "-(3 * (-(cos(3 * x) * cos(4 * x) / 4) - (INT x. 3 * cos(4 * x) * sin(3 * x) / 4)) / 4) + sin(3 * x) * sin(4 * x) / 4",
                     "rule": {
-                        "latex_str": "integrate by parts \\(u \\to \\cos{(3 x)}, v \\to \\frac{-\\cos{(4 x)}}{4}\\)",
+                        "latex_str": "integrate by parts with \\(u = \\cos{(3 x)}, v = \\frac{-\\cos{(4 x)}}{4}\\)",
                         "name": "IntegrationByParts",
-                        "str": "integrate by parts u -> cos(3 * x), v -> -cos(4 * x) / 4",
+                        "str": "integrate by parts with u = cos(3 * x), v = -cos(4 * x) / 4",
                         "u": "cos(3 * x)",
                         "v": "-cos(4 * x) / 4"
                     },

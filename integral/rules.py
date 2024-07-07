@@ -1580,7 +1580,8 @@ class Equation(Rule):
                 if ctx.check_condition(Op('=', Fun('norm', e), Const(0))) and \
                         normalize(self.new_expr, ctx) == Fun(*ctx.get_func_type('zero_matrix', t.args[1], t.args[2])):
                     return self.new_expr
-        raise AssertionError("Equation: rewriting %s to %s failed" % (e, self.new_expr))
+
+        raise RuleException("Equation", "rewriting %s to %s failed" % (e, self.new_expr))
 
 
 class IntegrationByParts(Rule):
@@ -1601,7 +1602,7 @@ class IntegrationByParts(Rule):
         self.v = v
 
     def __str__(self):
-        return "integrate by parts u -> %s, v -> %s" % (self.u, self.v)
+        return "integrate by parts with u = %s, v = %s" % (self.u, self.v)
 
     def export(self):
         return {
@@ -1609,7 +1610,7 @@ class IntegrationByParts(Rule):
             "u": str(self.u),
             "v": str(self.v),
             "str": str(self),
-            "latex_str": "integrate by parts \\(u \\to %s, v \\to %s\\)" % \
+            "latex_str": "integrate by parts with \\(u = %s, v = %s\\)" % \
                          (latex.convert_expr(self.u), latex.convert_expr(self.v))
         }
 
@@ -1645,7 +1646,8 @@ class IntegrationByParts(Rule):
                 return normalize(self.u * self.v, ctx2) - \
                        expr.IndefiniteIntegral(e.var, normalize(self.v * du, ctx2), e.skolem_args)
         else:
-            raise AssertionError("Integration by parts: %s != %s" % (str(udv), str(e.body)))
+            raise RuleException("Integration by parts", "u * dv does not equal body: %s != %s" % (
+                str(udv), str(e.body)))
 
 
 class SplitRegion(Rule):

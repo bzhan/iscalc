@@ -40,9 +40,9 @@
                                 "latex_res": "(\\left. x (x ^ {4} + 1) ^ {-m} \\right\\vert_{x=0}^{\\infty}) - (\\int_{0}^{\\infty} -4 m x ^ {4} (x ^ {4} + 1) ^ {-m - 1} \\,dx)",
                                 "res": "([x * (x ^ 4 + 1) ^ -m]_x=0,oo) - (INT x:[0,oo]. -(4 * m * x ^ 4 * (x ^ 4 + 1) ^ (-m - 1)))",
                                 "rule": {
-                                    "latex_str": "integrate by parts \\(u \\to \\frac{1}{(x ^ {4} + 1) ^ {m}}, v \\to x\\)",
+                                    "latex_str": "integrate by parts with \\(u = \\frac{1}{(x ^ {4} + 1) ^ {m}}, v = x\\)",
                                     "name": "IntegrationByParts",
-                                    "str": "integrate by parts u -> 1 / (x ^ 4 + 1) ^ m, v -> x",
+                                    "str": "integrate by parts with u = 1 / (x ^ 4 + 1) ^ m, v = x",
                                     "u": "1 / (x ^ 4 + 1) ^ m",
                                     "v": "x"
                                 },

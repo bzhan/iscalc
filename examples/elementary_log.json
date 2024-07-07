@@ -78,9 +78,9 @@
                                 "latex_res": "(\\left. \\frac{x ^ {m + 1} \\log^{n}(x)}{m + 1} \\right\\vert_{x=0}^{1}) - (\\int_{0}^{1} \\frac{n x ^ {m} \\log^{n - 1}(x)}{m + 1} \\,dx)",
                                 "res": "([x ^ (m + 1) * log(x) ^ n / (m + 1)]_x=0,1) - (INT x:[0,1]. n * x ^ m * log(x) ^ (n - 1) / (m + 1))",
                                 "rule": {
-                                    "latex_str": "integrate by parts \\(u \\to \\log^{n}(x), v \\to \\frac{x ^ {m + 1}}{m + 1}\\)",
+                                    "latex_str": "integrate by parts with \\(u = \\log^{n}(x), v = \\frac{x ^ {m + 1}}{m + 1}\\)",
                                     "name": "IntegrationByParts",
-                                    "str": "integrate by parts u -> log(x) ^ n, v -> x ^ (m + 1) / (m + 1)",
+                                    "str": "integrate by parts with u = log(x) ^ n, v = x ^ (m + 1) / (m + 1)",
                                     "u": "log(x) ^ n",
                                     "v": "x ^ (m + 1) / (m + 1)"
                                 },

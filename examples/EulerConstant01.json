@@ -26,10 +26,10 @@
                                 "latex_res": "(\\int_{0}^{1} \\frac{-e^{-x} + 1}{x} \\,dx) - ((\\left. e^{-x} \\log{x} \\right\\vert_{x=1}^{\\infty}) - (\\int_{1}^{\\infty} -e^{-x} \\log{x} \\,dx))",
                                 "res": "(INT x:[0,1]. (-exp(-x) + 1) / x) - (([exp(-x) * log(x)]_x=1,oo) - (INT x:[1,oo]. -(exp(-x) * log(x))))",
                                 "rule": {
-                                    "latex_str": "integrate by parts \\(u \\to e^{-x}, v \\to \\log{x}\\) at 1",
+                                    "latex_str": "integrate by parts with \\(u = e^{-x}, v = \\log{x}\\) at 1",
                                     "loc": "1",
                                     "name": "IntegrationByParts",
-                                    "str": "integrate by parts u -> exp(-x), v -> log(x) at 1",
+                                    "str": "integrate by parts with u = exp(-x), v = log(x) at 1",
                                     "u": "exp(-x)",
                                     "v": "log(x)"
                                 },
@@ -45,10 +45,10 @@
                                 "latex_res": "(\\left. \\log{x} (-e^{-x} + 1) \\right\\vert_{x=0}^{1}) - (\\int_{0}^{1} e^{-x} \\log{x} \\,dx) - ((\\left. e^{-x} \\log{x} \\right\\vert_{x=1}^{\\infty}) - (\\int_{1}^{\\infty} -e^{-x} \\log{x} \\,dx))",
                                 "res": "([log(x) * (-exp(-x) + 1)]_x=0,1) - (INT x:[0,1]. exp(-x) * log(x)) - (([exp(-x) * log(x)]_x=1,oo) - (INT x:[1,oo]. -(exp(-x) * log(x))))",
                                 "rule": {
-                                    "latex_str": "integrate by parts \\(u \\to 1 - e^{-x}, v \\to \\log{x}\\) at 0",
+                                    "latex_str": "integrate by parts with \\(u = 1 - e^{-x}, v = \\log{x}\\) at 0",
                                     "loc": "0",
                                     "name": "IntegrationByParts",
-                                    "str": "integrate by parts u -> 1 - exp(-x), v -> log(x) at 0",
+                                    "str": "integrate by parts with u = 1 - exp(-x), v = log(x) at 0",
                                     "u": "1 - exp(-x)",
                                     "v": "log(x)"
                                 },

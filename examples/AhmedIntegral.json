@@ -395,9 +395,9 @@
                                 "latex_res": "\\pi ((\\left. \\frac{1}{2} \\tan^{-1}{(\\frac{x}{\\sqrt{x ^ {2} + 2}})} \\right\\vert_{x=0}^{1}) - (\\int_{0}^{1} 0 \\,dx)) - I{(1)}",
                                 "res": "pi * (([1/2 * atan(x / sqrt(x ^ 2 + 2))]_x=0,1) - (INT x:[0,1]. 0)) - I(1)",
                                 "rule": {
-                                    "latex_str": "integrate by parts \\(u \\to 1, v \\to \\frac{\\tan^{-1}{(\\frac{x}{\\sqrt{2 + x ^ {2}}})}}{2}\\)",
+                                    "latex_str": "integrate by parts with \\(u = 1, v = \\frac{\\tan^{-1}{(\\frac{x}{\\sqrt{2 + x ^ {2}}})}}{2}\\)",
                                     "name": "IntegrationByParts",
-                                    "str": "integrate by parts u -> 1, v -> atan(x / sqrt(2 + x ^ 2)) / 2",
+                                    "str": "integrate by parts with u = 1, v = atan(x / sqrt(2 + x ^ 2)) / 2",
                                     "u": "1",
                                     "v": "atan(x / sqrt(2 + x ^ 2)) / 2"
                                 },
@@ -734,9 +734,9 @@
                                 "latex_res": "I{(1)} - \\frac{\\pi}{2} ((\\left. \\tan^{-1}{(\\frac{x}{\\sqrt{x ^ {2} + 2}})} \\right\\vert_{x=0}^{1}) - (\\int_{0}^{1} 0 \\,dx)) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "I(1) - pi / 2 * (([atan(x / sqrt(x ^ 2 + 2))]_x=0,1) - (INT x:[0,1]. 0)) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
-                                    "latex_str": "integrate by parts \\(u \\to 1, v \\to \\tan^{-1}{(\\frac{x}{\\sqrt{2 + x ^ {2}}})}\\)",
+                                    "latex_str": "integrate by parts with \\(u = 1, v = \\tan^{-1}{(\\frac{x}{\\sqrt{2 + x ^ {2}}})}\\)",
                                     "name": "IntegrationByParts",
-                                    "str": "integrate by parts u -> 1, v -> atan(x / sqrt(2 + x ^ 2))",
+                                    "str": "integrate by parts with u = 1, v = atan(x / sqrt(2 + x ^ 2))",
                                     "u": "1",
                                     "v": "atan(x / sqrt(2 + x ^ 2))"
                                 },

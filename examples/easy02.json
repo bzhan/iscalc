@@ -32,9 +32,9 @@
                                 "latex_res": "(\\left. x \\log{(\\frac{a ^ {2}}{x ^ {2}} + 1)} \\right\\vert_{x=0}^{\\infty}) - (\\int_{0}^{\\infty} -\\frac{2 a ^ {2}}{x ^ {2} (\\frac{a ^ {2}}{x ^ {2}} + 1)} \\,dx)",
                                 "res": "([x * log(a ^ 2 / x ^ 2 + 1)]_x=0,oo) - (INT x:[0,oo]. -(2 * a ^ 2 / (x ^ 2 * (a ^ 2 / x ^ 2 + 1))))",
                                 "rule": {
-                                    "latex_str": "integrate by parts \\(u \\to \\log{(1 + \\frac{a ^ {2}}{x ^ {2}})}, v \\to x\\)",
+                                    "latex_str": "integrate by parts with \\(u = \\log{(1 + \\frac{a ^ {2}}{x ^ {2}})}, v = x\\)",
                                     "name": "IntegrationByParts",
-                                    "str": "integrate by parts u -> log(1 + a ^ 2 / x ^ 2), v -> x",
+                                    "str": "integrate by parts with u = log(1 + a ^ 2 / x ^ 2), v = x",
                                     "u": "log(1 + a ^ 2 / x ^ 2)",
                                     "v": "x"
                                 },

@@ -24,6 +24,15 @@ from integral.conditions import Conditions
 from integral import sympywrapper
 
 
+class RuleException(Exception):
+    def __init__(self, rule_name: str, msg: str):
+        self.rule_name = rule_name
+        self.msg = msg
+
+    def __str__(self):
+        return "%s: %s" % (self.rule_name, self.msg)
+
+
 def deriv(var: str, e: Expr, ctx: Context) -> Expr:
     """Compute the derivative of e with respect to variable
     name var.
@@ -1351,6 +1360,12 @@ class SubstitutionInverse(Rule):
                 return e
             else:
                 return OnLocation(self, sep_ints[0][1]).eval(e, ctx)
+            
+        if not expr.is_integral(e):
+            raise RuleException("SubstitutionInverse", "input is not integral")
+        
+        if e.contains_var(self.var_name) or e.var == self.var_name:
+            raise RuleException("SubstitutionInverse", "variable %s already exists" % self.var_name)
 
         # dx = f'(u) * du
         subst_deriv = deriv(self.var_name, self.var_subst, ctx)
@@ -1367,7 +1382,7 @@ class SubstitutionInverse(Rule):
         lower = solve_equation(self.var_subst, x, self.var_name, ctx)
         upper = solve_equation(self.var_subst, x, self.var_name, ctx)
         if lower is None or upper is None:
-            raise AssertionError("SubstitutionInverse: cannot solve")
+            raise RuleException("SubstitutionInverse", "cannot solve equation")
 
         lower = limits.reduce_inf_limit(lower.subst(x.name, (1 / x) + e.lower), x.name, ctx)
         upper = limits.reduce_inf_limit(upper.subst(x.name, e.upper - (1 / x)), x.name, ctx)

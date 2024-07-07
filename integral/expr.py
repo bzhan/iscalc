@@ -1791,8 +1791,12 @@ class IndefiniteIntegral(Expr):
 
 
 class Integral(Expr):
-    """Integral of an expression."""
+    """Integral of an expression.
+    
+    Note equality is with respect to alpha equivalence. The hash function
+    is likewise.
 
+    """
     def __init__(self, var: str, lower: Expr, upper: Expr, body: Expr):
         assert isinstance(var, str) and isinstance(lower, Expr) and \
                isinstance(upper, Expr) and isinstance(body, Expr)
@@ -1805,7 +1809,8 @@ class Integral(Expr):
         self.var_type = RealType
 
     def __hash__(self):
-        return hash((INTEGRAL, self.var, self.lower, self.upper, self.body))
+        # Convert to standard bound variable
+        return hash((INTEGRAL, self.lower, self.upper, self.body.subst(self.var, Var("_u"))))
 
     def __eq__(self, other):
         return isinstance(other, Integral) and self.lower == other.lower and self.upper == other.upper and \

@@ -90,24 +90,6 @@
                                 "type": "CalculationStep"
                             },
                             {
-                                "fixes": [
-                                    [
-                                        "x",
-                                        "$real"
-                                    ]
-                                ],
-                                "latex_res": "-(\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx) + (\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx)",
-                                "res": "-(INT x:[1,oo]. log(x) / (x ^ 2 + 1)) + (INT x:[1,oo]. log(x) / (x ^ 2 + 1))",
-                                "rule": {
-                                    "latex_str": "substitute \\(x\\) for \\(u\\)",
-                                    "name": "Substitution",
-                                    "str": "substitute x for u",
-                                    "var_name": "x",
-                                    "var_subst": "u"
-                                },
-                                "type": "CalculationStep"
-                            },
-                            {
                                 "latex_res": "0",
                                 "res": "0",
                                 "rule": {

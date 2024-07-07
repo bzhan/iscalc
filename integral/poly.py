@@ -622,7 +622,7 @@ def to_poly_r(e: expr.Expr, ctx: Context) -> Polynomial:
     else:
         return singleton(e)
 
-def to_poly(e: expr.Expr, ctx: Context) -> expr.Expr:
+def to_poly(e: expr.Expr, ctx: Context) -> Polynomial:
     return to_poly_r(e, ctx).reduce(ctx)
 
 def function_eval(e: expr.Expr, ctx: Context) -> expr.Expr:
@@ -1034,6 +1034,7 @@ def simplify_sqrt(e: expr.Expr, ctx: Context) -> expr.Expr:
         return 1 / expr.sqrt(expr.Const(2))
 
     return e
+
 def simplify_sum(e: expr.Expr, ctx:Context) -> expr.Expr:
     if expr.is_summation(e):
         if e.lower == e.upper and e.lower not in (expr.POS_INF, expr.NEG_INF):
@@ -1056,6 +1057,7 @@ def simplify_sum(e: expr.Expr, ctx:Context) -> expr.Expr:
                     new_body = pat.inst_pat(new_inst)
                     return expr.Summation(av, al, au, new_body)
     return e
+
 def simplify_inf(e: expr.Expr, ctx: Context) -> expr.Expr:
     if e.is_plus():
         if e.args[0] == expr.POS_INF and e.args[1].is_constant():
@@ -1068,6 +1070,7 @@ def simplify_inf(e: expr.Expr, ctx: Context) -> expr.Expr:
             if expr.eval_expr(e) != 0:
                 return e.args[0]
     return e
+
 def normal_const(e:expr.Expr, ctx:Context):
     if e.is_constant():
         return normalize(e, ctx)

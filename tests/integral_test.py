@@ -965,7 +965,6 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.SubstitutionInverse("u", "1 / u"))
         calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.Equation("u ^ 2 * (1 / u ^ 2 + 1)", "u ^ 2 + 1"))
-        calc.perform_rule(rules.Substitution("x", "u"))
         calc.perform_rule(rules.Simplify())
 
         self.checkAndOutput(file)

@@ -32,9 +32,10 @@
                                 "latex_res": "\\int_{0}^{a} \\frac{\\log{(\\frac{t}{a} + 1)}}{(\\frac{t}{a}) ^ {2} + 1} (\\frac{1}{a}) \\,dt",
                                 "res": "INT t:[0,a]. log(t / a + 1) / ((t / a) ^ 2 + 1) * (1 / a)",
                                 "rule": {
-                                    "latex_str": "inverse substitute \\(\\frac{t}{a}\\) creating \\(t\\)",
+                                    "latex_str": "inverse substitute \\(\\frac{t}{a}\\) for \\(x\\) creating \\(t\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitute t / a creating t",
+                                    "old_var": "x",
+                                    "str": "inverse substitute t / a for x creating t",
                                     "var_name": "t",
                                     "var_subst": "t / a"
                                 },

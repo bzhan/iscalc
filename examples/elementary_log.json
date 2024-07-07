@@ -711,9 +711,10 @@
                                 "latex_res": "\\int_{0}^{1} (a y) ^ {m} \\log^{n}(a y) a \\,dy",
                                 "res": "INT y:[0,1]. (a * y) ^ m * log(a * y) ^ n * a",
                                 "rule": {
-                                    "latex_str": "inverse substitute \\(a y\\) creating \\(y\\)",
+                                    "latex_str": "inverse substitute \\(a y\\) for \\(x\\) creating \\(y\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitute a * y creating y",
+                                    "old_var": "x",
+                                    "str": "inverse substitute a * y for x creating y",
                                     "var_name": "y",
                                     "var_subst": "a * y"
                                 },

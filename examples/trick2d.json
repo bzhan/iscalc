@@ -20,9 +20,10 @@
                                 "latex_res": "\\int_{0}^{\\pi/4} \\frac{\\log{(\\tan{u} + 1)}}{\\tan^{2}(u) + 1} \\sec^{2}(u) \\,du",
                                 "res": "INT u:[0,pi / 4]. log(tan(u) + 1) / (tan(u) ^ 2 + 1) * sec(u) ^ 2",
                                 "rule": {
-                                    "latex_str": "inverse substitute \\(\\tan{u}\\) creating \\(u\\)",
+                                    "latex_str": "inverse substitute \\(\\tan{u}\\) for \\(x\\) creating \\(u\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitute tan(u) creating u",
+                                    "old_var": "x",
+                                    "str": "inverse substitute tan(u) for x creating u",
                                     "var_name": "u",
                                     "var_subst": "tan(u)"
                                 },
@@ -109,30 +110,31 @@
                             {
                                 "fixes": [
                                     [
-                                        "x",
+                                        "y",
                                         "$real"
                                     ]
                                 ],
-                                "latex_res": "-(\\int_{0}^{\\pi/4} \\log{(\\tan{(\\frac{\\pi}{4} - x)} + 1)}\\cdot -1 \\,dx)",
-                                "res": "-(INT x:[0,pi / 4]. log(tan(pi / 4 - x) + 1) * -1)",
+                                "latex_res": "-(\\int_{0}^{\\pi/4} \\log{(\\tan{(\\frac{\\pi}{4} - y)} + 1)}\\cdot -1 \\,dy)",
+                                "res": "-(INT y:[0,pi / 4]. log(tan(pi / 4 - y) + 1) * -1)",
                                 "rule": {
-                                    "latex_str": "inverse substitute \\(\\frac{\\pi}{4} - x\\) creating \\(x\\)",
+                                    "latex_str": "inverse substitute \\(\\frac{\\pi}{4} - y\\) for \\(x\\) creating \\(y\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitute pi / 4 - x creating x",
-                                    "var_name": "x",
-                                    "var_subst": "pi / 4 - x"
+                                    "old_var": "x",
+                                    "str": "inverse substitute pi / 4 - y for x creating y",
+                                    "var_name": "y",
+                                    "var_subst": "pi / 4 - y"
                                 },
                                 "type": "CalculationStep"
                             },
                             {
                                 "fixes": [
                                     [
-                                        "x",
+                                        "y",
                                         "$real"
                                     ]
                                 ],
-                                "latex_res": "\\int_{0}^{\\pi/4} \\log{(\\tan{(\\frac{\\pi}{4} - x)} + 1)} \\,dx",
-                                "res": "INT x:[0,pi / 4]. log(tan(pi / 4 - x) + 1)",
+                                "latex_res": "\\int_{0}^{\\pi/4} \\log{(\\tan{(\\frac{\\pi}{4} - y)} + 1)} \\,dy",
+                                "res": "INT y:[0,pi / 4]. log(tan(pi / 4 - y) + 1)",
                                 "rule": {
                                     "name": "Simplify",
                                     "str": "simplify"
@@ -142,30 +144,30 @@
                             {
                                 "fixes": [
                                     [
-                                        "x",
+                                        "y",
                                         "$real"
                                     ]
                                 ],
-                                "latex_res": "\\int_{0}^{\\pi/4} \\log{(\\frac{\\tan{(\\frac{\\pi}{4})} - \\tan{x}}{1 + \\tan{(\\frac{\\pi}{4})} \\tan{x}} + 1)} \\,dx",
-                                "res": "INT x:[0,pi / 4]. log((tan(pi / 4) - tan(x)) / (1 + tan(pi / 4) * tan(x)) + 1)",
+                                "latex_res": "\\int_{0}^{\\pi/4} \\log{(\\frac{\\tan{(\\frac{\\pi}{4})} - \\tan{y}}{1 + \\tan{(\\frac{\\pi}{4})} \\tan{y}} + 1)} \\,dy",
+                                "res": "INT y:[0,pi / 4]. log((tan(pi / 4) - tan(y)) / (1 + tan(pi / 4) * tan(y)) + 1)",
                                 "rule": {
-                                    "latex_str": "rewrite \\(\\tan{(\\frac{\\pi}{4} - x)}\\) to \\(\\frac{\\tan{(\\frac{\\pi}{4})} - \\tan{x}}{1 + \\tan{(\\frac{\\pi}{4})} \\tan{x}}\\) using identity",
+                                    "latex_str": "rewrite \\(\\tan{(\\frac{\\pi}{4} - y)}\\) to \\(\\frac{\\tan{(\\frac{\\pi}{4})} - \\tan{y}}{1 + \\tan{(\\frac{\\pi}{4})} \\tan{y}}\\) using identity",
                                     "name": "ApplyIdentity",
-                                    "source": "tan(pi / 4 - x)",
-                                    "str": "rewrite tan(pi / 4 - x) to (tan(pi / 4) - tan(x)) / (1 + tan(pi / 4) * tan(x)) using identity",
-                                    "target": "(tan(pi / 4) - tan(x)) / (1 + tan(pi / 4) * tan(x))"
+                                    "source": "tan(pi / 4 - y)",
+                                    "str": "rewrite tan(pi / 4 - y) to (tan(pi / 4) - tan(y)) / (1 + tan(pi / 4) * tan(y)) using identity",
+                                    "target": "(tan(pi / 4) - tan(y)) / (1 + tan(pi / 4) * tan(y))"
                                 },
                                 "type": "CalculationStep"
                             },
                             {
                                 "fixes": [
                                     [
-                                        "x",
+                                        "y",
                                         "$real"
                                     ]
                                 ],
-                                "latex_res": "\\int_{0}^{\\pi/4} \\log{(\\frac{-\\tan{x} + 1}{\\tan{x} + 1} + 1)} \\,dx",
-                                "res": "INT x:[0,pi / 4]. log((-tan(x) + 1) / (tan(x) + 1) + 1)",
+                                "latex_res": "\\int_{0}^{\\pi/4} \\log{(\\frac{-\\tan{y} + 1}{\\tan{y} + 1} + 1)} \\,dy",
+                                "res": "INT y:[0,pi / 4]. log((-tan(y) + 1) / (tan(y) + 1) + 1)",
                                 "rule": {
                                     "name": "Simplify",
                                     "str": "simplify"
@@ -175,48 +177,48 @@
                             {
                                 "fixes": [
                                     [
-                                        "x",
+                                        "y",
                                         "$real"
                                     ]
                                 ],
-                                "latex_res": "\\int_{0}^{\\pi/4} \\log{(\\frac{2}{1 + \\tan{x}})} \\,dx",
-                                "res": "INT x:[0,pi / 4]. log(2 / (1 + tan(x)))",
+                                "latex_res": "\\int_{0}^{\\pi/4} \\log{(\\frac{2}{1 + \\tan{y}})} \\,dy",
+                                "res": "INT y:[0,pi / 4]. log(2 / (1 + tan(y)))",
                                 "rule": {
-                                    "latex_str": "rewrite \\(\\frac{-\\tan{x} + 1}{\\tan{x} + 1} + 1\\) to \\(\\frac{2}{1 + \\tan{x}}\\)",
+                                    "latex_str": "rewrite \\(\\frac{-\\tan{y} + 1}{\\tan{y} + 1} + 1\\) to \\(\\frac{2}{1 + \\tan{y}}\\)",
                                     "name": "Equation",
-                                    "new_expr": "2 / (1 + tan(x))",
-                                    "old_expr": "(-tan(x) + 1) / (tan(x) + 1) + 1",
-                                    "str": "rewrite (-tan(x) + 1) / (tan(x) + 1) + 1 to 2 / (1 + tan(x))"
+                                    "new_expr": "2 / (1 + tan(y))",
+                                    "old_expr": "(-tan(y) + 1) / (tan(y) + 1) + 1",
+                                    "str": "rewrite (-tan(y) + 1) / (tan(y) + 1) + 1 to 2 / (1 + tan(y))"
                                 },
                                 "type": "CalculationStep"
                             },
                             {
                                 "fixes": [
                                     [
-                                        "x",
+                                        "y",
                                         "$real"
                                     ]
                                 ],
-                                "latex_res": "\\int_{0}^{\\pi/4} \\log{(2)} - \\log{(1 + \\tan{x})} \\,dx",
-                                "res": "INT x:[0,pi / 4]. log(2) - log(1 + tan(x))",
+                                "latex_res": "\\int_{0}^{\\pi/4} \\log{(2)} - \\log{(1 + \\tan{y})} \\,dy",
+                                "res": "INT y:[0,pi / 4]. log(2) - log(1 + tan(y))",
                                 "rule": {
-                                    "latex_str": "rewrite \\(\\log{(\\frac{2}{1 + \\tan{x}})}\\) to \\(\\log{(2)} - \\log{(1 + \\tan{x})}\\) using identity",
+                                    "latex_str": "rewrite \\(\\log{(\\frac{2}{1 + \\tan{y}})}\\) to \\(\\log{(2)} - \\log{(1 + \\tan{y})}\\) using identity",
                                     "name": "ApplyIdentity",
-                                    "source": "log(2 / (1 + tan(x)))",
-                                    "str": "rewrite log(2 / (1 + tan(x))) to log(2) - log(1 + tan(x)) using identity",
-                                    "target": "log(2) - log(1 + tan(x))"
+                                    "source": "log(2 / (1 + tan(y)))",
+                                    "str": "rewrite log(2 / (1 + tan(y))) to log(2) - log(1 + tan(y)) using identity",
+                                    "target": "log(2) - log(1 + tan(y))"
                                 },
                                 "type": "CalculationStep"
                             },
                             {
                                 "fixes": [
                                     [
-                                        "x",
+                                        "y",
                                         "$real"
                                     ]
                                 ],
-                                "latex_res": "\\log{(2)} (\\left. x \\right\\vert_{x=0}^{\\pi/4}) - (\\int_{0}^{\\pi/4} \\log{(1 + \\tan{x})} \\,dx)",
-                                "res": "log(2) * ([x]_x=0,pi / 4) - (INT x:[0,pi / 4]. log(1 + tan(x)))",
+                                "latex_res": "\\log{(2)} (\\left. y \\right\\vert_{y=0}^{\\pi/4}) - (\\int_{0}^{\\pi/4} \\log{(1 + \\tan{y})} \\,dy)",
+                                "res": "log(2) * ([y]_y=0,pi / 4) - (INT y:[0,pi / 4]. log(1 + tan(y)))",
                                 "rule": {
                                     "name": "DefiniteIntegralIdentity",
                                     "str": "apply integral identity"
@@ -226,12 +228,12 @@
                             {
                                 "fixes": [
                                     [
-                                        "x",
+                                        "y",
                                         "$real"
                                     ]
                                 ],
-                                "latex_res": "-(\\int_{0}^{\\pi/4} \\log{(\\tan{x} + 1)} \\,dx) + \\frac{\\pi \\log{(2)}}{4}",
-                                "res": "-(INT x:[0,pi / 4]. log(tan(x) + 1)) + pi * log(2) / 4",
+                                "latex_res": "-(\\int_{0}^{\\pi/4} \\log{(\\tan{y} + 1)} \\,dy) + \\frac{\\pi \\log{(2)}}{4}",
+                                "res": "-(INT y:[0,pi / 4]. log(tan(y) + 1)) + pi * log(2) / 4",
                                 "rule": {
                                     "name": "Simplify",
                                     "str": "simplify"

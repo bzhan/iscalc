@@ -65,49 +65,50 @@
                             {
                                 "fixes": [
                                     [
-                                        "x",
+                                        "t",
                                         "$real"
                                     ]
                                 ],
-                                "latex_res": "-(\\int_{0}^{\\pi/2} (\\cos^{2}(x)) ^ {m - 1} (-\\cos^{2}(x) + 1) ^ {n - 1} (-2 \\cos{x} \\sin{x}) \\,dx)",
-                                "res": "-(INT x:[0,pi / 2]. cos(x) ^ 2 ^ (m - 1) * (-(cos(x) ^ 2) + 1) ^ (n - 1) * -(2 * cos(x) * sin(x)))",
+                                "latex_res": "-(\\int_{0}^{\\pi/2} (\\cos^{2}(t)) ^ {m - 1} (-\\cos^{2}(t) + 1) ^ {n - 1} (-2 \\cos{t} \\sin{t}) \\,dt)",
+                                "res": "-(INT t:[0,pi / 2]. cos(t) ^ 2 ^ (m - 1) * (-(cos(t) ^ 2) + 1) ^ (n - 1) * -(2 * cos(t) * sin(t)))",
                                 "rule": {
-                                    "latex_str": "inverse substitute \\(\\cos^{2}(x)\\) creating \\(x\\)",
+                                    "latex_str": "inverse substitute \\(\\cos^{2}(t)\\) for \\(x\\) creating \\(t\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitute cos(x) ^ 2 creating x",
-                                    "var_name": "x",
-                                    "var_subst": "cos(x) ^ 2"
+                                    "old_var": "x",
+                                    "str": "inverse substitute cos(t) ^ 2 for x creating t",
+                                    "var_name": "t",
+                                    "var_subst": "cos(t) ^ 2"
                                 },
                                 "type": "CalculationStep"
                             },
                             {
                                 "fixes": [
                                     [
-                                        "x",
+                                        "t",
                                         "$real"
                                     ]
                                 ],
-                                "latex_res": "-(\\int_{0}^{\\pi/2} (\\cos^{2}(x)) ^ {m - 1} (-(1 - \\sin^{2}(x)) + 1) ^ {n - 1} (-2 \\cos{x} \\sin{x}) \\,dx)",
-                                "res": "-(INT x:[0,pi / 2]. cos(x) ^ 2 ^ (m - 1) * (-(1 - sin(x) ^ 2) + 1) ^ (n - 1) * -(2 * cos(x) * sin(x)))",
+                                "latex_res": "-(\\int_{0}^{\\pi/2} (\\cos^{2}(t)) ^ {m - 1} (-(1 - \\sin^{2}(t)) + 1) ^ {n - 1} (-2 \\cos{t} \\sin{t}) \\,dt)",
+                                "res": "-(INT t:[0,pi / 2]. cos(t) ^ 2 ^ (m - 1) * (-(1 - sin(t) ^ 2) + 1) ^ (n - 1) * -(2 * cos(t) * sin(t)))",
                                 "rule": {
-                                    "latex_str": "rewrite \\(\\cos^{2}(x)\\) to \\(1 - \\sin^{2}(x)\\) using identity at 0.0.0.1.0.0.0",
+                                    "latex_str": "rewrite \\(\\cos^{2}(t)\\) to \\(1 - \\sin^{2}(t)\\) using identity at 0.0.0.1.0.0.0",
                                     "loc": "0.0.0.1.0.0.0",
                                     "name": "ApplyIdentity",
-                                    "source": "cos(x) ^ 2",
-                                    "str": "rewrite cos(x) ^ 2 to 1 - sin(x) ^ 2 using identity at 0.0.0.1.0.0.0",
-                                    "target": "1 - sin(x) ^ 2"
+                                    "source": "cos(t) ^ 2",
+                                    "str": "rewrite cos(t) ^ 2 to 1 - sin(t) ^ 2 using identity at 0.0.0.1.0.0.0",
+                                    "target": "1 - sin(t) ^ 2"
                                 },
                                 "type": "CalculationStep"
                             },
                             {
                                 "fixes": [
                                     [
-                                        "x",
+                                        "t",
                                         "$real"
                                     ]
                                 ],
-                                "latex_res": "2 (\\int_{0}^{\\pi/2} \\cos^{2 m - 1}(x) \\sin^{2 n - 1}(x) \\,dx)",
-                                "res": "2 * (INT x:[0,pi / 2]. cos(x) ^ (2 * m - 1) * sin(x) ^ (2 * n - 1))",
+                                "latex_res": "2 (\\int_{0}^{\\pi/2} \\cos^{2 m - 1}(t) \\sin^{2 n - 1}(t) \\,dt)",
+                                "res": "2 * (INT t:[0,pi / 2]. cos(t) ^ (2 * m - 1) * sin(t) ^ (2 * n - 1))",
                                 "rule": {
                                     "name": "Simplify",
                                     "str": "simplify"
@@ -403,9 +404,10 @@
                                 "latex_res": "\\int_{-\\pi/2}^{\\pi/2} (\\frac{1}{2} + \\frac{1}{2} \\sin{u} - (\\frac{1}{2} + \\frac{1}{2} \\sin{u}) ^ {2}) ^ {1/2} (\\frac{\\cos{u}}{2}) \\,du",
                                 "res": "INT u:[-(pi / 2),pi / 2]. (1/2 + 1/2 * sin(u) - (1/2 + 1/2 * sin(u)) ^ 2) ^ (1/2) * (cos(u) / 2)",
                                 "rule": {
-                                    "latex_str": "inverse substitute \\(\\frac{1}{2} + \\frac{1}{2} \\sin{u}\\) creating \\(u\\)",
+                                    "latex_str": "inverse substitute \\(\\frac{1}{2} + \\frac{1}{2} \\sin{u}\\) for \\(x\\) creating \\(u\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitute 1/2 + 1/2 * sin(u) creating u",
+                                    "old_var": "x",
+                                    "str": "inverse substitute 1/2 + 1/2 * sin(u) for x creating u",
                                     "var_name": "u",
                                     "var_subst": "1/2 + 1/2 * sin(u)"
                                 },
@@ -723,9 +725,10 @@
                                 "latex_res": "-(\\int_{0}^{\\infty} \\sqrt{-\\log{(e^{-y})}} (-e^{-y}) \\,dy)",
                                 "res": "-(INT y:[0,oo]. sqrt(-log(exp(-y))) * -exp(-y))",
                                 "rule": {
-                                    "latex_str": "inverse substitute \\(e^{-y}\\) creating \\(y\\)",
+                                    "latex_str": "inverse substitute \\(e^{-y}\\) for \\(x\\) creating \\(y\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitute exp(-y) creating y",
+                                    "old_var": "x",
+                                    "str": "inverse substitute exp(-y) for x creating y",
                                     "var_name": "y",
                                     "var_subst": "exp(-y)"
                                 },

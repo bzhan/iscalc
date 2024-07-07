@@ -1066,8 +1066,9 @@ def parse_rule(item, parent) -> Rule:
         return rules.Substitution(var_name, var_subst)
     elif item['name'] == 'SubstitutionInverse':
         var_name = item['var_name']
+        old_var = item['old_var']
         var_subst = parser.parse_expr(item['var_subst'], fixes=fixes)
-        return rules.SubstitutionInverse(var_name, var_subst)
+        return rules.SubstitutionInverse(var_name, old_var, var_subst)
     elif item['name'] == 'IntegrationByParts':
         u = parser.parse_expr(item['u'], fixes=fixes)
         v = parser.parse_expr(item['v'], fixes=fixes)

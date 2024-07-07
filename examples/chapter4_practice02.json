@@ -91,9 +91,10 @@
                                 "latex_res": "-(\\int_{0}^{\\infty} (e^{-u}) ^ {m} \\log^{n}(e^{-u}) (-e^{-u}) \\,du)",
                                 "res": "-(INT u:[0,oo]. exp(-u) ^ m * log(exp(-u)) ^ n * -exp(-u))",
                                 "rule": {
-                                    "latex_str": "inverse substitute \\(e^{-u}\\) creating \\(u\\)",
+                                    "latex_str": "inverse substitute \\(e^{-u}\\) for \\(x\\) creating \\(u\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitute exp(-u) creating u",
+                                    "old_var": "x",
+                                    "str": "inverse substitute exp(-u) for x creating u",
                                     "var_name": "u",
                                     "var_subst": "exp(-u)"
                                 },

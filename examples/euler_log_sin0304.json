@@ -20,9 +20,10 @@
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\log{(\\tan^{2}(u) + 1)}}{\\tan^{2}(u) + 1} \\sec^{2}(u) \\,du",
                                 "res": "INT u:[0,pi / 2]. log(tan(u) ^ 2 + 1) / (tan(u) ^ 2 + 1) * sec(u) ^ 2",
                                 "rule": {
-                                    "latex_str": "inverse substitute \\(\\tan{u}\\) creating \\(u\\)",
+                                    "latex_str": "inverse substitute \\(\\tan{u}\\) for \\(x\\) creating \\(u\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitute tan(u) creating u",
+                                    "old_var": "x",
+                                    "str": "inverse substitute tan(u) for x creating u",
                                     "var_name": "u",
                                     "var_subst": "tan(u)"
                                 },

@@ -245,7 +245,7 @@ class IntegralTest(unittest.TestCase):
         self.assertEqual(str(calc.last_expr), "-(sqrt(3) / 8) + pi / 6")
 
         calc = file.add_calculation("INT x:[0, 1]. (1 - x^2) ^ (1/2)")
-        calc.perform_rule(rules.SubstitutionInverse("u", parser.parse_expr("sin(u)")))
+        calc.perform_rule(rules.SubstitutionInverse("u", "x", parser.parse_expr("sin(u)")))
         calc.perform_rule(rules.ApplyIdentity("1-sin(u)^2", "cos(u)^2"))
         calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.DefiniteIntegralIdentity())
@@ -253,7 +253,7 @@ class IntegralTest(unittest.TestCase):
         self.assertEqual(str(calc.last_expr), "pi / 4")
 
         calc = file.add_calculation("INT x:[0, sqrt(2)]. sqrt(2 - x^2)")
-        calc.perform_rule(rules.SubstitutionInverse("u", parser.parse_expr("sqrt(2) * sin(u)")))
+        calc.perform_rule(rules.SubstitutionInverse("u", "x", parser.parse_expr("sqrt(2) * sin(u)")))
         calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.ApplyIdentity("sin(u)^2", "1 - cos(u)^2"))
         calc.perform_rule(rules.Simplify())
@@ -262,7 +262,7 @@ class IntegralTest(unittest.TestCase):
         self.assertEqual(str(calc.last_expr), "pi / 2")
 
         calc = file.add_calculation("INT y:[-sqrt(2), sqrt(2)]. sqrt(8 - 2*y^2)")
-        calc.perform_rule(rules.SubstitutionInverse("u", parser.parse_expr("2 * sin(u)")))
+        calc.perform_rule(rules.SubstitutionInverse("u", "y", parser.parse_expr("2 * sin(u)")))
         calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.ApplyIdentity("sin(u)^2", "1 - cos(u)^2"))
         calc.perform_rule(rules.Simplify())
@@ -271,7 +271,7 @@ class IntegralTest(unittest.TestCase):
         self.assertEqual(str(calc.last_expr), "sqrt(2) * pi + 2 * sqrt(2)")
 
         calc = file.add_calculation("INT x:[1/sqrt(2), 1]. sqrt(1 - x^2) / x ^ 2")
-        calc.perform_rule(rules.SubstitutionInverse("u", parser.parse_expr("sin(u)")))
+        calc.perform_rule(rules.SubstitutionInverse("u", "x", parser.parse_expr("sin(u)")))
         calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.ApplyIdentity("sin(u)^2", "1 - cos(u)^2"))
         calc.perform_rule(rules.Simplify())
@@ -848,7 +848,7 @@ class IntegralTest(unittest.TestCase):
         calc = proof_base.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("I"))
         calc.perform_rule(rules.ElimInfInterval())
-        calc.perform_rule(rules.SubstitutionInverse("u", parser.parse_expr("sqrt(b) * u")))
+        calc.perform_rule(rules.SubstitutionInverse("u", "x", parser.parse_expr("sqrt(b) * u")))
         calc.perform_rule(rules.Simplify())
         s1 = parser.parse_expr("1 / (b * u^2 + b)", fixes=fixes)
         s2 = parser.parse_expr("(1/b) * (1 / (1^2 + u^2))", fixes=fixes)
@@ -962,7 +962,7 @@ class IntegralTest(unittest.TestCase):
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.SplitRegion("1"))
-        calc.perform_rule(rules.SubstitutionInverse("u", "1 / u"))
+        calc.perform_rule(rules.SubstitutionInverse("u", "x", "1 / u"))
         calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.Equation("u ^ 2 * (1 / u ^ 2 + 1)", "u ^ 2 + 1"))
         calc.perform_rule(rules.Simplify())
@@ -1029,7 +1029,7 @@ class IntegralTest(unittest.TestCase):
         goal = file.add_goal("(INT x:[0, oo]. log(x) / (x^2+b^2)) = pi * log(b) / (2*b)", conds=["b > 0"])
         proof = goal.proof_by_calculation()
         calc = proof.lhs_calc
-        calc.perform_rule(rules.SubstitutionInverse(var_name="t", var_subst=parser.parse_expr("1/t")))
+        calc.perform_rule(rules.SubstitutionInverse("t", "x", parser.parse_expr("1/t")))
         old_expr = parser.parse_expr("log(1 / t)")
         new_expr = parser.parse_expr("-log(t)")
         calc.perform_rule(rules.Equation(old_expr=old_expr, new_expr=new_expr))
@@ -1038,7 +1038,7 @@ class IntegralTest(unittest.TestCase):
         new_expr = parser.parse_expr("log(t) / (1 + b^2*t^2)")
         calc.perform_rule(rules.Equation(old_expr=old_expr, new_expr=new_expr))
 
-        calc.perform_rule(rules.SubstitutionInverse(var_name='s', var_subst=parser.parse_expr("s/b")))
+        calc.perform_rule(rules.SubstitutionInverse('s', "t", parser.parse_expr("s/b")))
         calc.perform_rule(rules.Simplify())
 
         old_expr = parser.parse_expr("log(s/b)")
@@ -1224,7 +1224,7 @@ class IntegralTest(unittest.TestCase):
         goal01 = file.add_goal("(INT x:[0,1]. log(x+1) / (x^2 + 1)) = (INT x:[0,pi / 4]. log(tan(x) + 1))")
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
-        calc.perform_rule(rules.SubstitutionInverse("u", "tan(u)"))
+        calc.perform_rule(rules.SubstitutionInverse("u", "x", "tan(u)"))
         calc.perform_rule(rules.ApplyIdentity("sec(u) ^ 2" , "tan(u)^2 + 1"))
         calc.perform_rule(rules.Simplify())
 
@@ -1234,15 +1234,15 @@ class IntegralTest(unittest.TestCase):
         calc = proof.lhs_calc
         s = calc.parse_expr("INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)")
         calc.perform_rule(rules.ApplyEquation(goal01.goal, s))
-        calc.perform_rule(rules.SubstitutionInverse("x", "pi/4 - x"))
+        calc.perform_rule(rules.SubstitutionInverse("y", "x", "pi/4 - y"))
         calc.perform_rule(rules.Simplify())
-        calc.perform_rule(rules.ApplyIdentity("tan(pi / 4 - x)",\
-                                              "(tan(pi / 4) - tan(x)) / (1 + tan(pi / 4) * tan(x))"))
+        calc.perform_rule(rules.ApplyIdentity("tan(pi / 4 - y)",\
+                                              "(tan(pi / 4) - tan(y)) / (1 + tan(pi / 4) * tan(y))"))
         calc.perform_rule(rules.Simplify())
-        calc.perform_rule(rules.Equation("(-tan(x) + 1) / (tan(x) + 1) + 1",\
-                                         "2 / (1+tan(x))"))
-        calc.perform_rule(rules.ApplyIdentity("log(2 / (1 + tan(x)))", \
-                                              "log(2) - log(1 + tan(x))"))
+        calc.perform_rule(rules.Equation("(-tan(y) + 1) / (tan(y) + 1) + 1",\
+                                         "2 / (1 + tan(y))"))
+        calc.perform_rule(rules.ApplyIdentity("log(2 / (1 + tan(y)))", \
+                                              "log(2) - log(1 + tan(y))"))
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.Simplify())
         s = calc.parse_expr("INT x:[0,pi / 4]. log(tan(x) + 1)")
@@ -1265,7 +1265,7 @@ class IntegralTest(unittest.TestCase):
                                conds=["a > 0"])
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
-        calc.perform_rule(rules.SubstitutionInverse("t", "t/a"))
+        calc.perform_rule(rules.SubstitutionInverse("t", "x", "t/a"))
         calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.Equation("1 / (t ^ 2 / a ^ 2 + 1) * log(t / a + 1)",
                                          "log(t / a + 1) * a^2 / (t ^ 2  + a ^ 2)"))
@@ -1387,7 +1387,7 @@ class IntegralTest(unittest.TestCase):
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("I"))
-        calc.perform_rule(rules.SubstitutionInverse("y", "1/y"))
+        calc.perform_rule(rules.SubstitutionInverse("y", "x", "1/y"))
         calc.perform_rule(rules.Equation("1 / (2 * (1 / y) ^ 2 * cos(2 * a) + (1 / y) ^ 4 + 1) * - (1 / y ^ 2)", \
                                          "-y^2 / (y^4 + 2*y^2*cos(2*a) + 1)"))
         calc.perform_rule(rules.Simplify())
@@ -1526,7 +1526,7 @@ class IntegralTest(unittest.TestCase):
         proof = goal1.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.ElimInfInterval())
-        calc.perform_rule(rules.SubstitutionInverse("u", parser.parse_expr("a * u")))
+        calc.perform_rule(rules.SubstitutionInverse("u", "x", parser.parse_expr("a * u")))
         calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.Equation("1 / (a ^ 2 * u ^ 2 + a ^ 2)", "1 / ((a ^ 2) * (u^2 + 1))"))
         calc.perform_rule(rules.Simplify())
@@ -2179,7 +2179,7 @@ class IntegralTest(unittest.TestCase):
         goal01 = file.add_goal("(INT x:[0, oo]. log(x^2+1)/(x^2+1)) = pi * log(2)")
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
-        calc.perform_rule(rules.SubstitutionInverse(var_name="u", var_subst="tan(u)"))
+        calc.perform_rule(rules.SubstitutionInverse("u", "x", "tan(u)"))
         calc.perform_rule(rules.ApplyIdentity("sec(u)^2", "tan(u)^2 + 1"))
         calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.ApplyIdentity("tan(u)^2+1", "sec(u)^2"))
@@ -2226,7 +2226,7 @@ class IntegralTest(unittest.TestCase):
                                conds=["a > 0", "b>-2", "b<2"])
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
-        calc.perform_rule(rules.SubstitutionInverse("u", "1/u"))
+        calc.perform_rule(rules.SubstitutionInverse("u", "x", "1/u"))
         calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.OnLocation(rules.ExpandPolynomial(), "0.0.1"))
         calc.perform_rule(rules.ApplyIdentity("(1/u)^a", "1^a / u^a"))
@@ -3060,7 +3060,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.Simplify())
         e = parser.parse_expr("y * sqrt(u ^ (-2) * (2 * u ^ 2 + 1))")
 
-        calc.perform_rule(rules.OnLocation(rules.SubstitutionInverse(var_name='y', var_subst=e), "1.0.0"))
+        calc.perform_rule(rules.OnLocation(rules.SubstitutionInverse('y', 'x', e), "1.0.0"))
         calc.perform_rule(rules.Simplify())
 
         calc.perform_rule(rules.Equation(
@@ -3091,7 +3091,7 @@ class IntegralTest(unittest.TestCase):
         calc.perform_rule(rules.Simplify())
         e = parser.parse_expr("1/x")
 
-        calc.perform_rule(rules.SubstitutionInverse(var_name='x', var_subst=e))
+        calc.perform_rule(rules.SubstitutionInverse('x', 'u', e))
         calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.Equation("x ^ 3 * (1 / x ^ 2 + 1) * sqrt(2 / x ^ 2 + 1)",
                                          "sqrt((1 + x^2) ^ 2 * (2 + x^2))"))
@@ -3492,7 +3492,7 @@ class IntegralTest(unittest.TestCase):
         goal = file.add_goal("(INT x:[-1, 1]. ((1 + x) / (1 - x)) ^ (1/2)) = pi")
         proof_of_goal = goal.proof_by_calculation()
         calc = proof_of_goal.lhs_calc
-        calc.perform_rule(rules.SubstitutionInverse(var_name="u", var_subst="cos(2 * u)"))
+        calc.perform_rule(rules.SubstitutionInverse("u", "x", "cos(2 * u)"))
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity("cos(2 * u)", "2 * cos(u) ^ 2 - 1"), "0.0.0.0.0.1"))
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity("cos(2 * u)", "1 - 2 * sin(u) ^ 2"), "0.0.0.0.1.1"))
         calc.perform_rule(rules.Simplify())
@@ -3639,8 +3639,8 @@ class IntegralTest(unittest.TestCase):
         proof_of_goal01 = goal01.proof_by_calculation()
         calc = proof_of_goal01.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("B"))
-        calc.perform_rule(rules.SubstitutionInverse(var_name="x", var_subst="cos(x) ^ 2"))
-        calc.perform_rule(rules.OnLocation(rules.ApplyIdentity("cos(x) ^ 2", "1 - sin(x) ^ 2"), "0.0.0.1.0.0.0"))
+        calc.perform_rule(rules.SubstitutionInverse("t", "x", "cos(t) ^ 2"))
+        calc.perform_rule(rules.OnLocation(rules.ApplyIdentity("cos(t) ^ 2", "1 - sin(t) ^ 2"), "0.0.0.1.0.0.0"))
         calc.perform_rule(rules.Simplify())
         assert goal01.is_finished()
 
@@ -3679,7 +3679,7 @@ class IntegralTest(unittest.TestCase):
         goal03 = file.add_goal("(INT x:[0, 1]. (x - x ^ 2) ^ (1/2)) = pi / 8")
         proof_of_goal03 = goal03.proof_by_calculation()
         calc = proof_of_goal03.lhs_calc
-        calc.perform_rule(rules.SubstitutionInverse(var_name="u", var_subst="1/2 + 1/2 * sin(u)"))
+        calc.perform_rule(rules.SubstitutionInverse("u", "x", "1/2 + 1/2 * sin(u)"))
         calc.perform_rule(rules.Equation("1/2 + 1/2 * sin(u) - (1/2 + 1/2 * sin(u)) ^ 2", "1/4 * (1 - sin(u) ^ 2)"))
         calc.perform_rule(rules.ApplyIdentity("1 - sin(u) ^ 2", "cos(u) ^ 2"))
         calc.perform_rule(rules.Simplify())
@@ -3718,7 +3718,7 @@ class IntegralTest(unittest.TestCase):
         goal07 = file.add_goal("(INT x:[0, 1]. sqrt(-log(x))) = sqrt(pi) / 2")
         proof_of_goal07 = goal07.proof_by_calculation()
         calc = proof_of_goal07.lhs_calc
-        calc.perform_rule(rules.SubstitutionInverse(var_name="y", var_subst="exp(-y)"))
+        calc.perform_rule(rules.SubstitutionInverse("y", "x", "exp(-y)"))
         calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.Equation("sqrt(y) * exp(-y)", "exp(-y) * sqrt(y)"))
         source = calc.parse_expr("INT y:[0,oo]. exp(-y) * sqrt(y)")
@@ -3955,7 +3955,7 @@ class IntegralTest(unittest.TestCase):
         goal01 = file.add_goal("(INT y:[0,1]. 1/ (sqrt(y) * sqrt(1-y))) = pi")
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
-        calc.perform_rule(rules.SubstitutionInverse("x", "sin(x)^2"))
+        calc.perform_rule(rules.SubstitutionInverse("x", "y", "sin(x)^2"))
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity("sin(x)^2", "1-cos(x)^2"), "0.0.1.1.0.1"))
         calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.DefiniteIntegralIdentity())
@@ -3964,7 +3964,7 @@ class IntegralTest(unittest.TestCase):
         goal02 = file.add_goal("(INT y:[0,1]. log(y)/ (sqrt(y) * sqrt(1-y))) = -(2*pi*log(2))")
         proof = goal02.proof_by_calculation()
         calc = proof.lhs_calc
-        calc.perform_rule(rules.SubstitutionInverse("x", "sin(x)^2"))
+        calc.perform_rule(rules.SubstitutionInverse("x", "y", "sin(x)^2"))
         calc.perform_rule(rules.Equation("log(sin(x)^2)", "2*log(sin(x))"))
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity("sin(x)^2", "1-cos(x)^2"), "0.0.1.1.0.1"))
         calc.perform_rule(rules.Simplify())
@@ -4131,7 +4131,7 @@ class IntegralTest(unittest.TestCase):
         goal02 = file.add_goal("(INT x:[0,1]. x^m * log(x)^n) = (-1)^n * factorial(n) / (m+1)^(n+1)", conds=["m > -1", "n >= 0", "isInt(n)"])
         proof = goal02.proof_by_calculation()
         calc = proof.lhs_calc
-        calc.perform_rule(rules.SubstitutionInverse("u", "exp(-u)"))
+        calc.perform_rule(rules.SubstitutionInverse("u", "x", "exp(-u)"))
         calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.Equation("(-u) ^ n * exp(-u) * exp(-u) ^ m", "(-u) ^ n * (exp(-u) * exp(-u) ^ m)"))
         calc.perform_rule(rules.Equation("exp(-u) * exp(-u) ^ m", "exp(-u)^1 * exp(-u)^m"))
@@ -4406,7 +4406,7 @@ class IntegralTest(unittest.TestCase):
         goal01 = file.add_goal(s1+"="+s2, conds=["abs(y) < 1"])
         proof = goal01.proof_by_calculation()
         calc = proof.lhs_calc
-        calc.perform_rule(rules.SubstitutionInverse("t", "sin(t)"))
+        calc.perform_rule(rules.SubstitutionInverse("t", "x", "sin(t)"))
         calc.perform_rule(rules.OnLocation(rules.Equation("1", "sin(t)^2 + cos(t)^2"), "0.0.1.1"))
         calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.OnLocation(rules.Equation("1", "sin(t/2)^2 + cos(t/2)^2"), "0.1"))
@@ -4552,7 +4552,7 @@ class IntegralTest(unittest.TestCase):
         goal03 = file.add_goal(s, conds=["m>=0", "n>=0", "isInt(n)", "isInt(m)", "a>0"], fixes=fixes)
         proof = goal03.proof_by_calculation()
         calc = proof.lhs_calc
-        calc.perform_rule(rules.SubstitutionInverse("y", "a*y"))
+        calc.perform_rule(rules.SubstitutionInverse("y", "x", "a*y"))
         source = calc.parse_expr("(a * y) ^ m")
         target = calc.parse_expr("a^m * y^m")
         calc.perform_rule(rules.ApplyIdentity(source,target))

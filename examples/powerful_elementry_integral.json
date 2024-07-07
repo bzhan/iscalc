@@ -32,9 +32,10 @@
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{(1 + y \\sin{t}) \\sqrt{1 - \\sin^{2}(t)}} \\cos{t} \\,dt",
                                 "res": "INT t:[0,pi / 2]. 1 / ((1 + y * sin(t)) * sqrt(1 - sin(t) ^ 2)) * cos(t)",
                                 "rule": {
-                                    "latex_str": "inverse substitute \\(\\sin{t}\\) creating \\(t\\)",
+                                    "latex_str": "inverse substitute \\(\\sin{t}\\) for \\(x\\) creating \\(t\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitute sin(t) creating t",
+                                    "old_var": "x",
+                                    "str": "inverse substitute sin(t) for x creating t",
                                     "var_name": "t",
                                     "var_subst": "sin(t)"
                                 },

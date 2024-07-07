@@ -1333,25 +1333,27 @@ class SubstitutionInverse(Rule):
 
     """
 
-    def __init__(self, var_name: str, var_subst: Union[Expr, str]):
+    def __init__(self, var_name: str, old_var: str, var_subst: Union[Expr, str]):
         self.name = "SubstitutionInverse"
         self.var_name = var_name
+        self.old_var = old_var
         if isinstance(var_subst, str):
             var_subst = parser.parse_expr(var_subst)
         self.var_subst = var_subst
 
     def __str__(self):
-        return "inverse substitute %s creating %s" % (
-            self.var_subst, self.var_name)
+        return "inverse substitute %s for %s creating %s" % (
+            self.var_subst, self.old_var, self.var_name)
 
     def export(self):
         return {
             "name": self.name,
             "var_name": self.var_name,
+            "old_var": self.old_var,
             "var_subst": str(self.var_subst),
             "str": str(self),
-            "latex_str": "inverse substitute \\(%s\\) creating \\(%s\\)" % (
-                latex.convert_expr(self.var_subst), self.var_name)
+            "latex_str": "inverse substitute \\(%s\\) for \\(%s\\) creating \\(%s\\)" % (
+                latex.convert_expr(self.var_subst), self.old_var, self.var_name)
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
@@ -1365,6 +1367,10 @@ class SubstitutionInverse(Rule):
         if not expr.is_integral(e):
             raise RuleException("SubstitutionInverse", "input is not integral")
         
+        if e.var != self.old_var:
+            raise RuleException("SubstitutionInverse", "incorrect old variable %s, should be %s" % (
+                self.old_var, e.var))
+
         if e.contains_var(self.var_name) or e.var == self.var_name:
             raise RuleException("SubstitutionInverse", "variable %s already exists" % self.var_name)
 
@@ -1897,8 +1903,9 @@ def check_item(item, target=None, *, debug=False):
 
         elif reason == 'Substitution inverse':
             var_name = step['params']['var_name']
+            old_var = step['params']['old_var']
             g = parser.parse_expr(step['params']['g'])
-            rule = SubstitutionInverse(var_name, g)
+            rule = SubstitutionInverse(var_name, old_var, g)
             if 'location' in step:
                 result = OnLocation(rule, step['location']).eval(current, ctx)
             else:

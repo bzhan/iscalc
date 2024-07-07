@@ -702,9 +702,10 @@
                     "latex_res": "\\int_{0}^{\\pi/2} (1 - \\sin^{2}(u)) ^ {1/2} \\cos{u} \\,du",
                     "res": "INT u:[0,pi / 2]. (1 - sin(u) ^ 2) ^ (1/2) * cos(u)",
                     "rule": {
-                        "latex_str": "inverse substitute \\(\\sin{u}\\) creating \\(u\\)",
+                        "latex_str": "inverse substitute \\(\\sin{u}\\) for \\(x\\) creating \\(u\\)",
                         "name": "SubstitutionInverse",
-                        "str": "inverse substitute sin(u) creating u",
+                        "old_var": "x",
+                        "str": "inverse substitute sin(u) for x creating u",
                         "var_name": "u",
                         "var_subst": "sin(u)"
                     },
@@ -784,9 +785,10 @@
                     "latex_res": "\\int_{0}^{\\pi/2} \\sqrt{2 - (\\sqrt{2} \\sin{u}) ^ {2}} (\\sqrt{2} \\cos{u}) \\,du",
                     "res": "INT u:[0,pi / 2]. sqrt(2 - (sqrt(2) * sin(u)) ^ 2) * (sqrt(2) * cos(u))",
                     "rule": {
-                        "latex_str": "inverse substitute \\(\\sqrt{2} \\sin{u}\\) creating \\(u\\)",
+                        "latex_str": "inverse substitute \\(\\sqrt{2} \\sin{u}\\) for \\(x\\) creating \\(u\\)",
                         "name": "SubstitutionInverse",
-                        "str": "inverse substitute sqrt(2) * sin(u) creating u",
+                        "old_var": "x",
+                        "str": "inverse substitute sqrt(2) * sin(u) for x creating u",
                         "var_name": "u",
                         "var_subst": "sqrt(2) * sin(u)"
                     },
@@ -881,9 +883,10 @@
                     "latex_res": "\\int_{-\\pi/4}^{\\pi/4} \\sqrt{8 - 2 (2 \\sin{u}) ^ {2}} (2 \\cos{u}) \\,du",
                     "res": "INT u:[-(pi / 4),pi / 4]. sqrt(8 - 2 * (2 * sin(u)) ^ 2) * (2 * cos(u))",
                     "rule": {
-                        "latex_str": "inverse substitute \\(2 \\sin{u}\\) creating \\(u\\)",
+                        "latex_str": "inverse substitute \\(2 \\sin{u}\\) for \\(y\\) creating \\(u\\)",
                         "name": "SubstitutionInverse",
-                        "str": "inverse substitute 2 * sin(u) creating u",
+                        "old_var": "y",
+                        "str": "inverse substitute 2 * sin(u) for y creating u",
                         "var_name": "u",
                         "var_subst": "2 * sin(u)"
                     },
@@ -978,9 +981,10 @@
                     "latex_res": "\\int_{\\pi/4}^{\\pi/2} \\frac{\\sqrt{1 - \\sin^{2}(u)}}{\\sin^{2}(u)} \\cos{u} \\,du",
                     "res": "INT u:[pi / 4,pi / 2]. sqrt(1 - sin(u) ^ 2) / sin(u) ^ 2 * cos(u)",
                     "rule": {
-                        "latex_str": "inverse substitute \\(\\sin{u}\\) creating \\(u\\)",
+                        "latex_str": "inverse substitute \\(\\sin{u}\\) for \\(x\\) creating \\(u\\)",
                         "name": "SubstitutionInverse",
-                        "str": "inverse substitute sin(u) creating u",
+                        "old_var": "x",
+                        "str": "inverse substitute sin(u) for x creating u",
                         "var_name": "u",
                         "var_subst": "sin(u)"
                     },

@@ -289,8 +289,17 @@ class Goal(StateItem):
 
 
 class CalculationStep(StateItem):
-    """A step in the calculation."""
+    """A step in the calculation.
+    
+    Attributes
+    ----------
+    parent (Calculation): the calculation this step is contained in.
+    rule (Rule): rule to be applied in this calculation.
+    res (Expr): result of this calculation step.
+    id (int): index of this step within the calculation.
+    ctx (Context): context of the calculation step.    
 
+    """
     def __init__(self, parent: "Calculation", rule: Rule, res: Expr, id: int):
         self.parent = parent
         self.rule = rule
@@ -331,12 +340,18 @@ class CalculationStep(StateItem):
 class Calculation(StateItem):
     """Calculation starting from an expression.
 
-    start: starting expression.
+    Attributes
+    ----------
+    parent: parent of the calculation, either a StateItem or CompFile.
+    start (Expr): starting expression.
+    steps: list of steps in the calculation.
     conds: (optional) a list of conditions under which the calculation
         is carried out.
+    connection_symbol: one of '=' and '==>'
+    ctx: current context (including existing identities, conditions,
+        fixed variables, etc).
 
     """
-
     def __init__(self, parent, ctx: Context, start: Expr, *,
                  connection_symbol='=', conds: Optional[Conditions] = None,
                  fixes=None):
@@ -826,7 +841,6 @@ class CompFile:
     name - name of the file.
 
     """
-
     def __init__(self, ctx: Union[Context, str], name: str):
         if isinstance(ctx, str):
             self.ctx = Context()

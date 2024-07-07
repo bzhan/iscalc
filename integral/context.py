@@ -494,6 +494,11 @@ class Context:
             self.fixes[name] = info
 
     def load_book(self, book_name: str, *, upto: Optional[str] = None):
+        """Load the book with the given name.
+        
+        This function recursively loads imported books.
+        
+        """
         assert isinstance(book_name, str)
         root_dir = os.path.dirname(dirname)
         examples_dir = os.path.join(root_dir, 'examples')

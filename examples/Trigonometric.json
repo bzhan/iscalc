@@ -76,8 +76,8 @@
                     "latex_res": "-\\frac{1}{5} (\\int \\frac{1}{u} \\,du)",
                     "res": "-(1/5 * (INT u. 1 / u))",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -103,8 +103,8 @@
                     "latex_res": "-\\frac{\\log{(\\cos{(5 x)})}}{5} + C",
                     "res": "-(log(cos(5 * x)) / 5) + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -171,8 +171,8 @@
                     "latex_res": "5 (\\int \\frac{\\sin{(4 x)}}{\\cos^{2}(4 x)} \\,dx)",
                     "res": "5 * (INT x. sin(4 * x) / cos(4 * x) ^ 2)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -204,8 +204,8 @@
                     "latex_res": "-\\frac{5}{4} (\\int \\frac{1}{u ^ {2}} \\,du)",
                     "res": "-(5/4 * (INT u. 1 / u ^ 2))",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -231,8 +231,8 @@
                     "latex_res": "\\frac{5}{4 \\cos{(4 x)}} + C",
                     "res": "5 / (4 * cos(4 * x)) + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -314,8 +314,8 @@
                     "latex_res": "2 (\\int \\cos{x} \\sin{x} \\,dx) + (\\int 1 \\,dx)",
                     "res": "2 * (INT x. cos(x) * sin(x)) + (INT x. 1)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -363,8 +363,8 @@
                     "latex_res": "\\sin^{2}(x) + x + C",
                     "res": "sin(x) ^ 2 + x + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -415,8 +415,8 @@
                     "latex_res": "\\frac{3 \\sin{(10 x)}}{20} + \\frac{3 x}{2} + C",
                     "res": "3 * sin(10 * x) / 20 + 3 * x / 2 + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -452,8 +452,8 @@
                     "latex_res": "(\\int \\tan^{2}(x) \\,dx) + 4 (\\int \\tan{x} \\,dx) + (\\int 4 \\,dx)",
                     "res": "(INT x. tan(x) ^ 2) + 4 * (INT x. tan(x)) + (INT x. 4)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -500,8 +500,8 @@
                     "latex_res": "4 \\log{(\\left| \\sec{x} \\right|)} + (\\int \\sec^{2}(x) \\,dx) + 4 x - (\\int 1 \\,dx) + C",
                     "res": "4 * log(abs(sec(x))) + (INT x. sec(x) ^ 2) + 4 * x - (INT x. 1) + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -518,8 +518,8 @@
                     "latex_res": "4 \\log{(\\left| \\sec{x} \\right|)} + 3 x + \\tan{x} + C",
                     "res": "4 * log(abs(sec(x))) + 3 * x + tan(x) + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -634,8 +634,8 @@
                     "latex_res": "(\\int u ^ {2} \\,du) - \\cos{x} + C",
                     "res": "(INT u. u ^ 2) - cos(x) + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -661,8 +661,8 @@
                     "latex_res": "\\frac{\\cos^{3}(x)}{3} - \\cos{x} + C",
                     "res": "cos(x) ^ 3 / 3 - cos(x) + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -729,8 +729,8 @@
                     "latex_res": "\\frac{1}{5} (\\int \\frac{1}{v} \\,dv)",
                     "res": "1/5 * (INT v. 1 / v)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -765,8 +765,8 @@
                     "latex_res": "\\frac{\\log{(5 \\sin{(5 x)} + 15)}}{5} + C",
                     "res": "log(5 * sin(5 * x) + 15) / 5 + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -833,8 +833,8 @@
                     "latex_res": "-(\\int \\sin{x} \\,dx) + (\\int 1 \\,dx)",
                     "res": "-(INT x. sin(x)) + (INT x. 1)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -851,8 +851,8 @@
                     "latex_res": "\\cos{x} + x + C",
                     "res": "cos(x) + x + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -1009,8 +1009,8 @@
                     "latex_res": "(\\int \\sec{x} \\tan{x} \\,dx) - (\\int \\sec^{2}(x) \\,dx) + (\\int 1 \\,dx)",
                     "res": "(INT x. sec(x) * tan(x)) - (INT x. sec(x) ^ 2) + (INT x. 1)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -1027,8 +1027,8 @@
                     "latex_res": "\\sec{x} - \\tan{x} + x + C",
                     "res": "sec(x) - tan(x) + x + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -1082,8 +1082,8 @@
                     "latex_res": "2 (\\int \\cot{(3 x)} \\csc{(3 x)} \\,dx) + 2 (\\int \\csc^{2}(3 x) \\,dx) - (\\int 1 \\,dx)",
                     "res": "2 * (INT x. cot(3 * x) * csc(3 * x)) + 2 * (INT x. csc(3 * x) ^ 2) - (INT x. 1)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -1123,8 +1123,8 @@
                     "latex_res": "\\frac{2 (\\int \\cot{u} \\csc{u} \\,du)}{3} + 2 (\\int \\csc^{2}(3 x) \\,dx) - (\\int 1 \\,dx)",
                     "res": "2 * (INT u. cot(u) * csc(u)) / 3 + 2 * (INT x. csc(3 * x) ^ 2) - (INT x. 1)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -1186,8 +1186,8 @@
                     "latex_res": "\\frac{2 (\\int \\csc^{2}(u) \\,du)}{3} - \\frac{2 \\csc{(3 x)}}{3} - x + C",
                     "res": "2 * (INT u. csc(u) ^ 2) / 3 - 2 * csc(3 * x) / 3 - x + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -1213,8 +1213,8 @@
                     "latex_res": "-\\frac{2 \\cot{(3 x)}}{3} - \\frac{2 \\csc{(3 x)}}{3} - x + C",
                     "res": "-(2 * cot(3 * x) / 3) - 2 * csc(3 * x) / 3 - x + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -1265,8 +1265,8 @@
                     "latex_res": "\\frac{2 (\\tan{x} + 5) ^ {3/2}}{3} + C",
                     "res": "2 * (tan(x) + 5) ^ (3/2) / 3 + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -1338,8 +1338,8 @@
                     "latex_res": "(\\int \\sec^{2}(x) \\tan^{3}(x) \\,dx) - (\\int \\tan^{3}(x) \\,dx)",
                     "res": "(INT x. sec(x) ^ 2 * tan(x) ^ 3) - (INT x. tan(x) ^ 3)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -1405,8 +1405,8 @@
                     "latex_res": "\\frac{\\tan^{4}(x)}{4} - (\\int \\tan^{3}(x) \\,dx) + C",
                     "res": "tan(x) ^ 4 / 4 - (INT x. tan(x) ^ 3) + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -1472,8 +1472,8 @@
                     "latex_res": "-(\\int \\sec^{2}(x) \\tan{x} \\,dx) + \\frac{\\tan^{4}(x)}{4} + (\\int \\tan{x} \\,dx) + C",
                     "res": "-(INT x. sec(x) ^ 2 * tan(x)) + tan(x) ^ 4 / 4 + (INT x. tan(x)) + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -1521,8 +1521,8 @@
                     "latex_res": "-\\frac{\\tan^{2}(x)}{2} + \\frac{\\tan^{4}(x)}{4} + \\log{(\\left| \\sec{x} \\right|)} + C",
                     "res": "-(tan(x) ^ 2 / 2) + tan(x) ^ 4 / 4 + log(abs(sec(x))) + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -1591,8 +1591,8 @@
                     "latex_res": "-\\frac{(\\cos{x} + \\sin{x}) ^ {6}}{6} + C",
                     "res": "-((cos(x) + sin(x)) ^ 6 / 6) + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -1661,8 +1661,8 @@
                     "latex_res": "e^{\\sin{x} + 4} + C",
                     "res": "exp(sin(x) + 4) + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -1719,8 +1719,8 @@
                     "latex_res": "-\\frac{\\int \\sin{u} \\,du}{3}",
                     "res": "-((INT u. sin(u)) / 3)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -1746,8 +1746,8 @@
                     "latex_res": "\\frac{\\cos{(\\cos{(3 x)})}}{3} + C",
                     "res": "cos(cos(3 * x)) / 3 + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -1816,8 +1816,8 @@
                     "latex_res": "\\frac{\\log^{2}(\\sin{x})}{2} + C",
                     "res": "log(sin(x)) ^ 2 / 2 + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -1886,8 +1886,8 @@
                     "latex_res": "\\frac{2 (3 \\sec{x} + 4) ^ {3/2}}{9} + C",
                     "res": "2 * (3 * sec(x) + 4) ^ (3/2) / 9 + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -1938,8 +1938,8 @@
                     "latex_res": "\\sin{(e^{x})} + C",
                     "res": "sin(exp(x)) + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -1978,8 +1978,8 @@
                     "latex_res": "-\\frac{x \\cos{(3 x)}}{3} + \\frac{\\int \\cos{(3 x)} \\,dx}{3}",
                     "res": "-(x * cos(3 * x) / 3) + (INT x. cos(3 * x)) / 3",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -1996,8 +1996,8 @@
                     "latex_res": "-\\frac{x \\cos{(3 x)}}{3} + \\frac{\\sin{(3 x)}}{9} + C",
                     "res": "-(x * cos(3 * x) / 3) + sin(3 * x) / 9 + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -2036,8 +2036,8 @@
                     "latex_res": "x ^ {2} \\sin{x} - 2 (\\int x \\sin{x} \\,dx)",
                     "res": "x ^ 2 * sin(x) - 2 * (INT x. x * sin(x))",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -2069,8 +2069,8 @@
                     "latex_res": "x ^ {2} \\sin{x} + 2 x \\cos{x} - 2 (\\int \\cos{x} \\,dx)",
                     "res": "x ^ 2 * sin(x) + 2 * x * cos(x) - 2 * (INT x. cos(x))",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -2087,8 +2087,8 @@
                     "latex_res": "x ^ {2} \\sin{x} + 2 x \\cos{x} - 2 \\sin{x} + C",
                     "res": "x ^ 2 * sin(x) + 2 * x * cos(x) - 2 * sin(x) + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -2175,8 +2175,8 @@
                     "latex_res": "e^{\\sin{x}} \\sin{x} - e^{\\sin{x}} + C",
                     "res": "exp(sin(x)) * sin(x) - exp(sin(x)) + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -2215,8 +2215,8 @@
                     "latex_res": "(\\int \\cos{x} e^{x} \\,dx) - \\cos{x} e^{x}",
                     "res": "(INT x. cos(x) * exp(x)) - cos(x) * exp(x)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -2283,8 +2283,8 @@
                     "latex_res": "-\\frac{3 (\\int \\cos{(3 x)} \\sin{(4 x)} \\,dx)}{4} + \\frac{\\sin{(3 x)} \\sin{(4 x)}}{4}",
                     "res": "-(3 * (INT x. cos(3 * x) * sin(4 * x)) / 4) + sin(3 * x) * sin(4 * x) / 4",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -2316,8 +2316,8 @@
                     "latex_res": "\\frac{9 (\\int \\cos{(4 x)} \\sin{(3 x)} \\,dx)}{16} + \\frac{3 \\cos{(3 x)} \\cos{(4 x)}}{16} + \\frac{\\sin{(3 x)} \\sin{(4 x)}}{4}",
                     "res": "9 * (INT x. cos(4 * x) * sin(3 * x)) / 16 + 3 * cos(3 * x) * cos(4 * x) / 16 + sin(3 * x) * sin(4 * x) / 4",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -2445,8 +2445,8 @@
                     "latex_res": "-\\frac{1}{2} (\\int \\frac{1}{u} \\,du)",
                     "res": "-(1/2 * (INT u. 1 / u))",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -2472,8 +2472,8 @@
                     "latex_res": "-\\frac{\\log{(\\left| \\cos{(2 x)} + \\sin{(2 x)} \\right|)}}{2} + C",
                     "res": "-(log(abs(cos(2 * x) + sin(2 * x))) / 2) + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -2542,8 +2542,8 @@
                     "latex_res": "\\log{(\\left| e^{x} \\sin{x} + 1 \\right|)} + C",
                     "res": "log(abs(exp(x) * sin(x) + 1)) + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }

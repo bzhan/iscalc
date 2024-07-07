@@ -70,8 +70,8 @@
                                 "latex_res": "0",
                                 "res": "0",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -190,8 +190,8 @@
                                 "res": "INT x:[0,oo]. x ^ (2 * n - 2) * exp(-(x ^ 2)) * (2 * n - 1) - 2 * x ^ (2 * n) * exp(-(x ^ 2))",
                                 "rule": {
                                     "loc": "0",
-                                    "name": "FullSimplify",
-                                    "str": "full simplify at 0"
+                                    "name": "Simplify",
+                                    "str": "simplify at 0"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -205,8 +205,8 @@
                                 "latex_res": "(2 n - 1) (\\int_{0}^{\\infty} x ^ {2 n - 2} e^{-x ^ {2}} \\,dx) - 2 (\\int_{0}^{\\infty} x ^ {2 n} e^{-x ^ {2}} \\,dx)",
                                 "res": "(2 * n - 1) * (INT x:[0,oo]. x ^ (2 * n - 2) * exp(-(x ^ 2))) - 2 * (INT x:[0,oo]. x ^ (2 * n) * exp(-(x ^ 2)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -511,8 +511,8 @@
                                         "latex_res": "\\frac{\\sqrt{\\pi}}{2}",
                                         "res": "sqrt(pi) / 2",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     }
@@ -621,8 +621,8 @@
                                         "latex_res": "\\frac{I{(n)} (2 n + 1)}{2}",
                                         "res": "I(n) * (2 * n + 1) / 2",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     },

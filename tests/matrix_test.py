@@ -99,7 +99,7 @@ class MatrixTest(unittest.TestCase):
         new_expr = calc.parse_expr("(inv(P) * A * P) ^ n * (inv(P) * A * P)")
         calc.perform_rule(rules.ApplyIdentity(old_expr, new_expr))
         calc.perform_rule(rules.OnLocation(rules.ApplyInductHyp(), '0'))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         assert goal.is_finished()
         raw_fixes = [
             ("A", {"symbol_type":"var", "type": "$tensor($real, 3, 3)"}),
@@ -127,7 +127,7 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
         calc = proof.rhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         assert goal01.is_finished()
 
         raw_fixes = [
@@ -138,7 +138,7 @@ class MatrixTest(unittest.TestCase):
         proof = goal02.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         calc = proof.rhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
         assert goal02.is_finished()
@@ -173,7 +173,7 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.Equation(old_e, new_e))
         source = calc.parse_expr("w * T(w) * hat(w)")
         calc.perform_rule(rules.ApplyEquation(goal02.goal, source))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         calc = induct_proof.rhs_calc
         assert goal03.is_finished()
 
@@ -201,12 +201,12 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.Equation(old_e, new_e))
         source = calc.parse_expr("w * T(w) * hat(w)")
         calc.perform_rule(rules.ApplyEquation(goal02.goal, source))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         calc = induct_proof.rhs_calc
         old_e = calc.parse_expr("hat(w) ^ 2")
         new_e = calc.parse_expr("hat(w) * hat(w)")
         calc.perform_rule(rules.Equation(old_e, new_e))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         assert goal04.is_finished()
         self.checkAndOutput(file)
 
@@ -220,12 +220,12 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.SeriesExpansionIdentity(old_expr="cos(a)"))
         s = calc.parse_expr("n = 0")
         calc.perform_rule(rules.OnLocation(rules.SplitItem(s), "1"))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         s1 = calc.parse_expr("-SUM(i, 1, oo, a ^ (2 * i) * (-1) ^ i / factorial(2 * i))")
         s2 = calc.parse_expr("SUM(i, 1, oo, (-1) * ((-1) ^ i * a ^ (2 * i) / factorial(2 * i)))")
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.ChangeSummationIndex(new_lower='0'))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         s3 = calc.parse_expr("a ^ (2 * i + 2) * (-1) ^ i / factorial(2 * i + 2)")
         s4 = calc.parse_expr("(-1) ^ i * a ^ (2 * (i+ 1)) / factorial(2 * (i + 1))")
         calc.perform_rule(rules.Equation(s3, s4))
@@ -249,7 +249,7 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.SplitItem(cond))
         cond = calc.parse_expr("i = 0")
         calc.perform_rule(rules.OnLocation(rules.SplitItem(cond), "1"))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.OnLocation(rules.ChangeSummationIndex(new_lower="0"), "0.1"))
         s1 = calc.parse_expr("(x * hat(w)) ^ (2 * i + 1)")
         s2 = calc.parse_expr("x ^ (2 * i + 1) * hat(w) ^ (2 * i + 1)")
@@ -274,9 +274,9 @@ class MatrixTest(unittest.TestCase):
         eq = calc.parse_expr("1 - cos(a) = SUM(n, 0, oo, (-1) ^ n * a ^ (2 * (n + 1)) / factorial(2 * (n + 1)))")
         source = calc.parse_expr("SUM(n, 0, oo, (-1) ^ n * x ^ (2 * (n + 1)) / factorial(2 * (n + 1)))")
         calc.perform_rule(rules.ApplyEquation(eq, source))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         calc = proof.rhs_calc
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         assert goal01.is_finished()
         self.checkAndOutput(file)
 
@@ -329,7 +329,7 @@ class MatrixTest(unittest.TestCase):
         source = calc.parse_expr("exp(-t * hat(w))")
         calc.perform_rule(rules.ApplyEquation(lemma, source))
         calc.perform_rule(rules.ExpandPolynomial())
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         s1 = calc.parse_expr("hat(w) ^ 4")
         s2 = calc.parse_expr("hat(w) ^ (2*(1+1))")
         calc.perform_rule(rules.Equation(s1, s2))
@@ -339,7 +339,7 @@ class MatrixTest(unittest.TestCase):
         lemma = calc.parse_expr("hat(w) ^ (2 * (n + 1)) = (-1) ^ n * hat(w) ^ 2", fixes=fixes)
         source = calc.parse_expr("hat(w) ^ (2*(1+1))")
         calc.perform_rule(rules.ApplyEquation(lemma, source, eq_fixes=fixes))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         s1 = calc.parse_expr("-((-cos(t) + 1) ^ 2 * hat(w) ^ 2)")
         s2 = calc.parse_expr("(-cos(t)^2 - 1 + 2* cos(t)) * hat(w) ^ 2")
         calc.perform_rule(rules.Equation(s1, s2))
@@ -352,7 +352,7 @@ class MatrixTest(unittest.TestCase):
         s1 = calc.parse_expr("(sin(t)^2 + cos(t)^2)")
         s2 = calc.parse_expr("1")
         calc.perform_rule(rules.ApplyIdentity(s1, s2))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         assert goal01.is_finished()
         raw_fixes = [('w', {"symbol_type":"var", "type":"$tensor($real, 3, 1)"}),
                      ('n', {"symbol_type":"var", "type":"$int"})]
@@ -362,7 +362,7 @@ class MatrixTest(unittest.TestCase):
         base_proof = proof.base_case.proof_by_calculation()
         calc = base_proof.lhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandMatFunc()))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         calc = base_proof.rhs_calc
         calc.perform_rule(rules.ExpandMatFunc())
         induct_proof = proof.induct_case.proof_by_calculation()
@@ -374,7 +374,7 @@ class MatrixTest(unittest.TestCase):
         s2 = calc.parse_expr("hat(w) * (hat(w) ^ n * w)")
         calc.perform_rule(rules.Equation(s1, s2))
         calc.perform_rule(rules.OnLocation(rules.ApplyInductHyp(), '1'))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         assert goal02.is_finished()
         raw_fixes = [('w', {"symbol_type":"var", "type":'$tensor($real,3,1)'})]
         fixes = parser.parse_raw_fixes(raw_fixes)
@@ -399,7 +399,7 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.ApplyEquation(goal02.goal, source, eq_fixes=fixes_from_expr(goal02.goal)))
         source = calc.parse_expr("hat(w) ^ 1 * w")
         calc.perform_rule(rules.ApplyEquation(goal02.goal, source, eq_fixes=fixes_from_expr(goal02.goal)))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         assert goal03.is_finished()
         raw_fixes = [('w', {"symbol_type":"var", "type":'$tensor($real,3,1)'}),
                      ('v', {"symbol_type":"var", "type":'$tensor($real,3,1)'}) ]
@@ -412,20 +412,20 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '1'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '0'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '1'))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         source = calc.parse_expr("exp(t * hat(w)) * exp(-(t * hat(w)))")
         calc.perform_rule(rules.ApplyEquation(goal01.goal, source))
         calc.perform_rule(rules.OnSubterm(rules.ExpandPolynomial()))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         source = calc.parse_expr("exp(t * hat(w)) * exp(-(t * hat(w)))")
         calc.perform_rule(rules.ApplyEquation(goal01.goal, source))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         s1 = calc.parse_expr("t * exp(t * hat(w)) * w * T(w) * v")
         s2 = calc.parse_expr("t * (exp(t * hat(w)) * w) * T(w) * v")
         calc.perform_rule(rules.Equation(s1,s2))
         source = calc.parse_expr("exp(t * hat(w)) * w")
         calc.perform_rule(rules.ApplyEquation(goal03.goal, source))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         assert goal04.is_finished()
         raw_fixes = [('w', {"symbol_type":"var", "type":'$tensor($real,3,1)'}),
                      ('v', {"symbol_type":"var", "type":'$tensor($real,3,1)'})]
@@ -438,7 +438,7 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '1'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '0'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '1'))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         assert goal05.is_finished()
         self.checkAndOutput(file)
 
@@ -464,7 +464,7 @@ class MatrixTest(unittest.TestCase):
         calc = proof.lhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition("hmf"), "0"))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition("hm"), "0"))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         calc = proof.rhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition("twist"), "0"))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition("hmf"), "1"))
@@ -473,7 +473,7 @@ class MatrixTest(unittest.TestCase):
         s = calc.parse_expr("w")
         t = calc.parse_expr("zero_matrix(3,1)")
         calc.perform_rule(rules.Equation(s, t))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         assert goal01.is_finished()
         raw_fixes = [('t', {"symbol_type":"var", "type":'$real'}),
                      ('w', {"symbol_type":"var", "type":'$tensor($real, 3, 1)'})]
@@ -485,7 +485,7 @@ class MatrixTest(unittest.TestCase):
         eq = calc.parse_expr("exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * (hat(w)) ^ 2")
         source = calc.parse_expr("exp(t * hat(w))")
         calc.perform_rule(rules.ApplyEquation(eq, source))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         calc = proof.rhs_calc
         eq = calc.parse_expr("exp(t * hat(w)) = unit_matrix(3) + sin(t) * hat(w) + (1 - cos(t)) * (hat(w)) ^ 2")
         source = calc.parse_expr("exp(t * hat(w))")
@@ -501,7 +501,7 @@ class MatrixTest(unittest.TestCase):
         source = calc.parse_expr("hat(w) ^ (2 * 1 + 1)")
         calc.perform_rule(rules.ApplyEquation(eq, source, eq_fixes=tmp))
         calc.perform_rule(rules.OnLocation(rules.ExpandPolynomial(), '0.0'))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         assert lemma.is_finished()
         raw_fixes = [('w', {"symbol_type":"var", "type":'$tensor($real, 3, 1)'}),
                      ('v', {"symbol_type":"var", "type":'$tensor($real, 3, 1)'})]
@@ -512,7 +512,7 @@ class MatrixTest(unittest.TestCase):
         calc = proof.lhs_calc
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hmf'), '0'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'), '0'))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         source = calc.parse_expr("D t. exp(t * hat(w))")
         calc.perform_rule(rules.ApplyEquation(lemma.goal, source))
         source = calc.parse_expr("D t. exp(t * hat(w))")
@@ -523,9 +523,9 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.ExpandMatFunc(),'0'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('hm'),'1'))
         calc.perform_rule(rules.OnSubterm(rules.ExpandPolynomial()))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.OnSubterm(rules.ExpandPolynomial()))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         eq = calc.parse_expr("hat(w)^2 =  w * T(w) - norm(w)^2 * unit_matrix(3)")
         source = calc.parse_expr("hat(w)^2")
         calc.perform_rule(rules.ApplyEquation(eq, source))
@@ -533,14 +533,14 @@ class MatrixTest(unittest.TestCase):
         source = calc.parse_expr("norm(w)")
         calc.perform_rule(rules.ApplyEquation(eq, source))
         calc.perform_rule(rules.OnSubterm(rules.ExpandPolynomial()))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         s = calc.parse_expr("t * hat(w) * w * T(w) * v")
         t = calc.parse_expr("t * (hat(w) * w) * T(w) * v")
         calc.perform_rule(rules.Equation(s, t))
         eq = calc.parse_expr("hat(w) * w = zero_matrix(3,1)")
         source = calc.parse_expr("hat(w) * w")
         calc.perform_rule(rules.ApplyEquation(eq, source))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         assert goal02.is_finished()
         self.checkAndOutput(file)
 
@@ -590,7 +590,7 @@ class MatrixTest(unittest.TestCase):
         eq = calc.parse_expr("hmf(-t, w, v) * hmf(t, w, v) = unit_matrix(4)", fixes=fixes)
         s = calc.parse_expr("hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))")
         calc.perform_rule(rules.ApplyEquation(eq, s, eq_fixes=fixes_from_expr(eq)))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
 
         proof = cases.induct_case.proof_by_calculation()
         calc = proof.lhs_calc
@@ -599,7 +599,7 @@ class MatrixTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.SplitItem(cond), '0.1'))
         cond = calc.parse_expr("i=0")
         calc.perform_rule(rules.OnLocation(rules.SplitItem(cond), '1.0'))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         s = calc.parse_expr(
             "inv(ic) * MUL(j, 0, n - 1, hmf(-nth(t,-j + n,0),nthc(w,-j + n),nthc(v,-j + n))) * hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0)) * MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j))) * ic")
         t = calc.parse_expr(
@@ -613,7 +613,7 @@ class MatrixTest(unittest.TestCase):
         s = calc.parse_expr("hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))")
         calc.perform_rule(rules.ApplyEquation(eq, s, eq_fixes=fixes_from_expr(eq)))
 
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         s = calc.parse_expr("MUL(j, 0, n - 1, hmf(-nth(t,-j + n, 0),nthc(w,-j + n),nthc(v,-j + n)))")
         t = calc.parse_expr(
             "MUL(j, 0, n-1, hmf(-nth(choose_row(t, 1, n),n-j-1, 0), nthc(choose_col(w,1,n), n-j-1), nthc(choose_col(v, 1, n), n-j-1)))")

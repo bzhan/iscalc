@@ -94,8 +94,8 @@
                                 "latex_res": "-\\frac{1}{-k + 1} (\\int_{1}^{\\infty} x ^ {-k} \\,dx)",
                                 "res": "-(1 / (-k + 1) * (INT x:[1,oo]. x ^ -k))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -118,8 +118,8 @@
                                 "latex_res": "\\frac{1}{(-k + 1) ^ {2}}",
                                 "res": "1 / (-k + 1) ^ 2",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -267,8 +267,8 @@
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{(2 n + 1) ^ {2}}}",
                                 "res": "SUM(n, 0, oo, 1 / (2 * n + 1) ^ 2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -407,8 +407,8 @@
                                 "latex_res": "\\sum_{n=0}^{\\infty}{(-1) ^ {n} (\\int_{1}^{\\infty} x ^ {-2 n - 2} \\log{x} \\,dx)}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n * (INT x:[1,oo]. x ^ (-(2 * n) - 2) * log(x)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -472,8 +472,8 @@
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n}}{(2 n + 1) ^ {2}}}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n / (2 * n + 1) ^ 2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -646,8 +646,8 @@
                                 "latex_res": "(\\int_{1}^{\\infty} \\frac{1}{x ^ {2} + 1} \\log{(\\frac{1}{x} + 1)} \\,dx) + (\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx) + \\frac{\\pi \\log{(2)}}{8}",
                                 "res": "(INT x:[1,oo]. 1 / (x ^ 2 + 1) * log(1 / x + 1)) + (INT x:[1,oo]. log(x) / (x ^ 2 + 1)) + pi * log(2) / 8",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -718,8 +718,8 @@
                                 "latex_res": "\\frac{\\pi \\log{(2)}}{4} + G",
                                 "res": "pi * log(2) / 4 + G",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },

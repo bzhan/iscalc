@@ -61,8 +61,8 @@
                                 "latex_res": "\\int_{0}^{1} u (-u + 1) ^ {n} \\,du",
                                 "res": "INT u:[0,1]. u * (-u + 1) ^ n",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -127,8 +127,8 @@
                                 "latex_res": "2 (\\int_{0}^{1} u (-u + 1) ^ {n} \\,du)",
                                 "res": "2 * (INT u:[0,1]. u * (-u + 1) ^ n)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -214,8 +214,8 @@
                                 "latex_res": "\\frac{2 n!}{(n + 2)!}",
                                 "res": "2 * factorial(n) / factorial(n + 2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -247,8 +247,8 @@
                                 "latex_res": "\\frac{2}{(n + 1) (n + 2)}",
                                 "res": "2 / ((n + 1) * (n + 2))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -326,8 +326,8 @@
                             "latex_res": "\\int_{0}^{1} (-\\sqrt{x} + 1) ^ {9} \\,dx = \\frac{1}{55}",
                             "res": "(INT x:[0,1]. (-sqrt(x) + 1) ^ 9) = 1/55",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         }

@@ -56,8 +56,8 @@
                                 "latex_res": "\\int_{0}^{\\pi/4} \\log{(\\tan{u} + 1)} \\,du",
                                 "res": "INT u:[0,pi / 4]. log(tan(u) + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -134,8 +134,8 @@
                                 "latex_res": "\\int_{0}^{\\pi/4} \\log{(\\tan{(\\frac{\\pi}{4} - x)} + 1)} \\,dx",
                                 "res": "INT x:[0,pi / 4]. log(tan(pi / 4 - x) + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -167,8 +167,8 @@
                                 "latex_res": "\\int_{0}^{\\pi/4} \\log{(\\frac{-\\tan{x} + 1}{\\tan{x} + 1} + 1)} \\,dx",
                                 "res": "INT x:[0,pi / 4]. log((-tan(x) + 1) / (tan(x) + 1) + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -233,8 +233,8 @@
                                 "latex_res": "-(\\int_{0}^{\\pi/4} \\log{(\\tan{x} + 1)} \\,dx) + \\frac{\\pi \\log{(2)}}{4}",
                                 "res": "-(INT x:[0,pi / 4]. log(tan(x) + 1)) + pi * log(2) / 4",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -273,8 +273,8 @@
                                 "latex_res": "-(\\int_{0}^{1} \\frac{\\log{(x + 1)}}{x ^ {2} + 1} \\,dx) + \\frac{\\pi \\log{(2)}}{4}",
                                 "res": "-(INT x:[0,1]. log(x + 1) / (x ^ 2 + 1)) + pi * log(2) / 4",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

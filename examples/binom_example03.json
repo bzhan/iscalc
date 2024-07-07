@@ -1,0 +1,151 @@
+{
+    "content": [
+        {
+            "finished": true,
+            "goal": "binom(2 * k,k) = (k + 1) / (2 * (2 * k + 1)) * binom(2 * k + 2,k + 1)",
+            "latex_goal": "\\binom{2 k}{k} = \\frac{k + 1}{2 (2 k + 1)} \\binom{2 k + 2}{k + 1}",
+            "obligations": [
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "2 * (2 * k + 1) != 0"
+                            ]
+                        }
+                    ],
+                    "conds": []
+                }
+            ],
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\binom{2 k}{k}",
+                        "start": "binom(2 * k,k)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{(2 k)!}{(k!)^{2}}",
+                                "res": "factorial(2 * k) / factorial(k) ^ 2",
+                                "rule": {
+                                    "func_name": "binom",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{(k + 1) (2 k + 2) ((2 k + 1) (2 k)!)}{2 ((k + 1) k!) ((k + 1) k!) (2 k + 1)}",
+                                "res": "(k + 1) * (2 * k + 2) * ((2 * k + 1) * factorial(2 * k)) / (2 * ((k + 1) * factorial(k)) * ((k + 1) * factorial(k)) * (2 * k + 1))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{(2 k)!}{(k!)^{2}}\\) to \\(\\frac{(k + 1) (2 k + 2) ((2 k + 1) (2 k)!)}{2 ((k + 1) k!) ((k + 1) k!) (2 k + 1)}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(k + 1) * (2 * k + 2) * ((2 * k + 1) * factorial(2 * k)) / (2 * ((k + 1) * factorial(k)) * ((k + 1) * factorial(k)) * (2 * k + 1))",
+                                    "old_expr": "factorial(2 * k) / factorial(k) ^ 2",
+                                    "str": "rewriting factorial(2 * k) / factorial(k) ^ 2 to (k + 1) * (2 * k + 2) * ((2 * k + 1) * factorial(2 * k)) / (2 * ((k + 1) * factorial(k)) * ((k + 1) * factorial(k)) * (2 * k + 1))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{(k + 1) (2 k + 2) (2 k + 1)!}{2 ((k + 1) k!) ((k + 1) k!) (2 k + 1)}",
+                                "res": "(k + 1) * (2 * k + 2) * factorial(2 * k + 1) / (2 * ((k + 1) * factorial(k)) * ((k + 1) * factorial(k)) * (2 * k + 1))",
+                                "rule": {
+                                    "latex_str": "rewrite \\((2 k + 1) (2 k)!\\) to \\((2 k + 1)!\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "(2 * k + 1) * factorial(2 * k)",
+                                    "str": "rewrite (2 * k + 1) * factorial(2 * k) to factorial(2 * k + 1) using identity",
+                                    "target": "factorial(2 * k + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{(k + 1) (2 k + 2) (2 k + 1)!}{2 (k + 1)! ((k + 1) k!) (2 k + 1)}",
+                                "res": "(k + 1) * (2 * k + 2) * factorial(2 * k + 1) / (2 * factorial(k + 1) * ((k + 1) * factorial(k)) * (2 * k + 1))",
+                                "rule": {
+                                    "latex_str": "rewrite \\((k + 1) k!\\) to \\((k + 1)!\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "(k + 1) * factorial(k)",
+                                    "str": "rewrite (k + 1) * factorial(k) to factorial(k + 1) using identity",
+                                    "target": "factorial(k + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{(k + 1) (2 k + 2) (2 k + 1)!}{2 (k + 1)! (k + 1)! (2 k + 1)}",
+                                "res": "(k + 1) * (2 * k + 2) * factorial(2 * k + 1) / (2 * factorial(k + 1) * factorial(k + 1) * (2 * k + 1))",
+                                "rule": {
+                                    "latex_str": "rewrite \\((k + 1) k!\\) to \\((k + 1)!\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "(k + 1) * factorial(k)",
+                                    "str": "rewrite (k + 1) * factorial(k) to factorial(k + 1) using identity",
+                                    "target": "factorial(k + 1)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{(k + 1) ((2 k + 1 + 1) (2 k + 1)!)}{2 (k + 1)! (k + 1)! (2 k + 1)}",
+                                "res": "(k + 1) * ((2 * k + 1 + 1) * factorial(2 * k + 1)) / (2 * factorial(k + 1) * factorial(k + 1) * (2 * k + 1))",
+                                "rule": {
+                                    "latex_str": "rewriting \\((k + 1) (2 k + 2) (2 k + 1)!\\) to \\((k + 1) ((2 k + 1 + 1) (2 k + 1)!)\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(k + 1) * ((2 * k + 1 + 1) * factorial(2 * k + 1))",
+                                    "old_expr": "(k + 1) * (2 * k + 2) * factorial(2 * k + 1)",
+                                    "str": "rewriting (k + 1) * (2 * k + 2) * factorial(2 * k + 1) to (k + 1) * ((2 * k + 1 + 1) * factorial(2 * k + 1))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{(k + 1) (2 k + 2)!}{2 (k + 1)! (k + 1)! (2 k + 1)}",
+                                "res": "(k + 1) * factorial(2 * k + 2) / (2 * factorial(k + 1) * factorial(k + 1) * (2 * k + 1))",
+                                "rule": {
+                                    "latex_str": "rewrite \\((2 k + 1 + 1) (2 k + 1)!\\) to \\((2 k + 2)!\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "(2 * k + 1 + 1) * factorial(2 * k + 1)",
+                                    "str": "rewrite (2 * k + 1 + 1) * factorial(2 * k + 1) to factorial(2 * k + 2) using identity",
+                                    "target": "factorial(2 * k + 2)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{k + 1}{2 (2 k + 1)} (\\frac{(2 k + 2)!}{((k + 1)!)^{2}})",
+                                "res": "(k + 1) / (2 * (2 * k + 1)) * (factorial(2 * k + 2) / factorial(k + 1) ^ 2)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{(k + 1) (2 k + 2)!}{2 (k + 1)! (k + 1)! (2 k + 1)}\\) to \\(\\frac{k + 1}{2 (2 k + 1)} (\\frac{(2 k + 2)!}{((k + 1)!)^{2}})\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(k + 1) / (2 * (2 * k + 1)) * (factorial(2 * k + 2) / factorial(k + 1) ^ 2)",
+                                    "old_expr": "(k + 1) * factorial(2 * k + 2) / (2 * factorial(k + 1) * factorial(k + 1) * (2 * k + 1))",
+                                    "str": "rewriting (k + 1) * factorial(2 * k + 2) / (2 * factorial(k + 1) * factorial(k + 1) * (2 * k + 1)) to (k + 1) / (2 * (2 * k + 1)) * (factorial(2 * k + 2) / factorial(k + 1) ^ 2)"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "\\frac{k + 1}{2 (2 k + 1)} \\binom{2 k + 2}{k + 1}",
+                        "start": "(k + 1) / (2 * (2 * k + 1)) * binom(2 * k + 2,k + 1)",
+                        "steps": [
+                            {
+                                "latex_res": "\\frac{k + 1}{2 (2 k + 1)} (\\frac{(2 k + 2)!}{((k + 1)!)^{2}})",
+                                "res": "(k + 1) / (2 * (2 * k + 1)) * (factorial(2 * k + 2) / factorial(k + 1) ^ 2)",
+                                "rule": {
+                                    "func_name": "binom",
+                                    "loc": "subterms",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition on subterms"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "binom(2 * k,k) = (k + 1) / (2 * (2 * k + 1)) * binom(2 * k + 2,k + 1)",
+                "latex_goal": "\\binom{2 k}{k} = \\frac{k + 1}{2 (2 k + 1)} \\binom{2 k + 2}{k + 1}",
+                "type": "CalculationProof"
+            },
+            "type": "Goal",
+            "wellformed": false
+        }
+    ],
+    "name": "binom_example03"
+}

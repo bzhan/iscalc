@@ -302,8 +302,8 @@
                                 "latex_res": "\\frac{\\pi}{2 \\sqrt{a} \\sqrt{b}} (\\int_{-\\sqrt{b}/\\sqrt{a}}^{\\sqrt{b}/\\sqrt{a}} \\frac{1}{x ^ {2} + 1} \\,dx)",
                                 "res": "pi / (2 * sqrt(a) * sqrt(b)) * (INT x:[-(sqrt(b) / sqrt(a)),sqrt(b) / sqrt(a)]. 1 / (x ^ 2 + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -326,8 +326,8 @@
                                 "latex_res": "\\frac{\\pi}{2 \\sqrt{a} \\sqrt{b}} (-\\tan^{-1}{(-\\frac{\\sqrt{b}}{\\sqrt{a}})} + \\tan^{-1}{(\\frac{\\sqrt{b}}{\\sqrt{a}})})",
                                 "res": "pi / (2 * sqrt(a) * sqrt(b)) * (-atan(-(sqrt(b) / sqrt(a))) + atan(sqrt(b) / sqrt(a)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -347,8 +347,8 @@
                                 "latex_res": "\\frac{\\pi}{\\sqrt{a} \\sqrt{b}} \\tan^{-1}{(\\frac{\\sqrt{b}}{\\sqrt{a}})}",
                                 "res": "pi / (sqrt(a) * sqrt(b)) * atan(sqrt(b) / sqrt(a))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },

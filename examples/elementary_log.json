@@ -96,8 +96,8 @@
                                 "latex_res": "-\\frac{n}{m + 1} (\\int_{0}^{1} x ^ {m} \\log^{n - 1}(x) \\,dx)",
                                 "res": "-(n / (m + 1) * (INT x:[0,1]. x ^ m * log(x) ^ (n - 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -317,8 +317,8 @@
                                         "latex_res": "\\frac{1}{m + 1}",
                                         "res": "1 / (m + 1)",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     }
@@ -493,8 +493,8 @@
                                         "latex_res": "-\\frac{(n + 1) I(m,n)}{m + 1}",
                                         "res": "-((n + 1) * I(m,n) / (m + 1))",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -512,8 +512,8 @@
                                         "latex_res": "-(-1) ^ {n} n! (m + 1) ^ {-n - 2} (n + 1)",
                                         "res": "-((-1) ^ n * factorial(n) * (m + 1) ^ (-n - 2) * (n + 1))",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -546,8 +546,8 @@
                                         "latex_res": "-(-1) ^ {n} (m + 1) ^ {-n - 2} (n + 1)!",
                                         "res": "-((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     }
@@ -747,8 +747,8 @@
                                 "latex_res": "a ^ {m + 1} (\\int_{0}^{1} y ^ {m} \\log^{n}(a y) \\,dy)",
                                 "res": "a ^ (m + 1) * (INT y:[0,1]. y ^ m * log(a * y) ^ n)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -865,8 +865,8 @@
                                 "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{\\log^{-k + n}(a) \\binom{n}{k} (\\int_{0}^{1} y ^ {m} \\log^{k}(y) \\,dy)}",
                                 "res": "a ^ (m + 1) * SUM(k, 0, n, log(a) ^ (-k + n) * binom(n,k) * (INT y:[0,1]. y ^ m * log(y) ^ k))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -915,8 +915,8 @@
                                 "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{(-1) ^ {k} k! \\log^{-k + n}(a) (m + 1) ^ {-k - 1} \\binom{n}{k}}",
                                 "res": "a ^ (m + 1) * SUM(k, 0, n, (-1) ^ k * factorial(k) * log(a) ^ (-k + n) * (m + 1) ^ (-k - 1) * binom(n,k))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -977,8 +977,8 @@
                                 "latex_res": "a ^ {m + 1} \\sum_{k=0}^{n}{(-1) ^ {k} k! \\log^{-k + n}(a) (m + 1) ^ {-k - 1} \\binom{n}{k}}",
                                 "res": "a ^ (m + 1) * SUM(k, 0, n, (-1) ^ k * factorial(k) * log(a) ^ (-k + n) * (m + 1) ^ (-k - 1) * binom(n,k))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

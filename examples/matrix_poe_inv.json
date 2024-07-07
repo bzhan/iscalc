@@ -1,0 +1,824 @@
+{
+    "content": [
+        {
+            "conds": [
+                {
+                    "cond": "n >= 1",
+                    "latex_cond": "n \\ge 1"
+                }
+            ],
+            "eq": "gst(t,n,w,v,ic) = MUL(i, 0, n - 1, hmf(nth(t,i,0),nthc(w,i),nthc(v,i))) * ic",
+            "fixes": [
+                [
+                    "i",
+                    {
+                        "latex_type": "\\text{i} \\in \\mathbb{Z}",
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
+                ],
+                [
+                    "n",
+                    {
+                        "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
+                ],
+                [
+                    "t",
+                    {
+                        "latex_type": "\\text{t} \\in \\mathbb{R}^{n}",
+                        "symbol_type": "var",
+                        "type": "$tensor($real, n, 1)"
+                    }
+                ],
+                [
+                    "w",
+                    {
+                        "latex_type": "\\text{w} \\in \\mathbb{R}^{3 \\times n}",
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, n)"
+                    }
+                ],
+                [
+                    "v",
+                    {
+                        "latex_type": "\\text{v} \\in \\mathbb{R}^{3 \\times n}",
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, n)"
+                    }
+                ],
+                [
+                    "ic",
+                    {
+                        "latex_type": "\\text{ic} \\in \\mathbb{R}^{4 \\times 4}",
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 4, 4)"
+                    }
+                ]
+            ],
+            "latex_eq": "gst{(t,n,w,v,ic)} = \\prod_{i=0}^{n - 1}{hmf(t_{i},w_{i},v_{i})} ic",
+            "latex_lhs": "gst{(t,n,w,v,ic)}",
+            "type": "FuncDef"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "n >= 1",
+                    "latex_cond": "n \\ge 1"
+                }
+            ],
+            "finished": true,
+            "fixes": [
+                [
+                    "i",
+                    {
+                        "latex_type": "\\text{i} \\in \\mathbb{Z}",
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
+                ],
+                [
+                    "n",
+                    {
+                        "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
+                ],
+                [
+                    "t",
+                    {
+                        "latex_type": "\\text{t} \\in \\mathbb{R}^{n}",
+                        "symbol_type": "var",
+                        "type": "$tensor($real, n, 1)"
+                    }
+                ],
+                [
+                    "w",
+                    {
+                        "latex_type": "\\text{w} \\in \\mathbb{R}^{3 \\times n}",
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, n)"
+                    }
+                ],
+                [
+                    "v",
+                    {
+                        "latex_type": "\\text{v} \\in \\mathbb{R}^{3 \\times n}",
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 3, n)"
+                    }
+                ],
+                [
+                    "ic",
+                    {
+                        "latex_type": "\\text{ic} \\in \\mathbb{R}^{4 \\times 4}",
+                        "symbol_type": "var",
+                        "type": "$tensor($real, 4, 4)"
+                    }
+                ]
+            ],
+            "goal": "inv(ic) * MUL(i, 0, n - 1, hmf(-nth(t,n - i - 1,0),nthc(w,n - i - 1),nthc(v,n - i - 1))) * gst(t,n,w,v,ic) = unit_matrix(4)",
+            "latex_goal": "ic ^ {-1} \\prod_{i=0}^{n - 1}{hmf(-t_{n - i - 1},w_{n - i - 1},v_{n - i - 1})} gst{(t,n,w,v,ic)} = \\mathbf{1}_{4 \\times 4}",
+            "proof": {
+                "base_case": {
+                    "conds": [
+                        {
+                            "cond": "1 >= 1",
+                            "latex_cond": "1 \\ge 1"
+                        }
+                    ],
+                    "finished": true,
+                    "fixes": [
+                        [
+                            "i",
+                            {
+                                "latex_type": "\\text{i} \\in \\mathbb{Z}",
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
+                        ],
+                        [
+                            "n",
+                            {
+                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
+                        ],
+                        [
+                            "t",
+                            {
+                                "latex_type": "\\text{t} \\in \\mathbb{R}^{1}",
+                                "symbol_type": "var",
+                                "type": "$tensor($real, 1, 1)"
+                            }
+                        ],
+                        [
+                            "w",
+                            {
+                                "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
+                                "symbol_type": "var",
+                                "type": "$tensor($real, 3, 1)"
+                            }
+                        ],
+                        [
+                            "v",
+                            {
+                                "latex_type": "\\text{v} \\in \\mathbb{R}^{3}",
+                                "symbol_type": "var",
+                                "type": "$tensor($real, 3, 1)"
+                            }
+                        ],
+                        [
+                            "ic",
+                            {
+                                "latex_type": "\\text{ic} \\in \\mathbb{R}^{4 \\times 4}",
+                                "symbol_type": "var",
+                                "type": "$tensor($real, 4, 4)"
+                            }
+                        ]
+                    ],
+                    "goal": "inv(ic) * hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * gst(t,1,w,v,ic) = unit_matrix(4)",
+                    "latex_goal": "ic ^ {-1} hmf(-t_{0},w_{0},v_{0}) gst{(t,1,w,v,ic)} = \\mathbf{1}_{4 \\times 4}",
+                    "proof": {
+                        "calcs": [
+                            {
+                                "conds": [
+                                    {
+                                        "cond": "1 >= 1",
+                                        "latex_cond": "1 \\ge 1"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "i",
+                                        {
+                                            "latex_type": "\\text{i} \\in \\mathbb{Z}",
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "t",
+                                        {
+                                            "latex_type": "\\text{t} \\in \\mathbb{R}^{1}",
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 1, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "w",
+                                        {
+                                            "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "v",
+                                        {
+                                            "latex_type": "\\text{v} \\in \\mathbb{R}^{3}",
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "ic",
+                                        {
+                                            "latex_type": "\\text{ic} \\in \\mathbb{R}^{4 \\times 4}",
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 4, 4)"
+                                        }
+                                    ]
+                                ],
+                                "latex_start": "ic ^ {-1} hmf(-t_{0},w_{0},v_{0}) gst{(t,1,w,v,ic)}",
+                                "start": "inv(ic) * hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * gst(t,1,w,v,ic)",
+                                "steps": [
+                                    {
+                                        "latex_res": "ic ^ {-1} hmf(-t_{0},w_{0},v_{0}) (hmf(t_{0},w_{0},v_{0}) ic)",
+                                        "res": "inv(ic) * hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * (hmf(nth(t,0,0),nthc(w,0),nthc(v,0)) * ic)",
+                                        "rule": {
+                                            "func_name": "gst",
+                                            "loc": "1",
+                                            "name": "ExpandDefinition",
+                                            "str": "expand definition at 1"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "ic ^ {-1} (hmf(-t_{0},w_{0},v_{0}) hmf(t_{0},w_{0},v_{0})) ic",
+                                        "res": "inv(ic) * (hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))) * ic",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(ic ^ {-1} hmf(-t_{0},w_{0},v_{0}) (hmf(t_{0},w_{0},v_{0}) ic)\\) to \\(ic ^ {-1} (hmf(-t_{0},w_{0},v_{0}) hmf(t_{0},w_{0},v_{0})) ic\\)",
+                                            "name": "Equation",
+                                            "new_expr": "inv(ic) * (hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))) * ic",
+                                            "old_expr": "inv(ic) * hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * (hmf(nth(t,0,0),nthc(w,0),nthc(v,0)) * ic)",
+                                            "str": "rewriting inv(ic) * hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * (hmf(nth(t,0,0),nthc(w,0),nthc(v,0)) * ic) to inv(ic) * (hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))) * ic"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "ic ^ {-1} \\mathbf{1}_{4 \\times 4} ic",
+                                        "res": "inv(ic) * unit_matrix(4) * ic",
+                                        "rule": {
+                                            "eq": "hmf(-t,w,v) * hmf(t,w,v) = unit_matrix(4)",
+                                            "eq_fixes": [
+                                                [
+                                                    "t",
+                                                    {
+                                                        "latex_type": "\\text{t} \\in \\mathbb{R}",
+                                                        "symbol_type": "var",
+                                                        "type": "$real"
+                                                    }
+                                                ],
+                                                [
+                                                    "w",
+                                                    {
+                                                        "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
+                                                        "symbol_type": "var",
+                                                        "type": "$tensor($real, 3, 1)"
+                                                    }
+                                                ],
+                                                [
+                                                    "v",
+                                                    {
+                                                        "latex_type": "\\text{v} \\in \\mathbb{R}^{3}",
+                                                        "symbol_type": "var",
+                                                        "type": "$tensor($real, 3, 1)"
+                                                    }
+                                                ]
+                                            ],
+                                            "latex_str": "apply equation \\(hmf(-t,w,v) hmf(t,w,v) = \\mathbf{1}_{4 \\times 4}\\)",
+                                            "name": "ApplyEquation",
+                                            "source": "hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))",
+                                            "str": "apply equation: hmf(-t,w,v) * hmf(t,w,v) = unit_matrix(4)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\mathbf{1}_{4 \\times 4}",
+                                        "res": "unit_matrix(4)",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            },
+                            {
+                                "conds": [
+                                    {
+                                        "cond": "1 >= 1",
+                                        "latex_cond": "1 \\ge 1"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "i",
+                                        {
+                                            "latex_type": "\\text{i} \\in \\mathbb{Z}",
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "t",
+                                        {
+                                            "latex_type": "\\text{t} \\in \\mathbb{R}^{1}",
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 1, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "w",
+                                        {
+                                            "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "v",
+                                        {
+                                            "latex_type": "\\text{v} \\in \\mathbb{R}^{3}",
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "ic",
+                                        {
+                                            "latex_type": "\\text{ic} \\in \\mathbb{R}^{4 \\times 4}",
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 4, 4)"
+                                        }
+                                    ]
+                                ],
+                                "latex_start": "\\mathbf{1}_{4 \\times 4}",
+                                "start": "unit_matrix(4)",
+                                "steps": [],
+                                "type": "Calculation"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "inv(ic) * hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * gst(t,1,w,v,ic) = unit_matrix(4)",
+                        "latex_goal": "ic ^ {-1} hmf(-t_{0},w_{0},v_{0}) gst{(t,1,w,v,ic)} = \\mathbf{1}_{4 \\times 4}",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal"
+                },
+                "finished": true,
+                "goal": "inv(ic) * MUL(i, 0, n - 1, hmf(-nth(t,n - i - 1,0),nthc(w,n - i - 1),nthc(v,n - i - 1))) * gst(t,n,w,v,ic) = unit_matrix(4)",
+                "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "n >= 1",
+                            "latex_cond": "n \\ge 1"
+                        }
+                    ],
+                    "finished": true,
+                    "fixes": [
+                        [
+                            "i",
+                            {
+                                "latex_type": "\\text{i} \\in \\mathbb{Z}",
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
+                        ],
+                        [
+                            "n",
+                            {
+                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
+                        ],
+                        [
+                            "t",
+                            {
+                                "latex_type": "\\text{t} \\in \\mathbb{R}^{n + 1}",
+                                "symbol_type": "var",
+                                "type": "$tensor($real, n + 1, 1)"
+                            }
+                        ],
+                        [
+                            "w",
+                            {
+                                "latex_type": "\\text{w} \\in \\mathbb{R}^{3 \\times n + 1}",
+                                "symbol_type": "var",
+                                "type": "$tensor($real, 3, n + 1)"
+                            }
+                        ],
+                        [
+                            "v",
+                            {
+                                "latex_type": "\\text{v} \\in \\mathbb{R}^{3 \\times n + 1}",
+                                "symbol_type": "var",
+                                "type": "$tensor($real, 3, n + 1)"
+                            }
+                        ],
+                        [
+                            "ic",
+                            {
+                                "latex_type": "\\text{ic} \\in \\mathbb{R}^{4 \\times 4}",
+                                "symbol_type": "var",
+                                "type": "$tensor($real, 4, 4)"
+                            }
+                        ]
+                    ],
+                    "goal": "inv(ic) * MUL(i, 0, n, hmf(-nth(t,-i + n,0),nthc(w,-i + n),nthc(v,-i + n))) * gst(t,n + 1,w,v,ic) = unit_matrix(4)",
+                    "latex_goal": "ic ^ {-1} \\prod_{i=0}^{n}{hmf(-t_{-i + n},w_{-i + n},v_{-i + n})} gst{(t,n + 1,w,v,ic)} = \\mathbf{1}_{4 \\times 4}",
+                    "proof": {
+                        "calcs": [
+                            {
+                                "conds": [
+                                    {
+                                        "cond": "n >= 1",
+                                        "latex_cond": "n \\ge 1"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "i",
+                                        {
+                                            "latex_type": "\\text{i} \\in \\mathbb{Z}",
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "t",
+                                        {
+                                            "latex_type": "\\text{t} \\in \\mathbb{R}^{n + 1}",
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, n + 1, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "w",
+                                        {
+                                            "latex_type": "\\text{w} \\in \\mathbb{R}^{3 \\times n + 1}",
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, n + 1)"
+                                        }
+                                    ],
+                                    [
+                                        "v",
+                                        {
+                                            "latex_type": "\\text{v} \\in \\mathbb{R}^{3 \\times n + 1}",
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, n + 1)"
+                                        }
+                                    ],
+                                    [
+                                        "ic",
+                                        {
+                                            "latex_type": "\\text{ic} \\in \\mathbb{R}^{4 \\times 4}",
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 4, 4)"
+                                        }
+                                    ]
+                                ],
+                                "latex_start": "ic ^ {-1} \\prod_{i=0}^{n}{hmf(-t_{-i + n},w_{-i + n},v_{-i + n})} gst{(t,n + 1,w,v,ic)}",
+                                "start": "inv(ic) * MUL(i, 0, n, hmf(-nth(t,-i + n,0),nthc(w,-i + n),nthc(v,-i + n))) * gst(t,n + 1,w,v,ic)",
+                                "steps": [
+                                    {
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "ic ^ {-1} \\prod_{i=0}^{n}{hmf(-t_{-i + n},w_{-i + n},v_{-i + n})} (\\prod_{i=0}^{n}{hmf(t_{i},w_{i},v_{i})} ic)",
+                                        "res": "inv(ic) * MUL(i, 0, n, hmf(-nth(t,-i + n,0),nthc(w,-i + n),nthc(v,-i + n))) * (MUL(i, 0, n, hmf(nth(t,i,0),nthc(w,i),nthc(v,i))) * ic)",
+                                        "rule": {
+                                            "func_name": "gst",
+                                            "loc": "1",
+                                            "name": "ExpandDefinition",
+                                            "str": "expand definition at 1"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ],
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "ic ^ {-1} (\\prod_{j=0}^{n - 1}{hmf(-t_{-j + n},w_{-j + n},v_{-j + n})} hmf(-t_{-n + n},w_{-n + n},v_{-n + n})) (\\prod_{i=0}^{n}{hmf(t_{i},w_{i},v_{i})} ic)",
+                                        "res": "inv(ic) * (MUL(j, 0, n - 1, hmf(-nth(t,-j + n,0),nthc(w,-j + n),nthc(v,-j + n))) * hmf(-nth(t,-n + n,0),nthc(w,-n + n),nthc(v,-n + n))) * (MUL(i, 0, n, hmf(nth(t,i,0),nthc(w,i),nthc(v,i))) * ic)",
+                                        "rule": {
+                                            "cond": "i = n",
+                                            "latex_str": "split item on \\(i = n\\) at 0.1",
+                                            "loc": "0.1",
+                                            "name": "SplitItem",
+                                            "str": "split item on i = n at 0.1"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "ic ^ {-1} (\\prod_{j=0}^{n - 1}{hmf(-t_{-j + n},w_{-j + n},v_{-j + n})} hmf(-t_{-n + n},w_{-n + n},v_{-n + n})) (hmf(t_{0},w_{0},v_{0}) \\prod_{j=0 + 1}^{n}{hmf(t_{j},w_{j},v_{j})} ic)",
+                                        "res": "inv(ic) * (MUL(j, 0, n - 1, hmf(-nth(t,-j + n,0),nthc(w,-j + n),nthc(v,-j + n))) * hmf(-nth(t,-n + n,0),nthc(w,-n + n),nthc(v,-n + n))) * (hmf(nth(t,0,0),nthc(w,0),nthc(v,0)) * MUL(j, 0 + 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j))) * ic)",
+                                        "rule": {
+                                            "cond": "i = 0",
+                                            "latex_str": "split item on \\(i = 0\\) at 1.0",
+                                            "loc": "1.0",
+                                            "name": "SplitItem",
+                                            "str": "split item on i = 0 at 1.0"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "ic ^ {-1} \\prod_{j=0}^{n - 1}{hmf(-t_{-j + n},w_{-j + n},v_{-j + n})} hmf(-t_{0},w_{0},v_{0}) hmf(t_{0},w_{0},v_{0}) \\prod_{j=1}^{n}{hmf(t_{j},w_{j},v_{j})} ic",
+                                        "res": "inv(ic) * MUL(j, 0, n - 1, hmf(-nth(t,-j + n,0),nthc(w,-j + n),nthc(v,-j + n))) * hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0)) * MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j))) * ic",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "ic ^ {-1} \\prod_{j=0}^{n - 1}{hmf(-t_{-j + n},w_{-j + n},v_{-j + n})} (hmf(-t_{0},w_{0},v_{0}) hmf(t_{0},w_{0},v_{0})) \\prod_{j=1}^{n}{hmf(t_{j},w_{j},v_{j})} ic",
+                                        "res": "inv(ic) * MUL(j, 0, n - 1, hmf(-nth(t,-j + n,0),nthc(w,-j + n),nthc(v,-j + n))) * (hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))) * MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j))) * ic",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(ic ^ {-1} \\prod_{j=0}^{n - 1}{hmf(-t_{-j + n},w_{-j + n},v_{-j + n})} hmf(-t_{0},w_{0},v_{0}) hmf(t_{0},w_{0},v_{0}) \\prod_{j=1}^{n}{hmf(t_{j},w_{j},v_{j})} ic\\) to \\(ic ^ {-1} \\prod_{j=0}^{n - 1}{hmf(-t_{-j + n},w_{-j + n},v_{-j + n})} (hmf(-t_{0},w_{0},v_{0}) hmf(t_{0},w_{0},v_{0})) \\prod_{j=1}^{n}{hmf(t_{j},w_{j},v_{j})} ic\\)",
+                                            "name": "Equation",
+                                            "new_expr": "inv(ic) * MUL(j, 0, n - 1, hmf(-nth(t,-j + n,0),nthc(w,-j + n),nthc(v,-j + n))) * (hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))) * MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j))) * ic",
+                                            "old_expr": "inv(ic) * MUL(j, 0, n - 1, hmf(-nth(t,-j + n,0),nthc(w,-j + n),nthc(v,-j + n))) * hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0)) * MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j))) * ic",
+                                            "str": "rewriting inv(ic) * MUL(j, 0, n - 1, hmf(-nth(t,-j + n,0),nthc(w,-j + n),nthc(v,-j + n))) * hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0)) * MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j))) * ic to inv(ic) * MUL(j, 0, n - 1, hmf(-nth(t,-j + n,0),nthc(w,-j + n),nthc(v,-j + n))) * (hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))) * MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j))) * ic"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "ic ^ {-1} \\prod_{j=0}^{n - 1}{hmf(-t_{-j + n},w_{-j + n},v_{-j + n})} \\mathbf{1}_{4 \\times 4} \\prod_{j=1}^{n}{hmf(t_{j},w_{j},v_{j})} ic",
+                                        "res": "inv(ic) * MUL(j, 0, n - 1, hmf(-nth(t,-j + n,0),nthc(w,-j + n),nthc(v,-j + n))) * unit_matrix(4) * MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j))) * ic",
+                                        "rule": {
+                                            "eq": "hmf(-t,w,v) * hmf(t,w,v) = unit_matrix(4)",
+                                            "eq_fixes": [
+                                                [
+                                                    "t",
+                                                    {
+                                                        "latex_type": "\\text{t} \\in \\mathbb{R}",
+                                                        "symbol_type": "var",
+                                                        "type": "$real"
+                                                    }
+                                                ],
+                                                [
+                                                    "w",
+                                                    {
+                                                        "latex_type": "\\text{w} \\in \\mathbb{R}^{3}",
+                                                        "symbol_type": "var",
+                                                        "type": "$tensor($real, 3, 1)"
+                                                    }
+                                                ],
+                                                [
+                                                    "v",
+                                                    {
+                                                        "latex_type": "\\text{v} \\in \\mathbb{R}^{3}",
+                                                        "symbol_type": "var",
+                                                        "type": "$tensor($real, 3, 1)"
+                                                    }
+                                                ]
+                                            ],
+                                            "latex_str": "apply equation \\(hmf(-t,w,v) hmf(t,w,v) = \\mathbf{1}_{4 \\times 4}\\)",
+                                            "name": "ApplyEquation",
+                                            "source": "hmf(-nth(t,0,0),nthc(w,0),nthc(v,0)) * hmf(nth(t,0,0),nthc(w,0),nthc(v,0))",
+                                            "str": "apply equation: hmf(-t,w,v) * hmf(t,w,v) = unit_matrix(4)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "ic ^ {-1} \\prod_{j=0}^{n - 1}{hmf(-t_{-j + n},w_{-j + n},v_{-j + n})} \\prod_{j=1}^{n}{hmf(t_{j},w_{j},v_{j})} ic",
+                                        "res": "inv(ic) * MUL(j, 0, n - 1, hmf(-nth(t,-j + n,0),nthc(w,-j + n),nthc(v,-j + n))) * MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j))) * ic",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "ic ^ {-1} \\prod_{j=0}^{n - 1}{hmf(-t[1:n,:]_{n - j - 1},w[:,1:n]_{n - j - 1},v[:,1:n]_{n - j - 1})} \\prod_{j=1}^{n}{hmf(t_{j},w_{j},v_{j})} ic",
+                                        "res": "inv(ic) * MUL(j, 0, n - 1, hmf(-nth(choose_row(t,1,n),n - j - 1,0),nthc(choose_col(w,1,n),n - j - 1),nthc(choose_col(v,1,n),n - j - 1))) * MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j))) * ic",
+                                        "rule": {
+                                            "name": "RewriteMatrixMul",
+                                            "source": "MUL(j, 0, n - 1, hmf(-nth(t,-j + n,0),nthc(w,-j + n),nthc(v,-j + n)))",
+                                            "str": "rewrite product of matrix",
+                                            "target": "MUL(j, 0, n - 1, hmf(-nth(choose_row(t,1,n),n - j - 1,0),nthc(choose_col(w,1,n),n - j - 1),nthc(choose_col(v,1,n),n - j - 1)))"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "ic ^ {-1} \\prod_{j=0}^{n - 1}{hmf(-t[1:n,:]_{n - j - 1},w[:,1:n]_{n - j - 1},v[:,1:n]_{n - j - 1})} \\prod_{j=0}^{n - 1}{hmf(t[1:n,:]_{j},w[:,1:n]_{j},v[:,1:n]_{j})} ic",
+                                        "res": "inv(ic) * MUL(j, 0, n - 1, hmf(-nth(choose_row(t,1,n),n - j - 1,0),nthc(choose_col(w,1,n),n - j - 1),nthc(choose_col(v,1,n),n - j - 1))) * MUL(j, 0, n - 1, hmf(nth(choose_row(t,1,n),j,0),nthc(choose_col(w,1,n),j),nthc(choose_col(v,1,n),j))) * ic",
+                                        "rule": {
+                                            "name": "RewriteMatrixMul",
+                                            "source": "MUL(j, 1, n, hmf(nth(t,j,0),nthc(w,j),nthc(v,j)))",
+                                            "str": "rewrite product of matrix",
+                                            "target": "MUL(j, 0, n - 1, hmf(nth(choose_row(t,1,n),j,0),nthc(choose_col(w,1,n),j),nthc(choose_col(v,1,n),j)))"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "ic ^ {-1} \\prod_{j=0}^{n - 1}{hmf(-t[1:n,:]_{n - j - 1},w[:,1:n]_{n - j - 1},v[:,1:n]_{n - j - 1})} (\\prod_{j=0}^{n - 1}{hmf(t[1:n,:]_{j},w[:,1:n]_{j},v[:,1:n]_{j})} ic)",
+                                        "res": "inv(ic) * MUL(j, 0, n - 1, hmf(-nth(choose_row(t,1,n),n - j - 1,0),nthc(choose_col(w,1,n),n - j - 1),nthc(choose_col(v,1,n),n - j - 1))) * (MUL(j, 0, n - 1, hmf(nth(choose_row(t,1,n),j,0),nthc(choose_col(w,1,n),j),nthc(choose_col(v,1,n),j))) * ic)",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(ic ^ {-1} \\prod_{j=0}^{n - 1}{hmf(-t[1:n,:]_{n - j - 1},w[:,1:n]_{n - j - 1},v[:,1:n]_{n - j - 1})} \\prod_{j=0}^{n - 1}{hmf(t[1:n,:]_{j},w[:,1:n]_{j},v[:,1:n]_{j})} ic\\) to \\(ic ^ {-1} \\prod_{j=0}^{n - 1}{hmf(-t[1:n,:]_{n - j - 1},w[:,1:n]_{n - j - 1},v[:,1:n]_{n - j - 1})} (\\prod_{j=0}^{n - 1}{hmf(t[1:n,:]_{j},w[:,1:n]_{j},v[:,1:n]_{j})} ic)\\)",
+                                            "name": "Equation",
+                                            "new_expr": "inv(ic) * MUL(j, 0, n - 1, hmf(-nth(choose_row(t,1,n),n - j - 1,0),nthc(choose_col(w,1,n),n - j - 1),nthc(choose_col(v,1,n),n - j - 1))) * (MUL(j, 0, n - 1, hmf(nth(choose_row(t,1,n),j,0),nthc(choose_col(w,1,n),j),nthc(choose_col(v,1,n),j))) * ic)",
+                                            "old_expr": "inv(ic) * MUL(j, 0, n - 1, hmf(-nth(choose_row(t,1,n),n - j - 1,0),nthc(choose_col(w,1,n),n - j - 1),nthc(choose_col(v,1,n),n - j - 1))) * MUL(j, 0, n - 1, hmf(nth(choose_row(t,1,n),j,0),nthc(choose_col(w,1,n),j),nthc(choose_col(v,1,n),j))) * ic",
+                                            "str": "rewriting inv(ic) * MUL(j, 0, n - 1, hmf(-nth(choose_row(t,1,n),n - j - 1,0),nthc(choose_col(w,1,n),n - j - 1),nthc(choose_col(v,1,n),n - j - 1))) * MUL(j, 0, n - 1, hmf(nth(choose_row(t,1,n),j,0),nthc(choose_col(w,1,n),j),nthc(choose_col(v,1,n),j))) * ic to inv(ic) * MUL(j, 0, n - 1, hmf(-nth(choose_row(t,1,n),n - j - 1,0),nthc(choose_col(w,1,n),n - j - 1),nthc(choose_col(v,1,n),n - j - 1))) * (MUL(j, 0, n - 1, hmf(nth(choose_row(t,1,n),j,0),nthc(choose_col(w,1,n),j),nthc(choose_col(v,1,n),j))) * ic)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "fixes": [
+                                            [
+                                                "j",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "ic ^ {-1} \\prod_{j=0}^{n - 1}{hmf(-t[1:n,:]_{n - j - 1},w[:,1:n]_{n - j - 1},v[:,1:n]_{n - j - 1})} gst{(t[1:n,:],n,w[:,1:n],v[:,1:n],ic)}",
+                                        "res": "inv(ic) * MUL(j, 0, n - 1, hmf(-nth(choose_row(t,1,n),n - j - 1,0),nthc(choose_col(w,1,n),n - j - 1),nthc(choose_col(v,1,n),n - j - 1))) * gst(choose_row(t,1,n),n,choose_col(w,1,n),choose_col(v,1,n),ic)",
+                                        "rule": {
+                                            "func_name": "gst",
+                                            "loc": "1",
+                                            "name": "FoldDefinition",
+                                            "str": "fold definition at 1"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\mathbf{1}_{4 \\times 4}",
+                                        "res": "unit_matrix(4)",
+                                        "rule": {
+                                            "name": "ApplyInductHyp",
+                                            "str": "apply induction hypothesis"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            },
+                            {
+                                "conds": [
+                                    {
+                                        "cond": "n >= 1",
+                                        "latex_cond": "n \\ge 1"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "i",
+                                        {
+                                            "latex_type": "\\text{i} \\in \\mathbb{Z}",
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "t",
+                                        {
+                                            "latex_type": "\\text{t} \\in \\mathbb{R}^{n + 1}",
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, n + 1, 1)"
+                                        }
+                                    ],
+                                    [
+                                        "w",
+                                        {
+                                            "latex_type": "\\text{w} \\in \\mathbb{R}^{3 \\times n + 1}",
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, n + 1)"
+                                        }
+                                    ],
+                                    [
+                                        "v",
+                                        {
+                                            "latex_type": "\\text{v} \\in \\mathbb{R}^{3 \\times n + 1}",
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 3, n + 1)"
+                                        }
+                                    ],
+                                    [
+                                        "ic",
+                                        {
+                                            "latex_type": "\\text{ic} \\in \\mathbb{R}^{4 \\times 4}",
+                                            "symbol_type": "var",
+                                            "type": "$tensor($real, 4, 4)"
+                                        }
+                                    ]
+                                ],
+                                "latex_start": "\\mathbf{1}_{4 \\times 4}",
+                                "start": "unit_matrix(4)",
+                                "steps": [],
+                                "type": "Calculation"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "inv(ic) * MUL(i, 0, n, hmf(-nth(t,-i + n,0),nthc(w,-i + n),nthc(v,-i + n))) * gst(t,n + 1,w,v,ic) = unit_matrix(4)",
+                        "latex_goal": "ic ^ {-1} \\prod_{i=0}^{n}{hmf(-t_{-i + n},w_{-i + n},v_{-i + n})} gst{(t,n + 1,w,v,ic)} = \\mathbf{1}_{4 \\times 4}",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal"
+                },
+                "induct_var": "n",
+                "latex_goal": "ic ^ {-1} \\prod_{i=0}^{n - 1}{hmf(-t_{n - i - 1},w_{n - i - 1},v_{n - i - 1})} gst{(t,n,w,v,ic)} = \\mathbf{1}_{4 \\times 4}",
+                "start": "1",
+                "type": "InductionProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "matrix_poe_inv"
+}

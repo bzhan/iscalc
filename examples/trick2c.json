@@ -45,8 +45,8 @@
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\cos^{2}(x)}{\\cos{x} + \\sin{x}} \\,dx",
                                 "res": "INT x:[0,pi / 2]. cos(x) ^ 2 / (cos(x) + sin(x))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -81,8 +81,8 @@
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\sin^{2}(x)}{\\cos{x} + \\sin{x}} \\,dx",
                                 "res": "INT x:[0,pi / 2]. sin(x) ^ 2 / (cos(x) + sin(x))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -103,8 +103,8 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi/2} \\frac{1}{\\cos{x} + \\sin{x}} \\,dx)",
                                 "res": "1/2 * (INT x:[0,pi / 2]. 1 / (cos(x) + sin(x)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -151,8 +151,8 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi/2} \\frac{\\cos^{2}(x)}{\\cos{x} + \\sin{x}} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\pi/2} \\frac{\\sin^{2}(x)}{\\cos{x} + \\sin{x}} \\,dx)",
                                 "res": "1/2 * (INT x:[0,pi / 2]. cos(x) ^ 2 / (cos(x) + sin(x))) + 1/2 * (INT x:[0,pi / 2]. sin(x) ^ 2 / (cos(x) + sin(x)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -203,8 +203,8 @@
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\sin^{2}(x)}{\\cos{x} + \\sin{x}} \\,dx",
                                 "res": "INT x:[0,pi / 2]. sin(x) ^ 2 / (cos(x) + sin(x))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -275,8 +275,8 @@
                                 "latex_res": "\\int_{0}^{1} \\frac{1}{(z ^ {2} + 1) (\\frac{-z ^ {2} + 1}{z ^ {2} + 1} + \\frac{2 z}{z ^ {2} + 1})} \\,dz",
                                 "res": "INT z:[0,1]. 1 / ((z ^ 2 + 1) * ((-(z ^ 2) + 1) / (z ^ 2 + 1) + 2 * z / (z ^ 2 + 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -362,8 +362,8 @@
                                 "latex_res": "\\frac{\\sqrt{2}}{4} ((\\int_{0}^{1} \\frac{1}{\\sqrt{2} - z + 1} \\,dz) + (\\int_{0}^{1} \\frac{1}{\\sqrt{2} + z - 1} \\,dz))",
                                 "res": "sqrt(2) / 4 * ((INT z:[0,1]. 1 / (sqrt(2) - z + 1)) + (INT z:[0,1]. 1 / (sqrt(2) + z - 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -428,8 +428,8 @@
                                 "latex_res": "\\frac{\\sqrt{2}\\cdot (\\log{(\\sqrt{2} + 1)} - \\log{(\\sqrt{2} - 1)})}{4}",
                                 "res": "sqrt(2) * (log(sqrt(2) + 1) - log(sqrt(2) - 1)) / 4",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -473,8 +473,8 @@
                                 "latex_res": "\\frac{\\sqrt{2} \\log{(2 \\sqrt{2} + 3)}}{4}",
                                 "res": "sqrt(2) * log(2 * sqrt(2) + 3) / 4",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -489,8 +489,8 @@
                                 "latex_res": "\\frac{\\sqrt{2} \\log{(2 \\sqrt{2} + 3)}}{4}",
                                 "res": "sqrt(2) * log(2 * sqrt(2) + 3) / 4",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

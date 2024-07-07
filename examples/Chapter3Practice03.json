@@ -84,8 +84,8 @@
                                 "latex_res": "\\frac{1}{2 b ^ {2}} ((\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a x)}}{b ^ {2} + x ^ {2}} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a x)}}{b ^ {2} - x ^ {2}} \\,dx))",
                                 "res": "1 / (2 * b ^ 2) * ((INT x:[-oo,oo]. cos(a * x) / (b ^ 2 + x ^ 2)) + (INT x:[-oo,oo]. cos(a * x) / (b ^ 2 - x ^ 2)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -135,8 +135,8 @@
                                 "latex_res": "\\frac{1}{2 b ^ {2}} (2 (\\int_{0}^{\\infty} \\frac{\\cos{(a x)}}{b ^ {2} + x ^ {2}} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a x)}}{b ^ {2} - x ^ {2}} \\,dx))",
                                 "res": "1 / (2 * b ^ 2) * (2 * (INT x:[0,oo]. cos(a * x) / (b ^ 2 + x ^ 2)) + (INT x:[-oo,oo]. cos(a * x) / (b ^ 2 - x ^ 2)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -171,8 +171,8 @@
                                 "latex_res": "\\frac{1}{2 b ^ {2}} (\\frac{\\pi e^{-a b}}{b} + \\frac{\\pi \\sin{(a b)}}{b})",
                                 "res": "1 / (2 * b ^ 2) * (pi * exp(-(a * b)) / b + pi * sin(a * b) / b)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },

@@ -133,8 +133,8 @@
                                 "latex_res": "\\frac{1}{b + 1} (\\int_{0}^{1} x ^ {a} (-x + 1) ^ {b + 1} \\,dx)",
                                 "res": "1 / (b + 1) * (INT x:[0,1]. x ^ a * (-x + 1) ^ (b + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -214,8 +214,8 @@
                                 "latex_res": "\\frac{a! b!}{(a + b + 2)!}",
                                 "res": "factorial(a) * factorial(b) / factorial(a + b + 2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

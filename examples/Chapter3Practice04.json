@@ -48,8 +48,8 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx",
                                 "res": "INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -119,8 +119,8 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx",
                                 "res": "INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -241,8 +241,8 @@
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{4 b} ((\\int_{-\\infty}^{\\infty} \\frac{x \\sin{(a x)}}{b + x} \\,dx) + (\\int_{-\\infty}^{\\infty} \\frac{x \\sin{(a x)}}{b - x} \\,dx))",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (4 * b) * ((INT x:[-oo,oo]. x * sin(a * x) / (b + x)) + (INT x:[-oo,oo]. x * sin(a * x) / (b - x))))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },
@@ -372,8 +372,8 @@
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{2 b} (\\int_{-\\infty}^{\\infty} \\frac{(b - u) \\sin{(a (b - u))}}{u} \\,du)",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (2 * b) * (INT u:[-oo,oo]. (b - u) * sin(a * (b - u)) / u))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },
@@ -457,8 +457,8 @@
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{2 b} (b (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a b - a u)}}{u} \\,du) - (\\int_{-\\infty}^{\\infty} \\sin{(a b - a u)} \\,du))",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1 / (2 * b) * (b * (INT u:[-oo,oo]. sin(a * b - a * u) / u) - (INT u:[-oo,oo]. sin(a * b - a * u))))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },
@@ -555,8 +555,8 @@
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = -\\frac{1}{2} (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a b - a u)}}{u} \\,du)",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = -(1/2 * (INT u:[-oo,oo]. sin(a * b - a * u) / u))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },
@@ -618,8 +618,8 @@
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = \\frac{\\cos{(a b)}}{2} (\\int_{-\\infty}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du) - \\frac{\\sin{(a b)}}{2} (\\int_{-\\infty}^{\\infty} \\frac{\\cos{(a u)}}{u} \\,du)",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = cos(a * b) / 2 * (INT u:[-oo,oo]. sin(a * u) / u) - sin(a * b) / 2 * (INT u:[-oo,oo]. cos(a * u) / u)",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },
@@ -741,8 +741,8 @@
                             "latex_res": "\\int_{0}^{\\infty} \\frac{x \\sin{(a x)}}{-b ^ {2} + x ^ {2}} \\,dx = \\cos{(a b)} (\\int_{0}^{\\infty} \\frac{\\sin{(a u)}}{u} \\,du)",
                             "res": "(INT x:[0,oo]. x * sin(a * x) / (-(b ^ 2) + x ^ 2)) = cos(a * b) * (INT u:[0,oo]. sin(a * u) / u)",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },

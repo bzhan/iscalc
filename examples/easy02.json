@@ -50,8 +50,8 @@
                                 "latex_res": "2 a ^ {2} (\\int_{0}^{\\infty} \\frac{1}{x ^ {2} (\\frac{a ^ {2}}{x ^ {2}} + 1)} \\,dx)",
                                 "res": "2 * a ^ 2 * (INT x:[0,oo]. 1 / (x ^ 2 * (a ^ 2 / x ^ 2 + 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -93,8 +93,8 @@
                                 "latex_res": "a\\cdot \\pi",
                                 "res": "a * pi",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

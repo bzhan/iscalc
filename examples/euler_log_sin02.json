@@ -39,8 +39,8 @@
                                 "latex_res": "(\\int_{0}^{\\pi/2} \\log{(\\sin{x})} \\,dx) - (\\int_{0}^{\\pi/2} \\log{x} \\,dx)",
                                 "res": "(INT x:[0,pi / 2]. log(sin(x))) - (INT x:[0,pi / 2]. log(x))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -115,8 +115,8 @@
                                 "latex_res": "-\\frac{\\pi\\cdot (-\\log{(2)} + \\log{(\\pi)})}{2} - \\frac{\\pi \\log{(2)}}{2} + \\frac{\\pi}{2}",
                                 "res": "-(pi * (-log(2) + log(pi)) / 2) - pi * log(2) / 2 + pi / 2",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -134,8 +134,8 @@
                                 "latex_res": "-\\frac{\\pi \\log{(\\pi)}}{2} + \\frac{\\pi}{2}",
                                 "res": "-(pi * log(pi) / 2) + pi / 2",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

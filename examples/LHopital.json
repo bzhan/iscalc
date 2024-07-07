@@ -23,8 +23,8 @@
                     "latex_res": "\\frac{2}{5}",
                     "res": "2/5",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -54,8 +54,8 @@
                     "latex_res": "4",
                     "res": "4",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -85,8 +85,8 @@
                     "latex_res": "1",
                     "res": "1",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -116,8 +116,8 @@
                     "latex_res": "\\log{(2)} - \\log{(3)}",
                     "res": "log(2) - log(3)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -147,8 +147,8 @@
                     "latex_res": "-\\frac{1}{54}",
                     "res": "-1/54",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -178,8 +178,8 @@
                     "latex_res": "0",
                     "res": "0",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }

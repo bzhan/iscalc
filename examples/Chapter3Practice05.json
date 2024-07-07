@@ -126,8 +126,8 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{(x (-a + b))}}{x} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{(x (a + b))}}{x} \\,dx)",
                                 "res": "1/2 * (INT x:[0,oo]. sin(x * (-a + b)) / x) + 1/2 * (INT x:[0,oo]. sin(x * (a + b)) / x)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -158,8 +158,8 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{(x (-a + b))}}{x} \\,dx) + \\frac{1}{2} (\\int_{0}^{\\infty} \\frac{\\sin{(x (a + b))}}{x} \\,dx)",
                                 "res": "1/2 * (INT x:[0,oo]. sin(x * (-a + b)) / x) + 1/2 * (INT x:[0,oo]. sin(x * (a + b)) / x)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -243,8 +243,8 @@
                                 "latex_res": "\\frac{\\pi}{2}",
                                 "res": "pi / 2",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -348,8 +348,8 @@
                                 "latex_res": "0",
                                 "res": "0",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -453,8 +453,8 @@
                                 "latex_res": "\\frac{\\pi}{4}",
                                 "res": "pi / 4",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

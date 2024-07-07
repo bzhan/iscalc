@@ -104,8 +104,8 @@
                                 "latex_res": "-\\frac{1}{b} (\\int_{0}^{\\infty} \\frac{1}{s ^ {2} + 1} \\log{(\\frac{s}{b})} \\,ds)",
                                 "res": "-(1 / b * (INT s:[0,oo]. 1 / (s ^ 2 + 1) * log(s / b)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -164,8 +164,8 @@
                                 "latex_res": "\\frac{\\pi \\log{b}}{2 b}",
                                 "res": "pi * log(b) / (2 * b)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

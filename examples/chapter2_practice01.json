@@ -57,8 +57,8 @@
                                 "latex_res": "2 (\\int_{0}^{\\pi/2} 1 \\,dx)",
                                 "res": "2 * (INT x:[0,pi / 2]. 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -81,8 +81,8 @@
                                 "latex_res": "\\pi",
                                 "res": "pi",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -178,8 +178,8 @@
                                 "latex_res": "4 (\\int_{0}^{\\pi/2} \\log{(\\sin{x})} \\,dx)",
                                 "res": "4 * (INT x:[0,pi / 2]. log(sin(x)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -214,8 +214,8 @@
                                 "latex_res": "-2 \\pi \\log{(2)}",
                                 "res": "-(2 * pi * log(2))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -413,8 +413,8 @@
                                 "latex_res": "2 \\log{(2)} (\\int_{0}^{1} \\frac{1}{\\sqrt{y} \\sqrt{-y + 1}} \\,dy) + (\\int_{0}^{1} \\frac{\\log{y}}{\\sqrt{y} \\sqrt{-y + 1}} \\,dy)",
                                 "res": "2 * log(2) * (INT y:[0,1]. 1 / (sqrt(y) * sqrt(-y + 1))) + (INT y:[0,1]. log(y) / (sqrt(y) * sqrt(-y + 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -488,8 +488,8 @@
                                 "latex_res": "0",
                                 "res": "0",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

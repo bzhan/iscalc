@@ -69,8 +69,8 @@
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{y \\sin{t} + 1} \\,dt",
                                 "res": "INT t:[0,pi / 2]. 1 / (y * sin(t) + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -302,8 +302,8 @@
                                 "latex_res": "2 (\\int_{0}^{1} \\frac{1}{2 u y + u ^ {2} + 1} \\,du)",
                                 "res": "2 * (INT u:[0,1]. 1 / (2 * u * y + u ^ 2 + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -389,8 +389,8 @@
                                 "latex_res": "2 \\sqrt{-y ^ {2} + 1} (\\int_{y/\\sqrt{-y ^ {2} + 1}}^{(y + 1)/\\sqrt{-y ^ {2} + 1}} \\frac{1}{v ^ {2} (-y ^ {2} + 1) - y ^ {2} + 1} \\,dv)",
                                 "res": "2 * sqrt(-(y ^ 2) + 1) * (INT v:[y / sqrt(-(y ^ 2) + 1),(y + 1) / sqrt(-(y ^ 2) + 1)]. 1 / (v ^ 2 * (-(y ^ 2) + 1) - y ^ 2 + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -440,8 +440,8 @@
                                 "latex_res": "\\frac{2}{\\sqrt{-y ^ {2} + 1}} (\\int_{y/\\sqrt{-y ^ {2} + 1}}^{(y + 1)/\\sqrt{-y ^ {2} + 1}} \\frac{1}{v ^ {2} + 1} \\,dv)",
                                 "res": "2 / sqrt(-(y ^ 2) + 1) * (INT v:[y / sqrt(-(y ^ 2) + 1),(y + 1) / sqrt(-(y ^ 2) + 1)]. 1 / (v ^ 2 + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -464,8 +464,8 @@
                                 "latex_res": "\\frac{2}{\\sqrt{-y ^ {2} + 1}} (\\tan^{-1}{(\\frac{y + 1}{\\sqrt{-y ^ {2} + 1}})} - \\tan^{-1}{(\\frac{y}{\\sqrt{-y ^ {2} + 1}})})",
                                 "res": "2 / sqrt(-(y ^ 2) + 1) * (atan((y + 1) / sqrt(-(y ^ 2) + 1)) - atan(y / sqrt(-(y ^ 2) + 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -692,8 +692,8 @@
                                 "latex_res": "\\int_{-1}^{1} \\frac{\\cos^{-1}{y}}{\\sqrt{-y ^ {2} + 1}} \\,dy",
                                 "res": "INT y:[-1,1]. acos(y) / sqrt(-(y ^ 2) + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -725,8 +725,8 @@
                                 "latex_res": "\\int_{0}^{\\pi} x \\,dx",
                                 "res": "INT x:[0,pi]. x",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -749,8 +749,8 @@
                                 "latex_res": "\\frac{\\pi ^ {2}}{2}",
                                 "res": "pi ^ 2 / 2",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

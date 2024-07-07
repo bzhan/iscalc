@@ -30,8 +30,8 @@
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{2 n + 1} (\\int_{0}^{1} x ^ {2 n} \\,dx)}",
                                 "res": "SUM(n, 0, oo, 1 / (2 * n + 1) * (INT x:[0,1]. x ^ (2 * n)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -64,8 +64,8 @@
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{(2 n + 1) ^ {2}}}",
                                 "res": "SUM(n, 0, oo, 1 / (2 * n + 1) ^ 2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -147,8 +147,8 @@
                                 "latex_res": "\\int_{0}^{1} \\sum_{n=0}^{\\infty}{\\frac{x ^ {2 n} (-1) ^ {n}}{2 n + 1}} \\,dx",
                                 "res": "INT x:[0,1]. SUM(n, 0, oo, x ^ (2 * n) * (-1) ^ n / (2 * n + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -200,8 +200,8 @@
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n}}{(2 n + 1) ^ {2}}}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n / (2 * n + 1) ^ 2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

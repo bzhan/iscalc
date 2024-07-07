@@ -186,8 +186,8 @@
                                         "latex_res": "\\Gamma{(n + \\frac{3}{2})}",
                                         "res": "Gamma(n + 3/2)",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -301,8 +301,8 @@
                                         "latex_res": "\\frac{4 ^ {-n}\\cdot \\sqrt{\\pi} (2 n + 2)!}{4 (n + 1)!}",
                                         "res": "4 ^ -n * sqrt(pi) * factorial(2 * n + 2) / (4 * factorial(n + 1))",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     }
@@ -422,8 +422,8 @@
                                             "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{(2 n)!} (\\int_{0}^{\\infty} (t x) ^ {2 n} e^{-x ^ {2}/2} \\,dx)}",
                                             "res": "SUM(n, 0, oo, 1 / factorial(2 * n) * (INT x:[0,oo]. (t * x) ^ (2 * n) * exp(-(x ^ 2 / 2))))",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         },
@@ -463,8 +463,8 @@
                                             "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n}}{(2 n)!} (\\int_{0}^{\\infty} x ^ {2 n} e^{-x ^ {2}/2} \\,dx)}",
                                             "res": "SUM(n, 0, oo, t ^ (2 * n) / factorial(2 * n) * (INT x:[0,oo]. x ^ (2 * n) * exp(-(x ^ 2 / 2))))",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         },
@@ -505,8 +505,8 @@
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (\\sqrt{u}\\cdot \\sqrt{2}) ^ {2 n}}{\\sqrt{u}} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (sqrt(u) * sqrt(2)) ^ (2 * n) / sqrt(u)))",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         },
@@ -546,8 +546,8 @@
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (2 u) ^ {n}}{\\sqrt{u}} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (2 * u) ^ n / sqrt(u)))",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         },
@@ -587,8 +587,8 @@
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} 2 ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} u ^ {n - 1/2} e^{-u} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n / factorial(2 * n) * (INT u:[0,oo]. u ^ (n - 1/2) * exp(-u)))",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         },
@@ -669,8 +669,8 @@
                                             "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} 2 ^ {n} 4 ^ {-n}}{n!}}",
                                             "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n * 4 ^ -n / factorial(n))",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         },
@@ -813,8 +813,8 @@
                                             "latex_res": "0",
                                             "res": "0",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         }
@@ -885,8 +885,8 @@
                                             "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{(2 n)!} (\\int_{0}^{\\infty} (t x) ^ {2 n} e^{-x ^ {2}/2} \\,dx)}",
                                             "res": "SUM(n, 0, oo, 1 / factorial(2 * n) * (INT x:[0,oo]. (t * x) ^ (2 * n) * exp(-(x ^ 2 / 2))))",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         },
@@ -926,8 +926,8 @@
                                             "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n}}{(2 n)!} (\\int_{0}^{\\infty} x ^ {2 n} e^{-x ^ {2}/2} \\,dx)}",
                                             "res": "SUM(n, 0, oo, t ^ (2 * n) / factorial(2 * n) * (INT x:[0,oo]. x ^ (2 * n) * exp(-(x ^ 2 / 2))))",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         },
@@ -968,8 +968,8 @@
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (\\sqrt{u}\\cdot \\sqrt{2}) ^ {2 n}}{\\sqrt{u}} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (sqrt(u) * sqrt(2)) ^ (2 * n) / sqrt(u)))",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         },
@@ -1009,8 +1009,8 @@
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (2 u) ^ {n}}{\\sqrt{u}} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (2 * u) ^ n / sqrt(u)))",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         },
@@ -1050,8 +1050,8 @@
                                             "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} 2 ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} u ^ {n - 1/2} e^{-u} \\,du)}",
                                             "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n / factorial(2 * n) * (INT u:[0,oo]. u ^ (n - 1/2) * exp(-u)))",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         },
@@ -1132,8 +1132,8 @@
                                             "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} 2 ^ {n} 4 ^ {-n}}{n!}}",
                                             "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, t ^ (2 * n) * 2 ^ n * 4 ^ -n / factorial(n))",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         },
@@ -1396,8 +1396,8 @@
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} x ^ {2 n} e^{-x ^ {2}/2} \\,dx)}",
                                 "res": "SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n / factorial(2 * n) * (INT x:[0,oo]. x ^ (2 * n) * exp(-(x ^ 2 / 2))))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1438,8 +1438,8 @@
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (\\sqrt{u}\\cdot \\sqrt{2}) ^ {2 n}}{\\sqrt{u}} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (sqrt(u) * sqrt(2)) ^ (2 * n) / sqrt(u)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1479,8 +1479,8 @@
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (2 u) ^ {n}}{\\sqrt{u}} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (2 * u) ^ n / sqrt(u)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1520,8 +1520,8 @@
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n} 2 ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} u ^ {n - 1/2} e^{-u} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n / factorial(2 * n) * (INT u:[0,oo]. u ^ (n - 1/2) * exp(-u)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1602,8 +1602,8 @@
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n} 2 ^ {n} 4 ^ {-n}}{n!}}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n * 4 ^ -n / factorial(n))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1711,8 +1711,8 @@
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} e^{-t ^ {2}/2}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * exp(-(t ^ 2 / 2))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1743,8 +1743,8 @@
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} e^{-t ^ {2}/2}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * exp(-(t ^ 2 / 2))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1915,8 +1915,8 @@
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} x ^ {2 n} e^{-x ^ {2}/2} \\,dx)}",
                                 "res": "SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n / factorial(2 * n) * (INT x:[0,oo]. x ^ (2 * n) * exp(-(x ^ 2 / 2))))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1957,8 +1957,8 @@
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (\\sqrt{u}\\cdot \\sqrt{2}) ^ {2 n}}{\\sqrt{u}} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (sqrt(u) * sqrt(2)) ^ (2 * n) / sqrt(u)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1998,8 +1998,8 @@
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} \\frac{e^{-u} (2 u) ^ {n}}{\\sqrt{u}} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n / factorial(2 * n) * (INT u:[0,oo]. exp(-u) * (2 * u) ^ n / sqrt(u)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -2039,8 +2039,8 @@
                                 "latex_res": "\\frac{\\sqrt{2}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n} 2 ^ {n}}{(2 n)!} (\\int_{0}^{\\infty} u ^ {n - 1/2} e^{-u} \\,du)}",
                                 "res": "sqrt(2) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n / factorial(2 * n) * (INT u:[0,oo]. u ^ (n - 1/2) * exp(-u)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -2121,8 +2121,8 @@
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} \\sum_{n=0}^{\\infty}{\\frac{t ^ {2 n} (-1) ^ {n} 2 ^ {n} 4 ^ {-n}}{n!}}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * SUM(n, 0, oo, t ^ (2 * n) * (-1) ^ n * 2 ^ n * 4 ^ -n / factorial(n))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -2230,8 +2230,8 @@
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} e^{-t ^ {2}/2}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * exp(-(t ^ 2 / 2))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -2262,8 +2262,8 @@
                                 "latex_res": "\\frac{\\sqrt{2} \\sqrt{\\pi}}{2} e^{-t ^ {2}/2}",
                                 "res": "sqrt(2) * sqrt(pi) / 2 * exp(-(t ^ 2 / 2))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

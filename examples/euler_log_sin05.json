@@ -135,8 +135,8 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{u ^ {2} (\\frac{1}{u ^ {2}} - \\frac{b}{u} + 1)} \\log{((\\frac{1}{u}) ^ {a} + 1)} \\,du",
                                 "res": "INT u:[0,oo]. 1 / (u ^ 2 * (1 / u ^ 2 - b / u + 1)) * log((1 / u) ^ a + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -236,8 +236,8 @@
                                 "latex_res": "(\\int_{0}^{\\infty} \\frac{\\log{(u ^ {a} + 1)}}{-b u + u ^ {2} + 1} \\,du) - a (\\int_{0}^{\\infty} \\frac{\\log{u}}{-b u + u ^ {2} + 1} \\,du)",
                                 "res": "(INT u:[0,oo]. log(u ^ a + 1) / (-(b * u) + u ^ 2 + 1)) - a * (INT u:[0,oo]. log(u) / (-(b * u) + u ^ 2 + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -272,8 +272,8 @@
                                 "latex_res": "(\\int_{0}^{\\infty} \\frac{\\log{(x ^ {a} + 1)}}{-b x + x ^ {2} + 1} \\,dx) - a (\\int_{0}^{\\infty} \\frac{\\log{x}}{-b x + x ^ {2} + 1} \\,dx)",
                                 "res": "(INT x:[0,oo]. log(x ^ a + 1) / (-(b * x) + x ^ 2 + 1)) - a * (INT x:[0,oo]. log(x) / (-(b * x) + x ^ 2 + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

@@ -76,8 +76,8 @@
                                 "latex_res": "2 (\\int_{0}^{\\pi/2} \\frac{\\cos{u} \\sin{(2 u)}}{\\sin{u}} \\,du)",
                                 "res": "2 * (INT u:[0,pi / 2]. cos(u) * sin(2 * u) / sin(u))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -109,8 +109,8 @@
                                 "latex_res": "4 (\\int_{0}^{\\pi/2} \\cos^{2}(u) \\,du)",
                                 "res": "4 * (INT u:[0,pi / 2]. cos(u) ^ 2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -133,8 +133,8 @@
                                 "latex_res": "\\pi",
                                 "res": "pi",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

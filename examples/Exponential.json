@@ -55,8 +55,8 @@
                     "latex_res": "2",
                     "res": "2",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -107,8 +107,8 @@
                     "latex_res": "\\frac{343 7 ^ {2 x}}{2 \\log{(7)}} + C",
                     "res": "343 * 7 ^ (2 * x) / (2 * log(7)) + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -147,8 +147,8 @@
                     "latex_res": "\\frac{3 e^{2 x}}{2} + \\frac{e^{7 x}}{49} + C",
                     "res": "3 * exp(2 * x) / 2 + exp(7 * x) / 49 + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -199,8 +199,8 @@
                     "latex_res": "\\frac{(2 e^{x} + 1) ^ {5}}{10} + C",
                     "res": "(2 * exp(x) + 1) ^ 5 / 10 + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -239,8 +239,8 @@
                     "latex_res": "-\\frac{e^{-8 x}}{8} + \\frac{e^{8 x}}{8} - 2 x + C",
                     "res": "-(exp(-(8 * x)) / 8) + exp(8 * x) / 8 - 2 * x + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -279,8 +279,8 @@
                     "latex_res": "\\int u ^ {10} (-u + 2) \\,du",
                     "res": "INT u. u ^ 10 * (-u + 2)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -312,8 +312,8 @@
                     "latex_res": "\\frac{2 u ^ {11}}{11} - \\frac{u ^ {12}}{12} + C",
                     "res": "2 * u ^ 11 / 11 - u ^ 12 / 12 + SKOLEM_CONST(C)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }
@@ -394,8 +394,8 @@
                                 "latex_res": "(\\int_{0}^{1} (\\frac{3}{5}) ^ {x} \\,dx) + (\\int_{0}^{1} (\\frac{4}{5}) ^ {x} \\,dx)",
                                 "res": "(INT x:[0,1]. (3/5) ^ x) + (INT x:[0,1]. (4/5) ^ x)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -418,8 +418,8 @@
                                 "latex_res": "\\frac{3}{5 \\log{(3)} - 5 \\log{(5)}} + \\frac{4}{10 \\log{(2)} - 5 \\log{(5)}} - \\frac{1}{2 \\log{(2)} - \\log{(5)}} - \\frac{1}{\\log{(3)} - \\log{(5)}}",
                                 "res": "3 / (5 * log(3) - 5 * log(5)) + 4 / (10 * log(2) - 5 * log(5)) - 1 / (2 * log(2) - log(5)) - 1 / (log(3) - log(5))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -489,8 +489,8 @@
                                 "latex_res": "-\\frac{10 (\\int u ^ {5} (u - 1) ^ {2} \\,du)}{9}",
                                 "res": "-(10 * (INT u. u ^ 5 * (u - 1) ^ 2) / 9)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -520,8 +520,8 @@
                                 "latex_res": "-\\frac{10 (\\int u ^ {5} \\,du) - 20 (\\int u ^ {6} \\,du) + 10 (\\int u ^ {7} \\,du)}{9}",
                                 "res": "-((10 * (INT u. u ^ 5) - 20 * (INT u. u ^ 6) + 10 * (INT u. u ^ 7)) / 9)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -547,8 +547,8 @@
                                 "latex_res": "-\\frac{5 (3 e^{-x} + 1) ^ {6}}{27} + \\frac{20 (3 e^{-x} + 1) ^ {7}}{63} - \\frac{5 (3 e^{-x} + 1) ^ {8}}{36} + C",
                                 "res": "-(5 * (3 * exp(-x) + 1) ^ 6 / 27) + 20 * (3 * exp(-x) + 1) ^ 7 / 63 - 5 * (3 * exp(-x) + 1) ^ 8 / 36 + SKOLEM_CONST(C)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -563,8 +563,8 @@
                                 "latex_res": "-\\frac{5 (3 e^{-x} + 1) ^ {6}}{27} + \\frac{20 (3 e^{-x} + 1) ^ {7}}{63} - \\frac{5 (3 e^{-x} + 1) ^ {8}}{36} + C",
                                 "res": "-(5 * (3 * exp(-x) + 1) ^ 6 / 27) + 20 * (3 * exp(-x) + 1) ^ 7 / 63 - 5 * (3 * exp(-x) + 1) ^ 8 / 36 + SKOLEM_CONST(C)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -617,8 +617,8 @@
                                 "latex_res": "4 (\\int \\frac{2 e^{2 x} + 6 e^{x}}{\\sqrt{e^{2 x} + 6 e^{x} + 1}} \\,dx)",
                                 "res": "4 * (INT x. (2 * exp(2 * x) + 6 * exp(x)) / sqrt(exp(2 * x) + 6 * exp(x) + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -653,8 +653,8 @@
                                 "latex_res": "8 \\sqrt{u} + C",
                                 "res": "8 * sqrt(u) + SKOLEM_CONST(C)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -776,8 +776,8 @@
                                 "latex_res": "\\frac{\\int u ^ {1/3} \\,du}{3}",
                                 "res": "(INT u. u ^ (1/3)) / 3",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -794,8 +794,8 @@
                                 "latex_res": "\\frac{u ^ {4/3}}{4} + C",
                                 "res": "u ^ (4/3) / 4 + SKOLEM_CONST(C)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },

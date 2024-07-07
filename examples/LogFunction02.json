@@ -184,8 +184,8 @@
                             "latex_res": "\\frac{1}{-x + 1} - \\frac{1}{x + 1} = \\sum_{k=0}^{\\infty}{(-1) ^ {k} (-x) ^ {k}} - \\sum_{k=0}^{\\infty}{x ^ {k} (-1) ^ {k}}",
                             "res": "1 / (-x + 1) - 1 / (x + 1) = SUM(k, 0, oo, (-1) ^ k * (-x) ^ k) - SUM(k, 0, oo, x ^ k * (-1) ^ k)",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },
@@ -327,8 +327,8 @@
                                 "latex_res": "-\\sum_{k=0}^{\\infty}{\\int_{0}^{1} y ^ {k} \\log{y} \\,dy}",
                                 "res": "-SUM(k, 0, oo, INT y:[0,1]. y ^ k * log(y))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -361,8 +361,8 @@
                                 "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{1}{(k + 1) ^ {2}}}",
                                 "res": "SUM(k, 0, oo, 1 / (k + 1) ^ 2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -415,8 +415,8 @@
                                 "latex_res": "-(\\int_{0}^{1} \\frac{t \\log{t}}{-t ^ {2} + 1} \\,dt)",
                                 "res": "-(INT t:[0,1]. t * log(t) / (-(t ^ 2) + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -512,8 +512,8 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{1} \\log{y} \\sum_{k=0}^{\\infty}{y ^ {k} (-1) ^ {k}} \\,dy) - \\frac{1}{2} (\\int_{0}^{1} \\log{y} \\sum_{k=0}^{\\infty}{y ^ {k}} \\,dy)",
                                 "res": "1/2 * (INT y:[0,1]. log(y) * SUM(k, 0, oo, y ^ k * (-1) ^ k)) - 1/2 * (INT y:[0,1]. log(y) * SUM(k, 0, oo, y ^ k))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -595,8 +595,8 @@
                                 "latex_res": "\\frac{1}{2} \\sum_{k=0}^{\\infty}{(-1) ^ {k} (\\int_{0}^{1} y ^ {k} \\log{y} \\,dy)} - \\frac{1}{2} \\sum_{k=0}^{\\infty}{\\int_{0}^{1} y ^ {k} \\log{y} \\,dy}",
                                 "res": "1/2 * SUM(k, 0, oo, (-1) ^ k * (INT y:[0,1]. y ^ k * log(y))) - 1/2 * SUM(k, 0, oo, INT y:[0,1]. y ^ k * log(y))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -629,8 +629,8 @@
                                 "latex_res": "-\\frac{1}{2} \\sum_{k=0}^{\\infty}{\\frac{(-1) ^ {k}}{(k + 1) ^ {2}}} + \\frac{1}{2} \\sum_{k=0}^{\\infty}{\\frac{1}{(k + 1) ^ {2}}}",
                                 "res": "-(1/2 * SUM(k, 0, oo, (-1) ^ k / (k + 1) ^ 2)) + 1/2 * SUM(k, 0, oo, 1 / (k + 1) ^ 2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -648,8 +648,8 @@
                                 "latex_res": "\\frac{\\pi ^ {2}}{24}",
                                 "res": "pi ^ 2 / 24",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

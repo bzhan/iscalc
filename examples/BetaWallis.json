@@ -109,8 +109,8 @@
                                 "latex_res": "2 (\\int_{0}^{\\pi/2} \\cos^{2 m - 1}(x) \\sin^{2 n - 1}(x) \\,dx)",
                                 "res": "2 * (INT x:[0,pi / 2]. cos(x) ^ (2 * m - 1) * sin(x) ^ (2 * n - 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -331,8 +331,8 @@
                                 "latex_res": "\\frac{\\Gamma{(n + 1)} ^ {2}}{\\Gamma{(2 n + 2)}}",
                                 "res": "Gamma(n + 1) ^ 2 / Gamma(2 * n + 2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -457,8 +457,8 @@
                                 "latex_res": "\\frac{1}{4} (\\int_{-\\pi/2}^{\\pi/2} \\cos^{2}(u) \\,du)",
                                 "res": "1/4 * (INT u:[-(pi / 2),pi / 2]. cos(u) ^ 2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -481,8 +481,8 @@
                                 "latex_res": "\\frac{\\pi}{8}",
                                 "res": "pi / 8",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -541,8 +541,8 @@
                                 "latex_res": "\\frac{((\\frac{1}{2})!)^{2}}{2}",
                                 "res": "factorial(1/2) ^ 2 / 2",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -741,8 +741,8 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\sqrt{y} e^{-y} \\,dy",
                                 "res": "INT y:[0,oo]. sqrt(y) * exp(-y)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -831,8 +831,8 @@
                                 "latex_res": "2 (\\int_{0}^{\\infty} e^{-y ^ {2}} \\,dy)",
                                 "res": "2 * (INT y:[0,oo]. exp(-(y ^ 2)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1090,8 +1090,8 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{1} \\frac{1}{u ^ {1/4} \\sqrt{-u + 1}} \\,du)",
                                 "res": "1/2 * (INT u:[0,1]. 1 / (u ^ (1/4) * sqrt(-u + 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1203,8 +1203,8 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{1} \\frac{1}{u ^ {1/4} \\sqrt{-u + 1}} \\,du)",
                                 "res": "1/2 * (INT u:[0,1]. 1 / (u ^ (1/4) * sqrt(-u + 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1322,8 +1322,8 @@
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\cos{x}} \\sqrt{\\sin{x}}} \\,dx",
                                 "res": "INT x:[0,pi / 2]. 1 / (sqrt(cos(x)) * sqrt(sin(x)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1491,8 +1491,8 @@
                             "latex_res": "\\frac{\\sqrt{2}}{2} (\\int_{0}^{\\pi} \\frac{1}{\\sqrt{\\sin{x}}} \\,dx) = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{\\pi}}",
                             "res": "sqrt(2) / 2 * (INT x:[0,pi]. 1 / sqrt(sin(x))) = Gamma(1/4) ^ 2 / (2 * sqrt(pi))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },
@@ -1542,8 +1542,8 @@
                             "latex_res": "\\sqrt{2} (\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin{x}}} \\,dx) = \\frac{\\Gamma{(\\frac{1}{4})} ^ {2}}{2 \\sqrt{\\pi}}",
                             "res": "sqrt(2) * (INT x:[0,pi / 2]. 1 / sqrt(sin(x))) = Gamma(1/4) ^ 2 / (2 * sqrt(pi))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },
@@ -1612,8 +1612,8 @@
                             "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\cos{x}}} \\,dx = \\frac{\\sqrt{2}\\cdot \\Gamma{(\\frac{1}{4})} ^ {2}}{4 \\sqrt{\\pi}}",
                             "res": "(INT x:[0,pi / 2]. 1 / sqrt(cos(x))) = sqrt(2) * Gamma(1/4) ^ 2 / (4 * sqrt(pi))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         }
@@ -1861,8 +1861,8 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{x ^ {m - 1}}{x + 1} \\,dx",
                                 "res": "INT x:[0,oo]. x ^ (m - 1) / (x + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -2317,8 +2317,8 @@
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) / 2 * (INT s:[-1,1]. (s + 1) ^ z * (-s + 1) ^ z)",
                             "rule": {
                                 "loc": "1",
-                                "name": "FullSimplify",
-                                "str": "full simplify at 1"
+                                "name": "Simplify",
+                                "str": "simplify at 1"
                             },
                             "type": "CalculationStep"
                         },
@@ -2404,8 +2404,8 @@
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) * (INT s:[0,1]. (-(s ^ 2) + 1) ^ z)",
                             "rule": {
                                 "loc": "1",
-                                "name": "FullSimplify",
-                                "str": "full simplify at 1"
+                                "name": "Simplify",
+                                "str": "simplify at 1"
                             },
                             "type": "CalculationStep"
                         },
@@ -2438,8 +2438,8 @@
                             "res": "factorial(z) * factorial(z) / factorial(2 * z + 1) = (1/2) ^ (2 * z) / 2 * (INT u:[0,1]. (-u + 1) ^ z / sqrt(u))",
                             "rule": {
                                 "loc": "1",
-                                "name": "FullSimplify",
-                                "str": "full simplify at 1"
+                                "name": "Simplify",
+                                "str": "simplify at 1"
                             },
                             "type": "CalculationStep"
                         },

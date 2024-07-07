@@ -43,10 +43,10 @@ class BinomTest(unittest.TestCase):
         proof = goal02.proof_by_calculation()
         calc = proof.lhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("binom")))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         calc = proof.rhs_calc
         calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("binom")))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         assert goal02.is_finished()
         goal03 = file.add_goal("binom(n,m-1)+binom(n,m) = binom(n+1, m)", fixes = fixes)
         proof = goal03.proof_by_calculation()
@@ -64,7 +64,7 @@ class BinomTest(unittest.TestCase):
         s1 = calc.parse_expr("(m - 1 + 1) * factorial(m - 1)")
         s2 = calc.parse_expr("factorial(m-1+1)")
         calc.perform_rule(rules.OnLocation(rules.ApplyIdentity(s1, s2), "0.1.0"))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         s1 = calc.parse_expr("factorial(n) * (-m + n + 1) / (factorial(m) * factorial(-m + n + 1)) + m * factorial(n) / (factorial(m) * factorial(-m + n + 1))")
         s2 = calc.parse_expr("(n+1) * factorial(n) / (factorial(m) * factorial(-m + n + 1))")
         calc.perform_rule(rules.Equation(s1, s2))
@@ -82,7 +82,7 @@ class BinomTest(unittest.TestCase):
         proof = goal04.proof_by_induction("m")
         base_proof = proof.base_case.proof_by_calculation()
         calc = base_proof.rhs_calc
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         calc = base_proof.lhs_calc
         calc.perform_rule(rules.ExpandDefinition("binom"))
         calc = base_proof.rhs_calc
@@ -91,7 +91,7 @@ class BinomTest(unittest.TestCase):
         calc = induct_proof.rhs_calc
         cond = calc.parse_expr("i=m+1")
         calc.perform_rule(rules.SplitItem(cond=cond))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         s1 = calc.parse_expr("j+n")
         s2 = calc.parse_expr("n+j")
         calc.perform_rule(rules.Equation(s1, s2))
@@ -101,7 +101,7 @@ class BinomTest(unittest.TestCase):
         calc.perform_rule(rules.Equation(s1, s2))
         source = calc.parse_expr("binom(m + n + 1,m + 1 - 1) + binom(m + n + 1,m + 1)")
         calc.perform_rule(rules.ApplyEquation(goal03.goal, source, goal03.ctx.fixes))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         assert goal04.is_finished()
         raw_fixes = [('m', {'symbol_type': 'var', 'type': '$int'}),
                      ('n', {'symbol_type': 'var', 'type': '$int'}),
@@ -113,9 +113,9 @@ class BinomTest(unittest.TestCase):
         calc = base_proof.rhs_calc
         cond = calc.parse_expr('k=0')
         calc.perform_rule(rules.SplitItem(cond))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.OnSubterm(rules.ExpandDefinition("binom")))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         induct_proof = proof.induct_case.proof_by_calculation()
         calc = induct_proof.lhs_calc
         s1 = calc.parse_expr("(x+y)^(n+1)")
@@ -140,11 +140,11 @@ class BinomTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.SplitItem(cond), '0'))
         cond = calc.parse_expr("k=0")
         calc.perform_rule(rules.OnLocation(rules.SplitItem(cond), '1'))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('binom'), '0.1.1'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('binom'), '1.1'))
         calc.perform_rule(rules.OnLocation(rules.ChangeSummationIndex("1"), '0.0.0'))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         s1 = calc.parse_expr("SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i - 1)) + SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i))")
         s2 = calc.parse_expr("SUM(i, 1, n, x ^ i * y ^ (-i + n + 1) * binom(n,i - 1) + x ^ i * y ^ (-i + n + 1) * binom(n,i))")
         calc.perform_rule(rules.Equation(s1, s2))
@@ -163,7 +163,7 @@ class BinomTest(unittest.TestCase):
         calc.perform_rule(rules.OnLocation(rules.SplitItem(cond), '1'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('binom'), '0.1'))
         calc.perform_rule(rules.OnLocation(rules.ExpandDefinition('binom'), '1.1.1'))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         self.checkAndOutput(file)
 
 
@@ -190,7 +190,7 @@ class BinomTest(unittest.TestCase):
         s9 = "factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2 / (4 ^ n / sqrt(n * pi))"
         s10 = "(factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2) * ((sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2 / (4 ^ n / sqrt(n * pi)))"
         calc.perform_rule(rules.Equation(s9, s10))
-        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0.1"))
+        calc.perform_rule(rules.OnLocation(rules.Simplify(), "0.1"))
         s11 = "2 * n * exp(-1)"
         s12 = "2 * (n * exp(-1))"
         calc.perform_rule(rules.Equation(s11, s12))
@@ -200,7 +200,7 @@ class BinomTest(unittest.TestCase):
         s15 = "2 ^ (2 * n)"
         s16 = "(2 ^ 2) ^ n"
         calc.perform_rule(rules.ApplyIdentity(s15, s16))
-        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0.1"))
+        calc.perform_rule(rules.OnLocation(rules.Simplify(), "0.1"))
         s17 = "factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * 1"
         s18 = "(factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n))) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2"
         calc.perform_rule(rules.Equation(s17, s18))
@@ -229,7 +229,7 @@ class BinomTest(unittest.TestCase):
         s33 = calc.parse_expr("(LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n))")
         s34 = calc.parse_expr("1")
         calc.perform_rule(rules.ApplyIdentity(s33, s34))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
 
         self.checkAndOutput(file)
 
@@ -281,7 +281,7 @@ class BinomTest(unittest.TestCase):
         calc = proof_induct.lhs_calc
         cond = calc.parse_expr("k <= n")
         calc.perform_rule(rules.SplitItem(cond))
-        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "1"))
+        calc.perform_rule(rules.OnLocation(rules.Simplify(), "1"))
         s1 = "m ^ -i / (2 * i - 1) ^ 2 * binom(2 * i,i) ^ 3 * (i ^ 3 * (-(m / 8) + 8) - 4 * i ^ 2 - 2 * i + 1)"
         s1 = calc.parse_expr(s1)
         s2 = "(((8 - m / 8) * i ^ 3 - 4 * i ^ 2 - 2 * i + 1) * binom(2 * i, i) ^ 3) / ((2 * i - 1) ^ 2 * m ^ i)"
@@ -313,7 +313,7 @@ class BinomTest(unittest.TestCase):
         s12 = "(2 * n + 1) ^ 2 * (2 * n + 3)"
         s12 = calc.parse_expr(s12)
         calc.perform_rule(rules.Equation(s11, s12))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         goal01.is_finished()
         raw_fixes = [('m', {'symbol_type': 'var', 'type': '$int'}),
                      ('n', {'symbol_type': 'binding', 'type': '$int'}),
@@ -326,7 +326,7 @@ class BinomTest(unittest.TestCase):
         calc = proof.begin
         calc.perform_rule(rules.LimitEquation('n', expr.POS_INF))
         calc.perform_rule(rules.VarSubsOfEquation([{'var': 'm', 'expr': "-64"}]))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         assert goal02.is_finished()
         s = "SUM(k, 0, oo, (16*k^3 - 4*k^2-2*k+1) * binom(2*k, k)^3 / ((2*k-1)^2*(-64)^k)) = 0"
         raw_fixes = [('k', {'symbol_type':'binding','type':'$int'})]
@@ -334,7 +334,7 @@ class BinomTest(unittest.TestCase):
         goal03 = file.add_goal(s, fixes=fixes, conds=["k>=0"])
         proof = goal03.proof_by_calculation()
         calc = proof.lhs_calc
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         new_expr_fixes = parser.parse_raw_fixes([('n', {'symbol_type':'binding', 'type':'$int'})])
         s1 = calc.parse_expr("SUM(k, 0, oo, (-64) ^ -k * (-(4 * k ^ 2) + 16 * k ^ 3 - 2 * k + 1) / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3)")
         s2 = calc.parse_expr("LIM {n->oo}.SUM(k, 0, n, (-64) ^ -k * (-(4 * k ^ 2) + 16 * k ^ 3 - 2 * k + 1) / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3)", fixes=new_expr_fixes)
@@ -359,7 +359,7 @@ class BinomTest(unittest.TestCase):
         s10 = "(LIM {n -> oo}. (2 * n + 1) / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3) * (LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)"
         s10 = calc.parse_expr(s10)
         calc.perform_rule(rules.Equation(s9, s10))
-        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0.0"))
+        calc.perform_rule(rules.OnLocation(rules.Simplify(), "0.0"))
         s11 = "n ^ (3/2) * pi ^ (3/2)"
         s11 = calc.parse_expr(s11)
         s12 = "(n * pi) ^ (3/2)"
@@ -380,7 +380,7 @@ class BinomTest(unittest.TestCase):
         s18 = "(-1) ^ n"
         s18 = calc.parse_expr(s18)
         calc.perform_rule(rules.ApplyIdentity(s17, s18))
-        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "0"))
+        calc.perform_rule(rules.OnLocation(rules.Simplify(), "0"))
         s19 = "LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
         s19 = calc.parse_expr(s19)
         s20 = "(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
@@ -391,7 +391,7 @@ class BinomTest(unittest.TestCase):
         s22 = "LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))"
         s22 = calc.parse_expr(s22)
         calc.perform_rule(rules.ApplyEquation(s21, s22, eq_fixes=fixes_from_expr(s21)))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         assert goal03.is_finished()
         raw_fixes = [('k', {'symbol_type':'binding', 'type':'$int'})]
         fixes = parser.parse_raw_fixes(raw_fixes)
@@ -440,7 +440,7 @@ class BinomTest(unittest.TestCase):
         calc = proof_induct.lhs_calc
         cond = calc.parse_expr("k <= n")
         calc.perform_rule(rules.SplitItem(cond))
-        calc.perform_rule(rules.OnLocation(rules.FullSimplify(), "1"))
+        calc.perform_rule(rules.OnLocation(rules.Simplify(), "1"))
         s1 = "m ^ -i / (2 * i - 1) ^ 3 * binom(2 * i,i) ^ 3 * (i ^ 3 * (-(m / 8) + 8) - 12 * i ^ 2 + 6 * i - 1)"
         s1 = calc.parse_expr(s1)
         s2 = "(((8 - m / 8) * i ^ 3 - 12 * i ^ 2 + 6 * i - 1) * binom(2 * i, i) ^ 3) / ((2 * i - 1) ^ 3 * m ^ i)"
@@ -472,7 +472,7 @@ class BinomTest(unittest.TestCase):
         s12 = "(2 * n + 1) ^ 3"
         s12 = calc.parse_expr(s12)
         calc.perform_rule(rules.Equation(s11, s12))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         goal05.is_finished()
         raw_fixes = [('m', {'symbol_type':'binding','type':'$int'}),
                      ('n', {'symbol_type':'binding','type':'$int'}),
@@ -485,7 +485,7 @@ class BinomTest(unittest.TestCase):
         calc = proof.begin
         calc.perform_rule(rules.LimitEquation('n', expr.POS_INF))
         calc.perform_rule(rules.VarSubsOfEquation([{'var': 'm', 'expr': "-64"}]))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         assert goal06.is_finished()
         s = "SUM(k, 0, oo, (16*k^3 - 12*k^2+6*k-1) * binom(2*k, k)^3 / ((2*k-1)^3*(-64)^k)) = 0"
         raw_fixes = [('k', {'symbol_type':'binding','type':'$int'})]
@@ -493,7 +493,7 @@ class BinomTest(unittest.TestCase):
         goal07 = file.add_goal(s, fixes=fixes, conds=["k>=0"])
         proof = goal07.proof_by_calculation()
         calc = proof.lhs_calc
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
 
         s1 = calc.parse_expr(
             "SUM(k, 0, oo, (-64) ^ -k * (-(12 * k ^ 2) + 16 * k ^ 3 + 6 * k - 1) / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3)")
@@ -541,7 +541,7 @@ class BinomTest(unittest.TestCase):
         s = calc.parse_expr("(-64) ^ n")
         t = calc.parse_expr("(-1)^n * (64)^n")
         calc.perform_rule(rules.ApplyIdentity(s, t))
-        calc.perform_rule(rules.FullSimplify())
+        calc.perform_rule(rules.Simplify())
         assert  goal07.is_finished()
         raw_fixes = [('k', {'symbol_type':'binding', 'type':'$int'})]
         fixes = parser.parse_raw_fixes(raw_fixes)

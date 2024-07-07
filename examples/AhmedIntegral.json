@@ -127,8 +127,8 @@
                                 "latex_res": "\\int_{0}^{1} \\frac{1}{(x ^ {2} + 1) (u ^ {2} (x ^ {2} + 2) + 1)} \\,dx",
                                 "res": "INT x:[0,1]. 1 / ((x ^ 2 + 1) * (u ^ 2 * (x ^ 2 + 2) + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -160,8 +160,8 @@
                                 "latex_res": "\\frac{1}{u ^ {2} + 1} (-u ^ {2} (\\int_{0}^{1} \\frac{1}{u ^ {2} x ^ {2} + 2 u ^ {2} + 1} \\,dx) + (\\int_{0}^{1} \\frac{1}{x ^ {2} + 1} \\,dx))",
                                 "res": "1 / (u ^ 2 + 1) * (-(u ^ 2 * (INT x:[0,1]. 1 / (u ^ 2 * x ^ 2 + 2 * u ^ 2 + 1))) + (INT x:[0,1]. 1 / (x ^ 2 + 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -193,8 +193,8 @@
                                 "latex_res": "\\frac{1}{u ^ {2} + 1} (-(\\int_{0}^{1} \\frac{1}{\\frac{2 u ^ {2} + 1}{u ^ {2}} + x ^ {2}} \\,dx) + (\\int_{0}^{1} \\frac{1}{x ^ {2} + 1} \\,dx))",
                                 "res": "1 / (u ^ 2 + 1) * (-(INT x:[0,1]. 1 / ((2 * u ^ 2 + 1) / u ^ 2 + x ^ 2)) + (INT x:[0,1]. 1 / (x ^ 2 + 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -235,8 +235,8 @@
                                 "latex_res": "\\frac{1}{u ^ {2} + 1} (-\\frac{\\sqrt{2 u ^ {2} + 1}}{u} (\\int_{0}^{u/\\sqrt{2 u ^ {2} + 1}} \\frac{1}{\\frac{y ^ {2} (2 u ^ {2} + 1)}{u ^ {2}} + \\frac{2 u ^ {2} + 1}{u ^ {2}}} \\,dy) + (\\int_{0}^{1} \\frac{1}{x ^ {2} + 1} \\,dx))",
                                 "res": "1 / (u ^ 2 + 1) * (-(sqrt(2 * u ^ 2 + 1) / u * (INT y:[0,u / sqrt(2 * u ^ 2 + 1)]. 1 / (y ^ 2 * (2 * u ^ 2 + 1) / u ^ 2 + (2 * u ^ 2 + 1) / u ^ 2))) + (INT x:[0,1]. 1 / (x ^ 2 + 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -285,8 +285,8 @@
                                 "latex_res": "\\frac{1}{u ^ {2} + 1} (-\\frac{u}{\\sqrt{2 u ^ {2} + 1}} \\tan^{-1}{(\\frac{u}{\\sqrt{2 u ^ {2} + 1}})} + \\frac{\\pi}{4})",
                                 "res": "1 / (u ^ 2 + 1) * (-(u / sqrt(2 * u ^ 2 + 1) * atan(u / sqrt(2 * u ^ 2 + 1))) + pi / 4)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -307,8 +307,8 @@
                                 "latex_res": "\\frac{1}{u ^ {2} + 1} (-\\frac{u}{\\sqrt{2 u ^ {2} + 1}} \\tan^{-1}{(\\frac{u}{\\sqrt{2 u ^ {2} + 1}})} + \\frac{\\pi}{4})",
                                 "res": "1 / (u ^ 2 + 1) * (-(u / sqrt(2 * u ^ 2 + 1) * atan(u / sqrt(2 * u ^ 2 + 1))) + pi / 4)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -343,8 +343,8 @@
                                 "latex_res": "(\\lim\\limits_{u\\to \\infty} I{(u)}) - I{(1)}",
                                 "res": "(LIM {u -> oo}. I(u)) - I(1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -379,8 +379,8 @@
                                 "latex_res": "\\pi (\\int_{0}^{1} \\frac{1}{\\sqrt{x ^ {2} + 2} (2 x ^ {2} + 2)} \\,dx) - I{(1)}",
                                 "res": "pi * (INT x:[0,1]. 1 / (sqrt(x ^ 2 + 2) * (2 * x ^ 2 + 2))) - I(1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -406,8 +406,8 @@
                                 "latex_res": "\\frac{\\pi ^ {2}}{12} - I{(1)}",
                                 "res": "pi ^ 2 / 12 - I(1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -482,8 +482,8 @@
                                 "latex_res": "-(\\int_{1}^{\\infty} \\frac{u}{(u ^ {2} + 1) \\sqrt{2 u ^ {2} + 1}} \\tan^{-1}{(\\frac{u}{\\sqrt{2 u ^ {2} + 1}})} \\,du) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "-(INT u:[1,oo]. u / ((u ^ 2 + 1) * sqrt(2 * u ^ 2 + 1)) * atan(u / sqrt(2 * u ^ 2 + 1))) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -523,8 +523,8 @@
                                 "latex_res": "-(\\int_{0}^{1} \\frac{1}{x ^ {3} (\\frac{1}{x ^ {2}} + 1) \\sqrt{\\frac{2}{x ^ {2}} + 1}} \\tan^{-1}{(\\frac{1}{x \\sqrt{\\frac{2}{x ^ {2}} + 1}})} \\,dx) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "-(INT x:[0,1]. 1 / (x ^ 3 * (1 / x ^ 2 + 1) * sqrt(2 / x ^ 2 + 1)) * atan(1 / (x * sqrt(2 / x ^ 2 + 1)))) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -586,8 +586,8 @@
                                 "latex_res": "-(\\int_{0}^{1} \\frac{1}{(x ^ {2} + 1) \\sqrt{x ^ {2} + 2}} \\tan^{-1}{(\\frac{1}{\\sqrt{x ^ {2} + 2}})} \\,dx) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "-(INT x:[0,1]. 1 / ((x ^ 2 + 1) * sqrt(x ^ 2 + 2)) * atan(1 / sqrt(x ^ 2 + 2))) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -669,8 +669,8 @@
                                 "latex_res": "(\\int_{0}^{1} \\frac{\\tan^{-1}{(\\sqrt{x ^ {2} + 2})}}{x ^ {2} \\sqrt{x ^ {2} + 2} + \\sqrt{x ^ {2} + 2}} \\,dx) - \\frac{\\pi}{2} (\\int_{0}^{1} \\frac{1}{x ^ {2} \\sqrt{x ^ {2} + 2} + \\sqrt{x ^ {2} + 2}} \\,dx) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "(INT x:[0,1]. atan(sqrt(x ^ 2 + 2)) / (x ^ 2 * sqrt(x ^ 2 + 2) + sqrt(x ^ 2 + 2))) - pi / 2 * (INT x:[0,1]. 1 / (x ^ 2 * sqrt(x ^ 2 + 2) + sqrt(x ^ 2 + 2))) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -763,8 +763,8 @@
                                 "latex_res": "-\\frac{\\pi ^ {2}}{48} + I{(1)}",
                                 "res": "-(pi ^ 2 / 48) + I(1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

@@ -202,8 +202,8 @@
                                 "latex_res": "\\frac{3}{-8 p + 8} - \\frac{1}{-8 p + 24} - \\frac{3}{-8 p - 8} + \\frac{1}{-8 p - 24}",
                                 "res": "3 / (-(8 * p) + 8) - 1 / (-(8 * p) + 24) - 3 / (-(8 * p) - 8) + 1 / (-(8 * p) - 24)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },

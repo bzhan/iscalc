@@ -72,8 +72,8 @@
                                 "latex_res": "-\\frac{3}{2} (\\int_{-1/2}^{1/2} \\frac{1}{u ^ {2} + \\frac{3}{4}} \\,du) + (\\int_{-1/2}^{1/2} \\frac{u}{u ^ {2} + \\frac{3}{4}} \\,du)",
                                 "res": "-(3/2 * (INT u:[-1/2,1/2]. 1 / (u ^ 2 + 3/4))) + (INT u:[-1/2,1/2]. u / (u ^ 2 + 3/4))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -105,8 +105,8 @@
                                 "latex_res": "-\\frac{3}{2} (\\int_{-1/2}^{1/2} \\frac{1}{u ^ {2} + \\frac{3}{4}} \\,du)",
                                 "res": "-(3/2 * (INT u:[-1/2,1/2]. 1 / (u ^ 2 + 3/4)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -156,8 +156,8 @@
                                 "latex_res": "-\\sqrt{3} (\\int_{-\\sqrt{3}/3}^{\\sqrt{3}/3} \\frac{1}{x ^ {2} + 1} \\,dx)",
                                 "res": "-(sqrt(3) * (INT x:[-(sqrt(3) / 3),sqrt(3) / 3]. 1 / (x ^ 2 + 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -180,8 +180,8 @@
                                 "latex_res": "-\\frac{\\sqrt{3} \\pi}{3}",
                                 "res": "-(sqrt(3) * pi / 3)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -196,8 +196,8 @@
                                 "latex_res": "-\\frac{\\sqrt{3} \\pi}{3}",
                                 "res": "-(sqrt(3) * pi / 3)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -293,8 +293,8 @@
                                 "latex_res": "\\frac{\\sqrt{3} \\pi}{9} + \\frac{\\log{(2)}}{3}",
                                 "res": "sqrt(3) * pi / 9 + log(2) / 3",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -309,8 +309,8 @@
                                 "latex_res": "\\frac{\\sqrt{3} \\pi}{9} + \\frac{\\log{(2)}}{3}",
                                 "res": "sqrt(3) * pi / 9 + log(2) / 3",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

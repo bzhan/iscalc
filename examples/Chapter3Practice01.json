@@ -96,8 +96,8 @@
                                 "latex_res": "2 a (\\int_{0}^{\\infty} \\frac{x ^ {2}}{(b ^ {2} + x ^ {2}) (a ^ {2} x ^ {2} + 1)} \\,dx)",
                                 "res": "2 * a * (INT x:[0,oo]. x ^ 2 / ((b ^ 2 + x ^ 2) * (a ^ 2 * x ^ 2 + 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -129,8 +129,8 @@
                                 "latex_res": "\\frac{2 a}{-a ^ {2} b ^ {2} + 1} (-b ^ {2} (\\int_{0}^{\\infty} \\frac{1}{b ^ {2} + x ^ {2}} \\,dx) + (\\int_{0}^{\\infty} \\frac{1}{a ^ {2} x ^ {2} + 1} \\,dx))",
                                 "res": "2 * a / (-(a ^ 2 * b ^ 2) + 1) * (-(b ^ 2 * (INT x:[0,oo]. 1 / (b ^ 2 + x ^ 2))) + (INT x:[0,oo]. 1 / (a ^ 2 * x ^ 2 + 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -194,8 +194,8 @@
                                 "latex_res": "\\frac{2 a}{-a ^ {2} b ^ {2} + 1} (\\frac{\\pi}{2 a} - \\frac{b\\cdot \\pi}{2})",
                                 "res": "2 * a / (-(a ^ 2 * b ^ 2) + 1) * (pi / (2 * a) - b * pi / 2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -313,8 +313,8 @@
                             "latex_res": "I(a,b) = \\frac{\\pi}{b} (\\int \\frac{1}{u} \\,du)",
                             "res": "I(a,b) = pi / b * (INT u [b]. 1 / u)",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },
@@ -397,8 +397,8 @@
                                 "latex_res": "0",
                                 "res": "0",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -476,8 +476,8 @@
                             "latex_res": "I(0,b) = C(b)",
                             "res": "I(0,b) = SKOLEM_FUNC(C(b))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },
@@ -560,8 +560,8 @@
                             "latex_res": "I(a,b) = \\frac{\\pi \\log{(a b + 1)}}{b}",
                             "res": "I(a,b) = pi * log(a * b + 1) / b",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         }

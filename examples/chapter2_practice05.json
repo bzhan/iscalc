@@ -38,8 +38,8 @@
                                 "latex_res": "2 (\\int_{0}^{\\infty} \\frac{1}{\\sqrt{x} (x + 1)} \\,dx)",
                                 "res": "2 * (INT x:[0,oo]. 1 / (sqrt(x) * (x + 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -71,8 +71,8 @@
                                 "latex_res": "4 (\\int_{0}^{\\infty} \\frac{1}{t ^ {2} + 1} \\,dt)",
                                 "res": "4 * (INT t:[0,oo]. 1 / (t ^ 2 + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -95,8 +95,8 @@
                                 "latex_res": "2 \\pi",
                                 "res": "2 * pi",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

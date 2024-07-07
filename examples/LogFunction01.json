@@ -24,8 +24,8 @@
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{n + 1} (\\int_{0}^{1} x ^ {n} \\,dx)}",
                                 "res": "SUM(n, 0, oo, 1 / (n + 1) * (INT x:[0,1]. x ^ n))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -58,8 +58,8 @@
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{1}{(n + 1) ^ {2}}}",
                                 "res": "SUM(n, 0, oo, 1 / (n + 1) ^ 2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -160,8 +160,8 @@
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n}}{n + 1} (\\int_{0}^{1} x ^ {n} \\,dx)}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n / (n + 1) * (INT x:[0,1]. x ^ n))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -194,8 +194,8 @@
                                 "latex_res": "\\sum_{n=0}^{\\infty}{\\frac{(-1) ^ {n}}{(n + 1) ^ {2}}}",
                                 "res": "SUM(n, 0, oo, (-1) ^ n / (n + 1) ^ 2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },

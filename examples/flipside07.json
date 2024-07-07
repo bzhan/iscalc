@@ -47,8 +47,8 @@
                                 "res": "2 / (a + 1) ^ 3",
                                 "rule": {
                                     "loc": "subterms",
-                                    "name": "FullSimplify",
-                                    "str": "full simplify on subterms"
+                                    "name": "Simplify",
+                                    "str": "simplify on subterms"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -110,8 +110,8 @@
                             "latex_res": "\\int_{0}^{1} x ^ {a} \\log^{2}(x) \\,dx = \\frac{2}{(a + 1) ^ {3}}",
                             "res": "(INT x:[0,1]. x ^ a * log(x) ^ 2) = 2 / (a + 1) ^ 3",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         }

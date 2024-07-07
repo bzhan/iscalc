@@ -50,8 +50,8 @@
                                 "latex_res": "\\frac{1}{a} (\\int_{1}^{\\infty} \\frac{1}{u (u + 1)} \\,du)",
                                 "res": "1 / a * (INT u:[1,oo]. 1 / (u * (u + 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -83,8 +83,8 @@
                                 "latex_res": "\\frac{1}{a} (-(\\int_{1}^{\\infty} \\frac{1}{u + 1} \\,du) + (\\int_{1}^{\\infty} \\frac{1}{u} \\,du))",
                                 "res": "1 / a * (-(INT u:[1,oo]. 1 / (u + 1)) + (INT u:[1,oo]. 1 / u))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -133,8 +133,8 @@
                                 "latex_res": "\\frac{\\log{(2)}}{a}",
                                 "res": "log(2) / a",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -216,8 +216,8 @@
                             "latex_res": "-(\\int_{0}^{\\infty} \\frac{x e^{a x}}{(e^{a x} + 1) ^ {2}} \\,dx) = -\\frac{\\log{(2)}}{a ^ {2}}",
                             "res": "-(INT x:[0,oo]. x * exp(a * x) / (exp(a * x) + 1) ^ 2) = -(log(2) / a ^ 2)",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },
@@ -308,8 +308,8 @@
                                 "latex_res": "\\log{(2)}",
                                 "res": "log(2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

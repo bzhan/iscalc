@@ -93,8 +93,8 @@
                                 "latex_res": "\\frac{1}{a - b} (-\\frac{1}{a} + \\frac{1}{b})",
                                 "res": "1 / (a - b) * (-(1 / a) + 1 / b)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -232,8 +232,8 @@
                             "latex_res": "-2 (\\int_{0}^{1} \\frac{x}{(b (-x + 1) + a x) ^ {3}} \\,dx) = -\\frac{1}{a ^ {2} b}",
                             "res": "-(2 * (INT x:[0,1]. x / (b * (-x + 1) + a * x) ^ 3)) = -(1 / (a ^ 2 * b))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },

@@ -96,8 +96,8 @@
                                 "latex_res": "e^{b ^ {2}/(4 a)} (\\int_{-\\infty}^{\\infty} e^{-a (-b/(2 a) + x) ^ {2}} \\,dx)",
                                 "res": "exp(b ^ 2 / (4 * a)) * (INT x:[-oo,oo]. exp(-(a * (-(b / (2 * a)) + x) ^ 2)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -132,8 +132,8 @@
                                 "latex_res": "\\frac{\\sqrt{\\pi}}{\\sqrt{a}} e^{b ^ {2}/(4 a)}",
                                 "res": "sqrt(pi) / sqrt(a) * exp(b ^ 2 / (4 * a))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -154,8 +154,8 @@
                                 "latex_res": "\\frac{\\sqrt{\\pi}}{\\sqrt{a}} e^{b ^ {2}/(4 a)}",
                                 "res": "sqrt(pi) / sqrt(a) * exp(b ^ 2 / (4 * a))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -214,8 +214,8 @@
                                 "latex_res": "-\\frac{b ^ {2}\\cdot \\sqrt{\\pi}}{4 a ^ {5/2}} e^{b ^ {2}/(4 a)} - \\frac{\\sqrt{\\pi}}{2 a ^ {3/2}} e^{b ^ {2}/(4 a)}",
                                 "res": "-(b ^ 2 * sqrt(pi) / (4 * a ^ (5/2)) * exp(b ^ 2 / (4 * a))) - sqrt(pi) / (2 * a ^ (3/2)) * exp(b ^ 2 / (4 * a))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -236,8 +236,8 @@
                                 "latex_res": "-\\frac{b ^ {2}\\cdot \\sqrt{\\pi}}{4 a ^ {5/2}} e^{b ^ {2}/(4 a)} - \\frac{\\sqrt{\\pi}}{2 a ^ {3/2}} e^{b ^ {2}/(4 a)}",
                                 "res": "-(b ^ 2 * sqrt(pi) / (4 * a ^ (5/2)) * exp(b ^ 2 / (4 * a))) - sqrt(pi) / (2 * a ^ (3/2)) * exp(b ^ 2 / (4 * a))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -296,8 +296,8 @@
                                 "latex_res": "\\frac{b\\cdot \\sqrt{\\pi}}{2 a ^ {3/2}} e^{b ^ {2}/(4 a)}",
                                 "res": "b * sqrt(pi) / (2 * a ^ (3/2)) * exp(b ^ 2 / (4 * a))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -318,8 +318,8 @@
                                 "latex_res": "\\frac{b\\cdot \\sqrt{\\pi}}{2 a ^ {3/2}} e^{b ^ {2}/(4 a)}",
                                 "res": "b * sqrt(pi) / (2 * a ^ (3/2)) * exp(b ^ 2 / (4 * a))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -390,8 +390,8 @@
                             "latex_res": "\\int_{-\\infty}^{\\infty} x e^{-a x ^ {2} + b x} \\,dx = \\frac{b\\cdot \\sqrt{\\pi}}{2 a ^ {3/2}} e^{b ^ {2}/(4 a)}",
                             "res": "(INT x:[-oo,oo]. x * exp(-(a * x ^ 2) + b * x)) = b * sqrt(pi) / (2 * a ^ (3/2)) * exp(b ^ 2 / (4 * a))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         }
@@ -458,8 +458,8 @@
                             "latex_res": "-(\\int_{-\\infty}^{\\infty} x ^ {2} e^{-a x ^ {2} + b x} \\,dx) = -\\frac{b ^ {2}\\cdot \\sqrt{\\pi}}{4 a ^ {5/2}} e^{b ^ {2}/(4 a)} - \\frac{\\sqrt{\\pi}}{2 a ^ {3/2}} e^{b ^ {2}/(4 a)}",
                             "res": "-(INT x:[-oo,oo]. x ^ 2 * exp(-(a * x ^ 2) + b * x)) = -(b ^ 2 * sqrt(pi) / (4 * a ^ (5/2)) * exp(b ^ 2 / (4 * a))) - sqrt(pi) / (2 * a ^ (3/2)) * exp(b ^ 2 / (4 * a))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },

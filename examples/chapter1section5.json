@@ -62,8 +62,8 @@
                                 "latex_res": "-(\\int_{1}^{\\infty} \\frac{\\log{u}}{u ^ {2} (\\frac{1}{u ^ {2}} + 1)} \\,du) + (\\int_{1}^{\\infty} \\frac{\\log{x}}{x ^ {2} + 1} \\,dx)",
                                 "res": "-(INT u:[1,oo]. log(u) / (u ^ 2 * (1 / u ^ 2 + 1))) + (INT x:[1,oo]. log(x) / (x ^ 2 + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -111,8 +111,8 @@
                                 "latex_res": "0",
                                 "res": "0",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

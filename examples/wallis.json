@@ -116,8 +116,8 @@
                                 "latex_res": "(-m - 1) (\\int_{0}^{\\infty} (x ^ {2} + b) ^ {-m - 2} \\,dx)",
                                 "res": "(-m - 1) * (INT x:[0,oo]. (x ^ 2 + b) ^ (-m - 2))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -175,8 +175,8 @@
                                 "latex_res": "(-m - 1) (\\int_{0}^{\\infty} (x ^ {2} + b) ^ {-m - 2} \\,dx)",
                                 "res": "(-m - 1) * (INT x:[0,oo]. (x ^ 2 + b) ^ (-m - 2))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -334,8 +334,8 @@
                                         "latex_res": "\\sqrt{b} (\\int_{0}^{\\infty} \\frac{1}{b u ^ {2} + b} \\,du)",
                                         "res": "sqrt(b) * (INT u:[0,oo]. 1 / (b * u ^ 2 + b))",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -376,8 +376,8 @@
                                         "latex_res": "\\frac{\\pi}{2 \\sqrt{b}}",
                                         "res": "pi / (2 * sqrt(b))",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     }
@@ -508,8 +508,8 @@
                                         "latex_res": "-\\frac{2 ^ {-2 m}\\cdot \\pi (2 m + 1)}{-4 m - 4} b ^ {-(2 m + 1)/2 - 1} \\binom{2 m}{m}",
                                         "res": "-(2 ^ -(2 * m) * pi * (2 * m + 1) / (-(4 * m) - 4) * b ^ (-((2 * m + 1) / 2) - 1) * binom(2 * m,m))",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -591,8 +591,8 @@
                                         "latex_res": "\\frac{b ^ {-m - 3/2} 2 ^ {-2 m}\\cdot \\pi (2 m + 1)}{4 m + 4} \\binom{2 m}{m}",
                                         "res": "b ^ (-m - 3/2) * 2 ^ -(2 * m) * pi * (2 * m + 1) / (4 * m + 4) * binom(2 * m,m)",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     }

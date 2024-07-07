@@ -109,8 +109,8 @@
                                 "latex_res": "\\int_{0}^{\\infty} (-u) ^ {n} e^{-u} (e^{-u}) ^ {m} \\,du",
                                 "res": "INT u:[0,oo]. (-u) ^ n * exp(-u) * exp(-u) ^ m",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -216,8 +216,8 @@
                                 "latex_res": "(-1) ^ {n} (\\int_{0}^{\\infty} u ^ {n} (e^{-u}) ^ {m + 1} \\,du)",
                                 "res": "(-1) ^ n * (INT u:[0,oo]. u ^ n * exp(-u) ^ (m + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -285,8 +285,8 @@
                                 "latex_res": "(-1) ^ {n} (m + 1) ^ {-n - 1} (\\int_{0}^{\\infty} t ^ {n} e^{-t} \\,dt)",
                                 "res": "(-1) ^ n * (m + 1) ^ (-n - 1) * (INT t:[0,oo]. t ^ n * exp(-t))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -318,8 +318,8 @@
                                 "latex_res": "(-1) ^ {n} n! (m + 1) ^ {-n - 1}",
                                 "res": "(-1) ^ n * factorial(n) * (m + 1) ^ (-n - 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -348,8 +348,8 @@
                                 "latex_res": "(-1) ^ {n} n! (m + 1) ^ {-n - 1}",
                                 "res": "(-1) ^ n * factorial(n) * (m + 1) ^ (-n - 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

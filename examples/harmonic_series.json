@@ -86,8 +86,8 @@
                                 "latex_res": "\\frac{1}{n} (\\int_{0}^{1} \\frac{x ^ {n} - 1}{-x + 1} \\,dx)",
                                 "res": "1 / n * (INT x:[0,1]. (x ^ n - 1) / (-x + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -144,8 +144,8 @@
                                 "latex_res": "-\\frac{1}{n} (\\int_{0}^{1} \\sum_{k=1}^{n}{x ^ {k - 1}} \\,dx)",
                                 "res": "-(1 / n * (INT x:[0,1]. SUM(k, 1, n, x ^ (k - 1))))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -198,8 +198,8 @@
                                 "latex_res": "-\\frac{1}{n} \\sum_{k=1}^{n}{\\frac{1}{k}}",
                                 "res": "-(1 / n * SUM(k, 1, n, 1 / k))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -218,8 +218,8 @@
                                 "latex_res": "-\\frac{H{(n)}}{n}",
                                 "res": "-(H(n) / n)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

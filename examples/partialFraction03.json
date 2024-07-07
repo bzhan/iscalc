@@ -75,8 +75,8 @@
                                             "latex_res": "4 x ^ {2} \\cos^{2}(a) + (x ^ {2} - 1) ^ {2}",
                                             "res": "4 * x ^ 2 * cos(a) ^ 2 + (x ^ 2 - 1) ^ 2",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         }
@@ -141,8 +141,8 @@
                                             "latex_res": "1",
                                             "res": "1",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         }
@@ -209,8 +209,8 @@
                                 "latex_res": "2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1",
                                 "res": "2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -304,8 +304,8 @@
                                             "latex_res": "-4 x ^ {2} (-\\cos^{2}(a) + 1) + 2 x ^ {2} + x ^ {4} + 1",
                                             "res": "-(4 * x ^ 2 * (-(cos(a) ^ 2) + 1)) + 2 * x ^ 2 + x ^ 4 + 1",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         },
@@ -381,8 +381,8 @@
                                             "latex_res": "1",
                                             "res": "1",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         }
@@ -537,8 +537,8 @@
                                             "latex_res": "1",
                                             "res": "1",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         }
@@ -731,8 +731,8 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{y ^ {2}}{2 y ^ {2} \\cos{(2 a)} + y ^ {4} + 1} \\,dy",
                                 "res": "INT y:[0,oo]. y ^ 2 / (2 * y ^ 2 * cos(2 * a) + y ^ 4 + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -759,8 +759,8 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{x ^ {2}}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. x ^ 2 / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -890,8 +890,8 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -918,8 +918,8 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1000,8 +1000,8 @@
                                 "latex_res": "2 (\\int_{0}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx)",
                                 "res": "2 * (INT x:[0,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1088,8 +1088,8 @@
                                 "latex_res": "0",
                                 "res": "0",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1186,8 +1186,8 @@
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{x ^ {2} + 1}{2 x ^ {2} \\cos{(2 a)} + x ^ {4} + 1} \\,dx)",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. (x ^ 2 + 1) / (2 * x ^ 2 * cos(2 * a) + x ^ 4 + 1))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },
@@ -1327,8 +1327,8 @@
                             "latex_res": "I{(a)} = \\frac{1}{4} (\\int_{-\\infty}^{\\infty} \\frac{1}{2 x \\sin{a} + x ^ {2} + 1} \\,dx)",
                             "res": "I(a) = 1/4 * (INT x:[-oo,oo]. 1 / (2 * x * sin(a) + x ^ 2 + 1))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },
@@ -1453,8 +1453,8 @@
                                 "latex_res": "\\frac{\\pi}{4 \\cos{a}}",
                                 "res": "pi / (4 * cos(a))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1540,8 +1540,8 @@
                                 "latex_res": "-\\frac{\\pi}{4 \\cos{a}}",
                                 "res": "-(pi / (4 * cos(a)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1622,8 +1622,8 @@
                                 "latex_res": "\\frac{\\sqrt{2} \\pi}{4}",
                                 "res": "sqrt(2) * pi / 4",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1773,8 +1773,8 @@
                                 "latex_res": "\\frac{\\sqrt{3} \\pi}{6}",
                                 "res": "sqrt(3) * pi / 6",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1878,8 +1878,8 @@
                                 "latex_res": "\\frac{\\pi}{2}",
                                 "res": "pi / 2",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1955,8 +1955,8 @@
                                 "latex_res": "\\frac{\\pi}{4}",
                                 "res": "pi / 4",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

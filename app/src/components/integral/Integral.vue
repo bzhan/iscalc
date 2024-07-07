@@ -11,7 +11,7 @@
         </b-nav-item-dropdown>
         <b-nav-item-dropdown text="Proof" left>
           <b-dropdown-item href="#" v-on:click="clearItem">Clear</b-dropdown-item>
-          <b-dropdown-item href="#" v-on:click="applyRule('FullSimplify')">Simplify</b-dropdown-item>
+          <b-dropdown-item href="#" v-on:click="applyRule('Simplify')">Simplify</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="addFuncDef">Add definition</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="addGoal">Add goal</b-dropdown-item>
           <b-dropdown-item href="#" v-on:click="proofByCalculation">Proof by calculation</b-dropdown-item>

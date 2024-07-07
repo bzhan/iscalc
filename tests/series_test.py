@@ -5,7 +5,7 @@ from integral import series, parser
 from integral.context import Context
 from integral.expr import Op, Var, Const
 from integral.parser import parse_expr
-from integral.rules import FullSimplify
+from integral.rules import Simplify
 from integral.series import expand_series
 
 
@@ -28,7 +28,7 @@ class SeriesTest(unittest.TestCase):
             ('1/x*(log(log(1 / x) + 1 / x) - log(1 / x))', 'x', ['-log(x)', '0']),
             ('1/x*(log(log(1 / x) + 1 / x) - log(1 / x))/log(log(log(1 / x)) + 1 / x)', 'x', ['1', '0']),
             ]
-        r = FullSimplify()
+        r = Simplify()
         ctx = Context()
         ctx.load_book('base')
         ctx.add_condition(Op('>', Var('x'), Const(0)))

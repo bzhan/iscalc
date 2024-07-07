@@ -92,8 +92,8 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\sqrt{3}/2} \\frac{1}{-u + 1} \\,du) + \\frac{1}{2} (\\int_{0}^{\\sqrt{3}/2} \\frac{1}{u + 1} \\,du)",
                                 "res": "1/2 * (INT u:[0,sqrt(3) / 2]. 1 / (-u + 1)) + 1/2 * (INT u:[0,sqrt(3) / 2]. 1 / (u + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -122,8 +122,8 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\sqrt{3}/2} \\frac{1}{-u + 1} \\,du) + \\frac{1}{2} \\log{(\\frac{\\sqrt{3}}{2} + 1)}",
                                 "res": "1/2 * (INT u:[0,sqrt(3) / 2]. 1 / (-u + 1)) + 1/2 * log(sqrt(3) / 2 + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -165,8 +165,8 @@
                                 "latex_res": "-\\frac{1}{2} \\log{(-\\frac{\\sqrt{3}}{2} + 1)} + \\frac{1}{2} \\log{(\\frac{\\sqrt{3}}{2} + 1)}",
                                 "res": "-(1/2 * log(-(sqrt(3) / 2) + 1)) + 1/2 * log(sqrt(3) / 2 + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -210,8 +210,8 @@
                                 "latex_res": "\\log{(\\sqrt{3} + 2)}",
                                 "res": "log(sqrt(3) + 2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },

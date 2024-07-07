@@ -187,8 +187,8 @@
                                             "latex_res": "\\sum_{n=1}^{\\infty}{x ^ {n}}",
                                             "res": "SUM(n, 1, oo, x ^ n)",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         }
@@ -283,8 +283,8 @@
                                             "latex_res": "0",
                                             "res": "0",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         }
@@ -319,8 +319,8 @@
                                             "latex_res": "0",
                                             "res": "0",
                                             "rule": {
-                                                "name": "FullSimplify",
-                                                "str": "full simplify"
+                                                "name": "Simplify",
+                                                "str": "simplify"
                                             },
                                             "type": "CalculationStep"
                                         }
@@ -729,8 +729,8 @@
                                         "latex_res": "\\sum_{k=1}^{\\infty}{\\frac{x ^ {k}}{k}}",
                                         "res": "SUM(k, 1, oo, x ^ k / k)",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     }
@@ -1010,8 +1010,8 @@
                                         "latex_res": "\\sum_{k=1}^{\\infty}{k ^ {-s - 2} x ^ {k}}",
                                         "res": "SUM(k, 1, oo, k ^ (-s - 2) * x ^ k)",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     }
@@ -1114,8 +1114,8 @@
                                 "latex_res": "-\\sum_{k=1}^{\\infty}{\\frac{(-x + 1) ^ {k - 1}}{k}}",
                                 "res": "-SUM(k, 1, oo, (-x + 1) ^ (k - 1) / k)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1273,8 +1273,8 @@
                                 "latex_res": "\\sum_{n=1}^{\\infty}{\\frac{(-1) ^ {n} (x - 1) ^ {n - 1}}{n}}",
                                 "res": "SUM(n, 1, oo, (-1) ^ n * (x - 1) ^ (n - 1) / n)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1325,8 +1325,8 @@
                                 "latex_res": "-\\sum_{n=1}^{\\infty}{\\frac{(-x + 1) ^ {n - 1}}{n}}",
                                 "res": "-SUM(n, 1, oo, (-x + 1) ^ (n - 1) / n)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1435,8 +1435,8 @@
                                 "latex_res": "\\frac{\\operatorname{Li}(2,-x + 1)}{-x + 1}",
                                 "res": "Li(2,-x + 1) / (-x + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1612,8 +1612,8 @@
                                 "latex_res": "\\sum_{k=1}^{\\infty}{k ^ {-s}}",
                                 "res": "SUM(k, 1, oo, k ^ -s)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1706,8 +1706,8 @@
                                 "latex_res": "2 (\\int_{0}^{x} \\frac{\\log{t} \\log{(-t + 1)}}{-t + 1} \\,dt) + \\log{x} \\log^{2}(-x + 1)",
                                 "res": "2 * (INT t:[0,x]. log(t) * log(-t + 1) / (-t + 1)) + log(x) * log(-x + 1) ^ 2",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1776,8 +1776,8 @@
                                 "latex_res": "2 (\\int_{0}^{x} \\frac{\\operatorname{Li}(2,-t + 1)}{-t + 1} \\,dt) + 2 \\log{(-x + 1)} \\operatorname{Li}(2,-x + 1) + \\log{x} \\log^{2}(-x + 1)",
                                 "res": "2 * (INT t:[0,x]. Li(2,-t + 1) / (-t + 1)) + 2 * log(-x + 1) * Li(2,-x + 1) + log(x) * log(-x + 1) ^ 2",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1803,8 +1803,8 @@
                                 "latex_res": "2 \\log{(-x + 1)} \\operatorname{Li}(2,-x + 1) + \\log{x} \\log^{2}(-x + 1) - 2 \\operatorname{Li}(3,-x + 1) + 2 \\operatorname{Li}(3,1)",
                                 "res": "2 * log(-x + 1) * Li(2,-x + 1) + log(x) * log(-x + 1) ^ 2 - 2 * Li(3,-x + 1) + 2 * Li(3,1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1852,8 +1852,8 @@
                                 "latex_res": "2 \\log{(-x + 1)} \\operatorname{Li}(2,-x + 1) + \\log{x} \\log^{2}(-x + 1) - 2 \\operatorname{Li}(3,-x + 1) + 2 \\zeta{(3)}",
                                 "res": "2 * log(-x + 1) * Li(2,-x + 1) + log(x) * log(-x + 1) ^ 2 - 2 * Li(3,-x + 1) + 2 * zeta(3)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1949,8 +1949,8 @@
                                 "latex_res": "-\\frac{1}{(x + 1) ^ {2}} \\sum_{k=1}^{\\infty}{\\frac{1}{k} (\\frac{1}{x + 1}) ^ {k - 1}}",
                                 "res": "-(1 / (x + 1) ^ 2 * SUM(k, 1, oo, 1 / k * (1 / (x + 1)) ^ (k - 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -2057,8 +2057,8 @@
                                 "latex_res": "-\\frac{1}{x + 1} \\sum_{n=0}^{\\infty}{\\frac{1}{n + 1} (\\frac{1}{x + 1}) ^ {n + 1}}",
                                 "res": "-(1 / (x + 1) * SUM(n, 0, oo, 1 / (n + 1) * (1 / (x + 1)) ^ (n + 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -2089,8 +2089,8 @@
                                 "latex_res": "-\\frac{1}{x + 1} \\sum_{n=1}^{\\infty}{\\frac{1}{n} (\\frac{1}{x + 1}) ^ {n}}",
                                 "res": "-(1 / (x + 1) * SUM(n, 1, oo, 1 / n * (1 / (x + 1)) ^ n))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -2141,8 +2141,8 @@
                                 "latex_res": "-\\frac{1}{(x + 1) ^ {2}} \\sum_{n=1}^{\\infty}{\\frac{1}{n} (\\frac{1}{x + 1}) ^ {n - 1}}",
                                 "res": "-(1 / (x + 1) ^ 2 * SUM(n, 1, oo, 1 / n * (1 / (x + 1)) ^ (n - 1)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -2271,8 +2271,8 @@
                                 "latex_res": "\\frac{1}{(x + 1) ^ {2}} \\sum_{k=1}^{\\infty}{\\frac{1}{k ^ {2}} (\\frac{1}{x + 1}) ^ {k - 1}}",
                                 "res": "1 / (x + 1) ^ 2 * SUM(k, 1, oo, 1 / k ^ 2 * (1 / (x + 1)) ^ (k - 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -2334,8 +2334,8 @@
                                 "latex_res": "\\frac{1}{(x + 1) ^ {2}} \\sum_{k=1}^{\\infty}{\\frac{1}{k ^ {2}} (\\frac{1}{x + 1}) ^ {k - 1}}",
                                 "res": "1 / (x + 1) ^ 2 * SUM(k, 1, oo, 1 / k ^ 2 * (1 / (x + 1)) ^ (k - 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -2428,8 +2428,8 @@
                                 "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{t} \\log{(t + 1)}}{t + 1} \\,dt) + \\log{x} \\log^{2}(x + 1)",
                                 "res": "-(2 * (INT t:[0,x]. log(t) * log(t + 1) / (t + 1))) + log(x) * log(x + 1) ^ 2",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -2512,8 +2512,8 @@
                                 "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{(t + 1)}}{t + 1} \\log{(\\frac{t}{t + 1})} \\,dt) - 2 (\\int_{0}^{x} \\frac{\\log^{2}(t + 1)}{t + 1} \\,dt) + \\log{x} \\log^{2}(x + 1)",
                                 "res": "-(2 * (INT t:[0,x]. log(t + 1) / (t + 1) * log(t / (t + 1)))) - 2 * (INT t:[0,x]. log(t + 1) ^ 2 / (t + 1)) + log(x) * log(x + 1) ^ 2",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -2569,8 +2569,8 @@
                                 "latex_res": "-2 (\\int_{0}^{x} \\frac{\\log{(t + 1)}}{t + 1} \\log{(\\frac{t}{t + 1})} \\,dt) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1)",
                                 "res": "-(2 * (INT t:[0,x]. log(t + 1) / (t + 1) * log(t / (t + 1)))) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -2639,8 +2639,8 @@
                                 "latex_res": "2 (\\int_{0}^{x} \\frac{1}{t + 1} \\operatorname{Li}(2,\\frac{1}{t + 1}) \\,dt) - 2 \\log{(x + 1)} \\operatorname{Li}(2,\\frac{1}{x + 1}) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1)",
                                 "res": "2 * (INT t:[0,x]. 1 / (t + 1) * Li(2,1 / (t + 1))) - 2 * log(x + 1) * Li(2,1 / (x + 1)) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -2666,8 +2666,8 @@
                                 "latex_res": "-2 \\log{(x + 1)} \\operatorname{Li}(2,\\frac{1}{x + 1}) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1) - 2 \\operatorname{Li}(3,\\frac{1}{x + 1}) + 2 \\operatorname{Li}(3,1)",
                                 "res": "-(2 * log(x + 1) * Li(2,1 / (x + 1))) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2 - 2 * Li(3,1 / (x + 1)) + 2 * Li(3,1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -2714,8 +2714,8 @@
                                 "latex_res": "-2 \\log{(x + 1)} \\operatorname{Li}(2,\\frac{1}{x + 1}) - \\frac{2 \\log^{3}(x + 1)}{3} + \\log{x} \\log^{2}(x + 1) - 2 \\operatorname{Li}(3,\\frac{1}{x + 1}) + 2 \\zeta{(3)}",
                                 "res": "-(2 * log(x + 1) * Li(2,1 / (x + 1))) - 2 * log(x + 1) ^ 3 / 3 + log(x) * log(x + 1) ^ 2 - 2 * Li(3,1 / (x + 1)) + 2 * zeta(3)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

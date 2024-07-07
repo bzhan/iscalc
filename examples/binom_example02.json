@@ -1,0 +1,421 @@
+{
+    "content": [
+        {
+            "finished": true,
+            "goal": "(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) = 1",
+            "latex_goal": "\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}\\,) = 1",
+            "proof": {
+                "calcs": [
+                    {
+                        "latex_start": "\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}\\,)",
+                        "start": "LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))",
+                        "steps": [
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\frac{(2 n)!}{(n!)^{2}}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}\\,)",
+                                "res": "LIM {n -> oo}. factorial(2 * n) / factorial(n) ^ 2 / (4 ^ n / sqrt(n * pi))",
+                                "rule": {
+                                    "func_name": "binom",
+                                    "loc": "subterms",
+                                    "name": "ExpandDefinition",
+                                    "str": "expand definition on subterms"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\frac{\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}} (\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n})}{(n!)^{2}}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}\\,)",
+                                "res": "LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) * (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / factorial(n) ^ 2 / (4 ^ n / sqrt(n * pi))",
+                                "rule": {
+                                    "latex_str": "rewriting \\((2 n)!\\) to \\(\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}} (\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n})\\)",
+                                    "name": "Equation",
+                                    "new_expr": "factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) * (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n))",
+                                    "old_expr": "factorial(2 * n)",
+                                    "str": "rewriting factorial(2 * n) to factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) * (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\frac{\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}} (\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n})}{(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}} (\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n})) ^ {2}}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}\\,)",
+                                "res": "LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) * (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) * (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 / (4 ^ n / sqrt(n * pi))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(n!\\) to \\(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}} (\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n})\\)",
+                                    "name": "Equation",
+                                    "new_expr": "factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) * (sqrt(2 * pi * n) * (n / exp(1)) ^ n)",
+                                    "old_expr": "factorial(n)",
+                                    "str": "rewriting factorial(n) to factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) * (sqrt(2 * pi * n) * (n / exp(1)) ^ n)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\frac{\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}} (\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n})}{(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2} (\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}) ^ {2}}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}\\,)",
+                                "res": "LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) * (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / ((factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2) / (4 ^ n / sqrt(n * pi))",
+                                "rule": {
+                                    "latex_str": "rewriting \\((\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}} (\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n})) ^ {2}\\) to \\((\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2} (\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}) ^ {2}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2",
+                                    "old_expr": "(factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) * (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2",
+                                    "str": "rewriting (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) * (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 to (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\frac{\\frac{\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}}{(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2}} (\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n})}{(\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}) ^ {2}}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}\\,)",
+                                "res": "LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2 / (4 ^ n / sqrt(n * pi))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}} (\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n})}{(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2} (\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}) ^ {2}}\\) to \\(\\frac{\\frac{\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}}{(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2}} (\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n})}{(\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}) ^ {2}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2",
+                                    "old_expr": "factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) * (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / ((factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2)",
+                                    "str": "rewriting factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) * (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / ((factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2) to factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}}{(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2}} (\\frac{\\frac{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}{(\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}) ^ {2}}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}})\\,)",
+                                "res": "LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2 / (4 ^ n / sqrt(n * pi)))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{\\frac{\\frac{\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}}{(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2}} (\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n})}{(\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}) ^ {2}}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}\\) to \\(\\frac{\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}}{(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2}} (\\frac{\\frac{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}{(\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}) ^ {2}}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}})\\)",
+                                    "name": "Equation",
+                                    "new_expr": "factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2 / (4 ^ n / sqrt(n * pi)))",
+                                    "old_expr": "factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2 / (4 ^ n / sqrt(n * pi))",
+                                    "str": "rewriting factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2 / (4 ^ n / sqrt(n * pi)) to factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) ^ 2 / (4 ^ n / sqrt(n * pi)))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}}{(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2}} (4 ^ {-n} (n\\cdot e^{-1}) ^ {-2 n} (2 n\\cdot e^{-1}) ^ {2 n})\\,)",
+                                "res": "LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (4 ^ -n * (n * exp(-1)) ^ -(2 * n) * (2 * n * exp(-1)) ^ (2 * n))",
+                                "rule": {
+                                    "loc": "0.1",
+                                    "name": "FullSimplify",
+                                    "str": "full simplify at 0.1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}}{(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2}} (4 ^ {-n} (n\\cdot e^{-1}) ^ {-2 n} (2 (n\\cdot e^{-1})) ^ {2 n})\\,)",
+                                "res": "LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (4 ^ -n * (n * exp(-1)) ^ -(2 * n) * (2 * (n * exp(-1))) ^ (2 * n))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(2 n\\cdot e^{-1}\\) to \\(2 (n\\cdot e^{-1})\\)",
+                                    "name": "Equation",
+                                    "new_expr": "2 * (n * exp(-1))",
+                                    "old_expr": "2 * n * exp(-1)",
+                                    "str": "rewriting 2 * n * exp(-1) to 2 * (n * exp(-1))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}}{(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2}} (4 ^ {-n} (n\\cdot e^{-1}) ^ {-2 n} (2 ^ {2 n} (n\\cdot e^{-1}) ^ {2 n}))\\,)",
+                                "res": "LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (4 ^ -n * (n * exp(-1)) ^ -(2 * n) * (2 ^ (2 * n) * (n * exp(-1)) ^ (2 * n)))",
+                                "rule": {
+                                    "latex_str": "rewrite \\((2 (n\\cdot e^{-1})) ^ {2 n}\\) to \\(2 ^ {2 n} (n\\cdot e^{-1}) ^ {2 n}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "(2 * (n * exp(-1))) ^ (2 * n)",
+                                    "str": "rewrite (2 * (n * exp(-1))) ^ (2 * n) to 2 ^ (2 * n) * (n * exp(-1)) ^ (2 * n) using identity",
+                                    "target": "2 ^ (2 * n) * (n * exp(-1)) ^ (2 * n)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}}{(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2}} (4 ^ {-n} (n\\cdot e^{-1}) ^ {-2 n} ((2 ^ {2}) ^ {n} (n\\cdot e^{-1}) ^ {2 n}))\\,)",
+                                "res": "LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * (4 ^ -n * (n * exp(-1)) ^ -(2 * n) * (2 ^ 2 ^ n * (n * exp(-1)) ^ (2 * n)))",
+                                "rule": {
+                                    "latex_str": "rewrite \\(2 ^ {2 n}\\) to \\((2 ^ {2}) ^ {n}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "2 ^ (2 * n)",
+                                    "str": "rewrite 2 ^ (2 * n) to 2 ^ 2 ^ n using identity",
+                                    "target": "2 ^ 2 ^ n"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}}{(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2}}\\cdot 1\\,)",
+                                "res": "LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * 1",
+                                "rule": {
+                                    "loc": "0.1",
+                                    "name": "FullSimplify",
+                                    "str": "full simplify at 0.1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}}{(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2}}\\,)",
+                                "res": "LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}}{(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2}}\\cdot 1\\) to \\(\\frac{\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}}{(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2",
+                                    "old_expr": "factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * 1",
+                                    "str": "rewriting factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 * 1 to factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\frac{\\lim\\limits_{n\\to \\infty} (\\,\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}\\,)}{\\lim\\limits_{n\\to \\infty} (\\,(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2}\\,)}",
+                                "res": "(LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n))) / (LIM {n -> oo}. (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}}{(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2}}\\,)\\) to \\(\\frac{\\lim\\limits_{n\\to \\infty} (\\,\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}\\,)}{\\lim\\limits_{n\\to \\infty} (\\,(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2}\\,)}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n))) / (LIM {n -> oo}. (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2)",
+                                    "old_expr": "LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2",
+                                    "str": "rewriting LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n)) / (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 to (LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n))) / (LIM {n -> oo}. (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\frac{\\lim\\limits_{n\\to \\infty} (\\,\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}\\,)}{\\lim\\limits_{n\\to \\infty} (\\,\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}} (\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}})\\,)}",
+                                "res": "(LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n))) / (LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) * (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)))",
+                                "rule": {
+                                    "latex_str": "rewriting \\((\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}) ^ {2}\\) to \\(\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}} (\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}})\\)",
+                                    "name": "Equation",
+                                    "new_expr": "factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) * (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n))",
+                                    "old_expr": "(factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2",
+                                    "str": "rewriting (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) ^ 2 to factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) * (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\frac{\\lim\\limits_{n\\to \\infty} (\\,\\frac{(2 n)!}{\\sqrt{4 \\pi n} (\\frac{2 n}{e}) ^ {2 n}}\\,)}{(\\lim\\limits_{n\\to \\infty} (\\,\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}\\,)) (\\lim\\limits_{n\\to \\infty} (\\,\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}\\,))}",
+                                "res": "(LIM {n -> oo}. factorial(2 * n) / (sqrt(4 * pi * n) * (2 * n / exp(1)) ^ (2 * n))) / ((LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) * (LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\lim\\limits_{n\\to \\infty} (\\,\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}} (\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}})\\,)\\) to \\((\\lim\\limits_{n\\to \\infty} (\\,\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}\\,)) (\\lim\\limits_{n\\to \\infty} (\\,\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}\\,))\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) * (LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n))",
+                                    "old_expr": "LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) * (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n))",
+                                    "str": "rewriting LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) * (factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) to (LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) * (LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "k",
+                                        "$real"
+                                    ],
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\frac{\\lim\\limits_{k\\to \\infty} (\\,\\frac{\\sqrt{2} k! (k\\cdot e^{-1}) ^ {-k}}{2 \\sqrt{k}\\cdot \\sqrt{\\pi}}\\,)}{(\\lim\\limits_{n\\to \\infty} (\\,\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}\\,)) (\\lim\\limits_{n\\to \\infty} (\\,\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}\\,))}",
+                                "res": "(LIM {k -> oo}. sqrt(2) * factorial(k) * (k * exp(-1)) ^ -k / (2 * sqrt(k) * sqrt(pi))) / ((LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) * (LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)))",
+                                "rule": {
+                                    "latex_str": "substitute \\(k\\) for \\(2 n\\) at 0",
+                                    "loc": "0",
+                                    "name": "Substitution",
+                                    "str": "substitute k for 2 * n at 0",
+                                    "var_name": "k",
+                                    "var_subst": "2 * n"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "k",
+                                        "$real"
+                                    ],
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\frac{\\lim\\limits_{k\\to \\infty} (\\,\\frac{k!}{\\frac{2 \\sqrt{k}\\cdot \\sqrt{\\pi}}{\\sqrt{2}} (\\frac{k}{e}) ^ {k}}\\,)}{(\\lim\\limits_{n\\to \\infty} (\\,\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}\\,)) (\\lim\\limits_{n\\to \\infty} (\\,\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}\\,))}",
+                                "res": "(LIM {k -> oo}. factorial(k) / (2 * sqrt(k) * sqrt(pi) / sqrt(2) * (k / exp(1)) ^ k)) / ((LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) * (LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{\\sqrt{2} k! (k\\cdot e^{-1}) ^ {-k}}{2 \\sqrt{k}\\cdot \\sqrt{\\pi}}\\) to \\(\\frac{k!}{\\frac{2 \\sqrt{k}\\cdot \\sqrt{\\pi}}{\\sqrt{2}} (\\frac{k}{e}) ^ {k}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "factorial(k) / (2 * sqrt(k) * sqrt(pi) / sqrt(2) * (k / exp(1)) ^ k)",
+                                    "old_expr": "sqrt(2) * factorial(k) * (k * exp(-1)) ^ -k / (2 * sqrt(k) * sqrt(pi))",
+                                    "str": "rewriting sqrt(2) * factorial(k) * (k * exp(-1)) ^ -k / (2 * sqrt(k) * sqrt(pi)) to factorial(k) / (2 * sqrt(k) * sqrt(pi) / sqrt(2) * (k / exp(1)) ^ k)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "k",
+                                        "$real"
+                                    ],
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\frac{\\lim\\limits_{k\\to \\infty} (\\,\\frac{k!}{\\sqrt{2 \\pi k} (\\frac{k}{e}) ^ {k}}\\,)}{(\\lim\\limits_{n\\to \\infty} (\\,\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}\\,)) (\\lim\\limits_{n\\to \\infty} (\\,\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}\\,))}",
+                                "res": "(LIM {k -> oo}. factorial(k) / (sqrt(2 * pi * k) * (k / exp(1)) ^ k)) / ((LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) * (LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)))",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{2 \\sqrt{k}\\cdot \\sqrt{\\pi}}{\\sqrt{2}}\\) to \\(\\sqrt{2 \\pi k}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "sqrt(2 * pi * k)",
+                                    "old_expr": "2 * sqrt(k) * sqrt(pi) / sqrt(2)",
+                                    "str": "rewriting 2 * sqrt(k) * sqrt(pi) / sqrt(2) to sqrt(2 * pi * k)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\frac{1}{(\\lim\\limits_{n\\to \\infty} (\\,\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}\\,)) (\\lim\\limits_{n\\to \\infty} (\\,\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}\\,))}",
+                                "res": "1 / ((LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)) * (LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)))",
+                                "rule": {
+                                    "latex_str": "rewrite \\(\\lim\\limits_{k\\to \\infty} (\\,\\frac{k!}{\\sqrt{2 \\pi k} (\\frac{k}{e}) ^ {k}}\\,)\\) to \\(1\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "LIM {k -> oo}. factorial(k) / (sqrt(2 * pi * k) * (k / exp(1)) ^ k)",
+                                    "str": "rewrite LIM {k -> oo}. factorial(k) / (sqrt(2 * pi * k) * (k / exp(1)) ^ k) to 1 using identity",
+                                    "target": "1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$real"
+                                    ]
+                                ],
+                                "latex_res": "\\frac{1}{1 (\\lim\\limits_{n\\to \\infty} (\\,\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}\\,))}",
+                                "res": "1 / (1 * (LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)))",
+                                "rule": {
+                                    "latex_str": "rewrite \\(\\lim\\limits_{n\\to \\infty} (\\,\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}\\,)\\) to \\(1\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)",
+                                    "str": "rewrite LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) to 1 using identity",
+                                    "target": "1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "\\frac{1}{1\\cdot 1}",
+                                "res": "1 / (1 * 1)",
+                                "rule": {
+                                    "latex_str": "rewrite \\(\\lim\\limits_{n\\to \\infty} (\\,\\frac{n!}{\\sqrt{2 \\pi n} (\\frac{n}{e}) ^ {n}}\\,)\\) to \\(1\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n)",
+                                    "str": "rewrite LIM {n -> oo}. factorial(n) / (sqrt(2 * pi * n) * (n / exp(1)) ^ n) to 1 using identity",
+                                    "target": "1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "1",
+                                "res": "1",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "latex_start": "1",
+                        "start": "1",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) = 1",
+                "latex_goal": "\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}\\,) = 1",
+                "type": "CalculationProof"
+            },
+            "type": "Goal"
+        }
+    ],
+    "name": "binom_example02"
+}

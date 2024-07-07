@@ -58,8 +58,8 @@
                                 "latex_res": "4 m (\\int_{0}^{\\infty} x ^ {4} (x ^ {4} + 1) ^ {-m - 1} \\,dx)",
                                 "res": "4 * m * (INT x:[0,oo]. x ^ 4 * (x ^ 4 + 1) ^ (-m - 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },

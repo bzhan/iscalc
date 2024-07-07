@@ -92,8 +92,8 @@
                                 "latex_res": "-(\\int_{0}^{\\infty} e^{-x y} \\sin{(a x)} \\,dx)",
                                 "res": "-(INT x:[0,oo]. exp(-(x * y)) * sin(a * x))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -127,8 +127,8 @@
                                 "latex_res": "-\\frac{a}{a ^ {2} + y ^ {2}}",
                                 "res": "-(a / (a ^ 2 + y ^ 2))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -201,8 +201,8 @@
                             "latex_res": "g(y,a) = -a (\\int \\frac{1}{a ^ {2} + y ^ {2}} \\,dy)",
                             "res": "g(y,a) = -(a * (INT y [a]. 1 / (a ^ 2 + y ^ 2)))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },
@@ -219,8 +219,8 @@
                             "latex_res": "g(y,a) = -\\tan^{-1}{(\\frac{y}{a})} + C(a)",
                             "res": "g(y,a) = -atan(y / a) + SKOLEM_FUNC(C(a))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         }
@@ -289,8 +289,8 @@
                             "latex_res": "g(y,a) = -a (\\int \\frac{1}{a ^ {2} + y ^ {2}} \\,dy)",
                             "res": "g(y,a) = -(a * (INT y [a]. 1 / (a ^ 2 + y ^ 2)))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },
@@ -307,8 +307,8 @@
                             "latex_res": "g(y,a) = -\\tan^{-1}{(\\frac{y}{a})} + C(a)",
                             "res": "g(y,a) = -atan(y / a) + SKOLEM_FUNC(C(a))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         }
@@ -366,8 +366,8 @@
                                 "latex_res": "0",
                                 "res": "0",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -463,8 +463,8 @@
                             "latex_res": "0 = -\\frac{\\pi}{2} + C(a)",
                             "res": "0 = -(pi / 2) + SKOLEM_FUNC(C(a))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },
@@ -555,8 +555,8 @@
                             "latex_res": "0 = \\frac{\\pi}{2} + C(a)",
                             "res": "0 = pi / 2 + SKOLEM_FUNC(C(a))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },

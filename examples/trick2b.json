@@ -47,8 +47,8 @@
                     "latex_res": "\\pi (\\int_{0}^{\\pi} \\frac{\\sin{y}}{\\cos^{2}(y) + 1} \\,dy) - (\\int_{0}^{\\pi} \\frac{y \\sin{y}}{\\cos^{2}(y) + 1} \\,dy)",
                     "res": "pi * (INT y:[0,pi]. sin(y) / (cos(y) ^ 2 + 1)) - (INT y:[0,pi]. y * sin(y) / (cos(y) ^ 2 + 1))",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -105,8 +105,8 @@
                     "latex_res": "\\frac{\\pi ^ {2}}{4}",
                     "res": "pi ^ 2 / 4",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }

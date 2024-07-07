@@ -1049,7 +1049,7 @@ class OrNode(GoalNode):
             if rule == AlgoNonLinearSubstitution:
                 continue
         
-            norm_integral = rules.FullSimplify().eval(cur_integral, ctx=ctx)
+            norm_integral = rules.Simplify().eval(cur_integral, ctx=ctx)
             if norm_integral != cur_integral:
                 algo_steps.append(calc.SimplifyStep(norm_integral, self.loc))
                 cur_integral = norm_integral
@@ -1062,7 +1062,7 @@ class OrNode(GoalNode):
                     if steps:
                         for step in steps:
                             step.prepend_loc(self.loc)
-                        norm_r = rules.FullSimplify().eval(r, ctx=ctx)
+                        norm_r = rules.Simplify().eval(r, ctx=ctx)
                         if norm_r != r:
                             steps.append(calc.SimplifyStep(norm_r, self.loc))
                         if is_integral(norm_r) and norm_r not in not_solved_integral:
@@ -1225,7 +1225,7 @@ class Slagle(rules.Rule):
         for step in trace:
             loc = step.loc
             if step.reason == "Simplification":
-                rule = rules.FullSimplify()
+                rule = rules.Simplify()
             elif step.reason == "DefiniteIntegralIdentity":
                 rule = rules.DefiniteIntegralIdentity()
             elif step.reason == "Substitution":
@@ -1248,7 +1248,7 @@ class Slagle(rules.Rule):
                 applied_rules.append(rules.OnLocation(rule, loc))
             else:
                 applied_rules.append(rule)
-        applied_rules.append(rules.FullSimplify())
+        applied_rules.append(rules.Simplify())
         return applied_rules
                 
 
@@ -1273,7 +1273,7 @@ def perform_steps(node):
     for step in node.trace():
         loc = step.loc
         if step.reason == "Simplification":
-            rule = rules.FullSimplify()
+            rule = rules.Simplify()
             current = rules.OnLocation(rule, loc).eval(current, ctx=ctx)
             real_steps.append({
                 "text": str(current),
@@ -1399,7 +1399,7 @@ def perform_steps(node):
     last_expr = parse_expr(real_steps[-1]["text"])
     if last_expr.is_constant() and last_expr.normalize() == last_expr:
         return real_steps
-    final_expr = rules.FullSimplify().eval(last_expr, ctx=ctx)
+    final_expr = rules.Simplify().eval(last_expr, ctx=ctx)
     real_steps.append({
         "text": str(final_expr),
         "latex": latex.convert_expr(final_expr),

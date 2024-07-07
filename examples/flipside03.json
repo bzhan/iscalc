@@ -84,8 +84,8 @@
                                 "latex_res": "\\int_{0}^{1} x ^ {a} \\,dx",
                                 "res": "INT x:[0,1]. x ^ a",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -108,8 +108,8 @@
                                 "latex_res": "\\frac{1}{a + 1}",
                                 "res": "1 / (a + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -189,8 +189,8 @@
                             "latex_res": "I{(a)} = \\log{(a + 1)} + C",
                             "res": "I(a) = log(a + 1) + SKOLEM_CONST(C)",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         }
@@ -257,8 +257,8 @@
                             "latex_res": "0 = C",
                             "res": "0 = SKOLEM_CONST(C)",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },
@@ -330,8 +330,8 @@
                                 "latex_res": "\\log{(a + 1)}",
                                 "res": "log(a + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

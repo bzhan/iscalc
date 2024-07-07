@@ -6,7 +6,7 @@ from integral.context import Context
 from integral.expr import Op, Var, Const
 from integral.gruntz import SubsSet, mrv, rewrite, dummy_var, limit_inf, mrv_lead_term
 from integral.parser import parse_expr
-from integral.rules import FullSimplify
+from integral.rules import Simplify
 from integral.series import expand_series
 
 

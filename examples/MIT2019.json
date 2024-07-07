@@ -50,8 +50,8 @@
                     "latex_res": "\\int_{0}^{\\pi/100} \\frac{1}{\\cos{(\\frac{39 x}{2})}} \\sin{(\\frac{39 x}{2})} \\,dx",
                     "res": "INT x:[0,pi / 100]. 1 / cos(39 * x / 2) * sin(39 * x / 2)",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 },
@@ -92,8 +92,8 @@
                     "latex_res": "-\\frac{2}{39} \\log{(\\cos{(\\frac{39 \\pi}{200})})}",
                     "res": "-(2/39 * log(cos(39 * pi / 200)))",
                     "rule": {
-                        "name": "FullSimplify",
-                        "str": "full simplify"
+                        "name": "Simplify",
+                        "str": "simplify"
                     },
                     "type": "CalculationStep"
                 }

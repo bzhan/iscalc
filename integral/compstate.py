@@ -1053,8 +1053,8 @@ def parse_rule(item, parent) -> Rule:
         return rules.FoldDefinition(func_name=func_name)
     elif item['name'] == 'DerivIntExchange':
         return rules.DerivIntExchange()
-    elif item['name'] == 'FullSimplify':
-        return rules.FullSimplify()
+    elif item['name'] == 'Simplify':
+        return rules.Simplify()
     elif item['name'] == 'ElimInfInterval':
         a = Const(0)
         if 'a' in item:

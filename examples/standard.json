@@ -131,8 +131,8 @@
                                 "latex_res": "\\frac{\\int e^{u} \\,du}{a}",
                                 "res": "(INT u. exp(u)) / a",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -227,8 +227,8 @@
                                 "latex_res": "\\frac{\\int \\sin{u} \\,du}{a}",
                                 "res": "(INT u. sin(u)) / a",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -254,8 +254,8 @@
                                 "latex_res": "-\\frac{\\cos{(a x)}}{a} + C",
                                 "res": "-(cos(a * x) / a) + SKOLEM_CONST(C)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -332,8 +332,8 @@
                                 "latex_res": "\\frac{\\int \\cos{u} \\,du}{a}",
                                 "res": "(INT u. cos(u)) / a",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -446,8 +446,8 @@
                                 "latex_res": "\\frac{1}{a} (\\int \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "1 / a * (INT u. 1 / (u ^ 2 + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -473,8 +473,8 @@
                                 "latex_res": "\\frac{1}{a} \\tan^{-1}{(\\frac{x}{a})} + C",
                                 "res": "1 / a * atan(x / a) + SKOLEM_CONST(C)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -559,8 +559,8 @@
                                 "latex_res": "\\frac{x ^ {k + 1} \\log{x}}{k + 1} - \\frac{\\int x ^ {k} \\,dx}{k + 1}",
                                 "res": "x ^ (k + 1) * log(x) / (k + 1) - (INT x. x ^ k) / (k + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -577,8 +577,8 @@
                                 "latex_res": "\\frac{x ^ {k + 1} \\log{x}}{k + 1} - \\frac{x ^ {k + 1}}{(k + 1) ^ {2}} + C",
                                 "res": "x ^ (k + 1) * log(x) / (k + 1) - x ^ (k + 1) / (k + 1) ^ 2 + SKOLEM_CONST(C)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -739,8 +739,8 @@
                                         "latex_res": "\\frac{1}{m + 1}",
                                         "res": "1 / (m + 1)",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     }
@@ -787,8 +787,8 @@
                                         "latex_res": "\\frac{1}{m + 1}",
                                         "res": "1 / (m + 1)",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     }
@@ -907,8 +907,8 @@
                                         "latex_res": "-\\frac{n + 1}{m + 1} (\\int_{0}^{1} x ^ {m} \\log^{n}(x) \\,dx)",
                                         "res": "-((n + 1) / (m + 1) * (INT x:[0,1]. x ^ m * log(x) ^ n))",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -926,8 +926,8 @@
                                         "latex_res": "-(-1) ^ {n} n! (m + 1) ^ {-n - 2} (n + 1)",
                                         "res": "-((-1) ^ n * factorial(n) * (m + 1) ^ (-n - 2) * (n + 1))",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     },
@@ -958,8 +958,8 @@
                                         "latex_res": "-(-1) ^ {n} (m + 1) ^ {-n - 2} (n + 1)!",
                                         "res": "-((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     }
@@ -1006,8 +1006,8 @@
                                         "latex_res": "-(-1) ^ {n} (m + 1) ^ {-n - 2} (n + 1)!",
                                         "res": "-((-1) ^ n * (m + 1) ^ (-n - 2) * factorial(n + 1))",
                                         "rule": {
-                                            "name": "FullSimplify",
-                                            "str": "full simplify"
+                                            "name": "Simplify",
+                                            "str": "simplify"
                                         },
                                         "type": "CalculationStep"
                                     }
@@ -1079,8 +1079,8 @@
                                 "latex_res": "-\\frac{y}{a} (\\int_{0}^{\\infty} e^{-x y} \\cos{(a x)} \\,dx) + \\frac{1}{a}",
                                 "res": "-(y / a * (INT x:[0,oo]. exp(-(x * y)) * cos(a * x))) + 1 / a",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1112,8 +1112,8 @@
                                 "latex_res": "-\\frac{y ^ {2}}{a ^ {2}} (\\int_{0}^{\\infty} e^{-x y} \\sin{(a x)} \\,dx) + \\frac{1}{a}",
                                 "res": "-(y ^ 2 / a ^ 2 * (INT x:[0,oo]. exp(-(x * y)) * sin(a * x))) + 1 / a",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -1222,8 +1222,8 @@
                                 "latex_res": "\\frac{a ^ {x}}{\\log{a}} + C",
                                 "res": "a ^ x / log(a) + SKOLEM_CONST(C)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -1295,8 +1295,8 @@
                                 "latex_res": "\\frac{\\sin{(2 x)}}{4} + \\frac{x}{2} + C",
                                 "res": "sin(2 * x) / 4 + x / 2 + SKOLEM_CONST(C)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

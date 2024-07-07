@@ -6,7 +6,8 @@ from decimal import Decimal
 
 from integral import expr
 from integral.expr import Var, Const, Op, Fun, Matrix
-from integral.parser import parse_expr
+from integral.parser import parse_expr, parse_action
+from integral.action import Action
 
 
 class ParserTest(unittest.TestCase):
@@ -69,6 +70,19 @@ class ParserTest(unittest.TestCase):
         for s, e, in test_data:
             self.assertEqual(parse_expr(s), e)
 
+    def testParseAction(self):
+        test_data = [
+            "calculate INT x:[0,1]. (3 * x + 1) ^ (-2)",
+            "substitute u for 3 * x + 1",
+            "apply definite integral",
+            "full simplify"
+        ]
+
+        for s in test_data:
+            action = parse_action(s)
+            self.assertIsInstance(action, Action)
+            self.assertEqual(str(action), s)
+
     def testParseVector(self):
         test_data = [
             ("[[1],[2],[3]]", Matrix([[Const(1)], [Const(2)], [Const(3)]])),
@@ -77,6 +91,7 @@ class ParserTest(unittest.TestCase):
         for s, r in test_data:
             e = parse_expr(s)
             self.assertEqual(e, r)
+
     def testParseMatrix(self):
         test_data = [
             ("{{1,2,3}, {4,5,6}}", Matrix([Vector([Const(1), Const(2), Const(3)], is_column=False),\
@@ -99,6 +114,7 @@ class ParserTest(unittest.TestCase):
                      ("a", "a")]
         for s, res in test_data:
             self.assertEqual(str(parse_expr(s)), res)
+
 
 if __name__ == "__main__":
     unittest.main()

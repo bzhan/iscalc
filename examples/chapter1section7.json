@@ -38,8 +38,8 @@
                                 "latex_res": "-4 (\\int_{0}^{1} \\frac{1}{x ^ {2} + 1} \\,dx) - 4 (\\int_{0}^{1} x ^ {2} \\,dx) + 5 (\\int_{0}^{1} x ^ {4} \\,dx) - 4 (\\int_{0}^{1} x ^ {5} \\,dx) + (\\int_{0}^{1} x ^ {6} \\,dx) + 4 (\\int_{0}^{1} 1 \\,dx)",
                                 "res": "-(4 * (INT x:[0,1]. 1 / (x ^ 2 + 1))) - 4 * (INT x:[0,1]. x ^ 2) + 5 * (INT x:[0,1]. x ^ 4) - 4 * (INT x:[0,1]. x ^ 5) + (INT x:[0,1]. x ^ 6) + 4 * (INT x:[0,1]. 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -62,8 +62,8 @@
                                 "latex_res": "-\\pi + \\frac{22}{7}",
                                 "res": "-pi + 22/7",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },

@@ -153,8 +153,8 @@
                                 "latex_res": "-\\frac{1}{n - 1} ((-n + 1) (\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (-n + 1) (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx))",
                                 "res": "-(1 / (n - 1) * ((-n + 1) * (INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (-n + 1) * (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -186,8 +186,8 @@
                                 "latex_res": "-\\frac{-n + 1}{n - 1} ((\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx))",
                                 "res": "-((-n + 1) / (n - 1) * ((INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -219,8 +219,8 @@
                                 "latex_res": "(\\int_{0}^{\\pi/2} \\cos^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx) + (\\int_{0}^{\\pi/2} \\sin^{2}(x) (a \\cos^{2}(x) + b \\sin^{2}(x)) ^ {-n} \\,dx)",
                                 "res": "(INT x:[0,pi / 2]. cos(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n) + (INT x:[0,pi / 2]. sin(x) ^ 2 * (a * cos(x) ^ 2 + b * sin(x) ^ 2) ^ -n)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -463,8 +463,8 @@
                                 "latex_res": "\\frac{1}{b} (\\int_{0}^{\\infty} \\frac{1}{\\frac{a}{b} + y ^ {2}} \\,dy)",
                                 "res": "1 / b * (INT y:[0,oo]. 1 / (a / b + y ^ 2))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -505,8 +505,8 @@
                                 "latex_res": "\\frac{\\pi}{2 \\sqrt{a} \\sqrt{b}}",
                                 "res": "pi / (2 * sqrt(a) * sqrt(b))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -615,8 +615,8 @@
                                 "latex_res": "-(\\frac{d}{da} I(a,b,1)) - (\\frac{d}{db} I(a,b,1))",
                                 "res": "-(D a. I(a,b,1)) - (D b. I(a,b,1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -668,8 +668,8 @@
                                 "latex_res": "\\frac{\\pi}{4 a ^ {3/2} \\sqrt{b}} + \\frac{\\pi}{4 \\sqrt{a} b ^ {3/2}}",
                                 "res": "pi / (4 * a ^ (3/2) * sqrt(b)) + pi / (4 * sqrt(a) * b ^ (3/2))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -778,8 +778,8 @@
                                 "latex_res": "-\\frac{\\frac{d}{da} I(a,b,2)}{2} - \\frac{\\frac{d}{db} I(a,b,2)}{2}",
                                 "res": "-((D a. I(a,b,2)) / 2) - (D b. I(a,b,2)) / 2",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -831,8 +831,8 @@
                                 "latex_res": "\\frac{\\pi}{16 a ^ {3/2} \\sqrt{b}} (\\frac{1}{a} + \\frac{1}{b}) + \\frac{\\pi}{16 \\sqrt{a} b ^ {3/2}} (\\frac{1}{a} + \\frac{1}{b}) + \\frac{\\pi}{8 a ^ {5/2} \\sqrt{b}} + \\frac{\\pi}{8 \\sqrt{a} b ^ {5/2}}",
                                 "res": "pi / (16 * a ^ (3/2) * sqrt(b)) * (1 / a + 1 / b) + pi / (16 * sqrt(a) * b ^ (3/2)) * (1 / a + 1 / b) + pi / (8 * a ^ (5/2) * sqrt(b)) + pi / (8 * sqrt(a) * b ^ (5/2))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -965,8 +965,8 @@
                                 "latex_res": "2 n (\\int_{0}^{y} x ^ {2} (a ^ {2} + x ^ {2}) ^ {-n - 1} \\,dx) + y (a ^ {2} + y ^ {2}) ^ {-n}",
                                 "res": "2 * n * (INT x:[0,y]. x ^ 2 * (a ^ 2 + x ^ 2) ^ (-n - 1)) + y * (a ^ 2 + y ^ 2) ^ -n",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },

@@ -76,8 +76,8 @@
                                 "latex_res": "(\\int_{0}^{1} \\frac{x ^ {a} - 1}{\\log{x}} \\,dx) - (\\int_{0}^{1} \\frac{x ^ {b} - 1}{\\log{x}} \\,dx)",
                                 "res": "(INT x:[0,1]. (x ^ a - 1) / log(x)) - (INT x:[0,1]. (x ^ b - 1) / log(x))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },

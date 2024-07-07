@@ -73,8 +73,8 @@
                                 "latex_res": "2 (\\int_{0}^{\\infty} \\frac{1}{t (\\frac{1}{t} + t)} \\,dt)",
                                 "res": "2 * (INT t:[0,oo]. 1 / (t * (1 / t + t)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -106,8 +106,8 @@
                                 "latex_res": "2 (\\int_{0}^{\\infty} \\frac{1}{t ^ {2} + 1} \\,dt)",
                                 "res": "2 * (INT t:[0,oo]. 1 / (t ^ 2 + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -130,8 +130,8 @@
                                 "latex_res": "\\pi",
                                 "res": "pi",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

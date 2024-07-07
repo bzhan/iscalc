@@ -60,8 +60,8 @@
                                 "latex_res": "\\frac{\\pi (-e^{-a m} + 1)}{2 a ^ {2}}",
                                 "res": "pi * (-exp(-(a * m)) + 1) / (2 * a ^ 2)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -159,8 +159,8 @@
                             "latex_res": "-2 a (\\int_{0}^{\\infty} \\frac{\\sin{(m x)}}{x (a ^ {2} + x ^ {2}) ^ {2}} \\,dx) = \\frac{2 a ^ {2} m\\cdot \\pi e^{-a m} - 4 a\\cdot \\pi (-e^{-a m} + 1)}{4 a ^ {4}}",
                             "res": "-(2 * a * (INT x:[0,oo]. sin(m * x) / (x * (a ^ 2 + x ^ 2) ^ 2))) = (2 * a ^ 2 * m * pi * exp(-(a * m)) - 4 * a * pi * (-exp(-(a * m)) + 1)) / (4 * a ^ 4)",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },

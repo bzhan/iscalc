@@ -133,8 +133,8 @@
                                 "latex_res": "\\frac{1}{2} (\\int_{0}^{\\pi/2} \\log{(a \\sin{t})} \\,dt) + \\frac{1}{2} (\\int_{0}^{\\pi/2} \\log{(a \\sin{x})} \\,dx)",
                                 "res": "1/2 * (INT t:[0,pi / 2]. log(a * sin(t))) + 1/2 * (INT x:[0,pi / 2]. log(a * sin(x)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -167,8 +167,8 @@
                                 "latex_res": "\\int_{0}^{\\pi/2} \\log{(a \\sin{x})} \\,dx",
                                 "res": "INT x:[0,pi / 2]. log(a * sin(x))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -347,8 +347,8 @@
                                 "latex_res": "(\\int_{0}^{\\pi/2} \\log{(a \\cos{x})} \\,dx) + (\\int_{0}^{\\pi/2} \\log{(a \\sin{x})} \\,dx) + \\frac{\\pi}{2} \\log{(\\frac{2}{a})}",
                                 "res": "(INT x:[0,pi / 2]. log(a * cos(x))) + (INT x:[0,pi / 2]. log(a * sin(x))) + pi / 2 * log(2 / a)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -402,8 +402,8 @@
                                 "latex_res": "2 (\\int_{0}^{\\pi/2} \\log{(a \\sin{x})} \\,dx) + \\frac{\\pi}{2} \\log{(\\frac{2}{a})}",
                                 "res": "2 * (INT x:[0,pi / 2]. log(a * sin(x))) + pi / 2 * log(2 / a)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -447,8 +447,8 @@
                                 "latex_res": "2 (\\int_{0}^{\\pi/2} \\log{(a \\sin{x})} \\,dx) + \\frac{\\pi}{2} \\log{(\\frac{2}{a})}",
                                 "res": "2 * (INT x:[0,pi / 2]. log(a * sin(x))) + pi / 2 * log(2 / a)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -545,8 +545,8 @@
                                 "latex_res": "\\frac{\\pi \\log{a}}{2} - \\frac{\\pi \\log{(2)}}{2}",
                                 "res": "pi * log(a) / 2 - pi * log(2) / 2",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

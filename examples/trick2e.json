@@ -50,8 +50,8 @@
                                 "latex_res": "\\frac{1}{a} (\\int_{0}^{a} \\frac{1}{\\frac{t ^ {2}}{a ^ {2}} + 1} \\log{(\\frac{t}{a} + 1)} \\,dt)",
                                 "res": "1 / a * (INT t:[0,a]. 1 / (t ^ 2 / a ^ 2 + 1) * log(t / a + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -101,8 +101,8 @@
                                 "latex_res": "a (\\int_{0}^{a} \\frac{1}{a ^ {2} + t ^ {2}} \\log{(\\frac{a + t}{a})} \\,dt)",
                                 "res": "a * (INT t:[0,a]. 1 / (a ^ 2 + t ^ 2) * log((a + t) / a))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -152,8 +152,8 @@
                                 "latex_res": "a (-\\log{a} (\\int_{0}^{a} \\frac{1}{a ^ {2} + t ^ {2}} \\,dt) + (\\int_{0}^{a} \\frac{\\log{(a + t)}}{a ^ {2} + t ^ {2}} \\,dt))",
                                 "res": "a * (-(log(a) * (INT t:[0,a]. 1 / (a ^ 2 + t ^ 2))) + (INT t:[0,a]. log(a + t) / (a ^ 2 + t ^ 2)))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -182,8 +182,8 @@
                                 "latex_res": "a ((\\int_{0}^{a} \\frac{\\log{(a + t)}}{a ^ {2} + t ^ {2}} \\,dt) - \\frac{\\pi \\log{a}}{4 a})",
                                 "res": "a * ((INT t:[0,a]. log(a + t) / (a ^ 2 + t ^ 2)) - pi * log(a) / (4 * a))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -225,8 +225,8 @@
                                 "latex_res": "a (\\int_{0}^{a} \\frac{\\log{(a + t)}}{a ^ {2} + t ^ {2}} \\,dt) - \\frac{\\pi \\log{a}}{4}",
                                 "res": "a * (INT t:[0,a]. log(a + t) / (a ^ 2 + t ^ 2)) - pi * log(a) / 4",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

@@ -64,8 +64,8 @@
                                 "latex_res": "-(\\int_{0}^{1} e^{-x} \\log{x} \\,dx) - (\\int_{1}^{\\infty} e^{-x} \\log{x} \\,dx)",
                                 "res": "-(INT x:[0,1]. exp(-x) * log(x)) - (INT x:[1,oo]. exp(-x) * log(x))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -118,8 +118,8 @@
                                 "latex_res": "-(\\int_{0}^{1} e^{-x} \\log{x} \\,dx) - (\\int_{1}^{\\infty} e^{-x} \\log{x} \\,dx)",
                                 "res": "-(INT x:[0,1]. exp(-x) * log(x)) - (INT x:[1,oo]. exp(-x) * log(x))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

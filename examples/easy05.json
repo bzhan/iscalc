@@ -65,8 +65,8 @@
                                 "latex_res": "-\\frac{\\log{(\\sqrt{2} ^ {-\\sqrt{2} + 1} + 1)}}{-\\sqrt{2} + 1}",
                                 "res": "-(log(sqrt(2) ^ (-sqrt(2) + 1) + 1) / (-sqrt(2) + 1))",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -87,8 +87,8 @@
                                 "latex_res": "(\\sqrt{2} + 1) \\log{(\\sqrt{2} ^ {-\\sqrt{2} + 1} + 1)}",
                                 "res": "(sqrt(2) + 1) * log(sqrt(2) ^ (-sqrt(2) + 1) + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },

@@ -96,8 +96,8 @@
                                 "latex_res": "\\int_{0}^{\\infty} \\frac{1}{a ^ {2} x ^ {2} + 1} \\,dx",
                                 "res": "INT x:[0,oo]. 1 / (a ^ 2 * x ^ 2 + 1)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             },
@@ -138,8 +138,8 @@
                                 "latex_res": "\\frac{\\pi}{2 a}",
                                 "res": "pi / (2 * a)",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }
@@ -228,8 +228,8 @@
                             "latex_res": "I(a,b) = \\frac{\\pi}{2} (\\int \\frac{1}{a} \\,da)",
                             "res": "I(a,b) = pi / 2 * (INT a [b]. 1 / a)",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         },
@@ -246,8 +246,8 @@
                             "latex_res": "I(a,b) = \\frac{\\pi \\log{a}}{2} + C(b)",
                             "res": "I(a,b) = pi * log(a) / 2 + SKOLEM_FUNC(C(b))",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         }
@@ -335,8 +335,8 @@
                             "latex_res": "C(a) = -\\frac{\\pi \\log{a}}{2}",
                             "res": "SKOLEM_FUNC(C(a)) = -(pi * log(a) / 2)",
                             "rule": {
-                                "name": "FullSimplify",
-                                "str": "full simplify"
+                                "name": "Simplify",
+                                "str": "simplify"
                             },
                             "type": "CalculationStep"
                         }
@@ -405,8 +405,8 @@
                                 "latex_res": "\\frac{\\pi \\log{a}}{2} - \\frac{\\pi \\log{b}}{2}",
                                 "res": "pi * log(a) / 2 - pi * log(b) / 2",
                                 "rule": {
-                                    "name": "FullSimplify",
-                                    "str": "full simplify"
+                                    "name": "Simplify",
+                                    "str": "simplify"
                                 },
                                 "type": "CalculationStep"
                             }

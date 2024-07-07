@@ -407,29 +407,6 @@ class Rule:
         return dict()
 
 
-class Simplify(Rule):
-    """Perform algebraic simplification. This treats the
-    expression as a polynomial, and normalizes the polynomial.
-
-    """
-
-    def __init__(self):
-        self.name = "Simplify"
-
-    def __str__(self):
-        return "simplify"
-
-    def export(self):
-        return {
-            "name": self.name,
-            "str": str(self)
-        }
-
-    def eval(self, e: Expr, ctx: Context) -> Expr:
-        res = normalize(e, ctx)
-        return res
-
-
 class Linearity(Rule):
     """Applies linearity rules:
 
@@ -1027,20 +1004,20 @@ class OnLocation(Rule):
         return rec(e, self.loc, ctx)
 
 
-class FullSimplify(Rule):
+class Simplify(Rule):
     """Perform simplification by applying the following rules repeatedly:
 
-    - Simplify
-    - Linearity
-    - DerivativeSimplify
+    - Apply Linearity.
+    - Normalize using the rules in poly.
+    - Apply DerivativeSimplify.
 
     """
 
     def __init__(self):
-        self.name = "FullSimplify"
+        self.name = "Simplify"
 
     def __str__(self):
-        return "full simplify"
+        return "simplify"
 
     def export(self):
         return {
@@ -1053,14 +1030,14 @@ class FullSimplify(Rule):
         current = e
         while True:
             s = OnSubterm(Linearity()).eval(current, ctx)
-            s = Simplify().eval(s, ctx)
+            s = normalize(s, ctx)
             s = OnSubterm(DerivativeSimplify()).eval(s, ctx)
             if s == current:
                 break
             current = s
             counter += 1
             if counter > 5:
-                raise AssertionError("Loop in FullSimplify")
+                raise AssertionError("Loop in Simplify")
         return current
 
 
@@ -1494,7 +1471,7 @@ class Equation(Rule):
         # Now e is the old expression
         assert self.old_expr is None or self.old_expr == e
 
-        r = FullSimplify()
+        r = Simplify()
         r1, r2 = r.eval(e, ctx), r.eval(self.new_expr, ctx)
         if r1 == r2:
             return self.new_expr
@@ -1861,9 +1838,9 @@ def check_item(item, target=None, *, debug=False):
 
         elif reason == 'Simplification':
             if "location" in step:
-                result = OnLocation(FullSimplify(), step["location"]).eval(current, ctx)
+                result = OnLocation(Simplify(), step["location"]).eval(current, ctx)
             else:
-                result = FullSimplify().eval(current, ctx)
+                result = Simplify().eval(current, ctx)
 
         elif reason == 'Substitution':
             var_name = step['params']['var_name']

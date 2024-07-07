@@ -1,0 +1,2948 @@
+{
+    "content": [
+        {
+            "conds": [
+                {
+                    "cond": "m != 0",
+                    "latex_cond": "m \\neq 0"
+                },
+                {
+                    "cond": "n >= 0",
+                    "latex_cond": "n \\ge 0"
+                }
+            ],
+            "finished": true,
+            "fixes": [
+                [
+                    "m",
+                    {
+                        "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
+                ],
+                [
+                    "n",
+                    {
+                        "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
+                ],
+                [
+                    "k",
+                    {
+                        "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
+            "goal": "SUM(k, 0, n, ((8 - m / 8) * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * m ^ k)) = (2 * n + 1) / m ^ n * binom(2 * n,n) ^ 3",
+            "latex_goal": "\\sum_{k=0}^{n}{\\frac{((8 - \\frac{m}{8}) k ^ {3} - 4 k ^ {2} - 2 k + 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} m ^ {k}}} = \\frac{2 n + 1}{m ^ {n}} \\binom{2 n}{n} ^ {3}",
+            "obligations": [
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "(2 * k - 1) ^ 2 * m ^ k != 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "m != 0",
+                            "latex_cond": "m \\neq 0"
+                        },
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "k >= 0",
+                            "latex_cond": "k \\ge 0"
+                        },
+                        {
+                            "cond": "k <= n",
+                            "latex_cond": "k \\le n"
+                        },
+                        {
+                            "cond": "n - k >= 0",
+                            "latex_cond": "n - k \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(k)",
+                            "latex_cond": "k \\in\\mathbb{Z}"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "m > 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "m != 0",
+                            "latex_cond": "m \\neq 0"
+                        },
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "isInt(n)"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "m != 0",
+                            "latex_cond": "m \\neq 0"
+                        },
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "n >= 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "m != 0",
+                            "latex_cond": "m \\neq 0"
+                        },
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        }
+                    ]
+                }
+            ],
+            "proof": {
+                "base_case": {
+                    "conds": [
+                        {
+                            "cond": "m != 0",
+                            "latex_cond": "m \\neq 0"
+                        },
+                        {
+                            "cond": "0 >= 0",
+                            "latex_cond": "0 \\ge 0"
+                        }
+                    ],
+                    "finished": true,
+                    "fixes": [
+                        [
+                            "m",
+                            {
+                                "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
+                        ],
+                        [
+                            "n",
+                            {
+                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
+                        ],
+                        [
+                            "k",
+                            {
+                                "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
+                        ]
+                    ],
+                    "goal": "1 = 1",
+                    "latex_goal": "1 = 1",
+                    "proof": {
+                        "calcs": [
+                            {
+                                "conds": [
+                                    {
+                                        "cond": "m != 0",
+                                        "latex_cond": "m \\neq 0"
+                                    },
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "k",
+                                        {
+                                            "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
+                                "latex_start": "1",
+                                "start": "1",
+                                "steps": [],
+                                "type": "Calculation"
+                            },
+                            {
+                                "conds": [
+                                    {
+                                        "cond": "m != 0",
+                                        "latex_cond": "m \\neq 0"
+                                    },
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "k",
+                                        {
+                                            "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
+                                "latex_start": "1",
+                                "start": "1",
+                                "steps": [],
+                                "type": "Calculation"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "1 = 1",
+                        "latex_goal": "1 = 1",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal"
+                },
+                "finished": true,
+                "goal": "SUM(k, 0, n, ((8 - m / 8) * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * m ^ k)) = (2 * n + 1) / m ^ n * binom(2 * n,n) ^ 3",
+                "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "m != 0",
+                            "latex_cond": "m \\neq 0"
+                        },
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        }
+                    ],
+                    "finished": true,
+                    "fixes": [
+                        [
+                            "m",
+                            {
+                                "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
+                        ],
+                        [
+                            "n",
+                            {
+                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
+                        ],
+                        [
+                            "k",
+                            {
+                                "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
+                        ]
+                    ],
+                    "goal": "SUM(k, 0, n + 1, m ^ -k / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3 * (k ^ 3 * (-(m / 8) + 8) - 4 * k ^ 2 - 2 * k + 1)) = m ^ (-n - 1) * (2 * n + 3) * binom(2 * n + 2,n + 1) ^ 3",
+                    "latex_goal": "\\sum_{k=0}^{n + 1}{\\frac{m ^ {-k}}{(2 k - 1) ^ {2}} \\binom{2 k}{k} ^ {3} (k ^ {3} (-\\frac{m}{8} + 8) - 4 k ^ {2} - 2 k + 1)} = m ^ {-n - 1} (2 n + 3) \\binom{2 n + 2}{n + 1} ^ {3}",
+                    "obligations": [
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "m > 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "m != 0",
+                                    "latex_cond": "m \\neq 0"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "k >= 0",
+                                    "latex_cond": "k \\ge 0"
+                                },
+                                {
+                                    "cond": "k <= n + 1",
+                                    "latex_cond": "k \\le n + 1"
+                                },
+                                {
+                                    "cond": "n + 1 - k >= 0",
+                                    "latex_cond": "n + 1 - k \\ge 0"
+                                },
+                                {
+                                    "cond": "isInt(k)",
+                                    "latex_cond": "k \\in\\mathbb{Z}"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "isInt(-k)"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "m != 0",
+                                    "latex_cond": "m \\neq 0"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "k >= 0",
+                                    "latex_cond": "k \\ge 0"
+                                },
+                                {
+                                    "cond": "k <= n + 1",
+                                    "latex_cond": "k \\le n + 1"
+                                },
+                                {
+                                    "cond": "n + 1 - k >= 0",
+                                    "latex_cond": "n + 1 - k \\ge 0"
+                                },
+                                {
+                                    "cond": "isInt(k)",
+                                    "latex_cond": "k \\in\\mathbb{Z}"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "-k >= 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "m != 0",
+                                    "latex_cond": "m \\neq 0"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "k >= 0",
+                                    "latex_cond": "k \\ge 0"
+                                },
+                                {
+                                    "cond": "k <= n + 1",
+                                    "latex_cond": "k \\le n + 1"
+                                },
+                                {
+                                    "cond": "n + 1 - k >= 0",
+                                    "latex_cond": "n + 1 - k \\ge 0"
+                                },
+                                {
+                                    "cond": "isInt(k)",
+                                    "latex_cond": "k \\in\\mathbb{Z}"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "(2 * k - 1) ^ 2 != 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "m != 0",
+                                    "latex_cond": "m \\neq 0"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "k >= 0",
+                                    "latex_cond": "k \\ge 0"
+                                },
+                                {
+                                    "cond": "k <= n + 1",
+                                    "latex_cond": "k \\le n + 1"
+                                },
+                                {
+                                    "cond": "n + 1 - k >= 0",
+                                    "latex_cond": "n + 1 - k \\ge 0"
+                                },
+                                {
+                                    "cond": "isInt(k)",
+                                    "latex_cond": "k \\in\\mathbb{Z}"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "m > 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "m != 0",
+                                    "latex_cond": "m \\neq 0"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "isInt(-n - 1)"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "m != 0",
+                                    "latex_cond": "m \\neq 0"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "-n - 1 >= 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "m != 0",
+                                    "latex_cond": "m \\neq 0"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                }
+                            ]
+                        }
+                    ],
+                    "proof": {
+                        "calcs": [
+                            {
+                                "conds": [
+                                    {
+                                        "cond": "m != 0",
+                                        "latex_cond": "m \\neq 0"
+                                    },
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "k",
+                                        {
+                                            "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
+                                "latex_start": "\\sum_{k=0}^{n + 1}{\\frac{m ^ {-k}}{(2 k - 1) ^ {2}} \\binom{2 k}{k} ^ {3} (k ^ {3} (-\\frac{m}{8} + 8) - 4 k ^ {2} - 2 k + 1)}",
+                                "start": "SUM(k, 0, n + 1, m ^ -k / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3 * (k ^ 3 * (-(m / 8) + 8) - 4 * k ^ 2 - 2 * k + 1))",
+                                "steps": [
+                                    {
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\sum_{i=0}^{n}{\\frac{m ^ {-i}}{(2 i - 1) ^ {2}} \\binom{2 i}{i} ^ {3} (i ^ {3} (-\\frac{m}{8} + 8) - 4 i ^ {2} - 2 i + 1)} + \\sum_{i=n + 1}^{n + 1}{\\frac{m ^ {-i}}{(2 i - 1) ^ {2}} \\binom{2 i}{i} ^ {3} (i ^ {3} (-\\frac{m}{8} + 8) - 4 i ^ {2} - 2 i + 1)}",
+                                        "res": "SUM(i, 0, n, m ^ -i / (2 * i - 1) ^ 2 * binom(2 * i,i) ^ 3 * (i ^ 3 * (-(m / 8) + 8) - 4 * i ^ 2 - 2 * i + 1)) + SUM(i, n + 1, n + 1, m ^ -i / (2 * i - 1) ^ 2 * binom(2 * i,i) ^ 3 * (i ^ 3 * (-(m / 8) + 8) - 4 * i ^ 2 - 2 * i + 1))",
+                                        "rule": {
+                                            "cond": "k <= n",
+                                            "latex_str": "split item on \\(k \\le n\\)",
+                                            "name": "SplitItem",
+                                            "str": "split item on k <= n"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\sum_{i=0}^{n}{\\frac{m ^ {-i}}{(2 i - 1) ^ {2}} \\binom{2 i}{i} ^ {3} (i ^ {3} (-\\frac{m}{8} + 8) - 4 i ^ {2} - 2 i + 1)} + \\frac{m ^ {-n - 1}}{(2 n + 1) ^ {2}} \\binom{2 n + 2}{n + 1} ^ {3} ((n + 1) ^ {3} (-\\frac{m}{8} + 8) - 4 (n + 1) ^ {2} - 2 n - 1)",
+                                        "res": "SUM(i, 0, n, m ^ -i / (2 * i - 1) ^ 2 * binom(2 * i,i) ^ 3 * (i ^ 3 * (-(m / 8) + 8) - 4 * i ^ 2 - 2 * i + 1)) + m ^ (-n - 1) / (2 * n + 1) ^ 2 * binom(2 * n + 2,n + 1) ^ 3 * ((n + 1) ^ 3 * (-(m / 8) + 8) - 4 * (n + 1) ^ 2 - 2 * n - 1)",
+                                        "rule": {
+                                            "loc": "1",
+                                            "name": "FullSimplify",
+                                            "str": "full simplify at 1"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\sum_{i=0}^{n}{\\frac{((8 - \\frac{m}{8}) i ^ {3} - 4 i ^ {2} - 2 i + 1) \\binom{2 i}{i} ^ {3}}{(2 i - 1) ^ {2} m ^ {i}}} + \\frac{m ^ {-n - 1}}{(2 n + 1) ^ {2}} \\binom{2 n + 2}{n + 1} ^ {3} ((n + 1) ^ {3} (-\\frac{m}{8} + 8) - 4 (n + 1) ^ {2} - 2 n - 1)",
+                                        "res": "SUM(i, 0, n, ((8 - m / 8) * i ^ 3 - 4 * i ^ 2 - 2 * i + 1) * binom(2 * i,i) ^ 3 / ((2 * i - 1) ^ 2 * m ^ i)) + m ^ (-n - 1) / (2 * n + 1) ^ 2 * binom(2 * n + 2,n + 1) ^ 3 * ((n + 1) ^ 3 * (-(m / 8) + 8) - 4 * (n + 1) ^ 2 - 2 * n - 1)",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(\\frac{m ^ {-i}}{(2 i - 1) ^ {2}} \\binom{2 i}{i} ^ {3} (i ^ {3} (-\\frac{m}{8} + 8) - 4 i ^ {2} - 2 i + 1)\\) to \\(\\frac{((8 - \\frac{m}{8}) i ^ {3} - 4 i ^ {2} - 2 i + 1) \\binom{2 i}{i} ^ {3}}{(2 i - 1) ^ {2} m ^ {i}}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "((8 - m / 8) * i ^ 3 - 4 * i ^ 2 - 2 * i + 1) * binom(2 * i,i) ^ 3 / ((2 * i - 1) ^ 2 * m ^ i)",
+                                            "old_expr": "m ^ -i / (2 * i - 1) ^ 2 * binom(2 * i,i) ^ 3 * (i ^ 3 * (-(m / 8) + 8) - 4 * i ^ 2 - 2 * i + 1)",
+                                            "str": "rewriting m ^ -i / (2 * i - 1) ^ 2 * binom(2 * i,i) ^ 3 * (i ^ 3 * (-(m / 8) + 8) - 4 * i ^ 2 - 2 * i + 1) to ((8 - m / 8) * i ^ 3 - 4 * i ^ 2 - 2 * i + 1) * binom(2 * i,i) ^ 3 / ((2 * i - 1) ^ 2 * m ^ i)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{2 n + 1}{m ^ {n}} \\binom{2 n}{n} ^ {3} + \\frac{m ^ {-n - 1}}{(2 n + 1) ^ {2}} \\binom{2 n + 2}{n + 1} ^ {3} ((n + 1) ^ {3} (-\\frac{m}{8} + 8) - 4 (n + 1) ^ {2} - 2 n - 1)",
+                                        "res": "(2 * n + 1) / m ^ n * binom(2 * n,n) ^ 3 + m ^ (-n - 1) / (2 * n + 1) ^ 2 * binom(2 * n + 2,n + 1) ^ 3 * ((n + 1) ^ 3 * (-(m / 8) + 8) - 4 * (n + 1) ^ 2 - 2 * n - 1)",
+                                        "rule": {
+                                            "loc": "0",
+                                            "name": "ApplyInductHyp",
+                                            "str": "apply induction hypothesis at 0"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{2 n + 1}{m ^ {n}} (\\frac{n + 1}{2 (2 n + 1)} \\binom{2 n + 2}{n + 1}) ^ {3} + \\frac{m ^ {-n - 1}}{(2 n + 1) ^ {2}} \\binom{2 n + 2}{n + 1} ^ {3} ((n + 1) ^ {3} (-\\frac{m}{8} + 8) - 4 (n + 1) ^ {2} - 2 n - 1)",
+                                        "res": "(2 * n + 1) / m ^ n * ((n + 1) / (2 * (2 * n + 1)) * binom(2 * n + 2,n + 1)) ^ 3 + m ^ (-n - 1) / (2 * n + 1) ^ 2 * binom(2 * n + 2,n + 1) ^ 3 * ((n + 1) ^ 3 * (-(m / 8) + 8) - 4 * (n + 1) ^ 2 - 2 * n - 1)",
+                                        "rule": {
+                                            "eq": "binom(2 * k,k) = (k + 1) / (2 * (2 * k + 1)) * binom(2 * k + 2,k + 1)",
+                                            "latex_str": "apply equation \\(\\binom{2 k}{k} = \\frac{k + 1}{2 (2 k + 1)} \\binom{2 k + 2}{k + 1}\\)",
+                                            "name": "ApplyEquation",
+                                            "source": "binom(2 * n,n)",
+                                            "str": "apply equation: binom(2 * k,k) = (k + 1) / (2 * (2 * k + 1)) * binom(2 * k + 2,k + 1)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{\\frac{m}{8} (n + 1) ^ {3}}{(2 n + 1) ^ {2} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3} + \\frac{m ^ {-n - 1}}{(2 n + 1) ^ {2}} \\binom{2 n + 2}{n + 1} ^ {3} ((n + 1) ^ {3} (-\\frac{m}{8} + 8) - 4 (n + 1) ^ {2} - 2 n - 1)",
+                                        "res": "m / 8 * (n + 1) ^ 3 / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3 + m ^ (-n - 1) / (2 * n + 1) ^ 2 * binom(2 * n + 2,n + 1) ^ 3 * ((n + 1) ^ 3 * (-(m / 8) + 8) - 4 * (n + 1) ^ 2 - 2 * n - 1)",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(\\frac{2 n + 1}{m ^ {n}} (\\frac{n + 1}{2 (2 n + 1)} \\binom{2 n + 2}{n + 1}) ^ {3}\\) to \\(\\frac{\\frac{m}{8} (n + 1) ^ {3}}{(2 n + 1) ^ {2} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "m / 8 * (n + 1) ^ 3 / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3",
+                                            "old_expr": "(2 * n + 1) / m ^ n * ((n + 1) / (2 * (2 * n + 1)) * binom(2 * n + 2,n + 1)) ^ 3",
+                                            "str": "rewriting (2 * n + 1) / m ^ n * ((n + 1) / (2 * (2 * n + 1)) * binom(2 * n + 2,n + 1)) ^ 3 to m / 8 * (n + 1) ^ 3 / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{\\frac{m}{8} (n + 1) ^ {3}}{(2 n + 1) ^ {2} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3} + \\frac{(8 - \\frac{m}{8}) (n + 1) ^ {3} - 4 (n + 1) ^ {2} - 2 n - 1}{(2 n + 1) ^ {2} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3}",
+                                        "res": "m / 8 * (n + 1) ^ 3 / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3 + ((8 - m / 8) * (n + 1) ^ 3 - 4 * (n + 1) ^ 2 - 2 * n - 1) / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(\\frac{m ^ {-n - 1}}{(2 n + 1) ^ {2}} \\binom{2 n + 2}{n + 1} ^ {3} ((n + 1) ^ {3} (-\\frac{m}{8} + 8) - 4 (n + 1) ^ {2} - 2 n - 1)\\) to \\(\\frac{(8 - \\frac{m}{8}) (n + 1) ^ {3} - 4 (n + 1) ^ {2} - 2 n - 1}{(2 n + 1) ^ {2} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "((8 - m / 8) * (n + 1) ^ 3 - 4 * (n + 1) ^ 2 - 2 * n - 1) / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3",
+                                            "old_expr": "m ^ (-n - 1) / (2 * n + 1) ^ 2 * binom(2 * n + 2,n + 1) ^ 3 * ((n + 1) ^ 3 * (-(m / 8) + 8) - 4 * (n + 1) ^ 2 - 2 * n - 1)",
+                                            "str": "rewriting m ^ (-n - 1) / (2 * n + 1) ^ 2 * binom(2 * n + 2,n + 1) ^ 3 * ((n + 1) ^ 3 * (-(m / 8) + 8) - 4 * (n + 1) ^ 2 - 2 * n - 1) to ((8 - m / 8) * (n + 1) ^ 3 - 4 * (n + 1) ^ 2 - 2 * n - 1) / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{8 (n + 1) ^ {3} - 4 (n + 1) ^ {2} - 2 (n + 1) + 1}{(2 n + 1) ^ {2} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3}",
+                                        "res": "(8 * (n + 1) ^ 3 - 4 * (n + 1) ^ 2 - 2 * (n + 1) + 1) / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(\\frac{\\frac{m}{8} (n + 1) ^ {3}}{(2 n + 1) ^ {2} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3} + \\frac{(8 - \\frac{m}{8}) (n + 1) ^ {3} - 4 (n + 1) ^ {2} - 2 n - 1}{(2 n + 1) ^ {2} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3}\\) to \\(\\frac{8 (n + 1) ^ {3} - 4 (n + 1) ^ {2} - 2 (n + 1) + 1}{(2 n + 1) ^ {2} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "(8 * (n + 1) ^ 3 - 4 * (n + 1) ^ 2 - 2 * (n + 1) + 1) / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3",
+                                            "old_expr": "m / 8 * (n + 1) ^ 3 / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3 + ((8 - m / 8) * (n + 1) ^ 3 - 4 * (n + 1) ^ 2 - 2 * n - 1) / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3",
+                                            "str": "rewriting m / 8 * (n + 1) ^ 3 / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3 + ((8 - m / 8) * (n + 1) ^ 3 - 4 * (n + 1) ^ 2 - 2 * n - 1) / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3 to (8 * (n + 1) ^ 3 - 4 * (n + 1) ^ 2 - 2 * (n + 1) + 1) / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{(2 n + 1) ^ {2} (2 n + 3)}{(2 n + 1) ^ {2} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3}",
+                                        "res": "(2 * n + 1) ^ 2 * (2 * n + 3) / ((2 * n + 1) ^ 2 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(8 (n + 1) ^ {3} - 4 (n + 1) ^ {2} - 2 (n + 1) + 1\\) to \\((2 n + 1) ^ {2} (2 n + 3)\\)",
+                                            "name": "Equation",
+                                            "new_expr": "(2 * n + 1) ^ 2 * (2 * n + 3)",
+                                            "old_expr": "8 * (n + 1) ^ 3 - 4 * (n + 1) ^ 2 - 2 * (n + 1) + 1",
+                                            "str": "rewriting 8 * (n + 1) ^ 3 - 4 * (n + 1) ^ 2 - 2 * (n + 1) + 1 to (2 * n + 1) ^ 2 * (2 * n + 3)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "m ^ {-n - 1} (2 n + 3) \\binom{2 n + 2}{n + 1} ^ {3}",
+                                        "res": "m ^ (-n - 1) * (2 * n + 3) * binom(2 * n + 2,n + 1) ^ 3",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            },
+                            {
+                                "conds": [
+                                    {
+                                        "cond": "m != 0",
+                                        "latex_cond": "m \\neq 0"
+                                    },
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                            "symbol_type": "var",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "k",
+                                        {
+                                            "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
+                                "latex_start": "m ^ {-n - 1} (2 n + 3) \\binom{2 n + 2}{n + 1} ^ {3}",
+                                "start": "m ^ (-n - 1) * (2 * n + 3) * binom(2 * n + 2,n + 1) ^ 3",
+                                "steps": [],
+                                "type": "Calculation"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "SUM(k, 0, n + 1, m ^ -k / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3 * (k ^ 3 * (-(m / 8) + 8) - 4 * k ^ 2 - 2 * k + 1)) = m ^ (-n - 1) * (2 * n + 3) * binom(2 * n + 2,n + 1) ^ 3",
+                        "latex_goal": "\\sum_{k=0}^{n + 1}{\\frac{m ^ {-k}}{(2 k - 1) ^ {2}} \\binom{2 k}{k} ^ {3} (k ^ {3} (-\\frac{m}{8} + 8) - 4 k ^ {2} - 2 k + 1)} = m ^ {-n - 1} (2 n + 3) \\binom{2 n + 2}{n + 1} ^ {3}",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal",
+                    "wellformed": false
+                },
+                "induct_var": "n",
+                "latex_goal": "\\sum_{k=0}^{n}{\\frac{((8 - \\frac{m}{8}) k ^ {3} - 4 k ^ {2} - 2 k + 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} m ^ {k}}} = \\frac{2 n + 1}{m ^ {n}} \\binom{2 n}{n} ^ {3}",
+                "start": "0",
+                "type": "InductionProof"
+            },
+            "type": "Goal",
+            "wellformed": false
+        },
+        {
+            "finished": true,
+            "fixes": [
+                [
+                    "m",
+                    {
+                        "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                        "symbol_type": "var",
+                        "type": "$int"
+                    }
+                ],
+                [
+                    "n",
+                    {
+                        "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ],
+                [
+                    "k",
+                    {
+                        "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
+            "goal": "(LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(4 * k ^ 2) + 16 * k ^ 3 - 2 * k + 1) / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3)) = (LIM {n -> oo}. (-64) ^ -n * (2 * n + 1) * binom(2 * n,n) ^ 3)",
+            "latex_goal": "\\lim\\limits_{n\\to \\infty} \\sum_{k=0}^{n}{\\frac{(-64) ^ {-k} (-4 k ^ {2} + 16 k ^ {3} - 2 k + 1)}{(2 k - 1) ^ {2}} \\binom{2 k}{k} ^ {3}} = \\lim\\limits_{n\\to \\infty} (\\,(-64) ^ {-n} (2 n + 1) \\binom{2 n}{n} ^ {3}\\,)",
+            "proof": {
+                "begin_label": "1.",
+                "finished": true,
+                "goal": "(LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(4 * k ^ 2) + 16 * k ^ 3 - 2 * k + 1) / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3)) = (LIM {n -> oo}. (-64) ^ -n * (2 * n + 1) * binom(2 * n,n) ^ 3)",
+                "latex_goal": "\\lim\\limits_{n\\to \\infty} \\sum_{k=0}^{n}{\\frac{(-64) ^ {-k} (-4 k ^ {2} + 16 k ^ {3} - 2 k + 1)}{(2 k - 1) ^ {2}} \\binom{2 k}{k} ^ {3}} = \\lim\\limits_{n\\to \\infty} (\\,(-64) ^ {-n} (2 n + 1) \\binom{2 n}{n} ^ {3}\\,)",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "m != 0",
+                            "latex_cond": "m \\neq 0"
+                        },
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        }
+                    ],
+                    "fixes": [
+                        [
+                            "m",
+                            {
+                                "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
+                        ],
+                        [
+                            "n",
+                            {
+                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                "symbol_type": "var",
+                                "type": "$int"
+                            }
+                        ],
+                        [
+                            "k",
+                            {
+                                "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
+                        ]
+                    ],
+                    "latex_start": "\\sum_{k=0}^{n}{\\frac{((8 - \\frac{m}{8}) k ^ {3} - 4 k ^ {2} - 2 k + 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} m ^ {k}}} = \\frac{2 n + 1}{m ^ {n}} \\binom{2 n}{n} ^ {3}",
+                    "start": "SUM(k, 0, n, ((8 - m / 8) * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * m ^ k)) = (2 * n + 1) / m ^ n * binom(2 * n,n) ^ 3",
+                    "steps": [
+                        {
+                            "fixes": [
+                                [
+                                    "n",
+                                    "$real"
+                                ],
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "\\lim\\limits_{n\\to \\infty} \\sum_{k=0}^{n}{\\frac{((8 - \\frac{m}{8}) k ^ {3} - 4 k ^ {2} - 2 k + 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} m ^ {k}}} = \\lim\\limits_{n\\to \\infty} (\\,\\frac{2 n + 1}{m ^ {n}} \\binom{2 n}{n} ^ {3}\\,)",
+                            "res": "(LIM {n -> oo}. SUM(k, 0, n, ((8 - m / 8) * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * m ^ k))) = (LIM {n -> oo}. (2 * n + 1) / m ^ n * binom(2 * n,n) ^ 3)",
+                            "rule": {
+                                "latex_str": "apply limit \\(n \\to \\infty\\) to equation",
+                                "lim": "oo",
+                                "name": "LimitEquation",
+                                "str": "apply limit n -> oo to equation",
+                                "var": "n"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "fixes": [
+                                [
+                                    "n",
+                                    "$real"
+                                ],
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "\\lim\\limits_{n\\to \\infty} \\sum_{k=0}^{n}{\\frac{(16 k ^ {3} - 4 k ^ {2} - 2 k + 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}} = \\lim\\limits_{n\\to \\infty} (\\,\\frac{2 n + 1}{(-64) ^ {n}} \\binom{2 n}{n} ^ {3}\\,)",
+                            "res": "(LIM {n -> oo}. SUM(k, 0, n, (16 * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))) = (LIM {n -> oo}. (2 * n + 1) / (-64) ^ n * binom(2 * n,n) ^ 3)",
+                            "rule": {
+                                "latex_str": "substitute \\(m\\) for \\(-64\\) in equation",
+                                "name": "VarSubsOfEquation",
+                                "str": "substitute m for -64 in equation",
+                                "subst": [
+                                    {
+                                        "expr": "-64",
+                                        "var": "m"
+                                    }
+                                ]
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "fixes": [
+                                [
+                                    "n",
+                                    "$real"
+                                ],
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "\\lim\\limits_{n\\to \\infty} \\sum_{k=0}^{n}{\\frac{(-64) ^ {-k} (-4 k ^ {2} + 16 k ^ {3} - 2 k + 1)}{(2 k - 1) ^ {2}} \\binom{2 k}{k} ^ {3}} = \\lim\\limits_{n\\to \\infty} (\\,(-64) ^ {-n} (2 n + 1) \\binom{2 n}{n} ^ {3}\\,)",
+                            "res": "(LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(4 * k ^ 2) + 16 * k ^ 3 - 2 * k + 1) / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3)) = (LIM {n -> oo}. (-64) ^ -n * (2 * n + 1) * binom(2 * n,n) ^ 3)",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "k >= 0",
+                    "latex_cond": "k \\ge 0"
+                }
+            ],
+            "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    {
+                        "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
+            "goal": "SUM(k, 0, oo, (16 * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) = 0",
+            "latex_goal": "\\sum_{k=0}^{\\infty}{\\frac{(16 k ^ {3} - 4 k ^ {2} - 2 k + 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}} = 0",
+            "obligations": [
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "(2 * k - 1) ^ 2 * (-64) ^ k != 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "k >= 0",
+                            "latex_cond": "k \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(k)",
+                            "latex_cond": "k \\in\\mathbb{Z}"
+                        }
+                    ]
+                }
+            ],
+            "proof": {
+                "calcs": [
+                    {
+                        "conds": [
+                            {
+                                "cond": "k >= 0",
+                                "latex_cond": "k \\ge 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
+                        "latex_start": "\\sum_{k=0}^{\\infty}{\\frac{(16 k ^ {3} - 4 k ^ {2} - 2 k + 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}}",
+                        "start": "SUM(k, 0, oo, (16 * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))",
+                        "steps": [
+                            {
+                                "fixes": [
+                                    [
+                                        "k",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{(-64) ^ {-k} (-4 k ^ {2} + 16 k ^ {3} - 2 k + 1)}{(2 k - 1) ^ {2}} \\binom{2 k}{k} ^ {3}}",
+                                "res": "SUM(k, 0, oo, (-64) ^ -k * (-(4 * k ^ 2) + 16 * k ^ 3 - 2 * k + 1) / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ],
+                                    [
+                                        "k",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} \\sum_{k=0}^{n}{\\frac{(-64) ^ {-k} (-4 k ^ {2} + 16 k ^ {3} - 2 k + 1)}{(2 k - 1) ^ {2}} \\binom{2 k}{k} ^ {3}}",
+                                "res": "LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(4 * k ^ 2) + 16 * k ^ 3 - 2 * k + 1) / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\sum_{k=0}^{\\infty}{\\frac{(-64) ^ {-k} (-4 k ^ {2} + 16 k ^ {3} - 2 k + 1)}{(2 k - 1) ^ {2}} \\binom{2 k}{k} ^ {3}}\\) to \\(\\lim\\limits_{n\\to \\infty} \\sum_{k=0}^{n}{\\frac{(-64) ^ {-k} (-4 k ^ {2} + 16 k ^ {3} - 2 k + 1)}{(2 k - 1) ^ {2}} \\binom{2 k}{k} ^ {3}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(4 * k ^ 2) + 16 * k ^ 3 - 2 * k + 1) / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3)",
+                                    "new_expr_fixes": [
+                                        [
+                                            "n",
+                                            {
+                                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                                "symbol_type": "binding",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
+                                    "old_expr": "SUM(k, 0, oo, (-64) ^ -k * (-(4 * k ^ 2) + 16 * k ^ 3 - 2 * k + 1) / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3)",
+                                    "str": "rewriting SUM(k, 0, oo, (-64) ^ -k * (-(4 * k ^ 2) + 16 * k ^ 3 - 2 * k + 1) / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3) to LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(4 * k ^ 2) + 16 * k ^ 3 - 2 * k + 1) / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,(-64) ^ {-n} (2 n + 1) \\binom{2 n}{n} ^ {3}\\,)",
+                                "res": "LIM {n -> oo}. (-64) ^ -n * (2 * n + 1) * binom(2 * n,n) ^ 3",
+                                "rule": {
+                                    "eq": "(LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(4 * k ^ 2) + 16 * k ^ 3 - 2 * k + 1) / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3)) = (LIM {n -> oo}. (-64) ^ -n * (2 * n + 1) * binom(2 * n,n) ^ 3)",
+                                    "eq_fixes": [
+                                        [
+                                            "m",
+                                            {
+                                                "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                                                "symbol_type": "var",
+                                                "type": "$int"
+                                            }
+                                        ],
+                                        [
+                                            "n",
+                                            {
+                                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                                "symbol_type": "binding",
+                                                "type": "$int"
+                                            }
+                                        ],
+                                        [
+                                            "k",
+                                            {
+                                                "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                                "symbol_type": "binding",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(\\lim\\limits_{n\\to \\infty} \\sum_{k=0}^{n}{\\frac{(-64) ^ {-k} (-4 k ^ {2} + 16 k ^ {3} - 2 k + 1)}{(2 k - 1) ^ {2}} \\binom{2 k}{k} ^ {3}} = \\lim\\limits_{n\\to \\infty} (\\,(-64) ^ {-n} (2 n + 1) \\binom{2 n}{n} ^ {3}\\,)\\)",
+                                    "name": "ApplyEquation",
+                                    "source": "LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(4 * k ^ 2) + 16 * k ^ 3 - 2 * k + 1) / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3)",
+                                    "str": "apply equation: (LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(4 * k ^ 2) + 16 * k ^ 3 - 2 * k + 1) / (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3)) = (LIM {n -> oo}. (-64) ^ -n * (2 * n + 1) * binom(2 * n,n) ^ 3)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,(-64) ^ {-n} (2 n + 1) (\\frac{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}} \\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\,)",
+                                "res": "LIM {n -> oo}. (-64) ^ -n * (2 * n + 1) * (4 ^ n / sqrt(n * pi) * binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\binom{2 n}{n}\\) to \\(\\frac{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}} \\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "4 ^ n / sqrt(n * pi) * binom(2 * n,n) / (4 ^ n / sqrt(n * pi))",
+                                    "old_expr": "binom(2 * n,n)",
+                                    "str": "rewriting binom(2 * n,n) to 4 ^ n / sqrt(n * pi) * binom(2 * n,n) / (4 ^ n / sqrt(n * pi))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,(-64) ^ {-n} (2 n + 1) ((\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3} (\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3})\\,)",
+                                "res": "LIM {n -> oo}. (-64) ^ -n * (2 * n + 1) * ((4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)",
+                                "rule": {
+                                    "latex_str": "rewrite \\((\\frac{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}} \\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\) to \\((\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3} (\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "(4 ^ n / sqrt(n * pi) * binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3",
+                                    "str": "rewrite (4 ^ n / sqrt(n * pi) * binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3 to (4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3 using identity",
+                                    "target": "(4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,\\frac{2 n + 1}{(-64) ^ {n}} (\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3} (\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\,)",
+                                "res": "LIM {n -> oo}. (2 * n + 1) / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3",
+                                "rule": {
+                                    "latex_str": "rewriting \\((-64) ^ {-n} (2 n + 1) ((\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3} (\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3})\\) to \\(\\frac{2 n + 1}{(-64) ^ {n}} (\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3} (\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(2 * n + 1) / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3",
+                                    "old_expr": "(-64) ^ -n * (2 * n + 1) * ((4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)",
+                                    "str": "rewriting (-64) ^ -n * (2 * n + 1) * ((4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3) to (2 * n + 1) / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "(\\lim\\limits_{n\\to \\infty} (\\,\\frac{2 n + 1}{(-64) ^ {n}} (\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3}\\,)) (\\lim\\limits_{n\\to \\infty} (\\,(\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\,))",
+                                "res": "(LIM {n -> oo}. (2 * n + 1) / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3) * (LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\lim\\limits_{n\\to \\infty} (\\,\\frac{2 n + 1}{(-64) ^ {n}} (\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3} (\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\,)\\) to \\((\\lim\\limits_{n\\to \\infty} (\\,\\frac{2 n + 1}{(-64) ^ {n}} (\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3}\\,)) (\\lim\\limits_{n\\to \\infty} (\\,(\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\,))\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(LIM {n -> oo}. (2 * n + 1) / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3) * (LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)",
+                                    "old_expr": "LIM {n -> oo}. (2 * n + 1) / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3",
+                                    "str": "rewriting LIM {n -> oo}. (2 * n + 1) / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3 to (LIM {n -> oo}. (2 * n + 1) / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3) * (LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "(\\lim\\limits_{n\\to \\infty} (\\,\\frac{(-64) ^ {-n} 4 ^ {3 n} (2 n + 1)}{n ^ {3/2}\\cdot \\pi ^ {3/2}}\\,)) (\\lim\\limits_{n\\to \\infty} (\\,(\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\,))",
+                                "res": "(LIM {n -> oo}. (-64) ^ -n * 4 ^ (3 * n) * (2 * n + 1) / (n ^ (3/2) * pi ^ (3/2))) * (LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)",
+                                "rule": {
+                                    "loc": "0.0",
+                                    "name": "FullSimplify",
+                                    "str": "full simplify at 0.0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "(\\lim\\limits_{n\\to \\infty} (\\,\\frac{(-64) ^ {-n} 4 ^ {3 n} (2 n + 1)}{(n\\cdot \\pi) ^ {3/2}}\\,)) (\\lim\\limits_{n\\to \\infty} (\\,(\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\,))",
+                                "res": "(LIM {n -> oo}. (-64) ^ -n * 4 ^ (3 * n) * (2 * n + 1) / (n * pi) ^ (3/2)) * (LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)",
+                                "rule": {
+                                    "latex_str": "rewrite \\(n ^ {3/2}\\cdot \\pi ^ {3/2}\\) to \\((n\\cdot \\pi) ^ {3/2}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "n ^ (3/2) * pi ^ (3/2)",
+                                    "str": "rewrite n ^ (3/2) * pi ^ (3/2) to (n * pi) ^ (3/2) using identity",
+                                    "target": "(n * pi) ^ (3/2)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "(\\lim\\limits_{n\\to \\infty} (\\,\\frac{(-64) ^ {-n} 64 ^ {n} (2 n + 1)}{(n\\cdot \\pi) ^ {3/2}}\\,)) (\\lim\\limits_{n\\to \\infty} (\\,(\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\,))",
+                                "res": "(LIM {n -> oo}. (-64) ^ -n * 64 ^ n * (2 * n + 1) / (n * pi) ^ (3/2)) * (LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)",
+                                "rule": {
+                                    "latex_str": "rewrite \\(4 ^ {3 n}\\) to \\(64 ^ {n}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "4 ^ (3 * n)",
+                                    "str": "rewrite 4 ^ (3 * n) to 64 ^ n using identity",
+                                    "target": "64 ^ n"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "(\\lim\\limits_{n\\to \\infty} (\\,\\frac{(-\\frac{1}{64}) ^ {n} 64 ^ {n} (2 n + 1)}{(n\\cdot \\pi) ^ {3/2}}\\,)) (\\lim\\limits_{n\\to \\infty} (\\,(\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\,))",
+                                "res": "(LIM {n -> oo}. (-1/64) ^ n * 64 ^ n * (2 * n + 1) / (n * pi) ^ (3/2)) * (LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)",
+                                "rule": {
+                                    "latex_str": "rewrite \\((-64) ^ {-n}\\) to \\((-\\frac{1}{64}) ^ {n}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "(-64) ^ -n",
+                                    "str": "rewrite (-64) ^ -n to (-1/64) ^ n using identity",
+                                    "target": "(-1/64) ^ n"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "(\\lim\\limits_{n\\to \\infty} (\\,\\frac{(-1) ^ {n} (2 n + 1)}{(n\\cdot \\pi) ^ {3/2}}\\,)) (\\lim\\limits_{n\\to \\infty} (\\,(\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\,))",
+                                "res": "(LIM {n -> oo}. (-1) ^ n * (2 * n + 1) / (n * pi) ^ (3/2)) * (LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)",
+                                "rule": {
+                                    "latex_str": "rewrite \\((-\\frac{1}{64}) ^ {n} 64 ^ {n}\\) to \\((-1) ^ {n}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "(-1/64) ^ n * 64 ^ n",
+                                    "str": "rewrite (-1/64) ^ n * 64 ^ n to (-1) ^ n using identity",
+                                    "target": "(-1) ^ n"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "0 (\\lim\\limits_{n\\to \\infty} (\\,(\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\,))",
+                                "res": "0 * (LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)",
+                                "rule": {
+                                    "loc": "0",
+                                    "name": "FullSimplify",
+                                    "str": "full simplify at 0"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "0 (\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}\\,)) ^ {3}",
+                                "res": "0 * (LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\lim\\limits_{n\\to \\infty} (\\,(\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\,)\\) to \\((\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}\\,)) ^ {3}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3",
+                                    "old_expr": "LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3",
+                                    "str": "rewriting LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3 to (LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "0\\cdot 1 ^ {3}",
+                                "res": "0 * 1 ^ 3",
+                                "rule": {
+                                    "eq": "(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) = 1",
+                                    "eq_fixes": [
+                                        [
+                                            "n",
+                                            {
+                                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                                "symbol_type": "binding",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}\\,) = 1\\)",
+                                    "name": "ApplyEquation",
+                                    "source": "LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))",
+                                    "str": "apply equation: (LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) = 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "0",
+                                "res": "0",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "conds": [
+                            {
+                                "cond": "k >= 0",
+                                "latex_cond": "k \\ge 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
+                        "latex_start": "0",
+                        "start": "0",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "SUM(k, 0, oo, (16 * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) = 0",
+                "latex_goal": "\\sum_{k=0}^{\\infty}{\\frac{(16 k ^ {3} - 4 k ^ {2} - 2 k + 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}} = 0",
+                "type": "CalculationProof"
+            },
+            "type": "Goal",
+            "wellformed": false
+        },
+        {
+            "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    {
+                        "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
+            "goal": "SUM(k, 0, oo, k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) = -1 / pi",
+            "latex_goal": "\\sum_{k=0}^{\\infty}{\\frac{k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}} = \\frac{-1}{\\pi}",
+            "obligations": [
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "(2 * k - 1) ^ 2 * (-64) ^ k != 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "k >= 0",
+                            "latex_cond": "k \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(k)",
+                            "latex_cond": "k \\in\\mathbb{Z}"
+                        }
+                    ]
+                }
+            ],
+            "proof": {
+                "begin_label": "3.",
+                "finished": true,
+                "goal": "SUM(k, 0, oo, k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) = -1 / pi",
+                "latex_goal": "\\sum_{k=0}^{\\infty}{\\frac{k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}} = \\frac{-1}{\\pi}",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "k >= 0",
+                            "latex_cond": "k \\ge 0"
+                        }
+                    ],
+                    "fixes": [
+                        [
+                            "k",
+                            {
+                                "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
+                        ]
+                    ],
+                    "latex_start": "\\sum_{k=0}^{\\infty}{\\frac{(16 k ^ {3} - 4 k ^ {2} - 2 k + 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}} = 0",
+                    "start": "SUM(k, 0, oo, (16 * k ^ 3 - 4 * k ^ 2 - 2 * k + 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) = 0",
+                    "steps": [
+                        {
+                            "fixes": [
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{((4 k + 1) (2 k - 1) ^ {2} + 2 k (4 k - 1)) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}} = 0",
+                            "res": "SUM(k, 0, oo, ((4 * k + 1) * (2 * k - 1) ^ 2 + 2 * k * (4 * k - 1)) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) = 0",
+                            "rule": {
+                                "latex_str": "rewriting \\(16 k ^ {3} - 4 k ^ {2} - 2 k + 1\\) to \\((4 k + 1) (2 k - 1) ^ {2} + 2 k (4 k - 1)\\)",
+                                "name": "Equation",
+                                "new_expr": "(4 * k + 1) * (2 * k - 1) ^ 2 + 2 * k * (4 * k - 1)",
+                                "old_expr": "16 * k ^ 3 - 4 * k ^ 2 - 2 * k + 1",
+                                "str": "rewriting 16 * k ^ 3 - 4 * k ^ 2 - 2 * k + 1 to (4 * k + 1) * (2 * k - 1) ^ 2 + 2 * k * (4 * k - 1)"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "fixes": [
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{(4 k + 1) (2 k - 1) ^ {2} \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}} + \\frac{2 k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}} = 0",
+                            "res": "SUM(k, 0, oo, (4 * k + 1) * (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k) + 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) = 0",
+                            "rule": {
+                                "latex_str": "rewriting \\(\\frac{((4 k + 1) (2 k - 1) ^ {2} + 2 k (4 k - 1)) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}\\) to \\(\\frac{(4 k + 1) (2 k - 1) ^ {2} \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}} + \\frac{2 k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}\\)",
+                                "name": "Equation",
+                                "new_expr": "(4 * k + 1) * (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k) + 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)",
+                                "old_expr": "((4 * k + 1) * (2 * k - 1) ^ 2 + 2 * k * (4 * k - 1)) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)",
+                                "str": "rewriting ((4 * k + 1) * (2 * k - 1) ^ 2 + 2 * k * (4 * k - 1)) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k) to (4 * k + 1) * (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k) + 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "fixes": [
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{(4 k + 1) \\binom{2 k}{k} ^ {3}}{(-64) ^ {k}} + \\frac{2 k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}} = 0",
+                            "res": "SUM(k, 0, oo, (4 * k + 1) * binom(2 * k,k) ^ 3 / (-64) ^ k + 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) = 0",
+                            "rule": {
+                                "latex_str": "rewriting \\(\\frac{(4 k + 1) (2 k - 1) ^ {2} \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}\\) to \\(\\frac{(4 k + 1) \\binom{2 k}{k} ^ {3}}{(-64) ^ {k}}\\)",
+                                "name": "Equation",
+                                "new_expr": "(4 * k + 1) * binom(2 * k,k) ^ 3 / (-64) ^ k",
+                                "old_expr": "(4 * k + 1) * (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)",
+                                "str": "rewriting (4 * k + 1) * (2 * k - 1) ^ 2 * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k) to (4 * k + 1) * binom(2 * k,k) ^ 3 / (-64) ^ k"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "fixes": [
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{(4 k + 1) \\binom{2 k}{k} ^ {3}}{(-64) ^ {k}}} + \\sum_{k=0}^{\\infty}{\\frac{2 k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}} = 0",
+                            "res": "SUM(k, 0, oo, (4 * k + 1) * binom(2 * k,k) ^ 3 / (-64) ^ k) + SUM(k, 0, oo, 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) = 0",
+                            "rule": {
+                                "latex_str": "rewriting \\(\\sum_{k=0}^{\\infty}{\\frac{(4 k + 1) \\binom{2 k}{k} ^ {3}}{(-64) ^ {k}} + \\frac{2 k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}}\\) to \\(\\sum_{k=0}^{\\infty}{\\frac{(4 k + 1) \\binom{2 k}{k} ^ {3}}{(-64) ^ {k}}} + \\sum_{k=0}^{\\infty}{\\frac{2 k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}}\\)",
+                                "name": "Equation",
+                                "new_expr": "SUM(k, 0, oo, (4 * k + 1) * binom(2 * k,k) ^ 3 / (-64) ^ k) + SUM(k, 0, oo, 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))",
+                                "old_expr": "SUM(k, 0, oo, (4 * k + 1) * binom(2 * k,k) ^ 3 / (-64) ^ k + 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))",
+                                "str": "rewriting SUM(k, 0, oo, (4 * k + 1) * binom(2 * k,k) ^ 3 / (-64) ^ k + 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) to SUM(k, 0, oo, (4 * k + 1) * binom(2 * k,k) ^ 3 / (-64) ^ k) + SUM(k, 0, oo, 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "fixes": [
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "\\frac{2}{\\pi} + \\sum_{k=0}^{\\infty}{\\frac{2 k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}} = 0",
+                            "res": "2 / pi + SUM(k, 0, oo, 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) = 0",
+                            "rule": {
+                                "loc": "0.0",
+                                "name": "SeriesEvaluationIdentity",
+                                "str": "apply series evaluation at 0.0"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "fixes": [
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "\\frac{2}{\\pi} + 2 \\sum_{k=0}^{\\infty}{\\frac{k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}} = 0",
+                            "res": "2 / pi + 2 * SUM(k, 0, oo, k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) = 0",
+                            "rule": {
+                                "latex_str": "rewriting \\(\\sum_{k=0}^{\\infty}{\\frac{2 k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}}\\) to \\(2 \\sum_{k=0}^{\\infty}{\\frac{k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}}\\)",
+                                "name": "Equation",
+                                "new_expr": "2 * SUM(k, 0, oo, k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))",
+                                "old_expr": "SUM(k, 0, oo, 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))",
+                                "str": "rewriting SUM(k, 0, oo, 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) to 2 * SUM(k, 0, oo, k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "fixes": [
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}} = -\\frac{1}{\\pi}",
+                            "res": "SUM(k, 0, oo, k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) = -(1 / pi)",
+                            "rule": {
+                                "latex_str": "solve equation for \\(\\sum_{k=0}^{\\infty}{\\frac{k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}}\\)",
+                                "name": "SolveEquation",
+                                "solve_for": "SUM(k, 0, oo, k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))",
+                                "str": "solve equation for SUM(k, 0, oo, k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal",
+            "wellformed": false
+        },
+        {
+            "conds": [
+                {
+                    "cond": "m != 0",
+                    "latex_cond": "m \\neq 0"
+                },
+                {
+                    "cond": "n >= 0",
+                    "latex_cond": "n \\ge 0"
+                }
+            ],
+            "finished": true,
+            "fixes": [
+                [
+                    "m",
+                    {
+                        "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ],
+                [
+                    "n",
+                    {
+                        "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ],
+                [
+                    "k",
+                    {
+                        "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
+            "goal": "SUM(k, 0, n, ((8 - m / 8) * k ^ 3 - 12 * k ^ 2 + 6 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * m ^ k)) = 1 / m ^ n * binom(2 * n,n) ^ 3",
+            "latex_goal": "\\sum_{k=0}^{n}{\\frac{((8 - \\frac{m}{8}) k ^ {3} - 12 k ^ {2} + 6 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} m ^ {k}}} = \\frac{1}{m ^ {n}} \\binom{2 n}{n} ^ {3}",
+            "obligations": [
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "(2 * k - 1) ^ 3 * m ^ k != 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "m != 0",
+                            "latex_cond": "m \\neq 0"
+                        },
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        },
+                        {
+                            "cond": "k >= 0",
+                            "latex_cond": "k \\ge 0"
+                        },
+                        {
+                            "cond": "k <= n",
+                            "latex_cond": "k \\le n"
+                        },
+                        {
+                            "cond": "n - k >= 0",
+                            "latex_cond": "n - k \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(k)",
+                            "latex_cond": "k \\in\\mathbb{Z}"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "m > 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "m != 0",
+                            "latex_cond": "m \\neq 0"
+                        },
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "isInt(n)"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "m != 0",
+                            "latex_cond": "m \\neq 0"
+                        },
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        }
+                    ]
+                },
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "n >= 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "m != 0",
+                            "latex_cond": "m \\neq 0"
+                        },
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        }
+                    ]
+                }
+            ],
+            "proof": {
+                "base_case": {
+                    "conds": [
+                        {
+                            "cond": "m != 0",
+                            "latex_cond": "m \\neq 0"
+                        },
+                        {
+                            "cond": "0 >= 0",
+                            "latex_cond": "0 \\ge 0"
+                        }
+                    ],
+                    "finished": true,
+                    "fixes": [
+                        [
+                            "m",
+                            {
+                                "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
+                        ],
+                        [
+                            "n",
+                            {
+                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
+                        ],
+                        [
+                            "k",
+                            {
+                                "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
+                        ]
+                    ],
+                    "goal": "1 = 1",
+                    "latex_goal": "1 = 1",
+                    "proof": {
+                        "calcs": [
+                            {
+                                "conds": [
+                                    {
+                                        "cond": "m != 0",
+                                        "latex_cond": "m \\neq 0"
+                                    },
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "k",
+                                        {
+                                            "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
+                                "latex_start": "1",
+                                "start": "1",
+                                "steps": [],
+                                "type": "Calculation"
+                            },
+                            {
+                                "conds": [
+                                    {
+                                        "cond": "m != 0",
+                                        "latex_cond": "m \\neq 0"
+                                    },
+                                    {
+                                        "cond": "0 >= 0",
+                                        "latex_cond": "0 \\ge 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "k",
+                                        {
+                                            "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
+                                "latex_start": "1",
+                                "start": "1",
+                                "steps": [],
+                                "type": "Calculation"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "1 = 1",
+                        "latex_goal": "1 = 1",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal"
+                },
+                "finished": true,
+                "goal": "SUM(k, 0, n, ((8 - m / 8) * k ^ 3 - 12 * k ^ 2 + 6 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * m ^ k)) = 1 / m ^ n * binom(2 * n,n) ^ 3",
+                "induct_case": {
+                    "conds": [
+                        {
+                            "cond": "m != 0",
+                            "latex_cond": "m \\neq 0"
+                        },
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        }
+                    ],
+                    "finished": true,
+                    "fixes": [
+                        [
+                            "m",
+                            {
+                                "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
+                        ],
+                        [
+                            "n",
+                            {
+                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
+                        ],
+                        [
+                            "k",
+                            {
+                                "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
+                        ]
+                    ],
+                    "goal": "SUM(k, 0, n + 1, m ^ -k / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3 * (k ^ 3 * (-(m / 8) + 8) - 12 * k ^ 2 + 6 * k - 1)) = m ^ (-n - 1) * binom(2 * n + 2,n + 1) ^ 3",
+                    "latex_goal": "\\sum_{k=0}^{n + 1}{\\frac{m ^ {-k}}{(2 k - 1) ^ {3}} \\binom{2 k}{k} ^ {3} (k ^ {3} (-\\frac{m}{8} + 8) - 12 k ^ {2} + 6 k - 1)} = m ^ {-n - 1} \\binom{2 n + 2}{n + 1} ^ {3}",
+                    "obligations": [
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "m > 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "m != 0",
+                                    "latex_cond": "m \\neq 0"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "k >= 0",
+                                    "latex_cond": "k \\ge 0"
+                                },
+                                {
+                                    "cond": "k <= n + 1",
+                                    "latex_cond": "k \\le n + 1"
+                                },
+                                {
+                                    "cond": "n + 1 - k >= 0",
+                                    "latex_cond": "n + 1 - k \\ge 0"
+                                },
+                                {
+                                    "cond": "isInt(k)",
+                                    "latex_cond": "k \\in\\mathbb{Z}"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "isInt(-k)"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "m != 0",
+                                    "latex_cond": "m \\neq 0"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "k >= 0",
+                                    "latex_cond": "k \\ge 0"
+                                },
+                                {
+                                    "cond": "k <= n + 1",
+                                    "latex_cond": "k \\le n + 1"
+                                },
+                                {
+                                    "cond": "n + 1 - k >= 0",
+                                    "latex_cond": "n + 1 - k \\ge 0"
+                                },
+                                {
+                                    "cond": "isInt(k)",
+                                    "latex_cond": "k \\in\\mathbb{Z}"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "-k >= 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "m != 0",
+                                    "latex_cond": "m \\neq 0"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "k >= 0",
+                                    "latex_cond": "k \\ge 0"
+                                },
+                                {
+                                    "cond": "k <= n + 1",
+                                    "latex_cond": "k \\le n + 1"
+                                },
+                                {
+                                    "cond": "n + 1 - k >= 0",
+                                    "latex_cond": "n + 1 - k \\ge 0"
+                                },
+                                {
+                                    "cond": "isInt(k)",
+                                    "latex_cond": "k \\in\\mathbb{Z}"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "(2 * k - 1) ^ 3 != 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "m != 0",
+                                    "latex_cond": "m \\neq 0"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                },
+                                {
+                                    "cond": "k >= 0",
+                                    "latex_cond": "k \\ge 0"
+                                },
+                                {
+                                    "cond": "k <= n + 1",
+                                    "latex_cond": "k \\le n + 1"
+                                },
+                                {
+                                    "cond": "n + 1 - k >= 0",
+                                    "latex_cond": "n + 1 - k \\ge 0"
+                                },
+                                {
+                                    "cond": "isInt(k)",
+                                    "latex_cond": "k \\in\\mathbb{Z}"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "m > 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "m != 0",
+                                    "latex_cond": "m \\neq 0"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "isInt(-n - 1)"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "m != 0",
+                                    "latex_cond": "m \\neq 0"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                }
+                            ]
+                        },
+                        {
+                            "branches": [
+                                {
+                                    "exprs": [
+                                        "-n - 1 >= 0"
+                                    ]
+                                }
+                            ],
+                            "conds": [
+                                {
+                                    "cond": "m != 0",
+                                    "latex_cond": "m \\neq 0"
+                                },
+                                {
+                                    "cond": "n >= 0",
+                                    "latex_cond": "n \\ge 0"
+                                }
+                            ]
+                        }
+                    ],
+                    "proof": {
+                        "calcs": [
+                            {
+                                "conds": [
+                                    {
+                                        "cond": "m != 0",
+                                        "latex_cond": "m \\neq 0"
+                                    },
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "k",
+                                        {
+                                            "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
+                                "latex_start": "\\sum_{k=0}^{n + 1}{\\frac{m ^ {-k}}{(2 k - 1) ^ {3}} \\binom{2 k}{k} ^ {3} (k ^ {3} (-\\frac{m}{8} + 8) - 12 k ^ {2} + 6 k - 1)}",
+                                "start": "SUM(k, 0, n + 1, m ^ -k / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3 * (k ^ 3 * (-(m / 8) + 8) - 12 * k ^ 2 + 6 * k - 1))",
+                                "steps": [
+                                    {
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\sum_{i=0}^{n}{\\frac{m ^ {-i}}{(2 i - 1) ^ {3}} \\binom{2 i}{i} ^ {3} (i ^ {3} (-\\frac{m}{8} + 8) - 12 i ^ {2} + 6 i - 1)} + \\sum_{i=n + 1}^{n + 1}{\\frac{m ^ {-i}}{(2 i - 1) ^ {3}} \\binom{2 i}{i} ^ {3} (i ^ {3} (-\\frac{m}{8} + 8) - 12 i ^ {2} + 6 i - 1)}",
+                                        "res": "SUM(i, 0, n, m ^ -i / (2 * i - 1) ^ 3 * binom(2 * i,i) ^ 3 * (i ^ 3 * (-(m / 8) + 8) - 12 * i ^ 2 + 6 * i - 1)) + SUM(i, n + 1, n + 1, m ^ -i / (2 * i - 1) ^ 3 * binom(2 * i,i) ^ 3 * (i ^ 3 * (-(m / 8) + 8) - 12 * i ^ 2 + 6 * i - 1))",
+                                        "rule": {
+                                            "cond": "k <= n",
+                                            "latex_str": "split item on \\(k \\le n\\)",
+                                            "name": "SplitItem",
+                                            "str": "split item on k <= n"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\sum_{i=0}^{n}{\\frac{m ^ {-i}}{(2 i - 1) ^ {3}} \\binom{2 i}{i} ^ {3} (i ^ {3} (-\\frac{m}{8} + 8) - 12 i ^ {2} + 6 i - 1)} + \\frac{m ^ {-n - 1}}{(2 n + 1) ^ {3}} \\binom{2 n + 2}{n + 1} ^ {3} ((n + 1) ^ {3} (-\\frac{m}{8} + 8) - 12 (n + 1) ^ {2} + 6 n + 5)",
+                                        "res": "SUM(i, 0, n, m ^ -i / (2 * i - 1) ^ 3 * binom(2 * i,i) ^ 3 * (i ^ 3 * (-(m / 8) + 8) - 12 * i ^ 2 + 6 * i - 1)) + m ^ (-n - 1) / (2 * n + 1) ^ 3 * binom(2 * n + 2,n + 1) ^ 3 * ((n + 1) ^ 3 * (-(m / 8) + 8) - 12 * (n + 1) ^ 2 + 6 * n + 5)",
+                                        "rule": {
+                                            "loc": "1",
+                                            "name": "FullSimplify",
+                                            "str": "full simplify at 1"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "fixes": [
+                                            [
+                                                "i",
+                                                "$int"
+                                            ]
+                                        ],
+                                        "latex_res": "\\sum_{i=0}^{n}{\\frac{((8 - \\frac{m}{8}) i ^ {3} - 12 i ^ {2} + 6 i - 1) \\binom{2 i}{i} ^ {3}}{(2 i - 1) ^ {3} m ^ {i}}} + \\frac{m ^ {-n - 1}}{(2 n + 1) ^ {3}} \\binom{2 n + 2}{n + 1} ^ {3} ((n + 1) ^ {3} (-\\frac{m}{8} + 8) - 12 (n + 1) ^ {2} + 6 n + 5)",
+                                        "res": "SUM(i, 0, n, ((8 - m / 8) * i ^ 3 - 12 * i ^ 2 + 6 * i - 1) * binom(2 * i,i) ^ 3 / ((2 * i - 1) ^ 3 * m ^ i)) + m ^ (-n - 1) / (2 * n + 1) ^ 3 * binom(2 * n + 2,n + 1) ^ 3 * ((n + 1) ^ 3 * (-(m / 8) + 8) - 12 * (n + 1) ^ 2 + 6 * n + 5)",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(\\frac{m ^ {-i}}{(2 i - 1) ^ {3}} \\binom{2 i}{i} ^ {3} (i ^ {3} (-\\frac{m}{8} + 8) - 12 i ^ {2} + 6 i - 1)\\) to \\(\\frac{((8 - \\frac{m}{8}) i ^ {3} - 12 i ^ {2} + 6 i - 1) \\binom{2 i}{i} ^ {3}}{(2 i - 1) ^ {3} m ^ {i}}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "((8 - m / 8) * i ^ 3 - 12 * i ^ 2 + 6 * i - 1) * binom(2 * i,i) ^ 3 / ((2 * i - 1) ^ 3 * m ^ i)",
+                                            "old_expr": "m ^ -i / (2 * i - 1) ^ 3 * binom(2 * i,i) ^ 3 * (i ^ 3 * (-(m / 8) + 8) - 12 * i ^ 2 + 6 * i - 1)",
+                                            "str": "rewriting m ^ -i / (2 * i - 1) ^ 3 * binom(2 * i,i) ^ 3 * (i ^ 3 * (-(m / 8) + 8) - 12 * i ^ 2 + 6 * i - 1) to ((8 - m / 8) * i ^ 3 - 12 * i ^ 2 + 6 * i - 1) * binom(2 * i,i) ^ 3 / ((2 * i - 1) ^ 3 * m ^ i)"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{1}{m ^ {n}} \\binom{2 n}{n} ^ {3} + \\frac{m ^ {-n - 1}}{(2 n + 1) ^ {3}} \\binom{2 n + 2}{n + 1} ^ {3} ((n + 1) ^ {3} (-\\frac{m}{8} + 8) - 12 (n + 1) ^ {2} + 6 n + 5)",
+                                        "res": "1 / m ^ n * binom(2 * n,n) ^ 3 + m ^ (-n - 1) / (2 * n + 1) ^ 3 * binom(2 * n + 2,n + 1) ^ 3 * ((n + 1) ^ 3 * (-(m / 8) + 8) - 12 * (n + 1) ^ 2 + 6 * n + 5)",
+                                        "rule": {
+                                            "loc": "0",
+                                            "name": "ApplyInductHyp",
+                                            "str": "apply induction hypothesis at 0"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{1}{m ^ {n}} (\\frac{n + 1}{2 (2 n + 1)} \\binom{2 n + 2}{n + 1}) ^ {3} + \\frac{m ^ {-n - 1}}{(2 n + 1) ^ {3}} \\binom{2 n + 2}{n + 1} ^ {3} ((n + 1) ^ {3} (-\\frac{m}{8} + 8) - 12 (n + 1) ^ {2} + 6 n + 5)",
+                                        "res": "1 / m ^ n * ((n + 1) / (2 * (2 * n + 1)) * binom(2 * n + 2,n + 1)) ^ 3 + m ^ (-n - 1) / (2 * n + 1) ^ 3 * binom(2 * n + 2,n + 1) ^ 3 * ((n + 1) ^ 3 * (-(m / 8) + 8) - 12 * (n + 1) ^ 2 + 6 * n + 5)",
+                                        "rule": {
+                                            "eq": "binom(2 * k,k) = (k + 1) / (2 * (2 * k + 1)) * binom(2 * k + 2,k + 1)",
+                                            "latex_str": "apply equation \\(\\binom{2 k}{k} = \\frac{k + 1}{2 (2 k + 1)} \\binom{2 k + 2}{k + 1}\\) at 0.1.0",
+                                            "loc": "0.1.0",
+                                            "name": "ApplyEquation",
+                                            "source": "binom(2 * n,n)",
+                                            "str": "apply equation: binom(2 * k,k) = (k + 1) / (2 * (2 * k + 1)) * binom(2 * k + 2,k + 1) at 0.1.0"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{\\frac{m}{8} (n + 1) ^ {3}}{(2 n + 1) ^ {3} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3} + \\frac{m ^ {-n - 1}}{(2 n + 1) ^ {3}} \\binom{2 n + 2}{n + 1} ^ {3} ((n + 1) ^ {3} (-\\frac{m}{8} + 8) - 12 (n + 1) ^ {2} + 6 n + 5)",
+                                        "res": "m / 8 * (n + 1) ^ 3 / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3 + m ^ (-n - 1) / (2 * n + 1) ^ 3 * binom(2 * n + 2,n + 1) ^ 3 * ((n + 1) ^ 3 * (-(m / 8) + 8) - 12 * (n + 1) ^ 2 + 6 * n + 5)",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(\\frac{1}{m ^ {n}} (\\frac{n + 1}{2 (2 n + 1)} \\binom{2 n + 2}{n + 1}) ^ {3}\\) to \\(\\frac{\\frac{m}{8} (n + 1) ^ {3}}{(2 n + 1) ^ {3} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "m / 8 * (n + 1) ^ 3 / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3",
+                                            "old_expr": "1 / m ^ n * ((n + 1) / (2 * (2 * n + 1)) * binom(2 * n + 2,n + 1)) ^ 3",
+                                            "str": "rewriting 1 / m ^ n * ((n + 1) / (2 * (2 * n + 1)) * binom(2 * n + 2,n + 1)) ^ 3 to m / 8 * (n + 1) ^ 3 / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{\\frac{m}{8} (n + 1) ^ {3}}{(2 n + 1) ^ {3} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3} + \\frac{(8 - \\frac{m}{8}) (n + 1) ^ {3} - 12 (n + 1) ^ {2} + 6 n + 5}{(2 n + 1) ^ {3} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3}",
+                                        "res": "m / 8 * (n + 1) ^ 3 / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3 + ((8 - m / 8) * (n + 1) ^ 3 - 12 * (n + 1) ^ 2 + 6 * n + 5) / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(\\frac{m ^ {-n - 1}}{(2 n + 1) ^ {3}} \\binom{2 n + 2}{n + 1} ^ {3} ((n + 1) ^ {3} (-\\frac{m}{8} + 8) - 12 (n + 1) ^ {2} + 6 n + 5)\\) to \\(\\frac{(8 - \\frac{m}{8}) (n + 1) ^ {3} - 12 (n + 1) ^ {2} + 6 n + 5}{(2 n + 1) ^ {3} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "((8 - m / 8) * (n + 1) ^ 3 - 12 * (n + 1) ^ 2 + 6 * n + 5) / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3",
+                                            "old_expr": "m ^ (-n - 1) / (2 * n + 1) ^ 3 * binom(2 * n + 2,n + 1) ^ 3 * ((n + 1) ^ 3 * (-(m / 8) + 8) - 12 * (n + 1) ^ 2 + 6 * n + 5)",
+                                            "str": "rewriting m ^ (-n - 1) / (2 * n + 1) ^ 3 * binom(2 * n + 2,n + 1) ^ 3 * ((n + 1) ^ 3 * (-(m / 8) + 8) - 12 * (n + 1) ^ 2 + 6 * n + 5) to ((8 - m / 8) * (n + 1) ^ 3 - 12 * (n + 1) ^ 2 + 6 * n + 5) / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{8 (n + 1) ^ {3} - 12 (n + 1) ^ {2} + 6 n + 5}{(2 n + 1) ^ {3} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3}",
+                                        "res": "(8 * (n + 1) ^ 3 - 12 * (n + 1) ^ 2 + 6 * n + 5) / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(\\frac{\\frac{m}{8} (n + 1) ^ {3}}{(2 n + 1) ^ {3} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3} + \\frac{(8 - \\frac{m}{8}) (n + 1) ^ {3} - 12 (n + 1) ^ {2} + 6 n + 5}{(2 n + 1) ^ {3} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3}\\) to \\(\\frac{8 (n + 1) ^ {3} - 12 (n + 1) ^ {2} + 6 n + 5}{(2 n + 1) ^ {3} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "(8 * (n + 1) ^ 3 - 12 * (n + 1) ^ 2 + 6 * n + 5) / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3",
+                                            "old_expr": "m / 8 * (n + 1) ^ 3 / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3 + ((8 - m / 8) * (n + 1) ^ 3 - 12 * (n + 1) ^ 2 + 6 * n + 5) / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3",
+                                            "str": "rewriting m / 8 * (n + 1) ^ 3 / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3 + ((8 - m / 8) * (n + 1) ^ 3 - 12 * (n + 1) ^ 2 + 6 * n + 5) / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3 to (8 * (n + 1) ^ 3 - 12 * (n + 1) ^ 2 + 6 * n + 5) / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "\\frac{(2 n + 1) ^ {3}}{(2 n + 1) ^ {3} m ^ {n + 1}} \\binom{2 n + 2}{n + 1} ^ {3}",
+                                        "res": "(2 * n + 1) ^ 3 / ((2 * n + 1) ^ 3 * m ^ (n + 1)) * binom(2 * n + 2,n + 1) ^ 3",
+                                        "rule": {
+                                            "latex_str": "rewriting \\(8 (n + 1) ^ {3} - 12 (n + 1) ^ {2} + 6 n + 5\\) to \\((2 n + 1) ^ {3}\\)",
+                                            "name": "Equation",
+                                            "new_expr": "(2 * n + 1) ^ 3",
+                                            "old_expr": "8 * (n + 1) ^ 3 - 12 * (n + 1) ^ 2 + 6 * n + 5",
+                                            "str": "rewriting 8 * (n + 1) ^ 3 - 12 * (n + 1) ^ 2 + 6 * n + 5 to (2 * n + 1) ^ 3"
+                                        },
+                                        "type": "CalculationStep"
+                                    },
+                                    {
+                                        "latex_res": "m ^ {-n - 1} \\binom{2 n + 2}{n + 1} ^ {3}",
+                                        "res": "m ^ (-n - 1) * binom(2 * n + 2,n + 1) ^ 3",
+                                        "rule": {
+                                            "name": "FullSimplify",
+                                            "str": "full simplify"
+                                        },
+                                        "type": "CalculationStep"
+                                    }
+                                ],
+                                "type": "Calculation"
+                            },
+                            {
+                                "conds": [
+                                    {
+                                        "cond": "m != 0",
+                                        "latex_cond": "m \\neq 0"
+                                    },
+                                    {
+                                        "cond": "n >= 0",
+                                        "latex_cond": "n \\ge 0"
+                                    }
+                                ],
+                                "fixes": [
+                                    [
+                                        "m",
+                                        {
+                                            "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "n",
+                                        {
+                                            "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ],
+                                    [
+                                        "k",
+                                        {
+                                            "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                            "symbol_type": "binding",
+                                            "type": "$int"
+                                        }
+                                    ]
+                                ],
+                                "latex_start": "m ^ {-n - 1} \\binom{2 n + 2}{n + 1} ^ {3}",
+                                "start": "m ^ (-n - 1) * binom(2 * n + 2,n + 1) ^ 3",
+                                "steps": [],
+                                "type": "Calculation"
+                            }
+                        ],
+                        "finished": true,
+                        "goal": "SUM(k, 0, n + 1, m ^ -k / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3 * (k ^ 3 * (-(m / 8) + 8) - 12 * k ^ 2 + 6 * k - 1)) = m ^ (-n - 1) * binom(2 * n + 2,n + 1) ^ 3",
+                        "latex_goal": "\\sum_{k=0}^{n + 1}{\\frac{m ^ {-k}}{(2 k - 1) ^ {3}} \\binom{2 k}{k} ^ {3} (k ^ {3} (-\\frac{m}{8} + 8) - 12 k ^ {2} + 6 k - 1)} = m ^ {-n - 1} \\binom{2 n + 2}{n + 1} ^ {3}",
+                        "type": "CalculationProof"
+                    },
+                    "type": "Goal",
+                    "wellformed": false
+                },
+                "induct_var": "n",
+                "latex_goal": "\\sum_{k=0}^{n}{\\frac{((8 - \\frac{m}{8}) k ^ {3} - 12 k ^ {2} + 6 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} m ^ {k}}} = \\frac{1}{m ^ {n}} \\binom{2 n}{n} ^ {3}",
+                "start": "0",
+                "type": "InductionProof"
+            },
+            "type": "Goal",
+            "wellformed": false
+        },
+        {
+            "finished": true,
+            "fixes": [
+                [
+                    "m",
+                    {
+                        "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ],
+                [
+                    "n",
+                    {
+                        "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ],
+                [
+                    "k",
+                    {
+                        "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
+            "goal": "(LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(12 * k ^ 2) + 16 * k ^ 3 + 6 * k - 1) / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3)) = (LIM {n -> oo}. (-64) ^ -n * binom(2 * n,n) ^ 3)",
+            "latex_goal": "\\lim\\limits_{n\\to \\infty} \\sum_{k=0}^{n}{\\frac{(-64) ^ {-k} (-12 k ^ {2} + 16 k ^ {3} + 6 k - 1)}{(2 k - 1) ^ {3}} \\binom{2 k}{k} ^ {3}} = \\lim\\limits_{n\\to \\infty} (\\,(-64) ^ {-n} \\binom{2 n}{n} ^ {3}\\,)",
+            "proof": {
+                "begin_label": "5.",
+                "finished": true,
+                "goal": "(LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(12 * k ^ 2) + 16 * k ^ 3 + 6 * k - 1) / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3)) = (LIM {n -> oo}. (-64) ^ -n * binom(2 * n,n) ^ 3)",
+                "latex_goal": "\\lim\\limits_{n\\to \\infty} \\sum_{k=0}^{n}{\\frac{(-64) ^ {-k} (-12 k ^ {2} + 16 k ^ {3} + 6 k - 1)}{(2 k - 1) ^ {3}} \\binom{2 k}{k} ^ {3}} = \\lim\\limits_{n\\to \\infty} (\\,(-64) ^ {-n} \\binom{2 n}{n} ^ {3}\\,)",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "m != 0",
+                            "latex_cond": "m \\neq 0"
+                        },
+                        {
+                            "cond": "n >= 0",
+                            "latex_cond": "n \\ge 0"
+                        }
+                    ],
+                    "fixes": [
+                        [
+                            "m",
+                            {
+                                "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
+                        ],
+                        [
+                            "n",
+                            {
+                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
+                        ],
+                        [
+                            "k",
+                            {
+                                "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
+                        ]
+                    ],
+                    "latex_start": "\\sum_{k=0}^{n}{\\frac{((8 - \\frac{m}{8}) k ^ {3} - 12 k ^ {2} + 6 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} m ^ {k}}} = \\frac{1}{m ^ {n}} \\binom{2 n}{n} ^ {3}",
+                    "start": "SUM(k, 0, n, ((8 - m / 8) * k ^ 3 - 12 * k ^ 2 + 6 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * m ^ k)) = 1 / m ^ n * binom(2 * n,n) ^ 3",
+                    "steps": [
+                        {
+                            "fixes": [
+                                [
+                                    "n",
+                                    "$int"
+                                ],
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "\\lim\\limits_{n\\to \\infty} \\sum_{k=0}^{n}{\\frac{((8 - \\frac{m}{8}) k ^ {3} - 12 k ^ {2} + 6 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} m ^ {k}}} = \\lim\\limits_{n\\to \\infty} (\\,\\frac{1}{m ^ {n}} \\binom{2 n}{n} ^ {3}\\,)",
+                            "res": "(LIM {n -> oo}. SUM(k, 0, n, ((8 - m / 8) * k ^ 3 - 12 * k ^ 2 + 6 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * m ^ k))) = (LIM {n -> oo}. 1 / m ^ n * binom(2 * n,n) ^ 3)",
+                            "rule": {
+                                "latex_str": "apply limit \\(n \\to \\infty\\) to equation",
+                                "lim": "oo",
+                                "name": "LimitEquation",
+                                "str": "apply limit n -> oo to equation",
+                                "var": "n"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "fixes": [
+                                [
+                                    "n",
+                                    "$int"
+                                ],
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "\\lim\\limits_{n\\to \\infty} \\sum_{k=0}^{n}{\\frac{(16 k ^ {3} - 12 k ^ {2} + 6 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} (-64) ^ {k}}} = \\lim\\limits_{n\\to \\infty} (\\,\\frac{1}{(-64) ^ {n}} \\binom{2 n}{n} ^ {3}\\,)",
+                            "res": "(LIM {n -> oo}. SUM(k, 0, n, (16 * k ^ 3 - 12 * k ^ 2 + 6 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k))) = (LIM {n -> oo}. 1 / (-64) ^ n * binom(2 * n,n) ^ 3)",
+                            "rule": {
+                                "latex_str": "substitute \\(m\\) for \\(-64\\) in equation",
+                                "name": "VarSubsOfEquation",
+                                "str": "substitute m for -64 in equation",
+                                "subst": [
+                                    {
+                                        "expr": "-64",
+                                        "var": "m"
+                                    }
+                                ]
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "fixes": [
+                                [
+                                    "n",
+                                    "$int"
+                                ],
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "\\lim\\limits_{n\\to \\infty} \\sum_{k=0}^{n}{\\frac{(-64) ^ {-k} (-12 k ^ {2} + 16 k ^ {3} + 6 k - 1)}{(2 k - 1) ^ {3}} \\binom{2 k}{k} ^ {3}} = \\lim\\limits_{n\\to \\infty} (\\,(-64) ^ {-n} \\binom{2 n}{n} ^ {3}\\,)",
+                            "res": "(LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(12 * k ^ 2) + 16 * k ^ 3 + 6 * k - 1) / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3)) = (LIM {n -> oo}. (-64) ^ -n * binom(2 * n,n) ^ 3)",
+                            "rule": {
+                                "name": "FullSimplify",
+                                "str": "full simplify"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal"
+        },
+        {
+            "conds": [
+                {
+                    "cond": "k >= 0",
+                    "latex_cond": "k \\ge 0"
+                }
+            ],
+            "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    {
+                        "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
+            "goal": "SUM(k, 0, oo, (16 * k ^ 3 - 12 * k ^ 2 + 6 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k)) = 0",
+            "latex_goal": "\\sum_{k=0}^{\\infty}{\\frac{(16 k ^ {3} - 12 k ^ {2} + 6 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} (-64) ^ {k}}} = 0",
+            "obligations": [
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "(2 * k - 1) ^ 3 * (-64) ^ k != 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "k >= 0",
+                            "latex_cond": "k \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(k)",
+                            "latex_cond": "k \\in\\mathbb{Z}"
+                        }
+                    ]
+                }
+            ],
+            "proof": {
+                "calcs": [
+                    {
+                        "conds": [
+                            {
+                                "cond": "k >= 0",
+                                "latex_cond": "k \\ge 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
+                        "latex_start": "\\sum_{k=0}^{\\infty}{\\frac{(16 k ^ {3} - 12 k ^ {2} + 6 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} (-64) ^ {k}}}",
+                        "start": "SUM(k, 0, oo, (16 * k ^ 3 - 12 * k ^ 2 + 6 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k))",
+                        "steps": [
+                            {
+                                "fixes": [
+                                    [
+                                        "k",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{(-64) ^ {-k} (-12 k ^ {2} + 16 k ^ {3} + 6 k - 1)}{(2 k - 1) ^ {3}} \\binom{2 k}{k} ^ {3}}",
+                                "res": "SUM(k, 0, oo, (-64) ^ -k * (-(12 * k ^ 2) + 16 * k ^ 3 + 6 * k - 1) / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3)",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ],
+                                    [
+                                        "k",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} \\sum_{k=0}^{n}{\\frac{(-64) ^ {-k} (-12 k ^ {2} + 16 k ^ {3} + 6 k - 1)}{(2 k - 1) ^ {3}} \\binom{2 k}{k} ^ {3}}",
+                                "res": "LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(12 * k ^ 2) + 16 * k ^ 3 + 6 * k - 1) / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\sum_{k=0}^{\\infty}{\\frac{(-64) ^ {-k} (-12 k ^ {2} + 16 k ^ {3} + 6 k - 1)}{(2 k - 1) ^ {3}} \\binom{2 k}{k} ^ {3}}\\) to \\(\\lim\\limits_{n\\to \\infty} \\sum_{k=0}^{n}{\\frac{(-64) ^ {-k} (-12 k ^ {2} + 16 k ^ {3} + 6 k - 1)}{(2 k - 1) ^ {3}} \\binom{2 k}{k} ^ {3}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(12 * k ^ 2) + 16 * k ^ 3 + 6 * k - 1) / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3)",
+                                    "new_expr_fixes": [
+                                        [
+                                            "n",
+                                            {
+                                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                                "symbol_type": "binding",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
+                                    "old_expr": "SUM(k, 0, oo, (-64) ^ -k * (-(12 * k ^ 2) + 16 * k ^ 3 + 6 * k - 1) / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3)",
+                                    "str": "rewriting SUM(k, 0, oo, (-64) ^ -k * (-(12 * k ^ 2) + 16 * k ^ 3 + 6 * k - 1) / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3) to LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(12 * k ^ 2) + 16 * k ^ 3 + 6 * k - 1) / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,(-64) ^ {-n} \\binom{2 n}{n} ^ {3}\\,)",
+                                "res": "LIM {n -> oo}. (-64) ^ -n * binom(2 * n,n) ^ 3",
+                                "rule": {
+                                    "eq": "(LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(12 * k ^ 2) + 16 * k ^ 3 + 6 * k - 1) / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3)) = (LIM {n -> oo}. (-64) ^ -n * binom(2 * n,n) ^ 3)",
+                                    "eq_fixes": [
+                                        [
+                                            "m",
+                                            {
+                                                "latex_type": "\\text{m} \\in \\mathbb{Z}",
+                                                "symbol_type": "binding",
+                                                "type": "$int"
+                                            }
+                                        ],
+                                        [
+                                            "n",
+                                            {
+                                                "latex_type": "\\text{n} \\in \\mathbb{Z}",
+                                                "symbol_type": "binding",
+                                                "type": "$int"
+                                            }
+                                        ],
+                                        [
+                                            "k",
+                                            {
+                                                "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                                "symbol_type": "binding",
+                                                "type": "$int"
+                                            }
+                                        ]
+                                    ],
+                                    "latex_str": "apply equation \\(\\lim\\limits_{n\\to \\infty} \\sum_{k=0}^{n}{\\frac{(-64) ^ {-k} (-12 k ^ {2} + 16 k ^ {3} + 6 k - 1)}{(2 k - 1) ^ {3}} \\binom{2 k}{k} ^ {3}} = \\lim\\limits_{n\\to \\infty} (\\,(-64) ^ {-n} \\binom{2 n}{n} ^ {3}\\,)\\)",
+                                    "name": "ApplyEquation",
+                                    "source": "LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(12 * k ^ 2) + 16 * k ^ 3 + 6 * k - 1) / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3)",
+                                    "str": "apply equation: (LIM {n -> oo}. SUM(k, 0, n, (-64) ^ -k * (-(12 * k ^ 2) + 16 * k ^ 3 + 6 * k - 1) / (2 * k - 1) ^ 3 * binom(2 * k,k) ^ 3)) = (LIM {n -> oo}. (-64) ^ -n * binom(2 * n,n) ^ 3)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,(-64) ^ {-n} (\\frac{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}} \\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\,)",
+                                "res": "LIM {n -> oo}. (-64) ^ -n * (4 ^ n / sqrt(n * pi) * binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\binom{2 n}{n}\\) to \\(\\frac{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}} \\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "4 ^ n / sqrt(n * pi) * binom(2 * n,n) / (4 ^ n / sqrt(n * pi))",
+                                    "old_expr": "binom(2 * n,n)",
+                                    "str": "rewriting binom(2 * n,n) to 4 ^ n / sqrt(n * pi) * binom(2 * n,n) / (4 ^ n / sqrt(n * pi))"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,(-64) ^ {-n} ((\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3} (\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3})\\,)",
+                                "res": "LIM {n -> oo}. (-64) ^ -n * ((4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)",
+                                "rule": {
+                                    "latex_str": "rewrite \\((\\frac{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}} \\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\) to \\((\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3} (\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "(4 ^ n / sqrt(n * pi) * binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3",
+                                    "str": "rewrite (4 ^ n / sqrt(n * pi) * binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3 to (4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3 using identity",
+                                    "target": "(4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,\\frac{1}{(-64) ^ {n}} ((\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3} (\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3})\\,)",
+                                "res": "LIM {n -> oo}. 1 / (-64) ^ n * ((4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)",
+                                "rule": {
+                                    "latex_str": "rewriting \\((-64) ^ {-n} ((\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3} (\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3})\\) to \\(\\frac{1}{(-64) ^ {n}} ((\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3} (\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3})\\)",
+                                    "name": "Equation",
+                                    "new_expr": "1 / (-64) ^ n * ((4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)",
+                                    "old_expr": "(-64) ^ -n * ((4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)",
+                                    "str": "rewriting (-64) ^ -n * ((4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3) to 1 / (-64) ^ n * ((4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "\\lim\\limits_{n\\to \\infty} (\\,\\frac{1}{(-64) ^ {n}} (\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3} (\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\,)",
+                                "res": "LIM {n -> oo}. 1 / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\frac{1}{(-64) ^ {n}} ((\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3} (\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3})\\) to \\(\\frac{1}{(-64) ^ {n}} (\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3} (\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "1 / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3",
+                                    "old_expr": "1 / (-64) ^ n * ((4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)",
+                                    "str": "rewriting 1 / (-64) ^ n * ((4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3) to 1 / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "(\\lim\\limits_{n\\to \\infty} (\\,\\frac{1}{(-64) ^ {n}} (\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3}\\,)) (\\lim\\limits_{n\\to \\infty} (\\,(\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\,))",
+                                "res": "(LIM {n -> oo}. 1 / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3) * (LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\lim\\limits_{n\\to \\infty} (\\,\\frac{1}{(-64) ^ {n}} (\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3} (\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\,)\\) to \\((\\lim\\limits_{n\\to \\infty} (\\,\\frac{1}{(-64) ^ {n}} (\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3}\\,)) (\\lim\\limits_{n\\to \\infty} (\\,(\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\,))\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(LIM {n -> oo}. 1 / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3) * (LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)",
+                                    "old_expr": "LIM {n -> oo}. 1 / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3",
+                                    "str": "rewriting LIM {n -> oo}. 1 / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3 * (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3 to (LIM {n -> oo}. 1 / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3) * (LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "(\\lim\\limits_{n\\to \\infty} (\\,\\frac{1}{(-64) ^ {n}} (\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3}\\,)) (\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}\\,)) ^ {3}",
+                                "res": "(LIM {n -> oo}. 1 / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3) * (LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3",
+                                "rule": {
+                                    "latex_str": "rewriting \\(\\lim\\limits_{n\\to \\infty} (\\,(\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}) ^ {3}\\,)\\) to \\((\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}\\,)) ^ {3}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3",
+                                    "old_expr": "LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3",
+                                    "str": "rewriting LIM {n -> oo}. (binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3 to (LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) ^ 3"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "(\\lim\\limits_{n\\to \\infty} (\\,\\frac{1}{(-64) ^ {n}} (\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3}\\,))\\cdot 1 ^ {3}",
+                                "res": "(LIM {n -> oo}. 1 / (-64) ^ n * (4 ^ n / sqrt(n * pi)) ^ 3) * 1 ^ 3",
+                                "rule": {
+                                    "eq": "(LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) = 1",
+                                    "latex_str": "apply equation \\(\\lim\\limits_{n\\to \\infty} (\\,\\frac{\\binom{2 n}{n}}{\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}}\\,) = 1\\)",
+                                    "name": "ApplyEquation",
+                                    "source": "LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))",
+                                    "str": "apply equation: (LIM {n -> oo}. binom(2 * n,n) / (4 ^ n / sqrt(n * pi))) = 1"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "(\\lim\\limits_{n\\to \\infty} (\\,\\frac{1}{(-64) ^ {n}} (\\frac{(4 ^ {n}) ^ {3}}{(n\\cdot \\pi) ^ {3/2}})\\,))\\cdot 1 ^ {3}",
+                                "res": "(LIM {n -> oo}. 1 / (-64) ^ n * (4 ^ n ^ 3 / (n * pi) ^ (3/2))) * 1 ^ 3",
+                                "rule": {
+                                    "latex_str": "rewriting \\((\\frac{4 ^ {n}}{\\sqrt{n\\cdot \\pi}}) ^ {3}\\) to \\(\\frac{(4 ^ {n}) ^ {3}}{(n\\cdot \\pi) ^ {3/2}}\\)",
+                                    "name": "Equation",
+                                    "new_expr": "4 ^ n ^ 3 / (n * pi) ^ (3/2)",
+                                    "old_expr": "(4 ^ n / sqrt(n * pi)) ^ 3",
+                                    "str": "rewriting (4 ^ n / sqrt(n * pi)) ^ 3 to 4 ^ n ^ 3 / (n * pi) ^ (3/2)"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "(\\lim\\limits_{n\\to \\infty} (\\,\\frac{1}{(-64) ^ {n}} (\\frac{(4 ^ {3}) ^ {n}}{(n\\cdot \\pi) ^ {3/2}})\\,))\\cdot 1 ^ {3}",
+                                "res": "(LIM {n -> oo}. 1 / (-64) ^ n * (4 ^ 3 ^ n / (n * pi) ^ (3/2))) * 1 ^ 3",
+                                "rule": {
+                                    "latex_str": "rewrite \\((4 ^ {n}) ^ {3}\\) to \\((4 ^ {3}) ^ {n}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "4 ^ n ^ 3",
+                                    "str": "rewrite 4 ^ n ^ 3 to 4 ^ 3 ^ n using identity",
+                                    "target": "4 ^ 3 ^ n"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "fixes": [
+                                    [
+                                        "n",
+                                        "$int"
+                                    ]
+                                ],
+                                "latex_res": "(\\lim\\limits_{n\\to \\infty} (\\,\\frac{1}{(-1) ^ {n} 64 ^ {n}} (\\frac{(4 ^ {3}) ^ {n}}{(n\\cdot \\pi) ^ {3/2}})\\,))\\cdot 1 ^ {3}",
+                                "res": "(LIM {n -> oo}. 1 / ((-1) ^ n * 64 ^ n) * (4 ^ 3 ^ n / (n * pi) ^ (3/2))) * 1 ^ 3",
+                                "rule": {
+                                    "latex_str": "rewrite \\((-64) ^ {n}\\) to \\((-1) ^ {n} 64 ^ {n}\\) using identity",
+                                    "name": "ApplyIdentity",
+                                    "source": "(-64) ^ n",
+                                    "str": "rewrite (-64) ^ n to (-1) ^ n * 64 ^ n using identity",
+                                    "target": "(-1) ^ n * 64 ^ n"
+                                },
+                                "type": "CalculationStep"
+                            },
+                            {
+                                "latex_res": "0",
+                                "res": "0",
+                                "rule": {
+                                    "name": "FullSimplify",
+                                    "str": "full simplify"
+                                },
+                                "type": "CalculationStep"
+                            }
+                        ],
+                        "type": "Calculation"
+                    },
+                    {
+                        "conds": [
+                            {
+                                "cond": "k >= 0",
+                                "latex_cond": "k \\ge 0"
+                            }
+                        ],
+                        "fixes": [
+                            [
+                                "k",
+                                {
+                                    "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                    "symbol_type": "binding",
+                                    "type": "$int"
+                                }
+                            ]
+                        ],
+                        "latex_start": "0",
+                        "start": "0",
+                        "steps": [],
+                        "type": "Calculation"
+                    }
+                ],
+                "finished": true,
+                "goal": "SUM(k, 0, oo, (16 * k ^ 3 - 12 * k ^ 2 + 6 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k)) = 0",
+                "latex_goal": "\\sum_{k=0}^{\\infty}{\\frac{(16 k ^ {3} - 12 k ^ {2} + 6 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} (-64) ^ {k}}} = 0",
+                "type": "CalculationProof"
+            },
+            "type": "Goal",
+            "wellformed": false
+        },
+        {
+            "finished": true,
+            "fixes": [
+                [
+                    "k",
+                    {
+                        "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                        "symbol_type": "binding",
+                        "type": "$int"
+                    }
+                ]
+            ],
+            "goal": "SUM(k, 0, oo, (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k)) = 2 / pi",
+            "latex_goal": "\\sum_{k=0}^{\\infty}{\\frac{(4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} (-64) ^ {k}}} = \\frac{2}{\\pi}",
+            "obligations": [
+                {
+                    "branches": [
+                        {
+                            "exprs": [
+                                "(2 * k - 1) ^ 3 * (-64) ^ k != 0"
+                            ]
+                        }
+                    ],
+                    "conds": [
+                        {
+                            "cond": "k >= 0",
+                            "latex_cond": "k \\ge 0"
+                        },
+                        {
+                            "cond": "isInt(k)",
+                            "latex_cond": "k \\in\\mathbb{Z}"
+                        }
+                    ]
+                }
+            ],
+            "proof": {
+                "begin_label": "7.",
+                "finished": true,
+                "goal": "SUM(k, 0, oo, (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k)) = 2 / pi",
+                "latex_goal": "\\sum_{k=0}^{\\infty}{\\frac{(4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} (-64) ^ {k}}} = \\frac{2}{\\pi}",
+                "start": {
+                    "conds": [
+                        {
+                            "cond": "k >= 0",
+                            "latex_cond": "k \\ge 0"
+                        }
+                    ],
+                    "fixes": [
+                        [
+                            "k",
+                            {
+                                "latex_type": "\\text{k} \\in \\mathbb{Z}",
+                                "symbol_type": "binding",
+                                "type": "$int"
+                            }
+                        ]
+                    ],
+                    "latex_start": "\\sum_{k=0}^{\\infty}{\\frac{(16 k ^ {3} - 12 k ^ {2} + 6 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} (-64) ^ {k}}} = 0",
+                    "start": "SUM(k, 0, oo, (16 * k ^ 3 - 12 * k ^ 2 + 6 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k)) = 0",
+                    "steps": [
+                        {
+                            "fixes": [
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{(2 k (2 k - 1) (4 k - 1) + 4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} (-64) ^ {k}}} = 0",
+                            "res": "SUM(k, 0, oo, (2 * k * (2 * k - 1) * (4 * k - 1) + 4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k)) = 0",
+                            "rule": {
+                                "latex_str": "rewriting \\(16 k ^ {3} - 12 k ^ {2} + 6 k - 1\\) to \\(2 k (2 k - 1) (4 k - 1) + 4 k - 1\\)",
+                                "name": "Equation",
+                                "new_expr": "2 * k * (2 * k - 1) * (4 * k - 1) + 4 * k - 1",
+                                "old_expr": "16 * k ^ 3 - 12 * k ^ 2 + 6 * k - 1",
+                                "str": "rewriting 16 * k ^ 3 - 12 * k ^ 2 + 6 * k - 1 to 2 * k * (2 * k - 1) * (4 * k - 1) + 4 * k - 1"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "fixes": [
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{2 k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}} + \\frac{(4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} (-64) ^ {k}}} = 0",
+                            "res": "SUM(k, 0, oo, 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k) + (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k)) = 0",
+                            "rule": {
+                                "latex_str": "rewriting \\(\\frac{(2 k (2 k - 1) (4 k - 1) + 4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} (-64) ^ {k}}\\) to \\(\\frac{2 k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}} + \\frac{(4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} (-64) ^ {k}}\\)",
+                                "name": "Equation",
+                                "new_expr": "2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k) + (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k)",
+                                "old_expr": "(2 * k * (2 * k - 1) * (4 * k - 1) + 4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k)",
+                                "str": "rewriting (2 * k * (2 * k - 1) * (4 * k - 1) + 4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k) to 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k) + (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k)"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "fixes": [
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{2 k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}} + \\sum_{k=0}^{\\infty}{\\frac{(4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} (-64) ^ {k}}} = 0",
+                            "res": "SUM(k, 0, oo, 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) + SUM(k, 0, oo, (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k)) = 0",
+                            "rule": {
+                                "latex_str": "rewriting \\(\\sum_{k=0}^{\\infty}{\\frac{2 k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}} + \\frac{(4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} (-64) ^ {k}}}\\) to \\(\\sum_{k=0}^{\\infty}{\\frac{2 k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}} + \\sum_{k=0}^{\\infty}{\\frac{(4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} (-64) ^ {k}}}\\)",
+                                "name": "Equation",
+                                "new_expr": "SUM(k, 0, oo, 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) + SUM(k, 0, oo, (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k))",
+                                "old_expr": "SUM(k, 0, oo, 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k) + (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k))",
+                                "str": "rewriting SUM(k, 0, oo, 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k) + (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k)) to SUM(k, 0, oo, 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) + SUM(k, 0, oo, (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k))"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "fixes": [
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "2 \\sum_{k=0}^{\\infty}{\\frac{k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}} + \\sum_{k=0}^{\\infty}{\\frac{(4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} (-64) ^ {k}}} = 0",
+                            "res": "2 * SUM(k, 0, oo, k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) + SUM(k, 0, oo, (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k)) = 0",
+                            "rule": {
+                                "latex_str": "rewriting \\(\\sum_{k=0}^{\\infty}{\\frac{2 k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}}\\) to \\(2 \\sum_{k=0}^{\\infty}{\\frac{k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}}\\)",
+                                "name": "Equation",
+                                "new_expr": "2 * SUM(k, 0, oo, k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))",
+                                "old_expr": "SUM(k, 0, oo, 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))",
+                                "str": "rewriting SUM(k, 0, oo, 2 * k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) to 2 * SUM(k, 0, oo, k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "fixes": [
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "2\\cdot (\\frac{-1}{\\pi}) + \\sum_{k=0}^{\\infty}{\\frac{(4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} (-64) ^ {k}}} = 0",
+                            "res": "2 * (-1 / pi) + SUM(k, 0, oo, (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k)) = 0",
+                            "rule": {
+                                "eq": "SUM(k, 0, oo, k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) = -1 / pi",
+                                "latex_str": "apply equation \\(\\sum_{k=0}^{\\infty}{\\frac{k (4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {2} (-64) ^ {k}}} = \\frac{-1}{\\pi}\\)",
+                                "name": "ApplyEquation",
+                                "source": "SUM(k, 0, oo, k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k))",
+                                "str": "apply equation: SUM(k, 0, oo, k * (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 2 * (-64) ^ k)) = -1 / pi"
+                            },
+                            "type": "CalculationStep"
+                        },
+                        {
+                            "fixes": [
+                                [
+                                    "k",
+                                    "$int"
+                                ]
+                            ],
+                            "latex_res": "\\sum_{k=0}^{\\infty}{\\frac{(4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} (-64) ^ {k}}} = \\frac{2}{\\pi}",
+                            "res": "SUM(k, 0, oo, (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k)) = 2 / pi",
+                            "rule": {
+                                "latex_str": "solve equation for \\(\\sum_{k=0}^{\\infty}{\\frac{(4 k - 1) \\binom{2 k}{k} ^ {3}}{(2 k - 1) ^ {3} (-64) ^ {k}}}\\)",
+                                "name": "SolveEquation",
+                                "solve_for": "SUM(k, 0, oo, (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k))",
+                                "str": "solve equation for SUM(k, 0, oo, (4 * k - 1) * binom(2 * k,k) ^ 3 / ((2 * k - 1) ^ 3 * (-64) ^ k))"
+                            },
+                            "type": "CalculationStep"
+                        }
+                    ],
+                    "type": "Calculation"
+                },
+                "type": "RewriteGoalProof"
+            },
+            "type": "Goal",
+            "wellformed": false
+        }
+    ],
+    "name": "binom_example04"
+}

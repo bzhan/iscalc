@@ -117,9 +117,9 @@
                                 "latex_res": "-(\\int_{0}^{\\infty} \\frac{\\log{((\\frac{1}{u}) ^ {a} + 1)}}{(\\frac{1}{u}) ^ {2} - b (\\frac{1}{u}) + 1} (-\\frac{1}{u ^ {2}}) \\,du)",
                                 "res": "-(INT u:[0,oo]. log((1 / u) ^ a + 1) / ((1 / u) ^ 2 - b * (1 / u) + 1) * -(1 / u ^ 2))",
                                 "rule": {
-                                    "latex_str": "inverse substitution for \\(\\frac{1}{u}\\)",
+                                    "latex_str": "inverse substitution \\(\\frac{1}{u}\\) creating \\(u\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution for 1 / u",
+                                    "str": "inverse substitution 1 / u creating u",
                                     "var_name": "u",
                                     "var_subst": "1 / u"
                                 },

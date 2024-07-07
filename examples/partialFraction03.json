@@ -695,9 +695,9 @@
                                 "latex_res": "-(\\int_{0}^{\\infty} \\frac{1}{2 (\\frac{1}{y}) ^ {2} \\cos{(2 a)} + (\\frac{1}{y}) ^ {4} + 1} (-\\frac{1}{y ^ {2}}) \\,dy)",
                                 "res": "-(INT y:[0,oo]. 1 / (2 * (1 / y) ^ 2 * cos(2 * a) + (1 / y) ^ 4 + 1) * -(1 / y ^ 2))",
                                 "rule": {
-                                    "latex_str": "inverse substitution for \\(\\frac{1}{y}\\)",
+                                    "latex_str": "inverse substitution \\(\\frac{1}{y}\\) creating \\(y\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution for 1 / y",
+                                    "str": "inverse substitution 1 / y creating y",
                                     "var_name": "y",
                                     "var_subst": "1 / y"
                                 },

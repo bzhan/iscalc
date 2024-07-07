@@ -20,9 +20,9 @@
                                 "latex_res": "-(\\int_{0}^{\\pi/2} (\\frac{1 + \\cos{(2 u)}}{1 - \\cos{(2 u)}}) ^ {1/2} (-2 \\sin{(2 u)}) \\,du)",
                                 "res": "-(INT u:[0,pi / 2]. ((1 + cos(2 * u)) / (1 - cos(2 * u))) ^ (1/2) * -(2 * sin(2 * u)))",
                                 "rule": {
-                                    "latex_str": "inverse substitution for \\(\\cos{(2 u)}\\)",
+                                    "latex_str": "inverse substitution \\(\\cos{(2 u)}\\) creating \\(u\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution for cos(2 * u)",
+                                    "str": "inverse substitution cos(2 * u) creating u",
                                     "var_name": "u",
                                     "var_subst": "cos(2 * u)"
                                 },

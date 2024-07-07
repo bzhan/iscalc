@@ -32,9 +32,9 @@
                                 "latex_res": "-(\\int_{0}^{\\infty} \\frac{\\log{(\\frac{1}{t})}}{(\\frac{1}{t}) ^ {2} + b ^ {2}} (-\\frac{1}{t ^ {2}}) \\,dt)",
                                 "res": "-(INT t:[0,oo]. log(1 / t) / ((1 / t) ^ 2 + b ^ 2) * -(1 / t ^ 2))",
                                 "rule": {
-                                    "latex_str": "inverse substitution for \\(\\frac{1}{t}\\)",
+                                    "latex_str": "inverse substitution \\(\\frac{1}{t}\\) creating \\(t\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution for 1 / t",
+                                    "str": "inverse substitution 1 / t creating t",
                                     "var_name": "t",
                                     "var_subst": "1 / t"
                                 },
@@ -86,9 +86,9 @@
                                 "latex_res": "-(\\int_{0}^{\\infty} \\frac{\\log{(\\frac{s}{b})}}{1 + b ^ {2} (\\frac{s}{b}) ^ {2}} (\\frac{1}{b}) \\,ds)",
                                 "res": "-(INT s:[0,oo]. log(s / b) / (1 + b ^ 2 * (s / b) ^ 2) * (1 / b))",
                                 "rule": {
-                                    "latex_str": "inverse substitution for \\(\\frac{s}{b}\\)",
+                                    "latex_str": "inverse substitution \\(\\frac{s}{b}\\) creating \\(s\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution for s / b",
+                                    "str": "inverse substitution s / b creating s",
                                     "var_name": "s",
                                     "var_subst": "s / b"
                                 },

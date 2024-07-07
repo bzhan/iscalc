@@ -1331,7 +1331,8 @@ class SubstitutionInverse(Rule):
         self.var_subst = var_subst
 
     def __str__(self):
-        return "inverse substitution for %s" % self.var_subst
+        return "inverse substitution %s creating %s" % (
+            self.var_subst, self.var_name)
 
     def export(self):
         return {
@@ -1339,7 +1340,8 @@ class SubstitutionInverse(Rule):
             "var_name": self.var_name,
             "var_subst": str(self.var_subst),
             "str": str(self),
-            "latex_str": "inverse substitution for \\(%s\\)" % latex.convert_expr(self.var_subst)
+            "latex_str": "inverse substitution \\(%s\\) creating \\(%s\\)" % (
+                latex.convert_expr(self.var_subst), self.var_name)
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:

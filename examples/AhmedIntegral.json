@@ -212,10 +212,10 @@
                                 "latex_res": "\\frac{1}{u ^ {2} + 1} (-(\\int_{0}^{u/\\sqrt{2 u ^ {2} + 1}} \\frac{1}{\\frac{2 u ^ {2} + 1}{u ^ {2}} + (y \\sqrt{u ^ {-2} (2 u ^ {2} + 1)}) ^ {2}} (\\frac{\\sqrt{2 u ^ {2} + 1}}{u}) \\,dy) + (\\int_{0}^{1} \\frac{1}{x ^ {2} + 1} \\,dx))",
                                 "res": "1 / (u ^ 2 + 1) * (-(INT y:[0,u / sqrt(2 * u ^ 2 + 1)]. 1 / ((2 * u ^ 2 + 1) / u ^ 2 + (y * sqrt(u ^ (-2) * (2 * u ^ 2 + 1))) ^ 2) * (sqrt(2 * u ^ 2 + 1) / u)) + (INT x:[0,1]. 1 / (x ^ 2 + 1)))",
                                 "rule": {
-                                    "latex_str": "inverse substitution for \\(y \\sqrt{u ^ {-2} (2 u ^ {2} + 1)}\\) at 1.0.0",
+                                    "latex_str": "inverse substitution \\(y \\sqrt{u ^ {-2} (2 u ^ {2} + 1)}\\) creating \\(y\\) at 1.0.0",
                                     "loc": "1.0.0",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution for y * sqrt(u ^ (-2) * (2 * u ^ 2 + 1)) at 1.0.0",
+                                    "str": "inverse substitution y * sqrt(u ^ (-2) * (2 * u ^ 2 + 1)) creating y at 1.0.0",
                                     "var_name": "y",
                                     "var_subst": "y * sqrt(u ^ (-2) * (2 * u ^ 2 + 1))"
                                 },
@@ -501,9 +501,9 @@
                                 "latex_res": "--(\\int_{0}^{1} \\frac{\\frac{1}{x}}{((\\frac{1}{x}) ^ {2} + 1) \\sqrt{2 (\\frac{1}{x}) ^ {2} + 1}} \\tan^{-1}{(\\frac{\\frac{1}{x}}{\\sqrt{2 (\\frac{1}{x}) ^ {2} + 1}})} (-\\frac{1}{x ^ {2}}) \\,dx) + \\frac{\\pi}{4} (\\int_{1}^{\\infty} \\frac{1}{u ^ {2} + 1} \\,du)",
                                 "res": "--(INT x:[0,1]. 1 / x / (((1 / x) ^ 2 + 1) * sqrt(2 * (1 / x) ^ 2 + 1)) * atan(1 / x / sqrt(2 * (1 / x) ^ 2 + 1)) * -(1 / x ^ 2)) + pi / 4 * (INT u:[1,oo]. 1 / (u ^ 2 + 1))",
                                 "rule": {
-                                    "latex_str": "inverse substitution for \\(\\frac{1}{x}\\)",
+                                    "latex_str": "inverse substitution \\(\\frac{1}{x}\\) creating \\(x\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution for 1 / x",
+                                    "str": "inverse substitution 1 / x creating x",
                                     "var_name": "x",
                                     "var_subst": "1 / x"
                                 },

@@ -72,9 +72,9 @@
                                 "latex_res": "-(\\int_{0}^{\\pi/2} (\\cos^{2}(x)) ^ {m - 1} (-\\cos^{2}(x) + 1) ^ {n - 1} (-2 \\cos{x} \\sin{x}) \\,dx)",
                                 "res": "-(INT x:[0,pi / 2]. cos(x) ^ 2 ^ (m - 1) * (-(cos(x) ^ 2) + 1) ^ (n - 1) * -(2 * cos(x) * sin(x)))",
                                 "rule": {
-                                    "latex_str": "inverse substitution for \\(\\cos^{2}(x)\\)",
+                                    "latex_str": "inverse substitution \\(\\cos^{2}(x)\\) creating \\(x\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution for cos(x) ^ 2",
+                                    "str": "inverse substitution cos(x) ^ 2 creating x",
                                     "var_name": "x",
                                     "var_subst": "cos(x) ^ 2"
                                 },
@@ -403,9 +403,9 @@
                                 "latex_res": "\\int_{-\\pi/2}^{\\pi/2} (\\frac{1}{2} + \\frac{1}{2} \\sin{u} - (\\frac{1}{2} + \\frac{1}{2} \\sin{u}) ^ {2}) ^ {1/2} (\\frac{\\cos{u}}{2}) \\,du",
                                 "res": "INT u:[-(pi / 2),pi / 2]. (1/2 + 1/2 * sin(u) - (1/2 + 1/2 * sin(u)) ^ 2) ^ (1/2) * (cos(u) / 2)",
                                 "rule": {
-                                    "latex_str": "inverse substitution for \\(\\frac{1}{2} + \\frac{1}{2} \\sin{u}\\)",
+                                    "latex_str": "inverse substitution \\(\\frac{1}{2} + \\frac{1}{2} \\sin{u}\\) creating \\(u\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution for 1/2 + 1/2 * sin(u)",
+                                    "str": "inverse substitution 1/2 + 1/2 * sin(u) creating u",
                                     "var_name": "u",
                                     "var_subst": "1/2 + 1/2 * sin(u)"
                                 },
@@ -723,9 +723,9 @@
                                 "latex_res": "-(\\int_{0}^{\\infty} \\sqrt{-\\log{(e^{-y})}} (-e^{-y}) \\,dy)",
                                 "res": "-(INT y:[0,oo]. sqrt(-log(exp(-y))) * -exp(-y))",
                                 "rule": {
-                                    "latex_str": "inverse substitution for \\(e^{-y}\\)",
+                                    "latex_str": "inverse substitution \\(e^{-y}\\) creating \\(y\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution for exp(-y)",
+                                    "str": "inverse substitution exp(-y) creating y",
                                     "var_name": "y",
                                     "var_subst": "exp(-y)"
                                 },

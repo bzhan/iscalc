@@ -20,9 +20,9 @@
                                 "latex_res": "\\int_{0}^{\\pi/4} \\frac{\\log{(\\tan{u} + 1)}}{\\tan^{2}(u) + 1} \\sec^{2}(u) \\,du",
                                 "res": "INT u:[0,pi / 4]. log(tan(u) + 1) / (tan(u) ^ 2 + 1) * sec(u) ^ 2",
                                 "rule": {
-                                    "latex_str": "inverse substitution for \\(\\tan{u}\\)",
+                                    "latex_str": "inverse substitution \\(\\tan{u}\\) creating \\(u\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution for tan(u)",
+                                    "str": "inverse substitution tan(u) creating u",
                                     "var_name": "u",
                                     "var_subst": "tan(u)"
                                 },
@@ -116,9 +116,9 @@
                                 "latex_res": "-(\\int_{0}^{\\pi/4} \\log{(\\tan{(\\frac{\\pi}{4} - x)} + 1)}\\cdot -1 \\,dx)",
                                 "res": "-(INT x:[0,pi / 4]. log(tan(pi / 4 - x) + 1) * -1)",
                                 "rule": {
-                                    "latex_str": "inverse substitution for \\(\\frac{\\pi}{4} - x\\)",
+                                    "latex_str": "inverse substitution \\(\\frac{\\pi}{4} - x\\) creating \\(x\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution for pi / 4 - x",
+                                    "str": "inverse substitution pi / 4 - x creating x",
                                     "var_name": "x",
                                     "var_subst": "pi / 4 - x"
                                 },

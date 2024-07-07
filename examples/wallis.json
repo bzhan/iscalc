@@ -316,9 +316,9 @@
                                         "latex_res": "\\lim\\limits_{t\\to \\infty} \\int_{0}^{t/\\sqrt{b}} \\frac{1}{(\\sqrt{b} u) ^ {2} + b} \\sqrt{b} \\,du",
                                         "res": "LIM {t -> oo}. INT u:[0,t / sqrt(b)]. 1 / ((sqrt(b) * u) ^ 2 + b) * sqrt(b)",
                                         "rule": {
-                                            "latex_str": "inverse substitution for \\(\\sqrt{b} u\\)",
+                                            "latex_str": "inverse substitution \\(\\sqrt{b} u\\) creating \\(u\\)",
                                             "name": "SubstitutionInverse",
-                                            "str": "inverse substitution for sqrt(b) * u",
+                                            "str": "inverse substitution sqrt(b) * u creating u",
                                             "var_name": "u",
                                             "var_subst": "sqrt(b) * u"
                                         },

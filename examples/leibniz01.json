@@ -56,9 +56,9 @@
                                 "latex_res": "\\lim\\limits_{t\\to \\infty} \\int_{0}^{t/a} \\frac{1}{(a u) ^ {2} + a ^ {2}} a \\,du",
                                 "res": "LIM {t -> oo}. INT u:[0,t / a]. 1 / ((a * u) ^ 2 + a ^ 2) * a",
                                 "rule": {
-                                    "latex_str": "inverse substitution for \\(a u\\)",
+                                    "latex_str": "inverse substitution \\(a u\\) creating \\(u\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution for a * u",
+                                    "str": "inverse substitution a * u creating u",
                                     "var_name": "u",
                                     "var_subst": "a * u"
                                 },

@@ -20,9 +20,9 @@
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{1}{\\sqrt{\\sin^{2}(x)} \\sqrt{1 - \\sin^{2}(x)}} (2 \\cos{x} \\sin{x}) \\,dx",
                                 "res": "INT x:[0,pi / 2]. 1 / (sqrt(sin(x) ^ 2) * sqrt(1 - sin(x) ^ 2)) * (2 * cos(x) * sin(x))",
                                 "rule": {
-                                    "latex_str": "inverse substitution for \\(\\sin^{2}(x)\\)",
+                                    "latex_str": "inverse substitution \\(\\sin^{2}(x)\\) creating \\(x\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution for sin(x) ^ 2",
+                                    "str": "inverse substitution sin(x) ^ 2 creating x",
                                     "var_name": "x",
                                     "var_subst": "sin(x) ^ 2"
                                 },
@@ -123,9 +123,9 @@
                                 "latex_res": "\\int_{0}^{\\pi/2} \\frac{\\log{(\\sin^{2}(x))}}{\\sqrt{\\sin^{2}(x)} \\sqrt{1 - \\sin^{2}(x)}} (2 \\cos{x} \\sin{x}) \\,dx",
                                 "res": "INT x:[0,pi / 2]. log(sin(x) ^ 2) / (sqrt(sin(x) ^ 2) * sqrt(1 - sin(x) ^ 2)) * (2 * cos(x) * sin(x))",
                                 "rule": {
-                                    "latex_str": "inverse substitution for \\(\\sin^{2}(x)\\)",
+                                    "latex_str": "inverse substitution \\(\\sin^{2}(x)\\) creating \\(x\\)",
                                     "name": "SubstitutionInverse",
-                                    "str": "inverse substitution for sin(x) ^ 2",
+                                    "str": "inverse substitution sin(x) ^ 2 creating x",
                                     "var_name": "x",
                                     "var_subst": "sin(x) ^ 2"
                                 },

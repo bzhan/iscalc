@@ -1251,7 +1251,7 @@ class Substitution(Rule):
         var_subst = self.var_subst
 
         if e.var not in var_subst.get_vars():
-            raise AssertionError("Substitution: variable not found")
+            raise RuleException("Substitution", "variable %s not found" % e.var)
 
         dfx = deriv(e.var, var_subst, ctx)
         ctx2 = body_conds(e, ctx)
@@ -1269,8 +1269,9 @@ class Substitution(Rule):
             # Substitution is unable to clear x, need to solve for x
             gu = solve_equation(var_subst, var_name, e.var, ctx)
             if gu is None:
-                print('Solve %s = %s for %s' % (var_subst, var_name, e.var))
-                raise AssertionError("Substitution: unable to solve equation")
+                raise RuleException("Substitution", "unable to solve equation %s = %s for %s" % (
+                    var_subst, var_name, e.var
+                ))
 
             gu = normalize(gu, ctx)
             c = e.body.replace(Var(e.var), gu)

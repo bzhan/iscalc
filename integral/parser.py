@@ -1,7 +1,7 @@
 """Parsing"""
 
 from typing import Dict, Optional, Tuple, List
-from lark import Lark, Transformer, v_args, exceptions
+from lark import Lark, Token, Transformer, v_args, exceptions
 from decimal import Decimal
 from fractions import Fraction
 
@@ -58,7 +58,21 @@ grammar = r"""
         | plus
 
     ?expr: compare
-    !interval: ("(" | "[") expr "," expr ("]" | ")") -> interval_expr
+
+    ?calculate_action: "calculate" expr -> calculate_action
+
+    ?atomic_rule: "substitute" CNAME "for" expr -> substitute_rule
+        | "inverse" "substitute" expr "for" CNAME "creating" CNAME -> inverse_substitute_rule
+        | "apply" "integral" "identity" -> integral_identity_rule
+        | "integrate" "by" "parts" "with" "u" "=" expr "," "v" "=" expr -> integrate_by_parts_rule
+        | "split" "region" "at" expr -> split_region_rule
+        | "rewrite" expr "to" expr -> equation_rule
+        | "simplify" -> full_simplify_rule
+
+    ?rule: atomic_rule
+
+    ?action: calculate_action
+        | rule -> rule_action
 
     %import common.CNAME
     %import common.WS
@@ -254,10 +268,48 @@ class ExprTransformer(Transformer):
 
     def type_expr(self, name, *args) -> expr.Type:
         return expr.Type(str(name), *args)
+    
+    def calculate_action(self, expr: Expr):
+        from integral import action
+        return action.CalculateAction(expr)
+    
+    def substitute_rule(self, var_name: Token, expr: Expr):
+        from integral import rules
+        return rules.Substitution(str(var_name), expr)
+
+    def inverse_substitute_rule(self, expr: Expr, old_var: Token, var_name: Token):
+        from integral import rules
+        return rules.SubstitutionInverse(str(var_name), str(old_var), expr)
+
+    def integral_identity_rule(self):
+        from integral import rules
+        return rules.DefiniteIntegralIdentity()
+    
+    def integrate_by_parts_rule(self, u_expr: Expr, v_expr: Expr):
+        from integral import rules
+        return rules.IntegrationByParts(u_expr, v_expr)
+
+    def split_region_rule(self, expr: Expr):
+        from integral import rules
+        return rules.SplitRegion(expr)
+    
+    def equation_rule(self, old_expr: Expr, new_expr: Expr):
+        from integral import rules
+        return rules.Equation(old_expr, new_expr)
+
+    def full_simplify_rule(self):
+        from integral import rules
+        return rules.Simplify()
+
+    def rule_action(self, rule):
+        from integral import action
+        return action.RuleAction(rule)
 
 
 transformer = ExprTransformer()
 expr_parser = Lark(grammar, start="expr", parser="lalr", transformer=transformer)
+action_parser = Lark(grammar, start="action", parser="lalr", transformer=transformer)
+
 
 def parse_expr(s: str, *, fixes: Fixes = None) -> Expr:
     """Parse an integral expression."""
@@ -270,6 +322,8 @@ def parse_expr(s: str, *, fixes: Fixes = None) -> Expr:
         print("When parsing:", s)
         raise e
 
+def parse_action(s: str):
+    return action_parser.parse(s)
 
 def parse_raw_fixes(raw_fixes):
     fixes = Fixes()

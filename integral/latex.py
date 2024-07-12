@@ -48,14 +48,14 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
                 if expr.is_fun(x) and len(x.args) > 0 and x.func_name == 'log':
                     # Logarithmic function
                     sy = convert_expr(y, mode="short")
-                    return "\%s^{%s}(%s)" % (x.func_name, sy, convert_expr(x.args[0]))
+                    return "\\%s^{%s}(%s)" % (x.func_name, sy, convert_expr(x.args[0]))
                 elif expr.is_fun(x) and x.func_name in ('cos', 'sin', 'tan', 'sec', 'csc', 'cot') \
                         and y not in (expr.Const(-1), -expr.Const(1)):
                     # For trigonometric function, use special format.
                     # This should NOT be used when the exponent is -1, since this conflicts with
                     # usual notation for inverse trigonometric functions
                     sy = convert_expr(y, mode="short")
-                    return "\%s^{%s}(%s)" % (x.func_name, sy, convert_expr(x.args[0]))
+                    return "\\%s^{%s}(%s)" % (x.func_name, sy, convert_expr(x.args[0]))
                 elif expr.is_const(x) and x.val < 0:
                     return "(%s) ^ {%s}" % (sx,sy)
                 elif expr.is_fun(x) and x.func_name == 'factorial':
@@ -185,7 +185,7 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
                 return "%s ^ {-1}" % sx
             elif e.func_name == 'hat':
                 if expr.is_var(x):
-                    return "\hat{%s}" % sx
+                    return "\\hat{%s}" % sx
                 else:
                     return "hat({%s})" % sx
             elif e.func_name == 'floor':
@@ -263,7 +263,7 @@ def convert_expr(e: expr.Expr, mode: str = "large") -> str:
         lim = convert_expr(e.lim, mode="short")
         body = convert_expr(e.body, mode)
         if e.body.ty == expr.OP and len(e.body.args) > 1:
-            return "\\lim\\limits_{%s\\to %s} (\,%s\,)" % (e.var, lim, body)
+            return "\\lim\\limits_{%s\\to %s} (\\,%s\\,)" % (e.var, lim, body)
         else:
             return "\\lim\\limits_{%s\\to %s} %s" % (e.var, lim, body)
     elif expr.is_deriv(e):

@@ -838,6 +838,8 @@ class CompFile:
     """Represent a file containing multiple StateItem objects.
 
     ctx - initial context of the file.
+        either a Context or a string, specifying the base context or
+        file name.
     name - name of the file.
 
     """

@@ -209,18 +209,18 @@ class IntegralTest(unittest.TestCase):
         self.assertEqual(str(calc.last_expr), "-(81 * 2 ^ (2/3) / 11) + 945 * 3 ^ (2/3) / 44")
 
         calc = file.add_calculation("INT x:[-1, 0]. (3 * x ^ 4 + 3 * x ^ 2 + 1) / (x ^ 2 + 1)")
-        calc.perform_rule(rules.OnLocation(rules.PartialFractionDecomposition(), "0"))
+        calc.perform_rule(rules.PartialFractionDecomposition())
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.Simplify())
         self.assertEqual(str(calc.last_expr), "pi / 4 + 1")
 
         calc = file.add_calculation("INT x:[4, exp(1) + 3]. (x ^ 3 - 12 * x ^ 2 - 42) / (x - 3)")
-        calc.perform_rule(rules.OnLocation(rules.PartialFractionDecomposition(), "0"))
+        calc.perform_rule(rules.PartialFractionDecomposition())
         calc.perform_rule(rules.DefiniteIntegralIdentity())
         calc.perform_rule(rules.Simplify())
         calc.perform_rule(rules.Substitution("u", parser.parse_expr("x - 3")))
         calc.perform_rule(rules.DefiniteIntegralIdentity())
-        calc.perform_rule(rules.OnSubterm(rules.ExpandPolynomial()))
+        calc.perform_rule(rules.ExpandPolynomial())
         calc.perform_rule(rules.Simplify())
         self.assertEqual(str(calc.last_expr), "-(3 * exp(2) / 2) + exp(3) / 3 - 45 * exp(1) - 461/6")
 

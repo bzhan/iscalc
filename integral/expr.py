@@ -310,8 +310,6 @@ class Expr:
     def is_plus(self):
         return self.ty == OP and self.op == '+'
 
-
-
     def is_minus(self):
         return self.ty == OP and self.op == '-' and len(self.args) == 2
 
@@ -1051,8 +1049,9 @@ def is_neg_inf(e: Expr) -> TypeGuard["Inf"]:
 def is_matrix(e: Expr) -> TypeGuard["Matrix"]:
     return e.ty == MATRIX
 
-def is_uminus(e: Expr):
+def is_uminus(e: Expr) -> TypeGuard["Op"]:
     return e.ty == OP and e.op == '-' and len(e.args) == 1
+
 def type_match(t: Type, pat:Type) -> Dict:
     if not isinstance(t, Type) or not isinstance(pat, Type):
         return None

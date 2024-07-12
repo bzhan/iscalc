@@ -563,6 +563,9 @@ class PartialFractionDecomposition(Rule):
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
+        if expr.is_integral(e) or expr.is_indefinite_integral(e):
+            return OnLocation(self, "0").eval(e, ctx)
+
         if sympywrapper.is_rational(e):
             return normalize(sympywrapper.partial_fraction(e), ctx)
         else:
@@ -1418,6 +1421,7 @@ class ExpandPolynomial(Rule):
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:
+        # Case of constant, integer power
         if e.is_power() and expr.is_const(e.args[1]) and e.args[1].val > 1 and \
                 int(e.args[1].val) == e.args[1].val:
             n = int(e.args[1].val)
@@ -1426,9 +1430,14 @@ class ExpandPolynomial(Rule):
             for i in range(n - 1):
                 res = res * base
             return from_poly(res.reduce(ctx))
+        
+        # Case of product: carry out the multiplication
         elif e.is_times():
             s1, s2 = self.eval(e.args[0], ctx), self.eval(e.args[1], ctx)
             return from_poly((to_poly(s1, ctx) * to_poly(s2, ctx)).reduce(ctx))
+        
+        # Case of divide: if denominator is monomial, expand fully, otherwise
+        # expand the numerator only.
         elif e.is_divides():
             s1, s2 = self.eval(e.args[0], ctx), self.eval(e.args[1], ctx)
             p1, p2 = to_poly(s1, ctx), to_poly(s2, ctx)
@@ -1436,6 +1445,18 @@ class ExpandPolynomial(Rule):
                 return from_poly((p1 / p2).reduce(ctx))
             else:
                 return from_poly((p1 / poly.singleton(from_poly(p2))).reduce(ctx))
+            
+        # Case of plus and minus: expand on both sides
+        elif e.is_plus() or e.is_minus():
+            e = OnLocation(self, "0").eval(e, ctx)
+            e = OnLocation(self, "1").eval(e, ctx)
+            return e
+        
+        # Case of uminus, expand subterm
+        elif expr.is_uminus(e):
+            return OnLocation(self, "0").eval(e, ctx)
+
+        # Case of integrals
         elif expr.is_integral(e):
             ctx2 = body_conds(e, ctx)
             return expr.Integral(e.var, e.lower, e.upper, self.eval(e.body, ctx2))

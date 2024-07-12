@@ -89,6 +89,38 @@ class ActionTest(unittest.TestCase):
         ]
         self.check_actions("base", "tongji", actions)
 
+        actions = [
+            "calculate INT x:[-1, 0]. (3 * x ^ 4 + 3 * x ^ 2 + 1) / (x ^ 2 + 1)",
+            "partial fraction decomposition",
+            "apply integral identity",
+            "simplify"
+        ]
+        self.check_actions("base", "tongji", actions)
+
+        actions = [
+            "calculate INT x:[4, exp(1) + 3]. (x ^ 3 - 12 * x ^ 2 - 42) / (x - 3)",
+            "partial fraction decomposition",
+            "apply integral identity",
+            "simplify",
+            "substitute u for x - 3",
+            "apply integral identity",
+            "expand polynomial",
+            "simplify"
+        ]
+        self.check_actions("base", "tongji", actions)
+
+        actions = [
+            "calculate INT x:[0, pi / 2]. sin(x) * cos(x) ^ 3",
+            "substitute u for cos(x)",
+            "apply integral identity",
+            "simplify"
+        ]
+        self.check_actions("base", "tongji", actions)
+
+        actions = [
+            
+        ]
+
     def testChapter1Section5(self):
         actions = [
             "calculate INT x:[0,oo]. log(x) / (x ^ 2 + 1)",

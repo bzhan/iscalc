@@ -68,6 +68,7 @@ grammar = r"""
         | "split" "region" "at" expr -> split_region_rule
         | "rewrite" expr "to" expr -> equation_rule
         | "expand" "polynomial" -> expand_polynomial_rule
+        | "partial" "fraction" "decomposition" -> partial_fraction_decomposition_rule
         | "simplify" -> full_simplify_rule
 
     ?rule: atomic_rule
@@ -301,6 +302,10 @@ class ExprTransformer(Transformer):
     def expand_polynomial_rule(self):
         from integral import rules
         return rules.ExpandPolynomial()
+    
+    def partial_fraction_decomposition_rule(self):
+        from integral import rules
+        return rules.PartialFractionDecomposition()
 
     def full_simplify_rule(self):
         from integral import rules

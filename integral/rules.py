@@ -1719,13 +1719,14 @@ class IntegrateByEquation(Rule):
         self.coeff = None
 
     def __str__(self):
-        return "integrate by equation"
+        return "solve integral %s" % self.lhs
 
     def export(self):
         return {
             "name": self.name,
             "lhs": str(self.lhs),
-            "str": str(self)
+            "str": str(self),
+            "latex_str": "solve integral \\(%s\\)" % latex.convert_expr(self.lhs)
         }
 
     def eval(self, e: Expr, ctx: Context) -> Expr:

@@ -69,6 +69,8 @@ grammar = r"""
         | "rewrite" expr "to" expr -> equation_rule
         | "expand" "polynomial" -> expand_polynomial_rule
         | "partial" "fraction" "decomposition" -> partial_fraction_decomposition_rule
+        | "rewrite" expr "to" expr "using" "identity" -> apply_identity_rule
+        | "solve" "integral" expr -> solve_integral_rule
         | "simplify" -> full_simplify_rule
 
     ?rule: atomic_rule
@@ -306,6 +308,14 @@ class ExprTransformer(Transformer):
     def partial_fraction_decomposition_rule(self):
         from integral import rules
         return rules.PartialFractionDecomposition()
+
+    def apply_identity_rule(self, old_expr: Expr, new_expr: Expr):
+        from integral import rules
+        return rules.ApplyIdentity(old_expr, new_expr)
+    
+    def solve_integral_rule(self, expr: Expr):
+        from integral import rules
+        return rules.IntegrateByEquation(expr)
 
     def full_simplify_rule(self):
         from integral import rules

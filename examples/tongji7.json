@@ -2497,9 +2497,10 @@
                     "latex_res": "\\frac{e^{\\pi} - 2}{5}",
                     "res": "(exp(pi) - 2) / 5",
                     "rule": {
+                        "latex_str": "solve integral \\(\\int_{0}^{\\pi/2} e^{2 x} \\cos{x} \\,dx\\)",
                         "lhs": "INT x:[0,pi / 2]. exp(2 * x) * cos(x)",
                         "name": "IntegrateByEquation",
-                        "str": "integrate by equation"
+                        "str": "solve integral INT x:[0,pi / 2]. exp(2 * x) * cos(x)"
                     },
                     "type": "CalculationStep"
                 }
@@ -2758,9 +2759,10 @@
                     "latex_res": "\\frac{-\\cos{(1)} e + e \\sin{(1)} + 1}{2}",
                     "res": "(-(cos(1) * exp(1)) + exp(1) * sin(1) + 1) / 2",
                     "rule": {
+                        "latex_str": "solve integral \\(\\int_{0}^{1} e^{u} \\sin{u} \\,du\\)",
                         "lhs": "INT u:[0,1]. exp(u) * sin(u)",
                         "name": "IntegrateByEquation",
-                        "str": "integrate by equation"
+                        "str": "solve integral INT u:[0,1]. exp(u) * sin(u)"
                     },
                     "type": "CalculationStep"
                 }
